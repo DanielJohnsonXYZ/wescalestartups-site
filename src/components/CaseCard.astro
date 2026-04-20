@@ -1,0 +1,21 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  sector: string;
+  summary: string;
+  results: string[];
+}
+
+const { href, title, sector, summary, results } = Astro.props;
+---
+
+<a class="case-card" href={href}>
+  <p class="card-kicker">{sector}</p>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <ul>
+    {results.slice(0, 2).map((result) => <li>{result}</li>)}
+  </ul>
+  <span>Read case study</span>
+</a>

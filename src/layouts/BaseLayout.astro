@@ -1,0 +1,67 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { buildOrganizationSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { siteConfig } from "../site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+  ogImage?: string;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  path = Astro.url.pathname,
+  ogImage = siteConfig.ogImage,
+  schema = []
+} = Astro.props;
+
+const canonical = absoluteUrl(path);
+const imageUrl = absoluteUrl(ogImage);
+const pageSchemas = Array.isArray(schema) ? schema : [schema];
+const allSchemas = [buildOrganizationSchema(), ...pageSchemas].filter(Boolean);
+const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={siteConfig.twitterHandle} />
+    <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

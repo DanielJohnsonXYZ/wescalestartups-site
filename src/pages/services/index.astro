@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import SectionIntro from "../../components/SectionIntro.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sortByOrder } from "../../lib/utils";
+import { siteConfig } from "../../site";
+
+const services = sortByOrder(await getCollection("services"));
+---
+
+<BaseLayout title="Services | We Scale Startups" description="Growth strategy, customer research, acquisition systems, and fractional CMO support for post-PMF startup teams." path="/services">
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Services</p>
+      <h1>Growth help with a clear job to do.</h1>
+      <p>Each offer is designed around a real constraint: unclear market, unclear language, unclear acquisition rhythm, or unclear leadership.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="grid-4">
+        {services.map((service) => (
+          <a class="service-card" href={`/services/${service.id}`}>
+            <p class="card-kicker">{service.data.audience}</p>
+            <h3>{service.data.title}</h3>
+            <p>{service.data.promise}</p>
+            <span class="card-link">{service.data.cta}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="How it works"
+        title="The service is the container. The system is the point."
+        body="The work should leave the company more capable: clearer decisions, cleaner experiments, stronger proof, and less dependency on anyone guessing in a meeting."
+      />
+      <div class="grid-3">
+        <article class="feature-card">
+          <h3>Diagnose</h3>
+          <p>Find the constraint that is actually slowing growth. Often it is positioning, sequencing, or weak evidence, not channel volume.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Build</h3>
+          <p>Turn the strategy into pages, campaigns, research, measurement, and a weekly operating cadence.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Transfer</h3>
+          <p>Document the system so founders, first marketers, agencies, and sales teams can keep running it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Start here</p>
+        <h2>Not sure which service fits?</h2>
+        <p>Bring the current growth mess. We will identify whether the constraint is strategy, research, acquisition, or leadership.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a growth diagnosis</a>
+    </div>
+  </section>
+</BaseLayout>

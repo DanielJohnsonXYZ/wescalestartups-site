@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildServiceSchema } from "../../lib/schema";
+import { siteConfig } from "../../site";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((service) => ({
+    params: { slug: service.id },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+const path = `/services/${service.id}`;
+---
+
+<BaseLayout
+  title={`${service.data.title} | We Scale Startups`}
+  description={service.data.description}
+  path={path}
+  schema={buildServiceSchema(service.data.title, service.data.description, path)}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">{service.data.shortTitle}</p>
+      <h1>{service.data.title}</h1>
+      <p>{service.data.description}</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{service.data.cta}</a>
+        <a class="button button-light" href="/services">All services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-grid">
+      <aside class="detail-aside">
+        <p class="eyebrow">Best fit</p>
+        <p>{service.data.audience}</p>
+        <p><strong>Promise:</strong> {service.data.promise}</p>
+      </aside>
+      <div class="detail-body">
+        <article class="content-block">
+          <h2>Outcomes</h2>
+          <ul>
+            {service.data.outcomes.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="content-block">
+          <h2>Process</h2>
+          <ol>
+            {service.data.process.map((item) => <li>{item}</li>)}
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Decision point</p>
+        <h2>Useful when the next move is unclear.</h2>
+        <p>A short diagnosis is enough to see whether this is the right shape of help or whether another constraint needs attention first.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{service.data.cta}</a>
+    </div>
+  </section>
+</BaseLayout>

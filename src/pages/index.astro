@@ -1,0 +1,223 @@
+---
+import { getCollection } from "astro:content";
+import CaseCard from "../components/CaseCard.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sortByOrder } from "../lib/utils";
+import { headlineMetrics, siteConfig } from "../site";
+
+const services = sortByOrder(await getCollection("services"));
+const industries = sortByOrder(await getCollection("industries")).slice(0, 4);
+const cases = sortByOrder(await getCollection("cases"));
+const featuredCase = cases[0];
+const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Newsflare", "Peachy", "Ned", "eQuoo", "LessonsUp"];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="shell">
+      <div class="hero-meta">
+        <span>Now building · AI-native growth systems</span>
+        <span>Research · Acquisition · Operating cadence</span>
+      </div>
+
+      <h1>We scale <em>startups</em> with AI-native growth systems.</h1>
+
+      <div class="hero-foot">
+        <p class="hero-copy">Founder-led growth work for teams past PMF. Senior operators plus AI-native workflows, embedded in the way your team ships pipeline.</p>
+        <dl class="hero-facts">
+          <dt>Founded</dt>
+          <dd>London · global clients</dd>
+          <dt>Focus</dt>
+          <dd>AI, SaaS, fintech, healthtech</dd>
+          <dt>Model</dt>
+          <dd>Fixed-scope, outcome-led sprints</dd>
+        </dl>
+        <div class="hero-actions">
+          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Start a sprint</a>
+          <a class="button button-light" href="/case-studies">See the proof</a>
+        </div>
+      </div>
+
+      <div class="showcase">
+        <div class="showcase-grid">
+          <div class="showcase-copy">
+            <p class="eyebrow">Live growth stack</p>
+            <h2 class="showcase-title">An <em>AI-native</em> growth stack, shipped in 90 days.</h2>
+            <p>We instrument the market, run customer research, build campaigns, improve conversion points, and transfer the operating system so the team can keep going.</p>
+            <div class="showcase-stats">
+              {headlineMetrics.map((metric) => (
+                <div>
+                  <span class="stat-number">{metric.value}</span>
+                  <span class="stat-label">{metric.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="mock" aria-label="Growth system performance chart">
+            <div class="mock-label">Weekly pipeline · signal</div>
+            <div class="mock-value">2.84M</div>
+            <div class="mock-badge">+184%</div>
+            <div class="mock-chart" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Selected proof and ecosystem names">
+    <div class="marquee-track">
+      {[...marqueeItems, ...marqueeItems].map((item) => (
+        <>
+          <span class="marquee-item">{item}</span>
+          <span class="marquee-dot">✦</span>
+        </>
+      ))}
+    </div>
+  </div>
+
+  <section class="section" id="engine">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="The engine"
+        title="Four systems we deploy."
+        body="The work is modular, but it is not a menu of disconnected tactics. Each system strengthens the same growth loop."
+      />
+
+      <div class="engine-list">
+        {services.map((service, index) => {
+          const words = service.data.shortTitle.split(" ");
+          const first = words[0];
+          const rest = words.slice(1).join(" ");
+          return (
+            <a class="engine-row" href={`/services/${service.id}`}>
+              <span class="engine-num">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{first} {rest && <em>{rest}</em>}</h3>
+              <p>{service.data.description}</p>
+              <span class="engine-tag">{service.data.cta}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="statement">
+        <h2>Agencies pitch. <em>We build.</em></h2>
+        <p>Operating principle · 01</p>
+      </div>
+    </div>
+  </section>
+
+  {featuredCase && (
+    <section class="section" id="results">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="Results"
+          title="Pipeline, proof, and learning velocity."
+          body="The case studies stay grounded in actual constraints: market clarity, acquisition efficiency, and conversion."
+        />
+        <div class="case-feature">
+          <div class="case-visual" aria-hidden="true">
+            <span>{featuredCase.data.client} · deployment</span>
+            <span>{featuredCase.data.results[0]}</span>
+            <strong>{featuredCase.data.client.slice(0, 1)}</strong>
+          </div>
+          <div class="case-copy">
+            <p class="eyebrow">{featuredCase.data.sector}</p>
+            <h3>From scattered spend to a cleaner <em>growth system</em>.</h3>
+            <p>{featuredCase.data.challenge}</p>
+            <p>{featuredCase.data.summary}</p>
+            <div class="case-metrics">
+              {featuredCase.data.results.slice(0, 3).map((result) => (
+                <div>
+                  <span class="stat-number">{result.split(" ")[0]}</span>
+                  <span class="stat-label">{result}</span>
+                </div>
+              ))}
+            </div>
+            <div class="hero-actions">
+              <a class="button button-brand" href={`/case-studies/${featuredCase.id}`}>Read the case</a>
+              <a class="button button-light" href="/case-studies">All proof</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-alt">
+    <div class="shell operator-grid">
+      <div class="operator-copy">
+        <p class="eyebrow">The operator</p>
+        <h2>Senior growth thinking without theatre.</h2>
+        <p>Work directly with Daniel Johnson on the decisions that shape growth: which customer to pursue, how to reach them, what to test, and how to turn the lessons into a repeatable system.</p>
+        <ul class="note-list">
+          <li>Founder-led strategy and execution direction</li>
+          <li>Experience across paid acquisition, SEO, CRO, mentoring, and training</li>
+          <li>Built for teams that need signal before they scale spend</li>
+        </ul>
+      </div>
+      <div class="founder-image">
+        <img src="/images/daniel-headshot.png" alt="Daniel Johnson, founder of We Scale Startups" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="markets">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Markets"
+        title="Built around categories where trust and clarity matter."
+        body="The same system adapts to different buying contexts: technical buyers, regulated categories, education users, and founders trying to make a new behaviour obvious."
+      />
+      <div class="grid-4">
+        {industries.map((industry) => (
+          <a class="industry-card" href={`/industries/${industry.id}`}>
+            <p class="card-kicker">Market</p>
+            <h3>{industry.data.title}</h3>
+            <p>{industry.data.description}</p>
+            <span class="card-link">Explore market</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="More proof"
+        title="Real work beats generic promise."
+        body="A few more examples of practical growth work across fintech, healthtech, and education."
+      />
+      <div class="grid-3">
+        {cases.slice(1, 4).map((item) => (
+          <CaseCard
+            href={`/case-studies/${item.id}`}
+            title={item.data.title}
+            sector={item.data.sector}
+            summary={item.data.summary}
+            results={item.data.results}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="cta">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Deploy · next sprint</p>
+        <h2>You ship the product. We ship the growth system.</h2>
+        <p>Bring your current bottleneck. We will map the next sensible moves and whether We Scale Startups is the right partner for the work.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Start a sprint</a>
+    </div>
+  </section>
+</BaseLayout>

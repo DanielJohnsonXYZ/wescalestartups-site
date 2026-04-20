@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout title="Contact | We Scale Startups" description="Book a growth diagnosis or contact We Scale Startups about strategy, research, acquisition, or fractional CMO support." path="/contact">
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Contact</p>
+      <h1>Bring the current growth bottleneck.</h1>
+      <p>The best first conversation is practical: what is happening now, what is not working, and what would need to become clearer for growth to move.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell contact-grid">
+      <article class="contact-option">
+        <p class="card-kicker">Fastest</p>
+        <h2>Book a growth diagnosis</h2>
+        <p>A short call to map the constraint, priorities, and whether We Scale Startups is useful for the next phase.</p>
+        <a class="card-link" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book on Calendly</a>
+      </article>
+      <article class="contact-option">
+        <p class="card-kicker">Email</p>
+        <h2>Send the context</h2>
+        <p>Share the product, stage, current channels, bottleneck, and what you want to change in the next 90 days.</p>
+        <a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      </article>
+      <article class="contact-option">
+        <p class="card-kicker">Phone</p>
+        <h2>Prefer direct?</h2>
+        <p>Use the office number if the work is time-sensitive or easier to explain in conversation.</p>
+        <a class="card-link" href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

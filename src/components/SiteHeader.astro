@@ -1,0 +1,37 @@
+---
+import { navigation, siteConfig } from "../site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isActive = (href: string) => href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="shell masthead">
+    <span>We Scale Startups · <strong>AI-native growth studio</strong></span>
+    <span>Operators · Systems · Outcomes</span>
+  </div>
+  <div class="shell header-inner">
+    <a class="brand" href="/" aria-label="We Scale Startups home">
+      <img src="/images/logos/wss-logo.png" alt="" width="120" height="68" />
+      <span>We Scale <em>Startups</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      {navigation.map((item) => (
+        <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <a class="button button-dark header-cta" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+    <details class="mobile-menu">
+      <summary class="button button-light">Menu</summary>
+      <nav aria-label="Mobile navigation">
+        {navigation.map((item) => (
+          <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+    </details>
+  </div>
+</header>

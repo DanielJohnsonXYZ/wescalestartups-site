@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+
+export async function getStaticPaths() {
+  const industries = await getCollection("industries");
+  return industries.map((industry) => ({
+    params: { slug: industry.id },
+    props: { industry }
+  }));
+}
+
+const { industry } = Astro.props;
+---
+
+<BaseLayout title={`${industry.data.title} | We Scale Startups`} description={industry.data.description} path={`/industries/${industry.id}`}>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Industry</p>
+      <h1>{industry.data.title}</h1>
+      <p>{industry.data.description}</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Discuss this market</a>
+        <a class="button button-light" href="/industries">All industries</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-grid">
+      <aside class="detail-aside">
+        <p class="eyebrow">Buyer problem</p>
+        <p>{industry.data.buyerProblem}</p>
+      </aside>
+      <div class="detail-body">
+        <article class="content-block">
+          <h2>Useful when</h2>
+          <ul>
+            {industry.data.usefulWhen.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="content-block">
+          <h2>Growth system</h2>
+          <ul>
+            {industry.data.growthSystem.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="content-block">
+          <h2>Relevant proof</h2>
+          <ul>
+            {industry.data.proof.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

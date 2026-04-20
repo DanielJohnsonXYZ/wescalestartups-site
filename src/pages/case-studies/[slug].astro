@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+
+export async function getStaticPaths() {
+  const cases = await getCollection("cases");
+  return cases.map((caseStudy) => ({
+    params: { slug: caseStudy.id },
+    props: { caseStudy }
+  }));
+}
+
+const { caseStudy } = Astro.props;
+---
+
+<BaseLayout title={`${caseStudy.data.title} | We Scale Startups`} description={caseStudy.data.summary} path={`/case-studies/${caseStudy.id}`}>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">{caseStudy.data.sector}</p>
+      <h1>{caseStudy.data.title}</h1>
+      <p>{caseStudy.data.summary}</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Talk through your bottleneck</a>
+        <a class="button button-light" href="/case-studies">All proof</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-grid">
+      <aside class="detail-aside">
+        <p class="eyebrow">Client</p>
+        <p>{caseStudy.data.client}</p>
+        <p><strong>Sector:</strong> {caseStudy.data.sector}</p>
+        <p><strong>Services:</strong> {caseStudy.data.services.join(", ")}</p>
+      </aside>
+      <div class="detail-body">
+        <article class="content-block">
+          <h2>Challenge</h2>
+          <p>{caseStudy.data.challenge}</p>
+        </article>
+        <article class="content-block">
+          <h2>Work</h2>
+          <ul>
+            {caseStudy.data.work.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="content-block">
+          <h2>Results</h2>
+          <ul>
+            {caseStudy.data.results.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { trustLogos } from "../site";
+---
+
+<section class="proof-strip" aria-label="Selected proof and ecosystem logos">
+  <div class="shell proof-inner">
+    <p>Trusted across startup, education, and growth communities</p>
+    <div class="logo-row">
+      {trustLogos.map((logo) => (
+        <figure>
+          <img src={logo.src} alt={logo.alt} loading="lazy" />
+          <figcaption>{logo.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

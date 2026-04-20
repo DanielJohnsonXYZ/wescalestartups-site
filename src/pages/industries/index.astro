@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import SectionIntro from "../../components/SectionIntro.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sortByOrder } from "../../lib/utils";
+
+const industries = sortByOrder(await getCollection("industries"));
+---
+
+<BaseLayout title="Industries | We Scale Startups" description="Growth systems for AI, B2B SaaS, fintech, healthtech, and education teams where trust and clarity matter." path="/industries">
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Industries</p>
+      <h1>Different markets. Same need for signal.</h1>
+      <p>The system adapts to the buyer, the category, the level of trust required, and the channels that can produce real evidence.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="Markets" title="Where the work fits best." />
+      <div class="grid-3">
+        {industries.map((industry) => (
+          <a class="industry-card" href={`/industries/${industry.id}`}>
+            <p class="card-kicker">Market</p>
+            <h3>{industry.data.title}</h3>
+            <p>{industry.data.description}</p>
+            <span class="card-link">Explore {industry.data.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

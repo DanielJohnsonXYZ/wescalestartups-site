@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import CaseCard from "../../components/CaseCard.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sortByOrder } from "../../lib/utils";
+
+const cases = sortByOrder(await getCollection("cases"));
+---
+
+<BaseLayout title="Case Studies | We Scale Startups" description="Selected growth strategy, acquisition, positioning, and go-to-market work from We Scale Startups." path="/case-studies">
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Proof</p>
+      <h1>Useful results from practical growth work.</h1>
+      <p>These are not decorative portfolio tiles. They are examples of constraints identified, systems improved, and clearer growth motion created.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="Selected work" title="Case studies worth keeping." />
+      <div class="grid-3">
+        {cases.map((item) => (
+          <CaseCard
+            href={`/case-studies/${item.id}`}
+            title={item.data.title}
+            sector={item.data.sector}
+            summary={item.data.summary}
+            results={item.data.results}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

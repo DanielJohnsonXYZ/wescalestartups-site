@@ -1,0 +1,21 @@
+{
+  "title": "Customer Research",
+  "shortTitle": "Research",
+  "description": "Research that turns vague market assumptions into sharper positioning, offers, landing pages, campaigns, and sales conversations.",
+  "audience": "Best for teams that know the product works but cannot yet explain the buying trigger in the customer's language.",
+  "promise": "You get the words, objections, triggers, and decision criteria your growth system should be built around.",
+  "outcomes": [
+    "Customer language library",
+    "Buying trigger and objection map",
+    "Sharper homepage and sales narrative",
+    "Campaign angles grounded in evidence"
+  ],
+  "process": [
+    "Review analytics, calls, CRM notes, reviews, and sales material",
+    "Run structured interviews with target customers and lost opportunities",
+    "Cluster patterns into pains, triggers, objections, and proof points",
+    "Turn findings into messaging, page, and campaign recommendations"
+  ],
+  "cta": "Find the buying language",
+  "order": 2
+}

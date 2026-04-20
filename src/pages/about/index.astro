@@ -1,0 +1,39 @@
+---
+import ProofLogos from "../../components/ProofLogos.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout title="About | We Scale Startups" description="We Scale Startups is founder-led growth strategy and acquisition systems for product-led startup teams." path="/about">
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">About</p>
+      <h1>Founder-led growth for teams that need clarity.</h1>
+      <p>We Scale Startups works with product-led teams that already have signal but need a clearer way to turn that signal into repeatable acquisition.</p>
+    </div>
+  </section>
+
+  <ProofLogos />
+
+  <section class="section">
+    <div class="shell split-section">
+      <div class="founder-image">
+        <img src="/images/daniel-headshot.png" alt="Daniel Johnson, founder of We Scale Startups" />
+      </div>
+      <div class="founder-copy">
+        <p class="eyebrow">Daniel Johnson</p>
+        <h2>Growth work without the fog machine.</h2>
+        <p>Daniel works across strategy, customer research, acquisition, mentoring, and speaking. The through-line is simple: help founders make better growth decisions and build systems their teams can keep running.</p>
+        <ul class="note-list">
+          <li>Founding partner at We Scale Startups</li>
+          <li>Mentor and speaker across startup and education communities</li>
+          <li>Experienced across paid, SEO, CRO, positioning, and GTM</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="button button-dark" href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel on LinkedIn</a>
+          <a class="button button-light" href="/case-studies">Read the proof</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -34,6 +34,10 @@ Hetzner origin. Cloudflare Pages custom domains have been added for:
 They remain pending until the zone DNS records are changed from the Hetzner
 origin to the Pages project.
 
+Required Cloudflare permission: `Zone DNS Edit` for the
+`wescalestartups.com` zone. A Pages-capable token is not enough for this
+final cutover step.
+
 Change the existing proxied A records:
 
 ```text

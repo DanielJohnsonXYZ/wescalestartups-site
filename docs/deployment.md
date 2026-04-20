@@ -23,6 +23,9 @@ npm run build
 npx wrangler pages deploy dist --project-name=wescalestartups-site --branch=main
 ```
 
+`functions/_middleware.js` redirects `www.wescalestartups.com` to the apex
+domain while preserving the path and query string.
+
 ## Production DNS Cutover
 
 The production domain currently still resolves through Cloudflare to the

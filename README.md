@@ -24,6 +24,9 @@ Cloudflare Pages uses the same build contract:
 - Output directory: `dist`
 - Production branch: `main`
 
+See `docs/deployment.md` for GitHub, Cloudflare Pages, DNS cutover, and
+Hetzner fallback notes.
+
 The current Hetzner/Coolify production path uses `compose.production.yml`.
 It builds the static image, attaches to the existing WSS proxy network, and
 routes `wescalestartups.com` plus `www.wescalestartups.com` through Traefik.

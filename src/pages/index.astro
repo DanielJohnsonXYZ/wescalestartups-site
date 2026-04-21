@@ -4,37 +4,40 @@ import CaseCard from "../components/CaseCard.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { sortByOrder } from "../lib/utils";
-import { headlineMetrics, siteConfig } from "../site";
+import { buildFaqSchema, buildPersonSchema } from "../lib/schema";
+import { headlineMetrics, siteConfig, whoThisIsFor, faqs } from "../site";
 
 const services = sortByOrder(await getCollection("services"));
+const phases = services.filter((s) => s.data.order <= 3);
+const delivery = services.filter((s) => s.data.order === 4);
 const industries = sortByOrder(await getCollection("industries")).slice(0, 4);
 const cases = sortByOrder(await getCollection("cases"));
 const featuredCase = cases[0];
 const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Newsflare", "Peachy", "Ned", "eQuoo", "LessonsUp"];
 ---
 
-<BaseLayout>
+<BaseLayout schema={[buildPersonSchema(), buildFaqSchema()]}>
   <section class="hero">
     <div class="shell">
       <div class="hero-meta">
-        <span>Now building · AI-native growth systems</span>
-        <span>Research · Acquisition · Operating cadence</span>
+        <span>Fractional growth leadership</span>
+        <span>Post-PMF B2B SaaS & AI · $1M–$10M ARR</span>
       </div>
 
-      <h1>We scale <em>startups</em> with AI-native growth systems.</h1>
+      <h1>Senior growth operator for <em>post-PMF</em> B2B SaaS &amp; AI founders.</h1>
 
       <div class="hero-foot">
-        <p class="hero-copy">Founder-led growth work for teams past PMF. Senior operators plus AI-native workflows, embedded in the way your team ships pipeline.</p>
+        <p class="hero-copy">Your product works. Acquisition is inconsistent. We Scale Startups is a senior operator — not an agency — who installs research, acquisition, and an operating cadence your team can keep running.</p>
         <dl class="hero-facts">
-          <dt>Founded</dt>
-          <dd>London · global clients</dd>
-          <dt>Focus</dt>
-          <dd>AI, SaaS, fintech, healthtech</dd>
-          <dt>Model</dt>
-          <dd>Fixed-scope, outcome-led sprints</dd>
+          <dt>Who</dt>
+          <dd>$1M–$10M ARR B2B SaaS &amp; AI</dd>
+          <dt>How</dt>
+          <dd>Research → Acquisition → Operating Cadence</dd>
+          <dt>Price</dt>
+          <dd>{siteConfig.priceBand}</dd>
         </dl>
         <div class="hero-actions">
-          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Start a sprint</a>
+          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
           <a class="button button-light" href="/case-studies">See the proof</a>
         </div>
       </div>
@@ -42,9 +45,9 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
       <div class="showcase">
         <div class="showcase-grid">
           <div class="showcase-copy">
-            <p class="eyebrow">Live growth stack</p>
-            <h2 class="showcase-title">An <em>AI-native</em> growth stack, shipped in 90 days.</h2>
-            <p>We instrument the market, run customer research, build campaigns, improve conversion points, and transfer the operating system so the team can keep going.</p>
+            <p class="eyebrow">Track record</p>
+            <h2 class="showcase-title">A decade operating growth for <em>product-led teams</em>.</h2>
+            <p>We instrument the market, run the customer research, build the campaigns and conversion points, and install the operating cadence so the team can keep going after we leave.</p>
             <div class="showcase-stats">
               {headlineMetrics.map((metric) => (
                 <div>
@@ -79,16 +82,40 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
     </div>
   </div>
 
+  <section class="section" id="who">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Who this is for"
+        title="Clear on fit. Clearer on non-fit."
+        body="We don't take every engagement. A short call tells us both whether this is the right shape of help."
+      />
+      <div class="grid-2">
+        <article class="fit-card fit-card-yes">
+          <h3>For you if</h3>
+          <ul>
+            {whoThisIsFor.forYou.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="fit-card fit-card-no">
+          <h3>Not for you if</h3>
+          <ul>
+            {whoThisIsFor.notForYou.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="engine">
     <div class="shell">
       <SectionIntro
         eyebrow="The engine"
-        title="Four systems we deploy."
-        body="The work is modular, but it is not a menu of disconnected tactics. Each system strengthens the same growth loop."
+        title="Three phases. One delivery model."
+        body="Research, Acquisition, and Operating Cadence are sequenced phases — each strengthens the same growth loop. Fractional CMO is the delivery model that runs all three."
       />
 
       <div class="engine-list">
-        {services.map((service, index) => {
+        {phases.map((service, index) => {
           const words = service.data.shortTitle.split(" ");
           const first = words[0];
           const rest = words.slice(1).join(" ");
@@ -101,6 +128,14 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
             </a>
           );
         })}
+        {delivery.map((service) => (
+          <a class="engine-row engine-row-delivery" href={`/services/${service.id}`}>
+            <span class="engine-num">△</span>
+            <h3>{service.data.shortTitle} <em>· delivery</em></h3>
+            <p>{service.data.description}</p>
+            <span class="engine-tag">{service.data.cta}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -108,7 +143,7 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
   <section class="section">
     <div class="shell">
       <div class="statement">
-        <h2>Agencies pitch. <em>We build.</em></h2>
+        <h2>Agencies pitch. <em>Operators install.</em></h2>
         <p>Operating principle · 01</p>
       </div>
     </div>
@@ -120,7 +155,7 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
         <SectionIntro
           eyebrow="Results"
           title="Pipeline, proof, and learning velocity."
-          body="The case studies stay grounded in actual constraints: market clarity, acquisition efficiency, and conversion."
+          body="Case studies stay grounded in actual constraints: market clarity, acquisition efficiency, and conversion."
         />
         <div class="case-feature">
           <div class="case-visual" aria-hidden="true">
@@ -158,10 +193,15 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
         <h2>Senior growth thinking without theatre.</h2>
         <p>Work directly with Daniel Johnson on the decisions that shape growth: which customer to pursue, how to reach them, what to test, and how to turn the lessons into a repeatable system.</p>
         <ul class="note-list">
-          <li>Founder-led strategy and execution direction</li>
-          <li>Experience across paid acquisition, SEO, CRO, mentoring, and training</li>
-          <li>Built for teams that need signal before they scale spend</li>
+          <li>10+ years operating growth across B2B SaaS, AI, fintech, healthtech, edtech</li>
+          <li>388+ mentorship sessions on GrowthMentor, 4.93★ average rating</li>
+          <li>£20M+ revenue influenced, £6M+ managed across paid acquisition</li>
+          <li>UK-based, currently operating from Asia — clients US, UK, and Europe</li>
         </ul>
+        <div class="hero-actions">
+          <a class="button button-dark" href="/about">About Daniel</a>
+          <a class="button button-light" href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">LinkedIn</a>
+        </div>
       </div>
       <div class="founder-image">
         <img src="/images/daniel-headshot.png" alt="Daniel Johnson, founder of We Scale Startups" />
@@ -210,14 +250,31 @@ const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Ne
     </div>
   </section>
 
+  <section class="section" id="faq">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="FAQ"
+        title="Questions we get before every first call."
+      />
+      <div class="faq-list">
+        {faqs.map((item) => (
+          <details class="faq-item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="cta-band" id="cta">
     <div class="shell cta-inner">
       <div>
-        <p class="eyebrow">Deploy · next sprint</p>
-        <h2>You ship the product. We ship the growth system.</h2>
-        <p>Bring your current bottleneck. We will map the next sensible moves and whether We Scale Startups is the right partner for the work.</p>
+        <p class="eyebrow">Next step</p>
+        <h2>Bring your current growth bottleneck.</h2>
+        <p>A 30-minute call to map the constraint, the priorities, and whether We Scale Startups is the right partner for the work. No deck, no pitch.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Start a sprint</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>

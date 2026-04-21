@@ -6,23 +6,27 @@ import { sortByOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
 
 const services = sortByOrder(await getCollection("services"));
+const phases = services.filter((s) => s.data.order <= 3);
+const delivery = services.filter((s) => s.data.order === 4);
 ---
 
-<BaseLayout title="Services | We Scale Startups" description="Growth strategy, customer research, acquisition systems, and fractional CMO support for post-PMF startup teams." path="/services">
+<BaseLayout title="Services | We Scale Startups" description="Three phases — Research, Acquisition, Operating Cadence — delivered as a Fractional CMO engagement. Pricing £5k–£15k/mo." path="/services">
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Services</p>
-      <h1>Growth help with a clear job to do.</h1>
-      <p>Each offer is designed around a real constraint: unclear market, unclear language, unclear acquisition rhythm, or unclear leadership.</p>
+      <h1>Three phases. One delivery model.</h1>
+      <p>Research, Acquisition, and Operating Cadence are sequenced phases that compound. Fractional CMO is the delivery model that runs them as one system.</p>
+      <p class="price-signal"><strong>Pricing:</strong> {siteConfig.priceBand}. {siteConfig.priceBandNote}</p>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <div class="grid-4">
-        {services.map((service) => (
+      <SectionIntro eyebrow="The phases" title="Sequenced, not parallel." body="Research settles the message. Acquisition turns it into pipeline. Operating Cadence makes both repeatable." />
+      <div class="grid-3">
+        {phases.map((service) => (
           <a class="service-card" href={`/services/${service.id}`}>
-            <p class="card-kicker">{service.data.audience}</p>
+            <p class="card-kicker">Phase {service.data.order}</p>
             <h3>{service.data.title}</h3>
             <p>{service.data.promise}</p>
             <span class="card-link">{service.data.cta}</span>
@@ -34,15 +38,31 @@ const services = sortByOrder(await getCollection("services"));
 
   <section class="section section-alt">
     <div class="shell">
+      <SectionIntro eyebrow="The delivery model" title="Fractional CMO runs all three." body="A senior operator in the room — accountable for sequencing, decisions, and execution quality — until you're ready for a full-time hire." />
+      <div class="grid-1">
+        {delivery.map((service) => (
+          <a class="service-card service-card-delivery" href={`/services/${service.id}`}>
+            <p class="card-kicker">Delivery model</p>
+            <h3>{service.data.title}</h3>
+            <p>{service.data.promise}</p>
+            <span class="card-link">{service.data.cta}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
       <SectionIntro
         eyebrow="How it works"
-        title="The service is the container. The system is the point."
+        title="Diagnose, build, transfer."
         body="The work should leave the company more capable: clearer decisions, cleaner experiments, stronger proof, and less dependency on anyone guessing in a meeting."
       />
       <div class="grid-3">
         <article class="feature-card">
           <h3>Diagnose</h3>
-          <p>Find the constraint that is actually slowing growth. Often it is positioning, sequencing, or weak evidence, not channel volume.</p>
+          <p>Find the constraint actually slowing growth. Usually positioning, sequencing, or weak evidence — not channel volume.</p>
         </article>
         <article class="feature-card">
           <h3>Build</h3>
@@ -50,7 +70,7 @@ const services = sortByOrder(await getCollection("services"));
         </article>
         <article class="feature-card">
           <h3>Transfer</h3>
-          <p>Document the system so founders, first marketers, agencies, and sales teams can keep running it.</p>
+          <p>Document the system so the founder, first marketer, or new CMO can keep running it.</p>
         </article>
       </div>
     </div>
@@ -60,10 +80,10 @@ const services = sortByOrder(await getCollection("services"));
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Start here</p>
-        <h2>Not sure which service fits?</h2>
-        <p>Bring the current growth mess. We will identify whether the constraint is strategy, research, acquisition, or leadership.</p>
+        <h2>Not sure which phase fits?</h2>
+        <p>Bring the current growth bottleneck. A 30-minute call identifies whether the constraint is Research, Acquisition, or Operating Cadence — and whether Fractional CMO is the right shape.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a growth diagnosis</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>

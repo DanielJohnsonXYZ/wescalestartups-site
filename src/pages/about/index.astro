@@ -1,15 +1,21 @@
 ---
 import ProofLogos from "../../components/ProofLogos.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildPersonSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 ---
 
-<BaseLayout title="About | We Scale Startups" description="We Scale Startups is founder-led growth strategy and acquisition systems for product-led startup teams." path="/about">
+<BaseLayout
+  title="About Daniel Johnson | We Scale Startups"
+  description="Daniel Johnson — fractional CMO and senior growth operator for post-PMF B2B SaaS and AI teams. 10+ years, £20M+ revenue influenced, 388+ GrowthMentor sessions at 4.93★."
+  path="/about"
+  schema={buildPersonSchema()}
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">About</p>
-      <h1>Founder-led growth for teams that need clarity.</h1>
-      <p>We Scale Startups works with product-led teams that already have signal but need a clearer way to turn that signal into repeatable acquisition.</p>
+      <h1>Daniel Johnson. Operator, not agency.</h1>
+      <p>We Scale Startups is one senior operator working directly with founders. No account managers, no hand-offs, no junior team learning on your dime.</p>
     </div>
   </section>
 
@@ -21,17 +27,29 @@ import { siteConfig } from "../../site";
         <img src="/images/daniel-headshot.png" alt="Daniel Johnson, founder of We Scale Startups" />
       </div>
       <div class="founder-copy">
-        <p class="eyebrow">Daniel Johnson</p>
-        <h2>Growth work without the fog machine.</h2>
-        <p>Daniel works across strategy, customer research, acquisition, mentoring, and speaking. The through-line is simple: help founders make better growth decisions and build systems their teams can keep running.</p>
+        <p class="eyebrow">Daniel Johnson · Founder</p>
+        <h2>A decade of growth work across SaaS, AI, fintech, healthtech, and edtech.</h2>
+        <p>UK-based, currently operating from Asia. I work with founders of post-PMF B2B SaaS and AI companies between $1M and $10M ARR — the stage where the product clearly works but acquisition is inconsistent, spend is hard to defend, and the first full-time growth leader is still 6–12 months away.</p>
+        <p>The through-line across every engagement is the same: help founders make better growth decisions and leave behind a system the team can keep running.</p>
+        <h3>The receipts</h3>
         <ul class="note-list">
-          <li>Founding partner at We Scale Startups</li>
-          <li>Mentor and speaker across startup and education communities</li>
-          <li>Experienced across paid, SEO, CRO, positioning, and GTM</li>
+          <li><strong>£20M+</strong> revenue influenced through client growth work</li>
+          <li><strong>£6M+</strong> managed across paid acquisition channels</li>
+          <li><strong>388+</strong> mentorship sessions on GrowthMentor · <strong>4.93★</strong> average rating</li>
+          <li><strong>10+</strong> years operating growth for product-led teams</li>
+          <li>Featured in Google Launchpad, Cambridge Judge, GrowthMentor, and multiple startup accelerators</li>
+        </ul>
+        <h3>What I actually do</h3>
+        <ul class="note-list">
+          <li>Fractional CMO for post-PMF B2B SaaS and AI teams</li>
+          <li>Growth diagnosis and 90-day operating plans</li>
+          <li>Customer research → message architecture → acquisition system</li>
+          <li>Mentor, speaker, and trainer across startup and education communities</li>
         </ul>
         <div class="hero-actions">
-          <a class="button button-dark" href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel on LinkedIn</a>
-          <a class="button button-light" href="/case-studies">Read the proof</a>
+          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+          <a class="button button-dark" href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">LinkedIn</a>
+          <a class="button button-light" href="/case-studies">See the proof</a>
         </div>
       </div>
     </div>

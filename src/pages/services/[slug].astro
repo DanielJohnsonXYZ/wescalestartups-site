@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 const path = `/services/${service.id}`;
+const isDelivery = service.data.order === 4;
 ---
 
 <BaseLayout
@@ -24,11 +25,12 @@ const path = `/services/${service.id}`;
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">{service.data.shortTitle}</p>
+      <p class="eyebrow">{isDelivery ? "Delivery model" : `Phase ${service.data.order}`}</p>
       <h1>{service.data.title}</h1>
       <p>{service.data.description}</p>
+      <p class="price-signal"><strong>Pricing:</strong> {siteConfig.priceBand}. {siteConfig.priceBandNote}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{service.data.cta}</a>
+        <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
         <a class="button button-light" href="/services">All services</a>
       </div>
     </div>
@@ -63,9 +65,9 @@ const path = `/services/${service.id}`;
       <div>
         <p class="eyebrow">Decision point</p>
         <h2>Useful when the next move is unclear.</h2>
-        <p>A short diagnosis is enough to see whether this is the right shape of help or whether another constraint needs attention first.</p>
+        <p>A 30-minute call is enough to see whether this is the right shape of help or whether another constraint needs attention first.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{service.data.cta}</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>

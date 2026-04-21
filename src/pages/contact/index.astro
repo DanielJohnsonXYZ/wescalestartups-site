@@ -3,28 +3,33 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
 ---
 
-<BaseLayout title="Contact | We Scale Startups" description="Book a growth diagnosis or contact We Scale Startups about strategy, research, acquisition, or fractional CMO support." path="/contact">
+<BaseLayout
+  title="Book a growth call | We Scale Startups"
+  description="Book a 30-minute growth call with Daniel Johnson. For post-PMF B2B SaaS and AI founders, $1M–$10M ARR."
+  path="/contact"
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Contact</p>
       <h1>Bring the current growth bottleneck.</h1>
-      <p>The best first conversation is practical: what is happening now, what is not working, and what would need to become clearer for growth to move.</p>
+      <p>A 30-minute call to map what's happening now, what's not working, and whether We Scale Startups is the right partner for the next phase. No deck, no pitch.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="shell contact-grid">
-      <article class="contact-option">
-        <p class="card-kicker">Fastest</p>
-        <h2>Book a growth diagnosis</h2>
-        <p>A short call to map the constraint, priorities, and whether We Scale Startups is useful for the next phase.</p>
-        <a class="card-link" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book on Calendly</a>
+      <article class="contact-option contact-option-primary">
+        <p class="card-kicker">Fastest · recommended</p>
+        <h2>Book a growth call</h2>
+        <p>30 minutes. Qualifying questions on the form so we both walk in with context.</p>
+        <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+        <p class="contact-note"><small>Best for: $1M–$10M ARR B2B SaaS or AI founders with a specific growth bottleneck.</small></p>
       </article>
       <article class="contact-option">
-        <p class="card-kicker">Email</p>
+        <p class="card-kicker">Prefer email</p>
         <h2>Send the context</h2>
-        <p>Share the product, stage, current channels, bottleneck, and what you want to change in the next 90 days.</p>
-        <a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        <p>Share the product, stage, current channels, bottleneck, and what you want to change in the next 90 days. I'll reply within two working days.</p>
+        <a class="card-link" href={`mailto:${siteConfig.email}?subject=Growth%20call%20enquiry`}>{siteConfig.email}</a>
       </article>
       <article class="contact-option">
         <p class="card-kicker">Phone</p>
@@ -32,6 +37,17 @@ import { siteConfig } from "../../site";
         <p>Use the office number if the work is time-sensitive or easier to explain in conversation.</p>
         <a class="card-link" href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
       </article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="calendly-embed">
+        <h2>Or book directly</h2>
+        <p>The Calendly opens in a new tab. Your browser may also show it inline below.</p>
+        <div class="calendly-inline-widget" data-url={siteConfig.bookingUrl} style="min-width:320px;height:700px;"></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" is:inline async></script>
+      </div>
     </div>
   </section>
 </BaseLayout>

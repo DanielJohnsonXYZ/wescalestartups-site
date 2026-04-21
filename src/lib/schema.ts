@@ -10,7 +10,7 @@ export function buildOrganizationSchema() {
     url: siteConfig.siteUrl,
     email: siteConfig.email,
     telephone: siteConfig.phone,
-    logo: absoluteUrl("/images/logos/wss-logo.png"),
+    logo: absoluteUrl("/images/logos/wss-logo.webp"),
     founder: {
       "@type": "Person",
       name: siteConfig.founderName,
@@ -24,6 +24,19 @@ export function buildOrganizationSchema() {
       addressCountry: "GB"
     },
     sameAs: [siteConfig.linkedin]
+  };
+}
+
+export function buildWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.siteUrl}/#website`,
+    name: siteConfig.name,
+    url: siteConfig.siteUrl,
+    description: siteConfig.description,
+    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    inLanguage: "en-US"
   };
 }
 

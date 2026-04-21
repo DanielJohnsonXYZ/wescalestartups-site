@@ -1,8 +1,16 @@
 import { siteConfig } from "../site";
 
+export function normalizePath(path = "/") {
+  if (path === "/index.html") return "/";
+  if (path.endsWith("/index.html")) return path.replace(/\/index\.html$/, "");
+  if (path.endsWith(".html")) return path.slice(0, -5);
+  return path || "/";
+}
+
 export function absoluteUrl(path = "/") {
   if (path.startsWith("http")) return path;
-  const normalized = path.startsWith("/") ? path : `/${path}`;
+  const cleanPath = normalizePath(path);
+  const normalized = cleanPath.startsWith("/") ? cleanPath : `/${cleanPath}`;
   return `${siteConfig.siteUrl}${normalized}`;
 }
 

@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout
+  title="Privacy | We Scale Startups"
+  description="How We Scale Startups handles enquiry, analytics, scheduling, and communication data."
+  path="/privacy"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Privacy</p>
+      <h1>Plain-English privacy for growth conversations.</h1>
+      <p>We collect the minimum information needed to understand an enquiry, schedule calls, improve the site, and follow up professionally.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell legal-grid">
+      <aside class="detail-aside">
+        <p><strong>Controller</strong></p>
+        <p>{siteConfig.name}</p>
+        <p>{siteConfig.address}</p>
+        <p><a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+      </aside>
+
+      <div class="detail-body legal-body">
+        <article class="content-block">
+          <h2>What we collect</h2>
+          <p>When you contact us or book a call, we may collect your name, email address, company, role, website, scheduling details, and the context you choose to share about your growth challenge.</p>
+          <p>When you browse the site, analytics and infrastructure tools may collect basic technical data such as pages visited, device type, approximate location, referrer, and browser information.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>How we use it</h2>
+          <ul>
+            <li>To respond to enquiries and decide whether there is a useful commercial fit.</li>
+            <li>To schedule and run calls through tools such as Calendly.</li>
+            <li>To improve website performance, messaging, and conversion flows.</li>
+            <li>To send follow-up material where it is relevant to the conversation.</li>
+          </ul>
+        </article>
+
+        <article class="content-block">
+          <h2>Third-party tools</h2>
+          <p>We may use service providers for hosting, analytics, scheduling, email, and operational workflows. These providers process data only for the purposes needed to deliver the service.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>Your choices</h2>
+          <p>You can ask to access, correct, or delete personal information we hold about you. Email {siteConfig.email} and we will respond within a reasonable timeframe.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

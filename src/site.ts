@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "We Scale Startups",
   title: "We Scale Startups | Growth Systems for AI and SaaS Teams",
   description:
-    "Founder-led growth strategy, customer research, and acquisition systems for post-PMF AI, SaaS, fintech, healthtech, and product-led teams.",
+    "AI-native growth strategy, customer research, and acquisition systems for post-PMF AI, SaaS, fintech, healthtech, and product-led teams.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "https://calendly.com/wescalestartups",
@@ -35,7 +35,7 @@ export const trustLogos = [
 ] as const;
 
 export const headlineMetrics = [
-  { value: "£20M+", label: "Revenue influenced through client growth work" },
+  { value: "£20M+", label: "Revenue influenced across global client work" },
   { value: "£6M+", label: "Managed across paid acquisition channels" },
-  { value: "10+", label: "Years of startup growth and mentoring work" }
+  { value: "10+", label: "Years building startup growth systems" }
 ] as const;

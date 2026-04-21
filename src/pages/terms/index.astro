@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout
+  title="Terms | We Scale Startups"
+  description="Terms for using the We Scale Startups website, content, and enquiry flows."
+  path="/terms"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Terms</p>
+      <h1>Useful boundaries for using this site.</h1>
+      <p>The site exists to explain our growth strategy, research, acquisition, and operating-system work. It is not a substitute for tailored professional advice.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell legal-grid">
+      <aside class="detail-aside">
+        <p><strong>Contact</strong></p>
+        <p>{siteConfig.name}</p>
+        <p><a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+      </aside>
+
+      <div class="detail-body legal-body">
+        <article class="content-block">
+          <h2>Website content</h2>
+          <p>The material on this site is provided for general information. Commercial outcomes depend on context, implementation quality, market conditions, and the underlying product or offer.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>Intellectual property</h2>
+          <p>Site content, copy, design, frameworks, and visual assets belong to We Scale Startups or their respective owners unless otherwise stated. Do not copy or republish material without permission.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>External links</h2>
+          <p>This site links to external services such as Calendly, LinkedIn, and client or ecosystem websites. We are not responsible for the content or privacy practices of third-party sites.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>Engagements</h2>
+          <p>Any client work is governed by a separate proposal, statement of work, or agreement. Website language does not create a client relationship on its own.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

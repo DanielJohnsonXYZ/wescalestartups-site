@@ -5,13 +5,15 @@ import { navigation, siteConfig } from "../site";
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
-      <img class="footer-logo" src="/images/logos/wss-logo.png" alt="We Scale Startups" width="128" height="72" />
-      <p class="footer-summary">Growth strategy, research, and acquisition systems for product-led teams that need clearer decisions before more spend.</p>
+      <img class="footer-logo" src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="128" height="72" loading="lazy" decoding="async" />
+      <p class="footer-summary">AI-native growth strategy, research, and acquisition systems for product-led teams that need clearer decisions before more spend.</p>
     </div>
     <div>
       <h2>Explore</h2>
       <nav class="footer-links" aria-label="Footer navigation">
         {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
       </nav>
     </div>
     <div>

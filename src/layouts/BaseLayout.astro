@@ -1,8 +1,8 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import { buildOrganizationSchema } from "../lib/schema";
-import { absoluteUrl } from "../lib/utils";
+import { buildOrganizationSchema, buildWebSiteSchema } from "../lib/schema";
+import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
 import "../styles/global.css";
 
@@ -22,15 +22,16 @@ const {
   schema = []
 } = Astro.props;
 
-const canonical = absoluteUrl(path);
+const currentPath = normalizePath(path);
+const canonical = absoluteUrl(currentPath);
 const imageUrl = absoluteUrl(ogImage);
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
-const allSchemas = [buildOrganizationSchema(), ...pageSchemas].filter(Boolean);
+const allSchemas = [buildOrganizationSchema(), buildWebSiteSchema(), ...pageSchemas].filter(Boolean);
 const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
 ---
 
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -58,7 +59,7 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <SiteHeader currentPath={Astro.url.pathname} />
+    <SiteHeader currentPath={currentPath} />
     <main id="main-content">
       <slot />
     </main>

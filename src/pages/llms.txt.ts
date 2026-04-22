@@ -36,6 +36,8 @@ ${headlineMetrics.map((item) => `- ${item.value}: ${item.label}`).join("\n")}
 - Transfer: ${siteConfig.siteUrl}/transfer
 - Industries: ${siteConfig.siteUrl}/industries
 - Case studies: ${siteConfig.siteUrl}/case-studies
+- Resources: ${siteConfig.siteUrl}/resources
+- Press kit: ${siteConfig.siteUrl}/press
 - About: ${siteConfig.siteUrl}/about
 - Contact: ${siteConfig.siteUrl}/contact
 `,

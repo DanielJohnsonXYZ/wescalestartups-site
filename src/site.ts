@@ -22,6 +22,7 @@ export const navigation = [
   { href: "/services", label: "Services" },
   { href: "/industries", label: "Industries" },
   { href: "/case-studies", label: "Proof" },
+  { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
 ] as const;
@@ -38,4 +39,31 @@ export const headlineMetrics = [
   { value: "£20M+", label: "Revenue influenced across startup client work" },
   { value: "£10M+", label: "Budgets and paid acquisition spend managed" },
   { value: "20+", label: "Startups advised across SaaS, AI, fintech, healthtech, and ecommerce" }
+] as const;
+
+export const leadMagnets = [
+  {
+    title: "Growth Bottleneck Scorecard",
+    audience: "Post-PMF founders",
+    description: "A practical checklist for deciding whether the current constraint is positioning, acquisition, conversion, reporting, or team cadence.",
+    href: "/resources#growth-bottleneck-scorecard"
+  },
+  {
+    title: "90-Day Growth Sprint Planner",
+    audience: "Startup leadership teams",
+    description: "A plain-English sprint outline for turning messy activity into sharper experiments, better reporting, and clearer ownership.",
+    href: "/resources#90-day-growth-sprint-planner"
+  },
+  {
+    title: "VC Portfolio Growth Diagnosis Template",
+    audience: "VCs and accelerator teams",
+    description: "A workshop template for helping portfolio founders identify the next growth constraint before hiring or spending more.",
+    href: "/resources#vc-portfolio-growth-diagnosis"
+  }
+] as const;
+
+export const proofStandards = [
+  "We separate before, work done, and result so visitors can see what changed.",
+  "We avoid anonymous miracle claims where there is no permissioned proof.",
+  "We connect results to the system built, not a single tactic taken out of context."
 ] as const;

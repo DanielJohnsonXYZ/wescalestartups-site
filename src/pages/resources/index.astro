@@ -1,0 +1,120 @@
+---
+import SectionIntro from "../../components/SectionIntro.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { leadMagnets, siteConfig } from "../../site";
+
+const guides = [
+  {
+    id: "growth-bottleneck-scorecard",
+    title: "Growth Bottleneck Scorecard",
+    format: "Founder checklist",
+    bestFor: "Post-PMF teams with activity but unclear priorities",
+    sections: [
+      "ICP clarity",
+      "Channel signal",
+      "Landing page conversion",
+      "Founder-led sales dependency",
+      "Reporting and decision cadence"
+    ]
+  },
+  {
+    id: "90-day-growth-sprint-planner",
+    title: "90-Day Growth Sprint Planner",
+    format: "Sprint planning worksheet",
+    bestFor: "Leadership teams preparing a quarter of focused growth work",
+    sections: [
+      "Diagnosis inputs",
+      "Experiment backlog",
+      "Decision rules",
+      "Weekly review rhythm",
+      "Transfer checklist"
+    ]
+  },
+  {
+    id: "vc-portfolio-growth-diagnosis",
+    title: "VC Portfolio Growth Diagnosis Template",
+    format: "Portfolio workshop guide",
+    bestFor: "Investors, accelerators, and venture studios supporting founder growth decisions",
+    sections: [
+      "Founder bottleneck prompts",
+      "Channel and conversion questions",
+      "Board-ready next steps",
+      "Referral routes",
+      "Sprint or fractional CMO fit"
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Resources | We Scale Startups"
+  description="Free growth diagnosis guides, sprint planners, and portfolio templates for post-PMF startups building repeatable growth systems."
+  path="/resources"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Resources</p>
+      <h1>Practical growth guides for teams between traction and scale.</h1>
+      <p>Use these when you need a clearer diagnosis before hiring, briefing an agency, or adding more channel activity.</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        <a class="button button-light" href="/case-studies">See Case Studies</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Lead magnets"
+        title="Downloadable enough to use, lightweight enough to read."
+        body="The point is to help a founder make the next growth decision, not bury them in a decorative PDF."
+      />
+      <div class="grid-3">
+        {guides.map((guide) => (
+          <article class="feature-card" id={guide.id}>
+            <p class="card-kicker">{guide.format}</p>
+            <h3>{guide.title}</h3>
+            <p><strong>Best for:</strong> {guide.bestFor}</p>
+            <ul>
+              {guide.sections.map((item) => <li>{item}</li>)}
+            </ul>
+            <a class="button button-light" href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(`Send me the ${guide.title}`)}`}>
+              Request the guide
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="How to use them"
+        title="Start with the bottleneck, then choose the shape of help."
+        body="If the scorecard shows a narrow problem, a focused sprint may be enough. If the problem is repeated judgement across positioning, channels, reporting, and team cadence, fractional CMO support may be cleaner."
+      />
+      <div class="grid-3">
+        {leadMagnets.map((item) => (
+          <a class="feature-card" href={item.href}>
+            <p class="card-kicker">{item.audience}</p>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Need the diagnosis done with you?</p>
+        <h2>Bring the current growth mess.</h2>
+        <p>We will identify whether the constraint is positioning, acquisition, conversion, reporting, or senior leadership.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+    </div>
+  </section>
+</BaseLayout>

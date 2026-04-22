@@ -5,7 +5,7 @@ import ProofLogos from "../components/ProofLogos.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { sortByOrder } from "../lib/utils";
-import { headlineMetrics, siteConfig } from "../site";
+import { headlineMetrics, leadMagnets, proofStandards, siteConfig } from "../site";
 
 const services = sortByOrder(await getCollection("services"));
 const industries = sortByOrder(await getCollection("industries")).slice(0, 4);
@@ -186,6 +186,31 @@ function metricLead(result: string) {
     </div>
   </section>
 
+  <section class="section">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">Daniel credibility</p>
+        <h2>Founder-led, but built to transfer into your team.</h2>
+        <p class="lead-copy">
+          Daniel brings the senior judgment, then turns that judgment into workflows, reporting, briefs, and handoff
+          material your team can keep using.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {[
+          "Google for Startups and Techstars ecosystem mentor",
+          "GrowthMentor track record with hundreds of founder sessions",
+          "Experience across SaaS, AI, fintech, healthtech, ecommerce, and education",
+          "Practical operator background across paid, SEO, CRO, positioning, GTM, and reporting"
+        ].map((item) => (
+          <article class="feature-card compact-card">
+            <p>{item}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   {featuredCase && (
     <section class="section" id="results">
       <div class="shell">
@@ -245,6 +270,25 @@ function metricLead(result: string) {
     </div>
   </section>
 
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Resources"
+        title="Useful before you spend more."
+        body="Lightweight guides for founders, leadership teams, and portfolio teams trying to diagnose the growth constraint."
+      />
+      <div class="grid-3">
+        {leadMagnets.map((item) => (
+          <a class="feature-card" href={item.href}>
+            <p class="card-kicker">{item.audience}</p>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="markets">
     <div class="shell">
       <SectionIntro
@@ -280,6 +324,13 @@ function metricLead(result: string) {
             summary={item.data.summary}
             results={item.data.results}
           />
+        ))}
+      </div>
+      <div class="mt-8 grid-3">
+        {proofStandards.map((item) => (
+          <article class="feature-card compact-card">
+            <p>{item}</p>
+          </article>
         ))}
       </div>
     </div>

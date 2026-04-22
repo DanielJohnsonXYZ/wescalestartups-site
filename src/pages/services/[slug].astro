@@ -54,6 +54,28 @@ const path = `/services/${service.id}`;
             {service.data.process.map((item) => <li>{item}</li>)}
           </ol>
         </article>
+        <article class="content-block">
+          <h2>Useful assets created</h2>
+          <ul>
+            <li>Prioritised bottleneck diagnosis and decision notes</li>
+            <li>Roadmap or experiment backlog with owners and success criteria</li>
+            <li>Messaging, campaign, reporting, or handoff material depending on the constraint</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="feature-card">
+        <p class="card-kicker">Resource</p>
+        <h2>Want to pressure-test this option first?</h2>
+        <p>Use the resources page to request the Growth Bottleneck Scorecard or 90-Day Growth Sprint Planner before booking.</p>
+        <div class="hero-actions">
+          <a class="button button-brand" href="/resources">See resources</a>
+          <a class="button button-light" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        </div>
       </div>
     </div>
   </section>

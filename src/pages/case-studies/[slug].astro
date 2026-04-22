@@ -34,8 +34,17 @@ const { caseStudy } = Astro.props;
         <p>{caseStudy.data.client}</p>
         <p><strong>Sector:</strong> {caseStudy.data.sector}</p>
         <p><strong>Services:</strong> {caseStudy.data.services.join(", ")}</p>
+        <p><strong>Proof format:</strong> Before, work done, result.</p>
       </aside>
       <div class="detail-body">
+        <article class="content-block">
+          <h2>Before, work done, result</h2>
+          <div class="proof-steps">
+            <div><span>Before</span><p>{caseStudy.data.challenge}</p></div>
+            <div><span>Work done</span><p>{caseStudy.data.work.slice(0, 3).join(", ")}.</p></div>
+            <div><span>Result</span><p>{caseStudy.data.results.slice(0, 3).join("; ")}.</p></div>
+          </div>
+        </article>
         <article class="content-block">
           <h2>Challenge</h2>
           <p>{caseStudy.data.challenge}</p>
@@ -53,6 +62,17 @@ const { caseStudy } = Astro.props;
           </ul>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Similar constraint?</p>
+        <h2>Diagnose the bottleneck before you brief more work.</h2>
+        <p>Bring the current funnel, positioning, and reporting problem. We will decide the most useful next move.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
     </div>
   </section>
 </BaseLayout>

@@ -1,0 +1,58 @@
+---
+import ProofLogos from "../../components/ProofLogos.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { headlineMetrics, siteConfig } from "../../site";
+
+const companyBoilerplate =
+  "We Scale Startups is a founder-led growth studio helping post-PMF startups build repeatable growth systems before hiring a full-time CMO. The work spans growth diagnosis, 90-day sprints, acquisition systems, and fractional CMO support.";
+
+const founderBio =
+  "Daniel Johnson is the founder of We Scale Startups and an AI-native growth operator for post-PMF SaaS, AI, fintech, healthtech, education, and ecommerce teams. His background includes Google for Startups, Techstars ecosystem mentoring, GrowthMentor, Cambridge Judge Business School, and practical growth work across 20+ startups.";
+---
+
+<BaseLayout
+  title="Press Kit | We Scale Startups"
+  description="Company boilerplate, founder bio, credibility signals, logos, and contact details for We Scale Startups."
+  path="/press"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Press kit</p>
+      <h1>Company and founder information for partners, podcasts, and press.</h1>
+      <p>Use this page for accurate short descriptions, proof points, and contact details.</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={`mailto:${siteConfig.email}`}>Email We Scale Startups</a>
+        <a class="button button-light" href="/about">About the company</a>
+      </div>
+    </div>
+  </section>
+
+  <ProofLogos />
+
+  <section class="section">
+    <div class="shell detail-grid">
+      <aside class="detail-aside">
+        <p class="eyebrow">Contact</p>
+        <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+        <p><a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a></p>
+        <p>{siteConfig.address}</p>
+      </aside>
+      <div class="detail-body">
+        <article class="content-block">
+          <h2>Company boilerplate</h2>
+          <p>{companyBoilerplate}</p>
+        </article>
+        <article class="content-block">
+          <h2>Founder bio</h2>
+          <p>{founderBio}</p>
+        </article>
+        <article class="content-block">
+          <h2>Proof points</h2>
+          <ul>
+            {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

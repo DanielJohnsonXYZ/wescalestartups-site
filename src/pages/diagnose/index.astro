@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout
+  title="Diagnose | We Scale Startups"
+  description="Growth diagnosis for post-PMF startups that need to find the real bottleneck before adding more activity."
+  path="/diagnose"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Diagnose</p>
+      <h1>Find the real growth bottleneck before adding more activity.</h1>
+      <p>We audit positioning, ICP, funnel, acquisition, reporting, and operating cadence so the next move is based on evidence, not noise.</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        <a class="button button-light" href="/services/growth-diagnosis">See the service</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell grid-3">
+      <article class="feature-card"><h3>Audit</h3><p>Review the site, offers, channel evidence, CRM notes, reporting, and sales narrative.</p></article>
+      <article class="feature-card"><h3>Prioritise</h3><p>Separate symptoms from constraints so the team knows what deserves the next sprint.</p></article>
+      <article class="feature-card"><h3>Decide</h3><p>Leave with a clear recommendation: sprint, acquisition build, fractional leadership, or a narrower fix.</p></article>
+    </div>
+  </section>
+</BaseLayout>

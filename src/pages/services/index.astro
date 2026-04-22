@@ -8,12 +8,12 @@ import { siteConfig } from "../../site";
 const services = sortByOrder(await getCollection("services"));
 ---
 
-<BaseLayout title="Services | We Scale Startups" description="Growth strategy, customer research, acquisition systems, and fractional CMO support for post-PMF startup teams." path="/services">
+<BaseLayout title="Services | We Scale Startups" description="Growth diagnosis, 90-day growth sprints, acquisition system builds, and fractional CMO support for post-PMF startup teams." path="/services">
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Services</p>
-      <h1>Growth help with a clear job to do.</h1>
-      <p>Each offer is designed around a real constraint: unclear market, unclear language, unclear acquisition rhythm, or unclear leadership.</p>
+      <h1>Choose the growth path that matches the bottleneck.</h1>
+      <p>Start with a diagnosis if the path is unclear. Move into a sprint, acquisition build, or fractional CMO support when the constraint is visible.</p>
     </div>
   </section>
 
@@ -36,7 +36,7 @@ const services = sortByOrder(await getCollection("services"));
     <div class="shell">
       <SectionIntro
         eyebrow="How it works"
-        title="The service is the container. The system is the point."
+        title="Diagnose. Build. Test. Transfer."
         body="The work should leave the company more capable: clearer decisions, cleaner experiments, stronger proof, and less dependency on anyone guessing in a meeting."
       />
       <div class="grid-3">
@@ -61,9 +61,9 @@ const services = sortByOrder(await getCollection("services"));
       <div>
         <p class="eyebrow">Start here</p>
         <h2>Not sure which service fits?</h2>
-        <p>Bring the current growth mess. We will identify whether the constraint is strategy, research, acquisition, or leadership.</p>
+        <p>Bring the current growth bottleneck. We will identify whether the constraint is diagnosis, sprint, acquisition system, or fractional leadership.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a growth diagnosis</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
     </div>
   </section>
 </BaseLayout>

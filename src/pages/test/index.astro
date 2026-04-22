@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout
+  title="Test | We Scale Startups"
+  description="Run focused growth experiments with clear hypotheses, owners, metrics, and decision rules."
+  path="/test"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Test</p>
+      <h1>Run fewer experiments, learn more from each one.</h1>
+      <p>We turn scattered marketing activity into tests with hypotheses, owners, commercial metrics, and decisions the team can act on.</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        <a class="button button-light" href="/case-studies">See proof</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell grid-3">
+      <article class="feature-card"><h3>Choose</h3><p>Select experiments by likely learning value, pipeline potential, effort, and risk.</p></article>
+      <article class="feature-card"><h3>Measure</h3><p>Use clear leading and lagging metrics so tests do not become activity reports.</p></article>
+      <article class="feature-card"><h3>Decide</h3><p>Scale, stop, refine, or transfer the work based on evidence.</p></article>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+{
+  "title": "Ecommerce",
+  "description": "Acquisition and conversion systems for ecommerce teams that need cleaner reporting, stronger offers, and better growth decisions before more spend.",
+  "buyerProblem": "Ecommerce teams often have plenty of channel data but not enough clarity on offer, margin, repeat purchase, or what to test next.",
+  "usefulWhen": [
+    "Paid spend is active but reporting does not explain what to scale",
+    "Content, email, CRO, and paid are not working from the same priorities",
+    "The team needs a stronger growth rhythm without hiring a full-time CMO"
+  ],
+  "growthSystem": [
+    "Offer and margin-led channel strategy",
+    "Landing page and conversion review",
+    "Creative, paid, lifecycle, and retention tests",
+    "Reporting cadence around CAC, payback, LTV, and repeat purchase"
+  ],
+  "proof": [
+    "Experience with ecommerce growth, paid acquisition, and retention programmes",
+    "Lifecycle and acquisition work that connects channel activity to commercial outcomes"
+  ],
+  "order": 7
+}

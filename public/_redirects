@@ -1,0 +1,13 @@
+# Cloudflare Pages redirects
+
+https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
+
+/contact-us                    /contact                         301
+/contact-us/                   /contact                         301
+
+/services/growth-strategy      /services/growth-diagnosis       301
+/services/growth-strategy/     /services/growth-diagnosis       301
+/services/customer-research    /services/90-day-growth-sprint   301
+/services/customer-research/   /services/90-day-growth-sprint   301
+/services/acquisition-systems  /services/acquisition-system-build  301
+/services/acquisition-systems/ /services/acquisition-system-build  301

@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+---
+
+<BaseLayout
+  title="Build | We Scale Startups"
+  description="Build the growth assets, acquisition workflows, reporting cadence, and team rituals that turn strategy into execution."
+  path="/build"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Build</p>
+      <h1>Turn growth strategy into assets, workflows, and operating rhythm.</h1>
+      <p>We build the practical pieces: positioning, landing pages, campaign briefs, reporting, AI workflows, and the meeting cadence that keeps learning moving.</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        <a class="button button-light" href="/services/90-day-growth-sprint">See the sprint</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell grid-3">
+      <article class="feature-card"><h3>Positioning</h3><p>Clarify ICP, pains, buying triggers, objections, and the offer story.</p></article>
+      <article class="feature-card"><h3>Acquisition</h3><p>Build the pages, campaigns, content, outbound, paid, SEO, or CRO tests that fit the stage.</p></article>
+      <article class="feature-card"><h3>Reporting</h3><p>Set a weekly view of pipeline, channel evidence, conversion, and learning velocity.</p></article>
+    </div>
+  </section>
+</BaseLayout>

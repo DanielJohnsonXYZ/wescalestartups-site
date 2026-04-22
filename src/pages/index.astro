@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import CaseCard from "../components/CaseCard.astro";
+import ProofLogos from "../components/ProofLogos.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { sortByOrder } from "../lib/utils";
@@ -10,110 +11,177 @@ const services = sortByOrder(await getCollection("services"));
 const industries = sortByOrder(await getCollection("industries")).slice(0, 4);
 const cases = sortByOrder(await getCollection("cases"));
 const featuredCase = cases[0];
-const marqueeItems = ["Google Launchpad", "Cambridge Judge", "GrowthMentor", "Newsflare", "Peachy", "Ned", "eQuoo", "LessonsUp"];
+
+const fitSignals = [
+  "Post-PMF, but growth is still too founder-dependent",
+  "Traction is real, but the team has no repeatable system",
+  "You are not ready for a full-time CMO, but junior execution is not enough",
+  "Acquisition, reporting, and conversion need cleaner ownership",
+  "The team is busy, but learning is scattered"
+];
+
+const messyGrowth = [
+  "Campaigns are active, but learning is hard to find",
+  "Content exists, but it does not compound into pipeline",
+  "Spend is live, but reporting does not explain what to scale",
+  "The founder makes too many growth decisions",
+  "Priorities change faster than the team can execute"
+];
+
+const aiUses = [
+  "Customer research synthesis",
+  "Call and review analysis",
+  "ICP and pain mapping",
+  "Landing page test briefs",
+  "Reporting automation",
+  "Experiment prioritisation",
+  "Content workflow design"
+];
+
+const process = [
+  ["Diagnose", "Find the real constraint across ICP, positioning, funnel, channels, reporting, and team cadence."],
+  ["Build", "Turn the decision into pages, campaigns, workflows, dashboards, and a weekly operating rhythm."],
+  ["Test", "Run focused experiments with clear hypotheses, owners, and decision rules."],
+  ["Transfer", "Document the system so the founder, team, and vendors can keep running it."]
+] as const;
 
 function metricLead(result: string) {
   return result.match(/(?:[$£])?\d+(?:\.\d+)?%?\+?/)?.[0] ?? result.split(" ")[0];
 }
 ---
 
-<BaseLayout path="/">
-  <section class="hero">
-    <div class="shell">
-      <div class="hero-meta">
-        <span>Now building · AI-native growth systems</span>
-        <span>Research · Acquisition · Operating cadence</span>
-      </div>
+<BaseLayout
+  path="/"
+  title="We Scale Startups | Repeatable Growth Systems Before Hiring a Full-Time CMO"
+  description="We help post-PMF startups turn messy growth activity into clearer positioning, sharper acquisition, and a pipeline rhythm the team can run."
+>
+  <section class="hero hero-with-portrait">
+    <div class="shell hero-grid">
+      <div>
+        <div class="hero-meta">
+          <span>Fractional CMO · Growth diagnosis · Acquisition systems</span>
+          <span>Post-PMF startups</span>
+        </div>
 
-      <h1>We scale <em>startups</em> with AI-native growth systems.</h1>
+        <h1>Build a repeatable growth system before hiring a full-time CMO.</h1>
 
-      <div class="hero-foot">
-        <p class="hero-copy">Founder-led growth work for teams past PMF. Senior operators plus AI-native workflows, embedded in the way your team ships qualified pipeline.</p>
-        <dl class="hero-facts">
-          <dt>Founded</dt>
-          <dd>London · US-friendly overlap</dd>
-          <dt>Focus</dt>
-          <dd>AI, SaaS, fintech, healthtech</dd>
-          <dt>Model</dt>
-          <dd>Fixed-scope sprints · USD-ready</dd>
-        </dl>
+        <p class="hero-copy">
+          We help post-PMF startups turn messy growth activity into clearer positioning, sharper acquisition,
+          and a pipeline rhythm the team can actually run.
+        </p>
+
         <div class="hero-actions">
-          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Start a sprint</a>
-          <a class="button button-light" href="/case-studies">See the proof</a>
+          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+          <a class="button button-light" href="/case-studies">See Case Studies</a>
+        </div>
+
+        <div class="hero-proof">
+          {headlineMetrics.map((metric) => (
+            <div>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div class="showcase">
-        <div class="showcase-grid">
-          <div class="showcase-copy">
-            <p class="eyebrow">Live growth stack</p>
-            <h2 class="showcase-title">An <em>AI-native</em> growth stack, shipped in 90 days.</h2>
-            <p>We instrument the market, run customer research, build campaigns, improve conversion points, and transfer the operating system so the team can keep going.</p>
-            <div class="showcase-stats">
-              {headlineMetrics.map((metric) => (
-                <div>
-                  <span class="stat-number">{metric.value}</span>
-                  <span class="stat-label">{metric.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div class="mock" aria-label="Growth system performance chart">
-            <div class="mock-label">Weekly pipeline · signal</div>
-            <div class="mock-value">2.84M</div>
-            <div class="mock-badge">+184%</div>
-            <div class="mock-chart" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span>
-            </div>
-          </div>
+      <aside class="hero-portrait-card" aria-label="Founder-led growth support">
+        <div class="founder-image">
+          <picture>
+            <source
+              srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
+              sizes="(max-width: 640px) 100vw, 38vw"
+              type="image/webp"
+            />
+            <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
+          </picture>
         </div>
+        <div class="hero-offer">
+          <p class="eyebrow">What we fix</p>
+          <ul class="note-list">
+            <li>Positioning that does not convert</li>
+            <li>Pipeline inconsistency</li>
+            <li>Founder-led sales dependency</li>
+            <li>Reporting that hides the real issue</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <ProofLogos />
+
+  <section class="section" id="fit">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">Who this is for</p>
+        <h2>This is for founders with traction, pressure, and no clean growth rhythm yet.</h2>
+      </div>
+      <div class="grid">
+        {fitSignals.map((item) => (
+          <article class="feature-card compact-card">
+            <p>{item}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <div class="marquee" aria-label="Selected proof and ecosystem names">
-    <div class="marquee-track">
-      {[...marqueeItems, ...marqueeItems].map((item) => (
-        <>
-          <span class="marquee-item">{item}</span>
-          <span class="marquee-dot">✦</span>
-        </>
-      ))}
-    </div>
-  </div>
-
-  <section class="section" id="engine">
+  <section class="section section-alt">
     <div class="shell">
       <SectionIntro
-        eyebrow="The engine"
-        title="Four systems we deploy."
-        body="The work is modular, but it is not a menu of disconnected tactics. Each system strengthens the same growth loop."
+        eyebrow="The pain"
+        title="Growth gets messy after PMF."
+        body="Once there is traction, the problem is rarely effort. The problem is sequencing, signal, and ownership."
       />
-
-      <div class="engine-list">
-        {services.map((service, index) => {
-          const words = service.data.shortTitle.split(" ");
-          const first = words[0];
-          const rest = words.slice(1).join(" ");
-          return (
-            <a class="engine-row" href={`/services/${service.id}`}>
-              <span class="engine-num">{String(index + 1).padStart(2, "0")}</span>
-              <h3>{first} {rest && <em>{rest}</em>}</h3>
-              <p>{service.data.description}</p>
-              <span class="engine-tag">{service.data.cta}</span>
-            </a>
-          );
-        })}
+      <div class="grid-5">
+        {messyGrowth.map((item) => (
+          <article class="feature-card compact-card">
+            <p>{item}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="services">
     <div class="shell">
-      <div class="statement">
-        <h2>Agencies pitch. <em>We build.</em></h2>
-        <p>Operating principle · 01</p>
+      <SectionIntro
+        eyebrow="Services"
+        title="Four clearer ways to work together."
+        body="Start with a diagnosis if the path is unclear. Move into a sprint, acquisition build, or fractional CMO support when the constraint is visible."
+      />
+
+      <div class="grid-4">
+        {services.map((service) => (
+          <a class="service-card service-card-strong" href={`/services/${service.id}`}>
+            <p class="card-kicker">{service.data.shortTitle}</p>
+            <h3>{service.data.title}</h3>
+            <p><strong>Who for:</strong> {service.data.audience}</p>
+            <p><strong>What changes:</strong> {service.data.promise}</p>
+            <span class="card-link">{service.data.cta}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">AI-native, practically</p>
+        <h2>AI speeds execution. Judgement decides priorities.</h2>
+        <p class="lead-copy">
+          We use AI where it shortens research, analysis, briefing, reporting, and iteration.
+          Senior operator judgement still decides what gets used, what gets ignored, and what matters commercially.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {aiUses.map((item) => (
+          <article class="feature-card compact-card">
+            <p>{item}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -122,21 +190,24 @@ function metricLead(result: string) {
     <section class="section" id="results">
       <div class="shell">
         <SectionIntro
-          eyebrow="Results"
-          title="Pipeline, proof, and learning velocity."
-          body="The case studies stay grounded in actual constraints: market clarity, acquisition efficiency, and conversion."
+          eyebrow="Case studies"
+          title="Before, work done, result."
+          body="Proof should be easy to scan. Each case shows the commercial problem, the work, and what changed."
         />
         <div class="case-feature">
           <div class="case-visual" aria-hidden="true">
-            <span>{featuredCase.data.client} · deployment</span>
+            <span>{featuredCase.data.client}</span>
             <span>{featuredCase.data.results[0]}</span>
             <strong>{featuredCase.data.client.slice(0, 1)}</strong>
           </div>
           <div class="case-copy">
             <p class="eyebrow">{featuredCase.data.sector}</p>
-            <h3>From scattered spend to a cleaner <em>growth system</em>.</h3>
-            <p>{featuredCase.data.challenge}</p>
-            <p>{featuredCase.data.summary}</p>
+            <h3>{featuredCase.data.title}</h3>
+            <div class="proof-steps">
+              <div><span>Before</span><p>{featuredCase.data.challenge}</p></div>
+              <div><span>Work done</span><p>{featuredCase.data.work.slice(0, 3).join(", ")}.</p></div>
+              <div><span>Result</span><p>{featuredCase.data.results.slice(0, 2).join("; ")}.</p></div>
+            </div>
             <div class="case-metrics">
               {featuredCase.data.results.slice(0, 3).map((result) => (
                 <div>
@@ -156,26 +227,20 @@ function metricLead(result: string) {
   )}
 
   <section class="section section-alt">
-    <div class="shell operator-grid">
-      <div class="operator-copy">
-        <p class="eyebrow">The operator</p>
-        <h2>Senior growth thinking without theatre.</h2>
-        <p>Work directly with Daniel Johnson on the decisions that shape growth: which customer to pursue, how to reach them, what to test, and how to turn the lessons into a repeatable system.</p>
-        <ul class="note-list">
-          <li>Founder-led strategy and execution direction</li>
-          <li>Experience across paid acquisition, SEO, CRO, mentoring, and training</li>
-          <li>Built for teams that need signal before they scale spend</li>
-        </ul>
-      </div>
-      <div class="founder-image">
-        <picture>
-          <source
-            srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
-            sizes="(max-width: 640px) 100vw, 48vw"
-            type="image/webp"
-          />
-          <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
-        </picture>
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Process"
+        title="Diagnose. Build. Test. Transfer."
+        body="The point is not to create dependency. The point is to leave the growth function clearer and easier to run."
+      />
+      <div class="grid-4">
+        {process.map(([title, body], index) => (
+          <a class="feature-card process-card" href={`/${title.toLowerCase()}`}>
+            <p class="card-kicker">{String(index + 1).padStart(2, "0")}</p>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -184,8 +249,8 @@ function metricLead(result: string) {
     <div class="shell">
       <SectionIntro
         eyebrow="Markets"
-        title="Built around categories where trust and clarity matter."
-        body="The same system adapts to different buying contexts: technical buyers, regulated categories, education users, and founders trying to make a new behaviour obvious."
+        title="Built for categories where trust and clarity matter."
+        body="The system adapts to the buyer, proof required, channel economics, and team capacity."
       />
       <div class="grid-4">
         {industries.map((industry) => (
@@ -204,8 +269,7 @@ function metricLead(result: string) {
     <div class="shell">
       <SectionIntro
         eyebrow="More proof"
-        title="Real work beats generic promise."
-        body="A few more examples of practical growth work across fintech, healthtech, and education."
+        title="Practical work across SaaS, fintech, healthtech, and education."
       />
       <div class="grid-3">
         {cases.slice(1, 4).map((item) => (
@@ -224,11 +288,11 @@ function metricLead(result: string) {
   <section class="cta-band" id="cta">
     <div class="shell cta-inner">
       <div>
-        <p class="eyebrow">Deploy · next sprint</p>
-        <h2>You ship the product. We ship the growth system.</h2>
-        <p>Bring your current bottleneck. We will map the next sensible moves and whether We Scale Startups is the right partner for the work.</p>
+        <p class="eyebrow">Next step</p>
+        <h2>Find the right growth path.</h2>
+        <p>Bring the current growth bottleneck. We will identify whether the constraint is diagnosis, sprint, acquisition system, or fractional leadership.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Start a sprint</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
     </div>
   </section>
 </BaseLayout>

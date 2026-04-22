@@ -14,12 +14,12 @@ export const GET: APIRoute = () =>
 **Booking:** ${siteConfig.bookingUrl}
 **Location:** London-based, serving global clients with US-friendly overlap.
 
-## Core Offer
+## Core Offers
 
-- Growth strategy sprints for teams that need a clear 90-day order of attack.
-- Customer research that turns buyer language into positioning, offers, landing pages, and campaigns.
-- Acquisition systems across paid, search, outbound, content, conversion points, and reporting.
-- Fractional CMO support for founders who need senior growth leadership before hiring a full-time leader.
+- Growth Diagnosis: audit positioning, funnel, acquisition, reporting, and team cadence to find the real bottleneck.
+- 90-Day Growth Sprint: sharpen positioning, launch focused experiments, improve reporting, and create a weekly growth rhythm.
+- Acquisition System Build: connect paid, SEO, outbound, content, CRO, and reporting around the buyer journey.
+- Fractional CMO: senior growth leadership before a full-time CMO hire.
 
 ## Proof Signals
 
@@ -30,6 +30,10 @@ ${headlineMetrics.map((item) => `- ${item.value}: ${item.label}`).join("\n")}
 
 - Home: ${siteConfig.siteUrl}/
 - Services: ${siteConfig.siteUrl}/services
+- Diagnose: ${siteConfig.siteUrl}/diagnose
+- Build: ${siteConfig.siteUrl}/build
+- Test: ${siteConfig.siteUrl}/test
+- Transfer: ${siteConfig.siteUrl}/transfer
 - Industries: ${siteConfig.siteUrl}/industries
 - Case studies: ${siteConfig.siteUrl}/case-studies
 - About: ${siteConfig.siteUrl}/about

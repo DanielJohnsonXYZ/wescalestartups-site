@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "We Scale Startups",
-  title: "We Scale Startups | Growth Systems for AI and SaaS Teams",
+  title: "We Scale Startups | Repeatable Growth Systems for Post-PMF Startups",
   description:
-    "AI-native growth strategy, customer research, and acquisition systems for post-PMF AI, SaaS, fintech, healthtech, and product-led teams.",
+    "Fractional CMO, growth diagnosis, and acquisition system builds for post-PMF startups that need clearer positioning, sharper acquisition, and repeatable pipeline.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "https://calendly.com/wescalestartups",
-  bookingLabel: "Book a growth diagnosis",
+  bookingLabel: "Book a Growth Diagnosis",
   email: "hello@wescalestartups.com",
   phone: "+44 20 3886 0931",
   address: "81 Curtain Road, London EC2A 3AG, United Kingdom",
@@ -35,7 +35,7 @@ export const trustLogos = [
 ] as const;
 
 export const headlineMetrics = [
-  { value: "£20M+", label: "Revenue influenced across global client work" },
-  { value: "£6M+", label: "Managed across paid acquisition channels" },
-  { value: "10+", label: "Years building startup growth systems" }
+  { value: "£20M+", label: "Revenue influenced across startup client work" },
+  { value: "£10M+", label: "Budgets and paid acquisition spend managed" },
+  { value: "20+", label: "Startups advised across SaaS, AI, fintech, healthtech, and ecommerce" }
 ] as const;

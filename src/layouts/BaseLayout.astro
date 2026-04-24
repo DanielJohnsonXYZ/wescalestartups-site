@@ -47,6 +47,9 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={siteConfig.twitterHandle} />
@@ -56,6 +59,38 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
     <meta name="twitter:image" content={imageUrl} />
 
     {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
+    <script is:inline>
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        const link = target instanceof Element ? target.closest("a") : null;
+        if (!link) return;
+
+        const label = link.dataset.cta || link.textContent?.trim();
+        if (!label) return;
+
+        const href = link.href || "";
+        const isCalendly = href.includes("calendly.com");
+        const isScorecard = href.includes("growth-bottleneck-scorecard");
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: isCalendly ? "calendly_click" : isScorecard ? "scorecard_start" : "cta_click",
+          cta_label: label,
+          cta_href: href,
+          page_path: window.location.pathname
+        });
+      });
+
+      document.addEventListener("submit", (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement)) return;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "form_submit",
+          form_id: form.id || form.name || "unknown",
+          page_path: window.location.pathname
+        });
+      });
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>

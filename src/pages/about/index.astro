@@ -17,22 +17,33 @@ import { siteConfig } from "../../site";
 
   <section class="section">
     <div class="shell split-section">
-      <div class="founder-image">
+      <div class="founder-gallery">
+        <div class="founder-image">
+          <picture>
+            <source
+              srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
+              sizes="(max-width: 640px) 100vw, 48vw"
+              type="image/webp"
+            />
+            <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
+          </picture>
+        </div>
         <picture>
           <source
-            srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
+            srcset="/images/daniel-aircraft-640.webp 640w, /images/daniel-aircraft-960.webp 960w"
             sizes="(max-width: 640px) 100vw, 48vw"
             type="image/webp"
           />
-          <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
+          <img class="founder-secondary-photo" src="/images/daniel-aircraft-960.webp" alt="Daniel Johnson in a small aircraft, a personal photo for founder credibility" width="960" height="960" loading="lazy" decoding="async" />
         </picture>
       </div>
       <div class="founder-copy">
         <p class="eyebrow">Daniel Johnson</p>
-        <h2>Senior operator judgement before the full-time hire.</h2>
+        <h2>Senior operator judgement for the growth decisions your team cannot leave fuzzy.</h2>
         <p>Daniel works across strategy, customer research, acquisition, mentoring, and speaking. The through-line is simple: help founders make better growth decisions and build systems their teams can keep running.</p>
         <ul class="note-list">
           <li>Google for Startups and Techstars ecosystem mentor</li>
+          <li>Speaking and teaching at Cambridge, Imperial, Nomad Summit, Shenzhen SaaS, and Foundervine</li>
           <li>£10M+ budgets and paid acquisition spend managed</li>
           <li>20+ startups advised across SaaS, AI, fintech, healthtech, and ecommerce</li>
           <li>Experienced across paid, SEO, CRO, positioning, GTM, and reporting cadence</li>

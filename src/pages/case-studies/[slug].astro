@@ -21,7 +21,7 @@ const { caseStudy } = Astro.props;
       <h1>{caseStudy.data.title}</h1>
       <p>{caseStudy.data.summary}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="case-book">{siteConfig.bookingLabel}</a>
         <a class="button button-light" href="/case-studies">All proof</a>
       </div>
     </div>
@@ -72,7 +72,7 @@ const { caseStudy } = Astro.props;
         <h2>Diagnose the bottleneck before you brief more work.</h2>
         <p>Bring the current funnel, positioning, and reporting problem. We will decide the most useful next move.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="case-final-book">{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>

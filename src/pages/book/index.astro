@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Growth Audit booking",
+  provider: { "@id": `${siteConfig.siteUrl}/#organization` },
+  url: `${siteConfig.siteUrl}/book`
+};
+---
+
+<BaseLayout
+  title="Book a Growth Audit | We Scale Startups"
+  description="Book a growth audit with We Scale Startups. Pre-qualify the current bottleneck, then choose a Calendly slot."
+  path="/book"
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Book call</p>
+      <h1>Book a Growth Audit.</h1>
+      <p>Use this when growth is active but the next move is unclear. The call maps the bottleneck, stage, team, budget, and whether WSS is the right shape of help.</p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.calendlyUrl} rel="noreferrer" target="_blank" data-cta="book-page-calendly">Open Calendly</a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-page-scorecard">{siteConfig.scorecardLabel}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-grid">
+      <aside class="detail-aside">
+        <p class="eyebrow">Good fit</p>
+        <p>Post-PMF startup, usually Seed to Series B, with real traction and a growth system that is not clear enough yet.</p>
+        <p><strong>Bring:</strong> current channels, ARR range, pipeline problem, team shape, and what you want to change in 90 days.</p>
+      </aside>
+      <div class="detail-body">
+        <article class="content-block">
+          <h2>Before you pick a slot</h2>
+          <ul>
+            <li>Know whether the issue is pipeline volume, conversion, positioning, reporting, or ownership.</li>
+            <li>Be ready to talk about current spend, team capacity, and urgency.</li>
+            <li>If the problem is still fuzzy, take the scorecard first and bring the result.</li>
+          </ul>
+        </article>
+        <article class="content-block">
+          <h2>What happens next</h2>
+          <ol>
+            <li>You choose a Calendly slot that works on mobile or desktop.</li>
+            <li>The booking source is tracked as a Calendly click.</li>
+            <li>The call focuses on diagnosis, not a generic pitch.</li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

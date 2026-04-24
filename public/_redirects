@@ -11,3 +11,23 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /services/customer-research/   /services/90-day-growth-sprint   301
 /services/acquisition-systems  /services/acquisition-system-build  301
 /services/acquisition-systems/ /services/acquisition-system-build  301
+
+/diagnose                     /services/growth-diagnosis          301
+/diagnose/                    /services/growth-diagnosis          301
+/build                        /services/acquisition-system-build  301
+/build/                       /services/acquisition-system-build  301
+/test                         /services/90-day-growth-sprint      301
+/test/                        /services/90-day-growth-sprint      301
+
+/industries/ai-genai          /industries/saas-growth             301
+/industries/ai-genai/         /industries/saas-growth             301
+/industries/b2b-saas          /industries/saas-growth             301
+/industries/b2b-saas/         /industries/saas-growth             301
+/industries/b2b-growth        /industries/saas-growth             301
+/industries/b2b-growth/       /industries/saas-growth             301
+/industries/ecommerce         /industries/saas-growth             301
+/industries/ecommerce/        /industries/saas-growth             301
+/industries/seed-to-series-b  /services/fractional-cmo            301
+/industries/seed-to-series-b/ /services/fractional-cmo            301
+/industries/vc-support        /resources                          301
+/industries/vc-support/       /resources                          301

@@ -8,24 +8,18 @@ import { sortByOrder } from "../lib/utils";
 import { headlineMetrics, leadMagnets, proofStandards, siteConfig } from "../site";
 
 const services = sortByOrder(await getCollection("services"));
-const industries = sortByOrder(await getCollection("industries")).slice(0, 4);
+const priorityIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
+const industries = sortByOrder(await getCollection("industries")).filter((industry) => priorityIndustries.includes(industry.id));
 const cases = sortByOrder(await getCollection("cases"));
 const featuredCase = cases[0];
 
 const fitSignals = [
   "Post-PMF, but growth is still too founder-dependent",
   "Traction is real, but the team has no repeatable system",
-  "You are not ready for a full-time CMO, but junior execution is not enough",
+  "You need senior growth leadership before, alongside, or after a full-time hire",
   "Acquisition, reporting, and conversion need cleaner ownership",
-  "The team is busy, but learning is scattered"
-];
-
-const messyGrowth = [
-  "Campaigns are active, but learning is hard to find",
-  "Content exists, but it does not compound into pipeline",
   "Spend is live, but reporting does not explain what to scale",
-  "The founder makes too many growth decisions",
-  "Priorities change faster than the team can execute"
+  "Channels are active, but pipeline is inconsistent"
 ];
 
 const aiUses = [
@@ -39,10 +33,10 @@ const aiUses = [
 ];
 
 const process = [
-  ["Diagnose", "Find the real constraint across ICP, positioning, funnel, channels, reporting, and team cadence."],
-  ["Build", "Turn the decision into pages, campaigns, workflows, dashboards, and a weekly operating rhythm."],
-  ["Test", "Run focused experiments with clear hypotheses, owners, and decision rules."],
-  ["Transfer", "Document the system so the founder, team, and vendors can keep running it."]
+  ["Diagnose", "/services/growth-diagnosis", "Find the real constraint across ICP, positioning, funnel, channels, reporting, and team cadence."],
+  ["Build", "/services/acquisition-system-build", "Turn the decision into pages, campaigns, workflows, dashboards, and a weekly rhythm."],
+  ["Test", "/services/90-day-growth-sprint", "Run focused experiments with clear hypotheses, owners, and decision rules."],
+  ["Transfer", "/transfer", "Document the system so the founder, team, and vendors can keep running it."]
 ] as const;
 
 function metricLead(result: string) {
@@ -52,8 +46,8 @@ function metricLead(result: string) {
 
 <BaseLayout
   path="/"
-  title="We Scale Startups | Repeatable Growth Systems Before Hiring a Full-Time CMO"
-  description="We help post-PMF startups turn messy growth activity into clearer positioning, sharper acquisition, and a pipeline rhythm the team can run."
+  title="We Scale Startups | Fractional CMO & Growth Systems for Post-PMF Startups"
+  description="Premium growth consultancy for post-PMF startups that need senior growth leadership, clearer GTM, and more predictable acquisition."
 >
   <section class="hero hero-with-portrait">
     <div class="shell hero-grid">
@@ -63,16 +57,16 @@ function metricLead(result: string) {
           <span>Post-PMF startups</span>
         </div>
 
-        <h1>Build a repeatable growth system before hiring a full-time CMO.</h1>
+        <h1>Senior growth leadership for startups that need more predictable acquisition.</h1>
 
         <p class="hero-copy">
-          We help post-PMF startups turn messy growth activity into clearer positioning, sharper acquisition,
-          and a pipeline rhythm the team can actually run.
+          We work alongside founders, teams, agencies, and existing marketing hires to turn messy growth activity into clearer positioning,
+          sharper acquisition, and a pipeline rhythm the team can run.
         </p>
 
         <div class="hero-actions">
-          <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
-          <a class="button button-light" href="/case-studies">See Case Studies</a>
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="hero-book">{siteConfig.bookingLabel}</a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">{siteConfig.scorecardLabel}</a>
         </div>
 
         <div class="hero-proof">
@@ -115,27 +109,11 @@ function metricLead(result: string) {
     <div class="shell two-column">
       <div>
         <p class="eyebrow">Who this is for</p>
-        <h2>This is for founders with traction, pressure, and no clean growth rhythm yet.</h2>
+        <h2>For teams with traction, pressure, and no clean growth rhythm yet.</h2>
+        <p class="lead-copy">The pattern is usually simple: the product works, the team is busy, but pipeline still depends on founder energy and scattered channel activity.</p>
       </div>
       <div class="grid">
         {fitSignals.map((item) => (
-          <article class="feature-card compact-card">
-            <p>{item}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="The pain"
-        title="Growth gets messy after PMF."
-        body="Once there is traction, the problem is rarely effort. The problem is sequencing, signal, and ownership."
-      />
-      <div class="grid-5">
-        {messyGrowth.map((item) => (
           <article class="feature-card compact-card">
             <p>{item}</p>
           </article>
@@ -259,8 +237,8 @@ function metricLead(result: string) {
         body="The point is not to create dependency. The point is to leave the growth function clearer and easier to run."
       />
       <div class="grid-4">
-        {process.map(([title, body], index) => (
-          <a class="feature-card process-card" href={`/${title.toLowerCase()}`}>
+        {process.map(([title, href, body], index) => (
+          <a class="feature-card process-card" href={href}>
             <p class="card-kicker">{String(index + 1).padStart(2, "0")}</p>
             <h3>{title}</h3>
             <p>{body}</p>
@@ -343,7 +321,10 @@ function metricLead(result: string) {
         <h2>Find the right growth path.</h2>
         <p>Bring the current growth bottleneck. We will identify whether the constraint is diagnosis, sprint, acquisition system, or fractional leadership.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="final-book">{siteConfig.bookingLabel}</a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="final-scorecard">{siteConfig.scorecardLabel}</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

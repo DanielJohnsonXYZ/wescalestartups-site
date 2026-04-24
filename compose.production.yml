@@ -6,6 +6,11 @@ services:
     image: wescalestartups-static:20260420
     container_name: wescalestartups-static
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
     healthcheck:
       test:
         - CMD
@@ -13,7 +18,7 @@ services:
         - "--spider"
         - "-q"
         - "http://127.0.0.1/"
-      interval: 10s
+      interval: 30s
       timeout: 5s
       retries: 5
     labels:

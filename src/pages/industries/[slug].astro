@@ -4,7 +4,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
 
 export async function getStaticPaths() {
-  const industries = await getCollection("industries");
+  const allowedIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
+  const industries = (await getCollection("industries")).filter((industry) => allowedIndustries.includes(industry.id));
   return industries.map((industry) => ({
     params: { slug: industry.id },
     props: { industry }
@@ -21,7 +22,7 @@ const { industry } = Astro.props;
       <h1>{industry.data.title}</h1>
       <p>{industry.data.description}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="industry-book">{siteConfig.bookingLabel}</a>
         <a class="button button-light" href="/industries">All industries</a>
       </div>
     </div>
@@ -47,7 +48,7 @@ const { industry } = Astro.props;
           </ul>
         </article>
         <article class="content-block">
-          <h2>Relevant proof</h2>
+          <h2>Market-specific proof</h2>
           <ul>
             {industry.data.proof.map((item) => <li>{item}</li>)}
           </ul>
@@ -71,7 +72,7 @@ const { industry } = Astro.props;
         <h2>Want a clearer growth path for {industry.data.title.toLowerCase()}?</h2>
         <p>We will connect the buyer problem, proof requirement, channel economics, and team capacity into a practical next step.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="industry-final-book">{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>

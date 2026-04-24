@@ -5,9 +5,12 @@ export const siteConfig = {
     "Fractional CMO, growth diagnosis, and acquisition system builds for post-PMF startups that need clearer positioning, sharper acquisition, and repeatable pipeline.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
-  bookingUrl: "https://calendly.com/wescalestartups",
-  bookingLabel: "Book a Growth Diagnosis",
-  email: "hello@wescalestartups.com",
+  bookingUrl: "/book",
+  calendlyUrl: "https://calendly.com/wescalestartups",
+  bookingLabel: "Book a Growth Audit",
+  scorecardLabel: "Take the Growth Bottleneck Scorecard",
+  scorecardUrl: "/resources#growth-bottleneck-scorecard",
+  email: "daniel@wescalestartups.com",
   phone: "+44 20 3886 0931",
   address: "81 Curtain Road, London EC2A 3AG, United Kingdom",
   linkedin: "https://www.linkedin.com/company/wescalestartups",
@@ -18,16 +21,22 @@ export const siteConfig = {
 } as const;
 
 export const navigation = [
-  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/industries", label: "Industries" },
-  { href: "/case-studies", label: "Proof" },
+  { href: "/case-studies", label: "Results" },
   { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" }
+  { href: "/book", label: "Book Call" }
 ] as const;
 
 export const trustLogos = [
+  { label: "Ned" },
+  { label: "eQuoo" },
+  { label: "LessonsUp" },
+  { label: "Nevly" }
+] as const;
+
+export const credentialLogos = [
   { src: "/images/logos/google.webp", alt: "Google", label: "Google Launchpad" },
   { src: "/images/logos/cambridge.webp", alt: "University of Cambridge", label: "Cambridge Judge" },
   { src: "/images/logos/growthmentor.png", alt: "GrowthMentor", label: "GrowthMentor" },
@@ -36,28 +45,29 @@ export const trustLogos = [
 ] as const;
 
 export const headlineMetrics = [
-  { value: "£20M+", label: "Revenue influenced across startup client work" },
   { value: "£10M+", label: "Budgets and paid acquisition spend managed" },
-  { value: "20+", label: "Startups advised across SaaS, AI, fintech, healthtech, and ecommerce" }
+  { value: "2", label: "Startup exits across operator and founder-side work" },
+  { value: "20+", label: "Startups advised across SaaS, fintech, healthtech, and EdTech" },
+  { value: "4.93/5", label: "Founder mentoring rating across 219 reviews" }
 ] as const;
 
 export const leadMagnets = [
   {
     title: "Growth Bottleneck Scorecard",
     audience: "Post-PMF founders",
-    description: "A practical checklist for deciding whether the current constraint is positioning, acquisition, conversion, reporting, or team cadence.",
+    description: "Score the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
     href: "/resources#growth-bottleneck-scorecard"
   },
   {
     title: "90-Day Growth Sprint Planner",
     audience: "Startup leadership teams",
-    description: "A plain-English sprint outline for turning messy activity into sharper experiments, better reporting, and clearer ownership.",
+    description: "Map a quarter of tests, owners, decision rules, and reporting so the team stops running disconnected activity.",
     href: "/resources#90-day-growth-sprint-planner"
   },
   {
     title: "VC Portfolio Growth Diagnosis Template",
     audience: "VCs and accelerator teams",
-    description: "A workshop template for helping portfolio founders identify the next growth constraint before hiring or spending more.",
+    description: "A portfolio workshop format for spotting whether a founder needs positioning, acquisition, team, or reporting help first.",
     href: "/resources#vc-portfolio-growth-diagnosis"
   }
 ] as const;

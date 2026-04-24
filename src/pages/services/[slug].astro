@@ -14,13 +14,96 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 const path = `/services/${service.id}`;
+
+const details = {
+  "fractional-cmo": {
+    price: "From £7.5k/month · 3-month minimum",
+    timeline: "First 30 days diagnose and reset priorities. Days 31-90 build, test, and transfer the operating rhythm.",
+    deliverables: [
+      "90-day growth priorities and decision rules",
+      "Pipeline dashboard and weekly growth meeting format",
+      "ICP, positioning, and channel test map",
+      "Agency, hiring, and tooling recommendations",
+      "Founder-facing weekly notes: scale, stop, fix"
+    ],
+    sampleWeek: ["Pipeline and channel review", "Customer-call or sales-call analysis", "Campaign or landing-page build review", "Growth meeting with owners", "Written decision summary"],
+    faqs: [
+      ["Can you work with an existing marketer?", "Yes. The fractional CMO role often sits above or alongside marketers, agencies, and founders to set priorities and improve decision quality."],
+      ["Do you replace an agency?", "Usually no. Agencies execute channel work. Fractional CMO support decides which work matters, what good looks like, and when to scale or stop."]
+    ]
+  },
+  "growth-diagnosis": {
+    price: "From £3.5k · usually 2 weeks",
+    timeline: "One focused diagnostic sprint ending in a constraint map, recommendation memo, and priority workshop.",
+    deliverables: [
+      "Growth bottleneck map across ICP, funnel, channel, conversion, reporting, and team",
+      "Analytics, CRM, campaign, and site review",
+      "Customer and sales insight summary",
+      "90-day recommendation memo",
+      "Priority workshop with founder and leadership team"
+    ],
+    sampleWeek: ["Data and asset review", "Founder and sales interviews", "Funnel and message teardown", "Constraint scoring", "Decision workshop"],
+    faqs: [
+      ["Is this useful before hiring?", "Yes. It clarifies whether the next move is a hire, agency, sprint, channel test, or positioning reset."],
+      ["Do we need clean analytics?", "No. Messy data is common. The diagnosis includes identifying what must be fixed first."]
+    ]
+  },
+  "acquisition-system-build": {
+    price: "From £8k · usually 4-6 weeks",
+    timeline: "Build the channel plan, campaign briefs, reporting view, and first experiments with your team or agency.",
+    deliverables: [
+      "Channel strategy and test sequencing",
+      "Campaign briefs and landing-page message map",
+      "Experiment backlog with owners and success criteria",
+      "Reporting dashboard and learning log",
+      "Handoff notes for internal team or agency"
+    ],
+    sampleWeek: ["Channel and audience selection", "Offer and message tests", "Landing-page or outbound brief", "Launch checklist", "Weekly readout"],
+    faqs: [
+      ["Is this paid ads only?", "No. The system can cover paid, outbound, partnerships, content, lifecycle, or a blended acquisition path."],
+      ["Who executes the work?", "Execution can be internal, agency-led, or supported by WSS depending on the scope."]
+    ]
+  },
+  "90-day-growth-sprint": {
+    price: "From £12k · 90-day sprint",
+    timeline: "Three months of focused experiments, weekly readouts, and clear decisions on what to scale, stop, or fix.",
+    deliverables: [
+      "Quarterly experiment roadmap",
+      "Weekly sprint meeting and decision notes",
+      "Positioning, landing-page, and campaign iterations",
+      "Pipeline and conversion reporting",
+      "Transfer checklist for the team"
+    ],
+    sampleWeek: ["Experiment planning", "Asset review", "Launch or iteration", "Performance readout", "Transfer notes"],
+    faqs: [
+      ["What if the first tests fail?", "That is useful signal. The sprint is built around fast learning and decision rules, not pretending every tactic will work."],
+      ["Can this follow a diagnosis?", "Yes. Diagnosis is often the cleanest input into a 90-day sprint."]
+    ]
+  }
+}[service.id] ?? {
+  price: "Scoped after diagnosis",
+  timeline: "Timeline depends on the constraint and team capacity.",
+  deliverables: service.data.outcomes,
+  sampleWeek: service.data.process,
+  faqs: [["How is scope set?", "Scope is set after we understand the current bottleneck, team, and urgency."]]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: details.faqs.map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer }
+  }))
+};
 ---
 
 <BaseLayout
   title={`${service.data.title} | We Scale Startups`}
   description={service.data.description}
   path={path}
-  schema={buildServiceSchema(service.data.title, service.data.description, path)}
+  schema={[buildServiceSchema(service.data.title, service.data.description, path), faqSchema]}
 >
   <section class="page-hero">
     <div class="shell">
@@ -28,7 +111,7 @@ const path = `/services/${service.id}`;
       <h1>{service.data.title}</h1>
       <p>{service.data.description}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{service.data.cta}</a>
+        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta={`${service.id}-book`}>{siteConfig.bookingLabel}</a>
         <a class="button button-light" href="/services">All services</a>
       </div>
     </div>
@@ -40,6 +123,8 @@ const path = `/services/${service.id}`;
         <p class="eyebrow">Best fit</p>
         <p>{service.data.audience}</p>
         <p><strong>Promise:</strong> {service.data.promise}</p>
+        <p><strong>Pricing:</strong> {details.price}</p>
+        <p><strong>Timeline:</strong> {details.timeline}</p>
       </aside>
       <div class="detail-body">
         <article class="content-block">
@@ -55,12 +140,16 @@ const path = `/services/${service.id}`;
           </ol>
         </article>
         <article class="content-block">
-          <h2>Useful assets created</h2>
+          <h2>Deliverables</h2>
           <ul>
-            <li>Prioritised bottleneck diagnosis and decision notes</li>
-            <li>Roadmap or experiment backlog with owners and success criteria</li>
-            <li>Messaging, campaign, reporting, or handoff material depending on the constraint</li>
+            {details.deliverables.map((item) => <li>{item}</li>)}
           </ul>
+        </article>
+        <article class="content-block">
+          <h2>Sample week</h2>
+          <ol>
+            {details.sampleWeek.map((item) => <li>{item}</li>)}
+          </ol>
         </article>
       </div>
     </div>
@@ -68,14 +157,19 @@ const path = `/services/${service.id}`;
 
   <section class="section section-alt">
     <div class="shell">
-      <div class="feature-card">
-        <p class="card-kicker">Resource</p>
-        <h2>Want to pressure-test this option first?</h2>
-        <p>Use the resources page to request the Growth Bottleneck Scorecard or 90-Day Growth Sprint Planner before booking.</p>
-        <div class="hero-actions">
-          <a class="button button-brand" href="/resources">See resources</a>
-          <a class="button button-light" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">Book a Growth Diagnosis</a>
-        </div>
+      <div class="grid-3">
+        {details.faqs.map(([question, answer]) => (
+          <details class="feature-card">
+            <summary><strong>{question}</strong></summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+        <article class="feature-card">
+          <p class="card-kicker">Resource</p>
+          <h2>Not sure which service fits?</h2>
+          <p>Use the Growth Bottleneck Scorecard to see whether the current constraint is positioning, acquisition, conversion, reporting, or team ownership.</p>
+          <a class="card-link" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>{siteConfig.scorecardLabel}</a>
+        </article>
       </div>
     </div>
   </section>
@@ -84,10 +178,10 @@ const path = `/services/${service.id}`;
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Decision point</p>
-        <h2>Useful when the next move is unclear.</h2>
-        <p>A short diagnosis is enough to see whether this is the right shape of help or whether another constraint needs attention first.</p>
+        <h2>Bring the current bottleneck.</h2>
+        <p>We will decide whether this is the right shape of help, what the first 30 days should focus on, and what should not be touched yet.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{service.data.cta}</a>
+      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta={`${service.id}-final-book`}>{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>

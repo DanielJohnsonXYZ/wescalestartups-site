@@ -4,15 +4,16 @@ import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { sortByOrder } from "../../lib/utils";
 
-const industries = sortByOrder(await getCollection("industries"));
+const allowedIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
+const industries = sortByOrder(await getCollection("industries")).filter((industry) => allowedIndustries.includes(industry.id));
 ---
 
-<BaseLayout title="Industries | We Scale Startups" description="Growth systems for AI, B2B SaaS, fintech, healthtech, and education teams where trust and clarity matter." path="/industries">
+<BaseLayout title="Industries | We Scale Startups" description="Growth systems for SaaS, fintech, healthtech, and EdTech teams where trust and clarity matter." path="/industries">
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Industries</p>
-      <h1>Different markets. Same need for signal.</h1>
-      <p>The system adapts to the buyer, the category, the level of trust required, and the channels that can produce real evidence.</p>
+      <h1>Four markets where proof, trust, and timing matter.</h1>
+      <p>The system adapts to the buyer, proof required, channel economics, and internal team capacity.</p>
     </div>
   </section>
 

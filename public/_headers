@@ -10,6 +10,9 @@
 /about
   Cache-Control: public, max-age=300, must-revalidate
 
+/book
+  Cache-Control: public, max-age=300, must-revalidate
+
 /case-studies
   Cache-Control: public, max-age=300, must-revalidate
 

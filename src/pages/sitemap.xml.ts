@@ -4,42 +4,44 @@ import { absoluteUrl } from "../lib/utils";
 
 export const prerender = true;
 
-function urlNode(path: string) {
-  return `<url><loc>${absoluteUrl(path)}</loc></url>`;
+interface UrlEntry {
+  path: string;
+  priority?: string;
+  changefreq?: string;
+}
+
+function urlNode({ path, priority = "0.6", changefreq = "monthly" }: UrlEntry, lastmod: string) {
+  return `<url><loc>${absoluteUrl(path)}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
 }
 
 export const GET: APIRoute = async () => {
   const services = await getCollection("services");
   const industries = await getCollection("industries");
   const cases = await getCollection("cases");
-  const staticPaths = [
-    "/",
-    "/services",
-    "/diagnose",
-    "/build",
-    "/test",
-    "/transfer",
-    "/industries",
-    "/case-studies",
-    "/resources",
-    "/press",
-    "/about",
-    "/contact",
-    "/privacy",
-    "/terms"
+  const lastmod = new Date().toISOString().slice(0, 10);
+
+  const staticEntries: UrlEntry[] = [
+    { path: "/", priority: "1.0", changefreq: "weekly" },
+    { path: "/services", priority: "0.9", changefreq: "monthly" },
+    { path: "/industries", priority: "0.8", changefreq: "monthly" },
+    { path: "/case-studies", priority: "0.9", changefreq: "monthly" },
+    { path: "/resources", priority: "0.8", changefreq: "monthly" },
+    { path: "/about", priority: "0.7", changefreq: "monthly" },
+    { path: "/contact", priority: "0.6", changefreq: "yearly" },
+    { path: "/press", priority: "0.5", changefreq: "yearly" },
+    { path: "/privacy", priority: "0.3", changefreq: "yearly" },
+    { path: "/terms", priority: "0.3", changefreq: "yearly" }
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticPaths.map((path) => urlNode(path)).join("")}
-${services.map((item) => urlNode(`/services/${item.id}`)).join("")}
-${industries.map((item) => urlNode(`/industries/${item.id}`)).join("")}
-${cases.map((item) => urlNode(`/case-studies/${item.id}`)).join("")}
+${staticEntries.map((entry) => urlNode(entry, lastmod)).join("")}
+${services.map((item) => urlNode({ path: `/services/${item.id}`, priority: "0.8" }, lastmod)).join("")}
+${industries.map((item) => urlNode({ path: `/industries/${item.id}`, priority: "0.7" }, lastmod)).join("")}
+${cases.map((item) => urlNode({ path: `/case-studies/${item.id}`, priority: "0.7" }, lastmod)).join("")}
 </urlset>`;
 
   return new Response(xml, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8"
-    }
+    headers: { "Content-Type": "application/xml; charset=utf-8" }
   });
 };

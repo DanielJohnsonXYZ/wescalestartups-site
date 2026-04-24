@@ -1,0 +1,55 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  audience?: string;
+  cta?: string;
+  formAction?: string;
+}
+
+const {
+  title = "Get the Growth Bottleneck Scorecard",
+  description = "A 5-minute diagnostic for post-PMF founders. We'll send the scorecard plus the 5 mistakes we see in every audit.",
+  audience = "For post-PMF founders",
+  cta = "Send me the scorecard",
+  // Replace with ConvertKit / MailerLite / Beehiiv / Resend endpoint.
+  formAction = "https://formspree.io/f/REPLACE_ME"
+} = Astro.props;
+---
+
+<section class="section lead-magnet-section" id="growth-bottleneck-scorecard">
+  <div class="shell lead-magnet-grid">
+    <div>
+      <p class="eyebrow">{audience}</p>
+      <h2>{title}</h2>
+      <p class="lead-copy">{description}</p>
+      <ul class="note-list">
+        <li>Score positioning, acquisition, conversion, reporting, and team cadence in 5 minutes</li>
+        <li>Get the 5 mistakes we see in every post-PMF growth audit</li>
+        <li>No spam. Unsubscribe in one click.</li>
+      </ul>
+    </div>
+    <form class="lead-magnet-form" method="post" action={formAction} id="scorecard-form">
+      <label>
+        <span>Work email</span>
+        <input type="email" name="email" required placeholder="daniel@yourstartup.com" autocomplete="email" />
+      </label>
+      <label>
+        <span>First name</span>
+        <input type="text" name="first_name" placeholder="Daniel" autocomplete="given-name" />
+      </label>
+      <label>
+        <span>Stage</span>
+        <select name="stage" required>
+          <option value="">Select stage</option>
+          <option value="pre-pmf">Pre-PMF</option>
+          <option value="post-pmf-under-1m">Post-PMF, &lt;$1M ARR</option>
+          <option value="post-pmf-1-10m">Post-PMF, $1M–$10M ARR</option>
+          <option value="post-pmf-10m-plus">$10M+ ARR</option>
+        </select>
+      </label>
+      <button type="submit" class="button button-brand" data-cta="scorecard-submit">{cta}</button>
+      <p class="lead-magnet-fine">By submitting you agree to receive the scorecard and occasional founder-focused emails. No spam.</p>
+    </form>
+  </div>
+</section>

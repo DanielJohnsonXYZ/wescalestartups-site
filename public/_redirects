@@ -5,20 +5,35 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /contact-us                    /contact                         301
 /contact-us/                   /contact                         301
 
-/services/growth-strategy      /services/growth-diagnosis       301
-/services/growth-strategy/     /services/growth-diagnosis       301
-/services/customer-research    /services/90-day-growth-sprint   301
-/services/customer-research/   /services/90-day-growth-sprint   301
-/services/acquisition-systems  /services/acquisition-system-build  301
-/services/acquisition-systems/ /services/acquisition-system-build  301
+# Book page now an alias for Calendly (external)
+/book                          https://calendly.com/wescalestartups  302
+/book/                         https://calendly.com/wescalestartups  302
 
-/diagnose                     /services/growth-diagnosis          301
-/diagnose/                    /services/growth-diagnosis          301
-/build                        /services/acquisition-system-build  301
-/build/                       /services/acquisition-system-build  301
-/test                         /services/90-day-growth-sprint      301
-/test/                        /services/90-day-growth-sprint      301
+# Legacy service slugs → new phase slugs (Apr 2026 restructure)
+/services/growth-strategy            /services/research              301
+/services/growth-strategy/           /services/research              301
+/services/growth-diagnosis           /services/research              301
+/services/growth-diagnosis/          /services/research              301
+/services/customer-research          /services/research              301
+/services/customer-research/         /services/research              301
+/services/90-day-growth-sprint       /services/acquisition           301
+/services/90-day-growth-sprint/      /services/acquisition           301
+/services/acquisition-systems        /services/acquisition           301
+/services/acquisition-systems/       /services/acquisition           301
+/services/acquisition-system-build   /services/acquisition           301
+/services/acquisition-system-build/  /services/acquisition           301
 
+# Legacy standalone phase pages → new service pages
+/diagnose                     /services/research                  301
+/diagnose/                    /services/research                  301
+/build                        /services/acquisition               301
+/build/                       /services/acquisition               301
+/test                         /services/acquisition               301
+/test/                        /services/acquisition               301
+/transfer                     /services/operating-cadence         301
+/transfer/                    /services/operating-cadence         301
+
+# Industry consolidation
 /industries/ai-genai          /industries/saas-growth             301
 /industries/ai-genai/         /industries/saas-growth             301
 /industries/b2b-saas          /industries/saas-growth             301

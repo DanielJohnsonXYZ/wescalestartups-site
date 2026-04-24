@@ -3,96 +3,51 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
 ---
 
-<BaseLayout title="Contact | We Scale Startups" description="Send a structured growth enquiry to We Scale Startups or book a growth audit with Daniel Johnson." path="/contact">
+<BaseLayout
+  title="Book a growth call | We Scale Startups"
+  description="Book a 30-minute growth call with Daniel Johnson. For post-PMF B2B SaaS and AI founders, $1M–$10M ARR."
+  path="/contact"
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Contact</p>
-      <h1>Send the growth context.</h1>
-      <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
-      <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="contact-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-      </div>
+      <h1>Bring the current growth bottleneck.</h1>
+      <p>A 30-minute call to map what's happening now, what's not working, and whether We Scale Startups is the right partner for the next phase. No deck, no pitch.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="shell contact-grid contact-grid-form">
-      <form class="contact-option contact-form" id="growth-enquiry" name="growth-enquiry">
-        <p class="card-kicker">Structured enquiry</p>
-        <h2>Tell us what is happening now.</h2>
-        <label>Name<input name="name" autocomplete="name" required /></label>
-        <label>Email<input name="email" type="email" autocomplete="email" required /></label>
-        <label>Company<input name="company" autocomplete="organization" required /></label>
-        <label>Company stage
-          <select name="stage" required>
-            <option value="">Choose one</option>
-            <option>Pre-seed / seed</option>
-            <option>Series A</option>
-            <option>Series B+</option>
-            <option>Bootstrapped / profitable</option>
-          </select>
-        </label>
-        <label>ARR range
-          <select name="arr" required>
-            <option value="">Choose one</option>
-            <option>Under £500k</option>
-            <option>£500k to £1m</option>
-            <option>£1m to £5m</option>
-            <option>£5m to £10m</option>
-            <option>£10m+</option>
-          </select>
-        </label>
-        <label>Current channels<input name="channels" placeholder="Paid, outbound, SEO, partners, content, sales-led..." /></label>
-        <label>Current bottleneck<textarea name="bottleneck" rows="4" required></textarea></label>
-        <label>Budget
-          <select name="budget" required>
-            <option value="">Choose one</option>
-            <option>Exploring</option>
-            <option>£3k to £8k</option>
-            <option>£8k to £15k</option>
-            <option>£15k+</option>
-          </select>
-        </label>
-        <label>Timeline<input name="timeline" placeholder="Now, this quarter, next quarter..." /></label>
-        <label>What do you need help with?<textarea name="help" rows="4"></textarea></label>
-        <button class="button button-brand" type="submit">Send enquiry</button>
-      </form>
-      <aside class="contact-option">
-        <p class="card-kicker">Prefer a call?</p>
-        <h2>Book a Growth Audit.</h2>
-        <p>A short diagnostic call is best when the problem is urgent or hard to explain in a form.</p>
-        <a class="card-link" href={siteConfig.bookingUrl} data-cta="contact-side-book">{siteConfig.bookingLabel}</a>
-        <p><strong>Address:</strong><br />81 Curtain Road,<br />London,<br />EC2A 3AG,<br />UK</p>
-      </aside>
+    <div class="shell contact-grid">
+      <article class="contact-option contact-option-primary">
+        <p class="card-kicker">Fastest · recommended</p>
+        <h2>Book a growth call</h2>
+        <p>30 minutes. Qualifying questions on the form so we both walk in with context.</p>
+        <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank" data-cta="contact-book">{siteConfig.bookingLabel}</a>
+        <p class="contact-note"><small>Best for: $1M–$10M ARR B2B SaaS or AI founders with a specific growth bottleneck.</small></p>
+      </article>
+      <article class="contact-option">
+        <p class="card-kicker">Prefer email</p>
+        <h2>Send the context</h2>
+        <p>Share the product, stage, current channels, bottleneck, and what you want to change in the next 90 days. I'll reply within two working days.</p>
+        <a class="card-link" href={`mailto:${siteConfig.email}?subject=Growth%20call%20enquiry`}>{siteConfig.email}</a>
+      </article>
+      <article class="contact-option">
+        <p class="card-kicker">Phone</p>
+        <h2>Prefer direct?</h2>
+        <p>Use the office number if the work is time-sensitive or easier to explain in conversation.</p>
+        <a class="card-link" href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="calendly-embed">
+        <h2>Or book directly</h2>
+        <p>The Calendly opens in a new tab. Your browser may also show it inline below.</p>
+        <div class="calendly-inline-widget" data-url={siteConfig.bookingUrl} style="min-width:320px;height:700px;"></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" is:inline async></script>
+      </div>
     </div>
   </section>
 </BaseLayout>
-
-<script define:vars={{ email: siteConfig.email }}>
-  const form = document.getElementById("growth-enquiry");
-
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const subject = `WSS enquiry from ${data.get("company") || data.get("name") || "website"}`;
-    const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Company: ${data.get("company") || ""}`,
-      `Stage: ${data.get("stage") || ""}`,
-      `ARR: ${data.get("arr") || ""}`,
-      `Channels: ${data.get("channels") || ""}`,
-      `Budget: ${data.get("budget") || ""}`,
-      `Timeline: ${data.get("timeline") || ""}`,
-      "",
-      "Current bottleneck:",
-      `${data.get("bottleneck") || ""}`,
-      "",
-      "Help needed:",
-      `${data.get("help") || ""}`
-    ].join("\n");
-
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  });
-</script>

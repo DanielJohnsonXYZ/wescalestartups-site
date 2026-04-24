@@ -1,0 +1,24 @@
+---
+import { objections } from "../site";
+---
+
+<section class="section" id="faq" aria-labelledby="objections-heading">
+  <div class="shell">
+    <div class="section-intro">
+      <p class="eyebrow">Questions</p>
+      <h2 id="objections-heading">What founders ask before every first call.</h2>
+      <p>Straight answers, no spin. Not here? Email hello@wescalestartups.com.</p>
+    </div>
+    <div class="objections-grid">
+      {objections.map((item, index) => (
+        <details class="objection-card" open={index === 0}>
+          <summary>
+            <span class="objection-q">{item.question}</span>
+            <span class="objection-chev" aria-hidden="true">+</span>
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

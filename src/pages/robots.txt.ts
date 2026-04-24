@@ -3,12 +3,44 @@ import { siteConfig } from "../site";
 
 export const prerender = true;
 
-export const GET: APIRoute = () =>
-  new Response(
-    `User-agent: *\nAllow: /\nHost: ${siteConfig.canonicalHost}\nSitemap: ${siteConfig.siteUrl}/sitemap.xml\n\n# LLM-friendly summary for AI crawlers\n# ${siteConfig.siteUrl}/llms.txt\n`,
-    {
-      headers: {
-        "Content-Type": "text/plain; charset=utf-8"
-      }
-    }
-  );
+const aiUserAgents = [
+  "GPTBot",
+  "ChatGPT-User",
+  "OAI-SearchBot",
+  "ClaudeBot",
+  "Claude-Web",
+  "anthropic-ai",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Google-Extended",
+  "Applebot-Extended",
+  "CCBot",
+  "cohere-ai",
+  "FacebookBot",
+  "Bytespider",
+  "Amazonbot",
+  "DuckAssistBot",
+  "YouBot"
+];
+
+export const GET: APIRoute = () => {
+  const aiBlock = aiUserAgents.map((ua) => `User-agent: ${ua}\nAllow: /\n`).join("\n");
+
+  const body = `# We Scale Startups — robots.txt
+# Full site is open to index and summarisation.
+
+User-agent: *
+Allow: /
+
+${aiBlock}
+Host: ${siteConfig.canonicalHost}
+Sitemap: ${siteConfig.siteUrl}/sitemap.xml
+
+# LLM-friendly summary for AI crawlers
+# ${siteConfig.siteUrl}/llms.txt
+`;
+
+  return new Response(body, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" }
+  });
+};

@@ -1,6 +1,7 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import StickyCTA from "../components/StickyCTA.astro";
 import { buildOrganizationSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -12,6 +13,7 @@ interface Props {
   path?: string;
   ogImage?: string;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  stickyCta?: boolean;
 }
 
 const {
@@ -19,7 +21,8 @@ const {
   description = siteConfig.description,
   path = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
-  schema = []
+  schema = [],
+  stickyCta = true
 } = Astro.props;
 
 const currentPath = normalizePath(path);
@@ -31,7 +34,7 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
 ---
 
 <!doctype html>
-<html lang="en-US">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,6 +53,7 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content="en_GB" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={siteConfig.twitterHandle} />
@@ -58,16 +62,17 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
 
+    <link rel="preconnect" href="https://calendly.com" />
+    <link rel="dns-prefetch" href="https://calendly.com" />
+
     {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
     <script is:inline>
       document.addEventListener("click", (event) => {
         const target = event.target;
         const link = target instanceof Element ? target.closest("a") : null;
         if (!link) return;
-
         const label = link.dataset.cta || link.textContent?.trim();
         if (!label) return;
-
         const href = link.href || "";
         const isCalendly = href.includes("calendly.com");
         const isScorecard = href.includes("growth-bottleneck-scorecard");
@@ -79,7 +84,6 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
           page_path: window.location.pathname
         });
       });
-
       document.addEventListener("submit", (event) => {
         const form = event.target;
         if (!(form instanceof HTMLFormElement)) return;
@@ -99,5 +103,6 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
       <slot />
     </main>
     <SiteFooter />
+    {stickyCta && <StickyCTA />}
   </body>
 </html>

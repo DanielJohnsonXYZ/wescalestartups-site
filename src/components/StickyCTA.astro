@@ -1,0 +1,26 @@
+---
+import { siteConfig } from "../site";
+---
+
+<div class="sticky-cta" id="sticky-cta" data-hidden="true" aria-hidden="true">
+  <div class="sticky-cta-inner">
+    <p class="sticky-cta-label">Bring a bottleneck →</p>
+    <a class="button button-brand sticky-cta-button" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank" data-cta="sticky-book">
+      {siteConfig.bookingLabel}
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const el = document.getElementById("sticky-cta");
+    if (!el) return;
+    const show = () => {
+      const shouldShow = window.scrollY > 600;
+      el.dataset.hidden = shouldShow ? "false" : "true";
+      el.setAttribute("aria-hidden", shouldShow ? "false" : "true");
+    };
+    window.addEventListener("scroll", show, { passive: true });
+    show();
+  })();
+</script>

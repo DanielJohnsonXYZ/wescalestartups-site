@@ -1,0 +1,28 @@
+---
+import { pricingGuide, siteConfig } from "../site";
+---
+
+<section class="section section-alt" id="pricing">
+  <div class="shell">
+    <div class="section-intro">
+      <p class="eyebrow">Pricing guide</p>
+      <h2>Engagement ranges so you can self-qualify.</h2>
+      <p>Exact scope and price are confirmed after a 20-minute call. Typical starting points below.</p>
+    </div>
+    <div class="grid-3 pricing-grid">
+      {pricingGuide.map((tier, index) => (
+        <article class={["pricing-card", index === 1 ? "pricing-card-highlight" : ""].filter(Boolean).join(" ")}>
+          {index === 1 && <span class="pricing-badge">Most common starting point</span>}
+          <p class="card-kicker">{tier.tier}</p>
+          <p class="pricing-range">{tier.range}</p>
+          <p class="pricing-summary">{tier.summary}</p>
+          <p class="pricing-fit"><strong>Best when:</strong> {tier.fit}</p>
+        </article>
+      ))}
+    </div>
+    <div class="pricing-footnote">
+      <p>All engagements start with a short qualification call to confirm fit before proposal.</p>
+      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="pricing-book">Diagnose My Growth Bottleneck</a>
+    </div>
+  </div>
+</section>

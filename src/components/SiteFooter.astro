@@ -3,16 +3,33 @@ import { navigation, siteConfig } from "../site";
 ---
 
 <footer class="site-footer">
+  <div class="shell footer-cta-band">
+    <div class="footer-cta-text">
+      <p class="eyebrow">Before you go</p>
+      <h2>Want a weekly founder-focused growth note?</h2>
+      <p>One short email per week on the growth constraint most post-PMF founders are missing. No fluff.</p>
+    </div>
+    <form class="footer-newsletter" action="https://formspree.io/f/REPLACE_ME" method="post" id="footer-newsletter">
+      <label class="sr-only" for="footer-email">Work email</label>
+      <input id="footer-email" type="email" name="email" required placeholder="daniel@yourstartup.com" autocomplete="email" />
+      <button type="submit" class="button button-brand" data-cta="footer-newsletter">Subscribe</button>
+    </form>
+  </div>
+
   <div class="shell footer-grid">
     <div>
       <img class="footer-logo" src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="128" height="72" loading="lazy" decoding="async" />
-      <p class="footer-summary">Senior growth leadership, clearer GTM, and more predictable acquisition for post-PMF startup teams.</p>
+      <p class="footer-summary">
+        <strong>Fractional CMO and growth systems for post-PMF B2B SaaS and AI startups.</strong>
+        Senior operator. Not a junior account team. You work directly with {siteConfig.founderName}.
+      </p>
       <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="footer-book">{siteConfig.bookingLabel}</a>
     </div>
     <div>
       <h2>Explore</h2>
       <nav class="footer-links" aria-label="Footer navigation">
         {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/resources">Resources</a>
         <a href="/press">Press kit</a>
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
@@ -23,7 +40,13 @@ import { navigation, siteConfig } from "../site";
       <div class="footer-links">
         <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
         <a href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
-        <a href={siteConfig.bookingUrl} data-cta="footer-contact-book">Book a call</a>
+        <a href={siteConfig.bookingUrl} data-cta="footer-contact-book">Book a 20-minute call</a>
+      </div>
+      <h2 class="mt-4">Connect</h2>
+      <div class="footer-links">
+        <a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel on LinkedIn</a>
+        <a href={siteConfig.linkedin} rel="noreferrer" target="_blank">WSS on LinkedIn</a>
+        <a href={`https://twitter.com/${siteConfig.twitterHandle.replace("@", "")}`} rel="noreferrer" target="_blank">Daniel on X</a>
       </div>
     </div>
   </div>

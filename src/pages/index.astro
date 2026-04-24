@@ -1,36 +1,23 @@
 ---
 import { getCollection } from "astro:content";
 import CaseCard from "../components/CaseCard.astro";
+import FounderVideo from "../components/FounderVideo.astro";
+import LeadMagnetForm from "../components/LeadMagnetForm.astro";
+import ObjectionsFAQ from "../components/ObjectionsFAQ.astro";
+import PricingGuide from "../components/PricingGuide.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import TrustStrip from "../components/TrustStrip.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildFAQSchema, buildPersonSchema, buildProfessionalServiceSchema } from "../lib/schema";
 import { sortByOrder } from "../lib/utils";
-import { headlineMetrics, leadMagnets, proofStandards, siteConfig } from "../site";
+import { headlineMetrics, leadMagnets, objections, painSignals, proofStandards, siteConfig } from "../site";
 
 const services = sortByOrder(await getCollection("services"));
-const priorityIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
+const priorityIndustries = ["b2b-saas", "saas-growth", "ai-genai", "fintech"];
 const industries = sortByOrder(await getCollection("industries")).filter((industry) => priorityIndustries.includes(industry.id));
 const cases = sortByOrder(await getCollection("cases"));
 const featuredCase = cases[0];
-
-const fitSignals = [
-  "Post-PMF, but growth is still too founder-dependent",
-  "Traction is real, but the team has no repeatable system",
-  "You need senior growth leadership before, alongside, or after a full-time hire",
-  "Acquisition, reporting, and conversion need cleaner ownership",
-  "Spend is live, but reporting does not explain what to scale",
-  "Channels are active, but pipeline is inconsistent"
-];
-
-const aiUses = [
-  "Customer research synthesis",
-  "Call and review analysis",
-  "ICP and pain mapping",
-  "Landing page test briefs",
-  "Reporting automation",
-  "Experiment prioritisation",
-  "Content workflow design"
-];
 
 const process = [
   ["Diagnose", "/services/growth-diagnosis", "Find the real constraint across ICP, positioning, funnel, channels, reporting, and team cadence."],
@@ -42,26 +29,31 @@ const process = [
 function metricLead(result: string) {
   return result.match(/(?:[$£])?\d+(?:\.\d+)?%?\+?/)?.[0] ?? result.split(" ")[0];
 }
+
+const faqSchema = buildFAQSchema(objections.map((o) => ({ question: o.question, answer: o.answer })));
+const personSchema = buildPersonSchema();
+const serviceSchema = buildProfessionalServiceSchema();
 ---
 
 <BaseLayout
   path="/"
-  title="We Scale Startups | Fractional CMO & Growth Systems for Post-PMF Startups"
-  description="Premium growth consultancy for post-PMF startups that need senior growth leadership, clearer GTM, and more predictable acquisition."
+  title="Fractional CMO for B2B SaaS & AI Startups | We Scale Startups"
+  description="Fractional CMO and growth systems for post-PMF B2B SaaS and AI startups (£1M–£10M ARR). Build predictable pipeline before you hire a £150k full-time CMO."
+  schema={[faqSchema, personSchema, serviceSchema]}
 >
   <section class="hero hero-with-portrait">
     <div class="shell hero-grid">
       <div>
         <div class="hero-meta">
-          <span>Fractional CMO · Growth diagnosis · Acquisition systems</span>
-          <span>Post-PMF startups</span>
+          <span>Fractional CMO · Growth audits · Acquisition systems</span>
+          <span>B2B SaaS &amp; AI · £1M–£10M ARR</span>
         </div>
 
-        <h1>Senior growth leadership for startups that need more predictable acquisition.</h1>
+        <h1>Build predictable pipeline <em>before</em> you hire a £150k CMO.</h1>
 
         <p class="hero-copy">
-          We work alongside founders, teams, agencies, and existing marketing hires to turn messy growth activity into clearer positioning,
-          sharper acquisition, and a pipeline rhythm the team can run.
+          Fractional CMO and growth systems for post-PMF B2B SaaS and AI founders.
+          We fix messy growth and build the repeatable revenue engine your team can actually run — without the full-time hire.
         </p>
 
         <div class="hero-actions">
@@ -87,33 +79,38 @@ function metricLead(result: string) {
               sizes="(max-width: 640px) 100vw, 38vw"
               type="image/webp"
             />
-            <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
+            <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups — fractional CMO for B2B SaaS and AI startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
           </picture>
         </div>
         <div class="hero-offer">
-          <p class="eyebrow">What we fix</p>
+          <p class="eyebrow">Led by Daniel Johnson</p>
+          <p class="hero-offer-role">Senior operator. Not a junior account team. You work directly with Daniel.</p>
           <ul class="note-list">
-            <li>Positioning that does not convert</li>
-            <li>Pipeline inconsistency</li>
-            <li>Founder-led sales dependency</li>
-            <li>Reporting that hides the real issue</li>
+            <li>15+ years across paid, SEO, CRO, and GTM</li>
+            <li>Google for Startups &amp; Techstars mentor</li>
+            <li>£10M+ in paid media managed</li>
           </ul>
         </div>
       </aside>
     </div>
   </section>
 
+  <TrustStrip />
+
   <ProofLogos />
 
-  <section class="section" id="fit">
+  <section class="section" id="pain">
     <div class="shell two-column">
       <div>
-        <p class="eyebrow">Who this is for</p>
-        <h2>For teams with traction, pressure, and no clean growth rhythm yet.</h2>
-        <p class="lead-copy">The pattern is usually simple: the product works, the team is busy, but pipeline still depends on founder energy and scattered channel activity.</p>
+        <p class="eyebrow">The pain</p>
+        <h2>Growth gets messy after product–market fit.</h2>
+        <p class="lead-copy">
+          Once there's traction, the problem isn't effort. It's that pipeline still depends on founder energy,
+          scattered channel activity, and reporting that doesn't actually explain what's working.
+        </p>
       </div>
-      <div class="grid">
-        {fitSignals.map((item) => (
+      <div class="grid grid-2">
+        {painSignals.map((item) => (
           <article class="feature-card compact-card">
             <p>{item}</p>
           </article>
@@ -122,12 +119,12 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <section class="section" id="services">
+  <section class="section section-alt" id="services">
     <div class="shell">
       <SectionIntro
         eyebrow="Services"
-        title="Four clearer ways to work together."
-        body="Start with a diagnosis if the path is unclear. Move into a sprint, acquisition build, or fractional CMO support when the constraint is visible."
+        title="Four ways to fix it."
+        body="Start with a Growth Audit if the path is unclear. Move into a sprint, acquisition build, or fractional CMO engagement once the constraint is visible."
       />
 
       <div class="grid-4">
@@ -144,56 +141,13 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="shell two-column">
-      <div>
-        <p class="eyebrow">AI-native, practically</p>
-        <h2>AI speeds execution. Judgement decides priorities.</h2>
-        <p class="lead-copy">
-          We use AI where it shortens research, analysis, briefing, reporting, and iteration.
-          Senior operator judgement still decides what gets used, what gets ignored, and what matters commercially.
-        </p>
-      </div>
-      <div class="grid grid-2">
-        {aiUses.map((item) => (
-          <article class="feature-card compact-card">
-            <p>{item}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell two-column">
-      <div>
-        <p class="eyebrow">Daniel credibility</p>
-        <h2>Founder-led, but built to transfer into your team.</h2>
-        <p class="lead-copy">
-          Daniel brings the senior judgment, then turns that judgment into workflows, reporting, briefs, and handoff
-          material your team can keep using.
-        </p>
-      </div>
-      <div class="grid grid-2">
-        {[
-          "Google for Startups and Techstars ecosystem mentor",
-          "GrowthMentor track record with hundreds of founder sessions",
-          "Experience across SaaS, AI, fintech, healthtech, ecommerce, and education",
-          "Practical operator background across paid, SEO, CRO, positioning, GTM, and reporting"
-        ].map((item) => (
-          <article class="feature-card compact-card">
-            <p>{item}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <FounderVideo />
 
   {featuredCase && (
-    <section class="section" id="results">
+    <section class="section section-alt" id="results">
       <div class="shell">
         <SectionIntro
-          eyebrow="Case studies"
+          eyebrow="Results"
           title="Before, work done, result."
           body="Proof should be easy to scan. Each case shows the commercial problem, the work, and what changed."
         />
@@ -221,20 +175,36 @@ function metricLead(result: string) {
             </div>
             <div class="hero-actions">
               <a class="button button-brand" href={`/case-studies/${featuredCase.id}`}>Read the case</a>
-              <a class="button button-light" href="/case-studies">All proof</a>
+              <a class="button button-light" href="/case-studies">See all results</a>
             </div>
           </div>
+        </div>
+
+        <div class="grid-3 mt-8">
+          {cases.slice(1, 4).map((item) => (
+            <CaseCard
+              href={`/case-studies/${item.id}`}
+              title={item.data.title}
+              sector={item.data.sector}
+              summary={item.data.summary}
+              results={item.data.results}
+            />
+          ))}
         </div>
       </div>
     </section>
   )}
 
-  <section class="section section-alt">
+  <PricingGuide />
+
+  <ObjectionsFAQ />
+
+  <section class="section">
     <div class="shell">
       <SectionIntro
         eyebrow="Process"
         title="Diagnose. Build. Test. Transfer."
-        body="The point is not to create dependency. The point is to leave the growth function clearer and easier to run."
+        body="The point is not to create dependency. It is to leave the growth function clearer and easier for your team to run."
       />
       <div class="grid-4">
         {process.map(([title, href, body], index) => (
@@ -248,30 +218,13 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <section class="section">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="Resources"
-        title="Useful before you spend more."
-        body="Lightweight guides for founders, leadership teams, and portfolio teams trying to diagnose the growth constraint."
-      />
-      <div class="grid-3">
-        {leadMagnets.map((item) => (
-          <a class="feature-card" href={item.href}>
-            <p class="card-kicker">{item.audience}</p>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
+  <LeadMagnetForm />
 
-  <section class="section" id="markets">
+  <section class="section section-alt" id="markets">
     <div class="shell">
       <SectionIntro
         eyebrow="Markets"
-        title="Built for categories where trust and clarity matter."
+        title="Built for B2B SaaS and AI — extends into Fintech and HealthTech."
         body="The system adapts to the buyer, proof required, channel economics, and team capacity."
       />
       <div class="grid-4">
@@ -282,26 +235,6 @@ function metricLead(result: string) {
             <p>{industry.data.description}</p>
             <span class="card-link">Explore market</span>
           </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="More proof"
-        title="Practical work across SaaS, fintech, healthtech, and education."
-      />
-      <div class="grid-3">
-        {cases.slice(1, 4).map((item) => (
-          <CaseCard
-            href={`/case-studies/${item.id}`}
-            title={item.data.title}
-            sector={item.data.sector}
-            summary={item.data.summary}
-            results={item.data.results}
-          />
         ))}
       </div>
       <div class="mt-8 grid-3">
@@ -318,8 +251,8 @@ function metricLead(result: string) {
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Next step</p>
-        <h2>Find the right growth path.</h2>
-        <p>Bring the current growth bottleneck. We will identify whether the constraint is diagnosis, sprint, acquisition system, or fractional leadership.</p>
+        <h2>Diagnose what's actually blocking growth.</h2>
+        <p>Bring your current growth bottleneck to a 20-minute call. Leave with a plain-English view of the constraint — and whether we're the right help for it.</p>
       </div>
       <div class="hero-actions">
         <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="final-book">{siteConfig.bookingLabel}</a>

@@ -1,0 +1,14 @@
+---
+import { trustStripItems } from "../site";
+---
+
+<section class="trust-strip" aria-label="Credibility summary">
+  <div class="shell trust-strip-inner">
+    {trustStripItems.map((item) => (
+      <div class="trust-strip-item">
+        <span aria-hidden="true" class="trust-strip-tick">✓</span>
+        <p>{item}</p>
+      </div>
+    ))}
+  </div>
+</section>

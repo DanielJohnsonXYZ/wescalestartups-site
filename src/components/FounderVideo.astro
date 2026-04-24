@@ -1,0 +1,44 @@
+---
+import { siteConfig } from "../site";
+
+const hasVideo = Boolean(siteConfig.videoUrl);
+---
+
+<section class="section founder-video-section" aria-labelledby="founder-video-heading">
+  <div class="shell two-column">
+    <div>
+      <p class="eyebrow">From Daniel</p>
+      <h2 id="founder-video-heading">Why startups hit a wall after product-market fit — and how we fix it.</h2>
+      <p class="lead-copy">
+        A 60-second explanation of the most common growth constraint we see in post-PMF B2B SaaS and AI startups,
+        and what to do about it before you hire a £150k CMO.
+      </p>
+      <ul class="note-list">
+        <li>The three signals that your growth is founder-dependent, not system-dependent</li>
+        <li>Why "more campaigns" rarely fixes post-PMF growth</li>
+        <li>What to build first — before hiring or adding agency spend</li>
+      </ul>
+    </div>
+    <div class="founder-video-frame">
+      {hasVideo ? (
+        <div class="video-embed">
+          <iframe
+            src={siteConfig.videoUrl}
+            title="Daniel Johnson: Why startups hit a wall after PMF"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      ) : (
+        <div class="video-placeholder" role="img" aria-label="Founder video placeholder — awaiting upload">
+          <span class="video-placeholder-eyebrow">Coming soon</span>
+          <p class="video-placeholder-title">60-second founder note</p>
+          <p class="video-placeholder-note">
+            Video embed appears here once <code>siteConfig.videoUrl</code> is set in <code>src/site.ts</code>.
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

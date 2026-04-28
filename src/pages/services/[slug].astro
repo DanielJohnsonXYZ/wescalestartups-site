@@ -17,7 +17,7 @@ const path = `/services/${service.id}`;
 
 const details = {
   "fractional-cmo": {
-    price: "From £7.5k/month · 3-month minimum",
+    price: "From £8k/month · 3-month minimum",
     timeline: "First 30 days diagnose and reset priorities. Days 31-90 build, test, and transfer the operating rhythm.",
     deliverables: [
       "90-day growth priorities and decision rules",
@@ -33,7 +33,7 @@ const details = {
     ]
   },
   "growth-diagnosis": {
-    price: "From £3.5k · usually 2 weeks",
+    price: "From £4k · usually 1 week",
     timeline: "One focused diagnostic sprint ending in a constraint map, recommendation memo, and priority workshop.",
     deliverables: [
       "Growth bottleneck map across ICP, funnel, channel, conversion, reporting, and team",
@@ -49,7 +49,7 @@ const details = {
     ]
   },
   "acquisition-system-build": {
-    price: "From £8k · usually 4-6 weeks",
+    price: "From £30k · usually 8-12 weeks",
     timeline: "Build the channel plan, campaign briefs, reporting view, and first experiments with your team or agency.",
     deliverables: [
       "Channel strategy and test sequencing",
@@ -65,7 +65,7 @@ const details = {
     ]
   },
   "90-day-growth-sprint": {
-    price: "From £12k · 90-day sprint",
+    price: "From £15k · 90-day sprint",
     timeline: "Three months of focused experiments, weekly readouts, and clear decisions on what to scale, stop, or fix.",
     deliverables: [
       "Quarterly experiment roadmap",
@@ -112,7 +112,7 @@ const faqSchema = {
       <p>{service.data.description}</p>
       <div class="hero-actions">
         <a class="button button-dark" href={siteConfig.bookingUrl} data-cta={`${service.id}-book`}>{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/services">All services</a>
+        <a class="button button-light" href="/pricing">See pricing</a>
       </div>
     </div>
   </section>

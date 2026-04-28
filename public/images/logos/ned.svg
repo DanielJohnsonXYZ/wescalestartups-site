@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="72" viewBox="0 0 220 72" role="img" aria-labelledby="title">
+  <title id="title">Ned</title>
+  <rect width="220" height="72" rx="12" fill="#fffefa"/>
+  <path d="M44 49V23h7.4l13.2 15.7V23h8.1v26h-7.1L52.1 32.8V49H44Zm40.1 0V23h24v6.7H92.7v3.2h13.9v6.3H92.7v3.1h15.8V49H84.1Zm35.3 0V23h11.3c4.7 0 8.5 1.2 11.2 3.6 2.8 2.4 4.2 5.5 4.2 9.4s-1.4 7.1-4.2 9.5c-2.8 2.3-6.5 3.5-11.2 3.5h-11.3Zm8.7-7.1h2.4c2.1 0 3.7-.5 4.9-1.5 1.2-1.1 1.8-2.5 1.8-4.4 0-1.8-.6-3.2-1.8-4.3-1.2-1-2.8-1.6-4.9-1.6h-2.4v11.8Z" fill="#100d18"/>
+  <circle cx="165" cy="36" r="13" fill="#6657ff"/>
+  <path d="M159 36h12" stroke="#d8ff4f" stroke-width="3" stroke-linecap="round"/>
+</svg>

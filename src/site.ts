@@ -25,18 +25,17 @@ export const siteConfig = {
 export const navigation = [
   { href: "/start-here", label: "Start here" },
   { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Results" },
+  { href: "/proof", label: "Proof" },
   { href: "/how-it-works", label: "How it works" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "About" }
+  { href: "/pricing", label: "Pricing" }
 ] as const;
 
 export const trustLogos = [
-  { label: "Ned" },
-  { label: "eQuoo" },
-  { label: "LessonsUp" },
-  { label: "Nevly" },
-  { label: "Diadia Health" }
+  { src: "/images/logos/ned.svg", alt: "Ned", label: "Ned" },
+  { src: "/images/logos/equoo.svg", alt: "eQuoo", label: "eQuoo" },
+  { src: "/images/logos/lessonsup.svg", alt: "LessonsUp", label: "LessonsUp" },
+  { src: "/images/logos/nevly.svg", alt: "Nevly", label: "Nevly" },
+  { src: "/images/logos/diadia-health.svg", alt: "Diadia Health", label: "Diadia Health" }
 ] as const;
 
 export const credentialLogos = [

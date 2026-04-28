@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="72" viewBox="0 0 220 72" role="img" aria-labelledby="title">
+  <title id="title">Nevly</title>
+  <rect width="220" height="72" rx="12" fill="#fffefa"/>
+  <path d="M44 49V23h7.7l13.4 15.9V23h8.2v26h-7.4L52.3 32.8V49H44Zm39.8 0V23h24v6.6H92.4v3.3h13.8v6.2H92.4v3.3h15.8V49H83.8Zm39.6.2L112.8 23h9.5l6.4 16.8 6.4-16.8h9.3l-10.6 26.2h-10.4Zm26.3-.2V23h8.6v18.6h14.5V49h-23.1Zm35.1 0v-9.7L174.7 23h9.8l4.7 8.7 4.8-8.7h9.6l-10.2 16.2V49h-8.6Z" fill="#100d18"/>
+  <path d="M35 23h5v26h-5z" fill="#07756e"/>
+</svg>

@@ -10,10 +10,6 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
 ---
 
 <header class="site-header">
-  <div class="shell masthead">
-    <span>We Scale Startups · <strong>Predictable acquisition for post-PMF startups</strong></span>
-    <span>Founder-led. £10M+ acquisition spend managed.</span>
-  </div>
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="We Scale Startups home">
       <img src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="120" height="68" />
@@ -23,14 +19,14 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
         <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
       ))}
     </nav>
-    <a class="button button-brand header-cta" href={siteConfig.bookingUrl} data-cta="header-book">{siteConfig.bookingLabel}</a>
+    <a class="button button-brand header-cta" href={siteConfig.bookingUrl} data-cta="header-book">Book call</a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
       <nav aria-label="Mobile navigation">
         {navigation.map((item) => (
           <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
         ))}
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="mobile-book">{siteConfig.bookingLabel}</a>
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="mobile-book">Book call</a>
       </nav>
     </details>
   </div>

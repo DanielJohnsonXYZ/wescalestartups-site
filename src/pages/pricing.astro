@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pricingTiers, siteConfig } from "../site";
+---
+
+<BaseLayout
+  path="/pricing"
+  title="Pricing · We Scale Startups"
+  description="Engagement ranges for Growth Diagnosis, 90-Day Sprint, Acquisition System Build, and Fractional CMO. Honest ranges so you can self-qualify."
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Pricing</p>
+      <h1>Honest ranges. No "request a quote" gating.</h1>
+      <p class="lede">
+        Engagements scale with team complexity, scope, and timeline — but the floor of each tier is below.
+        If the floor isn't workable for you, an agency or in-house hire will probably be a better fit.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="pricing-grid">
+        {pricingTiers.map((tier, idx) => (
+          <article class:list={["pricing-card", { "is-recommended": idx === 0 }]}>
+            {idx === 0 && <span class="recommended-badge">Most founders start here</span>}
+            <h3>{tier.name}</h3>
+            <div class="pricing-meta">
+              <span class="pricing-price">{tier.priceFrom}</span>
+              <span class="pricing-duration">{tier.duration}</span>
+            </div>
+            <p>{tier.description}</p>
+            <a class="card-link" href={tier.href}>Learn more →</a>
+          </article>
+        ))}
+      </div>
+
+      <div class="pricing-disclaimer">
+        Final fee depends on team size, channel mix, and the depth of execution required.
+        Every engagement starts with a 30-minute diagnostic call so we agree on scope before any contract.
+        Limited number of clients each quarter.
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">What's not in the price</p>
+        <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.2rem,3.8vw,3rem);line-height:1.05;font-weight:380;margin:0.4rem 0 1.4rem;">Media spend. Tools. Vendors.</h2>
+        <p class="lead-copy">Our fee covers strategy, system design, execution, and reporting. Paid media spend, tooling subscriptions, and any third-party vendor fees are separate and pass through at cost.</p>
+      </div>
+      <div class="grid grid-2">
+        <article class="feature-card compact-card"><p>Paid media spend (Google, Meta, LinkedIn, etc.)</p></article>
+        <article class="feature-card compact-card"><p>Tools and subscriptions (analytics, CRM, automation)</p></article>
+        <article class="feature-card compact-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
+        <article class="feature-card compact-card"><p>Travel for events or trade shows (if applicable)</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Not sure which tier fits?</p>
+        <h2>Find out on the call.</h2>
+        <p>30 minutes. We'll tell you which engagement (if any) actually solves your bottleneck — and which would be wasted spend.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="pricing-cta">
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

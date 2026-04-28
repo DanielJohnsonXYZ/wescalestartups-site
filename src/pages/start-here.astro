@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+
+const steps = [
+  {
+    n: "01",
+    title: "Score yourself in 5 minutes",
+    body: "The Growth Bottleneck Scorecard tells you which of five constraints is actually blocking pipeline. No email gating until the end.",
+    cta: "Take the scorecard",
+    href: siteConfig.scorecardUrl
+  },
+  {
+    n: "02",
+    title: "Read one case study",
+    body: "Find the case that looks most like your situation. We use the same Problem / Action / Result format every time so you can read it in 60 seconds.",
+    cta: "See proof",
+    href: "/proof"
+  },
+  {
+    n: "03",
+    title: "Book a 30-minute call",
+    body: "Bring the scorecard result and your current growth picture. You'll leave with a plain-English view of the bottleneck and which engagement (if any) actually fits.",
+    cta: siteConfig.bookingLabel,
+    href: siteConfig.bookingUrl
+  }
+];
+---
+
+<BaseLayout
+  path="/start-here"
+  title="Start here · We Scale Startups"
+  description="A three-step path for post-PMF founders who aren't sure where to begin: score yourself, read one case study, book a call."
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Start here</p>
+      <h1>Three steps. About 35 minutes total.</h1>
+      <p class="lede">
+        If you're not sure whether WSS is for you — or which of the four engagements would actually help — start here.
+        No demos, no sales calls until step three.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      {steps.map((step) => (
+        <article class="start-step">
+          <span class="start-step-num">{step.n}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+          <a class="button button-brand" href={step.href}>{step.cta}</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Already done step one?</p>
+        <h2>Skip ahead and book the call.</h2>
+        <p>Bring your scorecard result. We'll spend the 30 minutes on the bottleneck, not on intros.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="start-here-final">
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

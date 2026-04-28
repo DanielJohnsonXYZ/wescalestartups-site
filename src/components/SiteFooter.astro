@@ -1,21 +1,27 @@
 ---
 import { navigation, siteConfig } from "../site";
+
+const secondaryLinks = [
+  { href: "/industries", label: "Industries" },
+  { href: "/resources", label: "Resources" },
+  { href: "/press", label: "Press kit" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" }
+];
 ---
 
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
       <img class="footer-logo" src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="128" height="72" loading="lazy" decoding="async" />
-      <p class="footer-summary">Senior growth leadership, clearer GTM, and more predictable acquisition for post-PMF startup teams.</p>
+      <p class="footer-summary">Predictable acquisition for post-PMF startups. We build the repeatable growth system so founders are no longer the bottleneck.</p>
       <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="footer-book">{siteConfig.bookingLabel}</a>
     </div>
     <div>
       <h2>Explore</h2>
       <nav class="footer-links" aria-label="Footer navigation">
         {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-        <a href="/press">Press kit</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+        {secondaryLinks.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
     </div>
     <div>
@@ -24,6 +30,7 @@ import { navigation, siteConfig } from "../site";
         <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
         <a href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
         <a href={siteConfig.bookingUrl} data-cta="footer-contact-book">Book a call</a>
+        <a href={siteConfig.linkedin} rel="noopener" target="_blank">LinkedIn</a>
       </div>
     </div>
   </div>

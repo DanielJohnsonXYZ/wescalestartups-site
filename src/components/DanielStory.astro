@@ -1,0 +1,33 @@
+---
+import { founderStory, siteConfig } from "../site";
+---
+
+<section class="section daniel-story-section" aria-label="Why Daniel built We Scale Startups">
+  <div class="shell daniel-grid">
+    <div class="daniel-photo">
+      <picture>
+        <source
+          srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
+          sizes="(max-width: 640px) 100vw, 38vw"
+          type="image/webp"
+        />
+        <img src="/images/daniel-headshot-640.webp" alt="Daniel Johnson" width="640" height="668" loading="lazy" decoding="async" />
+      </picture>
+    </div>
+    <div class="daniel-copy">
+      <p class="eyebrow">Why I built WSS</p>
+      <h2>"Founders kept getting stuck running marketing themselves."</h2>
+      <p class="lead-copy">{founderStory.intro}</p>
+      <p class="lead-copy">{founderStory.why}</p>
+      <ul class="daniel-credentials">
+        {founderStory.credentials.map((cred) => (
+          <li>{cred}</li>
+        ))}
+      </ul>
+      <div class="hero-actions">
+        <a class="button button-light" href={siteConfig.founderLinkedin} rel="me noopener" target="_blank">Daniel on LinkedIn →</a>
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="daniel-story-book">{siteConfig.bookingLabel}</a>
+      </div>
+    </div>
+  </div>
+</section>

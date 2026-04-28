@@ -1492,3 +1492,983 @@ textarea:focus-visible {
     flex-direction: column;
   }
 }
+/* ============================================================
+   SITE OVERHAUL — APPEND TO src/styles/global.css
+   New classes for: pain-led hero, single CTA with subcopy,
+   testimonials, vs-agency, not-for, daniel-story, decision layer,
+   recommended badge, P/A/R format, lead magnets.
+   All existing classes are preserved.
+   ============================================================ */
+
+/* --- Hero pain list + secondary CTA --- */
+.hero-pain-list {
+  list-style: none;
+  margin: 1.4rem 0 1.6rem;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+  max-width: 580px;
+}
+
+.hero-pain-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--ink);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-weight: 420;
+  line-height: 1.35;
+}
+
+.hero-pain-list li::before {
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.8rem;
+  height: 2px;
+  background: var(--coral);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.hero-fix {
+  max-width: 600px;
+  margin: 0 0 2rem;
+  color: var(--ink-2);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.hero-secondary {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(102, 87, 255, 0.4);
+  text-underline-offset: 4px;
+}
+
+.hero-secondary:hover {
+  color: var(--violet);
+}
+
+/* --- Button with subcopy (outcome-led primary CTA) --- */
+.button-with-subcopy {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.85rem 1.25rem;
+  min-height: 64px;
+  text-align: left;
+}
+
+.button-with-subcopy .button-label {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.button-with-subcopy .button-subcopy {
+  color: rgba(255, 255, 255, 0.78);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: none;
+}
+
+/* --- Hero portrait card upgrade — operator credibility --- */
+.hero-offer-name {
+  margin: 0.35rem 0 0;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.4rem;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.hero-offer-role {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.hero-offer-rating {
+  margin: 0.85rem 0 0;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* --- Testimonials --- */
+.testimonials-section {
+  padding: 4rem 0 5rem;
+}
+
+.testimonials-header {
+  margin-bottom: 2.2rem;
+}
+
+.testimonials-header h2 {
+  margin: 0;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1;
+  font-weight: 380;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.testimonial-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.6rem;
+  box-shadow: 0 14px 42px rgba(16, 13, 24, 0.05);
+}
+
+.testimonial-card blockquote {
+  margin: 0;
+}
+
+.testimonial-card blockquote p {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.18rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.testimonial-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+}
+
+.testimonial-card figcaption strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.testimonial-card figcaption span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.testimonial-result {
+  margin-top: 0.35rem;
+  color: var(--violet) !important;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* --- Decision layer (services routing) --- */
+.decision-grid {
+  display: grid;
+  gap: 0.7rem;
+  margin-bottom: 3rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 0.6rem;
+}
+
+.decision-row {
+  display: grid;
+  grid-template-columns: 1.3fr auto 1fr;
+  gap: 1.6rem;
+  align-items: center;
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem;
+}
+
+.decision-row:hover {
+  background: rgba(102, 87, 255, 0.05);
+}
+
+.decision-condition .card-kicker,
+.decision-recommendation .card-kicker {
+  margin: 0 0 0.3rem;
+  color: var(--dim);
+}
+
+.decision-text {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  font-weight: 460;
+}
+
+.decision-arrow {
+  color: var(--violet);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+.decision-recommend-name {
+  margin: 0;
+  color: var(--violet);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.decision-duration {
+  margin: 0.2rem 0 0;
+  color: var(--dim);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+/* --- Recommended badge on cards --- */
+.is-recommended,
+.is-primary-lead {
+  position: relative;
+  border-color: var(--violet);
+  background:
+    linear-gradient(135deg, rgba(102, 87, 255, 0.06), rgba(216, 255, 79, 0.04)),
+    var(--surface);
+  box-shadow: 0 18px 48px rgba(102, 87, 255, 0.14);
+}
+
+.recommended-badge {
+  position: absolute;
+  top: -10px;
+  left: 1.1rem;
+  border-radius: 4px;
+  background: var(--violet);
+  color: #fff;
+  padding: 0.32rem 0.7rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* --- P/A/R case study format --- */
+.par-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1.4rem 0;
+}
+
+.par-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1.1rem;
+  border-left: 3px solid var(--line);
+  padding: 0.6rem 0 0.6rem 0.9rem;
+}
+
+.par-row.par-problem { border-left-color: var(--coral); }
+.par-row.par-action { border-left-color: var(--violet); }
+.par-row.par-result { border-left-color: var(--teal); }
+
+.par-label {
+  display: block;
+  color: var(--dim);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.par-row p {
+  margin: 0;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.case-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.4rem;
+}
+
+.case-mini h4 {
+  margin: 0;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.4rem;
+  line-height: 1.15;
+  font-weight: 480;
+}
+
+.par-mini {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0.4rem 0.9rem;
+  margin: 0;
+  padding: 0;
+}
+
+.par-mini dt {
+  color: var(--dim);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.par-mini dd {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.mt-8 {
+  margin-top: 3rem;
+}
+
+/* --- WSS vs Agency table --- */
+.vs-agency-section {
+  padding-top: 3rem;
+}
+
+.vs-table-wrap {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+}
+
+.vs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.vs-table thead th {
+  border-bottom: 1px solid var(--line-strong);
+  padding: 1rem 1.2rem;
+  color: var(--ink);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.vs-table thead th.vs-wss-col {
+  background: rgba(102, 87, 255, 0.06);
+  color: var(--violet);
+}
+
+.vs-table tbody th {
+  width: 22%;
+  border-right: 1px solid var(--line);
+  padding: 1rem 1.2rem;
+  color: var(--dim);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  vertical-align: top;
+  text-align: left;
+}
+
+.vs-table tbody tr {
+  border-bottom: 1px solid var(--line);
+}
+
+.vs-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.vs-table td {
+  padding: 1rem 1.2rem;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.vs-table td.vs-agency-cell {
+  color: var(--muted);
+}
+
+.vs-table td.vs-wss-cell {
+  background: rgba(102, 87, 255, 0.04);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.vs-footnote {
+  margin-top: 1.6rem;
+  color: var(--muted);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+/* --- Not-for grid --- */
+.not-for-section {
+  border-block: 1px solid var(--line);
+}
+
+.not-for-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.not-for-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.6rem 1.4rem 1.4rem;
+}
+
+.not-for-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0.7rem;
+  border-radius: 50%;
+  background: rgba(200, 84, 69, 0.12);
+  color: var(--coral);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.not-for-card h3 {
+  margin: 0 0 0.5rem;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.not-for-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.not-for-footnote {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.not-for-footnote a {
+  color: var(--violet);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Daniel story section --- */
+.daniel-story-section {
+  background:
+    linear-gradient(135deg, rgba(102, 87, 255, 0.05), rgba(216, 255, 79, 0.03)),
+    var(--paper);
+}
+
+.daniel-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) 1.4fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.daniel-photo {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(150deg, #453782, #0f0c18);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.daniel-photo picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.daniel-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.daniel-copy h2 {
+  margin: 0.4rem 0 1.4rem;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(2.4rem, 3.8vw, 3.4rem);
+  line-height: 1.05;
+  font-weight: 380;
+}
+
+.daniel-credentials {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.6rem 0 1.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+.daniel-credentials li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.daniel-credentials li::before {
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--violet);
+  content: "";
+  transform: translateY(-50%);
+}
+
+/* --- Lead magnet card primary highlight (already covered) --- */
+.lead-magnet-card {
+  position: relative;
+  display: grid;
+  gap: 0.7rem;
+}
+
+/* --- Page hero (used by new pages) --- */
+.page-hero p.lede {
+  max-width: 740px;
+  margin: 1.8rem 0 0;
+  color: var(--ink-2);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.page-hero .hero-actions {
+  margin-top: 2.4rem;
+}
+
+/* --- Pricing table --- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.8rem;
+}
+
+.pricing-card h3 {
+  margin: 0;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.7rem;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.pricing-meta {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  margin: 0.3rem 0 0.6rem;
+}
+
+.pricing-price {
+  color: var(--violet);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.45rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.pricing-duration {
+  color: var(--dim);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.pricing-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pricing-card .card-link {
+  margin-top: auto;
+}
+
+.pricing-disclaimer {
+  margin-top: 2rem;
+  border-left: 3px solid var(--violet);
+  padding: 0.7rem 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* --- First 30 days timeline --- */
+.timeline {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.6rem;
+}
+
+.timeline-week {
+  color: var(--violet);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.timeline-row h3 {
+  margin: 0 0 0.4rem;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.timeline-row p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* --- Start Here funnel --- */
+.start-step {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 1.6rem;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.4rem 1.6rem;
+}
+
+.start-step + .start-step {
+  margin-top: 0.8rem;
+}
+
+.start-step-num {
+  color: var(--violet);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 2.6rem;
+  font-style: italic;
+  font-weight: 380;
+  line-height: 1;
+}
+
+.start-step h3 {
+  margin: 0 0 0.3rem;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.start-step p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* --- Creative proof visuals --- */
+.creative-system-section {
+  background:
+    linear-gradient(135deg, rgba(102, 87, 255, 0.08), rgba(216, 255, 79, 0.1)),
+    var(--paper);
+}
+
+.creative-system-grid,
+.proof-creative-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.creative-system-grid h2,
+.proof-creative-grid h2 {
+  margin: 0.4rem 0 1.3rem;
+  max-width: 680px;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
+  line-height: 1;
+  font-weight: 380;
+}
+
+.system-board {
+  border: 1px solid rgba(16, 13, 24, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255, 254, 250, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 254, 250, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, #1f1838, #100d18);
+  background-size: 34px 34px, 34px 34px, auto;
+  box-shadow: 0 34px 90px rgba(16, 13, 24, 0.24);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  color: #fff;
+}
+
+.system-board-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  padding-bottom: 1rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.system-board-top span {
+  color: var(--acid);
+}
+
+.system-board-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+}
+
+.system-node {
+  min-height: 158px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+}
+
+.system-node span,
+.dashboard-label,
+.proof-map span {
+  color: rgba(255, 255, 255, 0.62);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.system-node strong {
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1.05;
+  font-weight: 420;
+}
+
+.system-node-coral {
+  box-shadow: inset 0 -4px 0 var(--coral);
+}
+
+.system-node-violet {
+  box-shadow: inset 0 -4px 0 var(--violet);
+}
+
+.system-node-teal {
+  box-shadow: inset 0 -4px 0 var(--teal);
+}
+
+.system-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.system-dashboard > div {
+  min-height: 92px;
+  border: 1px solid rgba(216, 255, 79, 0.22);
+  border-radius: 8px;
+  background: rgba(216, 255, 79, 0.08);
+  padding: 0.9rem;
+}
+
+.system-dashboard strong {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--acid);
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 430;
+}
+
+.proof-creative-section {
+  border-block: 1px solid var(--line);
+  background: rgba(255, 254, 250, 0.62);
+}
+
+.proof-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.proof-map article {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1.2rem;
+  box-shadow: 0 18px 46px rgba(16, 13, 24, 0.08);
+}
+
+.proof-map article:nth-child(1) {
+  border-top: 4px solid var(--coral);
+}
+
+.proof-map article:nth-child(2) {
+  border-top: 4px solid var(--violet);
+}
+
+.proof-map article:nth-child(3) {
+  border-top: 4px solid var(--teal);
+}
+
+.proof-map span {
+  color: var(--dim);
+}
+
+.proof-map strong {
+  display: block;
+  margin-top: auto;
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.proof-map p {
+  margin: 1.2rem 0 0;
+  color: var(--muted);
+}
+
+/* --- Responsive overrides --- */
+@media (max-width: 980px) {
+  .testimonials-grid,
+  .not-for-grid,
+  .pricing-grid,
+  .creative-system-grid,
+  .proof-creative-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .system-board-flow,
+  .system-dashboard,
+  .proof-map {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-row {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .decision-arrow {
+    display: none;
+  }
+
+  .daniel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vs-table thead {
+    display: none;
+  }
+
+  .vs-table tbody th,
+  .vs-table tbody td {
+    display: block;
+    border: none;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .vs-table tbody tr {
+    padding: 0.8rem 0;
+  }
+
+  .vs-table td.vs-wss-cell::before {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--violet);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    content: "We Scale Startups";
+  }
+
+  .vs-table td.vs-agency-cell::before {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--dim);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    content: "Agency";
+  }
+
+  .timeline-row,
+  .start-step {
+    grid-template-columns: 1fr;
+  }
+}

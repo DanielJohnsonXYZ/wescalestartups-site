@@ -1,0 +1,40 @@
+---
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  result: string;
+}
+
+interface Props {
+  testimonials: readonly Testimonial[];
+  title?: string;
+  eyebrow?: string;
+}
+
+const { testimonials, title = "What founders say.", eyebrow = "Testimonials" } = Astro.props;
+---
+
+<section class="section testimonials-section" aria-label="Founder testimonials">
+  <div class="shell">
+    <div class="testimonials-header">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+    </div>
+    <div class="testimonials-grid">
+      {testimonials.map((t) => (
+        <figure class="testimonial-card">
+          <blockquote>
+            <p>"{t.quote}"</p>
+          </blockquote>
+          <figcaption>
+            <strong>{t.name}</strong>
+            <span>{t.role}{t.company ? ` · ${t.company}` : ""}</span>
+            {t.result && <span class="testimonial-result">{t.result}</span>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import { notFor, siteConfig } from "../site";
+import SectionIntro from "./SectionIntro.astro";
+---
+
+<section class="section section-alt not-for-section" aria-label="Who this is not for">
+  <div class="shell">
+    <SectionIntro
+      eyebrow="Who this is not for"
+      title="Be clear up-front so we don't waste your call."
+      body="If any of these match, we'd rather say so now than three weeks into a kickoff. We'll point you somewhere better."
+    />
+    <div class="not-for-grid">
+      {notFor.map((item) => (
+        <article class="not-for-card">
+          <span class="not-for-x" aria-hidden="true">✕</span>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+    <p class="not-for-footnote">
+      If you're not sure which side of the line you're on, the <a href={siteConfig.scorecardUrl}>5-minute scorecard</a> will tell you in plain English.
+    </p>
+  </div>
+</section>

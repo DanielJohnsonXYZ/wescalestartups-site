@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { first30Days, siteConfig } from "../site";
+
+const deliverables = [
+  "North Star and KPIs agreed + baseline dashboard",
+  "ICP and messaging notes (voice of customer → value props → angle bank)",
+  "90-day plan with owners, effort/impact scoring, and timelines",
+  "Experiment backlog (prioritised) + 3–5 tests already shipped",
+  "Channel plan (paid/SEO/content/partnerships/email) with first assets live",
+  "Analytics and attribution hygiene: events, UTM discipline, reporting cadence",
+  "Monthly business review pack so leadership sees progress at a glance"
+];
+---
+
+<BaseLayout
+  path="/first-30-days"
+  title="First 30 days · We Scale Startups"
+  description="Exactly what happens in the first month of an engagement. Week-by-week, with concrete deliverables you'll have by day 30."
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">First 30 days</p>
+      <h1>Exactly what happens in month one.</h1>
+      <p class="lede">
+        Week-by-week. Real deliverables, not slides. By day 30 you have a documented plan,
+        a working dashboard, and 3–5 experiments shipped against the constraint we found in week one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="timeline">
+        {first30Days.map((item) => (
+          <article class="timeline-row">
+            <span class="timeline-week">{item.week}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">By day 30</p>
+        <h2>What you'll have in your hands.</h2>
+        <p class="lead-copy">
+          Every deliverable below is a working artefact — not a deck. The team can use it, edit it, and run with it after we leave.
+        </p>
+      </div>
+      <ul class="daniel-credentials">
+        {deliverables.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Sound right?</p>
+        <h2>Book the call. Bring your numbers.</h2>
+        <p>We'll spend 30 minutes on whether month one would actually move the needle for you, or whether something else would.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="first-30-days-cta">
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

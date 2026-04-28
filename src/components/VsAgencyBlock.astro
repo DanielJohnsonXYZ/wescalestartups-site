@@ -1,0 +1,39 @@
+---
+import { vsAgency } from "../site";
+import SectionIntro from "./SectionIntro.astro";
+---
+
+<section class="section vs-agency-section" aria-label="WSS versus agency comparison">
+  <div class="shell">
+    <SectionIntro
+      eyebrow="Why not an agency?"
+      title="Agencies execute tactics. We build systems."
+      body="Both have a place. The difference matters most when the constraint is decision-making, not delivery."
+    />
+
+    <div class="vs-table-wrap">
+      <table class="vs-table" aria-label="Agency versus We Scale Startups">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Agency</th>
+            <th scope="col" class="vs-wss-col">We Scale Startups</th>
+          </tr>
+        </thead>
+        <tbody>
+          {vsAgency.map((row) => (
+            <tr>
+              <th scope="row">{row.label}</th>
+              <td class="vs-agency-cell">{row.agency}</td>
+              <td class="vs-wss-cell">{row.wss}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="vs-footnote">
+      If the work needed is "run this channel for me" — go to an agency. If the work needed is "figure out which channel and why, then build the system" — that's us.
+    </p>
+  </div>
+</section>

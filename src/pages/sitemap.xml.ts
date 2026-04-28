@@ -14,7 +14,12 @@ export const GET: APIRoute = async () => {
   const cases = await getCollection("cases");
   const staticPaths = [
     "/",
+    "/start-here",
     "/services",
+    "/how-it-works",
+    "/first-30-days",
+    "/pricing",
+    "/proof",
     "/diagnose",
     "/build",
     "/test",

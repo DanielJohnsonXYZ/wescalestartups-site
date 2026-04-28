@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+
+const cadence = [
+  { day: "Mon", body: "Weekly priorities locked. Owners and decision rules attached to every test in the backlog." },
+  { day: "Tue–Thu", body: "Execution. Briefs ship, copy ships, pages ship. Async on Slack. Daniel is in the build, not just review." },
+  { day: "Fri", body: "Numbers review against the scorecard. What's working, what to scale, what to kill. Decisions logged." }
+];
+
+const phases = [
+  {
+    title: "Phase 1 — Diagnose",
+    weeks: "Weeks 1–2",
+    body: "Find the real constraint across ICP, positioning, funnel, channels, reporting, and team cadence. Ends in a plain-English bottleneck statement everyone agrees on."
+  },
+  {
+    title: "Phase 2 — Build",
+    weeks: "Weeks 3–6",
+    body: "Turn the decision into pages, campaigns, workflows, dashboards, and a weekly rhythm. Existing assets get rewired before new ones are built."
+  },
+  {
+    title: "Phase 3 — Test",
+    weeks: "Weeks 7–10",
+    body: "Run focused experiments with clear hypotheses, owners, and decision rules. ICE-scored, sequenced, and cut fast if they don't move the metric."
+  },
+  {
+    title: "Phase 4 — Transfer",
+    weeks: "Weeks 11–12",
+    body: "Document the system so the founder, team, and vendors can keep running it. Handover doc, dashboard read-me, vendor SLAs, decision rules — all written."
+  }
+];
+
+const youGet = [
+  "Direct Slack and email — Daniel responds to commercial questions same-day",
+  "A working backlog you can see and edit in Notion",
+  "A weekly numbers dashboard tied to the metric we agreed in week one",
+  "Monthly business review pack for the board or leadership team",
+  "Every brief, page, and campaign written and shipped — not just specced",
+  "On the way out: a 10–15 page handover doc so the system survives the engagement"
+];
+---
+
+<BaseLayout
+  path="/how-it-works"
+  title="How it works · We Scale Startups"
+  description="Exactly what happens week by week inside an engagement. The phases, the cadence, and what you get."
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">How it works</p>
+      <h1>Four phases. One weekly rhythm. No mystery.</h1>
+      <p class="lede">
+        Most consultancy engagements are a black box. This one isn't. Here's exactly what happens week by week,
+        what the cadence looks like, and what you walk away with.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">The four phases</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.4rem,4vw,3.6rem);line-height:1.05;font-weight:380;margin:0.4rem 0 2.2rem;">Diagnose. Build. Test. Transfer.</h2>
+      <div class="timeline">
+        {phases.map((p) => (
+          <article class="timeline-row">
+            <span class="timeline-week">{p.weeks}</span>
+            <div>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">Weekly cadence</p>
+        <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.4rem,4vw,3.4rem);line-height:1.05;font-weight:380;margin:0.4rem 0 1.4rem;">One rhythm, every week.</h2>
+        <p class="lead-copy">No mystery, no Friday-afternoon "what's been happening?" calls. The week is the same shape, every week.</p>
+      </div>
+      <div class="grid">
+        {cadence.map((c) => (
+          <article class="feature-card">
+            <p class="card-kicker">{c.day}</p>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell two-column">
+      <div>
+        <p class="eyebrow">What you get</p>
+        <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.4rem,4vw,3.4rem);line-height:1.05;font-weight:380;margin:0.4rem 0 1.4rem;">Working artefacts, not slides.</h2>
+        <p class="lead-copy">Everything below is something the team can edit, run, or hand to a vendor on day 91 without us in the room.</p>
+      </div>
+      <ul class="daniel-credentials">
+        {youGet.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>See if this rhythm fits your team.</h2>
+        <p>Bring the current growth picture. 30 minutes. Plain English.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="how-it-works-cta">
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

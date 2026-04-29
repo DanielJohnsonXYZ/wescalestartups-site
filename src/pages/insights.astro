@@ -1,37 +1,68 @@
 ---
-import StrategicPage from "../components/StrategicPage.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { formatDate, sortByOrder } from "../lib/utils";
+import { siteConfig } from "../site";
 
-const sections = [
-  {
-    title: "Growth diagnosis",
-    body: "Notes on spotting the actual bottleneck before founders hire, brief agencies, or add more campaigns.",
-    points: ["Positioning issues", "Channel sequencing", "Founder dependency"]
-  },
-  {
-    title: "Acquisition systems",
-    body: "Practical views on how paid, SEO, outbound, content, conversion, and reporting work together.",
-    points: ["Experiment design", "Offer clarity", "Reporting cadence"]
-  },
-  {
-    title: "AI and search visibility",
-    body: "How to make growth expertise easier for buyers, search systems, and AI assistants to understand.",
-    points: ["Structured pages", "FAQs", "Proof summaries", "Crawlable assets"]
-  }
-];
-
-const faqs = [
-  { question: "Is this the blog?", answer: "Yes. Insights reframes the blog as a practical library around diagnosis, acquisition systems, proof, and AI/search visibility." },
-  { question: "Where are the downloads?", answer: "Downloadable resources and templates live under the resources section." },
-  { question: "What should a founder read first?", answer: "Start with growth diagnosis, then move into acquisition systems once the bottleneck is visible." }
-];
+const insights = sortByOrder(await getCollection("insights"));
 ---
 
-<StrategicPage
+<BaseLayout
   path="/insights"
-  eyebrow="Insights"
-  title="Growth notes for founders between traction and scale."
-  description="We Scale Startups insights on growth diagnosis, acquisition systems, SEO, AI visibility, and reducing founder dependency."
-  lede="A practical library for founders who need clearer acquisition decisions, not generic growth content."
-  sections={sections}
-  faqs={faqs}
-/>
+  title="Growth notes for founders between traction and scale | We Scale Startups"
+  description="Original WSS insights on growth diagnosis, acquisition systems, AI visibility, and reducing founder dependency."
+  schema={buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Insights", path: "/insights" }
+  ])}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Insights</p>
+      <h1>Growth notes for founders between traction and scale.</h1>
+      <p class="lede">
+        Practical writing on diagnosing bottlenecks, building acquisition systems, and making expertise easier for buyers and AI search systems to trust.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+        <a class="button button-light" href="/fractional-cmo-vs-agency">WSS vs agency</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Published notes"
+        title="Start with the bottleneck, then choose the work."
+        body="Each article is written to answer a real founder question, not to fill a blog archive."
+      />
+      <div class="grid-3">
+        {insights.map((item) => (
+          <article class="feature-card insight-card">
+            <p class="card-kicker">{formatDate(item.data.publishedAt)}</p>
+            <h2>{item.data.title}</h2>
+            <p>{item.data.excerpt}</p>
+            <div class="insight-tags">
+              {item.data.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+            <a class="card-link" href={`/insights/${item.id}`}>Read the note →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Apply this to your company</p>
+        <h2>Diagnose the constraint before adding more activity.</h2>
+        <p>Bring the current site, pipeline, campaigns, reporting, and team context. We will decide which part of the system needs work first.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+    </div>
+  </section>
+</BaseLayout>

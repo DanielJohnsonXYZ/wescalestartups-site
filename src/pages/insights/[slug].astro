@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildInsightArticleSchema } from "../../lib/schema";
+import { formatDate } from "../../lib/utils";
+import { siteConfig } from "../../site";
+
+export async function getStaticPaths() {
+  const insights = await getCollection("insights");
+
+  return insights.map((insight) => ({
+    params: { slug: insight.id },
+    props: { insight }
+  }));
+}
+
+const { insight } = Astro.props;
+const { Content } = await render(insight);
+const path = `/insights/${insight.id}`;
+const updatedAt = insight.data.updatedAt ?? insight.data.publishedAt;
+const schemas = [
+  buildInsightArticleSchema({
+    title: insight.data.title,
+    description: insight.data.description,
+    path,
+    publishedAt: insight.data.publishedAt,
+    updatedAt: insight.data.updatedAt,
+    tags: insight.data.tags
+  }),
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Insights", path: "/insights" },
+    { name: insight.data.title, path }
+  ])
+];
+---
+
+<BaseLayout
+  path={path}
+  title={`${insight.data.title} | We Scale Startups`}
+  description={insight.data.description}
+  schema={schemas}
+  lastUpdated={false}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Insight</p>
+      <h1>{insight.data.title}</h1>
+      <p class="lede">{insight.data.description}</p>
+      <div class="article-meta">
+        <span>By {insight.data.author}</span>
+        <span>Published {formatDate(insight.data.publishedAt)}</span>
+        <span>Last updated {formatDate(updatedAt)}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell article-layout">
+      <aside class="detail-aside">
+        <p class="eyebrow">TL;DR</p>
+        <p>{insight.data.tldr}</p>
+        <div class="insight-tags">
+          {insight.data.tags.map((tag) => <span>{tag}</span>)}
+        </div>
+      </aside>
+      <article class="content-block article-body">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Bring the bottleneck into a live diagnosis.</h2>
+        <p>Thirty minutes is enough to decide whether the problem is positioning, acquisition, conversion, reporting, or ownership.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+    </div>
+  </section>
+</BaseLayout>

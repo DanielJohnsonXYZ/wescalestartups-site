@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { buildBreadcrumbSchema, buildCaseStudySchema } from "../../lib/schema";
+import { buildBreadcrumbSchema, buildCaseStudyArticleSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 
 export async function getStaticPaths() {
@@ -14,6 +14,20 @@ export async function getStaticPaths() {
 
 const { caseStudy } = Astro.props;
 const path = `/case-studies/${caseStudy.id}`;
+const caseFaqs = [
+  {
+    question: `What work did WSS do for ${caseStudy.data.client}?`,
+    answer: caseStudy.data.work.slice(0, 3).join("; ") + "."
+  },
+  {
+    question: `What changed for ${caseStudy.data.client}?`,
+    answer: caseStudy.data.results.slice(0, 3).join("; ") + "."
+  },
+  {
+    question: "What proof format does WSS use?",
+    answer: "WSS presents case studies in a Before, Work Done, Result format so buyers can separate the starting problem, the operating work, and the commercial signal."
+  }
+];
 ---
 
 <BaseLayout
@@ -21,7 +35,15 @@ const path = `/case-studies/${caseStudy.id}`;
   description={caseStudy.data.summary}
   path={path}
   schema={[
-    buildCaseStudySchema(caseStudy.data.title, caseStudy.data.summary, path),
+    buildCaseStudyArticleSchema({
+      name: caseStudy.data.title,
+      description: caseStudy.data.summary,
+      path,
+      publishedAt: caseStudy.data.publishedAt,
+      updatedAt: caseStudy.data.updatedAt,
+      keywords: caseStudy.data.services
+    }),
+    buildFaqSchema(caseFaqs),
     buildBreadcrumbSchema([
       { name: "Home", path: "/" },
       { name: "Proof", path: "/proof" },
@@ -75,6 +97,20 @@ const path = `/case-studies/${caseStudy.id}`;
             {caseStudy.data.results.map((item) => <li>{item}</li>)}
           </ul>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Case FAQ</p>
+      <div class="grid-3">
+        {caseFaqs.map((faq) => (
+          <article class="feature-card">
+            <h2>{faq.question}</h2>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

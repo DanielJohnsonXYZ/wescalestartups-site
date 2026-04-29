@@ -1,6 +1,27 @@
 import { absoluteUrl } from "./utils";
 import { siteConfig } from "../site";
 
+export function buildPersonSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteConfig.siteUrl}/#person`,
+    name: siteConfig.founderName,
+    jobTitle: "Founder and Fractional CMO",
+    url: "https://danieljohnson.xyz",
+    email: `mailto:${siteConfig.email}`,
+    worksFor: {
+      "@id": `${siteConfig.siteUrl}/#organization`
+    },
+    sameAs: [
+      siteConfig.founderLinkedin,
+      siteConfig.growthMentor,
+      siteConfig.mentorCruise,
+      "https://danieljohnson.xyz"
+    ]
+  };
+}
+
 export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -12,9 +33,7 @@ export function buildOrganizationSchema() {
     telephone: siteConfig.phone,
     logo: absoluteUrl("/images/logos/wss-logo.webp"),
     founder: {
-      "@type": "Person",
-      name: siteConfig.founderName,
-      sameAs: [siteConfig.founderLinkedin]
+      "@id": `${siteConfig.siteUrl}/#person`
     },
     address: {
       "@type": "PostalAddress",
@@ -23,7 +42,7 @@ export function buildOrganizationSchema() {
       postalCode: "EC2A 3AG",
       addressCountry: "GB"
     },
-    sameAs: [siteConfig.linkedin]
+    sameAs: [siteConfig.linkedin, siteConfig.growthMentor, siteConfig.mentorCruise]
   };
 }
 
@@ -86,11 +105,53 @@ export function buildCaseStudySchema(name: string, description: string, path: st
     headline: name,
     description,
     url: absoluteUrl(path),
-    author: {
-      "@type": "Person",
-      name: siteConfig.founderName
-    },
+    author: { "@id": `${siteConfig.siteUrl}/#person`, name: siteConfig.founderName },
     publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
     mainEntityOfPage: absoluteUrl(path)
+  };
+}
+
+export function buildCaseStudyArticleSchema(opts: {
+  name: string;
+  description: string;
+  path: string;
+  publishedAt: Date;
+  updatedAt?: Date;
+  keywords?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: opts.name,
+    description: opts.description,
+    url: absoluteUrl(opts.path),
+    datePublished: opts.publishedAt.toISOString(),
+    dateModified: (opts.updatedAt ?? opts.publishedAt).toISOString(),
+    author: { "@id": `${siteConfig.siteUrl}/#person`, name: siteConfig.founderName },
+    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    mainEntityOfPage: absoluteUrl(opts.path),
+    keywords: opts.keywords?.join(", ")
+  };
+}
+
+export function buildInsightArticleSchema(opts: {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: Date;
+  updatedAt?: Date;
+  tags: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: opts.title,
+    description: opts.description,
+    datePublished: opts.publishedAt.toISOString(),
+    dateModified: (opts.updatedAt ?? opts.publishedAt).toISOString(),
+    author: { "@id": `${siteConfig.siteUrl}/#person`, name: siteConfig.founderName },
+    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    mainEntityOfPage: absoluteUrl(opts.path),
+    keywords: opts.tags.join(", ")
   };
 }

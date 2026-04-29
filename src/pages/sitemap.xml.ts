@@ -12,6 +12,7 @@ export const GET: APIRoute = async () => {
   const services = await getCollection("services");
   const industries = await getCollection("industries");
   const cases = await getCollection("cases");
+  const insights = await getCollection("insights");
   const staticPaths = [
     "/",
     "/start-here",
@@ -24,6 +25,7 @@ export const GET: APIRoute = async () => {
     "/ai-growth-systems",
     "/first-30-days",
     "/pricing",
+    "/fractional-cmo-vs-agency",
     "/proof",
     "/insights",
     "/reports",
@@ -47,6 +49,7 @@ ${staticPaths.map((path) => urlNode(path)).join("")}
 ${services.map((item) => urlNode(`/services/${item.id}`)).join("")}
 ${industries.map((item) => urlNode(`/industries/${item.id}`)).join("")}
 ${cases.map((item) => urlNode(`/case-studies/${item.id}`)).join("")}
+${insights.map((item) => urlNode(`/insights/${item.id}`)).join("")}
 </urlset>`;
 
   return new Response(xml, {

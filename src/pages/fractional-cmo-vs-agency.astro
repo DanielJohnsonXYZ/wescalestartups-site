@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig, vsAgency, wssVsAgencyPage } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Fractional CMO vs Agency", path: "/fractional-cmo-vs-agency" }
+  ]),
+  buildFaqSchema([...wssVsAgencyPage.faqs])
+];
+---
+
+<BaseLayout
+  path="/fractional-cmo-vs-agency"
+  title="Fractional CMO vs Agency | We Scale Startups"
+  description="A practical comparison of We Scale Startups, fractional CMO support, and a typical agency for post-PMF teams choosing between senior judgement and channel execution."
+  schema={schemas}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Comparison</p>
+      <h1>Fractional CMO vs agency: choose the level where the problem lives.</h1>
+      <p class="lede">
+        Agencies are useful when the strategy is clear and the team needs execution capacity. WSS is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+        <a class="button button-light" href="/services/fractional-cmo">See Fractional CMO</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Side by side"
+        title="Agencies execute a channel. WSS builds the operating system."
+        body="The right choice depends on whether you already know what to do, or whether the company still needs senior judgement to decide what matters."
+      />
+      <div class="vs-table-wrap">
+        <table class="vs-table" aria-label="Agency versus We Scale Startups">
+          <thead>
+            <tr>
+              <th scope="col">Dimension</th>
+              <th scope="col">Agency</th>
+              <th scope="col" class="vs-wss-col">We Scale Startups</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vsAgency.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td class="vs-agency-cell">{row.agency}</td>
+                <td class="vs-wss-cell">{row.wss}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell grid-2">
+      <article class="feature-card">
+        <p class="card-kicker">Choose an agency when</p>
+        <ul>
+          {wssVsAgencyPage.whenAgency.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="feature-card card-accent">
+        <p class="card-kicker">Choose WSS when</p>
+        <ul>
+          {wssVsAgencyPage.whenWss.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="FAQ" title="The practical buying questions." />
+      <div class="grid-3">
+        {wssVsAgencyPage.faqs.map((item) => (
+          <article class="feature-card">
+            <h2>{item.question}</h2>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+      <p class="comparison-crosslink">
+        Daniel also keeps a personal comparison for founders weighing the role itself:
+        <a href={`${siteConfig.danielSite}/fractional-cmo-vs-agency/`} rel="noreferrer" target="_blank">Fractional CMO vs agency on danieljohnson.xyz</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Unsure which one you need?</p>
+        <h2>Diagnose the constraint before signing the retainer.</h2>
+        <p>Bring the agency brief, current numbers, or internal debate. We will tell you whether WSS, an agency, a hire, or nothing yet is the right move.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+    </div>
+  </section>
+</BaseLayout>

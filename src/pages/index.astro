@@ -7,8 +7,10 @@ import VsAgencyBlock from "../components/VsAgencyBlock.astro";
 import NotForBlock from "../components/NotForBlock.astro";
 import DanielStory from "../components/DanielStory.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildFaqSchema } from "../lib/schema";
 import { sortByOrder } from "../lib/utils";
 import {
+  buyerFaqs,
   headlineMetrics,
   leadMagnets,
   painSignals,
@@ -41,6 +43,7 @@ function metricLead(result: string) {
   path="/"
   title="We Scale Startups | Growth Leadership for Predictable Acquisition"
   description="Growth leadership for startups that need predictable acquisition. Diagnose the bottleneck, build the growth system, and transfer it so revenue is not founder-dependent."
+  schema={buildFaqSchema([...buyerFaqs])}
 >
   <!-- HERO: pain-led, single primary CTA -->
   <section class="hero hero-with-portrait">
@@ -333,6 +336,24 @@ function metricLead(result: string) {
 
   <!-- WHO THIS IS NOT FOR: filters bad-fit leads -->
   <NotForBlock />
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="FAQ"
+        title="What founders usually ask first."
+        body="Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership."
+      />
+      <div class="grid-4">
+        {buyerFaqs.map((faq) => (
+          <article class="feature-card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- RESOURCES as lead capture (kept simple) -->
   <section class="section section-alt">

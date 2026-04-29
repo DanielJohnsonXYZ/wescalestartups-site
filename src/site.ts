@@ -19,6 +19,11 @@ export const siteConfig = {
   twitterHandle: "@djohnsonxyz",
   founderName: "Daniel Johnson",
   founderLinkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
+  growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
+  growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
+  mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
+  danielSite: "https://danieljohnson.xyz",
+  lastUpdated: "30 April 2026",
   ogImage: "/og/default.svg"
 } as const;
 
@@ -218,6 +223,61 @@ export const vsAgency = [
     wss: "You step out — by design"
   }
 ] as const;
+
+export const buyerFaqs = [
+  {
+    question: "What does We Scale Startups do?",
+    answer:
+      "We Scale Startups diagnoses the real growth bottleneck, builds the acquisition system around it, and transfers the operating rhythm so post-PMF founders are not stuck in every growth decision."
+  },
+  {
+    question: "Who is WSS best for?",
+    answer:
+      "WSS is best for post-PMF startups with real traction, inconsistent acquisition, and a founder or small team that needs senior growth judgement before or alongside hiring, agencies, or more channel spend."
+  },
+  {
+    question: "How is WSS different from a typical agency?",
+    answer:
+      "Agencies usually execute a defined channel. WSS works at the system level: diagnosis, positioning, acquisition design, reporting cadence, team direction, and handoff."
+  },
+  {
+    question: "What is the first step?",
+    answer:
+      "Start with the Growth Bottleneck Scorecard or book a 30-minute call. The first job is to identify the constraint before adding more activity."
+  }
+] as const;
+
+export const wssVsAgencyPage = {
+  whenAgency: [
+    "You already have senior GTM leadership and need extra execution capacity in one channel.",
+    "The scope is fixed, well understood, and mostly production work.",
+    "You need a specialist paid, SEO, design, or content team to execute an existing strategy.",
+    "Your internal team already knows what to scale, stop, and measure."
+  ],
+  whenWss: [
+    "The founder still owns growth decisions and the team is waiting for direction.",
+    "Paid, SEO, outbound, content, CRO, and reporting have been tried in isolation.",
+    "The company needs diagnosis, priority calls, and an operating rhythm before more activity.",
+    "You want a system that internal people or agencies can keep running after the engagement."
+  ],
+  faqs: [
+    {
+      question: "Can WSS work with our existing agency?",
+      answer:
+        "Yes. WSS often sits above or alongside an agency: we set priorities, define what good looks like, review signal, and make sure channel execution connects to the commercial outcome."
+    },
+    {
+      question: "Should we hire an agency or WSS first?",
+      answer:
+        "If you know the channel and only need execution, hire an agency. If you are unsure where growth is breaking, start with diagnosis or WSS fractional leadership before adding more delivery."
+    },
+    {
+      question: "Is WSS a replacement for a full-time CMO?",
+      answer:
+        "Not forever. WSS is usually a bridge: senior growth leadership and system design now, then a cleaner handoff to internal hires or a full-time CMO when the role is clearer."
+    }
+  ]
+} as const;
 
 export const testimonials = [
   {

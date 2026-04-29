@@ -40,6 +40,23 @@ const cases = defineCollection({
     work: z.array(z.string()),
     results: z.array(z.string()),
     services: z.array(z.string()),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date().optional(),
+    order: z.number().default(999)
+  })
+});
+
+const insights = defineCollection({
+  loader: glob({ base: "./src/content/insights", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    excerpt: z.string(),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date().optional(),
+    author: z.string().default("Daniel Johnson"),
+    tags: z.array(z.string()),
+    tldr: z.string(),
     order: z.number().default(999)
   })
 });
@@ -47,5 +64,6 @@ const cases = defineCollection({
 export const collections = {
   services,
   industries,
-  cases
+  cases,
+  insights
 };

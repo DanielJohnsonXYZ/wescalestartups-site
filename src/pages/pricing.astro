@@ -1,12 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildFaqSchema } from "../lib/schema";
 import { pricingTiers, siteConfig } from "../site";
+
+const pricingFaqs = [
+  {
+    question: "Why publish starting prices?",
+    answer: "The ranges help founders self-qualify before a call. Final scope still depends on team size, channel mix, urgency, and execution depth."
+  },
+  {
+    question: "Which engagement do most founders start with?",
+    answer: "Most start with Growth Diagnosis when the bottleneck is unclear. If the constraint is already visible, a sprint, system build, or fractional CMO scope may be cleaner."
+  },
+  {
+    question: "Are media spend and tools included?",
+    answer: "No. WSS fees cover strategy, system design, execution support, and reporting. Media spend, tools, and third-party vendor costs are separate."
+  }
+];
 ---
 
 <BaseLayout
   path="/pricing"
   title="Pricing · We Scale Startups"
   description="Engagement ranges for Growth Diagnosis, 90-Day Sprint, Acquisition System Build, and Fractional CMO. Honest ranges so you can self-qualify."
+  schema={buildFaqSchema(pricingFaqs)}
 >
   <section class="page-hero">
     <div class="shell">
@@ -56,6 +73,20 @@ import { pricingTiers, siteConfig } from "../site";
         <article class="feature-card compact-card"><p>Tools and subscriptions (analytics, CRM, automation)</p></article>
         <article class="feature-card compact-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
         <article class="feature-card compact-card"><p>Travel for events or trade shows (if applicable)</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Pricing FAQ</p>
+      <div class="grid-3">
+        {pricingFaqs.map((faq) => (
+          <article class="feature-card">
+            <h2>{faq.question}</h2>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

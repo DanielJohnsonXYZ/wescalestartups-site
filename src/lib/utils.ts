@@ -17,3 +17,11 @@ export function absoluteUrl(path = "/") {
 export function sortByOrder<T extends { data: { order?: number } }>(items: T[]) {
   return items.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 }
+
+export function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }).format(date);
+}

@@ -1,16 +1,20 @@
 ---
-import { trustLogos } from "../site";
+import { proofClients } from "../site";
 ---
 
-<section class="proof-strip" aria-label="Selected proof and ecosystem logos">
+<section class="proof-strip" aria-label="Selected client work and startup growth engagements">
   <div class="shell proof-inner">
-    <p>Selected client work and startup growth engagements</p>
-    <div class="logo-row">
-      {trustLogos.map((logo) => (
-        <figure class="client-logo-tile">
-          {"src" in logo ? <img src={logo.src} alt={logo.alt} loading="lazy" /> : <strong>{logo.label}</strong>}
-          <figcaption>{logo.label}</figcaption>
-        </figure>
+    <div>
+      <p class="eyebrow">Selected client work</p>
+      <h2>Real engagements, not borrowed logo theatre.</h2>
+    </div>
+    <div class="proof-client-row">
+      {proofClients.map((client) => (
+        <article class="proof-client-tile">
+          <strong>{client.label}</strong>
+          <span>{client.context}</span>
+          <p>{client.proof}</p>
+        </article>
       ))}
     </div>
   </div>

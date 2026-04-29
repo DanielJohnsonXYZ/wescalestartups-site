@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "Diagnosis",
+    body: "A focused sprint for teams that need to know what is actually blocking growth before they spend more.",
+    points: ["1 week", "from £4k", "Bottleneck map and recommendation"]
+  },
+  {
+    title: "Sprint or system build",
+    body: "A sharper operating window for teams ready to test, build, and transfer a repeatable acquisition motion.",
+    points: ["12-week sprint", "8-12 week system build", "Campaign, page, channel, reporting work"]
+  },
+  {
+    title: "Fractional leadership",
+    body: "Senior growth leadership for teams that need judgement, direction, and operating cadence before a full-time CMO hire.",
+    points: ["3+ months", "from £8k/month", "Team, agency, and founder support"]
+  }
+];
+
+const faqs = [
+  { question: "Which engagement should we choose?", answer: "If the constraint is unclear, choose diagnosis. If it is clear, choose sprint, system build, or fractional leadership." },
+  { question: "Are prices fixed?", answer: "The pricing page gives honest ranges. Final scope depends on urgency, team capacity, and deliverables." },
+  { question: "Can one engagement lead to another?", answer: "Yes. Diagnosis often leads into a sprint or acquisition system build." }
+];
+---
+
+<StrategicPage
+  path="/engagement-models"
+  eyebrow="Engagement models"
+  title="Ways to work with We Scale Startups."
+  description="Engagement models for Growth Diagnosis, 90-Day Growth Sprint, Acquisition System Build, and Fractional CMO support."
+  lede="The right shape of help depends on whether the bottleneck is unknown, known, urgent, or repeated across the team."
+  sections={sections}
+  faqs={faqs}
+/>

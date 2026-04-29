@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "A growth engine is a decision system",
+    body: "It connects ICP, offer, acquisition, conversion, reporting, and team ownership so growth is not a pile of disconnected tactics.",
+    points: ["One commercial constraint at a time", "Evidence before channel volume", "Weekly scale, stop, or fix decisions"]
+  },
+  {
+    title: "What gets built",
+    body: "The engine is practical: dashboards, campaign briefs, landing-page direction, experiment rules, and a transfer pack.",
+    points: ["Acquisition map", "Experiment backlog", "Reporting rhythm", "Team handoff"]
+  },
+  {
+    title: "Where to start",
+    body: "If the bottleneck is unclear, start with Growth Diagnosis. If it is visible, move into a sprint or acquisition system build.",
+    points: ["Diagnose first when evidence is messy", "Sprint when urgency is high", "Build when channels need to compound"]
+  }
+];
+
+const faqs = [
+  { question: "Is this a growth team?", answer: "No. It is the operating system that helps a founder, marketer, agency, or sales team make better growth decisions." },
+  { question: "Is this only paid acquisition?", answer: "No. Paid, outbound, SEO, content, partnerships, lifecycle, and conversion can all sit inside the system." },
+  { question: "What changes after it is built?", answer: "The team has clearer priorities, cleaner reporting, and a weekly rhythm for deciding what to scale, stop, or fix." }
+];
+---
+
+<StrategicPage
+  path="/growth-engine"
+  eyebrow="Growth engine"
+  title="The growth engine behind predictable acquisition."
+  description="How We Scale Startups builds a practical growth engine for post-PMF startups: diagnosis, acquisition system, reporting, and team transfer."
+  lede="A growth engine is not more activity. It is the system that turns activity into learning, pipeline, and better weekly decisions."
+  sections={sections}
+  faqs={faqs}
+/>

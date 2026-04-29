@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "Growth diagnosis",
+    body: "Notes on spotting the actual bottleneck before founders hire, brief agencies, or add more campaigns.",
+    points: ["Positioning issues", "Channel sequencing", "Founder dependency"]
+  },
+  {
+    title: "Acquisition systems",
+    body: "Practical views on how paid, SEO, outbound, content, conversion, and reporting work together.",
+    points: ["Experiment design", "Offer clarity", "Reporting cadence"]
+  },
+  {
+    title: "AI and search visibility",
+    body: "How to make growth expertise easier for buyers, search systems, and AI assistants to understand.",
+    points: ["Structured pages", "FAQs", "Proof summaries", "Crawlable assets"]
+  }
+];
+
+const faqs = [
+  { question: "Is this the blog?", answer: "Yes. Insights reframes the blog as a practical library around diagnosis, acquisition systems, proof, and AI/search visibility." },
+  { question: "Where are the downloads?", answer: "Downloadable resources and templates live under the resources section." },
+  { question: "What should a founder read first?", answer: "Start with growth diagnosis, then move into acquisition systems once the bottleneck is visible." }
+];
+---
+
+<StrategicPage
+  path="/insights"
+  eyebrow="Insights"
+  title="Growth notes for founders between traction and scale."
+  description="We Scale Startups insights on growth diagnosis, acquisition systems, SEO, AI visibility, and reducing founder dependency."
+  lede="A practical library for founders who need clearer acquisition decisions, not generic growth content."
+  sections={sections}
+  faqs={faqs}
+/>

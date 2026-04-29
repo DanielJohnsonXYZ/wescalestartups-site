@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "Senior judgement, visible work",
+    body: "The model combines strategy and execution so the work does not die as a deck or drift into channel busywork.",
+    points: ["Weekly working sessions", "Written decision notes", "Named owners for every test"]
+  },
+  {
+    title: "Build with the team you have",
+    body: "Execution can happen through founders, in-house marketers, agencies, freelancers, or WSS support depending on capacity.",
+    points: ["Internal team guidance", "Agency direction", "Founder narrative support", "Handoff documentation"]
+  },
+  {
+    title: "Transfer by default",
+    body: "Every engagement is designed to leave the company more capable, not dependent on Daniel forever.",
+    points: ["Playbooks", "Dashboards", "Decision rules", "Review cadence"]
+  }
+];
+
+const faqs = [
+  { question: "Do you execute or advise?", answer: "Both, depending on scope. The important part is that decisions and deliverables stay connected." },
+  { question: "Can you manage an agency?", answer: "Yes. Fractional CMO and system-build work often includes agency direction and accountability." },
+  { question: "How often do we meet?", answer: "Most engagements use a weekly operating rhythm plus async decision notes." }
+];
+---
+
+<StrategicPage
+  path="/execution-model"
+  eyebrow="Execution model"
+  title="How growth work gets shipped."
+  description="The We Scale Startups execution model: senior growth judgement, weekly delivery, agency/team direction, and transfer."
+  lede="Good growth strategy is only useful when it changes what gets shipped, measured, and repeated."
+  sections={sections}
+  faqs={faqs}
+/>

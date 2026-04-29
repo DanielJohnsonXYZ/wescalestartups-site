@@ -13,19 +13,23 @@ import {
   leadMagnets,
   painSignals,
   proofStandards,
-  serviceDecision,
+  serviceSnapshots,
   siteConfig,
   testimonials
 } from "../site";
 
-const services = sortByOrder(await getCollection("services"));
 const cases = sortByOrder(await getCollection("cases"));
-const featuredCase = cases[0];
-const otherCases = cases.slice(1, 4);
+const featuredCase = cases.find((item) => item.id === "diadia-health") ?? cases[0];
+const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0, 4);
 const systemSignals = [
   { label: "Constraint", value: "Founder-led pipeline", accent: "coral" },
   { label: "Build", value: "Acquisition operating system", accent: "violet" },
   { label: "Transfer", value: "Team-owned weekly cadence", accent: "teal" }
+];
+const rhythmSteps = [
+  { label: "Monday", title: "Read the signal", body: "Pipeline, channel, conversion and sales notes become one decision view." },
+  { label: "Midweek", title: "Ship the next move", body: "Campaigns, pages, outbound, content or offer tests move with a named owner." },
+  { label: "Friday", title: "Scale, stop, fix", body: "Every week ends with a plain-English call on what deserves more attention." }
 ];
 
 function metricLead(result: string) {
@@ -35,8 +39,8 @@ function metricLead(result: string) {
 
 <BaseLayout
   path="/"
-  title="We Scale Startups | Predictable Acquisition for Post-PMF Startups"
-  description="Predictable acquisition for post-PMF startups. We build the repeatable growth system so founders are no longer the bottleneck — clearer positioning, sharper acquisition, pipeline that runs without you."
+  title="We Scale Startups | Growth Leadership for Predictable Acquisition"
+  description="Growth leadership for startups that need predictable acquisition. Diagnose the bottleneck, build the growth system, and transfer it so revenue is not founder-dependent."
 >
   <!-- HERO: pain-led, single primary CTA -->
   <section class="hero hero-with-portrait">
@@ -47,10 +51,10 @@ function metricLead(result: string) {
           <span>Post-PMF startups</span>
         </div>
 
-        <h1>Your growth shouldn't depend on you.</h1>
+        <h1>Growth leadership for startups that need predictable acquisition.</h1>
 
         <p class="hero-copy">
-          Predictable acquisition for post-PMF startups where:
+          We work with post-PMF startups where:
         </p>
 
         <ul class="hero-pain-list">
@@ -60,18 +64,18 @@ function metricLead(result: string) {
         </ul>
 
         <p class="hero-fix">
-          We build the repeatable growth system that fixes all three — so revenue keeps moving when you're not in every meeting.
+          Daniel diagnoses the constraint, builds the operating system around it, and transfers the rhythm so growth stops depending on founder heroics.
         </p>
 
-        <div class="hero-actions">
-          <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="hero-book">
-            <span class="button-label">{siteConfig.bookingLabel}</span>
-            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        <div class="hero-cta-group">
+          <a class="button button-brand hero-primary-cta" href={siteConfig.bookingUrl} data-cta="hero-book">
+            {siteConfig.bookingLabel}
           </a>
+          <p>{siteConfig.bookingSubcopy}</p>
         </div>
 
         <a class="hero-secondary" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
-          <span>or take the 5-minute Growth Bottleneck Scorecard →</span>
+          <span>Take the 5-minute Growth Bottleneck Scorecard →</span>
         </a>
 
         <div class="hero-proof">
@@ -153,45 +157,101 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <!-- SERVICES: now with explicit decision layer -->
-  <section class="section section-alt" id="services">
+  <!-- SERVICES: stronger selector with commercial context -->
+  <section class="section section-alt services-system-section" id="services">
     <div class="shell">
       <SectionIntro
         eyebrow="Services"
-        title="Pick the door that matches where you are."
-        body="Four ways to work together. The decision layer below is not marketing — it's literally how we'd route you on a first call."
+        title="Four ways to turn messy growth into a working system."
+        body="Pick by constraint, not by menu. Each service has a clear role, timeline, and handoff."
       />
 
-      <!-- Decision routing — replaces the equal-weight 4-card grid -->
-      <div class="decision-grid">
-        {serviceDecision.map((item, idx) => (
-          <a class="decision-row" href={item.href}>
-            <div class="decision-condition">
-              <p class="card-kicker">If</p>
-              <p class="decision-text">{item.condition}</p>
-            </div>
-            <div class="decision-arrow" aria-hidden="true">→</div>
-            <div class="decision-recommendation">
-              <p class="card-kicker">Start with</p>
-              <p class="decision-recommend-name">{item.recommendation}</p>
-              <p class="decision-duration">{item.duration}</p>
-            </div>
-          </a>
+      <div class="service-selector">
+        <aside class="service-selector-aside">
+          <p class="eyebrow">How to choose</p>
+          <h3>Start where the evidence is weakest.</h3>
+          <p>
+            If you cannot explain what is blocking acquisition, diagnose first. If the constraint is clear,
+            move into a sprint, system build, or fractional leadership.
+          </p>
+          <a class="button button-dark" href="/services">Compare services</a>
+        </aside>
+        <div class="service-selector-list">
+          {serviceSnapshots.map((service, idx) => (
+            <a class:list={["service-selector-row", { "is-priority": idx === 0 }]} href={service.href}>
+              <div class="service-selector-index">{String(idx + 1).padStart(2, "0")}</div>
+              <div>
+                <p class="card-kicker">{service.shortTitle}</p>
+                <h3>{service.title}</h3>
+                <p><strong>Best for:</strong> {service.bestFor}</p>
+                <p><strong>What you get:</strong> {service.get}</p>
+              </div>
+              <div class="service-selector-meta">
+                <span>{service.timeline}</span>
+                <strong>{service.price}</strong>
+                <em>{service.cta}</em>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGH CONTRAST OPERATING RHYTHM -->
+  <section class="section dark-rhythm-section">
+    <div class="shell dark-rhythm-grid">
+      <div>
+        <p class="eyebrow">Operating rhythm</p>
+        <h2>A weekly cadence for decisions, not another report nobody reads.</h2>
+        <p>
+          The system is simple on purpose: read signal, ship the next useful thing, then decide what to scale,
+          stop, or fix. That is how growth becomes less founder-dependent.
+        </p>
+      </div>
+      <div class="rhythm-flow" aria-label="Weekly growth operating rhythm">
+        {rhythmSteps.map((step, idx) => (
+          <article>
+            <span>{step.label}</span>
+            <strong>{step.title}</strong>
+            <p>{step.body}</p>
+            {idx < rhythmSteps.length - 1 && <b aria-hidden="true">→</b>}
+          </article>
         ))}
       </div>
+    </div>
+  </section>
 
-      <!-- Detailed service cards: one is highlighted as primary recommendation -->
-      <div class="grid-4 services-detailed">
-        {services.map((service, idx) => (
-          <a class:list={["service-card", "service-card-strong", { "is-recommended": idx === 0 }]} href={`/services/${service.id}`}>
-            {idx === 0 && <span class="recommended-badge">Most founders start here</span>}
-            <p class="card-kicker">{service.data.shortTitle}</p>
-            <h3>{service.data.title}</h3>
-            <p><strong>Who for:</strong> {service.data.audience}</p>
-            <p><strong>What changes:</strong> {service.data.promise}</p>
-            <span class="card-link">{service.data.cta}</span>
-          </a>
-        ))}
+  <!-- AI / SEARCH VISIBILITY VISUAL -->
+  <section class="section ai-system-section">
+    <div class="shell ai-system-grid">
+      <div class="ai-system-map" aria-label="Search and AI visibility system">
+        <div class="ai-system-node ai-system-node-main">
+          <span>Entity</span>
+          <strong>We Scale Startups</strong>
+        </div>
+        <div class="ai-system-lines">
+          <span>Services</span>
+          <span>Proof</span>
+          <span>Industries</span>
+          <span>Reports</span>
+        </div>
+        <div class="ai-system-output">
+          <span>Readable by search and AI systems</span>
+          <strong>Clear pages, internal links, schema, sitemap, FAQs</strong>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">SEO and LLM retrieval</p>
+        <h2>Make the growth expertise easy to crawl, quote, and trust.</h2>
+        <p class="lead-copy">
+          Search and AI systems need the same thing buyers need: clear pages, visible evidence,
+          specific services, useful reports, and claims that are easy to verify.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-light" href="/reports">View reports</a>
+          <a class="button button-light" href="/ai-growth-systems">AI growth systems</a>
+        </div>
       </div>
     </div>
   </section>

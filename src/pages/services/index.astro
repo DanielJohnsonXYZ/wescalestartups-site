@@ -1,11 +1,7 @@
 ---
-import { getCollection } from "astro:content";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { sortByOrder } from "../../lib/utils";
-import { siteConfig } from "../../site";
-
-const services = sortByOrder(await getCollection("services"));
+import { serviceSnapshots, siteConfig } from "../../site";
 ---
 
 <BaseLayout title="Services | We Scale Startups" description="Growth diagnosis, 90-day growth sprints, acquisition system builds, and fractional CMO support for post-PMF startup teams." path="/services">
@@ -19,15 +15,30 @@ const services = sortByOrder(await getCollection("services"));
 
   <section class="section">
     <div class="shell">
-      <div class="grid-4">
-        {services.map((service) => (
-          <a class="service-card" href={`/services/${service.id}`}>
-            <p class="card-kicker">{service.data.audience}</p>
-            <h3>{service.data.title}</h3>
-            <p>{service.data.promise}</p>
-            <span class="card-link">{service.data.cta}</span>
-          </a>
-        ))}
+      <div class="service-selector">
+        <aside class="service-selector-aside">
+          <p class="eyebrow">Service selector</p>
+          <h3>Choose by bottleneck.</h3>
+          <p>Every engagement has a job: find the constraint, ship focused work, build the system, or add senior leadership.</p>
+        </aside>
+        <div class="service-selector-list">
+          {serviceSnapshots.map((service, idx) => (
+            <a class:list={["service-selector-row", { "is-priority": idx === 0 }]} href={service.href}>
+              <div class="service-selector-index">{String(idx + 1).padStart(2, "0")}</div>
+              <div>
+                <p class="card-kicker">{service.shortTitle}</p>
+                <h3>{service.title}</h3>
+                <p><strong>Best for:</strong> {service.bestFor}</p>
+                <p><strong>What you get:</strong> {service.get}</p>
+              </div>
+              <div class="service-selector-meta">
+                <span>{service.timeline}</span>
+                <strong>{service.price}</strong>
+                <em>{service.cta}</em>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </section>

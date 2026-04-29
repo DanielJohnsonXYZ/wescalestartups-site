@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "Growth bottleneck report",
+    body: "A plain-English readout of where acquisition is stuck and which constraint should be fixed first.",
+    points: ["ICP and offer", "Channel evidence", "Conversion gaps", "Team ownership"]
+  },
+  {
+    title: "Acquisition system report",
+    body: "A system view of channels, landing pages, campaign logic, reporting, and weekly decisions.",
+    points: ["Channel map", "Experiment backlog", "Reporting view", "Decision cadence"]
+  },
+  {
+    title: "AI visibility report",
+    body: "A practical review of whether the site is easy for search and AI systems to crawl, understand, and cite.",
+    points: ["Sitemap and indexability", "Structured data", "Answer-shaped sections", "Proof and entity clarity"]
+  }
+];
+
+const faqs = [
+  { question: "Are reports downloadable?", answer: "The first version is a visible report hub. Downloadable PDFs can be added once the report formats are final." },
+  { question: "Do reports replace a diagnosis?", answer: "No. They explain the kinds of findings a diagnosis produces and make the methodology easier to inspect." },
+  { question: "Why add reports for SEO and LLMs?", answer: "Reports create clear, structured, evidence-led pages that buyers and retrieval systems can understand." }
+];
+---
+
+<StrategicPage
+  path="/reports"
+  eyebrow="Reports"
+  title="Reports that turn growth mess into decisions."
+  description="Growth bottleneck, acquisition system, and AI visibility report formats from We Scale Startups."
+  lede="Reports make the diagnosis visible: what is broken, what evidence supports it, and what should happen next."
+  sections={sections}
+  faqs={faqs}
+/>

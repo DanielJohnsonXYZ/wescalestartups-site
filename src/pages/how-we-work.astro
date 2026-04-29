@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "Plain-English diagnosis",
+    body: "We start by identifying the constraint that is actually slowing acquisition, not the channel that happens to be loudest.",
+    points: ["Site and funnel review", "Campaign and CRM evidence", "Founder and sales context"]
+  },
+  {
+    title: "Focused build",
+    body: "The work narrows into a few useful changes: pages, campaigns, reporting, operating cadence, or team/agency direction.",
+    points: ["Few bets, clear owners", "Decision rules", "Weekly review"]
+  },
+  {
+    title: "Transfer",
+    body: "The company should be more capable after the engagement, with the rhythm documented enough to keep running.",
+    points: ["Handoff notes", "Dashboards", "Playbooks", "Next-quarter priorities"]
+  }
+];
+
+const faqs = [
+  { question: "What happens first?", answer: "We start with the current growth picture: funnel, site, campaigns, sales notes, reporting, and team capacity." },
+  { question: "Do you use templates?", answer: "The rhythm is repeatable, but the diagnosis and work are based on the company’s actual constraint." },
+  { question: "What is the output?", answer: "Clearer priorities, shipped growth assets, a reporting rhythm, and a documented handoff." }
+];
+---
+
+<StrategicPage
+  path="/how-we-work"
+  eyebrow="How we work"
+  title="Diagnosis, build, test, transfer."
+  description="How We Scale Startups works with post-PMF startups: diagnose the bottleneck, build the system, test, and transfer."
+  lede="The work is designed to reduce founder dependency and leave the team with a clearer operating rhythm."
+  sections={sections}
+  faqs={faqs}
+/>

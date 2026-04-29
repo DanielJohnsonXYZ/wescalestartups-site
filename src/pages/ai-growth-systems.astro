@@ -1,0 +1,37 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "AI supports the system",
+    body: "AI is useful when it speeds up research, enrichment, reporting, and content operations without replacing commercial judgement.",
+    points: ["Research workflows", "Lead enrichment", "Reporting summaries", "Content repurposing"]
+  },
+  {
+    title: "Humans stay in control",
+    body: "The work is still led by clear ICP, positioning, offer, proof, and decision rules. AI helps the team move faster inside that frame.",
+    points: ["Visible sources", "Review checkpoints", "Quality bars", "Decision ownership"]
+  },
+  {
+    title: "Best-fit use cases",
+    body: "The strongest AI growth systems are narrow, repeatable, and tied to revenue activity rather than novelty.",
+    points: ["Outbound research", "Sales-call synthesis", "Campaign analysis", "SEO content briefs"]
+  }
+];
+
+const faqs = [
+  { question: "Is this an AI automation service?", answer: "No. It is growth system work that uses AI where it improves speed, consistency, or decision quality." },
+  { question: "Can AI improve acquisition?", answer: "Yes, when it supports research, prioritisation, content, outbound, or reporting inside a clear commercial system." },
+  { question: "What should not be automated?", answer: "Positioning decisions, proof standards, final messaging judgement, and relationship-heavy sales moments still need human ownership." }
+];
+---
+
+<StrategicPage
+  path="/ai-growth-systems"
+  eyebrow="AI growth systems"
+  title="AI-native growth systems without losing human judgement."
+  description="How We Scale Startups uses AI inside practical acquisition systems for research, reporting, content, and outbound workflows."
+  lede="AI should make the growth system faster and clearer, not turn it into a pile of unreviewed automation."
+  sections={sections}
+  faqs={faqs}
+/>

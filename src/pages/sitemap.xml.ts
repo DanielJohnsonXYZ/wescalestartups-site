@@ -4,24 +4,29 @@ import { absoluteUrl } from "../lib/utils";
 
 export const prerender = true;
 
-const publishedIndustries = new Set(["saas-growth", "fintech", "healthtech", "edtech"]);
-
 function urlNode(path: string) {
   return `<url><loc>${absoluteUrl(path)}</loc></url>`;
 }
 
 export const GET: APIRoute = async () => {
   const services = await getCollection("services");
-  const industries = (await getCollection("industries")).filter((item) => publishedIndustries.has(item.id));
+  const industries = await getCollection("industries");
   const cases = await getCollection("cases");
   const staticPaths = [
     "/",
     "/start-here",
     "/services",
     "/how-it-works",
+    "/how-we-work",
+    "/growth-engine",
+    "/execution-model",
+    "/engagement-models",
+    "/ai-growth-systems",
     "/first-30-days",
     "/pricing",
     "/proof",
+    "/insights",
+    "/reports",
     "/diagnose",
     "/build",
     "/test",

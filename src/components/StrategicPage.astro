@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+interface Props {
+  path: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  lede: string;
+  sections: Array<{
+    title: string;
+    body: string;
+    points: string[];
+  }>;
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+const { path, eyebrow, title, description, lede, sections, faqs } = Astro.props;
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: title, path }
+  ]),
+  buildFaqSchema(faqs)
+];
+---
+
+<BaseLayout title={`${title} | We Scale Startups`} description={description} path={path} schema={schema}>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+        <a class="button button-light" href="/services">Compare services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell strategic-grid">
+      {sections.map((section, idx) => (
+        <article class:list={["strategic-panel", { "strategic-panel-dark": idx === 1 }]}>
+          <span>{String(idx + 1).padStart(2, "0")}</span>
+          <h2>{section.title}</h2>
+          <p>{section.body}</p>
+          <ul>
+            {section.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="section-intro">
+        <div>
+          <p class="eyebrow">Questions</p>
+          <h2>What founders usually ask here.</h2>
+        </div>
+        <p>Short, visible answers help humans scan the page and help search systems understand what the page is about.</p>
+      </div>
+      <div class="grid-3">
+        {faqs.map((faq) => (
+          <article class="feature-card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Find the acquisition constraint before you add more activity.</h2>
+        <p>Bring the current site, pipeline, campaigns, reporting, and team context. We will decide which part of the system needs work first.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+    </div>
+  </section>
+</BaseLayout>

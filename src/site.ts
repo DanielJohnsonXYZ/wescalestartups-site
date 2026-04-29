@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "We Scale Startups",
   title: "We Scale Startups | Repeatable Growth Systems for Post-PMF Startups",
   description:
-    "Predictable acquisition for post-PMF startups. We build the repeatable growth system so founders are no longer the bottleneck — clearer positioning, sharper acquisition, pipeline that runs without you.",
+    "Growth leadership for startups that need predictable acquisition. We diagnose the bottleneck, build the growth system, and transfer it so founders are no longer stuck in every loop.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
@@ -27,15 +27,16 @@ export const navigation = [
   { href: "/services", label: "Services" },
   { href: "/proof", label: "Proof" },
   { href: "/how-it-works", label: "How it works" },
-  { href: "/pricing", label: "Pricing" }
+  { href: "/pricing", label: "Pricing" },
+  { href: "/insights", label: "Insights" }
 ] as const;
 
-export const trustLogos = [
-  { src: "/images/logos/ned.svg", alt: "Ned", label: "Ned" },
-  { src: "/images/logos/equoo.svg", alt: "eQuoo", label: "eQuoo" },
-  { src: "/images/logos/lessonsup.svg", alt: "LessonsUp", label: "LessonsUp" },
-  { src: "/images/logos/nevly.svg", alt: "Nevly", label: "Nevly" },
-  { src: "/images/logos/diadia-health.svg", alt: "Diadia Health", label: "Diadia Health" }
+export const proofClients = [
+  { label: "Ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
+  { label: "Diadia Health", context: "AI precision medicine", proof: "Marketing function built from zero" },
+  { label: "eQuoo", context: "Healthtech positioning", proof: "Clearer acquisition narrative" },
+  { label: "LessonsUp", context: "EdTech acquisition", proof: "Sharper message-market fit" },
+  { label: "Nevly", context: "Financial wellness", proof: "Trust-led GTM foundations" }
 ] as const;
 
 export const credentialLogos = [
@@ -48,9 +49,9 @@ export const credentialLogos = [
 
 export const headlineMetrics = [
   { value: "£10M+", label: "Paid acquisition spend managed" },
-  { value: "20+", label: "Post-PMF startups advised" },
+  { value: "20+", label: "Startups advised" },
   { value: "2", label: "Operator-side startup exits" },
-  { value: "4.93/5", label: "Mentor rating across 219 reviews" }
+  { value: "4.93/5", label: "Founder review average" }
 ] as const;
 
 // Pain-led signals — these now drive the hero subhead
@@ -85,6 +86,49 @@ export const serviceDecision = [
     recommendation: "Fractional CMO",
     href: "/services/fractional-cmo",
     duration: "3+ months"
+  }
+] as const;
+
+export const serviceSnapshots = [
+  {
+    title: "Growth Diagnosis",
+    shortTitle: "Diagnose",
+    href: "/services/growth-diagnosis",
+    bestFor: "You have activity, but no one can agree what is blocking pipeline.",
+    get: "A constraint map, evidence review, quick wins, and a 90-day recommendation.",
+    timeline: "1 week",
+    price: "from £4k",
+    cta: "Diagnose the bottleneck"
+  },
+  {
+    title: "90-Day Growth Sprint",
+    shortTitle: "Sprint",
+    href: "/services/90-day-growth-sprint",
+    bestFor: "You need focused tests this quarter, not another broad strategy deck.",
+    get: "Experiment roadmap, weekly decisions, campaign/page iterations, transfer notes.",
+    timeline: "12 weeks",
+    price: "from £15k",
+    cta: "Run a growth sprint"
+  },
+  {
+    title: "Acquisition System Build",
+    shortTitle: "Build",
+    href: "/services/acquisition-system-build",
+    bestFor: "Channels have been tried in isolation and now need to work as one system.",
+    get: "Channel strategy, offer map, landing/campaign briefs, reporting and handoff.",
+    timeline: "8-12 weeks",
+    price: "from £30k",
+    cta: "Build the system"
+  },
+  {
+    title: "Fractional CMO",
+    shortTitle: "Lead",
+    href: "/services/fractional-cmo",
+    bestFor: "The team needs senior growth judgement before a full-time CMO hire.",
+    get: "Priorities, cadence, decision rules, team/agency direction, founder clarity.",
+    timeline: "3+ months",
+    price: "from £8k/mo",
+    cta: "Add senior leadership"
   }
 ] as const;
 
@@ -177,25 +221,46 @@ export const vsAgency = [
 
 export const testimonials = [
   {
-    quote: "Extremely knowledgeable.",
-    name: "Kenneth",
-    role: "Standard Plan mentee",
+    quote: "Daniel offered sharp, practical advice with a clear focus on messaging and positioning. He helped me reframe the problem and target the right audience more effectively.",
+    name: "Greg Weinstein",
+    role: "Founder mentoring session",
     company: "MentorCruise review",
-    result: "Big-picture marketing and tactical unblock support"
+    result: "Messaging and positioning clarity"
   },
   {
-    quote: "Large list of experiments.",
-    name: "Ab",
-    role: "Standard Plan mentee",
+    quote: "Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.",
+    name: "Dru Riley",
+    role: "Growth mentoring session",
     company: "MentorCruise review",
-    result: "Experiment backlog and clearer growth direction"
+    result: "SEO and content direction"
   },
   {
-    quote: "Huge impact on the business.",
-    name: "Dominic",
-    role: "Lite Plan mentee",
+    quote: "Daniel helped me understand the importance of keyword research, building a Google Ads strategy, and targeting the right audience.",
+    name: "Christian W K",
+    role: "PPC mentoring session",
     company: "MentorCruise review",
-    result: "Year-long accountability and business growth support"
+    result: "Google Ads strategy"
+  },
+  {
+    quote: "He asked insightful questions to understand my business goals and challenges. He came across as knowledgeable and experienced even in our short conversation.",
+    name: "Joshua Pitzalis",
+    role: "Founder mentoring session",
+    company: "MentorCruise review",
+    result: "Growth direction and next steps"
+  },
+  {
+    quote: "Daniel brought me back to reality by underscoring the importance of fundamentals. He helped put growth marketing into perspective.",
+    name: "Jawad Ahmed",
+    role: "Marketing mentoring session",
+    company: "MentorCruise review",
+    result: "No-fluff growth fundamentals"
+  },
+  {
+    quote: "Daniel's systematic approach to marketing is second-to-none.",
+    name: "Ash Bailey",
+    role: "Growth mentoring session",
+    company: "MentorCruise review",
+    result: "Systematic marketing support"
   }
 ] as const;
 

@@ -7,7 +7,7 @@ export const GET: APIRoute = () =>
   new Response(
     `# We Scale Startups
 
-> We Scale Startups is a growth consultancy founded by Daniel Johnson. The studio helps post-PMF SaaS, fintech, healthtech, and EdTech teams turn customer evidence, positioning, acquisition, and reporting into a repeatable growth system.
+> We Scale Startups is a growth consultancy founded by Daniel Johnson. The studio provides growth leadership for startups that need predictable acquisition by turning customer evidence, positioning, acquisition, reporting, and team cadence into a repeatable growth system.
 
 **Website:** ${siteConfig.siteUrl}
 **Contact:** ${siteConfig.email}
@@ -24,15 +24,22 @@ export const GET: APIRoute = () =>
 ## Proof Signals
 
 ${headlineMetrics.map((item) => `- ${item.value}: ${item.label}`).join("\n")}
-- Selected client work and proof includes Ned, eQuoo, LessonsUp, Nevly, Google Launchpad, Cambridge Judge, and GrowthMentor.
+- Selected client work and proof includes Ned, Diadia Health, eQuoo, LessonsUp, and Nevly.
 
 ## Important Pages
 
 - Home: ${siteConfig.siteUrl}/
 - Services: ${siteConfig.siteUrl}/services
+- Growth engine: ${siteConfig.siteUrl}/growth-engine
+- Execution model: ${siteConfig.siteUrl}/execution-model
+- Engagement models: ${siteConfig.siteUrl}/engagement-models
+- AI growth systems: ${siteConfig.siteUrl}/ai-growth-systems
+- How we work: ${siteConfig.siteUrl}/how-we-work
 - Fractional CMO: ${siteConfig.siteUrl}/services/fractional-cmo
 - Growth Diagnosis: ${siteConfig.siteUrl}/services/growth-diagnosis
 - Acquisition Systems: ${siteConfig.siteUrl}/services/acquisition-system-build
+- Reports: ${siteConfig.siteUrl}/reports
+- Insights: ${siteConfig.siteUrl}/insights
 - Transfer: ${siteConfig.siteUrl}/transfer
 - Industries: ${siteConfig.siteUrl}/industries
 - Case studies: ${siteConfig.siteUrl}/case-studies

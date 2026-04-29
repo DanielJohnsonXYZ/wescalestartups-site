@@ -4,8 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
 
 export async function getStaticPaths() {
-  const allowedIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
-  const industries = (await getCollection("industries")).filter((industry) => allowedIndustries.includes(industry.id));
+  const industries = await getCollection("industries");
   return industries.map((industry) => ({
     params: { slug: industry.id },
     props: { industry }

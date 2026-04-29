@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildCaseStudySchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 
 export async function getStaticPaths() {
@@ -12,9 +13,22 @@ export async function getStaticPaths() {
 }
 
 const { caseStudy } = Astro.props;
+const path = `/case-studies/${caseStudy.id}`;
 ---
 
-<BaseLayout title={`${caseStudy.data.title} | We Scale Startups`} description={caseStudy.data.summary} path={`/case-studies/${caseStudy.id}`}>
+<BaseLayout
+  title={`${caseStudy.data.title} | We Scale Startups`}
+  description={caseStudy.data.summary}
+  path={path}
+  schema={[
+    buildCaseStudySchema(caseStudy.data.title, caseStudy.data.summary, path),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Proof", path: "/proof" },
+      { name: caseStudy.data.title, path }
+    ])
+  ]}
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">{caseStudy.data.sector}</p>

@@ -38,7 +38,7 @@ export const navigation = [
 
 export const proofClients = [
   { label: "Ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
-  { label: "AI Precision Medicine Startup", context: "Healthtech · Seed", proof: "Marketing function built from zero" },
+  { label: "Diadia Health", context: "AI precision medicine", proof: "Marketing function built from zero" },
   { label: "eQuoo", context: "Healthtech positioning", proof: "Clearer acquisition narrative" },
   { label: "LessonsUp", context: "EdTech acquisition", proof: "Sharper message-market fit" },
   { label: "Nevly", context: "Financial wellness", proof: "Trust-led GTM foundations" }

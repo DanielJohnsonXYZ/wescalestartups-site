@@ -1,54 +1,6 @@
-/*
-  X-Frame-Options: SAMEORIGIN
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
+# Cloudflare Pages custom headers — We Scale Startups
 
-/
-  Cache-Control: public, max-age=300, must-revalidate
-
-/about
-  Cache-Control: public, max-age=300, must-revalidate
-
-/book
-  Cache-Control: public, max-age=300, must-revalidate
-
-/case-studies
-  Cache-Control: public, max-age=300, must-revalidate
-
-/case-studies/*
-  Cache-Control: public, max-age=300, must-revalidate
-
-/contact
-  Cache-Control: public, max-age=300, must-revalidate
-
-/industries
-  Cache-Control: public, max-age=300, must-revalidate
-
-/industries/*
-  Cache-Control: public, max-age=300, must-revalidate
-
-/services
-  Cache-Control: public, max-age=300, must-revalidate
-
-/services/*
-  Cache-Control: public, max-age=300, must-revalidate
-
-/privacy
-  Cache-Control: public, max-age=300, must-revalidate
-
-/terms
-  Cache-Control: public, max-age=300, must-revalidate
-
-/llms.txt
-  Cache-Control: public, max-age=300, must-revalidate
-
-/robots.txt
-  Cache-Control: public, max-age=300, must-revalidate
-
-/sitemap.xml
-  Cache-Control: public, max-age=300, must-revalidate
-
+# Long cache for hashed static assets
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -57,3 +9,59 @@
 
 /og/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Default — security + sane caching for HTML
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=(), geolocation=(), camera=(), microphone=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-site
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://app.growthmentor.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.calendly.com https://listmonk.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://listmonk.wescalestartups.com; frame-ancestors 'self'
+
+/
+  Cache-Control: public, max-age=300, must-revalidate
+
+/about
+  Cache-Control: public, max-age=300, must-revalidate
+/book
+  Cache-Control: public, max-age=300, must-revalidate
+/case-studies
+  Cache-Control: public, max-age=300, must-revalidate
+/case-studies/*
+  Cache-Control: public, max-age=300, must-revalidate
+/contact
+  Cache-Control: public, max-age=300, must-revalidate
+/diagnose
+  Cache-Control: public, max-age=300, must-revalidate
+/industries
+  Cache-Control: public, max-age=300, must-revalidate
+/industries/*
+  Cache-Control: public, max-age=300, must-revalidate
+/insights
+  Cache-Control: public, max-age=300, must-revalidate
+/insights/*
+  Cache-Control: public, max-age=300, must-revalidate
+/proof
+  Cache-Control: public, max-age=300, must-revalidate
+/services
+  Cache-Control: public, max-age=300, must-revalidate
+/services/*
+  Cache-Control: public, max-age=300, must-revalidate
+/start-here
+  Cache-Control: public, max-age=300, must-revalidate
+/testimonials
+  Cache-Control: public, max-age=300, must-revalidate
+/privacy
+  Cache-Control: public, max-age=300, must-revalidate
+/terms
+  Cache-Control: public, max-age=300, must-revalidate
+
+/llms.txt
+  Cache-Control: public, max-age=300, must-revalidate
+/robots.txt
+  Cache-Control: public, max-age=300, must-revalidate
+/sitemap.xml
+  Cache-Control: public, max-age=300, must-revalidate

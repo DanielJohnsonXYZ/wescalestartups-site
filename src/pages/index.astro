@@ -39,11 +39,8 @@ const heroProofStats = headlineMetrics.map((metric) => {
   };
 });
 
-// Anonymise the featured case label on the homepage. The full slug page
-// keeps its name; the homepage tile uses a sector-led anonymisation.
-const featuredCaseLabel = featuredCase?.id === "diadia-health"
-  ? "AI Precision Medicine Startup"
-  : (featuredCase?.data.client ?? "");
+// Featured case label on the homepage uses the named client.
+const featuredCaseLabel = featuredCase?.data.client ?? "";
 
 // Concrete deliverables for the "growth system" section — replaces the
 // abstract Constraint / Build / Transfer block.

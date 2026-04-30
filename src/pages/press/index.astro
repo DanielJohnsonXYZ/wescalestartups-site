@@ -7,22 +7,22 @@ const companyBoilerplate =
   "We Scale Startups is a founder-led growth studio helping post-PMF startups build repeatable growth systems before hiring a full-time CMO. The work spans growth diagnosis, 90-day sprints, acquisition systems, and fractional CMO support.";
 
 const founderBio =
-  "Daniel Johnson is the founder of We Scale Startups and an AI-native growth operator for post-PMF SaaS, AI, fintech, healthtech, education, and ecommerce teams. His background includes Google for Startups, Techstars ecosystem mentoring, GrowthMentor, Cambridge Judge Business School, and practical growth work across 20+ startups.";
+  "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.";
 ---
 
 <BaseLayout
-  title="Press Kit | We Scale Startups"
+  title="Company Press Kit | We Scale Startups"
   description="Company boilerplate, founder bio, credibility signals, logos, and contact details for We Scale Startups."
   path="/press"
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">Press kit</p>
-      <h1>Company and founder information for partners, podcasts, and press.</h1>
-      <p>Use this page for accurate short descriptions, proof points, and contact details.</p>
+      <p class="eyebrow">Company press kit</p>
+      <h1>Company information for We Scale Startups.</h1>
+      <p>Use this page for accurate company descriptions, proof points, and contact details. For podcast, speaking, or expert commentary requests, see Daniel Johnson's media kit.</p>
       <div class="hero-actions">
         <a class="button button-dark" href={`mailto:${siteConfig.email}`}>Email We Scale Startups</a>
-        <a class="button button-light" href="/about">About the company</a>
+        <a class="button button-light" href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a>
       </div>
     </div>
   </section>
@@ -35,6 +35,7 @@ const founderBio =
         <p class="eyebrow">Contact</p>
         <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
         <p><a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a></p>
+        <p><a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a></p>
         <p>{siteConfig.address}</p>
       </aside>
       <div class="detail-body">
@@ -45,6 +46,7 @@ const founderBio =
         <article class="content-block">
           <h2>Founder bio</h2>
           <p>{founderBio}</p>
+          <p>For podcast, speaking, or expert commentary requests, see <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson's media kit</a>.</p>
         </article>
         <article class="content-block">
           <h2>Proof points</h2>

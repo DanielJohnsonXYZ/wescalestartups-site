@@ -109,7 +109,8 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Resources: ${siteConfig.siteUrl}/resources
 - About: ${siteConfig.siteUrl}/about
 - Contact: ${siteConfig.siteUrl}/contact
-- Press kit: ${siteConfig.siteUrl}/press
+- Company press kit: ${siteConfig.siteUrl}/press
+- Daniel Johnson media kit for podcasts, speaking, and expert commentary: ${siteConfig.danielSite}/media-kit/
 
 ## Published insights
 

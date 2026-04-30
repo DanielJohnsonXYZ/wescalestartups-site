@@ -27,3 +27,20 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /industries/seed-to-series-b/ /services/fractional-cmo            301
 /industries/vc-support        /resources                          301
 /industries/vc-support/       /resources                          301
+
+# === Audit follow-up (2026-04-30) ===
+# Consolidate 6 process pages → /how-it-works (with hash anchors)
+/how-we-work               /how-it-works#how-we-work       301
+/how-we-work/              /how-it-works#how-we-work       301
+/engagement-models         /how-it-works#engagement-models 301
+/engagement-models/        /how-it-works#engagement-models 301
+/execution-model           /how-it-works#execution-model   301
+/execution-model/          /how-it-works#execution-model   301
+/growth-engine             /how-it-works#growth-engine     301
+/growth-engine/            /how-it-works#growth-engine     301
+/first-30-days             /how-it-works#first-30-days     301
+/first-30-days/            /how-it-works#first-30-days     301
+
+# Industries trim — saas-growth duplicates b2b-saas
+/industries/saas-growth    /industries/b2b-saas            301
+/industries/saas-growth/   /industries/b2b-saas            301

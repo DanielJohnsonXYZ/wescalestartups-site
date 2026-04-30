@@ -1,30 +1,171 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Diagnose your growth bottleneck before adding more activity",
+  description: "A 5-step diagnostic process to find the real growth constraint in a post-PMF startup.",
+  totalTime: "PT30M",
+  step: [
+    { "@type": "HowToStep", position: 1, name: "Score positioning", text: "Test whether buyers describe the problem the way the website does. If not, positioning is the constraint." },
+    { "@type": "HowToStep", position: 2, name: "Score acquisition", text: "Look at the last 90 days of pipeline. Is acquisition coming from one channel, several disconnected channels, or none at all?" },
+    { "@type": "HowToStep", position: 3, name: "Score conversion", text: "Cohort the funnel from first touch to qualified conversation. Find the steepest drop." },
+    { "@type": "HowToStep", position: 4, name: "Score reporting", text: "Ask: what decision did our last weekly report help us make? If the answer is none, reporting is the constraint." },
+    { "@type": "HowToStep", position: 5, name: "Score team ownership", text: "Is there an internal owner running a weekly growth meeting and making scale/stop/fix calls? If not, team ownership is the constraint." }
+  ]
+};
+
+const layers = [
+  { name: "Positioning", q: "Do buyers describe the problem the way the website does?", red: "Acquisition gets harder upstream. Sales calls feel like education." },
+  { name: "Acquisition", q: "Are channels reinforcing each other or running in isolation?", red: "Pipeline lands in waves. CAC is unstable." },
+  { name: "Conversion", q: "Is the offer asking for too much, too early?", red: "Qualified visitors don't become qualified conversations." },
+  { name: "Reporting", q: "Does weekly reporting produce decisions?", red: "Activity is reported. Scale / stop / fix calls aren't made." },
+  { name: "Team ownership", q: "Is there an internal owner running the rhythm?", red: "Founder hours fill the gap. Growth stays personal." }
+];
+
+const decisionRules = [
+  { rule: "If positioning is the constraint", path: "Start with Growth Diagnosis → reframe the offer before adding spend.", href: "/services/growth-diagnosis" },
+  { rule: "If acquisition is the constraint", path: "Acquisition System Build → connect the channels into one operating system.", href: "/services/acquisition-system-build" },
+  { rule: "If conversion is the constraint", path: "90-Day Growth Sprint → tested landing/copy/offer iterations.", href: "/services/90-day-growth-sprint" },
+  { rule: "If reporting OR team ownership is the constraint", path: "Fractional CMO → senior owner inside the team running weekly cadence.", href: "/services/fractional-cmo" }
+];
 ---
 
 <BaseLayout
-  title="Diagnose | We Scale Startups"
-  description="Growth diagnosis for post-PMF startups that need to find the real bottleneck before adding more activity."
+  title="Diagnose your growth bottleneck | We Scale Startups"
+  description="A 5-step diagnostic to find the real growth constraint in a post-PMF startup. Score yourself across positioning, acquisition, conversion, reporting, and team ownership before adding more activity."
   path="/diagnose"
+  schema={[howToSchema]}
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">Diagnose</p>
+      <p class="eyebrow">Diagnose · 5 steps · Free</p>
       <h1>Find the real growth bottleneck before adding more activity.</h1>
-      <p>We audit positioning, ICP, funnel, acquisition, reporting, and operating cadence so the next move is based on evidence, not noise.</p>
+      <p class="lede">
+        Most teams add a channel, a hire, or an agency before knowing the actual constraint.
+        Score yourself across the 5 layers — positioning, acquisition, conversion, reporting, team ownership —
+        and you'll know what to fix before you spend more.
+      </p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="diagnose-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/services/growth-diagnosis">See the service</a>
+        <a class="button button-brand" href={siteConfig.scorecardUrl} data-cta="diagnose-scorecard">
+          Take the 5-minute scorecard →
+        </a>
+        <a class="button button-light" href={siteConfig.bookingUrl} data-cta="diagnose-book">
+          Or, book a 30-minute growth diagnostic →
+        </a>
       </div>
     </div>
   </section>
 
+  <!-- 5-LAYER DIAGNOSTIC -->
   <section class="section">
-    <div class="shell grid-3">
-      <article class="feature-card"><h3>Audit</h3><p>Review the site, offers, channel evidence, CRM notes, reporting, and sales narrative.</p></article>
-      <article class="feature-card"><h3>Prioritise</h3><p>Separate symptoms from constraints so the team knows what deserves the next sprint.</p></article>
-      <article class="feature-card"><h3>Decide</h3><p>Leave with a clear recommendation: sprint, acquisition build, fractional leadership, or a narrower fix.</p></article>
+    <div class="shell">
+      <p class="eyebrow">The 5 layers</p>
+      <h2>Score yourself across each layer.</h2>
+      <p class="lede" style="max-width:60ch; margin-top:0.75rem;">
+        For each one: ask the question, watch for the red signal. The layer with the strongest red signal is your bottleneck.
+      </p>
+
+      <ol class="diag-layer-list">
+        {layers.map((l, i) => (
+          <li class="diag-layer">
+            <span class="diag-layer-num">0{i + 1}</span>
+            <div>
+              <h3>{l.name}</h3>
+              <p class="diag-layer-q"><strong>Ask:</strong> {l.q}</p>
+              <p class="diag-layer-red"><strong>Red signal:</strong> {l.red}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- DECISION RULES -->
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Decision rules</p>
+      <h2>Once you know the constraint, the next move is obvious.</h2>
+      <div class="diag-rules-grid">
+        {decisionRules.map((r) => (
+          <a class="diag-rule-card" href={r.href}>
+            <p class="diag-rule-when">{r.rule}</p>
+            <p class="diag-rule-then">→ {r.path}</p>
+            <span class="diag-rule-cta">See the engagement →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Want help scoring it?</p>
+        <h2>Bring the picture, leave with the bottleneck named.</h2>
+        <p>30 minutes. No deck, no pitch. We'll diagnose the constraint together and decide if working together makes sense.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="diagnose-final-book">
+          <span class="button-label">Book a 30-minute growth diagnostic</span>
+          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="diagnose-final-scorecard">
+          Or, take the 5-minute scorecard →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .diag-layer-list { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0.85rem; }
+  .diag-layer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .diag-layer-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    align-self: start;
+    padding-top: 0.15rem;
+  }
+  .diag-layer h3 { margin: 0 0 0.5rem; font-size: 1.05rem; letter-spacing: -0.015em; }
+  .diag-layer-q { color: var(--ink); font-size: 0.92rem; line-height: 1.5; margin: 0 0 0.4rem; }
+  .diag-layer-red { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin: 0; }
+
+  .diag-rules-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) { .diag-rules-grid { grid-template-columns: 1fr 1fr; } }
+
+  .diag-rule-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem 1.4rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+  .diag-rule-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .diag-rule-when { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.5rem; }
+  .diag-rule-then { font-size: 0.95rem; line-height: 1.5; color: var(--ink); margin: 0 0 0.85rem; }
+  .diag-rule-cta { font-size: 0.78rem; font-weight: 700; color: var(--ink); }
+  .diag-rule-card:hover .diag-rule-cta { color: var(--accent); }
+</style>

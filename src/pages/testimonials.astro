@@ -1,0 +1,232 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig, testimonials, headlineMetrics } from "../site";
+
+type Category = "Client" | "Founder advisory" | "Mentoring" | "Other";
+
+function categorise(role: string, company: string): Category {
+  const s = `${role} ${company}`.toLowerCase();
+  if (/client|fractional cmo|sprint|engagement/.test(s)) return "Client";
+  if (/founder|advisory|growth session|advisor|operator/.test(s)) return "Founder advisory";
+  if (/mentor|growthmentor|mentorcruise|ppc|marketing mentoring/.test(s)) return "Mentoring";
+  return "Other";
+}
+
+const decorated = testimonials.map((t) => ({
+  ...t,
+  category: categorise(t.role ?? "", t.company ?? "")
+}));
+
+const categoryOrder: Category[] = ["Client", "Founder advisory", "Mentoring"];
+const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
+  acc[c] = decorated.filter((d) => d.category === c).length;
+  return acc;
+}, { all: decorated.length });
+---
+
+<BaseLayout
+  path="/testimonials"
+  title="Testimonials & founder feedback | We Scale Startups"
+  description="Founder, client, and mentoring feedback for We Scale Startups. Filter by engagement type. Read what founders say about working with WSS and Daniel Johnson."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Testimonials &amp; founder feedback</p>
+      <h1>What founders, operators, and clients say.</h1>
+      <p class="lede">
+        {headlineMetrics[0]?.value} paid acquisition managed, {headlineMetrics[3]?.value ?? "20+"} startups advised,
+        {headlineMetrics[2]?.value ?? "2"} operator-side exits. Filter by engagement type below.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="testimonials-hero-book">
+          Book a 30-minute growth diagnostic →
+        </a>
+        <a class="button button-light" href="/case-studies" data-cta="testimonials-hero-cases">
+          Read case studies →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter pills + grid -->
+  <section class="section">
+    <div class="shell">
+      <div class="tm-pill-row" role="tablist" aria-label="Filter testimonials">
+        <button class="tm-pill tm-pill-active" type="button" data-filter="all" aria-pressed="true">
+          All <span class="tm-pill-count">{counts.all}</span>
+        </button>
+        {categoryOrder.map((cat) => (
+          counts[cat] > 0 && (
+            <button class="tm-pill" type="button" data-filter={cat} aria-pressed="false">
+              {cat} <span class="tm-pill-count">{counts[cat]}</span>
+            </button>
+          )
+        ))}
+      </div>
+
+      <div class="tm-grid" id="testimonialsGrid">
+        {decorated.map((t) => (
+          <figure class="tm-card" data-category={t.category}>
+            <p class="tm-card-cat">{t.category}</p>
+            <blockquote>
+              <p>&ldquo;{t.quote}&rdquo;</p>
+            </blockquote>
+            <figcaption>
+              <p class="tm-name">{t.name}</p>
+              <p class="tm-role">{t.role}{t.company ? ` · ${t.company}` : ""}</p>
+              {t.result && <p class="tm-result">{t.result}</p>}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <p class="tm-foot">
+        Want the unfiltered view? See&nbsp;
+        <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">200+ public reviews on GrowthMentor →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Want this kind of feedback from your team?</h2>
+        <p>30 minutes. No deck, no pitch — just the bottleneck.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="testimonials-final-book">
+          <span class="button-label">Book a 30-minute growth diagnostic</span>
+          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="testimonials-final-scorecard">
+          Or, take the 5-minute scorecard →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tm-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  .tm-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .tm-pill:hover {
+    color: var(--ink);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  }
+  .tm-pill-active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tm-pill-active:hover { color: #fff; border-color: var(--ink); }
+  .tm-pill-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4rem;
+    padding: 0 0.4rem;
+    height: 1.2rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .tm-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .tm-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .tm-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .tm-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.5rem;
+    margin: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .tm-card.is-hidden { display: none; }
+  .tm-card-cat {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin: 0 0 0.85rem;
+  }
+  .tm-card blockquote { margin: 0; }
+  .tm-card blockquote p {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 500;
+    margin: 0;
+  }
+  .tm-card figcaption {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .tm-card .tm-name { font-weight: 700; color: var(--ink); margin: 0; font-size: 0.9rem; }
+  .tm-card .tm-role { color: var(--muted); font-size: 0.8rem; margin: 0.2rem 0 0; }
+  .tm-card .tm-result {
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tm-foot {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  .tm-foot a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var pills = document.querySelectorAll(".tm-pill");
+    var cards = document.querySelectorAll("#testimonialsGrid .tm-card");
+    if (!pills.length || !cards.length) return;
+    pills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        pills.forEach(function (p) { p.classList.remove("tm-pill-active"); p.setAttribute("aria-pressed", "false"); });
+        pill.classList.add("tm-pill-active");
+        pill.setAttribute("aria-pressed", "true");
+        var filter = pill.getAttribute("data-filter") || "all";
+        cards.forEach(function (card) {
+          if (filter === "all" || card.getAttribute("data-category") === filter) card.classList.remove("is-hidden");
+          else card.classList.add("is-hidden");
+        });
+      });
+    });
+  })();
+</script>

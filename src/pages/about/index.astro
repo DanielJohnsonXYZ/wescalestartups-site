@@ -4,18 +4,47 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
 ---
 
-<BaseLayout title="About | We Scale Startups" description="We Scale Startups is founder-led growth diagnosis, acquisition systems, and fractional CMO support for post-PMF startup teams." path="/about">
+<BaseLayout
+  title="About | We Scale Startups"
+  description="We Scale Startups is a founder-led growth consultancy. Diagnosis, acquisition systems, and fractional CMO support for post-PMF startup teams. Founded by Daniel Johnson."
+  path="/about"
+>
+  <!-- Hero -->
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">About</p>
-      <h1>Founder-led growth systems for teams between traction and scale.</h1>
-      <p>We Scale Startups works with post-PMF teams that already have signal but need clearer positioning, sharper acquisition, and a repeatable operating rhythm.</p>
+      <h1>Founder-led growth consultancy for teams between traction and scale.</h1>
+      <p>
+        We Scale Startups works with post-PMF teams that already have signal but need clearer positioning, sharper acquisition,
+        and a repeatable operating rhythm — without committing to a £150k full-time CMO hire.
+      </p>
     </div>
   </section>
 
   <ProofLogos />
 
+  <!-- WHY WSS EXISTS -->
   <section class="section">
+    <div class="shell">
+      <div style="max-width: 70ch;">
+        <p class="eyebrow">Why WSS exists</p>
+        <h2>Founders kept getting stuck running marketing themselves.</h2>
+        <p style="margin-top: 1rem;">
+          After 15 years operating inside SaaS, fintech, healthtech and EdTech startups — including two exits —
+          the same pattern kept showing up: founders with great products who were stuck running marketing themselves
+          because nobody else on the team could read the numbers and decide what to scale.
+        </p>
+        <p style="margin-top: 0.85rem;">
+          WSS was built to be the operator we wished was there. Senior judgement that diagnoses the real constraint,
+          builds the acquisition system around it, and transfers the rhythm so growth doesn't depend on founder heroics.
+          Not advisory decks. Not agency execution. The system in between.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT DANIEL — strengthened -->
+  <section class="section section-alt" id="daniel">
     <div class="shell split-section">
       <div class="founder-gallery">
         <div class="founder-image">
@@ -34,25 +63,87 @@ import { siteConfig } from "../../site";
             sizes="(max-width: 640px) 100vw, 48vw"
             type="image/webp"
           />
-          <img class="founder-secondary-photo" src="/images/daniel-aircraft-960.webp" alt="Daniel Johnson in a small aircraft, a personal photo for founder credibility" width="960" height="960" loading="lazy" decoding="async" />
+          <img class="founder-secondary-photo" src="/images/daniel-aircraft-960.webp" alt="Daniel Johnson outside the office, personal photo for founder credibility" width="960" height="960" loading="lazy" decoding="async" />
         </picture>
       </div>
       <div class="founder-copy">
-        <p class="eyebrow">Daniel Johnson</p>
-        <h2>Senior operator judgement for the growth decisions your team cannot leave fuzzy.</h2>
-        <p>Daniel works across strategy, customer research, acquisition, mentoring, and speaking. The through-line is simple: help founders make better growth decisions and build systems their teams can keep running.</p>
+        <p class="eyebrow">About Daniel Johnson</p>
+        <h2>The operator behind WSS.</h2>
+        <p>
+          Daniel is the founder of We Scale Startups. 15+ years operating inside founder-led startups across SaaS,
+          AI, fintech, healthtech, and EdTech. Two operator-side exits. Now leads diagnostic, acquisition system,
+          and fractional CMO engagements for post-PMF teams in the £1M–£10M ARR band.
+        </p>
+
+        <h3 class="founder-section-h3">Operator background</h3>
+        <ul class="note-list">
+          <li>Two operator-side startup exits — eQuoo (mental-health tech) and an eCommerce brand</li>
+          <li>Senior in-house operating roles: Head of Growth at Shoprocket and NAVA</li>
+          <li>15+ years across SaaS, AI, fintech, healthtech, EdTech, and eCommerce</li>
+        </ul>
+
+        <h3 class="founder-section-h3">Paid acquisition experience</h3>
+        <ul class="note-list">
+          <li>£10M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech</li>
+          <li>500+ qualified sign-ups from a single paid campaign at 8.6% CTR (US B2B fintech)</li>
+          <li>35% CAC reduction in 8 weeks (fintech) via account structure + landing-page routing</li>
+          <li>6× growth in monthly app downloads (2k → 12k+) over 6 months for an AI HealthTech</li>
+        </ul>
+
+        <h3 class="founder-section-h3">Mentoring &amp; speaking credibility</h3>
         <ul class="note-list">
           <li>Google for Startups and Techstars ecosystem mentor</li>
-          <li>Speaking and teaching at Cambridge, Imperial, Nomad Summit, Shenzhen SaaS, and Foundervine</li>
-          <li>£10M+ budgets and paid acquisition spend managed</li>
-          <li>20+ startups advised across SaaS, AI, fintech, healthtech, and ecommerce</li>
-          <li>Experienced across paid, SEO, CRO, positioning, GTM, and reporting cadence</li>
+          <li>Speaking and teaching at Cambridge Judge Business School, Imperial College London, Nomad Summit, Shenzhen SaaS, Foundervine</li>
+          <li>20+ post-PMF startups advised across Seed–Series B</li>
+          <li>Top-rated mentor on GrowthMentor (4.9+/5 across 200+ reviews)</li>
         </ul>
-        <div class="hero-actions">
-          <a class="button button-dark" href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel on LinkedIn</a>
-          <a class="button button-light" href="/proof">Read the proof</a>
+
+        <h3 class="founder-section-h3">How Daniel works with founders</h3>
+        <p>
+          Direct, system-level, hands-on. Diagnose the constraint first, build the acquisition system around it,
+          transfer the rhythm so the team can run it without us. Most engagements last 6–9 months. No long-tail
+          retainers, no junior account managers, no quarterly strategy decks. The work shows up in pipeline,
+          not in slides.
+        </p>
+
+        <div class="hero-actions" style="margin-top: 1.5rem;">
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="about-daniel-book">
+            Book a 30-minute growth diagnostic →
+          </a>
+          <a class="button button-light" href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">
+            Daniel on LinkedIn →
+          </a>
+          <a class="button button-light" href={siteConfig.danielSite} rel="noreferrer" target="_blank">
+            DanielJohnson.xyz →
+          </a>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Final CTA -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Bring the current bottleneck.</h2>
+        <p>30 minutes. No deck, no pitch. We'll diagnose the bottleneck and decide if working together makes sense.</p>
+      </div>
+      <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="about-final-book">
+        <span class="button-label">Book a 30-minute growth diagnostic</span>
+        <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+      </a>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .founder-section-h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin: 1.75rem 0 0.65rem;
+  }
+</style>

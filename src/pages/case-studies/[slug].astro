@@ -14,18 +14,39 @@ export async function getStaticPaths() {
 
 const { caseStudy } = Astro.props;
 const path = `/case-studies/${caseStudy.id}`;
+
+// Standardised case-study structure (founder direction):
+//   Problem · What WSS changed · Commercial result · System created · Why it mattered
+// Maps onto existing collection fields:
+//   problem        ← challenge
+//   wssChanged     ← work[] (top 3-4)
+//   commercialResult ← results[] (top 2-3)
+//   systemCreated  ← derived from services[] + work synthesis
+//   whyItMattered  ← summary as reframed value statement
+const sections = {
+  problem: caseStudy.data.challenge,
+  wssChanged: caseStudy.data.work,
+  commercialResult: caseStudy.data.results,
+  systemCreated: caseStudy.data.services.map((s) => `${s} system`),
+  whyItMattered: caseStudy.data.summary
+};
+
 const caseFaqs = [
   {
-    question: `What work did WSS do for ${caseStudy.data.client}?`,
+    question: `What did WSS change for ${caseStudy.data.client}?`,
     answer: caseStudy.data.work.slice(0, 3).join("; ") + "."
   },
   {
-    question: `What changed for ${caseStudy.data.client}?`,
+    question: `What commercial result did ${caseStudy.data.client} see?`,
     answer: caseStudy.data.results.slice(0, 3).join("; ") + "."
   },
   {
-    question: "What proof format does WSS use?",
-    answer: "WSS presents case studies in a Before, Work Done, Result format so buyers can separate the starting problem, the operating work, and the commercial signal."
+    question: `What system was left in place after the engagement?`,
+    answer: `${caseStudy.data.services.join(", ")} — owned by the internal team after handover.`
+  },
+  {
+    question: "How does WSS structure case studies?",
+    answer: "Five standardised sections: Problem, What WSS changed, Commercial result, System created, Why it mattered. Same format every time so buyers can read in 60 seconds."
   }
 ];
 ---
@@ -51,64 +72,97 @@ const caseFaqs = [
     ])
   ]}
 >
+  <!-- Hero -->
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">{caseStudy.data.sector}</p>
       <h1>{caseStudy.data.title}</h1>
-      <p>{caseStudy.data.summary}</p>
+      <p class="case-summary">{caseStudy.data.summary}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="case-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/proof">All proof</a>
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="case-book">
+          Book a 30-minute growth diagnostic →
+        </a>
+        <a class="button button-light" href="/case-studies">All case studies →</a>
       </div>
     </div>
   </section>
 
+  <!-- 5-section standardised structure -->
   <section class="section">
-    <div class="shell detail-grid">
-      <aside class="detail-aside">
-        <p class="eyebrow">Client</p>
-        <p>{caseStudy.data.client}</p>
-        <p><strong>Sector:</strong> {caseStudy.data.sector}</p>
-        <p><strong>Services:</strong> {caseStudy.data.services.join(", ")}</p>
-        <p><strong>Proof format:</strong> Before, work done, result.</p>
-        <p><strong>Founder/operator context:</strong> <a href={siteConfig.danielSite} rel="noreferrer" target="_blank">DanielJohnson.xyz</a></p>
-      </aside>
-      <div class="detail-body">
-        <article class="content-block">
-          <h2>Before, work done, result</h2>
-          <div class="proof-steps">
-            <div><span>Before</span><p>{caseStudy.data.challenge}</p></div>
-            <div><span>Work done</span><p>{caseStudy.data.work.slice(0, 3).join(", ")}.</p></div>
-            <div><span>Result</span><p>{caseStudy.data.results.slice(0, 3).join("; ")}.</p></div>
-          </div>
-        </article>
-        <article class="content-block">
-          <h2>Challenge</h2>
-          <p>{caseStudy.data.challenge}</p>
-        </article>
-        <article class="content-block">
-          <h2>Work</h2>
-          <ul>
-            {caseStudy.data.work.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-        <article class="content-block">
-          <h2>Results</h2>
-          <ul>
-            {caseStudy.data.results.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
+    <div class="shell">
+      <div class="case-grid">
+        <aside class="case-aside">
+          <p class="card-kicker">Client</p>
+          <p class="case-aside-client">{caseStudy.data.client}</p>
+          <dl class="case-aside-meta">
+            <dt>Sector</dt><dd>{caseStudy.data.sector}</dd>
+            <dt>Services used</dt><dd>{caseStudy.data.services.join(", ")}</dd>
+            <dt>Format</dt><dd>Problem · What WSS changed · Commercial result · System created · Why it mattered</dd>
+          </dl>
+          <a class="case-aside-link" href={siteConfig.danielSite} rel="noreferrer" target="_blank">
+            Founder/operator: DanielJohnson.xyz →
+          </a>
+        </aside>
+
+        <div class="case-body">
+          <!-- 1. PROBLEM -->
+          <article class="case-section case-section-problem">
+            <p class="case-section-num">01</p>
+            <h2>Problem</h2>
+            <p>{sections.problem}</p>
+          </article>
+
+          <!-- 2. WHAT WSS CHANGED -->
+          <article class="case-section case-section-action">
+            <p class="case-section-num">02</p>
+            <h2>What WSS changed</h2>
+            <ul>
+              {sections.wssChanged.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+
+          <!-- 3. COMMERCIAL RESULT -->
+          <article class="case-section case-section-result">
+            <p class="case-section-num">03</p>
+            <h2>Commercial result</h2>
+            <ul>
+              {sections.commercialResult.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+
+          <!-- 4. SYSTEM CREATED -->
+          <article class="case-section case-section-system">
+            <p class="case-section-num">04</p>
+            <h2>System created</h2>
+            <p>By the end of the engagement, the team was running these systems without WSS in every loop:</p>
+            <ul>
+              {sections.systemCreated.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+
+          <!-- 5. WHY IT MATTERED -->
+          <article class="case-section case-section-why">
+            <p class="case-section-num">05</p>
+            <h2>Why it mattered</h2>
+            <p>{sections.whyItMattered}</p>
+            <p class="case-section-takeaway">
+              <strong>The takeaway:</strong> the operating system stays with the team. The result isn't a campaign — it's the rhythm that keeps producing them.
+            </p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQs -->
   <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">Case FAQ</p>
+      <h2>What founders ask about this engagement.</h2>
       <div class="grid-3">
         {caseFaqs.map((faq) => (
           <article class="feature-card">
-            <h2>{faq.question}</h2>
+            <h3>{faq.question}</h3>
             <p>{faq.answer}</p>
           </article>
         ))}
@@ -116,14 +170,146 @@ const caseFaqs = [
     </div>
   </section>
 
+  <!-- Final CTA -->
   <section class="cta-band">
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Similar constraint?</p>
-        <h2>Diagnose the bottleneck before you brief more work.</h2>
-        <p>Bring the current funnel, positioning, and reporting problem. We will decide the most useful next move.</p>
+        <h2>Diagnose your bottleneck before you brief more work.</h2>
+        <p>30 minutes. Bring the current funnel, positioning, and reporting picture. We'll decide the most useful next move.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="case-final-book">{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="case-final-book">
+          <span class="button-label">Book a 30-minute growth diagnostic</span>
+          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="case-final-scorecard">
+          Or, take the 5-minute scorecard →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .case-summary {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    max-width: 65ch;
+    margin: 1rem 0 1.5rem;
+    color: var(--muted);
+  }
+  .case-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 980px) {
+    .case-grid {
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .case-aside {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.4rem 1.4rem;
+    align-self: start;
+    position: sticky;
+    top: 1.5rem;
+  }
+  .case-aside-client {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0.4rem 0 1.2rem;
+  }
+  .case-aside-meta { margin: 0; }
+  .case-aside-meta dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-top: 0.85rem;
+  }
+  .case-aside-meta dd {
+    margin: 0.3rem 0 0;
+    color: var(--ink);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .case-aside-link {
+    display: inline-block;
+    margin-top: 1.4rem;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .case-aside-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .case-body { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .case-section {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.75rem 1.75rem 1.85rem;
+    position: relative;
+  }
+  .case-section-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin: 0 0 0.6rem;
+  }
+  .case-section h2 {
+    margin: 0 0 1rem;
+    font-size: 1.4rem;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .case-section p { color: var(--ink); line-height: 1.6; margin: 0 0 1rem; }
+  .case-section p:last-child { margin-bottom: 0; }
+  .case-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .case-section li {
+    position: relative;
+    padding: 0.6rem 0 0.6rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .case-section li:last-child { border-bottom: 0; }
+  .case-section li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Subtle accent on the result block */
+  .case-section-result { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  .case-section-result li::before { color: var(--accent); }
+
+  .case-section-takeaway {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem !important;
+    font-size: 0.92rem;
+  }
+</style>

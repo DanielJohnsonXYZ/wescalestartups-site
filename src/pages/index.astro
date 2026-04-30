@@ -13,7 +13,6 @@ import {
   buyerFaqs,
   headlineMetrics,
   leadMagnets,
-  painSignals,
   proofStandards,
   serviceSnapshots,
   siteConfig,
@@ -33,6 +32,20 @@ const rhythmSteps = [
   { label: "Midweek", title: "Ship the next move", body: "Campaigns, pages, outbound, content or offer tests move with a named owner." },
   { label: "Friday", title: "Scale, stop, fix", body: "Every week ends with a plain-English call on what deserves more attention." }
 ];
+const heroProofStats = headlineMetrics.map((metric) => {
+  const value = metric.value;
+
+  if (value === "£10M+") return { ...metric, target: "10", prefix: "£", suffix: "M+", decimals: "0" };
+  if (value === "4.93/5") return { ...metric, target: "4.93", prefix: "", suffix: "/5", decimals: "2" };
+
+  return {
+    ...metric,
+    target: value.replace(/\D/g, "") || "0",
+    prefix: "",
+    suffix: value.includes("+") ? "+" : "",
+    decimals: "0"
+  };
+});
 
 function metricLead(result: string) {
   return result.match(/(?:[$£])?\d+(?:\.\d+)?%?\+?/)?.[0] ?? result.split(" ")[0];
@@ -45,72 +58,246 @@ function metricLead(result: string) {
   description="Growth leadership for startups that need predictable acquisition. Diagnose the bottleneck, build the growth system, and transfer it so revenue is not founder-dependent."
   schema={buildFaqSchema([...buyerFaqs])}
 >
-  <!-- HERO: pain-led, single primary CTA -->
-  <section class="hero hero-with-portrait">
-    <div class="shell hero-grid">
-      <div>
-        <div class="hero-meta">
-          <span>Fractional CMO · Growth diagnosis · Acquisition systems</span>
-          <span>Post-PMF startups</span>
-        </div>
+  <!-- HERO: interactive diagnosis and focused conversion path -->
+  <section class="hero wss-hero-redesign" aria-label="We Scale Startups hero">
+    <span class="brand-glyph" aria-hidden="true"><span>WSS</span></span>
 
-        <h1>Growth leadership for startups that need predictable acquisition.</h1>
+    <div class="shell">
+      <div class="hero-redesign-grid">
+        <div>
+          <p class="hero-rail" aria-label="Brand and positioning">
+            <span class="mark">/&#47;&nbsp;WSS</span>
+            <span class="pipe" aria-hidden="true">|</span>
+            <span class="label">Fractional growth leadership</span>
+            <span class="pipe" aria-hidden="true">|</span>
+            <span class="label">Post-PMF startups</span>
+          </p>
 
-        <p class="hero-copy">
-          We work with post-PMF startups where:
-        </p>
+          <h1>
+            <span class="beat">Name the bottleneck.</span>
+            <span class="beat">Build the system.</span>
+            <span class="beat"><span class="grad">Step out of the loop.</span></span>
+          </h1>
 
-        <ul class="hero-pain-list">
-          {painSignals.map((signal) => (
-            <li>{signal}</li>
-          ))}
-        </ul>
+          <p class="hero-thesis">
+            Fractional growth leadership for post-PMF startups. We diagnose the constraint, build the operating system around it, and transfer the rhythm so revenue stops depending on founder heroics.
+          </p>
 
-        <p class="hero-fix">
-          Daniel diagnoses the constraint, builds the operating system around it, and transfers the rhythm so growth stops depending on founder heroics.
-        </p>
+          <ul class="hero-strikes" aria-label="Patterns we eliminate">
+            <li><span class="lead">We end</span><span class="strike">founder-run pipeline</span></li>
+            <li><span class="strike">pipeline that comes in waves</span></li>
+            <li><span class="strike">spend without a scaling decision</span></li>
+          </ul>
 
-        <div class="hero-cta-group">
-          <a class="button button-brand hero-primary-cta" href={siteConfig.bookingUrl} data-cta="hero-book">
-            {siteConfig.bookingLabel}
-          </a>
-          <p>{siteConfig.bookingSubcopy}</p>
-        </div>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book">
+              Book a 30-minute diagnostic <span class="arr" aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
+              Take the 5-minute scorecard <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+          <p class="hero-microcopy">Leave the call with your biggest growth bottleneck named in plain English.</p>
 
-        <a class="hero-secondary" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
-          <span>Take the 5-minute Growth Bottleneck Scorecard →</span>
-        </a>
-
-        <div class="hero-proof">
-          {headlineMetrics.map((metric) => (
-            <div>
-              <strong>{metric.value}</strong>
-              <span>{metric.label}</span>
+          <div class="founder-card" aria-label="Founder">
+            <picture>
+              <source srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w" sizes="54px" type="image/webp" />
+              <img class="portrait" src="/images/daniel-headshot-960.webp" alt="Daniel Johnson" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
+            </picture>
+            <div class="who">
+              <span class="top">Founder-led by <strong>Daniel Johnson</strong> · <span class="stars">★ 4.93 / 5</span></span>
+              <span class="bottom">Speaker · Cambridge Judge · Imperial · Techstars · Google for Startups</span>
             </div>
-          ))}
+          </div>
         </div>
+
+        <aside class="diag" id="diag" aria-label="Sample growth diagnosis">
+          <svg class="spark" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#7b3eff" />
+                <stop offset="55%" stop-color="#a445ff" />
+                <stop offset="100%" stop-color="#c44dff" />
+              </linearGradient>
+            </defs>
+            <text class="label" x="2" y="22">Pipeline (now)</text>
+            <text class="label r" x="398" y="22">Pipeline (system)</text>
+            <path class="wave" d="M0,12 L18,5 L36,17 L54,4 L72,16 L90,3 L108,18 L126,7 L144,19 L162,4 L180,17 L198,6 L216,18 L234,3 L252,16 L270,8 L288,19 L306,5 L324,17 L342,4 L360,15 L378,9 L400,12" />
+            <path class="line" d="M0,18 C80,17 140,14 200,11 C260,8 320,6 400,3" />
+          </svg>
+
+          <header class="diag-head">
+            <div>
+              <p class="label"><span class="live" aria-hidden="true"></span> Constraint map</p>
+              <h2 class="title">Growth Diagnosis</h2>
+            </div>
+            <span class="week">WK 01 / 12</span>
+          </header>
+
+          <div class="diag-prompt">
+            <span class="tap"><span class="dot" aria-hidden="true"></span> Tap any constraint to diagnose yours</span>
+            <button class="reset" type="button" data-reset>Reset</button>
+          </div>
+
+          <div class="diag-rows">
+            <button class="row" type="button" data-key="positioning" aria-pressed="false">
+              <span class="name">Positioning <span class="sub">Message-market fit</span></span>
+              <span class="bar" style="--pct:32%;" aria-hidden="true"></span>
+              <span class="verdict">Healthy</span>
+            </button>
+            <button class="row is-bottleneck" type="button" data-key="acquisition" aria-pressed="true">
+              <span class="name">Acquisition <span class="sub">Channels &amp; pipeline</span></span>
+              <span class="bar" style="--pct:88%;" aria-hidden="true"></span>
+              <span class="verdict">Bottleneck</span>
+            </button>
+            <button class="row" type="button" data-key="conversion" aria-pressed="false">
+              <span class="name">Conversion <span class="sub">Site &amp; offer</span></span>
+              <span class="bar" style="--pct:54%;" aria-hidden="true"></span>
+              <span class="verdict">Watch</span>
+            </button>
+            <button class="row" type="button" data-key="reporting" aria-pressed="false">
+              <span class="name">Reporting <span class="sub">Decision view</span></span>
+              <span class="bar" style="--pct:62%;" aria-hidden="true"></span>
+              <span class="verdict">Watch</span>
+            </button>
+            <button class="row is-low" type="button" data-key="team" aria-pressed="false">
+              <span class="name">Team ownership <span class="sub">Weekly cadence</span></span>
+              <span class="bar" style="--pct:38%;" aria-hidden="true"></span>
+              <span class="verdict">Healthy</span>
+            </button>
+          </div>
+
+          <div class="diag-foot">
+            <span class="ico" aria-hidden="true">!</span>
+            <p class="copy-wrap" id="diagCopy">
+              <span class="lbl">Diagnosed bottleneck</span>
+              <strong>Acquisition channels operating in isolation.</strong>
+              Paid, content and outbound are not reinforcing one another, so pipeline lands in waves.
+            </p>
+          </div>
+        </aside>
       </div>
 
-      <aside class="hero-portrait-card" aria-label="Daniel Johnson, founder of We Scale Startups">
-        <div class="founder-image">
-          <picture>
-            <source
-              srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
-              sizes="(max-width: 640px) 100vw, 38vw"
-              type="image/webp"
-            />
-            <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
-          </picture>
-        </div>
-        <div class="hero-offer">
-          <p class="eyebrow">Founder-led</p>
-          <p class="hero-offer-name"><strong>Daniel Johnson</strong></p>
-          <p class="hero-offer-role">Two operator-side exits. £10M+ acquisition spend managed. Mentor to hundreds of founders through Google for Startups, Techstars, GrowthMentor.</p>
-          <p class="hero-offer-rating">⭐ 5.0/5 MentorCruise · 4.93/5 across 219 founder reviews</p>
-        </div>
-      </aside>
+      <div class="proof-rail" aria-label="Selected proof">
+        {heroProofStats.map((metric) => (
+          <div class="stat">
+            <strong data-target={metric.target} data-prefix={metric.prefix} data-suffix={metric.suffix} data-decimals={metric.decimals}>{metric.value}</strong>
+            <span>{metric.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const hero = document.querySelector(".wss-hero-redesign");
+      const diag = hero?.querySelector("#diag");
+      if (!hero || !diag) return;
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const spark = hero.querySelector(".spark");
+      if (spark) requestAnimationFrame(() => spark.classList.add("is-animated"));
+
+      const rows = [...diag.querySelectorAll(".row[data-key]")];
+      const copyEl = diag.querySelector("#diagCopy");
+      const resetBtn = diag.querySelector("[data-reset]");
+      const scenarios = {
+        positioning: {
+          severity: { positioning: 88, acquisition: 46, conversion: 58, reporting: 42, team: 34 },
+          head: "Message-market fit drift.",
+          body: "Buyers do not pattern-match the offer to their actual problem, so acquisition gets harder upstream."
+        },
+        acquisition: {
+          severity: { positioning: 32, acquisition: 88, conversion: 54, reporting: 62, team: 38 },
+          head: "Acquisition channels operating in isolation.",
+          body: "Paid, content and outbound are not reinforcing one another, so pipeline lands in waves."
+        },
+        conversion: {
+          severity: { positioning: 38, acquisition: 48, conversion: 86, reporting: 55, team: 36 },
+          head: "Site and offer leaking pipeline.",
+          body: "The page asks for too much, too early. Qualified visitors do not become qualified conversations."
+        },
+        reporting: {
+          severity: { positioning: 36, acquisition: 50, conversion: 48, reporting: 84, team: 42 },
+          head: "No single decision view.",
+          body: "Activity gets reported. What to scale, stop, or fix does not, so weeks pass without a sharp call."
+        },
+        team: {
+          severity: { positioning: 40, acquisition: 52, conversion: 46, reporting: 48, team: 86 },
+          head: "No internal owner running the rhythm.",
+          body: "The system needs a hand on the wheel inside. Without one, founder hours fill the gap and growth stays personal."
+        }
+      };
+      const verdict = (severity, isBottleneck) => isBottleneck ? "Bottleneck" : (severity < 42 ? "Healthy" : "Watch");
+
+      function applyDiagnosis(key, fromUser = false) {
+        const scenario = scenarios[key];
+        if (!scenario || !copyEl) return;
+
+        rows.forEach((row) => {
+          const rowKey = row.dataset.key;
+          const severity = scenario.severity[rowKey];
+          const isBottleneck = rowKey === key;
+          row.classList.toggle("is-bottleneck", isBottleneck);
+          row.classList.toggle("is-low", !isBottleneck && severity < 42);
+          row.setAttribute("aria-pressed", isBottleneck ? "true" : "false");
+          row.querySelector(".bar")?.style.setProperty("--pct", `${severity}%`);
+          const verdictEl = row.querySelector(".verdict");
+          if (verdictEl) verdictEl.textContent = verdict(severity, isBottleneck);
+        });
+
+        copyEl.innerHTML = `<span class="lbl">Diagnosed bottleneck</span><strong>${scenario.head}</strong> ${scenario.body}`;
+        if (fromUser) {
+          diag.classList.add("is-touched", "is-pulsing");
+          window.setTimeout(() => diag.classList.remove("is-pulsing"), 260);
+        }
+      }
+
+      rows.forEach((row) => row.addEventListener("click", () => applyDiagnosis(row.dataset.key, true)));
+      resetBtn?.addEventListener("click", () => {
+        applyDiagnosis("acquisition", true);
+        diag.classList.remove("is-touched");
+      });
+
+      const stats = hero.querySelectorAll(".proof-rail .stat strong[data-target]");
+      const formatStat = (el) => {
+        const target = Number.parseFloat(el.dataset.target || "0");
+        const decimals = Number.parseInt(el.dataset.decimals || "0", 10);
+        el.textContent = `${el.dataset.prefix || ""}${target.toFixed(decimals)}${el.dataset.suffix || ""}`;
+      };
+      const countUp = (el) => {
+        const target = Number.parseFloat(el.dataset.target || "0");
+        const decimals = Number.parseInt(el.dataset.decimals || "0", 10);
+        const prefix = el.dataset.prefix || "";
+        const suffix = el.dataset.suffix || "";
+        const duration = 1300;
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = `${prefix}${(target * eased).toFixed(decimals)}${suffix}`;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+      };
+
+      if (reduced || !("IntersectionObserver" in window)) {
+        stats.forEach(formatStat);
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            countUp(entry.target);
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.4 });
+        stats.forEach((stat) => io.observe(stat));
+      }
+    })();
+  </script>
 
   <!-- HERO-LEVEL CREDIBILITY: logos + immediate proof -->
   <ProofLogos />

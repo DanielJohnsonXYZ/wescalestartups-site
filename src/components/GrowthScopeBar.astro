@@ -1,0 +1,77 @@
+---
+// GrowthScopeBar.astro
+// Six-pillar visual that makes clear WSS works on the WHOLE growth system,
+// not just paid acquisition.
+const pillars = [
+  { title: "Positioning",    body: "ICP, message, value claim, segment map." },
+  { title: "Acquisition",    body: "Channel architecture, paid, organic, outbound." },
+  { title: "Conversion",     body: "Landing pages, offer, trial, demo flow." },
+  { title: "Retention",      body: "Onboarding, lifecycle, churn signals, expansion." },
+  { title: "Reporting",      body: "Decision view, weekly cadence, scale/stop calls." },
+  { title: "Team ownership", body: "Roles, rituals, internal handover, agency direction." }
+];
+---
+
+<section class="section section-alt growth-scope" aria-labelledby="scope-heading">
+  <div class="shell">
+    <div class="growth-scope-head">
+      <p class="eyebrow">What we cover</p>
+      <h2 id="scope-heading">Growth is six things working together. We work on all of them.</h2>
+      <p class="lede">More acquisition spend rarely fixes a positioning problem. More retention rarely fixes a conversion problem. WSS sets the priorities across all six and stays accountable for the commercial outcome.</p>
+    </div>
+
+    <div class="scope-grid">
+      {pillars.map((pillar, idx) => (
+        <article class="scope-card">
+          <span class="scope-num" aria-hidden="true">0{idx + 1}</span>
+          <h3>{pillar.title}</h3>
+          <p>{pillar.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .growth-scope-head { max-width: 65ch; margin-bottom: 2.25rem; }
+  .growth-scope-head h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.15; margin-top: 0.5rem; }
+  .growth-scope-head .lede { color: var(--muted); margin-top: 0.85rem; line-height: 1.6; }
+
+  .scope-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) { .scope-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .scope-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .scope-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem 1.25rem 1.4rem;
+    position: relative;
+  }
+  .scope-num {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .scope-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .scope-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-top: 0.45rem;
+  }
+</style>

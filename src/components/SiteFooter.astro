@@ -1,44 +1,179 @@
 ---
-import { navigation, siteConfig } from "../site";
+// SiteFooter.astro — restructured into 5 clean groups:
+// Work with us · Proof · Resources · Company · Legal
+import { siteConfig } from "../site";
 
-const secondaryLinks = [
-  { href: "/case-studies", label: "Case studies" },
-  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" },
-  { href: "/about", label: "About" },
-  { href: "/industries", label: "Industries" },
-  { href: "/resources", label: "Resources" },
-  { href: "/press", label: "Company press kit" },
-  { href: "/privacy", label: "Privacy" },
-  { href: "/terms", label: "Terms" }
+const groups = [
+  {
+    label: "Work with us",
+    links: [
+      { href: "/services/growth-diagnosis", label: "Growth Diagnosis" },
+      { href: "/services/90-day-growth-sprint", label: "90-Day Growth Sprint" },
+      { href: "/services/acquisition-system-build", label: "Acquisition System Build" },
+      { href: "/services/fractional-cmo", label: "Fractional CMO" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/book", label: "Book a 30-min diagnostic" }
+    ]
+  },
+  {
+    label: "Proof",
+    links: [
+      { href: "/proof", label: "All proof" },
+      { href: "/case-studies", label: "Case studies" },
+      { href: "/industries", label: "Industries we serve" },
+      { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" }
+    ]
+  },
+  {
+    label: "Resources",
+    links: [
+      { href: "/resources#growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+      { href: "/resources#90-day-growth-sprint-planner", label: "90-Day Sprint Planner" },
+      { href: "/resources#vc-portfolio-growth-diagnosis", label: "VC Portfolio Diagnosis" },
+      { href: "/insights", label: "Insights" },
+      { href: "/reports", label: "Reports" },
+      { href: "/start-here", label: "Start here" }
+    ]
+  },
+  {
+    label: "Company",
+    links: [
+      { href: "/about", label: "About WSS" },
+      { href: "/about#daniel", label: "About Daniel" },
+      { href: "/press", label: "Press kit" },
+      { href: "/contact", label: "Contact" },
+      { href: siteConfig.linkedin, label: "LinkedIn", external: true }
+    ]
+  },
+  {
+    label: "Legal",
+    links: [
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" }
+    ]
+  }
 ];
 ---
 
-<footer class="site-footer">
+<footer class="site-footer site-footer-v2">
   <div class="shell footer-grid">
-    <div>
+    <div class="footer-brand">
       <img class="footer-logo" src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="128" height="72" loading="lazy" decoding="async" />
-      <p class="footer-summary">Predictable acquisition for post-PMF startups. We build the repeatable growth system so founders are no longer the bottleneck.</p>
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="footer-book">{siteConfig.bookingLabel}</a>
+      <p class="footer-summary">
+        We help founder-led startups turn scattered marketing activity into a weekly growth system — diagnose the bottleneck, build the system, transfer it.
+      </p>
+      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="footer-book">
+        Book a 30-min growth diagnostic →
+      </a>
+      <p class="footer-secondary-cta">
+        Or, <a href={siteConfig.scorecardUrl}>take the 5-minute scorecard →</a>
+      </p>
     </div>
-    <div>
-      <h2>Explore</h2>
-      <nav class="footer-links" aria-label="Footer navigation">
-        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-        {secondaryLinks.map((item) => <a href={item.href}>{item.label}</a>)}
-      </nav>
-    </div>
-    <div>
-      <h2>Contact</h2>
-      <div class="footer-links">
-        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-        <a href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
-        <a href={siteConfig.bookingUrl} data-cta="footer-contact-book">Book a call</a>
-        <a href={siteConfig.linkedin} rel="noopener" target="_blank">LinkedIn</a>
+
+    {groups.map((group) => (
+      <div class="footer-col">
+        <h2>{group.label}</h2>
+        <nav class="footer-links" aria-label={`${group.label} links`}>
+          {group.links.map((link) => (
+            <a
+              href={link.href}
+              {...(link.external ? { target: "_blank", rel: "noopener" } : {})}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
       </div>
-    </div>
+    ))}
   </div>
+
   <div class="shell footer-bottom">
     <p>© 2026 We Scale Startups. All rights reserved.</p>
     <p>{siteConfig.address}</p>
+    <p class="founder-line">
+      Founded by <a href="/about#daniel">{siteConfig.founderName}</a> ·
+      <a href={siteConfig.danielSite} rel="noopener" target="_blank">danieljohnson.xyz</a>
+    </p>
   </div>
 </footer>
+
+<style>
+  .site-footer-v2 { padding-top: 4rem; padding-bottom: 2rem; }
+  .site-footer-v2 .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 720px) {
+    .site-footer-v2 .footer-grid {
+      grid-template-columns: 1.4fr repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1080px) {
+    .site-footer-v2 .footer-grid {
+      grid-template-columns: 1.6fr repeat(5, 1fr);
+    }
+  }
+
+  .footer-brand p.footer-summary {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 1rem 0 1.25rem;
+    max-width: 32ch;
+  }
+  .footer-secondary-cta {
+    margin-top: 0.85rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .footer-secondary-cta a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .footer-col h2 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin: 0 0 0.85rem;
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .footer-links a {
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .footer-links a:hover { color: var(--ink); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .footer-bottom p { margin: 0; }
+  .founder-line { margin-left: auto; }
+  .founder-line a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .founder-line a:hover {
+    border-bottom-color: var(--accent);
+  }
+</style>

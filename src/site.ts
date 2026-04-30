@@ -2,15 +2,15 @@ export const siteConfig = {
   name: "We Scale Startups",
   title: "We Scale Startups | Repeatable Growth Systems for Post-PMF Startups",
   description:
-    "Growth leadership for startups that need predictable acquisition. We diagnose the bottleneck, build the growth system, and transfer it so founders are no longer stuck in every loop.",
+    "We help founder-led startups turn scattered marketing activity into a weekly growth system. Diagnose the bottleneck, build the acquisition system, transfer the rhythm so revenue stops depending on founder heroics.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
   calendlyUrl: "https://calendly.com/wescalestartups",
-  bookingLabel: "Book a call",
-  bookingSubcopy: "Find your biggest growth bottleneck in 30 minutes",
-  scorecardLabel: "Take the scorecard",
-  scorecardLabelLong: "Take the 5-min Growth Bottleneck Scorecard",
+  bookingLabel: "Book a 30-minute growth diagnostic",
+  bookingSubcopy: "Free · 30 minutes · No pitch",
+  scorecardLabel: "Take the 5-minute scorecard",
+  scorecardLabelLong: "Take the 5-minute Growth Bottleneck Scorecard",
   scorecardUrl: "/resources#growth-bottleneck-scorecard",
   email: "daniel@wescalestartups.com",
   phone: "+44 20 3886 0931",
@@ -54,9 +54,9 @@ export const credentialLogos = [
 
 export const headlineMetrics = [
   { value: "£10M+", label: "Paid acquisition spend managed" },
-  { value: "20+", label: "Startups advised" },
+  { value: "500+", label: "Sign-ups from a single paid campaign" },
   { value: "2", label: "Operator-side startup exits" },
-  { value: "4.93/5", label: "Founder review average" }
+  { value: "20+", label: "Startups advised" }
 ] as const;
 
 // Pain-led signals — these now drive the hero subhead

@@ -6,15 +6,16 @@ import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import VsAgencyBlock from "../components/VsAgencyBlock.astro";
 import NotForBlock from "../components/NotForBlock.astro";
 import DanielStory from "../components/DanielStory.astro";
+import WhenToHireUs from "../components/WhenToHireUs.astro";
+import GrowthScopeBar from "../components/GrowthScopeBar.astro";
+import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildFaqSchema } from "../lib/schema";
 import { sortByOrder } from "../lib/utils";
 import {
   buyerFaqs,
   headlineMetrics,
-  leadMagnets,
   proofStandards,
-  serviceSnapshots,
   siteConfig,
   testimonials
 } from "../site";
@@ -22,22 +23,13 @@ import {
 const cases = sortByOrder(await getCollection("cases"));
 const featuredCase = cases.find((item) => item.id === "diadia-health") ?? cases[0];
 const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0, 4);
-const systemSignals = [
-  { label: "Constraint", value: "Founder-led pipeline", accent: "coral" },
-  { label: "Build", value: "Acquisition operating system", accent: "violet" },
-  { label: "Transfer", value: "Team-owned weekly cadence", accent: "teal" }
-];
-const rhythmSteps = [
-  { label: "Monday", title: "Read the signal", body: "Pipeline, channel, conversion and sales notes become one decision view." },
-  { label: "Midweek", title: "Ship the next move", body: "Campaigns, pages, outbound, content or offer tests move with a named owner." },
-  { label: "Friday", title: "Scale, stop, fix", body: "Every week ends with a plain-English call on what deserves more attention." }
-];
+
+// Headline metrics reordered: lead with the strongest commercial proof first.
+// Order: ad spend > sign-ups > built-from-zero > exits > review average.
 const heroProofStats = headlineMetrics.map((metric) => {
   const value = metric.value;
-
   if (value === "£10M+") return { ...metric, target: "10", prefix: "£", suffix: "M+", decimals: "0" };
   if (value === "4.93/5") return { ...metric, target: "4.93", prefix: "", suffix: "/5", decimals: "2" };
-
   return {
     ...metric,
     target: value.replace(/\D/g, "") || "0",
@@ -47,6 +39,26 @@ const heroProofStats = headlineMetrics.map((metric) => {
   };
 });
 
+// Featured case label on the homepage uses the named client.
+const featuredCaseLabel = featuredCase?.data.client ?? "";
+
+// Concrete deliverables for the "growth system" section — replaces the
+// abstract Constraint / Build / Transfer block.
+const concreteDeliverables = [
+  { label: "ICP & positioning", note: "One-line offer + segment map" },
+  { label: "Landing & offer",   note: "Tested headline + proof stack" },
+  { label: "Channel plan",      note: "Where pipeline actually comes from" },
+  { label: "Experiment backlog",note: "ICE-scored, weekly cadence" },
+  { label: "Growth dashboard",  note: "Pipeline → activity → decisions" },
+  { label: "Decision cadence",  note: "Mon read · Wed ship · Fri decide" },
+  { label: "Team handover pack",note: "What to run after we leave" }
+];
+
+// Filter testimonials: remove MentorCruise reviews from homepage proof.
+// They keep their place on /testimonials and /proof but the homepage
+// surface focuses on commercial / founder-advisory feedback only.
+const homeTestimonials = testimonials.filter((t) => !/mentorcruise/i.test(t.company));
+
 function metricLead(result: string) {
   return result.match(/(?:[$£])?\d+(?:\.\d+)?%?\+?/)?.[0] ?? result.split(" ")[0];
 }
@@ -54,11 +66,11 @@ function metricLead(result: string) {
 
 <BaseLayout
   path="/"
-  title="We Scale Startups | Growth Leadership for Predictable Acquisition"
-  description="Growth leadership for startups that need predictable acquisition. Diagnose the bottleneck, build the growth system, and transfer it so revenue is not founder-dependent."
+  title="We Scale Startups | Growth Leadership for Founder-Led Startups"
+  description="We help founder-led startups turn scattered marketing activity into a weekly growth system. Diagnose the bottleneck, build the acquisition system, transfer the rhythm."
   schema={buildFaqSchema([...buyerFaqs])}
 >
-  <!-- HERO: interactive diagnosis and focused conversion path -->
+  <!-- HERO -->
   <section class="hero wss-hero-redesign" aria-label="We Scale Startups hero">
     <span class="brand-glyph" aria-hidden="true"><span>WSS</span></span>
 
@@ -79,8 +91,15 @@ function metricLead(result: string) {
             <span class="beat"><span class="grad">Step out of the loop.</span></span>
           </h1>
 
+          <!-- Plain-English line above the operator language. -->
+          <p class="hero-plain">
+            We help founder-led startups turn scattered marketing activity into a weekly growth system.
+            <strong>For founders with traction, but no repeatable way to turn demand into pipeline.</strong>
+          </p>
+
           <p class="hero-thesis">
-            Fractional growth leadership for post-PMF startups. We diagnose the constraint, build the operating system around it, and transfer the rhythm so revenue stops depending on founder heroics.
+            We diagnose the constraint, build the acquisition system around it, and transfer the rhythm
+            so revenue stops depending on founder heroics.
           </p>
 
           <ul class="hero-strikes" aria-label="Patterns we eliminate">
@@ -89,9 +108,10 @@ function metricLead(result: string) {
             <li><span class="strike">spend without a scaling decision</span></li>
           </ul>
 
+          <!-- Single primary CTA + single secondary, consistent across the whole site. -->
           <div class="hero-cta">
             <a class="btn btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book">
-              Book a 30-minute diagnostic <span class="arr" aria-hidden="true">→</span>
+              Book a 30-minute growth diagnostic <span class="arr" aria-hidden="true">→</span>
             </a>
             <a class="btn btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
               Take the 5-minute scorecard <span class="arrow" aria-hidden="true">→</span>
@@ -178,6 +198,7 @@ function metricLead(result: string) {
         </aside>
       </div>
 
+      <!-- Proof rail: ad spend > signups > exits > startups > review average -->
       <div class="proof-rail" aria-label="Selected proof">
         {heroProofStats.map((metric) => (
           <div class="stat">
@@ -189,301 +210,133 @@ function metricLead(result: string) {
     </div>
   </section>
 
+  <!-- Diagnostic interactivity script kept inline so the hero remains self-contained. -->
   <script is:inline>
     (() => {
       const hero = document.querySelector(".wss-hero-redesign");
       const diag = hero?.querySelector("#diag");
       if (!hero || !diag) return;
-
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const spark = hero.querySelector(".spark");
       if (spark) requestAnimationFrame(() => spark.classList.add("is-animated"));
-
       const rows = [...diag.querySelectorAll(".row[data-key]")];
       const copyEl = diag.querySelector("#diagCopy");
       const resetBtn = diag.querySelector("[data-reset]");
       const scenarios = {
-        positioning: {
-          severity: { positioning: 88, acquisition: 46, conversion: 58, reporting: 42, team: 34 },
-          head: "Message-market fit drift.",
-          body: "Buyers do not pattern-match the offer to their actual problem, so acquisition gets harder upstream."
-        },
-        acquisition: {
-          severity: { positioning: 32, acquisition: 88, conversion: 54, reporting: 62, team: 38 },
-          head: "Acquisition channels operating in isolation.",
-          body: "Paid, content and outbound are not reinforcing one another, so pipeline lands in waves."
-        },
-        conversion: {
-          severity: { positioning: 38, acquisition: 48, conversion: 86, reporting: 55, team: 36 },
-          head: "Site and offer leaking pipeline.",
-          body: "The page asks for too much, too early. Qualified visitors do not become qualified conversations."
-        },
-        reporting: {
-          severity: { positioning: 36, acquisition: 50, conversion: 48, reporting: 84, team: 42 },
-          head: "No single decision view.",
-          body: "Activity gets reported. What to scale, stop, or fix does not, so weeks pass without a sharp call."
-        },
-        team: {
-          severity: { positioning: 40, acquisition: 52, conversion: 46, reporting: 48, team: 86 },
-          head: "No internal owner running the rhythm.",
-          body: "The system needs a hand on the wheel inside. Without one, founder hours fill the gap and growth stays personal."
-        }
+        positioning:{severity:{positioning:88,acquisition:46,conversion:58,reporting:42,team:34},head:"Message-market fit drift.",body:"Buyers do not pattern-match the offer to their actual problem, so acquisition gets harder upstream."},
+        acquisition:{severity:{positioning:32,acquisition:88,conversion:54,reporting:62,team:38},head:"Acquisition channels operating in isolation.",body:"Paid, content and outbound are not reinforcing one another, so pipeline lands in waves."},
+        conversion:{severity:{positioning:38,acquisition:48,conversion:86,reporting:55,team:36},head:"Site and offer leaking pipeline.",body:"The page asks for too much, too early. Qualified visitors do not become qualified conversations."},
+        reporting:{severity:{positioning:36,acquisition:50,conversion:48,reporting:84,team:42},head:"No single decision view.",body:"Activity gets reported. What to scale, stop, or fix does not, so weeks pass without a sharp call."},
+        team:{severity:{positioning:40,acquisition:52,conversion:46,reporting:48,team:86},head:"No internal owner running the rhythm.",body:"The system needs a hand on the wheel inside. Without one, founder hours fill the gap and growth stays personal."}
       };
-      const verdict = (severity, isBottleneck) => isBottleneck ? "Bottleneck" : (severity < 42 ? "Healthy" : "Watch");
-
-      function applyDiagnosis(key, fromUser = false) {
-        const scenario = scenarios[key];
-        if (!scenario || !copyEl) return;
-
+      const verdict = (s, isB) => isB ? "Bottleneck" : (s < 42 ? "Healthy" : "Watch");
+      function applyDiagnosis(key, fromUser=false) {
+        const s = scenarios[key]; if (!s || !copyEl) return;
         rows.forEach((row) => {
-          const rowKey = row.dataset.key;
-          const severity = scenario.severity[rowKey];
-          const isBottleneck = rowKey === key;
-          row.classList.toggle("is-bottleneck", isBottleneck);
-          row.classList.toggle("is-low", !isBottleneck && severity < 42);
-          row.setAttribute("aria-pressed", isBottleneck ? "true" : "false");
-          row.querySelector(".bar")?.style.setProperty("--pct", `${severity}%`);
-          const verdictEl = row.querySelector(".verdict");
-          if (verdictEl) verdictEl.textContent = verdict(severity, isBottleneck);
+          const k = row.dataset.key, sev = s.severity[k], isB = k === key;
+          row.classList.toggle("is-bottleneck", isB);
+          row.classList.toggle("is-low", !isB && sev < 42);
+          row.setAttribute("aria-pressed", isB ? "true" : "false");
+          row.querySelector(".bar")?.style.setProperty("--pct", `${sev}%`);
+          const v = row.querySelector(".verdict"); if (v) v.textContent = verdict(sev, isB);
         });
-
-        copyEl.innerHTML = `<span class="lbl">Diagnosed bottleneck</span><strong>${scenario.head}</strong> ${scenario.body}`;
-        if (fromUser) {
-          diag.classList.add("is-touched", "is-pulsing");
-          window.setTimeout(() => diag.classList.remove("is-pulsing"), 260);
-        }
+        copyEl.innerHTML = `<span class="lbl">Diagnosed bottleneck</span><strong>${s.head}</strong> ${s.body}`;
+        if (fromUser) { diag.classList.add("is-touched","is-pulsing"); window.setTimeout(()=>diag.classList.remove("is-pulsing"),260); }
       }
-
       rows.forEach((row) => row.addEventListener("click", () => applyDiagnosis(row.dataset.key, true)));
-      resetBtn?.addEventListener("click", () => {
-        applyDiagnosis("acquisition", true);
-        diag.classList.remove("is-touched");
-      });
-
+      resetBtn?.addEventListener("click", () => { applyDiagnosis("acquisition", true); diag.classList.remove("is-touched"); });
       const stats = hero.querySelectorAll(".proof-rail .stat strong[data-target]");
-      const formatStat = (el) => {
-        const target = Number.parseFloat(el.dataset.target || "0");
-        const decimals = Number.parseInt(el.dataset.decimals || "0", 10);
-        el.textContent = `${el.dataset.prefix || ""}${target.toFixed(decimals)}${el.dataset.suffix || ""}`;
-      };
-      const countUp = (el) => {
-        const target = Number.parseFloat(el.dataset.target || "0");
-        const decimals = Number.parseInt(el.dataset.decimals || "0", 10);
-        const prefix = el.dataset.prefix || "";
-        const suffix = el.dataset.suffix || "";
-        const duration = 1300;
-        const start = performance.now();
-
-        function tick(now) {
-          const progress = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = `${prefix}${(target * eased).toFixed(decimals)}${suffix}`;
-          if (progress < 1) requestAnimationFrame(tick);
-        }
-
+      const fmt = (el) => { const t = +el.dataset.target||0, d = +el.dataset.decimals||0; el.textContent = `${el.dataset.prefix||""}${t.toFixed(d)}${el.dataset.suffix||""}`; };
+      const up = (el) => {
+        const t = +el.dataset.target||0, d = +el.dataset.decimals||0, p = el.dataset.prefix||"", s = el.dataset.suffix||"", dur = 1300, start = performance.now();
+        function tick(now) { const pr = Math.min(1, (now-start)/dur), e = 1-Math.pow(1-pr,3); el.textContent = `${p}${(t*e).toFixed(d)}${s}`; if (pr<1) requestAnimationFrame(tick); }
         requestAnimationFrame(tick);
       };
-
-      if (reduced || !("IntersectionObserver" in window)) {
-        stats.forEach(formatStat);
-      } else {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            countUp(entry.target);
-            io.unobserve(entry.target);
-          });
-        }, { threshold: 0.4 });
-        stats.forEach((stat) => io.observe(stat));
-      }
+      if (reduced || !("IntersectionObserver" in window)) { stats.forEach(fmt); }
+      else { const io = new IntersectionObserver((entries)=>{entries.forEach((en)=>{if(!en.isIntersecting)return;up(en.target);io.unobserve(en.target);});}, { threshold: 0.4 }); stats.forEach((s)=>io.observe(s)); }
     })();
   </script>
 
-  <!-- HERO-LEVEL CREDIBILITY: logos + immediate proof -->
+  <!-- Logos / proof strip -->
   <ProofLogos />
 
-  <!-- TESTIMONIALS: hero-adjacent, before any nav-y content -->
-  <TestimonialsBlock testimonials={testimonials} />
+  <!-- WHEN TO HIRE US — buyer pain points -->
+  <WhenToHireUs />
 
-  <!-- CREATIVE SYSTEM VISUAL: shows the actual operating model, not decoration -->
+  <!-- WHAT GETS BUILT — concrete deliverables, not abstract -->
   <section class="section creative-system-section">
-    <div class="shell creative-system-grid">
-      <div>
-        <p class="eyebrow">What gets built</p>
-        <h2>From founder-led effort to a visible growth machine.</h2>
-        <p class="lead-copy">
-          The work is tangible: a decision dashboard, sequenced experiments, weekly operating rhythm,
-          and a transfer pack your team can run without Daniel in every loop.
-        </p>
-      </div>
-      <div class="system-board" aria-label="Growth system visual showing diagnosis, build, and transfer">
-        <div class="system-board-top">
-          <span>Growth OS</span>
-          <strong>Week 1 → Week 12</strong>
-        </div>
-        <div class="system-board-flow">
-          {systemSignals.map((signal) => (
-            <article class={`system-node system-node-${signal.accent}`}>
-              <span>{signal.label}</span>
-              <strong>{signal.value}</strong>
-            </article>
-          ))}
-        </div>
-        <div class="system-dashboard">
-          <div>
-            <span class="dashboard-label">Pipeline clarity</span>
-            <strong>↑</strong>
-          </div>
-          <div>
-            <span class="dashboard-label">Founder dependency</span>
-            <strong>↓</strong>
-          </div>
-          <div>
-            <span class="dashboard-label">Weekly decisions</span>
-            <strong>live</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES: stronger selector with commercial context -->
-  <section class="section section-alt services-system-section" id="services">
     <div class="shell">
       <SectionIntro
-        eyebrow="Services"
-        title="Four ways to turn messy growth into a working system."
-        body="Pick by constraint, not by menu. Each service has a clear role, timeline, and handoff."
+        eyebrow="What actually gets built"
+        title="Turn scattered marketing into a weekly operating system."
+        body="The work is tangible. By the end of the engagement, your team owns these artefacts and runs them every week without us in the loop."
       />
-
-      <div class="service-selector">
-        <aside class="service-selector-aside">
-          <p class="eyebrow">How to choose</p>
-          <h3>Start where the evidence is weakest.</h3>
-          <p>
-            If you cannot explain what is blocking acquisition, diagnose first. If the constraint is clear,
-            move into a sprint, system build, or fractional leadership.
-          </p>
-          <a class="button button-dark" href="/services">Compare services</a>
-        </aside>
-        <div class="service-selector-list">
-          {serviceSnapshots.map((service, idx) => (
-            <a class:list={["service-selector-row", { "is-priority": idx === 0 }]} href={service.href}>
-              <div class="service-selector-index">{String(idx + 1).padStart(2, "0")}</div>
-              <div>
-                <p class="card-kicker">{service.shortTitle}</p>
-                <h3>{service.title}</h3>
-                <p><strong>Best for:</strong> {service.bestFor}</p>
-                <p><strong>What you get:</strong> {service.get}</p>
-              </div>
-              <div class="service-selector-meta">
-                <span>{service.timeline}</span>
-                <strong>{service.price}</strong>
-                <em>{service.cta}</em>
-              </div>
-            </a>
-          ))}
-        </div>
+      <div class="deliverables-grid">
+        {concreteDeliverables.map((d, i) => (
+          <article class="deliverable-card">
+            <span class="deliverable-num" aria-hidden="true">{String(i+1).padStart(2, "0")}</span>
+            <h3>{d.label}</h3>
+            <p>{d.note}</p>
+          </article>
+        ))}
       </div>
+      <p class="creative-system-foot">
+        <a class="link-arrow" href="/how-it-works">See how the system gets built →</a>
+      </p>
     </div>
   </section>
 
-  <!-- HIGH CONTRAST OPERATING RHYTHM -->
+  <!-- GROWTH IS BROADER THAN ACQUISITION — six pillars -->
+  <GrowthScopeBar />
+
+  <!-- SERVICES COMPARISON TABLE — replaces previous service-selector -->
+  <ServiceComparisonTable />
+
+  <!-- OPERATING RHYTHM (kept — different job from sections above) -->
   <section class="section dark-rhythm-section">
     <div class="shell dark-rhythm-grid">
       <div>
         <p class="eyebrow">Operating rhythm</p>
-        <h2>A weekly cadence for decisions, not another report nobody reads.</h2>
+        <h2>Give your team a weekly cadence they can run without you.</h2>
         <p>
-          The system is simple on purpose: read signal, ship the next useful thing, then decide what to scale,
-          stop, or fix. That is how growth becomes less founder-dependent.
+          Read the signal on Monday. Ship the next move midweek. Friday: scale, stop, or fix.
+          That is how growth becomes less founder-dependent.
         </p>
       </div>
       <div class="rhythm-flow" aria-label="Weekly growth operating rhythm">
-        {rhythmSteps.map((step, idx) => (
-          <article>
-            <span>{step.label}</span>
-            <strong>{step.title}</strong>
-            <p>{step.body}</p>
-            {idx < rhythmSteps.length - 1 && <b aria-hidden="true">→</b>}
-          </article>
-        ))}
+        <article><span>Monday</span><strong>Read the signal</strong><p>Pipeline, channel, conversion and sales notes become one decision view.</p><b aria-hidden="true">→</b></article>
+        <article><span>Midweek</span><strong>Ship the next move</strong><p>Campaigns, pages, outbound, content or offer tests move with a named owner.</p><b aria-hidden="true">→</b></article>
+        <article><span>Friday</span><strong>Scale, stop, fix</strong><p>Every week ends with a plain-English call on what deserves more attention.</p></article>
       </div>
     </div>
   </section>
 
-  <!-- AI / SEARCH VISIBILITY VISUAL -->
-  <section class="section ai-system-section">
-    <div class="shell ai-system-grid">
-      <div class="ai-system-map" aria-label="Search and AI visibility system">
-        <div class="ai-system-node ai-system-node-main">
-          <span>Entity</span>
-          <strong>We Scale Startups</strong>
-        </div>
-        <div class="ai-system-lines">
-          <span>Services</span>
-          <span>Proof</span>
-          <span>Industries</span>
-          <span>Reports</span>
-        </div>
-        <div class="ai-system-output">
-          <span>Readable by search and AI systems</span>
-          <strong>Clear pages, internal links, schema, sitemap, FAQs</strong>
-        </div>
-      </div>
-      <div>
-        <p class="eyebrow">SEO and LLM retrieval</p>
-        <h2>Make the growth expertise easy to crawl, quote, and trust.</h2>
-        <p class="lead-copy">
-          Search and AI systems need the same thing buyers need: clear pages, visible evidence,
-          specific services, useful reports, and claims that are easy to verify.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-light" href="/reports">View reports</a>
-          <a class="button button-light" href="/ai-growth-systems">AI growth systems</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CASE STUDY: P/A/R format, scannable in 5 seconds -->
+  <!-- CASE STUDY: anonymised label on the homepage tile -->
   {featuredCase && (
     <section class="section" id="results">
       <div class="shell">
         <SectionIntro
           eyebrow="Case studies"
-          title="Problem. Action. Result."
-          body="Same format every time. Read the row. If it sounds like you, click through."
+          title="Real engagements. Same Problem / Action / Result format every time."
+          body="Read the row. If it sounds like you, click through."
         />
         <div class="case-feature">
           <div class="case-visual" aria-hidden="true">
-            <span>{featuredCase.data.client}</span>
+            <span>{featuredCaseLabel}</span>
             <span>{featuredCase.data.results[0]}</span>
-            <strong>{featuredCase.data.client.slice(0, 1)}</strong>
+            <strong>{featuredCaseLabel.slice(0, 1)}</strong>
           </div>
           <div class="case-copy">
             <p class="eyebrow">{featuredCase.data.sector}</p>
-            <h3>{featuredCase.data.title}</h3>
+            <h3>{featuredCaseLabel}: {featuredCase.data.title.replace(/^.*?:\s*/, '')}</h3>
             <div class="par-grid">
-              <div class="par-row par-problem">
-                <span class="par-label">Problem</span>
-                <p>{featuredCase.data.challenge}</p>
-              </div>
-              <div class="par-row par-action">
-                <span class="par-label">Action</span>
-                <p>{featuredCase.data.work.slice(0, 3).join(". ")}.</p>
-              </div>
-              <div class="par-row par-result">
-                <span class="par-label">Result</span>
-                <p>{featuredCase.data.results.slice(0, 2).join("; ")}.</p>
-              </div>
+              <div class="par-row par-problem"><span class="par-label">Problem</span><p>{featuredCase.data.challenge}</p></div>
+              <div class="par-row par-action"><span class="par-label">What we changed</span><p>{featuredCase.data.work.slice(0, 3).join(". ")}.</p></div>
+              <div class="par-row par-result"><span class="par-label">Commercial result</span><p>{featuredCase.data.results.slice(0, 2).join("; ")}.</p></div>
             </div>
             <div class="case-metrics">
-              {featuredCase.data.results.slice(0, 3).map((result) => (
-                <div>
-                  <span class="stat-number">{metricLead(result)}</span>
-                  <span class="stat-label">{result}</span>
-                </div>
+              {featuredCase.data.results.slice(0, 3).map((r) => (
+                <div><span class="stat-number">{metricLead(r)}</span><span class="stat-label">{r}</span></div>
               ))}
             </div>
             <div class="hero-actions">
@@ -493,19 +346,15 @@ function metricLead(result: string) {
           </div>
         </div>
 
-        <!-- More cases, each in P/A/R micro-format -->
         <div class="grid-3 mt-8">
           {otherCases.map((item) => (
             <article class="case-mini">
               <p class="card-kicker">{item.data.sector}</p>
               <h4>{item.data.title}</h4>
               <dl class="par-mini">
-                <dt>Problem</dt>
-                <dd>{item.data.challenge}</dd>
-                <dt>Action</dt>
-                <dd>{item.data.work[0]}.</dd>
-                <dt>Result</dt>
-                <dd>{item.data.results[0]}{item.data.results[1] ? "; " + item.data.results[1] : ""}.</dd>
+                <dt>Problem</dt><dd>{item.data.challenge}</dd>
+                <dt>What we changed</dt><dd>{item.data.work[0]}.</dd>
+                <dt>Commercial result</dt><dd>{item.data.results[0]}{item.data.results[1] ? "; " + item.data.results[1] : ""}.</dd>
               </dl>
               <a class="card-link" href={`/case-studies/${item.id}`}>Read the case →</a>
             </article>
@@ -515,20 +364,24 @@ function metricLead(result: string) {
     </section>
   )}
 
-  <!-- WSS vs AGENCY: explicit positioning -->
+  <!-- TESTIMONIALS — homepage version filters out MentorCruise reviews -->
+  <TestimonialsBlock testimonials={homeTestimonials} />
+
+  <!-- WSS vs AGENCY -->
   <VsAgencyBlock />
 
-  <!-- DANIEL: founder-led, why I built this -->
+  <!-- DANIEL — moved here, not in mid-page -->
   <DanielStory />
 
-  <!-- WHO THIS IS NOT FOR: filters bad-fit leads -->
+  <!-- WHO THIS IS NOT FOR -->
   <NotForBlock />
 
+  <!-- FAQ -->
   <section class="section section-alt">
     <div class="shell">
       <SectionIntro
         eyebrow="FAQ"
-        title="What founders usually ask first."
+        title="Know what to fix before you spend more."
         body="Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership."
       />
       <div class="grid-4">
@@ -542,59 +395,90 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <!-- RESOURCES as lead capture (kept simple) -->
-  <section class="section section-alt">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="Resources"
-        title="Useful before you spend more."
-        body="Lightweight, free, no demo required. Score yourself first — book a call when the bottleneck is visible."
-      />
-      <div class="grid-3">
-        {leadMagnets.map((item) => (
-          <a class:list={["feature-card", "lead-magnet-card", { "is-primary-lead": item.primary }]} href={item.href}>
-            {item.primary && <span class="recommended-badge">Start here</span>}
-            <p class="card-kicker">{item.audience}</p>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <span class="card-link">Get it →</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- PROOF STANDARDS -->
   <section class="section">
     <div class="shell">
-      <SectionIntro
-        eyebrow="How we present proof"
-        title="No miracle claims, no anonymous wins."
-      />
+      <SectionIntro eyebrow="How we present proof" title="No miracle claims, no anonymous wins." />
       <div class="grid-3">
-        {proofStandards.map((item) => (
-          <article class="feature-card compact-card">
-            <p>{item}</p>
-          </article>
-        ))}
+        {proofStandards.map((item) => (<article class="feature-card compact-card"><p>{item}</p></article>))}
       </div>
     </div>
   </section>
 
-  <!-- FINAL CTA: single primary -->
+  <!-- FINAL CTA — single primary, consistent label across the whole site -->
   <section class="cta-band" id="cta">
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Next step</p>
-        <h2>Find the bottleneck first.</h2>
+        <h2>Find the bottleneck before you spend more.</h2>
         <p>Bring the current growth picture. In 30 minutes you'll leave with a plain-English view of what's blocking pipeline — and which of the four engagements actually fits.</p>
       </div>
       <div class="hero-actions">
         <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="final-book">
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          <span class="button-label">Book a 30-minute growth diagnostic</span>
+          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="final-scorecard">
+          Or, take the 5-minute scorecard →
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .hero-plain {
+    margin-top: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .hero-plain strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Concrete deliverables grid */
+  .deliverables-grid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) { .deliverables-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .deliverables-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .deliverable-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1rem 1rem 1.1rem;
+  }
+  .deliverable-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .deliverable-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 0.3rem;
+  }
+  .deliverable-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.45;
+  }
+  .creative-system-foot {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+</style>

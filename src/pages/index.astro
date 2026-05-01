@@ -24,8 +24,6 @@ const cases = sortByOrder(await getCollection("cases"));
 const featuredCase = cases.find((item) => item.id === "diadia-health") ?? cases[0];
 const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0, 4);
 
-// Headline metrics reordered: lead with the strongest commercial proof first.
-// Order: ad spend > sign-ups > built-from-zero > exits > review average.
 const heroProofStats = headlineMetrics.map((metric) => {
   const value = metric.value;
   if (value === "£10M+") return { ...metric, target: "10", prefix: "£", suffix: "M+", decimals: "0" };
@@ -39,11 +37,8 @@ const heroProofStats = headlineMetrics.map((metric) => {
   };
 });
 
-// Featured case label on the homepage uses the named client.
 const featuredCaseLabel = featuredCase?.data.client ?? "";
 
-// Concrete deliverables for the "growth system" section — replaces the
-// abstract Constraint / Build / Transfer block.
 const concreteDeliverables = [
   { label: "ICP & positioning", note: "One-line offer + segment map" },
   { label: "Landing & offer",   note: "Tested headline + proof stack" },
@@ -54,9 +49,6 @@ const concreteDeliverables = [
   { label: "Team handover pack",note: "What to run after we leave" }
 ];
 
-// Filter testimonials: remove MentorCruise reviews from homepage proof.
-// They keep their place on /testimonials and /proof but the homepage
-// surface focuses on commercial / founder-advisory feedback only.
 const homeTestimonials = testimonials.filter((t) => !/mentorcruise/i.test(t.company));
 
 function metricLead(result: string) {
@@ -66,8 +58,8 @@ function metricLead(result: string) {
 
 <BaseLayout
   path="/"
-  title="We Scale Startups | Growth Leadership for Founder-Led Startups"
-  description="We help founder-led startups turn scattered marketing activity into a weekly growth system. Diagnose the bottleneck, build the acquisition system, transfer the rhythm."
+  title="We Scale Startups | Fractional CMO for Post-PMF B2B SaaS"
+  description="Fractional CMO and growth leadership for post-PMF B2B SaaS and AI startups. Diagnose the bottleneck, build the acquisition system, transfer the rhythm."
   schema={buildFaqSchema([...buyerFaqs])}
 >
   <!-- HERO -->
@@ -80,9 +72,9 @@ function metricLead(result: string) {
           <p class="hero-rail" aria-label="Brand and positioning">
             <span class="mark">/&#47;&nbsp;WSS</span>
             <span class="pipe" aria-hidden="true">|</span>
-            <span class="label">Fractional growth leadership</span>
+            <span class="label">Fractional CMO · Fractional growth leadership</span>
             <span class="pipe" aria-hidden="true">|</span>
-            <span class="label">Post-PMF startups</span>
+            <span class="label">Post-PMF B2B SaaS &amp; AI startups</span>
           </p>
 
           <h1>
@@ -91,9 +83,8 @@ function metricLead(result: string) {
             <span class="beat"><span class="grad">Step out of the loop.</span></span>
           </h1>
 
-          <!-- Plain-English line above the operator language. -->
           <p class="hero-plain">
-            We help founder-led startups turn scattered marketing activity into a weekly growth system.
+            We help founder-led B2B SaaS and AI startups turn scattered marketing activity into a weekly growth system.
             <strong>For founders with traction, but no repeatable way to turn demand into pipeline.</strong>
           </p>
 
@@ -108,7 +99,6 @@ function metricLead(result: string) {
             <li><span class="strike">spend without a scaling decision</span></li>
           </ul>
 
-          <!-- Single primary CTA + single secondary, consistent across the whole site. -->
           <div class="hero-cta">
             <a class="btn btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book">
               Book a 30-minute growth diagnostic <span class="arr" aria-hidden="true">→</span>
@@ -117,7 +107,7 @@ function metricLead(result: string) {
               Take the 5-minute scorecard <span class="arrow" aria-hidden="true">→</span>
             </a>
           </div>
-          <p class="hero-microcopy">Leave the call with your biggest growth bottleneck named in plain English.</p>
+          <p class="hero-microcopy">Leave the call with your biggest growth bottleneck named in plain English. No pitch — just a clear view of what's blocking pipeline.</p>
 
           <div class="founder-card" aria-label="Founder">
             <picture>
@@ -198,7 +188,7 @@ function metricLead(result: string) {
         </aside>
       </div>
 
-      <!-- Proof rail: ad spend > signups > exits > startups > review average -->
+      <!-- Proof rail -->
       <div class="proof-rail" aria-label="Selected proof">
         {heroProofStats.map((metric) => (
           <div class="stat">
@@ -210,7 +200,7 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <!-- Diagnostic interactivity script kept inline so the hero remains self-contained. -->
+  <!-- Diagnostic interactivity script -->
   <script is:inline>
     (() => {
       const hero = document.querySelector(".wss-hero-redesign");
@@ -257,13 +247,44 @@ function metricLead(result: string) {
     })();
   </script>
 
-  <!-- Logos / proof strip -->
   <ProofLogos />
 
-  <!-- WHEN TO HIRE US — buyer pain points -->
   <WhenToHireUs />
 
-  <!-- WHAT GETS BUILT — concrete deliverables, not abstract -->
+  <!-- WHY NOW — traction hides weak systems -->
+  <section class="section why-now-section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Why now"
+        title="Early traction hides the cracks. Systems find them."
+        body="Most post-PMF founders hit the same wall: growth worked when the founder ran it personally. Channels were tested. Some deals closed. Then the pattern broke — and no one could explain why."
+      />
+      <div class="why-now-grid">
+        <article class="why-now-card">
+          <span class="why-now-num">01</span>
+          <h3>Founder-led growth stops scaling</h3>
+          <p>What got you to £1M ARR was personal: your network, your pitch, your energy. That's not a system — it's a bottleneck wearing founder clothes.</p>
+        </article>
+        <article class="why-now-card">
+          <span class="why-now-num">02</span>
+          <h3>Channels work in isolation, not together</h3>
+          <p>Paid tests ran. SEO was tried. Outbound happened. But none of it reinforced the others, so pipeline comes in waves instead of a rhythm.</p>
+        </article>
+        <article class="why-now-card">
+          <span class="why-now-num">03</span>
+          <h3>The team waits for direction</h3>
+          <p>Without a clear constraint map and decision cadence, good people optimise locally. Spend goes up. Pipeline doesn't.</p>
+        </article>
+        <article class="why-now-card">
+          <span class="why-now-num">04</span>
+          <h3>The longer you wait, the harder it gets</h3>
+          <p>Bad reporting habits compound. Positioning drifts. A weak system disguised as a growth problem gets more expensive to fix every quarter.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT GETS BUILT -->
   <section class="section creative-system-section">
     <div class="shell">
       <SectionIntro
@@ -286,13 +307,11 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <!-- GROWTH IS BROADER THAN ACQUISITION — six pillars -->
   <GrowthScopeBar />
 
-  <!-- SERVICES COMPARISON TABLE — replaces previous service-selector -->
   <ServiceComparisonTable />
 
-  <!-- OPERATING RHYTHM (kept — different job from sections above) -->
+  <!-- OPERATING RHYTHM -->
   <section class="section dark-rhythm-section">
     <div class="shell dark-rhythm-grid">
       <div>
@@ -311,7 +330,6 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <!-- CASE STUDY: anonymised label on the homepage tile -->
   {featuredCase && (
     <section class="section" id="results">
       <div class="shell">
@@ -364,16 +382,12 @@ function metricLead(result: string) {
     </section>
   )}
 
-  <!-- TESTIMONIALS — homepage version filters out MentorCruise reviews -->
   <TestimonialsBlock testimonials={homeTestimonials} />
 
-  <!-- WSS vs AGENCY -->
   <VsAgencyBlock />
 
-  <!-- DANIEL — moved here, not in mid-page -->
   <DanielStory />
 
-  <!-- WHO THIS IS NOT FOR -->
   <NotForBlock />
 
   <!-- FAQ -->
@@ -398,14 +412,14 @@ function metricLead(result: string) {
   <!-- PROOF STANDARDS -->
   <section class="section">
     <div class="shell">
-      <SectionIntro eyebrow="How we present proof" title="No miracle claims, no anonymous wins." />
+      <SectionIntro eyebrow="How we show proof" title="No miracle claims. No anonymous wins." />
       <div class="grid-3">
         {proofStandards.map((item) => (<article class="feature-card compact-card"><p>{item}</p></article>))}
       </div>
     </div>
   </section>
 
-  <!-- FINAL CTA — single primary, consistent label across the whole site -->
+  <!-- FINAL CTA -->
   <section class="cta-band" id="cta">
     <div class="shell cta-inner">
       <div>
@@ -416,7 +430,7 @@ function metricLead(result: string) {
       <div class="hero-actions">
         <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="final-book">
           <span class="button-label">Book a 30-minute growth diagnostic</span>
-          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="final-scorecard">
           Or, take the 5-minute scorecard →
@@ -437,6 +451,45 @@ function metricLead(result: string) {
   .hero-plain strong {
     color: var(--accent);
     font-weight: 700;
+  }
+
+  /* Why Now section */
+  .why-now-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) { .why-now-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .why-now-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .why-now-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1.25rem 1.25rem 1.4rem;
+  }
+  .why-now-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .why-now-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 0.5rem;
+  }
+  .why-now-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.6;
   }
 
   /* Concrete deliverables grid */

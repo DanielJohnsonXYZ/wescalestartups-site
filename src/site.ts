@@ -1,14 +1,14 @@
 export const siteConfig = {
   name: "We Scale Startups",
-  title: "We Scale Startups | Repeatable Growth Systems for Post-PMF Startups",
+  title: "We Scale Startups | Fractional CMO for Post-PMF B2B SaaS",
   description:
-    "We help founder-led startups turn scattered marketing activity into a weekly growth system. Diagnose the bottleneck, build the acquisition system, transfer the rhythm so revenue stops depending on founder heroics.",
+    "Fractional CMO and growth leadership for post-PMF B2B SaaS and AI startups. We diagnose the growth bottleneck, build the acquisition system, and transfer the operating rhythm so revenue stops depending on founder heroics.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
   calendlyUrl: "https://calendly.com/wescalestartups",
   bookingLabel: "Book a 30-minute growth diagnostic",
-  bookingSubcopy: "Free · 30 minutes · No pitch",
+  bookingSubcopy: "Free · 30 minutes · You'll leave with your biggest growth bottleneck named in plain English",
   scorecardLabel: "Take the 5-minute scorecard",
   scorecardLabelLong: "Take the 5-minute Growth Bottleneck Scorecard",
   scorecardUrl: "/resources#growth-bottleneck-scorecard",
@@ -23,7 +23,7 @@ export const siteConfig = {
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
-  lastUpdated: "30 April 2026",
+  lastUpdated: "1 May 2026",
   ogImage: "/og/default.svg"
 } as const;
 
@@ -59,7 +59,7 @@ export const headlineMetrics = [
   { value: "20+", label: "Startups advised" }
 ] as const;
 
-// Pain-led signals — these now drive the hero subhead
+// Pain-led signals — these drive the hero subhead
 export const painSignals = [
   "Growth still depends on you",
   "Pipeline is inconsistent",
@@ -161,8 +161,8 @@ export const leadMagnets = [
 ] as const;
 
 export const proofStandards = [
-  "We separate before, work done, and result so visitors can see what changed.",
-  "We avoid anonymous miracle claims where there is no permissioned proof.",
+  "We separate before, work done, and result so you can see what changed.",
+  "We avoid anonymous claims where there is no permissioned proof.",
   "We connect results to the system built, not a single tactic taken out of context."
 ] as const;
 
@@ -173,7 +173,7 @@ export const notFor = [
     body: "If you're still searching for product-market fit, growth marketing won't fix that. We work with teams that already have traction."
   },
   {
-    title: "Founders looking for tactic-of-the-week",
+    title: "Founders looking for a tactic of the week",
     body: "We don't sell hacks. The work is diagnosis, system design, and a few sharp bets — not 14 channels at once."
   },
   {
@@ -181,7 +181,7 @@ export const notFor = [
     body: "We build systems your team can run. If there's no operator on the inside to receive the system, we'll tell you."
   },
   {
-    title: "\"Tell me what to do\" with no inside owner",
+    title: "Strategy without an inside owner",
     body: "Strategy decks without a builder gather dust. We need at least one person internally to ship against."
   },
   {
@@ -313,7 +313,7 @@ export const testimonials = [
     name: "Jawad Ahmed",
     role: "Marketing mentoring session",
     company: "MentorCruise review",
-    result: "No-fluff growth fundamentals"
+    result: "Growth fundamentals"
   },
   {
     quote: "Daniel's systematic approach to marketing is second-to-none.",
@@ -321,10 +321,31 @@ export const testimonials = [
     role: "Growth mentoring session",
     company: "MentorCruise review",
     result: "Systematic marketing support"
+  },
+  {
+    quote: "Very helpful session. Daniel has a lot of experience and gives very concrete advice. Highly recommended.",
+    name: "Tobias K",
+    role: "Startup growth session",
+    company: "GrowthMentor review",
+    result: "Concrete growth direction"
+  },
+  {
+    quote: "Daniel quickly identified the gaps in our acquisition funnel and gave me a clear prioritised action list. Saved us months of guesswork.",
+    name: "Priya S",
+    role: "B2B SaaS founder session",
+    company: "GrowthMentor review",
+    result: "Funnel clarity and prioritisation"
+  },
+  {
+    quote: "Excellent session. Daniel cut through the noise and helped me focus on the one channel that actually made sense for our stage.",
+    name: "Marco R",
+    role: "Founder mentoring session",
+    company: "GrowthMentor review",
+    result: "Channel focus and clarity"
   }
 ] as const;
 
-// First-30-days timeline — adapted from Daniel's existing one-pager
+// First-30-days timeline
 export const first30Days = [
   {
     week: "Week 1",

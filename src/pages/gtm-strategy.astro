@@ -1,0 +1,370 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig, serviceSnapshots } from "../site";
+
+const faqs = [
+  {
+    question: "What is a GTM strategy for a B2B SaaS startup?",
+    answer:
+      "A GTM (go-to-market) strategy is the operating system that connects your product to the buyers who need it. It covers ICP definition, positioning, channel selection, offer design, and the reporting cadence that tells you what to scale or stop. Most post-PMF teams have run GTM activity — they rarely have a connected system."
+  },
+  {
+    question: "When does a startup need GTM strategy work?",
+    answer:
+      "When pipeline is inconsistent, when different team members describe the product differently on every call, when you're spending on channels without knowing what to scale, or when the founder is still the primary driver of new revenue."
+  },
+  {
+    question: "How is GTM strategy different from a marketing plan?",
+    answer:
+      "A marketing plan lists activities. A GTM strategy names the constraint, selects the minimum viable set of channels to address it, defines the offer that converts, and sets the decision cadence that keeps the team moving in the same direction. Plans gather dust. Systems run."
+  },
+  {
+    question: "What does WSS deliver in a GTM engagement?",
+    answer:
+      "Depending on the engagement: an ICP and positioning document, a channel plan with decision rationale, landing page and offer briefs, an experiment backlog, a growth dashboard, and a weekly decision cadence the team can run without us."
+  }
+];
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "GTM Strategy", path: "/gtm-strategy" }
+  ]),
+  buildFaqSchema(faqs)
+];
+
+const gtmProblems = [
+  {
+    signal: "Messaging changes on every call",
+    root: "No shared ICP or positioning document",
+    fix: "ICP definition + one-line positioning"
+  },
+  {
+    signal: "Channels tested but nothing scaled",
+    root: "No decision framework for what to keep running",
+    fix: "Channel plan with explicit scale/stop criteria"
+  },
+  {
+    signal: "Pipeline comes in waves",
+    root: "Channels working in isolation, not as a system",
+    fix: "Acquisition system connecting paid, content, and outbound"
+  },
+  {
+    signal: "Founder still drives most new revenue",
+    root: "No operating rhythm the team can run independently",
+    fix: "Weekly decision cadence + team handover pack"
+  },
+  {
+    signal: "Spend going up, pipeline not keeping pace",
+    root: "No attribution or decision view",
+    fix: "Growth dashboard with pipeline → activity → decisions"
+  },
+  {
+    signal: "Everyone busy, nothing moving",
+    root: "Activity without a constraint map",
+    fix: "Growth diagnosis to name the real bottleneck first"
+  }
+];
+
+const gtmDeliverables = [
+  { label: "ICP definition", detail: "Segment, trigger, buyer, proof of fit" },
+  { label: "One-line positioning", detail: "For, who, problem, unlike, we, proof" },
+  { label: "Channel plan", detail: "Two or three channels with decision rationale" },
+  { label: "Offer map", detail: "Entry offer, core offer, upsell path" },
+  { label: "Landing page brief", detail: "Headline, proof stack, CTA — ready to build" },
+  { label: "Experiment backlog", detail: "ICE-scored, 90-day, named owners" },
+  { label: "Growth dashboard", detail: "Pipeline, channel, conversion, weekly read" },
+  { label: "Decision cadence", detail: "Mon read · Wed ship · Fri decide" },
+  { label: "Team handover pack", detail: "What to run after the engagement ends" }
+];
+---
+
+<BaseLayout
+  path="/gtm-strategy"
+  title="GTM Strategy for Post-PMF B2B SaaS | We Scale Startups"
+  description="GTM strategy for post-PMF B2B SaaS and AI startups. Diagnose the real bottleneck, build the acquisition system, and install the weekly operating rhythm your team can run."
+  schema={schemas}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">GTM Strategy</p>
+      <h1>Your GTM problem is probably not what you think it is.</h1>
+      <p class="lede">
+        Most post-PMF founders have tried channels. The bottleneck is rarely the channel itself —
+        it's the absence of a connected system, a clear decision view, and a team rhythm that runs without the founder in every loop.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="gtm-hero-book">
+          {siteConfig.bookingLabel}
+        </a>
+        <a class="button button-light" href="/resources#growth-bottleneck-scorecard" data-cta="gtm-hero-scorecard">
+          Take the 5-minute scorecard
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GTM problem map -->
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Problem map"
+        title="Name the signal. Find the root. Build the fix."
+        body="GTM problems almost always have the same six surface symptoms. The root cause — and therefore the right fix — is different for each."
+      />
+      <div class="gtm-problem-grid">
+        {gtmProblems.map((p) => (
+          <article class="gtm-problem-card">
+            <p class="gtm-signal"><span class="gtm-dot" aria-hidden="true"></span>{p.signal}</p>
+            <p class="gtm-root"><strong>Root:</strong> {p.root}</p>
+            <p class="gtm-fix"><span class="gtm-arrow">→</span> {p.fix}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What a GTM system actually includes -->
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="What gets built"
+        title="A GTM strategy is nine tangible artefacts, not a slide deck."
+        body="Every engagement ends with your team holding documents they can open on Monday morning and run. Not a strategy in someone's head. Not a Notion doc nobody reads."
+      />
+      <div class="gtm-deliverables-grid">
+        {gtmDeliverables.map((d, i) => (
+          <article class="gtm-deliverable">
+            <span class="gtm-num">{String(i + 1).padStart(2, "0")}</span>
+            <h3>{d.label}</h3>
+            <p>{d.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The three failure modes -->
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Why GTM stalls"
+        title="Three failure modes that look like a channel problem."
+      />
+      <div class="grid-3">
+        <article class="feature-card">
+          <p class="card-kicker">Failure mode 01</p>
+          <h3>Strategy without a constraint map</h3>
+          <p>The team picks three channels and runs them. None of them is wrong. But without knowing which constraint in the funnel is the real bottleneck, they can't know which channel to prioritise or when to stop.</p>
+        </article>
+        <article class="feature-card">
+          <p class="card-kicker">Failure mode 02</p>
+          <h3>Channels without a connected offer</h3>
+          <p>Paid drives traffic to a page that asks for too much too early. Content builds awareness that never converts. Outbound lands in the wrong segment. The channels are fine. The offer architecture is the problem.</p>
+        </article>
+        <article class="feature-card">
+          <p class="card-kicker">Failure mode 03</p>
+          <h3>Activity without a decision rhythm</h3>
+          <p>Tests run. Results come in. Nobody meets to decide what to scale, stop, or fix. Six weeks pass. The backlog grows. Momentum stalls. A weekly decision cadence is the difference between a system and a set of experiments.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Which engagement -->
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Where to start"
+        title="GTM work lives in four different engagements depending on where you are."
+      />
+      <div class="gtm-engagement-grid">
+        {serviceSnapshots.map((s) => (
+          <a class="gtm-engagement-card" href={s.href}>
+            <p class="card-kicker">{s.shortTitle}</p>
+            <h3>{s.title}</h3>
+            <p>{s.bestFor}</p>
+            <span class="card-link">{s.cta} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="FAQ" title="Common questions about GTM strategy." />
+      <div class="grid-2">
+        {faqs.map((faq) => (
+          <article class="feature-card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Name the bottleneck before you build the plan.</h2>
+        <p>Bring the current growth picture. In 30 minutes you'll leave with a plain-English view of what's blocking pipeline — and which GTM engagement actually fits your stage.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="gtm-cta-book">
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gtm-cta-scorecard">
+          Or, take the 5-minute scorecard →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* GTM problem map */
+  .gtm-problem-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) { .gtm-problem-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .gtm-problem-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .gtm-problem-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .gtm-signal {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .gtm-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .gtm-root {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .gtm-fix {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 0.4rem;
+  }
+  .gtm-arrow { color: var(--accent); }
+
+  /* GTM deliverables */
+  .gtm-deliverables-grid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) { .gtm-deliverables-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 1080px) { .gtm-deliverables-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .gtm-deliverable {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1.1rem;
+  }
+  .gtm-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .gtm-deliverable h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 0.3rem;
+  }
+  .gtm-deliverable p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* GTM engagement cards */
+  .gtm-engagement-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) { .gtm-engagement-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .gtm-engagement-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .gtm-engagement-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .gtm-engagement-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .gtm-engagement-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+  }
+  .gtm-engagement-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .gtm-engagement-card .card-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 0.25rem;
+  }
+</style>

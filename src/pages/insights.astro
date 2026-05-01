@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
@@ -52,6 +53,16 @@ const insights = sortByOrder(await getCollection("insights"));
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="shell">
+      <EmailSignup
+        heading="Get the weekly growth note."
+        subtext="One insight a week. What founders at your stage are actually doing to break through plateaus."
+        formId="insights-footer"
+      />
     </div>
   </section>
 

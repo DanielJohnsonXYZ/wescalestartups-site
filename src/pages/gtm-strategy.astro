@@ -1,4 +1,5 @@
 ---
+import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
@@ -225,6 +226,15 @@ const gtmDeliverables = [
           Or, take the 5-minute scorecard →
         </a>
       </div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="shell">
+      <EmailSignup
+        heading="Get the GTM Diagnostic Checklist."
+        subtext="The exact questions we use to find the GTM constraint in the first 30 minutes. Free by email."
+        formId="gtm-strategy-footer"
+      />
     </div>
   </section>
 </BaseLayout>

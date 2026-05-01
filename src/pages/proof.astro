@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import ProofLogos from "../components/ProofLogos.astro";
@@ -146,6 +147,16 @@ const cases = sortByOrder(await getCollection("cases"));
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
       </div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="shell">
+      <EmailSignup
+        heading="Want the monthly proof digest?"
+        subtext="Real numbers from real engagements. Sent once a month to founders who want benchmarks, not vanity stories."
+        formId="proof-footer"
+        variant="dark"
+      />
     </div>
   </section>
 </BaseLayout>

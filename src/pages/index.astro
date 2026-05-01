@@ -9,6 +9,7 @@ import DanielStory from "../components/DanielStory.astro";
 import WhenToHireUs from "../components/WhenToHireUs.astro";
 import GrowthScopeBar from "../components/GrowthScopeBar.astro";
 import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
+import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildFaqSchema } from "../lib/schema";
 import { sortByOrder } from "../lib/utils";
@@ -281,6 +282,17 @@ function metricLead(result: string) {
           <p>Bad reporting habits compound. Positioning drifts. A weak system disguised as a growth problem gets more expensive to fix every quarter.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- EMAIL SIGNUP -->
+  <section class="section section--tight">
+    <div class="shell">
+      <EmailSignup
+        heading="Get the weekly growth note."
+        subtext="One insight a week for post-PMF founders. What's blocking growth, what fixes it, and why."
+        formId="homepage-mid"
+      />
     </div>
   </section>
 

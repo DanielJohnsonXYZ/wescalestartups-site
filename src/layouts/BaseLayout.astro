@@ -1,4 +1,5 @@
 ---
+import EasterEgg from "../components/EasterEgg.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
@@ -113,5 +114,6 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
       )}
     </main>
     <SiteFooter />
+    <EasterEgg />
   </body>
 </html>

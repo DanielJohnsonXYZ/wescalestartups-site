@@ -1,0 +1,107 @@
+---
+// EasterEgg.astro — Konami code (↑↑↓↓←→←→BA) triggers a hidden growth tip
+// No props needed — just drop anywhere in BaseLayout
+---
+
+<div id="easter-egg" aria-hidden="true" role="dialog" aria-label="Secret message">
+  <button id="easter-egg-close" aria-label="Close">×</button>
+  <p class="ee-eyebrow">🔑 You found it.</p>
+  <h2>The one growth insight that changes everything:</h2>
+  <p class="ee-body">
+    Most startups don't have a channel problem. They have a clarity problem.
+    When the offer is specific enough, the right channel becomes obvious.
+    Fix the message before you fix the media.
+  </p>
+  <p class="ee-sig">— Daniel, We Scale Startups</p>
+  <a class="button button-brand" href="/book">Book a diagnostic call →</a>
+</div>
+
+<script>
+  (() => {
+    const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+    let idx = 0;
+    document.addEventListener('keydown', (e) => {
+      if (e.keyCode === KONAMI[idx]) {
+        idx++;
+        if (idx === KONAMI.length) {
+          idx = 0;
+          const egg = document.getElementById('easter-egg');
+          if (egg) { egg.classList.add('is-visible'); egg.removeAttribute('aria-hidden'); }
+        }
+      } else { idx = 0; }
+    });
+    document.getElementById('easter-egg-close')?.addEventListener('click', () => {
+      const egg = document.getElementById('easter-egg');
+      if (egg) { egg.classList.remove('is-visible'); egg.setAttribute('aria-hidden', 'true'); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const egg = document.getElementById('easter-egg');
+        if (egg?.classList.contains('is-visible')) {
+          egg.classList.remove('is-visible'); egg.setAttribute('aria-hidden', 'true');
+        }
+      }
+    });
+  })();
+</script>
+
+<style>
+  #easter-egg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    gap: 1rem;
+  }
+  #easter-egg.is-visible { display: flex; }
+  #easter-egg .ee-eyebrow {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent, #f97316);
+    margin: 0;
+  }
+  #easter-egg h2 {
+    color: #fff;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    max-width: 28ch;
+    margin: 0;
+  }
+  #easter-egg .ee-body {
+    color: #ccc;
+    font-size: 1.05rem;
+    max-width: 48ch;
+    line-height: 1.7;
+    margin: 0;
+  }
+  #easter-egg .ee-sig {
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 0;
+  }
+  #easter-egg-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid #555;
+    color: #aaa;
+    font-size: 1.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  #easter-egg-close:hover { border-color: #fff; color: #fff; }
+</style>

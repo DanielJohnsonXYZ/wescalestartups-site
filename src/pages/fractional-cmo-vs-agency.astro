@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig, vsAgency, wssVsAgencyPage } from "../site";
+import { siteConfig, strategicPageRelatedInsights, vsAgency, wssVsAgencyPage } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -12,6 +12,8 @@ const schemas = [
   ]),
   buildFaqSchema([...wssVsAgencyPage.faqs])
 ];
+
+const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"] ?? [];
 ---
 
 <BaseLayout
@@ -39,7 +41,7 @@ const schemas = [
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="vs-agency-hero-scorecard">
-          {siteConfig.scorecardLabel}
+          Or, {siteConfig.scorecardLabel} →
         </a>
         <a class="button button-light" href="/services/fractional-cmo">See Fractional CMO</a>
       </div>
@@ -110,6 +112,26 @@ const schemas = [
       </p>
     </div>
   </section>
+
+  {
+    vsAgencyRelated.length > 0 && (
+      <section class="section section-alt">
+        <div class="shell">
+          <p class="eyebrow">Related reading</p>
+          <h2>Founder notes on the same decision.</h2>
+          <ul class="related-insights-list">
+            {vsAgencyRelated.map((item) => (
+              <li>
+                <a class="card-link" href={item.href}>
+                  {item.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <section class="cta-band">
     <div class="shell cta-inner">

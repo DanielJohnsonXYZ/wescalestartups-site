@@ -90,6 +90,14 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   "/gtm-strategy": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
+  ],
+  "/fractional-cmo-vs-agency": [
+    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
+  ],
+  "/quiz": [
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+    { href: "/diagnose", label: "Manual 5-layer diagnostic framework" }
   ]
 };
 

@@ -3,11 +3,37 @@ import { getCollection } from "astro:content";
 import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
-import { buildBreadcrumbSchema } from "../lib/schema";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { formatDate, sortByOrder } from "../lib/utils";
 import { siteConfig } from "../site";
 
 const insights = sortByOrder(await getCollection("insights"));
+
+const insightsHubFaqs = [
+  {
+    question: "How is this different from generic marketing blogs?",
+    answer:
+      "Each note answers a founder question we see repeatedly: diagnosis, acquisition systems, AI visibility, and reducing founder dependency. The goal is a decision, not an archive."
+  },
+  {
+    question: "Where should I start?",
+    answer:
+      "If the bottleneck is unclear, start with the scorecard or quiz, then read the note that matches your constraint. The proof page shows outcomes in one scroll."
+  },
+  {
+    question: "Can I apply this without hiring WSS?",
+    answer:
+      "Many founders use the frameworks independently. When the constraint is political, cross-functional, or expensive to get wrong, the diagnostic call is the fastest honest check."
+  }
+];
+
+const insightsSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Insights", path: "/insights" }
+  ]),
+  buildFaqSchema(insightsHubFaqs)
+];
 ---
 
 <BaseLayout
@@ -15,10 +41,7 @@ const insights = sortByOrder(await getCollection("insights"));
   title="Growth notes for founders between traction and scale | We Scale Startups"
   description="Original WSS insights on growth diagnosis, acquisition systems, AI visibility, and reducing founder dependency."
   keywords="fractional CMO, B2B SaaS growth, growth diagnosis, acquisition system, GTM strategy, startup marketing, founder-led growth, pipeline bottleneck, We Scale Startups"
-  schema={buildBreadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Insights", path: "/insights" }
-  ])}
+  schema={insightsSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -62,6 +85,21 @@ const insights = sortByOrder(await getCollection("insights"));
               {item.data.tags.map((tag) => <span>{tag}</span>)}
             </div>
             <a class="card-link" href={`/insights/${item.id}`}>Read the note →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>How to use these notes.</h2>
+      <div class="grid-3">
+        {insightsHubFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
           </article>
         ))}
       </div>

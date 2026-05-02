@@ -1,11 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig } from "../site";
-import { buildFaqSchema } from "../lib/schema";
+import { siteConfig, strategicPageRelatedInsights } from "../site";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 
 const quizCalendlyUrl = siteConfig.calendlyUrl;
 const quizBookingLabel = siteConfig.bookingLabel;
 const quizDiagnosticCallQuestion = `Is this the same as the ${siteConfig.bookingCallShort}?`;
+
+const quizRelated = strategicPageRelatedInsights["/quiz"] ?? [];
 
 const faqSchema = buildFaqSchema([
   {
@@ -21,13 +23,21 @@ const faqSchema = buildFaqSchema([
     answer: "The quiz is a self-serve starting point. The diagnostic call goes deeper: we review your current stack, pipeline data, and team context to give you a prioritised action plan."
   }
 ]);
+
+const quizSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Growth bottleneck quiz", path: "/quiz" }
+  ]),
+  faqSchema
+];
 ---
 
 <BaseLayout
   title="Growth Bottleneck Quiz | We Scale Startups"
   description="3-minute quiz that identifies your primary growth bottleneck across positioning, acquisition, conversion, reporting, and team ownership. Free, instant results, no email required."
   path="/quiz"
-  schema={[faqSchema]}
+  schema={quizSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -37,6 +47,22 @@ const faqSchema = buildFaqSchema([
         10 questions across the 5 layers that determine whether a post-PMF startup scales or stalls.
         Instant result. No email required to see it.
       </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href="/diagnose" data-cta="quiz-hero-diagnose">
+          Prefer the written framework →
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="quiz-hero-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a
+          class="button button-light"
+          href={siteConfig.bookingUrl}
+          data-cta="quiz-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -50,6 +76,26 @@ const faqSchema = buildFaqSchema([
       </div>
     </div>
   </section>
+
+  {
+    quizRelated.length > 0 && (
+      <section class="section">
+        <div class="shell">
+          <p class="eyebrow">Go deeper</p>
+          <h2>After the quiz, read this next.</h2>
+          <ul class="related-insights-list">
+            {quizRelated.map((item) => (
+              <li>
+                <a class="card-link" href={item.href}>
+                  {item.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <!-- FAQ -->
   <section class="section section-alt">

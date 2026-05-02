@@ -183,8 +183,14 @@ import { siteConfig } from "../site";
           <h3>{siteConfig.bookingLabel}</h3>
           <p>Bring the scorecard result and your current growth picture. You'll leave with a plain-English view of the bottleneck and which engagement (if any) actually fits.</p>
         </div>
-        <a class="button button-brand" href={siteConfig.bookingUrl} title={siteConfig.bookingCallReassurance}>
-          {siteConfig.bookingLabel}
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          title={siteConfig.bookingCallReassurance}
+          data-cta="start-here-step3-book"
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
       </article>
     </div>

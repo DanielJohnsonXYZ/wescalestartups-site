@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig } from "../site";
+import { siteConfig, strategicPageRelatedInsights } from "../site";
 
 interface Props {
   path: string;
@@ -18,9 +18,12 @@ interface Props {
     question: string;
     answer: string;
   }>;
+  /** Optional override; defaults to `strategicPageRelatedInsights[path]`. */
+  relatedInsights?: Array<{ href: string; label: string }>;
 }
 
-const { path, eyebrow, title, description, lede, sections, faqs } = Astro.props;
+const { path, eyebrow, title, description, lede, sections, faqs, relatedInsights: relatedInsightsProp } = Astro.props;
+const relatedInsights = relatedInsightsProp ?? [...(strategicPageRelatedInsights[path] ?? [])];
 const schema = [
   buildBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -88,6 +91,26 @@ const schema = [
       </div>
     </div>
   </section>
+
+  {
+    relatedInsights.length > 0 && (
+      <section class="section">
+        <div class="shell">
+          <p class="eyebrow">Related reading</p>
+          <h2>Notes that pair with this page.</h2>
+          <ul class="related-insights-list">
+            {relatedInsights.map((item) => (
+              <li>
+                <a class="card-link" href={item.href}>
+                  {item.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <section class="cta-band">
     <div class="shell cta-inner">

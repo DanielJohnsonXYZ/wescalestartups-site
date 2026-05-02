@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 
 const howToSchema = {
@@ -31,13 +32,40 @@ const decisionRules = [
   { rule: "If conversion is the constraint", path: "90-Day Growth Sprint → tested landing/copy/offer iterations.", href: "/services/90-day-growth-sprint" },
   { rule: "If reporting OR team ownership is the constraint", path: "Fractional CMO → senior owner inside the team running weekly cadence.", href: "/services/fractional-cmo" }
 ];
+
+const diagnoseFaqs = [
+  {
+    question: "How is this different from the quiz?",
+    answer:
+      "The quiz auto-scores a primary constraint. This page explains the five layers in depth. The quiz is faster; this framework is better when you want to reason through each layer with your team."
+  },
+  {
+    question: "What if two layers look equally red?",
+    answer:
+      "Pick the layer where fixing it unlocks the next decision. If you are stuck, book the diagnostic — the first job is forcing a single bottleneck statement everyone can agree on."
+  },
+  {
+    question: "Does a red signal always mean hire WSS?",
+    answer:
+      "No. Sometimes the honest next step is internal execution, a hire, or an agency brief. The goal is to stop adding activity before the constraint is named."
+  }
+];
+
+const diagnoseSchema = [
+  howToSchema,
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Diagnose", path: "/diagnose" }
+  ]),
+  buildFaqSchema(diagnoseFaqs)
+];
 ---
 
 <BaseLayout
   title="Diagnose your growth bottleneck | We Scale Startups"
   description="A 5-step diagnostic to find the real growth constraint in a post-PMF startup. Score yourself across positioning, acquisition, conversion, reporting, and team ownership before adding more activity."
   path="/diagnose"
-  schema={[howToSchema]}
+  schema={diagnoseSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -103,6 +131,21 @@ const decisionRules = [
             <p class="diag-rule-then">→ {r.path}</p>
             <span class="diag-rule-cta">See the engagement →</span>
           </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Using this framework.</h2>
+      <div class="grid-3">
+        {diagnoseFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
         ))}
       </div>
     </div>

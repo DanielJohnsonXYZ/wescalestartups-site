@@ -1,12 +1,14 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { absoluteUrl } from "../lib/utils";
+import { siteConfig } from "../site";
 
 export const prerender = true;
 
 const today = () => new Date().toISOString().slice(0, 10);
+const staticLastMod = siteConfig.siteLastModified;
 
-function urlNode(path: string, lastmod: string = today()) {
+function urlNode(path: string, lastmod: string = staticLastMod) {
   return `<url><loc>${absoluteUrl(path)}</loc><lastmod>${lastmod}</lastmod></url>`;
 }
 
@@ -43,7 +45,6 @@ export const GET: APIRoute = async () => {
     "/resources",
     "/reports",
     "/testimonials",
-    "/test",
     "/build",
     "/transfer",
     "/privacy",

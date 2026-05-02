@@ -5,7 +5,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import { sortByOrder } from "../lib/utils";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { headlineMetrics, proofResultsByType, proofStandards, siteConfig, testimonials } from "../site";
+
+const proofFaqs = [
+  {
+    question: "How is proof structured on this page?",
+    answer:
+      "Cases use a consistent Problem / Action / Result format. Testimonials are grouped by engagement type where possible. Metrics are anchor signals, not vanity charts."
+  },
+  {
+    question: "Can I verify outcomes independently?",
+    answer:
+      "Read the linked case studies, external review profiles, and press kit proof points. For media fact-checking, use the company press page or book a short clarification call."
+  },
+  {
+    question: "Does proof guarantee future results?",
+    answer:
+      "No. Proof shows how diagnosis, system design, and transfer showed up in specific contexts. Your constraint map and team capacity still determine what is realistic."
+  }
+];
+
+const proofSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Proof", path: "/proof" }
+  ]),
+  buildFaqSchema(proofFaqs)
+];
 
 const cases = sortByOrder(await getCollection("cases"));
 const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
@@ -16,6 +43,7 @@ const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
   title="Proof · We Scale Startups"
   description="Aggregated proof: case studies, testimonials, logos, and engagement metrics. One page so you can see everything in one scroll."
   keywords="We Scale Startups proof, B2B SaaS case studies, growth consultancy testimonials, fractional CMO results, startup acquisition outcomes"
+  schema={proofSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -166,6 +194,21 @@ const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
         {proofStandards.map((item) => (
           <article class="feature-card compact-card">
             <p>{item}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>How to read this proof page.</h2>
+      <div class="grid-3">
+        {proofFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
           </article>
         ))}
       </div>

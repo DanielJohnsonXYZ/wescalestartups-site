@@ -1,7 +1,41 @@
 ---
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { leadMagnets, siteConfig } from "../../site";
+
+function guideRequestMailto(title: string, id: string) {
+  const outlineUrl = `${siteConfig.siteUrl}/resources#${id}`;
+  const subject = `Send me the ${title}`;
+  const body = `Please send the ${title}.\n\nOn-page outline: ${outlineUrl}`;
+  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+const resourcesFaqs = [
+  {
+    question: "Are these resources really free?",
+    answer:
+      "Yes. They exist to help founders self-diagnose and brief agencies or operators with clearer context. Optional email capture may apply on some flows."
+  },
+  {
+    question: "Do resources replace an engagement?",
+    answer:
+      "No. They sharpen the question. If the bottleneck is still unclear after the scorecard or guides, diagnosis or a sprint is usually the next step."
+  },
+  {
+    question: "How do I request a specific guide?",
+    answer:
+      "Use the request button on each card. Your email will include a link to the on-page outline so we know which asset you mean."
+  }
+];
+
+const resourcesSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" }
+  ]),
+  buildFaqSchema(resourcesFaqs)
+];
 
 const guides = [
   {
@@ -51,6 +85,7 @@ const guides = [
   description="Free growth diagnosis guides, sprint planners, and portfolio templates for post-PMF startups building repeatable growth systems."
   keywords="growth bottleneck scorecard, 90-day growth sprint, VC portfolio template, startup growth diagnosis, post-PMF GTM, fractional CMO resources"
   path="/resources"
+  schema={resourcesSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -91,7 +126,16 @@ const guides = [
             <ul>
               {guide.sections.map((item) => <li>{item}</li>)}
             </ul>
-            <a class="button button-light" href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(`Send me the ${guide.title}`)}`}>
+            <p class="resource-outline-link">
+              <a
+                class="card-link"
+                href={`${siteConfig.siteUrl}/resources#${guide.id}`}
+                data-cta={`resources-outline-${guide.id}`}
+              >
+                Canonical link to this outline →
+              </a>
+            </p>
+            <a class="button button-light" href={guideRequestMailto(guide.title, guide.id)} data-cta={`resources-request-${guide.id}`}>
               Request the guide
             </a>
           </article>
@@ -114,6 +158,21 @@ const guides = [
             <h3>{item.title}</h3>
             <p>{item.description}</p>
           </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Using the resource hub.</h2>
+      <div class="grid-3">
+        {resourcesFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -145,3 +204,10 @@ const guides = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .resource-outline-link {
+    margin: 0.5rem 0 0.75rem;
+    font-size: 0.9rem;
+  }
+</style>

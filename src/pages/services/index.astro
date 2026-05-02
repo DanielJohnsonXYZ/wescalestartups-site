@@ -2,7 +2,34 @@
 import OfferRoutingCards from "../../components/OfferRoutingCards.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { pricingTrustBullets, serviceSnapshots, siteConfig } from "../../site";
+
+const servicesHubFaqs = [
+  {
+    question: "Which service should I start with?",
+    answer:
+      "If the bottleneck is unclear, start with Growth Diagnosis. If the constraint is visible, a sprint, acquisition system build, or fractional CMO may be cleaner — confirm on the diagnostic call."
+  },
+  {
+    question: "Do I need an agency and WSS?",
+    answer:
+      "Often yes, in the right order: WSS clarifies the constraint and operating rules; agencies execute inside that system. Many teams already have agencies when we start."
+  },
+  {
+    question: "How do pricing ranges work?",
+    answer:
+      "The pricing page publishes honest starting ranges. Final scope depends on team complexity, channel mix, urgency, and execution depth — agreed after the diagnostic call."
+  }
+];
+
+const servicesSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" }
+  ]),
+  buildFaqSchema(servicesHubFaqs)
+];
 ---
 
 <BaseLayout
@@ -10,6 +37,7 @@ import { pricingTrustBullets, serviceSnapshots, siteConfig } from "../../site";
   description="Growth diagnosis, 90-day growth sprints, acquisition system builds, and fractional CMO support for post-PMF startup teams."
   keywords="growth diagnosis, 90-day growth sprint, acquisition system build, fractional CMO services, B2B SaaS GTM, post-PMF marketing"
   path="/services"
+  schema={servicesSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -81,6 +109,21 @@ import { pricingTrustBullets, serviceSnapshots, siteConfig } from "../../site";
           <h3>Transfer</h3>
           <p>Document the system so founders, first marketers, agencies, and sales teams can keep running it.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Choosing between the four engagements.</h2>
+      <div class="grid-3">
+        {servicesHubFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

@@ -1,7 +1,33 @@
 ---
 import ProofLogos from "../../components/ProofLogos.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
+
+const aboutFaqs = [
+  {
+    question: "What does We Scale Startups actually do?",
+    answer:
+      "WSS diagnoses the real growth bottleneck, builds the acquisition system around it, and transfers the operating rhythm so post-PMF teams are not stuck in founder-led growth decisions."
+  },
+  {
+    question: "Who is WSS for?",
+    answer:
+      "Post-PMF startups with traction and inconsistent acquisition — typically B2B SaaS, AI, fintech, healthtech, and similar markets — where positioning, channels, reporting, and team cadence need to work as one system."
+  },
+  {
+    question: "How do we start?",
+    answer: `Use the scorecard or ${siteConfig.bookingLabel.replace(/^Book /, "book ")} when the bottleneck is visible enough to discuss. The first job is naming the constraint before adding more activity.`
+  }
+];
+
+const aboutSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" }
+  ]),
+  buildFaqSchema(aboutFaqs)
+];
 ---
 
 <BaseLayout
@@ -9,6 +35,7 @@ import { siteConfig } from "../../site";
   description="We Scale Startups is a founder-led growth consultancy. Diagnosis, acquisition systems, and fractional CMO support for post-PMF startup teams. Founded by Daniel Johnson."
   keywords="We Scale Startups about, Daniel Johnson founder, growth consultancy London, post-PMF startup support, acquisition system builder"
   path="/about"
+  schema={aboutSchema}
 >
   <!-- Hero -->
   <section class="page-hero">
@@ -123,6 +150,21 @@ import { siteConfig } from "../../site";
             DanielJohnson.xyz →
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>About WSS in three questions.</h2>
+      <div class="grid-3">
+        {aboutFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

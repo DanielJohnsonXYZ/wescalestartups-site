@@ -20,12 +20,13 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
       ))}
     </nav>
     <a
-      class="button button-brand header-cta"
+      class="button button-brand header-cta header-cta--stacked button-with-subcopy"
       href={siteConfig.bookingUrl}
       data-cta="header-book"
       title={siteConfig.bookingCallReassurance}
     >
-      {siteConfig.bookingLabel}
+      <span class="button-label">{siteConfig.bookingLabel}</span>
+      <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
     </a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
@@ -33,8 +34,14 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
         {navigation.map((item) => (
           <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
         ))}
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="mobile-book" title={siteConfig.bookingCallReassurance}>
-          {siteConfig.bookingLabel}
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="mobile-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
       </nav>
     </details>

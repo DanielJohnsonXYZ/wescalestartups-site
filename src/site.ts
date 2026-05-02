@@ -45,6 +45,8 @@ export const siteConfig = {
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
   lastUpdated: "2 May 2026",
+  /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
+  siteLastModified: "2026-05-02",
   ogImage: "/og/default.svg",
   /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
   gtmId: "GTM-TV6C7GS"
@@ -58,6 +60,34 @@ export const navigation = [
   { href: "/pricing", label: "Pricing" },
   { href: "/insights", label: "Insights" }
 ] as const;
+
+/** Strategic pillar pages → related insights (internal links + related reading section). */
+export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
+  "/engagement-models": [
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
+    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
+  ],
+  "/how-we-work": [
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
+  ],
+  "/execution-model": [
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
+  ],
+  "/growth-engine": [
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
+  ],
+  "/ai-growth-systems": [
+    { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
+  ],
+  "/reports": [
+    { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
+  ]
+};
 
 export const proofClients = [
   { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },

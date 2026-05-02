@@ -1,6 +1,32 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
+
+const contactFaqs = [
+  {
+    question: "What should I include in an enquiry?",
+    answer:
+      "Stage, ARR band, active channels, the bottleneck in plain language, budget range, timeline, and what needs to change in the next 90 days. Specificity beats a generic intro."
+  },
+  {
+    question: "Is email or the diagnostic call better?",
+    answer: `Use email when you are assembling context asynchronously. Book ${siteConfig.bookingCallShort} when the problem is urgent, politically messy, or faster to show live.`
+  },
+  {
+    question: "How fast do you respond?",
+    answer:
+      "Enquiries are read by the operator, not a gatekeeper. If there is a fit, you will get a clear next step — or an honest no / referral."
+  }
+];
+
+const contactSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" }
+  ]),
+  buildFaqSchema(contactFaqs)
+];
 ---
 
 <BaseLayout
@@ -8,6 +34,7 @@ import { siteConfig } from "../../site";
   description="Send a structured growth enquiry to We Scale Startups or book a growth call with Daniel Johnson."
   keywords="contact We Scale Startups, growth enquiry, book growth diagnostic, Daniel Johnson WSS"
   path="/contact"
+  schema={contactSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -93,6 +120,21 @@ import { siteConfig } from "../../site";
         </p>
         <p><strong>Address:</strong><br />81 Curtain Road,<br />London,<br />EC2A 3AG,<br />UK</p>
       </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Contact and response expectations.</h2>
+      <div class="grid-3">
+        {contactFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 

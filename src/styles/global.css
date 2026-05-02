@@ -60,6 +60,43 @@
   padding: 0.72rem 0.95rem;
 }
 
+.related-insights-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.related-insights-list li {
+  margin: 0;
+}
+
+@media (min-width: 641px) {
+  .header-cta.header-cta--stacked.button-with-subcopy {
+    max-width: 11.75rem;
+    min-height: auto;
+    padding: 0.42rem 0.72rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.12rem;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .header-cta.header-cta--stacked .button-label {
+    font-size: 0.78rem;
+    line-height: 1.2;
+  }
+
+  .header-cta.header-cta--stacked .button-subcopy {
+    font-size: 0.62rem;
+    line-height: 1.25;
+    opacity: 0.88;
+    white-space: normal;
+  }
+}
+
 .hero-with-portrait {
   padding-top: 4rem;
 }

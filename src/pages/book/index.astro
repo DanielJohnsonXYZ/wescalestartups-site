@@ -1,14 +1,44 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 
-const schema = {
+const bookServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Growth Audit booking",
+  name: siteConfig.bookingLabel,
+  description: siteConfig.bookingCallReassurance,
   provider: { "@id": `${siteConfig.siteUrl}/#organization` },
   url: `${siteConfig.siteUrl}/book`
 };
+
+const bookFaqs = [
+  {
+    question: "What happens on the diagnostic call?",
+    answer: siteConfig.bookingCallReassurance
+  },
+  {
+    question: "How long is the call?",
+    answer: `The diagnostic is ${siteConfig.bookingCallDurationPhrase}. It is structured in short phases so you leave with a named bottleneck, not a vague conversation.`
+  },
+  {
+    question: "Do I need to prepare a deck?",
+    answer: "No deck required. Bring the current growth picture: funnel, channels, reporting, and what you think is blocking pipeline."
+  },
+  {
+    question: "Is there a pitch at the end?",
+    answer: "Only if there is a genuine fit. The default outcome is a clear next step — including telling you not to hire us yet when that is the honest answer."
+  }
+];
+
+const bookSchema = [
+  bookServiceSchema,
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Book", path: "/book" }
+  ]),
+  buildFaqSchema(bookFaqs)
+];
 ---
 
 <BaseLayout
@@ -16,7 +46,7 @@ const schema = {
   description={`${siteConfig.bookingLabel} with We Scale Startups. ${siteConfig.bookingCallReassurance} Then pick a Calendly slot.`}
   keywords="book growth call, startup growth diagnostic, Calendly We Scale Startups, 30 minute growth audit"
   path="/book"
-  schema={schema}
+  schema={bookSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -87,6 +117,21 @@ const schema = {
             <li>The call focuses on diagnosis, not a generic pitch.</li>
           </ol>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Booking the diagnostic.</h2>
+      <div class="grid-2">
+        {bookFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

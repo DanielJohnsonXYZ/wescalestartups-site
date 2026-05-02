@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 
 export async function getStaticPaths() {
@@ -12,16 +13,58 @@ export async function getStaticPaths() {
 }
 
 const { industry } = Astro.props;
+const path = `/industries/${industry.id}`;
+
+const industryFaqs = [
+  {
+    question: `What usually breaks for ${industry.data.title} teams post-PMF?`,
+    answer: industry.data.buyerProblem
+  },
+  {
+    question: "What is the first step if we might be a fit?",
+    answer: `Run the scorecard or ${siteConfig.bookingLabel.replace(/^Book /, "book ")} with your current funnel and proof context. The goal is to name the bottleneck before adding more channel activity.`
+  },
+  {
+    question: "Do you only work with companies in this sector?",
+    answer:
+      "No. This page translates common buyer, proof, and channel economics patterns for the sector. If your motion is similar — trust-heavy, committee buying, proof bar — the diagnostic still applies."
+  }
+];
+
+const industrySchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Industries", path: "/industries" },
+    { name: industry.data.title, path }
+  ]),
+  buildFaqSchema(industryFaqs)
+];
 ---
 
-<BaseLayout title={`${industry.data.title} | We Scale Startups`} description={industry.data.description} path={`/industries/${industry.id}`}>
+<BaseLayout
+  title={`${industry.data.title} | We Scale Startups`}
+  description={industry.data.description}
+  path={path}
+  schema={industrySchema}
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Industry</p>
       <h1>{industry.data.title}</h1>
       <p>{industry.data.description}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="industry-book">{siteConfig.bookingLabel}</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="industry-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industry-hero-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
         <a class="button button-light" href="/industries">All industries</a>
       </div>
     </div>
@@ -64,6 +107,21 @@ const { industry } = Astro.props;
             </a>
           </p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Questions founders ask on industry fit.</h2>
+      <div class="grid-3">
+        {industryFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

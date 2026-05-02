@@ -16,6 +16,8 @@ interface Props {
   ogImage?: string;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   lastUpdated?: string | false;
+  /** Override default robots meta (e.g. noindex for utility pages). */
+  metaRobots?: string;
 }
 
 const {
@@ -25,7 +27,8 @@ const {
   path = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
   schema = [],
-  lastUpdated = siteConfig.lastUpdated
+  lastUpdated = siteConfig.lastUpdated,
+  metaRobots = "index,follow,max-image-preview:large"
 } = Astro.props;
 
 const currentPath = normalizePath(path);
@@ -50,7 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
-    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="robots" content={metaRobots} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 

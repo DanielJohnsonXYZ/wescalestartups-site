@@ -1,6 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, testimonials, headlineMetrics } from "../site";
+
+const testimonialsFaqs = [
+  {
+    question: "Are these testimonials from paid engagements?",
+    answer:
+      "Quotes are labelled by engagement type where possible: client work, founder advisory sessions, or mentoring platforms. External profiles like GrowthMentor provide additional public verification."
+  },
+  {
+    question: "Why show mentoring reviews alongside client work?",
+    answer:
+      "Many founders meet WSS through mentoring first. The pattern recognition is the same — diagnosis, prioritisation, and practical next steps — even when the container is a one-hour session."
+  },
+  {
+    question: "Can I speak to a reference?",
+    answer:
+      "When there is a serious fit and timing works, reference conversations can be arranged after the diagnostic call — not as a substitute for reading the public proof base."
+  }
+];
+
+const testimonialsSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Testimonials", path: "/testimonials" }
+  ]),
+  buildFaqSchema(testimonialsFaqs)
+];
 
 type Category = "Client" | "Founder advisory" | "Mentoring" | "Other";
 
@@ -29,6 +56,7 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
   title="Testimonials & founder feedback | We Scale Startups"
   description="Founder, client, and mentoring feedback for We Scale Startups. Filter by engagement type. Read what founders say about working with WSS and Daniel Johnson."
   keywords="We Scale Startups reviews, founder testimonials, GrowthMentor reviews, fractional CMO feedback"
+  schema={testimonialsSchema}
 >
   <!-- Hero -->
   <section class="page-hero">
@@ -91,6 +119,21 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
         Want the unfiltered view? See&nbsp;
         <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">200+ public reviews on GrowthMentor →</a>
       </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>How to read these testimonials.</h2>
+      <div class="grid-3">
+        {testimonialsFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 

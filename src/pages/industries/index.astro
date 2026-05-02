@@ -2,11 +2,35 @@
 import { getCollection } from "astro:content";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { sortByOrder } from "../../lib/utils";
 import { siteConfig } from "../../site";
 
-const allowedIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
-const industries = sortByOrder(await getCollection("industries")).filter((industry) => allowedIndustries.includes(industry.id));
+const industriesHubFaqs = [
+  {
+    question: "Why are some industries listed under \"Also serve\"?",
+    answer:
+      "Core markets have the densest published proof and repeat buyer patterns. Other sectors use the same methodology with market-specific proof and compliance context on each page."
+  },
+  {
+    question: "Do you only work in these industries?",
+    answer:
+      "No. If your motion is B2B, trust-heavy, and post-PMF, the diagnostic still applies — the industry page is a shortcut for common proof and channel economics."
+  }
+];
+
+const industriesSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Industries", path: "/industries" }
+  ]),
+  buildFaqSchema(industriesHubFaqs)
+];
+
+const coreIndustryIds = new Set(["saas-growth", "fintech", "healthtech", "edtech"]);
+const allIndustries = sortByOrder(await getCollection("industries"));
+const coreIndustries = allIndustries.filter((industry) => coreIndustryIds.has(industry.id));
+const moreIndustries = allIndustries.filter((industry) => !coreIndustryIds.has(industry.id));
 ---
 
 <BaseLayout
@@ -14,11 +38,12 @@ const industries = sortByOrder(await getCollection("industries")).filter((indust
   description="Growth systems for SaaS, fintech, healthtech, and EdTech teams where trust and clarity matter."
   keywords="SaaS growth consultancy, fintech GTM, healthtech marketing, EdTech acquisition, B2B startup industries"
   path="/industries"
+  schema={industriesSchema}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Industries</p>
-      <h1>Four markets where proof, trust, and timing matter.</h1>
+      <h1>Markets where proof, trust, and timing matter.</h1>
       <p>The system adapts to the buyer, proof required, channel economics, and internal team capacity.</p>
       <div class="hero-actions">
         <a
@@ -40,15 +65,51 @@ const industries = sortByOrder(await getCollection("industries")).filter((indust
 
   <section class="section">
     <div class="shell">
-      <SectionIntro eyebrow="Markets" title="Where the work fits best." />
+      <SectionIntro eyebrow="Core markets" title="Where we publish the most proof." />
       <div class="grid-3">
-        {industries.map((industry) => (
+        {coreIndustries.map((industry) => (
           <a class="industry-card" href={`/industries/${industry.id}`}>
             <p class="card-kicker">Market</p>
             <h3>{industry.data.title}</h3>
             <p>{industry.data.description}</p>
             <span class="card-link">Explore {industry.data.title}</span>
           </a>
+        ))}
+      </div>
+      {moreIndustries.length > 0 && (
+        <>
+          <div class="industries-more-intro">
+            <SectionIntro
+              eyebrow="Also serve"
+              title="Additional sectors and founder contexts."
+              body="Same diagnostic and system-building approach — market pages vary by proof requirements and buyer motion."
+            />
+          </div>
+          <div class="grid-3">
+            {moreIndustries.map((industry) => (
+              <a class="industry-card" href={`/industries/${industry.id}`}>
+                <p class="card-kicker">Market</p>
+                <h3>{industry.data.title}</h3>
+                <p>{industry.data.description}</p>
+                <span class="card-link">Explore {industry.data.title}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>How industry pages work.</h2>
+      <div class="grid-2">
+        {industriesHubFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -80,3 +141,9 @@ const industries = sortByOrder(await getCollection("industries")).filter((indust
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .industries-more-intro {
+    margin-top: 2.75rem;
+  }
+</style>

@@ -89,11 +89,21 @@ ${staticPaths
   .join("\n")}
 ${services
   .map((s) =>
-    urlNode(`/services/${s.id}`, { lastmod: staticLastMod, changefreq: "weekly", priority: "0.85" })
+    urlNode(`/services/${s.id}`, {
+      lastmod: staticPathLastModified[`/services/${s.id}`] ?? staticLastMod,
+      changefreq: "weekly",
+      priority: "0.85"
+    })
   )
   .join("\n")}
 ${industries
-  .map((i) => urlNode(`/industries/${i.id}`, { lastmod: staticLastMod, changefreq: "monthly", priority: "0.7" }))
+  .map((i) =>
+    urlNode(`/industries/${i.id}`, {
+      lastmod: staticPathLastModified[`/industries/${i.id}`] ?? staticLastMod,
+      changefreq: "monthly",
+      priority: "0.7"
+    })
+  )
   .join("\n")}
 ${cases
   .map((c) =>

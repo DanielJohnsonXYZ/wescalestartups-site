@@ -52,10 +52,57 @@ export const siteConfig = {
   gtmId: "GTM-TV6C7GS"
 } as const;
 
-/** Per-path sitemap lastmod overrides (ISO date). Unlisted paths use siteLastModified. */
+/**
+ * Per-URL sitemap lastmod (ISO date), aligned to last git change on the backing page/content.
+ * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
+ */
 export const staticPathLastModified: Partial<Record<string, string>> = {
+  "/": "2026-05-03",
+  "/about": "2026-05-03",
+  "/ai-growth-systems": "2026-05-01",
+  "/book": "2026-05-03",
+  "/build": "2026-05-03",
+  "/case-studies": "2026-05-03",
+  "/contact": "2026-05-03",
+  "/diagnose": "2026-05-03",
+  "/engagement-models": "2026-05-01",
+  "/execution-model": "2026-05-01",
   "/experimentation": "2026-05-03",
-  "/when-growth-plateaus": "2026-05-03"
+  "/first-30-days": "2026-05-03",
+  "/fractional-cmo-vs-agency": "2026-05-03",
+  "/growth-engine": "2026-05-01",
+  "/gtm-strategy": "2026-05-03",
+  "/how-it-works": "2026-05-03",
+  "/how-we-work": "2026-05-01",
+  "/industries": "2026-05-03",
+  "/insights": "2026-05-03",
+  "/press": "2026-05-03",
+  "/pricing": "2026-05-03",
+  "/privacy": "2026-05-03",
+  "/proof": "2026-05-03",
+  "/quiz": "2026-05-03",
+  "/reports": "2026-05-01",
+  "/resources": "2026-05-03",
+  "/services": "2026-05-03",
+  "/start-here": "2026-05-03",
+  "/terms": "2026-05-03",
+  "/testimonials": "2026-05-03",
+  "/transfer": "2026-05-03",
+  "/when-growth-plateaus": "2026-05-03",
+  "/services/90-day-growth-sprint": "2026-05-03",
+  "/services/acquisition-system-build": "2026-05-03",
+  "/services/fractional-cmo": "2026-05-03",
+  "/services/growth-diagnosis": "2026-05-03",
+  "/industries/ai-genai": "2026-05-03",
+  "/industries/b2b-growth": "2026-05-03",
+  "/industries/b2b-saas": "2026-05-03",
+  "/industries/ecommerce": "2026-05-03",
+  "/industries/edtech": "2026-05-03",
+  "/industries/fintech": "2026-05-03",
+  "/industries/healthtech": "2026-05-03",
+  "/industries/saas-growth": "2026-05-03",
+  "/industries/seed-to-series-b": "2026-05-03",
+  "/industries/vc-support": "2026-05-03"
 };
 
 export const navigation = [
@@ -732,7 +779,7 @@ export const founderStory = {
 // ──────────────────────────────────────────────────────────────────────────
 // Mautic — email signup forms (replaces placeholder ConvertKit). Configure in
 // Cloudflare Pages: PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID
-// CONFIRM: default formId below is a placeholder — verify in Mautic → Forms before prod.
+// Default form id "1" is a guess — set PUBLIC_MAUTIC_NEWSLETTER_FORM_ID in production to your real form.
 // ──────────────────────────────────────────────────────────────────────────
 const mauticBaseRaw =
   (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||

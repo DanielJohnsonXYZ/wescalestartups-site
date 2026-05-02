@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://wescalestartups.com",
   trailingSlash: "never",
+  compressHTML: true,
   build: {
     format: "file"
   },

@@ -86,6 +86,10 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   "/reports": [
     { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
+  ],
+  "/gtm-strategy": [
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
   ]
 };
 

@@ -3,7 +3,7 @@ import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig, serviceSnapshots } from "../site";
+import { siteConfig, serviceSnapshots, strategicPageRelatedInsights } from "../site";
 
 const faqs = [
   {
@@ -35,6 +35,8 @@ const schemas = [
   ]),
   buildFaqSchema(faqs)
 ];
+
+const gtmRelatedInsights = strategicPageRelatedInsights["/gtm-strategy"] ?? [];
 
 const gtmProblems = [
   {
@@ -215,6 +217,26 @@ const gtmDeliverables = [
       </div>
     </div>
   </section>
+
+  {
+    gtmRelatedInsights.length > 0 && (
+      <section class="section section-alt">
+        <div class="shell">
+          <p class="eyebrow">Related reading</p>
+          <h2>Notes that pair with GTM strategy work.</h2>
+          <ul class="related-insights-list">
+            {gtmRelatedInsights.map((item) => (
+              <li>
+                <a class="card-link" href={item.href}>
+                  {item.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <!-- CTA -->
   <section class="cta-band">

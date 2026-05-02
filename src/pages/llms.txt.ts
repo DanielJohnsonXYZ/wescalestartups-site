@@ -92,6 +92,7 @@ Start with ${siteConfig.siteUrl}/start-here, then read one case study on ${siteC
 - Primary URL: ${siteConfig.siteUrl}
 - Contact email: ${siteConfig.email}
 - Booking URL: ${siteConfig.siteUrl}${siteConfig.bookingUrl}
+- Primary booking CTA: ${siteConfig.bookingLabel} (${siteConfig.bookingCallShort}, ${siteConfig.bookingCallDurationPhrase})
 - Location: ${siteConfig.address}
 - Role: Growth consultancy, acquisition system builder, fractional CMO support
 - Serves: post-PMF startups with traction and inconsistent acquisition

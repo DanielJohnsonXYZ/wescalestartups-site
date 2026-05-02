@@ -1,3 +1,5 @@
+const BOOKING_CALL_DURATION_PHRASE = "30 minutes" as const;
+
 export const siteConfig = {
   name: "We Scale Startups",
   title: "We Scale Startups | Fractional CMO for Post-PMF B2B SaaS",
@@ -8,7 +10,9 @@ export const siteConfig = {
   bookingUrl: "/book",
   calendlyUrl: "https://calendly.com/wescalestartups",
   bookingLabel: "Book a 30-minute growth diagnostic",
-  bookingSubcopy: "Free · 30 minutes · You'll leave with your biggest growth bottleneck named in plain English",
+  /** Inline copy: "In 30 minutes you'll…", "30 minutes. No deck." */
+  bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
+  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
   /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
   bookingCallShort: "30-minute diagnostic call",
   /** What happens on the 30-minute diagnostic (booking reassurance). */
@@ -25,8 +29,7 @@ export const siteConfig = {
     { phase: "Last ~5 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
   ],
   /** Short line near booking CTAs (header title, footer) — Growth Hub: call reassurance. */
-  bookingCallReassurance:
-    "Bring your current bottleneck. In 30 minutes we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.",
+  bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.`,
   scorecardLabel: "Take the 5-minute scorecard",
   scorecardLabelLong: "Take the 5-minute Growth Bottleneck Scorecard",
   scorecardUrl: "/resources#growth-bottleneck-scorecard",

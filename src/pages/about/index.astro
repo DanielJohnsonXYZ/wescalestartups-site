@@ -133,17 +133,24 @@ import { siteConfig } from "../../site";
       <div>
         <p class="eyebrow">Next step</p>
         <h2>Bring the current bottleneck.</h2>
-        <p>30 minutes. No deck, no pitch. We'll diagnose the bottleneck and decide if working together makes sense.</p>
+        <p>
+          {siteConfig.bookingCallDurationPhrase}. No deck, no pitch. We'll diagnose the bottleneck and decide if working together makes sense.
+        </p>
       </div>
-      <a
-        class="button button-brand button-with-subcopy"
-        href={siteConfig.bookingUrl}
-        data-cta="about-final-book"
-        title={siteConfig.bookingCallReassurance}
-      >
-        <span class="button-label">{siteConfig.bookingLabel}</span>
-        <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-      </a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="about-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="about-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

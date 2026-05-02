@@ -55,10 +55,14 @@ const { industry } = Astro.props;
         <article class="content-block">
           <h2>Lead magnet</h2>
           <p>
-            Request the Growth Bottleneck Scorecard and use it to decide whether the issue is positioning, acquisition,
-            conversion, reporting, or leadership capacity in this market.
+            {siteConfig.scorecardLabelLong} and use it to decide whether the issue is positioning, acquisition, conversion,
+            reporting, or leadership capacity in this market.
           </p>
-          <p><a class="button button-light" href="/resources#growth-bottleneck-scorecard">Open the scorecard</a></p>
+          <p>
+            <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industry-scorecard">
+              {siteConfig.scorecardLabel} →
+            </a>
+          </p>
         </article>
       </div>
     </div>
@@ -71,7 +75,20 @@ const { industry } = Astro.props;
         <h2>Want a clearer growth path for {industry.data.title.toLowerCase()}?</h2>
         <p>We will connect the buyer problem, proof requirement, channel economics, and team capacity into a practical next step.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="industry-final-book">{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="industry-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industry-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

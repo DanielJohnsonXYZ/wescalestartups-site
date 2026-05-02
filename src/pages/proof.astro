@@ -177,12 +177,17 @@ const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
       <div>
         <p class="eyebrow">Ready to talk?</p>
         <h2>Find the bottleneck before you spend more.</h2>
-        <p>Bring the current growth picture. In 30 minutes you'll leave with a plain-English view of what's blocking pipeline — and which engagement actually fits.</p>
+        <p>
+          Bring the current growth picture. In {siteConfig.bookingCallDurationPhrase} you'll leave with a plain-English view of what's blocking pipeline — and which engagement actually fits.
+        </p>
       </div>
       <div class="hero-actions">
         <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="proof-cta">
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="proof-scorecard">
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>

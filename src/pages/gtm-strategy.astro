@@ -99,15 +99,16 @@ const gtmDeliverables = [
       </p>
       <div class="hero-actions">
         <a
-          class="button button-brand"
+          class="button button-brand button-with-subcopy"
           href={siteConfig.bookingUrl}
           data-cta="gtm-hero-book"
           title={siteConfig.bookingCallReassurance}
         >
-          {siteConfig.bookingLabel}
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gtm-hero-scorecard">
-          {siteConfig.scorecardLabel}
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>
@@ -221,7 +222,9 @@ const gtmDeliverables = [
       <div>
         <p class="eyebrow">Next step</p>
         <h2>Name the bottleneck before you build the plan.</h2>
-        <p>Bring the current growth picture. In 30 minutes you'll leave with a plain-English view of what's blocking pipeline — and which GTM engagement actually fits your stage.</p>
+        <p>
+          Bring the current growth picture. In {siteConfig.bookingCallDurationPhrase} you'll leave with a plain-English view of what's blocking pipeline — and which GTM engagement actually fits your stage.
+        </p>
       </div>
       <div class="hero-actions">
         <a
@@ -243,7 +246,7 @@ const gtmDeliverables = [
     <div class="shell">
       <EmailSignup
         heading="Get the GTM Diagnostic Checklist."
-        subtext="The exact questions we use to find the GTM constraint in the first 30 minutes. Free by email."
+        subtext={`The exact questions we use to find the GTM constraint in the first ${siteConfig.bookingCallDurationPhrase}. Free by email.`}
         formId="gtm-strategy-footer"
       />
     </div>

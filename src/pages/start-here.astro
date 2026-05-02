@@ -165,7 +165,7 @@ import { siteConfig } from "../site";
           <h3>Score yourself in 5 minutes</h3>
           <p>The Growth Bottleneck Scorecard tells you which of five constraints is actually blocking pipeline. No email gating until the end.</p>
         </div>
-        <a class="button button-brand" href={siteConfig.scorecardUrl}>Take the scorecard</a>
+        <a class="button button-brand" href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a>
       </article>
 
       <article class="start-step">
@@ -196,7 +196,7 @@ import { siteConfig } from "../site";
       <div>
         <p class="eyebrow">Already done step one?</p>
         <h2>Skip ahead and book the call.</h2>
-        <p>Bring your scorecard result. We'll spend the 30 minutes on the bottleneck, not on intros.</p>
+        <p>Bring your scorecard result. We'll spend the {siteConfig.bookingCallDurationPhrase} on the bottleneck, not on intros.</p>
       </div>
       <div class="hero-actions">
         <a

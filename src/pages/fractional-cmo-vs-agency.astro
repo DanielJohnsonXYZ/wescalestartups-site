@@ -29,7 +29,18 @@ const schemas = [
         Agencies are useful when the strategy is clear and the team needs execution capacity. WSS is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions.
       </p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="vs-agency-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="vs-agency-hero-scorecard">
+          {siteConfig.scorecardLabel}
+        </a>
         <a class="button button-light" href="/services/fractional-cmo">See Fractional CMO</a>
       </div>
     </div>
@@ -107,7 +118,20 @@ const schemas = [
         <h2>Diagnose the constraint before signing the retainer.</h2>
         <p>Bring the agency brief, current numbers, or internal debate. We will tell you whether WSS, an agency, a hire, or nothing yet is the right move.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="vs-agency-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="vs-agency-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

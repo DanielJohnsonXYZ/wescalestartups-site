@@ -106,7 +106,9 @@ const pricingFaqs = [
       <div>
         <p class="eyebrow">Not sure which tier fits?</p>
         <h2>Find out on the call.</h2>
-        <p>30 minutes. We'll tell you which engagement (if any) actually solves your bottleneck — and which would be wasted spend.</p>
+        <p>
+          {siteConfig.bookingCallDurationPhrase}. We'll tell you which engagement (if any) actually solves your bottleneck — and which would be wasted spend.
+        </p>
       </div>
       <div class="hero-actions">
         <a
@@ -117,6 +119,9 @@ const pricingFaqs = [
         >
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="pricing-scorecard">
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>

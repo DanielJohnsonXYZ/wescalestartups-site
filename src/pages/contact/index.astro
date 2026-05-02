@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { contactRelatedReading, siteConfig } from "../../site";
 
 const contactFaqs = [
   {
@@ -120,6 +120,22 @@ const contactSchema = [
         </p>
         <p><strong>Address:</strong><br />81 Curtain Road,<br />London,<br />EC2A 3AG,<br />UK</p>
       </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Self-serve before you email.</h2>
+      <ul class="related-insights-list">
+        {contactRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

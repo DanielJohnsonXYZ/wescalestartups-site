@@ -2,7 +2,7 @@
 import ProofLogos from "../../components/ProofLogos.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { aboutRelatedReading, siteConfig } from "../../site";
 
 const aboutFaqs = [
   {
@@ -151,6 +151,27 @@ const aboutSchema = [
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>How we work and who it is for.</h2>
+      <ul class="related-insights-list">
+        {aboutRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+        <li>
+          <a class="card-link" href={`${siteConfig.danielSite}/`} rel="noreferrer" target="_blank">
+            Daniel Johnson · founder site →
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 

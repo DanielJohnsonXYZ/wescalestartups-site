@@ -6,7 +6,7 @@ import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import { sortByOrder } from "../lib/utils";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { headlineMetrics, proofResultsByType, proofStandards, siteConfig, testimonials } from "../site";
+import { headlineMetrics, proofHubRelatedReading, proofResultsByType, proofStandards, siteConfig, testimonials } from "../site";
 
 const proofFaqs = [
   {
@@ -197,6 +197,22 @@ const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>More ways to verify and engage.</h2>
+      <ul class="related-insights-list">
+        {proofHubRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

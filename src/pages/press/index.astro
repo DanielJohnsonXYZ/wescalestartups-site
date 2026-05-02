@@ -2,7 +2,7 @@
 import ProofLogos from "../../components/ProofLogos.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { headlineMetrics, siteConfig } from "../../site";
+import { headlineMetrics, pressRelatedReading, siteConfig } from "../../site";
 
 const pressFaqs = [
   {
@@ -96,6 +96,22 @@ const founderBio =
 
   <section class="section section-alt">
     <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Verify claims on the main site.</h2>
+      <ul class="related-insights-list">
+        {pressRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
       <p class="eyebrow">FAQ</p>
       <h2>Press and fact-checking.</h2>
       <div class="grid-3">
@@ -109,7 +125,7 @@ const founderBio =
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">Fact-checking</p>
       <h2>Verify outcomes before you cite them.</h2>

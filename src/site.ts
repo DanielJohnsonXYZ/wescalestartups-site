@@ -199,6 +199,92 @@ export const caseStudyRelatedReading: readonly { href: string; label: string }[]
   { href: "/book", label: siteConfig.bookingLabel }
 ];
 
+/** /proof — cases, services, press. */
+export const proofHubRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/services", label: "Services" },
+  { href: "/press", label: "Press kit" },
+  { href: "/book", label: siteConfig.bookingLabel }
+];
+
+/** /case-studies index. */
+export const caseStudiesIndexRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/proof", label: "Proof hub" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/services", label: "Services" },
+  { href: "/insights", label: "Insights" },
+  { href: "/book", label: siteConfig.bookingLabel }
+];
+
+/** /about. */
+export const aboutRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/proof", label: "Proof hub" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/services", label: "Services" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
+];
+
+/** /contact. */
+export const contactRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/book", label: siteConfig.bookingLabel },
+  { href: "/start-here", label: "Start here" },
+  { href: "/resources", label: "Resources" },
+  { href: "/proof", label: "Proof hub" },
+  { href: "/press", label: "Press kit" }
+];
+
+/** /industries hub. */
+export const industriesHubRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/proof", label: "Proof hub" },
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/services", label: "Services" },
+  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" }
+];
+
+/** /industries/[slug] — same links every sector. */
+export const industryDetailRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/industries", label: "All industries" },
+  { href: "/proof", label: "Proof hub" },
+  { href: "/services", label: "Services" },
+  { href: "/case-studies", label: "Case studies" }
+];
+
+/** /build. */
+export const buildPageRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/transfer", label: "Transfer · handoff" },
+  { href: "/services/90-day-growth-sprint", label: "90-Day Growth Sprint" },
+  { href: "/services/acquisition-system-build", label: "Acquisition System Build" },
+  { href: "/how-it-works", label: "How it works" }
+];
+
+/** /transfer. */
+export const transferPageRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/build", label: "Build · execution" },
+  { href: "/services/fractional-cmo", label: "Fractional CMO" },
+  { href: "/first-30-days", label: "First 30 days" },
+  { href: "/how-we-work", label: "How we work" }
+];
+
+/** /press — internal verification paths. */
+export const pressRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/proof", label: "Proof hub" },
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/about", label: "About WSS" },
+  { href: "/contact", label: "Contact" }
+];
+
+/** Home — crawl shortcuts at the bottom of the page. */
+export const homeRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/start-here", label: "Start here" },
+  { href: "/services", label: "Services" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/proof", label: "Proof hub" },
+  { href: "/insights", label: "Insights" },
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/book", label: siteConfig.bookingLabel }
+];
+
 export const proofClients = [
   { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
   { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine", proof: "Marketing function built from zero" },

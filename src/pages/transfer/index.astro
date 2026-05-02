@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { siteConfig, transferPageRelatedReading } from "../../site";
 
 const transferSchema = buildBreadcrumbSchema([
   { name: "Home", path: "/" },
@@ -43,6 +43,22 @@ const transferSchema = buildBreadcrumbSchema([
       <article class="feature-card"><h3>Document</h3><p>Capture the ICP, strategy, assets, reporting, experiments, and decision rules.</p></article>
       <article class="feature-card"><h3>Handoff</h3><p>Give founders, marketers, sales teams, agencies, and future hires a shared operating view.</p></article>
       <article class="feature-card"><h3>Reduce Dependency</h3><p>Make the team less dependent on founder instinct and external operators over time.</p></article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Build, leadership, and first 30 days.</h2>
+      <ul class="related-insights-list">
+        {transferPageRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

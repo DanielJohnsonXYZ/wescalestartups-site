@@ -4,7 +4,7 @@ import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { sortByOrder } from "../../lib/utils";
-import { siteConfig } from "../../site";
+import { industriesHubRelatedReading, siteConfig } from "../../site";
 
 const industriesHubFaqs = [
   {
@@ -97,6 +97,22 @@ const moreIndustries = allIndustries.filter((industry) => !coreIndustryIds.has(i
           </div>
         </>
       )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Proof and services across markets.</h2>
+      <ul class="related-insights-list">
+        {industriesHubRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

@@ -17,6 +17,7 @@ import { sortByOrder } from "../lib/utils";
 import {
   buyerFaqs,
   headlineMetrics,
+  homeRelatedReading,
   proofStandards,
   siteConfig,
   testimonials
@@ -441,6 +442,22 @@ function metricLead(result: string) {
       <div class="grid-3">
         {proofStandards.map((item) => (<article class="feature-card compact-card"><p>{item}</p></article>))}
       </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Explore the site</p>
+      <h2>Structured paths for buyers and search.</h2>
+      <ul class="related-insights-list">
+        {homeRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

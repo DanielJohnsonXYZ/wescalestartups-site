@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { industryDetailRelatedReading, siteConfig } from "../../site";
 
 export async function getStaticPaths() {
   const industries = await getCollection("industries");
@@ -108,6 +108,22 @@ const industrySchema = [
           </p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Hubs that pair with this market.</h2>
+      <ul class="related-insights-list">
+        {industryDetailRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

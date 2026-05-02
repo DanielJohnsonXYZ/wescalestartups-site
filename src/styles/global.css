@@ -3153,7 +3153,16 @@ textarea:focus-visible {
 .brand img { width: 82px; max-height: 46px; object-fit: contain; }
 .nav-links { gap: 0.18rem; }
 .nav-link { padding: 0.55rem 0.62rem; font-size: 0.84rem; }
-.header-cta { min-height: 42px; min-width: auto; padding: 0.72rem 0.95rem; }
+.header-cta {
+  min-height: 42px;
+  min-width: auto;
+  max-width: 13.5rem;
+  padding: 0.62rem 0.72rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+}
 .hero-with-portrait { padding-top: 4rem; }
 .hero-with-portrait h1 { max-width: 900px; font-size: clamp(3.2rem, 5.35vw, 5.75rem); }
 .hero-cta-group { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; margin-top: 1.75rem; }

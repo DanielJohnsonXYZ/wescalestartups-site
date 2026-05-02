@@ -19,14 +19,23 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
         <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
       ))}
     </nav>
-    <a class="button button-brand header-cta" href={siteConfig.bookingUrl} data-cta="header-book">Book call</a>
+    <a
+      class="button button-brand header-cta"
+      href={siteConfig.bookingUrl}
+      data-cta="header-book"
+      title={siteConfig.bookingCallReassurance}
+    >
+      {siteConfig.bookingLabel}
+    </a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
       <nav aria-label="Mobile navigation">
         {navigation.map((item) => (
           <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
         ))}
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="mobile-book">Book call</a>
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="mobile-book" title={siteConfig.bookingCallReassurance}>
+          {siteConfig.bookingLabel}
+        </a>
       </nav>
     </details>
   </div>

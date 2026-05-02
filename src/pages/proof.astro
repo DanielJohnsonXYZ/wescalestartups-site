@@ -79,20 +79,19 @@ const cases = sortByOrder(await getCollection("cases"));
     <div class="shell">
       <p class="eyebrow">Third-party validation</p>
       <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.2rem,3.6vw,3rem);line-height:1.05;font-weight:380;margin:0.4rem 0 1.4rem;">Reviews that live off-site.</h2>
-      <div class="grid-2">
+      <div class="validation-primary">
         <a class="feature-card validation-card" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
           <p class="card-kicker">GrowthMentor</p>
           <h3>Read Daniel's founder mentoring reviews.</h3>
           <p>External review profile with founder feedback from GTM, positioning, paid acquisition, and growth sessions.</p>
           <span class="card-link">View GrowthMentor reviews →</span>
         </a>
-        <a class="feature-card validation-card" href={siteConfig.mentorCruise} rel="noreferrer" target="_blank">
-          <p class="card-kicker">MentorCruise</p>
-          <h3>See the MentorCruise profile.</h3>
-          <p>Third-party mentoring profile used as an additional trust signal for founder-facing growth advice.</p>
-          <span class="card-link">View MentorCruise profile →</span>
-        </a>
       </div>
+      <p class="validation-tertiary">
+        Also on{" "}
+        <a href={siteConfig.mentorCruise} rel="noreferrer" target="_blank">MentorCruise</a>{" "}
+        (mentoring marketplace — secondary to client work and case proof above).
+      </p>
     </div>
   </section>
 
@@ -174,3 +173,22 @@ const cases = sortByOrder(await getCollection("cases"));
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .validation-primary {
+    max-width: 36rem;
+  }
+  .validation-tertiary {
+    margin: 1rem 0 0;
+    max-width: 48ch;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .validation-tertiary a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

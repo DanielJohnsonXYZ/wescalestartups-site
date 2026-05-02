@@ -21,6 +21,49 @@ import { siteConfig } from "../site";
     </div>
   </section>
 
+  <!-- Route by commercial intent (Growth Hub: Start here as guided router) -->
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Which engagement?</p>
+      <h2 class="route-section-h2">Pick the path that matches what you need right now.</h2>
+      <p class="route-section-lede">
+        Different founders arrive with different clarity. Use this to self-route — then confirm on the diagnostic.
+      </p>
+      <ul class="engagement-route-grid">
+        <li>
+          <a class="engagement-route-card" href={siteConfig.scorecardUrl}>
+            <span class="engagement-route-label">I don't know what's blocking growth</span>
+            <span class="engagement-route-action">Take the 5-minute scorecard →</span>
+          </a>
+        </li>
+        <li>
+          <a class="engagement-route-card" href="/services/growth-diagnosis">
+            <span class="engagement-route-label">I need a senior diagnosis first</span>
+            <span class="engagement-route-action">Growth Diagnosis →</span>
+          </a>
+        </li>
+        <li>
+          <a class="engagement-route-card" href="/services/90-day-growth-sprint">
+            <span class="engagement-route-label">I need execution this quarter</span>
+            <span class="engagement-route-action">90-Day Growth Sprint →</span>
+          </a>
+        </li>
+        <li>
+          <a class="engagement-route-card" href="/services/acquisition-system-build">
+            <span class="engagement-route-label">I need a connected acquisition system</span>
+            <span class="engagement-route-action">Acquisition System Build →</span>
+          </a>
+        </li>
+        <li>
+          <a class="engagement-route-card" href="/services/fractional-cmo">
+            <span class="engagement-route-label">I need ongoing senior leadership</span>
+            <span class="engagement-route-action">Fractional CMO →</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- DECISION TREE -->
   <section class="section">
     <div class="shell">
@@ -128,7 +171,9 @@ import { siteConfig } from "../site";
           <h3>Book a 30-minute call</h3>
           <p>Bring the scorecard result and your current growth picture. You'll leave with a plain-English view of the bottleneck and which engagement (if any) actually fits.</p>
         </div>
-        <a class="button button-brand" href={siteConfig.bookingUrl}>Book a call</a>
+        <a class="button button-brand" href={siteConfig.bookingUrl} title={siteConfig.bookingCallReassurance}>
+          {siteConfig.bookingLabel}
+        </a>
       </article>
     </div>
   </section>
@@ -161,6 +206,68 @@ import { siteConfig } from "../site";
 </BaseLayout>
 
 <style>
+  .route-section-h2 {
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(1.85rem, 3vw, 2.35rem);
+    font-weight: 380;
+    line-height: 1.1;
+    margin: 0.35rem 0 0.75rem;
+    color: var(--ink);
+  }
+  .route-section-lede {
+    margin: 0 0 1.5rem;
+    max-width: 60ch;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .engagement-route-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .engagement-route-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .engagement-route-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  .engagement-route-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1rem 1.05rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .engagement-route-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(16, 13, 24, 0.06);
+  }
+  .engagement-route-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .engagement-route-action {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
   .decision-grid {
     display: grid;
     gap: 1rem;

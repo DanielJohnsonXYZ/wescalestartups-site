@@ -68,9 +68,15 @@ const groups = [
       <p class="footer-summary">
         We help founder-led startups turn scattered marketing activity into a weekly growth system — diagnose the bottleneck, build the system, transfer it.
       </p>
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="footer-book">
-        Book a 30-min growth diagnostic →
+      <a
+        class="button button-brand"
+        href={siteConfig.bookingUrl}
+        data-cta="footer-book"
+        title={siteConfig.bookingCallReassurance}
+      >
+        {siteConfig.bookingLabel} →
       </a>
+      <p class="footer-book-reassurance">{siteConfig.bookingCallReassurance}</p>
       <p class="footer-secondary-cta">
         Or, <a href={siteConfig.scorecardUrl}>take the 5-minute scorecard →</a>
       </p>
@@ -128,6 +134,13 @@ const groups = [
     line-height: 1.6;
     margin: 1rem 0 1.25rem;
     max-width: 32ch;
+  }
+  .footer-book-reassurance {
+    margin: 0.65rem 0 0;
+    max-width: 42ch;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--muted);
   }
   .footer-secondary-cta {
     margin-top: 0.85rem;

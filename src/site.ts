@@ -22,6 +22,9 @@ export const siteConfig = {
     },
     { phase: "Last ~5 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
   ],
+  /** Short line near booking CTAs (header title, footer) — Growth Hub: call reassurance. */
+  bookingCallReassurance:
+    "Bring your current bottleneck. In 30 minutes we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.",
   scorecardLabel: "Take the 5-minute scorecard",
   scorecardLabelLong: "Take the 5-minute Growth Bottleneck Scorecard",
   scorecardUrl: "/resources#growth-bottleneck-scorecard",

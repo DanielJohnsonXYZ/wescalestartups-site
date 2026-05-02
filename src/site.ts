@@ -24,7 +24,9 @@ export const siteConfig = {
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
   lastUpdated: "1 May 2026",
-  ogImage: "/og/default.svg"
+  ogImage: "/og/default.svg",
+  /** Google Tag Manager container for wescalestartups.com */
+  gtmId: "GTM-5S892HK"
 } as const;
 
 export const navigation = [

@@ -31,6 +31,13 @@ const imageUrl = absoluteUrl(ogImage);
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
 const allSchemas = [buildPersonSchema(), buildOrganizationSchema(), buildWebSiteSchema(), ...pageSchemas].filter(Boolean);
 const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
+const gtmScript = `window.dataLayer=window.dataLayer||[];
+window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+(function(w,d,s,l,i){var loaded=false;
+function load(){if(loaded)return;loaded=true;var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+['pointerdown','keydown','scroll'].forEach(function(eventName){w.addEventListener(eventName,load,{once:true,passive:true});});
+if('requestIdleCallback' in w){w.requestIdleCallback(load,{timeout:3000});}else{w.setTimeout(load,1800);}
+})(window,document,'script','dataLayer','${siteConfig.gtmId}');`;
 ---
 
 <!doctype html>
@@ -61,12 +68,16 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
 
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
     <meta name="ai:summary" content={description} />
     <meta name="ai:role" content="Growth consultancy and fractional CMO support for post-PMF startups" />
     <meta name="ai:serves" content="Post-PMF SaaS, AI, fintech, healthtech, ecommerce, and education startups" />
     <meta name="ai:contact" content={`${siteConfig.siteUrl}${siteConfig.bookingUrl}`} />
 
     {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
+    <script is:inline set:html={gtmScript} />
     <script is:inline>
       document.addEventListener("click", (event) => {
         const target = event.target;
@@ -101,6 +112,14 @@ const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(
     </script>
   </head>
   <body>
+    <noscript>
+      <iframe
+        height="0"
+        src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.gtmId}`}
+        style="display:none;visibility:hidden"
+        width="0"
+      />
+    </noscript>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SiteHeader currentPath={currentPath} />
     <main id="main-content">

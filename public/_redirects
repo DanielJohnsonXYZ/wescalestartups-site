@@ -44,3 +44,13 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 # Industries trim — saas-growth duplicates b2b-saas
 /industries/saas-growth    /industries/b2b-saas            301
 /industries/saas-growth/   /industries/b2b-saas            301
+
+# Legacy WordPress / old site paths (mirror functions/_middleware.js)
+/about-us                  /about                          301
+/about-us/                 /about                          301
+/speaking                  /press                          301
+/speaking/                 /press                          301
+/portfolio/greenscreen     /case-studies                   301
+/portfolio/greenscreen/    /case-studies                   301
+/team/rahul-van-manen      /about                          301
+/team/rahul-van-manen/     /about                          301

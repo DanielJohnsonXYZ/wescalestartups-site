@@ -44,13 +44,19 @@ export const siteConfig = {
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
-  lastUpdated: "2 May 2026",
+  lastUpdated: "3 May 2026",
   /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
-  siteLastModified: "2026-05-02",
+  siteLastModified: "2026-05-03",
   ogImage: "/og/default.svg",
   /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
   gtmId: "GTM-TV6C7GS"
 } as const;
+
+/** Per-path sitemap lastmod overrides (ISO date). Unlisted paths use siteLastModified. */
+export const staticPathLastModified: Partial<Record<string, string>> = {
+  "/experimentation": "2026-05-03",
+  "/when-growth-plateaus": "2026-05-03"
+};
 
 export const navigation = [
   { href: "/start-here", label: "Start here" },
@@ -100,6 +106,13 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
     { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/diagnose", label: "Manual 5-layer diagnostic framework" }
+  ],
+  "/when-growth-plateaus": [
+    { href: "/insights/pipeline-plateau-post-pmf", label: "Pipeline plateau after PMF" },
+    { href: "/insights/systems-vs-activity-retainers", label: "Systems vs activity retainers" },
+    { href: "/experimentation", label: "Experimentation discipline" },
+    { href: "/diagnose", label: "5-layer diagnostic framework" },
+    { href: "/services", label: "Services" }
   ]
 };
 
@@ -282,6 +295,23 @@ export const homeRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/insights", label: "Insights" },
   { href: "/case-studies", label: "Case studies" },
+  { href: "/experimentation", label: "Experimentation" },
+  { href: "/when-growth-plateaus", label: "When growth plateaus" },
+  { href: "/book", label: siteConfig.bookingLabel }
+];
+
+/** Legal pages — useful internal links (exclude self on each page). */
+export const privacyPageRelatedLinks: readonly { href: string; label: string }[] = [
+  { href: "/", label: "Home" },
+  { href: "/contact", label: "Contact" },
+  { href: "/terms", label: "Terms of use" },
+  { href: "/book", label: siteConfig.bookingLabel }
+];
+
+export const termsPageRelatedLinks: readonly { href: string; label: string }[] = [
+  { href: "/", label: "Home" },
+  { href: "/contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy policy" },
   { href: "/book", label: siteConfig.bookingLabel }
 ];
 

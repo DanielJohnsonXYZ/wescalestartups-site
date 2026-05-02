@@ -36,6 +36,33 @@ const proofSchema = [
 
 const cases = sortByOrder(await getCollection("cases"));
 const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
+
+const deliverableGallery = [
+  {
+    href: "/services/growth-diagnosis",
+    title: "Diagnosis",
+    caption: "Constraint map, evidence notes, 90-day memo",
+    src: "/images/deliverables/diagnosis-preview.svg"
+  },
+  {
+    href: "/services/90-day-growth-sprint",
+    title: "Sprint",
+    caption: "Experiment cards, weekly decisions, transfer checklist",
+    src: "/images/deliverables/sprint-preview.svg"
+  },
+  {
+    href: "/services/acquisition-system-build",
+    title: "System build",
+    caption: "Channel map, briefs, reporting view",
+    src: "/images/deliverables/system-preview.svg"
+  },
+  {
+    href: "/services/fractional-cmo",
+    title: "Fractional CMO",
+    caption: "Cadence, dashboard, decision log",
+    src: "/images/deliverables/fcmo-preview.svg"
+  }
+] as const;
 ---
 
 <BaseLayout
@@ -186,6 +213,28 @@ const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
     </div>
   </section>
 
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Deliverable patterns</p>
+      <h2>What the work looks like on the table — before it is tailored to you.</h2>
+      <p class="lede" style="max-width: 62ch;">
+        These are illustrative wireframes, not client screenshots. They show the shape of outputs: maps, memos, backlogs, and cadence — then we match your stack and bottleneck.
+      </p>
+      <div class="grid-2 proof-deliverable-gallery" style="margin-top: 1.5rem;">
+        {deliverableGallery.map((item) => (
+          <a class="proof-deliverable-card" href={item.href} data-cta={`proof-gallery-${item.href.split("/").pop()}`}>
+            <img src={item.src} alt="" width="800" height="420" loading="lazy" decoding="async" />
+            <div class="proof-deliverable-copy">
+              <h3>{item.title}</h3>
+              <p>{item.caption}</p>
+              <span class="card-link">See the engagement →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="shell">
       <p class="eyebrow">How we measure the work</p>
@@ -266,5 +315,48 @@ const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
 <style>
   .validation-primary {
     max-width: 36rem;
+  }
+  .proof-deliverable-gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .proof-deliverable-gallery {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .proof-deliverable-card {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .proof-deliverable-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+    box-shadow: 0 8px 28px -12px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  .proof-deliverable-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.65rem;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .proof-deliverable-copy h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .proof-deliverable-copy p {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 </style>

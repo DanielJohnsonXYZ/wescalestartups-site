@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" role="img" aria-label="Illustrative wireframe for a diagnosis memo layout">
+  <rect width="800" height="420" fill="#f8f9f4"/>
+  <rect x="40" y="36" width="720" height="52" rx="10" fill="#6657ff" opacity="0.14"/>
+  <rect x="40" y="104" width="460" height="276" rx="14" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="516" y="104" width="244" height="128" rx="14" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="516" y="252" width="244" height="128" rx="14" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="64" y="132" width="200" height="10" rx="4" fill="rgba(16,13,24,0.12)"/>
+  <rect x="64" y="156" width="360" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+  <rect x="64" y="176" width="320" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+  <rect x="64" y="196" width="340" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+</svg>

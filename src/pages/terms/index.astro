@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { siteConfig, termsPageRelatedLinks } from "../../site";
 
 const termsSchema = buildBreadcrumbSchema([
   { name: "Home", path: "/" },
@@ -53,6 +53,22 @@ const termsSchema = buildBreadcrumbSchema([
           <p>Any client work is governed by a separate proposal, statement of work, or agreement. Website language does not create a client relationship on its own.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Site links</p>
+      <h2>Related pages.</h2>
+      <ul class="related-insights-list">
+        {termsPageRelatedLinks.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>

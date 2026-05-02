@@ -66,7 +66,8 @@ const details: Record<string, any> = {
     ],
     afterEngagement: "By the time we leave, the system runs without us: weekly meeting, dashboard, decision log, and a clear hire profile if you're ready for a full-time CMO.",
     deliverablePreviewNote:
-      "Living work in Notion or Google Docs: decision rules, dashboard links, experiment backlog, and weekly scale/stop/fix notes — not a one-off slide deck. Example structures are walkthrough-ready on the diagnostic call when helpful."
+      "Living work in Notion or Google Docs: decision rules, dashboard links, experiment backlog, and weekly scale/stop/fix notes — not a one-off slide deck. Example structures are walkthrough-ready on the diagnostic call when helpful.",
+    deliverablePreviewImage: "/images/deliverables/fcmo-preview.svg"
   },
 
   "growth-diagnosis": {
@@ -113,7 +114,8 @@ const details: Record<string, any> = {
     ],
     afterEngagement: "Most teams act on the recommendation by moving into a Sprint or Fractional CMO engagement. The diagnosis output is yours either way.",
     deliverablePreviewNote:
-      "Constraint maps, workshop memos, and weekly decision formats are tailored per company. Example structures and anonymised excerpts are walkthrough-ready on the diagnostic call when helpful — not generic template screenshots."
+      "Constraint maps, workshop memos, and weekly decision formats are tailored per company. Example structures and anonymised excerpts are walkthrough-ready on the diagnostic call when helpful — not generic template screenshots.",
+    deliverablePreviewImage: "/images/deliverables/diagnosis-preview.svg"
   },
 
   "acquisition-system-build": {
@@ -160,7 +162,8 @@ const details: Record<string, any> = {
     ],
     afterEngagement: "The system stays with you. Optional advisory retainer available if the team wants ongoing decision support without a full Fractional CMO engagement.",
     deliverablePreviewNote:
-      "Channel maps, brief libraries, reporting views, and handoff notes match your ad and analytics stack. We share anonymised patterns on the call; live client dashboards stay confidential."
+      "Channel maps, brief libraries, reporting views, and handoff notes match your ad and analytics stack. We share anonymised patterns on the call; live client dashboards stay confidential.",
+    deliverablePreviewImage: "/images/deliverables/system-preview.svg"
   },
 
   "90-day-growth-sprint": {
@@ -207,7 +210,8 @@ const details: Record<string, any> = {
     ],
     afterEngagement: "Most teams continue with Fractional CMO support to keep the rhythm. About 1 in 3 take the transfer pack and run the next quarter internally.",
     deliverablePreviewNote:
-      "Experiment cards, weekly decision notes, and an end-of-sprint transfer checklist — tuned to how your team ships. Example formats are available on the diagnostic call."
+      "Experiment cards, weekly decision notes, and an end-of-sprint transfer checklist — tuned to how your team ships. Example formats are available on the diagnostic call.",
+    deliverablePreviewImage: "/images/deliverables/sprint-preview.svg"
   }
 }[service.id] ?? {
   price: "Scoped after diagnosis",
@@ -355,6 +359,19 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
             {details.deliverablePreviewNote ??
               "Deliverables are agreed after diagnosis and written for your team to run — format depends on your bottleneck and tools."}
           </p>
+          {details.deliverablePreviewImage && (
+            <figure class="service-deliverable-figure">
+              <img
+                src={details.deliverablePreviewImage}
+                alt=""
+                width="800"
+                height="420"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Illustrative layout — final deliverables are client-specific.</figcaption>
+            </figure>
+          )}
         </article>
         <article class="content-block">
           <h2>Sample week</h2>
@@ -608,5 +625,25 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
     color: var(--muted);
     font-size: 0.92rem;
     margin-bottom: 0.85rem;
+  }
+
+  .service-deliverable-figure {
+    margin: 1.25rem 0 0;
+    padding: 0;
+  }
+  .service-deliverable-figure img {
+    display: block;
+    width: 100%;
+    max-width: 42rem;
+    height: auto;
+    border-radius: 0.85rem;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .service-deliverable-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    max-width: 42rem;
   }
 </style>

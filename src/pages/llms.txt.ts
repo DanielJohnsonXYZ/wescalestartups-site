@@ -134,6 +134,8 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Reports hub: ${siteConfig.siteUrl}/reports
 - Build (execution framing): ${siteConfig.siteUrl}/build
 - Transfer (handoff framing): ${siteConfig.siteUrl}/transfer
+- Experimentation (hypothesis-led tests): ${siteConfig.siteUrl}/experimentation
+- When growth plateaus (cornerstone): ${siteConfig.siteUrl}/when-growth-plateaus
 
 ## Published insights
 

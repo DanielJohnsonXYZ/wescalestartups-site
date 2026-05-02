@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" role="img" aria-label="Illustrative wireframe for channel and reporting map">
+  <rect width="800" height="420" fill="#f8f9f4"/>
+  <rect x="200" y="48" width="400" height="64" rx="12" fill="#6657ff" opacity="0.16"/>
+  <rect x="80" y="140" width="160" height="88" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="260" y="140" width="160" height="88" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="440" y="140" width="160" height="88" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="620" y="140" width="120" height="88" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <path d="M400 112 V132 M200 184 H600" stroke="rgba(102,87,255,0.35)" stroke-width="2" fill="none"/>
+  <rect x="80" y="252" width="660" height="120" rx="14" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="104" y="280" width="200" height="10" rx="4" fill="rgba(16,13,24,0.12)"/>
+  <rect x="104" y="304" width="612" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+  <rect x="104" y="324" width="580" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+</svg>

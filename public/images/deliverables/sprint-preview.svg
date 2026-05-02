@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" role="img" aria-label="Illustrative wireframe for sprint experiment cards">
+  <rect width="800" height="420" fill="#f8f9f4"/>
+  <rect x="40" y="40" width="170" height="100" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="230" y="40" width="170" height="100" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="420" y="40" width="170" height="100" rx="12" fill="#6657ff" opacity="0.12" stroke="rgba(102,87,255,0.35)" stroke-width="2"/>
+  <rect x="610" y="40" width="150" height="100" rx="12" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="40" y="160" width="720" height="220" rx="14" fill="#fffefa" stroke="rgba(16,13,24,0.14)" stroke-width="2"/>
+  <rect x="64" y="188" width="240" height="10" rx="4" fill="rgba(16,13,24,0.12)"/>
+  <rect x="64" y="212" width="560" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+  <rect x="64" y="236" width="520" height="8" rx="3" fill="rgba(16,13,24,0.08)"/>
+  <rect x="64" y="300" width="672" height="56" rx="10" fill="rgba(102,87,255,0.08)"/>
+</svg>

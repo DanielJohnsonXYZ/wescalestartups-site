@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { absoluteUrl } from "../lib/utils";
-import { siteConfig } from "../site";
+import { siteConfig, staticPathLastModified } from "../site";
 
 export const prerender = true;
 
@@ -32,7 +32,8 @@ function staticUrlMeta(path: string): Pick<UrlOpts, "changefreq" | "priority"> {
     "/quiz",
     "/diagnose",
     "/case-studies",
-    "/resources"
+    "/resources",
+    "/experimentation"
   ]);
   if (weekly.has(path)) return { changefreq: "weekly", priority: "0.9" };
   return { changefreq: "monthly", priority: "0.75" };
@@ -63,6 +64,7 @@ export const GET: APIRoute = async () => {
     "/growth-engine",
     "/ai-growth-systems",
     "/fractional-cmo-vs-agency",
+    "/when-growth-plateaus",
     "/case-studies",
     "/industries",
     "/about",
@@ -73,6 +75,7 @@ export const GET: APIRoute = async () => {
     "/testimonials",
     "/build",
     "/transfer",
+    "/experimentation",
     "/privacy",
     "/terms"
   ];
@@ -80,7 +83,9 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticPaths
-  .map((path) => urlNode(path, { lastmod: staticLastMod, ...staticUrlMeta(path) }))
+  .map((path) =>
+    urlNode(path, { lastmod: staticPathLastModified[path] ?? staticLastMod, ...staticUrlMeta(path) })
+  )
   .join("\n")}
 ${services
   .map((s) =>

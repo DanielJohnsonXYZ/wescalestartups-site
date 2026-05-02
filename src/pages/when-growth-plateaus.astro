@@ -1,0 +1,49 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "The plateau is rarely one channel",
+    body: "Post-PMF plateaus usually show up as noisy activity: more content, another hire, another agency — without a single bottleneck everyone agrees on.",
+    points: ["Pipeline arrives in waves", "CAC unstable or unexplained", "Founder still owns every growth decision", "Reporting shows activity, not decisions"]
+  },
+  {
+    title: "Force a constraint before you fund another quarter",
+    body: "The job is to name the lead constraint across positioning, acquisition, conversion, reporting, and ownership — then sequence work so the next expensive bet is obvious.",
+    points: ["One lead layer", "Evidence tied to revenue or qualified pipeline", "A 30–90 day sequence", "Falsifiable success signals"]
+  },
+  {
+    title: "Then pick the engagement shape",
+    body: "Sometimes the answer is diagnosis only. Sometimes a sprint, a system build, or fractional leadership. The shape follows the constraint — not the other way around.",
+    points: ["Growth Diagnosis when the path is fuzzy", "Sprint when you need signal this quarter", "System build when channels run in isolation", "Fractional CMO when judgement cadence is missing"]
+  }
+];
+
+const faqs = [
+  {
+    question: "Is a plateau always a marketing problem?",
+    answer:
+      "Often it is a system problem: positioning, offer, channel fit, conversion, reporting, or who owns scale/stop/fix. Product and PMF can still be the real block — diagnosis should say so honestly."
+  },
+  {
+    question: "What is the fastest honest check?",
+    answer:
+      "Run the scorecard or quiz, read one case study in your sector, then book the diagnostic when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
+  },
+  {
+    question: "Do we need more experiments?",
+    answer:
+      "You need fewer untethered experiments and more tests anchored to a constraint map. See the experimentation page for how we structure learning once the bottleneck is named."
+  }
+];
+---
+
+<StrategicPage
+  path="/when-growth-plateaus"
+  eyebrow="Cornerstone"
+  title="When growth plateaus after PMF, fix the system — not the symptom."
+  description="A practical read on post-PMF plateaus: naming the real constraint, sequencing work, and choosing the right engagement shape."
+  lede="Plateaus look like channel problems. They are usually decision, evidence, or ownership problems wearing channel clothes."
+  sections={sections}
+  faqs={faqs}
+/>

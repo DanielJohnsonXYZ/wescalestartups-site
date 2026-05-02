@@ -25,8 +25,8 @@ export const siteConfig = {
   danielSite: "https://danieljohnson.xyz",
   lastUpdated: "1 May 2026",
   ogImage: "/og/default.svg",
-  /** Google Tag Manager container for wescalestartups.com */
-  gtmId: "GTM-5S892HK"
+  /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
+  gtmId: "GTM-TV6C7GS"
 } as const;
 
 export const navigation = [

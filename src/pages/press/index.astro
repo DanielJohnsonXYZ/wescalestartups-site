@@ -22,8 +22,12 @@ const founderBio =
       <h1>Company information for We Scale Startups.</h1>
       <p>Use this page for accurate company descriptions, proof points, and contact details. For podcast, speaking, or expert commentary requests, see Daniel Johnson's media kit.</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={`mailto:${siteConfig.email}`}>Email We Scale Startups</a>
-        <a class="button button-light" href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a>
+        <a class="button button-dark" href={`mailto:${siteConfig.email}`} data-cta="press-email">Email We Scale Startups</a>
+        <a class="button button-light" href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank" data-cta="press-media-kit">
+          Daniel Johnson media kit
+        </a>
+        <a class="button button-light" href="/proof" data-cta="press-proof">Proof hub</a>
+        <a class="button button-light" href="/case-studies" data-cta="press-cases">Case studies</a>
       </div>
     </div>
   </section>
@@ -55,6 +59,28 @@ const founderBio =
             {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
           </ul>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Fact-checking</p>
+      <h2>Verify outcomes before you cite them.</h2>
+      <p class="lede" style="max-width: 62ch;">
+        Published cases and the proof hub use the same Problem / Action / Result structure. For commentary on a live growth decision, book a short call — we can usually clarify what is on the record vs client-confidential.
+      </p>
+      <div class="hero-actions" style="margin-top: 1.25rem;">
+        <a class="button button-brand" href="/proof" data-cta="press-verify-proof">See proof hub →</a>
+        <a class="button button-light" href="/case-studies" data-cta="press-verify-cases">All case studies →</a>
+        <a
+          class="button button-light"
+          href={siteConfig.bookingUrl}
+          data-cta="press-verify-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
+        </a>
       </div>
     </div>
   </section>

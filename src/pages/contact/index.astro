@@ -16,14 +16,18 @@ import { siteConfig } from "../../site";
       <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
       <div class="hero-actions">
         <a
-          class="button button-brand"
+          class="button button-brand button-with-subcopy"
           href={siteConfig.bookingUrl}
           data-cta="contact-book"
           title={siteConfig.bookingCallReassurance}
         >
-          {siteConfig.bookingLabel}
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="contact-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href={`mailto:${siteConfig.email}`} data-cta="contact-email">{siteConfig.email}</a>
       </div>
     </div>
   </section>
@@ -82,8 +86,39 @@ import { siteConfig } from "../../site";
         >
           {siteConfig.bookingLabel} →
         </a>
+        <p>
+          Prefer async?{" "}
+          <a href={siteConfig.scorecardUrl} data-cta="contact-side-scorecard">{siteConfig.scorecardLabel}</a>
+          {" "}or the <a href="/quiz" data-cta="contact-side-quiz">3-minute quiz</a>.
+        </p>
         <p><strong>Address:</strong><br />81 Curtain Road,<br />London,<br />EC2A 3AG,<br />UK</p>
       </aside>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Rather talk it through?</p>
+        <h2>Send the form — or book the call.</h2>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we can usually tell whether the constraint is positioning, acquisition, conversion, reporting, or ownership — and whether WSS is the right shape of help.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="contact-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="contact-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

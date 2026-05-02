@@ -7,10 +7,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="shell">
       <p class="eyebrow">404</p>
       <h1>This page wandered off.</h1>
-      <p>The useful paths are still here: services, industries, proof, or contact.</p>
+      <p>The useful paths are still here: start here, services, proof, book, or contact.</p>
       <div class="hero-actions">
-        <a class="button button-dark" href="/">Go home</a>
-        <a class="button button-light" href="/contact">Contact</a>
+        <a class="button button-dark" href="/" data-cta="404-home">Go home</a>
+        <a class="button button-light" href="/start-here" data-cta="404-start-here">Start here</a>
+        <a class="button button-light" href="/proof" data-cta="404-proof">Proof</a>
+        <a class="button button-light" href="/book" data-cta="404-book">Book</a>
+        <a class="button button-light" href="/contact" data-cta="404-contact">Contact</a>
       </div>
     </div>
   </section>

@@ -14,8 +14,19 @@ import { siteConfig } from "../../site";
       <h1>Run fewer experiments, learn more from each one.</h1>
       <p>We turn scattered marketing activity into tests with hypotheses, owners, commercial metrics, and decisions the team can act on.</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="test-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/proof">See proof</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="test-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="test-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/proof" data-cta="test-proof">See proof</a>
       </div>
     </div>
   </section>
@@ -25,6 +36,32 @@ import { siteConfig } from "../../site";
       <article class="feature-card"><h3>Choose</h3><p>Select experiments by likely learning value, pipeline potential, effort, and risk.</p></article>
       <article class="feature-card"><h3>Measure</h3><p>Use clear leading and lagging metrics so tests do not become activity reports.</p></article>
       <article class="feature-card"><h3>Decide</h3><p>Scale, stop, refine, or transfer the work based on evidence.</p></article>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Experiments without a constraint map</p>
+        <h2>Name the bottleneck before you scale tests.</h2>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we can usually tell whether the learning problem is positioning, acquisition, conversion, reporting, or ownership — so experiments compound instead of stacking.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="test-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="test-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

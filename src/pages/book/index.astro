@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { bookRelatedReading, siteConfig } from "../../site";
 
 const bookServiceSchema = {
   "@context": "https://schema.org",
@@ -55,17 +55,21 @@ const bookSchema = [
       <p>Use this when growth is active but the next move is unclear. The call maps the bottleneck, stage, team, budget, and whether WSS is the right shape of help.</p>
       <div class="hero-actions">
         <a
-          class="button button-brand"
+          class="button button-brand button-with-subcopy"
           href={siteConfig.calendlyUrl}
           rel="noreferrer"
           target="_blank"
           data-cta="book-page-calendly"
           title={siteConfig.bookingCallReassurance}
         >
-          Open Calendly
+          <span class="button-label">Open Calendly</span>
+          <span class="button-subcopy">Pick a slot · same structured diagnostic</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-page-scorecard">
-          {siteConfig.scorecardLabel}
+          {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/proof" data-cta="book-page-proof">
+          Proof hub
         </a>
       </div>
     </div>
@@ -123,6 +127,22 @@ const bookSchema = [
 
   <section class="section section-alt">
     <div class="shell">
+      <p class="eyebrow">Before the call</p>
+      <h2>Context that makes the 30 minutes useful.</h2>
+      <ul class="related-insights-list">
+        {bookRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
       <p class="eyebrow">FAQ</p>
       <h2>Booking the diagnostic.</h2>
       <div class="grid-2">
@@ -132,6 +152,34 @@ const bookSchema = [
             <p>{item.answer}</p>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Ready to pick a time?</p>
+        <h2>Open Calendly and lock a slot.</h2>
+        <p>
+          Bring the scorecard or quiz result if you have one. The call stays diagnostic — clear bottleneck, clear next step.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.calendlyUrl}
+          rel="noreferrer"
+          target="_blank"
+          data-cta="book-final-calendly"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">Open Calendly</span>
+          <span class="button-subcopy">Pick a slot · {siteConfig.bookingCallDurationPhrase}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
       </div>
     </div>
   </section>

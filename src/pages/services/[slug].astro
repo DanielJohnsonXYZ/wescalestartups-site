@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildServiceSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { serviceRelatedInsights, siteConfig } from "../../site";
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
@@ -64,7 +64,9 @@ const details: Record<string, any> = {
       ["What do you need from us?", "An execution owner inside the team (the founder is acceptable for the first 30 days), read access to analytics / CRM / ad accounts, and one 60-minute growth meeting slot per week. We supply senior judgement; you supply context and execution."],
       ["What happens after the engagement?", "Clean handover. By the end you have the operating cadence documented, dashboards owned by an internal team member, a roadmap for the next 90 days, and a hire profile if you are ready to bring in a full-time CMO. We can stay on a smaller advisory retainer if helpful."]
     ],
-    afterEngagement: "By the time we leave, the system runs without us: weekly meeting, dashboard, decision log, and a clear hire profile if you're ready for a full-time CMO."
+    afterEngagement: "By the time we leave, the system runs without us: weekly meeting, dashboard, decision log, and a clear hire profile if you're ready for a full-time CMO.",
+    deliverablePreviewNote:
+      "Living work in Notion or Google Docs: decision rules, dashboard links, experiment backlog, and weekly scale/stop/fix notes — not a one-off slide deck. Example structures are walkthrough-ready on the diagnostic call when helpful."
   },
 
   "growth-diagnosis": {
@@ -156,7 +158,9 @@ const details: Record<string, any> = {
       ["What do you need from us?", "An execution team (in-house, agency, or both), brand and product context, tracking access (GA4 / ad accounts / CRM / MA), and a paid spend guideline. We design and direct; your team or agency executes."],
       ["What happens after the engagement?", "Your team owns and runs the system. We document everything in a handoff pack and offer an optional advisory retainer (£3-5k/month) for ongoing decision support if the team wants it."]
     ],
-    afterEngagement: "The system stays with you. Optional advisory retainer available if the team wants ongoing decision support without a full Fractional CMO engagement."
+    afterEngagement: "The system stays with you. Optional advisory retainer available if the team wants ongoing decision support without a full Fractional CMO engagement.",
+    deliverablePreviewNote:
+      "Channel maps, brief libraries, reporting views, and handoff notes match your ad and analytics stack. We share anonymised patterns on the call; live client dashboards stay confidential."
   },
 
   "90-day-growth-sprint": {
@@ -201,7 +205,9 @@ const details: Record<string, any> = {
       ["What do you need from us?", "An execution owner, existing creative / dev / content capacity (in-house or agency), 30 minutes of founder time per week, and tracking access. We design and direct; your team ships."],
       ["What happens after the engagement?", "Most teams either move into Fractional CMO support to keep the rhythm going, or take the transfer pack and run the next quarter internally. A clean readout document is yours either way."]
     ],
-    afterEngagement: "Most teams continue with Fractional CMO support to keep the rhythm. About 1 in 3 take the transfer pack and run the next quarter internally."
+    afterEngagement: "Most teams continue with Fractional CMO support to keep the rhythm. About 1 in 3 take the transfer pack and run the next quarter internally.",
+    deliverablePreviewNote:
+      "Experiment cards, weekly decision notes, and an end-of-sprint transfer checklist — tuned to how your team ships. Example formats are available on the diagnostic call."
   }
 }[service.id] ?? {
   price: "Scoped after diagnosis",
@@ -218,7 +224,9 @@ const details: Record<string, any> = {
     ["Who is this for?", "Post-PMF founder-led teams. Scope is set after we understand the current bottleneck."],
     ["What do we get?", "Outcomes scoped to your situation. See the diagnosis page if you're not sure where to start."]
   ],
-  afterEngagement: "Scope and post-engagement plan agreed during diagnosis."
+  afterEngagement: "Scope and post-engagement plan agreed during diagnosis.",
+  deliverablePreviewNote:
+    "Deliverables are named after the diagnostic call and documented for your team — format depends on bottleneck, stack, and urgency."
 };
 
 const faqSchema = {
@@ -242,6 +250,7 @@ const serviceKeywords: Record<string, string> = {
     "fractional CMO, embedded growth leadership, startup marketing cadence, pipeline dashboard, agency management"
 };
 const keywords = serviceKeywords[service.id];
+const relatedForService = serviceRelatedInsights[service.id] ?? [];
 ---
 
 <BaseLayout
@@ -340,12 +349,13 @@ const keywords = serviceKeywords[service.id];
             {details.deliverables.map((item: string) => <li>{item}</li>)}
           </ul>
         </article>
-        {details.deliverablePreviewNote && (
-          <article class="content-block">
-            <h2>Representative output</h2>
-            <p>{details.deliverablePreviewNote}</p>
-          </article>
-        )}
+        <article class="content-block">
+          <h2>Representative output</h2>
+          <p>
+            {details.deliverablePreviewNote ??
+              "Deliverables are agreed after diagnosis and written for your team to run — format depends on your bottleneck and tools."}
+          </p>
+        </article>
         <article class="content-block">
           <h2>Sample week</h2>
           <ol>
@@ -359,6 +369,26 @@ const keywords = serviceKeywords[service.id];
       </div>
     </div>
   </section>
+
+  {
+    relatedForService.length > 0 && (
+      <section class="section">
+        <div class="shell">
+          <p class="eyebrow">Related reading</p>
+          <h2>Notes and hubs that pair with this engagement.</h2>
+          <ul class="related-insights-list">
+            {relatedForService.map((item) => (
+              <li>
+                <a class="card-link" href={item.href}>
+                  {item.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <!-- Service-specific FAQs (6 standardised questions) -->
   <section class="section section-alt service-faqs">

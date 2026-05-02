@@ -110,6 +110,52 @@ export const diagnoseRelatedReading: readonly { href: string; label: string }[] 
   { href: "/reports", label: "Report formats (bottleneck, system, AI visibility)" }
 ];
 
+/** /resources — frameworks, quiz, reports (internal crawl). */
+export const resourcesRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
+  { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
+  { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
+  { href: "/diagnose", label: "5-layer diagnostic framework" },
+  { href: "/quiz", label: "Growth bottleneck quiz" },
+  { href: "/reports", label: "Report formats hub" }
+];
+
+/** /book — pre-call context. */
+export const bookRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/diagnose", label: "5-layer diagnostic framework" },
+  { href: "/quiz", label: "Growth bottleneck quiz" },
+  { href: "/resources", label: "Resources and scorecard" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/proof", label: "Proof hub" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
+];
+
+/** /services/[slug] — related insights and hubs. */
+export const serviceRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
+  "growth-diagnosis": [
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+    { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
+    { href: "/diagnose", label: "Free 5-layer framework" },
+    { href: "/reports", label: "Report formats" }
+  ],
+  "90-day-growth-sprint": [
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+    { href: "/first-30-days", label: "First 30 days with WSS" },
+    { href: "/how-it-works", label: "How it works" }
+  ],
+  "acquisition-system-build": [
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+    { href: "/build", label: "Build · execution framing" },
+    { href: "/transfer", label: "Transfer · handoff framing" }
+  ],
+  "fractional-cmo": [
+    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+    { href: "/fractional-cmo-vs-agency", label: "Fractional CMO vs agency" },
+    { href: "/first-30-days", label: "First 30 days with WSS" },
+    { href: "/engagement-models", label: "Engagement models" }
+  ]
+};
+
 export const proofClients = [
   { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
   { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine", proof: "Marketing function built from zero" },

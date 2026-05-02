@@ -2,7 +2,7 @@
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { leadMagnets, siteConfig } from "../../site";
+import { leadMagnets, resourcesRelatedReading, siteConfig } from "../../site";
 
 function guideRequestMailto(title: string, id: string) {
   const outlineUrl = `${siteConfig.siteUrl}/resources#${id}`;
@@ -160,6 +160,22 @@ const guides = [
           </a>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Frameworks, quizzes, and notes that pair with these guides.</h2>
+      <ul class="related-insights-list">
+        {resourcesRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

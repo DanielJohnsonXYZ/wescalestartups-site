@@ -3,7 +3,7 @@ import OfferRoutingCards from "../../components/OfferRoutingCards.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { pricingTrustBullets, serviceSnapshots, siteConfig } from "../../site";
+import { pricingTrustBullets, serviceSnapshots, servicesHubRelatedReading, siteConfig } from "../../site";
 
 const servicesHubFaqs = [
   {
@@ -110,6 +110,22 @@ const servicesSchema = [
           <p>Document the system so founders, first marketers, agencies, and sales teams can keep running it.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Pricing, proof, and how the work runs.</h2>
+      <ul class="related-insights-list">
+        {servicesHubRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

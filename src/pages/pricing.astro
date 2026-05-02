@@ -2,7 +2,7 @@
 import OfferRoutingCards from "../components/OfferRoutingCards.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { pricingTrustBullets, pricingTiers, siteConfig } from "../site";
+import { pricingRelatedReading, pricingTrustBullets, pricingTiers, siteConfig } from "../site";
 
 const pricingFaqs = [
   {
@@ -87,6 +87,22 @@ const pricingFaqs = [
         <article class="feature-card compact-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
         <article class="feature-card compact-card"><p>Travel for events or trade shows (if applicable)</p></article>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Context for the numbers.</h2>
+      <ul class="related-insights-list">
+        {pricingRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildCaseStudyArticleSchema, buildFaqSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { caseStudyRelatedReading, siteConfig } from "../../site";
 
 export async function getStaticPaths() {
   const cases = await getCollection("cases");
@@ -67,7 +67,7 @@ const caseFaqs = [
     buildFaqSchema(caseFaqs),
     buildBreadcrumbSchema([
       { name: "Home", path: "/" },
-      { name: "Proof", path: "/proof" },
+      { name: "Case studies", path: "/case-studies" },
       { name: caseStudy.data.title, path }
     ])
   ]}
@@ -156,6 +156,22 @@ const caseFaqs = [
           </article>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>More proof and how to engage.</h2>
+      <ul class="related-insights-list">
+        {caseStudyRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

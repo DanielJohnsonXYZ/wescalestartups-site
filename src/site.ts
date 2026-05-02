@@ -156,6 +156,49 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
   ]
 };
 
+/** /pricing — decision context and self-serve paths. */
+export const pricingRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/services", label: "Compare the four engagements" },
+  { href: "/fractional-cmo-vs-agency", label: "Fractional CMO vs agency" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/start-here", label: "Start here" },
+  { href: "/resources", label: "Resources and scorecard" }
+];
+
+/** /services hub — pricing, proof, diagnosis. */
+export const servicesHubRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/pricing", label: "Pricing ranges" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/proof", label: "Proof hub" },
+  { href: "/diagnose", label: "5-layer diagnostic" },
+  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" }
+];
+
+/** /insights hub — frameworks and proof. */
+export const insightsHubRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/reports", label: "Report formats" },
+  { href: "/diagnose", label: "5-layer framework" },
+  { href: "/quiz", label: "Growth bottleneck quiz" },
+  { href: "/proof", label: "Proof hub" },
+  { href: "/resources", label: "Resources" }
+];
+
+/** /testimonials — proof and next steps. */
+export const testimonialsRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/proof", label: "Proof hub" },
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/book", label: siteConfig.bookingLabel },
+  { href: "/resources", label: "Resources" }
+];
+
+/** Case study detail pages — standard crawl paths. */
+export const caseStudyRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/proof", label: "Proof hub" },
+  { href: "/case-studies", label: "All case studies" },
+  { href: "/services", label: "Compare services" },
+  { href: "/book", label: siteConfig.bookingLabel }
+];
+
 export const proofClients = [
   { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
   { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine", proof: "Marketing function built from zero" },

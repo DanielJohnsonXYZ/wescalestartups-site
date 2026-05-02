@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig, testimonials, headlineMetrics } from "../site";
+import { siteConfig, testimonials, testimonialsRelatedReading, headlineMetrics } from "../site";
 
 const testimonialsFaqs = [
   {
@@ -119,6 +119,22 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
         Want the unfiltered view? See&nbsp;
         <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">200+ public reviews on GrowthMentor →</a>
       </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Verify outcomes and next steps.</h2>
+      <ul class="related-insights-list">
+        {testimonialsRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

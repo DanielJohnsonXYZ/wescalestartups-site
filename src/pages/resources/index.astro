@@ -58,8 +58,19 @@ const guides = [
       <h1>Practical growth guides for teams between traction and scale.</h1>
       <p>Use these when you need a clearer diagnosis before hiring, briefing an agency, or adding more channel activity.</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="resources-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/proof">See proof</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="resources-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="resources-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/proof" data-cta="resources-proof">See proof</a>
       </div>
     </div>
   </section>
@@ -113,9 +124,24 @@ const guides = [
       <div>
         <p class="eyebrow">Need the diagnosis done with you?</p>
         <h2>Bring the current growth mess.</h2>
-        <p>We will identify whether the constraint is positioning, acquisition, conversion, reporting, or senior leadership.</p>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we will identify whether the constraint is positioning, acquisition, conversion, reporting, or senior leadership — no pitch unless there is a clear fit.
+        </p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="resources-final-book">{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="resources-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="resources-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

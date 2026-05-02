@@ -75,9 +75,24 @@ const schemas = [
       <div>
         <p class="eyebrow">Next step</p>
         <h2>Bring the bottleneck into a live diagnosis.</h2>
-        <p>Thirty minutes is enough to decide whether the problem is positioning, acquisition, conversion, reporting, or ownership.</p>
+        <p>
+          {siteConfig.bookingCallDurationPhrase} is enough to decide whether the problem is positioning, acquisition, conversion, reporting, or ownership.
+        </p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="insight-article-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="insight-article-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

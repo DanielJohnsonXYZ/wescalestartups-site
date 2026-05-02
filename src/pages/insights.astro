@@ -28,8 +28,19 @@ const insights = sortByOrder(await getCollection("insights"));
         Practical writing on diagnosing bottlenecks, building acquisition systems, and making expertise easier for buyers and AI search systems to trust.
       </p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/fractional-cmo-vs-agency">WSS vs agency</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="insights-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="insights-hero-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/fractional-cmo-vs-agency" data-cta="insights-hero-vs-agency">WSS vs agency</a>
       </div>
     </div>
   </section>
@@ -72,9 +83,24 @@ const insights = sortByOrder(await getCollection("insights"));
       <div>
         <p class="eyebrow">Apply this to your company</p>
         <h2>Diagnose the constraint before adding more activity.</h2>
-        <p>Bring the current site, pipeline, campaigns, reporting, and team context. We will decide which part of the system needs work first.</p>
+        <p>
+          Bring the current site, pipeline, campaigns, reporting, and team context. In {siteConfig.bookingCallDurationPhrase} we can usually decide which part of the system needs work first.
+        </p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="insights-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="insights-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

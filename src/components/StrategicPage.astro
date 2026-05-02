@@ -37,8 +37,19 @@ const schema = [
       <h1>{title}</h1>
       <p class="lede">{lede}</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/services">Compare services</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="strategic-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="strategic-hero-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/services" data-cta="strategic-hero-services">Compare services</a>
       </div>
     </div>
   </section>
@@ -83,9 +94,24 @@ const schema = [
       <div>
         <p class="eyebrow">Next step</p>
         <h2>Find the acquisition constraint before you add more activity.</h2>
-        <p>Bring the current site, pipeline, campaigns, reporting, and team context. We will decide which part of the system needs work first.</p>
+        <p>
+          Bring the current site, pipeline, campaigns, reporting, and team context. In {siteConfig.bookingCallDurationPhrase} we can usually tell which part of the system needs work first.
+        </p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="strategic-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="strategic-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

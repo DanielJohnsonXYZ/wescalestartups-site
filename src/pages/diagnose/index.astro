@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { siteConfig } from "../../site";
+import { diagnoseRelatedReading, siteConfig } from "../../site";
 
 const howToSchema = {
   "@context": "https://schema.org",
@@ -148,6 +148,22 @@ const diagnoseSchema = [
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Turn the framework into a report or a decision.</h2>
+      <ul class="related-insights-list">
+        {diagnoseRelatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

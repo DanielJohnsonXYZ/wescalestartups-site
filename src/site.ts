@@ -102,6 +102,13 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   ]
 };
 
+/** /diagnose — related reports and insights (internal crawl). */
+export const diagnoseRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
+  { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
+  { href: "/reports", label: "Report formats (bottleneck, system, AI visibility)" }
+];
+
 export const proofClients = [
   { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
   { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine", proof: "Marketing function built from zero" },

@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
+
+const termsSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Terms", path: "/terms" }
+]);
 ---
 
 <BaseLayout
@@ -8,6 +14,7 @@ import { siteConfig } from "../../site";
   description="Terms for using the We Scale Startups website, content, and enquiry flows."
   keywords="We Scale Startups terms of use, website terms"
   path="/terms"
+  schema={termsSchema}
 >
   <section class="page-hero">
     <div class="shell">

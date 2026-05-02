@@ -1,12 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
+
+const buildSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Build", path: "/build" }
+]);
 ---
 
 <BaseLayout
   title="Build | We Scale Startups"
   description="Build the growth assets, acquisition workflows, reporting cadence, and team rituals that turn strategy into execution."
   path="/build"
+  schema={buildSchema}
 >
   <section class="page-hero">
     <div class="shell">

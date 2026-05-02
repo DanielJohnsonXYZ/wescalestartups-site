@@ -1,12 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
+
+const transferSchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Transfer", path: "/transfer" }
+]);
 ---
 
 <BaseLayout
   title="Transfer | We Scale Startups"
   description="Transfer the growth system to the founder, team, agencies, and future hires so the company keeps improving."
   path="/transfer"
+  schema={transferSchema}
 >
   <section class="page-hero">
     <div class="shell">

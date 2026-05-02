@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
+
+const privacySchema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Privacy", path: "/privacy" }
+]);
 ---
 
 <BaseLayout
@@ -8,6 +14,7 @@ import { siteConfig } from "../../site";
   description="How We Scale Startups handles enquiry, analytics, scheduling, and communication data."
   keywords="We Scale Startups privacy policy, data protection, Calendly analytics"
   path="/privacy"
+  schema={privacySchema}
 >
   <section class="page-hero">
     <div class="shell">

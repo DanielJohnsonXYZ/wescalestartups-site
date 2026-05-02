@@ -129,6 +129,11 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Execution model (pillar): ${siteConfig.siteUrl}/execution-model
 - Growth engine (pillar): ${siteConfig.siteUrl}/growth-engine
 - How we work (pillar): ${siteConfig.siteUrl}/how-we-work
+- AI growth systems (pillar): ${siteConfig.siteUrl}/ai-growth-systems
+- Industries hub: ${siteConfig.siteUrl}/industries
+- Reports hub: ${siteConfig.siteUrl}/reports
+- Build (execution framing): ${siteConfig.siteUrl}/build
+- Transfer (handoff framing): ${siteConfig.siteUrl}/transfer
 
 ## Published insights
 

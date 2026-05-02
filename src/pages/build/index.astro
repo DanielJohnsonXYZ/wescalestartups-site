@@ -14,8 +14,19 @@ import { siteConfig } from "../../site";
       <h1>Turn growth strategy into assets, workflows, and operating rhythm.</h1>
       <p>We build the practical pieces: positioning, landing pages, campaign briefs, reporting, AI workflows, and the meeting cadence that keeps learning moving.</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="build-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/services/90-day-growth-sprint">See the sprint</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="build-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="build-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/services/90-day-growth-sprint" data-cta="build-sprint">See the sprint</a>
       </div>
     </div>
   </section>
@@ -25,6 +36,32 @@ import { siteConfig } from "../../site";
       <article class="feature-card"><h3>Positioning</h3><p>Clarify ICP, pains, buying triggers, objections, and the offer story.</p></article>
       <article class="feature-card"><h3>Acquisition</h3><p>Build the pages, campaigns, content, outbound, paid, SEO, or CRO tests that fit the stage.</p></article>
       <article class="feature-card"><h3>Reporting</h3><p>Set a weekly view of pipeline, channel evidence, conversion, and learning velocity.</p></article>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Before the build</p>
+        <h2>Confirm the bottleneck, then ship the right assets.</h2>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we can tell whether the constraint is positioning, acquisition, conversion, reporting, or ownership — so the build work lands in the right place.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="build-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="build-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

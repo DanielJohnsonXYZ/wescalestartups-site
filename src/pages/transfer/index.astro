@@ -14,8 +14,19 @@ import { siteConfig } from "../../site";
       <h1>Leave the team with a system they can keep running.</h1>
       <p>We document decisions, workflows, reporting, meeting cadence, and handoff rules so the growth function gets stronger after the engagement ends.</p>
       <div class="hero-actions">
-        <a class="button button-dark" href={siteConfig.bookingUrl} data-cta="transfer-book">{siteConfig.bookingLabel}</a>
-        <a class="button button-light" href="/services/fractional-cmo">Fractional CMO support</a>
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="transfer-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="transfer-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/services/fractional-cmo" data-cta="transfer-fcmo">Fractional CMO support</a>
       </div>
     </div>
   </section>
@@ -25,6 +36,32 @@ import { siteConfig } from "../../site";
       <article class="feature-card"><h3>Document</h3><p>Capture the ICP, strategy, assets, reporting, experiments, and decision rules.</p></article>
       <article class="feature-card"><h3>Handoff</h3><p>Give founders, marketers, sales teams, agencies, and future hires a shared operating view.</p></article>
       <article class="feature-card"><h3>Reduce Dependency</h3><p>Make the team less dependent on founder instinct and external operators over time.</p></article>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Plan the handoff</p>
+        <h2>Make sure the system survives after the engagement.</h2>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we can map what needs documenting, who owns the rhythm, and whether fractional support or a sprint is the right next shape of help.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="transfer-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="transfer-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { sortByOrder } from "../../lib/utils";
+import { siteConfig } from "../../site";
 
 const allowedIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
 const industries = sortByOrder(await getCollection("industries")).filter((industry) => allowedIndustries.includes(industry.id));
@@ -19,6 +20,21 @@ const industries = sortByOrder(await getCollection("industries")).filter((indust
       <p class="eyebrow">Industries</p>
       <h1>Four markets where proof, trust, and timing matter.</h1>
       <p>The system adapts to the buyer, proof required, channel economics, and internal team capacity.</p>
+      <div class="hero-actions">
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="industries-index-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industries-index-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/services" data-cta="industries-index-services">Compare services</a>
+      </div>
     </div>
   </section>
 
@@ -34,6 +50,32 @@ const industries = sortByOrder(await getCollection("industries")).filter((indust
             <span class="card-link">Explore {industry.data.title}</span>
           </a>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Market-specific diagnosis</p>
+        <h2>Name the constraint before you scale spend.</h2>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we connect buyer problem, proof bar, channel economics, and team capacity into a practical next step.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="industries-index-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industries-index-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
       </div>
     </div>
   </section>

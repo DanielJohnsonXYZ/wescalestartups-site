@@ -4,6 +4,7 @@ import CaseCard from "../../components/CaseCard.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { sortByOrder } from "../../lib/utils";
+import { siteConfig } from "../../site";
 
 const cases = sortByOrder(await getCollection("cases"));
 ---
@@ -19,6 +20,21 @@ const cases = sortByOrder(await getCollection("cases"));
       <p class="eyebrow">Proof</p>
       <h1>Useful results from practical growth work.</h1>
       <p>These are not decorative portfolio tiles. They are examples of constraints identified, systems improved, and clearer growth motion created.</p>
+      <div class="hero-actions">
+        <a
+          class="button button-dark button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="case-studies-index-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="case-studies-index-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/proof" data-cta="case-studies-index-proof">All proof</a>
+      </div>
     </div>
   </section>
 
@@ -35,6 +51,32 @@ const cases = sortByOrder(await getCollection("cases"));
             results={item.data.results}
           />
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">After a case</p>
+        <h2>Bring your situation into a live read.</h2>
+        <p>
+          In {siteConfig.bookingCallDurationPhrase}, we can usually tell whether your constraint looks like one of these patterns — and which engagement (if any) would actually help.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="case-studies-index-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="case-studies-index-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
       </div>
     </div>
   </section>

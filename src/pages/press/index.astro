@@ -1,7 +1,37 @@
 ---
 import ProofLogos from "../../components/ProofLogos.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { headlineMetrics, siteConfig } from "../../site";
+
+const pressFaqs = [
+  {
+    question: "Can we use the company boilerplate verbatim?",
+    answer:
+      "Yes. The boilerplate on this page is written for publication. Attribute to We Scale Startups and link to the primary site when possible. If you need a shorter pull-quote, email and we will trim to length."
+  },
+  {
+    question: "Where should we verify metrics before publication?",
+    answer:
+      "Use the proof hub and linked case studies, which follow a consistent Problem / Action / Result structure. For commentary on a live decision or client-confidential detail, book a short clarification call — we can usually separate what is on the record."
+  },
+  {
+    question: "Where are media assets and a longer founder bio?",
+    answer: `For headshots, podcast and speaking topics, and expert commentary positioning, use ${siteConfig.founderName}'s media kit on danieljohnson.xyz. This page is the company-level press kit for We Scale Startups.`
+  },
+  {
+    question: "Who handles press and fact-checking enquiries?",
+    answer: `Email ${siteConfig.email} for company-level questions. Use the media kit link for founder-led podcast, stage, and expert requests.`
+  }
+];
+
+const pressSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Press kit", path: "/press" }
+  ]),
+  buildFaqSchema(pressFaqs)
+];
 
 const companyBoilerplate =
   "We Scale Startups is a founder-led growth studio helping post-PMF startups build repeatable growth systems before hiring a full-time CMO. The work spans growth diagnosis, 90-day sprints, acquisition systems, and fractional CMO support.";
@@ -15,6 +45,7 @@ const founderBio =
   description="Company boilerplate, founder bio, credibility signals, logos, and contact details for We Scale Startups."
   keywords="We Scale Startups press kit, company boilerplate, startup PR assets, Daniel Johnson media"
   path="/press"
+  schema={pressSchema}
 >
   <section class="page-hero">
     <div class="shell">
@@ -64,6 +95,21 @@ const founderBio =
   </section>
 
   <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Press and fact-checking.</h2>
+      <div class="grid-3">
+        {pressFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="shell">
       <p class="eyebrow">Fact-checking</p>
       <h2>Verify outcomes before you cite them.</h2>

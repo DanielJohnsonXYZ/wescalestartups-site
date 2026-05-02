@@ -41,13 +41,13 @@ const heroProofStats = headlineMetrics.map((metric) => {
 const featuredCaseLabel = featuredCase?.data.client ?? "";
 
 const concreteDeliverables = [
-  { label: "ICP & positioning", note: "One-line offer + segment map" },
-  { label: "Landing & offer",   note: "Tested headline + proof stack" },
-  { label: "Channel plan",      note: "Where pipeline actually comes from" },
-  { label: "Experiment backlog",note: "ICE-scored, weekly cadence" },
-  { label: "Growth dashboard",  note: "Pipeline → activity → decisions" },
-  { label: "Decision cadence",  note: "Mon read · Wed ship · Fri decide" },
-  { label: "Team handover pack",note: "What to run after we leave" }
+  { label: "ICP & positioning", note: "One-line offer + segment map", href: "/gtm-strategy" },
+  { label: "Landing & offer", note: "Tested headline + proof stack", href: "/services/acquisition-system-build" },
+  { label: "Channel plan", note: "Where pipeline actually comes from", href: "/services/acquisition-system-build" },
+  { label: "Experiment backlog", note: "ICE-scored, weekly cadence", href: "/services/90-day-growth-sprint" },
+  { label: "Growth dashboard", note: "Pipeline → activity → decisions", href: "/how-it-works" },
+  { label: "Decision cadence", note: "Mon read · Wed ship · Fri decide", href: "/how-it-works" },
+  { label: "Team handover pack", note: "What to run after we leave", href: "/how-it-works" }
 ];
 
 const homeTestimonials = testimonials.filter((t) => !/mentorcruise/i.test(t.company));
@@ -85,20 +85,9 @@ function metricLead(result: string) {
           </h1>
 
           <p class="hero-plain">
-            We help founder-led B2B SaaS and AI startups turn scattered marketing activity into a weekly growth system.
-            <strong>For founders with traction, but no repeatable way to turn demand into pipeline.</strong>
+            We diagnose the constraint, build the acquisition system around it, and transfer the weekly rhythm — so revenue stops depending on founder heroics.
+            <strong>If every growth decision still runs through you, you do not have a system yet — you have a bottleneck.</strong>
           </p>
-
-          <p class="hero-thesis">
-            We diagnose the constraint, build the acquisition system around it, and transfer the rhythm
-            so revenue stops depending on founder heroics.
-          </p>
-
-          <ul class="hero-strikes" aria-label="Patterns we eliminate">
-            <li><span class="lead">We end</span><span class="strike">founder-run pipeline</span></li>
-            <li><span class="strike">pipeline that comes in waves</span></li>
-            <li><span class="strike">spend without a scaling decision</span></li>
-          </ul>
 
           <div class="hero-cta">
             <a class="btn btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book">
@@ -306,11 +295,12 @@ function metricLead(result: string) {
       />
       <div class="deliverables-grid">
         {concreteDeliverables.map((d, i) => (
-          <article class="deliverable-card">
-            <span class="deliverable-num" aria-hidden="true">{String(i+1).padStart(2, "0")}</span>
+          <a class="deliverable-card deliverable-card-link" href={d.href} data-cta={`deliverable-${d.label.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}>
+            <span class="deliverable-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
             <h3>{d.label}</h3>
             <p>{d.note}</p>
-          </article>
+            <span class="deliverable-more">Where this shows up →</span>
+          </a>
         ))}
       </div>
       <p class="creative-system-foot">
@@ -322,6 +312,8 @@ function metricLead(result: string) {
   <GrowthScopeBar />
 
   <ServiceComparisonTable />
+
+  <NotForBlock />
 
   <!-- OPERATING RHYTHM -->
   <section class="section dark-rhythm-section">
@@ -379,7 +371,20 @@ function metricLead(result: string) {
         <div class="grid-3 mt-8">
           {otherCases.map((item) => (
             <article class="case-mini">
-              <p class="card-kicker">{item.data.sector}</p>
+              <div class="case-scan-strip" aria-label="Case at a glance">
+                <p class="case-scan-meta">
+                  <strong>{item.data.client}</strong>
+                  <span class="case-scan-sep" aria-hidden="true">·</span>
+                  <span>{item.data.sector}</span>
+                </p>
+                <p class="case-scan-narrative">
+                  <span class="case-scan-bit">{item.data.challenge}</span>
+                  <span class="case-scan-sep" aria-hidden="true">→</span>
+                  <span class="case-scan-bit">{item.data.work[0]}</span>
+                  <span class="case-scan-sep" aria-hidden="true">→</span>
+                  <span class="case-scan-bit">{item.data.results[0]}</span>
+                </p>
+              </div>
               <h4>{item.data.title}</h4>
               <dl class="par-mini">
                 <dt>Problem</dt><dd>{item.data.challenge}</dd>
@@ -399,8 +404,6 @@ function metricLead(result: string) {
   <VsAgencyBlock />
 
   <DanielStory />
-
-  <NotForBlock />
 
   <!-- FAQ -->
   <section class="section section-alt">
@@ -541,6 +544,23 @@ function metricLead(result: string) {
     color: var(--muted);
     margin: 0;
     line-height: 1.45;
+  }
+  a.deliverable-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  a.deliverable-card-link:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 22px rgba(16, 13, 24, 0.07);
+  }
+  .deliverable-more {
+    display: inline-block;
+    margin-top: 0.65rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
   }
   .creative-system-foot {
     margin-top: 1.5rem;

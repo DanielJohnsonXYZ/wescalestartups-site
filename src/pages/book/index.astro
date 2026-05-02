@@ -30,6 +30,25 @@ const schema = {
     </div>
   </section>
 
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">What happens on the call</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.85rem,3vw,2.4rem);line-height:1.1;font-weight:380;margin:0.35rem 0 1.25rem;">
+        30 minutes, structured — so you leave with clarity, not a sales ambush.
+      </h2>
+      <ol class="call-phase-list">
+        {
+          siteConfig.bookingCallPhases.map((step) => (
+            <li>
+              <strong>{step.phase}</strong>
+              <span>{step.detail}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
   <section class="section">
     <div class="shell detail-grid">
       <aside class="detail-aside">
@@ -58,3 +77,34 @@ const schema = {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .call-phase-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    max-width: 56rem;
+  }
+  .call-phase-list li {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+  }
+  .call-phase-list strong {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .call-phase-list span {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+</style>

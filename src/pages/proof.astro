@@ -104,7 +104,20 @@ const cases = sortByOrder(await getCollection("cases"));
       <div class="grid-3">
         {cases.map((c) => (
           <article class="case-mini">
-            <p class="card-kicker">{c.data.sector}</p>
+            <div class="case-scan-strip" aria-label="Case at a glance">
+              <p class="case-scan-meta">
+                <strong>{c.data.client}</strong>
+                <span class="case-scan-sep" aria-hidden="true">·</span>
+                <span>{c.data.sector}</span>
+              </p>
+              <p class="case-scan-narrative">
+                <span class="case-scan-bit">{c.data.challenge}</span>
+                <span class="case-scan-sep" aria-hidden="true">→</span>
+                <span class="case-scan-bit">{c.data.work[0]}</span>
+                <span class="case-scan-sep" aria-hidden="true">→</span>
+                <span class="case-scan-bit">{c.data.results[0]}</span>
+              </p>
+            </div>
             <h4>{c.data.title}</h4>
             <dl class="par-mini">
               <dt>Problem</dt>

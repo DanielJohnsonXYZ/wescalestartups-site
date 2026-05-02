@@ -32,8 +32,43 @@ import SectionIntro from "./SectionIntro.astro";
       </table>
     </div>
 
+    <ul class="vs-examples" aria-label="Concrete differences in practice">
+      <li>
+        <strong>Campaigns vs decision rules.</strong> An agency ships the next ads and landing variants. We install the weekly rule for what to scale, stop, or fix — then agencies (if any) execute inside that frame.
+      </li>
+      <li>
+        <strong>Activity reporting vs commercial reporting.</strong> Agencies often report impressions and clicks. We report pipeline, conversion, and payback — tied to a single decision view for the founder and team.
+      </li>
+      <li>
+        <strong>Channel ownership vs system ownership.</strong> Agencies optimize the channel they were hired for. We connect ICP, offer, channels, and cadence so the company owns the growth system, not a vendor roadmap.
+      </li>
+    </ul>
+
     <p class="vs-footnote">
       If the work needed is "run this channel for me" — go to an agency. If the work needed is "figure out which channel and why, then build the system" — that's us.
     </p>
   </div>
 </section>
+
+<style>
+  .vs-examples {
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+    max-width: 72ch;
+  }
+  .vs-examples li {
+    margin: 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--violet);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .vs-examples strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+</style>

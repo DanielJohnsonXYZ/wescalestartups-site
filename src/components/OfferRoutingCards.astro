@@ -1,0 +1,99 @@
+---
+// Symptom → offer routing (shared on Services + Pricing). Data: site.ts → serviceDecision.
+import { serviceDecision, siteConfig } from "../site";
+---
+
+<section class="section section-alt offer-routing-section" aria-label="Which engagement fits">
+  <div class="shell">
+    <p class="eyebrow">Which offer is right?</p>
+    <h2 class="offer-routing-h2">Match where you are to the engagement.</h2>
+    <p class="offer-routing-lede">
+      If the symptom is wrong, the scope is wrong. Use this to self-route — then confirm on the call.
+    </p>
+    <div class="offer-routing-grid">
+      {
+        serviceDecision.map((row) => (
+          <a class="feature-card offer-routing-card" href={row.href}>
+            <p class="card-kicker">If this sounds like you</p>
+            <p class="offer-routing-symptom">{row.condition}</p>
+            <h3 class="offer-routing-rec">{row.recommendation}</h3>
+            <p class="offer-routing-meta">{row.duration}</p>
+            <span class="card-link">View scope →</span>
+          </a>
+        ))
+      }
+    </div>
+    <p class="offer-routing-foot">
+      Still unsure?{" "}
+      <a href={siteConfig.bookingUrl} data-cta="offer-routing-book">
+        {siteConfig.bookingLabel}
+      </a>
+      — we usually name the right tier in the first ten minutes.
+    </p>
+  </div>
+</section>
+
+<style>
+  .offer-routing-h2 {
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 380;
+    line-height: 1.08;
+    margin: 0.35rem 0 0.75rem;
+  }
+  .offer-routing-lede {
+    max-width: 62ch;
+    margin: 0 0 1.75rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .offer-routing-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .offer-routing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .offer-routing-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .offer-routing-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 28px rgba(16, 13, 24, 0.06);
+  }
+  .offer-routing-symptom {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0.25rem 0 0.5rem;
+    line-height: 1.45;
+  }
+  .offer-routing-rec {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.02em;
+  }
+  .offer-routing-meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .offer-routing-foot {
+    margin: 1.75rem 0 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+  .offer-routing-foot a {
+    color: var(--ink);
+    font-weight: 600;
+  }
+</style>

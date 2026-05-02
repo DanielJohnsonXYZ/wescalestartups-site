@@ -2447,6 +2447,44 @@ textarea:focus-visible {
   padding: 1.4rem;
 }
 
+.case-scan-strip {
+  margin: 0 0 0.15rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-scan-meta {
+  margin: 0 0 0.4rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.case-scan-meta strong {
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.case-scan-narrative {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.case-scan-narrative .case-scan-sep {
+  margin: 0 0.35rem;
+  color: var(--dim);
+  font-weight: 400;
+}
+
 .case-mini h4 {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
@@ -3211,7 +3249,7 @@ textarea:focus-visible {
 /* --- WSS hero redesign: interactive constraint diagnosis --- */
 .wss-hero-redesign {
   position: relative;
-  padding: clamp(3.2rem, 5vw, 4.5rem) 0 3rem;
+  padding: clamp(2.35rem, 4vw, 3.35rem) 0 2.35rem;
   overflow: hidden;
   isolation: isolate;
 }
@@ -3285,7 +3323,7 @@ textarea:focus-visible {
 
 .wss-hero-redesign h1 {
   max-width: 760px;
-  margin: 1.2rem 0 0;
+  margin: 0.75rem 0 0;
   color: var(--ink);
   font-family: "Fraunces Variable", Georgia, serif;
   font-size: clamp(3.25rem, 4.35vw, 4.25rem);

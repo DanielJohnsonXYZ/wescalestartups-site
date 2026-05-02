@@ -9,6 +9,19 @@ export const siteConfig = {
   calendlyUrl: "https://calendly.com/wescalestartups",
   bookingLabel: "Book a 30-minute growth diagnostic",
   bookingSubcopy: "Free · 30 minutes · You'll leave with your biggest growth bottleneck named in plain English",
+  /** What happens on the 30-minute diagnostic (booking reassurance). */
+  bookingCallPhases: [
+    { phase: "First ~5 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
+    {
+      phase: "Next ~10 minutes",
+      detail: "Bottleneck read — is the constraint positioning, acquisition, conversion, reporting, or team ownership?"
+    },
+    {
+      phase: "~10 minutes",
+      detail: "Options — Growth Diagnosis, Sprint, System Build, Fractional CMO, or the right referral if we are not a fit."
+    },
+    { phase: "Last ~5 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
+  ],
   scorecardLabel: "Take the 5-minute scorecard",
   scorecardLabelLong: "Take the 5-minute Growth Bottleneck Scorecard",
   scorecardUrl: "/resources#growth-bottleneck-scorecard",

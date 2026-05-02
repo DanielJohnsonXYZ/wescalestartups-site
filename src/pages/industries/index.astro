@@ -8,7 +8,12 @@ const allowedIndustries = ["saas-growth", "fintech", "healthtech", "edtech"];
 const industries = sortByOrder(await getCollection("industries")).filter((industry) => allowedIndustries.includes(industry.id));
 ---
 
-<BaseLayout title="Industries | We Scale Startups" description="Growth systems for SaaS, fintech, healthtech, and EdTech teams where trust and clarity matter." path="/industries">
+<BaseLayout
+  title="Industries | We Scale Startups"
+  description="Growth systems for SaaS, fintech, healthtech, and EdTech teams where trust and clarity matter."
+  keywords="SaaS growth consultancy, fintech GTM, healthtech marketing, EdTech acquisition, B2B startup industries"
+  path="/industries"
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Industries</p>

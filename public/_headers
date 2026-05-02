@@ -19,7 +19,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-site
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://app.growthmentor.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.calendly.com https://listmonk.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://listmonk.wescalestartups.com; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://app.growthmentor.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.calendly.com https://comms.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://comms.wescalestartups.com; frame-ancestors 'self'
 
 /
   Cache-Control: public, max-age=300, must-revalidate

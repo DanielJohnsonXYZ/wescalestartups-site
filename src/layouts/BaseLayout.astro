@@ -10,6 +10,8 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  /** Optional extra discoverability meta for hub pages (insights, resources, etc.). */
+  keywords?: string;
   path?: string;
   ogImage?: string;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
@@ -19,6 +21,7 @@ interface Props {
 const {
   title = siteConfig.title,
   description = siteConfig.description,
+  keywords,
   path = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
   schema = [],
@@ -46,6 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

@@ -228,11 +228,24 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: answer }
   }))
 };
+
+const serviceKeywords: Record<string, string> = {
+  "growth-diagnosis":
+    "growth diagnosis, startup bottleneck analysis, constraint mapping, post-PMF diagnostic, one-week growth audit",
+  "90-day-growth-sprint":
+    "90-day growth sprint, experiment roadmap, ICE scoring, quarterly growth plan, startup testing cadence",
+  "acquisition-system-build":
+    "acquisition system build, multi-channel GTM, campaign and landing briefs, growth reporting system",
+  "fractional-cmo":
+    "fractional CMO, embedded growth leadership, startup marketing cadence, pipeline dashboard, agency management"
+};
+const keywords = serviceKeywords[service.id];
 ---
 
 <BaseLayout
   title={`${service.data.title} | We Scale Startups`}
   description={service.data.description}
+  keywords={keywords}
   path={path}
   schema={[buildServiceSchema(service.data.title, service.data.description, path), faqSchema]}
 >

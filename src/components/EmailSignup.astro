@@ -1,19 +1,22 @@
 ---
-// EmailSignup.astro — inline email capture strip
-// Props: heading, subtext, formId (for analytics), variant ('light' | 'dark')
+// EmailSignup.astro — inline email capture; posts to Mautic (see site.ts).
+import { mauticNewsletter } from "../site";
+
 interface Props {
   heading?: string;
   subtext?: string;
   formId?: string;
-  variant?: 'light' | 'dark';
+  variant?: "light" | "dark";
 }
 
 const {
   heading = "Get the weekly growth note.",
   subtext = "One actionable insight for post-PMF founders. No padding, no pitch.",
   formId = "email-signup",
-  variant = 'light'
+  variant = "light"
 } = Astro.props;
+
+const { submitUrl, formId: mauticFormId } = mauticNewsletter;
 ---
 
 <div class={`email-signup-strip email-signup-strip--${variant}`} data-form-id={formId}>
@@ -22,12 +25,20 @@ const {
       <p class="email-signup-heading">{heading}</p>
       <p class="email-signup-sub">{subtext}</p>
     </div>
-    <form class="email-signup-form" action="https://app.convertkit.com/forms/subscribe" method="post" data-sv-form data-uid="wss-growth-note" novalidate>
+    <form
+      class="email-signup-form"
+      id={formId}
+      action={submitUrl}
+      method="post"
+      accept-charset="UTF-8"
+      data-cta={`email-signup-${formId}`}
+    >
+      <input type="hidden" name="mauticform[formId]" value={mauticFormId} />
       <label class="sr-only" for={`email-field-${formId}`}>Your email address</label>
       <input
         id={`email-field-${formId}`}
         type="email"
-        name="email_address"
+        name="mauticform[email]"
         placeholder="you@company.com"
         required
         autocomplete="email"

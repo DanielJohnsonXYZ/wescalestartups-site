@@ -23,7 +23,7 @@ export const siteConfig = {
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
-  lastUpdated: "1 May 2026",
+  lastUpdated: "2 May 2026",
   ogImage: "/og/default.svg",
   /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
   gtmId: "GTM-TV6C7GS"
@@ -55,7 +55,7 @@ export const credentialLogos = [
 ] as const;
 
 export const headlineMetrics = [
-  { value: "£10M+", label: "Paid acquisition spend managed" },
+  { value: "£6.8M+", label: "Paid acquisition spend managed" },
   { value: "500+", label: "Sign-ups from a single paid campaign" },
   { value: "2", label: "Operator-side startup exits" },
   { value: "20+", label: "Startups advised" }
@@ -412,6 +412,26 @@ export const founderStory = {
     "Mentored hundreds of founders through Google for Startups, Techstars, GrowthMentor",
     "MentorCruise Top Mentor — 5.0/5 across 30+ reviews",
     "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad",
-    "£10M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech"
+    "£6.8M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech"
   ]
+} as const;
+
+// ──────────────────────────────────────────────────────────────────────────
+// Mautic — email signup forms (replaces placeholder ConvertKit). Configure in
+// Cloudflare Pages: PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID
+// CONFIRM: default formId below is a placeholder — verify in Mautic → Forms before prod.
+// ──────────────────────────────────────────────────────────────────────────
+const mauticBaseRaw =
+  (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||
+  "https://comms.wescalestartups.com";
+const mauticBase = mauticBaseRaw.replace(/\/$/, "");
+const mauticNewsletterFormId =
+  (typeof import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID === "string" &&
+    import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID.trim()) ||
+  "1";
+
+export const mauticNewsletter = {
+  baseUrl: mauticBase,
+  formId: mauticNewsletterFormId,
+  submitUrl: `${mauticBase}/form/submit/${mauticNewsletterFormId}`
 } as const;

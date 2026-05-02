@@ -1,6 +1,15 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { buyerFaqs, headlineMetrics, siteConfig, serviceSnapshots, testimonials, vsAgency, wssVsAgencyPage } from "../site";
+import {
+  buyerFaqs,
+  headlineMetrics,
+  proofResultsByType,
+  siteConfig,
+  serviceSnapshots,
+  testimonials,
+  vsAgency,
+  wssVsAgencyPage
+} from "../site";
 import { sortByOrder } from "../lib/utils";
 
 export const prerender = true;
@@ -91,6 +100,7 @@ Start with ${siteConfig.siteUrl}/start-here, then read one case study on ${siteC
 ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Third-party profiles:
   - GrowthMentor: ${siteConfig.growthMentor}
+  - MentorCruise: ${siteConfig.mentorCruise}
 - ${testimonialLine}
 
 ## Important pages
@@ -99,7 +109,7 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Start here: ${siteConfig.siteUrl}/start-here
 - Services: ${siteConfig.siteUrl}/services
 - Pricing: ${siteConfig.siteUrl}/pricing
-- Proof: ${siteConfig.siteUrl}/proof
+- Proof: ${siteConfig.siteUrl}/proof (includes results-by-type: ${proofResultsByType.map((r) => r.label).join("; ")})
 - WSS vs agency: ${siteConfig.siteUrl}/fractional-cmo-vs-agency
 - How it works: ${siteConfig.siteUrl}/how-it-works
 - First 30 days: ${siteConfig.siteUrl}/first-30-days

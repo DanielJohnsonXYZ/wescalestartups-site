@@ -62,6 +62,35 @@ export const proofClients = [
   { label: "Nevly", context: "Financial wellness", proof: "Trust-led GTM foundations" }
 ] as const;
 
+/** Proof page — scan results by commercial outcome type (links to case studies). */
+export const proofResultsByType = [
+  {
+    label: "Positioning & narrative",
+    summary: "Clearer category story and acquisition messaging before scaling spend.",
+    caseId: "equoo"
+  },
+  {
+    label: "Paid acquisition & landing",
+    summary: "Search structure, landing foundations, and sign-up volume from one coherent system.",
+    caseId: "ned"
+  },
+  {
+    label: "Trust-led GTM foundations",
+    summary: "Financial product narrative where credibility and clarity drive the next growth tests.",
+    caseId: "nevly"
+  },
+  {
+    label: "Message–market fit & channel fit",
+    summary: "EdTech offer and channel story aligned so pipeline stops arriving in random bursts.",
+    caseId: "lessonsup"
+  },
+  {
+    label: "Marketing function from zero",
+    summary: "First structured marketing operation for a complex B2B offer — not a deck, a running function.",
+    caseId: "diadia-health"
+  }
+] as const;
+
 export const credentialLogos = [
   { src: "/images/logos/google.webp", alt: "Google", label: "Google for Startups" },
   { src: "/images/logos/cambridge.webp", alt: "University of Cambridge", label: "Cambridge Judge" },

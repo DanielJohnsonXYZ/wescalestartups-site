@@ -793,6 +793,6 @@ const mauticNewsletterFormId =
 export const mauticNewsletter = {
   baseUrl: mauticBase,
   formId: mauticNewsletterFormId,
-  /** Mautic 5+ / v7 uses the `/s/` front controller prefix; bare `/form/submit/…` 404s on many installs. */
-  submitUrl: `${mauticBase}/s/form/submit/${mauticNewsletterFormId}`
+  /** This Mautic host 404s on `/form/submit/{id}`; use `?formId=` (matches Mautic 7 embed docs). */
+  submitUrl: `${mauticBase}/form/submit?formId=${encodeURIComponent(mauticNewsletterFormId)}`
 } as const;

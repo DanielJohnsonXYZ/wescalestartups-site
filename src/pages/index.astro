@@ -90,11 +90,18 @@ function metricLead(result: string) {
           </p>
 
           <div class="hero-cta">
-            <a class="btn btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book">
-              Book a 30-minute growth diagnostic <span class="arr" aria-hidden="true">→</span>
+            <a
+              class="btn btn-primary"
+              href={siteConfig.bookingUrl}
+              data-cta="hero-book"
+              title={siteConfig.bookingCallReassurance}
+            >
+              {siteConfig.bookingLabel}
+              <span class="arr" aria-hidden="true">→</span>
             </a>
             <a class="btn btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
-              Take the 5-minute scorecard <span class="arrow" aria-hidden="true">→</span>
+              {siteConfig.scorecardLabel}
+              <span class="arrow" aria-hidden="true">→</span>
             </a>
           </div>
           <p class="hero-microcopy">Leave the call with your biggest growth bottleneck named in plain English. No pitch — just a clear view of what's blocking pipeline.</p>
@@ -462,6 +469,13 @@ function metricLead(result: string) {
     line-height: 1.55;
     color: var(--ink);
     max-width: 60ch;
+  }
+  @media (max-height: 860px) and (min-width: 981px) {
+    .hero-plain {
+      margin-top: 0.85rem;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
   }
   .hero-plain strong {
     color: var(--accent);

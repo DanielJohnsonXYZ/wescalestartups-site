@@ -87,11 +87,6 @@ const cases = sortByOrder(await getCollection("cases"));
           <span class="card-link">View GrowthMentor reviews →</span>
         </a>
       </div>
-      <p class="validation-tertiary">
-        Also on{" "}
-        <a href={siteConfig.mentorCruise} rel="noreferrer" target="_blank">MentorCruise</a>{" "}
-        (mentoring marketplace — secondary to client work and case proof above).
-      </p>
     </div>
   </section>
 
@@ -177,18 +172,5 @@ const cases = sortByOrder(await getCollection("cases"));
 <style>
   .validation-primary {
     max-width: 36rem;
-  }
-  .validation-tertiary {
-    margin: 1rem 0 0;
-    max-width: 48ch;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: var(--muted);
-  }
-  .validation-tertiary a {
-    color: var(--ink);
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 3px;
   }
 </style>

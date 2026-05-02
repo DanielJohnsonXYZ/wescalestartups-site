@@ -91,7 +91,6 @@ Start with ${siteConfig.siteUrl}/start-here, then read one case study on ${siteC
 ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Third-party profiles:
   - GrowthMentor: ${siteConfig.growthMentor}
-  - MentorCruise: ${siteConfig.mentorCruise}
 - ${testimonialLine}
 
 ## Important pages

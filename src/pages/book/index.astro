@@ -12,8 +12,8 @@ const schema = {
 ---
 
 <BaseLayout
-  title="Book a Call | We Scale Startups"
-  description="Book a 30-minute growth call with We Scale Startups. Pre-qualify the current bottleneck, then choose a Calendly slot."
+  title={`${siteConfig.bookingLabel} · We Scale Startups`}
+  description={`${siteConfig.bookingLabel} with We Scale Startups. ${siteConfig.bookingCallReassurance} Then pick a Calendly slot.`}
   keywords="book growth call, startup growth diagnostic, Calendly We Scale Startups, 30 minute growth audit"
   path="/book"
   schema={schema}
@@ -21,11 +21,22 @@ const schema = {
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Book call</p>
-      <h1>Book a 30-minute growth call.</h1>
+      <h1>{siteConfig.bookingLabel}</h1>
       <p>Use this when growth is active but the next move is unclear. The call maps the bottleneck, stage, team, budget, and whether WSS is the right shape of help.</p>
       <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.calendlyUrl} rel="noreferrer" target="_blank" data-cta="book-page-calendly">Open Calendly</a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-page-scorecard">{siteConfig.scorecardLabel}</a>
+        <a
+          class="button button-brand"
+          href={siteConfig.calendlyUrl}
+          rel="noreferrer"
+          target="_blank"
+          data-cta="book-page-calendly"
+          title={siteConfig.bookingCallReassurance}
+        >
+          Open Calendly
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-page-scorecard">
+          {siteConfig.scorecardLabel}
+        </a>
       </div>
     </div>
   </section>
@@ -62,7 +73,10 @@ const schema = {
           <ul>
             <li>Know whether the issue is pipeline volume, conversion, positioning, reporting, or ownership.</li>
             <li>Be ready to talk about current spend, team capacity, and urgency.</li>
-            <li>If the problem is still fuzzy, take the scorecard first and bring the result.</li>
+            <li>
+              If the problem is still fuzzy, complete the{" "}
+              <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a> first and bring the result.
+            </li>
           </ul>
         </article>
         <article class="content-block">

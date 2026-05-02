@@ -15,7 +15,14 @@ import { siteConfig } from "../../site";
       <h1>Send the growth context.</h1>
       <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
       <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="contact-book">{siteConfig.bookingLabel}</a>
+        <a
+          class="button button-brand"
+          href={siteConfig.bookingUrl}
+          data-cta="contact-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel}
+        </a>
         <a class="button button-light" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
       </div>
     </div>
@@ -65,9 +72,16 @@ import { siteConfig } from "../../site";
       </form>
       <aside class="contact-option">
         <p class="card-kicker">Prefer a call?</p>
-        <h2>Book a call.</h2>
+        <h2>{siteConfig.bookingLabel}</h2>
         <p>A short diagnostic call is best when the problem is urgent or hard to explain in a form.</p>
-        <a class="card-link" href={siteConfig.bookingUrl} data-cta="contact-side-book">{siteConfig.bookingLabel}</a>
+        <a
+          class="card-link"
+          href={siteConfig.bookingUrl}
+          data-cta="contact-side-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
+        </a>
         <p><strong>Address:</strong><br />81 Curtain Road,<br />London,<br />EC2A 3AG,<br />UK</p>
       </aside>
     </div>

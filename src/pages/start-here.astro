@@ -88,7 +88,9 @@ import { siteConfig } from "../site";
           <span class="decision-num">02</span>
           <h3>Know the bottleneck but need senior judgement?</h3>
           <p>You can name the constraint but want a second opinion before spending more or hiring.</p>
-          <p class="decision-action">Book a 30-minute growth diagnostic. Bring the picture, leave with a plain-English read on what to do next.</p>
+          <p class="decision-action">
+            {siteConfig.bookingLabel}. Bring the picture, leave with a plain-English read on what to do next.
+          </p>
           <a
             class="button button-brand"
             href={siteConfig.bookingUrl}
@@ -178,7 +180,7 @@ import { siteConfig } from "../site";
       <article class="start-step">
         <span class="start-step-num">03</span>
         <div>
-          <h3>Book a 30-minute call</h3>
+          <h3>{siteConfig.bookingLabel}</h3>
           <p>Bring the scorecard result and your current growth picture. You'll leave with a plain-English view of the bottleneck and which engagement (if any) actually fits.</p>
         </div>
         <a class="button button-brand" href={siteConfig.bookingUrl} title={siteConfig.bookingCallReassurance}>

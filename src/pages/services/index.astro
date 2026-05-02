@@ -2,7 +2,7 @@
 import OfferRoutingCards from "../../components/OfferRoutingCards.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { serviceSnapshots, siteConfig } from "../../site";
+import { pricingTrustBullets, serviceSnapshots, siteConfig } from "../../site";
 ---
 
 <BaseLayout
@@ -51,6 +51,16 @@ import { serviceSnapshots, siteConfig } from "../../site";
 
   <OfferRoutingCards />
 
+  <section class="section">
+    <div class="shell">
+      <ul class="services-trust-list" aria-label="How engagements work">
+        {pricingTrustBullets.map((line) => (
+          <li>{line}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <section class="section section-alt">
     <div class="shell">
       <SectionIntro
@@ -82,7 +92,39 @@ import { serviceSnapshots, siteConfig } from "../../site";
         <h2>Not sure which service fits?</h2>
         <p>Bring the current growth bottleneck. We will identify whether the constraint is diagnosis, sprint, acquisition system, or fractional leadership.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="services-book">{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="services-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="services-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .services-trust-list {
+    margin: 0 auto;
+    padding: 1.15rem 1.25rem 1.2rem 1.5rem;
+    max-width: 52rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    list-style: disc;
+  }
+  .services-trust-list li {
+    margin: 0.35rem 0;
+    padding-left: 0.15rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+</style>

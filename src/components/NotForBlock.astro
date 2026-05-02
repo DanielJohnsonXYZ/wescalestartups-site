@@ -20,7 +20,9 @@ import SectionIntro from "./SectionIntro.astro";
       ))}
     </div>
     <p class="not-for-footnote">
-      If you're not sure which side of the line you're on, the <a href={siteConfig.scorecardUrl}>5-minute scorecard</a> will tell you in plain English.
+      If you're not sure which side of the line you're on, start with the{" "}
+      <a href={siteConfig.scorecardUrl} data-cta="not-for-scorecard">{siteConfig.scorecardLabel}</a>
+      — five minutes, plain-English read on where the bottleneck probably sits.
     </p>
   </div>
 </section>

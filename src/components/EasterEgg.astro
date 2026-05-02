@@ -1,6 +1,7 @@
 ---
 // EasterEgg.astro — Konami code (↑↑↓↓←→←→BA) triggers a hidden growth tip
 // No props needed — just drop anywhere in BaseLayout
+import { siteConfig } from "../site";
 ---
 
 <div id="easter-egg" aria-hidden="true" role="dialog" aria-label="Secret message">
@@ -13,7 +14,9 @@
     Fix the message before you fix the media.
   </p>
   <p class="ee-sig">— Daniel, We Scale Startups</p>
-  <a class="button button-brand" href="/book">Book a diagnostic call →</a>
+  <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="easter-egg-book">
+    {siteConfig.bookingLabel} →
+  </a>
 </div>
 
 <script>

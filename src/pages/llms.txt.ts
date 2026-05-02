@@ -121,6 +121,14 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - Contact: ${siteConfig.siteUrl}/contact
 - Company press kit: ${siteConfig.siteUrl}/press
 - Daniel Johnson media kit for podcasts, speaking, and expert commentary: ${siteConfig.danielSite}/media-kit/
+- Book / schedule diagnostic: ${siteConfig.siteUrl}${siteConfig.bookingUrl}
+- Growth bottleneck quiz (self-serve): ${siteConfig.siteUrl}/quiz
+- Manual 5-layer diagnose framework: ${siteConfig.siteUrl}/diagnose
+- GTM strategy (pillar): ${siteConfig.siteUrl}/gtm-strategy
+- Engagement models (pillar): ${siteConfig.siteUrl}/engagement-models
+- Execution model (pillar): ${siteConfig.siteUrl}/execution-model
+- Growth engine (pillar): ${siteConfig.siteUrl}/growth-engine
+- How we work (pillar): ${siteConfig.siteUrl}/how-we-work
 
 ## Published insights
 

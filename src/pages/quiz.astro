@@ -5,6 +5,7 @@ import { buildFaqSchema } from "../lib/schema";
 
 const quizCalendlyUrl = siteConfig.calendlyUrl;
 const quizBookingLabel = siteConfig.bookingLabel;
+const quizDiagnosticCallQuestion = `Is this the same as the ${siteConfig.bookingCallShort}?`;
 
 const faqSchema = buildFaqSchema([
   {
@@ -16,7 +17,7 @@ const faqSchema = buildFaqSchema([
     answer: "Your primary growth constraint identified across 5 layers — positioning, acquisition, conversion, reporting, and team ownership — plus a specific recommended next step."
   },
   {
-    question: "Is this the same as the 30-minute diagnostic call?",
+    question: quizDiagnosticCallQuestion,
     answer: "The quiz is a self-serve starting point. The diagnostic call goes deeper: we review your current stack, pipeline data, and team context to give you a prioritised action plan."
   }
 ]);
@@ -65,7 +66,7 @@ const faqSchema = buildFaqSchema([
           <dd>Your primary growth constraint identified across 5 layers — positioning, acquisition, conversion, reporting, and team ownership — plus a specific recommended next step.</dd>
         </div>
         <div class="faq-item">
-          <dt>Is this the same as the 30-minute diagnostic call?</dt>
+          <dt>{quizDiagnosticCallQuestion}</dt>
           <dd>The quiz is a self-serve starting point. The diagnostic call goes deeper: we review your current stack, pipeline data, and team context to give you a prioritised action plan.</dd>
         </div>
       </dl>

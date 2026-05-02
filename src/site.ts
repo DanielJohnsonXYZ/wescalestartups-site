@@ -9,6 +9,8 @@ export const siteConfig = {
   calendlyUrl: "https://calendly.com/wescalestartups",
   bookingLabel: "Book a 30-minute growth diagnostic",
   bookingSubcopy: "Free · 30 minutes · You'll leave with your biggest growth bottleneck named in plain English",
+  /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
+  bookingCallShort: "30-minute diagnostic call",
   /** What happens on the 30-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
     { phase: "First ~5 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
@@ -297,8 +299,7 @@ export const buyerFaqs = [
   },
   {
     question: "What is the first step?",
-    answer:
-      "Start with the Growth Bottleneck Scorecard or book a 30-minute call. The first job is to identify the constraint before adding more activity."
+    answer: `Start with the Growth Bottleneck Scorecard or ${siteConfig.bookingLabel.replace(/^Book /, "book ")}. The first job is to identify the constraint before adding more activity.`
   }
 ] as const;
 

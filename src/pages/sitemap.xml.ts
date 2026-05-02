@@ -5,11 +5,37 @@ import { siteConfig } from "../site";
 
 export const prerender = true;
 
-const today = () => new Date().toISOString().slice(0, 10);
 const staticLastMod = siteConfig.siteLastModified;
 
-function urlNode(path: string, lastmod: string = staticLastMod) {
-  return `<url><loc>${absoluteUrl(path)}</loc><lastmod>${lastmod}</lastmod></url>`;
+type UrlOpts = {
+  lastmod?: string;
+  changefreq: string;
+  priority: string;
+};
+
+function urlNode(path: string, opts: UrlOpts) {
+  const lastmod = opts.lastmod ?? staticLastMod;
+  return `<url><loc>${absoluteUrl(path)}</loc><lastmod>${lastmod}</lastmod><changefreq>${opts.changefreq}</changefreq><priority>${opts.priority}</priority></url>`;
+}
+
+function staticUrlMeta(path: string): Pick<UrlOpts, "changefreq" | "priority"> {
+  if (path === "/") return { changefreq: "weekly", priority: "1.0" };
+  if (path === "/privacy" || path === "/terms") return { changefreq: "yearly", priority: "0.35" };
+  const weekly = new Set([
+    "/start-here",
+    "/services",
+    "/pricing",
+    "/proof",
+    "/contact",
+    "/book",
+    "/how-it-works",
+    "/quiz",
+    "/diagnose",
+    "/case-studies",
+    "/resources"
+  ]);
+  if (weekly.has(path)) return { changefreq: "weekly", priority: "0.9" };
+  return { changefreq: "monthly", priority: "0.75" };
 }
 
 export const GET: APIRoute = async () => {
@@ -53,11 +79,35 @@ export const GET: APIRoute = async () => {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticPaths.map((path) => urlNode(path)).join("\n")}
-${services.map((s) => urlNode(`/services/${s.id}`)).join("\n")}
-${industries.map((i) => urlNode(`/industries/${i.id}`)).join("\n")}
-${cases.map((c) => urlNode(`/case-studies/${c.id}`, c.data.updatedAt?.toISOString().slice(0, 10) ?? c.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
-${insights.map((i) => urlNode(`/insights/${i.id}`, i.data.updatedAt?.toISOString().slice(0, 10) ?? i.data.publishedAt.toISOString().slice(0, 10))).join("\n")}
+${staticPaths
+  .map((path) => urlNode(path, { lastmod: staticLastMod, ...staticUrlMeta(path) }))
+  .join("\n")}
+${services
+  .map((s) =>
+    urlNode(`/services/${s.id}`, { lastmod: staticLastMod, changefreq: "weekly", priority: "0.85" })
+  )
+  .join("\n")}
+${industries
+  .map((i) => urlNode(`/industries/${i.id}`, { lastmod: staticLastMod, changefreq: "monthly", priority: "0.7" }))
+  .join("\n")}
+${cases
+  .map((c) =>
+    urlNode(`/case-studies/${c.id}`, {
+      lastmod: c.data.updatedAt?.toISOString().slice(0, 10) ?? c.data.publishedAt.toISOString().slice(0, 10),
+      changefreq: "monthly",
+      priority: "0.72"
+    })
+  )
+  .join("\n")}
+${insights
+  .map((i) =>
+    urlNode(`/insights/${i.id}`, {
+      lastmod: i.data.updatedAt?.toISOString().slice(0, 10) ?? i.data.publishedAt.toISOString().slice(0, 10),
+      changefreq: "monthly",
+      priority: "0.72"
+    })
+  )
+  .join("\n")}
 </urlset>`;
 
   return new Response(xml, {

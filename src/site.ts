@@ -84,6 +84,7 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
   ],
   "/reports": [
+    { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
     { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
   ],

@@ -1,6 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig } from "../site";
+
+const startHereFaqs = [
+  {
+    question: "How long does the guided path take?",
+    answer:
+      "About 35 minutes of reading if you follow the three-step path: scorecard, one proof read, then the diagnostic call. You can stop after step one or two if you are not ready to talk yet."
+  },
+  {
+    question: "Do I have to book a call?",
+    answer:
+      "No. The scorecard, quiz, written diagnostic framework, and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
+  },
+  {
+    question: "Is We Scale Startups a marketing agency?",
+    answer:
+      "No. WSS works at diagnosis and system level: bottleneck, acquisition design, reporting cadence, and transfer. Agencies often execute inside that system once the constraint is clear — many teams use both."
+  }
+];
+
+const startHereSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Start here", path: "/start-here" }
+  ]),
+  buildFaqSchema(startHereFaqs)
+];
 ---
 
 <BaseLayout
@@ -8,6 +35,7 @@ import { siteConfig } from "../site";
   title="Start here · We Scale Startups"
   description="A guided path for post-PMF founders deciding whether WSS is for you. Three reading paths by stage, a decision tree, and a 35-minute total commitment."
   keywords="We Scale Startups onboarding, post-PMF founder guide, growth consultancy fit, which engagement first, startup growth decision tree"
+  schema={startHereSchema}
 >
   <!-- Hero -->
   <section class="page-hero">
@@ -193,6 +221,21 @@ import { siteConfig } from "../site";
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
       </article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Before you commit time.</h2>
+      <div class="grid-3">
+        {startHereFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 

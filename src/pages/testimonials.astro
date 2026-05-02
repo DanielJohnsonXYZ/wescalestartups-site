@@ -40,8 +40,13 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
         {headlineMetrics[2]?.value ?? "2"} operator-side exits. Filter by engagement type below.
       </p>
       <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="testimonials-hero-book">
-          Book a 30-minute growth diagnostic →
+        <a
+          class="button button-brand"
+          href={siteConfig.bookingUrl}
+          data-cta="testimonials-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
         </a>
         <a class="button button-light" href="/case-studies" data-cta="testimonials-hero-cases">
           Read case studies →
@@ -98,12 +103,17 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
         <p>30 minutes. No deck, no pitch — just the bottleneck.</p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="testimonials-final-book">
-          <span class="button-label">Book a 30-minute growth diagnostic</span>
-          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="testimonials-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="testimonials-final-scorecard">
-          Or, take the 5-minute scorecard →
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>

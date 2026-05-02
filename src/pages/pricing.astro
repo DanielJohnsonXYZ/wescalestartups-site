@@ -2,7 +2,7 @@
 import OfferRoutingCards from "../components/OfferRoutingCards.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildFaqSchema } from "../lib/schema";
-import { pricingTiers, siteConfig } from "../site";
+import { pricingTrustBullets, pricingTiers, siteConfig } from "../site";
 
 const pricingFaqs = [
   {
@@ -60,6 +60,12 @@ const pricingFaqs = [
         Every engagement starts with a 30-minute diagnostic call so we agree on scope before any contract.
         Limited number of clients each quarter.
       </div>
+
+      <ul class="pricing-trust-list" aria-label="How engagements work">
+        {pricingTrustBullets.map((line) => (
+          <li>{line}</li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -103,7 +109,12 @@ const pricingFaqs = [
         <p>30 minutes. We'll tell you which engagement (if any) actually solves your bottleneck — and which would be wasted spend.</p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="pricing-cta">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="pricing-cta"
+          title={siteConfig.bookingCallReassurance}
+        >
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
@@ -111,3 +122,22 @@ const pricingFaqs = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .pricing-trust-list {
+    margin: 1.75rem 0 0;
+    padding: 1.15rem 1.25rem 1.2rem 1.5rem;
+    max-width: 52rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    list-style: disc;
+  }
+  .pricing-trust-list li {
+    margin: 0.35rem 0;
+    padding-left: 0.15rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+</style>

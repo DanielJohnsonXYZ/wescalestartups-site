@@ -32,11 +32,16 @@ const signals = [
     </div>
 
     <div class="when-to-hire-cta">
-      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="when-to-hire-book">
-        Book a 30-minute growth diagnostic →
+      <a
+        class="button button-brand"
+        href={siteConfig.bookingUrl}
+        data-cta="when-to-hire-book"
+        title={siteConfig.bookingCallReassurance}
+      >
+        {siteConfig.bookingLabel} →
       </a>
       <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="when-to-hire-scorecard">
-        Or, take the 5-minute scorecard →
+        Or, {siteConfig.scorecardLabel} →
       </a>
     </div>
   </div>

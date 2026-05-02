@@ -98,11 +98,16 @@ const gtmDeliverables = [
         it's the absence of a connected system, a clear decision view, and a team rhythm that runs without the founder in every loop.
       </p>
       <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="gtm-hero-book">
+        <a
+          class="button button-brand"
+          href={siteConfig.bookingUrl}
+          data-cta="gtm-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
           {siteConfig.bookingLabel}
         </a>
-        <a class="button button-light" href="/resources#growth-bottleneck-scorecard" data-cta="gtm-hero-scorecard">
-          Take the 5-minute scorecard
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gtm-hero-scorecard">
+          {siteConfig.scorecardLabel}
         </a>
       </div>
     </div>
@@ -219,12 +224,17 @@ const gtmDeliverables = [
         <p>Bring the current growth picture. In 30 minutes you'll leave with a plain-English view of what's blocking pipeline — and which GTM engagement actually fits your stage.</p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="gtm-cta-book">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="gtm-cta-book"
+          title={siteConfig.bookingCallReassurance}
+        >
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gtm-cta-scorecard">
-          Or, take the 5-minute scorecard →
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>

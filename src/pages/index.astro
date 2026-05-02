@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import ClientWorkStrip from "../components/ClientWorkStrip.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import TestimonialsBlock from "../components/TestimonialsBlock.astro";
@@ -243,6 +244,8 @@ function metricLead(result: string) {
       else { const io = new IntersectionObserver((entries)=>{entries.forEach((en)=>{if(!en.isIntersecting)return;up(en.target);io.unobserve(en.target);});}, { threshold: 0.4 }); stats.forEach((s)=>io.observe(s)); }
     })();
   </script>
+
+  <ClientWorkStrip />
 
   <ProofLogos />
 

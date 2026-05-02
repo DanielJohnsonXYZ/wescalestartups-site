@@ -55,11 +55,19 @@ export const navigation = [
 ] as const;
 
 export const proofClients = [
-  { label: "Ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
-  { label: "Diadia Health", context: "AI precision medicine", proof: "Marketing function built from zero" },
-  { label: "eQuoo", context: "Healthtech positioning", proof: "Clearer acquisition narrative" },
-  { label: "LessonsUp", context: "EdTech acquisition", proof: "Sharper message-market fit" },
-  { label: "Nevly", context: "Financial wellness", proof: "Trust-led GTM foundations" }
+  { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
+  { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine", proof: "Marketing function built from zero" },
+  { label: "eQuoo", caseSlug: "equoo", context: "Healthtech positioning", proof: "Clearer acquisition narrative" },
+  { label: "LessonsUp", caseSlug: "lessonsup", context: "EdTech acquisition", proof: "Sharper message-market fit" },
+  { label: "Nevly", caseSlug: "nevly", context: "Financial wellness", proof: "Trust-led GTM foundations" }
+] as const;
+
+/** Pricing / services — short reassurance lines (Growth Hub: trust near price). */
+export const pricingTrustBullets = [
+  "Scope is agreed after the diagnostic call — no surprise lock-in on diagnosis or sprint.",
+  "No pitch unless there's a genuine fit; the first job is naming the bottleneck.",
+  "Deliverables and weekly cadence transfer to your team — not a slide deck handoff.",
+  "Works alongside existing agencies or internal marketers when execution is already in motion."
 ] as const;
 
 /** Proof page — scan results by commercial outcome type (links to case studies). */

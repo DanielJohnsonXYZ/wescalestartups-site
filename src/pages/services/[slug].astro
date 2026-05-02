@@ -258,11 +258,16 @@ const keywords = serviceKeywords[service.id];
       <p class="service-headline">{details.headline ?? service.data.promise}</p>
       <p class="service-description">{service.data.description}</p>
       <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta={`${service.id}-book`}>
-          Book a 30-minute growth diagnostic →
+        <a
+          class="button button-brand"
+          href={siteConfig.bookingUrl}
+          data-cta={`${service.id}-book`}
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
-          Take the 5-minute scorecard →
+          {siteConfig.scorecardLabel} →
         </a>
       </div>
       <div class="service-meta-strip" aria-label="Engagement summary">
@@ -356,7 +361,7 @@ const keywords = serviceKeywords[service.id];
         <h3>Use the Growth Bottleneck Scorecard.</h3>
         <p>5 minutes. See whether the current constraint is positioning, acquisition, conversion, reporting, or team ownership.</p>
         <a class="card-link" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard-followup`}>
-          Take the 5-minute scorecard →
+          {siteConfig.scorecardLabel} →
         </a>
       </article>
     </div>
@@ -371,12 +376,17 @@ const keywords = serviceKeywords[service.id];
         <p>30 minutes. We'll decide whether this is the right shape of help, what the first 30 days should focus on, and what should not be touched yet.</p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta={`${service.id}-final-book`}>
-          <span class="button-label">Book a 30-minute growth diagnostic</span>
-          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta={`${service.id}-final-book`}
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-final-scorecard`}>
-          Or, take the 5-minute scorecard →
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>

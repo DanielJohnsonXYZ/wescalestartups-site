@@ -33,7 +33,7 @@ import { siteConfig } from "../site";
         <li>
           <a class="engagement-route-card" href={siteConfig.scorecardUrl}>
             <span class="engagement-route-label">I don't know what's blocking growth</span>
-            <span class="engagement-route-action">Take the 5-minute scorecard →</span>
+            <span class="engagement-route-action">{siteConfig.scorecardLabel} →</span>
           </a>
         </li>
         <li>
@@ -79,7 +79,9 @@ import { siteConfig } from "../site";
           <h3>Unsure what's broken?</h3>
           <p>You suspect growth is stuck but the team can't agree what's blocking pipeline.</p>
           <p class="decision-action">Take the scorecard. 5 minutes. Score yourself across the 5 layers (positioning, acquisition, conversion, reporting, team).</p>
-          <a class="button button-brand" href={siteConfig.scorecardUrl}>Take the 5-minute scorecard →</a>
+          <a class="button button-brand" href={siteConfig.scorecardUrl}>
+            {siteConfig.scorecardLabel} →
+          </a>
         </article>
 
         <article class="decision-card decision-card-primary">
@@ -87,7 +89,13 @@ import { siteConfig } from "../site";
           <h3>Know the bottleneck but need senior judgement?</h3>
           <p>You can name the constraint but want a second opinion before spending more or hiring.</p>
           <p class="decision-action">Book a 30-minute growth diagnostic. Bring the picture, leave with a plain-English read on what to do next.</p>
-          <a class="button button-brand" href={siteConfig.bookingUrl}>Book a 30-minute growth diagnostic →</a>
+          <a
+            class="button button-brand"
+            href={siteConfig.bookingUrl}
+            title={siteConfig.bookingCallReassurance}
+          >
+            {siteConfig.bookingLabel} →
+          </a>
         </article>
 
         <article class="decision-card">
@@ -125,7 +133,9 @@ import { siteConfig } from "../site";
           <p class="stage-action">
             <strong>Best fit.</strong> Start with a 30-minute diagnostic. We'll diagnose the bottleneck and decide together whether a Sprint or Fractional CMO engagement makes sense.
           </p>
-          <a class="card-link" href={siteConfig.bookingUrl}>Book a 30-minute growth diagnostic →</a>
+          <a class="card-link" href={siteConfig.bookingUrl} title={siteConfig.bookingCallReassurance}>
+            {siteConfig.bookingLabel} →
+          </a>
         </article>
 
         <article class="stage-card">
@@ -187,12 +197,17 @@ import { siteConfig } from "../site";
         <p>Bring your scorecard result. We'll spend the 30 minutes on the bottleneck, not on intros.</p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="start-here-final">
-          <span class="button-label">Book a 30-minute growth diagnostic</span>
-          <span class="button-subcopy">Free · 30 minutes · No pitch</span>
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="start-here-final"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="start-here-final-scorecard">
-          Or, take the 5-minute scorecard →
+          Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>

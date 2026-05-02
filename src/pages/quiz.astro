@@ -3,6 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../site";
 import { buildFaqSchema } from "../lib/schema";
 
+const quizCalendlyUrl = siteConfig.calendlyUrl;
+const quizBookingLabel = siteConfig.bookingLabel;
+
 const faqSchema = buildFaqSchema([
   {
     question: "How long does the growth bottleneck quiz take?",
@@ -70,7 +73,7 @@ const faqSchema = buildFaqSchema([
   </section>
 </BaseLayout>
 
-<script>
+<script define:vars={{ quizCalendlyUrl, quizBookingLabel }}>
 const QUESTIONS = [
   {
     layer: "positioning",
@@ -283,7 +286,7 @@ function renderResult() {
         <p class="result-fix">${meta.fix}</p>
         <div class="hero-actions" style="margin-top:1.25rem">
           <a class="button button-brand" href="${meta.href}">See the engagement →</a>
-          <a class="button button-light" href="https://calendly.com/wescalestartups" target="_blank" rel="noopener">Book a 30-min diagnostic call →</a>
+          <a class="button button-light" href="${quizCalendlyUrl}" target="_blank" rel="noopener">${quizBookingLabel} →</a>
         </div>
       </div>
 

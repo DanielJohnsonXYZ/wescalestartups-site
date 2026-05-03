@@ -2,6 +2,7 @@
 import EasterEgg from "../components/EasterEgg.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import AnnouncementBanner from "../components/AnnouncementBanner.astro";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -169,6 +170,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SiteHeader currentPath={currentPath} />
+    <AnnouncementBanner
+      text="New: Growth Operating System and Founder-led Growth cornerstone pages now live."
+      href="/growth-operating-system"
+      linkText="See Growth OS →"
+      dismissible={true}
+      variant="brand"
+    />
     <main id="main-content">
       <slot />
       {lastUpdated && (

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, strategicPageRelatedInsights } from "../site";
 
@@ -61,6 +62,39 @@ const howItWorksFaqs = [
 
 const howItWorksRelated = strategicPageRelatedInsights["/how-we-work"] ?? [];
 
+const artefactGallery = [
+  {
+    src: "/images/deliverables/artefacts/growth-dashboard.webp",
+    alt: "Anonymized weekly growth dashboard showing pipeline, conversion, CAC, and funnel trend charts.",
+    caption: "The weekly growth dashboard every engagement ends with"
+  },
+  {
+    src: "/images/deliverables/artefacts/experiment-backlog.webp",
+    alt: "Anonymized experiment backlog table with hypotheses, ICE scores, owners, and status for Series A SaaS Co.",
+    caption: "An active experiment backlog from a 90-day growth sprint"
+  },
+  {
+    src: "/images/deliverables/artefacts/icp-map.webp",
+    alt: "Anonymized ICP map grid with segment, core pain, and channel fit columns from a Growth Diagnosis.",
+    caption: "ICP map built during Growth Diagnosis — segment, pain, channel fit"
+  },
+  {
+    src: "/images/deliverables/artefacts/landing-brief.webp",
+    alt: "Anonymized landing page brief document with placeholder brand name and structured sections.",
+    caption: "A landing page brief from the Acquisition System Build phase"
+  },
+  {
+    src: "/images/deliverables/artefacts/weekly-decision.webp",
+    alt: "Anonymized weekly decision document with tested, moved, and next columns; figures obscured.",
+    caption: "The weekly decision doc — what was tested, what moved, what is next"
+  },
+  {
+    src: "/images/deliverables/artefacts/handover-pack.webp",
+    alt: "Handover pack cover slide with title and systems tagline, no client details.",
+    caption: "The handover pack delivered at the end of every engagement"
+  }
+];
+
 const howItWorksSchema = [
   buildBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -99,6 +133,8 @@ const howItWorksSchema = [
     </div>
   </section>
 
+  <WssOperatingSystemDiagram tone="alt" />
+
   <section class="section">
     <div class="shell">
       <p class="eyebrow">The engagement rhythm</p>
@@ -112,6 +148,37 @@ const howItWorksSchema = [
               <p>{p.body}</p>
             </div>
           </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section how-artefacts-section">
+    <div class="shell">
+      <p class="eyebrow">Deliverables</p>
+      <h2
+        style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.2rem,3.8vw,3.2rem);line-height:1.08;font-weight:380;margin:0.4rem 0 1rem;"
+      >
+        The work is in the artefacts, not the deck.
+      </h2>
+      <p class="lede how-artefacts-lede">
+        Representative, anonymized snapshots of what ships inside an engagement — not client-specific screenshots.
+        Exported at 2× for sharp displays; WebP for load time.
+      </p>
+      <div class="how-artefact-strip" role="list">
+        {artefactGallery.map((item) => (
+          <figure class="how-artefact-card" role="listitem">
+            <img
+              src={item.src}
+              alt={item.alt}
+              width="800"
+              height="500"
+              loading="lazy"
+              decoding="async"
+              class="how-artefact-img"
+            />
+            <figcaption class="how-artefact-caption">{item.caption}</figcaption>
+          </figure>
         ))}
       </div>
     </div>
@@ -201,4 +268,42 @@ const howItWorksSchema = [
       </div>
     </div>
   </section>
+
+  <style>
+    .how-artefacts-lede {
+      max-width: 62ch;
+      margin-bottom: 1.5rem;
+    }
+    .how-artefact-strip {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scroll-snap-type: x proximity;
+      margin-inline: -0.5rem;
+      padding-inline: 0.5rem;
+    }
+    .how-artefact-card {
+      flex: 0 0 min(340px, 85vw);
+      scroll-snap-align: start;
+      margin: 0;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .how-artefact-img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.75rem;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .how-artefact-caption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 0;
+      padding-right: 0.25rem;
+    }
+  </style>
 </BaseLayout>

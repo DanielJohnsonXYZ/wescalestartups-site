@@ -1,6 +1,7 @@
 ---
 // SiteFooter.astro — restructured into 5 clean groups:
 // Work with us · Proof · Resources · Company · Legal
+import EmailSignup from "./EmailSignup.astro";
 import { siteConfig } from "../site";
 
 const groups = [
@@ -80,6 +81,14 @@ const groups = [
       <p class="footer-secondary-cta">
         Or, <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel} →</a>
       </p>
+      <div class="footer-newsletter" aria-label="Newsletter signup">
+        <EmailSignup
+          variant="light"
+          formId="footer-newsletter"
+          heading="Weekly growth note"
+          subtext="One actionable insight for post-PMF founders. No spam."
+        />
+      </div>
     </div>
 
     {groups.map((group) => (
@@ -152,6 +161,21 @@ const groups = [
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  .footer-newsletter {
+    margin-top: 1.25rem;
+    max-width: 36rem;
+  }
+  .footer-newsletter :global(.email-signup-strip) {
+    margin: 0;
+    padding: 1.1rem 1.15rem;
+  }
+  .footer-newsletter :global(.email-signup-heading) {
+    font-size: 1rem;
+  }
+  .footer-newsletter :global(.email-signup-sub) {
+    font-size: 0.82rem;
   }
 
   .footer-col h2 {

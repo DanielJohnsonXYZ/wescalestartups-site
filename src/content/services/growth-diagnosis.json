@@ -11,10 +11,10 @@
     "Recommendation on whether to run a sprint, build an acquisition system, or add fractional leadership"
   ],
   "process": [
-    "Review last 90 days of pipeline data in CRM, GA4 acquisition reports, and 10 recent sales calls",
-    "Map where activity is turning into qualified pipeline, learning, or waste",
-    "Identify the highest-value constraint and write a 1-page evidence summary",
-    "Share a practical growth path with owners, metrics, and next steps"
+    "Audit 90 days of CRM pipeline, GA4 acquisition reports, and 10 recent sales call recordings to name the constraint",
+    "Map every activity into three buckets: qualified pipeline, learning signal, or waste — then kill the waste",
+    "Write a 1-page constraint evidence summary with the bottleneck, the data, and the fix priority",
+    "Deliver a practical growth path with named owners, tracked metrics, and a 14-day next-step checklist"
   ],
   "cta": "Book a 30-minute growth diagnostic",
   "order": 1

@@ -1,116 +1,89 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig } from "../site";
+import { siteConfig, staticPathLastModified } from "../site";
 
 const dimensions = [
-  { key: "positioning", label: "Positioning clarity", desc: "How clearly does your ICP understand the problem you solve and why now?" },
-  { key: "founder_dep", label: "Founder dependency", desc: "What percentage of growth decisions still require founder input?" },
-  { key: "pipeline", label: "Pipeline repeatability", desc: "Can you predict pipeline volume within 20% for next quarter?" },
-  { key: "acquisition", label: "Acquisition system maturity", desc: "Do channels work as one system vs isolated experiments?" },
-  { key: "offer", label: "Offer and messaging strength", desc: "Does your offer convert strangers to conversations at >3%?" },
-  { key: "proof", label: "Proof and conversion assets", desc: "Do you have case studies, testimonials, and benchmarks buyers trust?" },
-  { key: "cadence", label: "Operating cadence", desc: "Is there a weekly rhythm that produces growth decisions without founder heroics?" },
-  { key: "leadership", label: "Senior growth leadership gap", desc: "Is there a senior growth leader owning priorities, or is the founder still the growth department?" }
+  {
+    dimension: "Positioning clarity",
+    description: "Can a stranger say what you sell, who it's for, and why now — in one sentence?",
+    scoreLabels: ["Weak", "Improving", "Clear"],
+    weight: "High — drives every other channel"
+  },
+  {
+    dimension: "Acquisition system",
+    description: "Are paid, SEO, outbound, and content working as one system with shared ICP and offer?",
+    scoreLabels: ["Siloed", "Partially linked", "One system"],
+    weight: "High — compounds when fixed"
+  },
+  {
+    dimension: "Conversion flow",
+    description: "Does the homepage → demo/lead capture convert at 3%+ for your ICP traffic?",
+    scoreLabels: ["<1%", "1–3%", "3%+"],
+    weight: "Medium — often a quick win"
+  },
+  {
+    dimension: "Reporting & decisions",
+    description: "Is there one weekly view that says what to scale, stop, or fix this week?",
+    scoreLabels: ["No view", "Activity only", "Decision view"],
+    weight: "High — without this, growth stays founder-led"
+  },
+  {
+    dimension: "Team ownership",
+    description: "Can the team run the growth rhythm without founder input for 2+ weeks?",
+    scoreLabels: ["Founder only", "Mixed", "Team-owned"],
+    weight: "High — the exit condition for fractional work"
+  },
+  {
+    dimension: "Offer & pricing",
+    description: "Is the offer sharp for one ICP segment, with pricing that signals confidence?",
+    scoreLabels: ["Blurry", "Clear but broad", "Sharp & segmented"],
+    weight: "Medium — positioning flows from this"
+  },
+  {
+    dimension: "Experiment cadence",
+    description: "Are 2–4 growth experiments live at any time, with owners and decision rules?",
+    scoreLabels: ["None", "Ad-hoc", "2–4 active"],
+    weight: "Medium — speed of learning"
+  },
+  {
+    dimension: "Founder time",
+    description: "How many growth hours per week does the founder spend, and is it the right 5 hours?",
+    scoreLabels: [">15 hrs", "8–15 hrs", "<8 hrs"],
+    weight: "High — founder bottleneck score"
+  }
 ];
 
-const scoreLabels = ["Critical gap", "Significant gap", "Emerging", "Strong", "Best practice"];
-
-const wssScaleScoreSchema = [
+const schema = [
   buildBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "WSS Scale Score", path: "/wss-scale-score" }
   ])
 ];
 ---
+
 <BaseLayout
   title="WSS Scale Score | We Scale Startups"
-  description="Proprietary diagnostic: the 8-dimension WSS Scale Score. Assess positioning clarity, founder dependency, pipeline repeatability, acquisition maturity, offer strength, proof assets, operating cadence, and senior growth leadership."
-  keywords="WSS Scale Score, startup growth assessment, post-PMF diagnostic, founder dependency audit, acquisition system maturity, growth leadership gap"
+  description="Score your startup across 8 growth dimensions: positioning, acquisition, conversion, reporting, team ownership, offer, experimentation, and founder time."
+  keywords="growth scorecard, startup growth assessment, fractional CMO audit, post-PMF growth checklist, acquisition system score"
   path="/wss-scale-score"
-  schema={wssScaleScoreSchema}
+  schema={schema}
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">Proprietary diagnostic</p>
-      <h1>The WSS Scale Score</h1>
+      <p class="eyebrow">WSS Scale Score</p>
+      <h1>How ready is your growth system?</h1>
       <p class="lede">
-        A 5-minute diagnostic across 8 dimensions that predict whether your growth will scale or stay founder-dependent.
-        Get your score, see your biggest gap, and receive personalised recommendations.
+        Score your startup across 8 dimensions in 5 minutes.
+        At the end you'll see which constraint will block scale first — and what to fix.
       </p>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href="#calculator" data-cta="wss-score-start">
-          <span class="button-label">Start the WSS Scale Score</span>
-          <span class="button-subcopy">5 minutes · 8 dimensions · personalised result</span>
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="scale-score-book">
+          {siteConfig.bookingLabel}
+          <span class="arr" aria-hidden="true">→</span>
         </a>
-        <a class="button button-light" href={siteConfig.bookingUrl} data-cta="wss-score-book">
-          Or, {siteConfig.bookingLabel} →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="calculator">
-    <div class="shell" style="max-width: 720px;">
-      <p class="eyebrow">Calculator</p>
-      <h2>Rate each dimension 1–5</h2>
-      <p class="lede" style="margin-bottom: 2rem;">
-        Be honest — the score only works if the data is real. 1 = Critical gap, 5 = Best practice.
-      </p>
-
-      <form id="wssForm" style="display:grid;gap:1.5rem;">
-        {dimensions.map((d) => (
-          <article style="background:var(--surface);border:1px solid var(--line);border-radius:1rem;padding:1.25rem 1.5rem;">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;">
-              <div>
-                <strong style="display:block;font-size:1.05rem;color:var(--ink);margin-bottom:0.3rem;">{d.label}</strong>
-                <p style="margin:0;font-size:0.88rem;color:var(--muted);line-height:1.5;">{d.desc}</p>
-              </div>
-            </div>
-            <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;" data-dimension={d.key}>
-              {[1,2,3,4,5].map((n) => (
-                <label style="display:flex;align-items:center;gap:0.3rem;cursor:pointer;font-size:0.9rem;color:var(--ink);">
-                  <input type="radio" name={d.key} value={n} required style="accent-color:var(--accent);" />
-                  <span>{n} <span style="color:var(--muted);font-size:0.78rem;">{scoreLabels[n-1]}</span>
-                </label>
-              ))}
-            </div>
-          </article>
-        ))}
-
-        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;">
-          <button type="submit" class="button button-brand">Get my WSS Scale Score</button>
-          <button type="reset" class="button button-light">Reset</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- Results section (hidden by default) -->
-  <section class="section section-alt" id="results" style="display:none;">
-    <div class="shell" style="max-width:720px;">
-      <p class="eyebrow">Your result</p>
-      <h2 id="resultTitle">Your WSS Scale Score</h2>
-      <div id="scoreVisual" style="background:var(--surface);border:1px solid var(--line);border-radius:1rem;padding:2rem;margin:1.5rem 0;text-align:center;">
-        <div id="scoreNumber" style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(3rem,6vw,5rem);font-weight:380;color:var(--accent);line-height:1;">0</div>
-        <p id="scoreLabel" style="margin:0.5rem 0 0;font-size:1.1rem;color:var(--ink);font-weight:600;">Calculating...</p>
-      </div>
-
-      <div id="dimensionScores" style="display:grid;gap:0.75rem;grid-template-columns:1fr;margin:1.5rem 0;">
-        <!-- Dimension scores will be inserted here -->
-      </div>
-
-      <div id="recommendations" style="background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));border-radius:1rem;padding:1.5rem;margin-top:1.5rem;">
-        <h3 style="margin:0 0 0.75rem;font-size:1.1rem;">Personalised recommendations</h3>
-        <ul id="recList" style="margin:0;padding:0 0 0 1.2rem;color:var(--ink);line-height:1.6;"></ul>
-      </div>
-
-      <div class="hero-actions" style="margin-top:2rem;">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-result-book">
-          {siteConfig.bookingLabel} →
-        </a>
-        <a class="button button-light" href="/resources" data-cta="wss-result-resources">
-          See resources →
+        <a class="button button-light" href="/resources#growth-bottleneck-scorecard" data-cta="scale-score-resource">
+          Or use the simpler scorecard →
         </a>
       </div>
     </div>
@@ -119,12 +92,24 @@ const wssScaleScoreSchema = [
   <section class="section">
     <div class="shell">
       <p class="eyebrow">The 8 dimensions</p>
-      <h2>What the WSS Scale Score measures</h2>
-      <div style="display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.5rem;">
-        {dimensions.map((d, i) => (
-          <article style="background:var(--surface);border:1px solid var(--line);border-radius:0.85rem;padding:1.25rem 1.5rem;">
-            <strong style="display:block;font-size:0.95rem;color:var(--accent);margin-bottom:0.3rem;">0{i+1}. {d.label}</strong>
-            <p style="margin:0;font-size:0.9rem;color:var(--muted);line-height:1.55;">{d.desc}</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.2rem,3.6vw,3rem);line-height:1.05;font-weight:380;margin:0.4rem 0 2rem;">
+        What we measure, and why it predicts scale.
+      </h2>
+      <div class="grid-2" style="gap:1.5rem;">
+        {dimensions.map((dim, i) => (
+          <article class="feature-card" style="padding:1.5rem 1.5rem 1.8rem;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.75rem;">
+              <h3 style="font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;margin:0;">0{i + 1}. {dim.dimension}</h3>
+              <span style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);">{dim.weight}</span>
+            </div>
+            <p style="font-size:0.92rem;color:var(--muted);line-height:1.6;margin:0 0 0.75rem;">{dim.description}</p>
+            <div style="display:flex;gap:0.5rem;font-size:0.78rem;">
+              {dim.scoreLabels.map((label, j) => (
+                <span style={`padding:0.25rem 0.6rem;border-radius:0.4rem;border:1px solid var(--line);color:var(--muted);background:${j === 0 ? "var(--surface)" : j === 1 ? "var(--surface)" : "var(--accent)/10"}`}>
+                  {label}
+                </span>
+              ))}
+            </div>
           </article>
         ))}
       </div>
@@ -133,21 +118,50 @@ const wssScaleScoreSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">What happens next</p>
-      <h2>From score to system</h2>
-      <div style="display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.5rem;">
-        <article style="background:var(--surface);border:1px solid var(--line);border-radius:0.85rem;padding:1.25rem 1.5rem;">
-          <strong style="display:block;font-size:0.95rem;color:var(--ink);margin-bottom:0.3rem;">Score 8–16: Critical gaps</strong>
-          <p style="margin:0;font-size:0.9rem;color:var(--muted);line-height:1.55;">Start with a <a href="/services/growth-diagnosis">Growth Diagnosis</a> to name the #1 constraint, then a <a href="/services/90-day-growth-sprint">90-Day Sprint</a> to build early signal.</p>
+      <p class="eyebrow">How to use this</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.2rem,3.6vw,3rem);line-height:1.05;font-weight:380;margin:0.4rem 0 2rem;">
+        A diagnostic tool, not a vanity quiz.
+      </h2>
+      <div class="grid-3">
+        <article class="feature-card compact-card">
+          <h3>1. Score honestly</h3>
+          <p>Get a founder, a growth lead, and one IC in the room. Score each dimension separately, then compare.</p>
         </article>
-        <article style="background:var(--surface);border:1px solid var(--line);border-radius:0.85rem;padding:1.25rem 1.5rem;">
-          <strong style="display:block;font-size:0.95rem;color:var(--ink);margin-bottom:0.3rem;">Score 17–28: Significant gaps</strong>
-          <p style="margin:0;font-size:0.9rem;color:var(--muted);line-height:1.55;">An <a href="/services/acquisition-system-build">Acquisition System Build</a> usually fits best — channels, offers, and reporting working as one system.</p>
+        <article class="feature-card compact-card">
+          <h3>2. Find the low score</h3>
+          <p>The dimension with the lowest score is usually the constraint that's blocking repeatable pipeline.</p>
         </article>
-        <article style="background:var(--surface);border:1px solid var(--line);border-radius:0.85rem;padding:1.25rem 1.5rem;">
-          <strong style="display:block;font-size:0.95rem;color:var(--ink);margin-bottom:0.3rem;">Score 29–40: Strong foundations</strong>
-          <p style="margin:0;font-size:0.9rem;color:var(--muted);line-height:1.55;">A <a href="/services/fractional-cmo">Fractional CMO</a> engagement scales what's working and transfers the operating rhythm to your team.</p>
+        <article class="feature-card compact-card">
+          <h3>3. Book a diagnostic</h3>
+          <p>Bring the scores to a 30-minute diagnostic. We'll confirm the constraint and recommend the engagement shape.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">What the score predicts</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2.2rem,3.6vw,3rem);line-height:1.05;font-weight:380;margin:0.4rem 0 2rem;">
+        Low scores here are why pipeline plateaus.
+      </h2>
+      <div class="grid-2" style="gap:1.25rem;">
+        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
+          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Positioning + Offer below 2/3</h3>
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Acquisition spend leaks. Channels attract the wrong ICP. CAC climbs while conversion falls.</p>
+        </div>
+        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
+          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Acquisition system below 2/3</h3>
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Channels work in isolation but pipeline arrives in waves. No compound effect week over week.</p>
+        </div>
+        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
+          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Reporting & Decisions below 2/3</h3>
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Activity gets reported but no one decides what to scale, stop, or fix. Weeks pass without a sharp call.</p>
+        </div>
+        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
+          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Team Ownership below 2/3</h3>
+          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Growth still depends on founder heroics. The system isn't transferable. Fractional work can't finish.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -155,115 +169,21 @@ const wssScaleScoreSchema = [
   <section class="cta-band">
     <div class="shell cta-inner">
       <div>
-        <p class="eyebrow">Want the personalised walkthrough?</p>
-        <h2>Get your score, then talk it through.</h2>
+        <p class="eyebrow">Ready to diagnose?</p>
+        <h2>Book a 30-minute growth diagnostic.</h2>
         <p>
-          Complete the WSS Scale Score and bring the result to a {siteConfig.bookingCallDurationPhrase} diagnostic call.
-          We'll show you exactly which dimension to fix first and what that looks like in practice.
+          Bring your WSS Scale Score. In {siteConfig.bookingCallDurationPhrase} we'll confirm the constraint and recommend the engagement that fits — or tell you where else to go.
         </p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="wss-cta-book">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="scale-score-final-book">
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href="#calculator" data-cta="wss-cta-retake">
-          Retake the WSS Scale Score →
+        <a class="button button-light" href="/services" data-cta="scale-score-services">
+          Compare services →
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline>
-  (function() {
-    var form = document.getElementById("wssForm");
-    var results = document.getElementById("results");
-    if (!form || !results) return;
-
-    var dimensions = [
-      { key: "positioning", label: "Positioning clarity", max: 5 },
-      { key: "founder_dep", label: "Founder dependency", max: 5 },
-      { key: "pipeline", label: "Pipeline repeatability", max: 5 },
-      { key: "acquisition", label: "Acquisition system maturity", max: 5 },
-      { key: "offer", label: "Offer and messaging strength", max: 5 },
-      { key: "proof", label: "Proof and conversion assets", max: 5 },
-      { key: "cadence", label: "Operating cadence", max: 5 },
-      { key: "leadership", label: "Senior growth leadership gap", max: 5 }
-    ];
-
-    var recommendations = {
-      positioning: "Run a messaging audit: ICP, problem statement, and buying trigger. Test 2 headline variants within 14 days.",
-      founder_dep: "Document the top 10 growth decisions and assign an internal owner for each. Set a weekly 30-minute growth meeting.",
-      pipeline: "Build a simple pipeline dashboard: MQLs, SQLs, won deals, and CAC by channel. Review every Monday.",
-      acquisition: "Map the full buyer journey across channels. Ensure paid, content, and outbound reinforce the same offer.",
-      offer: "Test your offer with 5 recent won customers. If they can't explain why they bought, the offer needs sharpening.",
-      proof: "Build 3 case studies with Problem / Action / Result format. Add them to your homepage and key landing pages.",
-      cadence: "Establish Monday signal review, Wednesday ship, Friday scale/stop decision. Document the rhythm in 1 page.",
-      leadership: "If revenue >£1M ARR and founder is still the growth department, interview for a Fractional CMO or full-time hire."
-    };
-
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      var data = {};
-      var total = 0;
-      var responses = [];
-
-      dimensions.forEach(function(d) {
-        var radios = form.querySelectorAll('input[name="' + d.key + '"]:checked');
-        var val = radios.length ? parseInt(radios[0].value, 10) : 0;
-        data[d.key] = val;
-        total += val;
-        responses.push({ label: d.label, value: val });
-      });
-
-      // Show results
-      results.style.display = "";
-      document.getElementById("scoreNumber").textContent = total + "/40";
-
-      var label = total <= 16 ? "Critical gaps — start with diagnosis" : total <= 28 ? "Significant gaps — system build recommended" : "Strong foundations — scale with leadership";
-      document.getElementById("scoreLabel").textContent = label;
-
-      // Dimension breakdown
-      var dimContainer = document.getElementById("dimensionScores");
-      dimContainer.innerHTML = "";
-      responses.forEach(function(r) {
-        var pct = (r.value / 5 * 100) + "%";
-        var div = document.createElement("div");
-        div.style.cssText = "display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid var(--line);";
-        div.innerHTML = '<span style="flex:1;font-size:0.9rem;color:var(--ink);">' + r.label + '</span>' +
-          '<div style="flex:0 0 120px;height:6px;background:var(--line);border-radius:3px;overflow:hidden;"><div style="width:' + pct + ';height:100%;background:var(--accent);border-radius:3px;"></div></div>' +
-          '<span style="font-size:0.85rem;font-weight:600;color:var(--ink);min-width:2rem;text-align:right;">' + r.value + '/5</span>';
-        dimContainer.appendChild(div);
-      });
-
-      // Recommendations
-      var recList = document.getElementById("recList");
-      recList.innerHTML = "";
-      responses.sort(function(a, b) { return a.value - b.value; });
-      responses.slice(0, 3).forEach(function(r) {
-        var li = document.createElement("li");
-        li.style.marginBottom = "0.5rem";
-        li.textContent = recommendations[r.label.toLowerCase().replace(/[^a-z_]/g, "_")] || recommendations[r.key] || "Review this dimension and prioritise fixes.";
-        recList.appendChild(li);
-      });
-
-      // Scroll to results
-      results.scrollIntoView({ behavior: "smooth", block: "start" });
-
-      // Push to dataLayer
-      if (window.dataLayer) {
-        window.dataLayer.push({
-          event: "wss_scale_score_complete",
-          score_total: total,
-          score_dimensions: JSON.stringify(data),
-          page_path: window.location.pathname
-        });
-      }
-    });
-
-    form.addEventListener("reset", function() {
-      results.style.display = "none";
-    });
-  })();
-</script>

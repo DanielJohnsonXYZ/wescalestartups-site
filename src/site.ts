@@ -373,12 +373,13 @@ export const termsPageRelatedLinks: readonly { href: string; label: string }[] =
   { href: "/book", label: siteConfig.bookingLabel }
 ];
 
-export const proofClients = [
-  { label: "Ned", caseSlug: "ned", context: "Fintech acquisition", proof: "500+ sign-ups from paid search" },
-  { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine", proof: "Marketing function built from zero" },
-  { label: "eQuoo", caseSlug: "equoo", context: "Healthtech positioning", proof: "Clearer acquisition narrative" },
-  { label: "LessonsUp", caseSlug: "lessonsup", context: "EdTech acquisition", proof: "Sharper message-market fit" },
-  { label: "Nevly", caseSlug: "nevly", context: "Financial wellness", proof: "Trust-led GTM foundations" }
+const proofClients = [
+  { label: "Ned", caseSlug: "ned", context: "Fintech client · Fractional CMO engagement", proof: "500+ sign-ups from paid search" },
+  { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine client · Growth Diagnosis + Sprint", proof: "Marketing function built from zero" },
+  { label: "eQuoo", caseSlug: "equoo", context: "Healthtech client · Fractional CMO engagement", proof: "Clearer acquisition narrative" },
+  { label: "LessonsUp", caseSlug: "lessonsup", context: "EdTech client · Acquisition System Build", proof: "Sharper message-market fit" },
+  { label: "Nevly", caseSlug: "nevly", context: "Financial wellness client · Sprint + CMO support", proof: "Trust-led GTM foundations" },
+  { label: "Madia", caseSlug: "madia", context: "Marketing agency partner · referral relationship", proof: "Ongoing collaboration on client growth systems" }
 ] as const;
 
 /** Pricing / services — short reassurance lines (Growth Hub: trust near price). */
@@ -429,6 +430,7 @@ export const credentialLogos = [
 export const headlineMetrics = [
   { value: "£6.8M+", label: "Paid acquisition spend managed" },
   { value: "500+", label: "Sign-ups from a single paid campaign" },
+  { value: "479+", label: "Founder sessions · ★ 4.93" },
   { value: "2", label: "Operator-side startup exits" },
   { value: "20+", label: "Startups advised" }
 ] as const;
@@ -653,6 +655,13 @@ export const wssVsAgencyPage = {
 } as const;
 
 export const testimonials = [
+  {
+    quote: "The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint that followed shipped 6 experiments and gave us a weekly cadence that still runs without Daniel today.",
+    name: "James Madia",
+    role: "Founder",
+    company: "Madia (marketing agency partner)",
+    result: "Acquisition system built, running without founder"
+  },
   {
     quote: "Daniel offered sharp, practical advice with a clear focus on messaging and positioning. He helped me reframe the problem and target the right audience more effectively.",
     name: "Greg Weinstein",

@@ -11,10 +11,10 @@
     "Weekly reporting rhythm that links activity to pipeline and learning"
   ],
   "process": [
-    "Diagnose current funnel using GA4 events, CRM stage data, and 5 recent sales call recordings",
-    "Select 3-5 experiments using ICE framework: impact on pipeline, confidence from data, ease of execution",
-    "Build experiment assets: landing page variants, ad creative sets, email sequences, or pricing tests",
-    "Friday weekly: review CPL, MQL rate, and pipeline velocity; scale >2x ROI, kill <1x ROI"
+    "Diagnose current funnel: export GA4 events, CRM stage conversion rates, and listen to 5 recent sales calls to hear the real objection",
+    "Select 3-5 experiments using ICE: (1) impact on pipeline velocity, (2) confidence from past data, (3) ease of execution with current team",
+    "Build experiment assets: (1) 2 landing page variants with different value props, (2) 3 ad creative sets per channel, (3) email sequence with behavioural triggers",
+    "Friday weekly review: calculate CPL trend, MQL conversion rate, pipeline velocity; scale experiments >2x ROI, kill <1x ROI, document learnings in backlog"
   ],
   "cta": "Start a 90-Day Sprint",
   "order": 2

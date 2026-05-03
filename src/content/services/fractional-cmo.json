@@ -11,10 +11,10 @@
     "Team rituals that reduce founder bottleneck"
   ],
   "process": [
-    "Review last 90 days of pipeline data in CRM to name the real growth constraint",
-    "Set quarterly growth priorities with decision rules: what to scale, stop, or fix each week",
-    "Facilitate Monday pipeline review, Wednesday experiment ship, Friday scale/stop decision",
-    "Document weekly cadence, dashboard owner, and handoff checklist by month 3"
+    "Export last 90 days of CRM pipeline data; map where deals stall and what the founder is still deciding personally",
+    "Set quarterly growth priorities with decision rules: scale paid if CAC < LTV/3, stop channels with >60-day payback, fix reporting gaps first",
+    "Facilitate Monday pipeline review (30 min), Wednesday experiment ship (2-3 tests), Friday scale/stop decision (based on week's data)",
+    "Document weekly cadence in a 1-page handoff checklist: who owns each metric, what the dashboard shows, and when to call Daniel back"
   ],
   "cta": "Get senior growth leadership",
   "order": 4

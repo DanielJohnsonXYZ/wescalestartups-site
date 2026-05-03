@@ -136,6 +136,7 @@ export const navigation = [
   { href: "/insights", label: "Insights" },
   { href: "/growth-operating-system", label: "Growth OS" },
   { href: "/founder-led-growth", label: "Founder-led" },
+  { href: "/podcast-guest-application", label: "Podcast Guests" },
   { href: "/contact", label: "Contact" }
 ] as const;
 
@@ -610,6 +611,24 @@ export const leadMagnets = [
     audience: "VCs and accelerator teams",
     description: "A portfolio workshop format for spotting whether a founder needs positioning, acquisition, team, or reporting help first.",
     href: "/resources#vc-portfolio-growth-diagnosis"
+  },
+  {
+    title: "Acquisition Channel Decision Matrix",
+    audience: "Growth teams · 10 minutes",
+    description: "Score paid, organic, partnerships, outbound, and content against your current stage, team capacity, and ICP clarity.",
+    href: "/resources#acquisition-channel-matrix"
+  },
+  {
+    title: "Fractional CMO Hiring Checklist",
+    audience: "Founders hiring senior GTM leadership",
+    description: "The questions to ask, the artefacts to expect in week 1, and the red flags that mean the operator can't build a system.",
+    href: "/resources#fractional-cmo-hiring-checklist"
+  },
+  {
+    title: "AI-Native GTM Stack Map",
+    audience: "Teams adopting AI for GTM",
+    description: "Map where generative and agentic AI accelerate research, messaging, experiments, and reporting in your current stack.",
+    href: "/resources#ai-native-gtm-stack-map"
   }
 ] as const;
 

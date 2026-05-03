@@ -20,13 +20,16 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
 
-  // Serve static assets (images, og, css, js, _astro) directly via ASSETS.
+  // Serve static assets (images, og, css, js, _astro, sitemap, robots) directly via ASSETS.
   if (
     /^\/images\//.test(path) ||
     /^\/og\//.test(path) ||
     /^\/_astro\//.test(path) ||
     path.endsWith(".css") ||
-    path.endsWith(".js")
+    path.endsWith(".js") ||
+    path === "/sitemap.xml" ||
+    path === "/robots.txt" ||
+    path === "/rss.xml"
   ) {
     return fetchStaticAsset(context, path);
   }

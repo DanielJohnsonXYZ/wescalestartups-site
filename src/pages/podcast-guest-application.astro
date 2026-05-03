@@ -1,0 +1,186 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Podcast Guest Application", url: "/podcast-guest-application" }
+  ])
+];
+
+const guestFields = [
+  { name: "name", label: "Name", type: "text", required: true },
+  { name: "company", label: "Company", type: "text", required: true },
+  { name: "role", label: "Role / Title", type: "text", required: true },
+  { name: "website", label: "Website", type: "url", required: false },
+  { name: "linkedin", label: "LinkedIn Profile", type: "url", required: false },
+  { name: "what-building", label: "What are you building?", type: "textarea", required: true },
+  { name: "how-using-ai", label: "How are you using AI in your startup?", type: "textarea", required: true },
+  { name: "practical-lessons", label: "What practical lessons can listeners take away?", type: "textarea", required: true },
+  { name: "relevant-links", label: "Relevant links (product, press, LinkedIn, etc.)", type: "textarea", required: false },
+  { name: "email", label: "Email", type: "email", required: true }
+];
+
+const suggestedCopy = "Want to be a guest? We are looking for founders, operators, and growth leaders with practical examples of how AI is helping startups grow faster, save time, or make better commercial decisions.";
+---
+
+<BaseLayout
+  title="Podcast Guest Application | We Scale Startups"
+  description="Apply to be a guest on the How Startups Win With AI podcast. Founders, operators, and growth leaders sharing practical AI-driven growth lessons."
+  path="/podcast-guest-application"
+  schema={schemas}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Podcast Guest Application</p>
+      <h1>Apply to be a guest on <span class="grad">How Startups Win With AI</span></h1>
+      <p class="max-w-3xl">
+        {suggestedCopy}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Who we're looking for"
+        title="Founders and operators with real AI growth stories."
+        intro="We want practical, specific examples — not theory. If your startup is using AI to grow faster, save time, or make better commercial decisions, we want to hear from you."
+      />
+      <div class="max-w-3xl grid gap-4">
+        <div class="card p-6">
+          <h3 class="font-bold text-lg">What makes a great guest</h3>
+          <ul class="mt-4 space-y-3">
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're a founder, operator, or growth leader at a post-PMF startup</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're using AI in a way that creates measurable commercial outcomes</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You can share specific examples, numbers, and lessons learned</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're comfortable on record — clear speaking, practical takeaways</span></li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold text-lg">Topics we love</h3>
+          <ul class="mt-4 space-y-3">
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>AI-native GTM: how AI changed your acquisition model</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>Agentic workflows that replaced manual growth work</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>Using AI to sharpen positioning, ICP, or pricing</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>AI tools that improved conversion, retention, or sales efficiency</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Application form"
+        title="Tell us about yourself and your AI story."
+        intro="The more specific you are, the faster we can see if there's a fit for the show."
+      />
+      <form class="max-w-2xl card p-8 md:p-10 space-y-5" id="guest-application" name="guest-application">
+        {guestFields.map((field) => (
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">
+              {field.label}{field.required && <span class="text-[color:var(--accent)]"> *</span>}
+            </span>
+            {field.type === "textarea" ? (
+              <textarea
+                name={field.name}
+                rows="4"
+                required={field.required}
+                class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
+              ></textarea>
+            ) : (
+              <input
+                type={field.type}
+                name={field.name}
+                required={field.required}
+                class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
+              />
+            )}
+          </label>
+        ))}
+        <button class="button button-brand" type="submit">Submit Application</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Sponsorship"
+        title="Interested in sponsoring the podcast?"
+        intro="Reach a high-intent audience of founders and operators building AI-native startups."
+      />
+      <div class="max-w-3xl card p-8 md:p-10">
+        <p class="text-lg leading-8 text-[color:var(--muted)]">
+          The podcast reaches founders and operators at post-PMF startups who are actively using AI to grow. Sponsorship includes pre-roll mentions, show notes links, and optional founder-led partnership discussions.
+        </p>
+        <a class="button button-brand mt-6" href={`mailto:${siteConfig.email}?subject=Podcast%20Sponsorship%20Enquiry`}>Enquire About Sponsorship →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Prefer a call?</p>
+        <h2>Discuss the podcast or sponsorship directly.</h2>
+        <p>
+          If you'd rather talk through the fit, the topic, or sponsorship options, book a 30-minute diagnostic call with Daniel.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="podcast-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={`mailto:${siteConfig.email}?subject=Podcast%20Guest%20Enquiry`} data-cta="podcast-email">
+          Or, email {siteConfig.email} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ email: siteConfig.email }}>
+  const form = document.getElementById("guest-application");
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+
+    const subject = `Podcast Guest Application: ${data.get("name") || "Guest"} (${data.get("company") || ""})`;
+    const body = [
+      `Name: ${data.get("name") || ""}`,
+      `Company: ${data.get("company") || ""}`,
+      `Role: ${data.get("role") || ""}`,
+      `Website: ${data.get("website") || ""}`,
+      `LinkedIn: ${data.get("linkedin") || ""}`,
+      ``,
+      `What are you building?`,
+      `${data.get("what-building") || ""}`,
+      ``,
+      `How are you using AI?`,
+      `${data.get("how-using-ai") || ""}`,
+      ``,
+      `Practical lessons for listeners:`,
+      `${data.get("practical-lessons") || ""}`,
+      ``,
+      `Relevant links:`,
+      `${data.get("relevant-links") || ""}`,
+      ``,
+      `Email: ${data.get("email") || ""}`
+    ].join("\n");
+
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

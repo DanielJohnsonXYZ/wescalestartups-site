@@ -591,44 +591,52 @@ export const serviceSnapshots = [
   }
 ] as const;
 
-// Lead magnets remain the secondary path
+// Lead magnets remain the secondary path. Each one has its own standalone
+// landing page at /resources/{id} for SEO-crawlable, paid-ad-ready
+// surfaces (rendered by /src/pages/resources/[slug].astro).
 export const leadMagnets = [
   {
+    id: "growth-bottleneck-scorecard",
     title: "Growth Bottleneck Scorecard",
     audience: "Post-PMF founders · 5 minutes",
     description: "Score the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
-    href: "/resources#growth-bottleneck-scorecard",
+    href: "/resources/growth-bottleneck-scorecard",
     primary: true
   },
   {
+    id: "90-day-growth-sprint-planner",
     title: "90-Day Growth Sprint Planner",
     audience: "Startup leadership teams",
     description: "Map a quarter of tests, owners, decision rules, and reporting so the team stops running disconnected activity.",
-    href: "/resources#90-day-growth-sprint-planner"
+    href: "/resources/90-day-growth-sprint-planner"
   },
   {
+    id: "vc-portfolio-growth-diagnosis",
     title: "VC Portfolio Growth Diagnosis Template",
     audience: "VCs and accelerator teams",
     description: "A portfolio workshop format for spotting whether a founder needs positioning, acquisition, team, or reporting help first.",
-    href: "/resources#vc-portfolio-growth-diagnosis"
+    href: "/resources/vc-portfolio-growth-diagnosis"
   },
   {
+    id: "acquisition-channel-matrix",
     title: "Acquisition Channel Decision Matrix",
     audience: "Growth teams · 10 minutes",
     description: "Score paid, organic, partnerships, outbound, and content against your current stage, team capacity, and ICP clarity.",
-    href: "/resources#acquisition-channel-matrix"
+    href: "/resources/acquisition-channel-matrix"
   },
   {
+    id: "fractional-cmo-hiring-checklist",
     title: "Fractional CMO Hiring Checklist",
     audience: "Founders hiring senior GTM leadership",
     description: "The questions to ask, the artefacts to expect in week 1, and the red flags that mean the operator can't build a system.",
-    href: "/resources#fractional-cmo-hiring-checklist"
+    href: "/resources/fractional-cmo-hiring-checklist"
   },
   {
+    id: "ai-native-gtm-stack-map",
     title: "AI-Native GTM Stack Map",
     audience: "Teams adopting AI for GTM",
     description: "Map where generative and agentic AI accelerate research, messaging, experiments, and reporting in your current stack.",
-    href: "/resources#ai-native-gtm-stack-map"
+    href: "/resources/ai-native-gtm-stack-map"
   }
 ] as const;
 

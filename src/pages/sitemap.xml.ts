@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { isFinalSitemapPath } from "../lib/sitemapCanonical";
 import { absoluteUrl } from "../lib/utils";
-import { siteConfig, staticPathLastModified } from "../site";
+import { leadMagnets, siteConfig, staticPathLastModified } from "../site";
 
 export const prerender = true;
 
@@ -145,6 +145,15 @@ ${podcastEpisodes
       lastmod: ep.data.publishedAt.toISOString().slice(0, 10),
       changefreq: "monthly",
       priority: "0.68"
+    })
+  )
+  .join("\n")}
+${leadMagnets
+  .map((magnet) =>
+    urlNode(`/resources/${magnet.id}`, {
+      lastmod: staticPathLastModified[`/resources/${magnet.id}`] ?? staticLastMod,
+      changefreq: "monthly",
+      priority: "0.7"
     })
   )
   .join("\n")}

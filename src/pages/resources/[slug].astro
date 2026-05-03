@@ -1,0 +1,318 @@
+---
+import CfEmailOff from "../../components/CfEmailOff.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { leadMagnets, siteConfig } from "../../site";
+
+/**
+ * Standalone landing page per lead magnet — replaces the buried anchor
+ * fragments on /resources. Each /resources/{id} is now SEO-crawlable,
+ * paid-ad-ready, and conversion-focused with one CTA.
+ */
+
+// Per-magnet content. Keys must match `id` in site.ts → leadMagnets.
+const magnetDetails: Record<string, {
+  format: string;
+  bestFor: string;
+  whatYouGet: string[];
+  howToUse: string;
+  whoItsNotFor: string;
+  faq: Array<{ question: string; answer: string }>;
+}> = {
+  "growth-bottleneck-scorecard": {
+    format: "Founder checklist · 5 minutes to complete",
+    bestFor: "Post-PMF teams with marketing activity but unclear priorities",
+    whatYouGet: [
+      "Five-section diagnostic across ICP clarity, channel signal, landing-page conversion, founder-led sales dependency, and reporting cadence",
+      "Scoring rubric so you can see where the constraint actually lives",
+      "Founder-friendly language — no consultant jargon",
+      "Built to be filled in by the founder in one sitting"
+    ],
+    howToUse:
+      "Score each section honestly — usually one or two areas score noticeably worse than the rest. That's the bottleneck. Use the result to decide whether you need a Strategy Sprint, a fractional CMO engagement, or just a sharper plan you can run yourself.",
+    whoItsNotFor:
+      "Pre-revenue or pre-PMF teams. The scorecard assumes you have customers, traction, and the basic GTM mechanics in place.",
+    faq: [
+      {
+        question: "Do I need to be a paying client to get the scorecard?",
+        answer: "No. Request it via the form, get it in the next reply. We use it as a diagnostic step before any engagement conversation."
+      },
+      {
+        question: "What if my score is bad in every section?",
+        answer: "Then the most likely truth is that you don't have a single bottleneck — you have foundational gaps. Book a Growth Diagnosis call and we'll work through which gap to close first."
+      },
+      {
+        question: "Can I share the scorecard with my team?",
+        answer: "Yes. Many founders run it as a 30-minute team exercise — each person scores independently, then you compare. Disagreement is information."
+      }
+    ]
+  },
+  "90-day-growth-sprint-planner": {
+    format: "Sprint planning worksheet · 60 minutes to complete",
+    bestFor: "Startup leadership teams preparing a quarter of focused growth work",
+    whatYouGet: [
+      "Diagnosis input template — the questions to answer before you sequence experiments",
+      "Experiment backlog format with ICE scoring and decision rules",
+      "Weekly review rhythm template (Monday read, Wednesday ship, Friday decide)",
+      "Owner map — who owns each experiment and how it gets reviewed",
+      "Transfer checklist — what gets handed back to the team at the end of the quarter"
+    ],
+    howToUse:
+      "Block 60 minutes with the founder + growth lead. Work through the diagnosis section first, then sequence experiments. The output is a one-page sprint plan you can execute against for the next 13 weeks.",
+    whoItsNotFor:
+      "Solo founders without an internal owner to receive the system. The planner assumes there's at least one person inside the company who will run the sprint.",
+    faq: [
+      {
+        question: "Do I have to use the full 90 days?",
+        answer: "No. The structure works for 30, 60, or 90-day cycles. Most teams find 90 days is the right length to test, scale, and decide on a channel."
+      },
+      {
+        question: "What if my team can't commit to weekly reviews?",
+        answer: "Bi-weekly works but the cycle slows. Weekly is the default because growth experiments compound only when decisions are made fast."
+      },
+      {
+        question: "Can WSS run the sprint with us?",
+        answer: "Yes — that's our 90-Day Growth Sprint engagement. The planner is the self-serve version of the same structure."
+      }
+    ]
+  },
+  "vc-portfolio-growth-diagnosis": {
+    format: "Portfolio workshop guide · 90-minute session format",
+    bestFor: "Investors, accelerators, and venture studios supporting founder growth decisions",
+    whatYouGet: [
+      "Founder bottleneck prompt sheet — the five questions that surface the real constraint",
+      "Channel and conversion question banks for portfolio reviews",
+      "Board-ready next-step recommendations grouped by stage",
+      "Referral routes — when a founder needs an operator vs an agency vs internal hire",
+      "Sprint or fractional CMO fit criteria — when each engagement shape is the right call"
+    ],
+    howToUse:
+      "Run as a 90-minute workshop with one or more founders. The prompts are designed to be answered in real-time so the diagnosis happens in the room. Use the output to brief whichever support route makes sense.",
+    whoItsNotFor:
+      "Pure follow-on investors with no operating support model. The template assumes the firm has the bandwidth to actually engage with founder growth decisions.",
+    faq: [
+      {
+        question: "Can I run this as a group workshop with multiple portfolio founders?",
+        answer: "Yes — works well as a small-group session (3–6 founders). The cross-pollination between founders often surfaces patterns nobody saw alone."
+      },
+      {
+        question: "Do you facilitate this for VC firms?",
+        answer: "Yes — we run portfolio diagnosis workshops as a paid engagement. Useful when the firm wants an outside operator's read on which founders are stuck on what."
+      }
+    ]
+  },
+  "acquisition-channel-matrix": {
+    format: "Channel selection worksheet · 10 minutes to complete",
+    bestFor: "Growth teams choosing where to invest the next quarter's acquisition budget",
+    whatYouGet: [
+      "Stage-by-channel fit map (Seed, Series A, Series B)",
+      "Team capacity scoring — what each channel actually costs in human attention",
+      "ICP alignment scoring — how well the channel reaches your buyer",
+      "Time-to-signal table — how long until you know if it's working",
+      "Decision matrix template — score, weight, decide"
+    ],
+    howToUse:
+      "Run with your growth lead. Score each candidate channel against the four dimensions, weight by what matters most for your stage. The output is a ranked list of where to invest first.",
+    whoItsNotFor:
+      "Teams with established channel mixes that are working — this is for teams in re-allocation or expansion mode, not optimisation mode.",
+    faq: [
+      {
+        question: "Should I include channels I've never tried?",
+        answer: "Yes — the framework works for net-new channels too. You'll just have lower confidence in the team-capacity and time-to-signal scores."
+      },
+      {
+        question: "What if two channels tie?",
+        answer: "Pick the one with the shorter time-to-signal. You want to learn fast, not perfectly."
+      }
+    ]
+  },
+  "fractional-cmo-hiring-checklist": {
+    format: "Hiring assessment worksheet · 30 minutes to review per candidate",
+    bestFor: "Founders preparing to hire senior GTM leadership — fractional or full-time",
+    whatYouGet: [
+      "Twelve interview questions designed to separate operators from advisors",
+      "The artefacts to expect in week one (and what's missing if they don't appear)",
+      "Red flags surfaced during diagnosis — when the operator can't actually build a system",
+      "Handoff criteria — when fractional ends and the internal hire takes over",
+      "Equity vs cash trade-off framework for early hires"
+    ],
+    howToUse:
+      "Use the question bank in your shortlist interviews. Score each candidate against the artefact and handoff criteria after their diagnosis sprint. The output is a defensible hiring decision rather than a vibes-based one.",
+    whoItsNotFor:
+      "Companies hiring junior marketers — the criteria are designed for senior operators with five or more years of GTM ownership.",
+    faq: [
+      {
+        question: "Will this work for hiring a full-time CMO too?",
+        answer: "Yes. The interview questions and red-flag criteria carry over. The handoff section is more relevant for fractional engagements."
+      },
+      {
+        question: "How much does WSS charge for fractional CMO?",
+        answer: "Engagement-dependent. The honest comparison is on /pricing — we publish range bands so you can sanity-check our pricing against the market before booking a call."
+      }
+    ]
+  },
+  "ai-native-gtm-stack-map": {
+    format: "Stack assessment template · 45 minutes to complete",
+    bestFor: "Teams adopting AI for research, messaging, campaign briefs, and reporting",
+    whatYouGet: [
+      "Current stack audit template — map what AI is doing today vs what it should be",
+      "AI research acceleration points — where generative AI shortens customer-call review and competitor teardowns",
+      "Message testing with AI — how to use AI for hypothesis generation without losing senior judgement",
+      "Reporting automation gaps — where AI can replace manual weekly summaries",
+      "Implementation priority map — sequence the AI rollout so it compounds rather than fragments"
+    ],
+    howToUse:
+      "Run with the team that owns each layer of the stack (research, messaging, reporting). The template surfaces the highest-leverage AI integrations first. Most teams find one or two changes account for most of the speed gain.",
+    whoItsNotFor:
+      "Teams without a working GTM motion. AI accelerates a system; it doesn't substitute for one. Build the system first, then map the AI layer.",
+    faq: [
+      {
+        question: "Do I need a full AI stack to use this?",
+        answer: "No. The map is shape-agnostic — it works whether you're using ChatGPT only or a full agentic stack with custom tools."
+      },
+      {
+        question: "What tools does WSS recommend?",
+        answer: "Tooling changes too fast to recommend permanently. The template is principles-led, with examples of categories rather than specific products."
+      }
+    ]
+  }
+};
+
+export function getStaticPaths() {
+  return leadMagnets.map((magnet) => ({
+    params: { slug: magnet.id }
+  }));
+}
+
+const { slug } = Astro.params;
+const magnet = leadMagnets.find((m) => m.id === slug);
+const details = magnetDetails[slug as string];
+
+if (!magnet || !details) {
+  return Astro.redirect("/resources/");
+}
+
+function guideRequestMailto(title: string) {
+  const subject = `Send me the ${title}`;
+  const body = `Please send the ${title}.\n\nFound it on: ${siteConfig.siteUrl}/resources/${slug}\n\nA bit about my company:\n— Stage / ARR:\n— Team size:\n— Current biggest growth question:`;
+  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+const otherMagnets = leadMagnets.filter((m) => m.id !== slug).slice(0, 3);
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: magnet.title, path: `/resources/${slug}` }
+  ]),
+  buildFaqSchema(details.faq)
+];
+
+const description = `${magnet.description} Free download for ${magnet.audience.toLowerCase()}. Built by We Scale Startups.`;
+---
+
+<BaseLayout
+  title={`${magnet.title} | We Scale Startups`}
+  description={description}
+  path={`/resources/${slug}`}
+  schema={schemas}
+  lastUpdated={siteConfig.lastUpdated}
+>
+  <section class="section section-hero">
+    <div class="shell">
+      <p class="eyebrow"><a href="/resources">Resources</a> · {magnet.audience}</p>
+      <h1>{magnet.title}</h1>
+      <p class="lead">{magnet.description}</p>
+      <div class="hero-cta">
+        <CfEmailOff>
+          <a class="btn btn-primary" href={guideRequestMailto(magnet.title)} data-cta={`magnet-hero-${slug}`}>
+            Request the {magnet.title} →
+          </a>
+        </CfEmailOff>
+        <a class="btn btn-ghost" href="/services" data-cta={`magnet-hero-services-${slug}`}>
+          Or see services →
+        </a>
+      </div>
+      <p class="hero-microcopy">Free. No autoresponder funnel. Reply by email, usually within a working day.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="What you get"
+        heading={`Inside the ${magnet.title}`}
+        intro={details.format}
+      />
+      <ul class="check-list">
+        {details.whatYouGet.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell two-col">
+      <article>
+        <p class="eyebrow">How to use it</p>
+        <h2>Designed for one sitting, not a workshop series.</h2>
+        <p>{details.howToUse}</p>
+      </article>
+      <article>
+        <p class="eyebrow">Best fit</p>
+        <h2>Who this is for.</h2>
+        <p>{details.bestFor}.</p>
+        <p class="muted"><strong>Not for:</strong> {details.whoItsNotFor}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="FAQ"
+        heading="Three questions founders ask before requesting it."
+      />
+      <div class="faq-stack">
+        {details.faq.map((item, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="Other resources" heading="Three more, all free." />
+      <div class="card-grid">
+        {otherMagnets.map((other) => (
+          <a class="card" href={other.href}>
+            <p class="eyebrow">{other.audience}</p>
+            <h3>{other.title}</h3>
+            <p>{other.description}</p>
+            <span class="link-arrow">View →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="shell">
+      <h2>Need more than a template?</h2>
+      <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href={siteConfig.calendlyUrl} data-cta={`magnet-final-book-${slug}`} rel="noreferrer" target="_blank">
+          Book a Growth Diagnosis →
+        </a>
+        <a class="btn btn-ghost" href="/resources" data-cta={`magnet-final-resources-${slug}`}>
+          Back to all resources →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

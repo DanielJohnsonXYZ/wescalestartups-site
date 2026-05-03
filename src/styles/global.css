@@ -4318,3 +4318,62 @@ textarea:focus-visible {
     gap: 0.35rem;
   }
 }
+
+
+/* Hero proof-rail verification link — points to live GrowthMentor profile so
+   the 479+ / 4.93 stat is independently checkable. Subtle but clickable. */
+.wss-hero-redesign .proof-rail-verify {
+  margin-top: 0.85rem;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.55);
+}
+.wss-hero-redesign .proof-rail-verify a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 600;
+}
+.wss-hero-redesign .proof-rail-verify a:hover {
+  color: var(--accent, #6433ff);
+  text-decoration-thickness: 2px;
+}
+
+
+/* Credential logo strip — replaces the text credit line in the founder
+   card. Linkable, grayscale, hover restores colour. */
+.wss-hero-redesign .credential-logos {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+.wss-hero-redesign .credential-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 160ms ease, filter 160ms ease;
+  filter: grayscale(100%);
+}
+.wss-hero-redesign .credential-logo:hover,
+.wss-hero-redesign .credential-logo:focus-visible {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+.wss-hero-redesign .credential-logo img {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 720px) {
+  .wss-hero-redesign .credential-logos {
+    gap: 0.75rem;
+  }
+  .wss-hero-redesign .credential-logo img {
+    height: 16px;
+  }
+}

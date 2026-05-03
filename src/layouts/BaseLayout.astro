@@ -107,9 +107,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         const href = link.href || "";
         const isCalendly = href.includes("calendly.com");
         const isScorecard = href.includes("growth-bottleneck-scorecard");
+        const isPricing = href.includes("/pricing") || link.closest("[data-pricing-link]");
+        const isResource = href.includes("/resources") || link.closest("[data-resource-link]");
+        const isOutbound = href.startsWith("http") && !href.includes(window.location.hostname);
+
+        let eventName = "cta_click";
+        if (isCalendly) eventName = "calendly_click";
+        else if (isScorecard) eventName = "scorecard_start";
+        else if (isPricing) eventName = "pricing_click";
+        else if (isResource) eventName = "resource_click";
+        else if (isOutbound) eventName = "outbound_link_click";
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: isCalendly ? "calendly_click" : isScorecard ? "scorecard_start" : "cta_click",
+          event: eventName,
           cta_label: label,
           cta_href: href,
           page_path: window.location.pathname
@@ -123,6 +134,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         window.dataLayer.push({
           event: "form_submit",
           form_id: form.id || form.name || "unknown",
+          form_action: form.action || "unknown",
+          page_path: window.location.pathname
+        });
+      });
+
+      // Track resource downloads (PDF, CSV, etc.)
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        const link = target instanceof Element ? target.closest("a[download]") : null;
+        if (!link) return;
+        const href = link.href || "";
+        const label = link.dataset.cta || link.textContent?.trim() || "resource_download";
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "resource_download",
+          download_url: href,
+          download_label: label,
           page_path: window.location.pathname
         });
       });

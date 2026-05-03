@@ -49,7 +49,7 @@ export const siteConfig = {
   siteLastModified: "2026-05-03",
   ogImage: "/og/default.svg",
   /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
-  gtmId: "GTM-TV6C7GS"
+  gtmId: "GTM-5S892HK"
 } as const;
 
 /** Named methodology — use on home, GTM, and press for consistent entity language. */

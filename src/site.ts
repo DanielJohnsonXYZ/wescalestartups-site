@@ -428,7 +428,7 @@ export const credentialLogos = [
 ] as const;
 
 export const headlineMetrics = [
-  { value: "£6.8M+", label: "Paid acquisition spend managed" },
+  { value: "£6M+", label: "Paid acquisition spend managed" },
   { value: "500+", label: "Sign-ups from a single paid campaign" },
   { value: "479+", label: "Founder sessions · ★ 4.93" },
   { value: "2", label: "Operator-side startup exits" },
@@ -793,7 +793,7 @@ export const founderStory = {
     "Mentored hundreds of founders through Google for Startups, Techstars, GrowthMentor",
     "MentorCruise Top Mentor — 5.0/5 across 30+ reviews",
     "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad",
-    "£6.8M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech"
+    "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech"
   ]
 } as const;
 

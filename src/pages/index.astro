@@ -31,7 +31,7 @@ const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0,
 
 const heroProofStats = headlineMetrics.map((metric) => {
   const value = metric.value;
-  if (value === "£6.8M+") return { ...metric, target: "6.8", prefix: "£", suffix: "M+", decimals: "1" };
+  if (value === "£6M+") return { ...metric, target: "6", prefix: "£", suffix: "M+", decimals: "0" };
   if (value === "479+") return { ...metric, target: "479", prefix: "", suffix: "+", decimals: "0" };
   if (value === "500+") return { ...metric, target: "500", prefix: "", suffix: "+", decimals: "0" };
   if (value === "4.93/5") return { ...metric, target: "4.93", prefix: "", suffix: "/5", decimals: "2" };

@@ -1,4 +1,6 @@
 # Cloudflare Pages (and compatible static hosts). Static export serves /experimentation.html
+# Redirect chain fix: send http://www and https://www directly to https://wescalestartups.com (single hop)
+http://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 
 /test /experimentation 301

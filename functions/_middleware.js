@@ -9,7 +9,7 @@ const HOMEPAGE_AGENT_LINK =
 /** Cloudflare Pages: use the ASSETS binding. Plain `fetch(same-origin)` in middleware is not reliable. */
 function fetchStaticAsset(context, pathname) {
   const assetUrl = new URL(pathname, context.request.url);
-  const req = new Request(assetUrl.toString(), { method: "GET" });
+  const req = new Request(assetUrl.toString(), { method: context.request.method });
   if (context.env && context.env.ASSETS) {
     return context.env.ASSETS.fetch(req);
   }
@@ -19,6 +19,17 @@ function fetchStaticAsset(context, pathname) {
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
+
+  // Serve static assets (images, og, css, js, _astro) directly via ASSETS.
+  if (
+    /^\/images\//.test(path) ||
+    /^\/og\//.test(path) ||
+    /^\/_astro\//.test(path) ||
+    path.endsWith(".css") ||
+    path.endsWith(".js")
+  ) {
+    return fetchStaticAsset(context, path);
+  }
 
   // Junk / legacy e-commerce paths from old index — 410 so crawlers drop them (not soft-404 to home).
   if (
@@ -40,8 +51,7 @@ export async function onRequest(context) {
       const mdRes = await fetchStaticAsset(context, "/markdown/home.md");
       if (mdRes.ok) {
         const method = context.request.method;
-        const isHead = method === "HEAD";
-        const body = isHead ? null : await mdRes.text();
+        const body = method === "HEAD" ? null : await mdRes.text();
         return new Response(body, {
           headers: {
             "Content-Type": "text/markdown; charset=utf-8",

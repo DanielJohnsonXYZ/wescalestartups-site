@@ -373,7 +373,7 @@ export const termsPageRelatedLinks: readonly { href: string; label: string }[] =
   { href: "/book", label: siteConfig.bookingLabel }
 ];
 
-const proofClients = [
+export const proofClients = [
   { label: "Ned", caseSlug: "ned", context: "Fintech client · Fractional CMO engagement", proof: "500+ sign-ups from paid search" },
   { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine client · Growth Diagnosis + Sprint", proof: "Marketing function built from zero" },
   { label: "eQuoo", caseSlug: "equoo", context: "Healthtech client · Fractional CMO engagement", proof: "Clearer acquisition narrative" },

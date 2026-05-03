@@ -1,0 +1,12 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<aside class="tldr-callout" aria-label="TL;DR — summary for readers and search">
+  <p class="tldr-callout-label">In short</p>
+  <p class="tldr-callout-body">{text}</p>
+</aside>

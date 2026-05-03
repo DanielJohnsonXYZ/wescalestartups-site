@@ -1,5 +1,6 @@
 ---
 import ProofLogos from "../../components/ProofLogos.astro";
+import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { aboutRelatedReading, siteConfig } from "../../site";
@@ -42,6 +43,9 @@ const aboutSchema = [
     <div class="shell">
       <p class="eyebrow">About</p>
       <h1>Founder-led growth consultancy for teams between traction and scale.</h1>
+      <TldrCallout
+        text="WSS is the operator bench for post-PMF B2B SaaS and AI startups: we diagnose the real constraint, wire acquisition and reporting into one system, and leave the team with a weekly rhythm they can run without founder heroics — not slides, not undifferentiated agency hours."
+      />
       <p>
         We Scale Startups works with post-PMF teams that already have signal but need clearer positioning, sharper acquisition,
         and a repeatable operating rhythm — without committing to a £150k full-time CMO hire.

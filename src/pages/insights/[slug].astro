@@ -5,6 +5,7 @@ import { buildBreadcrumbSchema, buildInsightArticleSchema } from "../../lib/sche
 import { formatDate } from "../../lib/utils";
 import { siteConfig } from "../../site";
 import EmailSignup from "../../components/EmailSignup.astro";
+import TldrCallout from "../../components/TldrCallout.astro";
 import { mauticNewsletter } from "../../site";
 
 export async function getStaticPaths() {
@@ -23,6 +24,14 @@ const updatedAt = insight.data.updatedAt ?? insight.data.publishedAt;
 const publishedIso = insight.data.publishedAt.toISOString();
 const modifiedIso = (insight.data.updatedAt ?? insight.data.publishedAt).toISOString();
 const { submitUrl: mauticSubmitUrl, formId: mauticFormId } = mauticNewsletter;
+
+const insightPillarIds = new Set([
+  "what-is-a-fractional-cmo",
+  "b2b-saas-gtm-strategy",
+  "ai-native-gtm",
+  "startup-growth-bottlenecks"
+]);
+const showLeadTldr = insightPillarIds.has(insight.id);
 
 const schemas = [
   buildInsightArticleSchema({
@@ -80,6 +89,7 @@ const schemas = [
         </div>
       </aside>
       <article class="content-block article-body">
+        {showLeadTldr && <TldrCallout text={insight.data.tldr} />}
         <Content />
       </article>
     </div>

@@ -64,7 +64,7 @@ export const methodologyBrand = {
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
   "/": "2026-05-05",
-  "/about": "2026-05-04",
+  "/about": "2026-05-05",
   "/ai-growth-systems": "2026-05-01",
   "/book": "2026-05-04",
   "/build": "2026-05-03",
@@ -108,7 +108,11 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/when-growth-plateaus": "2026-05-03",
   "/services/90-day-growth-sprint": "2026-05-04",
   "/services/acquisition-system-build": "2026-05-04",
-  "/services/fractional-cmo": "2026-05-04",
+  "/services/fractional-cmo": "2026-05-05",
+  "/insights/what-is-a-fractional-cmo": "2026-05-05",
+  "/insights/b2b-saas-gtm-strategy": "2026-05-05",
+  "/insights/ai-native-gtm": "2026-05-05",
+  "/insights/startup-growth-bottlenecks": "2026-05-05",
   "/services/growth-diagnosis": "2026-05-04",
   "/industries/ai-genai": "2026-05-03",
   "/industries/b2b-growth": "2026-05-03",

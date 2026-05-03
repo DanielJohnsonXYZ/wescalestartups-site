@@ -11,6 +11,8 @@ import WhenToHireUs from "../components/WhenToHireUs.astro";
 import GrowthScopeBar from "../components/GrowthScopeBar.astro";
 import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
 import HomeScorecardHook from "../components/HomeScorecardHook.astro";
+import TldrCallout from "../components/TldrCallout.astro";
+import WhoThisIsForIcp from "../components/WhoThisIsForIcp.astro";
 import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
 import CtaLadder from "../components/CtaLadder.astro";
 import EmailSignup from "../components/EmailSignup.astro";
@@ -86,6 +88,10 @@ function metricLead(result: string) {
             <span class="beat">Build the system.</span>
             <span class="beat"><span class="grad">Step out of the loop.</span></span>
           </h1>
+
+          <TldrCallout
+            text="We Scale Startups helps post-PMF B2B SaaS and AI founders name the growth bottleneck, build a coherent acquisition system, and transfer the weekly rhythm — so pipeline compounds without every decision routing through the founder. Fractional CMO judgement plus delivery: diagnosis, sprints, system builds, and embedded leadership when the fit is right."
+          />
 
           <p class="hero-plain">
             We are a <strong>fractional CMO</strong> for post-PMF B2B SaaS and AI startups. We diagnose the constraint, build the acquisition system around it, and transfer the weekly rhythm — so revenue stops depending on founder heroics.
@@ -263,6 +269,8 @@ function metricLead(result: string) {
   <ProofLogos />
 
   <CtaLadder />
+
+  <WhoThisIsForIcp />
 
   <WhenToHireUs />
 

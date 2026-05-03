@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildServiceSchema } from "../../lib/schema";
 import { serviceRelatedInsights, siteConfig } from "../../site";
@@ -283,6 +284,11 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
       {details.premium && <span class="service-premium-badge">Premium offer</span>}
       <p class="eyebrow">{service.data.shortTitle}</p>
       <h1>{service.data.title}</h1>
+      {
+        service.id === "fractional-cmo" && (
+          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls — until the system runs without a £150k full-time hire." />
+        )
+      }
       <p class="service-headline">{details.headline ?? service.data.promise}</p>
       <p class="service-description">{service.data.description}</p>
       <div class="hero-actions">

@@ -379,7 +379,7 @@ export const proofClients = [
   { label: "eQuoo", caseSlug: "equoo", context: "Healthtech client · Fractional CMO engagement", proof: "Clearer acquisition narrative" },
   { label: "LessonsUp", caseSlug: "lessonsup", context: "EdTech client · Acquisition System Build", proof: "Sharper message-market fit" },
   { label: "Nevly", caseSlug: "nevly", context: "Financial wellness client · Sprint + CMO support", proof: "Trust-led GTM foundations" },
-  { label: "Madia", caseSlug: "madia", context: "Marketing agency partner · referral relationship", proof: "Ongoing collaboration on client growth systems" }
+  { label: "Madia", caseSlug: "madia", context: "Marketing agency partner · Partnership discussions", proof: "Ongoing collaboration on client growth systems" }
 ] as const;
 
 /** Pricing / services — short reassurance lines (Growth Hub: trust near price). */

@@ -3,3 +3,20 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 
 /test /experimentation 301
 /test/ /experimentation 301
+
+# Legacy /services paths (old naming)
+/services/growth-diagnosis /services/growth-diagnosis 301
+/services/90-day-growth-sprint /services/90-day-growth-sprint 301
+/services/acquisition-system-build /services/acquisition-system-build 301
+/services/fractional-cmo /services/fractional-cmo 301
+
+# Legacy /case-studies paths
+/case-study /case-studies 301
+/case-studies/diadia /case-studies/diadia-health 301
+/case-studies/equoo /case-studies/equoo 301
+/case-studies/lessonsup /case-studies/lessonsup 301
+/case-studies/ned /case-studies/ned 301
+/case-studies/nevly /case-studies/nevly 301
+
+# WSS Scale Score (new page)
+/wss-scale-score /wss-scale-score 200

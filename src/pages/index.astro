@@ -32,6 +32,8 @@ const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0,
 const heroProofStats = headlineMetrics.map((metric) => {
   const value = metric.value;
   if (value === "£6.8M+") return { ...metric, target: "6.8", prefix: "£", suffix: "M+", decimals: "1" };
+  if (value === "479+") return { ...metric, target: "479", prefix: "", suffix: "+", decimals: "0" };
+  if (value === "500+") return { ...metric, target: "500", prefix: "", suffix: "+", decimals: "0" };
   if (value === "4.93/5") return { ...metric, target: "4.93", prefix: "", suffix: "/5", decimals: "2" };
   return {
     ...metric,
@@ -89,7 +91,7 @@ function metricLead(result: string) {
           </h1>
 
           <p class="hero-plain">
-            We diagnose the constraint, build the acquisition system around it, and transfer the weekly rhythm — so revenue stops depending on founder heroics.
+            We are a <strong>fractional CMO</strong> for post-PMF B2B SaaS and AI startups. We diagnose the constraint, build the acquisition system around it, and transfer the weekly rhythm — so revenue stops depending on founder heroics.
             <strong>If every growth decision still runs through you, you do not have a system yet — you have a bottleneck.</strong>
             {" "}This work is organised as the <strong>{methodologyBrand.shortName}</strong>: {methodologyBrand.tagline}
           </p>
@@ -123,71 +125,73 @@ function metricLead(result: string) {
           </div>
         </div>
 
-        <aside class="diag" id="diag" aria-label="Sample growth diagnosis">
-          <svg class="spark" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#7b3eff" />
-                <stop offset="55%" stop-color="#a445ff" />
-                <stop offset="100%" stop-color="#c44dff" />
-              </linearGradient>
-            </defs>
-            <text class="label" x="2" y="22">Pipeline (now)</text>
-            <text class="label r" x="398" y="22">Pipeline (system)</text>
-            <path class="wave" d="M0,12 L18,5 L36,17 L54,4 L72,16 L90,3 L108,18 L126,7 L144,19 L162,4 L180,17 L198,6 L216,18 L234,3 L252,16 L270,8 L288,19 L306,5 L324,17 L342,4 L360,15 L378,9 L400,12" />
-            <path class="line" d="M0,18 C80,17 140,14 200,11 C260,8 320,6 400,3" />
-          </svg>
+  <!-- Interactive diagnosis element — reduced visual prominence -->
+      <aside class="diag diag--compact" id="diag" aria-label="Sample growth diagnosis">
+        <svg class="spark spark--small" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Reduced size SVG -->
+          <defs>
+            <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#7b3eff" />
+              <stop offset="55%" stop-color="#a445ff" />
+              <stop offset="100%" stop-color="#c44dff" />
+            </linearGradient>
+          </defs>
+          <text class="label" x="2" y="22">Pipeline (now)</text>
+          <text class="label r" x="398" y="22">Pipeline (system)</text>
+          <path class="wave" d="M0,12 L18,5 L36,17 L54,4 L72,16 L90,3 L108,18 L126,7 L144,19 L162,4 L180,17 L198,6 L216,18 L234,3 L252,16 L270,8 L288,19 L306,5 L324,17 L342,4 L360,15 L378,9 L400,12" />
+          <path class="line" d="M0,18 C80,17 140,14 200,11 C260,8 320,6 400,3" />
+        </svg>
 
-          <header class="diag-head">
-            <div>
-              <p class="label"><span class="live" aria-hidden="true"></span> Constraint map</p>
-              <h2 class="title">Growth Diagnosis</h2>
-            </div>
-            <span class="week">WK 01 / 12</span>
-          </header>
-
-          <div class="diag-prompt">
-            <span class="tap"><span class="dot" aria-hidden="true"></span> Tap any constraint to diagnose yours</span>
-            <button class="reset" type="button" data-reset>Reset</button>
+        <header class="diag-head diag-head--compact">
+          <div>
+            <p class="label"><span class="live" aria-hidden="true"></span> Constraint map</p>
+            <h2 class="title title--small">Growth Diagnosis</h2>
           </div>
+          <span class="week">WK 01 / 12</span>
+        </header>
 
-          <div class="diag-rows">
-            <button class="row" type="button" data-key="positioning" aria-pressed="false">
-              <span class="name">Positioning <span class="sub">Message-market fit</span></span>
-              <span class="bar" style="--pct:32%;" aria-hidden="true"></span>
-              <span class="verdict">Healthy</span>
-            </button>
-            <button class="row is-bottleneck" type="button" data-key="acquisition" aria-pressed="true">
-              <span class="name">Acquisition <span class="sub">Channels &amp; pipeline</span></span>
-              <span class="bar" style="--pct:88%;" aria-hidden="true"></span>
-              <span class="verdict">Bottleneck</span>
-            </button>
-            <button class="row" type="button" data-key="conversion" aria-pressed="false">
-              <span class="name">Conversion <span class="sub">Site &amp; offer</span></span>
-              <span class="bar" style="--pct:54%;" aria-hidden="true"></span>
-              <span class="verdict">Watch</span>
-            </button>
-            <button class="row" type="button" data-key="reporting" aria-pressed="false">
-              <span class="name">Reporting <span class="sub">Decision view</span></span>
-              <span class="bar" style="--pct:62%;" aria-hidden="true"></span>
-              <span class="verdict">Watch</span>
-            </button>
-            <button class="row is-low" type="button" data-key="team" aria-pressed="false">
-              <span class="name">Team ownership <span class="sub">Weekly cadence</span></span>
-              <span class="bar" style="--pct:38%;" aria-hidden="true"></span>
-              <span class="verdict">Healthy</span>
-            </button>
-          </div>
+        <div class="diag-prompt diag-prompt--compact">
+          <span class="tap"><span class="dot" aria-hidden="true"></span> Tap any constraint to diagnose yours</span>
+          <button class="reset reset--small" type="button" data-reset>Reset</button>
+        </div>
 
-          <div class="diag-foot">
-            <span class="ico" aria-hidden="true">!</span>
-            <p class="copy-wrap" id="diagCopy">
-              <span class="lbl">Diagnosed bottleneck</span>
-              <strong>Acquisition channels operating in isolation.</strong>
-              Paid, content and outbound are not reinforcing one another, so pipeline lands in waves.
-            </p>
-          </div>
-        </aside>
+        <div class="diag-rows diag-rows--compact">
+          <button class="row" type="button" data-key="positioning" aria-pressed="false">
+            <span class="name">Positioning <span class="sub">Message-market fit</span></span>
+            <span class="bar" style="--pct:32%;" aria-hidden="true"></span>
+            <span class="verdict">Healthy</span>
+          </button>
+          <button class="row is-bottleneck" type="button" data-key="acquisition" aria-pressed="true">
+            <span class="name">Acquisition <span class="sub">Channels &amp; pipeline</span></span>
+            <span class="bar" style="--pct:88%;" aria-hidden="true"></span>
+            <span class="verdict">Bottleneck</span>
+          </button>
+          <button class="row" type="button" data-key="conversion" aria-pressed="false">
+            <span class="name">Conversion <span class="sub">Site &amp; offer</span></span>
+            <span class="bar" style="--pct:54%;" aria-hidden="true"></span>
+            <span class="verdict">Watch</span>
+          </button>
+          <button class="row" type="button" data-key="reporting" aria-pressed="false">
+            <span class="name">Reporting <span class="sub">Decision view</span></span>
+            <span class="bar" style="--pct:62%;" aria-hidden="true"></span>
+            <span class="verdict">Watch</span>
+          </button>
+          <button class="row is-low" type="button" data-key="team" aria-pressed="false">
+            <span class="name">Team ownership <span class="sub">Weekly cadence</span></span>
+            <span class="bar" style="--pct:38%;" aria-hidden="true"></span>
+            <span class="verdict">Healthy</span>
+          </button>
+        </div>
+
+        <div class="diag-foot diag-foot--compact">
+          <span class="ico" aria-hidden="true">!</span>
+          <p class="copy-wrap" id="diagCopy">
+            <span class="lbl">Diagnosed bottleneck</span>
+            <strong>Acquisition channels operating in isolation.</strong>
+            Paid, content and outbound are not reinforcing one another, so pipeline lands in waves.
+          </p>
+        </div>
+      </aside>
       </div>
 
       <!-- Proof rail -->
@@ -611,5 +615,33 @@ function metricLead(result: string) {
   .creative-system-foot {
     margin-top: 1.5rem;
     text-align: center;
+  }
+
+  /* Compact diagnosis element — reduced visual prominence */
+  .diag--compact {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+  }
+  .diag-head--compact,
+  .diag-prompt--compact,
+  .diag-rows--compact,
+  .diag-foot--compact {
+    margin-top: 0.75rem;
+  }
+  .title--small {
+    font-size: 1.1rem;
+    margin: 0.25rem 0 0.5rem;
+  }
+  .spark--small {
+    height: 18px;
+    width: 100%;
+  }
+  .reset--small {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.5rem;
   }
 </style>

@@ -146,7 +146,7 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 
 ## Important pages
 
-- Home: ${siteConfig.siteUrl}/
+- Home: ${siteConfig.siteUrl}
 - Start here: ${siteConfig.siteUrl}/start-here
 - Services: ${siteConfig.siteUrl}/services
 - Pricing: ${siteConfig.siteUrl}/pricing

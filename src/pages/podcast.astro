@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import EmailSignup from "../components/EmailSignup.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import { absoluteUrl } from "../lib/utils";
 import { siteConfig } from "../site";
 
 const podcastFaqs = [
@@ -32,12 +33,12 @@ const podcastSchema = {
   "@type": "PodcastSeries",
   "name": "How Startups Win With AI",
   "description": "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies.",
-  "url": "https://wescalestartups.com/podcast",
+  "url": absoluteUrl("/podcast"),
   "author": {
     "@type": "Organization",
     "@id": `${siteConfig.siteUrl}/#organization`
   },
-  "webFeed": "https://wescalestartups.com/podcast"
+  "webFeed": absoluteUrl("/podcast")
 };
 ---
 

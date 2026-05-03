@@ -78,6 +78,8 @@ export const GET: APIRoute = async () => {
     "/build",
     "/transfer",
     "/experimentation",
+    "/growth-course",
+    "/wss-scale-score",
     "/podcast",
     "/privacy",
     "/terms",

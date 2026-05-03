@@ -20,6 +20,8 @@ const { insight } = Astro.props;
 const { Content } = await render(insight);
 const path = `/insights/${insight.id}`;
 const updatedAt = insight.data.updatedAt ?? insight.data.publishedAt;
+const publishedIso = insight.data.publishedAt.toISOString();
+const modifiedIso = (insight.data.updatedAt ?? insight.data.publishedAt).toISOString();
 const { submitUrl: mauticSubmitUrl, formId: mauticFormId } = mauticNewsletter;
 
 const schemas = [
@@ -43,6 +45,10 @@ const schemas = [
   path={path}
   title={`${insight.data.title} | We Scale Startups`}
   description={insight.data.description}
+  ogImageAlt={`${insight.data.title} — We Scale Startups`}
+  ogType="article"
+  articlePublishedTime={publishedIso}
+  articleModifiedTime={modifiedIso}
   schema={schemas}
   lastUpdated={false}
 >

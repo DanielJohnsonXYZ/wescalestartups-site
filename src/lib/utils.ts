@@ -11,6 +11,8 @@ export function absoluteUrl(path = "/") {
   if (path.startsWith("http")) return path;
   const cleanPath = normalizePath(path);
   const normalized = cleanPath.startsWith("/") ? cleanPath : `/${cleanPath}`;
+  /** Match `trailingSlash: "never"`: apex canonical has no trailing slash. */
+  if (normalized === "/") return siteConfig.siteUrl;
   return `${siteConfig.siteUrl}${normalized}`;
 }
 

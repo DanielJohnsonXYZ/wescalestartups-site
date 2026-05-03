@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "We Scale Startups",
   title: "We Scale Startups | Fractional CMO for Post-PMF B2B SaaS",
   description:
-    "Fractional CMO and growth leadership for post-PMF B2B SaaS and AI startups. We diagnose the growth bottleneck, build the acquisition system, and transfer the operating rhythm so revenue stops depending on founder heroics.",
+    "Fractional CMO for post-PMF B2B SaaS and AI startups: diagnose the bottleneck, build the acquisition system, transfer the weekly rhythm so pipeline compounds without founder heroics.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
@@ -74,6 +74,8 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/engagement-models": "2026-05-01",
   "/execution-model": "2026-05-01",
   "/experimentation": "2026-05-03",
+  "/growth-course": "2026-05-04",
+  "/wss-scale-score": "2026-05-04",
   "/first-30-days": "2026-05-03",
   "/fractional-cmo-vs-agency": "2026-05-03",
   "/growth-engine": "2026-05-01",

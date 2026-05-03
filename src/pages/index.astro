@@ -63,12 +63,7 @@ function metricLead(result: string) {
 }
 ---
 
-<BaseLayout
-  path="/"
-  title="We Scale Startups | Fractional CMO for Post-PMF B2B SaaS"
-  description="Fractional CMO and growth leadership for post-PMF B2B SaaS and AI startups. Diagnose the bottleneck, build the acquisition system, transfer the rhythm."
-  schema={buildFaqSchema([...buyerFaqs])}
->
+<BaseLayout path="/" title={siteConfig.title} description={siteConfig.description} schema={buildFaqSchema([...buyerFaqs])}>
   <!-- HERO -->
   <section class="hero wss-hero-redesign" aria-label="We Scale Startups hero">
     <span class="brand-glyph" aria-hidden="true"><span>WSS</span></span>

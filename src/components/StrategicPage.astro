@@ -7,6 +7,8 @@ interface Props {
   path: string;
   eyebrow: string;
   title: string;
+  /** Shorter `<title>` / social title when the H1 is long for SERP previews. */
+  metaTitle?: string;
   description: string;
   lede: string;
   sections: Array<{
@@ -22,7 +24,7 @@ interface Props {
   relatedInsights?: Array<{ href: string; label: string }>;
 }
 
-const { path, eyebrow, title, description, lede, sections, faqs, relatedInsights: relatedInsightsProp } = Astro.props;
+const { path, eyebrow, title, metaTitle, description, lede, sections, faqs, relatedInsights: relatedInsightsProp } = Astro.props;
 const relatedInsights = relatedInsightsProp ?? [...(strategicPageRelatedInsights[path] ?? [])];
 const schema = [
   buildBreadcrumbSchema([
@@ -33,7 +35,7 @@ const schema = [
 ];
 ---
 
-<BaseLayout title={`${title} | We Scale Startups`} description={description} path={path} schema={schema}>
+<BaseLayout title={metaTitle ?? `${title} | We Scale Startups`} description={description} path={path} schema={schema}>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">{eyebrow}</p>

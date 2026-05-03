@@ -44,7 +44,7 @@ export const siteConfig = {
   growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
-  lastUpdated: "3 May 2026",
+  lastUpdated: "4 May 2026",
   /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
   siteLastModified: "2026-05-03",
   ogImage: "/og/default.svg",
@@ -64,9 +64,9 @@ export const methodologyBrand = {
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
   "/": "2026-05-04",
-  "/about": "2026-05-03",
+  "/about": "2026-05-04",
   "/ai-growth-systems": "2026-05-01",
-  "/book": "2026-05-03",
+  "/book": "2026-05-04",
   "/build": "2026-05-03",
   "/case-studies": "2026-05-03",
   "/contact": "2026-05-03",
@@ -89,7 +89,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/llms.txt": "2026-05-03",
   "/llms-full.txt": "2026-05-03",
   "/markdown/home.md": "2026-05-03",
-  "/press": "2026-05-03",
+  "/press": "2026-05-04",
   "/pricing": "2026-05-03",
   "/podcast": "2026-05-03",
   "/privacy": "2026-05-03",
@@ -97,16 +97,16 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/quiz": "2026-05-03",
   "/reports": "2026-05-01",
   "/resources": "2026-05-03",
-  "/services": "2026-05-03",
+  "/services": "2026-05-04",
   "/start-here": "2026-05-03",
   "/terms": "2026-05-03",
   "/testimonials": "2026-05-03",
   "/transfer": "2026-05-03",
   "/when-growth-plateaus": "2026-05-03",
-  "/services/90-day-growth-sprint": "2026-05-03",
-  "/services/acquisition-system-build": "2026-05-03",
-  "/services/fractional-cmo": "2026-05-03",
-  "/services/growth-diagnosis": "2026-05-03",
+  "/services/90-day-growth-sprint": "2026-05-04",
+  "/services/acquisition-system-build": "2026-05-04",
+  "/services/fractional-cmo": "2026-05-04",
+  "/services/growth-diagnosis": "2026-05-04",
   "/industries/ai-genai": "2026-05-03",
   "/industries/b2b-growth": "2026-05-03",
   "/industries/b2b-saas": "2026-05-03",
@@ -128,7 +128,8 @@ export const navigation = [
   { href: "/quiz", label: "Quiz" },
   { href: "/insights", label: "Insights" },
   { href: "/growth-operating-system", label: "Growth OS" },
-  { href: "/founder-led-growth", label: "Founder-led" }
+  { href: "/founder-led-growth", label: "Founder-led" },
+  { href: "/contact", label: "Contact" }
 ] as const;
 
 /** Strategic pillar pages → related insights (internal links + related reading section). */
@@ -261,37 +262,43 @@ export const insightsHubRelatedReading: readonly { href: string; label: string }
 ];
 
 /**
- * Strategic groupings for /insights (commercial authority + navigation).
- * IDs are content collection entries under src/content/insights/.
+ * Content clusters for /insights: pillar insight id + spoke ids (src/content/insights/).
+ * Aligns with Growth Hub strategy — four pillars, 6–8 articles per cluster over time.
  */
 export const insightsThemeGroups: readonly {
   title: string;
   description: string;
-  insightIds: readonly string[];
+  pillarId: string;
+  spokeInsightIds: readonly string[];
 }[] = [
   {
-    title: "Diagnosis & bottleneck clarity",
-    description: "Name the constraint before you add spend, channels, or headcount.",
-    insightIds: [
-      "diagnose-growth-bottleneck-before-spend",
-      "what-a-growth-report-should-answer",
+    title: "Fractional CMO",
+    description:
+      "When fractional leadership fits, how it differs from agencies and full-time hires, and what good looks like.",
+    pillarId: "what-is-a-fractional-cmo",
+    spokeInsightIds: ["when-to-hire-fractional-cmo"]
+  },
+  {
+    title: "Startup GTM",
+    description: "ICP, positioning, channel sequencing, and one acquisition rhythm instead of sprawl.",
+    pillarId: "b2b-saas-gtm-strategy",
+    spokeInsightIds: [
+      "acquisition-system-beats-channel-sprawl",
+      "systems-vs-activity-retainers",
       "pipeline-plateau-post-pmf"
     ]
   },
   {
-    title: "Acquisition systems & retainers",
-    description: "Replace channel sprawl and activity retainers with one operating rhythm.",
-    insightIds: ["acquisition-system-beats-channel-sprawl", "systems-vs-activity-retainers"]
+    title: "AI-native marketing",
+    description: "AI in research, content, outbound, and measurement — without losing citable expertise.",
+    pillarId: "ai-native-gtm",
+    spokeInsightIds: ["make-ai-search-visibility-citable"]
   },
   {
-    title: "Fractional CMO & org design",
-    description: "When senior marketing leadership is the right move — and what “good” looks like.",
-    insightIds: ["when-to-hire-fractional-cmo"]
-  },
-  {
-    title: "AI search & LLM visibility",
-    description: "Make expertise easy for buyers and answer engines to cite.",
-    insightIds: ["make-ai-search-visibility-citable"]
+    title: "Growth diagnostics",
+    description: "Name the bottleneck before spend: reporting, velocity, retention, and positioning drift.",
+    pillarId: "startup-growth-bottlenecks",
+    spokeInsightIds: ["diagnose-growth-bottleneck-before-spend", "what-a-growth-report-should-answer"]
   }
 ] as const;
 
@@ -842,8 +849,12 @@ export const pricingTiers = [
     name: "Fractional CMO",
     duration: "3 months minimum",
     priceFrom: "from £8,000 / month",
-    description: "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO.",
-    href: "/services/fractional-cmo"
+    description:
+      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £12,000/month (~2 days/week) when you need deeper operating support.",
+    href: "/services/fractional-cmo",
+    mostPopular: true,
+    popularRationale:
+      "Chosen by most post-PMF SaaS founders — full strategic ownership with execution support."
   }
 ] as const;
 

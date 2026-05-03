@@ -293,6 +293,9 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
           {siteConfig.scorecardLabel} →
         </a>
+        <a class="button button-light" href="/contact" data-cta={`${service.id}-contact`}>
+          Contact →
+        </a>
       </div>
       <div class="service-meta-strip" aria-label="Engagement summary">
         <div><span class="svc-meta-label">Best for</span><span class="svc-meta-value">{service.data.audience}</span></div>
@@ -423,7 +426,10 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
       <article class="service-faq-followup">
         <p class="card-kicker">Still not sure?</p>
         <h3>Use the Growth Bottleneck Scorecard.</h3>
-        <p>5 minutes. See whether the current constraint is positioning, acquisition, conversion, reporting, or team ownership.</p>
+        <p>
+          5 minutes. See whether the current constraint is positioning, acquisition, conversion, reporting, or team ownership. Prefer email first?{" "}
+          <a href="/contact" data-cta={`${service.id}-contact-followup`}>Contact</a>.
+        </p>
         <a class="card-link" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard-followup`}>
           {siteConfig.scorecardLabel} →
         </a>
@@ -453,6 +459,9 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-final-scorecard`}>
           Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href="/contact" data-cta={`${service.id}-final-contact`}>
+          Contact →
         </a>
       </div>
     </div>

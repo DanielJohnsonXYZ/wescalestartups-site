@@ -63,7 +63,7 @@ export const methodologyBrand = {
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
-  "/": "2026-05-03",
+  "/": "2026-05-04",
   "/about": "2026-05-03",
   "/ai-growth-systems": "2026-05-01",
   "/book": "2026-05-03",
@@ -84,7 +84,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/how-we-work": "2026-05-01",
   "/industries": "2026-05-03",
   "/founder-led-growth": "2026-05-03",
-  "/growth-operating-system": "2026-05-03",
+  "/growth-operating-system": "2026-05-04",
   "/insights": "2026-05-03",
   "/llms.txt": "2026-05-03",
   "/llms-full.txt": "2026-05-03",
@@ -407,6 +407,10 @@ export const homeRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/services", label: "Services" },
   { href: "/pricing", label: "Pricing" },
   { href: "/proof", label: "Proof hub" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/diagnose", label: "5-layer diagnostic framework" },
+  { href: "/ai-growth-systems", label: "AI growth systems" },
+  { href: "/industries", label: "Industries" },
   { href: "/insights", label: "Insights" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/experimentation", label: "Experimentation" },

@@ -45,25 +45,8 @@ const boilerplateLong = `${boilerplateMedium} Work is delivered through Daniel J
 const founderBio =
   "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.";
 
-const whatWeDoServices = [
-  {
-    title: "Growth Diagnosis",
-    description:
-      "Identify the bottleneck before founders spend more money on channels, agencies, or hires."
-  },
-  {
-    title: "90-Day Growth Sprint",
-    description: "Build the plan, operating rhythm, positioning, funnel fixes, and first tests."
-  },
-  {
-    title: "Acquisition System Build",
-    description: "Turn scattered marketing activity into a repeatable acquisition system."
-  },
-  {
-    title: "Fractional CMO",
-    description: "Embedded senior GTM leadership without a full-time CMO hire."
-  }
-] as const;
+const whatWeDo =
+  "Growth diagnosis, sprint execution, acquisition systems, and fractional CMO leadership — with dashboards, experiment cadence, and leadership rituals designed to transfer ownership.";
 
 const whoWeHelp =
   "Most often Seed–Series B teams with real traction and uneven acquisition — typically founder-led GTM, inconsistent pipeline, or agencies executing tactics without a single decision view.";
@@ -89,20 +72,38 @@ const brandAssets = [
   path="/press"
   schema={pressSchema}
 >
-  <section class="page-hero">
+  <section class="page-hero" aria-labelledby="press-kit-heading">
     <div class="shell">
       <p class="eyebrow">Company press kit</p>
-      <h1>Company information for We Scale Startups.</h1>
-      <p>Use this page for accurate company descriptions, proof points, and contact details. For podcast, speaking, or expert commentary requests, see Daniel Johnson's media kit.</p>
-      <div class="hero-actions">
-        <!--email_off-->
-        <a class="button button-dark" href={`mailto:${siteConfig.email}`} data-cta="press-email">Email We Scale Startups</a>
-        <!--/email_off-->
-        <a class="button button-light" href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank" data-cta="press-media-kit">
-          Daniel Johnson media kit
-        </a>
-        <a class="button button-light" href="/proof" data-cta="press-proof">Proof hub</a>
-        <a class="button button-light" href="/case-studies" data-cta="press-cases">Case studies</a>
+      <h1 id="press-kit-heading">Official press information for We Scale Startups.</h1>
+      <p class="press-hero-deck">
+        For accurate company descriptions, proof, and media assets. Podcast, speaking, and expert commentary:{" "}
+        <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">{siteConfig.founderName}&rsquo;s media kit</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="press-one-line-heading">
+    <div class="shell">
+      <p class="eyebrow">At a glance</p>
+      <h2 id="press-one-line-heading" class="visually-hidden">One-line description</h2>
+      <p class="press-one-liner">{boilerplateShort}</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="press-boilerplate-heading">
+    <div class="shell">
+      <p class="eyebrow">For publication</p>
+      <h2 id="press-boilerplate-heading">Company boilerplates</h2>
+      <div class="detail-grid" style="margin-top: 1rem;">
+        <article class="content-block">
+          <h3 class="press-subhead">Short</h3>
+          <p>{boilerplateShort}</p>
+          <h3 class="press-subhead">Medium</h3>
+          <p>{boilerplateMedium}</p>
+          <h3 class="press-subhead">Long</h3>
+          <p>{boilerplateLong}</p>
+        </article>
       </div>
     </div>
   </section>
@@ -112,13 +113,7 @@ const brandAssets = [
       <article class="content-block">
         <p class="eyebrow">What we do</p>
         <h2 class="press-at-glance-title">Company-level positioning.</h2>
-        <ul class="press-what-we-do-list">
-          {whatWeDoServices.map((item) => (
-            <li>
-              <strong>{item.title}:</strong> {item.description}
-            </li>
-          ))}
-        </ul>
+        <p>{whatWeDo}</p>
       </article>
       <article class="content-block">
         <p class="eyebrow">Who we help</p>
@@ -128,66 +123,42 @@ const brandAssets = [
     </div>
   </section>
 
+  <section class="section" aria-labelledby="press-proof-heading">
+    <div class="shell">
+      <p class="eyebrow">Credibility</p>
+      <h2 id="press-proof-heading">Proof points</h2>
+      <article class="content-block" style="margin-top: 1rem; max-width: 62ch;">
+        <ul>
+          {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
+        </ul>
+        <p class="press-verify-note">
+          Verify against <a href="/proof">the proof hub</a> and linked case studies before citing metrics.
+        </p>
+      </article>
+    </div>
+  </section>
+
   <ProofLogos />
 
-  <section class="section">
-    <div class="shell detail-grid">
-      <aside class="detail-aside">
-        <p class="eyebrow">Media contact</p>
-        <p>
-          <!--email_off-->
-          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-          <!--/email_off-->
-        </p>
-        <p><a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a></p>
-        <p><a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a></p>
-        <p>{siteConfig.address}</p>
-      </aside>
-      <div class="detail-body">
-        <article class="content-block">
-          <h2>Company boilerplates</h2>
-          <h3 class="press-subhead">Short</h3>
-          <p>{boilerplateShort}</p>
-          <h3 class="press-subhead">Medium</h3>
-          <p>{boilerplateMedium}</p>
-          <h3 class="press-subhead">Long</h3>
-          <p>{boilerplateLong}</p>
-        </article>
-        <article class="content-block">
-          <h2>Founder bio</h2>
-          <p>{founderBio}</p>
-          <p>For podcast, speaking, or expert commentary requests, see <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson's media kit</a>.</p>
-        </article>
-        <article class="content-block">
-          <h2>Proof points</h2>
-          <ul>
-            {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
-          </ul>
-          <p class="press-verify-note">
-            Verify against <a href="/proof">the proof hub</a> and linked case studies before citing metrics.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
+  <section class="section section-alt" aria-labelledby="press-founder-heading">
     <div class="shell">
-      <p class="eyebrow">Angles</p>
-      <h2>Story hooks that match how we work.</h2>
-      <ul class="press-angles-list">
-        {pressAngles.map((angle) => (
-          <li>{angle}</li>
-        ))}
-      </ul>
+      <p class="eyebrow">Leadership</p>
+      <h2 id="press-founder-heading">Founder bio</h2>
+      <article class="content-block" style="margin-top: 1rem; max-width: 62ch;">
+        <p>{founderBio}</p>
+        <p>
+          For podcast, speaking, or expert commentary requests, see{" "}
+          <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson&apos;s media kit</a>.
+        </p>
+      </article>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" aria-labelledby="press-brand-heading">
     <div class="shell">
       <p class="eyebrow">Brand assets</p>
-      <h2>Logos and default social preview.</h2>
-      <p class="lede" style="max-width: 62ch;">
+      <h2 id="press-brand-heading">Logos and default social preview.</h2>
+      <p class="lede" style="max-width: 62ch; margin-top: 1rem;">
         Use these URLs when you need raster or SVG marks. For founder photography and speaker topics, use Daniel&apos;s{" "}
         <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">personal media kit</a>.
       </p>
@@ -201,7 +172,48 @@ const brandAssets = [
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt" aria-labelledby="press-angles-heading">
+    <div class="shell">
+      <p class="eyebrow">Press angles</p>
+      <h2 id="press-angles-heading">Story hooks that match how we work.</h2>
+      <ul class="press-angles-list">
+        {pressAngles.map((angle) => (
+          <li>{angle}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="press-contact-heading">
+    <div class="shell">
+      <p class="eyebrow">Media contact</p>
+      <h2 id="press-contact-heading">Company press and fact-checking</h2>
+      <div class="press-contact-body">
+        <div class="hero-actions">
+          <!--email_off-->
+          <a class="button button-dark" href={`mailto:${siteConfig.email}`} data-cta="press-email">Email We Scale Startups</a>
+          <!--/email_off-->
+        </div>
+        <p>
+          <!--email_off-->
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <!--/email_off-->
+        </p>
+        <p><a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a></p>
+        <p><a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a></p>
+        <p><a href="/proof">Proof hub</a> · <a href="/case-studies">Case studies</a></p>
+        <p>{siteConfig.address}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt press-last-updated-section" aria-label="Last updated">
+    <div class="shell">
+      <p class="press-last-updated">Last updated: {siteConfig.lastUpdated}</p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="shell">
       <p class="eyebrow">Related reading</p>
       <h2>Verify claims on the main site.</h2>
@@ -217,7 +229,7 @@ const brandAssets = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">FAQ</p>
       <h2>Press and fact-checking.</h2>
@@ -232,7 +244,7 @@ const brandAssets = [
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell">
       <p class="eyebrow">Fact-checking</p>
       <h2>Verify outcomes before you cite them.</h2>
@@ -256,6 +268,32 @@ const brandAssets = [
 </BaseLayout>
 
 <style>
+  .press-hero-deck {
+    max-width: 62ch;
+    margin-top: 0.85rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .press-one-liner {
+    font-size: clamp(1.15rem, 2.4vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0.5rem 0 0;
+    max-width: 52ch;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
   .press-at-glance-title {
     font-size: clamp(1.25rem, 2.5vw, 1.45rem);
     font-weight: 700;
@@ -279,18 +317,6 @@ const brandAssets = [
     color: var(--muted);
     margin-top: 0.85rem;
   }
-  .press-what-we-do-list {
-    margin: 0.35rem 0 0;
-    padding-left: 1.15rem;
-    max-width: 62ch;
-    display: grid;
-    gap: 0.65rem;
-    color: var(--ink);
-    line-height: 1.55;
-  }
-  .press-what-we-do-list strong {
-    font-weight: 700;
-  }
   .press-angles-list {
     margin: 1rem 0 0;
     padding-left: 1.15rem;
@@ -312,5 +338,26 @@ const brandAssets = [
     color: var(--ink);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+  .press-contact-body {
+    margin-top: 1rem;
+    max-width: 62ch;
+    display: grid;
+    gap: 0.65rem;
+    line-height: 1.55;
+  }
+  .press-contact-body a:not(.button) {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .press-last-updated-section {
+    padding-block: 1.5rem;
+  }
+  .press-last-updated {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
   }
 </style>

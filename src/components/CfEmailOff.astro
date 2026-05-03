@@ -1,0 +1,15 @@
+---
+/**
+ * Cloudflare Email Address Obfuscation rewrites mailto:/visible emails into
+ * /cdn-cgi/l/email-protection links (bad for crawlers). Wrapping content with
+ * these comments disables obfuscation for this subtree only.
+ * @see https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/
+ */
+---
+<!--email_off--><span class="cf-email-off"><slot /></span><!--/email_off-->
+
+<style>
+  .cf-email-off {
+    display: contents;
+  }
+</style>

@@ -1,4 +1,5 @@
 ---
+import CfEmailOff from "../../components/CfEmailOff.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
@@ -135,9 +136,11 @@ const guides = [
                 Canonical link to this outline →
               </a>
             </p>
-            <a class="button button-light" href={guideRequestMailto(guide.title, guide.id)} data-cta={`resources-request-${guide.id}`}>
-              Request the guide
-            </a>
+            <CfEmailOff>
+              <a class="button button-light" href={guideRequestMailto(guide.title, guide.id)} data-cta={`resources-request-${guide.id}`}>
+                Request the guide
+              </a>
+            </CfEmailOff>
           </article>
         ))}
       </div>

@@ -9,7 +9,7 @@ export function buildPersonSchema() {
     name: siteConfig.founderName,
     jobTitle: "Founder and Fractional CMO",
     url: "https://danieljohnson.xyz",
-    email: `mailto:${siteConfig.email}`,
+    email: siteConfig.email,
     worksFor: {
       "@id": `${siteConfig.siteUrl}/#organization`
     },

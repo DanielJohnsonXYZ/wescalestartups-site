@@ -29,7 +29,11 @@ const termsSchema = buildBreadcrumbSchema([
       <aside class="detail-aside">
         <p><strong>Contact</strong></p>
         <p>{siteConfig.name}</p>
-        <p><a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+        <p>
+          <!--email_off-->
+          <a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <!--/email_off-->
+        </p>
       </aside>
 
       <div class="detail-body legal-body">

@@ -153,9 +153,15 @@ const podcastSchema = {
         body="If you're a founder or operator with honest lessons on using AI inside a startup, apply to be a guest."
       />
       <div class="hero-actions">
-        <a class="button button-brand" href="mailto:daniel@wescalestartups.com?subject=Podcast%20Guest%20Application" data-cta="podcast-guest">
+        <!--email_off-->
+        <a
+          class="button button-brand"
+          href={`mailto:${siteConfig.email}?subject=Podcast%20Guest%20Application`}
+          data-cta="podcast-guest"
+        >
           Apply to be a guest →
         </a>
+        <!--/email_off-->
         <a class="button button-light" href="/press" data-cta="podcast-press">
           Press kit
         </a>

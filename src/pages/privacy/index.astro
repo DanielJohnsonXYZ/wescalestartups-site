@@ -30,7 +30,11 @@ const privacySchema = buildBreadcrumbSchema([
         <p><strong>Controller</strong></p>
         <p>{siteConfig.name}</p>
         <p>{siteConfig.address}</p>
-        <p><a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+        <p>
+          <!--email_off-->
+          <a class="card-link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <!--/email_off-->
+        </p>
       </aside>
 
       <div class="detail-body legal-body">
@@ -58,7 +62,9 @@ const privacySchema = buildBreadcrumbSchema([
 
         <article class="content-block">
           <h2>Your choices</h2>
-          <p>You can ask to access, correct, or delete personal information we hold about you. Email {siteConfig.email} and we will respond within a reasonable timeframe.</p>
+          <p>
+            You can ask to access, correct, or delete personal information we hold about you. Email <!--email_off-->{siteConfig.email}<!--/email_off--> and we will respond within a reasonable timeframe.
+          </p>
         </article>
       </div>
     </div>

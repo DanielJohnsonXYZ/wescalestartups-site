@@ -21,7 +21,8 @@ const pressFaqs = [
   },
   {
     question: "Who handles press and fact-checking enquiries?",
-    answer: `Email ${siteConfig.email} for company-level questions. Use the media kit link for founder-led podcast, stage, and expert requests.`
+    answer:
+      "Use the Email We Scale Startups button on this page for company-level questions. For founder-led podcast, stage, and expert requests, use Daniel Johnson's media kit link above."
   }
 ];
 
@@ -77,7 +78,9 @@ const brandAssets = [
       <h1>Company information for We Scale Startups.</h1>
       <p>Use this page for accurate company descriptions, proof points, and contact details. For podcast, speaking, or expert commentary requests, see Daniel Johnson's media kit.</p>
       <div class="hero-actions">
+        <!--email_off-->
         <a class="button button-dark" href={`mailto:${siteConfig.email}`} data-cta="press-email">Email We Scale Startups</a>
+        <!--/email_off-->
         <a class="button button-light" href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank" data-cta="press-media-kit">
           Daniel Johnson media kit
         </a>
@@ -108,7 +111,11 @@ const brandAssets = [
     <div class="shell detail-grid">
       <aside class="detail-aside">
         <p class="eyebrow">Media contact</p>
-        <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+        <p>
+          <!--email_off-->
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <!--/email_off-->
+        </p>
         <p><a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a></p>
         <p><a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a></p>
         <p>{siteConfig.address}</p>

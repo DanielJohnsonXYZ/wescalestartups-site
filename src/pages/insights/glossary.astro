@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
+import { siteConfig } from "../../site";
 
 const path = "/insights/glossary";
 
@@ -59,6 +60,7 @@ const schema = buildBreadcrumbSchema([
   title="Glossary — growth, GTM, and fractional leadership | We Scale Startups"
   description="Definitional hub for fractional CMO, growth bottlenecks, GTM, and acquisition systems — with links to deeper notes on wescalestartups.com."
   schema={schema}
+  lastUpdated={siteConfig.lastUpdated}
   breadcrumbItems={[
     { name: "Home", path: "/" },
     { name: "Insights", path: "/insights" },

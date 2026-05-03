@@ -59,6 +59,7 @@ const breadcrumb = buildBreadcrumbSchema([
     { name: "Podcast", path: "/podcast" },
     { name: e.title, path }
   ]}
+  lastUpdated={siteConfig.lastUpdated}
 >
   <article class="shell section">
     <p class="eyebrow">Podcast · Episode {e.episodeNumber > 0 ? e.episodeNumber : "template"}</p>

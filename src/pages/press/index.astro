@@ -33,11 +33,35 @@ const pressSchema = [
   buildFaqSchema(pressFaqs)
 ];
 
-const companyBoilerplate =
-  "We Scale Startups is a founder-led growth studio helping post-PMF startups build repeatable growth systems before hiring a full-time CMO. The work spans growth diagnosis, 90-day sprints, acquisition systems, and fractional CMO support.";
+const boilerplateShort =
+  "We Scale Startups helps post-PMF B2B SaaS and AI startups diagnose growth constraints and install a repeatable acquisition operating rhythm.";
+
+const boilerplateMedium =
+  "We Scale Startups is a founder-led growth consultancy helping post-PMF startups build repeatable growth systems before hiring a full-time CMO. Engagements span growth diagnosis, 90-day sprints, acquisition system builds, and fractional CMO leadership.";
+
+const boilerplateLong = `${boilerplateMedium} Work is delivered through Daniel Johnson and senior operators, with proof-oriented reporting — Problem / Action / Result — and explicit transfer so growth stops depending on founder heroics.`;
 
 const founderBio =
   "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.";
+
+const whatWeDo =
+  "Growth diagnosis, sprint execution, acquisition systems, and fractional CMO leadership — with dashboards, experiment cadence, and leadership rituals designed to transfer ownership.";
+
+const whoWeHelp =
+  "Most often Seed–Series B teams with real traction and uneven acquisition — typically founder-led GTM, inconsistent pipeline, or agencies executing tactics without a single decision view.";
+
+const pressAngles = [
+  "Why post-PMF teams plateau when acquisition channels run in isolation.",
+  "Founder dependency vs weekly operating rhythm — how teams decide what to scale, stop, or fix.",
+  "Fractional CMO vs agency: systems ownership vs channel execution.",
+  "AI-era visibility and credibility — reporting formats AI assistants can cite."
+];
+
+const brandAssets = [
+  { label: "Primary logo (webp)", href: "/images/logos/wss-logo.webp" },
+  { label: "Open Graph default", href: "/og/default.svg" },
+  { label: "Favicon", href: "/favicon.svg" }
+];
 ---
 
 <BaseLayout
@@ -63,12 +87,27 @@ const founderBio =
     </div>
   </section>
 
+  <section class="section section-alt">
+    <div class="shell detail-grid">
+      <article class="content-block">
+        <p class="eyebrow">What we do</p>
+        <h2 class="press-at-glance-title">Company-level positioning.</h2>
+        <p>{whatWeDo}</p>
+      </article>
+      <article class="content-block">
+        <p class="eyebrow">Who we help</p>
+        <h2 class="press-at-glance-title">Typical fit.</h2>
+        <p>{whoWeHelp}</p>
+      </article>
+    </div>
+  </section>
+
   <ProofLogos />
 
   <section class="section">
     <div class="shell detail-grid">
       <aside class="detail-aside">
-        <p class="eyebrow">Contact</p>
+        <p class="eyebrow">Media contact</p>
         <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
         <p><a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a></p>
         <p><a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson media kit</a></p>
@@ -76,8 +115,13 @@ const founderBio =
       </aside>
       <div class="detail-body">
         <article class="content-block">
-          <h2>Company boilerplate</h2>
-          <p>{companyBoilerplate}</p>
+          <h2>Company boilerplates</h2>
+          <h3 class="press-subhead">Short</h3>
+          <p>{boilerplateShort}</p>
+          <h3 class="press-subhead">Medium</h3>
+          <p>{boilerplateMedium}</p>
+          <h3 class="press-subhead">Long</h3>
+          <p>{boilerplateLong}</p>
         </article>
         <article class="content-block">
           <h2>Founder bio</h2>
@@ -89,8 +133,41 @@ const founderBio =
           <ul>
             {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
           </ul>
+          <p class="press-verify-note">
+            Verify against <a href="/proof">the proof hub</a> and linked case studies before citing metrics.
+          </p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Angles</p>
+      <h2>Story hooks that match how we work.</h2>
+      <ul class="press-angles-list">
+        {pressAngles.map((angle) => (
+          <li>{angle}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Brand assets</p>
+      <h2>Logos and default social preview.</h2>
+      <p class="lede" style="max-width: 62ch;">
+        Use these URLs when you need raster or SVG marks. For founder photography and speaker topics, use Daniel&apos;s{" "}
+        <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">personal media kit</a>.
+      </p>
+      <ul class="brand-assets-list">
+        {brandAssets.map((asset) => (
+          <li>
+            <a href={asset.href}>{asset.label}</a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -147,3 +224,51 @@ const founderBio =
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .press-at-glance-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.45rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0.35rem 0 0.75rem;
+    color: var(--ink);
+  }
+  .press-subhead {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin: 1.25rem 0 0.5rem;
+  }
+  .press-subhead:first-of-type {
+    margin-top: 0;
+  }
+  .press-verify-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.85rem;
+  }
+  .press-angles-list {
+    margin: 1rem 0 0;
+    padding-left: 1.15rem;
+    max-width: 62ch;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .brand-assets-list {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .brand-assets-list a {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

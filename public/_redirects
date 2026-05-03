@@ -1,3 +1,5 @@
 # Cloudflare Pages (and compatible static hosts). Static export serves /experimentation.html
+https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
+
 /test /experimentation 301
 /test/ /experimentation 301

@@ -52,6 +52,12 @@ export const siteConfig = {
   gtmId: "GTM-TV6C7GS"
 } as const;
 
+/** Named methodology — use on home, GTM, and press for consistent entity language. */
+export const methodologyBrand = {
+  shortName: "WSS Growth Operating System",
+  tagline: "Diagnose the bottleneck, build the acquisition system, transfer the weekly cadence."
+} as const;
+
 /**
  * Per-URL sitemap lastmod (ISO date), aligned to last git change on the backing page/content.
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
@@ -111,6 +117,7 @@ export const navigation = [
   { href: "/proof", label: "Proof" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/quiz", label: "Quiz" },
   { href: "/insights", label: "Insights" }
 ] as const;
 

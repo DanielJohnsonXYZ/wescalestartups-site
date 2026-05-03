@@ -1,3 +1,11 @@
+/** Matches `public/_headers` for `/` — keep in sync for HTML (via Pages headers) and markdown (via Functions response). */
+const HOMEPAGE_AGENT_LINK =
+  '</llms.txt>; rel="alternate"; type="text/plain", ' +
+  '</llms-full.txt>; rel="alternate"; type="text/markdown", ' +
+  '</markdown/home.md>; rel="alternate"; type="text/markdown", ' +
+  '</.well-known/api-catalog>; rel="api-catalog", ' +
+  '</.well-known/agent-skills/index.json>; rel="alternate"; type="application/json"';
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
@@ -26,6 +34,7 @@ export async function onRequest(context) {
         return new Response(text, {
           headers: {
             "Content-Type": "text/markdown; charset=utf-8",
+            Link: HOMEPAGE_AGENT_LINK,
             Vary: "Accept",
             "Cache-Control": "public, max-age=300, must-revalidate"
           }

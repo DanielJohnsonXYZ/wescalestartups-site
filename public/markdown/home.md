@@ -7,7 +7,10 @@
 - **Booking:** [30-minute growth diagnostic](https://wescalestartups.com/book)
 - **Start here:** [First-time visitor path](https://wescalestartups.com/start-here)
 - **Services:** [What we offer](https://wescalestartups.com/services)
+- **Pricing:** [Engagement & fees](https://wescalestartups.com/pricing)
 - **Proof:** [Case studies & results](https://wescalestartups.com/proof)
+- **Quiz:** [5-minute growth bottleneck scorecard](https://wescalestartups.com/quiz)
+- **Contact:** [Email & details](https://wescalestartups.com/contact)
 - **Company press kit:** [Press & media](https://wescalestartups.com/press)
 
 ## One-line positioning

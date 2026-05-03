@@ -22,11 +22,8 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://app.growthmentor.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.calendly.com https://comms.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://comms.wescalestartups.com; frame-ancestors 'self'
 
 /
-  Link: </llms.txt>; rel="alternate"; type="text/plain"
-  Link: </llms-full.txt>; rel="alternate"; type="text/markdown"
-  Link: </markdown/home.md>; rel="alternate"; type="text/markdown"
-  Link: </.well-known/api-catalog>; rel="api-catalog"
-  Link: </.well-known/agent-skills/index.json>; rel="alternate"; type="application/json"
+  Link: </llms.txt>; rel="alternate"; type="text/plain", </llms-full.txt>; rel="alternate"; type="text/markdown", </markdown/home.md>; rel="alternate"; type="text/markdown", </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="alternate"; type="application/json"
+  Vary: Accept
   Cache-Control: public, max-age=300, must-revalidate
 
 /about

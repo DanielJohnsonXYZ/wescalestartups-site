@@ -3,7 +3,7 @@
   "shortTitle": "Acquisition",
   "description": "A practical acquisition system across paid, SEO, outbound, content, CRO, and reporting, built around how your buyers actually decide.",
   "audience": "Best for teams that have tried channels in isolation and now need an acquisition motion that compounds.",
-  "promise": "You get channels, landing pages, offers, and reporting working together instead of creating more scattered activity.",
+  "promise": "You get channel map, campaign briefs, and reporting dashboard — artefacts the team executes, not a presentation.",
   "outcomes": [
     "Channel strategy tied to ICP, buying trigger, stage, and margins",
     "Landing pages and offers built around buyer intent",
@@ -11,10 +11,10 @@
     "Measurement that connects campaigns to pipeline, not vanity metrics"
   ],
   "process": [
-    "Map the buying journey, current channel evidence, and conversion gaps",
-    "Choose the acquisition motion that fits stage, team, and budget",
-    "Build or improve campaign assets, landing pages, tracking, and reporting",
-    "Review weekly and scale only what shows qualified signal"
+    "Map the buying journey across 20 recent won/lost deals, current channel evidence, and conversion gaps",
+    "Choose the acquisition motion that fits stage, team capacity, and LTV/CAC ratio",
+    "Build 3 campaign briefs with audience, offer, landing page wireframe, and tracking spec",
+    "Launch, measure CPL and MQL rate weekly, scale only channels showing >2x ROAS"
   ],
   "cta": "Build an Acquisition System",
   "order": 3

@@ -3,7 +3,7 @@
   "shortTitle": "Diagnose",
   "description": "A focused audit of positioning, funnel, acquisition, reporting, and team cadence so founders know which growth constraint to fix first.",
   "audience": "Best for post-PMF teams with traction, activity, and unclear priorities.",
-  "promise": "You leave with a plain-English view of the bottleneck, the highest-value fixes, and the growth path that makes sense now.",
+  "promise": "You get constraint map, evidence table, and 90-day priority memo — working artefacts you can act on immediately, not a slide deck.",
   "outcomes": [
     "Priority audit across positioning, ICP, funnel, acquisition, and reporting",
     "Clear diagnosis of whether the issue is market, message, channel, conversion, or operating rhythm",
@@ -11,9 +11,9 @@
     "Recommendation on whether to run a sprint, build an acquisition system, or add fractional leadership"
   ],
   "process": [
-    "Review current site, analytics, CRM notes, campaigns, and sales material",
-    "Map where activity is turning into learning, pipeline, or waste",
-    "Identify the highest-value constraint and the evidence behind it",
+    "Review last 90 days of pipeline data in CRM, GA4 acquisition reports, and 10 recent sales calls",
+    "Map where activity is turning into qualified pipeline, learning, or waste",
+    "Identify the highest-value constraint and write a 1-page evidence summary",
     "Share a practical growth path with owners, metrics, and next steps"
   ],
   "cta": "Book a 30-minute growth diagnostic",

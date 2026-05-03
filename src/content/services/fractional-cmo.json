@@ -3,7 +3,7 @@
   "shortTitle": "Fractional CMO",
   "description": "Senior growth leadership for post-PMF startups that need clearer GTM, better acquisition decisions, and more predictable pipeline.",
   "audience": "Best for Seed to Series B teams that need senior growth leadership alongside founders, teams, agencies, or existing marketing hires.",
-  "promise": "You get a senior operator owning priorities, reporting, team direction, and the decisions behind what to scale, stop, or fix.",
+  "promise": "You get weekly decision log, pipeline dashboard, and hire profile — artefacts that outlast the engagement, not advisory slides.",
   "outcomes": [
     "Growth priorities, reporting, and weekly operating rhythm",
     "Hiring, vendor, and channel decisions",
@@ -11,10 +11,10 @@
     "Team rituals that reduce founder bottleneck"
   ],
   "process": [
-    "Diagnose current constraints and team capacity",
-    "Set quarterly growth priorities and decision rules",
-    "Guide execution across research, campaigns, and conversion",
-    "Document the system so the team gets stronger over time"
+    "Review last 90 days of pipeline data in CRM to name the real growth constraint",
+    "Set quarterly growth priorities with decision rules: what to scale, stop, or fix each week",
+    "Facilitate Monday pipeline review, Wednesday experiment ship, Friday scale/stop decision",
+    "Document weekly cadence, dashboard owner, and handoff checklist by month 3"
   ],
   "cta": "Get senior growth leadership",
   "order": 4

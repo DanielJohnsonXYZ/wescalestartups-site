@@ -354,6 +354,7 @@ export const homeRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/case-studies", label: "Case studies" },
   { href: "/experimentation", label: "Experimentation" },
   { href: "/when-growth-plateaus", label: "When growth plateaus" },
+  { href: "/contact", label: "Contact" },
   { href: "/book", label: siteConfig.bookingLabel }
 ];
 

@@ -1,0 +1,123 @@
+---
+import { siteConfig } from "../site";
+---
+
+<section class="section section--tight cta-ladder-section" aria-labelledby="cta-ladder-title">
+  <div class="shell">
+    <div class="cta-ladder-head">
+      <p class="eyebrow">Recommended path</p>
+      <h2 id="cta-ladder-title">Three steps. No guesswork.</h2>
+      <p class="cta-ladder-lede">
+        Orient → diagnose → talk. Same destinations we link elsewhere — ordered here so the page doubles as a conversion ladder.
+      </p>
+    </div>
+    <ol class="cta-ladder-steps">
+      <li>
+        <span class="cta-ladder-num" aria-hidden="true">1</span>
+        <div>
+          <strong>Orient</strong>
+          <p><a href="/start-here">Start here</a> — pick the door that matches your stage.</p>
+        </div>
+      </li>
+      <li>
+        <span class="cta-ladder-num" aria-hidden="true">2</span>
+        <div>
+          <strong>Name the bottleneck</strong>
+          <p>
+            <a href="/quiz">Growth bottleneck quiz</a>
+            {" "}or the{" "}
+            <a href="/diagnose">five-layer diagnose framework</a>
+            {" "}— before more spend.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="cta-ladder-num" aria-hidden="true">3</span>
+        <div>
+          <strong>Confirm fit</strong>
+          <p>
+            <a href={siteConfig.bookingUrl} data-cta="cta-ladder-book">{siteConfig.bookingLabel}</a>
+            {" "}— leave with the constraint named in plain English.
+          </p>
+        </div>
+      </li>
+    </ol>
+    <p class="cta-ladder-meta">
+      Prefer email? <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      · <a href="/contact">Contact</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .cta-ladder-section {
+    padding-block: 2.25rem;
+    border-top: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+    background: color-mix(in oklab, var(--violet) 5%, var(--bg));
+  }
+  .cta-ladder-head {
+    max-width: 62ch;
+    margin-bottom: 1.25rem;
+  }
+  .cta-ladder-lede {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .cta-ladder-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .cta-ladder-steps li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 1rem 1rem 1.1rem;
+    border-radius: 12px;
+    border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+    background: var(--surface, var(--bg));
+  }
+  .cta-ladder-num {
+    flex: 0 0 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    background: color-mix(in oklab, var(--violet) 18%, transparent);
+    color: var(--ink);
+  }
+  .cta-ladder-steps strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  .cta-ladder-steps p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .cta-ladder-steps a {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .cta-ladder-meta {
+    margin: 1.15rem 0 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .cta-ladder-meta a {
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>

@@ -10,6 +10,7 @@ import DanielStory from "../components/DanielStory.astro";
 import WhenToHireUs from "../components/WhenToHireUs.astro";
 import GrowthScopeBar from "../components/GrowthScopeBar.astro";
 import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
+import CtaLadder from "../components/CtaLadder.astro";
 import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildFaqSchema } from "../lib/schema";
@@ -252,7 +253,11 @@ function metricLead(result: string) {
 
   <ProofLogos />
 
+  <CtaLadder />
+
   <WhenToHireUs />
+
+  <NotForBlock />
 
   <!-- WHY NOW — traction hides weak systems -->
   <section class="section why-now-section">
@@ -325,8 +330,6 @@ function metricLead(result: string) {
   <GrowthScopeBar />
 
   <ServiceComparisonTable />
-
-  <NotForBlock />
 
   <!-- OPERATING RHYTHM -->
   <section class="section dark-rhythm-section">

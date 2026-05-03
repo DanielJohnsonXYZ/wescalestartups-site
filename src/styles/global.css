@@ -2440,6 +2440,41 @@ textarea:focus-visible {
   text-transform: uppercase;
 }
 
+.is-most-popular {
+  position: relative;
+  border: 2px solid var(--teal);
+  padding: 2rem 1.95rem;
+  background:
+    linear-gradient(135deg, rgba(7, 117, 110, 0.08), rgba(102, 87, 255, 0.04)),
+    var(--surface);
+  box-shadow: 0 22px 56px rgba(7, 117, 110, 0.14);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  left: 1.1rem;
+  border-radius: 4px;
+  background: var(--teal);
+  color: #fff;
+  padding: 0.32rem 0.7rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pricing-popular-rationale {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-left: 3px solid var(--teal);
+  background: rgba(7, 117, 110, 0.06);
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
 /* --- P/A/R case study format --- */
 .par-grid {
   display: grid;

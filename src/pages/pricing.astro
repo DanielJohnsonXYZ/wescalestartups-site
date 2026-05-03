@@ -45,14 +45,24 @@ const pricingFaqs = [
     <div class="shell">
       <div class="pricing-grid">
         {pricingTiers.map((tier, idx) => (
-          <article class:list={["pricing-card", { "is-recommended": idx === 0 }]}>
+          <article
+            class:list={[
+              "pricing-card",
+              { "is-recommended": idx === 0 },
+              { "is-most-popular": "mostPopular" in tier && tier.mostPopular }
+            ]}
+          >
             {idx === 0 && <span class="recommended-badge">Most founders start here</span>}
+            {"mostPopular" in tier && tier.mostPopular && <span class="popular-badge">Most popular</span>}
             <h3>{tier.name}</h3>
             <div class="pricing-meta">
               <span class="pricing-price">{tier.priceFrom}</span>
               <span class="pricing-duration">{tier.duration}</span>
             </div>
             <p>{tier.description}</p>
+            {"popularRationale" in tier && tier.popularRationale && (
+              <p class="pricing-popular-rationale">{tier.popularRationale}</p>
+            )}
             <a class="card-link" href={tier.href}>Learn more →</a>
           </article>
         ))}

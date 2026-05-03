@@ -45,8 +45,25 @@ const boilerplateLong = `${boilerplateMedium} Work is delivered through Daniel J
 const founderBio =
   "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.";
 
-const whatWeDo =
-  "Growth diagnosis, sprint execution, acquisition systems, and fractional CMO leadership — with dashboards, experiment cadence, and leadership rituals designed to transfer ownership.";
+const whatWeDoServices = [
+  {
+    title: "Growth Diagnosis",
+    description:
+      "Identify the bottleneck before founders spend more money on channels, agencies, or hires."
+  },
+  {
+    title: "90-Day Growth Sprint",
+    description: "Build the plan, operating rhythm, positioning, funnel fixes, and first tests."
+  },
+  {
+    title: "Acquisition System Build",
+    description: "Turn scattered marketing activity into a repeatable acquisition system."
+  },
+  {
+    title: "Fractional CMO",
+    description: "Embedded senior GTM leadership without a full-time CMO hire."
+  }
+] as const;
 
 const whoWeHelp =
   "Most often Seed–Series B teams with real traction and uneven acquisition — typically founder-led GTM, inconsistent pipeline, or agencies executing tactics without a single decision view.";
@@ -95,7 +112,13 @@ const brandAssets = [
       <article class="content-block">
         <p class="eyebrow">What we do</p>
         <h2 class="press-at-glance-title">Company-level positioning.</h2>
-        <p>{whatWeDo}</p>
+        <ul class="press-what-we-do-list">
+          {whatWeDoServices.map((item) => (
+            <li>
+              <strong>{item.title}:</strong> {item.description}
+            </li>
+          ))}
+        </ul>
       </article>
       <article class="content-block">
         <p class="eyebrow">Who we help</p>
@@ -255,6 +278,18 @@ const brandAssets = [
     font-size: 0.88rem;
     color: var(--muted);
     margin-top: 0.85rem;
+  }
+  .press-what-we-do-list {
+    margin: 0.35rem 0 0;
+    padding-left: 1.15rem;
+    max-width: 62ch;
+    display: grid;
+    gap: 0.65rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .press-what-we-do-list strong {
+    font-weight: 700;
   }
   .press-angles-list {
     margin: 1rem 0 0;

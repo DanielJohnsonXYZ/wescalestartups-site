@@ -1,0 +1,196 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const courseFeatures = [
+  {
+    module: "01",
+    title: "What growth actually is (and isn't)",
+    description: "Stop confusing growth with marketing tactics. Learn the system view."
+  },
+  {
+    module: "02",
+    title: "Finding the bottleneck",
+    description: "Use the 5-layer diagnostic framework to name what's blocking pipeline."
+  },
+  {
+    module: "03",
+    title: "Positioning that converts",
+    description: "Move from generic \"AI-powered\" claims to specific buyer-focused messaging."
+  },
+  {
+    module: "04",
+    title: "Acquisition channel sequencing",
+    description: "Learn which channels to test first, and how to avoid channel sprawl."
+  },
+  {
+    module: "05",
+    title: "Conversion and funnel logic",
+    description: "Fix the pages and flows that leak pipeline before the demo."
+  },
+  {
+    module: "06",
+    title: "Reporting that drives decisions",
+    description: "Build a growth scorecard that tells you what to scale, kill, or fix."
+  },
+  {
+    module: "07",
+    title: "Building the experiment backlog",
+    description: "How to generate, prioritise, and run growth experiments that compound."
+  },
+  {
+    module: "08",
+    title: "Transfer: making it repeatable",
+    description: "Document the system so the team can run without founder heroics."
+  },
+  {
+    module: "09",
+    title: "AI-native GTM workflows",
+    description: "Use generative and agentic AI to accelerate research, testing, and iteration."
+  },
+  {
+    module: "10",
+    title: "When to hire, what to outsource",
+    description: "Decision framework for fractional CMO, agency, or in-house hire."
+  },
+  {
+    module: "11",
+    title: "Case study walkthrough",
+    description: "See the system applied to a real post-PMF SaaS startup."
+  },
+  {
+    module: "12",
+    title: "Your 90-day growth plan",
+    description: "Leave with a prioritised roadmap, ownership, and decision cadence."
+  }
+];
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Growth Course", url: "/growth-course" }
+  ])
+];
+---
+
+<BaseLayout
+  title="What the Heck is Growth? | We Scale Startups"
+  description="A 12-module cohort course on startup growth systems. For founders and operators who want to build repeatable acquisition without founder dependency."
+  path="/growth-course"
+  schema={schemas}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Course</p>
+      <h1>What the Heck is Growth?</h1>
+      <p class="hero-copy">
+        A 12-module cohort course for post-PMF founders and operators who are done guessing at acquisition. 
+        Learn to diagnose the bottleneck, build the system, and transfer the rhythm — the same method WSS uses with clients.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href="#waitlist">Join the Waitlist — £30/mo</a>
+        <a class="button button-light" href="/services">Work with us instead →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <p class="eyebrow">Who this is for</p>
+        <h2>Founders and operators who want to understand growth — properly.</h2>
+        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
+          You've got traction. You know growth matters. But every time you open a book or blog, it's either too tactical (run this ad) or too vague (growth is a mindset). 
+          This course is the practical, system-level view — the same one used with WSS clients.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        <div class="card p-6">
+          <p class="card-label">Post-PMF Founders</p>
+          <p>Seed to Series B, traction but inconsistent acquisition, founder still the best salesperson.</p>
+        </div>
+        <div class="card p-6">
+          <p class="card-label">First Growth Hires</p>
+          <p>Recently promoted or hired to run growth, need a framework before the team drifts.</p>
+        </div>
+        <div class="card p-6">
+          <p class="card-label">Ops People</p>
+          <p>Running marketing, sales, or product — want to understand how the pieces fit into a system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <p class="eyebrow">12 Modules</p>
+        <h2>What you'll learn.</h2>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {courseFeatures.map((item) => (
+          <div class="card p-6">
+            <p class="text-sm font-semibold text-[color:var(--accent)] mb-2">Module {item.module}</p>
+            <h3 class="text-lg font-bold tracking-[-0.04em]">{item.title}</h3>
+            <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="waitlist">
+    <div class="shell">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="eyebrow">Waitlist now open</p>
+        <h2>£30/month for 12 weeks. Launch date TBD.</h2>
+        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
+          Join the waitlist to be first in line when the cohort launches. No charge until the course goes live — just early access and a founding-member discount.
+        </p>
+
+        <div class="mt-8 card p-8 md:p-10">
+          <div class="grid gap-4 max-w-md mx-auto">
+            <div>
+              <label class="text-sm font-semibold" for="course-name">Name</label>
+              <input class="input mt-1" type="text" id="course-name" placeholder="Your name" />
+            </div>
+            <div>
+              <label class="text-sm font-semibold" for="course-email">Email</label>
+              <input class="input mt-1" type="email" id="course-email" placeholder="you@company.com" />
+            </div>
+            <div>
+              <label class="text-sm font-semibold" for="course-stage">Stage</label>
+              <select class="input mt-1" id="course-stage">
+                <option>Select your stage</option>
+                <option>Pre-PMF</option>
+                <option>Post-PMF, Seed</option>
+                <option>Series A</option>
+                <option>Series B+</option>
+              </select>
+            </div>
+            <button class="button button-brand w-full" type="submit">Join the Waitlist</button>
+            <p class="text-xs text-[color:var(--muted)] text-center">No charge until launch. Unsubscribe anytime.</p>
+          </div>
+        </div>
+
+        <p class="mt-6 text-sm text-[color:var(--muted)]">
+          Prefer working directly? <a class="link-arrow" href={siteConfig.bookingUrl}>Book a 30-minute diagnostic →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Not ready for a course?</p>
+        <h2>Book a 30-minute diagnostic instead.</h2>
+        <p>Sometimes the fastest way to learn is a focused conversation about your actual bottleneck.</p>
+      </div>
+      <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
+    </div>
+  </section>
+</BaseLayout>

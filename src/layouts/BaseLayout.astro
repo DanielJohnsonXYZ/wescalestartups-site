@@ -50,6 +50,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
+    <script is:inline set:html={gtmScript} />
+    <!-- End Google Tag Manager -->
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
@@ -92,7 +95,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="ai:contact" content={`${siteConfig.siteUrl}${siteConfig.bookingUrl}`} />
 
     {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
-    <script is:inline set:html={gtmScript} />
     <script is:inline>
       document.addEventListener("click", (event) => {
         const target = event.target;
@@ -127,6 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) — immediately after <body> per GTM install instructions. -->
     <noscript>
       <iframe
         height="0"
@@ -135,6 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         width="0"
       />
     </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SiteHeader currentPath={currentPath} />
     <main id="main-content">

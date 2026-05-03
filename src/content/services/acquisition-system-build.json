@@ -13,8 +13,8 @@
   "process": [
     "Map the buying journey across 20 recent won/lost deals; extract the exact trigger that moved each deal forward and the objection that killed it",
     "Choose the acquisition motion: paid search for high-intent keywords, content for education-stage buyers, outbound for enterprise — based on LTV/CAC and team bandwidth",
-    "Build 3 campaign briefs: (1) headline + offer test plan, (2) landing page wireframe with conversion hook, (3) tracking spec with UTM governance",
-    "Launch week 1, measure CPL and MQL rate weekly; kill channels with <1x ROAS by week 4, scale >2x ROAS with budget reallocation"
+    "Build 3 working campaign briefs: (1) headline + offer test plan, (2) landing page wireframe with conversion hook, (3) tracking spec with UTM governance",
+    "Launch week 1, measure CPL and MQL rate weekly; kill channels with <1x ROAS by week 4, scale >2x ROAS with budget reallocation — all logged in a working campaign doc your team runs"
   ],
   "cta": "Build an Acquisition System",
   "order": 3

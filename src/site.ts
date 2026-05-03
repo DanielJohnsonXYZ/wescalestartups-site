@@ -379,7 +379,7 @@ export const proofClients = [
   { label: "eQuoo", caseSlug: "equoo", context: "Healthtech client · Fractional CMO engagement", proof: "Clearer acquisition narrative" },
   { label: "LessonsUp", caseSlug: "lessonsup", context: "EdTech client · Acquisition System Build", proof: "Sharper message-market fit" },
   { label: "Nevly", caseSlug: "nevly", context: "Financial wellness client · Sprint + CMO support", proof: "Trust-led GTM foundations" },
-  { label: "Madia", caseSlug: "madia", context: "Marketing agency partner · Partnership discussions", proof: "Ongoing collaboration on client growth systems" }
+  { label: "Madiha Shahid", caseSlug: "madiha", context: "Operations & Strategy · WSS team", proof: "Ongoing operational support and strategy execution" }
 ] as const;
 
 /** Pricing / services — short reassurance lines (Growth Hub: trust near price). */
@@ -539,7 +539,8 @@ export const leadMagnets = [
 export const proofStandards = [
   "We separate before, work done, and result so you can see what changed.",
   "We avoid anonymous claims where there is no permissioned proof.",
-  "We connect results to the system built, not a single tactic taken out of context."
+  "We connect results to the system built, not a single tactic taken out of context.",
+  "Deliverables are practical working assets — playbooks, dashboards, and decision logs — not theatre or slides."
 ] as const;
 
 // Who this is NOT for — disqualifies bad-fit leads, increases trust

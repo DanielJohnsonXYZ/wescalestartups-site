@@ -1,0 +1,178 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import EmailSignup from "../../../components/EmailSignup.astro";
+import { absoluteUrl } from "../../../lib/utils";
+import { siteConfig } from "../../../site";
+import { buildBreadcrumbSchema } from "../../../lib/schema";
+
+export const getStaticPaths = (async () => {
+  const episodes = await getCollection("podcastEpisodes");
+  return episodes.map((entry) => ({
+    params: { slug: entry.id },
+    props: { episode: entry }
+  }));
+}) satisfies GetStaticPaths;
+
+const { episode } = Astro.props;
+const e = episode.data;
+const path = `/podcast/episodes/${episode.id}`;
+const embedUrl = e.youtubeId ? `https://www.youtube-nocookie.com/embed/${e.youtubeId}` : null;
+
+const episodeSchema = {
+  "@context": "https://schema.org",
+  "@type": "PodcastEpisode",
+  name: e.title,
+  description: e.summary,
+  datePublished: e.publishedAt.toISOString().slice(0, 10),
+  partOfSeries: {
+    "@type": "PodcastSeries",
+    name: "How Startups Win With AI",
+    url: absoluteUrl("/podcast")
+  },
+  ...(e.youtubeId
+    ? {
+        associatedMedia: {
+          "@type": "VideoObject",
+          name: e.title,
+          embedUrl: `https://www.youtube.com/embed/${e.youtubeId}`
+        }
+      }
+    : {})
+};
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Podcast", path: "/podcast" },
+  { name: e.title, path }
+]);
+---
+
+<BaseLayout
+  path={path}
+  title={`${e.title} | How Startups Win With AI`}
+  description={e.summary.slice(0, 155)}
+  schema={[breadcrumb, episodeSchema]}
+>
+  <article class="shell section">
+    <p class="eyebrow">Podcast · Episode {e.episodeNumber > 0 ? e.episodeNumber : "template"}</p>
+    <h1>{e.title}</h1>
+    <p class="lede">
+      With <strong>{e.guestName}</strong> — {e.guestRole}
+      {e.durationNote && ` · ${e.durationNote}`}
+    </p>
+
+    {
+      embedUrl ? (
+        <div class="episode-video">
+          <iframe
+            title={`${e.title} on YouTube`}
+            src={embedUrl}
+            width="560"
+            height="315"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      ) : (
+        <p class="episode-placeholder">
+          <a href={e.youtubeUrl} target="_blank" rel="noopener">
+            Watch on YouTube →
+          </a>
+          {" "}
+          (embed <code>youtubeId</code> in the episode JSON when the video is live.)
+        </p>
+      )
+    }
+
+    <section class="section-block">
+      <h2>Summary</h2>
+      <p>{e.summary}</p>
+    </section>
+
+    <section class="section-block">
+      <h2>Key takeaways</h2>
+      <ul>
+        {e.keyTakeaways.map((t) => (
+          <li>{t}</li>
+        ))}
+      </ul>
+    </section>
+
+    {
+      e.resources && e.resources.length > 0 && (
+        <section class="section-block">
+          <h2>Resources</h2>
+          <ul>
+            {e.resources.map((r) => (
+              <li>
+                <a href={r.href} target="_blank" rel="noopener">
+                  {r.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class="section-block">
+      <h2>Newsletter</h2>
+      <p>Get the next episode and one practical growth note.</p>
+      <EmailSignup formId={`podcast-episode-${episode.id}`} variant="dark" />
+    </section>
+
+    <p class="episode-back">
+      <a href="/podcast">← All episodes</a>
+      {" · "}
+      <a href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .section {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 720px;
+  }
+  .lede {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .episode-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+  .episode-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .episode-placeholder {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    margin-bottom: 2rem;
+  }
+  .section-block {
+    margin-bottom: 1.75rem;
+  }
+  .section-block h2 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+  .episode-back {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+  }
+</style>

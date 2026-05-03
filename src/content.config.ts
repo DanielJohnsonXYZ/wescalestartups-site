@@ -61,9 +61,29 @@ const insights = defineCollection({
   })
 });
 
+const podcastEpisodes = defineCollection({
+  loader: glob({ base: "./src/content/podcast", pattern: "**/*.json" }),
+  schema: z.object({
+    title: z.string(),
+    episodeNumber: z.number(),
+    publishedAt: z.coerce.date(),
+    guestName: z.string(),
+    guestRole: z.string(),
+    youtubeId: z.string().optional(),
+    youtubeUrl: z.string().url(),
+    summary: z.string(),
+    keyTakeaways: z.array(z.string()),
+    durationNote: z.string().optional(),
+    resources: z
+      .array(z.object({ label: z.string(), href: z.string().url() }))
+      .optional()
+  })
+});
+
 export const collections = {
   services,
   industries,
   cases,
-  insights
+  insights,
+  podcastEpisodes
 };

@@ -1,0 +1,18 @@
+{
+  "title": "Episode template: how we structure every show",
+  "episodeNumber": 0,
+  "publishedAt": "2026-05-05",
+  "guestName": "Guest Name",
+  "guestRole": "Title · Company",
+  "youtubeUrl": "https://www.youtube.com/@wescalestartups",
+  "summary": "Use this page as the repeatable SEO shell for How Startups Win With AI. Replace the YouTube embed, guest bio, takeaways, and resources for each release.",
+  "keyTakeaways": [
+    "Replace with three to five concrete lessons listeners can apply this week.",
+    "Keep quotes short and attributable.",
+    "Link every episode to one WSS service or insight article for internal authority."
+  ],
+  "durationNote": "~35 minutes",
+  "resources": [
+    { "label": "Subscribe on YouTube", "href": "https://www.youtube.com/@wescalestartups" }
+  ]
+}

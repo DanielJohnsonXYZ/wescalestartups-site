@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+
+const path = "/insights/glossary";
+
+const entries = [
+  {
+    term: "Fractional CMO",
+    blurb: "Senior marketing leadership on a part-time basis — scope, cadence, and when it beats full-time or agency.",
+    href: "/insights/what-is-a-fractional-cmo"
+  },
+  {
+    term: "Growth bottleneck",
+    blurb: "The single constraint that limits revenue more than any other layer of the system.",
+    href: "/insights/startup-growth-bottlenecks"
+  },
+  {
+    term: "B2B SaaS GTM",
+    blurb: "How post-PMF teams sequence ICP, channels, and experiments.",
+    href: "/insights/b2b-saas-gtm-strategy"
+  },
+  {
+    term: "AI-native GTM",
+    blurb: "Practical AI in research, messaging, and execution — without replacing judgment.",
+    href: "/insights/ai-native-gtm"
+  },
+  {
+    term: "Acquisition system",
+    blurb: "Channels wired to one offer narrative and decision cadence — vs channel sprawl.",
+    href: "/insights/acquisition-system-beats-channel-sprawl"
+  },
+  {
+    term: "Growth diagnosis",
+    blurb: "Naming the constraint before adding budget or hires.",
+    href: "/insights/diagnose-growth-bottleneck-before-spend"
+  },
+  {
+    term: "When to hire a fractional CMO",
+    blurb: "Timing vs full-time, agency, or internal lead.",
+    href: "/insights/when-to-hire-fractional-cmo"
+  },
+  {
+    term: "Pipeline plateau (post-PMF)",
+    blurb: "What stalls after early traction and how to read it.",
+    href: "/insights/pipeline-plateau-post-pmf"
+  }
+] as const;
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Insights", path: "/insights" },
+  { name: "Glossary", path }
+]);
+---
+
+<BaseLayout
+  path={path}
+  title="Glossary — growth, GTM, and fractional leadership | We Scale Startups"
+  description="Definitional hub for fractional CMO, growth bottlenecks, GTM, and acquisition systems — with links to deeper notes on wescalestartups.com."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Insights</p>
+      <h1>Glossary</h1>
+      <p class="lede">
+        Short definitions with links to the full notes. Built for search and LLM retrieval — expand with more spokes as you publish.
+      </p>
+      <p>
+        <a class="button button-light" href="/insights">← All insights</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <ul class="glossary-list">
+        {
+          entries.map((item) => (
+            <li class="glossary-item">
+              <h2>
+                <a href={item.href}>{item.term}</a>
+              </h2>
+              <p>{item.blurb}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .glossary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.5rem;
+    max-width: 40rem;
+  }
+  .glossary-item h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.35rem;
+  }
+  .glossary-item h2 a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .glossary-item p {
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+</style>

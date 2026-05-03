@@ -47,6 +47,7 @@ export const GET: APIRoute = async () => {
   const services = await getCollection("services");
   const industries = await getCollection("industries");
   const insights = await getCollection("insights");
+  const podcastEpisodes = await getCollection("podcastEpisodes");
 
   const staticPaths = [
     "/",
@@ -82,6 +83,8 @@ export const GET: APIRoute = async () => {
     "/growth-course",
     "/wss-scale-score",
     "/podcast",
+    "/insights/glossary",
+    "/seo-content-strategy",
     "/privacy",
     "/terms",
     "/llms.txt",
@@ -133,6 +136,15 @@ ${insights
       lastmod: i.data.updatedAt?.toISOString().slice(0, 10) ?? i.data.publishedAt.toISOString().slice(0, 10),
       changefreq: "monthly",
       priority: "0.72"
+    })
+  )
+  .join("\n")}
+${podcastEpisodes
+  .map((ep) =>
+    urlNode(`/podcast/episodes/${ep.id}`, {
+      lastmod: ep.data.publishedAt.toISOString().slice(0, 10),
+      changefreq: "monthly",
+      priority: "0.68"
     })
   )
   .join("\n")}

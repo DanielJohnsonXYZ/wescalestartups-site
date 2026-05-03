@@ -1,0 +1,133 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/seo-content-strategy";
+
+const faq = buildFaqSchema([
+  {
+    question: "What is the content strategy for wescalestartups.com?",
+    answer:
+      "We publish around four clusters: fractional CMO and leadership, post-PMF GTM and bottlenecks, AI-native execution, and diagnostics. Each cluster has a pillar on /insights plus spokes that interlink to services."
+  },
+  {
+    question: "How does this relate to cold search and LLM retrieval?",
+    answer:
+      "Pillar pages answer definitional queries; spokes add depth and internal links. The glossary summarises terms and points to long-form notes."
+  }
+]);
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "SEO content strategy", path }
+  ]),
+  faq
+];
+
+const stages = [
+  {
+    stage: "Problem-aware",
+    focus: "Bottlenecks, plateaus, inconsistent pipeline",
+    examples: ["/insights/diagnose-growth-bottleneck-before-spend", "/insights/pipeline-plateau-post-pmf"]
+  },
+  {
+    stage: "Solution-aware",
+    focus: "Fractional CMO vs agency vs full-time, acquisition systems",
+    examples: ["/insights/what-is-a-fractional-cmo", "/insights/acquisition-system-beats-channel-sprawl"]
+  },
+  {
+    stage: "Method-aware",
+    focus: "GTM sequencing, reporting, AI in the workflow",
+    examples: ["/insights/b2b-saas-gtm-strategy", "/insights/ai-native-gtm"]
+  }
+];
+---
+
+<BaseLayout
+  path={path}
+  title="SEO & LLM content strategy | We Scale Startups"
+  description="How We Scale Startups maps cold search and AI retrieval: topic clusters, buyer stages, internal linking, and conversion CTAs — live reference for the Growth Hub."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Strategy</p>
+      <h1>SEO content strategy (cold search + LLM retrieval)</h1>
+      <p class="lede">
+        This page is the live reference for how we structure editorial work: clusters on <a href="/insights">/insights</a>, definitional coverage in the{" "}
+        <a href="/insights/glossary">glossary</a>, and service CTAs on commercial pages.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell prose-block">
+      <h2>Topic clusters</h2>
+      <ol>
+        <li>
+          <strong>Fractional CMO &amp; leadership</strong> — pillar <a href="/insights/what-is-a-fractional-cmo">What is a fractional CMO?</a> plus hiring and comparison spokes.
+        </li>
+        <li>
+          <strong>Startup GTM &amp; bottlenecks</strong> — pillar <a href="/insights/b2b-saas-gtm-strategy">B2B SaaS GTM strategy</a> and{" "}
+          <a href="/insights/startup-growth-bottlenecks">growth bottlenecks</a>.
+        </li>
+        <li>
+          <strong>AI-native GTM</strong> — <a href="/insights/ai-native-gtm">AI-native GTM</a> and practical workflow notes.
+        </li>
+        <li>
+          <strong>Diagnostics</strong> — diagnosis-before-spend, reporting, and systems vs activity.
+        </li>
+      </ol>
+
+      <h2>Buyer stages → content types</h2>
+      <ul>
+        {
+          stages.map((s) => (
+            <li>
+              <strong>{s.stage}:</strong> {s.focus}
+              <ul>
+                {s.examples.map((href) => (
+                  <li>
+                    <a href={href}>{href}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h2>Conversion paths</h2>
+      <p>
+        Every long-form piece should link to one primary service (Diagnosis, Sprint, System Build, or Fractional CMO) and to{" "}
+        <a href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a> or the <a href="/quiz">quiz</a> as a soft step.
+      </p>
+
+      <p>
+        <a class="button button-brand" href="/insights">
+          Browse insights →
+        </a>
+        {" "}
+        <a class="button button-light" href={siteConfig.bookingUrl}>
+          {siteConfig.bookingLabel} →
+        </a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose-block {
+    max-width: 44rem;
+  }
+  .prose-block h2 {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+  }
+  .prose-block ul,
+  .prose-block ol {
+    line-height: 1.6;
+  }
+</style>

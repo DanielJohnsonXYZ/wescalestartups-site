@@ -1,0 +1,131 @@
+---
+/**
+ * Above-the-fold micro hook: first step toward /quiz (Growth Hub task).
+ * Options match the Notion brief; selection reveals CTA to full quiz.
+ */
+---
+
+<section class="home-scorecard-hook" aria-labelledby="scorecard-hook-title">
+  <div class="home-scorecard-hook__inner">
+    <p class="home-scorecard-hook__eyebrow">30-second check</p>
+    <h2 id="scorecard-hook-title" class="home-scorecard-hook__title">Which sounds most like your business right now?</h2>
+    <div class="home-scorecard-hook__options" role="group" aria-describedby="scorecard-hook-title">
+      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="leads">
+        <span class="home-scorecard-hook__letter">A</span>
+        <span>We have good leads but a low close rate</span>
+      </button>
+      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="pipeline">
+        <span class="home-scorecard-hook__letter">B</span>
+        <span>Pipeline is inconsistent</span>
+      </button>
+      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="chaos">
+        <span class="home-scorecard-hook__letter">C</span>
+        <span>We're growing but it feels chaotic</span>
+      </button>
+      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="unknown">
+        <span class="home-scorecard-hook__letter">D</span>
+        <span>We're not sure where growth is breaking down</span>
+      </button>
+    </div>
+    <p id="scorecard-hook-followup" class="home-scorecard-hook__followup" hidden>
+      <strong class="home-scorecard-hook__lead">Based on your answer, the full quiz will map this to a primary bottleneck layer.</strong>
+      <a class="button button-brand" href="/quiz" data-cta="home-scorecard-hook-quiz">Take the 3-minute quiz →</a>
+    </p>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector(".home-scorecard-hook");
+  const followup = document.getElementById("scorecard-hook-followup");
+  if (root && followup) {
+    root.querySelectorAll("[data-hook-choice]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        root.querySelectorAll("[data-hook-choice]").forEach((b) => b.classList.remove("is-selected"));
+        btn.classList.add("is-selected");
+        followup.hidden = false;
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "home_scorecard_hook_select",
+            hook_choice: btn.getAttribute("data-hook-choice")
+          });
+        } catch {
+          /* ignore */
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .home-scorecard-hook {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .home-scorecard-hook__eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 0.35rem;
+  }
+  .home-scorecard-hook__title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.75rem;
+    max-width: 36rem;
+  }
+  .home-scorecard-hook__options {
+    display: grid;
+    gap: 0.5rem;
+  }
+  @media (min-width: 640px) {
+    .home-scorecard-hook__options {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .home-scorecard-hook__btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    text-align: left;
+    padding: 0.55rem 0.65rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .home-scorecard-hook__btn:hover {
+    border-color: rgba(249, 115, 22, 0.55);
+    background: rgba(249, 115, 22, 0.08);
+  }
+  .home-scorecard-hook__btn.is-selected {
+    border-color: #f97316;
+    background: rgba(249, 115, 22, 0.12);
+  }
+  .home-scorecard-hook__letter {
+    flex-shrink: 0;
+    font-weight: 700;
+    opacity: 0.85;
+    width: 1.25rem;
+  }
+  .home-scorecard-hook__followup {
+    margin: 0.85rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+  .home-scorecard-hook__lead {
+    font-size: 0.9rem;
+    font-weight: 500;
+    max-width: 32rem;
+  }
+</style>

@@ -49,7 +49,7 @@ const insightsSchema = [
       <p class="eyebrow">Insights</p>
       <h1>Growth notes for founders between traction and scale.</h1>
       <p class="lede">
-        Notes grouped around how we work: diagnosis first, acquisition as a system, fractional CMO ownership, and being citable in AI answers. Pick a theme below or scroll for every published note.
+        Notes are organised into four clusters (fractional CMO, GTM, AI-native marketing, and growth diagnostics), each with a pillar hub and spokes — so topics gain depth and internal links, not a flat archive. Pick a cluster below or scroll for every published note.
       </p>
       <div class="hero-actions">
         <a
@@ -72,30 +72,41 @@ const insightsSchema = [
   <section class="section section-alt">
     <div class="shell">
       <SectionIntro
-        eyebrow="Browse by theme"
-        title="Structured like the WSS operating system — not a flat blog roll."
-        body="Each theme matches how founders show up: unclear bottleneck, scattered channels, missing owner, or invisible expertise."
+        eyebrow="Content clusters"
+        title="Four pillars with spokes — built for topical depth and internal links."
+        body="Each cluster has a pillar page (the hub) and live spokes. More notes roll in until each cluster reaches 6–8 articles, all interlinked to the pillar and to relevant services."
       />
       <div class="insights-theme-grid">
-        {insightsThemeGroups.map((theme) => (
-          <article class="feature-card insights-theme-card">
-            <h2>{theme.title}</h2>
-            <p>{theme.description}</p>
-            <ul class="insights-theme-links">
-              {theme.insightIds.map((id) => {
-                const item = insightsById.get(id);
-                if (!item) return null;
-                return (
-                  <li>
-                    <a class="card-link" href={`/insights/${item.id}`}>
-                      {item.data.title} →
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </article>
-        ))}
+        {insightsThemeGroups.map((theme) => {
+          const pillar = insightsById.get(theme.pillarId);
+          return (
+            <article class="feature-card insights-theme-card">
+              <h2>{theme.title}</h2>
+              <p>{theme.description}</p>
+              {pillar ? (
+                <p class="insights-pillar-link">
+                  <span class="insights-pillar-label">Pillar</span>
+                  <a class="card-link" href={`/insights/${pillar.id}`}>
+                    {pillar.data.title} →
+                  </a>
+                </p>
+              ) : null}
+              <ul class="insights-theme-links">
+                {theme.spokeInsightIds.map((id) => {
+                  const item = insightsById.get(id);
+                  if (!item) return null;
+                  return (
+                    <li>
+                      <a class="card-link" href={`/insights/${item.id}`}>
+                        {item.data.title} →
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -206,6 +217,19 @@ const insightsSchema = [
     font-size: 1.08rem;
     margin: 0 0 0.5rem;
     letter-spacing: -0.02em;
+  }
+  .insights-pillar-link {
+    margin: 0.85rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .insights-pillar-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted, #5c5668);
   }
   .insights-theme-links {
     list-style: none;

@@ -269,12 +269,13 @@ function getResult() {
 }
 
 function renderProgress() {
-  const pct = Math.round((current / QUESTIONS.length) * 100);
+  const step = Math.min(current + 1, QUESTIONS.length);
+  const pct = Math.round((step / QUESTIONS.length) * 100);
   return `
-    <div class="quiz-progress" role="progressbar" aria-valuenow="${current}" aria-valuemin="0" aria-valuemax="${QUESTIONS.length}" aria-label="Question ${current} of ${QUESTIONS.length}">
+    <div class="quiz-progress" role="progressbar" aria-valuenow="${step}" aria-valuemin="1" aria-valuemax="${QUESTIONS.length}" aria-label="Question ${step} of ${QUESTIONS.length}">
       <div class="quiz-progress-bar" style="width:${pct}%"></div>
     </div>
-    <p class="quiz-counter">${current} / ${QUESTIONS.length}</p>`;
+    <p class="quiz-counter">Question ${step} of ${QUESTIONS.length}</p>`;
 }
 
 function renderQuestion(idx) {
@@ -358,9 +359,14 @@ function mount() {
     // Option selection
     app.querySelectorAll('.quiz-option').forEach(btn => {
       btn.addEventListener('click', () => {
-        const idx = parseInt(btn.dataset.idx);
+        const idx = parseInt(btn.dataset.idx, 10);
+        const q = QUESTIONS[current];
+        const prev = answers[current];
+        if (prev !== null) {
+          scores[q.layer] -= q.options[prev].score;
+        }
         answers[current] = idx;
-        scores[QUESTIONS[current].layer] += QUESTIONS[current].options[idx].score;
+        scores[q.layer] += q.options[idx].score;
         render();
       });
     });
@@ -372,12 +378,13 @@ function mount() {
       render();
     });
 
-    // Back
+    // Back — drop in-progress answer on this step, then go to previous question
     app.querySelector('.quiz-back')?.addEventListener('click', () => {
-      // Undo score
-      if (answers[current - 1] !== null) {
-        scores[QUESTIONS[current - 1].layer] -= QUESTIONS[current - 1].options[answers[current - 1]].score;
-        answers[current - 1] = null;
+      if (current <= 0) return;
+      if (answers[current] !== null) {
+        const q = QUESTIONS[current];
+        scores[q.layer] -= q.options[answers[current]].score;
+        answers[current] = null;
       }
       current--;
       render();

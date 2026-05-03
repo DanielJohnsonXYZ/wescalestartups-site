@@ -5,6 +5,7 @@ import { buildBreadcrumbSchema, buildInsightArticleSchema } from "../../lib/sche
 import { formatDate } from "../../lib/utils";
 import { siteConfig } from "../../site";
 import EmailSignup from "../../components/EmailSignup.astro";
+import { mauticNewsletter } from "../../site";
 
 export async function getStaticPaths() {
   const insights = await getCollection("insights");
@@ -19,6 +20,8 @@ const { insight } = Astro.props;
 const { Content } = await render(insight);
 const path = `/insights/${insight.id}`;
 const updatedAt = insight.data.updatedAt ?? insight.data.publishedAt;
+const { submitUrl: mauticSubmitUrl, formId: mauticFormId } = mauticNewsletter;
+
 const schemas = [
   buildInsightArticleSchema({
     title: insight.data.title,
@@ -74,12 +77,65 @@ const schemas = [
   <section class="section section--tight">
     <div class="shell">
       <EmailSignup
-        heading="Get the weekly growth note."
-        subtext="One insight a week for post-PMF founders. What's blocking growth, what fixes it, and why."
+        heading="The Growth Bottleneck — weekly note"
+        subtext="One actionable note for post-PMF founders: what’s stuck, what to do next, and why."
         formId="insight-article-newsletter"
       />
     </div>
   </section>
+
+  <div
+    class="insight-nl-sticky"
+    id="insight-nl-sticky"
+    role="region"
+    aria-label="Newsletter signup"
+    hidden
+  >
+    <div class="insight-nl-sticky-inner shell">
+      <p class="insight-nl-sticky-label">The Growth Bottleneck — one note for founders between traction and scale.</p>
+      <form
+        class="insight-nl-sticky-form"
+        action={mauticSubmitUrl}
+        method="post"
+        accept-charset="UTF-8"
+        id="insight-sticky-newsletter"
+        data-cta="email-signup-insight-sticky"
+      >
+        <input type="hidden" name="mauticform[formId]" value={mauticFormId} />
+        <label class="sr-only" for="insight-sticky-email">Email</label>
+        <input
+          id="insight-sticky-email"
+          type="email"
+          name="mauticform[email]"
+          placeholder="you@company.com"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="button button-brand">Get the note →</button>
+      </form>
+      <button type="button" class="insight-nl-sticky-dismiss" aria-label="Dismiss newsletter bar">
+        ×
+      </button>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var sticky = document.getElementById("insight-nl-sticky");
+      if (!sticky) return;
+      var storageKey = "wss_insight_nl_sticky_dismissed";
+      try {
+        if (sessionStorage.getItem(storageKey) === "1") return;
+      } catch (e) {}
+      sticky.hidden = false;
+      sticky.querySelector(".insight-nl-sticky-dismiss")?.addEventListener("click", function () {
+        sticky.hidden = true;
+        try {
+          sessionStorage.setItem(storageKey, "1");
+        } catch (e) {}
+      });
+    })();
+  </script>
 
   <section class="cta-band">
     <div class="shell cta-inner">
@@ -107,3 +163,91 @@ const schemas = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .insight-nl-sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    padding: 0.65rem 0;
+    background: var(--ink, #100d18);
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
+  }
+  .insight-nl-sticky-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1rem;
+    position: relative;
+    padding-right: 2.25rem;
+  }
+  .insight-nl-sticky-label {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.88);
+    flex: 1 1 200px;
+    max-width: 42ch;
+  }
+  .insight-nl-sticky-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+    flex: 2 1 280px;
+  }
+  .insight-nl-sticky-form input[type="email"] {
+    flex: 1 1 180px;
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 0.88rem;
+  }
+  .insight-nl-sticky-form input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .insight-nl-sticky-form .button {
+    font-size: 0.82rem;
+    padding: 0.55rem 0.85rem;
+  }
+  .insight-nl-sticky-dismiss {
+    position: absolute;
+    top: 0.15rem;
+    right: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 0.25rem;
+  }
+  .insight-nl-sticky-dismiss:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* Reserve space so sticky bar does not cover last CTAs on short viewports */
+  body:has(.insight-nl-sticky:not([hidden])) .cta-band {
+    padding-bottom: 5.5rem;
+  }
+</style>

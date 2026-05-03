@@ -49,7 +49,7 @@ export const siteConfig = {
   siteLastModified: "2026-05-03",
   ogImage: "/og/default.svg",
   /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
-  gtmId: "GTM-5S892HK"
+  gtmId: "GTM-TV6C7GS"
 } as const;
 
 /** Named methodology — use on home, GTM, and press for consistent entity language. */
@@ -257,6 +257,41 @@ export const insightsHubRelatedReading: readonly { href: string; label: string }
   { href: "/proof", label: "Proof hub" },
   { href: "/resources", label: "Resources" }
 ];
+
+/**
+ * Strategic groupings for /insights (commercial authority + navigation).
+ * IDs are content collection entries under src/content/insights/.
+ */
+export const insightsThemeGroups: readonly {
+  title: string;
+  description: string;
+  insightIds: readonly string[];
+}[] = [
+  {
+    title: "Diagnosis & bottleneck clarity",
+    description: "Name the constraint before you add spend, channels, or headcount.",
+    insightIds: [
+      "diagnose-growth-bottleneck-before-spend",
+      "what-a-growth-report-should-answer",
+      "pipeline-plateau-post-pmf"
+    ]
+  },
+  {
+    title: "Acquisition systems & retainers",
+    description: "Replace channel sprawl and activity retainers with one operating rhythm.",
+    insightIds: ["acquisition-system-beats-channel-sprawl", "systems-vs-activity-retainers"]
+  },
+  {
+    title: "Fractional CMO & org design",
+    description: "When senior marketing leadership is the right move — and what “good” looks like.",
+    insightIds: ["when-to-hire-fractional-cmo"]
+  },
+  {
+    title: "AI search & LLM visibility",
+    description: "Make expertise easy for buyers and answer engines to cite.",
+    insightIds: ["make-ai-search-visibility-citable"]
+  }
+] as const;
 
 /** /testimonials — proof and next steps. */
 export const testimonialsRelatedReading: readonly { href: string; label: string }[] = [

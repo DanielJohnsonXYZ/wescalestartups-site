@@ -5,9 +5,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { formatDate, sortByOrder } from "../lib/utils";
-import { insightsHubRelatedReading, siteConfig } from "../site";
+import { insightsHubRelatedReading, insightsThemeGroups, siteConfig } from "../site";
 
 const insights = sortByOrder(await getCollection("insights"));
+const insightsById = new Map(insights.map((item) => [item.id, item]));
 
 const insightsHubFaqs = [
   {
@@ -39,7 +40,7 @@ const insightsSchema = [
 <BaseLayout
   path="/insights"
   title="Growth notes for founders between traction and scale | We Scale Startups"
-  description="Original WSS insights on growth diagnosis, acquisition systems, AI visibility, and reducing founder dependency."
+  description="WSS insights organised around diagnosis, acquisition systems, fractional CMO leadership, and AI/LLM visibility — not a generic marketing blog archive."
   keywords="fractional CMO, B2B SaaS growth, growth diagnosis, acquisition system, GTM strategy, startup marketing, founder-led growth, pipeline bottleneck, We Scale Startups"
   schema={insightsSchema}
 >
@@ -48,7 +49,7 @@ const insightsSchema = [
       <p class="eyebrow">Insights</p>
       <h1>Growth notes for founders between traction and scale.</h1>
       <p class="lede">
-        Practical writing on diagnosing bottlenecks, building acquisition systems, and making expertise easier for buyers and AI search systems to trust.
+        Notes grouped around how we work: diagnosis first, acquisition as a system, fractional CMO ownership, and being citable in AI answers. Pick a theme below or scroll for every published note.
       </p>
       <div class="hero-actions">
         <a
@@ -64,6 +65,37 @@ const insightsSchema = [
           Or, {siteConfig.scorecardLabel} →
         </a>
         <a class="button button-light" href="/fractional-cmo-vs-agency" data-cta="insights-hero-vs-agency">WSS vs agency</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Browse by theme"
+        title="Structured like the WSS operating system — not a flat blog roll."
+        body="Each theme matches how founders show up: unclear bottleneck, scattered channels, missing owner, or invisible expertise."
+      />
+      <div class="insights-theme-grid">
+        {insightsThemeGroups.map((theme) => (
+          <article class="feature-card insights-theme-card">
+            <h2>{theme.title}</h2>
+            <p>{theme.description}</p>
+            <ul class="insights-theme-links">
+              {theme.insightIds.map((id) => {
+                const item = insightsById.get(id);
+                if (!item) return null;
+                return (
+                  <li>
+                    <a class="card-link" href={`/insights/${item.id}`}>
+                      {item.data.title} →
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -125,8 +157,8 @@ const insightsSchema = [
   <section class="section section--tight">
     <div class="shell">
       <EmailSignup
-        heading="Get the weekly growth note."
-        subtext="One insight a week. What founders at your stage are actually doing to break through plateaus."
+        heading="The Growth Bottleneck — weekly note"
+        subtext="One actionable note for post-PMF founders: what’s stuck, what to do next, and why. No daily drip."
         formId="insights-footer"
       />
     </div>
@@ -158,3 +190,29 @@ const insightsSchema = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .insights-theme-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .insights-theme-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .insights-theme-card h2 {
+    font-size: 1.08rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .insights-theme-links {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+</style>

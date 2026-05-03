@@ -21,6 +21,8 @@ function urlNode(path: string, opts: UrlOpts) {
 function staticUrlMeta(path: string): Pick<UrlOpts, "changefreq" | "priority"> {
   if (path === "/") return { changefreq: "weekly", priority: "1.0" };
   if (path === "/privacy" || path === "/terms") return { changefreq: "yearly", priority: "0.35" };
+  const agentMirrors = new Set(["/llms.txt", "/llms-full.txt", "/markdown/home.md"]);
+  if (agentMirrors.has(path)) return { changefreq: "monthly", priority: "0.55" };
   const weekly = new Set([
     "/start-here",
     "/services",
@@ -77,7 +79,10 @@ export const GET: APIRoute = async () => {
     "/transfer",
     "/experimentation",
     "/privacy",
-    "/terms"
+    "/terms",
+    "/llms.txt",
+    "/llms-full.txt",
+    "/markdown/home.md"
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

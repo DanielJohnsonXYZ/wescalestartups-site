@@ -1,0 +1,392 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { siteConfig } from "../site";
+
+const podcastFaqs = [
+  {
+    question: "What is How Startups Win With AI about?",
+    answer: "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies. Less hype, more what's actually working."
+  },
+  {
+    question: "Who is the host?",
+    answer: "Daniel Johnson, founder of We Scale Startups. Daniel works with post-PMF B2B SaaS and AI startups on growth strategy, experimentation, and practical AI adoption."
+  },
+  {
+    question: "Where can I listen?",
+    answer: "The podcast is available on YouTube, Spotify, and Apple Podcasts. Subscribe on your preferred platform to get new episodes as they're released."
+  },
+  {
+    question: "Can I apply to be a guest?",
+    answer: "Yes. If you're a founder or operator with a practical AI growth story, apply via the guest form. We look for real examples, honest lessons, and useful takeaways."
+  },
+  {
+    question: "How does this relate to WSS?",
+    answer: "The podcast is the media and authority engine for We Scale Startups. It builds trust, demonstrates practical thinking, and creates warm paths to working together."
+  }
+];
+
+const podcastSchema = {
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "name": "How Startups Win With AI",
+  "description": "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies.",
+  "url": "https://wescalestartups.com/podcast",
+  "author": {
+    "@type": "Organization",
+    "@id": `${siteConfig.siteUrl}/#organization`
+  },
+  "webFeed": "https://wescalestartups.com/podcast"
+};
+---
+
+<BaseLayout
+  path="/podcast"
+  title="How Startups Win With AI | WSS Podcast"
+  description="Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies. Hosted by Daniel Johnson, founder of We Scale Startups."
+  keywords="startup podcast, AI growth, startup AI adoption, founder interviews, B2B SaaS podcast, growth strategies"
+  schema={podcastSchema}
+>
+  <!-- HERO -->
+  <section class="page-hero podcast-hero">
+    <div class="shell">
+      <p class="eyebrow">Podcast</p>
+      <h1>How Startups Win With AI</h1>
+      <p class="podcast-tagline">Smart conversations on growth, speed, and what's actually working.</p>
+      <p class="podcast-description">
+        The podcast for founders and operators who want practical AI adoption stories — not hype, not tool lists, just what's actually working inside ambitious startups.
+      </p>
+      <div class="hero-actions podcast-cta-group">
+        <a class="button button-brand" href="https://youtube.com/@wescalestartups" target="_blank" rel="noopener" data-cta="podcast-youtube">
+          Watch on YouTube →
+        </a>
+        <a class="button button-light" href={siteConfig.bookingUrl} data-cta="podcast-book">
+          {siteConfig.bookingLabel}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE BUTTONS -->
+  <section class="section section-alt podcast-subscribe">
+    <div class="shell">
+      <p class="eyebrow">Subscribe</p>
+      <h2>Pick your platform.</h2>
+      <div class="subscribe-buttons">
+        <a class="subscribe-btn" href="https://youtube.com/@wescalestartups" target="_blank" rel="noopener" data-cta="subscribe-youtube">
+          <strong>YouTube</strong>
+          <span>Watch full episodes</span>
+        </a>
+        <a class="subscribe-btn" href="https://open.spotify.com/" target="_blank" rel="noopener" data-cta="subscribe-spotify">
+          <strong>Spotify</strong>
+          <span>Listen on the go</span>
+        </a>
+        <a class="subscribe-btn" href="https://apple.co/" target="_blank" rel="noopener" data-cta="subscribe-apple">
+          <strong>Apple Podcasts</strong>
+          <span>Listen on iOS</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT THE SHOW IS -->
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="What we cover"
+        title="Less hype. More useful advantage."
+        body="Each episode explores how startups are using AI in growth, marketing, operations, and decision-making — with honest lessons on what worked and what didn't."
+      />
+      <div class="podcast-pillars">
+        <article class="pillar-card">
+          <h3>Growth</h3>
+          <p>How startups use AI to create demand, improve acquisition, sharpen positioning, and run better campaigns.</p>
+        </article>
+        <article class="pillar-card">
+          <h3>Speed</h3>
+          <p>How lean teams use AI to move faster without adding headcount — research, synthesis, iteration.</p>
+        </article>
+        <article class="pillar-card">
+          <h3>Better Decisions</h3>
+          <p>How founders and operators use AI to think more clearly and make better commercial calls.</p>
+        </article>
+        <article class="pillar-card">
+          <h3>What Not To Do</h3>
+          <p>Honest conversations about what's overhyped, distracting, or not worth the time.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Audience"
+        title="Built for startup founders and operators."
+        body="If you're building a B2B SaaS or AI company and want practical AI adoption stories, this show is for you."
+      />
+      <div class="audience-grid">
+        <article class="audience-card">
+          <h3>Startup Founders</h3>
+          <p>Thinking: "We should be growing faster with AI."</p>
+        </article>
+        <article class="audience-card">
+          <h3>Growth Leaders</h3>
+          <p>Thinking: "How are other startups actually using AI well?"</p>
+        </article>
+        <article class="audience-card">
+          <h3>Operators</h3>
+          <p>Thinking: "How do we use AI without becoming generic?"</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUEST CTA -->
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Guest applications"
+        title="Have a practical AI growth story?"
+        body="If you're a founder or operator with honest lessons on using AI inside a startup, apply to be a guest."
+      />
+      <div class="hero-actions">
+        <a class="button button-brand" href="mailto:daniel@wescalestartups.com?subject=Podcast%20Guest%20Application" data-cta="podcast-guest">
+          Apply to be a guest →
+        </a>
+        <a class="button button-light" href="/press" data-cta="podcast-press">
+          Press kit
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT THE HOST -->
+  <section class="section section-alt">
+    <div class="shell host-grid">
+      <div class="host-photo">
+        <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson" width="960" height="1003" loading="lazy" decoding="async" />
+      </div>
+      <div class="host-bio">
+        <p class="eyebrow">Host</p>
+        <h2>Daniel Johnson</h2>
+        <p>
+          Daniel is the founder of We Scale Startups, where he helps post-PMF B2B SaaS and AI startups build repeatable growth systems. He mentors founders through Google for Startups, Techstars, and GrowthMentor (479+ sessions, ★4.93/5).
+        </p>
+        <p>
+          The podcast is where Daniel explores how ambitious startups are using AI in practical, commercially useful ways — less hype, more what's actually working.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href={siteConfig.founderLinkedin} target="_blank" rel="noopener" data-cta="host-linkedin">
+            Daniel on LinkedIn →
+          </a>
+          <a class="button button-light" href={siteConfig.danielSite} target="_blank" rel="noopener" data-cta="host-daniel-site">
+            danieljohnson.xyz →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section section--tight">
+    <div class="shell">
+      <EmailSignup
+        heading="Get the weekly growth note."
+        subtext="One insight a week for post-PMF founders. What's blocking growth, what fixes it, and why."
+        formId="podcast-newsletter"
+      />
+    </div>
+  </section>
+
+  <!-- WSS COMMERCIAL CTA -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Work with WSS</p>
+        <h2>Turn AI advantage into a repeatable system.</h2>
+        <p>
+          The podcast shows what's possible. WSS builds the growth system so your team can run it without founder heroics.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="podcast-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href="/services" data-cta="podcast-services">
+          Compare services →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Common questions about the show.</h2>
+      <div class="grid-3">
+        {podcastFaqs.map((faq) => (
+          <article class="feature-card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .podcast-hero {
+    padding-bottom: 3rem;
+  }
+  .podcast-tagline {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0.75rem 0 1rem;
+    letter-spacing: -0.01em;
+  }
+  .podcast-description {
+    max-width: 58ch;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+  .podcast-cta-group {
+    align-items: center;
+  }
+
+  .podcast-subscribe {
+    padding-block: 3rem;
+  }
+  .subscribe-buttons {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 600px) {
+    .subscribe-buttons { grid-template-columns: repeat(3, 1fr); }
+  }
+  .subscribe-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .subscribe-btn:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 22px rgba(16, 13, 24, 0.07);
+  }
+  .subscribe-btn strong {
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .subscribe-btn span {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .podcast-pillars {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) {
+    .podcast-pillars { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1080px) {
+    .podcast-pillars { grid-template-columns: repeat(4, 1fr); }
+  }
+  .pillar-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1.25rem 1.25rem 1.4rem;
+  }
+  .pillar-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+  .pillar-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .audience-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 720px) {
+    .audience-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .audience-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 1.25rem 1.25rem 1.4rem;
+  }
+  .audience-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 0.5rem;
+  }
+  .audience-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .host-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  @media (min-width: 720px) {
+    .host-grid { grid-template-columns: 300px 1fr; }
+  }
+  .host-photo img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 1rem;
+    border: 1px solid var(--line);
+  }
+  .host-bio p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+  .host-bio .hero-actions {
+    margin-top: 1rem;
+  }
+</style>

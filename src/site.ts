@@ -81,6 +81,8 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/how-it-works": "2026-05-03",
   "/how-we-work": "2026-05-01",
   "/industries": "2026-05-03",
+  "/founder-led-growth": "2026-05-03",
+  "/growth-operating-system": "2026-05-03",
   "/insights": "2026-05-03",
   "/llms.txt": "2026-05-03",
   "/llms-full.txt": "2026-05-03",
@@ -122,7 +124,9 @@ export const navigation = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
   { href: "/quiz", label: "Quiz" },
-  { href: "/insights", label: "Insights" }
+  { href: "/insights", label: "Insights" },
+  { href: "/growth-operating-system", label: "Growth OS" },
+  { href: "/founder-led-growth", label: "Founder-led" }
 ] as const;
 
 /** Strategic pillar pages → related insights (internal links + related reading section). */
@@ -305,7 +309,22 @@ export const contactRelatedReading: readonly { href: string; label: string }[] =
   { href: "/press", label: "Press kit" }
 ];
 
-/** /industries hub. */
+/** Cornerstone pages — strategic content hubs. */
+export const cornerstoneRelatedReading: Partial<Record<string, readonly { href: string; label: string }[]>> = {
+  "/growth-operating-system": [
+    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+    { href: "/diagnose", label: "5-layer diagnostic framework" },
+    { href: "/build", label: "Acquisition System Build" },
+    { href: "/transfer", label: "Transfer · handoff" },
+    { href: "/first-30-days", label: "First 30 days with WSS" }
+  ],
+  "/founder-led-growth": [
+    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+    { href: "/start-here", label: "Start here" },
+    { href: "/services/fractional-cmo", label: "Fractional CMO" }
+  ]
+};
 export const industriesHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/case-studies", label: "Case studies" },

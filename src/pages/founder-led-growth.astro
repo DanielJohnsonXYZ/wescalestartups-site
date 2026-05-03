@@ -1,0 +1,268 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { strategicPageRelatedInsights, siteConfig } from "../site";
+
+const pageSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Founder-led growth", path: "/founder-led-growth" }
+  ])
+];
+
+const signals = [
+  {
+    signal: "Founder owns every revenue call",
+    description: "The calendar is full of prospect calls, but nobody else can confidently run them."
+  },
+  {
+    signal: "Pipeline arrives in bursts",
+    description: "Good months are followed by quiet ones. There's no predictable rhythm."
+  },
+  {
+    signal: "Channels are tried in isolation",
+    description: "Paid, SEO, outbound, partnerships — each feels like a separate experiment."
+  },
+  {
+    signal: "Team waits for growth decisions",
+    description: "Campaigns pause because the founder hasn't reviewed the data or signed off the message."
+  },
+  {
+    signal: "Agencies execute, but nothing compounds",
+    description: "Activity is high, but there's no shared acquisition narrative or system."
+  }
+];
+
+const transitionSteps = [
+  {
+    step: "Diagnose",
+    description: "Name the constraint: positioning, acquisition, conversion, reporting, or team ownership."
+  },
+  {
+    step: "Build",
+    description: "Acquisition system: channels, offers, landing pages, and reporting that work together."
+  },
+  {
+    step: "Transfer",
+    description: "Playbooks, dashboards, and weekly rhythm that runs without founder involvement."
+  }
+];
+---
+
+<BaseLayout
+  path="/founder-led-growth"
+  title="Founder-led Growth | We Scale Startups"
+  description="Founder-led growth: when the founder is the best salesperson, but the company can't scale. Diagnose the bottleneck and build a repeatable system."
+  keywords="founder-led growth, post-PMF startup, founder dependency, acquisition system, fractional CMO, startup growth bottleneck"
+  schema={pageSchema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Founder-led growth</p>
+      <h1>When the founder is the best salesperson — but the company can't scale.</h1>
+      <p class="lede">
+        Post-PMF startups often hit the same wall: the founder built traction, but growth depends on them personally. The job is to turn that into a system the team can run.
+      </p>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="flg-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href="/quiz" data-cta="flg-quiz">Take the quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">The symptoms</p>
+      <h2>How to know you're stuck in founder-led growth.</h2>
+      <div class="grid-2" style="margin-top: 2rem;">
+        {signals.map((item) => (
+          <article class="feature-card">
+            <h3>{item.signal}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Why it happens</p>
+      <h2>The founder built traction. Now it's the bottleneck.</h2>
+      <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
+        In the early days, founder-led sales and marketing are a superpower. But past PMF, the same pattern becomes the constraint: there's no acquisition system, no shared narrative, and no weekly rhythm the team can own.
+      </p>
+      <div class="stage-grid" style="margin-top: 2rem;">
+        <article class="stage-card">
+          <p class="card-kicker">What got you here</p>
+          <h3>Founder-led traction</h3>
+          <p>Direct relationships, fast decisions, deep product knowledge. The founder is the best person to sell and market — for now.</p>
+        </article>
+        <article class="stage-card stage-card-fit">
+          <p class="card-kicker">What breaks</p>
+          <h3>Inconsistent pipeline</h3>
+          <p>Channels run in isolation. Reporting tracks activity, not outcomes. The team waits for direction. Revenue plateaus while the founder tries to do it all.</p>
+        </article>
+        <article class="stage-card">
+          <p class="card-kicker">What's needed</p>
+          <h3>A repeatable system</h3>
+          <p>One coherent acquisition system: positioning, channels, offers, landing pages, and reporting — handed off to the team.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">The transition</p>
+      <h2>From founder-led to system-led growth.</h2>
+      <div class="decision-grid" style="margin-top: 2rem;">
+        {transitionSteps.map((item, i) => (
+          <article class="decision-card">
+            <span class="decision-num">0{i + 1}</span>
+            <h3>{item.step}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Proof</p>
+      <h2>Founders who stepped out of growth.</h2>
+      <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
+        These case studies show what happens when the constraint is named and a system is built around it.
+      </p>
+      <ul class="related-insights-list" style="margin-top: 1.5rem;">
+        <li><a class="card-link" href="/proof">See all proof →</a></li>
+        <li><a class="card-link" href="/case-studies">Read case studies →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Deeper context on founder-led growth.</h2>
+      <ul class="related-insights-list" style="margin-top: 1.5rem;">
+        <li><a class="card-link" href="/insights/when-to-hire-fractional-cmo">When to hire a fractional CMO →</a></li>
+        <li><a class="card-link" href="/insights/diagnose-growth-bottleneck-before-spend">Diagnose the bottleneck before spend →</a></li>
+        <li><a class="card-link" href="/insights/acquisition-system-beats-channel-sprawl">Acquisition system vs channel sprawl →</a></li>
+        <li><a class="card-link" href="/start-here">Start here →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Step out of growth</p>
+        <h2>Diagnose the bottleneck. Build the system.</h2>
+        <p>
+          Bring your current growth picture. In {siteConfig.bookingCallDurationPhrase} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="flg-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="flg-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .decision-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) {
+    .decision-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .decision-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .decision-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .decision-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .decision-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .stage-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .stage-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .stage-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .stage-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.4rem 1.4rem;
+  }
+  .stage-card-fit { border-color: var(--accent); }
+  .stage-card h3 {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+  .stage-card p {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-top: 0.5rem;
+  }
+  .stage-card .card-kicker {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+</style>

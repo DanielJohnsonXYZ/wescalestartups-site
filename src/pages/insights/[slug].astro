@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildInsightArticleSchema } from "../../lib/schema";
 import { formatDate } from "../../lib/utils";
 import { siteConfig } from "../../site";
+import EmailSignup from "../../components/EmailSignup.astro";
 
 export async function getStaticPaths() {
   const insights = await getCollection("insights");

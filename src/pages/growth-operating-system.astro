@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { strategicPageRelatedInsights, siteConfig } from "../site";
+
+const pageSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Growth operating system", path: "/growth-operating-system" }
+  ])
+];
+
+const systemComponents = [
+  {
+    phase: "Diagnosis",
+    icon: "🔍",
+    description: "Bottleneck constraint mapping across five layers: positioning, acquisition, conversion, reporting, team ownership."
+  },
+  {
+    phase: "Design",
+    icon: "📐",
+    description: "Acquisition system architecture: channel strategy, offer map, landing briefs, and reporting cadence."
+  },
+  {
+    phase: "Build",
+    icon: "🔧",
+    description: "Channel execution, campaign logs, experiment backlog, and weekly decision rules."
+  },
+  {
+    phase: "Transfer",
+    icon: "📋",
+    description: "Playbooks, dashboards, handoff packs, and weekly rhythm that runs without founder involvement."
+  }
+];
+---
+
+<BaseLayout
+  path="/growth-operating-system"
+  title="Growth Operating System | We Scale Startups"
+  description="The WSS Growth Operating System: diagnosis, acquisition design, execution, and transfer — so post-PMF startups stop depending on founder heroics."
+  keywords="growth operating system, startup growth system, fractional CMO, acquisition system, post-PMF growth, B2B SaaS growth"
+  schema={pageSchema}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Cornerstone</p>
+      <h1>Growth operating system.</h1>
+      <p class="lede">
+        A repeatable system for post-PMF startups to diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm — so growth stops depending on founder heroics.
+      </p>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="gos-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href="/services" data-cta="gos-services">See services →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Why it matters</p>
+      <h2>Post-PMF startups usually die in the middle.</h2>
+      <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
+        You have traction. But pipeline arrives in bursts. The founder is still the best salesperson. Channels are running in isolation. Nobody can confidently say what's working.
+      </p>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <article class="feature-card">
+          <h3>The problem</h3>
+          <p>Founder dependency, disconnected channels, no shared acquisition narrative, reporting that tracks activity instead of outcomes.</p>
+        </article>
+        <article class="feature-card">
+          <h3>The system solution</h3>
+          <p>One coherent operating system: diagnosis → design → build → transfer. Not a deck, a working growth function.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Four phases</p>
+      <h2>How the system is built.</h2>
+      <div class="decision-grid" style="margin-top: 2rem;">
+        {systemComponents.map((item) => (
+          <article class="decision-card">
+            <span class="decision-num">{item.icon}</span>
+            <h3>{item.phase}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">What you get</p>
+      <h2>Working artefacts, not slide decks.</h2>
+      <ul class="related-insights-list" style="margin-top: 1.5rem;">
+        <li><a class="card-link" href="/diagnose">5-layer diagnostic framework</a> — names the constraint in plain English</li>
+        <li><a class="card-link" href="/build">Acquisition system build</a> — channels, offers, landing pages, reporting</li>
+        <li><a class="card-link" href="/transfer">Transfer playbooks</a> — handoff packs your team can run without you</li>
+        <li><a class="card-link" href="/first-30-days">First 30 days</a> — what happens when WSS joins the team</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Who this is for</p>
+      <h2>Post-PMF B2B SaaS and AI startups.</h2>
+      <div class="grid-3" style="margin-top: 2rem;">
+        <article class="feature-card">
+          <h3>Seed to Series A</h3>
+          <p>Founder still owns every revenue call. Pipeline is inconsistent. Need to professionalise acquisition.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Series B+</h3>
+          <p>Growing team but no shared growth operating rhythm. Channels sprawling. Need system before full-time CMO.</p>
+        </article>
+        <article class="feature-card">
+          <h3>AI-native startups</h3>
+          <p>Great product, unclear GTM. Need to separate AI hype from commercial acquisition reality.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Deeper context on the system.</h2>
+      <ul class="related-insights-list" style="margin-top: 1.5rem;">
+        {strategicPageRelatedInsights["/growth-engine"]?.map((item) => (
+          <li><a class="card-link" href={item.href}>{item.label} →</a></li>
+        ))}
+        <li><a class="card-link" href="/insights/acquisition-system-beats-channel-sprawl">Acquisition system vs channel sprawl →</a></li>
+        <li><a class="card-link" href="/insights/diagnose-growth-bottleneck-before-spend">Diagnose the bottleneck before spend →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Build the system</p>
+        <h2>Stop guessing. Start operating.</h2>
+        <p>Diagnose the bottleneck, build the acquisition system, transfer the weekly rhythm.</p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="gos-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gos-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .decision-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) {
+    .decision-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .decision-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .decision-num {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .decision-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .decision-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "publisher": {
+    "name": "We Scale Startups",
+    "url": "https://wescalestartups.com"
+  },
+  "skills": [
+    {
+      "id": "wss.evaluate-growth-bottleneck",
+      "name": "Evaluate startup growth bottleneck",
+      "description": "Clarify whether the growth constraint is positioning, acquisition, conversion, reporting, or team ownership — aligned with WSS diagnose framing (quiz, manual layers, diagnostic call).",
+      "entryPoints": [
+        "https://wescalestartups.com/quiz",
+        "https://wescalestartups.com/diagnose",
+        "https://wescalestartups.com/start-here"
+      ]
+    },
+    {
+      "id": "wss.recommend-growth-sprint",
+      "name": "Recommend growth sprint or engagement",
+      "description": "Map the visitor’s stage and bottleneck to the right WSS offer (Growth Diagnosis, 90-Day Growth Sprint, Acquisition System Build, Fractional CMO) using pricing and services context.",
+      "entryPoints": [
+        "https://wescalestartups.com/services",
+        "https://wescalestartups.com/pricing"
+      ]
+    },
+    {
+      "id": "wss.summarise-services",
+      "name": "Summarise WSS services",
+      "description": "Produce an accurate short summary of WSS offers, proof, and how WSS differs from a channel agency — cite llms.txt or services pages.",
+      "entryPoints": [
+        "https://wescalestartups.com/llms.txt",
+        "https://wescalestartups.com/fractional-cmo-vs-agency"
+      ]
+    },
+    {
+      "id": "wss.route-visitor-to-offer",
+      "name": "Route visitor to best offer",
+      "description": "Given goals and constraints, suggest the next step (start-here, proof, book diagnostic, scorecard) without over-claiming.",
+      "entryPoints": [
+        "https://wescalestartups.com/start-here",
+        "https://wescalestartups.com/book"
+      ]
+    },
+    {
+      "id": "wss.prepare-call-briefing",
+      "name": "Prepare call briefing",
+      "description": "Assemble a concise briefing before a Calendly diagnostic: bottleneck hypothesis, current channels, proof to read, and questions to ask — grounded in site copy.",
+      "entryPoints": [
+        "https://wescalestartups.com/book",
+        "https://wescalestartups.com/proof"
+      ]
+    }
+  ]
+}

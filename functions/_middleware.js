@@ -15,6 +15,25 @@ export async function onRequest(context) {
     return Response.redirect(url.toString(), 301);
   }
 
+  // Content negotiation: agents requesting markdown on the homepage get the static mirror.
+  if (path === "/" || path === "") {
+    const accept = context.request.headers.get("Accept") || "";
+    if (/\btext\/markdown\b/i.test(accept)) {
+      const mdUrl = new URL("/markdown/home.md", url.origin);
+      const mdRes = await fetch(mdUrl, { method: "GET" });
+      if (mdRes.ok) {
+        const text = await mdRes.text();
+        return new Response(text, {
+          headers: {
+            "Content-Type": "text/markdown; charset=utf-8",
+            Vary: "Accept",
+            "Cache-Control": "public, max-age=300, must-revalidate"
+          }
+        });
+      }
+    }
+  }
+
   if (url.pathname === "/contact-us" || url.pathname === "/contact-us/") {
     url.pathname = "/contact";
     return Response.redirect(url.toString(), 301);

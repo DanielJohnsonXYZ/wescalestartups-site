@@ -1,0 +1,15 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://wescalestartups.com",
+      "service-doc": [
+        { "href": "https://wescalestartups.com/services" },
+        { "href": "https://wescalestartups.com/start-here" },
+        { "href": "https://wescalestartups.com/how-it-works" }
+      ],
+      "status": [
+        { "href": "https://wescalestartups.com/contact" }
+      ]
+    }
+  ]
+}

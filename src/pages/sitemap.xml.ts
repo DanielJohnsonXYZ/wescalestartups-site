@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { isFinalSitemapPath } from "../lib/sitemapCanonical";
 import { absoluteUrl } from "../lib/utils";
 import { siteConfig, staticPathLastModified } from "../site";
 
@@ -86,7 +87,7 @@ export const GET: APIRoute = async () => {
     "/llms.txt",
     "/llms-full.txt",
     "/markdown/home.md"
-  ];
+  ].filter(isFinalSitemapPath);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -96,6 +97,7 @@ ${staticPaths
   )
   .join("\n")}
 ${services
+  .filter((s) => isFinalSitemapPath(`/services/${s.id}`))
   .map((s) =>
     urlNode(`/services/${s.id}`, {
       lastmod: staticPathLastModified[`/services/${s.id}`] ?? staticLastMod,
@@ -105,6 +107,7 @@ ${services
   )
   .join("\n")}
 ${industries
+  .filter((i) => isFinalSitemapPath(`/industries/${i.id}`))
   .map((i) =>
     urlNode(`/industries/${i.id}`, {
       lastmod: staticPathLastModified[`/industries/${i.id}`] ?? staticLastMod,
@@ -114,6 +117,7 @@ ${industries
   )
   .join("\n")}
 ${cases
+  .filter((c) => isFinalSitemapPath(`/case-studies/${c.id}`))
   .map((c) =>
     urlNode(`/case-studies/${c.id}`, {
       lastmod: c.data.updatedAt?.toISOString().slice(0, 10) ?? c.data.publishedAt.toISOString().slice(0, 10),
@@ -123,6 +127,7 @@ ${cases
   )
   .join("\n")}
 ${insights
+  .filter((i) => isFinalSitemapPath(`/insights/${i.id}`))
   .map((i) =>
     urlNode(`/insights/${i.id}`, {
       lastmod: i.data.updatedAt?.toISOString().slice(0, 10) ?? i.data.publishedAt.toISOString().slice(0, 10),

@@ -262,6 +262,11 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
   description={service.data.description}
   keywords={keywords}
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: service.data.title, path }
+  ]}
   schema={[
     buildBreadcrumbSchema([
       { name: "Home", path: "/" },

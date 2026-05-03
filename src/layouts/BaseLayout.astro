@@ -25,6 +25,8 @@ interface Props {
   lastUpdated?: string | false;
   /** Override default robots meta (e.g. noindex for utility pages). */
   metaRobots?: string;
+  /** Visible breadcrumb trail (mirrors JSON-LD when provided). Last item is current page. */
+  breadcrumbItems?: Array<{ name: string; path: string }>;
 }
 
 const {
@@ -39,7 +41,8 @@ const {
   articleModifiedTime,
   schema = [],
   lastUpdated = siteConfig.lastUpdated,
-  metaRobots = "index,follow,max-image-preview:large"
+  metaRobots = "index,follow,max-image-preview:large",
+  breadcrumbItems
 } = Astro.props;
 
 const currentPath = normalizePath(path);
@@ -202,6 +205,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       variant="brand"
     />
     <main id="main-content">
+      {
+        breadcrumbItems && breadcrumbItems.length > 0 && (
+          <div class="breadcrumb-wrap">
+            <div class="shell">
+              <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+                <ol>
+                  {breadcrumbItems.map((item, index) => {
+                    const isLast = index === breadcrumbItems.length - 1;
+                    const href = item.path.startsWith("/") ? normalizePath(item.path) : `/${normalizePath(item.path)}`;
+                    return (
+                      <li>
+                        {isLast ? (
+                          <span aria-current="page">{item.name}</span>
+                        ) : (
+                          <a href={href}>{item.name}</a>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </nav>
+            </div>
+          </div>
+        )
+      }
       <slot />
       {lastUpdated && (
         <section class="last-updated-band" aria-label="Page freshness">

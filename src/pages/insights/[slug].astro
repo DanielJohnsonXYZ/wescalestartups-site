@@ -51,6 +51,11 @@ const schemas = [
   articleModifiedTime={modifiedIso}
   schema={schemas}
   lastUpdated={false}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Insights", path: "/insights" },
+    { name: insight.data.title, path }
+  ]}
 >
   <section class="page-hero">
     <div class="shell">

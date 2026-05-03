@@ -35,7 +35,16 @@ const schema = [
 ];
 ---
 
-<BaseLayout title={metaTitle ?? `${title} | We Scale Startups`} description={description} path={path} schema={schema}>
+<BaseLayout
+  title={metaTitle ?? `${title} | We Scale Startups`}
+  description={description}
+  path={path}
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: title, path }
+  ]}
+>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">{eyebrow}</p>

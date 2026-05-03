@@ -690,6 +690,53 @@ textarea:focus-visible {
   transform: translateY(0);
 }
 
+/* Visible breadcrumbs (pairs with BreadcrumbList JSON-LD) */
+.breadcrumb-wrap {
+  padding: 0.65rem 0 0;
+}
+
+.breadcrumb-nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28rem 0.5rem;
+  align-items: center;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+.breadcrumb-nav li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumb-nav li:not(:last-child)::after {
+  content: "/";
+  color: var(--dim);
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.breadcrumb-nav a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.breadcrumb-nav a:hover {
+  color: var(--ink-2);
+}
+
+.breadcrumb-nav [aria-current="page"] {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
 .shell {
   width: min(100% - 2rem, 1240px);
   margin-inline: auto;

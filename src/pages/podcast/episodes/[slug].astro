@@ -54,6 +54,11 @@ const breadcrumb = buildBreadcrumbSchema([
   title={`${e.title} | How Startups Win With AI`}
   description={e.summary.slice(0, 155)}
   schema={[breadcrumb, episodeSchema]}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Podcast", path: "/podcast" },
+    { name: e.title, path }
+  ]}
 >
   <article class="shell section">
     <p class="eyebrow">Podcast · Episode {e.episodeNumber > 0 ? e.episodeNumber : "template"}</p>

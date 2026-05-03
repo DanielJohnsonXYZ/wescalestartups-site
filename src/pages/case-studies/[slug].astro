@@ -55,6 +55,11 @@ const caseFaqs = [
   title={`${caseStudy.data.title} | We Scale Startups`}
   description={caseStudy.data.summary}
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Case studies", path: "/case-studies" },
+    { name: caseStudy.data.title, path }
+  ]}
   schema={[
     buildCaseStudyArticleSchema({
       name: caseStudy.data.title,

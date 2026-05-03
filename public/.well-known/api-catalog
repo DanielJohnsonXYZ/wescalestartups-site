@@ -2,6 +2,11 @@
   "linkset": [
     {
       "anchor": "https://wescalestartups.com",
+      "describedby": [
+        { "href": "https://wescalestartups.com/llms.txt", "type": "text/plain" },
+        { "href": "https://wescalestartups.com/llms-full.txt", "type": "text/markdown" },
+        { "href": "https://wescalestartups.com/markdown/home.md", "type": "text/markdown" }
+      ],
       "service-doc": [
         { "href": "https://wescalestartups.com/services" },
         { "href": "https://wescalestartups.com/start-here" },

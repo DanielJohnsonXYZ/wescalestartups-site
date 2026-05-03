@@ -6,6 +6,16 @@ const HOMEPAGE_AGENT_LINK =
   '</.well-known/api-catalog>; rel="api-catalog", ' +
   '</.well-known/agent-skills/index.json>; rel="alternate"; type="application/json"';
 
+/** Cloudflare Pages: use the ASSETS binding. Plain `fetch(same-origin)` in middleware is not reliable. */
+function fetchStaticAsset(context, pathname) {
+  const assetUrl = new URL(pathname, context.request.url);
+  const req = new Request(assetUrl.toString(), { method: "GET" });
+  if (context.env && context.env.ASSETS) {
+    return context.env.ASSETS.fetch(req);
+  }
+  return fetch(req);
+}
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
@@ -27,11 +37,12 @@ export async function onRequest(context) {
   if (path === "/" || path === "") {
     const accept = context.request.headers.get("Accept") || "";
     if (/\btext\/markdown\b/i.test(accept)) {
-      const mdUrl = new URL("/markdown/home.md", url.origin);
-      const mdRes = await fetch(mdUrl, { method: "GET" });
+      const mdRes = await fetchStaticAsset(context, "/markdown/home.md");
       if (mdRes.ok) {
-        const text = await mdRes.text();
-        return new Response(text, {
+        const method = context.request.method;
+        const isHead = method === "HEAD";
+        const body = isHead ? null : await mdRes.text();
+        return new Response(body, {
           headers: {
             "Content-Type": "text/markdown; charset=utf-8",
             Link: HOMEPAGE_AGENT_LINK,

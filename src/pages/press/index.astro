@@ -63,11 +63,45 @@ const brandAssets = [
   { label: "Open Graph default", href: "/og/default.svg" },
   { label: "Favicon", href: "/favicon.svg" }
 ];
+
+/** Scannable examples for journalists — names anonymised where required. */
+const pressClientWorkRows = [
+  {
+    company: "B2B fintech",
+    type: "Acquisition",
+    work: "Paid search and landing-page campaign",
+    outcome: "500+ qualified sign-ups (see proof hub)"
+  },
+  {
+    company: "AI / health",
+    type: "GTM build",
+    work: "Marketing function and acquisition narrative from a thin base",
+    outcome: "Foundation for repeatable pipeline"
+  },
+  {
+    company: "HealthTech / mental health",
+    type: "Positioning",
+    work: "Offer narrative and message-market alignment",
+    outcome: "Clearer GTM story for buyers and investors"
+  },
+  {
+    company: "EdTech",
+    type: "Acquisition",
+    work: "Channel and messaging sequencing",
+    outcome: "Sharper message-market fit"
+  },
+  {
+    company: "Financial wellness",
+    type: "Trust-led GTM",
+    work: "Positioning and acquisition foundations",
+    outcome: "Stronger trust narrative in a regulated category"
+  }
+];
 ---
 
 <BaseLayout
   title="Company Press Kit | We Scale Startups"
-  description="Company boilerplate, founder bio, credibility signals, logos, and contact details for We Scale Startups."
+  description="Press kit for We Scale Startups: company boilerplate, founder bio, proof metrics, logos, and media contact. For podcasts and speaking, use Daniel Johnson’s personal media kit on danieljohnson.xyz."
   keywords="We Scale Startups press kit, company boilerplate, startup PR assets, Daniel Johnson media"
   path="/press"
   schema={pressSchema}
@@ -140,6 +174,39 @@ const brandAssets = [
 
   <ProofLogos />
 
+  <section class="section" aria-labelledby="press-clients-heading">
+    <div class="shell">
+      <p class="eyebrow">Selected client work</p>
+      <h2 id="press-clients-heading">Examples journalists can scan quickly.</h2>
+      <p class="lede" style="max-width: 62ch; margin-top: 0.75rem;">
+        Some names are anonymised where confidentiality applies. Verify numbers against{" "}
+        <a href="/proof">the proof hub</a> and linked case studies before publication.
+      </p>
+      <div class="press-table-wrap" style="margin-top: 1.25rem; overflow-x: auto;">
+        <table class="press-client-table">
+          <thead>
+            <tr>
+              <th scope="col">Company / category</th>
+              <th scope="col">Type of work</th>
+              <th scope="col">Summary</th>
+              <th scope="col">Outcome signal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pressClientWorkRows.map((row) => (
+              <tr>
+                <td>{row.company}</td>
+                <td>{row.type}</td>
+                <td>{row.work}</td>
+                <td>{row.outcome}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-alt" aria-labelledby="press-founder-heading">
     <div class="shell">
       <p class="eyebrow">Leadership</p>
@@ -188,6 +255,16 @@ const brandAssets = [
     <div class="shell">
       <p class="eyebrow">Media contact</p>
       <h2 id="press-contact-heading">Company press and fact-checking</h2>
+      <div class="press-contact-routing" style="max-width: 62ch; margin-top: 0.75rem; line-height: 1.55;">
+        <p>
+          <strong>Company / WSS:</strong> boilerplate, metrics, logos, partner background, and fact-checking on published case formats — use the email below.
+        </p>
+        <p style="margin-top: 0.65rem;">
+          <strong>Podcast, speaking, expert commentary:</strong>{" "}
+          <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">{siteConfig.founderName}&rsquo;s personal media kit</a>{" "}
+          (headshots, topics, how to describe Daniel).
+        </p>
+      </div>
       <div class="press-contact-body">
         <div class="hero-actions">
           <!--email_off-->
@@ -359,5 +436,23 @@ const brandAssets = [
     margin: 0;
     font-size: 0.9rem;
     color: var(--muted);
+  }
+  .press-client-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .press-client-table th,
+  .press-client-table td {
+    border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .press-client-table thead th {
+    background: color-mix(in oklab, var(--violet) 8%, var(--bg));
+    font-weight: 700;
   }
 </style>

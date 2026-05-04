@@ -3,7 +3,7 @@ import CfEmailOff from "../../components/CfEmailOff.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { leadMagnets, resourcesRelatedReading, siteConfig } from "../../site";
+import { resourcesRelatedReading, siteConfig } from "../../site";
 
 function guideRequestMailto(title: string, id: string) {
   const outlineUrl = `${siteConfig.siteUrl}/resources#${id}`;

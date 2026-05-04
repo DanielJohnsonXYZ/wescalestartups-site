@@ -6,22 +6,22 @@ import { siteConfig } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Podcast Guest Application", url: "/podcast-guest-application" }
+    { name: "Home", path: "/" },
+    { name: "Podcast Guest Application", path: "/podcast-guest-application" }
   ])
 ];
 
 const guestFields = [
-  { name: "name", label: "Name", type: "text", required: true },
-  { name: "company", label: "Company", type: "text", required: true },
-  { name: "role", label: "Role / Title", type: "text", required: true },
-  { name: "website", label: "Website", type: "url", required: false },
-  { name: "linkedin", label: "LinkedIn Profile", type: "url", required: false },
-  { name: "what-building", label: "What are you building?", type: "textarea", required: true },
-  { name: "how-using-ai", label: "How are you using AI in your startup?", type: "textarea", required: true },
-  { name: "practical-lessons", label: "What practical lessons can listeners take away?", type: "textarea", required: true },
-  { name: "relevant-links", label: "Relevant links (product, press, LinkedIn, etc.)", type: "textarea", required: false },
-  { name: "email", label: "Email", type: "email", required: true }
+  { name: "name", label: "Name", type: "text" as const, required: true },
+  { name: "company", label: "Company", type: "text" as const, required: true },
+  { name: "role", label: "Role / Title", type: "text" as const, required: true },
+  { name: "website", label: "Website", type: "url" as const, required: false },
+  { name: "linkedin", label: "LinkedIn Profile", type: "url" as const, required: false },
+  { name: "what-building", label: "What are you building?", type: "textarea" as const, required: true },
+  { name: "how-using-ai", label: "How are you using AI in your startup?", type: "textarea" as const, required: true },
+  { name: "practical-lessons", label: "What practical lessons can listeners take away?", type: "textarea" as const, required: true },
+  { name: "relevant-links", label: "Relevant links (product, press, LinkedIn, etc.)", type: "textarea" as const, required: false },
+  { name: "email", label: "Email", type: "email" as const, required: true }
 ];
 
 const suggestedCopy = "Want to be a guest? We are looking for founders, operators, and growth leaders with practical examples of how AI is helping startups grow faster, save time, or make better commercial decisions.";
@@ -48,7 +48,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
       <SectionIntro
         eyebrow="Who we're looking for"
         title="Founders and operators with real AI growth stories."
-        intro="We want practical, specific examples — not theory. If your startup is using AI to grow faster, save time, or make better commercial decisions, we want to hear from you."
+        body="We want practical, specific examples — not theory. If your startup is using AI to grow faster, save time, or make better commercial decisions, we want to hear from you."
       />
       <div class="max-w-3xl grid gap-4">
         <div class="card p-6">
@@ -78,7 +78,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
       <SectionIntro
         eyebrow="Application form"
         title="Tell us about yourself and your AI story."
-        intro="The more specific you are, the faster we can see if there's a fit for the show."
+        body="The more specific you are, the faster we can see if there's a fit for the show."
       />
       <form class="max-w-2xl card p-8 md:p-10 space-y-5" id="guest-application" name="guest-application">
         {guestFields.map((field) => (
@@ -113,7 +113,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
       <SectionIntro
         eyebrow="Sponsorship"
         title="Interested in sponsoring the podcast?"
-        intro="Reach a high-intent audience of founders and operators building AI-native startups."
+        body="Reach a high-intent audience of founders and operators building AI-native startups."
       />
       <div class="max-w-3xl card p-8 md:p-10">
         <p class="text-lg leading-8 text-[color:var(--muted)]">
@@ -151,7 +151,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
   </section>
 </BaseLayout>
 
-<script define:vars={{ email: siteConfig.email }}>
+<script is:inline define:vars={{ email: siteConfig.email }}>
   const form = document.getElementById("guest-application");
 
   form?.addEventListener("submit", (event) => {

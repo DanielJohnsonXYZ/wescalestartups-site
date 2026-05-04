@@ -37,20 +37,22 @@ const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
 <script>
   // Check if banner was previously dismissed
   document.querySelectorAll('[data-dismissible="true"]').forEach((banner) => {
+    if (!(banner instanceof HTMLElement)) return;
     const id = banner.id;
     if (localStorage.getItem(`banner-dismissed-${id}`)) {
-      banner.style.display = 'none';
+      banner.style.display = "none";
     }
   });
 
   // Handle dismiss button clicks
-  document.querySelectorAll('[data-dismiss-id]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-dismiss-id');
+  document.querySelectorAll("[data-dismiss-id]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-dismiss-id");
+      if (!id) return;
       const banner = document.getElementById(id);
-      if (banner) {
-        banner.style.display = 'none';
-        localStorage.setItem(`banner-dismissed-${id}`, 'true');
+      if (banner instanceof HTMLElement) {
+        banner.style.display = "none";
+        localStorage.setItem(`banner-dismissed-${id}`, "true");
       }
     });
   });

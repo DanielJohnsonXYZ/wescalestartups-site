@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "check": "astro check",
     "preview": "astro preview",
     "verify:agents": "node scripts/verify-agent-discovery.mjs"
   },
@@ -22,5 +23,9 @@
   },
   "overrides": {
     "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.9.3"
   }
 }

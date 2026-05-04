@@ -48,12 +48,25 @@ export const siteConfig = {
   /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
   siteLastModified: "2026-05-03",
   ogImage: "/og/default.svg",
-  /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
+  /**
+   * Google Tag Manager — production container for wescalestartups.com only.
+   * Do not use the personal-site container (GTM-5S892HK on danieljohnson.xyz).
+   */
   gtmId: "GTM-TV6C7GS",
   /** Public X (Twitter) profile — used in Person schema sameAs */
   founderTwitter: "https://x.com/djohnsonxyz",
   /** Podcast hub on WSS — entity graph / sameAs */
   podcastUrl: "https://wescalestartups.com/podcast"
+} as const;
+
+/**
+ * Canonical JSON-LD @id nodes — Person is rooted on danieljohnson.xyz; Organization on this domain.
+ * Keeps Knowledge Graph / LLM entity resolution from splitting Daniel across two Person IDs.
+ */
+export const entityGraph = {
+  danielPerson: "https://danieljohnson.xyz/#person",
+  wssOrganization: `${siteConfig.siteUrl}/#organization`,
+  wssWebsite: `${siteConfig.siteUrl}/#website`
 } as const;
 
 /** Named methodology — use on home, GTM, llms.txt, and press for consistent entity language. */

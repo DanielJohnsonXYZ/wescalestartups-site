@@ -241,11 +241,7 @@ const description = `${magnet.description} Free download for ${magnet.audience.t
 
   <section class="section section-alt">
     <div class="shell">
-      <SectionIntro
-        eyebrow="What you get"
-        heading={`Inside the ${magnet.title}`}
-        intro={details.format}
-      />
+      <SectionIntro eyebrow="What you get" title={`Inside the ${magnet.title}`} body={details.format} />
       <ul class="check-list">
         {details.whatYouGet.map((item) => <li>{item}</li>)}
       </ul>
@@ -270,10 +266,7 @@ const description = `${magnet.description} Free download for ${magnet.audience.t
 
   <section class="section section-alt">
     <div class="shell">
-      <SectionIntro
-        eyebrow="FAQ"
-        heading="Three questions founders ask before requesting it."
-      />
+      <SectionIntro eyebrow="FAQ" title="Three questions founders ask before requesting it." />
       <div class="faq-stack">
         {details.faq.map((item, index) => (
           <details class="faq-item" open={index === 0}>
@@ -287,7 +280,7 @@ const description = `${magnet.description} Free download for ${magnet.audience.t
 
   <section class="section">
     <div class="shell">
-      <SectionIntro eyebrow="Other resources" heading="Three more, all free." />
+      <SectionIntro eyebrow="Other resources" title="Three more, all free." />
       <div class="card-grid">
         {otherMagnets.map((other) => (
           <a class="card" href={other.href}>

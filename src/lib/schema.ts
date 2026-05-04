@@ -1,5 +1,5 @@
 import { absoluteUrl } from "./utils";
-import { siteConfig } from "../site";
+import { entityGraph, siteConfig } from "../site";
 
 const personKnowsAbout = [
   "Fractional CMO",
@@ -14,13 +14,22 @@ export function buildPersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${siteConfig.siteUrl}/#person`,
+    "@id": entityGraph.danielPerson,
     name: siteConfig.founderName,
+    givenName: "Daniel",
+    familyName: "Johnson",
     jobTitle: "Founder and Fractional CMO",
     url: siteConfig.danielSite,
     email: siteConfig.email,
+    telephone: siteConfig.phone,
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/images/daniel-headshot-960.webp"),
+      width: 960,
+      height: 1003
+    },
     worksFor: {
-      "@id": `${siteConfig.siteUrl}/#organization`
+      "@id": entityGraph.wssOrganization
     },
     knowsAbout: [...personKnowsAbout],
     sameAs: [
@@ -29,8 +38,9 @@ export function buildPersonSchema() {
       siteConfig.growthMentor,
       siteConfig.mentorCruise,
       siteConfig.danielSite,
-      siteConfig.siteUrl,
       siteConfig.podcastUrl,
+      siteConfig.linkedin,
+      "https://www.youtube.com/@danieljohnson6000",
       "https://www.jbs.cam.ac.uk/",
       "https://startup.google.com/",
       "https://www.techstars.com/"
@@ -42,14 +52,14 @@ export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${siteConfig.siteUrl}/#organization`,
+    "@id": entityGraph.wssOrganization,
     name: siteConfig.name,
     url: siteConfig.siteUrl,
     email: siteConfig.email,
     telephone: siteConfig.phone,
     logo: absoluteUrl("/images/logos/wss-logo.webp"),
     founder: {
-      "@id": `${siteConfig.siteUrl}/#person`
+      "@id": entityGraph.danielPerson
     },
     knowsAbout: [...personKnowsAbout],
     address: {
@@ -74,12 +84,12 @@ export function buildWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${siteConfig.siteUrl}/#website`,
+    "@id": entityGraph.wssWebsite,
     name: siteConfig.name,
     url: siteConfig.siteUrl,
     description: siteConfig.description,
-    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
-    about: { "@id": `${siteConfig.siteUrl}/#organization` },
+    publisher: { "@id": entityGraph.wssOrganization },
+    about: { "@id": entityGraph.wssOrganization },
     inLanguage: "en-US"
   };
 }
@@ -90,7 +100,7 @@ export function buildServiceSchema(name: string, description: string, path: stri
     "@type": "Service",
     name,
     description,
-    provider: { "@id": `${siteConfig.siteUrl}/#organization` },
+    provider: { "@id": entityGraph.wssOrganization },
     url: absoluteUrl(path)
   };
 }
@@ -130,8 +140,8 @@ export function buildCaseStudySchema(name: string, description: string, path: st
     headline: name,
     description,
     url: absoluteUrl(path),
-    author: { "@id": `${siteConfig.siteUrl}/#person`, name: siteConfig.founderName },
-    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
+    publisher: { "@id": entityGraph.wssOrganization },
     mainEntityOfPage: absoluteUrl(path)
   };
 }
@@ -152,8 +162,8 @@ export function buildCaseStudyArticleSchema(opts: {
     url: absoluteUrl(opts.path),
     datePublished: opts.publishedAt.toISOString(),
     dateModified: (opts.updatedAt ?? opts.publishedAt).toISOString(),
-    author: { "@id": `${siteConfig.siteUrl}/#person`, name: siteConfig.founderName },
-    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
+    publisher: { "@id": entityGraph.wssOrganization },
     mainEntityOfPage: absoluteUrl(opts.path),
     keywords: opts.keywords?.join(", ")
   };
@@ -174,8 +184,8 @@ export function buildInsightArticleSchema(opts: {
     description: opts.description,
     datePublished: opts.publishedAt.toISOString(),
     dateModified: (opts.updatedAt ?? opts.publishedAt).toISOString(),
-    author: { "@id": `${siteConfig.siteUrl}/#person`, name: siteConfig.founderName },
-    publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
+    publisher: { "@id": entityGraph.wssOrganization },
     mainEntityOfPage: absoluteUrl(opts.path),
     keywords: opts.tags.join(", ")
   };

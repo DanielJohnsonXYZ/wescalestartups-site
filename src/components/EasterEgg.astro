@@ -21,17 +21,24 @@ import { siteConfig } from "../site";
 
 <script>
   (() => {
-    const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+    const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
     let idx = 0;
-    document.addEventListener('keydown', (e) => {
-      if (e.keyCode === KONAMI[idx]) {
+    document.addEventListener("keydown", (e) => {
+      const expected = KONAMI[idx];
+      const ok = idx < 8 ? e.key === expected : e.key.toLowerCase() === expected;
+      if (ok) {
         idx++;
         if (idx === KONAMI.length) {
           idx = 0;
-          const egg = document.getElementById('easter-egg');
-          if (egg) { egg.classList.add('is-visible'); egg.removeAttribute('aria-hidden'); }
+          const egg = document.getElementById("easter-egg");
+          if (egg) {
+            egg.classList.add("is-visible");
+            egg.removeAttribute("aria-hidden");
+          }
         }
-      } else { idx = 0; }
+      } else {
+        idx = 0;
+      }
     });
     document.getElementById('easter-egg-close')?.addEventListener('click', () => {
       const egg = document.getElementById('easter-egg');

@@ -235,7 +235,7 @@ const contactSchema = [
   </section>
 </BaseLayout>
 
-<script define:vars={{ email: siteConfig.email }}>
+<script is:inline define:vars={{ email: siteConfig.email }}>
   const form = document.getElementById("growth-enquiry");
 
   form?.addEventListener("submit", (event) => {

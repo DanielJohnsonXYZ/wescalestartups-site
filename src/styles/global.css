@@ -2861,6 +2861,29 @@ textarea:focus-visible {
   object-position: center top;
 }
 
+.daniel-visuals {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.daniel-photo--contextual {
+  aspect-ratio: 1 / 1;
+}
+
+.daniel-photo--contextual img {
+  object-position: center 35%;
+}
+
+.daniel-visuals-caption {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+  max-width: 40ch;
+}
+
 .daniel-copy h2 {
   margin: 0.4rem 0 1.4rem;
   font-family: "Fraunces Variable", Georgia, serif;

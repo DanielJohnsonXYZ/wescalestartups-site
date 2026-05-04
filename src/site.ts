@@ -67,7 +67,7 @@ export const methodologyBrand = {
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
-  "/": "2026-05-06",
+  "/": "2026-05-04",
   "/about": "2026-05-05",
   "/ai-growth-systems": "2026-05-01",
   "/book": "2026-05-04",
@@ -95,7 +95,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/markdown/home.md": "2026-05-03",
   "/press": "2026-05-04",
   "/pricing": "2026-05-03",
-  "/podcast": "2026-05-03",
+  "/podcast": "2026-05-04",
   "/insights/glossary": "2026-05-05",
   "/seo-content-strategy": "2026-05-05",
   "/podcast/episodes/how-startups-win-template": "2026-05-05",

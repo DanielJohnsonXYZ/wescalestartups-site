@@ -49,6 +49,7 @@ export const brandAssets = [
   { label: "Default social / Open Graph image (SVG)", href: "/og/default.svg" },
   { label: "Favicon", href: "/favicon.svg" },
   { label: "Founder headshot (WebP, high resolution)", href: "/images/daniel-headshot-960.webp" },
+  { label: "Founder contextual photo — informal / in-environment (WebP)", href: "/images/daniel-aircraft-960.webp" },
   { label: "Example deliverable diagram (anonymised)", href: "/images/deliverables/system-preview.svg" },
   { label: "Approved company boilerplates (this page)", href: "/press#press-boilerplate-heading" },
   { label: "Approved founder bio (this page)", href: "/press#press-founder-heading" }

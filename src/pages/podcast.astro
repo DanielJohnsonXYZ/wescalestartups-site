@@ -186,8 +186,41 @@ const podcastSchema = {
   <!-- ABOUT THE HOST -->
   <section class="section section-alt">
     <div class="shell host-grid">
-      <div class="host-photo">
-        <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson" width="960" height="1003" loading="lazy" decoding="async" />
+      <div class="host-photos" aria-label="Host photos">
+        <figure class="host-photo">
+          <picture>
+            <source
+              srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
+              sizes="(max-width: 720px) 45vw, 140px"
+              type="image/webp"
+            />
+            <img
+              src="/images/daniel-headshot-640.webp"
+              alt="Daniel Johnson — headshot"
+              width="640"
+              height="668"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </figure>
+        <figure class="host-photo host-photo--context">
+          <picture>
+            <source
+              srcset="/images/daniel-aircraft-640.webp 640w, /images/daniel-aircraft-960.webp 960w"
+              sizes="(max-width: 720px) 45vw, 140px"
+              type="image/webp"
+            />
+            <img
+              src="/images/daniel-aircraft-640.webp"
+              alt="Daniel Johnson — informal context photo"
+              width="640"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </figure>
       </div>
       <div class="host-bio">
         <p class="eyebrow">Host</p>
@@ -391,14 +424,37 @@ const podcastSchema = {
     align-items: center;
   }
   @media (min-width: 720px) {
-    .host-grid { grid-template-columns: 300px 1fr; }
+    .host-grid { grid-template-columns: minmax(200px, 280px) 1fr; }
+  }
+  .host-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  @media (min-width: 720px) {
+    .host-photos {
+      margin: 0;
+      grid-template-columns: 1fr;
+      max-width: 200px;
+    }
+  }
+  .host-photo {
+    margin: 0;
   }
   .host-photo img {
     width: 100%;
-    max-width: 300px;
     height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
     border-radius: 1rem;
     border: 1px solid var(--line);
+    display: block;
+  }
+  .host-photo--context img {
+    aspect-ratio: 1 / 1;
+    object-position: center 35%;
   }
   .host-bio p {
     font-size: 0.95rem;

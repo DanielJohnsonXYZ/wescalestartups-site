@@ -90,6 +90,12 @@ function metricLead(result: string) {
             <span class="beat"><span class="grad">Step out of the loop.</span></span>
           </h1>
 
+          <p class="hero-firstperson">
+            I'm <strong>Daniel Johnson</strong>, fractional CMO. I help post-PMF B2B SaaS and AI founders build GTM systems that compound — commercially on{" "}
+            <a href={siteConfig.siteUrl}>{siteConfig.canonicalHost}</a>, and as a personal brand on{" "}
+            <a href={siteConfig.danielSite} rel="me">{siteConfig.danielSite.replace(/^https:\/\//, "")}</a>.
+          </p>
+
           <TldrCallout
             text="We Scale Startups helps post-PMF B2B SaaS and AI founders name the growth bottleneck, build a coherent acquisition system, and transfer the weekly rhythm — so pipeline compounds without every decision routing through the founder. Fractional CMO judgement plus delivery: diagnosis, sprints, system builds, and embedded leadership when the fit is right."
           />
@@ -551,6 +557,19 @@ function metricLead(result: string) {
 </BaseLayout>
 
 <style>
+  .hero-firstperson {
+    margin-top: 0.85rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 58ch;
+  }
+  .hero-firstperson a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   .hero-plain {
     margin-top: 1.25rem;
     font-size: 1.05rem;

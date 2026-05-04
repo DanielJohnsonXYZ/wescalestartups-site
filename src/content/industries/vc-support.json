@@ -1,21 +1,46 @@
 {
-  "title": "VC Support",
-  "description": "Growth diagnosis, workshops, and office hours for VC-backed founders who need practical help turning traction into a clearer growth system.",
-  "buyerProblem": "Portfolio founders often need senior commercial judgment before they are ready to hire or brief a full agency.",
+  "title": "Venture capital & portfolio marketing",
+  "description": "Practical GTM help for VC-backed founders. Short diagnosis sessions, portfolio workshops, and clear next steps before you scale spend or hiring.",
+  "buyerProblem": "Portfolio teams often need senior commercial judgment early. Many founders are post-PMF but still founder-dependent on growth decisions.",
   "usefulWhen": [
-    "A founder needs a second opinion on their growth bottleneck",
-    "The portfolio needs practical AI-native GTM training",
-    "A startup needs a sharper growth plan before the next fundraise or hiring decision"
+    "A founder wants a second opinion on the real bottleneck — not another channel plan.",
+    "The portfolio needs a practical session on AI-native GTM without tool hype.",
+    "A company needs a sharper growth story before the next fundraise or key hire."
   ],
   "growthSystem": [
     "Founder growth diagnosis sessions",
-    "Portfolio workshops on AI-native GTM and acquisition",
-    "90-day roadmap reviews",
-    "Referral path into sprint or fractional CMO support where useful"
+    "Portfolio workshops on acquisition rhythm and reporting",
+    "90-day roadmap reviews tied to one primary constraint",
+    "Clean referral into sprint or fractional CMO work when it is a fit"
   ],
   "proof": [
-    "Mentoring and programme work across Google for Startups, GrowthMentor, and startup education communities",
-    "Founder-led operator support for teams between traction and scale"
+    "Mentoring across Google for Startups, Techstars, GrowthMentor, and founder education programmes",
+    "Operator-side support for teams moving from traction to repeatable acquisition"
   ],
-  "order": 9
+  "order": 9,
+  "readingBlocks": [
+    {
+      "heading": "What this page is for",
+      "paragraphs": [
+        "This is the VC and portfolio lens on the same WSS work: name the bottleneck, build the acquisition system, transfer the weekly rhythm.",
+        "If you are an investor or platform lead, think of this as senior GTM judgement for founders who are already shipping — not a generic marketing retainer."
+      ]
+    },
+    {
+      "heading": "Key takeaways",
+      "bullets": [
+        "Start with the constraint, not a channel shopping list.",
+        "Use one weekly decision view so experiments stop colliding.",
+        "Keep proof and messaging aligned before you scale paid or outbound.",
+        "When the team is ready, hand off a running cadence — not a slide deck."
+      ]
+    },
+    {
+      "heading": "How a first engagement usually runs",
+      "paragraphs": [
+        "We run a focused diagnosis, then agree whether a sprint, system build, or fractional CMO layer is the honest next step.",
+        "No forced long retainer — the goal is clarity and a system the team can run."
+      ]
+    }
+  ]
 }

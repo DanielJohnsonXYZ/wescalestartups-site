@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { strategicPageRelatedInsights, siteConfig } from "../site";
+import { methodologyBrand, strategicPageRelatedInsights, siteConfig } from "../site";
 
 const pageSchema = [
   buildBreadcrumbSchema([
@@ -37,7 +37,7 @@ const systemComponents = [
 <BaseLayout
   path="/growth-operating-system"
   title="Growth Operating System | We Scale Startups"
-  description="The WSS Growth Operating System: diagnosis, acquisition design, execution, and transfer — so post-PMF startups stop depending on founder heroics."
+  description={`The ${methodologyBrand.shortName}: diagnosis, acquisition design, execution, and transfer — so post-PMF startups stop depending on founder heroics.`}
   keywords="growth operating system, startup growth system, fractional CMO, acquisition system, post-PMF growth, B2B SaaS growth"
   schema={pageSchema}
   lastUpdated={siteConfig.lastUpdated}
@@ -47,7 +47,7 @@ const systemComponents = [
       <p class="eyebrow">Cornerstone</p>
       <h1>Growth operating system.</h1>
       <p class="lede">
-        A repeatable system for post-PMF startups to diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm — so growth stops depending on founder heroics.
+        The <strong>{methodologyBrand.shortName}</strong> is the named WSS model for post-PMF teams: diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm — so growth stops depending on founder heroics.
       </p>
       <div class="hero-actions">
         <a

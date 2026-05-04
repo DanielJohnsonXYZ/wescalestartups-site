@@ -25,7 +25,23 @@ const industries = defineCollection({
     usefulWhen: z.array(z.string()),
     growthSystem: z.array(z.string()),
     proof: z.array(z.string()),
-    order: z.number().default(999)
+    order: z.number().default(999),
+    /** Optional readable sections (shorter paragraphs) for dense industry pages. */
+    readingBlocks: z
+      .array(
+        z
+          .object({
+            heading: z.string(),
+            paragraphs: z.array(z.string()).optional(),
+            bullets: z.array(z.string()).optional()
+          })
+          .refine(
+            (b) =>
+              (b.paragraphs?.length ?? 0) > 0 || (b.bullets?.length ?? 0) > 0,
+            { message: "Each reading block needs paragraphs and/or bullets." }
+          )
+      )
+      .optional()
   })
 });
 

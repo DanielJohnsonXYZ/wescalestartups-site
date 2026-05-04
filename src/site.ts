@@ -52,9 +52,9 @@ export const siteConfig = {
   gtmId: "GTM-TV6C7GS"
 } as const;
 
-/** Named methodology — use on home, GTM, and press for consistent entity language. */
+/** Named methodology — use on home, GTM, llms.txt, and press for consistent entity language. */
 export const methodologyBrand = {
-  shortName: "WSS Growth Operating System",
+  shortName: "Growth Bottleneck System",
   tagline: "Diagnose the bottleneck, build the acquisition system, transfer the weekly cadence."
 } as const;
 
@@ -123,7 +123,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/industries/healthtech": "2026-05-03",
   "/industries/saas-growth": "2026-05-03",
   "/industries/seed-to-series-b": "2026-05-03",
-  "/industries/vc-support": "2026-05-03"
+  "/industries/vc-support": "2026-05-04"
 };
 
 export const navigation = [
@@ -257,7 +257,15 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/how-it-works", label: "How it works" },
   { href: "/proof", label: "Proof hub" },
   { href: "/diagnose", label: "5-layer diagnostic" },
-  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" }
+  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+  { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+  { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+  { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
+  { href: "/industries/b2b-saas", label: "B2B SaaS industry notes" },
+  { href: "/industries/fintech", label: "FinTech industry notes" },
+  { href: "/industries/healthtech", label: "HealthTech industry notes" },
+  { href: "/industries/edtech", label: "EdTech industry notes" }
 ];
 
 /** /insights hub — frameworks and proof. */
@@ -266,7 +274,12 @@ export const insightsHubRelatedReading: readonly { href: string; label: string }
   { href: "/diagnose", label: "5-layer framework" },
   { href: "/quiz", label: "Growth bottleneck quiz" },
   { href: "/proof", label: "Proof hub" },
-  { href: "/resources", label: "Resources" }
+  { href: "/resources", label: "Resources" },
+  { href: "/industries/b2b-saas", label: "B2B SaaS market notes" },
+  { href: "/industries/fintech", label: "FinTech market notes" },
+  { href: "/industries/healthtech", label: "HealthTech market notes" },
+  { href: "/industries/edtech", label: "EdTech market notes" },
+  { href: "/industries/vc-support", label: "VC & portfolio marketing" }
 ];
 
 /**
@@ -349,7 +362,8 @@ export const aboutRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/services", label: "Services" },
-  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+  { href: "https://danieljohnson.xyz/", label: "Daniel Johnson — personal site" }
 ];
 
 /** /contact. */
@@ -381,7 +395,10 @@ export const industriesHubRelatedReading: readonly { href: string; label: string
   { href: "/proof", label: "Proof hub" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/services", label: "Services" },
-  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" }
+  { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" },
+  { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+  { href: "/industries/vc-support", label: "VC & portfolio marketing support" }
 ];
 
 /** /industries/[slug] — same links every sector. */
@@ -389,7 +406,11 @@ export const industryDetailRelatedReading: readonly { href: string; label: strin
   { href: "/industries", label: "All industries" },
   { href: "/proof", label: "Proof hub" },
   { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Case studies" }
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+  { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+  { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
 ];
 
 /** /build. */
@@ -426,7 +447,15 @@ export const homeRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/diagnose", label: "5-layer diagnostic framework" },
   { href: "/ai-growth-systems", label: "AI growth systems" },
   { href: "/industries", label: "Industries" },
+  { href: "/industries/b2b-saas", label: "B2B SaaS industry notes" },
+  { href: "/industries/fintech", label: "FinTech industry notes" },
+  { href: "/industries/healthtech", label: "HealthTech industry notes" },
+  { href: "/industries/edtech", label: "EdTech industry notes" },
   { href: "/insights", label: "Insights" },
+  { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
+  { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
+  { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/experimentation", label: "Experimentation" },
   { href: "/when-growth-plateaus", label: "When growth plateaus" },

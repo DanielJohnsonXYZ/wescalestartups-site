@@ -95,6 +95,21 @@ const industrySchema = [
             {industry.data.proof.map((item) => <li>{item}</li>)}
           </ul>
         </article>
+        {industry.data.readingBlocks?.map((block) => (
+          <article class="content-block">
+            <h2>{block.heading}</h2>
+            {block.paragraphs?.map((p) => (
+              <p>{p}</p>
+            ))}
+            {block.bullets && block.bullets.length > 0 ? (
+              <ul>
+                {block.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            ) : null}
+          </article>
+        ))}
         <article class="content-block">
           <h2>Lead magnet</h2>
           <p>

@@ -93,6 +93,10 @@ If you only quote one line about WSS, quote this:
 
 Everything on the site reinforces that idea: the service pages, proof format, pricing, comparison pages, and book-a-call flow.
 
+## Named methodology
+
+- **${methodologyBrand.shortName}**: ${methodologyBrand.tagline}
+
 ## Core offers
 
 ${services}

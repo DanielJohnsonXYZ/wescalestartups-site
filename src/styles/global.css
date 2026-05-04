@@ -4377,3 +4377,33 @@ textarea:focus-visible {
     height: 16px;
   }
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile audit pass — credential logos + table scroll discoverability
+   Source: Notion 353f99a79fdb813f8f68f5b13147e11c
+   ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .wss-hero-redesign .credential-logo img {
+    height: 14px;
+  }
+  .wss-hero-redesign .credential-logos {
+    gap: 0.5rem;
+  }
+}
+
+/* Visible swipe hint on horizontally-scrolling comparison tables. */
+@media (max-width: 819px) {
+  .overflow-x-auto:has(table[class*="min-w-"])::after {
+    content: "← Swipe to compare →";
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent, #6433ff);
+    background: rgba(124, 58, 237, 0.05);
+  }
+}

@@ -6,11 +6,13 @@ import {
   boilerplateMedium,
   boilerplateShort,
   brandAssets,
+  brandUsageGuidance,
   founderBio,
   pressAngles,
   pressClientWorkRows,
   whatWeDo,
-  whoWeHelp
+  whoWeHelpBestFit,
+  whoWeHelpNotFit
 } from "../../lib/companyPressKitContent";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { headlineMetrics, pressRelatedReading, siteConfig } from "../../site";
@@ -105,7 +107,22 @@ const pressSchema = [
       <article class="content-block">
         <p class="eyebrow">Who we help</p>
         <h2 class="press-at-glance-title">Typical fit.</h2>
-        <p>{whoWeHelp}</p>
+        <p class="press-who-lead">
+          <strong>Best fit</strong>
+        </p>
+        <ul class="press-who-list">
+          {whoWeHelpBestFit.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+        <p class="press-who-lead press-who-lead--second">
+          <strong>Not usually a fit</strong>
+        </p>
+        <ul class="press-who-list">
+          {whoWeHelpNotFit.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
       </article>
     </div>
   </section>
@@ -177,9 +194,9 @@ const pressSchema = [
   <section class="section" aria-labelledby="press-brand-heading">
     <div class="shell">
       <p class="eyebrow">Brand assets</p>
-      <h2 id="press-brand-heading">Logos and default social preview.</h2>
+      <h2 id="press-brand-heading">Logos, imagery, and usage.</h2>
       <p class="lede" style="max-width: 62ch; margin-top: 1rem;">
-        Use these URLs when you need raster or SVG marks. For founder photography and speaker topics, use Daniel&apos;s{" "}
+        Download URLs for marks and defaults. For additional speaker photography and topics, use Daniel&apos;s{" "}
         <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">personal media kit</a>.
       </p>
       <ul class="brand-assets-list">
@@ -189,13 +206,14 @@ const pressSchema = [
           </li>
         ))}
       </ul>
+      <p class="brand-usage-guidance">{brandUsageGuidance}</p>
     </div>
   </section>
 
   <section class="section section-alt" aria-labelledby="press-angles-heading">
     <div class="shell">
       <p class="eyebrow">Press angles</p>
-      <h2 id="press-angles-heading">Story hooks that match how we work.</h2>
+      <h2 id="press-angles-heading">Press angles We Scale Startups can comment on.</h2>
       <ul class="press-angles-list">
         {pressAngles.map((angle) => (
           <li>{angle}</li>
@@ -369,6 +387,28 @@ const pressSchema = [
     color: var(--ink);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+  .brand-usage-guidance {
+    margin: 1.15rem 0 0;
+    max-width: 62ch;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .press-who-lead {
+    margin: 0.5rem 0 0.35rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .press-who-lead--second {
+    margin-top: 1rem;
+  }
+  .press-who-list {
+    margin: 0.25rem 0 0;
+    padding-left: 1.15rem;
+    max-width: 58ch;
+    line-height: 1.55;
+    color: var(--ink);
   }
   .press-contact-body {
     margin-top: 1rem;

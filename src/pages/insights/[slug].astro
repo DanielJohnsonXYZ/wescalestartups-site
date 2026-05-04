@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { buildBreadcrumbSchema, buildInsightArticleSchema } from "../../lib/schema";
+import { buildBreadcrumbSchema, buildFaqSchema, buildInsightArticleSchema } from "../../lib/schema";
 import { formatDate } from "../../lib/utils";
 import { siteConfig } from "../../site";
 import EmailSignup from "../../components/EmailSignup.astro";
@@ -46,7 +46,8 @@ const schemas = [
     { name: "Home", path: "/" },
     { name: "Insights", path: "/insights" },
     { name: insight.data.title, path }
-  ])
+  ]),
+  ...(insight.data.faqs?.length ? [buildFaqSchema(insight.data.faqs)] : [])
 ];
 ---
 

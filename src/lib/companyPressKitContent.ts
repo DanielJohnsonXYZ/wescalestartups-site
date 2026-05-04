@@ -14,21 +14,49 @@ export const founderBio =
 export const whatWeDo =
   "Growth diagnosis, sprint execution, acquisition systems, and fractional CMO leadership — with dashboards, experiment cadence, and leadership rituals designed to transfer ownership.";
 
-export const whoWeHelp =
-  "Most often Seed–Series B teams with real traction and uneven acquisition — typically founder-led GTM, inconsistent pipeline, or agencies executing tactics without a single decision view.";
+/** Best-fit profile for journalists (company press kit). */
+export const whoWeHelpBestFit = [
+  "Seed to Series B startups",
+  "Post-PMF companies with paying customers",
+  "Founder-led AI and B2B SaaS teams",
+  "Companies where growth still depends too heavily on the founder",
+  "Teams with traction but unclear repeatable pipeline"
+] as const;
+
+export const whoWeHelpNotFit = [
+  "Pre-revenue companies",
+  "Teams still searching for a problem",
+  "Businesses looking only for cheap ad execution",
+  "Companies that want vanity metrics instead of revenue impact"
+] as const;
 
 export const pressAngles = [
-  "Why post-PMF teams plateau when acquisition channels run in isolation.",
-  "Founder dependency vs weekly operating rhythm — how teams decide what to scale, stop, or fix.",
-  "Fractional CMO vs agency: systems ownership vs channel execution.",
-  "AI-era visibility and credibility — reporting formats AI assistants can cite."
+  "Why founder-led growth breaks after early traction.",
+  "Why post-PMF startups struggle to build repeatable pipeline.",
+  "Why agencies often fail Seed to Series B startups.",
+  "Why AI startups need sharper positioning, not just more content.",
+  "Why fractional CMO support is becoming more common.",
+  "Why senior growth judgment matters more as AI makes tactics cheaper.",
+  "Why startup growth systems beat one-off campaign spikes."
 ] as const;
 
 export const brandAssets = [
-  { label: "Primary logo (webp)", href: "/images/logos/wss-logo.webp" },
-  { label: "Open Graph default", href: "/og/default.svg" },
-  { label: "Favicon", href: "/favicon.svg" }
+  { label: "WSS logo (colour, WebP)", href: "/images/logos/wss-logo.webp" },
+  {
+    label: "WSS logo on dark backgrounds (use white / inverted treatment from the colour master)",
+    href: "/images/logos/wss-logo.webp"
+  },
+  { label: "Default social / Open Graph image (SVG)", href: "/og/default.svg" },
+  { label: "Favicon", href: "/favicon.svg" },
+  { label: "Founder headshot (WebP, high resolution)", href: "/images/daniel-headshot-960.webp" },
+  { label: "Example deliverable diagram (anonymised)", href: "/images/deliverables/system-preview.svg" },
+  { label: "Approved company boilerplates (this page)", href: "/press#press-boilerplate-heading" },
+  { label: "Approved founder bio (this page)", href: "/press#press-founder-heading" }
 ] as const;
+
+/** Short usage note shown under the brand asset list on /press */
+export const brandUsageGuidance =
+  "Do not stretch, skew, or add effects to the wordmark. Maintain clear space at least equal to the cap height of “We”. On dark layouts, use a monochrome white version derived from the colour logo. For colour reference, match the live site: violet accent #6657ff, ink #14121a, cream background #fffefa.";
 
 export type PressClientWorkRow = {
   company: string;

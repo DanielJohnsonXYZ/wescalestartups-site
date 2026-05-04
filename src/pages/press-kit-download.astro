@@ -5,11 +5,13 @@ import {
   boilerplateMedium,
   boilerplateShort,
   brandAssets,
+  brandUsageGuidance,
   founderBio,
   pressAngles,
   pressClientWorkRows,
   whatWeDo,
-  whoWeHelp
+  whoWeHelpBestFit,
+  whoWeHelpNotFit
 } from "../lib/companyPressKitContent";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
@@ -71,7 +73,18 @@ const schemas = [
         <p>{whatWeDo}</p>
 
         <h3 class="press-print-h">Who we help</h3>
-        <p>{whoWeHelp}</p>
+        <p><strong>Best fit</strong></p>
+        <ul>
+          {whoWeHelpBestFit.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+        <p><strong>Not usually a fit</strong></p>
+        <ul>
+          {whoWeHelpNotFit.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
 
         <h3 class="press-print-h">Proof points</h3>
         <p class="press-print-note">Verify against {absoluteUrl("/proof")} before citing.</p>
@@ -116,6 +129,7 @@ const schemas = [
             </li>
           ))}
         </ul>
+        <p>{brandUsageGuidance}</p>
 
         <h3 class="press-print-h">Press angles</h3>
         <ul>

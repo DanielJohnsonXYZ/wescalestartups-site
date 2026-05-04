@@ -73,7 +73,15 @@ const insights = defineCollection({
     author: z.string().default("Daniel Johnson"),
     tags: z.array(z.string()),
     tldr: z.string(),
-    order: z.number().default(999)
+    order: z.number().default(999),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string()
+        })
+      )
+      .optional()
   })
 });
 

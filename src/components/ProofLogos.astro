@@ -1,5 +1,5 @@
 ---
-import { proofClients } from "../site";
+import { proofClients, proofEcosystemLogos } from "../site";
 ---
 
 <section class="proof-strip" aria-label="Selected client work and startup growth engagements">
@@ -7,15 +7,52 @@ import { proofClients } from "../site";
     <div>
       <p class="eyebrow">Current &amp; recent client work</p>
       <h2>Real engagements, not borrowed logo theatre.</h2>
+      <p class="proof-strip-lede">
+        Each mark below is labelled: <strong>paid client work</strong> (case study) vs <strong>programmes &amp; lecturing</strong> so nothing reads like an implied client when it is not.
+      </p>
     </div>
-    <div class="proof-client-row">
-      {proofClients.map((client) => (
-        <article class="proof-client-tile">
-          <strong>{client.label}</strong>
-          <span>{client.context}</span>
-          <p>{client.proof}</p>
-        </article>
-      ))}
+    <div class="proof-clients-stack">
+      <div class="proof-client-row">
+        {proofClients.map((client) => (
+          <article class="proof-client-tile">
+            <div class="proof-client-logo-row">
+              <img
+                class="proof-client-logo"
+                src={client.logoSrc}
+                alt=""
+                width="140"
+                height="40"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="proof-client-relationship">{client.relationship}</span>
+            </div>
+            <strong>
+              <a href={`/case-studies/${client.caseSlug}`} data-cta={`proof-client-${client.caseSlug}`}>
+                {client.label}
+              </a>
+            </strong>
+            <span class="proof-client-context">{client.context}</span>
+            <p>{client.proof}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="proof-ecosystem">
+        <p class="eyebrow">Programmes, lecturing &amp; reviews</p>
+        <p class="proof-ecosystem-lede">
+          These are <strong>not</strong> client logos — context for how the operator shows up before you hire WSS.
+        </p>
+        <ul class="proof-eco-grid">
+          {proofEcosystemLogos.map((item) => (
+            <li class="proof-eco-tile">
+              <img src={item.src} alt="" width="120" height="36" loading="lazy" decoding="async" class="proof-eco-logo" />
+              <span class="proof-eco-name">{item.name}</span>
+              <span class="proof-eco-rel">{item.relationship}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 </section>

@@ -100,7 +100,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/seo-content-strategy": "2026-05-05",
   "/podcast/episodes/how-startups-win-template": "2026-05-05",
   "/privacy": "2026-05-03",
-  "/proof": "2026-05-03",
+  "/proof": "2026-05-04",
   "/quiz": "2026-05-05",
   "/reports": "2026-05-01",
   "/resources": "2026-05-03",
@@ -483,12 +483,68 @@ export const termsPageRelatedLinks: readonly { href: string; label: string }[] =
 ];
 
 export const proofClients = [
-  { label: "Ned", caseSlug: "ned", context: "Fintech client · Fractional CMO engagement", proof: "500+ sign-ups from paid search" },
-  { label: "Diadia Health", caseSlug: "diadia-health", context: "AI precision medicine client · Growth Diagnosis + Sprint", proof: "Marketing function built from zero" },
-  { label: "eQuoo", caseSlug: "equoo", context: "Healthtech client · Fractional CMO engagement", proof: "Clearer acquisition narrative" },
-  { label: "LessonsUp", caseSlug: "lessonsup", context: "EdTech client · Acquisition System Build", proof: "Sharper message-market fit" },
-  { label: "Nevly", caseSlug: "nevly", context: "Financial wellness client · Sprint + CMO support", proof: "Trust-led GTM foundations" },
-  { label: "Madiha Shahid", caseSlug: "madiha", context: "Operations & Strategy · WSS team", proof: "Ongoing operational support and strategy execution" }
+  {
+    label: "Ned",
+    caseSlug: "ned",
+    logoSrc: "/images/logos/ned.svg",
+    relationship: "Paid client engagement",
+    context: "Fintech · Fractional CMO",
+    proof: "500+ sign-ups from paid search"
+  },
+  {
+    label: "Diadia Health",
+    caseSlug: "diadia-health",
+    logoSrc: "/images/logos/diadia-health.svg",
+    relationship: "Paid client engagement",
+    context: "AI / precision medicine · Diagnosis + Sprint",
+    proof: "Marketing function built from zero"
+  },
+  {
+    label: "eQuoo",
+    caseSlug: "equoo",
+    logoSrc: "/images/logos/equoo.svg",
+    relationship: "Paid client engagement",
+    context: "Healthtech · Fractional CMO",
+    proof: "Clearer acquisition narrative"
+  },
+  {
+    label: "LessonsUp",
+    caseSlug: "lessonsup",
+    logoSrc: "/images/logos/lessonsup.svg",
+    relationship: "Paid client engagement",
+    context: "EdTech · Acquisition system build",
+    proof: "Sharper message-market fit"
+  },
+  {
+    label: "Nevly",
+    caseSlug: "nevly",
+    logoSrc: "/images/logos/nevly.svg",
+    relationship: "Paid client engagement",
+    context: "Financial wellness · Sprint + CMO support",
+    proof: "Trust-led GTM foundations"
+  }
+] as const;
+
+/** Non-client marks on /proof — each logo paired with how the relationship should be read. */
+export const proofEcosystemLogos = [
+  {
+    src: "/images/logos/google.webp",
+    alt: "Google for Startups",
+    name: "Google for Startups",
+    relationship: "Mentor · startup programmes"
+  },
+  {
+    src: "/images/logos/cambridge.webp",
+    alt: "Cambridge Judge Business School",
+    name: "Cambridge Judge",
+    relationship: "Guest lecturing · entrepreneurship"
+  },
+  {
+    src: "/images/logos/growthmentor.png",
+    alt: "GrowthMentor",
+    name: "GrowthMentor",
+    relationship: "External reviews · 479+ mentor sessions"
+  }
 ] as const;
 
 /** Pricing / services — short reassurance lines (Growth Hub: trust near price). */

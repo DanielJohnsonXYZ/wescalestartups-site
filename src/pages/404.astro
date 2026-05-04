@@ -8,10 +8,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   path="/404"
   metaRobots="noindex,follow"
 >
-  <section class="page-hero">
+  <section class="page-hero" aria-labelledby="wss-404-title">
     <div class="shell">
       <p class="eyebrow">404</p>
-      <h1>This page wandered off.</h1>
+      <h1 id="wss-404-title">This page wandered off.</h1>
       <p>The useful paths are still here: start here, services, proof, book, or contact.</p>
       <div class="hero-actions">
         <a class="button button-dark" href="/" data-cta="404-home">Go home</a>
@@ -20,6 +20,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <a class="button button-light" href="/book" data-cta="404-book">Book</a>
         <a class="button button-light" href="/contact" data-cta="404-contact">Contact</a>
       </div>
+      <nav class="mt-10 max-w-2xl border-t border-[color:var(--line)] pt-8" aria-label="More ways to continue">
+        <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Also try</p>
+        <ul class="mt-4 grid gap-2 text-sm text-[color:var(--muted)] sm:grid-cols-2">
+          <li>
+            <a class="link-arrow" href="/newsletter" data-cta="404-newsletter">Newsletter →</a>
+          </li>
+          <li>
+            <a class="link-arrow" href="/insights" data-cta="404-insights">Insights →</a>
+          </li>
+          <li>
+            <a class="link-arrow" href="/growth-course" data-cta="404-growth-course">Growth course →</a>
+          </li>
+          <li>
+            <a class="link-arrow" href="/services" data-cta="404-services">Services →</a>
+          </li>
+          <li class="sm:col-span-2">
+            <a class="link-arrow" href="https://danieljohnson.xyz/start-here/" data-cta="404-daniel-start-here" rel="noopener">
+              Personal site: Start here (Daniel Johnson) →
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </section>
 </BaseLayout>

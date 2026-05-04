@@ -19,10 +19,10 @@ const schemas = [
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
 >
-  <section class="page-hero">
+  <section class="page-hero" aria-labelledby="wss-newsletter-title">
     <div class="shell max-w-3xl">
       <p class="eyebrow">Newsletter</p>
-      <h1>Here's Some Growth</h1>
+      <h1 id="wss-newsletter-title">Here's Some Growth</h1>
       <p class="hero-copy">
         A fortnightly email for founders and operators who are past PMF but still fighting inconsistent pipeline. One concrete note
         every other Monday — bottleneck framing, acquisition rhythm, and what actually moved the needle in client work. No agency
@@ -30,6 +30,13 @@ const schemas = [
       </p>
       <p class="mt-4 text-[color:var(--muted)]">
         Sent from Daniel Johnson · <span class="whitespace-nowrap">{siteConfig.email}</span> · ~10:00 GMT on alternating Mondays.
+      </p>
+      <p class="mt-6 text-sm leading-relaxed text-[color:var(--muted)]">
+        For Daniel’s personal writing list (occasional growth notes from{" "}
+        <a class="link-arrow" href={`${siteConfig.danielSite}/newsletter/`} rel="noopener">
+          danieljohnson.xyz
+        </a>
+        ), use that page — this list is the We Scale Startups / operator lens.
       </p>
     </div>
   </section>

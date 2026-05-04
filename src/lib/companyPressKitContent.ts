@@ -9,7 +9,7 @@ export const boilerplateMedium =
 export const boilerplateLong = `${boilerplateMedium} Work is delivered through Daniel Johnson and senior operators, with proof-oriented reporting — Problem / Action / Result — and explicit transfer so growth stops depending on founder heroics.`;
 
 export const founderBio =
-  "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor.";
+  "Daniel Johnson is a fractional CMO and GTM operator who helps post-PMF AI and B2B SaaS startups build repeatable growth systems. He is the founder of We Scale Startups and mentors founders through Google for Startups, Techstars, and GrowthMentor. He moderates Online Geniuses, a 53,000+ member marketing community.";
 
 export const whatWeDo =
   "Growth diagnosis, sprint execution, acquisition systems, and fractional CMO leadership — with dashboards, experiment cadence, and leadership rituals designed to transfer ownership.";

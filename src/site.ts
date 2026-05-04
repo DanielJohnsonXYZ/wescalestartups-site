@@ -64,7 +64,7 @@ export const methodologyBrand = {
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
   "/": "2026-05-05",
-  "/about": "2026-05-05",
+  "/about": "2026-05-04",
   "/ai-growth-systems": "2026-05-01",
   "/book": "2026-05-05",
   "/build": "2026-05-03",

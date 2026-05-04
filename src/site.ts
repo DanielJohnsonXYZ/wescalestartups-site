@@ -49,7 +49,11 @@ export const siteConfig = {
   siteLastModified: "2026-05-03",
   ogImage: "/og/default.svg",
   /** Google Tag Manager container for wescalestartups.com (We Scale Startups account) */
-  gtmId: "GTM-TV6C7GS"
+  gtmId: "GTM-TV6C7GS",
+  /** Public X (Twitter) profile — used in Person schema sameAs */
+  founderTwitter: "https://x.com/djohnsonxyz",
+  /** Podcast hub on WSS — entity graph / sameAs */
+  podcastUrl: "https://wescalestartups.com/podcast"
 } as const;
 
 /** Named methodology — use on home, GTM, llms.txt, and press for consistent entity language. */
@@ -63,7 +67,7 @@ export const methodologyBrand = {
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
-  "/": "2026-05-04",
+  "/": "2026-05-06",
   "/about": "2026-05-05",
   "/ai-growth-systems": "2026-05-01",
   "/book": "2026-05-04",

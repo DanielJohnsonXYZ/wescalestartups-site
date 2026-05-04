@@ -1,6 +1,15 @@
 import { absoluteUrl } from "./utils";
 import { siteConfig } from "../site";
 
+const personKnowsAbout = [
+  "Fractional CMO",
+  "B2B SaaS go-to-market",
+  "AI startup growth",
+  "Seed to Series B",
+  "Growth diagnosis",
+  "Acquisition systems"
+] as const;
+
 export function buildPersonSchema() {
   return {
     "@context": "https://schema.org",
@@ -8,16 +17,23 @@ export function buildPersonSchema() {
     "@id": `${siteConfig.siteUrl}/#person`,
     name: siteConfig.founderName,
     jobTitle: "Founder and Fractional CMO",
-    url: "https://danieljohnson.xyz",
+    url: siteConfig.danielSite,
     email: siteConfig.email,
     worksFor: {
       "@id": `${siteConfig.siteUrl}/#organization`
     },
+    knowsAbout: [...personKnowsAbout],
     sameAs: [
       siteConfig.founderLinkedin,
+      siteConfig.founderTwitter,
       siteConfig.growthMentor,
       siteConfig.mentorCruise,
-      "https://danieljohnson.xyz"
+      siteConfig.danielSite,
+      siteConfig.siteUrl,
+      siteConfig.podcastUrl,
+      "https://www.jbs.cam.ac.uk/",
+      "https://startup.google.com/",
+      "https://www.techstars.com/"
     ]
   };
 }
@@ -35,6 +51,7 @@ export function buildOrganizationSchema() {
     founder: {
       "@id": `${siteConfig.siteUrl}/#person`
     },
+    knowsAbout: [...personKnowsAbout],
     address: {
       "@type": "PostalAddress",
       streetAddress: "81 Curtain Road",
@@ -42,7 +59,14 @@ export function buildOrganizationSchema() {
       postalCode: "EC2A 3AG",
       addressCountry: "GB"
     },
-    sameAs: [siteConfig.linkedin, siteConfig.growthMentor, siteConfig.mentorCruise]
+    sameAs: [
+      siteConfig.linkedin,
+      siteConfig.danielSite,
+      siteConfig.podcastUrl,
+      siteConfig.growthMentor,
+      siteConfig.mentorCruise,
+      siteConfig.founderLinkedin
+    ]
   };
 }
 
@@ -55,6 +79,7 @@ export function buildWebSiteSchema() {
     url: siteConfig.siteUrl,
     description: siteConfig.description,
     publisher: { "@id": `${siteConfig.siteUrl}/#organization` },
+    about: { "@id": `${siteConfig.siteUrl}/#organization` },
     inLanguage: "en-US"
   };
 }

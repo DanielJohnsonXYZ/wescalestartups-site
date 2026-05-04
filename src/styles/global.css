@@ -3698,6 +3698,20 @@ textarea:focus-visible {
   height: 88px;
 }
 
+@media (min-width: 640px) {
+  .founder-card picture {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 900px) {
+  .founder-card picture {
+    width: 200px;
+    height: 200px;
+  }
+}
+
 .wss-hero-redesign .portrait {
   width: 88px;
   height: 88px;
@@ -3706,6 +3720,20 @@ textarea:focus-visible {
   box-shadow: 0 0 0 2px var(--logo-2);
   object-fit: cover;
   object-position: 50% 18%;
+}
+
+@media (min-width: 640px) {
+  .wss-hero-redesign .portrait {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 900px) {
+  .wss-hero-redesign .portrait {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 .founder-card .who {

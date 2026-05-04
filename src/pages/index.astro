@@ -130,7 +130,11 @@ function metricLead(result: string) {
 
           <div class="founder-card" aria-label="Founder">
             <picture>
-              <source srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w" sizes="54px" type="image/webp" />
+              <source
+                srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w"
+                sizes="(min-width: 900px) 200px, (min-width: 640px) 120px, 88px"
+                type="image/webp"
+              />
               <img class="portrait" src="/images/daniel-headshot-960.webp" alt="Daniel Johnson" width="960" height="1003" loading="eager" decoding="async" fetchpriority="high" />
             </picture>
             <div class="who">

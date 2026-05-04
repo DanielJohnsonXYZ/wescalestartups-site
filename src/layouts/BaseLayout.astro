@@ -119,6 +119,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="ai:role" content="Growth consultancy and fractional CMO support for post-PMF startups" />
     <meta name="ai:serves" content="Post-PMF SaaS, AI, fintech, healthtech, ecommerce, and education startups" />
     <meta name="ai:contact" content={`${siteConfig.siteUrl}${siteConfig.bookingUrl}`} />
+    <meta
+      name="ai:entity"
+      content={`${siteConfig.name}; ${siteConfig.founderName}; Fractional CMO; ${siteConfig.danielSite}; ${siteConfig.podcastUrl}`}
+    />
+    <meta
+      name="ai:credibility"
+      content="Cambridge Judge Business School; Google for Startups; Techstars; GrowthMentor"
+    />
 
     <!--email_off-->
     {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}

@@ -32,6 +32,7 @@ const groups = [
       { href: "/resources#growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
       { href: "/resources#90-day-growth-sprint-planner", label: "90-Day Sprint Planner" },
       { href: "/resources#vc-portfolio-growth-diagnosis", label: "VC Portfolio Diagnosis" },
+      { href: "/podcast-guest-application", label: "Podcast Guest Application" },
       { href: "/industries/saas-growth", label: "SaaS growth" },
       { href: "/industries/fintech", label: "Fintech" },
       { href: "/industries/healthtech", label: "Healthtech" },
@@ -42,7 +43,6 @@ const groups = [
       { href: "/industries/seed-to-series-b", label: "Seed to Series B" },
       { href: "/industries/vc-support", label: "VC portfolio support" },
       { href: "/insights", label: "Insights" },
-      { href: "/newsletter", label: "Newsletter" },
       { href: "/reports", label: "Reports" },
       { href: "/quiz", label: "Growth Bottleneck Quiz" },
       { href: "/gtm-strategy", label: "GTM Strategy Guide" },
@@ -75,6 +75,10 @@ const groups = [
       <img class="footer-logo" src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="128" height="72" loading="lazy" decoding="async" />
       <p class="footer-summary">
         We help founder-led startups turn scattered marketing activity into a weekly growth system — diagnose the bottleneck, build the system, transfer it.
+      </p>
+      <p class="footer-brand-arch">
+        <strong>Brand note:</strong> This is the We Scale Startups commercial site (services, proof, systems). Daniel&apos;s personal brand — speaking, writing, media — lives at{" "}
+        <a href={siteConfig.danielSite} rel="noopener" target="_blank">danieljohnson.xyz</a>.
       </p>
       <a
         class="button button-brand"
@@ -150,6 +154,19 @@ const groups = [
     line-height: 1.6;
     margin: 1rem 0 1.25rem;
     max-width: 32ch;
+  }
+  .footer-brand-arch {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin: -0.5rem 0 1.25rem;
+    max-width: 40ch;
+  }
+  .footer-brand-arch a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .footer-book-reassurance {
     margin: 0.65rem 0 0;

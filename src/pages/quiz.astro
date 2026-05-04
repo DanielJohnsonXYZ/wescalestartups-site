@@ -224,35 +224,34 @@ const QUESTIONS = [
   }
 ];
 
-const LAYER_META = {
+/** Four personalised paths — acquisition + reporting/team scores roll up for clearer routing. */
+const PATH_META = {
   positioning: {
     label: "Positioning",
-    description: "Buyers don't see the problem the way you do. Sales calls start with education instead of qualification. The offer message shifts from call to call.",
+    description:
+      "Buyers don't see the problem the way you do. Sales calls start with education instead of qualification. The offer message shifts from call to call.",
     fix: "Start with Growth Diagnosis — reframe the offer before adding spend or channels.",
     href: "/services/growth-diagnosis"
   },
-  acquisition: {
-    label: "Acquisition",
-    description: "Channels run in isolation rather than reinforcing each other. Pipeline arrives in waves. CAC is unstable and hard to forecast.",
-    fix: "Acquisition System Build — connect the channels into one operating system.",
+  channels: {
+    label: "Channel mix & acquisition",
+    description:
+      "Channels run in isolation rather than reinforcing each other. Pipeline arrives in waves. CAC is unstable and hard to forecast.",
+    fix: "Acquisition System Build — connect the channels into one operating system before scaling spend.",
     href: "/services/acquisition-system-build"
   },
   conversion: {
     label: "Conversion",
-    description: "Qualified visitors don't become qualified conversations. The offer asks for too much too early or the funnel has an invisible drop-off.",
+    description:
+      "Qualified visitors don't become qualified conversations. The offer asks for too much too early or the funnel has an invisible drop-off.",
     fix: "90-Day Growth Sprint — test landing page, copy, and offer iterations at pace.",
     href: "/services/90-day-growth-sprint"
   },
-  reporting: {
-    label: "Reporting",
-    description: "Activity is tracked but decisions aren't made. The team knows what happened but not what to do next.",
-    fix: "Fractional CMO — senior owner running a weekly decision cadence.",
-    href: "/services/fractional-cmo"
-  },
-  team: {
-    label: "Team ownership",
-    description: "Founder hours are filling the growth gap. Without an internal owner running the rhythm, growth stays personal and doesn't scale.",
-    fix: "Fractional CMO — transfer the operating system to someone inside the team.",
+  rhythm: {
+    label: "Decision rhythm & ownership",
+    description:
+      "Activity is tracked but weekly decisions don't stick — or the founder is still the implicit owner of every growth call. The system doesn't run without them in the loop.",
+    fix: "Fractional CMO or embedded cadence — senior owner for the weekly rhythm, reporting, and handoffs.",
     href: "/services/fractional-cmo"
   }
 };
@@ -263,9 +262,28 @@ let scores = { positioning: 0, acquisition: 0, conversion: 0, reporting: 0, team
 let answers = new Array(QUESTIONS.length).fill(null);
 
 // ── Render helpers ─────────────────────────────────────────────
+function pathScores() {
+  return {
+    positioning: scores.positioning,
+    channels: scores.acquisition,
+    conversion: scores.conversion,
+    rhythm: scores.reporting + scores.team
+  };
+}
+
 function getResult() {
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  return sorted[0][0];
+  const rolled = pathScores();
+  const order = ["positioning", "channels", "conversion", "rhythm"];
+  let best = "positioning";
+  let bestN = -1;
+  for (const k of order) {
+    const v = rolled[k];
+    if (v > bestN) {
+      bestN = v;
+      best = k;
+    }
+  }
+  return best;
 }
 
 function renderProgress() {
@@ -281,10 +299,16 @@ function renderProgress() {
 function renderQuestion(idx) {
   const q = QUESTIONS[idx];
   const layerNum = { positioning: 1, acquisition: 2, conversion: 3, reporting: 4, team: 5 }[q.layer];
+  const layerLabel =
+    q.layer === "team"
+      ? "Team ownership"
+      : q.layer === "reporting"
+        ? "Reporting"
+        : PATH_META[q.layer === "acquisition" ? "channels" : q.layer].label;
   return `
     ${renderProgress()}
     <div class="quiz-question-wrap">
-      <p class="quiz-layer-label">Layer ${layerNum}: ${LAYER_META[q.layer].label}</p>
+      <p class="quiz-layer-label">Layer ${layerNum}: ${layerLabel}</p>
       <h2 class="quiz-q-text">${q.text}</h2>
       <div class="quiz-options" role="list">
         ${q.options.map((opt, i) => `
@@ -306,11 +330,15 @@ function renderQuestion(idx) {
 }
 
 function renderResult() {
-  const topLayer = getResult();
-  const meta = LAYER_META[topLayer];
-  const allScores = Object.entries(scores)
-    .map(([k, v]) => ({ key: k, label: LAYER_META[k].label, score: v, max: 4 }))
-    .sort((a, b) => b.score - a.score);
+  const topPath = getResult();
+  const meta = PATH_META[topPath];
+  const rolled = pathScores();
+  const allScores = [
+    { key: "positioning", label: PATH_META.positioning.label, score: rolled.positioning, max: 4 },
+    { key: "channels", label: PATH_META.channels.label, score: rolled.channels, max: 4 },
+    { key: "conversion", label: PATH_META.conversion.label, score: rolled.conversion, max: 4 },
+    { key: "rhythm", label: PATH_META.rhythm.label, score: rolled.rhythm, max: 8 }
+  ].sort((a, b) => b.score - a.score);
 
   return `
     <div class="quiz-result">

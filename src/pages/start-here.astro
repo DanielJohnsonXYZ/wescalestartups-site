@@ -1,23 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig } from "../site";
+import { methodologyBrand, siteConfig } from "../site";
 
 const startHereFaqs = [
   {
     question: "How long does the guided path take?",
     answer:
-      "About 35 minutes of reading if you follow the three-step path: scorecard, one proof read, then the diagnostic call. You can stop after step one or two if you are not ready to talk yet."
+      "About 35 minutes if you follow the three-step path: scorecard (or quiz), one proof read, then the diagnostic call. You can stop after step one or two if you are not ready to talk yet."
   },
   {
     question: "Do I have to book a call?",
     answer:
-      "No. The scorecard, quiz, written diagnostic framework, and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
+      "No. The scorecard, growth bottleneck quiz, written diagnostic framework, and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
   },
   {
     question: "Is We Scale Startups a marketing agency?",
     answer:
       "No. WSS works at diagnosis and system level: bottleneck, acquisition design, reporting cadence, and transfer. Agencies often execute inside that system once the constraint is clear — many teams use both."
+  },
+  {
+    question: "Should I use this site or Daniel Johnson's personal site?",
+    answer:
+      "Start here on wescalestartups.com when you want the WSS engagement ladder: Growth Diagnosis, 90-Day Sprint, Acquisition System Build, or fractional CMO through the firm. Use danieljohnson.xyz when you are explicitly exploring a fractional CMO relationship with Daniel as the principal — the positioning overlaps, but the commercial path and contracts differ."
   }
 ];
 
@@ -33,7 +38,7 @@ const startHereSchema = [
 <BaseLayout
   path="/start-here"
   title="Start here · We Scale Startups"
-  description="A guided path for post-PMF founders deciding whether WSS is for you. Three reading paths by stage, a decision tree, and a 35-minute total commitment."
+  description="Entry path for post-PMF B2B SaaS and AI founders: match your stage to the WSS offer ladder (diagnosis → sprint → system → fractional), or self-qualify with the scorecard, quiz, and proof before booking a diagnostic."
   keywords="We Scale Startups onboarding, post-PMF founder guide, growth consultancy fit, which engagement first, startup growth decision tree"
   schema={startHereSchema}
   lastUpdated={siteConfig.lastUpdated}
@@ -42,10 +47,16 @@ const startHereSchema = [
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Start here</p>
-      <h1>Three reading paths. One {siteConfig.bookingCallShort}. About 35 minutes total.</h1>
+      <h1>Pick your door. Same methodology: {methodologyBrand.tagline}</h1>
       <p class="lede">
-        If you're not sure whether WSS is for you — or which of the four engagements would actually help — start here.
-        No demos, no sales calls until step three.
+        WSS works with <strong>post-PMF B2B SaaS and AI</strong> teams where growth still runs through the founder. If you are not sure
+        which offer fits — scorecard, sprint, system build, or fractional bench — use this page as the router. No demos; book only when
+        step three makes sense.
+      </p>
+      <p class="lede lede-tight">
+        <strong>Company vs personal path:</strong> Engagements on this site run through We Scale Startups. If you are comparing a{' '}
+        <strong>solo fractional CMO</strong> relationship with Daniel as principal, his parallel orientation is at{' '}
+        <a href={`${siteConfig.danielSite}/start-here/`}>danieljohnson.xyz/start-here</a> — overlap in positioning, different contract path.
       </p>
     </div>
   </section>
@@ -56,13 +67,20 @@ const startHereSchema = [
       <p class="eyebrow">Which engagement?</p>
       <h2 class="route-section-h2">Pick the path that matches what you need right now.</h2>
       <p class="route-section-lede">
-        Different founders arrive with different clarity. Use this to self-route — then confirm on the diagnostic.
+        Different founders arrive with different clarity. Self-route here, then confirm fit on the diagnostic. See the full ladder on{' '}
+        <a href="/pricing">Pricing</a> and how delivery works on <a href="/how-it-works">How it works</a>.
       </p>
       <ul class="engagement-route-grid">
         <li>
           <a class="engagement-route-card" href={siteConfig.scorecardUrl}>
             <span class="engagement-route-label">I don't know what's blocking growth</span>
             <span class="engagement-route-action">{siteConfig.scorecardLabel} →</span>
+          </a>
+        </li>
+        <li>
+          <a class="engagement-route-card" href="/quiz">
+            <span class="engagement-route-label">I want a quick structured quiz first</span>
+            <span class="engagement-route-action">Growth bottleneck quiz →</span>
           </a>
         </li>
         <li>
@@ -164,6 +182,7 @@ const startHereSchema = [
           <p class="stage-action">
             <strong>Best fit.</strong> Start with a {siteConfig.bookingCallShort}. We'll diagnose the bottleneck and decide together whether a Sprint or Fractional CMO engagement makes sense.
           </p>
+          <a class="card-link" href="/founder-led-growth">Read: founder-led growth constraint →</a>
           <a class="card-link" href={siteConfig.bookingUrl} title={siteConfig.bookingCallReassurance}>
             {siteConfig.bookingLabel} →
           </a>
@@ -191,8 +210,11 @@ const startHereSchema = [
       <article class="start-step">
         <span class="start-step-num">01</span>
         <div>
-          <h3>Score yourself in 5 minutes</h3>
-          <p>The Growth Bottleneck Scorecard tells you which of five constraints is actually blocking pipeline. No email gating until the end.</p>
+          <h3>Score yourself in 5 minutes (or take the quiz)</h3>
+          <p>
+            The Growth Bottleneck Scorecard maps which of five constraints is blocking pipeline. Prefer questions over a grid? Use the{' '}
+            <a href="/quiz">growth bottleneck quiz</a> — same job, different format.
+          </p>
         </div>
         <a class="button button-brand" href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a>
       </article>
@@ -282,6 +304,15 @@ const startHereSchema = [
     font-size: 0.95rem;
     line-height: 1.55;
   }
+  .lede-tight {
+    max-width: 68ch;
+    font-size: 0.92rem;
+    margin-top: 1rem !important;
+  }
+  .lede-tight a {
+    color: var(--accent);
+    font-weight: 600;
+  }
   .engagement-route-grid {
     list-style: none;
     margin: 0;
@@ -297,7 +328,12 @@ const startHereSchema = [
   }
   @media (min-width: 1100px) {
     .engagement-route-grid {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1400px) {
+    .engagement-route-grid {
+      grid-template-columns: repeat(6, 1fr);
     }
   }
   .engagement-route-card {

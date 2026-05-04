@@ -4407,3 +4407,38 @@ textarea:focus-visible {
     background: rgba(124, 58, 237, 0.05);
   }
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────
+   Hover affordance for inline arrow links — "See how the system gets
+   built →", "Read full case study →" etc. The arrow now lifts/slides
+   on hover so the click target reads as interactive.
+   Source: Notion 354f99a79fdb814c9ce0ee8f933312bf
+   ────────────────────────────────────────────────────────────────────── */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--accent, #6433ff);
+  transition: color 160ms ease;
+  position: relative;
+  border-bottom: 1px solid transparent;
+}
+.link-arrow::after {
+  content: "";
+  display: inline-block;
+  transition: transform 200ms ease, color 160ms ease;
+  /* The arrow is already in the link text — this lifts the underline    */
+  /* effect, not the glyph itself.                                        */
+}
+.link-arrow:hover,
+.link-arrow:focus-visible {
+  color: var(--ink, #0b0b0c);
+  border-bottom-color: var(--accent, #6433ff);
+}
+.link-arrow:hover {
+  /* Subtle pull-right on hover so the arrow direction reads as motion. */
+  letter-spacing: 0.01em;
+}

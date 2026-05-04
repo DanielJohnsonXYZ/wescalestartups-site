@@ -284,11 +284,9 @@ const pressClientWorkRows = [
     </div>
   </section>
 
-  <section class="section section-alt press-last-updated-section" aria-label="Last updated">
-    <div class="shell">
-      <p class="press-last-updated">Last updated: {siteConfig.lastUpdated}</p>
-    </div>
-  </section>
+  <!-- Removed duplicate "Last updated" section — BaseLayout already renders one
+       at the bottom of the page when lastUpdated is passed. Source: Notion
+       354f99a79fdb8183a59ad998378f5663. -->
 
   <section class="section">
     <div class="shell">

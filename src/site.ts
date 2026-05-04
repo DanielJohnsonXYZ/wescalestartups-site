@@ -500,9 +500,7 @@ export const credentialLogos = [
   { src: "/images/logos/cambridge.webp", alt: "University of Cambridge", label: "Cambridge Judge" },
   { src: "/images/logos/growthmentor.png", alt: "GrowthMentor", label: "GrowthMentor" },
   { src: "/images/logos/newsflare.webp", alt: "Newsflare", label: "Newsflare" },
-  { src: "/images/logos/peachy.png", alt: "Peachy", label: "Peachy" },
-  { src: "/images/logos/techstars.webp", alt: "Techstars", label: "Techstars" },
-  { src: "/images/logos/uk-space-agency.webp", alt: "UK Space Agency", label: "UK Space Agency" }
+  { src: "/images/logos/peachy.png", alt: "Peachy", label: "Peachy" }
 ] as const;
 
 export const headlineMetrics = [

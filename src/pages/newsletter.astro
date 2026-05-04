@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { insightsHubRelatedReading, siteConfig } from "../site";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Newsletter", url: "/newsletter" }
+  ])
+];
+---
+
+<BaseLayout
+  title="Here's Some Growth — newsletter | We Scale Startups"
+  description="Fortnightly notes for post-PMF founders: one practical idea on bottlenecks, GTM systems, and repeatable acquisition. From Daniel Johnson / We Scale Startups."
+  path="/newsletter"
+  schema={schemas}
+  lastUpdated={siteConfig.lastUpdated}
+>
+  <section class="page-hero">
+    <div class="shell max-w-3xl">
+      <p class="eyebrow">Newsletter</p>
+      <h1>Here's Some Growth</h1>
+      <p class="hero-copy">
+        A fortnightly email for founders and operators who are past PMF but still fighting inconsistent pipeline. One concrete note
+        every other Monday — bottleneck framing, acquisition rhythm, and what actually moved the needle in client work. No agency
+        fluff.
+      </p>
+      <p class="mt-4 text-[color:var(--muted)]">
+        Sent from Daniel Johnson · <span class="whitespace-nowrap">{siteConfig.email}</span> · ~10:00 GMT on alternating Mondays.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell max-w-2xl">
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-4">Get the next issue</h2>
+      <p class="text-[color:var(--muted)] mb-8">
+        Single opt-in — you’ll get the next send as soon as you confirm. Unsubscribe any time.
+      </p>
+      <div class="card p-8 md:p-10">
+        <EmailSignup
+          variant="light"
+          formId="page-newsletter-heres-some-growth"
+          heading="Join Here's Some Growth"
+          subtext="Post-PMF B2B SaaS and AI founders — practical notes, every other Monday."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell max-w-3xl">
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-6">What you’ll read</h2>
+      <ul class="space-y-3 text-[color:var(--muted)] list-disc pl-5">
+        <li>How to name the real constraint before you add channel spend</li>
+        <li>Systems vs activity — what “repeatable acquisition” actually looks like</li>
+        <li>Patterns from fractional CMO work with Seed–Series B teams</li>
+        <li>Links to deeper essays on <a class="link-arrow" href="/insights">Insights</a> when a topic deserves the long version</li>
+      </ul>
+      <p class="mt-8">
+        Prefer a call? <a class="link-arrow" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell max-w-3xl">
+      <p class="eyebrow">Keep exploring</p>
+      <h2 class="text-xl font-bold tracking-[-0.04em] mb-6">Related on the site</h2>
+      <ul class="grid gap-3 sm:grid-cols-2">
+        {insightsHubRelatedReading.map((link) => (
+          <li>
+            <a class="link-arrow" href={link.href}>
+              {link.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

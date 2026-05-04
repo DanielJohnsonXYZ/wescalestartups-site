@@ -6,6 +6,7 @@ import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 const quizCalendlyUrl = siteConfig.calendlyUrl;
 const quizBookingLabel = siteConfig.bookingLabel;
 const quizGrowthCourseHref = "/growth-course/";
+const quizScorecardUrl = siteConfig.scorecardUrl;
 const quizDiagnosticCallQuestion = `Is this the same as the ${siteConfig.bookingCallShort}?`;
 
 const quizRelated = strategicPageRelatedInsights["/quiz"] ?? [];
@@ -13,7 +14,7 @@ const quizRelated = strategicPageRelatedInsights["/quiz"] ?? [];
 const faqSchema = buildFaqSchema([
   {
     question: "How long does the growth bottleneck quiz take?",
-    answer: "About 3 minutes. 10 questions, scored instantly. No email required to see your result."
+    answer: "About 5 minutes for most people. 10 questions, scored instantly. No email required to see your result."
   },
   {
     question: "What do I get at the end?",
@@ -36,17 +37,17 @@ const quizSchema = [
 
 <BaseLayout
   title="Growth Bottleneck Quiz | We Scale Startups"
-  description="3-minute quiz that identifies your primary growth bottleneck across positioning, acquisition, conversion, reporting, and team ownership. Free, instant results, no email required."
+  description="Short scorecard-style quiz (about 5 minutes) that identifies your primary growth bottleneck across positioning, acquisition, conversion, reporting, and team ownership. Free, instant results, no email required."
   path="/quiz"
   schema={quizSchema}
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">Quiz · 3 minutes · Free</p>
-      <h1>Find your growth bottleneck in 3 minutes.</h1>
+      <p class="eyebrow">Quiz · ~5 minutes · Free</p>
+      <h1>Find your growth bottleneck in about 5 minutes.</h1>
       <p class="lede">
-        10 questions across the 5 layers that determine whether a post-PMF startup scales or stalls.
-        Instant result. No email required to see it.
+        Ten questions across the five layers that determine whether a post-PMF startup scales or stalls.
+        Instant, plain-English result — a fast directional read before the downloadable scorecard or a diagnostic call.
       </p>
       <div class="hero-actions">
         <a class="button button-brand" href="/diagnose" data-cta="quiz-hero-diagnose">
@@ -109,11 +110,14 @@ const quizSchema = [
       <dl class="faq-list">
         <div class="faq-item">
           <dt>How long does it take?</dt>
-          <dd>About 3 minutes. 10 questions, scored instantly. No email required to see your result.</dd>
+          <dd>About 5 minutes for most founders. 10 questions, scored instantly. No email required to see your result.</dd>
         </div>
         <div class="faq-item">
           <dt>What do I get at the end?</dt>
-          <dd>Your primary growth constraint identified across 5 layers — positioning, acquisition, conversion, reporting, and team ownership — plus a specific recommended next step.</dd>
+          <dd>
+            Your primary growth constraint across five layers — positioning, acquisition, conversion, reporting, and team ownership — a severity snapshot for each, and a recommended next step (service page or call). For a written workbook version, use the{" "}
+            <a href={siteConfig.scorecardUrl}>Growth Bottleneck Scorecard</a>.
+          </dd>
         </div>
         <div class="faq-item">
           <dt>{quizDiagnosticCallQuestion}</dt>
@@ -124,7 +128,7 @@ const quizSchema = [
   </section>
 </BaseLayout>
 
-<script define:vars={{ quizCalendlyUrl, quizBookingLabel, quizGrowthCourseHref }}>
+<script define:vars={{ quizCalendlyUrl, quizBookingLabel, quizGrowthCourseHref, quizScorecardUrl }}>
 const QUESTIONS = [
   {
     layer: "positioning",
@@ -350,6 +354,7 @@ function renderResult() {
       <p class="eyebrow">Your result</p>
       <h2>Your primary bottleneck is <span class="result-highlight">${meta.label}</span>.</h2>
       <p class="quiz-result-desc">${meta.description}</p>
+      <p class="quiz-result-note">Directional read only — useful for where to focus next. For a written checklist, use the <a href="${quizScorecardUrl}">Growth Bottleneck Scorecard</a>; for depth on your numbers and stack, book the diagnostic call.</p>
 
       <div class="result-scores">
         ${allScores.map(s => `
@@ -368,6 +373,7 @@ function renderResult() {
         <div class="hero-actions" style="margin-top:1.25rem">
           <a class="button button-brand" href="${meta.href}">See the engagement →</a>
           <a class="button button-light" href="${quizCalendlyUrl}" target="_blank" rel="noopener">${quizBookingLabel} →</a>
+          <a class="button button-light" href="${quizScorecardUrl}" data-cta="quiz-result-scorecard">Downloadable scorecard →</a>
         </div>
         <p class="quiz-result-book">
           <a href="${quizGrowthCourseHref}" data-cta="quiz-result-growth-course">Prefer the book? The Growth Course lays out the same methodology →</a>
@@ -548,8 +554,21 @@ document.addEventListener('DOMContentLoaded', mount);
     font-size: 1rem;
     line-height: 1.7;
     color: var(--muted, #666);
-    margin: 0.75rem 0 2rem;
+    margin: 0.75rem 0 1rem;
     max-width: 52ch;
+  }
+  .quiz-result-note {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted, #666);
+    margin: 0 0 1.75rem;
+    max-width: 56ch;
+  }
+  .quiz-result-note a {
+    color: var(--accent, #f97316);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
   .result-scores {

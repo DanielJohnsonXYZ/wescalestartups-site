@@ -63,7 +63,7 @@ export const methodologyBrand = {
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
-  "/": "2026-05-05",
+  "/": "2026-05-04",
   "/about": "2026-05-05",
   "/ai-growth-systems": "2026-05-01",
   "/book": "2026-05-04",
@@ -77,13 +77,13 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/growth-course": "2026-05-04",
   "/wss-scale-score": "2026-05-04",
   "/first-30-days": "2026-05-03",
-  "/fractional-cmo-vs-agency": "2026-05-03",
+  "/fractional-cmo-vs-agency": "2026-05-04",
   "/growth-engine": "2026-05-01",
   "/gtm-strategy": "2026-05-03",
   "/how-it-works": "2026-05-04",
   "/how-we-work": "2026-05-01",
   "/industries": "2026-05-03",
-  "/founder-led-growth": "2026-05-03",
+  "/founder-led-growth": "2026-05-04",
   "/growth-operating-system": "2026-05-04",
   "/insights": "2026-05-04",
   "/llms.txt": "2026-05-03",
@@ -97,7 +97,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/podcast/episodes/how-startups-win-template": "2026-05-05",
   "/privacy": "2026-05-03",
   "/proof": "2026-05-03",
-  "/quiz": "2026-05-04",
+  "/quiz": "2026-05-05",
   "/reports": "2026-05-01",
   "/resources": "2026-05-03",
   "/services": "2026-05-04",
@@ -671,37 +671,37 @@ export const notFor = [
   }
 ] as const;
 
-// WSS vs agency — explicit positioning
+// WSS vs agency — explicit positioning (complementary to good agencies, not dismissive)
 export const vsAgency = [
   {
     label: "What gets delivered",
-    agency: "Tactics in isolation (paid, SEO, content)",
-    wss: "A repeatable system the team can run"
+    agency: "Channel execution (paid, SEO, content, creative)",
+    wss: "A repeatable system the team (and partners) can run"
   },
   {
     label: "Strategy",
-    agency: "You define it, they execute",
-    wss: "We diagnose the constraint, then act on it"
+    agency: "You brief the channel; they ship",
+    wss: "We diagnose the constraint, then align execution"
   },
   {
     label: "Reporting",
-    agency: "Activity, impressions, vanity metrics",
-    wss: "What's working, what to scale, what to kill"
+    agency: "Often channel metrics and delivery dashboards",
+    wss: "Commercial signal — scale, stop, fix calls"
   },
   {
     label: "Decision rights",
-    agency: "Theirs, on their channel",
-    wss: "Shared, on the commercial outcome"
+    agency: "Strong on their remit",
+    wss: "Shared on the outcome across channels"
   },
   {
     label: "When the engagement ends",
-    agency: "The work stops",
-    wss: "The system continues without us"
+    agency: "Delivery pauses with the retainer",
+    wss: "The operating rhythm continues without us"
   },
   {
     label: "Founder dependency",
-    agency: "You stay in every loop",
-    wss: "You step out — by design"
+    agency: "You may still own cross-channel calls",
+    wss: "You step back as the system owns the cadence"
   }
 ] as const;
 
@@ -719,7 +719,7 @@ export const buyerFaqs = [
   {
     question: "How is WSS different from a typical agency?",
     answer:
-      "Agencies usually execute a defined channel. WSS works at the system level: diagnosis, positioning, acquisition design, reporting cadence, team direction, and handoff."
+      "Agencies are the right choice when the channel plan is clear and you need production capacity. WSS works one level up: naming the bottleneck, aligning channels, installing weekly decision rules, and handing off a system your team or agency can run inside."
   },
   {
     question: "What is the first step?",

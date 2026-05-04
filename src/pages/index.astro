@@ -485,12 +485,12 @@ function metricLead(result: string) {
         title="Know what to fix before you spend more."
         body="Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership."
       />
-      <div class="grid-4">
-        {buyerFaqs.map((faq) => (
-          <article class="feature-card">
-            <h3>{faq.question}</h3>
+      <div class="home-faq-stack">
+        {buyerFaqs.map((faq, index) => (
+          <details class="home-faq-item" open={index === 0}>
+            <summary>{faq.question}</summary>
             <p>{faq.answer}</p>
-          </article>
+          </details>
         ))}
       </div>
     </div>
@@ -703,5 +703,56 @@ function metricLead(result: string) {
   .reset--small {
     font-size: 0.78rem;
     padding: 0.2rem 0.5rem;
+  }
+
+  /* Homepage FAQ — accordion (matches resource / service FAQ pattern) */
+  .home-faq-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-width: 720px;
+    margin-top: 0.5rem;
+  }
+  .home-faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    padding: 0;
+    overflow: hidden;
+  }
+  .home-faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    padding: 1rem 2.75rem 1rem 1.15rem;
+    position: relative;
+  }
+  .home-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .home-faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  .home-faq-item[open] summary::after {
+    content: "−";
+  }
+  .home-faq-item p {
+    margin: 0;
+    padding: 0 1.15rem 1.1rem;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 0.85rem;
   }
 </style>

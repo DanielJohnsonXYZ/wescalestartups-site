@@ -363,6 +363,25 @@ function metricLead(result: string) {
     </div>
   </section>
 
+  <!-- PODCAST — compact trust asset (does not compete with primary book CTA) -->
+  <section class="section section--tight section-alt" aria-labelledby="home-podcast-heading">
+    <div class="shell home-podcast-compact">
+      <p class="eyebrow">Podcast</p>
+      <h2 id="home-podcast-heading">How Startups Win With AI</h2>
+      <p class="home-podcast-lede">
+        Smart conversations with founders and operators on how startups use AI to grow faster, save time, and build sharper companies. No tool hype. No generic founder chat — practical examples of what is working.
+      </p>
+      <div class="hero-actions home-podcast-actions">
+        <a class="button button-brand" href="/podcast" data-cta="home-podcast-hub">
+          Open the podcast hub →
+        </a>
+        <a class="button button-light" href="/podcast-guest-application" data-cta="home-podcast-guest">
+          Suggest a guest →
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- WHAT GETS BUILT -->
   <section class="section creative-system-section">
     <div class="shell">
@@ -557,6 +576,17 @@ function metricLead(result: string) {
 </BaseLayout>
 
 <style>
+  .home-podcast-compact .home-podcast-lede {
+    margin-top: 0.75rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+  .home-podcast-actions {
+    margin-top: 1.1rem;
+  }
+
   .hero-firstperson {
     margin-top: 0.85rem;
     font-size: 0.98rem;

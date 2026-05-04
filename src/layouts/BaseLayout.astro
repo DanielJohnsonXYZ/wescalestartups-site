@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Analytics: GTM loads gtm.js here; event names are pushed from inline listeners below. Consent banners are not bundled in-repo — configure CMP in GTM if you need opt-in regions. -->
+    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); cta_click, calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download. Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
     <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
     <script is:inline set:html={gtmScript} />
     <!-- End Google Tag Manager -->
@@ -124,6 +124,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {serializedSchemas.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
     <!--/email_off-->
     <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "page_context",
+        page_path: window.location.pathname,
+        page_title: document.title,
+        page_location: window.location.href
+      });
+
       document.addEventListener("click", (event) => {
         const target = event.target;
         const link = target instanceof Element ? target.closest("a") : null;

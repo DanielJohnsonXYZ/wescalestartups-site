@@ -5,6 +5,7 @@ import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 
 const quizCalendlyUrl = siteConfig.calendlyUrl;
 const quizBookingLabel = siteConfig.bookingLabel;
+const quizGrowthCourseHref = "/growth-course/";
 const quizDiagnosticCallQuestion = `Is this the same as the ${siteConfig.bookingCallShort}?`;
 
 const quizRelated = strategicPageRelatedInsights["/quiz"] ?? [];
@@ -53,6 +54,9 @@ const quizSchema = [
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="quiz-hero-scorecard">
           Or, {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href={quizGrowthCourseHref} data-cta="quiz-hero-growth-course">
+          Read The Growth Course →
         </a>
         <a
           class="button button-light"
@@ -120,7 +124,7 @@ const quizSchema = [
   </section>
 </BaseLayout>
 
-<script define:vars={{ quizCalendlyUrl, quizBookingLabel }}>
+<script define:vars={{ quizCalendlyUrl, quizBookingLabel, quizGrowthCourseHref }}>
 const QUESTIONS = [
   {
     layer: "positioning",
@@ -313,6 +317,7 @@ function renderQuestion(idx) {
       <div class="quiz-options" role="list">
         ${q.options.map((opt, i) => `
           <button
+            type="button"
             class="quiz-option${answers[idx] === i ? ' is-selected' : ''}"
             data-idx="${i}"
             role="listitem"
@@ -321,8 +326,8 @@ function renderQuestion(idx) {
         `).join('')}
       </div>
       <div class="quiz-nav">
-        ${idx > 0 ? `<button class="button button-light quiz-back">← Back</button>` : '<span></span>'}
-        <button class="button button-brand quiz-next" ${answers[idx] === null ? 'disabled' : ''}>
+        ${idx > 0 ? `<button type="button" class="button button-light quiz-back">← Back</button>` : '<span></span>'}
+        <button type="button" class="button button-brand quiz-next" ${answers[idx] === null ? 'disabled' : ''}>
           ${idx === QUESTIONS.length - 1 ? 'See my result →' : 'Next →'}
         </button>
       </div>
@@ -364,9 +369,12 @@ function renderResult() {
           <a class="button button-brand" href="${meta.href}">See the engagement →</a>
           <a class="button button-light" href="${quizCalendlyUrl}" target="_blank" rel="noopener">${quizBookingLabel} →</a>
         </div>
+        <p class="quiz-result-book">
+          <a href="${quizGrowthCourseHref}" data-cta="quiz-result-growth-course">Prefer the book? The Growth Course lays out the same methodology →</a>
+        </p>
       </div>
 
-      <button class="quiz-restart button button-light" style="margin-top:2rem">Retake the quiz</button>
+      <button type="button" class="quiz-restart button button-light" style="margin-top:2rem">Retake the quiz</button>
     </div>`;
 }
 
@@ -492,6 +500,10 @@ document.addEventListener('DOMContentLoaded', mount);
     line-height: 1.4;
   }
   .quiz-option:hover { border-color: var(--accent, #f97316); }
+  .quiz-option:focus-visible {
+    outline: 2px solid var(--accent, #f97316);
+    outline-offset: 2px;
+  }
   .quiz-option.is-selected {
     border-color: var(--accent, #f97316);
     background: #fff7f2;
@@ -509,9 +521,28 @@ document.addEventListener('DOMContentLoaded', mount);
     opacity: 0.4;
     cursor: not-allowed;
   }
+  .quiz-nav .button:focus-visible,
+  .quiz-restart:focus-visible {
+    outline: 2px solid var(--accent, #f97316);
+    outline-offset: 2px;
+  }
 
   /* ── Result ── */
   .quiz-result { max-width: 640px; }
+  .quiz-result-book {
+    margin: 1.25rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .quiz-result-book a {
+    color: var(--muted, #666);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .quiz-result-book a:hover {
+    color: var(--ink, #1a1a18);
+  }
   .result-highlight { color: var(--accent, #f97316); }
   .quiz-result-desc {
     font-size: 1rem;

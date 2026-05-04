@@ -64,9 +64,9 @@ export const methodologyBrand = {
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
   "/": "2026-05-05",
-  "/about": "2026-05-04",
+  "/about": "2026-05-05",
   "/ai-growth-systems": "2026-05-01",
-  "/book": "2026-05-05",
+  "/book": "2026-05-04",
   "/build": "2026-05-03",
   "/case-studies": "2026-05-03",
   "/contact": "2026-05-03",
@@ -75,7 +75,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/execution-model": "2026-05-01",
   "/experimentation": "2026-05-03",
   "/growth-course": "2026-05-04",
-  "/newsletter": "2026-05-04",
   "/wss-scale-score": "2026-05-04",
   "/first-30-days": "2026-05-03",
   "/fractional-cmo-vs-agency": "2026-05-03",
@@ -91,7 +90,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/llms-full.txt": "2026-05-03",
   "/markdown/home.md": "2026-05-03",
   "/press": "2026-05-04",
-  "/press-kit-download": "2026-05-04",
   "/pricing": "2026-05-03",
   "/podcast": "2026-05-03",
   "/insights/glossary": "2026-05-05",
@@ -99,7 +97,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/podcast/episodes/how-startups-win-template": "2026-05-05",
   "/privacy": "2026-05-03",
   "/proof": "2026-05-03",
-  "/quiz": "2026-05-03",
+  "/quiz": "2026-05-04",
   "/reports": "2026-05-01",
   "/resources": "2026-05-03",
   "/services": "2026-05-04",
@@ -138,6 +136,7 @@ export const navigation = [
   { href: "/insights", label: "Insights" },
   { href: "/growth-operating-system", label: "Growth OS" },
   { href: "/founder-led-growth", label: "Founder-led" },
+  { href: "/podcast-guest-application", label: "Podcast Guests" },
   { href: "/contact", label: "Contact" }
 ] as const;
 
@@ -592,14 +591,16 @@ export const serviceSnapshots = [
   }
 ] as const;
 
-// Lead magnets remain the secondary path
+// Lead magnets remain the secondary path. Each one has its own standalone
+// landing page at /resources/{id} for SEO-crawlable, paid-ad-ready
+// surfaces (rendered by /src/pages/resources/[slug].astro).
 export const leadMagnets = [
   {
     id: "growth-bottleneck-scorecard",
     title: "Growth Bottleneck Scorecard",
     audience: "Post-PMF founders · 5 minutes",
     description: "Score the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
-    href: "/resources#growth-bottleneck-scorecard",
+    href: "/resources/growth-bottleneck-scorecard",
     primary: true
   },
   {
@@ -607,14 +608,35 @@ export const leadMagnets = [
     title: "90-Day Growth Sprint Planner",
     audience: "Startup leadership teams",
     description: "Map a quarter of tests, owners, decision rules, and reporting so the team stops running disconnected activity.",
-    href: "/resources#90-day-growth-sprint-planner"
+    href: "/resources/90-day-growth-sprint-planner"
   },
   {
     id: "vc-portfolio-growth-diagnosis",
     title: "VC Portfolio Growth Diagnosis Template",
     audience: "VCs and accelerator teams",
     description: "A portfolio workshop format for spotting whether a founder needs positioning, acquisition, team, or reporting help first.",
-    href: "/resources#vc-portfolio-growth-diagnosis"
+    href: "/resources/vc-portfolio-growth-diagnosis"
+  },
+  {
+    id: "acquisition-channel-matrix",
+    title: "Acquisition Channel Decision Matrix",
+    audience: "Growth teams · 10 minutes",
+    description: "Score paid, organic, partnerships, outbound, and content against your current stage, team capacity, and ICP clarity.",
+    href: "/resources/acquisition-channel-matrix"
+  },
+  {
+    id: "fractional-cmo-hiring-checklist",
+    title: "Fractional CMO Hiring Checklist",
+    audience: "Founders hiring senior GTM leadership",
+    description: "The questions to ask, the artefacts to expect in week 1, and the red flags that mean the operator can't build a system.",
+    href: "/resources/fractional-cmo-hiring-checklist"
+  },
+  {
+    id: "ai-native-gtm-stack-map",
+    title: "AI-Native GTM Stack Map",
+    audience: "Teams adopting AI for GTM",
+    description: "Map where generative and agentic AI accelerate research, messaging, experiments, and reporting in your current stack.",
+    href: "/resources/ai-native-gtm-stack-map"
   }
 ] as const;
 

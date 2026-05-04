@@ -1,0 +1,256 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  boilerplateLong,
+  boilerplateMedium,
+  boilerplateShort,
+  brandAssets,
+  founderBio,
+  pressAngles,
+  pressClientWorkRows,
+  whatWeDo,
+  whoWeHelp
+} from "../lib/companyPressKitContent";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { headlineMetrics, siteConfig } from "../site";
+
+const path = "/press-kit-download";
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Press kit", path: "/press" },
+    { name: "Download", path }
+  ])
+];
+---
+
+<BaseLayout
+  title="Company press kit (print) | We Scale Startups"
+  description="Printable We Scale Startups company press kit: boilerplate, proof points, brand assets, media contact — save as PDF for editors and partners."
+  keywords="We Scale Startups press kit PDF, company boilerplate, startup media assets"
+  {path}
+  schema={schemas}
+>
+  <section class="page-hero print-hide" aria-labelledby="press-download-heading">
+    <div class="shell">
+      <p class="eyebrow">Company press kit</p>
+      <h1 id="press-download-heading">Download / print the WSS press kit</h1>
+      <p class="press-download-deck">
+        One page you can print or save as PDF (use your browser&apos;s print dialog → Save as PDF). For founder headshots and speaking topics, use{" "}
+        <a href={`${siteConfig.danielSite}/media-kit-download/`} rel="noreferrer" target="_blank"
+          >Daniel Johnson&apos;s media kit download</a
+        >.
+      </p>
+      <div class="hero-actions">
+        <button class="button button-brand" type="button" data-print-kit> Print / Save as PDF → </button>
+        <a class="button button-light" href="/press/">View online press kit →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt print-section" aria-label="Printable press kit">
+    <div class="shell">
+      <div class="press-printable card-print">
+        <header class="press-print-header">
+          <p class="eyebrow">We Scale Startups</p>
+          <h2 class="press-print-title">Company press kit</h2>
+          <p class="press-print-sub">Official boilerplate, proof, and media contact</p>
+        </header>
+
+        <h3 class="press-print-h">One-line description</h3>
+        <p>{boilerplateShort}</p>
+
+        <h3 class="press-print-h">Boilerplates for publication</h3>
+        <p><strong>Short</strong> — {boilerplateShort}</p>
+        <p><strong>Medium</strong> — {boilerplateMedium}</p>
+        <p><strong>Long</strong> — {boilerplateLong}</p>
+
+        <h3 class="press-print-h">What we do</h3>
+        <p>{whatWeDo}</p>
+
+        <h3 class="press-print-h">Who we help</h3>
+        <p>{whoWeHelp}</p>
+
+        <h3 class="press-print-h">Proof points</h3>
+        <p class="press-print-note">Verify against {absoluteUrl("/proof")} before citing.</p>
+        <ul>
+          {headlineMetrics.map((metric) => (
+            <li>
+              <strong>{metric.value}</strong> {metric.label}
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="press-print-h">Selected client work (examples)</h3>
+        <table class="press-print-table">
+          <thead>
+            <tr>
+              <th scope="col">Company / category</th>
+              <th scope="col">Type</th>
+              <th scope="col">Summary</th>
+              <th scope="col">Outcome signal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pressClientWorkRows.map((row) => (
+              <tr>
+                <td>{row.company}</td>
+                <td>{row.type}</td>
+                <td>{row.work}</td>
+                <td>{row.outcome}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <h3 class="press-print-h">Founder bio</h3>
+        <p>{founderBio}</p>
+
+        <h3 class="press-print-h">Brand asset URLs</h3>
+        <ul>
+          {brandAssets.map((asset) => (
+            <li>
+              {asset.label}: {absoluteUrl(asset.href)}
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="press-print-h">Press angles</h3>
+        <ul>
+          {pressAngles.map((angle) => (
+            <li>{angle}</li>
+          ))}
+        </ul>
+
+        <h3 class="press-print-h">Media contact</h3>
+        <p>
+          <strong>Company / WSS:</strong>{" "}
+          <!--email_off-->
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <!--/email_off-->
+        </p>
+        <p>{siteConfig.address}</p>
+        <p>
+          <a href={siteConfig.founderLinkedin} rel="noreferrer" target="_blank">Daniel Johnson on LinkedIn</a>
+          {" · "}
+          <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Founder media kit</a>
+        </p>
+
+        <footer class="press-print-footer">
+          <p>
+            Last updated: {siteConfig.lastUpdated} · Canonical URL: {absoluteUrl(path)}
+          </p>
+        </footer>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelector("[data-print-kit]")?.addEventListener("click", () => window.print());
+</script>
+
+<style>
+  .press-download-deck {
+    max-width: 62ch;
+    margin-top: 0.85rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .press-printable {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 2.5rem;
+    background: var(--bg);
+    border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    border-radius: 12px;
+  }
+  .card-print {
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .press-print-header {
+    text-align: center;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+  }
+  .press-print-title {
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0.35rem 0 0.25rem;
+  }
+  .press-print-sub {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .press-print-h {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin: 1.5rem 0 0.5rem;
+  }
+  .press-print-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .press-print-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+  .press-print-table th,
+  .press-print-table td {
+    border: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .press-print-table thead th {
+    background: color-mix(in oklab, var(--violet) 8%, var(--bg));
+  }
+  .press-print-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+  }
+  @media print {
+    .print-hide,
+    nav,
+    footer,
+    .cookie-banner {
+      display: none !important;
+    }
+    .print-section {
+      padding: 0 !important;
+    }
+    .shell {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .press-printable {
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    body {
+      background: white !important;
+    }
+    .card-print {
+      color: #111 !important;
+    }
+  }
+</style>

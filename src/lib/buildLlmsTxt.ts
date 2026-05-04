@@ -160,6 +160,7 @@ ${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
 - About: ${siteConfig.siteUrl}/about
 - Contact: ${siteConfig.siteUrl}/contact
 - Company press kit: ${siteConfig.siteUrl}/press
+- Company press kit (print / PDF): ${siteConfig.siteUrl}/press-kit-download
 - Daniel Johnson media kit for podcasts, speaking, and expert commentary: ${siteConfig.danielSite}/media-kit/
 - Book / schedule diagnostic: ${siteConfig.siteUrl}${siteConfig.bookingUrl}
 - Growth bottleneck quiz (self-serve): ${siteConfig.siteUrl}/quiz

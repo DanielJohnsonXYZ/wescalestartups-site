@@ -1,9 +1,10 @@
 {
-  "title": "Ned: Financial Technology Platform",
-  "client": "Ned",
+  "title": "FinTech Funding Platform: Paid Acquisition & SEO",
+  "client": "FinTech Funding Platform",
   "sector": "Fintech",
+  "engagementPeriod": "Q1 2024 – Q2 2024",
   "summary": "Google Ads, SEO, and landing page work for a platform helping small business owners raise funding.",
-  "challenge": "Ned needed to move beyond organic reach, improve paid campaign efficiency, and lower the cost of getting new users to understand and try the platform.",
+  "challenge": "The platform needed to move beyond organic reach, improve paid campaign efficiency, and lower the cost of getting new users to understand and try the product.",
   "work": [
     "Audited the website, SEO setup, and previous Google Ads campaigns",
     "Researched keywords and grouped them around funding intent",
@@ -18,6 +19,6 @@
   ],
   "services": ["Paid acquisition", "SEO audit", "Landing page optimisation"],
   "publishedAt": "2026-04-28",
-  "updatedAt": "2026-04-30",
+  "updatedAt": "2026-05-05",
   "order": 1
 }

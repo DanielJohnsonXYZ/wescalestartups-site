@@ -33,11 +33,11 @@ const sections = {
 
 const caseFaqs = [
   {
-    question: `What did WSS change for ${caseStudy.data.client}?`,
+    question: `What did WSS change for this ${caseStudy.data.sector} client?`,
     answer: caseStudy.data.work.slice(0, 3).join("; ") + "."
   },
   {
-    question: `What commercial result did ${caseStudy.data.client} see?`,
+    question: `What commercial result did this engagement produce?`,
     answer: caseStudy.data.results.slice(0, 3).join("; ") + "."
   },
   {
@@ -107,6 +107,12 @@ const caseFaqs = [
           <dl class="case-aside-meta">
             <dt>Sector</dt><dd>{caseStudy.data.sector}</dd>
             <dt>Services used</dt><dd>{caseStudy.data.services.join(", ")}</dd>
+            {caseStudy.data.engagementPeriod && (
+              <>
+                <dt>Engagement period</dt>
+                <dd>{caseStudy.data.engagementPeriod}</dd>
+              </>
+            )}
             <dt>Format</dt><dd>Problem · What WSS changed · Commercial result · System created · Why it mattered</dd>
           </dl>
           <a class="case-aside-link" href={siteConfig.danielSite} rel="noreferrer" target="_blank">

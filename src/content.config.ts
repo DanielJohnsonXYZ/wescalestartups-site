@@ -51,6 +51,7 @@ const cases = defineCollection({
     title: z.string(),
     client: z.string(),
     sector: z.string(),
+    engagementPeriod: z.string().optional(),
     summary: z.string(),
     challenge: z.string(),
     work: z.array(z.string()),

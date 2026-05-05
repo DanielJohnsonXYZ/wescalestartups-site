@@ -1,9 +1,10 @@
 {
-  "title": "LessonsUp: Education Acquisition",
-  "client": "LessonsUp",
+  "title": "EdTech Marketplace: Acquisition Focus & Messaging",
+  "client": "EdTech Marketplace",
   "sector": "EdTech",
+  "engagementPeriod": "Q2 2024 – Q3 2024",
   "summary": "Growth marketing support for an education product that needed clearer acquisition focus.",
-  "challenge": "LessonsUp needed to reach the right users with a more focused message and a cleaner path from first touch to sign-up.",
+  "challenge": "The platform needed to reach the right users with a more focused message and a cleaner path from first touch to sign-up.",
   "work": [
     "Reviewed the acquisition journey and audience segments",
     "Refined growth messaging around user intent",
@@ -17,6 +18,6 @@
   ],
   "services": ["Growth marketing", "Messaging", "Conversion planning"],
   "publishedAt": "2026-04-28",
-  "updatedAt": "2026-04-30",
+  "updatedAt": "2026-05-05",
   "order": 3
 }

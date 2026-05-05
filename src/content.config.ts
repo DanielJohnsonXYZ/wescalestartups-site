@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const services = defineCollection({
   loader: glob({ base: "./src/content/services", pattern: "**/*.json" }),
@@ -95,12 +96,12 @@ const podcastEpisodes = defineCollection({
     guestName: z.string(),
     guestRole: z.string(),
     youtubeId: z.string().optional(),
-    youtubeUrl: z.string().url(),
+    youtubeUrl: z.url(),
     summary: z.string(),
     keyTakeaways: z.array(z.string()),
     durationNote: z.string().optional(),
     resources: z
-      .array(z.object({ label: z.string(), href: z.string().url() }))
+      .array(z.object({ label: z.string(), href: z.url() }))
       .optional()
   })
 });

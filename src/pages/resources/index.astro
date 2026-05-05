@@ -77,45 +77,6 @@ const guides = [
       "Referral routes",
       "Sprint or fractional CMO fit"
     ]
-  },
-  {
-    id: "acquisition-channel-matrix",
-    title: "Acquisition Channel Decision Matrix",
-    format: "Channel selection worksheet",
-    bestFor: "Teams choosing where to invest next quarter's acquisition budget",
-    sections: [
-      "Paid vs organic fit by stage",
-      "Team capacity requirements",
-      "ICP alignment scoring",
-      "Time-to-signal by channel",
-      "Decision matrix template"
-    ]
-  },
-  {
-    id: "fractional-cmo-hiring-checklist",
-    title: "Fractional CMO Hiring Checklist",
-    format: "Hiring assessment worksheet",
-    bestFor: "Founders preparing to hire senior GTM leadership",
-    sections: [
-      "Questions to ask in interview",
-      "Artefacts to expect in week 1",
-      "Red flags during diagnosis",
-      "Handoff criteria for internal hire",
-      "Equity vs cash trade-offs"
-    ]
-  },
-  {
-    id: "ai-native-gtm-stack-map",
-    title: "AI-Native GTM Stack Map",
-    format: "Stack assessment template",
-    bestFor: "Teams adopting AI for research, messaging, and campaign iteration",
-    sections: [
-      "Current stack audit",
-      "AI research acceleration points",
-      "Message testing with AI",
-      "Reporting automation gaps",
-      "Implementation priority map"
-    ]
   }
 ];
 ---
@@ -170,10 +131,10 @@ const guides = [
             <p class="resource-outline-link">
               <a
                 class="card-link"
-                href={`/resources/${guide.id}`}
-                data-cta={`resources-fullpage-${guide.id}`}
+                href={`${siteConfig.siteUrl}/resources#${guide.id}`}
+                data-cta={`resources-outline-${guide.id}`}
               >
-                See the full landing page →
+                Canonical link to this outline →
               </a>
             </p>
             <CfEmailOff>

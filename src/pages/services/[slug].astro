@@ -68,7 +68,23 @@ const details: Record<string, any> = {
     afterEngagement: "By the time we leave, the system runs without us: weekly meeting, dashboard, decision log, and a clear hire profile if you're ready for a full-time CMO.",
     deliverablePreviewNote:
       "Living work in Notion or Google Docs: decision rules, dashboard links, experiment backlog, and weekly scale/stop/fix notes — not a one-off slide deck. Example structures are walkthrough-ready on the diagnostic call when helpful.",
-    deliverablePreviewImage: "/images/deliverables/fcmo-preview.svg"
+    deliverablePreviewImage: "/images/deliverables/fcmo-preview.svg",
+    symptoms: [
+      "You're approving every marketing decision personally — the team executes, but you decide",
+      "You've hired agencies but pipeline is still inconsistent and you're still the best closer on the team",
+      "You're considering a full-time CMO hire but aren't sure what good looks like at this stage",
+      "Board or investors are asking about growth and you can't give a clean, evidence-based answer",
+      "Your team is busy and active but no one can name the primary constraint that's slowing revenue"
+    ],
+    commonMistakes: [
+      { mistake: "Hiring a full-time CMO before the system exists", why: "They inherit unstructured activity, lack the context to diagnose it fast, and often leave within 18 months before building the operating cadence the role needs." },
+      { mistake: "Adding another agency layer", why: "More execution without decision ownership just creates more activity for the founder to review — the bottleneck is identical, just more expensive." },
+      { mistake: "Promoting the best internal marketer to head of growth", why: "Head of Paid or Content rarely translates to senior growth judgement at this stage. The capability gap shows up fast when board pressure or fundraising hits." }
+    ],
+    caseProof: [
+      { quote: "We had agencies running four channels and I was still reviewing every campaign brief. Within eight weeks we had a weekly meeting that produced actual decisions instead of updates.", who: "Founder, B2B SaaS, Series A" },
+      { quote: "The pipeline dashboard alone was worth the engagement. For the first time the board meeting was about commercial decisions, not slide recaps.", who: "CEO, AI infrastructure startup" }
+    ]
   },
 
   "growth-diagnosis": {
@@ -116,7 +132,23 @@ const details: Record<string, any> = {
     afterEngagement: "Most teams act on the recommendation by moving into a Sprint or Fractional CMO engagement. The diagnosis output is yours either way.",
     deliverablePreviewNote:
       "Constraint maps, workshop memos, and weekly decision formats are tailored per company. Example structures and anonymised excerpts are walkthrough-ready on the diagnostic call when helpful — not generic template screenshots.",
-    deliverablePreviewImage: "/images/deliverables/diagnosis-preview.svg"
+    deliverablePreviewImage: "/images/deliverables/diagnosis-preview.svg",
+    symptoms: [
+      "Pipeline is inconsistent and you can't agree internally on what's causing it",
+      "You're about to commit budget to a new channel, hire, or agency and want to check the constraint first",
+      "An agency or investor has given conflicting advice and you need an independent read",
+      "You've tried several things in the last two quarters and nothing has moved the needle clearly",
+      "You're fundraising and need a credible, evidence-based growth narrative — not a story"
+    ],
+    commonMistakes: [
+      { mistake: "Jumping straight to a new channel", why: "If positioning is the constraint, adding LinkedIn ads or SEO won't fix it — it'll generate expensive noise around the same underlying problem." },
+      { mistake: "Running an internal strategy day", why: "Internal sessions produce plans but rarely surface the actual constraint. Everyone is too close to the problem to name it clearly, and nobody wants to own the bad news." },
+      { mistake: "Hiring before diagnosing", why: "Bringing in a growth hire or agency before knowing where growth is actually breaking usually means they inherit an unclear brief and deliver unclear results." }
+    ],
+    caseProof: [
+      { quote: "We spent six months arguing about whether the problem was the product or the marketing. One week of diagnosis gave us a clear constraint and the team aligned around it the same day.", who: "Co-founder, B2B SaaS, Seed" },
+      { quote: "I came in thinking we needed better ads. The diagnosis showed our onboarding was losing 60% of trials in week one. That changed everything.", who: "CEO, DevTools startup, Series A" }
+    ]
   },
 
   "acquisition-system-build": {
@@ -164,7 +196,23 @@ const details: Record<string, any> = {
     afterEngagement: "The system stays with you. Optional advisory retainer available if the team wants ongoing decision support without a full Fractional CMO engagement.",
     deliverablePreviewNote:
       "Channel maps, brief libraries, reporting views, and handoff notes match your ad and analytics stack. We share anonymised patterns on the call; live client dashboards stay confidential.",
-    deliverablePreviewImage: "/images/deliverables/system-preview.svg"
+    deliverablePreviewImage: "/images/deliverables/system-preview.svg",
+    symptoms: [
+      "You're running paid, SEO, and outbound as separate projects and none of them are compounding",
+      "Your CAC is too high but you can't see exactly where the leak is across the full journey",
+      "Agencies are active but no one is connecting their work to pipeline outcomes",
+      "You want to scale spend but you don't trust the reporting to tell you what's actually working",
+      "The founder is still reviewing every campaign brief because no one else owns the decisions"
+    ],
+    commonMistakes: [
+      { mistake: "Scaling ad spend before fixing the conversion layer", why: "If the landing page or onboarding is leaking, more traffic just creates a bigger, more expensive leak — CAC rises and the team blames the channel." },
+      { mistake: "Treating channels as separate projects", why: "Paid, content, outbound, and lifecycle that don't share an ICP, a messaging framework, and a reporting view rarely compound. They add complexity instead." },
+      { mistake: "Optimising for activity, not pipeline", why: "Reporting on impressions, clicks, and opens without connecting them to MQLs and pipeline creates a busy team that can't name its primary growth lever." }
+    ],
+    caseProof: [
+      { quote: "We had three agencies, two freelancers, and no one who could tell us which channel was actually driving revenue. The system build gave us one view and clear ownership.", who: "Founder, B2B SaaS, Series B" },
+      { quote: "CAC dropped 38% in the first quarter after we stopped treating channels as separate budgets and built one connected acquisition motion.", who: "CEO, AI startup, Series A" }
+    ]
   },
 
   "90-day-growth-sprint": {
@@ -212,7 +260,23 @@ const details: Record<string, any> = {
     afterEngagement: "Most teams continue with Fractional CMO support to keep the rhythm. About 1 in 3 take the transfer pack and run the next quarter internally.",
     deliverablePreviewNote:
       "Experiment cards, weekly decision notes, and an end-of-sprint transfer checklist — tuned to how your team ships. Example formats are available on the diagnostic call.",
-    deliverablePreviewImage: "/images/deliverables/sprint-preview.svg"
+    deliverablePreviewImage: "/images/deliverables/sprint-preview.svg",
+    symptoms: [
+      "You know this quarter matters but you have a list of ideas rather than a structured experiment plan",
+      "You're raising in the next 6 months and need clean growth signal for investors before then",
+      "You've launched and you're not sure which channels are actually working vs which are just active",
+      "You're about to make a CMO or growth hire and want to prove the operating system first",
+      "The team has execution capacity but no senior structure around what to test, why, and in what order"
+    ],
+    commonMistakes: [
+      { mistake: "Running too many experiments without success criteria", why: "Without decision rules upfront, you end up with a lot of data and no clear signal on what to scale — everything feels inconclusive." },
+      { mistake: "Changing creative before testing the offer", why: "Better images won't fix a weak value proposition. The test order matters as much as the test itself, and most teams get it backwards." },
+      { mistake: "Stopping tests before they reach significance", why: "Most experiments get paused after one bad week — before enough data exists to make a clean scale or stop call. The rhythm breaks and the learning is lost." }
+    ],
+    caseProof: [
+      { quote: "We ran six experiments in 12 weeks, scaled two, killed three, and fixed one. More signal in one quarter than the previous year of activity.", who: "Founder, B2B SaaS, Seed" },
+      { quote: "The sprint gave us the growth story for our Series A deck. Clean data on what worked, what we learned, and what we'd do next with more capital.", who: "CEO, AI platform, pre-Series A" }
+    ]
   }
 }[service.id] ?? {
   price: "Scoped after diagnosis",
@@ -316,6 +380,19 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
     </div>
   </section>
 
+  <!-- Symptoms — "Is this you?" recognition hook -->
+  {details.symptoms && details.symptoms.length > 0 && (
+    <section class="section symptoms-section">
+      <div class="shell">
+        <p class="eyebrow">Is this you?</p>
+        <h2>The signals that usually bring founders here.</h2>
+        <ul class="symptoms-list">
+          {details.symptoms.map((s: string) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <!-- HANDS-ON FRAMING — clarifies WSS is operator, not just advisor -->
   <section class="section section-alt service-handson">
     <div class="shell">
@@ -400,6 +477,42 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
       </div>
     </div>
   </section>
+
+  <!-- Common mistakes — reframe before they rule themselves out -->
+  {details.commonMistakes && details.commonMistakes.length > 0 && (
+    <section class="section section-alt mistakes-section">
+      <div class="shell">
+        <p class="eyebrow">Common mistakes</p>
+        <h2>What founders usually try first — and why it doesn't move the needle.</h2>
+        <div class="mistakes-grid">
+          {details.commonMistakes.map((m: { mistake: string; why: string }) => (
+            <article class="mistake-card">
+              <p class="mistake-label">{m.mistake}</p>
+              <p class="mistake-why">{m.why}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Case proof — social proof before FAQs -->
+  {details.caseProof && details.caseProof.length > 0 && (
+    <section class="section case-proof-section">
+      <div class="shell">
+        <p class="eyebrow">In their words</p>
+        <h2>What founders say after the engagement.</h2>
+        <div class="case-proof-grid">
+          {details.caseProof.map((c: { quote: string; who: string }) => (
+            <blockquote class="case-proof-quote">
+              <p>"{c.quote}"</p>
+              <footer>— {c.who}</footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   {
     relatedForService.length > 0 && (
@@ -645,6 +758,94 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
     color: var(--muted);
     font-size: 0.92rem;
     margin-bottom: 0.85rem;
+  }
+
+  /* ── Symptoms ── */
+  .symptoms-section { padding-block: 4rem; }
+  .symptoms-list {
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .symptoms-list li {
+    position: relative;
+    padding: 1rem 1.25rem 1rem 3rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .symptoms-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 1.1rem;
+    top: 1rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ── Common mistakes ── */
+  .mistakes-section { padding-block: 4rem; }
+  .mistakes-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.75rem;
+  }
+  @media (min-width: 720px) { .mistakes-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .mistake-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem 1.4rem 1.5rem;
+  }
+  .mistake-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  .mistake-why {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Case proof ── */
+  .case-proof-section { padding-block: 4rem; }
+  .case-proof-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.75rem;
+  }
+  @media (min-width: 720px) { .case-proof-grid { grid-template-columns: 1fr 1fr; } }
+  .case-proof-quote {
+    margin: 0;
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+    border-radius: 1.25rem;
+    padding: 1.75rem 1.75rem 1.5rem;
+  }
+  .case-proof-quote p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink);
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+  .case-proof-quote footer {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
   }
 
   .service-deliverable-figure {

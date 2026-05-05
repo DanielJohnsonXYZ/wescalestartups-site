@@ -118,6 +118,10 @@ function metricLead(result: string) {
               <span class="arrow" aria-hidden="true">→</span>
             </a>
           </div>
+          <p class="hero-trust-micro" aria-label="Quick proof">
+            <span>£18M+ revenue impact</span><span aria-hidden="true"> · </span><span>£6M+ ad spend managed</span><span aria-hidden="true"> · </span><span>★&nbsp;4.93 GrowthMentor</span><span aria-hidden="true"> · </span><span>Techstars&nbsp;· Google&nbsp;· Cambridge</span>
+          </p>
+
           <p class="hero-microcopy">
             Leave the call with your biggest growth bottleneck named in plain English. No pitch — just a clear view of what's blocking pipeline.{" "}
             <a href="/contact" data-cta="hero-contact">Contact</a> if you prefer a written enquiry first.
@@ -297,6 +301,31 @@ function metricLead(result: string) {
 
   <ProofLogos />
 
+  <!-- Named outcomes — proof before first CTA -->
+  <section class="section named-outcomes-section">
+    <div class="shell">
+      <p class="eyebrow">Results from real engagements</p>
+      <h2>What founders leave with.</h2>
+      <div class="named-outcomes-grid">
+        <article class="named-outcome-card">
+          <p class="no-sector">Healthtech · Fractional CMO</p>
+          <p class="no-result">Built the first structured marketing operation. 100-podcast outreach live. CEO time freed from marketing coordination.</p>
+          <a class="no-link" href="/case-studies/diadia-health">Read the case →</a>
+        </article>
+        <article class="named-outcome-card">
+          <p class="no-sector">Fintech · Acquisition Sprint</p>
+          <p class="no-result">CTR improved to 8.6%. 500+ sign-ups in the first two months. CPC reached $0.74.</p>
+          <a class="no-link" href="/case-studies/ned">Read the case →</a>
+        </article>
+        <article class="named-outcome-card">
+          <p class="no-sector">Mental Health App · Diagnosis + System</p>
+          <p class="no-result">Positioning sharpened from generic wellness to clinical-credibility-led. Acquisition focus narrowed to one ICP and one channel.</p>
+          <a class="no-link" href="/case-studies/equoo">Read the case →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Credential logos — Google, Cambridge, etc. -->
   <section class="section section-alt">
     <div class="shell">
@@ -349,6 +378,59 @@ function metricLead(result: string) {
           <h3>The longer you wait, the harder it gets</h3>
           <p>Bad reporting habits compound. Positioning drifts. A weak system disguised as a growth problem gets more expensive to fix every quarter.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER — concrete transformation examples -->
+  <section class="section before-after-section">
+    <div class="shell">
+      <p class="eyebrow">Before and after</p>
+      <h2>What actually changes when the system is in.</h2>
+      <div class="ba-grid">
+        <article class="ba-card">
+          <div class="ba-before">
+            <span class="ba-label">Before</span>
+            <p>Founder approves every campaign — the team executes, but every decision routes through you.</p>
+          </div>
+          <div class="ba-arrow" aria-hidden="true">→</div>
+          <div class="ba-after">
+            <span class="ba-label">After</span>
+            <p>Team runs a weekly decision cadence. Scale, stop, or fix calls happen without the founder in the room.</p>
+          </div>
+        </article>
+        <article class="ba-card">
+          <div class="ba-before">
+            <span class="ba-label">Before</span>
+            <p>Channels report in isolation — paid, SEO, and outbound each have their own numbers, none connected to pipeline.</p>
+          </div>
+          <div class="ba-arrow" aria-hidden="true">→</div>
+          <div class="ba-after">
+            <span class="ba-label">After</span>
+            <p>One dashboard. One view. Each week you see exactly what to scale, what to stop, and what to fix.</p>
+          </div>
+        </article>
+        <article class="ba-card">
+          <div class="ba-before">
+            <span class="ba-label">Before</span>
+            <p>Agency owns the channel logic — you get reports, invoices, and reasons why it didn't work.</p>
+          </div>
+          <div class="ba-arrow" aria-hidden="true">→</div>
+          <div class="ba-after">
+            <span class="ba-label">After</span>
+            <p>Company owns the system. The agency executes inside a brief your team controls — and the IP stays with you.</p>
+          </div>
+        </article>
+      </div>
+      <!-- Proof callout — grounds abstract claims with specific evidence -->
+      <div class="why-now-proof">
+        <p class="wnp-label">These aren't theoretical — here's what it looks like in practice:</p>
+        <ul class="wnp-list">
+          <li><strong>Founder-led growth replaced:</strong> AI Precision Medicine Platform — CEO moved from doing all marketing to weekly review in 30 days.</li>
+          <li><strong>Channels unified:</strong> FinTech platform — paid, organic, and outbound connected to one decision view; CTR to 8.6% and 500+ sign-ups in two months.</li>
+          <li><strong>Team given direction:</strong> EdTech marketplace — acquisition focus narrowed from five channels to one ICP and one channel with a clear experiment backlog.</li>
+        </ul>
+        <a class="wnp-link" href="/case-studies">See all case studies →</a>
       </div>
     </div>
   </section>
@@ -753,6 +835,156 @@ function metricLead(result: string) {
   .reset--small {
     font-size: 0.78rem;
     padding: 0.2rem 0.5rem;
+  }
+
+  /* Hero trust micro-strip */
+  .hero-trust-micro {
+    margin-top: 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .hero-trust-micro span { white-space: nowrap; }
+
+  /* Named outcomes */
+  .named-outcomes-section { padding-block: 4rem; }
+  .named-outcomes-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.75rem;
+  }
+  @media (min-width: 720px) { .named-outcomes-grid { grid-template-columns: repeat(3, 1fr); } }
+  .named-outcome-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem 1.4rem 1.4rem;
+  }
+  .no-sector {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin: 0 0 0.6rem;
+  }
+  .no-result {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 0.85rem;
+  }
+  .no-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .no-link:hover { text-decoration: underline; }
+
+  /* Why Now proof callout */
+  .why-now-proof {
+    margin-top: 2rem;
+    background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
+    border-radius: 1rem;
+    padding: 1.4rem 1.6rem 1.5rem;
+  }
+  .wnp-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.75rem;
+  }
+  .wnp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .wnp-list li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .wnp-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .wnp-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .wnp-link:hover { text-decoration: underline; }
+
+  /* Before / After section */
+  .before-after-section { padding-block: 4rem; }
+  .ba-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 900px) { .ba-grid { grid-template-columns: repeat(3, 1fr); } }
+  .ba-card {
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .ba-before, .ba-after {
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+  .ba-before {
+    background: color-mix(in srgb, #ff4444 5%, var(--surface));
+    border-bottom: 1px solid var(--line);
+  }
+  .ba-after {
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    border-top: 1px solid var(--line);
+  }
+  .ba-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.65rem;
+  }
+  .ba-before .ba-label { color: #c03030; }
+  .ba-after .ba-label { color: var(--accent); }
+  .ba-before p, .ba-after p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .ba-before p { color: var(--ink); }
+  .ba-after p { color: var(--ink); }
+  .ba-arrow {
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--accent);
+    font-weight: 700;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
 
   /* Homepage FAQ — accordion (matches resource / service FAQ pattern) */

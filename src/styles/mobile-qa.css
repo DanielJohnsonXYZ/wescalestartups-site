@@ -1,0 +1,203 @@
+/* Mobile QA implementation - 2026-05-05
+   Keeps the mobile path usable across the hero, menu, diagnostic, proof, CTAs,
+   forms, and dense footer/navigation surfaces. */
+
+@media (max-width: 980px) {
+  .site-header {
+    padding: 0.55rem 0;
+  }
+
+  .header-inner {
+    position: relative;
+    min-height: 56px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+    margin-left: auto;
+  }
+
+  .mobile-menu summary {
+    min-width: 5.25rem;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .mobile-menu nav {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 4.75rem);
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    left: max(1rem, env(safe-area-inset-left, 0px));
+    width: auto;
+    max-height: min(72vh, 34rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.65rem;
+  }
+
+  .mobile-menu nav .nav-link,
+  .mobile-menu nav .button {
+    width: 100%;
+    justify-content: flex-start;
+    min-height: 44px;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .mobile-menu nav .button {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100% - 1.25rem, 1240px);
+  }
+
+  .announcement-bar .shell {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .wss-hero-redesign {
+    padding-top: 2rem;
+  }
+
+  .wss-hero-redesign h1 {
+    font-size: clamp(2.55rem, 13vw, 3.5rem);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-firstperson,
+  .hero-plain,
+  .hero-microcopy,
+  .tldr-callout-body {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .wss-hero-redesign .hero-cta,
+  .hero-actions,
+  .home-podcast-actions,
+  .cta-inner .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 0.7rem;
+  }
+
+  .wss-hero-redesign .btn,
+  .hero-actions .button,
+  .cta-inner .button,
+  .home-podcast-actions .button {
+    width: 100%;
+    min-height: 48px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .founder-card {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .founder-card .portrait {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .wss-hero-redesign .credential-logos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: 0.55rem 0.8rem;
+  }
+
+  .diag--compact,
+  .diag {
+    width: 100%;
+    max-width: none;
+    padding: 0.95rem;
+  }
+
+  .diag-head,
+  .diag-prompt {
+    gap: 0.75rem;
+  }
+
+  .diag-prompt {
+    align-items: flex-start;
+  }
+
+  .diag .row {
+    min-height: 58px;
+    padding: 0.8rem;
+    touch-action: manipulation;
+  }
+
+  .wss-hero-redesign .proof-rail {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+  }
+
+  .wss-hero-redesign .proof-rail .stat strong {
+    font-size: 1.55rem;
+  }
+
+  .wss-hero-redesign .proof-rail .stat span {
+    font-size: 0.62rem;
+    overflow-wrap: anywhere;
+  }
+
+  .proof-client-row,
+  .proof-eco-grid,
+  .why-now-grid,
+  .deliverables-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(6, minmax(82vw, 1fr));
+    scroll-padding-inline: 0.65rem;
+  }
+
+  .testimonial-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand img {
+    width: 62px;
+  }
+
+  .wss-hero-redesign h1 {
+    font-size: clamp(2.35rem, 12.5vw, 3.1rem);
+  }
+
+  .hero-rail .label,
+  .hero-rail .mark {
+    font-size: 0.68rem;
+  }
+
+  .wss-hero-redesign .proof-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .wss-hero-redesign .credential-logos {
+    grid-template-columns: 1fr;
+  }
+
+  .diag .row {
+    grid-template-columns: 1fr;
+  }
+
+  .diag .row .bar,
+  .diag .row .verdict {
+    grid-column: auto;
+  }
+}

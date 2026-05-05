@@ -2980,6 +2980,32 @@ textarea:focus-visible {
   object-position: center 35%;
 }
 
+.daniel-speaking-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.daniel-speaking-photo {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 0 0 1px var(--line-soft),
+    0 4px 16px rgba(16, 13, 24, 0.08);
+}
+
+.daniel-speaking-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
 .daniel-visuals-caption {
   margin: 0;
   font-size: 0.8rem;

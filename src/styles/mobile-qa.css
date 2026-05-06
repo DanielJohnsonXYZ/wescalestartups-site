@@ -68,12 +68,13 @@
   }
 
   .wss-hero-redesign h1 {
-    font-size: clamp(2.55rem, 13vw, 3.5rem);
-    line-height: 0.98;
+    font-size: clamp(2.18rem, 10vw, 2.8rem);
+    line-height: 1;
     overflow-wrap: anywhere;
   }
 
   .hero-firstperson,
+  .hero-lede,
   .hero-plain,
   .hero-microcopy,
   .tldr-callout-body {
@@ -106,6 +107,16 @@
     gap: 0.75rem;
   }
 
+  .wss-hero-redesign .founder-card {
+    grid-template-columns: 1fr;
+    padding: 0.75rem;
+  }
+
+  .wss-hero-redesign .founder-card picture,
+  .wss-hero-redesign .portrait {
+    display: none;
+  }
+
   .founder-card .portrait {
     width: 72px;
     min-width: 72px;
@@ -124,6 +135,53 @@
     padding: 0.95rem;
   }
 
+  .diag--panel {
+    padding: 0;
+  }
+
+  .diag--panel .diag-head {
+    padding: 0.75rem 0.8rem 0.7rem;
+  }
+
+  .diag--panel .diag-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .diag--panel .diag-kpis div {
+    padding: 0.5rem 0.45rem;
+  }
+
+  .diag--panel .diag-kpis span {
+    font-size: 0.48rem;
+  }
+
+  .diag--panel .diag-kpis strong {
+    font-size: 0.9rem;
+  }
+
+  .diag--panel .diag-kpis em {
+    font-size: 0.5rem;
+  }
+
+  .diag--panel .diag-chart {
+    padding: 0.55rem 0.75rem 0;
+  }
+
+  .diag--panel .diag-spark {
+    height: 82px;
+  }
+
+  .diag--panel .diag-prompt,
+  .diag--panel .diag-rows,
+  .diag--panel .diag-foot {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  .diag--panel .diag-prompt .tap {
+    font-size: 0.52rem;
+  }
+
   .diag-head,
   .diag-prompt {
     gap: 0.75rem;
@@ -137,6 +195,23 @@
     min-height: 58px;
     padding: 0.8rem;
     touch-action: manipulation;
+  }
+
+  .diag--panel .row {
+    min-height: 0;
+    padding: 0.45rem 0.38rem;
+  }
+
+  .diag--panel .row .sub {
+    display: none;
+  }
+
+  .diag--panel .diag-foot {
+    padding: 0.62rem 0.7rem;
+  }
+
+  .diag--panel .diag-foot .copy-wrap {
+    font-size: 0.78rem;
   }
 
   .wss-hero-redesign .proof-rail {
@@ -176,7 +251,7 @@
   }
 
   .wss-hero-redesign h1 {
-    font-size: clamp(2.35rem, 12.5vw, 3.1rem);
+    font-size: clamp(2rem, 9.5vw, 2.45rem);
   }
 
   .hero-rail .label,
@@ -185,7 +260,7 @@
   }
 
   .wss-hero-redesign .proof-rail {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .wss-hero-redesign .credential-logos {
@@ -196,8 +271,20 @@
     grid-template-columns: 1fr;
   }
 
+  .diag--panel .row {
+    grid-template-columns: 1.45rem minmax(0, 1fr) auto;
+  }
+
   .diag .row .bar,
   .diag .row .verdict {
+    grid-column: auto;
+  }
+
+  .diag--panel .row .bar {
+    display: none;
+  }
+
+  .diag--panel .row .verdict {
     grid-column: auto;
   }
 }

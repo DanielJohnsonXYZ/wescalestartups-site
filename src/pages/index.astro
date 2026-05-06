@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import BrandLogoSlot from "../components/BrandLogoSlot.astro";
 import ClientWorkStrip from "../components/ClientWorkStrip.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import SectionIntro from "../components/SectionIntro.astro";
@@ -11,8 +10,6 @@ import DanielStory from "../components/DanielStory.astro";
 import WhenToHireUs from "../components/WhenToHireUs.astro";
 import GrowthScopeBar from "../components/GrowthScopeBar.astro";
 import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
-import HomeScorecardHook from "../components/HomeScorecardHook.astro";
-import TldrCallout from "../components/TldrCallout.astro";
 import WhoThisIsForIcp from "../components/WhoThisIsForIcp.astro";
 import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
 import CtaLadder from "../components/CtaLadder.astro";
@@ -24,7 +21,6 @@ import {
   buyerFaqs,
   headlineMetrics,
   homeRelatedReading,
-  methodologyBrand,
   proofStandards,
   siteConfig,
   testimonials
@@ -60,6 +56,41 @@ const concreteDeliverables = [
   { label: "Team handover pack", note: "What to run after we leave", href: "/how-it-works" }
 ];
 
+const engagementShapes = [
+  {
+    step: "01",
+    label: "Diagnose",
+    title: "Bottleneck diagnosis",
+    body: "One-week deep-dive. The binding constraint named in plain English with a fix-or-skip recommendation.",
+    meta: "1 week · fixed scope",
+    href: "/services/growth-diagnosis"
+  },
+  {
+    step: "02",
+    label: "Sprint",
+    title: "90-day growth sprint",
+    body: "Targeted intervention against the named bottleneck. Built, run, measured, and transferred.",
+    meta: "12 weeks · focused execution",
+    href: "/services/90-day-growth-sprint"
+  },
+  {
+    step: "03",
+    label: "Build",
+    title: "Acquisition system build",
+    body: "Channel hierarchy, narrative, reporting cadence, and handover installed end-to-end.",
+    meta: "8-12 weeks · system install",
+    href: "/services/acquisition-system-build"
+  },
+  {
+    step: "04",
+    label: "Embed",
+    title: "Embedded fractional CMO",
+    body: "Senior growth leadership alongside your team when the constraint needs an operator in the seat.",
+    meta: "3+ months · selective fit",
+    href: "/services/fractional-cmo"
+  }
+];
+
 const homeTestimonials = testimonials.filter((t) => !/mentorcruise/i.test(t.company));
 
 function metricLead(result: string) {
@@ -84,24 +115,27 @@ function metricLead(result: string) {
           </p>
 
           <h1>
-            <span class="beat">Predictable B2B SaaS pipeline.</span>
-            <span class="beat"><span class="grad">Without a £150k CMO hire.</span></span>
+            <span class="beat">Predictable B2B SaaS pipeline</span>
+            <span class="beat"><span class="strike">without</span> a <span class="grad">£150k</span> CMO hire.</span>
           </h1>
 
-          <p class="hero-firstperson">
-            I'm <strong>Daniel Johnson</strong>, fractional CMO. I help post-PMF B2B SaaS and AI founders build GTM systems that compound — commercially on{" "}
-            <a href={siteConfig.siteUrl}>{siteConfig.canonicalHost}</a>, and as a personal brand on{" "}
-            <a href={siteConfig.danielSite} rel="me">{siteConfig.danielSite.replace(/^https:\/\//, "")}</a>.
+          <p class="hero-credibility">
+            <span class="hero-avatar" aria-hidden="true">DJ</span>
+            <span>
+              Daniel Johnson · Fractional CMO · <a href="https://app.growthmentor.com/mentors/daniel-johnson" rel="noreferrer" target="_blank">★ 4.93 GrowthMentor</a> · 479+ founder sessions
+            </span>
           </p>
 
-          <TldrCallout
-            text="We Scale Startups helps post-PMF B2B SaaS and AI founders name the growth bottleneck, build a coherent acquisition system, and transfer the weekly rhythm — so pipeline compounds without every decision routing through the founder. Fractional CMO judgement plus delivery: diagnosis, sprints, system builds, and embedded leadership when the fit is right."
-          />
-
-          <p class="hero-plain">
-            Four engagement shapes — one-week bottleneck diagnosis, 90-day sprint, full acquisition system build, or embedded Fractional CMO. Each ends with the team owning the artefacts and the weekly cadence, not dependent on us to run it.
-            {" "}This work is structured as the <strong>{methodologyBrand.shortName}</strong>.
+          <p class="hero-lede">
+            I help <strong>post-PMF B2B SaaS and AI founders</strong> name the growth bottleneck, build a coherent acquisition system, and transfer the weekly rhythm — so pipeline compounds <strong>without every decision routing through the founder</strong>.
           </p>
+
+          <div class="hero-shapes" aria-label="Engagement shapes">
+            <a href="/services/growth-diagnosis"><span>01</span> Diagnose</a>
+            <a href="/services/90-day-growth-sprint"><span>02</span> 90-day sprint</a>
+            <a href="/services/acquisition-system-build"><span>03</span> System build</a>
+            <a href="/services/fractional-cmo"><span>04</span> Embedded CMO</a>
+          </div>
 
           <div class="hero-cta">
             <a
@@ -117,17 +151,15 @@ function metricLead(result: string) {
               {siteConfig.scorecardLabel}
               <span class="arrow" aria-hidden="true">→</span>
             </a>
+            <a class="btn btn-link" href="/contact" data-cta="hero-contact">Written enquiry</a>
           </div>
           <p class="hero-trust-micro" aria-label="Quick proof">
             <span>£18M+ revenue impact</span><span aria-hidden="true"> · </span><span>£6M+ ad spend managed</span><span aria-hidden="true"> · </span><span>★&nbsp;4.93 GrowthMentor</span><span aria-hidden="true"> · </span><span>Techstars&nbsp;· Google&nbsp;· Cambridge</span>
           </p>
 
           <p class="hero-microcopy">
-            Leave the call with your biggest growth bottleneck named in plain English. No pitch — just a clear view of what's blocking pipeline.{" "}
-            <a href="/contact" data-cta="hero-contact">Contact</a> if you prefer a written enquiry first.
+            Leave the call with your biggest growth bottleneck named in plain English. No pitch — just a clear view of what's blocking pipeline.
           </p>
-
-          <HomeScorecardHook />
 
           <div class="founder-card" aria-label="Founder">
             <picture>
@@ -147,12 +179,12 @@ function metricLead(result: string) {
                 <a class="credential-logo" href="https://www.jbs.cam.ac.uk/" rel="noreferrer" target="_blank" aria-label="Cambridge Judge Business School">
                   <img src="/images/logos/cambridge.webp" alt="Cambridge Judge Business School" width="60" height="20" loading="lazy" decoding="async" />
                 </a>
-                <BrandLogoSlot
-                  class="credential-logo"
-                  label="Imperial College"
-                  href="https://www.imperial.ac.uk/"
-                />
-                <BrandLogoSlot class="credential-logo" label="Techstars" href="https://www.techstars.com/" />
+                <a class="credential-logo" href="https://www.imperial.ac.uk/" rel="noreferrer" target="_blank" aria-label="Imperial College London">
+                  <img src="/images/logos/imperial.webp" alt="Imperial College London" width="120" height="14" loading="lazy" decoding="async" />
+                </a>
+                <a class="credential-logo" href="https://www.techstars.com/" rel="noreferrer" target="_blank" aria-label="Techstars">
+                  <img src="/images/logos/techstars.webp" alt="Techstars" width="60" height="24" loading="lazy" decoding="async" />
+                </a>
                 <a class="credential-logo" href="https://startup.google.com/" rel="noreferrer" target="_blank" aria-label="Google for Startups Mentor">
                   <img src="/images/logos/google.webp" alt="Google for Startups Mentor" width="60" height="20" loading="lazy" decoding="async" />
                 </a>
@@ -164,73 +196,118 @@ function metricLead(result: string) {
           </div>
         </div>
 
-  <!-- Interactive diagnosis element — reduced visual prominence -->
-      <aside class="diag diag--compact" id="diag" aria-label="Sample growth diagnosis">
-        <svg class="spark spark--small" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true">
-          <!-- Reduced size SVG -->
-          <defs>
-            <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#7b3eff" />
-              <stop offset="55%" stop-color="#a445ff" />
-              <stop offset="100%" stop-color="#c44dff" />
-            </linearGradient>
-          </defs>
-          <text class="label" x="2" y="22">Pipeline (now)</text>
-          <text class="label r" x="398" y="22">Pipeline (system)</text>
-          <path class="wave" d="M0,12 L18,5 L36,17 L54,4 L72,16 L90,3 L108,18 L126,7 L144,19 L162,4 L180,17 L198,6 L216,18 L234,3 L252,16 L270,8 L288,19 L306,5 L324,17 L342,4 L360,15 L378,9 L400,12" />
-          <path class="line" d="M0,18 C80,17 140,14 200,11 C260,8 320,6 400,3" />
-        </svg>
+        <aside class="diag diag--panel" id="diag" aria-label="Sample growth diagnosis">
+          <header class="diag-head">
+            <div>
+              <p class="label"><span class="live" aria-hidden="true"></span> Growth Diagnostic · Sample output</p>
+              <h2 class="title">Constraint Map</h2>
+            </div>
+            <span class="week">WK 01 / 12</span>
+          </header>
 
-        <header class="diag-head diag-head--compact">
-          <div>
-            <p class="label"><span class="live" aria-hidden="true"></span> Constraint map</p>
-            <h2 class="title title--small">Growth Diagnosis</h2>
+          <div class="diag-kpis" aria-label="Sample diagnostic metrics">
+            <div>
+              <span>Pipeline today</span>
+              <strong>£42k <small>/ wk</small></strong>
+              <em>Flat 6 wks</em>
+            </div>
+            <div>
+              <span>12-wk projection</span>
+              <strong>£128k <small>/ wk</small></strong>
+              <em class="up">3.0x system lift</em>
+            </div>
+            <div>
+              <span>Bottleneck</span>
+              <strong class="accent">Acquisition</strong>
+              <em class="accent">88% confidence</em>
+            </div>
           </div>
-          <span class="week">WK 01 / 12</span>
-        </header>
 
-        <div class="diag-prompt diag-prompt--compact">
-          <span class="tap"><span class="dot" aria-hidden="true"></span> Tap any constraint to diagnose yours</span>
-          <button class="reset reset--small" type="button" data-reset>Reset</button>
-        </div>
+          <div class="diag-chart">
+            <div class="diag-legend" aria-hidden="true">
+              <span class="now">Pipeline now</span>
+              <span class="system">Pipeline system</span>
+            </div>
+            <svg class="spark diag-spark" viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#7b3eff" />
+                  <stop offset="55%" stop-color="#a445ff" />
+                  <stop offset="100%" stop-color="#c44dff" />
+                </linearGradient>
+                <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#a445ff" stop-opacity=".26" />
+                  <stop offset="100%" stop-color="#a445ff" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <g class="grid" stroke="#e9e2d4" stroke-width="1">
+                <line x1="0" x2="600" y1="40" y2="40" />
+                <line x1="0" x2="600" y1="80" y2="80" />
+                <line x1="0" x2="600" y1="120" y2="120" />
+              </g>
+              <path class="area" d="M0,120 C60,114 120,108 180,98 C240,86 300,70 360,52 C420,36 480,24 540,18 L600,12 L600,160 L0,160 Z" fill="url(#sparkFill)" />
+              <path class="wave" d="M0,114 C40,110 80,118 120,114 C160,108 200,116 240,112 C280,107 320,116 360,110 C400,105 440,114 480,108 C520,103 560,111 600,107" />
+              <path class="line" d="M0,120 C60,114 120,108 180,98 C240,86 300,70 360,52 C420,36 480,24 540,18 L600,12" />
+              <g class="fix-note" transform="translate(220,86)">
+                <line x1="0" y1="0" x2="0" y2="-30" />
+                <circle cx="0" cy="0" r="4" />
+                <rect x="6" y="-44" width="118" height="22" rx="6" />
+                <text x="14" y="-29">ACQUISITION FIX</text>
+              </g>
+              <g class="endnode">
+                <circle cx="600" cy="12" r="12" />
+                <circle cx="600" cy="12" r="5" />
+              </g>
+            </svg>
+          </div>
 
-        <div class="diag-rows diag-rows--compact">
-          <button class="row" type="button" data-key="positioning" aria-pressed="false">
-            <span class="name">Positioning <span class="sub">Message-market fit</span></span>
-            <span class="bar" style="--pct:32%;" aria-hidden="true"></span>
-            <span class="verdict">Healthy</span>
-          </button>
-          <button class="row is-bottleneck" type="button" data-key="acquisition" aria-pressed="true">
-            <span class="name">Acquisition <span class="sub">Channels &amp; pipeline</span></span>
-            <span class="bar" style="--pct:88%;" aria-hidden="true"></span>
-            <span class="verdict">Bottleneck</span>
-          </button>
-          <button class="row" type="button" data-key="conversion" aria-pressed="false">
-            <span class="name">Conversion <span class="sub">Site &amp; offer</span></span>
-            <span class="bar" style="--pct:54%;" aria-hidden="true"></span>
-            <span class="verdict">Watch</span>
-          </button>
-          <button class="row" type="button" data-key="reporting" aria-pressed="false">
-            <span class="name">Reporting <span class="sub">Decision view</span></span>
-            <span class="bar" style="--pct:62%;" aria-hidden="true"></span>
-            <span class="verdict">Watch</span>
-          </button>
-          <button class="row is-low" type="button" data-key="team" aria-pressed="false">
-            <span class="name">Team ownership <span class="sub">Weekly cadence</span></span>
-            <span class="bar" style="--pct:38%;" aria-hidden="true"></span>
-            <span class="verdict">Healthy</span>
-          </button>
-        </div>
+          <div class="diag-prompt">
+            <span class="tap"><span class="dot" aria-hidden="true"></span> Tap any constraint to diagnose yours</span>
+            <button class="reset" type="button" data-reset>Reset</button>
+          </div>
 
-        <div class="diag-foot diag-foot--compact">
-          <span class="ico" aria-hidden="true">!</span>
-          <p class="copy-wrap" id="diagCopy">
-            <span class="lbl">Diagnosed bottleneck</span>
-            <strong>Acquisition channels operating in isolation.</strong>
-            Paid, content and outbound are not reinforcing one another, so pipeline lands in waves.
-          </p>
-        </div>
-      </aside>
+          <div class="diag-rows">
+            <button class="row" type="button" data-key="positioning" aria-pressed="false">
+              <span class="idx" aria-hidden="true">01</span>
+              <span class="name">Positioning <span class="sub">ICP clear · category owned</span></span>
+              <span class="bar" style="--pct:32%;" aria-hidden="true"></span>
+              <span class="verdict">Healthy</span>
+            </button>
+            <button class="row is-bottleneck" type="button" data-key="acquisition" aria-pressed="true">
+              <span class="idx" aria-hidden="true">02</span>
+              <span class="name">Acquisition <span class="sub">Channel concentration risk</span></span>
+              <span class="bar" style="--pct:88%;" aria-hidden="true"></span>
+              <span class="verdict">Bottleneck</span>
+            </button>
+            <button class="row" type="button" data-key="conversion" aria-pressed="false">
+              <span class="idx" aria-hidden="true">03</span>
+              <span class="name">Conversion <span class="sub">Demo to SQL leak</span></span>
+              <span class="bar" style="--pct:54%;" aria-hidden="true"></span>
+              <span class="verdict">Watch</span>
+            </button>
+            <button class="row" type="button" data-key="reporting" aria-pressed="false">
+              <span class="idx" aria-hidden="true">04</span>
+              <span class="name">Reporting <span class="sub">Weekly decision view</span></span>
+              <span class="bar" style="--pct:62%;" aria-hidden="true"></span>
+              <span class="verdict">Watch</span>
+            </button>
+            <button class="row is-low" type="button" data-key="team" aria-pressed="false">
+              <span class="idx" aria-hidden="true">05</span>
+              <span class="name">Team ownership <span class="sub">Founder-dependent decisions</span></span>
+              <span class="bar" style="--pct:38%;" aria-hidden="true"></span>
+              <span class="verdict">Healthy</span>
+            </button>
+          </div>
+
+          <div class="diag-foot">
+            <span class="ico" aria-hidden="true">!</span>
+            <p class="copy-wrap" id="diagCopy">
+              <span class="lbl">Diagnosed bottleneck</span>
+              <strong>Acquisition channels operating in isolation.</strong>
+              Paid, content and outbound are not reinforcing one another, so pipeline lands in waves.
+            </p>
+          </div>
+        </aside>
       </div>
 
       <!-- Proof rail -->
@@ -247,6 +324,28 @@ function metricLead(result: string) {
           Verify on GrowthMentor →
         </a>
       </p>
+    </div>
+  </section>
+
+  <section class="engagement-strip" aria-label="Ways to work with We Scale Startups">
+    <div class="shell">
+      <div class="engagement-strip-head">
+        <div>
+          <p class="eyebrow">How we work · 4 shapes</p>
+          <h2>One bottleneck. Four ways to fix it.</h2>
+        </div>
+        <p>Pick the smallest engagement that solves the constraint and leaves your team with the weekly cadence.</p>
+      </div>
+      <div class="engagement-grid">
+        {engagementShapes.map((shape) => (
+          <a class="engagement-card" href={shape.href} data-cta={`engagement-${shape.label.toLowerCase()}`}>
+            <span class="step">{shape.step} · {shape.label}</span>
+            <strong>{shape.title}</strong>
+            <p>{shape.body}</p>
+            <em>{shape.meta}</em>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -322,21 +421,6 @@ function metricLead(result: string) {
           <p class="no-result">Positioning sharpened from generic wellness to clinical-credibility-led. Acquisition focus narrowed to one ICP and one channel.</p>
           <a class="no-link" href="/case-studies/equoo">Read the case →</a>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Credential logos — Google, Cambridge, etc. -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">Credentials</p>
-      <h2>Where Daniel is recognised and invited.</h2>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-6">
-        <img src="/images/logos/google.webp" alt="Google for Startups — Mentor" class="h-10 w-auto" />
-        <img src="/images/logos/cambridge.webp" alt="University of Cambridge — Visiting Lecturer" class="h-10 w-auto" />
-        <BrandLogoSlot class="credential-strip-slot" label="Imperial College" href="https://www.imperial.ac.uk/" />
-        <BrandLogoSlot class="credential-strip-slot" label="Techstars" href="https://www.techstars.com/" />
-        <img src="/images/logos/growthmentor.png" alt="GrowthMentor — Top-rated Mentor" class="h-10 w-auto" />
       </div>
     </div>
   </section>
@@ -703,9 +787,9 @@ function metricLead(result: string) {
   }
 
   .wss-hero-redesign .founder-card .founder-track {
-    margin-top: 0.35rem;
-    font-size: 0.8rem;
-    line-height: 1.45;
+    margin-top: 0.22rem;
+    font-size: 0.74rem;
+    line-height: 1.38;
     color: var(--muted);
     max-width: 52ch;
   }

@@ -553,6 +553,30 @@ export const proofEcosystemLogos = [
     relationship: "Guest lecturing · entrepreneurship"
   },
   {
+    src: "/images/logos/imperial.webp",
+    alt: "Imperial College London",
+    name: "Imperial College",
+    relationship: "Invited growth teaching · startup support"
+  },
+  {
+    src: "/images/logos/techstars.webp",
+    alt: "Techstars",
+    name: "Techstars",
+    relationship: "Mentor · startup programmes"
+  },
+  {
+    src: "/images/logos/uksa.webp",
+    alt: "UK Space Agency",
+    name: "UK Space Agency",
+    relationship: "Startup ecosystem support"
+  },
+  {
+    src: "/images/logos/general-assembly.webp",
+    alt: "General Assembly",
+    name: "General Assembly",
+    relationship: "Growth teaching · startup education"
+  },
+  {
     src: "/images/logos/growthmentor.png",
     alt: "GrowthMentor",
     name: "GrowthMentor",

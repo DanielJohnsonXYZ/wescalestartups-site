@@ -1,0 +1,51 @@
+---
+import { siteConfig } from "../site";
+
+const links = [
+  { href: "/start-here", label: "Start here" },
+  { href: "/services", label: "Services" },
+  { href: "/proof", label: "Proof" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/insights", label: "Insights" }
+] as const;
+---
+
+<header class="h3-nav">
+  <div class="h3-container h3-nav-row">
+    <a class="h3-brand" href="/" aria-label="We Scale Startups home">
+      <span class="h3-brand-mark" aria-hidden="true">W</span>
+      <span class="h3-brand-name">We Scale Startups<span class="dot">.</span></span>
+    </a>
+    <nav class="h3-nav-links" aria-label="Primary navigation">
+      {links.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <a
+      class="h3-btn h3-btn-primary h3-nav-cta"
+      href={siteConfig.bookingUrl}
+      data-cta="header-book-v3"
+      title={siteConfig.bookingCallReassurance}
+    >
+      Book a 30-min diagnostic <span class="arrow" aria-hidden="true">→</span>
+    </a>
+    <details class="h3-nav-mobile">
+      <summary>Menu</summary>
+      <nav aria-label="Mobile primary navigation">
+        {links.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+        <a
+          class="h3-btn h3-btn-primary"
+          href={siteConfig.bookingUrl}
+          data-cta="mobile-book-v3"
+          title={siteConfig.bookingCallReassurance}
+          style="margin-top:8px;justify-content:center"
+        >
+          Book diagnostic <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </details>
+  </div>
+</header>

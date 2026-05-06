@@ -9,6 +9,7 @@
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
+    "check:links:crawl": "node scripts/check-crawl-links.mjs --input=docs/crawls/latest.csv",
     "verify:agents": "node scripts/verify-agent-discovery.mjs"
   },
   "dependencies": {

@@ -27,6 +27,17 @@ interface Props {
   metaRobots?: string;
   /** Visible breadcrumb trail (mirrors JSON-LD when provided). Last item is current page. */
   breadcrumbItems?: Array<{ name: string; path: string }>;
+  /** When false, the page supplies its own header (e.g. homepage hero v3). */
+  showSiteHeader?: boolean;
+  /** Extra classes on `<body>` (space-separated). */
+  bodyClass?: string;
+  /** Override default sitewide announcement banner. */
+  announcementText?: string;
+  announcementHref?: string;
+  announcementLinkText?: string;
+  announcementDismissible?: boolean;
+  announcementVariant?: "default" | "brand" | "muted" | "dark-hero";
+  announcementPill?: string;
 }
 
 const {
@@ -42,7 +53,15 @@ const {
   schema = [],
   lastUpdated = false,
   metaRobots = "index,follow,max-image-preview:large",
-  breadcrumbItems
+  breadcrumbItems,
+  showSiteHeader = true,
+  bodyClass = "",
+  announcementText = "New: Growth Operating System and Founder-led Growth cornerstone pages now live.",
+  announcementHref = "/growth-operating-system",
+  announcementLinkText = "See Growth OS →",
+  announcementDismissible = true,
+  announcementVariant = "brand",
+  announcementPill
 } = Astro.props;
 
 const currentPath = normalizePath(path);
@@ -197,7 +216,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     </script>
   </head>
-  <body>
+  <body class={bodyClass}>
     <!-- Google Tag Manager (noscript) — immediately after <body> per GTM install instructions. -->
     <noscript>
       <iframe
@@ -209,13 +228,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <SiteHeader currentPath={currentPath} />
+    {showSiteHeader && <SiteHeader currentPath={currentPath} />}
     <AnnouncementBanner
-      text="New: Growth Operating System and Founder-led Growth cornerstone pages now live."
-      href="/growth-operating-system"
-      linkText="See Growth OS →"
-      dismissible={true}
-      variant="brand"
+      text={announcementText}
+      href={announcementHref}
+      linkText={announcementLinkText}
+      dismissible={announcementDismissible}
+      variant={announcementVariant}
+      pill={announcementPill}
     />
     <main id="main-content">
       {

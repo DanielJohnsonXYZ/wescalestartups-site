@@ -4,10 +4,12 @@ interface Props {
   href?: string;
   linkText?: string;
   dismissible?: boolean;
-  variant?: "default" | "brand" | "muted";
+  variant?: "default" | "brand" | "muted" | "dark-hero";
+  /** Optional label chip (dark-hero variant). */
+  pill?: string;
 }
 
-const { text, href, linkText = "Learn more →", dismissible = true, variant = "default" } = Astro.props;
+const { text, href, linkText = "Learn more →", dismissible = true, variant = "default", pill } = Astro.props;
 
 // Generate a unique ID for this banner (for localStorage dismiss)
 const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
@@ -20,6 +22,7 @@ const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
   data-dismissible={dismissible}
 >
   <div class="shell banner-inner">
+    {pill && variant === "dark-hero" && <span class="banner-pill">{pill}</span>}
     <p class="banner-text">{text}</p>
     {href && (
       <a class="banner-link" href={href}>{linkText}</a>
@@ -77,6 +80,47 @@ const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
   .announcement-banner--muted {
     background: var(--paper);
     color: var(--muted);
+  }
+  .announcement-banner--dark-hero {
+    background: #0d0c09;
+    color: #f5efde;
+    border-bottom: 1px solid #1f1d18;
+    font-size: 13px;
+  }
+  .announcement-banner--dark-hero .banner-text {
+    text-align: center;
+  }
+  .announcement-banner--dark-hero .banner-link {
+    color: #fff;
+    opacity: 0.85;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .announcement-banner--dark-hero .banner-link:hover {
+    opacity: 1;
+  }
+  .announcement-banner--dark-hero .banner-dismiss {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .announcement-banner--dark-hero .banner-dismiss:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .banner-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: linear-gradient(95deg, rgba(94, 43, 255, 0.3), rgba(208, 70, 255, 0.3));
+    border: 1px solid rgba(208, 70, 255, 0.4);
+    color: #f5edff;
+    font-weight: 600;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
   .banner-inner {
     display: flex;

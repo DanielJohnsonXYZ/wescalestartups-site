@@ -61,6 +61,7 @@ A shared technical QA checklist for the three Daniel-adjacent sites. Run it befo
 - [ ] All internal links use the trailing-slash form (no redirect chain)
 - [ ] No 404s on the modified page (run a quick crawl with linkinator or Screaming Frog)
 - [ ] External links open in `_blank` with `rel="noreferrer"`
+- [ ] Full crawl of nav, footer, CTAs, case studies, and external review links runs via dedicated crawler export + `npm run check:links:crawl`
 
 ### Sitemap / robots
 - [ ] New pages added to `src/pages/sitemap.xml.ts` if not auto-discovered

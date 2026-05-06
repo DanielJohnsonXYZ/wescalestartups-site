@@ -25,3 +25,11 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Crawl link check (if export exists)
+        run: |
+          if [ -f docs/crawls/latest.csv ]; then
+            npm run check:links:crawl
+          else
+            echo "Skipping crawl link check: docs/crawls/latest.csv not found"
+          fi

@@ -1,5 +1,5 @@
 ---
-// EmailSignup.astro — inline email capture; posts to Mautic (see site.ts).
+// EmailSignup.astro - inline email capture; posts to Mautic (see site.ts).
 import { mauticNewsletter } from "../site";
 
 interface Props {
@@ -7,16 +7,25 @@ interface Props {
   subtext?: string;
   formId?: string;
   variant?: "light" | "dark";
+  buttonLabel?: string;
+  sourceType?: "newsletter" | "lead_magnet" | "contact_enquiry";
+  sourcePage?: string;
+  leadMagnet?: string;
 }
 
 const {
   heading = "Get the weekly growth note.",
   subtext = "One actionable insight for post-PMF founders. No padding, no pitch.",
   formId = "email-signup",
-  variant = "light"
+  variant = "light",
+  buttonLabel = "Get the note ->",
+  sourceType = "newsletter",
+  sourcePage = Astro.url.pathname,
+  leadMagnet = ""
 } = Astro.props;
 
 const { submitUrl, formId: mauticFormId } = mauticNewsletter;
+const sourcePageValue = sourcePage || Astro.url.pathname;
 ---
 
 <div class={`email-signup-strip email-signup-strip--${variant}`} data-form-id={formId}>
@@ -32,8 +41,15 @@ const { submitUrl, formId: mauticFormId } = mauticNewsletter;
       method="post"
       accept-charset="UTF-8"
       data-cta={`email-signup-${formId}`}
+      data-mautic-source-form
     >
       <input type="hidden" name="mauticform[formId]" value={mauticFormId} />
+      <input type="hidden" name="mauticform[source_type]" value={sourceType} />
+      <input type="hidden" name="mauticform[source_page]" value={sourcePageValue} data-source-page />
+      <input type="hidden" name="mauticform[lead_magnet]" value={leadMagnet} />
+      <input type="hidden" name="mauticform[utm_source]" value="" data-utm-field="utm_source" />
+      <input type="hidden" name="mauticform[utm_medium]" value="" data-utm-field="utm_medium" />
+      <input type="hidden" name="mauticform[utm_campaign]" value="" data-utm-field="utm_campaign" />
       <label class="sr-only" for={`email-field-${formId}`}>Your email address</label>
       <input
         id={`email-field-${formId}`}
@@ -43,11 +59,30 @@ const { submitUrl, formId: mauticFormId } = mauticNewsletter;
         required
         autocomplete="email"
       />
-      <button type="submit" class="button button-brand">Get the note →</button>
+      <button type="submit" class="button button-brand">{buttonLabel}</button>
     </form>
     <p class="email-signup-fine">No spam. Unsubscribe any time.</p>
   </div>
 </div>
+
+<script is:inline>
+  document.querySelectorAll("form[data-mautic-source-form]").forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const pageField = form.querySelector("[data-source-page]");
+    if (pageField instanceof HTMLInputElement) {
+      pageField.value = window.location.href;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    form.querySelectorAll("[data-utm-field]").forEach((field) => {
+      if (!(field instanceof HTMLInputElement)) return;
+      const key = field.dataset.utmField;
+      if (!key) return;
+      field.value = params.get(key) || "";
+    });
+  });
+</script>
 
 <style>
   .email-signup-strip {

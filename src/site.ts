@@ -523,7 +523,7 @@ export const proofClients = [
   {
     label: "LessonsUp",
     caseSlug: "lessonsup",
-    logoSrc: "/images/logos/lessonsup.svg",
+    logoSrc: "/images/logos/lessonsup-logo.svg",
     relationship: "Paid client engagement",
     context: "EdTech · Acquisition system build",
     proof: "Sharper message-market fit"
@@ -531,7 +531,7 @@ export const proofClients = [
   {
     label: "Nevly",
     caseSlug: "nevly",
-    logoSrc: "/images/logos/nevly.svg",
+    logoSrc: "/images/logos/nevly-logo.svg",
     relationship: "Paid client engagement",
     context: "Financial wellness · Sprint + CMO support",
     proof: "Trust-led GTM foundations"

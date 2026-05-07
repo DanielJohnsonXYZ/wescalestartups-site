@@ -577,7 +577,7 @@ export const proofEcosystemLogos = [
     relationship: "Growth teaching · startup education"
   },
   {
-    src: "/images/logos/growthmentor.png",
+    src: "/images/logos/growthmentor-v2.jpg",
     alt: "GrowthMentor",
     name: "GrowthMentor",
     relationship: "External reviews · 479+ mentor sessions"
@@ -628,7 +628,7 @@ export const credentialLogos = [
   { src: "/images/logos/techstars.webp", alt: "Techstars", label: "Techstars" },
   { src: "/images/logos/general-assembly.png", alt: "General Assembly", label: "General Assembly" },
   { src: "/images/logos/uksa.webp", alt: "UK Space Agency", label: "UK Space Agency" },
-  { src: "/images/logos/growthmentor.png", alt: "GrowthMentor", label: "GrowthMentor" },
+  { src: "/images/logos/growthmentor-v2.jpg", alt: "GrowthMentor", label: "GrowthMentor" },
   { src: "/images/logos/newsflare.webp", alt: "Newsflare", label: "Newsflare" },
   { src: "/images/logos/peachy.png", alt: "Peachy", label: "Peachy" }
 ] as const;

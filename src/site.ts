@@ -499,7 +499,7 @@ export const proofClients = [
   {
     label: "Ned",
     caseSlug: "ned",
-    logoSrc: "/images/logos/ned.svg",
+    logoSrc: "/images/logos/ned-icon.png",
     relationship: "Paid client engagement",
     context: "Fintech · Fractional CMO",
     proof: "500+ sign-ups from paid search"
@@ -507,7 +507,7 @@ export const proofClients = [
   {
     label: "Diadia Health",
     caseSlug: "diadia-health",
-    logoSrc: "/images/logos/diadia-health.svg",
+    logoSrc: "/images/logos/diadia-health-logo.png",
     relationship: "Paid client engagement",
     context: "AI / precision medicine · Diagnosis + Sprint",
     proof: "Marketing function built from zero"
@@ -515,7 +515,7 @@ export const proofClients = [
   {
     label: "eQuoo",
     caseSlug: "equoo",
-    logoSrc: "/images/logos/equoo.svg",
+    logoSrc: "/images/logos/equoo-logo.png",
     relationship: "Paid client engagement",
     context: "Healthtech · Fractional CMO",
     proof: "Clearer acquisition narrative"
@@ -624,6 +624,10 @@ export const proofResultsByType = [
 export const credentialLogos = [
   { src: "/images/logos/google.webp", alt: "Google", label: "Google for Startups" },
   { src: "/images/logos/cambridge.webp", alt: "University of Cambridge", label: "Cambridge Judge" },
+  { src: "/images/logos/imperial.webp", alt: "Imperial College London", label: "Imperial College London" },
+  { src: "/images/logos/techstars.webp", alt: "Techstars", label: "Techstars" },
+  { src: "/images/logos/general-assembly.png", alt: "General Assembly", label: "General Assembly" },
+  { src: "/images/logos/uksa.webp", alt: "UK Space Agency", label: "UK Space Agency" },
   { src: "/images/logos/growthmentor.png", alt: "GrowthMentor", label: "GrowthMentor" },
   { src: "/images/logos/newsflare.webp", alt: "Newsflare", label: "Newsflare" },
   { src: "/images/logos/peachy.png", alt: "Peachy", label: "Peachy" }

@@ -1,0 +1,136 @@
+/* ============================================================
+   site-v3.css — Global design-token alignment + page-hero upgrade
+   Aligns inner-page palette with the homepage warm design system.
+   Import AFTER global.css in BaseLayout.astro.
+   ============================================================ */
+
+/* ── 1. Warm design tokens ─────────────────────────────────────
+   Override the cooler global.css palette with the warmer values
+   used by the homepage (home-hero-v3.css --h3-* variables).
+   ─────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds: warm cream instead of cool off-white */
+  --paper:        #f3eee2;
+  --paper-deep:   #ebe5d3;
+  --surface:      #faf8f3;
+
+  /* Ink: warm dark instead of cool near-black */
+  --ink:          #15140f;
+  --ink-2:        #2b2a25;
+  --muted:        #6f6a60;
+
+  /* Lines: warm ink base */
+  --line:         rgba(21, 20, 15, 0.12);
+  --line-strong:  rgba(21, 20, 15, 0.22);
+  --line-soft:    rgba(21, 20, 15, 0.07);
+
+  /* Violet: tightened to match homepage gradient anchor */
+  --violet:       #5e2bff;
+  --violet-deep:  #1a0a4d;
+  --violet-tint:  #efe9ff;
+
+  /* Logo gradient: aligned with homepage purple-to-pink sweep */
+  --logo-1:       #5e2bff;
+  --logo-2:       #9b3dff;
+  --logo-3:       #d046ff;
+  --logo-grad:    linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
+
+  /* Orange accent — new token matching homepage --h3-accent */
+  --accent:       #ff6a1a;
+  --accent-tint:  #ffe9d9;
+
+  /* Status tokens used in proof/results sections */
+  --good:         #0f8f4a;
+  --warn-color:   #c87a08;
+  --bad:          #c43030;
+}
+
+/* ── 2. Body: warm gradient background ─────────────────────────
+   Replace the cool purple/acid gradient with a warm
+   purple/orange sweep matching the homepage palette.
+   ─────────────────────────────────────────────────────────── */
+body {
+  background:
+    radial-gradient(125% 85% at 100% -15%, rgba(155,  61, 255, 0.09), transparent 52%),
+    radial-gradient( 90% 55% at   0%   0%, rgba(255, 106,  26, 0.06), transparent 48%),
+    linear-gradient(180deg, var(--paper) 0%, #e8e1d0 60%, var(--paper-deep) 100%);
+}
+
+/* ── 3. Page-hero: gradient + subtle grid ──────────────────────
+   Mirrors the .h3-hero treatment from the homepage — a warm
+   surface base with purple/orange radial highlights and the
+   same 46px grid mask, so every inner-page hero reads as part
+   of the same design system.
+   ─────────────────────────────────────────────────────────── */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* Radial colour wash — matches homepage .h3-hero::before */
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: -10% -8% auto -8%;
+  height: 520px;
+  background:
+    radial-gradient(50% 60% at 82%   0%, rgba(208,  70, 255, 0.16), transparent 60%),
+    radial-gradient(40% 60% at  8%  18%, rgba(255, 106,  26, 0.07), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(2px);
+}
+
+/* Grid texture mask — matches homepage .h3-hero::after */
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right,  rgba(21, 20, 15, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 20, 15, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image:         radial-gradient(75% 65% at 50% 25%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(75% 65% at 50% 25%, #000 30%, transparent 75%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Lift content above pseudo-element layers */
+.page-hero .shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 4. Eyebrow pill ──────────────────────────────────────────
+   Match the homepage engagement-strip eyebrow: a violet pill
+   with monospace text. Fallback to plain text if the pill
+   variant isn't desired — pages can opt out with .eyebrow-plain.
+   ─────────────────────────────────────────────────────────── */
+.page-hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--violet-deep);
+  background: var(--violet-tint);
+  border: 1px solid rgba(94, 43, 255, 0.18);
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* ── 5. CTA band: warm surface ────────────────────────────────
+   The homepage CTA band sits on --paper. Give inner pages the
+   same treatment so the closing section feels unified.
+   ─────────────────────────────────────────────────────────── */
+.cta-band {
+  background:
+    radial-gradient(60% 80% at 80% 0%, rgba(155, 61, 255, 0.08), transparent 55%),
+    var(--paper);
+}

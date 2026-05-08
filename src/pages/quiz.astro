@@ -46,28 +46,8 @@ const quizSchema = [
       <p class="eyebrow">Quiz · ~5 minutes · Free</p>
       <h1>Find your growth bottleneck in about 5 minutes.</h1>
       <p class="lede">
-        Ten questions across the five layers that determine whether a post-PMF startup scales or stalls.
-        Instant, plain-English result — a fast directional read before the downloadable scorecard or a diagnostic call.
+        Ten questions. Instant result. Find out exactly where your growth is stuck — across positioning, acquisition, conversion, reporting, and team ownership.
       </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href="/diagnose" data-cta="quiz-hero-diagnose">
-          Prefer the written framework →
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="quiz-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href={quizGrowthCourseHref} data-cta="quiz-hero-growth-course">
-          Read The Growth Course →
-        </a>
-        <a
-          class="button button-light"
-          href={siteConfig.bookingUrl}
-          data-cta="quiz-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          {siteConfig.bookingLabel} →
-        </a>
-      </div>
     </div>
   </section>
 
@@ -105,7 +85,7 @@ const quizSchema = [
   <!-- FAQ -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Questions</p>
+      <p class="eyebrow">FAQ</p>
       <h2>About the quiz.</h2>
       <dl class="faq-list">
         <div class="faq-item">
@@ -124,6 +104,34 @@ const quizSchema = [
           <dd>The quiz is a self-serve starting point. The diagnostic call goes deeper: we review your current stack, pipeline data, and team context to give you a prioritised action plan.</dd>
         </div>
       </dl>
+    </div>
+  </section>
+
+  <!-- Not ready? -->
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Prefer something else?</p>
+      <h2>Not ready to take the quiz?</h2>
+      <p class="lede">A few other ways to start diagnosing your bottleneck.</p>
+      <div class="hero-actions">
+        <a class="button button-brand" href="/diagnose" data-cta="quiz-notready-diagnose">
+          Try the written framework →
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="quiz-notready-scorecard">
+          {siteConfig.scorecardLabel} →
+        </a>
+        <a class="button button-light" href={quizGrowthCourseHref} data-cta="quiz-notready-growth-course">
+          Read The Growth Course →
+        </a>
+        <a
+          class="button button-light"
+          href={siteConfig.bookingUrl}
+          data-cta="quiz-notready-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -380,6 +388,21 @@ function renderResult() {
         </p>
       </div>
 
+      <div class="quiz-share" style="margin-top:2.5rem;padding:1.5rem;background:var(--surface-alt,#f5f5f5);border-radius:8px;">
+        <p class="quiz-share-heading" style="font-weight:600;margin:0 0 0.5rem">Want to keep your result?</p>
+        <p style="font-size:0.9rem;color:var(--muted);margin:0 0 1rem">Drop your email and I'll send your result plus one recommended next step.</p>
+        <form class="quiz-email-form" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <input type="email" placeholder="your@email.com" required style="flex:1;min-width:200px;padding:0.6rem 0.875rem;border:1px solid var(--border,#d1d5db);border-radius:6px;font-size:0.9rem;" />
+          <button type="submit" class="button button-brand" style="white-space:nowrap;">Send my result</button>
+        </form>
+        <p class="quiz-email-success" style="display:none;font-size:0.875rem;color:var(--muted);margin:0.75rem 0 0">Got it — check your inbox.</p>
+        <p style="margin:1.25rem 0 0.5rem;font-weight:600;font-size:0.875rem;">Or share with a founder who needs this:</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a class="button button-light" id="quiz-share-linkedin" href="#" target="_blank" rel="noopener" style="font-size:0.875rem;">Share on LinkedIn →</a>
+          <a class="button button-light" id="quiz-share-twitter" href="#" target="_blank" rel="noopener" style="font-size:0.875rem;">Share on X →</a>
+        </div>
+      </div>
+
       <button type="button" class="quiz-restart button button-light" style="margin-top:2rem">Retake the quiz</button>
     </div>`;
 }
@@ -439,6 +462,37 @@ function mount() {
       answers = new Array(QUESTIONS.length).fill(null);
       render();
     });
+
+    // Email capture
+    const emailForm = app.querySelector('.quiz-email-form');
+    if (emailForm) {
+      emailForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = emailForm.querySelector('input[type="email"]');
+        const email = input ? input.value : '';
+        const topPath = getResult();
+        const meta = PATH_META[topPath];
+        // Encode result in mailto fallback; replace with API call if available
+        const subject = encodeURIComponent('Your WSS growth bottleneck result');
+        const body = encodeURIComponent(`Your primary bottleneck: ${meta.label}\n\n${meta.description}\n\nRecommended next step: ${meta.fix}\n\n${meta.href}`);
+        window.location.href = `mailto:${encodeURIComponent(email)}?subject=${subject}&body=${body}`;
+        emailForm.style.display = 'none';
+        const success = app.querySelector('.quiz-email-success');
+        if (success) success.style.display = '';
+      });
+    }
+
+    // Social share
+    const topPath = getResult();
+    const meta = PATH_META[topPath];
+    const shareText = encodeURIComponent(`I just found my biggest growth bottleneck with @WSSgrowth: ${meta.label}. Quick 5-min quiz → wescalestartups.com/quiz`);
+    const shareUrl = encodeURIComponent('https://wescalestartups.com/quiz');
+
+    const liBtn = app.querySelector('#quiz-share-linkedin');
+    if (liBtn) liBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`;
+
+    const twBtn = app.querySelector('#quiz-share-twitter');
+    if (twBtn) twBtn.href = `https://twitter.com/intent/tweet?text=${shareText}`;
   }
 
   render();

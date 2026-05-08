@@ -144,13 +144,12 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
 };
 
 export const navigation = [
-  { href: "/start-here", label: "Start here" },
   { href: "/services", label: "Services" },
   { href: "/proof", label: "Proof" },
-  { href: "/how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/about", label: "About" },
   { href: "/quiz", label: "Quiz" },
-  { href: "/insights", label: "Insights" },
+  { href: "/insights", label: "Ideas" },
   { href: "/growth-operating-system", label: "Growth OS" },
   { href: "/founder-led-growth", label: "Founder-led" },
   { href: "/podcast-guest-application", label: "Podcast Guests" },

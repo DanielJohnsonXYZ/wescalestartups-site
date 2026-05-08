@@ -1,5 +1,5 @@
 /* ============================================================
-   site-v3.css — Global design-token alignment + page-hero upgrade
+   site-v3.css — Global design-token alignment + inner-page upgrade
    Aligns inner-page palette with the homepage warm design system.
    Import AFTER global.css in BaseLayout.astro.
    ============================================================ */
@@ -18,6 +18,7 @@
   --ink:          #15140f;
   --ink-2:        #2b2a25;
   --muted:        #6f6a60;
+  --dim:          #7a7468;
 
   /* Lines: warm ink base */
   --line:         rgba(21, 20, 15, 0.12);
@@ -35,11 +36,11 @@
   --logo-3:       #d046ff;
   --logo-grad:    linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
 
-  /* Orange accent — new token matching homepage --h3-accent */
+  /* Orange accent — matching homepage --h3-accent */
   --accent:       #ff6a1a;
   --accent-tint:  #ffe9d9;
 
-  /* Status tokens used in proof/results sections */
+  /* Status tokens */
   --good:         #0f8f4a;
   --warn-color:   #c87a08;
   --bad:          #c43030;
@@ -57,10 +58,7 @@ body {
 }
 
 /* ── 3. Page-hero: gradient + subtle grid ──────────────────────
-   Mirrors the .h3-hero treatment from the homepage — a warm
-   surface base with purple/orange radial highlights and the
-   same 46px grid mask, so every inner-page hero reads as part
-   of the same design system.
+   Mirrors the .h3-hero treatment from the homepage.
    ─────────────────────────────────────────────────────────── */
 .page-hero {
   position: relative;
@@ -68,7 +66,6 @@ body {
   background: var(--surface);
 }
 
-/* Radial colour wash — matches homepage .h3-hero::before */
 .page-hero::before {
   content: "";
   position: absolute;
@@ -82,7 +79,6 @@ body {
   filter: blur(2px);
 }
 
-/* Grid texture mask — matches homepage .h3-hero::after */
 .page-hero::after {
   content: "";
   position: absolute;
@@ -97,40 +93,132 @@ body {
   pointer-events: none;
 }
 
-/* Lift content above pseudo-element layers */
 .page-hero .shell {
   position: relative;
   z-index: 1;
 }
 
-/* ── 4. Eyebrow pill ──────────────────────────────────────────
-   Match the homepage engagement-strip eyebrow: a violet pill
-   with monospace text. Fallback to plain text if the pill
-   variant isn't desired — pages can opt out with .eyebrow-plain.
+/* ── 4. Page-hero h1: warm gradient text ───────────────────────
+   The hero headline gets a warm ink→violet sweep so it reads
+   like the homepage headline treatment.
    ─────────────────────────────────────────────────────────── */
-.page-hero .eyebrow {
+.page-hero h1 {
+  background: linear-gradient(115deg, var(--ink) 0%, var(--ink-2) 48%, #5e2bff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ink); /* fallback */
+}
+
+.page-hero h1 em {
+  background: linear-gradient(95deg, #5e2bff 0%, #9b3dff 55%, #d046ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* ── 5. Global eyebrow pill ────────────────────────────────────
+   Every .eyebrow on the site gets the violet pill, matching the
+   homepage engagement-strip eyebrow. Dark-section overrides
+   restore contrast where the pill would look wrong.
+   ─────────────────────────────────────────────────────────── */
+.eyebrow,
+.card-kicker {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--violet-deep);
   background: var(--violet-tint);
   border: 1px solid rgba(94, 43, 255, 0.18);
-  padding: 5px 11px;
+  padding: 4px 10px;
   border-radius: 999px;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   font-weight: 700;
-  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* ── 5. CTA band: warm surface ────────────────────────────────
-   The homepage CTA band sits on --paper. Give inner pages the
-   same treatment so the closing section feels unified.
+/* Dark sections: transparent pill, light text */
+.dark-rhythm-section .eyebrow,
+.service-selector-aside .eyebrow,
+.strategic-panel-dark .eyebrow,
+.strategic-panel-dark .card-kicker {
+  background: transparent;
+  border-color: transparent;
+  color: var(--acid, #d8ff4f);
+  padding-inline: 0;
+}
+
+/* ── 6. Section-alt: warm surface ──────────────────────────────
+   Replace the cool off-white with our warm paper tone.
+   ─────────────────────────────────────────────────────────── */
+.section-alt {
+  background:
+    radial-gradient(80% 60% at 100% 0%, rgba(255, 106, 26, 0.04), transparent 55%),
+    var(--paper);
+  border-color: var(--line);
+}
+
+/* ── 7. Feature cards & content blocks: warm surface ───────────
+   Remove the cool rgba(255,254,250) and use --surface.
+   ─────────────────────────────────────────────────────────── */
+.feature-card,
+.contact-option,
+.content-block {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+/* ── 8. CTA inner card: warm, no acid yellow ───────────────────
+   Replace the cool violet+acid gradient with a warm
+   purple+orange wash over --surface.
+   ─────────────────────────────────────────────────────────── */
+.cta-inner {
+  background:
+    radial-gradient(65% 80% at 85% 0%,   rgba(155, 61, 255, 0.09), transparent 55%),
+    radial-gradient(45% 70% at  8% 100%, rgba(255, 106, 26, 0.05), transparent 50%),
+    var(--surface);
+  border-color: var(--line);
+}
+
+/* ── 9. CTA band: warm surface ─────────────────────────────────
+   The closing CTA section background.
    ─────────────────────────────────────────────────────────── */
 .cta-band {
   background:
     radial-gradient(60% 80% at 80% 0%, rgba(155, 61, 255, 0.08), transparent 55%),
     var(--paper);
+}
+
+/* ── 10. Proof tiles: remove acid-yellow tint ──────────────────
+   Proof client tiles had a cool violet + acid gradient;
+   replace with clean warm surface.
+   ─────────────────────────────────────────────────────────── */
+.proof-client-tile {
+  background: var(--surface);
+  border-color: var(--line-soft);
+}
+
+/* ── 11. Strategic panels: warm surface ────────────────────────
+   Used on StrategicPage.astro inner pages.
+   ─────────────────────────────────────────────────────────── */
+.strategic-panel {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+/* ── 12. Testimonial cards: warm surface ────────────────────────*/
+.testimonial-card {
+  background: var(--surface);
+  border-color: var(--line-soft);
+}
+
+/* ── 13. Header: warm backdrop ─────────────────────────────────
+   The sticky nav uses a backdrop blur; align it to the warm
+   palette so it doesn't look out of place on scroll.
+   ─────────────────────────────────────────────────────────── */
+.site-header {
+  background: rgba(243, 238, 226, 0.82);
 }

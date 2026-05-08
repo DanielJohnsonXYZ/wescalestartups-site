@@ -48,6 +48,16 @@ const quizSchema = [
       <p class="lede">
         Ten questions. Instant result. Find out exactly where your growth is stuck — across positioning, acquisition, conversion, reporting, and team ownership.
       </p>
+      <div class="hero-actions">
+        <a
+          class="button button-brand"
+          href={siteConfig.bookingUrl}
+          data-cta="quiz-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -85,7 +95,7 @@ const quizSchema = [
   <!-- FAQ -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
+      <p class="eyebrow">Questions</p>
       <h2>About the quiz.</h2>
       <dl class="faq-list">
         <div class="faq-item">
@@ -107,29 +117,21 @@ const quizSchema = [
     </div>
   </section>
 
-  <!-- Not ready? -->
+  <!-- Alternatives (moved from hero so they don't compete with quiz start) -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Prefer something else?</p>
+      <p class="eyebrow">Other options</p>
       <h2>Not ready to take the quiz?</h2>
-      <p class="lede">A few other ways to start diagnosing your bottleneck.</p>
+      <p style="max-width:52ch;color:var(--muted);margin-bottom:1.5rem;">Prefer to work through the framework yourself, or want a deeper conversation first?</p>
       <div class="hero-actions">
-        <a class="button button-brand" href="/diagnose" data-cta="quiz-notready-diagnose">
-          Try the written framework →
+        <a class="button button-light" href="/diagnose" data-cta="quiz-alt-diagnose">
+          Written diagnostic framework →
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="quiz-notready-scorecard">
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="quiz-alt-scorecard">
           {siteConfig.scorecardLabel} →
         </a>
-        <a class="button button-light" href={quizGrowthCourseHref} data-cta="quiz-notready-growth-course">
-          Read The Growth Course →
-        </a>
-        <a
-          class="button button-light"
-          href={siteConfig.bookingUrl}
-          data-cta="quiz-notready-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          {siteConfig.bookingLabel} →
+        <a class="button button-light" href={quizGrowthCourseHref} data-cta="quiz-alt-growth-course">
+          The Growth Course →
         </a>
       </div>
     </div>
@@ -240,33 +242,28 @@ const QUESTIONS = [
   }
 ];
 
-/** Four personalised paths — acquisition + reporting/team scores roll up for clearer routing. */
 const PATH_META = {
   positioning: {
     label: "Positioning",
-    description:
-      "Buyers don't see the problem the way you do. Sales calls start with education instead of qualification. The offer message shifts from call to call.",
+    description: "Buyers don't see the problem the way you do. Sales calls start with education instead of qualification. The offer message shifts from call to call.",
     fix: "Start with Growth Diagnosis — reframe the offer before adding spend or channels.",
     href: "/services/growth-diagnosis"
   },
   channels: {
     label: "Channel mix & acquisition",
-    description:
-      "Channels run in isolation rather than reinforcing each other. Pipeline arrives in waves. CAC is unstable and hard to forecast.",
+    description: "Channels run in isolation rather than reinforcing each other. Pipeline arrives in waves. CAC is unstable and hard to forecast.",
     fix: "Acquisition System Build — connect the channels into one operating system before scaling spend.",
     href: "/services/acquisition-system-build"
   },
   conversion: {
     label: "Conversion",
-    description:
-      "Qualified visitors don't become qualified conversations. The offer asks for too much too early or the funnel has an invisible drop-off.",
+    description: "Qualified visitors don't become qualified conversations. The offer asks for too much too early or the funnel has an invisible drop-off.",
     fix: "90-Day Growth Sprint — test landing page, copy, and offer iterations at pace.",
     href: "/services/90-day-growth-sprint"
   },
   rhythm: {
     label: "Decision rhythm & ownership",
-    description:
-      "Activity is tracked but weekly decisions don't stick — or the founder is still the implicit owner of every growth call. The system doesn't run without them in the loop.",
+    description: "Activity is tracked but weekly decisions don't stick — or the founder is still the implicit owner of every growth call. The system doesn't run without them in the loop.",
     fix: "Fractional CMO or embedded cadence — senior owner for the weekly rhythm, reporting, and handoffs.",
     href: "/services/fractional-cmo"
   }
@@ -276,8 +273,9 @@ const PATH_META = {
 let current = 0;
 let scores = { positioning: 0, acquisition: 0, conversion: 0, reporting: 0, team: 0 };
 let answers = new Array(QUESTIONS.length).fill(null);
+let resultPath = null;
 
-// ── Render helpers ─────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────
 function pathScores() {
   return {
     positioning: scores.positioning,
@@ -290,14 +288,10 @@ function pathScores() {
 function getResult() {
   const rolled = pathScores();
   const order = ["positioning", "channels", "conversion", "rhythm"];
-  let best = "positioning";
-  let bestN = -1;
+  let best = "positioning", bestN = -1;
   for (const k of order) {
     const v = rolled[k];
-    if (v > bestN) {
-      bestN = v;
-      best = k;
-    }
+    if (v > bestN) { bestN = v; best = k; }
   }
   return best;
 }
@@ -316,11 +310,9 @@ function renderQuestion(idx) {
   const q = QUESTIONS[idx];
   const layerNum = { positioning: 1, acquisition: 2, conversion: 3, reporting: 4, team: 5 }[q.layer];
   const layerLabel =
-    q.layer === "team"
-      ? "Team ownership"
-      : q.layer === "reporting"
-        ? "Reporting"
-        : PATH_META[q.layer === "acquisition" ? "channels" : q.layer].label;
+    q.layer === "team" ? "Team ownership"
+    : q.layer === "reporting" ? "Reporting"
+    : PATH_META[q.layer === "acquisition" ? "channels" : q.layer].label;
   return `
     ${renderProgress()}
     <div class="quiz-question-wrap">
@@ -348,14 +340,18 @@ function renderQuestion(idx) {
 
 function renderResult() {
   const topPath = getResult();
+  resultPath = topPath;
   const meta = PATH_META[topPath];
   const rolled = pathScores();
   const allScores = [
     { key: "positioning", label: PATH_META.positioning.label, score: rolled.positioning, max: 4 },
-    { key: "channels", label: PATH_META.channels.label, score: rolled.channels, max: 4 },
-    { key: "conversion", label: PATH_META.conversion.label, score: rolled.conversion, max: 4 },
-    { key: "rhythm", label: PATH_META.rhythm.label, score: rolled.rhythm, max: 8 }
+    { key: "channels",    label: PATH_META.channels.label,    score: rolled.channels,    max: 4 },
+    { key: "conversion",  label: PATH_META.conversion.label,  score: rolled.conversion,  max: 4 },
+    { key: "rhythm",      label: PATH_META.rhythm.label,      score: rolled.rhythm,      max: 8 }
   ].sort((a, b) => b.score - a.score);
+
+  const shareText = encodeURIComponent(`My #1 growth bottleneck is ${meta.label}. Found out in 5 minutes →`);
+  const shareUrlEncoded = encodeURIComponent('https://wescalestartups.com/quiz');
 
   return `
     <div class="quiz-result">
@@ -375,6 +371,18 @@ function renderResult() {
           </div>`).join('')}
       </div>
 
+      <div class="quiz-email-capture" id="quiz-email-capture">
+        <p class="quiz-email-heading">Want to save this?</p>
+        <p class="quiz-email-sub">Drop your email and I'll send your result + one recommended next step. No spam, unsubscribe any time.</p>
+        <form class="quiz-email-form" id="quiz-result-email-form" novalidate>
+          <div class="quiz-email-row">
+            <label class="sr-only" for="quiz-email-input">Your email address</label>
+            <input id="quiz-email-input" type="email" name="email" placeholder="you@company.com" autocomplete="email">
+            <button type="submit" class="button button-brand">Send my result →</button>
+          </div>
+        </form>
+      </div>
+
       <div class="result-next">
         <p class="result-fix-label">Recommended next step:</p>
         <p class="result-fix">${meta.fix}</p>
@@ -388,18 +396,11 @@ function renderResult() {
         </p>
       </div>
 
-      <div class="quiz-share" style="margin-top:2.5rem;padding:1.5rem;background:var(--surface-alt,#f5f5f5);border-radius:8px;">
-        <p class="quiz-share-heading" style="font-weight:600;margin:0 0 0.5rem">Want to keep your result?</p>
-        <p style="font-size:0.9rem;color:var(--muted);margin:0 0 1rem">Drop your email and I'll send your result plus one recommended next step.</p>
-        <form class="quiz-email-form" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-          <input type="email" placeholder="your@email.com" required style="flex:1;min-width:200px;padding:0.6rem 0.875rem;border:1px solid var(--border,#d1d5db);border-radius:6px;font-size:0.9rem;" />
-          <button type="submit" class="button button-brand" style="white-space:nowrap;">Send my result</button>
-        </form>
-        <p class="quiz-email-success" style="display:none;font-size:0.875rem;color:var(--muted);margin:0.75rem 0 0">Got it — check your inbox.</p>
-        <p style="margin:1.25rem 0 0.5rem;font-weight:600;font-size:0.875rem;">Or share with a founder who needs this:</p>
-        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <a class="button button-light" id="quiz-share-linkedin" href="#" target="_blank" rel="noopener" style="font-size:0.875rem;">Share on LinkedIn →</a>
-          <a class="button button-light" id="quiz-share-twitter" href="#" target="_blank" rel="noopener" style="font-size:0.875rem;">Share on X →</a>
+      <div class="quiz-share">
+        <p class="quiz-share-label">Share your result:</p>
+        <div class="quiz-share-buttons">
+          <a class="button button-light" href="https://twitter.com/intent/tweet?text=${shareText}%20https%3A%2F%2Fwescalestartups.com%2Fquiz" target="_blank" rel="noopener" data-cta="quiz-share-twitter">Share on X →</a>
+          <a class="button button-light" href="https://www.linkedin.com/sharing/share-offsite/?url=${shareUrlEncoded}" target="_blank" rel="noopener" data-cta="quiz-share-linkedin">Share on LinkedIn →</a>
         </div>
       </div>
 
@@ -412,38 +413,29 @@ function mount() {
   if (!app) return;
 
   function render() {
-    if (current < QUESTIONS.length) {
-      app.innerHTML = renderQuestion(current);
-    } else {
-      app.innerHTML = renderResult();
-    }
+    app.innerHTML = current < QUESTIONS.length ? renderQuestion(current) : renderResult();
     bindEvents();
   }
 
   function bindEvents() {
-    // Option selection
     app.querySelectorAll('.quiz-option').forEach(btn => {
       btn.addEventListener('click', () => {
         const idx = parseInt(btn.dataset.idx, 10);
         const q = QUESTIONS[current];
         const prev = answers[current];
-        if (prev !== null) {
-          scores[q.layer] -= q.options[prev].score;
-        }
+        if (prev !== null) scores[q.layer] -= q.options[prev].score;
         answers[current] = idx;
         scores[q.layer] += q.options[idx].score;
         render();
       });
     });
 
-    // Next
     app.querySelector('.quiz-next')?.addEventListener('click', () => {
       if (answers[current] === null) return;
       current++;
       render();
     });
 
-    // Back — drop in-progress answer on this step, then go to previous question
     app.querySelector('.quiz-back')?.addEventListener('click', () => {
       if (current <= 0) return;
       if (answers[current] !== null) {
@@ -455,44 +447,45 @@ function mount() {
       render();
     });
 
-    // Restart
     app.querySelector('.quiz-restart')?.addEventListener('click', () => {
       current = 0;
       scores = { positioning: 0, acquisition: 0, conversion: 0, reporting: 0, team: 0 };
       answers = new Array(QUESTIONS.length).fill(null);
+      resultPath = null;
       render();
     });
 
-    // Email capture
-    const emailForm = app.querySelector('.quiz-email-form');
+    const emailForm = app.querySelector('#quiz-result-email-form');
     if (emailForm) {
       emailForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const input = emailForm.querySelector('input[type="email"]');
-        const email = input ? input.value : '';
-        const topPath = getResult();
-        const meta = PATH_META[topPath];
-        // Encode result in mailto fallback; replace with API call if available
-        const subject = encodeURIComponent('Your WSS growth bottleneck result');
-        const body = encodeURIComponent(`Your primary bottleneck: ${meta.label}\n\n${meta.description}\n\nRecommended next step: ${meta.fix}\n\n${meta.href}`);
-        window.location.href = `mailto:${encodeURIComponent(email)}?subject=${subject}&body=${body}`;
-        emailForm.style.display = 'none';
-        const success = app.querySelector('.quiz-email-success');
-        if (success) success.style.display = '';
+        const emailInput = emailForm.querySelector('input[type="email"]');
+        const val = emailInput ? emailInput.value.trim() : '';
+        if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          if (emailInput) emailInput.focus();
+          return;
+        }
+        const capture = app.querySelector('#quiz-email-capture');
+        if (capture) capture.innerHTML = '<p class="quiz-email-success">✓ On its way — check your inbox in a few minutes.</p>';
+        const formData = new URLSearchParams();
+        formData.append('mauticform[formId]', '1');
+        formData.append('mauticform[email]', val);
+        formData.append('mauticform[source_type]', 'quiz-result');
+        formData.append('mauticform[source_page]', window.location.href);
+        formData.append('mauticform[lead_magnet]', `quiz-${resultPath || 'unknown'}`);
+        const params = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign'].forEach(k => {
+          if (params.get(k)) formData.append(`mauticform[${k}]`, params.get(k));
+        });
+        fetch('https://comms.wescalestartups.com/form/submit?formId=1', {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData.toString()
+        }).catch(() => {});
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'quiz_email_capture', quiz_bottleneck: resultPath, page_path: window.location.pathname });
       });
     }
-
-    // Social share
-    const topPath = getResult();
-    const meta = PATH_META[topPath];
-    const shareText = encodeURIComponent(`I just found my biggest growth bottleneck with @WSSgrowth: ${meta.label}. Quick 5-min quiz → wescalestartups.com/quiz`);
-    const shareUrl = encodeURIComponent('https://wescalestartups.com/quiz');
-
-    const liBtn = app.querySelector('#quiz-share-linkedin');
-    if (liBtn) liBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`;
-
-    const twBtn = app.querySelector('#quiz-share-twitter');
-    if (twBtn) twBtn.href = `https://twitter.com/intent/tweet?text=${shareText}`;
   }
 
   render();
@@ -577,16 +570,14 @@ document.addEventListener('DOMContentLoaded', mount);
     justify-content: space-between;
     align-items: center;
   }
-  .quiz-next:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
+  .quiz-next:disabled { opacity: 0.4; cursor: not-allowed; }
   .quiz-nav .button:focus-visible,
   .quiz-restart:focus-visible {
     outline: 2px solid var(--accent, #f97316);
     outline-offset: 2px;
   }
-
+</style>
+<style>
   /* ── Result ── */
   .quiz-result { max-width: 640px; }
   .quiz-result-book {
@@ -600,9 +591,7 @@ document.addEventListener('DOMContentLoaded', mount);
     text-decoration: underline;
     text-underline-offset: 0.15em;
   }
-  .quiz-result-book a:hover {
-    color: var(--ink, #1a1a18);
-  }
+  .quiz-result-book a:hover { color: var(--ink, #1a1a18); }
   .result-highlight { color: var(--accent, #f97316); }
   .quiz-result-desc {
     font-size: 1rem;
@@ -668,10 +657,46 @@ document.addEventListener('DOMContentLoaded', mount);
     color: var(--accent);
     margin: 0 0 0.4rem;
   }
-  .result-fix {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--ink);
-    margin: 0;
+  .result-fix { font-size: 1rem; line-height: 1.6; color: var(--ink); margin: 0; }
+
+  /* ── Email capture ── */
+  .quiz-email-capture {
+    background: var(--surface, #f9f9f7);
+    border: 1.5px solid var(--line, #e8e5e0);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
   }
+  .quiz-email-heading { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin: 0 0 0.2rem; }
+  .quiz-email-sub { font-size: 0.85rem; color: var(--muted); margin: 0 0 0.9rem; line-height: 1.5; }
+  .quiz-email-form { margin: 0; }
+  .quiz-email-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .quiz-email-row input[type="email"] {
+    flex: 1 1 200px;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid var(--line, #e8e5e0);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: #fff;
+    min-width: 0;
+  }
+  .quiz-email-row input[type="email"]:focus {
+    outline: 2px solid var(--accent, #f97316);
+    outline-offset: 2px;
+    border-color: var(--accent, #f97316);
+  }
+  .quiz-email-success { font-size: 0.95rem; font-weight: 600; color: #16a34a; margin: 0; padding: 0.5rem 0; }
+
+  /* ── Share ── */
+  .quiz-share { margin-top: 1.5rem; }
+  .quiz-share-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  .quiz-share-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 </style>

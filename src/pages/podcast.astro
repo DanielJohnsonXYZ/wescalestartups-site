@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import EmailSignup from "../components/EmailSignup.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import { buildFaqSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { siteConfig } from "../site";
 
@@ -16,30 +16,35 @@ const podcastFaqs = [
   },
   {
     question: "Where can I listen?",
-    answer: "The podcast is available on YouTube, Spotify, and Apple Podcasts. Subscribe on your preferred platform to get new episodes as they're released."
+    answer:
+      "The show is launching soon. Spotify, Apple Podcasts, and YouTube links will go live with episode one — we are not publishing placeholder directory URLs. Join the list on this page for a single note when the feed is ready."
   },
   {
     question: "Can I apply to be a guest?",
-    answer: "Yes. If you're a founder or operator with a practical AI growth story, apply via the guest form. We look for real examples, honest lessons, and useful takeaways."
+    answer: "Yes. If you're a founder or operator with a practical AI growth story, apply via email or the guest application page. We look for real examples, honest lessons, and useful takeaways."
   },
   {
     question: "How does this relate to WSS?",
-    answer: "The podcast is the media and authority engine for We Scale Startups. It builds trust, demonstrates practical thinking, and creates warm paths to working together."
+    answer: "The podcast is part of how WSS shares practical thinking on AI and growth. Commercial work still runs through diagnosis and engagements on this site."
   }
 ];
 
-const podcastSchema = {
-  "@context": "https://schema.org",
-  "@type": "PodcastSeries",
-  "name": "How Startups Win With AI",
-  "description": "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies.",
-  "url": absoluteUrl("/podcast"),
-  "author": {
-    "@type": "Organization",
-    "@id": `${siteConfig.siteUrl}/#organization`
-  },
-  "webFeed": absoluteUrl("/podcast")
-};
+const podcastSeriesSchema = siteConfig.podcastLive
+  ? {
+      "@context": "https://schema.org",
+      "@type": "PodcastSeries",
+      name: "How Startups Win With AI",
+      description:
+        "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies.",
+      url: absoluteUrl("/podcast"),
+      author: {
+        "@type": "Organization",
+        "@id": `${siteConfig.siteUrl}/#organization`
+      }
+    }
+  : null;
+
+const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [podcastSeriesSchema] : [])];
 ---
 
 <BaseLayout
@@ -47,7 +52,7 @@ const podcastSchema = {
   title="How Startups Win With AI | WSS Podcast"
   description="Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies. Hosted by Daniel Johnson, founder of We Scale Startups."
   keywords="startup podcast, AI growth, startup AI adoption, founder interviews, B2B SaaS podcast, growth strategies"
-  schema={podcastSchema}
+  schema={podcastSchemas}
   lastUpdated={siteConfig.lastUpdated}
 >
   <!-- HERO -->
@@ -60,46 +65,42 @@ const podcastSchema = {
         The podcast for founders and operators who want practical AI adoption stories — not hype, not tool lists, just what's actually working inside ambitious startups.
       </p>
       <div class="hero-actions podcast-cta-group">
-        <a class="button button-brand" href="https://youtube.com/@wescalestartups" target="_blank" rel="noopener" data-cta="podcast-youtube">
-          Watch on YouTube →
-        </a>
-        <a class="button button-light" href={siteConfig.bookingUrl} data-cta="podcast-book">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="podcast-book">
           {siteConfig.bookingLabel}
         </a>
+        <a class="button button-light" href="/podcast-guest-application" data-cta="podcast-guest-page">
+          Podcast guest application →
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- SUBSCRIBE BUTTONS -->
+  <!-- LAUNCH LIST -->
   <section class="section section-alt podcast-subscribe">
     <div class="shell">
-      <p class="eyebrow">Subscribe</p>
-      <h2>Pick your platform.</h2>
-      <div class="subscribe-buttons">
-        <a class="subscribe-btn" href="https://youtube.com/@wescalestartups" target="_blank" rel="noopener" data-cta="subscribe-youtube">
-          <strong>YouTube</strong>
-          <span>Watch full episodes</span>
+      <p class="eyebrow">Launching soon</p>
+      <h2>Spotify, Apple Podcasts, and YouTube will go live with episode one.</h2>
+      <p class="lede">
+        We are not linking generic directory URLs before the feed exists. Join <strong>{siteConfig.newsletterName}</strong> for one email when the show is live, or book a diagnostic if you want help with growth systems now.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.scorecardUrl} data-cta="podcast-scorecard">
+          {siteConfig.scorecardLabel} →
         </a>
-        <a class="subscribe-btn" href="https://open.spotify.com/" target="_blank" rel="noopener" data-cta="subscribe-spotify">
-          <strong>Spotify</strong>
-          <span>Listen on the go</span>
-        </a>
-        <a class="subscribe-btn" href="https://apple.co/" target="_blank" rel="noopener" data-cta="subscribe-apple">
-          <strong>Apple Podcasts</strong>
-          <span>Listen on iOS</span>
+        <a class="button button-light" href="/resources" data-cta="podcast-resources">
+          Resources →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- EPISODE PAGES (repeatable template) -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Episodes on-site</p>
-      <h2>Episode pages for search and sharing.</h2>
+      <p class="eyebrow">Episodes</p>
+      <h2>On-site episode pages when the first episode ships.</h2>
       <p class="lede">
-        Each release gets a dedicated URL with summary, takeaways, and newsletter signup —{" "}
-        <a href="/podcast/episodes/how-startups-win-template">see the repeatable template →</a>
+        Each release will get a dedicated URL with summary and takeaways. Planning guest outreach in the meantime?{" "}
+        <a href="/podcast-guest-strategy">Open the guest strategy →</a>
       </p>
     </div>
   </section>
@@ -240,17 +241,6 @@ const podcastSchema = {
           </a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="section section--tight">
-    <div class="shell">
-      <EmailSignup
-        heading="Get the weekly growth note."
-        subtext="One insight a week for post-PMF founders. What's blocking growth, what fixes it, and why."
-        formId="podcast-newsletter"
-      />
     </div>
   </section>
 

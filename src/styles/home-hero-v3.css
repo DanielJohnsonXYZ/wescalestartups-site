@@ -309,6 +309,30 @@
   }
 }
 
+.page-home-v3 .h3-hero-proof {
+  margin: 0.65rem 0 0;
+  max-width: 52ch;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--h3-ink-2);
+}
+.page-home-v3 .h3-hero-proof a {
+  color: var(--h3-violet);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.page-home-v3 .h3-hero-proof a:hover {
+  color: var(--h3-violet-2);
+}
+.page-home-v3 .h3-trust-footnote {
+  margin: 0.6rem 0 0;
+  max-width: 56ch;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--h3-muted);
+}
+
 .page-home-v3 .h3-h1 {
   font-family: "Fraunces Variable", Georgia, serif;
   font-weight: 340;

@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/fractional-cmo-vs-full-time-cmo";
+const faqs = [
+  {
+    question: "When is fractional the right bridge?",
+    answer:
+      "When you need senior GTM judgement and a running system now, but the full-time CMO brief is still evolving — stage, channel mix, or team shape is not stable enough for a £150k hire."
+  },
+  {
+    question: "When should you hire full-time?",
+    answer:
+      "When the constraint map is clear, the weekly cadence runs without the founder, and you want a permanent executive owning vendor strategy, hiring, and board narrative long term."
+  },
+  {
+    question: "Can WSS help hire the full-time CMO?",
+    answer:
+      "Often yes — we help define the bar, interview for system-building ability, and hand over dashboards and decision rules so the hire starts with context."
+  }
+];
+const schema = [buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Fractional vs full-time CMO", path }]), buildFaqSchema(faqs)];
+---
+
+<BaseLayout
+  path={path}
+  title="Fractional CMO vs Full-Time CMO | We Scale Startups"
+  description="When a fractional CMO bridges to a full-time hire — and when to commit to a permanent marketing leader. Practical criteria for post-PMF B2B SaaS teams."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Fractional vs full-time CMO", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Hiring</p>
+      <h1>Fractional CMO vs full-time CMO</h1>
+      <p class="lede">
+        Fractional fits when you need the system and cadence without locking in a permanent exec search. Full-time fits when the role is stable and you want a single owner for the next multi-year chapter.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+        <a class="button button-light" href="/services/fractional-cmo">Fractional CMO scope →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="grid-3">
+        {faqs.map((f) => (
+          <article class="feature-card">
+            <h2>{f.question}</h2>
+            <p>{f.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

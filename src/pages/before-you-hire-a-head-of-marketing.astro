@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/before-you-hire-a-head-of-marketing";
+const faqs = [
+  {
+    question: "What should be true before the first marketing lead?",
+    answer:
+      "A named bottleneck, a weekly decision cadence sketch, and one internal owner who can receive a system. Without that, the hire inherits chaos."
+  },
+  {
+    question: "Is a head of marketing the same as a CMO?",
+    answer:
+      "Often the first hire is a senior generalist or growth lead — not a full executive team peer. Titles should match the actual decision rights you can give them."
+  },
+  {
+    question: "Can WSS define the role before we recruit?",
+    answer:
+      "Yes — role design, scorecard, and first 90-day outcomes are a common output of diagnosis or fractional support."
+  }
+];
+const schema = [buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Before you hire marketing", path }]), buildFaqSchema(faqs)];
+---
+
+<BaseLayout
+  path={path}
+  title="Before You Hire a Head of Marketing | We Scale Startups"
+  description="Name the bottleneck and operating rhythm before your first senior marketing hire — so the role has clear decision rights and success metrics."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Before you hire marketing", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">First marketing hire</p>
+      <h1>Before you hire a head of marketing</h1>
+      <p class="lede">
+        Hiring into an undefined GTM motion produces expensive, frustrated marketers. Clarify the constraint, the weekly cadence, and what &quot;good&quot; looks like first — then recruit into a real brief.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+        <a class="button button-light" href="/resources/first-marketing-hire-scorecard">First marketing hire scorecard →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell grid-3">
+      {faqs.map((f) => (
+        <article class="feature-card">
+          <h2>{f.question}</h2>
+          <p>{f.answer}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

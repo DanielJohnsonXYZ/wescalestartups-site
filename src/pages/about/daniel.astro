@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../../lib/schema";
+import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
+
+const path = "/about/daniel";
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Daniel Johnson", path }
+  ])
+];
+---
+
+<BaseLayout
+  path={path}
+  title="Daniel Johnson | We Scale Startups"
+  description="Daniel Johnson — founder of We Scale Startups, fractional CMO and growth operator for post-PMF B2B SaaS and AI startups."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Daniel Johnson", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Founder</p>
+      <h1>Daniel Johnson</h1>
+      <p class="lede">{founderStory.intro}</p>
+      <p>{founderStory.why}</p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="daniel-book">{siteConfig.bookingLabel} →</a>
+        <a class="button button-light" href={siteConfig.danielSite} rel="noopener noreferrer" target="_blank">
+          Personal site →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Proof base</p>
+      <h2>Operator context.</h2>
+      <ul class="daniel-credentials">
+        {founderStory.credentials.map((c) => <li>{c}</li>)}
+      </ul>
+      <ul class="related-insights-list" style="margin-top:1.5rem">
+        {canonicalProofMetrics.map((m) => (
+          <li>
+            <strong>{m.value}</strong> {m.label}
+            {"note" in m && m.note ? ` — ${m.note}` : ""}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

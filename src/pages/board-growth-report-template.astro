@@ -1,0 +1,52 @@
+---
+import CfEmailOff from "../components/CfEmailOff.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/board-growth-report-template";
+const title = "Board Growth Report Template";
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: title, path }
+  ])
+];
+
+function requestMailto() {
+  const subject = `Send me the ${title}`;
+  const body = `Please send the ${title}.\n\nFound on: ${siteConfig.siteUrl}${path}`;
+  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+---
+
+<BaseLayout
+  path={path}
+  title="Board Growth Report Template | We Scale Startups"
+  description="Board-ready growth report template: what changed, what shipped, what to scale or stop — request by email."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: title, path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Template</p>
+      <h1>{title}</h1>
+      <p class="lede">
+        Structure for monthly or quarterly board updates — commercial outcomes, experiment learnings, and explicit scale/stop/fix recommendations (not activity totals).
+      </p>
+      <div class="hero-actions">
+        <CfEmailOff>
+          <a class="button button-brand" href={requestMailto()} data-cta="board-report-request">
+            Request the template →
+          </a>
+        </CfEmailOff>
+        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

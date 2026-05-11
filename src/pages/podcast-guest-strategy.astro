@@ -1,0 +1,517 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Podcast Guest Strategy: 100 Ranked Guests for We Scale Startups";
+const description =
+  "A ranked May 2026 podcast guest strategy for We Scale Startups, prioritising warm leads, authority builders, hidden gems, and strategic partners.";
+
+const guests = [
+  [1, "Victor Asemota", "Founder, Keita Wealth Advisory / SwiftaCorp; Africa Partner, Alta Global Ventures", "Building startups where the playbook doesn't exist: lessons from Africa's tech ecosystem", "Easy", "8/10", "A - Early"],
+  [2, "Noah Adelstein", "GTM Engineer Lab Founder + Rippling APAC/EMEA Growth Lead", "GTM as an engineering problem: how to build a repeatable growth machine using AI and systems", "Easy", "8/10", "A - Early"],
+  [3, "Holly Wright", "Founder & CEO, Bridebook", "From zero to marketplace: how Bridebook scaled without a traditional growth playbook", "Easy", "7/10", "A - Early"],
+  [4, "Oren Cohen", "Startup Operator & Strategic Referral Partner", "The growth handoff: when and how founders stop being their own CMO", "Easy", "7/10", "A - Early"],
+  [5, "Dawid Weideman", "Founder, Kalium", "Building Kalium: the unglamorous truth about pre-revenue GTM for technical founders", "Easy", "6/10", "A - Early"],
+  [6, "James Gayle", "Founder, Hampshire Podcast Studios & Straw Hat Social", "Word of mouth at scale: how to build a business where every client sends the next one", "Easy", "7/10", "A - Early"],
+  [7, "Sarah Finegan", "Investor, Antler", "What investors really want from founders pitching growth: an insider's guide", "Easy", "8/10", "A - Early"],
+  [8, "Gabriella Bouchier", "Founder, Scooch", "The messy middle: what early-stage founders never tell you about building traction", "Easy", "6/10", "A - Early"],
+  [9, "Levaughn Hall", "Founder, PodVault", "The podcast discovery problem: how PodVault is building the infrastructure for the creator economy", "Easy", "7/10", "A - Early"],
+  [10, "Oren Greenberg", "Growth Advisor & Consultant, London Startup Ecosystem", "B2B growth in the AI era: what's working, what's dead, and what founders keep getting wrong", "Easy", "7/10", "A - Early"],
+  [11, "Michael Louis", "CEO & Co-founder, Cerebrium", "AI infrastructure GTM from Cape Town: how Cerebrium generates millions in ARR without a sales team", "Moderate", "8/10", "A - Early"],
+  [12, "Jeremy Goillot", "Founder & CEO, Allo", "Why PLG almost killed my startup, and how adding one salesperson tripled our ACV", "Moderate", "8/10", "A - Early"],
+  [13, "Matthew Eisner", "Head of Product & Growth; Operator & Advisor", "Why your product and growth teams aren't aligned, and the systems that fix it", "Easy", "6/10", "A - Early"],
+  [14, "Jonathan Baillie Strong", "Founder & Operator, London Startup Ecosystem", "The London startup advantage: why European founders build differently", "Easy", "6/10", "A - Early"],
+  [15, "Alex Henneberg", "Founder, Spear Sales", "Founder to sales team: the exact playbook for your first outbound hire", "Easy", "7/10", "A - Early"],
+  [16, "Nick, Liminal AI", "Founder, Liminal AI", "Building Liminal AI: what nobody tells you about GTM in the AI-native era", "Easy", "7/10", "A - Early"],
+  [17, "Michael Cole", "SVP Marketing, Everflow", "How Everflow hit $28M ARR bootstrapped: the referral flywheel strategy most founders ignore", "Moderate", "8/10", "A - Early"],
+  [18, "Bobby Samuels", "CEO & Founder, Protege", "$1M to $30M GMV in 12 months: the founder sales playbook nobody is talking about", "Moderate", "8/10", "A - Early"],
+  [19, "Deboshree Das", "Co-founder & CEO, Criya", "From advisor to creator: how B2B consultants are building audiences that drive inbound", "Easy", "7/10", "A - Early"],
+  [20, "Ben Glass", "Founder, Advisory AI", "How AI is transforming the consulting and advisory industry", "Easy", "7/10", "A - Early"],
+  [21, "Fernando Fortini", "Founder / Operator", "To be confirmed based on conversation", "Easy", "6/10", "A - Early"],
+  [22, "Agustin Rodriguez", "Founder, Pleso", "Building across borders: how Pleso is scaling a startup from Latin America", "Easy", "6/10", "A - Early"],
+  [23, "Elias Ek", "Entrepreneur & Investor, Taiwan Startup Ecosystem", "The Taiwan startup advantage: AI, hardware, and the global opportunity most founders are missing", "Easy", "7/10", "A - Early"],
+  [24, "Connor Riley", "Founder, Farrow Agency", "What agencies know that startup founders don't", "Easy", "6/10", "A - Early"],
+  [25, "Sam Sturm", "Interviewer / Partner, Founders Factory", "Inside the accelerator: what Founders Factory looks for when helping startups scale", "Easy", "7/10", "A - Early"],
+  [26, "Emily Kramer", "Founder, MKT1 Newsletter & Dear Marketers Podcast", "The new B2B marketing playbook for AI-native startups", "Stretch", "10/10", "B - Authority"],
+  [27, "Elena Verna", "Head of Growth, Lovable; former Amplitude, SurveyMonkey, Miro", "Why the old growth playbook is dead, and what Lovable did to hit $200M ARR in under a year", "Hard", "10/10", "B - Authority"],
+  [28, "Mark Kosoglow", "CEO, Operator; ex-VP Sales at Outreach", "Why outbound is broken and how to fix it", "Moderate", "9/10", "B - Authority"],
+  [29, "Alexa Grabell", "Co-founder & CEO, Pocus", "From zero to $1M ARR: how Pocus built a 4,000-person community", "Stretch", "9/10", "B - Authority"],
+  [30, "Chris Walker", "CEO, Passetto; Founder, Refine Labs", "Why almost everything you know about demand generation is wrong", "Stretch", "9/10", "B - Authority"],
+  [31, "Adam Robinson", "CEO, Retention.com & RB2B", "OLD WAY / NEW WAY: building B2B SaaS with LinkedIn as the primary growth channel", "Moderate", "9/10", "B - Authority"],
+  [32, "Guillaume Moubeche", "CEO & Co-founder, Lemlist", "Why I spend 70% of my time on personal brand", "Stretch", "9/10", "B - Authority"],
+  [33, "Andrew Fennell", "Founder, StandoutCV", "18 million visitors and $1M revenue with no investors", "Moderate", "7/10", "B - Authority"],
+  [34, "Asia Orangio", "CEO, DemandMaven", "The SaaS growth diagnostic", "Moderate", "8/10", "B - Authority"],
+  [35, "Patrick Campbell", "Founder, ProfitWell; Paddle", "The $200M pricing lesson", "Hard", "9/10", "B - Authority"],
+  [36, "Nathan Latka", "Host, SaaStr & The Top Entrepreneurs Podcast", "Inside 2,000 startup interviews", "Stretch", "9/10", "B - Authority"],
+  [37, "Amanda Natividad", "VP Marketing, SparkToro", "Zero-click content and the death of the click", "Stretch", "8/10", "B - Authority"],
+  [38, "Rand Fishkin", "Co-founder, SparkToro; former Moz CEO", "Lost, found, and built again", "Stretch", "9/10", "B - Authority"],
+  [39, "Mark Roberge", "Co-founder, Stage 2 Capital; ex-CRO, HubSpot", "The Sales Acceleration Formula", "Hard", "9/10", "B - Authority"],
+  [40, "Thibault Louis-Lucas", "Co-founder, Revid AI, Taplio, Tweet Hunter", "Building 5 products to $100K MRR with no employees", "Moderate", "8/10", "B - Authority"],
+  [41, "Wes Bush", "CEO, ProductLed", "Is product-led growth right for your startup?", "Stretch", "8/10", "B - Authority"],
+  [42, "Maggie Hott", "GTM Lead, OpenAI", "Why OpenAI doesn't pay sales commissions", "Hard", "10/10", "B - Authority"],
+  [43, "Tomer Chernia", "VP GTM, Cursor", "How Cursor went viral without paid ads", "Hard", "10/10", "B - Authority"],
+  [44, "Corey Haines", "Founder, SwipeWell", "The swipe file strategy", "Moderate", "7/10", "B - Authority"],
+  [45, "Dave Gerhardt", "Founder, Exit Five; ex-CMO Drift & Privy", "From CMO to community founder", "Stretch", "9/10", "B - Authority"],
+  [46, "Raph Parker", "First GTM hire at Segment; Founder, Mandolin", "From first GTM hire to $3.2B exit", "Stretch", "9/10", "B - Authority"],
+  [47, "Kyle Parrish", "ex-Head of Sales, Figma", "Inside Figma's early sales", "Stretch", "9/10", "B - Authority"],
+  [48, "Kathleen Estreich", "Partner, Pear Ventures; Co-founder MKT1 Capital", "From Stripe to VC", "Stretch", "9/10", "B - Authority"],
+  [49, "Sangram Vajre", "Co-founder, Terminus; founder, GTM Partners", "ABM is not dead, it evolved", "Stretch", "8/10", "B - Authority"],
+  [50, "April Dunford", "Positioning consultant; author, Obviously Awesome", "Why your startup's positioning is probably wrong", "Stretch", "10/10", "B - Authority"],
+  [51, "Sharath Keshava Narayana", "Co-founder, Sanas & Observe.ai", "India to the US: building enterprise SaaS from India", "Moderate", "8/10", "C - Hidden Gem"],
+  [52, "Andrii Yasinetsky", "Co-founder / Leadership, Diadia Health", "Building a health tech startup", "Easy", "6/10", "C - Hidden Gem"],
+  [53, "Aisha Raheem", "Co-founder & CEO, Farmz2U", "Building for a billion: agri-tech across Africa", "Easy", "7/10", "C - Hidden Gem"],
+  [54, "Leroy Yau", "Entrepreneur & Investor, Taiwan Startup Ecosystem", "Taiwan beyond semiconductors", "Easy", "6/10", "C - Hidden Gem"],
+  [55, "Joseph Buchanan", "Founder, Fracti.onl", "The fractional economy", "Easy", "7/10", "C - Hidden Gem"],
+  [56, "Cem Dedeaga", "Founder / Operator", "To be confirmed based on company focus", "Easy", "5/10", "C - Hidden Gem"],
+  [57, "Laszlo Balazs Szatmari", "Founder / Operator", "Building from Central Europe", "Easy", "5/10", "C - Hidden Gem"],
+  [58, "Anton Borvanov", "Founder / Operator", "To be confirmed after conversation", "Easy", "5/10", "C - Hidden Gem"],
+  [59, "Adwoa-Alexsis Mintah", "Founder / Operator", "To be confirmed, strong personal story focus", "Easy", "6/10", "C - Hidden Gem"],
+  [60, "Ifeanyi Ukwu", "Founder / Operator", "Building global from Nigeria", "Easy", "6/10", "C - Hidden Gem"],
+  [61, "Peep Laja", "CEO, Wynter; Founder, CXL Institute", "Why your startup's messaging is wrong", "Stretch", "8/10", "C - Hidden Gem"],
+  [62, "Gina Bianchini", "CEO & Co-founder, Mighty Networks", "Why community is the most defensible growth moat", "Stretch", "8/10", "C - Hidden Gem"],
+  [63, "Andrew Gazdecki", "CEO, Acquire.com", "Build to sell", "Moderate", "8/10", "C - Hidden Gem"],
+  [64, "Kieran Flanagan", "HubSpot alumnus; fractional advisor & creator", "What I stole from HubSpot's content machine", "Stretch", "8/10", "C - Hidden Gem"],
+  [65, "Steph Smith", "Partner, a16z; author, Doing Content Right", "Doing content right", "Stretch", "8/10", "C - Hidden Gem"],
+  [66, "Noya Kremer", "Founder / Operator", "To be confirmed after conversation", "Easy", "5/10", "C - Hidden Gem"],
+  [67, "Jake Steiner", "Entrepreneur / Operator", "To be confirmed", "Easy", "5/10", "C - Hidden Gem"],
+  [68, "Martyna Karas", "Google for Startups Network", "What Google for Startups sees that founders don't", "Easy", "7/10", "C - Hidden Gem"],
+  [69, "Alex Embery", "Founder / Operator", "To be confirmed", "Easy", "5/10", "C - Hidden Gem"],
+  [70, "Harry Gadsby", "Founder / Growth Advisor", "To be confirmed", "Easy", "5/10", "C - Hidden Gem"],
+  [71, "Sara Pion", "VP Marketing, Metadata.io", "B2B demand gen at every budget", "Moderate", "7/10", "C - Hidden Gem"],
+  [72, "Anthony Pierri", "Co-founder, Fletch PMM", "Why your startup's homepage is losing you customers", "Moderate", "8/10", "C - Hidden Gem"],
+  [73, "Ben Leonard", "UK Dept. for Business & Trade", "Startup support resources you're leaving on the table", "Easy", "6/10", "C - Hidden Gem"],
+  [74, "Shihao Ko", "Investor; Startup Ecosystem", "What investors really look for", "Easy", "7/10", "C - Hidden Gem"],
+  [75, "Jeremy Basset", "Strategic Contact", "To be confirmed based on current focus", "Easy", "6/10", "C - Hidden Gem"],
+  [76, "Lenny Rachitsky", "Creator, Lenny's Newsletter; Host, Lenny's Podcast", "Behind Lenny's Newsletter", "Hard", "10/10", "D - Strategic"],
+  [77, "Harry Stebbings", "Founder, 20VC", "Building the most influential VC podcast from scratch", "Hard", "10/10", "D - Strategic"],
+  [78, "Ben Davies", "Founder, SearcHive", "SEO-first growth", "Easy", "6/10", "D - Strategic"],
+  [79, "Kalyani Wadehra", "NUS Entrepreneurship Ecosystem", "Singapore's startup edge", "Easy", "6/10", "D - Strategic"],
+  [80, "Karina Karn", "Growth Professional", "The growth mentor effect", "Easy", "7/10", "D - Strategic"],
+  [81, "Nick Malekos", "Growth Professional", "What 100+ growth mentoring sessions taught me", "Easy", "6/10", "D - Strategic"],
+  [82, "Vishal Gohel", "Founder / Operator", "To be confirmed", "Easy", "5/10", "D - Strategic"],
+  [83, "Gus Ferguson", "Founder / Operator", "To be confirmed", "Easy", "5/10", "D - Strategic"],
+  [84, "Stacy Ennis", "Book coach; Thought Leadership strategist", "The authority book", "Moderate", "7/10", "D - Strategic"],
+  [85, "Ross Simmonds", "CEO, Foundation", "Create once, distribute forever", "Moderate", "8/10", "D - Strategic"],
+  [86, "Kipp Bodnar", "CMO, HubSpot", "The future of inbound", "Hard", "9/10", "D - Strategic"],
+  [87, "Brendan Hufford", "Founder, Growth Sprints", "Content as a growth sprint", "Moderate", "7/10", "D - Strategic"],
+  [88, "Jay, Hustle & Hive Marketing", "Founder, Hustle & Hive Marketing", "The campaign that worked", "Easy", "6/10", "D - Strategic"],
+  [89, "Joanna Wiebe", "Founder, Copyhackers", "Words that convert", "Stretch", "8/10", "D - Strategic"],
+  [90, "Hiten Shah", "Co-founder, Crazy Egg, KISSmetrics, FYI", "3 SaaS companies and counting", "Stretch", "8/10", "D - Strategic"],
+  [91, "Andrew Birt", "Founder / Operator", "To be confirmed", "Easy", "5/10", "D - Strategic"],
+  [92, "Darius", "Operator / Founder", "To be confirmed", "Easy", "5/10", "D - Strategic"],
+  [93, "Anthony Gale", "Founder / Operator", "To be confirmed", "Easy", "5/10", "D - Strategic"],
+  [94, "James Lethem", "Founder / Operator", "To be confirmed", "Easy", "5/10", "D - Strategic"],
+  [95, "Peep Laja", "CEO, Wynter; Founder, CXL Institute", "Message-market fit before product-market fit", "Stretch", "8/10", "D - Strategic"],
+  [96, "Lloyed Lobo", "Co-founder, Boast.ai", "Grassroots to greatness", "Moderate", "8/10", "D - Strategic"],
+  [97, "Nate Nasralla", "Founder, Fluint", "Selling without a salesperson", "Moderate", "7/10", "D - Strategic"],
+  [98, "Sarah Tavel", "GP, Benchmark", "The hierarchy of engagement", "Hard", "9/10", "D - Strategic"],
+  [99, "Katelyn Bourgoin", "CEO, Customer Camp", "Why buyers actually buy", "Moderate", "8/10", "D - Strategic"],
+  [100, "Elena / Eli, Diadia Health", "Co-founder, Diadia Health", "From chaos to compounding", "Easy", "7/10", "D - Strategic"],
+];
+
+const firstInvites = [
+  "Victor Asemota", "Oren Cohen", "James Gayle", "Noah Adelstein", "Holly Wright",
+  "Michael Louis", "Jeremy Goillot", "Emily Kramer", "Deboshree Das", "Ben Glass",
+  "Alexa Grabell", "Levaughn Hall", "Alex Henneberg", "Oren Greenberg", "Elena / Eli, Diadia Health",
+];
+
+const consultingLeads = ["Emily Kramer", "Asia Orangio", "April Dunford", "Mark Kosoglow", "Alexa Grabell", "Dave Gerhardt", "Kathleen Estreich", "Peep Laja", "Anthony Pierri", "Lloyed Lobo"];
+const audienceGrowth = ["Emily Kramer", "Lenny Rachitsky", "Elena Verna", "Harry Stebbings", "Rand Fishkin", "Chris Walker", "Maggie Hott", "Tomer Chernia", "Dave Gerhardt", "April Dunford"];
+
+const bookingPlan = [
+  ["Week 1", "Warm Network Activation", "Confirm Victor, reach out to James Gayle and Oren Cohen, ask Elena / Eli for Diadia guests, and pitch Fernando, Agustin, and Ben Glass from live meetings."],
+  ["Week 2", "CRM Warm List Outreach", "Message Noah Adelstein, Oren Greenberg, Jonathan Baillie Strong, Matthew Eisner, Deb Das, Leroy Yau, Elias Ek, Karina Karn, Nick Malekos, and Ben Davies."],
+  ["Week 3", "Strategic Warm Cold Outreach", "Pitch Emily Kramer, Michael Louis, Jeremy Goillot, Asia Orangio, Andrew Gazdecki, and Mark Kosoglow with specific content hooks."],
+  ["Week 4", "Authority Pitches + System Setup", "Record the first warm episodes, pitch Alexa Grabell, Chris Walker, and Adam Robinson, create the tracking doc and media kit, and ask each guest for two referrals."],
+];
+
+const templates = [
+  ["Warm relationship", "Quick idea: would love to have you on the pod", "Really enjoyed our conversation a few weeks back. The point you made about [specific thing] has stayed with me. I'm building a podcast for startup founders and operators focused on how companies actually grow: practical, no fluff. I'd love to have you on to talk about [specific episode angle]. The format is relaxed: 35-45 minutes, recorded remotely, and I'll handle editing. Would you be up for it?"],
+  ["Warm cold", "Big fan of your work - podcast invite", "I've been a subscriber to [newsletter/community] for [X months]. Your piece on [specific content] changed how I think about [topic]. I run a podcast for startup founders and operators at We Scale Startups focused on practical growth, GTM strategy, and real case studies. I'd love to have you on to discuss [specific angle]."],
+  ["Cold aspirational", "[Podcast name] - would love your perspective on [specific topic]", "Quick cold intro. I host a podcast for startup founders and operators called [Podcast Name]. I've been following your work on [specific thing], particularly [specific content or achievement]. If you're open to it, I'd love to send over a few questions first so you can see where I'd take the conversation."],
+  ["Intro request", "Intro request - [Name] for podcast", "I'm building a podcast for startup founders and would love to have [Guest Name] on. Their work on [specific topic] is exactly the kind of practical insight my audience needs. Would you be comfortable with a short intro?"],
+  ["Social DM", "", "Hi [Name], longtime follower. Your [tweet/post/thread] on [specific topic] is one I keep coming back to. I host a podcast for startup operators and founders. Would love to have you on to unpack [specific angle]. 35 mins, remote, no prep needed. Worth it?"],
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="strategy-page">
+    <section class="hero">
+      <p class="eyebrow">Podcast Guest Strategy</p>
+      <h1>100 Ranked Guests for We Scale Startups</h1>
+      <p class="byline">Daniel Johnson | May 2026</p>
+      <p class="lede">Warm leads · Authority builders · Hidden gems · Strategic partners</p>
+      <nav aria-label="Page sections">
+        <a href="#master-ranking">Master ranking</a>
+        <a href="#invite-first">Invite first</a>
+        <a href="#booking-plan">30-day plan</a>
+        <a href="#templates">Outreach templates</a>
+      </nav>
+    </section>
+
+    <section class="section-grid" aria-label="Strategy sections">
+      <article><span>A</span><h2>Realistic Early Gets</h2><p>People already in Daniel's orbit or highly accessible cold reaches.</p></article>
+      <article><span>B</span><h2>Authority Builders</h2><p>Higher difficulty guests who lift credibility and audience growth.</p></article>
+      <article><span>C</span><h2>Hidden Gems</h2><p>Underexposed founders and operators with honest, useful stories.</p></article>
+      <article><span>D</span><h2>Strategic Partners</h2><p>Guests who can open doors, build partnerships, or support WSS pipeline.</p></article>
+    </section>
+
+    <section id="master-ranking" class="content-block">
+      <div class="section-heading">
+        <p class="eyebrow">Master Ranking</p>
+        <h2>All 100 Guests</h2>
+        <p>Ranked by overall priority: warm relationships, audience upside, and commercial potential for We Scale Startups.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Current Role</th><th>Suggested Episode Angle</th><th>Difficulty</th><th>Audience</th><th>Section</th></tr>
+          </thead>
+          <tbody>
+            {guests.map(([rank, name, role, angle, difficulty, audience, section]) => (
+              <tr>
+                <td>{rank}</td>
+                <td><strong>{name}</strong></td>
+                <td>{role}</td>
+                <td>{angle}</td>
+                <td><span class={`pill ${String(difficulty).toLowerCase()}`}>{difficulty}</span></td>
+                <td>{audience}</td>
+                <td>{section}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="invite-first" class="content-block split">
+      <div>
+        <p class="eyebrow">Final Strategy Layer</p>
+        <h2>The 15 Guests To Invite First</h2>
+        <p>Lead with warm relationships. Record fast, publish fast, and use early clips to unlock harder guests.</p>
+      </div>
+      <ol class="rank-list">
+        {firstInvites.map((name) => <li>{name}</li>)}
+      </ol>
+    </section>
+
+    <section class="content-block two-col">
+      <article>
+        <h2>Most Likely To Create Inbound Consulting Leads</h2>
+        <ul>{consultingLeads.map((name) => <li>{name}</li>)}</ul>
+      </article>
+      <article>
+        <h2>Most Likely To Grow The Audience Fastest</h2>
+        <ul>{audienceGrowth.map((name) => <li>{name}</li>)}</ul>
+      </article>
+    </section>
+
+    <section id="booking-plan" class="content-block">
+      <div class="section-heading">
+        <p class="eyebrow">Execution</p>
+        <h2>30-Day Guest Booking Plan</h2>
+      </div>
+      <div class="plan-grid">
+        {bookingPlan.map(([week, title, body]) => (
+          <article>
+            <span>{week}</span>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="templates" class="content-block">
+      <div class="section-heading">
+        <p class="eyebrow">Outreach</p>
+        <h2>Templates</h2>
+        <p>Use these as starting points. Personalise every bracketed detail before sending.</p>
+      </div>
+      <div class="template-grid">
+        {templates.map(([label, subject, body]) => (
+          <article>
+            <p class="template-label">{label}</p>
+            {subject && <h3>{subject}</h3>}
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="content-block principles">
+      <h2>Key Principles For Guest Booking Success</h2>
+      <ul>
+        <li>Start warm, go cold with proof.</li>
+        <li>Make it easy to say yes: no prep, 35-45 minutes, remote, recording provided.</li>
+        <li>Reference their specific work in every pitch.</li>
+        <li>Ask for referrals in every conversation.</li>
+        <li>Build in public to create visible booking momentum.</li>
+        <li>After 10 published episodes, use proof to lift pitch success rates.</li>
+        <li>Protect the niche: operators and founders, not generic celebrity interviews.</li>
+        <li>Use cross-promotion as the fastest growth channel.</li>
+      </ul>
+      <p class="source-note">Built for Daniel Johnson and We Scale Startups, May 2026.</p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .strategy-page {
+    background: #f7f4ee;
+    color: #191917;
+  }
+
+  .hero,
+  .content-block,
+  .section-grid {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  .hero {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 88px 0 56px;
+  }
+
+  .eyebrow,
+  .byline,
+  .template-label {
+    margin: 0 0 12px;
+    color: #8c3d24;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    letter-spacing: 0;
+  }
+
+  h1 {
+    max-width: 900px;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.8rem);
+    line-height: 0.94;
+  }
+
+  .lede {
+    max-width: 720px;
+    margin: 24px 0 28px;
+    color: #4d4942;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  nav a,
+  .pill {
+    border: 1px solid rgba(25, 25, 23, 0.18);
+    border-radius: 999px;
+    padding: 9px 13px;
+    color: inherit;
+    text-decoration: none;
+    background: #fffdf8;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .section-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    padding: 0 0 46px;
+  }
+
+  .section-grid article,
+  .content-block,
+  .plan-grid article,
+  .template-grid article,
+  .two-col article {
+    background: #fffdf8;
+    border: 1px solid rgba(25, 25, 23, 0.12);
+    border-radius: 8px;
+  }
+
+  .section-grid article {
+    padding: 20px;
+  }
+
+  .section-grid span {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 16px;
+    background: #243c37;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 900;
+  }
+
+  .section-grid h2,
+  .content-block h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.45rem, 3vw, 2.35rem);
+    line-height: 1.05;
+  }
+
+  .section-grid p,
+  .content-block p,
+  li,
+  td {
+    color: #4d4942;
+    line-height: 1.55;
+  }
+
+  .content-block {
+    padding: 28px;
+    margin-bottom: 22px;
+  }
+
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 22px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(25, 25, 23, 0.12);
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    min-width: 1040px;
+    border-collapse: collapse;
+    background: #fff;
+  }
+
+  th,
+  td {
+    padding: 13px 12px;
+    border-bottom: 1px solid rgba(25, 25, 23, 0.1);
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.92rem;
+  }
+
+  th {
+    color: #191917;
+    background: #eee6d8;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 5px 9px;
+    font-size: 0.78rem;
+  }
+
+  .pill.easy { background: #e6f3e8; color: #19662b; }
+  .pill.moderate { background: #fff2c8; color: #7b5200; }
+  .pill.stretch { background: #ffe4cf; color: #91410f; }
+  .pill.hard { background: #ffe1df; color: #9d2520; }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 28px;
+    align-items: start;
+  }
+
+  .rank-list {
+    columns: 2;
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .two-col,
+  .plan-grid,
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .two-col {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .two-col article,
+  .plan-grid article,
+  .template-grid article {
+    padding: 22px;
+  }
+
+  .plan-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .plan-grid span {
+    color: #8c3d24;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+  }
+
+  .plan-grid h3,
+  .template-grid h3 {
+    margin: 8px 0 10px;
+    font-size: 1.1rem;
+  }
+
+  .principles ul {
+    columns: 2;
+    padding-left: 20px;
+  }
+
+  .source-note {
+    margin-top: 24px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .section-grid,
+    .split,
+    .two-col,
+    .plan-grid,
+    .template-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rank-list,
+    .principles ul {
+      columns: 1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero,
+    .content-block,
+    .section-grid {
+      width: min(100% - 24px, 1180px);
+    }
+
+    .content-block {
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.55rem, 15vw, 4rem);
+    }
+  }
+</style>

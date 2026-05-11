@@ -3,7 +3,7 @@ import CfEmailOff from "../../components/CfEmailOff.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { resourcesRelatedReading, siteConfig } from "../../site";
+import { leadMagnets, resourcesRelatedReading, siteConfig } from "../../site";
 
 function guideRequestMailto(title: string, id: string) {
   const outlineUrl = `${siteConfig.siteUrl}/resources#${id}`;
@@ -79,6 +79,9 @@ const guides = [
     ]
   }
 ];
+
+const guideIds = new Set(guides.map((g) => g.id));
+const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
 ---
 
 <BaseLayout
@@ -93,7 +96,10 @@ const guides = [
     <div class="shell">
       <p class="eyebrow">Resources</p>
       <h1>Practical growth guides for teams between traction and scale.</h1>
-      <p>Use these when you need a clearer diagnosis before hiring, briefing an agency, or adding more channel activity.</p>
+      <p>
+        Use these when you need a clearer diagnosis before hiring, briefing an agency, or adding more channel activity. Prefer the fastest pass? Start with the{" "}
+        <a href="/resources/growth-bottleneck-scorecard">{siteConfig.scorecardName}</a> — {siteConfig.scorecardTagline}
+      </p>
       <div class="hero-actions">
         <a
           class="button button-dark button-with-subcopy"
@@ -115,9 +121,9 @@ const guides = [
   <section class="section">
     <div class="shell">
       <SectionIntro
-        eyebrow="Lead magnets"
-        title="Downloadable enough to use, lightweight enough to read."
-        body="The point is to help a founder make the next growth decision, not bury them in a decorative PDF."
+        eyebrow="Guides & templates"
+        title="Request working assets — outlines on-page, files by email."
+        body="Most items below are outlines you can read here; you request the full template or worksheet by email (no decorative PDF funnel). Each resource page explains what you get and how to use it."
       />
       <div class="grid-3">
         {guides.map((guide) => (
@@ -144,6 +150,63 @@ const guides = [
             </CfEmailOff>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  {
+    moreMagnets.length > 0 && (
+      <section class="section section-alt">
+        <div class="shell">
+          <SectionIntro
+            eyebrow="More templates"
+            title="Additional worksheets and checklists."
+            body="Each opens as a full resource page with outline, FAQ, and email request."
+          />
+          <div class="grid-3">
+            {moreMagnets.map((m) => (
+              <article class="feature-card">
+                <p class="card-kicker">{m.audience}</p>
+                <h3>
+                  <a href={m.href}>{m.title}</a>
+                </h3>
+                <p>{m.description}</p>
+                <a class="card-link" href={m.href}>
+                  Open resource page →
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Board &amp; dashboard</p>
+      <h2>Standalone templates.</h2>
+      <div class="grid-3">
+        <article class="feature-card">
+          <p class="card-kicker">Leadership</p>
+          <h3>
+            <a href="/board-growth-report-template">Board growth report template</a>
+          </h3>
+          <p>What changed, what shipped, what to scale or stop — without vanity metrics.</p>
+          <a class="card-link" href="/board-growth-report-template">
+            View →
+          </a>
+        </article>
+        <article class="feature-card">
+          <p class="card-kicker">Measurement</p>
+          <h3>
+            <a href="/growth-dashboard-template">Growth dashboard template</a>
+          </h3>
+          <p>Weekly view tying pipeline to activity and decisions.</p>
+          <a class="card-link" href="/growth-dashboard-template">
+            View →
+          </a>
+        </article>
       </div>
     </div>
   </section>

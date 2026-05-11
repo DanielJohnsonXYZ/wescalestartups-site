@@ -21,7 +21,7 @@ const magnetDetails: Record<string, {
   faq: Array<{ question: string; answer: string }>;
 }> = {
   "growth-bottleneck-scorecard": {
-    format: "Founder checklist · 5 minutes to complete",
+    format: "Founder checklist · 10 questions · ~5 minutes",
     bestFor: "Post-PMF teams with marketing activity but unclear priorities",
     whatYouGet: [
       "Five-section diagnostic across ICP clarity, channel signal, landing-page conversion, founder-led sales dependency, and reporting cadence",
@@ -152,6 +152,111 @@ const magnetDetails: Record<string, {
       }
     ]
   },
+  "founder-led-growth-diagnostic": {
+    format: "Structured prompts · one working session",
+    bestFor: "Founder-led GTM teams testing whether the bottleneck is positioning, channel fit, conversion, or cadence",
+    whatYouGet: [
+      "Prompts to separate signal from story in your current funnel",
+      "A simple scoring view of founder-dependency vs system ownership",
+      "Next-step routing: diagnosis, sprint, system build, or fractional leadership"
+    ],
+    howToUse:
+      "Work through the prompts with your growth lead or on your own. The output should be one plain-English bottleneck sentence you can brief an operator or agency with.",
+    whoItsNotFor: "Teams with no repeatable customer proof yet — establish PMF first.",
+    faq: [
+      {
+        question: "Is this the same as the scorecard?",
+        answer: "It overlaps — the scorecard is the fastest self-serve pass. This diagnostic is a slightly longer narrative format for founders who think better in prompts than scores."
+      },
+      {
+        question: "Can WSS run this with us?",
+        answer: "Yes — that's what the Growth Diagnosis engagement is for, with evidence and numbers in the room."
+      },
+      {
+        question: "Do I get a PDF?",
+        answer: "Request via email — we send the working doc. The on-page outline explains what's inside."
+      }
+    ]
+  },
+  "agency-brief-template": {
+    format: "One-page brief · 20 minutes to complete",
+    bestFor: "Founders briefing agencies, freelancers, or contractors on paid, content, or creative",
+    whatYouGet: [
+      "Goal, constraint, and success-metric blocks",
+      "Proof and positioning inputs the agency can't guess",
+      "Scope boundaries — what is in / out for the first sprint",
+      "Reporting cadence — what you need to see weekly"
+    ],
+    howToUse:
+      "Fill before kickoff. Send as the single source of truth — it prevents scope drift and 'surprise' channel strategies.",
+    whoItsNotFor: "Teams that have not agreed an internal owner for the agency relationship.",
+    faq: [
+      {
+        question: "Does this replace a statement of work?",
+        answer: "No — it informs the SOW. It makes the SOW shorter and clearer."
+      },
+      {
+        question: "Can I use it for multiple agencies?",
+        answer: "Yes — duplicate the brief per vendor with shared company context."
+      },
+      {
+        question: "Will you review our brief?",
+        answer: "On engagements, yes — brief quality is part of how we direct execution."
+      }
+    ]
+  },
+  "first-marketing-hire-scorecard": {
+    format: "Hiring scorecard · 15 minutes per role design",
+    bestFor: "Founders deciding between generalist, growth marketer, or senior GTM leader",
+    whatYouGet: [
+      "Stage-fit criteria — what the first marketing hire should actually own",
+      "Scorecard for candidates against execution vs advisory bias",
+      "Sequencing note — when fractional beats full-time"
+    ],
+    howToUse:
+      "Score your situation first, then your shortlist. Use it to avoid hiring a full-stack unicorn when you needed a channel owner.",
+    whoItsNotFor: "Enterprise marketing teams with established leadership.",
+    faq: [
+      {
+        question: "Does this overlap the fractional CMO hiring checklist?",
+        answer: "Similar territory — this scorecard is faster and stage-first; the checklist goes deeper on interviews."
+      },
+      {
+        question: "Can WSS help hire?",
+        answer: "We often advise on role design and bar-setting; recruiting partners handle search when needed."
+      },
+      {
+        question: "Is it only for B2B SaaS?",
+        answer: "Written for B2B SaaS and AI — most criteria transfer to adjacent B2B models."
+      }
+    ]
+  },
+  "ai-search-visibility-checklist": {
+    format: "Checklist · 30 minutes",
+    bestFor: "Teams that want LLM-visible, citable expertise (not generic AI fluff pages)",
+    whatYouGet: [
+      "Source and citation hygiene prompts",
+      "Page structures that reward quoting",
+      "Internal linking patterns that reinforce entity clarity"
+    ],
+    howToUse:
+      "Run after you have a real POV worth citing. Pair with the AI search visibility insight article for examples.",
+    whoItsNotFor: "Brands without a differentiated point of view — AI visibility amplifies clarity; it doesn't invent it.",
+    faq: [
+      {
+        question: "Is this only for SEO?",
+        answer: "It's about being quotable wherever models look — which increasingly includes search and assistants."
+      },
+      {
+        question: "Do you guarantee citations?",
+        answer: "No honest operator can. The checklist raises the odds by making claims verifiable."
+      },
+      {
+        question: "Where is the long-form version?",
+        answer: "See the insights article on making AI search visibility citable — linked from /insights."
+      }
+    ]
+  },
   "ai-native-gtm-stack-map": {
     format: "Stack assessment template · 45 minutes to complete",
     bestFor: "Teams adopting AI for research, messaging, campaign briefs, and reporting",
@@ -210,11 +315,16 @@ const schemas = [
   buildFaqSchema(details.faq)
 ];
 
-const description = `${magnet.description} Free download for ${magnet.audience.toLowerCase()}. Built by We Scale Startups.`;
+const description = `${magnet.description} Request the asset by email for ${magnet.audience.toLowerCase()}. Built by We Scale Startups.`;
+
+const layoutTitle =
+  slug === "growth-bottleneck-scorecard"
+    ? "Growth Bottleneck Scorecard | We Scale Startups"
+    : `${magnet.title} | We Scale Startups`;
 ---
 
 <BaseLayout
-  title={`${magnet.title} | We Scale Startups`}
+  title={layoutTitle}
   description={description}
   path={`/resources/${slug}`}
   schema={schemas}
@@ -299,8 +409,13 @@ const description = `${magnet.description} Free download for ${magnet.audience.t
       <h2>Need more than a template?</h2>
       <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href={siteConfig.calendlyUrl} data-cta={`magnet-final-book-${slug}`} rel="noreferrer" target="_blank">
-          Book a Growth Diagnosis →
+        <a
+          class="btn btn-primary"
+          href={siteConfig.bookingUrl}
+          data-cta={`magnet-final-book-${slug}`}
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
         </a>
         <a class="btn btn-ghost" href="/resources" data-cta={`magnet-final-resources-${slug}`}>
           Back to all resources →

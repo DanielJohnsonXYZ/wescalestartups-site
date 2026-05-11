@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig, testimonials, testimonialsRelatedReading, headlineMetrics } from "../site";
+import { siteConfig, testimonials, testimonialsRelatedReading } from "../site";
 
 const testimonialsFaqs = [
   {
@@ -41,7 +41,7 @@ function categorise(role: string, company: string): Category {
 
 const decorated = testimonials.map((t) => ({
   ...t,
-  category: categorise(t.role ?? "", t.company ?? "")
+  category: t.category === "paid-client" ? "Client" : categorise(t.role ?? "", t.company ?? "")
 }));
 
 const categoryOrder: Category[] = ["Client", "Founder advisory", "Mentoring"];
@@ -64,8 +64,8 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
       <p class="eyebrow">Testimonials &amp; founder feedback</p>
       <h1>What founders, operators, and clients say.</h1>
       <p class="lede">
-        {headlineMetrics[0]?.value} paid acquisition managed, {headlineMetrics[3]?.value ?? "20+"} startups advised,
-        {headlineMetrics[2]?.value ?? "2"} operator-side exits. Filter by engagement type below.
+        £18M+ revenue influenced · £6M+ paid acquisition managed · 479+ founder sessions · 4.93/5 GrowthMentor · 20+ startups
+        supported · 2 operator-side exits. Filter by engagement type below.
       </p>
       <div class="hero-actions">
         <a
@@ -117,7 +117,7 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
 
       <p class="tm-foot">
         Want the unfiltered view? See&nbsp;
-        <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">200+ public reviews on GrowthMentor →</a>
+        <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">public reviews on GrowthMentor →</a>
       </p>
     </div>
   </section>

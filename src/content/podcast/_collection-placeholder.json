@@ -1,0 +1,11 @@
+{
+  "title": "Podcast launch placeholder",
+  "episodeNumber": 0,
+  "publishedAt": "2026-01-01",
+  "guestName": "We Scale Startups",
+  "guestRole": "Internal",
+  "youtubeUrl": "https://www.youtube.com/watch?v=0",
+  "summary": "Draft entry so the podcastEpisodes glob loader is non-empty before the first real episode ships. Safe to delete once a real episode JSON exists in this folder.",
+  "keyTakeaways": ["Not a published episode"],
+  "draft": true
+}

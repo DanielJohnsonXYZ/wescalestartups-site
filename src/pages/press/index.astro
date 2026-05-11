@@ -15,7 +15,7 @@ import {
   whoWeHelpNotFit
 } from "../../lib/companyPressKitContent";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { headlineMetrics, pressRelatedReading, siteConfig } from "../../site";
+import { headlineMetrics, pressRelatedReading, revenueInfluencedNote, siteConfig } from "../../site";
 
 const pressFaqs = [
   {
@@ -135,6 +135,9 @@ const pressSchema = [
         <ul>
           {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
         </ul>
+        <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--muted); max-width: 52ch;">
+          <strong>£18M+ revenue influenced:</strong> {revenueInfluencedNote}
+        </p>
         <p class="press-verify-note">
           Verify against <a href="/proof">the proof hub</a> and linked case studies before citing metrics.
         </p>

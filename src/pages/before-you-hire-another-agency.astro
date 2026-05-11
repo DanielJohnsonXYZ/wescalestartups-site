@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/before-you-hire-another-agency";
+const faqs = [
+  {
+    question: "When is another agency the wrong move?",
+    answer:
+      "When nobody inside the company can brief a single decision view across channels — adding execution capacity amplifies confusion, not pipeline."
+  },
+  {
+    question: "When is an agency the right move?",
+    answer:
+      "When the channel plan is clear, success metrics are agreed, and you need production or specialist depth inside a brief your team owns."
+  },
+  {
+    question: "What does WSS do first?",
+    answer:
+      "Name the bottleneck, align channel work to one rhythm, and give you the briefs and review format agencies should execute inside."
+  }
+];
+const schema = [buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Before another agency", path }]), buildFaqSchema(faqs)];
+---
+
+<BaseLayout
+  path={path}
+  title="Before You Hire Another Agency | We Scale Startups"
+  description="When to fix the growth system before adding another agency — and how to brief channel partners with one coherent commercial view."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Before another agency", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Agencies</p>
+      <h1>Before you hire another agency</h1>
+      <p class="lede">
+        Agencies execute; they rarely fix cross-channel prioritisation. If the founder still owns every scale/stop/fix call, another retainer usually adds cost before it adds clarity.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+        <a class="button button-light" href="/fractional-cmo-vs-agency">Fractional CMO vs agency →</a>
+        <a class="button button-light" href="/resources/agency-brief-template">Agency brief template →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell grid-3">
+      {faqs.map((f) => (
+        <article class="feature-card">
+          <h2>{f.question}</h2>
+          <p>{f.answer}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

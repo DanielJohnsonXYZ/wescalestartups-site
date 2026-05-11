@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/workshops";
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Workshops", path }
+  ])
+];
+---
+
+<BaseLayout
+  path={path}
+  title="Workshops | We Scale Startups"
+  description="Hands-on workshops for portfolio teams and leadership groups: growth diagnosis, acquisition system design, and weekly operating cadence."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Workshops", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Workshops</p>
+      <h1>Diagnosis and system design in the room.</h1>
+      <p class="lede">
+        Formats for VCs, accelerators, and leadership offsites — bottleneck naming, experiment sequencing, and what &quot;transfer&quot; should look like. Enquire for agenda and audience fit.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="workshops-book">{siteConfig.bookingLabel} →</a>
+        <a class="button button-light" href={`mailto:${siteConfig.email}?subject=Workshop%20enquiry`}>Email workshop enquiry →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

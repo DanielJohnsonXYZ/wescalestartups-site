@@ -5,15 +5,34 @@ interface Testimonial {
   role: string;
   company: string;
   result: string;
+  category?: "paid-client" | "advisory" | "speaking";
 }
 
 interface Props {
   testimonials: readonly Testimonial[];
   title?: string;
   eyebrow?: string;
+  /** When true, group by category with subheads (e.g. testimonials hub). */
+  groupByCategory?: boolean;
 }
 
-const { testimonials, title = "What founders say.", eyebrow = "Testimonials" } = Astro.props;
+const { testimonials, title = "What founders say.", eyebrow = "Testimonials", groupByCategory = false } = Astro.props;
+
+const labels: Record<NonNullable<Testimonial["category"]>, string> = {
+  "paid-client": "Paid WSS engagements",
+  advisory: "Founder advisory · GrowthMentor & MentorCruise",
+  speaking: "Speaking · workshops · programmes"
+};
+
+const grouped = groupByCategory
+  ? (["paid-client", "advisory", "speaking"] as const)
+      .map((key) => ({
+        key,
+        label: labels[key],
+        items: testimonials.filter((t) => (t.category ?? "advisory") === key)
+      }))
+      .filter((g) => g.items.length > 0)
+  : null;
 ---
 
 <section class="section testimonials-section" aria-label="Founder testimonials">
@@ -22,19 +41,65 @@ const { testimonials, title = "What founders say.", eyebrow = "Testimonials" } =
       <p class="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
     </div>
-    <div class="testimonials-grid">
-      {testimonials.map((t) => (
-        <figure class="testimonial-card">
-          <blockquote>
-            <p>"{t.quote}"</p>
-          </blockquote>
-          <figcaption>
-            <strong>{t.name}</strong>
-            <span>{t.role}{t.company ? ` · ${t.company}` : ""}</span>
-            {t.result && <span class="testimonial-result">{t.result}</span>}
-          </figcaption>
-        </figure>
-      ))}
-    </div>
+    {
+      grouped ? (
+        grouped.map((g) => (
+          <div class="testimonials-group">
+            <h3 class="testimonials-group-title">{g.label}</h3>
+            <div class="testimonials-grid">
+              {g.items.map((t) => (
+                <figure class="testimonial-card">
+                  <blockquote>
+                    <p>"{t.quote}"</p>
+                  </blockquote>
+                  <figcaption>
+                    <strong>{t.name}</strong>
+                    <span>
+                      {t.role}
+                      {t.company ? ` · ${t.company}` : ""}
+                    </span>
+                    {t.result && <span class="testimonial-result">{t.result}</span>}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        ))
+      ) : (
+        <div class="testimonials-grid">
+          {testimonials.map((t) => (
+            <figure class="testimonial-card">
+              <blockquote>
+                <p>"{t.quote}"</p>
+              </blockquote>
+              <figcaption>
+                <strong>{t.name}</strong>
+                <span>
+                  {t.role}
+                  {t.company ? ` · ${t.company}` : ""}
+                </span>
+                {t.result && <span class="testimonial-result">{t.result}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>
+
+<style>
+  .testimonials-group {
+    margin-top: 2rem;
+  }
+  .testimonials-group:first-of-type {
+    margin-top: 0.5rem;
+  }
+  .testimonials-group-title {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    color: var(--ink);
+  }
+</style>

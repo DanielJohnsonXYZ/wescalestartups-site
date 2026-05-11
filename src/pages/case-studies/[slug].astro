@@ -23,12 +23,23 @@ const path = `/case-studies/${caseStudy.id}`;
 //   commercialResult ← results[] (top 2-3)
 //   systemCreated  ← derived from services[] + work synthesis
 //   whyItMattered  ← summary as reframed value statement
+function serviceToSystemLine(s: string) {
+  const t = s.trim();
+  if (/systems?$/i.test(t)) return t;
+  return `${t} system`;
+}
+
+const systemCreatedList =
+  caseStudy.data.systemsCreated?.length
+    ? caseStudy.data.systemsCreated
+    : caseStudy.data.services.map(serviceToSystemLine);
+
 const sections = {
   problem: caseStudy.data.challenge,
   wssChanged: caseStudy.data.work,
   commercialResult: caseStudy.data.results,
-  systemCreated: caseStudy.data.services.map((s) => `${s} system`),
-  whyItMattered: caseStudy.data.summary
+  systemCreated: systemCreatedList,
+  whyItMattered: caseStudy.data.whyItMattered ?? caseStudy.data.summary
 };
 
 const caseFaqs = [
@@ -42,7 +53,7 @@ const caseFaqs = [
   },
   {
     question: `What system was left in place after the engagement?`,
-    answer: `${caseStudy.data.services.join(", ")} — owned by the internal team after handover.`
+    answer: `${systemCreatedList.join("; ")} — owned by the internal team after handover.`
   },
   {
     question: "How does WSS structure case studies?",
@@ -118,9 +129,46 @@ const caseFaqs = [
           <a class="case-aside-link" href={siteConfig.danielSite} rel="noreferrer" target="_blank">
             Founder/operator: DanielJohnson.xyz →
           </a>
+          {caseStudy.data.relatedOfferHref && (
+            <p style="margin-top:1rem">
+              <a class="button button-light" href={caseStudy.data.relatedOfferHref}>
+                Related offer →
+              </a>
+            </p>
+          )}
         </aside>
 
         <div class="case-body">
+          {(caseStudy.data.situation ||
+            caseStudy.data.constraint ||
+            caseStudy.data.beforeState ||
+            caseStudy.data.afterState) && (
+            <article class="case-section">
+              <p class="case-section-num">00</p>
+              <h2>Context</h2>
+              {caseStudy.data.situation && (
+                <p>
+                  <strong>Situation:</strong> {caseStudy.data.situation}
+                </p>
+              )}
+              {caseStudy.data.constraint && (
+                <p>
+                  <strong>Constraint:</strong> {caseStudy.data.constraint}
+                </p>
+              )}
+              {caseStudy.data.beforeState && (
+                <p>
+                  <strong>Before:</strong> {caseStudy.data.beforeState}
+                </p>
+              )}
+              {caseStudy.data.afterState && (
+                <p>
+                  <strong>After:</strong> {caseStudy.data.afterState}
+                </p>
+              )}
+            </article>
+          )}
+
           <!-- 1. PROBLEM -->
           <article class="case-section case-section-problem">
             <p class="case-section-num">01</p>
@@ -165,6 +213,60 @@ const caseFaqs = [
               <strong>The takeaway:</strong> the operating system stays with the team. The result isn't a campaign — it's the rhythm that keeps producing them.
             </p>
           </article>
+
+          {(caseStudy.data.timeline ||
+            caseStudy.data.assetsShipped?.length ||
+            caseStudy.data.commercialResult ||
+            caseStudy.data.operationalResult ||
+            caseStudy.data.clientQuote ||
+            caseStudy.data.teamAfterWss) && (
+            <article class="case-section">
+              <p class="case-section-num">06</p>
+              <h2>Depth</h2>
+              {caseStudy.data.timeline && (
+                <p>
+                  <strong>Timeline:</strong> {caseStudy.data.timeline}
+                </p>
+              )}
+              {caseStudy.data.assetsShipped && caseStudy.data.assetsShipped.length > 0 && (
+                <div>
+                  <strong>Assets shipped</strong>
+                  <ul>
+                    {caseStudy.data.assetsShipped.map((x) => (
+                      <li>{x}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {caseStudy.data.commercialResult && (
+                <p>
+                  <strong>Commercial result:</strong> {caseStudy.data.commercialResult}
+                </p>
+              )}
+              {caseStudy.data.operationalResult && (
+                <p>
+                  <strong>Operational result:</strong> {caseStudy.data.operationalResult}
+                </p>
+              )}
+              {caseStudy.data.clientQuote && (
+                <blockquote>
+                  <p>&ldquo;{caseStudy.data.clientQuote}&rdquo;</p>
+                </blockquote>
+              )}
+              {caseStudy.data.teamAfterWss && (
+                <p>
+                  <strong>What the team could do after WSS:</strong> {caseStudy.data.teamAfterWss}
+                </p>
+              )}
+            </article>
+          )}
+
+          {caseStudy.data.artefactImage && (
+            <figure class="case-artefact">
+              <img src={caseStudy.data.artefactImage} alt="" width="960" height="520" loading="lazy" decoding="async" />
+              <figcaption>Engagement artefact (illustrative).</figcaption>
+            </figure>
+          )}
         </div>
       </div>
     </div>

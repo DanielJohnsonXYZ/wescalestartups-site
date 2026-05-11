@@ -1,6 +1,14 @@
 ---
 import { siteConfig } from "../site";
 
+const whenSignals = [
+  { icon: "↗", title: "You have traction, but pipeline is inconsistent.", body: "Months land in waves. You can't predict next quarter's revenue with confidence." },
+  { icon: "👤", title: "The founder is still the growth department.", body: "Decisions, copy, calls, dashboards — all routed through one person. It does not scale." },
+  { icon: "💸", title: "You're spending on channels without knowing what to scale.", body: "Paid, content, outbound — running, but no single decision view. Every week feels like guessing." },
+  { icon: "🤝", title: "Agencies are executing, but nobody owns the system.", body: "Specialists are doing tactics. Strategy lives in the founder's head. Reporting is activity, not commercial." },
+  { icon: "🎯", title: "You need senior judgement before a full-time CMO.", body: "It's too early to commit to £150k base + equity. Too late to keep guessing." }
+] as const;
+
 const cards = [
   {
     title: "Seed–Series B SaaS with traction, messy pipeline",
@@ -24,8 +32,8 @@ const cards = [
 <section class="section who-icp-section" aria-labelledby="who-icp-heading">
   <div class="shell">
     <div class="who-icp-head">
-      <p class="eyebrow">Who this is for</p>
-      <h2 id="who-icp-heading">Four ICP patterns we are built for.</h2>
+      <p class="eyebrow">Who this is for · When to hire us</p>
+      <h2 id="who-icp-heading">Fit patterns — and when the timing is right.</h2>
       <p class="lede">
         Clear fit language saves everyone time. If none of these feel close, you may still be pre-PMF, heavily consumer, or better served by a full-time marketing lead —{" "}
         <a href="/contact" data-cta="who-icp-contact">tell us your context</a> and we will say so honestly on a short call.
@@ -43,6 +51,18 @@ const cards = [
         ))
       }
     </ul>
+
+    <h3 class="who-when-sub">If any of these sound like you, we should talk.</h3>
+    <div class="when-to-hire-grid who-icp-when-grid">
+      {whenSignals.map((signal) => (
+        <article class="when-card">
+          <span class="when-icon" aria-hidden="true">{signal.icon}</span>
+          <h4>{signal.title}</h4>
+          <p>{signal.body}</p>
+        </article>
+      ))}
+    </div>
+
     <div class="who-icp-cta">
       <a
         class="button button-brand"
@@ -97,6 +117,57 @@ const cards = [
     padding: 1.35rem 1.35rem 1.45rem;
     transition: border-color 0.18s ease;
   }
+  .who-when-sub {
+    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 2.25rem 0 1rem;
+  }
+  .who-icp-when-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 720px) {
+    .who-icp-when-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 1080px) {
+    .who-icp-when-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.25rem 1.25rem 1.35rem;
+  }
+  .when-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0.35rem 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .when-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+  .when-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    font-size: 1rem;
+  }
+
   .who-icp-card:hover {
     border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
   }

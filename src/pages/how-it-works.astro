@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig, strategicPageRelatedInsights } from "../site";
+import { first30Days, siteConfig, strategicPageRelatedInsights } from "../site";
 
 const cadence = [
   { day: "Mon", body: "Weekly priorities locked. Owners and decision rules attached to every test in the backlog." },
@@ -120,16 +120,44 @@ const howItWorksSchema = [
         what the cadence looks like, and what you walk away with.
       </p>
       <div class="hero-actions">
-        <a class="button button-brand" href="/quiz" data-cta="how-it-works-hero-quiz">
-          3-minute bottleneck quiz →
-        </a>
-        <a class="button button-light" href="/diagnose" data-cta="how-it-works-hero-diagnose">
-          Written 5-layer framework →
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="how-it-works-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="how-it-works-hero-scorecard">
           {siteConfig.scorecardLabel} →
         </a>
+        <a class="button button-light" href="/diagnose" data-cta="how-it-works-hero-diagnose">
+          5-layer framework (deep dive) →
+        </a>
       </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">First 30 days</p>
+      <h2>What happens in month one.</h2>
+      <p class="lede">Same sequence on most engagements — emphasis shifts with your bottleneck.</p>
+      <div class="timeline">
+        {first30Days.map((item) => (
+          <article class="timeline-row">
+            <span class="timeline-week">{item.week}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p>
+        <a class="card-link" href="/first-30-days">Full first 30 days detail →</a>
+      </p>
     </div>
   </section>
 

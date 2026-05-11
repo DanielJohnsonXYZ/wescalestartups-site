@@ -1,0 +1,52 @@
+---
+import CfEmailOff from "../components/CfEmailOff.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/growth-dashboard-template";
+const title = "Growth Dashboard Template";
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: title, path }
+  ])
+];
+
+function requestMailto() {
+  const subject = `Send me the ${title}`;
+  const body = `Please send the ${title}.\n\nFound on: ${siteConfig.siteUrl}${path}`;
+  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+---
+
+<BaseLayout
+  path={path}
+  title="Growth Dashboard Template | We Scale Startups"
+  description="Weekly growth dashboard template: pipeline, channel activity, and scale/stop/fix decisions — request by email."
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: title, path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Template</p>
+      <h1>{title}</h1>
+      <p class="lede">
+        A weekly view that ties pipeline to channel activity and decisions — designed so leadership sees what to scale, stop, or fix without vanity metrics.
+      </p>
+      <div class="hero-actions">
+        <CfEmailOff>
+          <a class="button button-brand" href={requestMailto()} data-cta="growth-dashboard-request">
+            Request the template →
+          </a>
+        </CfEmailOff>
+        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

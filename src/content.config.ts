@@ -58,6 +58,22 @@ const cases = defineCollection({
     work: z.array(z.string()),
     results: z.array(z.string()),
     services: z.array(z.string()),
+    /** Explicit systems / artefacts (avoids auto "X system" duplication in the template). */
+    systemsCreated: z.array(z.string()).optional(),
+    /** Deeper "why this mattered" — not a repeat of summary. */
+    whyItMattered: z.string().optional(),
+    situation: z.string().optional(),
+    constraint: z.string().optional(),
+    beforeState: z.string().optional(),
+    afterState: z.string().optional(),
+    timeline: z.string().optional(),
+    assetsShipped: z.array(z.string()).optional(),
+    commercialResult: z.string().optional(),
+    operationalResult: z.string().optional(),
+    clientQuote: z.string().optional(),
+    artefactImage: z.string().optional(),
+    teamAfterWss: z.string().optional(),
+    relatedOfferHref: z.string().optional(),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
     order: z.number().default(999)
@@ -102,7 +118,9 @@ const podcastEpisodes = defineCollection({
     durationNote: z.string().optional(),
     resources: z
       .array(z.object({ label: z.string(), href: z.url() }))
-      .optional()
+      .optional(),
+    /** When true, excluded from episode routes and sitemap (keeps loader non-empty pre-launch). */
+    draft: z.boolean().optional()
   })
 });
 

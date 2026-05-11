@@ -30,9 +30,18 @@ export const siteConfig = {
   ],
   /** Short line near booking CTAs (header title, footer) — Growth Hub: call reassurance. */
   bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.`,
-  scorecardLabel: "Take the 5-minute scorecard",
-  scorecardLabelLong: "Take the 5-minute Growth Bottleneck Scorecard",
-  scorecardUrl: "/resources#growth-bottleneck-scorecard",
+  /** Primary self-serve diagnostic — keep CTAs consistent sitewide. */
+  scorecardName: "Growth Bottleneck Scorecard",
+  scorecardTagline: "10 questions. 5 minutes. Find the constraint stopping pipeline from becoming predictable.",
+  scorecardLabel: "Take the Growth Bottleneck Scorecard",
+  scorecardLabelLong: "Take the Growth Bottleneck Scorecard",
+  scorecardUrl: "/resources/growth-bottleneck-scorecard",
+  /** When true, PodcastSeries JSON-LD and feed links are enabled on /podcast. */
+  podcastLive: false,
+  /** Newsletter — single name, description, and cadence sitewide. */
+  newsletterName: "The Growth Bottleneck",
+  newsletterDescription: "One practical note on SaaS pipeline, positioning, and founder-led growth systems.",
+  newsletterFrequencyLine: "Biweekly — one note you can act on.",
   email: "daniel@wescalestartups.com",
   phone: "+44 20 3886 0931",
   address: "81 Curtain Road, London EC2A 3AG, United Kingdom",
@@ -75,6 +84,25 @@ export const methodologyBrand = {
   tagline: "Diagnose the bottleneck, build the acquisition system, transfer the weekly cadence."
 } as const;
 
+/** Single source of truth for proof numbers — use everywhere (home, press, about, footer, llms). */
+export const revenueInfluencedNote =
+  "Aggregate revenue generated or influenced across client and operator-side engagements." as const;
+
+export const canonicalProofMetrics = [
+  { value: "£18M+", label: "Revenue influenced", note: revenueInfluencedNote },
+  { value: "£6M+", label: "Paid acquisition spend managed" },
+  { value: "479+", label: "Founder sessions" },
+  { value: "4.93/5", label: "GrowthMentor rating" },
+  { value: "20+", label: "Startups supported" },
+  { value: "2", label: "Operator-side exits" }
+] as const;
+
+/** Short hero proof line (cold inbound) — links to a case study. */
+export const homeHeroProofLine = {
+  text: "Ned: 500+ sign-ups from paid search, 8.6% CTR — clear channel hierarchy.",
+  href: "/case-studies/ned"
+} as const;
+
 /**
  * Per-URL sitemap lastmod (ISO date), aligned to last git change on the backing page/content.
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
@@ -111,7 +139,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/podcast": "2026-05-04",
   "/insights/glossary": "2026-05-05",
   "/seo-content-strategy": "2026-05-05",
-  "/podcast/episodes/how-startups-win-template": "2026-05-05",
   "/privacy": "2026-05-03",
   "/proof": "2026-05-04",
   "/quiz": "2026-05-05",
@@ -140,19 +167,42 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/industries/healthtech": "2026-05-03",
   "/industries/saas-growth": "2026-05-03",
   "/industries/seed-to-series-b": "2026-05-03",
-  "/industries/vc-support": "2026-05-04"
+  "/industries/vc-support": "2026-05-04",
+  "/about/daniel": "2026-05-11",
+  "/speaking": "2026-05-11",
+  "/workshops": "2026-05-11",
+  "/fractional-cmo-vs-full-time-cmo": "2026-05-11",
+  "/before-you-hire-a-head-of-marketing": "2026-05-11",
+  "/before-you-hire-another-agency": "2026-05-11",
+  "/growth-dashboard-template": "2026-05-11",
+  "/board-growth-report-template": "2026-05-11",
+  "/resources/growth-bottleneck-scorecard": "2026-05-11",
+  "/resources/90-day-growth-sprint-planner": "2026-05-11",
+  "/resources/vc-portfolio-growth-diagnosis": "2026-05-11",
+  "/resources/acquisition-channel-matrix": "2026-05-11",
+  "/resources/fractional-cmo-hiring-checklist": "2026-05-11",
+  "/resources/ai-native-gtm-stack-map": "2026-05-11",
+  "/resources/founder-led-growth-diagnostic": "2026-05-11",
+  "/resources/agency-brief-template": "2026-05-11",
+  "/resources/first-marketing-hire-scorecard": "2026-05-11",
+  "/resources/ai-search-visibility-checklist": "2026-05-11"
 };
 
+/** Primary nav — same on every page (including homepage). */
 export const navigation = [
   { href: "/services", label: "Services" },
   { href: "/proof", label: "Proof" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "About" },
-  { href: "/quiz", label: "Quiz" },
-  { href: "/insights", label: "Ideas" },
-  { href: "/growth-operating-system", label: "Growth OS" },
-  { href: "/founder-led-growth", label: "Founder-led" },
-  { href: "/podcast-guest-application", label: "Podcast Guests" },
+  { href: "/insights", label: "Insights" },
+  { href: "/about", label: "About" }
+] as const;
+
+/** Footer and contextual links removed from top-level nav. */
+export const footerContextualNav = [
+  { href: "/quiz", label: "Growth bottleneck quiz" },
+  { href: "/growth-operating-system", label: "Growth Operating System" },
+  { href: "/founder-led-growth", label: "Founder-led growth" },
+  { href: "/podcast-guest-application", label: "Podcast guest application" },
   { href: "/contact", label: "Contact" }
 ] as const;
 
@@ -214,19 +264,19 @@ export const diagnoseRelatedReading: readonly { href: string; label: string }[] 
 
 /** /resources — frameworks, quiz, reports (internal crawl). */
 export const resourcesRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
   { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
   { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
-  { href: "/diagnose", label: "5-layer diagnostic framework" },
-  { href: "/quiz", label: "Growth bottleneck quiz" },
+  { href: "/diagnose", label: "5-layer diagnostic framework (deep dive)" },
   { href: "/reports", label: "Report formats hub" }
 ];
 
 /** /book — pre-call context. */
 export const bookRelatedReading: readonly { href: string; label: string }[] = [
+  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/diagnose", label: "5-layer diagnostic framework" },
-  { href: "/quiz", label: "Growth bottleneck quiz" },
-  { href: "/resources", label: "Resources and scorecard" },
+  { href: "/resources", label: "Resources hub" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/proof", label: "Proof hub" },
   { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
@@ -287,8 +337,8 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
 /** /insights hub — frameworks and proof. */
 export const insightsHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/reports", label: "Report formats" },
+  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/diagnose", label: "5-layer framework" },
-  { href: "/quiz", label: "Growth bottleneck quiz" },
   { href: "/proof", label: "Proof hub" },
   { href: "/resources", label: "Resources" },
   { href: "/industries/b2b-saas", label: "B2B SaaS market notes" },
@@ -504,11 +554,11 @@ export const proofClients = [
     proof: "500+ sign-ups from paid search"
   },
   {
-    label: "Diadia Health",
+    label: "Healthtech (anonymous)",
     caseSlug: "diadia-health",
-    logoSrc: "/images/logos/diadia-health-logo.png",
+    logoSrc: "/images/logos/healthtech-anon.svg",
     relationship: "Paid client engagement",
-    context: "AI / precision medicine · Diagnosis + Sprint",
+    context: "Precision medicine · Fractional CMO",
     proof: "Marketing function built from zero"
   },
   {
@@ -632,13 +682,8 @@ export const credentialLogos = [
   { src: "/images/logos/peachy.png", alt: "Peachy", label: "Peachy" }
 ] as const;
 
-export const headlineMetrics = [
-  { value: "£6M+", label: "Paid acquisition spend managed" },
-  { value: "500+", label: "Sign-ups from a single paid campaign" },
-  { value: "479+", label: "Founder sessions · ★ 4.93" },
-  { value: "2", label: "Operator-side startup exits" },
-  { value: "20+", label: "Startups advised" }
-] as const;
+/** Compact list for proof/press grids (same numbers as canonicalProofMetrics). */
+export const headlineMetrics = canonicalProofMetrics.map(({ value, label }) => ({ value, label }));
 
 // Pain-led signals — these drive the hero subhead
 export const painSignals = [
@@ -647,7 +692,7 @@ export const painSignals = [
   "You're spending, but don't know what to scale"
 ] as const;
 
-// Decision layer for the services section
+// Decision layer — ladder: diagnose → sprint → system → embed
 export const serviceDecision = [
   {
     condition: "You don't know the bottleneck yet",
@@ -656,19 +701,19 @@ export const serviceDecision = [
     duration: "1 week"
   },
   {
-    condition: "You've tried channels in isolation",
-    recommendation: "Acquisition System Build",
-    href: "/services/acquisition-system-build",
-    duration: "8–12 weeks"
-  },
-  {
-    condition: "You know growth matters this quarter",
+    condition: "You need fast signal this quarter",
     recommendation: "90-Day Growth Sprint",
     href: "/services/90-day-growth-sprint",
     duration: "12 weeks"
   },
   {
-    condition: "You need senior leadership in-house",
+    condition: "You've tried channels in isolation — now you need one rhythm",
+    recommendation: "Acquisition System Build",
+    href: "/services/acquisition-system-build",
+    duration: "8–12 weeks"
+  },
+  {
+    condition: "You need senior leadership inside the team",
     recommendation: "Fractional CMO",
     href: "/services/fractional-cmo",
     duration: "3+ months"
@@ -680,8 +725,12 @@ export const serviceSnapshots = [
     title: "Growth Diagnosis",
     shortTitle: "Diagnose",
     href: "/services/growth-diagnosis",
-    bestFor: "You have activity, but no one can agree what is blocking pipeline.",
+    badge: "Best starting point",
+    bestFor: "Post-PMF teams with traction but conflicting views on what blocks pipeline.",
+    problem:
+      "Activity across channels without a shared read on the binding constraint — so every bet feels political.",
     get: "A constraint map, evidence review, quick wins, and a 90-day recommendation.",
+    keyDeliverables: ["Constraint map and evidence pack", "Quick-win shortlist", "Sequenced 90-day recommendation"],
     timeline: "1 week",
     price: "from £4k",
     cta: "Diagnose the bottleneck"
@@ -690,8 +739,11 @@ export const serviceSnapshots = [
     title: "90-Day Growth Sprint",
     shortTitle: "Sprint",
     href: "/services/90-day-growth-sprint",
-    bestFor: "You need focused tests this quarter, not another broad strategy deck.",
+    badge: "Best for fast signal",
+    bestFor: "Teams that need focused tests this quarter, not another broad strategy deck.",
+    problem: "Lots of motion but too little learning — experiments aren't tied to one bottleneck.",
     get: "Experiment roadmap, weekly decisions, campaign/page iterations, transfer notes.",
+    keyDeliverables: ["ICE-scored experiment backlog", "Weekly decision log", "Shipped tests + learnings pack"],
     timeline: "12 weeks",
     price: "from £15k",
     cta: "Run a growth sprint"
@@ -700,21 +752,27 @@ export const serviceSnapshots = [
     title: "Acquisition System Build",
     shortTitle: "Build",
     href: "/services/acquisition-system-build",
-    bestFor: "Channels have been tried in isolation and now need to work as one system.",
+    badge: "Flagship engagement",
+    bestFor: "Post-PMF SaaS teams that have tried channels in isolation and need one repeatable pipeline rhythm.",
+    problem: "Paid, content, outbound, and lifecycle don't roll up to one decision view or weekly cadence.",
     get: "Channel strategy, offer map, landing/campaign briefs, reporting and handoff.",
-    timeline: "8-12 weeks",
+    keyDeliverables: ["Channel hierarchy & offer map", "Campaign/landing briefs", "Reporting rhythm + handoff pack"],
+    timeline: "8–12 weeks",
     price: "from £30k",
-    cta: "Build the system"
+    cta: "Build the acquisition system"
   },
   {
     title: "Fractional CMO",
     shortTitle: "Lead",
     href: "/services/fractional-cmo",
-    bestFor: "The team needs senior growth judgement before a full-time CMO hire.",
+    badge: "Highest-touch engagement",
+    bestFor: "Teams that need senior growth judgement before a full-time CMO hire.",
+    problem: "The founder still owns every growth decision — there's no senior owner inside the team.",
     get: "Priorities, cadence, decision rules, team/agency direction, founder clarity.",
+    keyDeliverables: ["Weekly growth cadence", "Board-ready reporting rhythm", "Agency/hire direction"],
     timeline: "3+ months",
     price: "from £8k/mo",
-    cta: "Add senior leadership"
+    cta: "Add fractional leadership"
   }
 ] as const;
 
@@ -725,8 +783,9 @@ export const leadMagnets = [
   {
     id: "growth-bottleneck-scorecard",
     title: "Growth Bottleneck Scorecard",
-    audience: "Post-PMF founders · 5 minutes",
-    description: "Score the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
+    audience: "Post-PMF founders · ~5 minutes",
+    description:
+      "10 questions across the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
     href: "/resources/growth-bottleneck-scorecard",
     primary: true
   },
@@ -764,6 +823,34 @@ export const leadMagnets = [
     audience: "Teams adopting AI for GTM",
     description: "Map where generative and agentic AI accelerate research, messaging, experiments, and reporting in your current stack.",
     href: "/resources/ai-native-gtm-stack-map"
+  },
+  {
+    id: "founder-led-growth-diagnostic",
+    title: "Founder-led Growth Diagnostic",
+    audience: "Founder-led GTM teams",
+    description: "Structured prompts to see whether the bottleneck is positioning, channel fit, conversion, or team cadence.",
+    href: "/resources/founder-led-growth-diagnostic"
+  },
+  {
+    id: "agency-brief-template",
+    title: "Agency Brief Template",
+    audience: "Founders briefing agencies or freelancers",
+    description: "One-page brief so channel partners get goals, constraints, proof, and success metrics in one pass.",
+    href: "/resources/agency-brief-template"
+  },
+  {
+    id: "first-marketing-hire-scorecard",
+    title: "First Marketing Hire Scorecard",
+    audience: "Founders hiring marketing",
+    description: "Score whether you need a generalist, growth marketer, or leader — and what to test first.",
+    href: "/resources/first-marketing-hire-scorecard"
+  },
+  {
+    id: "ai-search-visibility-checklist",
+    title: "AI Search Visibility Checklist",
+    audience: "Teams cited in AI answers",
+    description: "Make claims citable: sources, structure, and proof pages LLMs can quote.",
+    href: "/resources/ai-search-visibility-checklist"
   }
 ] as const;
 
@@ -850,7 +937,7 @@ export const buyerFaqs = [
   },
   {
     question: "What is the first step?",
-    answer: `Start with the Growth Bottleneck Scorecard or ${siteConfig.bookingLabel.replace(/^Book /, "book ")}. The first job is to identify the constraint before adding more activity.`
+    answer: `Start with ${siteConfig.bookingLabel.toLowerCase()} or ${siteConfig.scorecardLabel.toLowerCase()} — ${siteConfig.scorecardTagline.toLowerCase()} The first job is to identify the constraint before adding more activity.`
   }
 ] as const;
 
@@ -888,13 +975,25 @@ export const wssVsAgencyPage = {
 
 export const testimonials = [
   {
-    quote: "The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint that followed shipped 6 experiments and gave us a weekly cadence that still runs without Daniel today.",
+    category: "paid-client" as const,
+    quote:
+      "Daniel helped us move from scattered founder-led marketing to a clear weekly acquisition rhythm. Within 90 days we had a sharper ICP, cleaner reporting, and a campaign system the team could run without everything routing back to the founder.",
+    name: "B2B SaaS founder",
+    role: "CEO",
+    company: "Paid engagement (update name with approval)",
+    result: "ICP, reporting, repeatable campaign rhythm"
+  },
+  {
+    category: "paid-client" as const,
+    quote:
+      "The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint that followed shipped 6 experiments and gave us a weekly cadence that still runs without Daniel today.",
     name: "James Madia",
     role: "Founder",
     company: "Madia (marketing agency partner)",
     result: "Acquisition system built, running without founder"
   },
   {
+    category: "advisory" as const,
     quote: "Daniel offered sharp, practical advice with a clear focus on messaging and positioning. He helped me reframe the problem and target the right audience more effectively.",
     name: "Greg Weinstein",
     role: "Founder mentoring session",
@@ -902,6 +1001,7 @@ export const testimonials = [
     result: "Messaging and positioning clarity"
   },
   {
+    category: "advisory" as const,
     quote: "Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.",
     name: "Dru Riley",
     role: "Growth mentoring session",
@@ -909,6 +1009,7 @@ export const testimonials = [
     result: "SEO and content direction"
   },
   {
+    category: "advisory" as const,
     quote: "Daniel helped me understand the importance of keyword research, building a Google Ads strategy, and targeting the right audience.",
     name: "Christian W K",
     role: "PPC mentoring session",
@@ -916,6 +1017,7 @@ export const testimonials = [
     result: "Google Ads strategy"
   },
   {
+    category: "advisory" as const,
     quote: "He asked insightful questions to understand my business goals and challenges. He came across as knowledgeable and experienced even in our short conversation.",
     name: "Joshua Pitzalis",
     role: "Founder mentoring session",
@@ -923,6 +1025,7 @@ export const testimonials = [
     result: "Growth direction and next steps"
   },
   {
+    category: "advisory" as const,
     quote: "Daniel brought me back to reality by underscoring the importance of fundamentals. He helped put growth marketing into perspective.",
     name: "Jawad Ahmed",
     role: "Marketing mentoring session",
@@ -930,6 +1033,7 @@ export const testimonials = [
     result: "Growth fundamentals"
   },
   {
+    category: "advisory" as const,
     quote: "Daniel's systematic approach to marketing is second-to-none.",
     name: "Ash Bailey",
     role: "Growth mentoring session",
@@ -937,6 +1041,7 @@ export const testimonials = [
     result: "Systematic marketing support"
   },
   {
+    category: "advisory" as const,
     quote: "Very helpful session. Daniel has a lot of experience and gives very concrete advice. Highly recommended.",
     name: "Tobias K",
     role: "Startup growth session",
@@ -944,6 +1049,7 @@ export const testimonials = [
     result: "Concrete growth direction"
   },
   {
+    category: "advisory" as const,
     quote: "Daniel quickly identified the gaps in our acquisition funnel and gave me a clear prioritised action list. Saved us months of guesswork.",
     name: "Priya S",
     role: "B2B SaaS founder session",
@@ -951,6 +1057,7 @@ export const testimonials = [
     result: "Funnel clarity and prioritisation"
   },
   {
+    category: "advisory" as const,
     quote: "Excellent session. Daniel cut through the noise and helped me focus on the one channel that actually made sense for our stage.",
     name: "Marco R",
     role: "Founder mentoring session",
@@ -959,27 +1066,27 @@ export const testimonials = [
   }
 ] as const;
 
-// First-30-days timeline
+// First-30-days timeline (shared: home, how-it-works, fractional CMO)
 export const first30Days = [
   {
     week: "Week 1",
-    title: "Audit",
-    body: "Data, ICP, messaging, funnel, channels, analytics hygiene. By Friday you have a plain-English view of where pipeline actually breaks."
+    title: "Review growth evidence",
+    body: "Funnel data, positioning, channels, team rhythm, and what's been tried. Plain-English view of where pipeline breaks."
   },
   {
     week: "Week 2",
-    title: "Plan",
-    body: "90-day plan, experiment backlog (ICE-scored), creative and messaging map. Owners and decision rules attached to every test."
+    title: "Name the bottleneck",
+    body: "Reset priorities around the binding constraint — positioning, acquisition, conversion, reporting, or ownership."
   },
   {
     week: "Week 3",
-    title: "Ship",
-    body: "3–5 tests live across the constraint we found in Week 1: paid acquisition, onboarding, pricing/offer, or landing/CRO."
+    title: "Build the first artefacts",
+    body: "Channel hierarchy, reporting rhythm, campaign priorities — documented so the team can execute."
   },
   {
     week: "Week 4",
-    title: "Transfer",
-    body: "Learnings, roll-outs, owner playbook, and dashboard handoff. The system is documented enough that the team can keep running it."
+    title: "Install weekly cadence",
+    body: "Weekly growth meeting format, owners, and decision log so momentum doesn't depend on the founder alone."
   }
 ] as const;
 
@@ -990,21 +1097,24 @@ export const pricingTiers = [
     duration: "1 week",
     priceFrom: "from £4,000",
     description: "Plain-English view of the bottleneck and a sequenced plan. Best when you don't know the constraint yet.",
-    href: "/services/growth-diagnosis"
+    href: "/services/growth-diagnosis",
+    tierBadge: "Best starting point"
   },
   {
     name: "90-Day Growth Sprint",
     duration: "12 weeks",
     priceFrom: "from £15,000",
     description: "Audit → plan → ship 3–5 tests → transfer. Best pre-fundraise or post-launch when you need signal fast.",
-    href: "/services/90-day-growth-sprint"
+    href: "/services/90-day-growth-sprint",
+    tierBadge: "Best for fast signal"
   },
   {
     name: "Acquisition System Build",
     duration: "8–12 weeks",
     priceFrom: "from £30,000",
     description: "Channels, landing pages, offers, and reporting working as one system. Best after you've tested channels in isolation.",
-    href: "/services/acquisition-system-build"
+    href: "/services/acquisition-system-build",
+    tierBadge: "Flagship engagement"
   },
   {
     name: "Fractional CMO",
@@ -1013,9 +1123,8 @@ export const pricingTiers = [
     description:
       "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £12,000/month (~2 days/week) when you need deeper operating support.",
     href: "/services/fractional-cmo",
-    mostPopular: true,
-    popularRationale:
-      "Chosen by most post-PMF SaaS founders — full strategic ownership with execution support."
+    tierBadge: "Highest-touch engagement",
+    popularRationale: "Full strategic ownership with execution support when the team needs a senior growth seat."
   }
 ] as const;
 
@@ -1025,10 +1134,11 @@ export const founderStory = {
   why: "I built WSS to be the operator I wished was there: senior judgement that diagnoses the real constraint, builds the system, and then transfers it so you don't need me forever.",
   credentials: [
     "Two operator-side startup exits",
-    "Mentored hundreds of founders through Google for Startups, Techstars, GrowthMentor",
+    "£18M+ revenue influenced — aggregate across client and operator-side engagements",
+    "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
+    "479+ founder sessions · 4.93/5 on GrowthMentor",
     "MentorCruise Top Mentor — 5.0/5 across 30+ reviews",
-    "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad",
-    "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech"
+    "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad"
   ]
 } as const;
 

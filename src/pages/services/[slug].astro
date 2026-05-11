@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildServiceSchema } from "../../lib/schema";
-import { serviceRelatedInsights, siteConfig } from "../../site";
+import { first30Days, serviceRelatedInsights, siteConfig } from "../../site";
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
@@ -318,12 +318,21 @@ const serviceKeywords: Record<string, string> = {
   "fractional-cmo":
     "fractional CMO, embedded growth leadership, startup marketing cadence, pipeline dashboard, agency management"
 };
+
+const metaTitleById: Record<string, string> = {
+  "growth-diagnosis": "Growth Diagnosis for Post-PMF SaaS | We Scale Startups",
+  "90-day-growth-sprint": "90-Day Growth Sprint for B2B SaaS | We Scale Startups",
+  "acquisition-system-build": "B2B SaaS Acquisition System Build | We Scale Startups",
+  "fractional-cmo": "Fractional CMO for B2B SaaS Startups | We Scale Startups"
+};
+
 const keywords = serviceKeywords[service.id];
 const relatedForService = serviceRelatedInsights[service.id] ?? [];
+const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Scale Startups`;
 ---
 
 <BaseLayout
-  title={`${service.data.title} | We Scale Startups`}
+  title={layoutTitle}
   description={service.data.description}
   keywords={keywords}
   path={path}
@@ -477,6 +486,33 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
       </div>
     </div>
   </section>
+
+  {
+    service.id === "fractional-cmo" && (
+      <section class="section section-alt" aria-labelledby="fcmo-first30">
+        <div class="shell">
+          <p class="eyebrow">First 30 days</p>
+          <h2 id="fcmo-first30">What happens in month one</h2>
+          <div class="timeline">
+            {first30Days.map((item) => (
+              <article class="timeline-row">
+                <span class="timeline-week">{item.week}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p class="lede" style="margin-top:1rem">
+            <a class="card-link" href="/first-30-days">
+              Full first 30 days breakdown →
+            </a>
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   <!-- Common mistakes — reframe before they rule themselves out -->
   {details.commonMistakes && details.commonMistakes.length > 0 && (

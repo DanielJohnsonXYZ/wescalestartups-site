@@ -1,25 +1,23 @@
 ---
 import { getCollection } from "astro:content";
 import HomeProofV3 from "../components/HomeProofV3.astro";
-import HomeStickyNav from "../components/HomeStickyNav.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import VsAgencyBlock from "../components/VsAgencyBlock.astro";
 import NotForBlock from "../components/NotForBlock.astro";
 import DanielStory from "../components/DanielStory.astro";
-import WhenToHireUs from "../components/WhenToHireUs.astro";
-import GrowthScopeBar from "../components/GrowthScopeBar.astro";
-import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
 import WhoThisIsForIcp from "../components/WhoThisIsForIcp.astro";
 import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
 import CtaLadder from "../components/CtaLadder.astro";
-import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/home-hero-v3.css";
 import { buildFaqSchema } from "../lib/schema";
 import { sortByOrder } from "../lib/utils";
 import {
   buyerFaqs,
+  canonicalProofMetrics,
+  first30Days,
+  homeHeroProofLine,
   homeRelatedReading,
   proofStandards,
   siteConfig,
@@ -27,20 +25,10 @@ import {
 } from "../site";
 
 const cases = sortByOrder(await getCollection("cases"));
-const featuredCase = cases.find((item) => item.id === "diadia-health") ?? cases[0];
+const featuredCase = cases.find((item) => item.id === "ned") ?? cases[0];
 const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0, 4);
 
 const featuredCaseLabel = featuredCase?.data.client ?? "";
-
-const concreteDeliverables = [
-  { label: "ICP & positioning", note: "One-line offer + segment map", href: "/gtm-strategy" },
-  { label: "Landing & offer", note: "Tested headline + proof stack", href: "/services/acquisition-system-build" },
-  { label: "Channel plan", note: "Where pipeline actually comes from", href: "/services/acquisition-system-build" },
-  { label: "Experiment backlog", note: "ICE-scored, weekly cadence", href: "/services/90-day-growth-sprint" },
-  { label: "Growth dashboard", note: "Pipeline → activity → decisions", href: "/how-it-works" },
-  { label: "Decision cadence", note: "Mon read · Wed ship · Fri decide", href: "/how-it-works" },
-  { label: "Team handover pack", note: "What to run after we leave", href: "/how-it-works" }
-];
 
 const engagementShapes = [
   {
@@ -56,7 +44,7 @@ const engagementShapes = [
     label: "Sprint",
     title: "90-day growth sprint",
     body: "Targeted intervention against the named bottleneck. Built, run, measured, transferred.",
-    meta: "⏱ 90 days · most popular",
+    meta: "⏱ 90 days · best for fast signal",
     href: "/services/90-day-growth-sprint"
   },
   {
@@ -64,7 +52,7 @@ const engagementShapes = [
     label: "Build",
     title: "Acquisition system build",
     body: "Channel hierarchy, narrative, reporting cadence, hiring spec — installed end-to-end.",
-    meta: "⏱ 12-16 weeks",
+    meta: "⏱ 8–12 weeks · flagship",
     href: "/services/acquisition-system-build"
   },
   {
@@ -77,7 +65,10 @@ const engagementShapes = [
   }
 ];
 
-const homeTestimonials = testimonials.filter((t) => !/mentorcruise/i.test(t.company));
+const homeTestimonials = [
+  ...testimonials.filter((t) => t.category === "paid-client"),
+  ...testimonials.filter((t) => t.category === "advisory")
+].slice(0, 8);
 
 function metricLead(result: string) {
   return result.match(/(?:[$£])?\d+(?:\.\d+)?%?\+?/)?.[0] ?? result.split(" ")[0];
@@ -89,16 +80,13 @@ function metricLead(result: string) {
   title={siteConfig.title}
   description={siteConfig.description}
   schema={buildFaqSchema([...buyerFaqs])}
-  showSiteHeader={false}
+  showSiteHeader={true}
   bodyClass="page-home-v3"
-  announcementVariant="dark-hero"
-  announcementPill="New"
-  announcementText="Growth Operating System and Founder-led Growth cornerstone pages now live."
-  announcementHref="/growth-operating-system"
-  announcementLinkText="See Growth OS →"
+  announcementVariant="brand"
+  announcementText={`New resource: ${siteConfig.scorecardName}. ${siteConfig.scorecardTagline}`}
+  announcementHref={siteConfig.scorecardUrl}
+  announcementLinkText={`${siteConfig.scorecardLabel} →`}
 >
-  <HomeStickyNav />
-
   <section class="h3-hero" aria-label="We Scale Startups hero">
     <div class="h3-container">
       <div class="h3-rail">
@@ -116,6 +104,10 @@ function metricLead(result: string) {
             Predictable B2B SaaS pipeline<br />
             <span class="strike">without</span> a <span class="num">£150k</span> CMO hire.
           </h1>
+
+          <p class="h3-hero-proof">
+            <a href={homeHeroProofLine.href} data-cta="hero-proof-line">{homeHeroProofLine.text}</a>
+          </p>
 
           <div class="h3-name-line">
             <span class="h3-av" aria-hidden="true">DJ</span>
@@ -142,7 +134,7 @@ function metricLead(result: string) {
               Book a 30-minute growth diagnostic <span class="arrow" aria-hidden="true">→</span>
             </a>
             <a class="h3-btn h3-btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
-              Take the 5-min scorecard <span class="arrow" aria-hidden="true">→</span>
+              {siteConfig.scorecardLabel} <span class="arrow" aria-hidden="true">→</span>
             </a>
             <a class="h3-btn h3-btn-link" href="/contact" data-cta="hero-contact">or send a written enquiry</a>
           </div>
@@ -152,11 +144,18 @@ function metricLead(result: string) {
           </p>
 
           <div class="h3-trust">
-            <span class="h3-chip"><span class="num">£18M+</span> revenue impact</span>
-            <span class="h3-chip"><span class="num">£6M+</span> ad spend managed</span>
-            <span class="h3-chip"><span class="star">★</span> <span class="num">4.93</span> GrowthMentor</span>
-            <span class="h3-chip"><span class="swatch"></span> Techstars · Google · Cambridge Judge</span>
+            {canonicalProofMetrics.slice(0, 4).map((m) => (
+              <span class="h3-chip">
+                <span class="num">{m.value}</span> {m.label}
+              </span>
+            ))}
+            <span class="h3-chip h3-chip-note" title={canonicalProofMetrics[0]?.note}>
+              <span class="swatch"></span> Techstars · Google · Cambridge Judge
+            </span>
           </div>
+          <p class="h3-trust-footnote">
+            {canonicalProofMetrics[0]?.value} revenue influenced — {canonicalProofMetrics[0]?.note}
+          </p>
         </div>
 
         <aside class="h3-panel" aria-label="Live growth diagnostic sample output">
@@ -274,16 +273,18 @@ function metricLead(result: string) {
     </div>
   </section>
 
-  <section class="h3-strip" aria-label="How we work">
+  <HomeProofV3 />
+
+  <section class="h3-strip" aria-label="Offer routing">
     <div class="h3-container">
       <div class="h3-head">
         <div>
-          <span class="h3-eyebrow">How we work · 4 shapes</span>
+          <span class="h3-eyebrow">Four offers · one ladder</span>
           <h2>
-            One bottleneck. Four ways to fix it. <span style="color:var(--h3-muted);font-weight:300;font-style:italic"> — pick the smallest that solves it.</span>
+            Diagnosis finds the bottleneck. Sprint tests the next move. <strong>Acquisition System Build</strong> installs the rhythm. Fractional CMO operates it with your team.
           </h2>
         </div>
-        <div class="h3-sub">Each ends with the team owning the artefacts &amp; weekly cadence.</div>
+        <div class="h3-sub">Pick the smallest commitment that answers your biggest question — then confirm on the call.</div>
       </div>
       <div class="h3-stages">
         {engagementShapes.map((shape) => (
@@ -321,54 +322,17 @@ function metricLead(result: string) {
     })();
   </script>
 
-  <HomeProofV3 />
-
   <CtaLadder />
 
   <WhoThisIsForIcp />
 
-  <WhenToHireUs />
-
   <NotForBlock />
 
-  <!-- WHY NOW — traction hides weak systems -->
-  <section class="section why-now-section">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="Why now"
-        title="Early traction hides the cracks. Systems find them."
-        body="Most post-PMF founders hit the same wall: growth worked when the founder ran it personally. Channels were tested. Some deals closed. Then the pattern broke — and no one could explain why."
-      />
-      <div class="why-now-grid">
-        <article class="why-now-card">
-          <span class="why-now-num">01</span>
-          <h3>Founder-led growth stops scaling</h3>
-          <p>What got you to £1M ARR was personal: your network, your pitch, your energy. That's not a system — it's a bottleneck wearing founder clothes.</p>
-        </article>
-        <article class="why-now-card">
-          <span class="why-now-num">02</span>
-          <h3>Channels work in isolation, not together</h3>
-          <p>Paid tests ran. SEO was tried. Outbound happened. But none of it reinforced the others, so pipeline comes in waves instead of a rhythm.</p>
-        </article>
-        <article class="why-now-card">
-          <span class="why-now-num">03</span>
-          <h3>The team waits for direction</h3>
-          <p>Without a clear constraint map and decision cadence, good people optimise locally. Spend goes up. Pipeline doesn't.</p>
-        </article>
-        <article class="why-now-card">
-          <span class="why-now-num">04</span>
-          <h3>The longer you wait, the harder it gets</h3>
-          <p>Bad reporting habits compound. Positioning drifts. A weak system disguised as a growth problem gets more expensive to fix every quarter.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- BEFORE / AFTER — concrete transformation examples -->
+  <!-- BEFORE / AFTER — core problem in concrete terms -->
   <section class="section before-after-section">
     <div class="shell">
-      <p class="eyebrow">Before and after</p>
-      <h2>What actually changes when the system is in.</h2>
+      <p class="eyebrow">The core problem</p>
+      <h2>Early traction hides weak systems — here's what changes when the rhythm is in.</h2>
       <div class="ba-grid">
         <article class="ba-card">
           <div class="ba-before">
@@ -408,93 +372,30 @@ function metricLead(result: string) {
       <div class="why-now-proof">
         <p class="wnp-label">These aren't theoretical — here's what it looks like in practice:</p>
         <ul class="wnp-list">
-          <li><strong>Founder-led growth replaced:</strong> AI Precision Medicine Platform — CEO moved from doing all marketing to weekly review in 30 days.</li>
-          <li><strong>Channels unified:</strong> FinTech platform — paid, organic, and outbound connected to one decision view; CTR to 8.6% and 500+ sign-ups in two months.</li>
-          <li><strong>Team given direction:</strong> EdTech marketplace — acquisition focus narrowed from five channels to one ICP and one channel with a clear experiment backlog.</li>
+          <li><strong>Founder-led growth replaced:</strong> Healthtech (anonymous) — CEO moved from doing all marketing to weekly review within the first 30 days.</li>
+          <li><strong>Channels unified:</strong> FinTech — paid, organic, and outbound connected to one decision view; 8.6% CTR and 500+ sign-ups in two months.</li>
+          <li><strong>Team given direction:</strong> EdTech — acquisition focus narrowed from five channels to one ICP and one channel with a clear experiment backlog.</li>
         </ul>
         <a class="wnp-link" href="/case-studies">See all case studies →</a>
       </div>
     </div>
   </section>
 
-  <!-- EMAIL SIGNUP -->
-  <section class="section section--tight">
-    <div class="shell">
-      <EmailSignup
-        heading="Get the weekly growth note."
-        subtext="One insight a week for post-PMF founders. What's blocking growth, what fixes it, and why."
-        formId="homepage-mid"
-      />
-    </div>
-  </section>
-
-  <!-- PODCAST — compact trust asset (does not compete with primary book CTA) -->
-  <section class="section section--tight section-alt" aria-labelledby="home-podcast-heading">
-    <div class="shell home-podcast-compact">
-      <p class="eyebrow">Podcast</p>
-      <h2 id="home-podcast-heading">How Startups Win With AI</h2>
-      <p class="home-podcast-lede">
-        Smart conversations with founders and operators on how startups use AI to grow faster, save time, and build sharper companies. No tool hype. No generic founder chat — practical examples of what is working.
-      </p>
-      <div class="hero-actions home-podcast-actions">
-        <a class="button button-brand" href="/podcast" data-cta="home-podcast-hub">
-          Open the podcast hub →
-        </a>
-        <a class="button button-light" href="/podcast-guest-application" data-cta="home-podcast-guest">
-          Suggest a guest →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT GETS BUILT -->
-  <section class="section creative-system-section">
+  <section class="section section-alt flagship-system-section" aria-labelledby="flagship-heading">
     <div class="shell">
       <SectionIntro
-        eyebrow="What actually gets built"
-        title="Seven artefacts your team owns on day 91."
-        body="The work is tangible. Each engagement ends with named owners, a running dashboard, and a decision format the team uses every week — not a slide deck that sits in a folder."
+        eyebrow="Flagship offer"
+        title="The WSS Acquisition System"
+        body="For post-PMF SaaS teams that have tried channels in isolation and now need one repeatable pipeline rhythm — channel hierarchy, offer map, reporting cadence, and a weekly decision format your team (and agencies) can run inside."
       />
-      <div class="deliverables-grid">
-        {concreteDeliverables.map((d, i) => (
-          <a class="deliverable-card deliverable-card-link" href={d.href} data-cta={`deliverable-${d.label.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}>
-            <span class="deliverable-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-            <h3>{d.label}</h3>
-            <p>{d.note}</p>
-            <span class="deliverable-more">Where this shows up →</span>
-          </a>
-        ))}
+      <div class="hero-actions" style="margin-top:1rem">
+        <a class="button button-brand" href="/services/acquisition-system-build" data-cta="home-flagship-build">Explore Acquisition System Build →</a>
+        <a class="button button-light" href={siteConfig.bookingUrl} data-cta="home-flagship-book">{siteConfig.bookingLabel}</a>
       </div>
-      <p class="creative-system-foot">
-        <a class="link-arrow" href="/how-it-works">See how the system gets built →</a>
-      </p>
     </div>
   </section>
-
-  <WssOperatingSystemDiagram />
-
-  <GrowthScopeBar />
 
   <ServiceComparisonTable />
-
-  <!-- OPERATING RHYTHM -->
-  <section class="section dark-rhythm-section">
-    <div class="shell dark-rhythm-grid">
-      <div>
-        <p class="eyebrow">Operating rhythm</p>
-        <h2>Give your team a weekly cadence they can run without you.</h2>
-        <p>
-          Read the signal on Monday. Ship the next move midweek. Friday: scale, stop, or fix.
-          Three decisions a week, every week — that's how pipeline becomes predictable instead of personal.
-        </p>
-      </div>
-      <div class="rhythm-flow" aria-label="Weekly growth operating rhythm">
-        <article><span>Monday</span><strong>Read the signal</strong><p>Pipeline, channel, conversion and sales notes become one decision view.</p><b aria-hidden="true">→</b></article>
-        <article><span>Midweek</span><strong>Ship the next move</strong><p>Campaigns, pages, outbound, content or offer tests move with a named owner.</p><b aria-hidden="true">→</b></article>
-        <article><span>Friday</span><strong>Scale, stop, fix</strong><p>Every week ends with a plain-English call on what deserves more attention.</p></article>
-      </div>
-    </div>
-  </section>
 
   {featuredCase && (
     <section class="section" id="results">
@@ -561,9 +462,36 @@ function metricLead(result: string) {
     </section>
   )}
 
-  <TestimonialsBlock testimonials={homeTestimonials} />
-
   <VsAgencyBlock />
+
+  <section class="section section-alt" aria-labelledby="first30-home-heading">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="First 30 days"
+        title="What happens in month one."
+        body="Same sequence on most engagements — emphasis shifts based on whether the constraint is positioning, acquisition, conversion, or reporting."
+        titleId="first30-home-heading"
+      />
+      <div class="timeline home-first30-timeline">
+        {first30Days.map((item) => (
+          <article class="timeline-row">
+            <span class="timeline-week">{item.week}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="home-first30-more">
+        <a class="link-arrow" href="/first-30-days">Full first 30 days detail →</a>
+        {" · "}
+        <a class="link-arrow" href="/how-it-works">How it works →</a>
+      </p>
+    </div>
+  </section>
+
+  <TestimonialsBlock testimonials={homeTestimonials} />
 
   <DanielStory />
 

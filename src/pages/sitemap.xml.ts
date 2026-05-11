@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { isFinalSitemapPath } from "../lib/sitemapCanonical";
 import { absoluteUrl } from "../lib/utils";
-import { siteConfig, staticPathLastModified } from "../site";
+import { leadMagnets, siteConfig, staticPathLastModified } from "../site";
 
 export const prerender = true;
 
@@ -50,48 +50,59 @@ export const GET: APIRoute = async () => {
   const podcastEpisodes = await getCollection("podcastEpisodes");
 
   const staticPaths = [
-    "/",
-    "/start-here",
-    "/services",
-    "/proof",
-    "/how-it-works",
-    "/how-we-work",
-    "/pricing",
-    "/insights",
-    "/diagnose",
-    "/quiz",
-    "/book",
-    "/gtm-strategy",
-    "/first-30-days",
-    "/engagement-models",
-    "/execution-model",
-    "/growth-engine",
-    "/ai-growth-systems",
-    "/fractional-cmo-vs-agency",
-    "/when-growth-plateaus",
-    "/case-studies",
-    "/industries",
-    "/about",
-    "/contact",
-    "/press",
-    "/press-kit-download",
-    "/resources",
-    "/reports",
-    "/testimonials",
-    "/build",
-    "/transfer",
-    "/experimentation",
-    "/growth-course",
-    "/newsletter",
-    "/wss-scale-score",
-    "/podcast",
-    "/insights/glossary",
-    "/seo-content-strategy",
-    "/privacy",
-    "/terms",
-    "/llms.txt",
-    "/llms-full.txt",
-    "/markdown/home.md"
+    ...new Set([
+      "/",
+      "/start-here",
+      "/services",
+      "/proof",
+      "/how-it-works",
+      "/how-we-work",
+      "/pricing",
+      "/insights",
+      "/diagnose",
+      "/quiz",
+      "/book",
+      "/gtm-strategy",
+      "/first-30-days",
+      "/engagement-models",
+      "/execution-model",
+      "/growth-engine",
+      "/ai-growth-systems",
+      "/fractional-cmo-vs-agency",
+      "/fractional-cmo-vs-full-time-cmo",
+      "/when-growth-plateaus",
+      "/case-studies",
+      "/industries",
+      "/about",
+      "/about/daniel",
+      "/speaking",
+      "/workshops",
+      "/before-you-hire-a-head-of-marketing",
+      "/before-you-hire-another-agency",
+      "/growth-dashboard-template",
+      "/board-growth-report-template",
+      "/contact",
+      "/press",
+      "/press-kit-download",
+      "/resources",
+      "/reports",
+      "/testimonials",
+      "/build",
+      "/transfer",
+      "/experimentation",
+      "/growth-course",
+      "/newsletter",
+      "/wss-scale-score",
+      "/podcast",
+      "/insights/glossary",
+      "/seo-content-strategy",
+      "/privacy",
+      "/terms",
+      "/llms.txt",
+      "/llms-full.txt",
+      "/markdown/home.md",
+      ...leadMagnets.map((m) => m.href)
+    ])
   ].filter(isFinalSitemapPath);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -142,6 +153,7 @@ ${insights
   )
   .join("\n")}
 ${podcastEpisodes
+  .filter((ep) => !ep.data.draft && ep.id !== "how-startups-win-template")
   .map((ep) =>
     urlNode(`/podcast/episodes/${ep.id}`, {
       lastmod: ep.data.publishedAt.toISOString().slice(0, 10),

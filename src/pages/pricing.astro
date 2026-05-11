@@ -53,7 +53,7 @@ const pricingFaqs = [
             ]}
           >
             {idx === 0 && <span class="recommended-badge">Most founders start here</span>}
-            {"mostPopular" in tier && tier.mostPopular && <span class="popular-badge">Most popular</span>}
+            {"tierBadge" in tier && tier.tierBadge && <span class="popular-badge">{tier.tierBadge}</span>}
             <h3>{tier.name}</h3>
             <div class="pricing-meta">
               <span class="pricing-price">{tier.priceFrom}</span>

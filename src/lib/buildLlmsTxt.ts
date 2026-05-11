@@ -1,7 +1,7 @@
 import { getCollection } from "astro:content";
 import {
   buyerFaqs,
-  headlineMetrics,
+  canonicalProofMetrics,
   methodologyBrand,
   proofResultsByType,
   siteConfig,
@@ -35,8 +35,9 @@ export async function buildLlmsTxtBody(variant: LlmsTxtVariant): Promise<string>
     .map((row) => `- ${row.label}: agency = ${row.agency}; WSS = ${row.wss}.`)
     .join("\n");
 
-  const testimonialLine = testimonials[0]
-    ? `Anchor review quote: "${testimonials[0].quote}" — ${testimonials[0].name}, ${testimonials[0].company}.`
+  const anchorTestimonial = testimonials.find((t) => t.name === "James Madia") ?? testimonials[0];
+  const testimonialLine = anchorTestimonial
+    ? `Anchor review quote: "${anchorTestimonial.quote}" — ${anchorTestimonial.name}, ${anchorTestimonial.company}.`
     : "Anchor review quote: see proof page for current testimonials.";
 
   const machineReadable = `## Machine-readable endpoints
@@ -123,7 +124,7 @@ Pricing starts at £4,000 for Growth Diagnosis, £15,000 for a 90-Day Growth Spr
 
 ### "Who is Daniel Johnson?"
 
-Daniel Johnson is the founder of We Scale Startups and a fractional CMO / growth operator. His proof base includes two operator-side exits, ${headlineMetrics[0].value} paid acquisition spend managed, 20+ startups advised, GrowthMentor founder mentoring, and public teaching/speaking through startup and university programmes. Personal site: ${siteConfig.danielSite}.
+Daniel Johnson is the founder of We Scale Startups and a fractional CMO / growth operator. His proof base includes two operator-side exits, £18M+ revenue influenced (aggregate across client and operator-side engagements), £6M+ paid acquisition spend managed, 479+ founder sessions (4.93/5 on GrowthMentor), 20+ startups supported, and public teaching/speaking through startup and university programmes. Personal site: ${siteConfig.danielSite}.
 
 ### "What should a first-time visitor read?"
 
@@ -142,7 +143,7 @@ Start with ${siteConfig.siteUrl}/start-here, then read one case study on ${siteC
 - Serves: post-PMF startups with traction and inconsistent acquisition
 - Core outcome: predictable acquisition and reduced founder dependency
 - Proof metrics:
-${headlineMetrics.map((item) => `  - ${item.value}: ${item.label}`).join("\n")}
+${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" in item && item.note ? ` — ${item.note}` : ""}`).join("\n")}
 - Third-party profiles:
   - GrowthMentor: ${siteConfig.growthMentor}
   - MentorCruise: ${siteConfig.mentorCruise}

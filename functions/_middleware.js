@@ -89,8 +89,6 @@ export async function onRequest(context) {
   const legacyRedirects = {
     "/about-us": "/about",
     "/about-us/": "/about",
-    "/speaking": "/press",
-    "/speaking/": "/press",
     "/portfolio/greenscreen": "/case-studies",
     "/portfolio/greenscreen/": "/case-studies",
     "/team/rahul-van-manen": "/about",
@@ -99,6 +97,14 @@ export async function onRequest(context) {
 
   if (legacyRedirects[path]) {
     url.pathname = legacyRedirects[path];
+    return Response.redirect(url.toString(), 301);
+  }
+
+  if (
+    path === "/podcast/episodes/how-startups-win-template" ||
+    path === "/podcast/episodes/how-startups-win-template/"
+  ) {
+    url.pathname = "/podcast";
     return Response.redirect(url.toString(), 301);
   }
 

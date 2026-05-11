@@ -9,10 +9,12 @@ import { buildBreadcrumbSchema } from "../../../lib/schema";
 
 export const getStaticPaths = (async () => {
   const episodes = await getCollection("podcastEpisodes");
-  return episodes.map((entry) => ({
-    params: { slug: entry.id },
-    props: { episode: entry }
-  }));
+  return episodes
+    .filter((entry) => !entry.data.draft)
+    .map((entry) => ({
+      params: { slug: entry.id },
+      props: { episode: entry }
+    }));
 }) satisfies GetStaticPaths;
 
 const { episode } = Astro.props;

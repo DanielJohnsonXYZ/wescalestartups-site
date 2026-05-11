@@ -13,8 +13,8 @@ const schemas = [
 ---
 
 <BaseLayout
-  title="Here's Some Growth — newsletter | We Scale Startups"
-  description="Fortnightly notes for post-PMF founders: one practical idea on bottlenecks, GTM systems, and repeatable acquisition. From Daniel Johnson / We Scale Startups."
+  title={`${siteConfig.newsletterName} — newsletter | We Scale Startups`}
+  description={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
   path="/newsletter"
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
@@ -22,14 +22,13 @@ const schemas = [
   <section class="page-hero" aria-labelledby="wss-newsletter-title">
     <div class="shell max-w-3xl">
       <p class="eyebrow">Newsletter</p>
-      <h1 id="wss-newsletter-title">Here's Some Growth</h1>
+      <h1 id="wss-newsletter-title">{siteConfig.newsletterName}</h1>
       <p class="hero-copy">
-        A fortnightly email for founders and operators who are past PMF but still fighting inconsistent pipeline. One concrete note
-        every other Monday — bottleneck framing, acquisition rhythm, and what actually moved the needle in client work. No agency
-        fluff.
+        {siteConfig.newsletterDescription} {siteConfig.newsletterFrequencyLine} Sent from Daniel Johnson ·{" "}
+        <span class="whitespace-nowrap">{siteConfig.email}</span>.
       </p>
       <p class="mt-4 text-[color:var(--muted)]">
-        Sent from Daniel Johnson · <span class="whitespace-nowrap">{siteConfig.email}</span> · ~10:00 GMT on alternating Mondays.
+        Same list as the site footer — one name and cadence everywhere.
       </p>
       <p class="mt-6 text-sm leading-relaxed text-[color:var(--muted)]">
         For Daniel’s personal writing list (occasional growth notes from{" "}
@@ -50,9 +49,9 @@ const schemas = [
       <div class="card p-8 md:p-10">
         <EmailSignup
           variant="light"
-          formId="page-newsletter-heres-some-growth"
-          heading="Join Here's Some Growth"
-          subtext="Post-PMF B2B SaaS and AI founders — practical notes, every other Monday."
+          formId="page-newsletter-growth-bottleneck"
+          heading={siteConfig.newsletterName}
+          subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
         />
       </div>
     </div>

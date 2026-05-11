@@ -1,6 +1,6 @@
 ---
 // EmailSignup.astro - inline email capture; posts to Mautic (see site.ts).
-import { mauticNewsletter } from "../site";
+import { mauticNewsletter, siteConfig } from "../site";
 
 interface Props {
   heading?: string;
@@ -14,8 +14,8 @@ interface Props {
 }
 
 const {
-  heading = "Get the weekly growth note.",
-  subtext = "One actionable insight for post-PMF founders. No padding, no pitch.",
+  heading = siteConfig.newsletterName,
+  subtext = `${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`,
   formId = "email-signup",
   variant = "light",
   buttonLabel = "Get the note ->",

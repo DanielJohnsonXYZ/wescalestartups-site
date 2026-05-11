@@ -1,12 +1,12 @@
 {
-  "title": "AI Precision Medicine Platform: Marketing Function Build",
-  "client": "AI Precision Medicine Platform",
+  "title": "Healthtech: marketing function from zero (anonymous)",
+  "client": "B2B healthtech (anonymous)",
   "sector": "Healthtech",
-  "engagementPeriod": "Q3 2025 – Ongoing",
-  "summary": "Built the marketing function from zero for an AI precision medicine platform serving functional medicine clinicians and HRT practitioners.",
-  "challenge": "Strong clinical product, founder CEO with deep technical credentials and a series of clinical partnerships forming — but no marketing operation existed. The CEO was closing partnerships through her personal network, creating content herself, and managing agency relationships ad hoc. No channel strategy, no outbound system, no event presence, and no way to scale beyond founder-led sales.",
+  "engagementPeriod": "November 2025 – March 2026",
+  "summary": "Built the marketing function from zero for a precision-medicine platform serving clinicians — anonymous at the client's request.",
+  "challenge": "Strong clinical product, founder CEO with deep technical credentials and clinical partnerships forming — but no marketing operation existed. The CEO was closing partnerships through her personal network, creating content herself, and managing agency relationships ad hoc. No channel strategy, no outbound system, no event presence, and no way to scale beyond founder-led sales.",
   "work": [
-    "Built the entire marketing operation from zero — channel strategy, content matrix, outbound systems",
+    "Built the entire marketing operation from zero — channel strategy, content matrix, outbound workflow",
     "Researched, ranked, and pitched 100 podcasts across 12 categories with personalised pitches per show",
     "Set up and ran LinkedIn Sales Navigator campaigns across two executive accounts targeting clinic owners and medical directors",
     "Managed a major West Coast healthtech conference end-to-end, including logistics, setup, and post-event outreach to 250+ attendees",
@@ -21,7 +21,15 @@
     "CEO time freed from marketing coordination — moved from doing everything to weekly review"
   ],
   "services": ["Fractional CMO", "Outbound systems", "Conference and partnerships"],
+  "systemsCreated": [
+    "Fractional CMO operating rhythm",
+    "Outbound workflow",
+    "Conference and partnership playbook",
+    "Webinar / clinician education process"
+  ],
+  "whyItMattered": "For early-stage healthtech companies, the challenge is rarely just visibility. The harder problem is translating clinical credibility into a commercial GTM motion that investors, clinicians, and partners can understand. WSS helped turn this company's marketing from founder-led execution into a more structured commercial function.",
   "publishedAt": "2026-04-28",
-  "updatedAt": "2026-05-05",
-  "order": 5
+  "updatedAt": "2026-05-11",
+  "order": 5,
+  "relatedOfferHref": "/services/fractional-cmo"
 }

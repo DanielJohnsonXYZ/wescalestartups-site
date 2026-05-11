@@ -2,7 +2,7 @@
 // SiteFooter.astro — restructured into 5 clean groups:
 // Work with us · Proof · Resources · Company · Legal
 import EmailSignup from "./EmailSignup.astro";
-import { siteConfig } from "../site";
+import { footerContextualNav, siteConfig } from "../site";
 
 const groups = [
   {
@@ -29,10 +29,14 @@ const groups = [
   {
     label: "Resources",
     links: [
-      { href: "/resources#growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
-      { href: "/resources#90-day-growth-sprint-planner", label: "90-Day Sprint Planner" },
-      { href: "/resources#vc-portfolio-growth-diagnosis", label: "VC Portfolio Diagnosis" },
-      { href: "/podcast-guest-application", label: "Podcast Guest Application" },
+      { href: siteConfig.scorecardUrl, label: siteConfig.scorecardName },
+      { href: "/resources/90-day-growth-sprint-planner", label: "90-Day Sprint Planner" },
+      { href: "/resources/vc-portfolio-growth-diagnosis", label: "VC Portfolio Diagnosis" },
+      { href: "/growth-dashboard-template", label: "Growth dashboard template" },
+      { href: "/board-growth-report-template", label: "Board growth report template" },
+      ...footerContextualNav
+        .filter((l) => l.href !== "/contact")
+        .map((l) => ({ href: l.href, label: l.label })),
       { href: "/industries/saas-growth", label: "SaaS growth" },
       { href: "/industries/fintech", label: "Fintech" },
       { href: "/industries/healthtech", label: "Healthtech" },
@@ -53,7 +57,9 @@ const groups = [
     label: "Company",
     links: [
       { href: "/about", label: "About WSS" },
-      { href: "/about#daniel", label: "About Daniel" },
+      { href: "/about/daniel", label: "About Daniel" },
+      { href: "/speaking", label: "Speaking" },
+      { href: "/workshops", label: "Workshops" },
       { href: "/press", label: "Press kit" },
       { href: "/contact", label: "Contact" },
       { href: siteConfig.linkedin, label: "LinkedIn", external: true }
@@ -96,8 +102,8 @@ const groups = [
         <EmailSignup
           variant="light"
           formId="footer-newsletter"
-          heading="The Growth Bottleneck — weekly note"
-          subtext="One actionable note on getting unstuck. Post-PMF founders, every other week."
+          heading={siteConfig.newsletterName}
+          subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
         />
       </div>
     </div>

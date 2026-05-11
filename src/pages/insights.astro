@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import EmailSignup from "../components/EmailSignup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
@@ -167,16 +166,6 @@ const insightsSchema = [
           </article>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section section--tight">
-    <div class="shell">
-      <EmailSignup
-        heading="The Growth Bottleneck — weekly note"
-        subtext="One actionable note for post-PMF founders: what’s stuck, what to do next, and why. No daily drip."
-        formId="insights-footer"
-      />
     </div>
   </section>
 

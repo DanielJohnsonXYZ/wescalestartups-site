@@ -1,5 +1,4 @@
 ---
-import OfferRoutingCards from "../../components/OfferRoutingCards.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
@@ -33,7 +32,7 @@ const servicesSchema = [
 ---
 
 <BaseLayout
-  title="Services | We Scale Startups"
+  title="B2B SaaS Growth Services | We Scale Startups"
   description="Growth diagnosis, 90-day growth sprints, acquisition system builds, and fractional CMO support for post-PMF startup teams."
   keywords="growth diagnosis, 90-day growth sprint, acquisition system build, fractional CMO services, B2B SaaS GTM, post-PMF marketing"
   path="/services"
@@ -46,42 +45,63 @@ const servicesSchema = [
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Services</p>
-      <h1>Choose the growth path that matches the bottleneck.</h1>
-      <p>Start with a diagnosis if the path is unclear. Move into a sprint, acquisition build, or fractional CMO support when the constraint is visible.</p>
+      <h1>Four ways to fix the bottleneck — pick the smallest that solves it.</h1>
+      <p>
+        Each offer includes who it is for, the problem it solves, timeline, starting price, and what ships. Confirm scope on a {siteConfig.bookingCallShort}.
+      </p>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="services-hub-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="services-hub-scorecard">
+          {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <div class="service-selector">
-        <aside class="service-selector-aside">
-          <p class="eyebrow">Service selector</p>
-          <h3>Choose by bottleneck.</h3>
-          <p>Every engagement has a job: find the constraint, ship focused work, build the system, or add senior leadership.</p>
-        </aside>
-        <div class="service-selector-list">
-          {serviceSnapshots.map((service, idx) => (
-            <a class:list={["service-selector-row", { "is-priority": idx === 0 }]} href={service.href}>
-              <div class="service-selector-index">{String(idx + 1).padStart(2, "0")}</div>
+      <div class="offer-card-grid">
+        {
+          serviceSnapshots.map((service) => (
+            <article class="feature-card offer-detail-card">
+              <p class="card-kicker">{service.badge}</p>
+              <h2>
+                <a href={service.href}>{service.title}</a>
+              </h2>
+              <p>
+                <strong>Who it is for:</strong> {service.bestFor}
+              </p>
+              <p>
+                <strong>The problem:</strong> {service.problem}
+              </p>
+              <p>
+                <strong>Timeline:</strong> {service.timeline} · <strong>Starting price:</strong> {service.price}
+              </p>
               <div>
-                <p class="card-kicker">{service.shortTitle}</p>
-                <h3>{service.title}</h3>
-                <p><strong>Best for:</strong> {service.bestFor}</p>
-                <p><strong>What you get:</strong> {service.get}</p>
+                <strong>Key deliverables</strong>
+                <ul class="offer-deliverables">
+                  {service.keyDeliverables.map((d) => (
+                    <li>{d}</li>
+                  ))}
+                </ul>
               </div>
-              <div class="service-selector-meta">
-                <span>{service.timeline}</span>
-                <strong>{service.price}</strong>
-                <em>{service.cta}</em>
-              </div>
-            </a>
-          ))}
-        </div>
+              <a class="button button-brand" href={service.href} data-cta={`services-hub-${service.shortTitle.toLowerCase()}`}>
+                {service.cta} →
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
-
-  <OfferRoutingCards />
 
   <section class="section">
     <div class="shell">
@@ -166,7 +186,7 @@ const servicesSchema = [
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="services-scorecard">
-          Or, {siteConfig.scorecardLabel} →
+          {siteConfig.scorecardLabel} →
         </a>
         <a class="button button-light" href="/contact" data-cta="services-contact">
           Contact →
@@ -177,6 +197,38 @@ const servicesSchema = [
 </BaseLayout>
 
 <style>
+  .offer-card-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px) {
+    .offer-card-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .offer-detail-card h2 {
+    font-size: 1.35rem;
+    margin: 0.25rem 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .offer-detail-card h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .offer-detail-card h2 a:hover {
+    color: var(--accent);
+  }
+  .offer-deliverables {
+    margin: 0.5rem 0 0;
+    padding-left: 1.2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .offer-detail-card .button {
+    margin-top: 1rem;
+  }
   .services-trust-list {
     margin: 0 auto;
     padding: 1.15rem 1.25rem 1.2rem 1.5rem;

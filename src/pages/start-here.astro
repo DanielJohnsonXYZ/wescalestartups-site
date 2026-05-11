@@ -7,12 +7,12 @@ const startHereFaqs = [
   {
     question: "How long does the guided path take?",
     answer:
-      "About 35 minutes if you follow the three-step path: scorecard (or quiz), one proof read, then the diagnostic call. You can stop after step one or two if you are not ready to talk yet."
+      "About 35 minutes if you follow the three-step path: scorecard, one proof read, then the diagnostic call. You can stop after step one or two if you are not ready to talk yet."
   },
   {
     question: "Do I have to book a call?",
     answer:
-      "No. The scorecard, growth bottleneck quiz, written diagnostic framework, and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
+      "No. The scorecard, written diagnostic framework, and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
   },
   {
     question: "Is We Scale Startups a marketing agency?",
@@ -75,12 +75,6 @@ const startHereSchema = [
           <a class="engagement-route-card" href={siteConfig.scorecardUrl}>
             <span class="engagement-route-label">I don't know what's blocking growth</span>
             <span class="engagement-route-action">{siteConfig.scorecardLabel} →</span>
-          </a>
-        </li>
-        <li>
-          <a class="engagement-route-card" href="/quiz">
-            <span class="engagement-route-label">I want a quick structured quiz first</span>
-            <span class="engagement-route-action">Growth bottleneck quiz →</span>
           </a>
         </li>
         <li>
@@ -210,10 +204,9 @@ const startHereSchema = [
       <article class="start-step">
         <span class="start-step-num">01</span>
         <div>
-          <h3>Score yourself in 5 minutes (or take the quiz)</h3>
+          <h3>Score yourself in 5 minutes</h3>
           <p>
-            The Growth Bottleneck Scorecard maps which of five constraints is blocking pipeline. Prefer questions over a grid? Use the{' '}
-            <a href="/quiz">growth bottleneck quiz</a> — same job, different format.
+            The Growth Bottleneck Scorecard maps which of five constraints is blocking pipeline before you add another channel, hire, or agency.
           </p>
         </div>
         <a class="button button-brand" href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a>

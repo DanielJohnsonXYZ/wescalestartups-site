@@ -168,7 +168,7 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - Company press kit (print / PDF): ${siteConfig.siteUrl}/press-kit-download
 - Daniel Johnson media kit for podcasts, speaking, and expert commentary: ${siteConfig.danielSite}/media-kit/
 - Book / schedule diagnostic: ${siteConfig.siteUrl}${siteConfig.bookingUrl}
-- Growth bottleneck quiz (self-serve): ${siteConfig.siteUrl}/quiz
+- ${siteConfig.scorecardName} (self-serve): ${siteConfig.siteUrl}${siteConfig.scorecardUrl}
 - Manual 5-layer diagnose framework: ${siteConfig.siteUrl}/diagnose
 - GTM strategy (pillar): ${siteConfig.siteUrl}/gtm-strategy
 - Engagement models (pillar): ${siteConfig.siteUrl}/engagement-models

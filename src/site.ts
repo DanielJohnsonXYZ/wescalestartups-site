@@ -141,7 +141,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/seo-content-strategy": "2026-05-05",
   "/privacy": "2026-05-03",
   "/proof": "2026-05-04",
-  "/quiz": "2026-05-05",
   "/reports": "2026-05-01",
   "/resources": "2026-05-03",
   "/services": "2026-05-04",
@@ -239,11 +238,6 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   "/fractional-cmo-vs-agency": [
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
-  ],
-  "/quiz": [
-    { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
-    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
-    { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" }
   ],
   "/when-growth-plateaus": [
     { href: "/insights/pipeline-plateau-post-pmf", label: "Pipeline plateau after PMF" },

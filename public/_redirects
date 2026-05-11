@@ -10,3 +10,6 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /case-study /case-studies 301
 /case-studies/diadia /case-studies/diadia-health 301
 /podcast/episodes/how-startups-win-template /podcast 301
+/quiz /resources/growth-bottleneck-scorecard 301
+/diagnose /resources/growth-bottleneck-scorecard 301
+/wss-scale-score /resources/growth-bottleneck-scorecard 301

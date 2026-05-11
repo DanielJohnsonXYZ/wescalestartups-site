@@ -199,7 +199,6 @@ export const navigation = [
 
 /** Footer and contextual links removed from top-level nav. */
 export const footerContextualNav = [
-  { href: "/quiz", label: "Growth bottleneck quiz" },
   { href: "/growth-operating-system", label: "Growth Operating System" },
   { href: "/founder-led-growth", label: "Founder-led growth" },
   { href: "/podcast-guest-application", label: "Podcast guest application" },
@@ -244,13 +243,13 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   "/quiz": [
     { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
-    { href: "/diagnose", label: "Manual 5-layer diagnostic framework" }
+    { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" }
   ],
   "/when-growth-plateaus": [
     { href: "/insights/pipeline-plateau-post-pmf", label: "Pipeline plateau after PMF" },
     { href: "/insights/systems-vs-activity-retainers", label: "Systems vs activity retainers" },
     { href: "/experimentation", label: "Experimentation discipline" },
-    { href: "/diagnose", label: "5-layer diagnostic framework" },
+    { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
     { href: "/services", label: "Services" }
   ]
 };
@@ -268,14 +267,14 @@ export const resourcesRelatedReading: readonly { href: string; label: string }[]
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
   { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
   { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
-  { href: "/diagnose", label: "5-layer diagnostic framework (deep dive)" },
+  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/reports", label: "Report formats hub" }
 ];
 
 /** /book — pre-call context. */
 export const bookRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
-  { href: "/diagnose", label: "5-layer diagnostic framework" },
+  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/resources", label: "Resources hub" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/proof", label: "Proof hub" },
@@ -287,7 +286,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
   "growth-diagnosis": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
-    { href: "/diagnose", label: "Free 5-layer framework" },
+    { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
     { href: "/reports", label: "Report formats" }
   ],
   "90-day-growth-sprint": [
@@ -322,7 +321,7 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/pricing", label: "Pricing ranges" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/proof", label: "Proof hub" },
-  { href: "/diagnose", label: "5-layer diagnostic" },
+  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" },
   { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
   { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },

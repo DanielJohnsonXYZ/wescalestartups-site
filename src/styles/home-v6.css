@@ -653,7 +653,216 @@
   box-shadow: 0 4px 12px -4px var(--h3-glow);
 }
 
-/* ============ 8.  Reduced motion respect ============ */
+/* ============ 8.  Light-mode overrides — neutralise the v3 dark hardcodes ============
+   home-hero-v3.css ends with a "DARK MODE" override block that pins
+   #111009 / #161410 / rgba(255,255,255,.04) backgrounds onto every v3
+   surface. v6 reads as inconsistent until we flip those back to light.
+   These overrides load AFTER the v3 hardcodes (same specificity) so
+   cascade order wins. */
+
+/* Site nav — light frosted glass */
+.page-home-v3 .h3-nav {
+  background: rgba(255, 255, 255, .78);
+  backdrop-filter: saturate(1.5) blur(18px);
+  -webkit-backdrop-filter: saturate(1.5) blur(18px);
+  border-bottom-color: var(--h3-line);
+}
+.page-home-v3 .site-header {
+  background: rgba(250, 250, 247, .82);
+  backdrop-filter: saturate(1.5) blur(18px);
+  -webkit-backdrop-filter: saturate(1.5) blur(18px);
+  border-bottom: 1px solid var(--h3-line);
+}
+.page-home-v3 .h3-nav-mobile summary {
+  background: var(--h3-paper);
+  border-color: var(--h3-line-strong);
+  color: var(--h3-ink);
+}
+.page-home-v3 .h3-nav-mobile nav {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+  box-shadow: 0 12px 28px -10px rgba(24, 24, 27, .14);
+}
+.page-home-v3 .h3-nav-mobile a:hover { background: var(--h3-violet-tint); }
+
+/* Rail tag — light tint */
+.page-home-v3 .h3-rail .h3-tag {
+  background: var(--h3-violet-tint);
+  border-color: rgba(124, 58, 237, .25);
+  color: var(--h3-violet-deep);
+}
+
+/* Old hero shapes (kept for compatibility in case any other page uses them) */
+.page-home-v3 .h3-shape {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+  color: var(--h3-ink-2);
+  box-shadow: var(--h3-shadow-sm);
+}
+.page-home-v3 .h3-shape .n { background: var(--h3-violet); color: #fff; }
+.page-home-v3 .h3-shape:hover {
+  background: var(--h3-violet-tint);
+  border-color: var(--h3-violet);
+}
+
+/* Old hero buttons — keep ghost legible in light mode */
+.page-home-v3 .h3-btn-ghost {
+  background: var(--h3-paper);
+  border-color: var(--h3-line-strong);
+  color: var(--h3-ink);
+}
+.page-home-v3 .h3-btn-ghost:hover {
+  background: var(--h3-paper);
+  border-color: var(--h3-violet);
+  color: var(--h3-violet-deep);
+}
+
+/* Trust chips */
+.page-home-v3 .h3-chip {
+  background: var(--h3-paper);
+  border-color: var(--h3-line-strong);
+  color: var(--h3-ink-2);
+  box-shadow: var(--h3-shadow-sm);
+}
+.page-home-v3 .h3-chip .num { color: var(--h3-ink); }
+
+/* Old diagnostic panel — light cards (hero hidden anyway, but safety) */
+.page-home-v3 .h3-panel {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-panel-head {
+  background: linear-gradient(180deg, var(--h3-violet-tint) 0%, var(--h3-paper) 100%);
+  border-bottom-color: var(--h3-line);
+}
+.page-home-v3 .h3-kpi { background: var(--h3-paper); }
+.page-home-v3 .h3-row-item:hover { background: var(--h3-violet-tint); border-color: var(--h3-line); }
+.page-home-v3 .h3-row-item .ico { background: var(--h3-paper-2); color: var(--h3-ink-2); }
+.page-home-v3 .h3-meter { background: var(--h3-paper-2); }
+.page-home-v3 .h3-verdict { background: var(--h3-paper-2); border-color: var(--h3-line); color: var(--h3-ink-2); }
+.page-home-v3 .h3-panel-foot {
+  background: linear-gradient(180deg, var(--h3-paper-2) 0%, var(--h3-paper) 100%);
+  border-top-color: var(--h3-line);
+}
+.page-home-v3 .h3-panel-foot .summary { color: var(--h3-ink-2); }
+
+/* Engagement strip cards — were `rgba(255,255,255,0.04)` (assumes dark
+   underlay). Flip to white cards on the off-white canvas. */
+.page-home-v3 .h3-stage {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-stage:hover {
+  background: var(--h3-paper);
+  border-color: var(--h3-violet-3);
+}
+.page-home-v3 .h3-stage h3 { color: var(--h3-ink); }
+.page-home-v3 .h3-stage p  { color: var(--h3-ink-2); }
+.page-home-v3 .h3-stage .dur { color: var(--h3-ink-3); }
+
+/* Proof frame + client / programme cards (HomeProofV3) */
+.page-home-v3 .h3-proof {
+  background: linear-gradient(
+    180deg,
+    var(--h3-paper-2) 0%, var(--h3-paper-2) 60px,
+    var(--h3-surface) 60px, var(--h3-surface) calc(100% - 60px),
+    var(--h3-paper-2) calc(100% - 60px)
+  );
+}
+.page-home-v3 .h3-proof .h3-frame {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-proof h2 { color: var(--h3-ink); }
+.page-home-v3 .h3-ccard {
+  background: linear-gradient(180deg, var(--h3-paper) 0%, var(--h3-paper-2) 100%);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-ccard .name { color: var(--h3-ink); }
+.page-home-v3 .h3-ccard .outcome { color: var(--h3-ink-2); }
+.page-home-v3 .h3-ccard:hover {
+  background: var(--h3-paper);
+  border-color: var(--h3-violet-3);
+}
+.page-home-v3 .h3-pcard {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-pcard:hover {
+  background: var(--h3-paper);
+  border-color: var(--h3-violet-3);
+}
+.page-home-v3 .h3-pcard .pico {
+  background: var(--h3-paper-2);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-pcard .psub { color: var(--h3-ink-3); }
+.page-home-v3 .h3-pcard .stat {
+  background: var(--h3-paper-2);
+  border-color: var(--h3-line);
+  color: var(--h3-ink-2);
+}
+
+/* Legend / divider */
+.page-home-v3 .h3-legend-row .pip {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+  color: var(--h3-ink-2);
+}
+.page-home-v3 .h3-divide::before,
+.page-home-v3 .h3-divide::after { background: var(--h3-line); }
+.page-home-v3 .h3-divide .label { color: var(--h3-ink-3); }
+
+/* Quote box (DanielStory etc.) */
+.page-home-v3 .h3-qbox {
+  background: linear-gradient(180deg, var(--h3-paper) 0%, var(--h3-paper-2) 100%);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .h3-qav {
+  background: radial-gradient(120% 120% at 30% 30%, #ffffff 0%, var(--h3-paper-2) 70%);
+  border-color: var(--h3-line-strong);
+  color: var(--h3-violet-deep);
+}
+.page-home-v3 .h3-qtxt  { color: var(--h3-ink); }
+.page-home-v3 .h3-qmeta { color: var(--h3-ink-3); }
+.page-home-v3 .h3-qmeta strong { color: var(--h3-ink); }
+.page-home-v3 .h3-name-line .h3-av {
+  background: radial-gradient(120% 120% at 30% 30%, #ffffff 0%, var(--h3-paper-2) 70%);
+  border-color: var(--h3-line-strong);
+  color: var(--h3-violet-deep);
+}
+
+/* Brand mark in header — light gradient */
+.page-home-v3 .h3-brand-mark {
+  background: linear-gradient(135deg, var(--h3-violet-3) 0%, var(--h3-violet) 60%, var(--h3-violet-2) 100%);
+  color: #fff;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .25),
+    0 6px 18px -6px var(--h3-glow);
+}
+.page-home-v3 .h3-brand-mark::after {
+  background: linear-gradient(135deg, var(--h3-violet-3), var(--h3-violet));
+  box-shadow: 0 2px 6px var(--h3-glow);
+}
+
+/* Global section overrides defined in v3 (before/after, FAQ, cta-band,
+   feature-card, case-mini). Original v3 already retargets these to
+   --h3-paper / --h3-line which we've redefined to light. But explicit
+   eyebrow + heading colours benefit from a refresh. */
+.page-home-v3 .ba-card        { background: var(--h3-paper); border-color: var(--h3-line); }
+.page-home-v3 .ba-before      { background: color-mix(in srgb, #dc2626 5%, var(--h3-paper)); border-bottom-color: var(--h3-line); }
+.page-home-v3 .ba-after       { background: color-mix(in srgb, var(--h3-violet) 6%, var(--h3-paper)); border-top-color: var(--h3-line); }
+.page-home-v3 .ba-arrow       { background: var(--h3-paper); border-color: var(--h3-line); color: var(--h3-violet); }
+.page-home-v3 .why-now-proof  { background: color-mix(in srgb, var(--h3-violet) 5%, var(--h3-paper)); border-color: rgba(124, 58, 237, .25); }
+.page-home-v3 .home-faq-item  { background: var(--h3-paper); border-color: var(--h3-line); }
+.page-home-v3 .home-faq-item summary { color: var(--h3-ink); }
+.page-home-v3 .home-faq-item p { color: var(--h3-ink-2); border-top-color: var(--h3-line); }
+.page-home-v3 .feature-card   { background: var(--h3-paper); border-color: var(--h3-line); color: var(--h3-ink-2); }
+.page-home-v3 .case-mini      { background: var(--h3-paper); border-color: var(--h3-line); }
+.page-home-v3 .cta-band       { background: linear-gradient(180deg, var(--h3-violet-tint) 0%, var(--h3-surface) 100%); }
+.page-home-v3 .eyebrow        { color: var(--h3-violet); }
+
+/* ============ 9.  Reduced motion respect ============ */
 @media (prefers-reduced-motion: reduce) {
   .page-home-v3 .hv6-hero::before { animation: none; }
   .page-home-v3 .hv6-pulse::after { animation: none; opacity: 0; }

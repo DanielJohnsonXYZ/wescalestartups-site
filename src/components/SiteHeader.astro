@@ -31,10 +31,11 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
       class="button button-brand header-cta header-cta--stacked button-with-subcopy"
       href={siteConfig.bookingUrl}
       data-cta="header-book"
-      title={siteConfig.bookingCallReassurance}
+      aria-label={siteConfig.bookingLabel}
+      title={`${siteConfig.bookingLabel}. ${siteConfig.bookingCallReassurance}`}
     >
-      <span class="button-label">{siteConfig.bookingLabel}</span>
-      <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+      <span class="button-label">Book diagnostic</span>
+      <span class="button-subcopy">30 min. Clear next step.</span>
     </a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>

@@ -3525,19 +3525,77 @@ textarea:focus-visible {
 }
 
 /* --- Final cascade overrides for WSS homepage polish --- */
-.site-header { padding: 0.55rem 0; }
-.header-inner { min-height: 54px; padding: 0.5rem 0.58rem 0.5rem 0.78rem; }
-.brand img { width: 82px; max-height: 46px; object-fit: contain; }
-.nav-links { gap: 0.18rem; }
-.nav-link { padding: 0.55rem 0.62rem; font-size: 0.84rem; }
+.site-header {
+  padding: 0.65rem 0;
+}
+
+.header-inner {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding: 0.55rem 0.72rem 0.55rem 0.95rem;
+  border-color: rgba(16, 13, 24, 0.09);
+  background: rgba(255, 254, 250, 0.94);
+  box-shadow: 0 14px 44px rgba(16, 13, 24, 0.08);
+}
+
+.brand img {
+  width: 92px;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+.nav-links {
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.nav-link {
+  padding: 0.55rem 0.7rem;
+  color: rgba(40, 34, 53, 0.72);
+  font-size: 0.84rem;
+  letter-spacing: 0;
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  background: rgba(102, 87, 255, 0.08);
+  color: var(--ink);
+}
+
 .header-cta {
   min-height: 42px;
-  min-width: auto;
-  max-width: 13.5rem;
-  padding: 0.62rem 0.72rem;
-  font-size: 0.72rem;
-  line-height: 1.2;
-  text-align: center;
+  min-width: 9.75rem;
+  max-width: 10.5rem;
+  padding: 0.52rem 0.78rem;
+  border: 1px solid rgba(102, 87, 255, 0.22);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6657ff, #4f3ee8);
+  box-shadow: 0 12px 28px rgba(102, 87, 255, 0.2);
+  line-height: 1.15;
+  text-align: left;
+  white-space: normal;
+}
+
+.header-cta.header-cta--stacked.button-with-subcopy {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12rem;
+}
+
+.header-cta .button-label {
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
+
+.header-cta .button-subcopy {
+  color: rgba(255, 255, 255, 0.78);
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 500;
+  line-height: 1.18;
   white-space: normal;
 }
 .hero-with-portrait { padding-top: 4rem; }

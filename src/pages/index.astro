@@ -11,6 +11,7 @@ import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
 import CtaLadder from "../components/CtaLadder.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/home-hero-v3.css";
+import "../styles/home-v6.css";
 import { buildFaqSchema } from "../lib/schema";
 import { sortByOrder } from "../lib/utils";
 import {
@@ -86,183 +87,187 @@ function metricLead(result: string) {
   announcementHref={siteConfig.scorecardUrl}
   announcementLinkText={`${siteConfig.scorecardLabel} →`}
 >
-  <section class="h3-hero" aria-label="We Scale Startups hero">
-    <div class="h3-container">
-      <div class="h3-rail">
-        <span class="h3-tag">// WSS</span>
-        <span>Fractional CMO</span>
-        <span class="h3-dotsep"></span>
-        <span>Fractional growth leadership</span>
-        <span class="h3-dotsep"></span>
-        <span>Post-PMF B2B SaaS &amp; AI</span>
-      </div>
+  <!-- Utility bar — live operator status -->
+  <div class="hv6-util">
+    <div class="hv6-util-inner">
+      <span class="hv6-status"><span class="hv6-pulse" aria-hidden="true"></span> 2 client slots open · Q3 2026</span>
+      <span class="hv6-util-sep" aria-hidden="true">·</span>
+      <span>Operating from London — UK / EU / US hours</span>
+      <span class="hv6-util-right">
+        <a href="/podcast">Podcast</a>
+        <a href="/insights">Insights</a>
+        <a href="/newsletter">Newsletter</a>
+      </span>
+    </div>
+  </div>
 
-      <div class="h3-hero-grid">
-        <div>
-          <h1 class="h3-h1">
-            Predictable B2B SaaS pipeline<br />
-            <span class="strike">without</span> a <span class="num">£150k</span> CMO hire.
+  <section class="hv6-hero" aria-label="We Scale Startups hero">
+    <div class="hv6-aurora-2" aria-hidden="true"></div>
+    <div class="h3-container">
+
+      <div class="hv6-grid">
+
+        <div class="hv6-col-main">
+          <div class="hv6-eyebrow">
+            <span class="dot" aria-hidden="true"></span> Fractional CMO · Post-PMF B2B SaaS &amp; AI
+          </div>
+
+          <h1 class="hv6-h1">
+            Pipeline that compounds. <span class="strike">Without</span> the <span class="grad">£150k</span> CMO hire.
           </h1>
 
-          <div class="h3-name-line">
-            <span class="h3-av" aria-hidden="true">DJ</span>
-            <span
-              >{siteConfig.founderName} · Fractional CMO · <a href={siteConfig.growthMentor} rel="noopener noreferrer" target="_blank"
-                ><span class="h3-star">★</span> 4.93 GrowthMentor</a
-              > · 479+ founder sessions</span
+          <div class="hv6-byline">
+            <span class="av" aria-hidden="true">DJ</span>
+            <span class="who">{siteConfig.founderName}</span>
+            <span class="sep" aria-hidden="true"></span>
+            <span>Fractional CMO</span>
+            <span class="sep" aria-hidden="true"></span>
+            <a href={siteConfig.growthMentor} rel="noopener noreferrer" target="_blank"
+              ><span class="star">★</span>4.93 · GrowthMentor</a
             >
+            <span class="sep" aria-hidden="true"></span>
+            <span>479+ founder sessions</span>
           </div>
 
-          <p class="h3-lede">
-            I help <strong>post-PMF B2B SaaS and AI founders</strong> name the growth bottleneck, build a coherent acquisition system, and transfer the weekly rhythm — so pipeline compounds <strong>without every decision routing through the founder</strong>.
+          <p class="hv6-lede">
+            I help <strong>post-PMF B2B SaaS &amp; AI founders</strong> name the growth bottleneck, install the acquisition system, and transfer the weekly rhythm — <strong>so pipeline compounds without every decision routing through the founder</strong>.
           </p>
 
-          <div class="h3-shapes" aria-label="Engagement shapes">
-            <a class="h3-shape" href="/services/growth-diagnosis" data-cta="hero-shape-diagnose"><span class="n">01</span> Diagnose</a>
-            <a class="h3-shape" href="/services/90-day-growth-sprint" data-cta="hero-shape-sprint"><span class="n">02</span> 90-day sprint</a>
-            <a class="h3-shape" href="/services/acquisition-system-build" data-cta="hero-shape-build"><span class="n">03</span> System build</a>
-            <a class="h3-shape" href="/services/fractional-cmo" data-cta="hero-shape-embed"><span class="n">04</span> Embedded CMO</a>
-          </div>
+          <nav class="hv6-ladder" aria-label="Engagement ladder">
+            <a href="/services/growth-diagnosis" data-cta="hero-shape-diagnose"><span class="n">01</span> Diagnose</a>
+            <a href="/services/90-day-growth-sprint" data-cta="hero-shape-sprint"><span class="n">02</span> Sprint</a>
+            <a href="/services/acquisition-system-build" data-cta="hero-shape-build"><span class="n">03</span> Build</a>
+            <a href="/services/fractional-cmo" data-cta="hero-shape-embed"><span class="n">04</span> Embed</a>
+          </nav>
 
-          <div class="h3-cta-row">
-            <a class="h3-btn h3-btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book" title={siteConfig.bookingCallReassurance}>
-              Book a 20-minute growth diagnostic <span class="arrow" aria-hidden="true">→</span>
+          <div class="hv6-cta-row">
+            <a class="hv6-btn hv6-btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book" title={siteConfig.bookingCallReassurance}>
+              Book the 20-min diagnostic <span class="arrow" aria-hidden="true">→</span>
             </a>
-            <a class="h3-btn h3-btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
-              {siteConfig.scorecardLabel} <span class="arrow" aria-hidden="true">→</span>
+            <a class="hv6-btn hv6-btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
+              Take the scorecard <span class="arrow" aria-hidden="true">→</span>
             </a>
-            <a class="h3-btn h3-btn-link" href="/contact" data-cta="hero-contact">or send a written enquiry</a>
+            <a class="hv6-btn hv6-btn-link" href="/contact" data-cta="hero-contact">or send a written enquiry</a>
           </div>
         </div>
 
-        <aside class="h3-panel" aria-label="Live growth diagnostic sample output">
-          <div class="h3-panel-head">
-            <div class="h3-panel-title"><span class="live" aria-hidden="true"></span> Growth Diagnostic — Sample Output</div>
-            <div class="h3-panel-meta">WK 01 / 12</div>
+        <aside class="hv6-dash" aria-label="Live growth diagnostic sample">
+          <div class="hv6-dash-head">
+            <div class="hv6-dash-title"><span class="live-dot" aria-hidden="true"></span> Growth Diagnostic — Live Sample</div>
+            <div class="hv6-dash-meta">WK 01 / 12</div>
           </div>
 
-          <div class="h3-kpis">
-            <div class="h3-kpi">
+          <div class="hv6-kpis">
+            <div class="hv6-kpi">
               <div class="l">Pipeline today</div>
-              <div class="v">£42k <span style="font-size:14px;color:var(--h3-muted)">/ wk</span></div>
-              <div class="delta flat">— flat 6 wks</div>
+              <div class="v">£42k<span class="unit">/wk</span></div>
+              <div class="d flat">— flat 6 wks</div>
             </div>
-            <div class="h3-kpi">
+            <div class="hv6-kpi">
               <div class="l">12-wk projection</div>
-              <div class="v">£128k <span style="font-size:14px;color:var(--h3-muted)">/ wk</span></div>
-              <div class="delta up">▲ 3.0× compounding</div>
+              <div class="v">£128k<span class="unit">/wk</span></div>
+              <div class="d up">▲ 3.0× compounding</div>
             </div>
-            <div class="h3-kpi">
+            <div class="hv6-kpi">
               <div class="l">Bottleneck</div>
-              <div class="v" style="color:var(--h3-violet)">Acquisition</div>
-              <div class="delta" style="color:var(--h3-violet)">88% confidence</div>
+              <div class="v" style="color:var(--h3-violet-deep)">Acquisition</div>
+              <div class="d acc">88% confidence</div>
             </div>
           </div>
 
-          <div class="h3-chart-wrap">
-            <div class="h3-chart-legend">
-              <span class="k dotted">Pipeline (now)</span>
-              <span class="k b">Pipeline (system)</span>
+          <div class="hv6-chart-wrap">
+            <div class="hv6-chart-legend">
+              <span class="k flat">Pipeline · now</span>
+              <span class="k live">Pipeline · system</span>
             </div>
-            <svg class="h3-spark" id="h3-hero-spark" viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true">
+            <svg class="hv6-spark" id="hv6-hero-spark" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
               <defs>
-                <linearGradient id="h3-g1" x1="0" x2="1" y1="0" y2="0">
-                  <stop offset="0%" stop-color="#5e2bff"></stop>
-                  <stop offset="50%" stop-color="#9b3dff"></stop>
-                  <stop offset="100%" stop-color="#d046ff"></stop>
+                <linearGradient id="hv6-g1" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%"   stop-color="#a78bfa"></stop>
+                  <stop offset="50%"  stop-color="#7c3aed"></stop>
+                  <stop offset="100%" stop-color="#6d28d9"></stop>
                 </linearGradient>
-                <linearGradient id="h3-g1f" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#9b3dff" stop-opacity=".30"></stop>
-                  <stop offset="100%" stop-color="#9b3dff" stop-opacity="0"></stop>
+                <linearGradient id="hv6-g1f" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#7c3aed" stop-opacity=".25"></stop>
+                  <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"></stop>
                 </linearGradient>
+                <filter id="hv6-glow" x="-20%" y="-50%" width="140%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+                  <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+                </filter>
               </defs>
-              <g stroke="#2a2820" stroke-width="1">
-                <line x1="0" x2="600" y1="40" y2="40"></line>
-                <line x1="0" x2="600" y1="80" y2="80"></line>
-                <line x1="0" x2="600" y1="120" y2="120"></line>
+              <g stroke="#e7e5e0" stroke-width="1">
+                <line x1="0" x2="600" y1="36" y2="36"></line>
+                <line x1="0" x2="600" y1="75" y2="75"></line>
+                <line x1="0" x2="600" y1="114" y2="114"></line>
               </g>
-              <path
-                class="area"
-                d="M0,120 C60,114 120,108 180,98 C240,86 300,70 360,52 C420,36 480,24 540,18 L600,12 L600,160 L0,160 Z"
-                fill="url(#h3-g1f)"></path>
-              <path
-                d="M0,114 C40,110 80,118 120,114 C160,108 200,116 240,112 C280,107 320,116 360,110 C400,105 440,114 480,108 C520,103 560,111 600,107"
-                fill="none"
-                stroke="#2c2920"
-                stroke-width="2"
-                stroke-dasharray="4 5"></path>
-              <path
-                class="draw"
-                d="M0,120 C60,114 120,108 180,98 C240,86 300,70 360,52 C420,36 480,24 540,18 L600,12"
-                fill="none"
-                stroke="url(#h3-g1)"
-                stroke-width="3.2"
-                stroke-linecap="round"></path>
-              <g transform="translate(220,86)">
-                <line x1="0" y1="0" x2="0" y2="-30" stroke="#ff6a1a" stroke-width="1.5" stroke-dasharray="2 3"></line>
-                <circle cx="0" cy="0" r="4" fill="#ff6a1a"></circle>
-                <rect x="6" y="-44" width="118" height="22" rx="6" fill="#1c1a14" stroke="#3a3020" stroke-width="1"></rect>
-                <text x="14" y="-29" font-family="JetBrains Mono, monospace" font-size="10" fill="#ff8c4a" font-weight="700" letter-spacing="0.5">ACQUISITION FIX</text>
-              </g>
+              <path d="M0,116 C40,112 80,120 120,116 C160,110 200,118 240,114 C280,109 320,118 360,112 C400,107 440,116 480,110 C520,105 560,113 600,109"
+                    fill="none" stroke="#cdc7bd" stroke-width="2" stroke-dasharray="4 5"></path>
+              <path class="area"
+                    d="M0,120 C60,114 120,108 180,96 C240,84 300,68 360,50 C420,34 480,22 540,15 L600,10 L600,150 L0,150 Z"
+                    fill="url(#hv6-g1f)"></path>
+              <path class="draw"
+                    d="M0,120 C60,114 120,108 180,96 C240,84 300,68 360,50 C420,34 480,22 540,15 L600,10"
+                    fill="none" stroke="url(#hv6-g1)" stroke-width="3" stroke-linecap="round"
+                    filter="url(#hv6-glow)"></path>
               <g class="endnode">
-                <circle cx="600" cy="12" r="12" fill="#d046ff" fill-opacity=".15"></circle>
-                <circle cx="600" cy="12" r="5" fill="#d046ff"></circle>
+                <circle cx="600" cy="10" r="14" fill="#7c3aed" fill-opacity=".15"></circle>
+                <circle cx="600" cy="10" r="5" fill="#7c3aed"></circle>
               </g>
             </svg>
           </div>
 
-          <div class="h3-rows">
-            <div class="h3-row-item h3-good">
-              <span class="ico">01</span>
-              <span class="lbl">Positioning <small>ICP clear · category owned</small><span class="h3-meter"><span style="width:78%"></span></span></span>
-              <span class="h3-verdict">Healthy</span>
+          <div class="hv6-rows">
+            <div class="hv6-row">
+              <span class="n">01</span>
+              <span class="what">Positioning<small>ICP clear · category owned</small></span>
+              <span class="tag ok">Healthy</span>
             </div>
-            <div class="h3-row-item h3-bad">
-              <span class="ico">02</span>
-              <span class="lbl">Acquisition <small>Channel concentration risk · single-source</small><span class="h3-meter"><span style="width:88%"></span></span></span>
-              <span class="h3-verdict">Bottleneck</span>
+            <div class="hv6-row">
+              <span class="n">02</span>
+              <span class="what">Acquisition<small>Channel concentration · single-source</small></span>
+              <span class="tag bad">Bottleneck</span>
             </div>
-            <div class="h3-row-item h3-warn">
-              <span class="ico">03</span>
-              <span class="lbl">Conversion <small>Demo → SQL leak · no playbook</small><span class="h3-meter"><span style="width:54%"></span></span></span>
-              <span class="h3-verdict">Watch</span>
+            <div class="hv6-row">
+              <span class="n">03</span>
+              <span class="what">Conversion<small>Demo → SQL leak · no playbook</small></span>
+              <span class="tag watch">Watch</span>
             </div>
-            <div class="h3-row-item h3-good">
-              <span class="ico">04</span>
-              <span class="lbl">Reporting <small>Weekly cadence · founder-trusted</small><span class="h3-meter"><span style="width:71%"></span></span></span>
-              <span class="h3-verdict">Healthy</span>
+            <div class="hv6-row">
+              <span class="n">04</span>
+              <span class="what">Reporting<small>Weekly cadence · founder-trusted</small></span>
+              <span class="tag ok">Healthy</span>
             </div>
-            <div class="h3-row-item h3-warn">
-              <span class="ico">05</span>
-              <span class="lbl">Team ownership <small>Founder-dependent on most decisions</small><span class="h3-meter"><span style="width:48%"></span></span></span>
-              <span class="h3-verdict">Watch</span>
+            <div class="hv6-row">
+              <span class="n">05</span>
+              <span class="what">Team ownership<small>Founder-dependent on most decisions</small></span>
+              <span class="tag watch">Watch</span>
             </div>
           </div>
 
-          <div class="h3-panel-foot">
-            <div class="summary"><strong>Verdict.</strong> Acquisition is the binding constraint — run a 90-day sprint.</div>
-            <a class="h3-btn h3-btn-ghost" href={siteConfig.scorecardUrl} data-cta="diag-take-yours" style="padding:9px 12px;font-size:13px"
-              >Take yours <span class="arrow" aria-hidden="true">→</span></a
-            >
+          <div class="hv6-dash-foot">
+            <div class="verdict"><strong>Verdict.</strong> Run a 90-day sprint against <em>acquisition</em>.</div>
+            <a href={siteConfig.scorecardUrl} data-cta="diag-take-yours">Take yours →</a>
           </div>
         </aside>
+
       </div>
     </div>
   </section>
 
-  <!-- STATS BAR — prominent proof metrics section -->
-  <section class="h3-stats-bar" aria-label="Growth proof metrics">
+  <!-- PROOF BAR — editorial proof strip with brand-violet gradient numerals -->
+  <section class="hv6-proof-bar" aria-label="Growth proof metrics">
     <div class="h3-container">
-      <div class="h3-stats-grid">
+      <div class="hv6-proof-grid">
         {canonicalProofMetrics.slice(0, 4).map((m) => (
-          <div class="h3-stat-item">
-            <span class="h3-stat-value">{m.value}</span>
-            <span class="h3-stat-label">{m.label}</span>
+          <div class="hv6-stat">
+            <span class="hv6-stat-value">{m.value}</span>
+            <span class="hv6-stat-label">{m.label}</span>
           </div>
         ))}
-        <div class="h3-stat-item h3-stat-logos">
-          <span class="h3-stat-logos-label">Trusted by founders from</span>
-          <div class="h3-stat-logos-names">
+        <div class="hv6-trust">
+          <span class="lbl">Trusted by founders from</span>
+          <div class="names">
             <span>Techstars</span>
             <span>Google</span>
             <span>Cambridge Judge</span>
@@ -300,7 +305,7 @@ function metricLead(result: string) {
 
   <script is:inline>
     (() => {
-      const spark = document.getElementById("h3-hero-spark");
+      const spark = document.getElementById("hv6-hero-spark");
       if (!spark) return;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduced) {

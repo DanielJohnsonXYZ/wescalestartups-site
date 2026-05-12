@@ -4,7 +4,15 @@ import { buildBreadcrumbSchema } from "../lib/schema";
 import { absoluteUrl } from "../lib/utils";
 import { siteConfig } from "../site";
 
-const team = [
+type TeamMember = {
+  name: string;
+  title: string;
+  image: string;
+  linkedIn?: string;
+  twitter?: string;
+};
+
+const team: TeamMember[] = [
   {
     name: "Daniel Johnson",
     title: "Managing Founder",
@@ -32,7 +40,7 @@ const team = [
     title: "Team",
     image: "/images/team/madiha-shahid.png"
   }
-] as const;
+];
 
 const teamSchema = [
   buildBreadcrumbSchema([

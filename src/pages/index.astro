@@ -17,7 +17,6 @@ import {
   buyerFaqs,
   canonicalProofMetrics,
   first30Days,
-  homeHeroProofLine,
   homeRelatedReading,
   proofStandards,
   siteConfig,
@@ -105,10 +104,6 @@ function metricLead(result: string) {
             <span class="strike">without</span> a <span class="num">£150k</span> CMO hire.
           </h1>
 
-          <p class="h3-hero-proof">
-            <a href={homeHeroProofLine.href} data-cta="hero-proof-line">{homeHeroProofLine.text}</a>
-          </p>
-
           <div class="h3-name-line">
             <span class="h3-av" aria-hidden="true">DJ</span>
             <span
@@ -131,31 +126,13 @@ function metricLead(result: string) {
 
           <div class="h3-cta-row">
             <a class="h3-btn h3-btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book" title={siteConfig.bookingCallReassurance}>
-              Book a 30-minute growth diagnostic <span class="arrow" aria-hidden="true">→</span>
+              Book a 20-minute growth diagnostic <span class="arrow" aria-hidden="true">→</span>
             </a>
             <a class="h3-btn h3-btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
               {siteConfig.scorecardLabel} <span class="arrow" aria-hidden="true">→</span>
             </a>
             <a class="h3-btn h3-btn-link" href="/contact" data-cta="hero-contact">or send a written enquiry</a>
           </div>
-          <p class="h3-cta-sub">
-            You'll leave the call with your <strong>biggest growth bottleneck named in plain English</strong>. No pitch — just a clear view of what's blocking pipeline.
-            {" "}<a class="h3-start-here" href="/start-here" data-cta="hero-start-here">First time here? Start here →</a>
-          </p>
-
-          <div class="h3-trust">
-            {canonicalProofMetrics.slice(0, 4).map((m) => (
-              <span class="h3-chip">
-                <span class="num">{m.value}</span> {m.label}
-              </span>
-            ))}
-            <span class="h3-chip h3-chip-note" title={canonicalProofMetrics[0]?.note}>
-              <span class="swatch"></span> Techstars · Google · Cambridge Judge
-            </span>
-          </div>
-          <p class="h3-trust-footnote">
-            {canonicalProofMetrics[0]?.value} revenue influenced — {canonicalProofMetrics[0]?.note}
-          </p>
         </div>
 
         <aside class="h3-panel" aria-label="Live growth diagnostic sample output">
@@ -199,7 +176,7 @@ function metricLead(result: string) {
                   <stop offset="100%" stop-color="#9b3dff" stop-opacity="0"></stop>
                 </linearGradient>
               </defs>
-              <g stroke="#eee7d4" stroke-width="1">
+              <g stroke="#2a2820" stroke-width="1">
                 <line x1="0" x2="600" y1="40" y2="40"></line>
                 <line x1="0" x2="600" y1="80" y2="80"></line>
                 <line x1="0" x2="600" y1="120" y2="120"></line>
@@ -211,7 +188,7 @@ function metricLead(result: string) {
               <path
                 d="M0,114 C40,110 80,118 120,114 C160,108 200,116 240,112 C280,107 320,116 360,110 C400,105 440,114 480,108 C520,103 560,111 600,107"
                 fill="none"
-                stroke="#bfb8a4"
+                stroke="#2c2920"
                 stroke-width="2"
                 stroke-dasharray="4 5"></path>
               <path
@@ -224,8 +201,8 @@ function metricLead(result: string) {
               <g transform="translate(220,86)">
                 <line x1="0" y1="0" x2="0" y2="-30" stroke="#ff6a1a" stroke-width="1.5" stroke-dasharray="2 3"></line>
                 <circle cx="0" cy="0" r="4" fill="#ff6a1a"></circle>
-                <rect x="6" y="-44" width="118" height="22" rx="6" fill="#fff" stroke="#ffd0aa" stroke-width="1"></rect>
-                <text x="14" y="-29" font-family="JetBrains Mono, monospace" font-size="10" fill="#7a3a06" font-weight="700" letter-spacing="0.5">ACQUISITION FIX</text>
+                <rect x="6" y="-44" width="118" height="22" rx="6" fill="#1c1a14" stroke="#3a3020" stroke-width="1"></rect>
+                <text x="14" y="-29" font-family="JetBrains Mono, monospace" font-size="10" fill="#ff8c4a" font-weight="700" letter-spacing="0.5">ACQUISITION FIX</text>
               </g>
               <g class="endnode">
                 <circle cx="600" cy="12" r="12" fill="#d046ff" fill-opacity=".15"></circle>
@@ -269,6 +246,28 @@ function metricLead(result: string) {
             >
           </div>
         </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR — prominent proof metrics section -->
+  <section class="h3-stats-bar" aria-label="Growth proof metrics">
+    <div class="h3-container">
+      <div class="h3-stats-grid">
+        {canonicalProofMetrics.slice(0, 4).map((m) => (
+          <div class="h3-stat-item">
+            <span class="h3-stat-value">{m.value}</span>
+            <span class="h3-stat-label">{m.label}</span>
+          </div>
+        ))}
+        <div class="h3-stat-item h3-stat-logos">
+          <span class="h3-stat-logos-label">Trusted by founders from</span>
+          <div class="h3-stat-logos-names">
+            <span>Techstars</span>
+            <span>Google</span>
+            <span>Cambridge Judge</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>

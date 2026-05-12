@@ -1,4 +1,4 @@
-const BOOKING_CALL_DURATION_PHRASE = "30 minutes" as const;
+const BOOKING_CALL_DURATION_PHRASE = "20 minutes" as const;
 
 export const siteConfig = {
   name: "We Scale Startups",
@@ -9,13 +9,13 @@ export const siteConfig = {
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
   calendlyUrl: "https://calendly.com/wescalestartups",
-  bookingLabel: "Book a 30-minute growth diagnostic",
+  bookingLabel: "Book a 20-minute growth diagnostic",
   /** Inline copy: "In 30 minutes you'll…", "30 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
   bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
   /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
-  bookingCallShort: "30-minute diagnostic call",
-  /** What happens on the 30-minute diagnostic (booking reassurance). */
+  bookingCallShort: "20-minute diagnostic call",
+  /** What happens on the 20-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
     { phase: "First ~5 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
     {

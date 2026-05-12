@@ -1,131 +1,371 @@
 ---
 /**
- * Above-the-fold micro hook: first step toward the Growth Bottleneck Scorecard.
- * Selection reveals CTA to the full scorecard.
+ * Growth engine scanner — 5 dimensions, click to rate.
+ * Shows instant bottleneck diagnosis + CTA to the full scorecard.
  */
+const dimensions = [
+  { id: "positioning", label: "Positioning", hint: "ICP is sharp · category is owned" },
+  { id: "acquisition",  label: "Acquisition",   hint: "Predictable inbound + outbound pipeline" },
+  { id: "conversion",   label: "Conversion",    hint: "Demo → SQL rate is consistently above benchmark" },
+  { id: "reporting",    label: "Reporting",     hint: "One dashboard · weekly decision cadence exists" },
+  { id: "ownership",    label: "Team ownership", hint: "Team runs without founder in every decision" },
+];
+
+const verdicts: Record<string, { title: string; body: string; }> = {
+  positioning: {
+    title: "Positioning is the binding constraint.",
+    body: "Your ICP or category framing isn't sharp enough yet — prospects don't immediately see why you over alternatives. Fix the narrative before scaling spend.",
+  },
+  acquisition: {
+    title: "Acquisition is the binding constraint.",
+    body: "Channels are either too thin, too concentrated on one source, or not generating consistent qualified pipeline. This is the most common constraint at Series A.",
+  },
+  conversion: {
+    title: "Conversion is the binding constraint.",
+    body: "Leads enter the funnel but leak before becoming SQL. The demo or sales process needs a playbook — qualifying questions, objection handling, next-step discipline.",
+  },
+  reporting: {
+    title: "Reporting is the binding constraint.",
+    body: "Without a shared weekly view, decisions can't move at speed. The founder stays in the loop by default because there's no dashboard the team trusts.",
+  },
+  ownership: {
+    title: "Team ownership is the binding constraint.",
+    body: "Founder dependency on day-to-day calls is the ceiling. The team needs a decision format and clear accountability — not just execution tasks.",
+  },
+};
 ---
 
-<section class="home-scorecard-hook" aria-labelledby="scorecard-hook-title">
-  <div class="home-scorecard-hook__inner">
-    <p class="home-scorecard-hook__eyebrow">30-second check</p>
-    <h2 id="scorecard-hook-title" class="home-scorecard-hook__title">Which sounds most like your business right now?</h2>
-    <div class="home-scorecard-hook__options" role="group" aria-describedby="scorecard-hook-title">
-      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="leads">
-        <span class="home-scorecard-hook__letter">A</span>
-        <span>We have good leads but a low close rate</span>
-      </button>
-      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="pipeline">
-        <span class="home-scorecard-hook__letter">B</span>
-        <span>Pipeline is inconsistent</span>
-      </button>
-      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="chaos">
-        <span class="home-scorecard-hook__letter">C</span>
-        <span>We're growing but it feels chaotic</span>
-      </button>
-      <button type="button" class="home-scorecard-hook__btn" data-hook-choice="unknown">
-        <span class="home-scorecard-hook__letter">D</span>
-        <span>We're not sure where growth is breaking down</span>
-      </button>
+<section class="hsh" aria-labelledby="hsh-title">
+  <div class="hsh-inner">
+    <div class="hsh-header">
+      <p class="hsh-eyebrow">2-minute growth scanner</p>
+      <h2 id="hsh-title" class="hsh-title">Rate your growth engine — find the bottleneck in 5 clicks</h2>
+      <p class="hsh-sub">Score each dimension 1–3. We'll surface your binding constraint instantly. No email required.</p>
     </div>
-    <p id="scorecard-hook-followup" class="home-scorecard-hook__followup" hidden>
-      <strong class="home-scorecard-hook__lead">Based on your answer, the scorecard will map this to a primary bottleneck layer.</strong>
-      <a class="button button-brand" href="/resources/growth-bottleneck-scorecard" data-cta="home-scorecard-hook-scorecard">Take the Growth Bottleneck Scorecard →</a>
+
+    <div class="hsh-dims" id="hsh-dims" role="group" aria-label="Growth dimension ratings">
+      {dimensions.map((dim) => (
+        <div class="hsh-dim" data-dim={dim.id}>
+          <div class="hsh-dim-meta">
+            <strong class="hsh-dim-label">{dim.label}</strong>
+            <span class="hsh-dim-hint">{dim.hint}</span>
+          </div>
+          <div class="hsh-scores" role="group" aria-label={`${dim.label} score`}>
+            <button class="hsh-score" data-score="1" aria-label="1 — Struggling" title="1 — Struggling">
+              <span class="hsh-score-num">1</span>
+              <span class="hsh-score-label">Struggling</span>
+            </button>
+            <button class="hsh-score" data-score="2" aria-label="2 — Progressing" title="2 — Progressing">
+              <span class="hsh-score-num">2</span>
+              <span class="hsh-score-label">Progressing</span>
+            </button>
+            <button class="hsh-score" data-score="3" aria-label="3 — Healthy" title="3 — Healthy">
+              <span class="hsh-score-num">3</span>
+              <span class="hsh-score-label">Healthy</span>
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="hsh-result" id="hsh-result" hidden>
+      <div class="hsh-result-bars" id="hsh-result-bars" aria-hidden="true"></div>
+      <div class="hsh-result-text">
+        <p class="hsh-result-verdict" id="hsh-result-title"></p>
+        <p class="hsh-result-body" id="hsh-result-body"></p>
+        <div class="hsh-result-actions">
+          <a class="button button-brand" href="/resources/growth-bottleneck-scorecard" data-cta="hsh-full-scorecard">
+            Full 10-question scorecard →
+          </a>
+          <a class="hsh-reset" href="#" id="hsh-reset" aria-label="Reset scores">Reset</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="hsh-cta-fallback">
+      Or skip straight to the <a href="/resources/growth-bottleneck-scorecard" data-cta="hsh-skip">full Growth Bottleneck Scorecard →</a>
     </p>
   </div>
 </section>
 
-<script>
-  const root = document.querySelector(".home-scorecard-hook");
-  const followup = document.getElementById("scorecard-hook-followup");
-  if (root && followup) {
-    root.querySelectorAll("[data-hook-choice]").forEach((btn) => {
+<script define:vars={{ verdicts }}>
+  const dims = document.querySelectorAll(".hsh-dim");
+  const resultEl = document.getElementById("hsh-result");
+  const titleEl = document.getElementById("hsh-result-title");
+  const bodyEl = document.getElementById("hsh-result-body");
+  const barsEl = document.getElementById("hsh-result-bars");
+  const resetBtn = document.getElementById("hsh-reset");
+  const dimLabels = { positioning: "Positioning", acquisition: "Acquisition", conversion: "Conversion", reporting: "Reporting", ownership: "Ownership" };
+  const scores = {};
+
+  function checkComplete() {
+    return Object.keys(scores).length === dims.length;
+  }
+
+  function showResult() {
+    // Find lowest score = binding constraint
+    let minScore = 4, minDim = null;
+    for (const [id, score] of Object.entries(scores)) {
+      if (score < minScore) { minScore = score; minDim = id; }
+    }
+    if (!minDim || !resultEl || !titleEl || !bodyEl || !barsEl) return;
+
+    const v = verdicts[minDim];
+    titleEl.textContent = v.title;
+    bodyEl.textContent = v.body;
+
+    // Build bars
+    const barColors = { 1: "#c03030", 2: "#c87a08", 3: "#0f8f4a" };
+    const barColorsDark = { 1: "#ff5555", 2: "#ffb040", 3: "#3fcf76" };
+    barsEl.innerHTML = Object.entries(scores).map(([id, s]) => `
+      <div class="hsh-bar-row${id === minDim ? " hsh-bar-bottleneck" : ""}">
+        <span class="hsh-bar-lbl">${dimLabels[id]}</span>
+        <div class="hsh-bar-track">
+          <div class="hsh-bar-fill" style="width:${(s/3)*100}%;background:${barColorsDark[s]}"></div>
+        </div>
+        <span class="hsh-bar-score" style="color:${barColorsDark[s]}">${s}/3${id === minDim ? " ◀ bottleneck" : ""}</span>
+      </div>
+    `).join("");
+
+    resultEl.hidden = false;
+    resultEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "hsh_complete", bottleneck: minDim, min_score: minScore });
+    } catch {}
+  }
+
+  dims.forEach((dim) => {
+    dim.querySelectorAll(".hsh-score").forEach((btn) => {
       btn.addEventListener("click", () => {
-        root.querySelectorAll("[data-hook-choice]").forEach((b) => b.classList.remove("is-selected"));
+        const id = dim.dataset.dim;
+        const score = parseInt(btn.dataset.score);
+        scores[id] = score;
+
+        // Update UI
+        dim.querySelectorAll(".hsh-score").forEach((b) => b.classList.remove("is-selected"));
         btn.classList.add("is-selected");
-        followup.hidden = false;
-        try {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "home_scorecard_hook_select",
-            hook_choice: btn.getAttribute("data-hook-choice")
-          });
-        } catch {
-          /* ignore */
-        }
+        dim.classList.add("is-rated");
+
+        if (checkComplete()) showResult();
       });
     });
-  }
+  });
+
+  resetBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    Object.keys(scores).forEach((k) => delete scores[k]);
+    dims.forEach((d) => {
+      d.classList.remove("is-rated");
+      d.querySelectorAll(".hsh-score").forEach((b) => b.classList.remove("is-selected"));
+    });
+    if (resultEl) resultEl.hidden = true;
+  });
 </script>
 
 <style>
-  .home-scorecard-hook {
-    margin-top: 1.25rem;
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(0, 0, 0, 0.2);
+  .hsh {
+    margin-top: 1.5rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
   }
-  .home-scorecard-hook__eyebrow {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+
+  .hsh-eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    opacity: 0.75;
+    opacity: 0.6;
+    margin: 0 0 0.4rem;
+  }
+  .hsh-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
     margin: 0 0 0.35rem;
   }
-  .home-scorecard-hook__title {
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.35;
-    margin: 0 0 0.75rem;
-    max-width: 36rem;
+  .hsh-sub {
+    font-size: 0.85rem;
+    opacity: 0.65;
+    margin: 0 0 1.25rem;
+    max-width: 46ch;
   }
-  .home-scorecard-hook__options {
-    display: grid;
-    gap: 0.5rem;
-  }
-  @media (min-width: 640px) {
-    .home-scorecard-hook__options {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .home-scorecard-hook__btn {
+
+  .hsh-dims {
     display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    text-align: left;
-    padding: 0.55rem 0.65rem;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .hsh-dim {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 9px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    flex-wrap: wrap;
+  }
+  .hsh-dim.is-rated {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.14);
+  }
+
+  .hsh-dim-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 140px;
+  }
+  .hsh-dim-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: inherit;
+  }
+  .hsh-dim-hint {
+    font-size: 0.75rem;
+    opacity: 0.55;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .hsh-scores {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .hsh-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 0.45rem 0.65rem;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.04);
     color: inherit;
     font: inherit;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color 0.12s, background 0.12s, transform 0.1s;
+    min-width: 52px;
   }
-  .home-scorecard-hook__btn:hover {
-    border-color: rgba(249, 115, 22, 0.55);
+  .hsh-score:hover {
+    border-color: rgba(249, 115, 22, 0.5);
     background: rgba(249, 115, 22, 0.08);
+    transform: translateY(-1px);
   }
-  .home-scorecard-hook__btn.is-selected {
-    border-color: #f97316;
-    background: rgba(249, 115, 22, 0.12);
+  .hsh-score.is-selected {
+    border-color: #7c4dff;
+    background: rgba(124, 77, 255, 0.18);
   }
-  .home-scorecard-hook__letter {
-    flex-shrink: 0;
+  .hsh-score-num {
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .hsh-score-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* Result */
+  .hsh-result {
+    margin-top: 1.25rem;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  @media (min-width: 640px) {
+    .hsh-result { grid-template-columns: 1.2fr 1fr; }
+  }
+
+  .hsh-bar-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 90px;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+    font-size: 0.82rem;
+  }
+  .hsh-bar-bottleneck .hsh-bar-lbl {
     font-weight: 700;
-    opacity: 0.85;
-    width: 1.25rem;
+    color: #c9bfff;
   }
-  .home-scorecard-hook__followup {
-    margin: 0.85rem 0 0;
+  .hsh-bar-track {
+    height: 7px;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+  .hsh-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+  .hsh-bar-score {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
+  }
+  .hsh-bar-lbl { opacity: 0.8; }
+
+  .hsh-result-text {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.65rem;
+    gap: 0.6rem;
   }
-  .home-scorecard-hook__lead {
-    font-size: 0.9rem;
-    font-weight: 500;
-    max-width: 32rem;
+  .hsh-result-verdict {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    color: #c9bfff;
+  }
+  .hsh-result-body {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin: 0;
+  }
+  .hsh-result-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .hsh-reset {
+    font-size: 0.8rem;
+    opacity: 0.55;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 3px;
+  }
+  .hsh-reset:hover { opacity: 0.85; }
+
+  .hsh-cta-fallback {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.55;
+  }
+  .hsh-cta-fallback a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 1;
   }
 </style>

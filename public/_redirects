@@ -13,3 +13,5 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /quiz /resources/growth-bottleneck-scorecard 301
 /diagnose /resources/growth-bottleneck-scorecard 301
 /wss-scale-score /resources/growth-bottleneck-scorecard 301
+/ourteam /team 301
+/ourteam/ /team 301

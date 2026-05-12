@@ -72,6 +72,7 @@ export const GET: APIRoute = async () => {
       "/case-studies",
       "/industries",
       "/about",
+      "/team",
       "/about/daniel",
       "/speaking",
       "/workshops",

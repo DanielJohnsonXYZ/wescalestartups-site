@@ -1,0 +1,240 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { absoluteUrl } from "../lib/utils";
+import { siteConfig } from "../site";
+
+const team = [
+  {
+    name: "Daniel Johnson",
+    title: "Managing Founder",
+    image: "/images/team/daniel-johnson.webp",
+    linkedIn: "https://www.linkedin.com/in/danieljohnsonxyz/",
+    twitter: "https://x.com/djohnsonxyz"
+  },
+  {
+    name: "Tina Loc",
+    title: "Managing Director",
+    image: "/images/team/tina-loc.jpeg"
+  },
+  {
+    name: "James Lethem",
+    title: "General Manager",
+    image: "/images/team/james-lethem.jpeg"
+  },
+  {
+    name: "Rahul van Manen",
+    title: "Operations Intern",
+    image: "/images/team/rahul-van-manen.png"
+  },
+  {
+    name: "Madiha Shahid",
+    title: "Team",
+    image: "/images/team/madiha-shahid.png"
+  }
+] as const;
+
+const teamSchema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Team", path: "/team" }
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: team.map((member, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Person",
+        name: member.name,
+        jobTitle: member.title,
+        image: absoluteUrl(member.image),
+        worksFor: {
+          "@id": `${siteConfig.siteUrl}/#organization`
+        },
+        sameAs: [member.linkedIn, member.twitter].filter(Boolean)
+      }
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title="Team | We Scale Startups"
+  description="Meet the We Scale Startups team: Daniel Johnson, Tina Loc, James Lethem, Rahul van Manen, and Madiha Shahid."
+  keywords="We Scale Startups team, Daniel Johnson, Tina Loc, James Lethem, Rahul van Manen, Madiha Shahid"
+  path="/team"
+  schema={teamSchema}
+>
+  <section class="page-hero team-hero">
+    <div class="shell">
+      <p class="eyebrow">Team</p>
+      <h1>The people behind We Scale Startups.</h1>
+      <p class="lede">
+        A small operator-led team supporting post-PMF startups with growth diagnosis,
+        acquisition systems, execution rhythm, and commercial clarity.
+      </p>
+    </div>
+  </section>
+
+  <section class="section team-section">
+    <div class="shell">
+      <div class="team-grid" aria-label="We Scale Startups team members">
+        {team.map((member) => (
+          <article class="team-card">
+            <div class="team-photo-wrap">
+              <img
+                src={member.image}
+                alt={`${member.name}, ${member.title} at We Scale Startups`}
+                width="540"
+                height="540"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="team-card-copy">
+              <p class="team-role">{member.title}</p>
+              <h2>{member.name}</h2>
+              {(member.linkedIn || member.twitter) && (
+                <div class="team-socials" aria-label={`${member.name} social links`}>
+                  {member.linkedIn && (
+                    <a href={member.linkedIn} rel="noopener noreferrer" target="_blank">
+                      LinkedIn
+                    </a>
+                  )}
+                  {member.twitter && (
+                    <a href={member.twitter} rel="noopener noreferrer" target="_blank">
+                      X / Twitter
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Work with the team</p>
+        <h2>Bring the current growth picture. We will help name the constraint.</h2>
+        <p>
+          The first conversation stays diagnostic: stage, channels, team shape, reporting,
+          and where pipeline is getting stuck.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="team-book">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button button-light" href="/about">
+          About WSS →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .team-hero h1 {
+    max-width: 980px;
+  }
+
+  .team-hero .lede {
+    max-width: 780px;
+  }
+
+  .team-section {
+    padding-top: clamp(3.5rem, 7vw, 5.5rem);
+  }
+
+  .team-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .team-card {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: 0 14px 45px rgba(16, 13, 24, 0.06);
+  }
+
+  .team-photo-wrap {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(102, 87, 255, 0.08), rgba(216, 255, 79, 0.06)),
+      var(--paper);
+  }
+
+  .team-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .team-card-copy {
+    display: grid;
+    gap: 0.7rem;
+    padding: 1.1rem;
+  }
+
+  .team-role {
+    margin: 0;
+    color: var(--violet);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .team-card h2 {
+    margin: 0;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(1.55rem, 2.3vw, 2.15rem);
+    font-weight: 420;
+    line-height: 1.05;
+  }
+
+  .team-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.15rem;
+  }
+
+  .team-socials a {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.42rem 0.58rem;
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .team-socials a:hover {
+    border-color: rgba(102, 87, 255, 0.34);
+    background: rgba(102, 87, 255, 0.08);
+  }
+
+  @media (max-width: 980px) {
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 620px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

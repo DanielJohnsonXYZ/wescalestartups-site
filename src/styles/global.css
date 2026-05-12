@@ -3564,6 +3564,87 @@ textarea:focus-visible {
   color: var(--ink);
 }
 
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-dropdown.is-active > .nav-link {
+  background: rgba(102, 87, 255, 0.08);
+  color: var(--ink);
+}
+
+.nav-link-parent {
+  gap: 0.25rem;
+}
+
+.nav-link-parent span {
+  color: var(--dim);
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 50%;
+  z-index: 70;
+  width: min(20rem, calc(100vw - 2rem));
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid rgba(16, 13, 24, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 254, 250, 0.98);
+  padding: 0.45rem;
+  box-shadow: 0 22px 70px rgba(16, 13, 24, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translate(-50%, 0.35rem);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.nav-dropdown:hover .nav-menu,
+.nav-dropdown:focus-within .nav-menu {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.nav-menu::before {
+  position: absolute;
+  inset: -0.6rem 0 auto;
+  height: 0.65rem;
+  content: "";
+}
+
+.nav-menu-link {
+  display: grid;
+  gap: 0.22rem;
+  border-radius: 8px;
+  padding: 0.72rem 0.8rem;
+  color: var(--ink);
+}
+
+.nav-menu-link:hover,
+.nav-menu-link.is-active {
+  background: rgba(102, 87, 255, 0.08);
+}
+
+.nav-menu-link strong {
+  font-size: 0.88rem;
+  line-height: 1.15;
+}
+
+.nav-menu-link span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
 .header-cta {
   min-height: 42px;
   min-width: 9.75rem;
@@ -3597,6 +3678,41 @@ textarea:focus-visible {
   font-weight: 500;
   line-height: 1.18;
   white-space: normal;
+}
+
+.mobile-menu nav {
+  width: min(320px, calc(100vw - 1.25rem));
+}
+
+.mobile-nav-group {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.mobile-nav-group > .nav-link {
+  color: var(--ink);
+}
+
+.mobile-nav-group > div {
+  display: grid;
+  gap: 0.08rem;
+  border-left: 1px solid rgba(16, 13, 24, 0.1);
+  margin: 0.05rem 0 0.25rem 0.75rem;
+  padding-left: 0.45rem;
+}
+
+.mobile-subnav-link {
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.42rem 0.55rem;
+}
+
+.mobile-subnav-link:hover,
+.mobile-subnav-link.is-active {
+  background: rgba(102, 87, 255, 0.08);
+  color: var(--ink);
 }
 .hero-with-portrait { padding-top: 4rem; }
 .hero-with-portrait h1 { max-width: 900px; font-size: clamp(3.2rem, 5.35vw, 5.75rem); }

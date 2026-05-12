@@ -1,5 +1,5 @@
 ---
-import { navigation, siteConfig } from "../site";
+import { siteConfig } from "../site";
 
 interface Props {
   currentPath: string;
@@ -7,6 +7,55 @@ interface Props {
 
 const { currentPath } = Astro.props;
 const isActive = (href: string) => href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+const navGroups = [
+  { href: "/start-here", label: "Start here" },
+  {
+    href: "/services",
+    label: "Services",
+    children: [
+      { href: "/services/growth-diagnosis", label: "Growth Diagnosis", note: "Name the bottleneck first" },
+      { href: "/services/90-day-growth-sprint", label: "90-Day Sprint", note: "Focused execution cycle" },
+      { href: "/services/acquisition-system-build", label: "Acquisition Build", note: "Channels, offers, reporting" },
+      { href: "/services/fractional-cmo", label: "Fractional CMO", note: "Senior growth leadership" }
+    ]
+  },
+  {
+    href: "/proof",
+    label: "Proof",
+    children: [
+      { href: "/proof", label: "Proof hub", note: "Results and operating evidence" },
+      { href: "/case-studies", label: "Case studies", note: "Client work in context" },
+      { href: "/testimonials", label: "Testimonials", note: "Founder and operator voices" },
+      { href: "/fractional-cmo-vs-agency", label: "WSS vs agency", note: "When each model fits" }
+    ]
+  },
+  { href: "/pricing", label: "Pricing" },
+  {
+    href: "/resources",
+    label: "Resources",
+    children: [
+      { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "10 questions, 5 minutes" },
+      { href: "/resources", label: "Resources hub", note: "Templates and guides" },
+      { href: "/insights", label: "Insights", note: "Strategic reads" },
+      { href: "/growth-operating-system", label: "Growth OS", note: "How the system works" },
+      { href: "/podcast", label: "Podcast", note: "How Startups Win With AI" }
+    ]
+  },
+  {
+    href: "/about",
+    label: "Company",
+    children: [
+      { href: "/about", label: "About WSS", note: "Who we are for" },
+      { href: "/about/daniel", label: "About Daniel", note: "Founder profile" },
+      { href: "/speaking", label: "Speaking", note: "Talks and workshops" },
+      { href: "/workshops", label: "Workshops", note: "Private team sessions" },
+      { href: "/contact", label: "Contact", note: "Email and details" }
+    ]
+  }
+] as const;
+
+const isGroupActive = (item: typeof navGroups[number]) =>
+  isActive(item.href) || ("children" in item && item.children.some((child) => isActive(child.href)));
 ---
 
 <header class="site-header">
@@ -23,8 +72,25 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
       />
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
-      {navigation.map((item) => (
-        <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
+      {navGroups.map((item) => (
+        "children" in item ? (
+          <div class:list={["nav-dropdown", { "is-active": isGroupActive(item) }]}>
+            <a class="nav-link nav-link-parent" href={item.href} aria-haspopup="true" aria-expanded="false">
+              {item.label}
+              <span aria-hidden="true">⌄</span>
+            </a>
+            <div class="nav-menu" aria-label={`${item.label} menu`}>
+              {item.children.map((child) => (
+                <a class:list={["nav-menu-link", { "is-active": isActive(child.href) }]} href={child.href}>
+                  <strong>{child.label}</strong>
+                  <span>{child.note}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a class:list={["nav-link", { "is-active": isGroupActive(item) }]} href={item.href}>{item.label}</a>
+        )
       ))}
     </nav>
     <a
@@ -40,8 +106,19 @@ const isActive = (href: string) => href === "/" ? currentPath === "/" : currentP
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
       <nav aria-label="Mobile navigation">
-        {navigation.map((item) => (
-          <a class:list={["nav-link", { "is-active": isActive(item.href) }]} href={item.href}>{item.label}</a>
+        {navGroups.map((item) => (
+          "children" in item ? (
+            <div class="mobile-nav-group">
+              <a class:list={["nav-link", { "is-active": isGroupActive(item) }]} href={item.href}>{item.label}</a>
+              <div>
+                {item.children.map((child) => (
+                  <a class:list={["mobile-subnav-link", { "is-active": isActive(child.href) }]} href={child.href}>{child.label}</a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a class:list={["nav-link", { "is-active": isGroupActive(item) }]} href={item.href}>{item.label}</a>
+          )
         ))}
         <a
           class="button button-brand button-with-subcopy"

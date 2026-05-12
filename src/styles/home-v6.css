@@ -67,14 +67,15 @@
   max-width: 1280px; margin: 0 auto;
   display: flex; align-items: center; gap: 18px;
   padding: 10px 32px;
-  font: 500 11.5px/1 "JetBrains Mono", ui-monospace, monospace;
+  font: 500 12px/1 "JetBrains Mono", ui-monospace, monospace;
   letter-spacing: .04em;
-  color: var(--h3-ink-3);
+  color: var(--h3-ink-2);
   flex-wrap: wrap;
 }
 .page-home-v3 .hv6-status {
   display: inline-flex; align-items: center; gap: 9px;
-  color: var(--h3-ink-2);
+  color: var(--h3-ink);
+  font-weight: 600;
 }
 .page-home-v3 .hv6-pulse {
   width: 8px; height: 8px; border-radius: 50%;
@@ -862,7 +863,121 @@
 .page-home-v3 .cta-band       { background: linear-gradient(180deg, var(--h3-violet-tint) 0%, var(--h3-surface) 100%); }
 .page-home-v3 .eyebrow        { color: var(--h3-violet); }
 
-/* ============ 9.  Reduced motion respect ============ */
+/* ============ 9.  Contrast pass — readability fixes across the page ============
+   Several headings + muted text were tuned for the dark canvas the site
+   shipped with previously. On the new light canvas the strokes wash out.
+   Explicit ink colours and slightly heavier weights restore AA-level
+   contrast everywhere a heading or body block was reading thin. */
+
+/* Section headings — was font-weight: 370 (too thin on cream) */
+.page-home-v3 .section-intro h2 {
+  color: var(--h3-ink);
+  font-weight: 480;
+  letter-spacing: -.016em;
+}
+.page-home-v3 .section-intro h2 em {
+  color: var(--h3-violet);
+  font-style: italic;
+  font-weight: 520;
+}
+.page-home-v3 .section-intro > p:last-child { color: var(--h3-ink-2); }
+
+/* Generic h2 on the homepage (sections that don't use SectionIntro) */
+.page-home-v3 .section h2,
+.page-home-v3 .before-after-section h2,
+.page-home-v3 .flagship-system-section h2,
+.page-home-v3 .cta-band h2 {
+  color: var(--h3-ink);
+  font-weight: 480;
+}
+
+/* Eyebrows — was using the global --violet which can be too dark on cream;
+   pin to brand-violet for vibrancy + readable size */
+.page-home-v3 .eyebrow,
+.page-home-v3 .card-kicker {
+  color: var(--h3-violet);
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+/* Not-for cards — h3 + body got more contrast */
+.page-home-v3 .not-for-section { background: var(--h3-paper-2); }
+.page-home-v3 .not-for-card {
+  background: var(--h3-paper);
+  border-color: var(--h3-line);
+}
+.page-home-v3 .not-for-card h3 {
+  color: var(--h3-ink);
+  font-weight: 500;
+}
+.page-home-v3 .not-for-card p { color: var(--h3-ink-2); }
+.page-home-v3 .not-for-footnote { color: var(--h3-ink-2); }
+.page-home-v3 .not-for-footnote a { color: var(--h3-violet); border-bottom: 1px solid var(--h3-violet); }
+.page-home-v3 .not-for-x {
+  background: var(--h3-violet-tint);
+  color: var(--h3-violet);
+}
+
+/* Section-alt — was a translucent overlay tuned for dark underlay.
+   On light, set an explicit warm tint so headings have a stable backdrop. */
+.page-home-v3 .section-alt { background: var(--h3-paper-2); }
+.page-home-v3 .section { background: var(--h3-surface); }
+
+/* WhoThisIsForIcp cards (#h3-card-style) — anything that uses .feature-card
+   gets ink-2 body, ink heading */
+.page-home-v3 .feature-card,
+.page-home-v3 .feature-card * { color: var(--h3-ink); }
+.page-home-v3 .feature-card p { color: var(--h3-ink-2); }
+.page-home-v3 .feature-card h3 { color: var(--h3-ink); font-weight: 500; }
+
+/* FAQ summary text — was inheriting muted in places */
+.page-home-v3 .home-faq-item summary { color: var(--h3-ink); font-weight: 600; }
+.page-home-v3 .home-faq-item p { color: var(--h3-ink-2); }
+
+/* Case-mini & related lists */
+.page-home-v3 .case-mini h4 { color: var(--h3-ink); font-weight: 500; }
+.page-home-v3 .case-mini dl dt { color: var(--h3-violet); font-weight: 600; }
+.page-home-v3 .case-mini dl dd { color: var(--h3-ink-2); }
+.page-home-v3 .par-mini dt    { color: var(--h3-violet); font-weight: 600; }
+.page-home-v3 .par-mini dd    { color: var(--h3-ink-2); }
+.page-home-v3 .case-scan-narrative { color: var(--h3-ink-2); }
+
+/* Final CTA band copy */
+.page-home-v3 .cta-band p { color: var(--h3-ink-2); }
+.page-home-v3 .cta-inner h2 { color: var(--h3-ink); }
+
+/* Timeline (First 30 days) */
+.page-home-v3 .timeline-row h3 { color: var(--h3-ink); font-weight: 500; }
+.page-home-v3 .timeline-row p  { color: var(--h3-ink-2); }
+.page-home-v3 .timeline-week   { color: var(--h3-violet); font-weight: 700; }
+
+/* Testimonials block */
+.page-home-v3 .testimonial-card { background: var(--h3-paper); border-color: var(--h3-line); }
+.page-home-v3 .testimonial-card blockquote { color: var(--h3-ink); }
+.page-home-v3 .testimonial-card cite,
+.page-home-v3 .testimonial-card .testimonial-meta { color: var(--h3-ink-2); }
+
+/* Related reading list */
+.page-home-v3 .related-insights-list a { color: var(--h3-ink); font-weight: 500; }
+.page-home-v3 .related-insights-list a:hover { color: var(--h3-violet); }
+
+/* Daniel Story / founder note */
+.page-home-v3 .home-founder-copy p,
+.page-home-v3 .daniel-story p { color: var(--h3-ink-2); }
+.page-home-v3 .home-founder-copy strong,
+.page-home-v3 .daniel-story strong { color: var(--h3-ink); }
+
+/* Engagement strip h2 — already coloured by v3 rules but reweight */
+.page-home-v3 .h3-strip h2 { color: var(--h3-ink); font-weight: 500; }
+.page-home-v3 .h3-strip h2 strong {
+  background: linear-gradient(180deg, var(--h3-violet-3) 0%, var(--h3-violet-2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+.page-home-v3 .h3-strip .h3-sub { color: var(--h3-ink-2); }
+
+/* ============ 10. Reduced motion respect ============ */
 @media (prefers-reduced-motion: reduce) {
   .page-home-v3 .hv6-hero::before { animation: none; }
   .page-home-v3 .hv6-pulse::after { animation: none; opacity: 0; }

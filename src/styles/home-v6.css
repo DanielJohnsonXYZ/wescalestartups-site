@@ -57,10 +57,16 @@
 .page-home-v3 .h3-hero,
 .page-home-v3 .h3-stats-bar { display: none; }
 
-/* ============ 3.  Utility bar — live operator status ============ */
+/* ============ 3.  Utility bar — live operator status ============ *
+ * NOTE: home-hero-v3.css's "DARK THEME OVERRIDES" block sets
+ *   body.page-home-v3 { background-color: #0a0908; }
+ * with higher specificity than this file can undo via .page-home-v3.
+ * The util bar therefore uses explicit light values rather than a
+ * transparent gradient that would let the dark body bleed through.
+ */
 .page-home-v3 .hv6-util {
-  border-bottom: 1px solid var(--h3-line);
-  background: linear-gradient(180deg, var(--h3-glow-soft) 0%, transparent 100%);
+  border-bottom: 1px solid #e7e5e0;
+  background: linear-gradient(180deg, rgba(124, 58, 237, .08) 0%, #fafaf7 100%);
   position: relative;
 }
 .page-home-v3 .hv6-util-inner {
@@ -69,12 +75,12 @@
   padding: 10px 32px;
   font: 500 12px/1 "JetBrains Mono", ui-monospace, monospace;
   letter-spacing: .04em;
-  color: var(--h3-ink-2);
+  color: #44403c;
   flex-wrap: wrap;
 }
 .page-home-v3 .hv6-status {
   display: inline-flex; align-items: center; gap: 9px;
-  color: var(--h3-ink);
+  color: #18181b;
   font-weight: 600;
 }
 .page-home-v3 .hv6-pulse {
@@ -90,10 +96,10 @@
   0%   { transform: scale(.6); opacity: .55; }
   100% { transform: scale(2.4); opacity: 0; }
 }
-.page-home-v3 .hv6-util-sep { color: var(--h3-line-strong); }
+.page-home-v3 .hv6-util-sep { color: #d4d0c6; }
 .page-home-v3 .hv6-util-right { margin-left: auto; display: flex; gap: 14px; }
-.page-home-v3 .hv6-util a { color: inherit; text-decoration: none; transition: color .15s ease; }
-.page-home-v3 .hv6-util a:hover { color: var(--h3-ink); }
+.page-home-v3 .hv6-util a { color: #44403c; text-decoration: none; transition: color .15s ease; }
+.page-home-v3 .hv6-util a:hover { color: #18181b; }
 @media (max-width: 720px) { .page-home-v3 .hv6-util-right { display: none; } }
 
 /* ============ 4.  Hero ============ */

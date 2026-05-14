@@ -115,7 +115,7 @@ const verdicts: Record<string, { title: string; body: string; }> = {
     bodyEl.textContent = v.body;
 
     // Build bars
-    const barColors = { 1: "#c03030", 2: "#c87a08", 3: "#0f8f4a" };
+    const barColors = { 1: "#c03030", 2: "#92400e", 3: "#166534" };
     const barColorsDark = { 1: "#ff5555", 2: "#ffb040", 3: "#3fcf76" };
     barsEl.innerHTML = Object.entries(scores).map(([id, s]) => `
       <div class="hsh-bar-row${id === minDim ? " hsh-bar-bottleneck" : ""}">

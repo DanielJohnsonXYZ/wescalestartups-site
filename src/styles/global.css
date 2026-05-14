@@ -14,14 +14,14 @@
   --ink: #100d18;
   --ink-2: #282235;
   --muted: #5d5868;
-  --dim: #8a8495;
+  --dim: #5f5a52;
   --line: rgba(16, 13, 24, 0.12);
   --line-strong: rgba(16, 13, 24, 0.22);
   --violet: #6657ff;
   --violet-deep: #36266d;
   --teal: #07756e;
   --acid: #d8ff4f;
-  --coral: #c85445;
+  --coral: #a83f35;
   --shadow: 0 34px 100px rgba(54, 38, 109, 0.16);
   --logo-1: #7b3eff;
   --logo-2: #a445ff;
@@ -414,6 +414,7 @@
 .service-selector-aside {
   border: 1px solid var(--line);
   border-radius: 8px;
+  background-color: var(--ink);
   background:
     linear-gradient(160deg, rgba(16, 13, 24, 0.96), rgba(54, 38, 109, 0.92)),
     var(--ink);
@@ -509,6 +510,7 @@
 }
 
 .dark-rhythm-section {
+  background-color: #100d18;
   background:
     radial-gradient(circle at 20% 20%, rgba(102, 87, 255, 0.34), transparent 28rem),
     linear-gradient(135deg, #100d18, #241a43 58%, #120f1d);
@@ -653,6 +655,7 @@
 }
 
 .strategic-panel-dark {
+  background-color: var(--ink);
   background:
     linear-gradient(135deg, #100d18, #302455),
     var(--ink);
@@ -1038,6 +1041,7 @@ textarea:focus-visible {
 }
 
 .button-brand {
+  background-color: var(--violet);
   background: var(--violet);
   color: #fff;
   box-shadow: 0 14px 32px rgba(102, 87, 255, 0.24);
@@ -3743,7 +3747,7 @@ textarea:focus-visible {
 .testimonial-card blockquote p { font-size: 1.06rem; }
 .services-system-section { border-block: 1px solid var(--line); }
 .service-selector { display: grid; grid-template-columns: minmax(260px, 0.34fr) minmax(0, 1fr); gap: 1.1rem; align-items: stretch; }
-.service-selector-aside { border: 1px solid var(--line); border-radius: 8px; background: linear-gradient(160deg, rgba(16, 13, 24, 0.96), rgba(54, 38, 109, 0.92)), var(--ink); color: #fff; padding: 1.5rem; }
+.service-selector-aside { border: 1px solid var(--line); border-radius: 8px; background-color: var(--ink); background: linear-gradient(160deg, rgba(16, 13, 24, 0.96), rgba(54, 38, 109, 0.92)), var(--ink); color: #fff; padding: 1.5rem; }
 .service-selector-aside .eyebrow { color: var(--acid); }
 .service-selector-aside h3 { margin: 0 0 1rem; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(2rem, 3vw, 3rem); line-height: 1; font-weight: 390; }
 .service-selector-aside p { color: rgba(255, 255, 255, 0.72); line-height: 1.7; }
@@ -3757,7 +3761,7 @@ textarea:focus-visible {
 .service-selector-meta { display: grid; gap: 0.35rem; align-content: center; justify-items: end; text-align: right; }
 .service-selector-meta span, .service-selector-meta em { color: var(--dim); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.68rem; line-height: 1.35; text-transform: uppercase; }
 .service-selector-meta strong { color: var(--violet); font-size: 1rem; }
-.dark-rhythm-section { background: radial-gradient(circle at 20% 20%, rgba(102, 87, 255, 0.34), transparent 28rem), linear-gradient(135deg, #100d18, #241a43 58%, #120f1d); color: #fff; }
+.dark-rhythm-section { background-color: #100d18; background: radial-gradient(circle at 20% 20%, rgba(102, 87, 255, 0.34), transparent 28rem), linear-gradient(135deg, #100d18, #241a43 58%, #120f1d); color: #fff; }
 .dark-rhythm-grid, .ai-system-grid { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: 3rem; align-items: center; }
 .dark-rhythm-section .eyebrow { color: var(--acid); }
 .dark-rhythm-section h2, .ai-system-section h2 { margin: 0.4rem 0 1.1rem; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(2.4rem, 4.4vw, 4.4rem); line-height: 1; font-weight: 380; }
@@ -3777,7 +3781,7 @@ textarea:focus-visible {
 .ai-system-lines span { color: var(--violet); text-align: center; }
 .strategic-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .strategic-panel { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 1.35rem; }
-.strategic-panel-dark { background: linear-gradient(135deg, #100d18, #302455), var(--ink); color: #fff; }
+.strategic-panel-dark { background-color: var(--ink); background: linear-gradient(135deg, #100d18, #302455), var(--ink); color: #fff; }
 .strategic-panel span { color: var(--violet); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; }
 .strategic-panel-dark span { color: var(--acid); }
 .strategic-panel h2 { margin: 3rem 0 0.8rem; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(1.65rem, 2.6vw, 2.45rem); line-height: 1; font-weight: 420; }

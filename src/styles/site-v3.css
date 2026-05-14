@@ -18,7 +18,7 @@
   --ink:          #15140f;
   --ink-2:        #2b2a25;
   --muted:        #6f6a60;
-  --dim:          #7a7468;
+  --dim:          #5f5a52;
 
   /* Lines: warm ink base */
   --line:         rgba(21, 20, 15, 0.12);
@@ -37,12 +37,12 @@
   --logo-grad:    linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
 
   /* Orange accent — matching homepage --h3-accent */
-  --accent:       #ff6a1a;
+  --accent:       #a8440b;
   --accent-tint:  #ffe9d9;
 
   /* Status tokens */
   --good:         #0f8f4a;
-  --warn-color:   #c87a08;
+  --warn-color:   #92400e;
   --bad:          #c43030;
 }
 

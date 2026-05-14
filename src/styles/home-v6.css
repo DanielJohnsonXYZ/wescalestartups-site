@@ -59,8 +59,8 @@
 
 /* ============ 3.  Utility bar — live operator status ============ */
 .page-home-v3 .hv6-util {
-  border-bottom: 1px solid var(--h3-line);
-  background: linear-gradient(180deg, var(--h3-glow-soft) 0%, transparent 100%);
+  border-bottom: 1px solid #ddd6c8;
+  background: #fffefa;
   position: relative;
 }
 .page-home-v3 .hv6-util-inner {
@@ -69,12 +69,12 @@
   padding: 10px 32px;
   font: 500 12px/1 "JetBrains Mono", ui-monospace, monospace;
   letter-spacing: .04em;
-  color: var(--h3-ink-2);
+  color: #2b2a25;
   flex-wrap: wrap;
 }
 .page-home-v3 .hv6-status {
   display: inline-flex; align-items: center; gap: 9px;
-  color: var(--h3-ink);
+  color: #15140f;
   font-weight: 600;
 }
 .page-home-v3 .hv6-pulse {
@@ -90,10 +90,15 @@
   0%   { transform: scale(.6); opacity: .55; }
   100% { transform: scale(2.4); opacity: 0; }
 }
-.page-home-v3 .hv6-util-sep { color: var(--h3-line-strong); }
+.page-home-v3 .hv6-util-sep { color: #8f8776; }
 .page-home-v3 .hv6-util-right { margin-left: auto; display: flex; gap: 14px; }
-.page-home-v3 .hv6-util a { color: inherit; text-decoration: none; transition: color .15s ease; }
-.page-home-v3 .hv6-util a:hover { color: var(--h3-ink); }
+.page-home-v3 .hv6-util a {
+  color: #4c1d95;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.page-home-v3 .hv6-util a:hover { color: #2e1065; }
 @media (max-width: 720px) { .page-home-v3 .hv6-util-right { display: none; } }
 
 /* ============ 4.  Hero ============ */

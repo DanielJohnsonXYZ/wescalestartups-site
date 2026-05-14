@@ -21,9 +21,13 @@
   Cross-Origin-Resource-Policy: same-site
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://app.growthmentor.com https://assets.calendly.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.calendly.com https://comms.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://comms.wescalestartups.com; frame-ancestors 'self'
 
+# Homepage HTML response: middleware intercepts and serves /markdown/home.md
+# for `Accept: text/markdown` requests *before* this static HTML is consulted,
+# so the HTML response itself does not vary by Accept. The markdown response
+# (set in functions/_middleware.js) keeps its own `Vary: Accept`. Avoiding
+# `Vary: Accept` here prevents needless edge cache fragmentation on `/`.
 /
   Link: </llms.txt>; rel="alternate"; type="text/plain", </llms-full.txt>; rel="alternate"; type="text/markdown", </markdown/home.md>; rel="alternate"; type="text/markdown", </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="alternate"; type="application/json"
-  Vary: Accept
   Cache-Control: public, max-age=300, must-revalidate
 
 /about

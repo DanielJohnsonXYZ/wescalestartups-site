@@ -74,4 +74,4 @@ The Notion `Case Studies` page has three full case studies that aren't on the si
 2. **eCommerce automation platform (anonymised)** — 18-month fractional CMO engagement, multi-channel rebuild
 3. **FRONTLINE / Boehringer-Ingelheim (via Hustle & Hive)** — performance audit that flagged a ₱1.1M annual misallocation
 
-Cases 2 and 3 would substantially upgrade the proof hub. To add them, mirror the JSON shape of `diadia-health.json` and drop in `src/content/cases/`. The `/case-studies/[id].astro` dynamic route will pick them up automatically.
+Cases 2 and 3 would substantially upgrade the proof hub. To add them, mirror the JSON shape of `diadia-health.json` and drop in `src/content/cases/`. The `src/pages/case-studies/[slug].astro` dynamic route will pick them up automatically.

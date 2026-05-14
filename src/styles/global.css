@@ -27,6 +27,9 @@
   --logo-2: #a445ff;
   --logo-3: #c44dff;
   --logo-grad: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
+  /* Semantic accent: maps to brand violet so component-scoped styles
+     (var(--accent)) render with the site's primary accent color. */
+  --accent: var(--violet);
 }
 
 /* --- 2026 polish pass: header, CTA, proof, services, diagrams --- */

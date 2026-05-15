@@ -13,7 +13,7 @@ const groups = [
       { href: "/services/acquisition-system-build", label: "Acquisition System Build" },
       { href: "/services/fractional-cmo", label: "Fractional CMO" },
       { href: "/pricing", label: "Pricing" },
-      { href: "/book", label: siteConfig.bookingLabel }
+      { href: "/contact", label: "Contact" }
     ]
   },
   {
@@ -88,13 +88,13 @@ const groups = [
       </p>
       <a
         class="button button-brand"
-        href={siteConfig.bookingUrl}
-        data-cta="footer-book"
-        title={siteConfig.bookingCallReassurance}
+        href="/contact"
+        data-cta="footer-contact"
+        title="Contact We Scale Startups"
       >
-        {siteConfig.bookingLabel} →
+        Contact →
       </a>
-      <p class="footer-book-reassurance">{siteConfig.bookingCallReassurance}</p>
+      <p class="footer-book-reassurance">Send the growth context, stage, bottleneck, budget, and timeline. We will reply with the clearest next step.</p>
       <p class="footer-secondary-cta">
         Or, <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel} →</a>
       </p>
@@ -196,6 +196,7 @@ const groups = [
   .footer-newsletter {
     margin-top: 1.25rem;
     max-width: 36rem;
+    min-width: 0;
   }
   .footer-newsletter :global(.email-signup-strip) {
     margin: 0;
@@ -206,6 +207,13 @@ const groups = [
   }
   .footer-newsletter :global(.email-signup-sub) {
     font-size: 0.82rem;
+  }
+  .footer-newsletter :global(.email-signup-form) {
+    flex-direction: column;
+  }
+  .footer-newsletter :global(.email-signup-form input[type="email"]),
+  .footer-newsletter :global(.email-signup-form .button) {
+    width: 100%;
   }
 
   .footer-col h2 {

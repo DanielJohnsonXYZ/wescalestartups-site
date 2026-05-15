@@ -96,13 +96,13 @@ const isGroupActive = (item: typeof navGroups[number]) =>
     </nav>
     <a
       class="button button-brand header-cta header-cta--stacked button-with-subcopy"
-      href={siteConfig.bookingUrl}
-      data-cta="header-book"
-      aria-label={siteConfig.bookingLabel}
-      title={`${siteConfig.bookingLabel}. ${siteConfig.bookingCallReassurance}`}
+      href="/contact"
+      data-cta="header-contact"
+      aria-label="Contact We Scale Startups"
+      title="Contact We Scale Startups"
     >
-      <span class="button-label">Book diagnostic</span>
-      <span class="button-subcopy">20 min. Clear next step.</span>
+      <span class="button-label">Contact</span>
+      <span class="button-subcopy">Send growth context.</span>
     </a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
@@ -123,12 +123,12 @@ const isGroupActive = (item: typeof navGroups[number]) =>
         ))}
         <a
           class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="mobile-book"
-          title={siteConfig.bookingCallReassurance}
+          href="/contact"
+          data-cta="mobile-contact"
+          title="Contact We Scale Startups"
         >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          <span class="button-label">Contact</span>
+          <span class="button-subcopy">Send growth context.</span>
         </a>
       </nav>
     </details>

@@ -125,6 +125,7 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
     gap: 0.5rem;
     flex-wrap: wrap;
     width: 100%;
+    min-width: 0;
   }
   .email-signup-form input[type="email"] {
     flex: 1 1 220px;
@@ -146,7 +147,17 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
     border-color: var(--accent, #f97316);
   }
   .email-signup-form .button {
+    max-width: 100%;
     white-space: nowrap;
+  }
+  @media (max-width: 520px) {
+    .email-signup-form {
+      flex-direction: column;
+    }
+    .email-signup-form input[type="email"],
+    .email-signup-form .button {
+      width: 100%;
+    }
   }
   .email-signup-fine {
     font-size: 0.78rem;

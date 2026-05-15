@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder-Led Growth Bottleneck Map | We Scale Startups</title>
+  <meta name="description" content="Identify your biggest GTM bottleneck in under 5 minutes. Free diagnostic for post-PMF SaaS founders.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #07101f;
+      --surface:      #0f1d30;
+      --surface-2:    #172640;
+      --surface-3:    #1f3050;
+      --accent:       #10b981;
+      --accent-h:     #059669;
+      --accent-dim:   rgba(16,185,129,0.12);
+      --text:         #f0f4f8;
+      --muted:        #7a91a8;
+      --dim:          #3d5470;
+      --border:       #1a2f47;
+      --border-l:     #243e5c;
+      --red:          #f87171;
+      --red-bg:       rgba(248,113,113,0.1);
+      --yellow:       #fbbf24;
+      --yellow-bg:    rgba(251,191,36,0.1);
+      --green:        #34d399;
+      --green-bg:     rgba(52,211,153,0.1);
+      --r:            12px;
+      --r-sm:         8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+    }
+    .site-header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo span { color: var(--accent); }
+    .header-badge {
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border-l);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* ── Screens ── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── Intro ── */
+    #intro {
+      min-height: calc(100vh - 57px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+    }
+    #intro.active { display: flex; }
+    .intro-inner {
+      max-width: 620px;
+      width: 100%;
+      text-align: center;
+    }
+    .tag {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .intro-inner h1 {
+      font-size: clamp(28px, 5.5vw, 46px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .intro-inner h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .intro-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 40px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .benefits {
+      list-style: none;
+      background: var(--surface);
+      border: 1px solid var(--border-l);
+      border-radius: var(--r);
+      padding: 20px 24px;
+      text-align: left;
+      margin-bottom: 36px;
+    }
+    .benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 10px 0;
+    }
+    .benefits li + li { border-top: 1px solid var(--border); }
+    .benefits li .chk { color: var(--accent); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 40px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .btn-start:hover { background: var(--accent-h); transform: translateY(-2px); }
+    .time-note { margin-top: 14px; font-size: 13px; color: var(--dim); }
+
+    /* ── Quiz ── */
+    #quiz-screen { padding: 32px 24px 80px; min-height: calc(100vh - 57px); }
+    .quiz-inner { max-width: 680px; margin: 0 auto; }
+
+    .progress-wrap { margin-bottom: 32px; }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .progress-track {
+      height: 3px;
+      background: var(--surface-3);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+      transition: width 0.35s ease;
+      width: 0%;
+    }
+
+    .q-card {
+      background: var(--surface);
+      border: 1px solid var(--border-l);
+      border-radius: var(--r);
+      padding: 36px;
+      margin-bottom: 20px;
+    }
+    .q-meta {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 16px;
+    }
+    .q-text {
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 18px;
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: left;
+    }
+    .opt:hover { border-color: var(--accent); background: var(--accent-dim); }
+    .opt.selected { border-color: var(--accent); background: var(--accent-dim); }
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--surface-3);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .opt.selected .opt-letter { background: var(--accent); color: #fff; }
+    .opt-text { font-size: 14px; color: var(--muted); line-height: 1.55; padding-top: 4px; }
+    .opt.selected .opt-text { color: var(--text); }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-back {
+      padding: 12px 22px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid var(--border-l);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-back:hover { border-color: var(--muted); color: var(--text); }
+    .btn-next {
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .btn-next.on { opacity: 1; pointer-events: auto; }
+    .btn-next.on:hover { background: var(--accent-h); }
+
+    /* ── Capture ── */
+    #capture-screen {
+      min-height: calc(100vh - 57px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+    }
+    #capture-screen.active { display: flex; }
+    .capture-inner {
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+    }
+    .capture-inner h2 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .capture-inner p { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+    .form-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .form-fields input {
+      padding: 14px 16px;
+      background: var(--surface-2);
+      border: 2px solid var(--border-l);
+      border-radius: var(--r-sm);
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+    .form-fields input:focus { outline: none; border-color: var(--accent); }
+    .form-fields input::placeholder { color: var(--dim); }
+    .form-fields input.err { border-color: var(--red); }
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .btn-submit:hover { background: var(--accent-h); transform: translateY(-1px); }
+    .privacy { font-size: 12px; color: var(--dim); margin-top: 14px; line-height: 1.6; }
+
+    /* ── Results ── */
+    #results-screen { padding: 40px 24px 100px; }
+    .results-inner { max-width: 680px; margin: 0 auto; }
+
+    .result-risk {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .result-risk.high { background: var(--red-bg); color: var(--red); }
+    .result-risk.medium { background: var(--yellow-bg); color: var(--yellow); }
+    .result-risk.low { background: var(--green-bg); color: var(--green); }
+
+    .result-name {
+      font-size: clamp(26px, 4.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .result-primary {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .result-primary strong { color: var(--accent); }
+
+    /* Score bars */
+    .scores-card {
+      background: var(--surface);
+      border: 1px solid var(--border-l);
+      border-radius: var(--r);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .scores-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 20px;
+    }
+    .score-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 32px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+    .score-label { font-size: 13px; color: var(--muted); }
+    .score-label.primary { color: var(--text); font-weight: 600; }
+    .score-track {
+      height: 6px;
+      background: var(--surface-3);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .score-bar {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--dim);
+    }
+    .score-bar.primary { background: var(--red); }
+    .score-num { font-size: 12px; font-weight: 600; color: var(--muted); text-align: right; }
+
+    /* Content cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-l);
+      border-radius: var(--r);
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+    .card-ttl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* Plan */
+    .plan-list { display: flex; flex-direction: column; gap: 20px; }
+    .plan-item { display: flex; gap: 16px; }
+    .plan-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(16,185,129,0.25);
+    }
+    .plan-body { flex: 1; }
+    .plan-wk {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 6px;
+    }
+    .plan-txt { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* Warning */
+    .warn-card {
+      background: var(--red-bg);
+      border: 1px solid rgba(248,113,113,0.18);
+      border-radius: var(--r);
+      padding: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .warn-icon { font-size: 18px; flex-shrink: 0; }
+    .warn-card .card-ttl { color: var(--red); margin-bottom: 8px; }
+    .warn-card p { font-size: 14px; color: var(--red); opacity: 0.85; line-height: 1.7; }
+
+    /* CTA */
+    .cta-card {
+      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.03));
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: var(--r);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .cta-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      margin-bottom: 12px;
+    }
+    .cta-card > p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 36px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .btn-cta:hover { background: var(--accent-h); transform: translateY(-2px); }
+    .cta-sub { margin-top: 14px; font-size: 13px; color: var(--dim); }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+    /* Footer */
+    footer {
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--dim);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--dim); text-decoration: none; }
+    footer a:hover { color: var(--muted); }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .screen.active { animation: fadeUp 0.28s ease; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .q-card { padding: 24px 18px; }
+      .q-text { font-size: 17px; }
+      .quiz-nav { flex-direction: column-reverse; }
+      .btn-back, .btn-next { width: 100%; text-align: center; }
+      .cta-card { padding: 28px 20px; }
+      .score-row { grid-template-columns: 110px 1fr 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="https://wescalestartups.com" class="logo">We Scale <span>Startups</span></a>
+    <span class="header-badge">Free Diagnostic</span>
+  </div>
+</header>
+
+<!-- ══════════════ INTRO ══════════════ -->
+<section id="intro" class="screen active">
+  <div class="intro-inner">
+    <div class="tag">Free Diagnostic · 4 Minutes</div>
+    <h1>Your growth is working.<br>But <em>how much</em><br>lives in your head?</h1>
+    <p class="intro-sub">The Founder-Led Growth Bottleneck Map identifies your biggest GTM risk in under 5 minutes — and tells you exactly what to fix first.</p>
+
+    <ul class="benefits">
+      <li><span class="chk">✓</span> Your primary growth bottleneck across 6 key GTM failure points</li>
+      <li><span class="chk">✓</span> A plain-English diagnosis of what's holding you back right now</li>
+      <li><span class="chk">✓</span> A specific 30-day action plan built for your bottleneck</li>
+      <li><span class="chk">✓</span> The one mistake to avoid — given your specific situation</li>
+    </ul>
+
+    <button class="btn-start" onclick="startQuiz()">Find My Bottleneck →</button>
+    <p class="time-note">12 questions · No sign-up required to start</p>
+  </div>
+</section>
+
+<!-- ══════════════ QUIZ ══════════════ -->
+<section id="quiz-screen" class="screen">
+  <div class="quiz-inner">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="q-counter">Question 1 of 12</span>
+        <span id="q-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="p-fill"></div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-meta" id="q-meta"></div>
+      <p class="q-text" id="q-text"></p>
+      <div class="options" id="q-opts"></div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ EMAIL CAPTURE ══════════════ -->
+<section id="capture-screen" class="screen">
+  <div class="capture-inner">
+    <div class="tag">Almost There</div>
+    <h2>Where should we send your results?</h2>
+    <p>We'll show your results instantly and send a copy to your inbox so you can reference it later.</p>
+    <div class="form-fields">
+      <input type="text"  id="f-name"  placeholder="First name" autocomplete="given-name" />
+      <input type="email" id="f-email" placeholder="Work email address" autocomplete="email" />
+    </div>
+    <button class="btn-submit" onclick="showResults()">See My Results →</button>
+    <p class="privacy">No spam. We'll send your results plus occasional GTM insights from We Scale Startups. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<!-- ══════════════ RESULTS ══════════════ -->
+<section id="results-screen" class="screen">
+  <div class="results-inner" id="results-content">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<footer>
+  <a href="https://wescalestartups.com">wescalestartups.com</a> &nbsp;·&nbsp; © 2026 We Scale Startups
+</footer>
+
+
+<script>
+/* ═══════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════ */
+
+const BOTTLENECKS = [
+  "Founder-Held Narrative",
+  "Weak Positioning",
+  "Inconsistent Pipeline",
+  "Weak Proof System",
+  "No GTM Rhythm",
+  "Premature Hire Risk"
+];
+
+const QUESTIONS = [
+  /* ── Bottleneck 0: Founder-Held Narrative ── */
+  {
+    b: 0,
+    meta: "Sales Narrative Transfer",
+    text: "If a senior salesperson or BDR had to run your next three discovery calls without you, how confident are you they'd communicate your value as effectively as you do?",
+    opts: [
+      { t: "Not confident at all — they'd miss the nuance that makes prospects say yes", s: 3 },
+      { t: "Reasonably confident — they'd get most of it, but I'd want to brief them first", s: 2 },
+      { t: "Very confident — we've documented our narrative and the team can run it without me", s: 1 }
+    ]
+  },
+  {
+    b: 0,
+    meta: "Sales Narrative Transfer",
+    text: "When a prospect asks why customers choose you over the alternatives, who gives the clearest, most compelling answer?",
+    opts: [
+      { t: "Me, every time — I'm the only one who really nails this", s: 3 },
+      { t: "Mostly me, but others can cover it if pushed", s: 2 },
+      { t: "Our team handles this consistently — it's been transferred and trained in", s: 1 }
+    ]
+  },
+
+  /* ── Bottleneck 1: Weak Positioning ── */
+  {
+    b: 1,
+    meta: "Positioning Clarity",
+    text: "Can you describe who you help and the specific outcome you deliver — in one sentence — without it shifting depending on who you're talking to?",
+    opts: [
+      { t: "No — it tends to change based on the prospect or context", s: 3 },
+      { t: "I have a version but I'm not convinced it's sharp enough or consistently landing", s: 2 },
+      { t: "Yes — it's specific, consistent, and everyone on the team can say it", s: 1 }
+    ]
+  },
+  {
+    b: 1,
+    meta: "Positioning Clarity",
+    text: "If a target prospect visited your website homepage right now, how quickly would they know they're in exactly the right place?",
+    opts: [
+      { t: "Probably not quickly — it's too broad or generic for our best-fit buyer", s: 3 },
+      { t: "Within a few seconds if they read carefully — but it requires effort from them", s: 2 },
+      { t: "Immediately — the headline speaks directly to their specific pain", s: 1 }
+    ]
+  },
+
+  /* ── Bottleneck 2: Inconsistent Pipeline ── */
+  {
+    b: 2,
+    meta: "Pipeline Consistency",
+    text: "How predictable is your new business pipeline month to month?",
+    opts: [
+      { t: "Highly variable — some months are strong, others are worryingly quiet", s: 3 },
+      { t: "Reasonably consistent but not yet reliable enough to forecast confidently", s: 2 },
+      { t: "Predictable — we have a repeatable system generating steady, forecastable pipeline", s: 1 }
+    ]
+  },
+  {
+    b: 2,
+    meta: "Pipeline Consistency",
+    text: "How much of your new business pipeline comes from a documented, repeatable process that doesn't depend on you being personally active?",
+    opts: [
+      { t: "Almost none — most comes from my relationships, referrals, or me pushing hard", s: 3 },
+      { t: "Some does, but a lot still relies on ad hoc effort or whoever's most active", s: 2 },
+      { t: "Most of it — we have a documented outbound or inbound system the team runs independently", s: 1 }
+    ]
+  },
+
+  /* ── Bottleneck 3: Weak Proof System ── */
+  {
+    b: 3,
+    meta: "Proof & Credibility",
+    text: "How strong is your evidence of customer outcomes — the kind a sceptical, time-poor prospect would find convincing without a sales call?",
+    opts: [
+      { t: "Weak — a few testimonials but no outcome-specific case studies or data", s: 3 },
+      { t: "Moderate — some proof exists but it's inconsistent and not integrated into sales", s: 2 },
+      { t: "Strong — specific, outcome-based case studies used consistently across sales and marketing", s: 1 }
+    ]
+  },
+  {
+    b: 3,
+    meta: "Proof & Credibility",
+    text: "If a well-qualified prospect asked for evidence that your solution actually works before agreeing to a next step, what would you send them?",
+    opts: [
+      { t: "A few testimonials, maybe a deck, and a long email explaining the context", s: 3 },
+      { t: "One or two case studies — though they could be more specific or outcome-focused", s: 2 },
+      { t: "A proof pack: specific case studies, metrics, and references matched to their situation", s: 1 }
+    ]
+  },
+
+  /* ── Bottleneck 4: No GTM Rhythm ── */
+  {
+    b: 4,
+    meta: "GTM Operating Rhythm",
+    text: "Does your team have a structured weekly GTM meeting covering pipeline, messaging test results, and weekly priorities?",
+    opts: [
+      { t: "No — we have ad hoc check-ins but nothing structured or consistent", s: 3 },
+      { t: "Sometimes — but it's irregular and often gets cancelled or replaced by other priorities", s: 2 },
+      { t: "Yes — a regular rhythm that produces clear priorities and compound learning each week", s: 1 }
+    ]
+  },
+  {
+    b: 4,
+    meta: "GTM Operating Rhythm",
+    text: "How often does your team deliberately test messaging, review what's working, and make structured improvements to your GTM approach?",
+    opts: [
+      { t: "Rarely — insights stay in people's heads and we mostly repeat what we've always done", s: 3 },
+      { t: "Occasionally — usually when something isn't working or the pipeline goes quiet", s: 2 },
+      { t: "Regularly — there's a structured learning loop built into how the team operates each week", s: 1 }
+    ]
+  },
+
+  /* ── Bottleneck 5: Premature Hire Risk ── */
+  {
+    b: 5,
+    meta: "Marketing Hire Readiness",
+    text: "Are you planning to hire a Head of Marketing, Head of Growth, or senior marketing leader in the next six months?",
+    opts: [
+      { t: "Yes — this is an active priority and I'm already looking or will be very soon", s: 3 },
+      { t: "Maybe — we're weighing it up but haven't committed", s: 2 },
+      { t: "No — this isn't on the near-term agenda", s: 1 }
+    ]
+  },
+  {
+    b: 5,
+    meta: "Marketing Hire Readiness",
+    text: "If you hired a senior marketing leader tomorrow, how clear is the GTM brief they'd walk into?",
+    opts: [
+      { t: "Not clear — the positioning, ICP, GTM strategy, and success metrics still need significant work", s: 3 },
+      { t: "Reasonably clear in some areas, but real gaps that would slow them down considerably", s: 2 },
+      { t: "Very clear — they'd have sharp positioning, a documented strategy, and defined first priorities", s: 1 }
+    ]
+  }
+];
+
+const RESULTS = [
+  /* 0 — Founder-Held Narrative */
+  {
+    name: "The Bottleneck Is You",
+    bottleneck: "Founder-Held Narrative",
+    diagnosis: "Your growth works — when you're in the room. The problem is that your sharpest sales narrative, your best objection-handling, and your clearest explanation of why customers choose you all live in your head. No one else communicates your value as well as you do. That's a compliment and a structural risk. Until your sales knowledge is extracted, documented, and transferred into your team, your website, and your assets, growth will remain dependent on your personal presence in the pipeline.",
+    plan: [
+      { wk: "Week 1", title: "Extract the knowledge", txt: "Record your three best recent sales or discovery calls. Pull out the moments where a prospect visibly understood your value, agreed with your framing, or raised an objection you handled well. These are the raw materials your GTM system is currently missing." },
+      { wk: "Week 2", title: "Write the founder sales narrative doc", txt: "Document your ICP in one paragraph, the core pain you solve (in buyer language, not product language), how you frame the problem, your three best proof stories, and the five most common objections with your exact responses. This is the single most valuable GTM asset you can create right now." },
+      { wk: "Week 3", title: "Transfer and test", txt: "Run a 90-minute sales transfer session with anyone involved in pipeline. Walk through the doc live, then have them run a practice discovery call without you. Find the gaps. Fill them. Repeat until they can handle the moments that currently only you can handle." },
+      { wk: "Week 4", title: "Embed the language everywhere", txt: "Update your website homepage, outbound sequences, and core sales assets using the exact language from the narrative doc — the phrases, framing, and objection responses that work in your best calls. Remove anything generic that could apply to any other company in your category." }
+    ],
+    warning: "Don't hire a Head of Marketing yet. They'll inherit a system where the best sales narrative still lives in your head. Any budget spent on demand generation before this is fixed will underperform — because the message won't be as sharp as the one only you can deliver. Extract the narrative first, then hire."
+  },
+
+  /* 1 — Weak Positioning */
+  {
+    name: "Lost in the Noise",
+    bottleneck: "Weak Positioning",
+    diagnosis: "Your positioning is too broad, too product-led, or too inconsistent to cut through. The result: you're hard to remember, harder to refer, and easy to scroll past. When a prospect lands on your website or receives your outbound, they can't immediately tell whether this is for them, what's different about you, or why they should care now. Generic positioning costs you at every stage — website conversion, outbound reply rates, referral quality, and deal velocity.",
+    plan: [
+      { wk: "Week 1", title: "Anchor your real ICP", txt: "List your last 10 customers. What's the most common job title? Company stage? Specific pain that brought them to you? The overlap is your actual ICP — not the broad market you hope to serve, but the specific buyer you already win. Build from reality, not aspiration." },
+      { wk: "Week 2", title: "Test five positioning statements", txt: "Write five versions of your one-line value proposition. Each should name a specific buyer, a specific pain, and a specific outcome. Test each with a current customer or friendly prospect: 'Does this sound like your situation when you came to us?' Pick the version that lands fastest without explanation." },
+      { wk: "Week 3", title: "Rewrite the homepage", txt: "Rewrite your homepage headline and opening paragraph using the winning positioning statement. Make it pain-led and outcome-specific. Remove any language that could apply to any other company in your category. If in doubt: more specific, more concrete, more buyer-focused — not less." },
+      { wk: "Week 4", title: "Test in outbound", txt: "Run a 30-contact outbound test using the new positioning as the hook. Write a 3-touch sequence: a pain-led opening, one proof statement, one direct CTA. Measure open rate, reply rate, and meetings booked. This is your positioning stress-test in the real market." }
+    ],
+    warning: "Don't run paid advertising or launch a content strategy until your positioning is sharp. You'll spend money amplifying a message that isn't working. Positioning is the foundation — not something you fix 'later when there's budget'. Fix it now and everything downstream gets cheaper and faster."
+  },
+
+  /* 2 — Inconsistent Pipeline */
+  {
+    name: "Feast or Famine",
+    bottleneck: "Inconsistent Pipeline",
+    diagnosis: "Your pipeline is reactive — driven by referrals, founder energy, or bursts of outreach effort. Some months are strong. Others are dangerously quiet. There's no documented, repeatable system generating consistent pipeline without you being personally active. This creates a predictable trap: you're busy delivering when pipeline is good, which means you're not selling, which means next quarter goes quiet, which means you start selling hard again. The fix isn't more activity — it's a system that runs without you.",
+    plan: [
+      { wk: "Week 1", title: "Audit your real channel mix", txt: "Map your last 10 deals. Where did each one actually come from — not where you assumed, but where the contact was first made? This gives you your real pipeline channels versus your hoped-for ones. Most founders discover their best channel is one they haven't systematised yet." },
+      { wk: "Week 2", title: "Document one pipeline process", txt: "Choose your single best-performing channel — usually outbound or referrals. Write down the exact steps, who owns each step, the sequence and timing, the messaging, and the target volume per week. This is your first pipeline SOP. Start with one channel, not five." },
+      { wk: "Week 3", title: "Run a 30-day pipeline test", txt: "Build a 4-week outbound test: 50 target contacts, a 3-touch sequence, one specific ICP, one hook, one CTA. Track open rates, reply rates, and meetings booked. The goal isn't a flood of meetings — it's a tested, measurable pipeline process you can hand to someone else and replicate." },
+      { wk: "Week 4", title: "Install a pipeline review", txt: "Set a recurring 20-minute Monday pipeline review. Track: meetings booked this week, pipeline added, active deals moved. Make pipeline visibility a team habit, not something you only check when it's quiet. What gets reviewed weekly gets managed consistently." }
+    ],
+    warning: "Don't launch a content strategy or SEO programme expecting short-term pipeline impact. Content compounds over 6–12 months. Your pipeline problem is acute — you need outbound, referral, or partnership systems that generate conversations this quarter. Fix the near-term engine first, then layer in content."
+  },
+
+  /* 3 — Weak Proof System */
+  {
+    name: "The Credibility Gap",
+    bottleneck: "Weak Proof System",
+    diagnosis: "You have happy customers — but the proof isn't visible, specific, or structured enough to do the selling work without you in the room. Prospects need to verify your claims quickly, independently, and without a sales call. Right now, the gap between 'we're good at this' and 'here's specific evidence we're good at this' is costing you at every stage of the funnel — website conversion, deal progression, close rates, and referral quality.",
+    plan: [
+      { wk: "Week 1", title: "Run three customer interviews", txt: "Contact your three best customers. Ask for 20 minutes. Three questions: What was the specific situation before we worked together? What's measurably different now? What would you tell a peer who was considering working with us? Record every call. Use their exact words — not your interpretation of them." },
+      { wk: "Week 2", title: "Write one proper case study", txt: "Build a case study from one interview. Structure: the situation before → why they chose you → what you did → the specific outcome → a genuine quote. Under 500 words. Every claim must be specific — a named metric, a timeframe, a tangible result. Remove anything vague or promotional." },
+      { wk: "Week 3", title: "Build a proof pack", txt: "Assemble a proof pack: three case studies, five outcome-specific testimonials (not vague praise), any relevant data or third-party validation. Format it for easy sharing — one PDF or a linked page. This goes out before a meeting, not after one." },
+      { wk: "Week 4", title: "Integrate proof into the sales sequence", txt: "Add one proof asset to every stage of your sales email sequence. Pre-call: a relevant case study. Post-call: the most relevant testimonial for their situation. Follow-up: a specific metric that directly addresses their biggest scepticism. Track whether conversion rates at each stage improve." }
+    ],
+    warning: "Don't collect vanity testimonials — 'A pleasure to work with' or 'Highly recommend' adds zero credibility with a sceptical buyer. Prospects need to see specific outcomes for specific problems from buyers in situations similar to theirs. If your proof doesn't make a sceptic pause and take notice, it isn't doing selling work."
+  },
+
+  /* 4 — No GTM Rhythm */
+  {
+    name: "Busy, Not Compounding",
+    bottleneck: "No GTM Rhythm",
+    diagnosis: "Your team is active — but the activity isn't compounding. There's no structured weekly loop where the team reviews what's working, tests new approaches, documents what they learn, and uses those insights to improve the following week. Without a GTM rhythm, even good work produces isolated results rather than a system that gets smarter over time. You're generating effort, not learning. And effort without structured learning plateaus.",
+    plan: [
+      { wk: "Week 1", title: "Run a GTM retrospective", txt: "Block 90 minutes with your commercial team. Ask: What worked last month? What didn't? What did we learn about the buyer — their language, objections, and buying triggers? What would we do differently if we started again? Document every answer. This is your first compound learning artefact." },
+      { wk: "Week 2", title: "Install the weekly GTM meeting", txt: "Set a recurring 45-minute weekly GTM meeting. Strict agenda: pipeline review (10 min), messaging or channel test results (15 min), priority for this week (10 min), decisions needed (10 min). This isn't a status meeting — it's a learning and decision meeting. Protect it from other priorities." },
+      { wk: "Week 3", title: "Run your first deliberate test", txt: "Pick one messaging variable to test this week — a different subject line, a new hook, a different target segment, or an alternative CTA. Define what success looks like before you start. Run it for a full week. Measure it. Document the result in a shared GTM log." },
+      { wk: "Week 4", title: "Build the GTM log", txt: "Create a simple, shared GTM log — a running record of what you've tested, what worked, what didn't, and what you're testing next. In six months, this will be more valuable than any marketing strategy document. Start it now and maintain it religiously." }
+    ],
+    warning: "Don't add more channels, campaigns, or team members until you have a GTM rhythm. Additional resources without a learning loop just increase noise and cost. The bottleneck isn't resource — it's the absence of a structured improvement process. Add the rhythm first. Then the resourcing compounds it."
+  },
+
+  /* 5 — Premature Hire Risk */
+  {
+    name: "Hiring Into a Mess",
+    bottleneck: "Premature Hire Risk",
+    diagnosis: "You're close to making a senior marketing hire — but the conditions for that person to succeed aren't in place yet. Without clear positioning, a documented GTM brief, a working pipeline channel, and defined expectations for the first 90 days, your new hire will spend most of their first six months fixing foundational problems that should already be solved. That's a slow, expensive way to learn what a good foundation looks like. The issue isn't whether to hire — it's whether you're ready for the hire to succeed.",
+    plan: [
+      { wk: "Week 1", title: "Write the real GTM brief", txt: "Not the job description — the real context. Write down: what is the positioning, who is the ICP, what channels are working and at what volume, what is the pipeline target, what are the three biggest GTM gaps, and what must be true at the end of their first 90 days for this hire to be called a success. If you can't write this, you're not ready to hire yet." },
+      { wk: "Week 2", title: "Fix one gap before they start", txt: "Identify the three biggest GTM problems the new hire would face on day one. Pick the most important and fix it before you make an offer. This proves the brief is real, gives them a better starting position, and significantly reduces their risk of failing in the first quarter." },
+      { wk: "Week 3", title: "Clarify the right level and type of hire", txt: "Decide whether you need a Head of Marketing (strategy and leadership) or an execution hire (demand gen, outbound, content). Most founder-led companies at your stage need execution more than strategy. Hiring a Head of Marketing when you need a demand gen manager is a common, expensive mismatch." },
+      { wk: "Week 4", title: "Consider a fractional CMO first", txt: "A fractional CMO for 90 days can fix your positioning, install a pipeline process, write the brief for the permanent hire, and even run the hiring process itself. That's a faster, lower-risk path to a successful permanent hire than recruiting cold into an unclear foundation." }
+    ],
+    warning: "Don't hire a Head of Marketing expecting them to figure out your positioning, ICP, and GTM strategy on their own. That's a 6-month delay before they can do the job you hired them for — and often a failed hire when expectations aren't met. Get the foundations right first. The right hire in the right context compounds. The right hire in the wrong context burns out."
+  }
+];
+
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+let curr     = 0;
+let answers  = new Array(12).fill(null);
+
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() {
+  showScreen('quiz-screen');
+  renderQ(0);
+}
+
+function renderQ(idx) {
+  curr = idx;
+  const q   = QUESTIONS[idx];
+  const pct = Math.round((idx / 12) * 100);
+
+  document.getElementById('q-counter').textContent = `Question ${idx + 1} of 12`;
+  document.getElementById('q-pct').textContent     = `${pct}%`;
+  document.getElementById('p-fill').style.width    = `${pct}%`;
+  document.getElementById('q-meta').textContent    = `${q.meta}  ·  ${idx + 1} / 12`;
+  document.getElementById('q-text').textContent    = q.text;
+
+  const container = document.getElementById('q-opts');
+  container.innerHTML = '';
+  const letters = ['A', 'B', 'C'];
+  q.opts.forEach((opt, i) => {
+    const sel = answers[idx] === i ? ' selected' : '';
+    const div = document.createElement('div');
+    div.className = `opt${sel}`;
+    div.innerHTML = `<div class="opt-letter">${letters[i]}</div><div class="opt-text">${opt.t}</div>`;
+    div.addEventListener('click', () => pick(i));
+    container.appendChild(div);
+  });
+
+  document.getElementById('btn-back').style.visibility = idx === 0 ? 'hidden' : 'visible';
+  refreshNext();
+}
+
+function pick(i) {
+  answers[curr] = i;
+  document.querySelectorAll('.opt').forEach((el, idx) => {
+    el.classList.toggle('selected', idx === i);
+    el.querySelector('.opt-letter').style.background = idx === i ? 'var(--accent)' : '';
+    el.querySelector('.opt-letter').style.color       = idx === i ? '#fff' : '';
+  });
+  refreshNext();
+  setTimeout(() => goNext(), 420);
+}
+
+function refreshNext() {
+  const btn = document.getElementById('btn-next');
+  const has = answers[curr] !== null;
+  btn.classList.toggle('on', has);
+  btn.textContent = curr === 11 ? 'Get My Results →' : 'Next →';
+}
+
+function goNext() {
+  if (answers[curr] === null) return;
+  if (curr < 11) { renderQ(curr + 1); }
+  else           { showScreen('capture-screen'); }
+}
+
+function goBack() {
+  if (curr > 0) { renderQ(curr - 1); }
+  else          { showScreen('intro'); }
+}
+
+
+/* ═══════════════════════════════════════════════
+   SCORING & RESULTS
+═══════════════════════════════════════════════ */
+function calcScores() {
+  const scores = [0, 0, 0, 0, 0, 0];
+  answers.forEach((a, i) => {
+    const q = QUESTIONS[i];
+    scores[q.b] += (a !== null) ? q.opts[a].s : 2; // default mid if skipped
+  });
+  return scores;
+}
+
+function dominant(scores) {
+  return scores.reduce((best, s, i) => s > scores[best] ? i : best, 0);
+}
+
+function riskLevel(total) {
+  if (total <= 18) return 'low';
+  if (total <= 27) return 'medium';
+  return 'high';
+}
+
+function riskLabel(lvl) {
+  return { low: '● Lower Risk', medium: '● Medium Risk', high: '● High Risk' }[lvl];
+}
+
+function showResults() {
+  const email = document.getElementById('f-email');
+  const name  = document.getElementById('f-name');
+
+  if (!email.value.includes('@')) {
+    email.classList.add('err');
+    email.focus();
+    return;
+  }
+  email.classList.remove('err');
+
+  /* ── TODO: Wire up email capture ──────────────────────────────
+     Replace the fetch call below with your email service endpoint.
+     E.g. ConvertKit, Mailchimp, your own API, etc.
+
+     fetch('/api/subscribe', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({
+         name:  name.value.trim(),
+         email: email.value.trim(),
+         result: BOTTLENECKS[dominantIdx]
+       })
+     });
+  ─────────────────────────────────────────────────────────────── */
+
+  const scores     = calcScores();
+  const domIdx     = dominant(scores);
+  const result     = RESULTS[domIdx];
+  const total      = scores.reduce((a, b) => a + b, 0);
+  const lvl        = riskLevel(total);
+  const firstName  = (name.value.trim().split(' ')[0]) || 'there';
+
+  /* Score bars */
+  const scoresHTML = scores.map((s, i) => {
+    const prim = i === domIdx;
+    const pct  = Math.round(((s - 2) / 4) * 100);
+    return `
+      <div class="score-row">
+        <div class="score-label${prim ? ' primary' : ''}">${BOTTLENECKS[i]}</div>
+        <div class="score-track"><div class="score-bar${prim ? ' primary' : ''}" style="width:${pct}%"></div></div>
+        <div class="score-num">${s}/6</div>
+      </div>`;
+  }).join('');
+
+  /* 30-day plan */
+  const planHTML = result.plan.map(p => `
+    <div class="plan-item">
+      <div class="plan-num">${p.wk.replace('Week ','')}</div>
+      <div class="plan-body">
+        <div class="plan-wk">${p.wk}: ${p.title}</div>
+        <div class="plan-txt">${p.txt}</div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('results-content').innerHTML = `
+    <div class="result-risk ${lvl}">${riskLabel(lvl)}</div>
+    <h2 class="result-name">${result.name}</h2>
+    <p class="result-primary">Primary bottleneck: <strong>${result.bottleneck}</strong></p>
+
+    <div class="scores-card">
+      <div class="scores-title">Your 6 Bottleneck Scores</div>
+      ${scoresHTML}
+    </div>
+
+    <div class="card">
+      <div class="card-ttl">The Diagnosis</div>
+      <p>${result.diagnosis}</p>
+    </div>
+
+    <div class="card">
+      <div class="card-ttl">Your 30-Day Action Plan</div>
+      <div class="plan-list">${planHTML}</div>
+    </div>
+
+    <div class="warn-card">
+      <div class="warn-icon">⚠️</div>
+      <div>
+        <div class="card-ttl">What Not To Do Next</div>
+        <p>${result.warning}</p>
+      </div>
+    </div>
+
+    <div class="cta-card">
+      <h3>Want a personalised founder-led growth teardown?</h3>
+      <p>In 5 minutes, we'll show you exactly where your GTM system is leaking — and what to fix first. No pitch. No fluff. Just a clear, specific commercial diagnosis.</p>
+      <!-- ✏️  Update the href below to your booking link -->
+      <a href="https://wescalestartups.com/call" class="btn-cta">Book Your Free 5-Minute Teardown →</a>
+      <p class="cta-sub">Free · No obligation · With a We Scale Startups senior advisor</p>
+    </div>`;
+
+  showScreen('results-screen');
+}
+</script>
+</body>
+</html>

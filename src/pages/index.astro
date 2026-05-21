@@ -5,6 +5,28 @@ import { buildFaqSchema } from "../lib/schema";
 import "../styles/home-v7.css";
 
 const faqSchema = buildFaqSchema([...buyerFaqs]);
+
+// "Not a founder?" routing — investors / corporate / operators
+const subAudiences = [
+  {
+    title: "Investors & funds.",
+    body: "Diagnose growth across a portfolio in two weeks. Same framework, applied across companies.",
+    href: "/resources/vc-portfolio-growth-diagnosis",
+    label: "VC Portfolio Diagnosis"
+  },
+  {
+    title: "Corporate & accelerator partners.",
+    body: "Workshops, keynote talks, and programme advisory for cohorts and innovation teams.",
+    href: "/speaking",
+    label: "Speaking & workshops"
+  },
+  {
+    title: "Operators, advisors & referrers.",
+    body: "Refer a founder, come on the podcast, or partner on a deal. Drop a line.",
+    href: "/contact",
+    label: "Get in touch"
+  }
+];
 ---
 <BaseLayout
   title="We Scale Startups — Fractional CMO for Post-PMF B2B SaaS & AI"
@@ -135,6 +157,22 @@ const faqSchema = buildFaqSchema([...buyerFaqs]);
           </svg>
           <span class="logo-meta">Top Mentor · 5.0/5</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  {/* SUB-AUDIENCE ROUTING — solves the "we serve more than founders" problem */}
+  <section class="v7-sub-audience" aria-label="Other audiences">
+    <div class="shell">
+      <div class="v7-sub-label">Not a founder?</div>
+      <div class="v7-sub-grid">
+        {subAudiences.map((a) => (
+          <div class="v7-sub-item">
+            <h4>{a.title}</h4>
+            <p>{a.body}</p>
+            <a href={a.href}>{a.label} →</a>
+          </div>
+        ))}
       </div>
     </div>
   </section>

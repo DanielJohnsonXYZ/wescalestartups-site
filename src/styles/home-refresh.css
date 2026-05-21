@@ -1,0 +1,171 @@
+/* ──────────────────────────────────────────────────────────────────────
+   home-refresh.css — additive styles for May 2026 homepage refresh
+   Loaded AFTER home-v6.css. Adds:
+     · Sub-audience routing band ("Not a founder?")
+     · "What you'll leave with" four-card section
+     · Diagnostic-widget intro typography (.hv6-dash-intro)
+     · A few light modernisation touches on existing patterns
+   All styles scoped under .page-home-v3 to avoid leaking into other pages.
+   Uses existing --h3-* tokens defined in home-v6.css.
+   ────────────────────────────────────────────────────────────────────── */
+
+/* ============ Diagnostic widget — intro heading ============ */
+.page-home-v3 .hv6-dash-intro {
+  padding: 14px 0 18px;
+  border-bottom: 1px solid var(--h3-line);
+  margin-bottom: 18px;
+}
+.page-home-v3 .hv6-dash-h {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  color: var(--h3-ink);
+  margin: 0 0 4px;
+}
+.page-home-v3 .hv6-dash-p {
+  font-size: 0.82rem;
+  color: var(--h3-ink-3);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============ Sub-audience routing band ============ */
+.page-home-v3 .wr-sub-audience {
+  background: var(--h3-paper);
+  border-top: 1px solid var(--h3-line);
+  border-bottom: 1px solid var(--h3-line);
+  padding-block: 3.5rem;
+}
+.page-home-v3 .wr-sub-label {
+  font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--h3-ink-3);
+  margin-bottom: 1.6rem;
+}
+.page-home-v3 .wr-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 720px) {
+  .page-home-v3 .wr-sub-grid { grid-template-columns: repeat(3, 1fr); gap: 2.25rem; }
+}
+.page-home-v3 .wr-sub-item h4 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  color: var(--h3-ink);
+  margin: 0 0 0.4rem;
+}
+.page-home-v3 .wr-sub-item p {
+  font-size: 0.88rem;
+  color: var(--h3-ink-3);
+  line-height: 1.55;
+  margin: 0 0 0.65rem;
+}
+.page-home-v3 .wr-sub-item a {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--h3-violet);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.page-home-v3 .wr-sub-item a:hover {
+  color: var(--h3-violet-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ============ What you'll leave with — 4 cards ============ */
+.page-home-v3 .wr-leave-with {
+  background: var(--h3-paper-2);
+}
+.page-home-v3 .wr-lw-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+@media (min-width: 720px) { .page-home-v3 .wr-lw-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1080px) { .page-home-v3 .wr-lw-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+
+.page-home-v3 .wr-lw-card {
+  background: var(--h3-paper);
+  border: 1px solid var(--h3-line);
+  border-radius: 1rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+  position: relative;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.page-home-v3 .wr-lw-card:hover {
+  border-color: color-mix(in srgb, var(--h3-violet) 35%, var(--h3-line));
+  transform: translateY(-2px);
+  box-shadow: var(--h3-shadow-md);
+}
+.page-home-v3 .wr-lw-num {
+  display: inline-block;
+  font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--h3-violet);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.55rem;
+}
+.page-home-v3 .wr-lw-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--h3-ink);
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+}
+.page-home-v3 .wr-lw-card p {
+  font-size: 0.9rem;
+  color: var(--h3-ink-3);
+  line-height: 1.55;
+  margin: 0;
+}
+.page-home-v3 .wr-lw-cta {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+/* ============ Modernisation touches on existing patterns ============ */
+
+/* Slightly snappier card transitions where the base CSS uses opacity-only hover */
+.page-home-v3 .case-mini,
+.page-home-v3 .ba-card,
+.page-home-v3 .feature-card {
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.page-home-v3 .case-mini:hover,
+.page-home-v3 .feature-card:hover {
+  border-color: color-mix(in srgb, var(--h3-violet) 30%, var(--h3-line));
+  transform: translateY(-2px);
+  box-shadow: var(--h3-shadow-md);
+}
+
+/* Final CTA — gentle radial glow behind the headline */
+.page-home-v3 .cta-band {
+  position: relative;
+  overflow: hidden;
+}
+.page-home-v3 .cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 50% 30%, var(--h3-glow-soft), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.page-home-v3 .cta-band > * { position: relative; z-index: 1; }
+
+/* Slightly tighter eyebrow above section H2s when used via SectionIntro on new sections */
+.page-home-v3 .wr-leave-with .section-intro p.eyebrow,
+.page-home-v3 .wr-sub-audience .section-intro p.eyebrow {
+  letter-spacing: 0.1em;
+}

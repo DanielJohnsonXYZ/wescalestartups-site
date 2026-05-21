@@ -932,6 +932,16 @@ export const buyerFaqs = [
   {
     question: "What is the first step?",
     answer: `Start with ${siteConfig.bookingLabel.toLowerCase()} or ${siteConfig.scorecardLabel.toLowerCase()} — ${siteConfig.scorecardTagline.toLowerCase()} The first job is to identify the constraint before adding more activity.`
+  },
+  {
+    question: "Do you guarantee results?",
+    answer:
+      "No. Anyone who guarantees marketing outcomes either doesn't understand the work or doesn't intend to do it. What we guarantee is the operating system — a constraint named, a plan to move it, and a weekly rhythm your team can run."
+  },
+  {
+    question: "Who isn't this for?",
+    answer:
+      "Pre-PMF startups, founders looking for tactic-of-the-week, teams without internal execution capacity, and volume buyers who want more activity rather than fewer sharper decisions. If that's you, we'll say so on the call and point you somewhere better."
   }
 ] as const;
 

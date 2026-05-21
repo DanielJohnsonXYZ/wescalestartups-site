@@ -1,714 +1,601 @@
 ---
-import { getCollection } from "astro:content";
-import HomeProofV3 from "../components/HomeProofV3.astro";
-import SectionIntro from "../components/SectionIntro.astro";
-import TestimonialsBlock from "../components/TestimonialsBlock.astro";
-import VsAgencyBlock from "../components/VsAgencyBlock.astro";
-import NotForBlock from "../components/NotForBlock.astro";
-import DanielStory from "../components/DanielStory.astro";
-import WhoThisIsForIcp from "../components/WhoThisIsForIcp.astro";
-import ServiceComparisonTable from "../components/ServiceComparisonTable.astro";
-import CtaLadder from "../components/CtaLadder.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import "../styles/home-hero-v3.css";
-import "../styles/home-v6.css";
-import "../styles/home-refresh.css";
+import { siteConfig, buyerFaqs } from "../site";
 import { buildFaqSchema } from "../lib/schema";
-import { sortByOrder } from "../lib/utils";
-import {
-  buyerFaqs,
-  canonicalProofMetrics,
-  first30Days,
-  proofStandards,
-  siteConfig,
-  testimonials
-} from "../site";
+import "../styles/home-v7.css";
 
-const cases = sortByOrder(await getCollection("cases"));
-const featuredCase = cases.find((item) => item.id === "ned") ?? cases[0];
-const otherCases = cases.filter((item) => item.id !== featuredCase?.id).slice(0, 4);
-
-const featuredCaseLabel = featuredCase?.data.client ?? "";
-
-const homeTestimonials = [
-  ...testimonials.filter((t) => t.category === "paid-client"),
-  ...testimonials.filter((t) => t.category === "advisory")
-].slice(0, 8);
-
-function metricLead(result: string) {
-  return result.match(/(?:[$£])?\d+(?:\.\d+)?%?\+?/)?.[0] ?? result.split(" ")[0];
-}
-
-// "Not a founder?" routing — investors / corporate / operators
-const subAudiences = [
-  {
-    title: "Investors & funds.",
-    body: "Diagnose growth across a portfolio in two weeks. Same framework, applied across companies.",
-    href: "/resources/vc-portfolio-growth-diagnosis",
-    label: "VC Portfolio Diagnosis"
-  },
-  {
-    title: "Corporate & accelerator partners.",
-    body: "Workshops, keynote talks, and programme advisory for cohorts and innovation teams.",
-    href: "/speaking",
-    label: "Speaking & workshops"
-  },
-  {
-    title: "Operators, advisors & referrers.",
-    body: "Refer a founder, come on the podcast, or partner on a deal. Drop a line.",
-    href: "/contact",
-    label: "Get in touch"
-  }
-];
-
-// What you'll leave with after the 20-min call
-const leaveWith = [
-  {
-    n: "01",
-    h: "The constraint, named.",
-    p: "Positioning, acquisition, conversion, reporting, or team ownership — which one is binding pipeline right now."
-  },
-  {
-    n: "02",
-    h: "The next move.",
-    p: "What you'd test, build, or stop in the next 30 days to move that constraint."
-  },
-  {
-    n: "03",
-    h: "An honest read on fit.",
-    p: "Whether WSS is the right call, or whether an agency, a hire, or no-one is the better answer."
-  },
-  {
-    n: "04",
-    h: "The plain-English version.",
-    p: "No frameworks, no jargon, no slides. A direct conversation."
-  }
-];
+const faqSchema = buildFaqSchema([...buyerFaqs]);
 ---
-
 <BaseLayout
+  title="We Scale Startups — Fractional CMO for Post-PMF B2B SaaS & AI"
+  description="Fractional CMO who installs a repeatable growth system in 90 days. For post-PMF B2B SaaS and AI founders doing £1–10M ARR who need their pipeline to stop depending on them running it."
   path="/"
-  title={siteConfig.title}
-  description={siteConfig.description}
-  schema={buildFaqSchema([...buyerFaqs])}
-  showSiteHeader={true}
-  bodyClass="page-home-v3"
-  announcementVariant="brand"
-  announcementText={`New resource: ${siteConfig.scorecardName}. ${siteConfig.scorecardTagline}`}
-  announcementHref={siteConfig.scorecardUrl}
-  announcementLinkText={`${siteConfig.scorecardLabel} →`}
+  schema={faqSchema}
+  bodyClass="page-home-v7"
 >
-  <!-- Utility bar — live operator status -->
-  <div class="hv6-util">
-    <div class="hv6-util-inner">
-      <span class="hv6-status"><span class="hv6-pulse" aria-hidden="true"></span> 2 client slots open · Q3 2026</span>
-      <span class="hv6-util-sep" aria-hidden="true">·</span>
-      <span>Operating from London — UK / EU / US hours</span>
-      <span class="hv6-util-right">
-        <a href="/podcast">Podcast</a>
-        <a href="/insights">Insights</a>
-        <a href="/newsletter">Newsletter</a>
-      </span>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  {/* HERO */}
+  <section class="hero">
+    <div class="shell">
+      <span class="spec-label">Fractional CMO · Post-PMF B2B SaaS &amp; AI</span>
+      <div class="hero-grid">
+        <div>
+          <h1>Your pipeline shouldn't depend on <span class="hl">you running</span> it.</h1>
+          <p class="lede">We install the acquisition system your team can run <strong>without the founder in every decision</strong> — in 90 days, for the cost of a senior hire's first quarter.</p>
+
+          <div class="step-chips">
+            <a href="/services/growth-diagnosis" class="step-chip"><span class="n">01</span> Diagnose</a>
+            <a href="/services/90-day-growth-sprint" class="step-chip"><span class="n">02</span> Sprint</a>
+            <a href="/services/acquisition-system-build" class="step-chip"><span class="n">03</span> Build</a>
+            <a href="/services/fractional-cmo" class="step-chip"><span class="n">04</span> Embed</a>
+          </div>
+
+          <div class="hero-ctas">
+            <a href={siteConfig.bookingUrl} class="btn-primary">{siteConfig.bookingLabel} <span>→</span></a>
+            <a href={siteConfig.scorecardUrl} class="btn-secondary">Take the 5-min scorecard <span>→</span></a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust"><span class="trust-v counter" data-target="18" data-suffix="M+" data-prefix="£">£18M+</span><span class="trust-l">Revenue<br />influenced</span></div>
+            <div class="trust"><span class="trust-v counter" data-target="6" data-suffix="M+" data-prefix="£">£6M+</span><span class="trust-l">Paid spend<br />managed</span></div>
+            <div class="trust"><span class="trust-v counter" data-target="479" data-suffix="+">479+</span><span class="trust-l">Founder<br />sessions</span></div>
+            <div class="trust"><span class="trust-v counter" data-target="4.93" data-decimals="2">4.93<span style="font-size:0.55em;color:var(--ink-3);font-weight:500;">/5</span></span><span class="trust-l">GrowthMentor<br />rating</span></div>
+          </div>
+        </div>
+
+        {/* Diagnostic widget — with tab switcher */}
+        <aside class="diag-card">
+          <div class="diag-tabs" role="tablist">
+            <button class="diag-tab active" data-tab="saas" role="tab">B2B SaaS</button>
+            <button class="diag-tab" data-tab="fintech" role="tab">Fintech</button>
+            <button class="diag-tab" data-tab="healthtech" role="tab">Healthtech</button>
+          </div>
+          <div class="diag-head">
+            <span class="diag-head-l">Growth Diagnostic — Live Sample</span>
+            <span class="diag-head-r" id="diag-wk">WK 01/12</span>
+          </div>
+          <div class="diag-title" id="diag-title">What 20 minutes looks like.</div>
+          <div class="diag-sub" id="diag-sub">A real diagnosis from a recent call. Yours follows the same shape, with your numbers.</div>
+          <div class="diag-metrics">
+            <div><div class="m-label">Pipeline today</div><div class="m-val" data-m="now">£42k<span class="unit">/wk</span></div><div class="m-foot" data-m="flat">— flat 6 wks</div></div>
+            <div><div class="m-label">12-wk projection</div><div class="m-val violet" data-m="proj">£128k<span class="unit">/wk</span></div><div class="m-foot up" data-m="growth">▲ 3.0× compounding</div></div>
+            <div><div class="m-label">Bottleneck</div><div class="m-val violet" data-m="bn">Acq.</div><div class="m-foot" data-m="conf">88% conf.</div></div>
+          </div>
+          <div class="chart-row" id="chart">
+            <div class="bar dim" style="height:38%"></div>
+            <div class="bar dim" style="height:42%"></div>
+            <div class="bar dim" style="height:36%"></div>
+            <div class="bar dim" style="height:40%"></div>
+            <div class="bar" style="height:48%"></div>
+            <div class="bar" style="height:58%"></div>
+            <div class="bar" style="height:68%"></div>
+            <div class="bar" style="height:78%"></div>
+            <div class="bar" style="height:88%"></div>
+            <div class="bar" style="height:100%"></div>
+          </div>
+          <div class="constraints" id="constraints">
+            <div class="constraint"><span class="constraint-name"><span class="constraint-n">01</span><span class="constraint-text"><strong>Positioning</strong><span data-c="01">ICP clear · category owned</span></span></span><span class="tag ok" data-t="01">Healthy</span></div>
+            <div class="constraint bn"><span class="constraint-name"><span class="constraint-n">02</span><span class="constraint-text"><strong>Acquisition</strong><span data-c="02">Single-source channel</span></span></span><span class="tag bad" data-t="02">Bottleneck</span></div>
+            <div class="constraint"><span class="constraint-name"><span class="constraint-n">03</span><span class="constraint-text"><strong>Conversion</strong><span data-c="03">Demo → SQL leak</span></span></span><span class="tag watch" data-t="03">Watch</span></div>
+            <div class="constraint"><span class="constraint-name"><span class="constraint-n">04</span><span class="constraint-text"><strong>Reporting</strong><span data-c="04">Weekly cadence trusted</span></span></span><span class="tag ok" data-t="04">Healthy</span></div>
+            <div class="constraint"><span class="constraint-name"><span class="constraint-n">05</span><span class="constraint-text"><strong>Team ownership</strong><span data-c="05">Founder-dependent</span></span></span><span class="tag watch" data-t="05">Watch</span></div>
+          </div>
+          <div class="verdict" id="verdict"><strong>Verdict.</strong> Run a 90-day sprint against <em style="color:var(--violet);font-style:italic;">acquisition</em>.</div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {/* LOGO WALL — credentials, replacing the duplicate-stat proof bar */}
+  <section class="logo-wall">
+    <div class="shell">
+      <div class="logo-wall-label">Trusted by founders, programmes &amp; platforms</div>
+      <div class="logo-row">
+        <a href="https://www.jbs.cam.ac.uk/" class="logo-item lg-cambridge-wrap" rel="noopener noreferrer" target="_blank" aria-label="Cambridge Judge Business School — guest lecturer">
+          <span class="lg-cambridge">
+            <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20 2 L36 8 L36 26 C36 36 28 44 20 46 C12 44 4 36 4 26 L4 8 Z" fill="#A50034" stroke="#A50034" stroke-width="1"/>
+              <path d="M12 14 Q15 12 18 14 Q15 16 12 14 M22 14 Q25 12 28 14 Q25 16 22 14 M12 22 Q15 20 18 22 Q15 24 12 22 M22 22 Q25 20 28 22 Q25 24 22 22 M12 30 Q15 28 18 30 Q15 32 12 30 M22 30 Q25 28 28 30 Q25 32 22 30" fill="#FFC72C" stroke="#FFC72C" stroke-width="0.5"/>
+            </svg>
+            <span class="lg-cambridge-text">UNIVERSITY OF<br />CAMBRIDGE<span class="judge">Judge Business School</span></span>
+          </span>
+          <span class="logo-meta">Guest Lecturer</span>
+        </a>
+        <a href="https://startup.google.com/" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Google for Startups — mentor">
+          <span class="lg-google"><span class="g-b">G</span><span class="g-o">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-g">l</span><span class="g-o">e</span><span class="g-suffix">for Startups</span></span>
+          <span class="logo-meta">Mentor</span>
+        </a>
+        <a href="https://www.techstars.com" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Techstars — speaker">
+          <span class="lg-techstars">techstars<span class="lg-techstars-underscore">_</span></span>
+          <span class="logo-meta">Speaker</span>
+        </a>
+        <a href="https://app.growthmentor.com/mentors/daniel-johnson" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="GrowthMentor — 4.93 across 479+ sessions">
+          <span class="lg-growthmentor">
+            <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20 0 C28 6 34 14 34 22 C34 30 28 36 20 36 C12 36 6 30 6 22 C6 14 12 6 20 0 Z M20 8 L20 30 M14 14 C14 18 17 21 20 21 M26 14 C26 18 23 21 20 21 M14 22 C14 26 17 28 20 28 M26 22 C26 26 23 28 20 28" fill="none" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/>
+              <line x1="20" y1="36" x2="20" y2="46" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            growthmentor
+          </span>
+          <span class="logo-meta">★ 4.93 · 479+ sessions</span>
+        </a>
+        <a href="https://www.imperial.ac.uk/business-school" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Imperial College Business School — speaker">
+          <span class="lg-imperial">
+            IMPERIAL
+            <span class="lg-imperial-sub">BUSINESS SCHOOL</span>
+          </span>
+          <span class="logo-meta">Speaker</span>
+        </a>
+        <a href="https://mentorcruise.com/mentor/danieljohnson/" class="logo-item lg-mentorcruise" rel="noopener noreferrer" target="_blank" aria-label="MentorCruise — Top Mentor">
+          <svg viewBox="0 0 177 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g><path d="M29.5956 15.5293H0.373168C0.0982521 15.5293 -0.0820411 15.8167 0.0376324 16.0643L1.57906 19.252C1.60241 19.3002 1.65129 19.3309 1.70489 19.3309H28.2639C28.3175 19.3309 28.3664 19.3002 28.3898 19.252L29.9312 16.0643C30.0509 15.8168 29.8706 15.5293 29.5956 15.5293Z"/><path d="M2.18902 20.5146C3.21986 22.6464 5.37919 24.0008 7.74714 24.0008H22.2203C24.5882 24.0008 26.7475 22.6464 27.7784 20.5146L27.8662 20.3329C27.8961 20.2711 27.8511 20.1992 27.7824 20.1992H2.18507C2.11635 20.1992 2.07129 20.2711 2.10121 20.3329L2.18902 20.5146Z"/><path d="M14.1973 0.117229L6.36499 14.0093C6.22493 14.2577 6.40444 14.565 6.68963 14.565H14.335C14.4894 14.565 14.6145 14.4399 14.6145 14.2855V0.227441C14.6145 -0.00172937 14.3105 -0.0820223 14.1973 0.117229Z"/><path d="M23.6734 14.01L15.8411 0.11789L15.838 0.112479C15.7256 -0.0853096 15.4238 -0.00556126 15.4238 0.221873V14.2862C15.4238 14.4406 15.549 14.5657 15.7033 14.5657H23.3487C23.6339 14.5657 23.8135 14.2584 23.6734 14.01Z"/><path d="M48.9841 20.9762L48.1864 10.0582L44.7674 20.452H41.9638L38.5447 10.0352L37.7242 20.9762H34.6016L35.7412 5.13477H38.9095V5.15737L39.6845 5.13477L43.377 16.3264L47.0468 5.13477L47.8218 5.15737V5.13477H50.9672L52.1297 20.9762H48.9841Z"/><path d="M56.4144 16.0084C56.6118 16.7985 56.9957 17.4064 57.5654 17.8319C58.1353 18.2573 58.8227 18.4701 59.6282 18.4701C60.3726 18.4701 60.9538 18.3447 61.3719 18.0938C61.7897 17.8432 62.1278 17.4749 62.3862 16.9883L64.9619 18.6981C64.7341 19.0324 64.4605 19.3555 64.1414 19.6667C63.8223 19.9784 63.4422 20.2557 63.0017 20.4986C62.5608 20.7419 62.0559 20.9317 61.486 21.0683C60.9161 21.2053 60.2666 21.2734 59.5372 21.2734C58.5644 21.2734 57.6831 21.1138 56.8931 20.7948C56.1027 20.4757 55.4265 20.0353 54.8644 19.4729C54.3022 18.9108 53.8691 18.246 53.5653 17.4785C53.2611 16.7113 53.1094 15.8794 53.1094 14.9826C53.1094 14.1164 53.2724 13.2997 53.5995 12.5322C53.9261 11.765 54.3665 11.0962 54.9214 10.5265C55.476 9.95649 56.1295 9.50843 56.8817 9.18167C57.6339 8.85492 58.4431 8.69141 59.3091 8.69141C60.2815 8.69141 61.1476 8.86625 61.9076 9.21591C62.6673 9.56557 63.3129 10.0213 63.8451 10.5834C64.3768 11.1458 64.7831 11.788 65.0645 12.5096C65.3455 13.2312 65.4863 13.9721 65.4863 14.732C65.4863 15.2787 65.4635 15.7045 65.4178 16.0083L56.4144 16.0084ZM62.3179 13.7973C62.1506 13.0076 61.8165 12.384 61.3149 11.9283C60.8135 11.4723 60.1754 11.2445 59.4004 11.2445C58.6254 11.2445 57.9679 11.4649 57.4288 11.9053C56.8892 12.3464 56.5358 12.9766 56.3688 13.7973H62.3179Z"/><path d="M73.6238 8.668C74.3379 8.668 74.9836 8.78203 75.5613 9.0097C76.1387 9.23771 76.6326 9.56079 77.0429 9.97863C77.4531 10.3968 77.7684 10.898 77.9888 11.483C78.209 12.068 78.3193 12.7102 78.3193 13.4089V20.9764H74.9687V14.07C74.9687 13.2949 74.7443 12.7022 74.2962 12.2921C73.8478 11.8819 73.2819 11.6768 72.5982 11.6768C71.9145 11.6768 71.3444 11.8859 70.8887 12.3034C70.4328 12.7215 70.197 13.242 70.182 13.865V20.9765H66.8086V8.96416H69.9997V10.081C70.4099 9.65585 70.9228 9.31382 71.5382 9.05555C72.1536 8.79727 72.8488 8.668 73.6238 8.668Z"/><path d="M85.5663 20.9775C84.0621 20.9775 82.9338 20.571 82.1816 19.758C81.4294 18.9453 81.0533 17.8547 81.0533 16.4872V11.8374H79.002V8.96523H80.0276C80.8482 8.96523 81.2584 8.53211 81.2584 7.66625V5.79688H84.5408V8.96523H87.4583V11.8374H84.4268V16.0771C84.4268 16.7153 84.5863 17.2016 84.9054 17.5356C85.2245 17.87 85.6804 18.0372 86.273 18.0372H87.5494V20.9776L85.5663 20.9775Z"/><path d="M94.7053 21.2734C93.7478 21.2734 92.8739 21.1138 92.0838 20.7948C91.2936 20.4757 90.6098 20.0353 90.0325 19.4729C89.4548 18.9108 89.0067 18.246 88.6876 17.4785C88.3685 16.7113 88.209 15.8794 88.209 14.9826C88.209 14.0858 88.3686 13.2541 88.6876 12.4867C89.0067 11.7195 89.4548 11.0547 90.0325 10.4923C90.6098 9.93021 91.2936 9.48947 92.0838 9.17003C92.8739 8.85094 93.7478 8.69141 94.7053 8.69141C95.6473 8.69141 96.5173 8.85097 97.315 9.17003C98.1128 9.48947 98.8002 9.93021 99.3778 10.4923C99.9552 11.0547 100.404 11.7195 100.723 12.4867C101.042 13.2541 101.201 14.0861 101.201 14.9826C101.201 15.879 101.042 16.7113 100.723 17.4785C100.404 18.246 99.9552 18.9108 99.3778 19.4729C98.8001 20.0352 98.1128 20.4757 97.315 20.7948C96.5173 21.1139 95.6473 21.2734 94.7053 21.2734ZM94.728 18.2649C95.6398 18.2649 96.384 17.9571 96.9617 17.3415C97.5391 16.7263 97.8279 15.9325 97.8279 14.9596C97.8279 14.0023 97.5465 13.2199 96.9845 12.6119C96.4222 12.0043 95.67 11.7002 94.728 11.7002C93.7856 11.7002 93.0298 12.0044 92.46 12.6119C91.8902 13.2199 91.6052 14.0103 91.6052 14.9825C91.6052 15.9398 91.8902 16.7262 92.46 17.3415C93.0298 17.9571 93.7855 18.2649 94.728 18.2649Z"/><path d="M105.783 10.1269C106.193 9.68611 106.691 9.33278 107.276 9.06685C107.861 8.80126 108.51 8.66797 109.225 8.66797V11.8363C108.191 11.8363 107.39 12.0567 106.82 12.4971C106.25 12.9382 105.965 13.5611 105.965 14.3661V20.9764H102.592V8.96416H105.783L105.783 10.1269Z"/><path d="M118.479 21.272C117.324 21.272 116.249 21.0669 115.254 20.6568C114.258 20.2466 113.396 19.6765 112.667 18.9473C111.937 18.2176 111.368 17.3518 110.957 16.3486C110.547 15.3458 110.342 14.2519 110.342 13.0666C110.342 11.8663 110.551 10.7644 110.969 9.76129C111.386 8.75846 111.96 7.89226 112.689 7.16298C113.419 6.43371 114.281 5.86366 115.277 5.45348C116.272 5.04296 117.347 4.83789 118.502 4.83789C119.52 4.83789 120.439 4.98248 121.26 5.27101C122.08 5.55985 122.802 5.94344 123.425 6.42207C124.048 6.90069 124.568 7.45182 124.986 8.07473C125.404 8.69798 125.72 9.34379 125.932 10.0122L122.673 11.3342C122.399 10.3313 121.913 9.53362 121.214 8.94097C120.515 8.34832 119.581 8.05182 118.411 8.05182C117.727 8.05182 117.104 8.17381 116.542 8.4168C115.979 8.65979 115.493 8.99781 115.083 9.43093C114.673 9.86404 114.353 10.3882 114.126 11.0038C113.898 11.6191 113.784 12.3068 113.784 13.0666C113.784 13.8112 113.898 14.4912 114.126 15.1065C114.353 15.7221 114.673 16.2463 115.083 16.6794C115.493 17.1125 115.983 17.4509 116.553 17.6935C117.123 17.9368 117.75 18.0581 118.434 18.0581C119.603 18.0581 120.534 17.762 121.226 17.1693C121.917 16.5767 122.399 15.7789 122.673 14.7761L125.932 16.0981C125.72 16.7818 125.401 17.4393 124.975 18.0698C124.55 18.7004 124.025 19.2515 123.402 19.7221C122.779 20.1935 122.057 20.5694 121.237 20.8506C120.416 21.1315 119.497 21.272 118.479 21.272Z"/><path d="M130.674 10.1269C131.084 9.68611 131.581 9.33278 132.166 9.06685C132.751 8.80126 133.401 8.66797 134.116 8.66797V11.8363C133.082 11.8363 132.28 12.0567 131.711 12.4971C131.141 12.9382 130.856 13.5611 130.856 14.3661V20.9764H127.482V8.96416H130.674L130.674 10.1269Z"/><path d="M146.424 8.96484V20.9771H143.256V19.8374C142.83 20.2785 142.321 20.6278 141.729 20.8861C141.136 21.1444 140.475 21.2733 139.746 21.2733C138.985 21.2733 138.313 21.148 137.728 20.8974C137.143 20.6468 136.657 20.3047 136.269 19.8716C135.882 19.4385 135.589 18.9296 135.392 18.3446C135.194 17.7596 135.096 17.1251 135.096 16.4413V8.96488H138.469V16.0083C138.469 16.677 138.67 17.2201 139.073 17.638C139.476 18.0561 140.034 18.2649 140.748 18.2649C141.447 18.2649 142.005 18.0595 142.424 17.6493C142.841 17.2391 143.05 16.7149 143.05 16.0767V8.96491L146.424 8.96484Z"/><path d="M149.889 7.209C149.265 7.209 148.741 7.01155 148.316 6.61635C147.89 6.22145 147.678 5.70461 147.678 5.06641C147.678 4.44351 147.89 3.93064 148.316 3.52778C148.741 3.1256 149.265 2.92383 149.889 2.92383C150.512 2.92383 151.032 3.1256 151.45 3.52778C151.868 3.93064 152.077 4.44351 152.077 5.06641C152.077 5.70461 151.868 6.22149 151.45 6.61635C151.032 7.01155 150.512 7.209 149.889 7.209ZM148.179 8.96404H151.552V20.9763H148.179V8.96404Z"/><path d="M157.956 21.2734C156.619 21.2734 155.495 21.0075 154.583 20.4756C153.671 19.9441 153.041 19.1537 152.691 18.1053L155.541 17.0111C155.708 17.5433 156 17.9534 156.418 18.2419C156.836 18.5308 157.387 18.6751 158.07 18.6751C158.572 18.6751 158.963 18.5803 159.244 18.3902C159.525 18.2004 159.666 17.9308 159.666 17.5808C159.666 17.2315 159.507 16.9543 159.187 16.7489C158.868 16.5438 158.473 16.3653 158.002 16.2134C157.531 16.0618 157.018 15.902 156.464 15.7348C155.909 15.5676 155.396 15.3512 154.925 15.0853C154.454 14.8194 154.059 14.4697 153.74 14.0366C153.421 13.6035 153.261 13.0451 153.261 12.3613C153.261 11.2216 153.69 10.3251 154.549 9.67163C155.407 9.0185 156.574 8.69141 158.048 8.69141C159.248 8.69141 160.255 8.9234 161.068 9.38678C161.881 9.85046 162.416 10.5 162.675 11.3356L159.826 12.4298C159.537 11.6091 158.929 11.199 158.002 11.199C157.06 11.199 156.589 11.5257 156.589 12.1789C156.589 12.498 156.749 12.7489 157.068 12.9311C157.387 13.1135 157.782 13.2731 158.253 13.4097C158.724 13.5466 159.241 13.6912 159.803 13.8428C160.365 13.9951 160.882 14.2114 161.353 14.4926C161.824 14.7739 162.219 15.1385 162.538 15.5866C162.857 16.035 163.017 16.6316 163.017 17.3758C163.017 17.9837 162.899 18.5269 162.663 19.0055C162.428 19.4842 162.09 19.891 161.649 20.2251C161.208 20.5594 160.676 20.8177 160.054 21.0002C159.43 21.1824 158.732 21.2734 157.956 21.2734Z"/><path d="M167.03 16.0084C167.227 16.7985 167.611 17.4064 168.181 17.8319C168.751 18.2573 169.438 18.4701 170.243 18.4701C170.988 18.4701 171.569 18.3447 171.987 18.0938C172.405 17.8432 172.743 17.4749 173.002 16.9883L175.577 18.6981C175.349 19.0324 175.076 19.3555 174.757 19.6667C174.438 19.9784 174.058 20.2557 173.617 20.4986C173.176 20.7419 172.671 20.9317 172.101 21.0683C171.532 21.2053 170.882 21.2734 170.152 21.2734C169.18 21.2734 168.298 21.1138 167.508 20.7948C166.718 20.4757 166.042 20.0353 165.48 19.4729C164.917 18.9108 164.484 18.246 164.18 17.4785C163.876 16.7113 163.725 15.8794 163.725 14.9826C163.725 14.1164 163.888 13.2997 164.215 12.5322C164.541 11.765 164.982 11.0962 165.537 10.5265C166.091 9.95649 166.745 9.50843 167.497 9.18167C168.249 8.85492 169.058 8.69141 169.924 8.69141C170.897 8.69141 171.763 8.86625 172.523 9.21591C173.283 9.56557 173.928 10.0213 174.46 10.5834C174.992 11.1458 175.399 11.788 175.68 12.5096C175.961 13.2312 176.102 13.9721 176.102 14.732C176.102 15.2787 176.079 15.7045 176.033 16.0083L167.03 16.0084ZM172.933 13.7973C172.766 13.0076 172.432 12.384 171.93 11.9283C171.429 11.4723 170.791 11.2445 170.015 11.2445C169.24 11.2445 168.583 11.4649 168.044 11.9053C167.504 12.3464 167.151 12.9766 166.984 13.7973H172.933Z"/></g>
+          </svg>
+          <span class="logo-meta">Top Mentor · 5.0/5</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Interactive bottleneck finder */}
+  <section>
+    <div class="shell">
+      <span class="spec-label">Interactive · § 02 · Find your bottleneck</span>
+      <h2 class="section-h">Which constraint sounds <em>like you</em>?</h2>
+      <p class="section-sub">Click whichever feels closest. We'll show you which engagement matches.</p>
+
+      <div class="bottleneck-finder">
+        <div class="bf-grid" id="bf-grid">
+          <button class="bf-card" data-bn="positioning"><span class="bf-num">01 / POSITIONING</span><span class="bf-name">Story doesn't land</span><span class="bf-q">Demos go well, pipeline doesn't.</span></button>
+          <button class="bf-card active" data-bn="acquisition"><span class="bf-num">02 / ACQUISITION</span><span class="bf-name">One-channel risk</span><span class="bf-q">If it dips, the quarter dips.</span></button>
+          <button class="bf-card" data-bn="conversion"><span class="bf-num">03 / CONVERSION</span><span class="bf-name">No playbook</span><span class="bf-q">Every rep improvises.</span></button>
+          <button class="bf-card" data-bn="reporting"><span class="bf-num">04 / REPORTING</span><span class="bf-name">Dashboards disagree</span><span class="bf-q">No single weekly view.</span></button>
+          <button class="bf-card" data-bn="team"><span class="bf-num">05 / TEAM</span><span class="bf-name">Founder bottleneck</span><span class="bf-q">Every brief routes through you.</span></button>
+        </div>
+
+        <div class="bf-result" id="bf-result">
+          <div>
+            <div class="bf-result-meta" id="bf-meta">02 · ACQUISITION</div>
+            <h4 id="bf-title">One channel carries the funnel.</h4>
+            <p id="bf-desc">Diversify before the dip — design the second engine and the weekly decision rule.</p>
+            <a class="bf-result-link" id="bf-link" href="/services/acquisition-system-build">Acquisition System Build →</a>
+          </div>
+          <div class="bf-rec">
+            <span class="bf-rec-label">Recommended engagement</span>
+            <span class="bf-rec-svc" id="bf-svc">Acquisition System Build</span>
+            <span class="bf-rec-meta" id="bf-svc-meta">from £30k · 8–12 weeks · Flagship</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Growth system flow diagram */}
+  <section class="services">
+    <div class="shell">
+      <span class="spec-label">The system · § 03 · How the four engagements connect</span>
+      <h2 class="section-h">Each engagement <em>installs</em> what the next one needs.</h2>
+      <p class="section-sub">Diagnosis names the constraint. Sprint tests the next move. Build installs the rhythm. Embed operates it with your team.</p>
+
+      <div class="system-diagram">
+        <div class="system-flow">
+          <div class="flow-arrow" aria-hidden="true"></div>
+          <article class="flow-node">
+            <div class="flow-node-step"><span class="flow-node-num">01</span><span class="flow-node-name">DIAGNOSE</span></div>
+            <h4>Growth Diagnosis</h4>
+            <p>One-week deep-dive. Constraint named in plain English with a fix-or-skip recommendation.</p>
+            <div class="flow-node-out">Output → <span>constraint map</span></div>
+          </article>
+          <article class="flow-node">
+            <div class="flow-node-step"><span class="flow-node-num">02</span><span class="flow-node-name">SPRINT</span></div>
+            <h4>90-Day Sprint</h4>
+            <p>Targeted intervention against the named bottleneck. Built, run, measured, transferred.</p>
+            <div class="flow-node-out">Output → <span>tested playbook</span></div>
+          </article>
+          <article class="flow-node">
+            <div class="flow-node-step"><span class="flow-node-num">03</span><span class="flow-node-name">BUILD</span></div>
+            <h4>System Build</h4>
+            <p>Channel hierarchy, narrative, reporting cadence, hiring spec — installed end-to-end.</p>
+            <div class="flow-node-out">Output → <span>operating system</span></div>
+          </article>
+          <article class="flow-node">
+            <div class="flow-node-step"><span class="flow-node-num">04</span><span class="flow-node-name">EMBED</span></div>
+            <h4>Fractional CMO</h4>
+            <p>2–3 days/week leadership when the fit is right. The team owns the cadence; we operate it.</p>
+            <div class="flow-node-out">Output → <span>team ownership</span></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FIVE BOTTLENECKS */}
+  <section>
+    <div class="shell">
+      <span class="spec-label">The five constraints · § 04</span>
+      <h2 class="section-h">You probably have one of these five <em>bottlenecks</em>.</h2>
+      <p class="section-sub">If pipeline is inconsistent and the founder is still in every decision, it's one of these.</p>
+      <div class="bn-grid">
+        <article class="bn-card"><div class="bn-num">01 / POSITIONING</div><h4>The story lands in the room. Not in the market.</h4><p>Demos go well, pipeline doesn't. The product narrative doesn't carry beyond a live conversation.</p></article>
+        <article class="bn-card"><div class="bn-num">02 / ACQUISITION</div><h4>One channel carries the funnel.</h4><p>If it dips, the quarter dips. There's no second engine.</p></article>
+        <article class="bn-card"><div class="bn-num">03 / CONVERSION</div><h4>Demos and trials don't progress.</h4><p>No shared playbook for what to say, when. Every rep improvises.</p></article>
+        <article class="bn-card"><div class="bn-num">04 / REPORTING</div><h4>No single weekly view of scale, stop, or fix.</h4><p>Paid, organic, and outbound each report in their own dashboards.</p></article>
+        <article class="bn-card" style="grid-column: span 2;"><div class="bn-num">05 / TEAM OWNERSHIP</div><h4>Every campaign, brief, and dashboard routes through the founder.</h4><p>The team executes; you decide. It doesn't scale — and it's why pipeline still depends on you running it.</p></article>
+      </div>
+    </div>
+  </section>
+
+  {/* SERVICES TABLE */}
+  <section class="services">
+    <div class="shell">
+      <span class="spec-label">Four offers · one ladder · § 05</span>
+      <h2 class="section-h">Pick the smallest commitment that answers your <em>biggest</em> question.</h2>
+      <p class="section-sub">All four engagements solve a different problem. Start with the one that matches your current constraint — ladder up later.</p>
+      <div class="svc-table">
+        <div class="svc-row">
+          <span class="svc-step">/01</span>
+          <div><span class="svc-title">Growth Diagnosis</span><span class="svc-price">£4k · 1 week</span></div>
+          <div class="svc-desc"><strong>Best for</strong>You're not sure what's blocking pipeline.</div>
+          <div class="svc-desc"><strong>What gets built</strong>Constraint map, evidence review, 90-day plan.</div>
+          <div class="svc-cta"><a href="/services/growth-diagnosis">Read →</a></div>
+        </div>
+        <div class="svc-row">
+          <span class="svc-step">/02</span>
+          <div><span class="svc-title">90-Day Growth Sprint</span><span class="svc-price">£15k · 12 weeks</span></div>
+          <div class="svc-desc"><strong>Best for</strong>Focused tests against the named bottleneck this quarter.</div>
+          <div class="svc-desc"><strong>What gets built</strong>Experiment backlog, weekly decisions, tested copy.</div>
+          <div class="svc-cta"><a href="/services/90-day-growth-sprint">Run →</a></div>
+        </div>
+        <div class="svc-row flagship">
+          <span class="svc-step">/03</span>
+          <div><span class="svc-title">Acquisition System Build<span class="svc-flag">Flagship</span></span><span class="svc-price">£30k · 8–12 weeks</span></div>
+          <div class="svc-desc"><strong>Best for</strong>Channels in isolation; you need them as one system.</div>
+          <div class="svc-desc"><strong>What gets built</strong>Channel architecture, offer map, reporting, handoff pack.</div>
+          <div class="svc-cta"><a href="/services/acquisition-system-build">Build →</a></div>
+        </div>
+        <div class="svc-row">
+          <span class="svc-step">/04</span>
+          <div><span class="svc-title">Fractional CMO</span><span class="svc-price">£8k/mo · 3-mo min</span></div>
+          <div class="svc-desc"><strong>Best for</strong>Senior growth leadership without a £150k full-time hire.</div>
+          <div class="svc-desc"><strong>What gets built</strong>Operating cadence, agency direction, board reporting.</div>
+          <div class="svc-cta"><a href="/services/fractional-cmo">Embed →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* CASE STUDIES */}
+  <section class="cases">
+    <div class="shell">
+      <span class="spec-label">Real engagements · § 06</span>
+      <h2 class="section-h">Results, <em>named</em>.</h2>
+      <p class="section-sub">Every row labelled — paid client engagement vs programme or lecturing — so nothing reads like an implied client when it isn't.</p>
+      <div class="case-grid">
+        <article class="case-card feature">
+          <span class="case-meta">Paid · Fintech · Fractional CMO</span>
+          <h4>Ned</h4>
+          <div class="case-sub">Funding platform · Google Ads + SEO overhaul</div>
+          <p><strong>500+ sign-ups</strong> in two months from paid search. The team needed to move beyond organic reach and lower the cost of getting users to try the product.</p>
+          <div class="case-mini-stats">
+            <div><div class="case-stat-v">8.6%</div><div class="case-stat-l">Avg CTR</div></div>
+            <div><div class="case-stat-v">500+</div><div class="case-stat-l">Sign-ups · 2mo</div></div>
+            <div><div class="case-stat-v">$0.74</div><div class="case-stat-l">Avg CPC</div></div>
+          </div>
+          <a href="/case-studies/ned" class="case-link">Read the full case study →</a>
+        </article>
+        <article class="case-card">
+          <span class="case-meta">Paid · Healthtech</span>
+          <h4>Diadia (anon.)</h4>
+          <div class="case-sub">Precision medicine · Fractional CMO</div>
+          <p>Marketing function <strong>built from zero</strong>. Operating rhythm installed.</p>
+          <a href="/case-studies/diadia-health" class="case-link">Read →</a>
+        </article>
+        <article class="case-card">
+          <span class="case-meta">Paid · Healthtech</span>
+          <h4>eQuoo</h4>
+          <div class="case-sub">Mental-health app · Fractional CMO</div>
+          <p>Clearer <strong>acquisition narrative</strong> and channel hierarchy.</p>
+          <a href="/case-studies/equoo" class="case-link">Read →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {/* Testimonials */}
+  <section class="testimonials">
+    <div class="shell">
+      <span class="spec-label">Founder voices · § 07</span>
+      <h2 class="section-h">What founders <em>say</em>.</h2>
+      <p class="section-sub">Paid clients first, mentoring reviews second. All verifiable on request.</p>
+      <div class="testim-grid">
+        <figure class="testim-card">
+          <span class="testim-mark">"</span>
+          <blockquote>The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint shipped six experiments and gave us a weekly cadence that still runs without Daniel today.</blockquote>
+          <cite><strong>James Madia</strong>Founder, Madia · Paid engagement</cite>
+        </figure>
+        <figure class="testim-card">
+          <span class="testim-mark">"</span>
+          <blockquote>Daniel helped us move from scattered founder-led marketing to a clear weekly acquisition rhythm. Within 90 days we had sharper ICP, cleaner reporting, and a campaign system the team could run without everything routing back to the founder.</blockquote>
+          <cite><strong>B2B SaaS founder, CEO</strong>Paid engagement · name on request</cite>
+        </figure>
+        <figure class="testim-card">
+          <span class="testim-mark">"</span>
+          <blockquote>Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.</blockquote>
+          <cite><strong>Dru Riley</strong>Growth mentoring · MentorCruise</cite>
+        </figure>
+        <figure class="testim-card">
+          <span class="testim-mark">"</span>
+          <blockquote>Sharp, practical advice with a clear focus on messaging and positioning. He helped me reframe the problem and target the right audience more effectively.</blockquote>
+          <cite><strong>Greg Weinstein</strong>Founder mentoring · MentorCruise</cite>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {/* ABOUT — with real photos */}
+  <section class="about">
+    <div class="shell">
+      <span class="spec-label">Founder · § 08</span>
+      <div class="about-grid">
+        <div class="about-photo-stack">
+          <div class="about-photo">
+            <img src="https://wescalestartups.com/images/daniel-headshot-640.webp" alt="Daniel Johnson, founder of We Scale Startups" loading="lazy" />
+          </div>
+          <div class="about-photo-secondary">
+            <img src="https://wescalestartups.com/images/daniel-aircraft-640.webp" alt="Daniel Johnson — operator-side context" loading="lazy" />
+          </div>
+          <div class="about-photo-caption">Daniel Johnson · Daniels-Macbook-Air</div>
+        </div>
+        <div class="about-content">
+          <h2>Why I built <em>this</em>.</h2>
+          <p>I'm Daniel Johnson. After 15 years operating inside SaaS, fintech, healthtech and EdTech startups — including two exits — I kept seeing the same pattern: founders with great products, stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.</p>
+          <p>I built We Scale Startups to be the operator I wished was there. <strong>The work is to diagnose the bottleneck, install the acquisition system, and transfer the weekly rhythm</strong> — so you don't need me forever.</p>
+          <div class="about-creds">
+            <div class="label">Track record</div>
+            <li>Two operator-side startup exits</li>
+            <li>£18M+ revenue influenced</li>
+            <li>£6M+ paid acquisition spend</li>
+            <li>479+ founder sessions · 4.93/5</li>
+            <li>MentorCruise Top Mentor · 5.0/5</li>
+            <li>Cambridge Judge · Imperial · Techstars</li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="faq">
+    <div class="shell">
+      <span class="spec-label">Before you book · § 09</span>
+      <h2 class="section-h">Questions you'll ask before you book.</h2>
+      <p class="section-sub">Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership.</p>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary><span class="q-num">/01</span><span class="q-text">Who is We Scale Startups for?</span></summary>
+          <div class="answer">Post-PMF B2B SaaS and AI startups, typically Seed to Series B, with real traction and inconsistent acquisition. If you're still searching for product-market fit, we're the wrong call — growth marketing won't fix a product problem.</div>
+        </details>
+        <details class="faq-item" open>
+          <summary><span class="q-num">/02</span><span class="q-text">How is WSS different from an agency?</span></summary>
+          <div class="answer">Agencies are the right choice when the channel plan is clear and you need production capacity. WSS works one level up — naming the bottleneck, aligning channels, installing the weekly decision rhythm, and handing off a system your team (or your agency) can run inside. Many teams need both, often in that order.</div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q-num">/03</span><span class="q-text">What does the first call actually cover?</span></summary>
+          <div class="answer">20 minutes. Bring your current numbers and the constraint you suspect is binding pipeline. You'll leave with the constraint named in plain English, the next move sketched out, and an honest read on whether WSS is the right call.</div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q-num">/04</span><span class="q-text">What does it cost?</span></summary>
+          <div class="answer">Four engagements, four price points. Diagnosis from £4k (one week). 90-Day Sprint from £15k. Acquisition System Build from £30k. Fractional CMO from £8k/month, 3-month minimum. <a href="/pricing">Full pricing →</a></div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q-num">/05</span><span class="q-text">Do you guarantee results?</span></summary>
+          <div class="answer">No. Anyone who guarantees marketing outcomes either doesn't understand the work or doesn't intend to do it. What we guarantee is the operating system — a constraint named, a plan to move it, and a weekly rhythm your team can run.</div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q-num">/06</span><span class="q-text">Who isn't this for?</span></summary>
+          <div class="answer">Pre-PMF startups, founders looking for tactic-of-the-week, teams without internal execution capacity, and volume buyers who want more activity rather than fewer sharper decisions. If that's you, we'll say so on the call and point you somewhere better.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* FINAL CTA */}
+  <section class="final-cta">
+    <div class="shell">
+      <span class="spec-label" style="color: var(--violet-soft); margin-bottom: 12px;">→ Next step</span>
+      <h2>The next step is a <em>20-minute call</em>.</h2>
+      <p>Bring your current growth picture. You'll leave with your bottleneck named in plain English, and an honest read on whether we're the right call.</p>
+      <a href={siteConfig.bookingUrl} class="btn-primary">{siteConfig.bookingLabel} <span>→</span></a>
+    </div>
+  </section>
+
+  {/* NEWSLETTER MODAL */}
+  <div class="modal-backdrop" id="newsletter-modal" role="dialog" aria-labelledby="modal-h">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close" onclick="closeModal()">×</button>
+      <span class="modal-eyebrow">● The Growth Bottleneck — Biweekly</span>
+      <h3 id="modal-h">One useful note. <em>Every other Thursday.</em></h3>
+      <p>Practical writing on SaaS pipeline, positioning, and founder-led growth systems. Read by 1,400+ founders. No fluff, no funnels, no AI ghostwriting.</p>
+      <form class="modal-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="you@company.com" required aria-label="Email" />
+        <button type="submit">Get the note <span>→</span></button>
+      </form>
+      <div class="modal-foot">No spam · Unsubscribe in one click</div>
     </div>
   </div>
 
-  <section class="hv6-hero" aria-label="We Scale Startups hero">
-    <div class="hv6-aurora-2" aria-hidden="true"></div>
-    <div class="h3-container">
-
-      <div class="hv6-grid">
-
-        <div class="hv6-col-main">
-          <div class="hv6-eyebrow">
-            <span class="dot" aria-hidden="true"></span> Fractional CMO · Post-PMF B2B SaaS &amp; AI
-          </div>
-
-          <h1 class="hv6-h1">
-            Your pipeline shouldn't depend on <span class="grad">you running</span> it.
-          </h1>
-
-          <div class="hv6-byline">
-            <span class="av" aria-hidden="true">DJ</span>
-            <span class="who">{siteConfig.founderName}</span>
-            <span class="sep" aria-hidden="true"></span>
-            <span>Fractional CMO</span>
-            <span class="sep" aria-hidden="true"></span>
-            <a href={siteConfig.growthMentor} rel="noopener noreferrer" target="_blank"
-              ><span class="star">★</span>4.93 · GrowthMentor</a
-            >
-            <span class="sep" aria-hidden="true"></span>
-            <span>479+ founder sessions</span>
-          </div>
-
-          <p class="hv6-lede">
-            We install the acquisition system your team can run <strong>without the founder in every decision</strong> — in 90 days, for the cost of a senior hire's first quarter.
-          </p>
-
-          <nav class="hv6-ladder" aria-label="Engagement ladder">
-            <a href="/services/growth-diagnosis" data-cta="hero-shape-diagnose"><span class="n">01</span> Diagnose</a>
-            <a href="/services/90-day-growth-sprint" data-cta="hero-shape-sprint"><span class="n">02</span> Sprint</a>
-            <a href="/services/acquisition-system-build" data-cta="hero-shape-build"><span class="n">03</span> Build</a>
-            <a href="/services/fractional-cmo" data-cta="hero-shape-embed"><span class="n">04</span> Embed</a>
-          </nav>
-
-          <div class="hv6-cta-row">
-            <a class="hv6-btn hv6-btn-primary" href={siteConfig.bookingUrl} data-cta="hero-book" title={siteConfig.bookingCallReassurance}>
-              {siteConfig.bookingLabel} <span class="arrow" aria-hidden="true">→</span>
-            </a>
-            <a class="hv6-btn hv6-btn-ghost" href={siteConfig.scorecardUrl} data-cta="hero-scorecard">
-              Take the 5-min scorecard <span class="arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
-
-        <aside class="hv6-dash" aria-label="Live growth diagnostic sample">
-          <div class="hv6-dash-head">
-            <div class="hv6-dash-title"><span class="live-dot" aria-hidden="true"></span> Growth Diagnostic — Live Sample</div>
-            <div class="hv6-dash-meta">WK 01 / 12</div>
-          </div>
-
-          <div class="hv6-dash-intro">
-            <h3 class="hv6-dash-h">What 20 minutes looks like.</h3>
-            <p class="hv6-dash-p">A real diagnosis from a recent call. Yours follows the same shape, with your numbers.</p>
-          </div>
-
-          <div class="hv6-kpis">
-            <div class="hv6-kpi">
-              <div class="l">Pipeline today</div>
-              <div class="v">£42k<span class="unit">/wk</span></div>
-              <div class="d flat">— flat 6 wks</div>
-            </div>
-            <div class="hv6-kpi">
-              <div class="l">12-wk projection</div>
-              <div class="v">£128k<span class="unit">/wk</span></div>
-              <div class="d up">▲ 3.0× compounding</div>
-            </div>
-            <div class="hv6-kpi">
-              <div class="l">Bottleneck</div>
-              <div class="v" style="color:var(--h3-violet-deep)">Acquisition</div>
-              <div class="d acc">88% confidence</div>
-            </div>
-          </div>
-
-          <div class="hv6-chart-wrap">
-            <div class="hv6-chart-legend">
-              <span class="k flat">Pipeline · now</span>
-              <span class="k live">Pipeline · system</span>
-            </div>
-            <svg class="hv6-spark" id="hv6-hero-spark" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="hv6-g1" x1="0" x2="1" y1="0" y2="0">
-                  <stop offset="0%"   stop-color="#a78bfa"></stop>
-                  <stop offset="50%"  stop-color="#7c3aed"></stop>
-                  <stop offset="100%" stop-color="#6d28d9"></stop>
-                </linearGradient>
-                <linearGradient id="hv6-g1f" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#7c3aed" stop-opacity=".25"></stop>
-                  <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"></stop>
-                </linearGradient>
-                <filter id="hv6-glow" x="-20%" y="-50%" width="140%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
-                  <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
-                </filter>
-              </defs>
-              <g stroke="#e7e5e0" stroke-width="1">
-                <line x1="0" x2="600" y1="36" y2="36"></line>
-                <line x1="0" x2="600" y1="75" y2="75"></line>
-                <line x1="0" x2="600" y1="114" y2="114"></line>
-              </g>
-              <path d="M0,116 C40,112 80,120 120,116 C160,110 200,118 240,114 C280,109 320,118 360,112 C400,107 440,116 480,110 C520,105 560,113 600,109"
-                    fill="none" stroke="#cdc7bd" stroke-width="2" stroke-dasharray="4 5"></path>
-              <path class="area"
-                    d="M0,120 C60,114 120,108 180,96 C240,84 300,68 360,50 C420,34 480,22 540,15 L600,10 L600,150 L0,150 Z"
-                    fill="url(#hv6-g1f)"></path>
-              <path class="draw"
-                    d="M0,120 C60,114 120,108 180,96 C240,84 300,68 360,50 C420,34 480,22 540,15 L600,10"
-                    fill="none" stroke="url(#hv6-g1)" stroke-width="3" stroke-linecap="round"
-                    filter="url(#hv6-glow)"></path>
-              <g class="endnode">
-                <circle cx="600" cy="10" r="14" fill="#7c3aed" fill-opacity=".15"></circle>
-                <circle cx="600" cy="10" r="5" fill="#7c3aed"></circle>
-              </g>
-            </svg>
-          </div>
-
-          <div class="hv6-rows">
-            <div class="hv6-row">
-              <span class="n">01</span>
-              <span class="what">Positioning<small>ICP clear · category owned</small></span>
-              <span class="tag ok">Healthy</span>
-            </div>
-            <div class="hv6-row">
-              <span class="n">02</span>
-              <span class="what">Acquisition<small>Channel concentration · single-source</small></span>
-              <span class="tag bad">Bottleneck</span>
-            </div>
-            <div class="hv6-row">
-              <span class="n">03</span>
-              <span class="what">Conversion<small>Demo → SQL leak · no playbook</small></span>
-              <span class="tag watch">Watch</span>
-            </div>
-            <div class="hv6-row">
-              <span class="n">04</span>
-              <span class="what">Reporting<small>Weekly cadence · founder-trusted</small></span>
-              <span class="tag ok">Healthy</span>
-            </div>
-            <div class="hv6-row">
-              <span class="n">05</span>
-              <span class="what">Team ownership<small>Founder-dependent on most decisions</small></span>
-              <span class="tag watch">Watch</span>
-            </div>
-          </div>
-
-          <div class="hv6-dash-foot">
-            <div class="verdict"><strong>Verdict.</strong> Run a 90-day sprint against <em>acquisition</em>.</div>
-            <a href={siteConfig.scorecardUrl} data-cta="diag-take-yours">Take yours →</a>
-          </div>
-        </aside>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PROOF BAR — editorial proof strip with brand-violet gradient numerals -->
-  <section class="hv6-proof-bar" aria-label="Growth proof metrics">
-    <div class="h3-container">
-      <div class="hv6-proof-grid">
-        {canonicalProofMetrics.slice(0, 4).map((m) => (
-          <div class="hv6-stat">
-            <span class="hv6-stat-value">{m.value}</span>
-            <span class="hv6-stat-label">{m.label}</span>
-          </div>
-        ))}
-        <div class="hv6-trust">
-          <span class="lbl">Constraints diagnosed across</span>
-          <div class="names">
-            <span>Positioning</span>
-            <span>Acquisition</span>
-            <span>Conversion</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SUB-AUDIENCE ROUTING — solves the "we serve more than founders" problem -->
-  <section class="section wr-sub-audience" aria-label="Other audiences">
-    <div class="shell">
-      <div class="wr-sub-label">Not a founder?</div>
-      <div class="wr-sub-grid">
-        {subAudiences.map((a) => (
-          <div class="wr-sub-item">
-            <h4>{a.title}</h4>
-            <p>{a.body}</p>
-            <a href={a.href}>{a.label} →</a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <HomeProofV3 />
-
-  <!-- WHAT YOU'LL LEAVE WITH — concrete promise for the first call -->
-  <section class="section wr-leave-with" aria-labelledby="leave-with-h2">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="The first call"
-        title="In 20 minutes, you'll leave with this."
-        body="Bring your current numbers. No pitch unless there's a clear fit."
-        titleId="leave-with-h2"
-      />
-      <div class="wr-lw-grid">
-        {leaveWith.map((b) => (
-          <article class="wr-lw-card">
-            <span class="wr-lw-num">{b.n}</span>
-            <h4>{b.h}</h4>
-            <p>{b.p}</p>
-          </article>
-        ))}
-      </div>
-      <div class="wr-lw-cta">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="leave-with-book">
-          {siteConfig.bookingLabel} →
-        </a>
-      </div>
-    </div>
-  </section>
-
   <script is:inline>
-    (() => {
-      const spark = document.getElementById("hv6-hero-spark");
-      if (!spark) return;
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduced) {
-        spark.classList.add("is-animated");
-        return;
+    // =========== Animated counters on scroll ===========
+    (function(){
+      const counters = document.querySelectorAll('.counter');
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      function animate(el) {
+        const target = parseFloat(el.dataset.target);
+        const decimals = parseInt(el.dataset.decimals) || 0;
+        const suffix = el.dataset.suffix || '';
+        const prefix = el.dataset.prefix || '';
+        const dur = 1400;
+        const start = performance.now();
+        const wrap = el.querySelector('span');
+        const wrapHTML = wrap ? wrap.outerHTML : '';
+        function tick(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const v = ease(p) * target;
+          el.firstChild.nodeValue = prefix + v.toFixed(decimals) + suffix;
+          if (wrap) el.innerHTML = prefix + v.toFixed(decimals) + suffix + wrapHTML;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
       }
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((en) => {
-            if (!en.isIntersecting) return;
-            spark.classList.add("is-animated");
-            io.disconnect();
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting && !e.target.dataset.animated) {
+              e.target.dataset.animated = '1';
+              animate(e.target);
+              io.unobserve(e.target);
+            }
           });
-        },
-        { threshold: 0.2 }
-      );
-      io.observe(spark);
+        }, { threshold: 0.3 });
+        counters.forEach(c => io.observe(c));
+      }
     })();
+
+    // =========== Diagnostic widget — tab switcher ===========
+    (function(){
+      const scenarios = {
+        saas: {
+          title: 'What 20 minutes looks like.',
+          sub: 'A real diagnosis from a recent B2B SaaS call. Yours follows the same shape.',
+          now: '£42k<span class="unit">/wk</span>', flat: '— flat 6 wks',
+          proj: '£128k<span class="unit">/wk</span>', growth: '▲ 3.0× compounding',
+          bn: 'Acq.', conf: '88% conf.',
+          verdict: 'Run a 90-day sprint against <em style="color:var(--violet);font-style:italic;">acquisition</em>.',
+          bars: [38, 42, 36, 40, 48, 58, 68, 78, 88, 100],
+          tags: ['ok', 'bad', 'watch', 'ok', 'watch']
+        },
+        fintech: {
+          title: 'A fintech founder, last quarter.',
+          sub: 'Pipeline strong on the brand channel; nothing else carrying weight.',
+          now: '£68k<span class="unit">/wk</span>', flat: '— spiky 12 wks',
+          proj: '£170k<span class="unit">/wk</span>', growth: '▲ 2.5× diversified',
+          bn: 'Conv.', conf: '92% conf.',
+          verdict: 'Tighten the demo-to-SQL playbook. <em style="color:var(--violet);font-style:italic;">Sprint</em> recommended.',
+          bars: [55, 62, 48, 70, 58, 65, 78, 72, 88, 100],
+          tags: ['ok', 'ok', 'bad', 'watch', 'ok']
+        },
+        healthtech: {
+          title: 'A healthtech founder, this month.',
+          sub: 'Strong clinical product. Marketing function did not exist.',
+          now: '£12k<span class="unit">/wk</span>', flat: '— inconsistent',
+          proj: '£64k<span class="unit">/wk</span>', growth: '▲ 5.3× building',
+          bn: 'All five', conf: '—',
+          verdict: 'Marketing function from zero. <em style="color:var(--violet);font-style:italic;">System Build</em> required.',
+          bars: [10, 15, 8, 18, 22, 38, 52, 68, 82, 100],
+          tags: ['watch', 'bad', 'watch', 'bad', 'bad']
+        }
+      };
+      const tabs = document.querySelectorAll('.diag-tab');
+      function setTag(el, cls) {
+        el.classList.remove('ok', 'bad', 'watch');
+        el.classList.add(cls);
+        el.textContent = cls === 'ok' ? 'Healthy' : cls === 'bad' ? 'Bottleneck' : 'Watch';
+      }
+      tabs.forEach(t => {
+        t.addEventListener('click', () => {
+          tabs.forEach(o => o.classList.remove('active'));
+          t.classList.add('active');
+          const s = scenarios[t.dataset.tab];
+          document.getElementById('diag-title').textContent = s.title;
+          document.getElementById('diag-sub').textContent = s.sub;
+          document.querySelector('[data-m="now"]').innerHTML = s.now;
+          document.querySelector('[data-m="flat"]').textContent = s.flat;
+          document.querySelector('[data-m="proj"]').innerHTML = s.proj;
+          document.querySelector('[data-m="growth"]').textContent = s.growth;
+          document.querySelector('[data-m="bn"]').textContent = s.bn;
+          document.querySelector('[data-m="conf"]').textContent = s.conf;
+          document.getElementById('verdict').innerHTML = '<strong>Verdict.</strong> ' + s.verdict;
+          const bars = document.querySelectorAll('#chart .bar');
+          s.bars.forEach((h, i) => { if (bars[i]) bars[i].style.height = h + '%'; });
+          const tags = document.querySelectorAll('[data-t]');
+          s.tags.forEach((t, i) => { if (tags[i]) setTag(tags[i], t); });
+        });
+      });
+    })();
+
+    // =========== Find-your-bottleneck interactive ===========
+    (function(){
+      const data = {
+        positioning: { meta: '01 · POSITIONING', title: 'Your story lands in the room. Not in the market.', desc: 'The product narrative is right, but it does not carry beyond a live conversation. Demos go well, pipeline does not.', svc: 'Growth Diagnosis', meta2: 'from £4k · 1 week · Best starting point', link: '/services/growth-diagnosis' },
+        acquisition: { meta: '02 · ACQUISITION', title: 'One channel carries the funnel.', desc: 'Diversify before the dip — design the second engine and the weekly decision rule that scales it.', svc: 'Acquisition System Build', meta2: 'from £30k · 8–12 weeks · Flagship', link: '/services/acquisition-system-build' },
+        conversion: { meta: '03 · CONVERSION', title: 'Demos and trials do not progress.', desc: 'No shared playbook for what to say, when. 90-day sprint installs the test loop and decision cadence.', svc: '90-Day Growth Sprint', meta2: 'from £15k · 12 weeks · Best for fast signal', link: '/services/90-day-growth-sprint' },
+        reporting: { meta: '04 · REPORTING', title: 'No single weekly view of scale, stop, or fix.', desc: 'Paid, organic, outbound each report in their own dashboards. Build installs one decision view your team owns.', svc: 'Acquisition System Build', meta2: 'from £30k · 8–12 weeks · Flagship', link: '/services/acquisition-system-build' },
+        team: { meta: '05 · TEAM OWNERSHIP', title: 'Every campaign and brief routes through the founder.', desc: 'Senior judgement without a £150k hire. Embedded leadership 2–3 days/week, transferring the rhythm.', svc: 'Fractional CMO', meta2: 'from £8k/month · 3-month min', link: '/services/fractional-cmo' }
+      };
+      const cards = document.querySelectorAll('.bf-card');
+      function update(key) {
+        const d = data[key];
+        document.getElementById('bf-meta').textContent = d.meta;
+        document.getElementById('bf-title').textContent = d.title;
+        document.getElementById('bf-desc').textContent = d.desc;
+        document.getElementById('bf-svc').textContent = d.svc;
+        document.getElementById('bf-svc-meta').textContent = d.meta2;
+        document.getElementById('bf-link').href = d.link;
+        document.getElementById('bf-link').textContent = d.svc + ' →';
+      }
+      cards.forEach(c => {
+        c.addEventListener('click', () => {
+          cards.forEach(o => o.classList.remove('active'));
+          c.classList.add('active');
+          update(c.dataset.bn);
+        });
+      });
+    })();
+
+    // =========== Newsletter modal — scroll-triggered ===========
+    (function(){
+      const modal = document.getElementById('newsletter-modal');
+      if (!modal) return;
+      const KEY = 'wss_newsletter_dismissed_v1';
+      if (sessionStorage.getItem(KEY)) return;
+      let shown = false;
+      function show() {
+        if (shown) return;
+        shown = true;
+        modal.classList.add('show');
+      }
+      // Trigger when scrolled past 55% of the page
+      function onScroll() {
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY / docH;
+        if (scrolled > 0.55) {
+          show();
+          window.removeEventListener('scroll', onScroll);
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      // Also exit-intent on desktop
+      document.addEventListener('mouseout', (e) => {
+        if (!e.toElement && !e.relatedTarget && e.clientY < 10) show();
+      });
+      // Close handlers
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    })();
+    function closeModal() {
+      const modal = document.getElementById('newsletter-modal');
+      if (modal) {
+        modal.classList.remove('show');
+        sessionStorage.setItem('wss_newsletter_dismissed_v1', '1');
+      }
+    }
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = '✓ Thanks — check your inbox';
+      setTimeout(closeModal, 1200);
+    }
   </script>
-
-  <CtaLadder />
-
-  <WhoThisIsForIcp />
-
-  <NotForBlock />
-
-  <!-- BEFORE / AFTER — core problem in concrete terms -->
-  <section class="section before-after-section">
-    <div class="shell">
-      <p class="eyebrow">The core problem</p>
-      <h2>Early traction hides weak systems — here's what changes when the rhythm is in.</h2>
-      <div class="ba-grid">
-        <article class="ba-card">
-          <div class="ba-before">
-            <span class="ba-label">Before</span>
-            <p>Founder approves every campaign — the team executes, but every decision routes through you.</p>
-          </div>
-          <div class="ba-arrow" aria-hidden="true">→</div>
-          <div class="ba-after">
-            <span class="ba-label">After</span>
-            <p>Team runs a weekly decision cadence. Scale, stop, or fix calls happen without the founder in the room.</p>
-          </div>
-        </article>
-        <article class="ba-card">
-          <div class="ba-before">
-            <span class="ba-label">Before</span>
-            <p>Channels report in isolation — paid, SEO, and outbound each have their own numbers, none connected to pipeline.</p>
-          </div>
-          <div class="ba-arrow" aria-hidden="true">→</div>
-          <div class="ba-after">
-            <span class="ba-label">After</span>
-            <p>One dashboard. One view. Each week you see exactly what to scale, what to stop, and what to fix.</p>
-          </div>
-        </article>
-        <article class="ba-card">
-          <div class="ba-before">
-            <span class="ba-label">Before</span>
-            <p>Agency owns the channel logic — you get reports, invoices, and reasons why it didn't work.</p>
-          </div>
-          <div class="ba-arrow" aria-hidden="true">→</div>
-          <div class="ba-after">
-            <span class="ba-label">After</span>
-            <p>Company owns the system. The agency executes inside a brief your team controls — and the IP stays with you.</p>
-          </div>
-        </article>
-      </div>
-      <!-- Proof callout — grounds abstract claims with specific evidence -->
-      <div class="why-now-proof">
-        <p class="wnp-label">These aren't theoretical — here's what it looks like in practice:</p>
-        <ul class="wnp-list">
-          <li><strong>Founder-led growth replaced:</strong> Healthtech (anonymous) — CEO moved from doing all marketing to weekly review within the first 30 days.</li>
-          <li><strong>Channels unified:</strong> FinTech — paid, organic, and outbound connected to one decision view; 8.6% CTR and 500+ sign-ups in two months.</li>
-          <li><strong>Team given direction:</strong> EdTech — acquisition focus narrowed from five channels to one ICP and one channel with a clear experiment backlog.</li>
-        </ul>
-        <a class="wnp-link" href="/case-studies">See all case studies →</a>
-      </div>
-    </div>
-  </section>
-
-  <ServiceComparisonTable />
-
-  {featuredCase && (
-    <section class="section" id="results">
-      <div class="shell">
-        <SectionIntro
-          eyebrow="Case studies"
-          title="Results, named."
-          body="Read the row. If it sounds like you, click through. Every engagement labelled — paid client work vs programme or lecturing — so nothing reads like an implied client when it isn't."
-        />
-        <div class="case-feature">
-          <div class="case-visual" aria-hidden="true">
-            <span>{featuredCaseLabel}</span>
-            <span>{featuredCase.data.results[0]}</span>
-            <strong>{featuredCaseLabel.slice(0, 1)}</strong>
-          </div>
-          <div class="case-copy">
-            <p class="eyebrow">{featuredCase.data.sector}</p>
-            <h3>{featuredCaseLabel}: {featuredCase.data.title.replace(/^.*?:\s*/, '')}</h3>
-            <div class="par-grid">
-              <div class="par-row par-problem"><span class="par-label">Problem</span><p>{featuredCase.data.challenge}</p></div>
-              <div class="par-row par-action"><span class="par-label">What we changed</span><p>{featuredCase.data.work.slice(0, 3).join(". ")}.</p></div>
-              <div class="par-row par-result"><span class="par-label">Commercial result</span><p>{featuredCase.data.results.slice(0, 2).join("; ")}.</p></div>
-            </div>
-            <div class="case-metrics">
-              {featuredCase.data.results.slice(0, 3).map((r) => (
-                <div><span class="stat-number">{metricLead(r)}</span><span class="stat-label">{r}</span></div>
-              ))}
-            </div>
-            <div class="hero-actions">
-              <a class="button button-brand" href={`/case-studies/${featuredCase.id}`}>Read the full case</a>
-              <a class="button button-light" href="/proof">All proof</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-3 mt-8">
-          {otherCases.map((item) => (
-            <article class="case-mini">
-              <div class="case-scan-strip" aria-label="Case at a glance">
-                <p class="case-scan-meta">
-                  <strong>{item.data.client}</strong>
-                  <span class="case-scan-sep" aria-hidden="true">·</span>
-                  <span>{item.data.sector}</span>
-                </p>
-                <p class="case-scan-narrative">
-                  <span class="case-scan-bit">{item.data.challenge}</span>
-                  <span class="case-scan-sep" aria-hidden="true">→</span>
-                  <span class="case-scan-bit">{item.data.work[0]}</span>
-                  <span class="case-scan-sep" aria-hidden="true">→</span>
-                  <span class="case-scan-bit">{item.data.results[0]}</span>
-                </p>
-              </div>
-              <h4>{item.data.title}</h4>
-              <dl class="par-mini">
-                <dt>Problem</dt><dd>{item.data.challenge}</dd>
-                <dt>What we changed</dt><dd>{item.data.work[0]}.</dd>
-                <dt>Commercial result</dt><dd>{item.data.results[0]}{item.data.results[1] ? "; " + item.data.results[1] : ""}.</dd>
-              </dl>
-              <a class="card-link" href={`/case-studies/${item.id}`}>Read the case →</a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <VsAgencyBlock />
-
-  <section class="section section-alt" aria-labelledby="first30-home-heading">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="First 30 days"
-        title="What happens in month one."
-        body="Same sequence on most engagements — emphasis shifts based on whether the constraint is positioning, acquisition, conversion, or reporting."
-        titleId="first30-home-heading"
-      />
-      <div class="timeline home-first30-timeline">
-        {first30Days.map((item) => (
-          <article class="timeline-row">
-            <span class="timeline-week">{item.week}</span>
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-      <p class="home-first30-more">
-        <a class="link-arrow" href="/first-30-days">Full first 30 days detail →</a>
-        {" · "}
-        <a class="link-arrow" href="/how-it-works">How it works →</a>
-      </p>
-    </div>
-  </section>
-
-  <TestimonialsBlock testimonials={homeTestimonials} />
-
-  <DanielStory />
-
-  <!-- FAQ -->
-  <section class="section section-alt">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="Before you book"
-        title="Questions you'll ask before you book."
-        body="Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership."
-      />
-      <div class="home-faq-stack">
-        {buyerFaqs.map((faq, index) => (
-          <details class="home-faq-item" open={index < 2}>
-            <summary>{faq.question}</summary>
-            <p>{faq.answer}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="cta-band" id="cta">
-    <div class="shell cta-inner">
-      <div>
-        <p class="eyebrow">Next step</p>
-        <h2>The next step is a 20-minute call.</h2>
-        <p>
-          Bring your current growth picture. You'll leave with your bottleneck named in plain English, and an honest read on whether we're the right call.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="final-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="final-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
-
-<style>
-  /* Before / After section */
-  .before-after-section { padding-block: 4rem; }
-  .ba-grid {
-    display: grid;
-    gap: 1.25rem;
-    grid-template-columns: 1fr;
-    margin-top: 2rem;
-  }
-  @media (min-width: 900px) { .ba-grid { grid-template-columns: repeat(3, 1fr); } }
-  .ba-card {
-    display: grid;
-    grid-template-rows: 1fr auto 1fr;
-    gap: 0;
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
-    overflow: hidden;
-    background: var(--surface);
-  }
-  .ba-before, .ba-after { padding: 1.4rem 1.4rem 1.6rem; }
-  .ba-before {
-    background: color-mix(in srgb, #ff4444 5%, var(--surface));
-    border-bottom: 1px solid var(--line);
-  }
-  .ba-after {
-    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
-    border-top: 1px solid var(--line);
-  }
-  .ba-label {
-    display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 0.65rem;
-  }
-  .ba-before .ba-label { color: #c03030; }
-  .ba-after .ba-label { color: var(--accent); }
-  .ba-before p, .ba-after p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0;
-  }
-  .ba-arrow {
-    text-align: center;
-    padding: 0.5rem 0;
-    font-size: 1.25rem;
-    color: var(--accent);
-    font-weight: 700;
-    background: var(--surface);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-
-  /* Why Now proof callout */
-  .why-now-proof {
-    margin-top: 2rem;
-    background: color-mix(in srgb, var(--accent) 5%, var(--surface));
-    border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
-    border-radius: 1rem;
-    padding: 1.4rem 1.6rem 1.5rem;
-  }
-  .wnp-label {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 0.75rem;
-  }
-  .wnp-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .wnp-list li {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--ink);
-    padding-left: 1rem;
-    position: relative;
-  }
-  .wnp-list li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .wnp-link {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .wnp-link:hover { text-decoration: underline; }
-
-  /* Homepage FAQ — accordion */
-  .home-faq-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    max-width: 720px;
-    margin-top: 0.5rem;
-  }
-  .home-faq-item {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 0;
-    overflow: hidden;
-  }
-  .home-faq-item summary {
-    cursor: pointer;
-    list-style: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    padding: 1rem 2.75rem 1rem 1.15rem;
-    position: relative;
-  }
-  .home-faq-item summary::-webkit-details-marker { display: none; }
-  .home-faq-item summary::after {
-    content: "+";
-    position: absolute;
-    right: 1.1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--accent);
-  }
-  .home-faq-item[open] summary::after { content: "−"; }
-  .home-faq-item p {
-    margin: 0;
-    padding: 0 1.15rem 1.1rem;
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: var(--muted);
-    border-top: 1px solid var(--line);
-    padding-top: 0.85rem;
-  }
-</style>

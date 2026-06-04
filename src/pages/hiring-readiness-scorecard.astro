@@ -1,0 +1,677 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/hiring-readiness-scorecard";
+
+const faqs = [
+  {
+    question: "How is this different from just posting a job description?",
+    answer:
+      "A job description describes who you want. This scorecard tells you whether the company is ready to receive them. Most failed marketing hires aren't a hiring mistake — they're a readiness mistake."
+  },
+  {
+    question: "What if I score in the middle zone?",
+    answer:
+      "A middle score usually means some GTM foundations are in place but the gaps are structural — unclear ICP, weak proof, no weekly rhythm. A fractional CMO can fill those gaps in 90–120 days and set the hire up to succeed."
+  },
+  {
+    question: "Can WSS help us prepare before we hire?",
+    answer:
+      "Yes. Role definition, GTM foundations, positioning clarity, proof systems, and weekly rhythm are all within scope. We can make you ready — then help you hire into a real brief."
+  }
+];
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Hiring Readiness Scorecard", path }
+  ]),
+  buildFaqSchema(faqs)
+];
+---
+
+<BaseLayout
+  title="Hiring Readiness Scorecard | We Scale Startups"
+  description="Before you hire a Head of Marketing, check whether they'd inherit a system or a mess. 12 questions, 3 result types, clear next steps."
+  keywords="hiring readiness, head of marketing, fractional CMO, GTM foundations, marketing hire scorecard, B2B SaaS marketing"
+  path={path}
+  schema={schema}
+>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Hiring Readiness Scorecard · 12 questions · Free</p>
+      <h1>Before you hire a Head of Marketing, check what they'd be walking into.</h1>
+      <p class="lede">
+        Most failed marketing hires aren't a people problem — they're a readiness problem.
+        Score your GTM foundations in 5 minutes and find out whether you're ready to hire,
+        need fractional leadership first, or need to build the foundations entirely.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href="#scorecard">Start the scorecard →</a>
+        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY THIS MATTERS -->
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Why this matters</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:380;margin:0.4rem 0 2rem;">
+        The three most common hiring mistakes — and how to avoid all of them.
+      </h2>
+      <div class="grid-3">
+        <article class="feature-card compact-card">
+          <h3>Hiring too early</h3>
+          <p>Before ICP, positioning, and proof are clear, a marketing leader spends the first 60 days figuring out what the company actually sells and to whom. They can't win.</p>
+        </article>
+        <article class="feature-card compact-card">
+          <h3>Hiring at the wrong level</h3>
+          <p>A senior CMO in a channel-execution role will churn in 6 months. A junior generalist asked to own strategy will struggle. Mismatched level = mismatched expectations.</p>
+        </article>
+        <article class="feature-card compact-card">
+          <h3>Hiring without a real brief</h3>
+          <p>If you can't say what "good" looks like at 30, 60, and 90 days — the hire will define success themselves. That rarely aligns with what the founder actually needed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SCORECARD -->
+  <section class="section" id="scorecard">
+    <div class="shell">
+      <p class="eyebrow">The scorecard</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:380;margin:0.4rem 0 0.5rem;">
+        Answer honestly. The result is only as useful as the input.
+      </h2>
+      <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
+        Score your company across 12 GTM readiness dimensions. Takes around 5 minutes.
+      </p>
+
+      <div id="quiz-container">
+        <!-- Progress bar -->
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar" id="progress-bar" style="width:0%"></div>
+        </div>
+        <p class="quiz-progress-label" id="progress-label">Question 1 of 12</p>
+
+        <!-- Questions rendered by JS -->
+        <div id="quiz-questions"></div>
+
+        <!-- Navigation -->
+        <div class="quiz-nav" id="quiz-nav" style="display:none">
+          <button class="button button-light" id="btn-back" onclick="quizBack()" style="display:none">← Back</button>
+          <button class="button button-brand" id="btn-next" onclick="quizNext()">Next →</button>
+        </div>
+
+        <!-- Results (hidden until complete) -->
+        <div id="quiz-result" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT EACH RESULT MEANS -->
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">The three outcomes</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:380;margin:0.4rem 0 2rem;">
+        What your score predicts — and what to do next.
+      </h2>
+      <div class="grid-3">
+        <article class="feature-card" style="border-top:3px solid #22c55e;">
+          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#22c55e;margin:0 0 0.5rem;">Score 18–24</p>
+          <h3>Ready to hire</h3>
+          <p>Your GTM foundations are strong enough for a senior marketing leader to land and execute. Focus on defining the role, the 90-day brief, and the right seniority level.</p>
+        </article>
+        <article class="feature-card" style="border-top:3px solid var(--accent);">
+          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin:0 0 0.5rem;">Score 9–17</p>
+          <h3>Fractional leadership first</h3>
+          <p>Some foundations are in place but the gaps are structural. A fractional CMO can build the missing system in 90–120 days, then hand to a permanent hire who has a real brief to work from.</p>
+        </article>
+        <article class="feature-card" style="border-top:3px solid #f97316;">
+          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#f97316;margin:0 0 0.5rem;">Score 0–8</p>
+          <h3>Build foundations first</h3>
+          <p>A senior marketing hire would inherit chaos: unclear ICP, weak positioning, no proof system, no rhythm. Build the foundations first — then hire someone into a system that can actually work.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Common questions</p>
+      <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:380;margin:0.4rem 0 2rem;">
+        Things founders ask before using this scorecard.
+      </h2>
+      <div class="grid-3">
+        {faqs.map((f) => (
+          <article class="feature-card">
+            <h3>{f.question}</h3>
+            <p>{f.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Want a second opinion?</p>
+        <h2>Bring your score. We'll tell you what it means for your next hire.</h2>
+        <p>
+          {siteConfig.bookingCallDurationPhrase}. We'll look at the scorecard together, identify the real gaps, and recommend whether to hire now, hire fractional first, or build the foundations. No pitch.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="hrs-final-book">
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href="/before-you-hire-a-head-of-marketing" data-cta="hrs-before-hire">
+          Read the full guide →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Progress bar */
+  .quiz-progress-wrap {
+    height: 4px;
+    background: var(--line);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+  .quiz-progress-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 300ms ease;
+  }
+  .quiz-progress-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 2rem;
+  }
+
+  /* Question card */
+  .quiz-question-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .quiz-question-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .quiz-question-text {
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    margin: 0 0 1.5rem;
+    color: var(--ink);
+  }
+  .quiz-options {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .quiz-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1rem 1.1rem;
+    background: var(--bg, white);
+    border: 1.5px solid var(--line);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 140ms ease, background 140ms ease;
+    width: 100%;
+  }
+  .quiz-option:hover { border-color: var(--accent); }
+  .quiz-option.selected {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+  .quiz-option-score {
+    flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 0.1rem;
+    transition: background 140ms, border-color 140ms, color 140ms;
+  }
+  .quiz-option.selected .quiz-option-score {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .quiz-option-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .quiz-option-sublabel {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  /* Nav buttons */
+  .quiz-nav {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  /* Result card */
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 2rem 2rem 2.5rem;
+  }
+  .result-score-display {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .result-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .result-headline {
+    font-family: 'Fraunces Variable', Georgia, serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 380;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+  }
+  .result-summary {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 0 0 1.75rem;
+    max-width: 60ch;
+  }
+  .result-actions-grid {
+    display: grid;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 640px) { .result-actions-grid { grid-template-columns: 1fr 1fr; } }
+  .result-action-card {
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--bg, white);
+  }
+  .result-action-card h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    color: var(--ink);
+  }
+  .result-action-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+  }
+  .result-warning {
+    padding: 1rem 1.25rem;
+    border-left: 3px solid #f97316;
+    border-radius: 0 0.5rem 0.5rem 0;
+    background: color-mix(in srgb, #f97316 6%, transparent);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 1.75rem;
+  }
+  .result-warning strong { color: #c05621; }
+  .result-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .result-restart {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 1.25rem;
+    display: block;
+  }
+  .result-restart:hover { color: var(--ink); }
+</style>
+
+<script is:inline define:vars={{ bookingUrl: siteConfig.bookingUrl, bookingLabel: siteConfig.bookingLabel }}>
+  const questions = [
+    {
+      dimension: "ICP Clarity",
+      q: "Can your team describe your ideal customer in one sentence — industry, size, role, and pain — without the founder's help?",
+      options: [
+        { text: "Yes — it's written down, shared, and consistent across the team.", sub: "Everyone uses the same language.", score: 2 },
+        { text: "Roughly — but it varies by team member or context.", sub: "The founder often clarifies it.", score: 1 },
+        { text: "No — it's vague or still evolving.", sub: "Most answers sound different.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Positioning Clarity",
+      q: "Does your website explain who you serve, what problem you solve, and why now — in language your buyers actually use?",
+      options: [
+        { text: "Yes — buyers have confirmed it reflects their language and pain.", sub: "We've tested this with real customers.", score: 2 },
+        { text: "Somewhat — it's directionally right but a bit generic.", sub: "We haven't formally tested it.", score: 1 },
+        { text: "No — it sounds like most SaaS sites or is still founder-drafted.", sub: "Buyers often need extra explanation.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Founder Sales Narrative",
+      q: "Has the founder's key sales story, objection-handling, and buyer language been written down and successfully used by others?",
+      options: [
+        { text: "Yes — it's documented and others are using it effectively.", sub: "AEs or SDRs don't need the founder on calls.", score: 2 },
+        { text: "Partially — some of it is captured but the founder still holds the best version.", sub: "The founder is still the best closer.", score: 1 },
+        { text: "No — it's entirely in the founder's head and has never been fully extracted.", sub: "Deals usually need founder involvement.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Proof Strength",
+      q: "Do you have 3 or more case studies or testimonials with specific, verifiable outcomes for your exact ICP?",
+      options: [
+        { text: "Yes — specific results, named customers, and quantified outcomes.", sub: "Revenue impact, time saved, or conversion uplift stated.", score: 2 },
+        { text: "1–2 references — but they're vague or from adjacent segments.", sub: "Directional proof, not precise.", score: 1 },
+        { text: "Minimal or none — we're still building proof.", sub: "Or proof exists but isn't packaged.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Channel Learning",
+      q: "Do you know which one or two acquisition channels have consistently produced your best-fit customers — with data to back it up?",
+      options: [
+        { text: "Yes — we know our best channels and can attribute pipeline to them.", sub: "Data exists. Decisions are made from it.", score: 2 },
+        { text: "We have a strong hunch, but attribution is messy.", sub: "Directional confidence, not hard data.", score: 1 },
+        { text: "No clear signal — we've tried several things without a pattern.", sub: "Pipeline source is unclear.", score: 0 }
+      ]
+    },
+    {
+      dimension: "CRM and Reporting",
+      q: "Is there a weekly view of pipeline, source, and funnel performance that the team reviews — without the founder prompting it?",
+      options: [
+        { text: "Yes — a weekly review runs consistently with clear owners.", sub: "Decisions come out of it.", score: 2 },
+        { text: "Partially — some reporting exists but it's ad hoc or founder-driven.", sub: "No consistent cadence.", score: 1 },
+        { text: "No — there's no regular reporting cadence.", sub: "Pipeline is tracked informally at best.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Sales Alignment",
+      q: "Is there a defined sales process — stages, qualification criteria, and handoffs — that the team actually follows?",
+      options: [
+        { text: "Yes — documented, followed, and reviewed regularly.", sub: "The process doesn't depend on the founder.", score: 2 },
+        { text: "Roughly — there's a loose process that people follow inconsistently.", sub: "Edge cases go back to the founder.", score: 1 },
+        { text: "No — sales is mostly ad hoc or founder-led.", sub: "Every deal is handled differently.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Role Clarity",
+      q: "Have you written a clear brief for the marketing role — including what they own, what success looks like at 90 days, and what they won't do?",
+      options: [
+        { text: "Yes — written, agreed, and stress-tested with a clear 90-day outcome.", sub: "The brief is ready. Scope is defined.", score: 2 },
+        { text: "Draft stage — we know roughly what we want but haven't committed it to paper.", sub: "It would need a few hours to sharpen.", score: 1 },
+        { text: "No — we'd figure out the role once we find the right person.", sub: "The brief doesn't exist yet.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Budget",
+      q: "Do you have a confirmed marketing budget — including salary, execution budget, and tools — that's been stress-tested by the board or finance?",
+      options: [
+        { text: "Yes — salary and execution budget both confirmed with runway to invest.", sub: "The hire can actually do the job.", score: 2 },
+        { text: "Salary is confirmed, but execution budget is vague or assumed.", sub: "The hire may struggle to get resources.", score: 1 },
+        { text: "Not yet confirmed — we're still figuring out what we can afford.", sub: "Budget may not support the hire.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Weekly GTM Rhythm",
+      q: "Is there a weekly growth meeting — with a consistent agenda, clear owner, and decisions coming out of it — running for at least 3 months?",
+      options: [
+        { text: "Yes — weekly, with agenda, owner, and documented decisions.", sub: "The rhythm is set. Someone could inherit it.", score: 2 },
+        { text: "Occasional growth conversations, but no consistent weekly rhythm.", sub: "It depends on the founder's availability.", score: 1 },
+        { text: "No regular meeting — growth is discussed reactively.", sub: "Pipeline surprises are common.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Execution Support",
+      q: "Will the new marketing leader have enough internal support — or budget for external support — to actually execute?",
+      options: [
+        { text: "Yes — design, ops, data, and/or agency budget are available.", sub: "The hire won't be fully solo.", score: 2 },
+        { text: "Some support exists but it's limited or dependent on other priorities.", sub: "The hire may need to fight for resource.", score: 1 },
+        { text: "No — they'd be a team of one with no external budget.", sub: "Execution depends entirely on them alone.", score: 0 }
+      ]
+    },
+    {
+      dimension: "Gap Diagnosis",
+      q: "Do you know specifically what marketing is currently failing at — strategy, execution, leadership, or all three — and why?",
+      options: [
+        { text: "Yes — we know exactly what's missing and can articulate why.", sub: "The brief reflects this diagnosis.", score: 2 },
+        { text: "We have a general sense but it's not precisely diagnosed.", sub: "It's something like 'we need more pipeline'.", score: 1 },
+        { text: "Not sure — we know growth is stalling but don't know the root cause.", sub: "We're hiring to find out.", score: 0 }
+      ]
+    }
+  ];
+
+  const results = {
+    ready: {
+      range: "18–24",
+      color: "#22c55e",
+      headline: "You're ready to make a strong marketing hire.",
+      summary: "Your GTM foundations are solid enough for a senior marketing leader to land, orient quickly, and execute. The risk now isn't hiring too early — it's hiring at the wrong level or writing a brief that's too vague. Use this moment to define the role sharply, nail the 90-day outcomes, and get the interview process right.",
+      actions: [
+        { title: "Define the role precisely", body: "Write a brief with 90-day outcomes, scope boundaries, and decision rights. The better the brief, the better the hire." },
+        { title: "Match seniority to the actual job", body: "Don't hire a CMO for a Head of Growth job. Match the level to the decisions they need to make, not the title you want to give." },
+        { title: "Set a hiring rhythm", body: "Build a scorecard for candidates. Know the 3 non-negotiables before the first interview." },
+        { title: "Preserve founder involvement in year one", body: "Even a strong hire needs context. Schedule weekly check-ins for the first 90 days — not to supervise, but to transfer knowledge." }
+      ],
+      warning: "<strong>What not to do:</strong> Assume the hire will fix positioning, proof, and pipeline alone. Even strong marketers need a clear brief and regular founder context in year one. Don't disappear.",
+      cta1: { label: "Book a hiring readiness review →", url: null }
+    },
+    fractional: {
+      range: "9–17",
+      color: "var(--accent)",
+      headline: "You need fractional leadership before making a permanent hire.",
+      summary: "Some foundations are in place, but the gaps are structural. A permanent hire would spend 60–90 days figuring out what's missing before they could execute anything. A fractional CMO can diagnose and close those gaps faster — and then hand over to a permanent hire who has a real system to run.",
+      actions: [
+        { title: "Identify the top 2–3 gaps", body: "ICP clarity, positioning, proof, or rhythm? Focus fractional time on the gaps that will block the permanent hire most." },
+        { title: "Use fractional to build the brief", body: "A good fractional CMO will define the role for the person who follows them — so the permanent hire lands into a real position." },
+        { title: "Set a 90–120 day milestone", body: "What needs to be true before you switch from fractional to permanent? Write it down now and work backwards." },
+        { title: "Keep recruiting passive", body: "Run a light talent search in the background. When the system is ready, you want candidates warm — not starting from scratch." }
+      ],
+      warning: "<strong>What not to do:</strong> Hire a permanent Head of Marketing now to \"figure it out\". Without clear ICP, positioning, proof, and rhythm, even a great marketer will struggle for 6+ months before contributing. The hire will be frustrated and expensive.",
+      cta1: { label: "Explore fractional CMO engagement →", url: "/services/fractional-cmo" }
+    },
+    foundations: {
+      range: "0–8",
+      color: "#f97316",
+      headline: "Build the foundations before making any marketing hire.",
+      summary: "A senior marketing hire right now would inherit a mess — unclear ICP, weak positioning, limited proof, no weekly rhythm, and an undefined role. They'd spend their first 6 months building the foundation while being measured on pipeline they couldn't possibly generate yet. This is the most expensive version of the hiring mistake.",
+      actions: [
+        { title: "Fix ICP and positioning first", body: "Until buyers can clearly identify with your messaging, no channel will work at scale. This is the highest-leverage starting point." },
+        { title: "Build proof before outbound", body: "Get 2–3 case studies with specific, verifiable outcomes. Without proof, outbound and content are fighting uphill." },
+        { title: "Start a weekly GTM rhythm now", body: "Even a 30-minute weekly review with a consistent agenda will change how the team thinks about growth. Start before the hire arrives." },
+        { title: "Define the role before recruiting", body: "What specifically is failing? Until you can name the constraint precisely, you can't write a brief. Don't recruit into ambiguity." }
+      ],
+      warning: "<strong>What not to do:</strong> Hire a senior marketer and expect them to diagnose and fix the foundations while also generating pipeline. That's two jobs at once. Build the system first — then hire someone to run and improve it.",
+      cta1: { label: "Book a GTM foundations review →", url: null }
+    }
+  };
+
+  let current = 0;
+  let answers = new Array(questions.length).fill(null);
+
+  function getResult(total) {
+    if (total >= 18) return { key: "ready", ...results.ready };
+    if (total >= 9) return { key: "fractional", ...results.fractional };
+    return { key: "foundations", ...results.foundations };
+  }
+
+  function render() {
+    const container = document.getElementById("quiz-questions");
+    const nav = document.getElementById("quiz-nav");
+    const progressBar = document.getElementById("progress-bar");
+    const progressLabel = document.getElementById("progress-label");
+    const resultDiv = document.getElementById("quiz-result");
+
+    if (current >= questions.length) {
+      // Show result
+      container.style.display = "none";
+      nav.style.display = "none";
+      progressBar.style.width = "100%";
+      progressLabel.textContent = "Complete";
+      resultDiv.style.display = "block";
+
+      const total = answers.reduce((s, a) => s + (a !== null ? a : 0), 0);
+      const maxScore = questions.length * 2;
+      const r = getResult(total);
+
+      const actionsHtml = r.actions.map(a => `
+        <div class="result-action-card">
+          <h4>${a.title}</h4>
+          <p>${a.body}</p>
+        </div>
+      `).join("");
+
+      const cta1Url = r.cta1.url || bookingUrl;
+
+      resultDiv.innerHTML = `
+        <div class="result-card">
+          <div class="result-score-display" style="color:${r.color}">${total}<span style="font-size:1.5rem;color:var(--muted);">/${maxScore}</span></div>
+          <p class="result-label">Your hiring readiness score · ${r.range} = ${r.key === "ready" ? "Ready to hire" : r.key === "fractional" ? "Fractional leadership first" : "Build foundations first"}</p>
+          <h2 class="result-headline">${r.headline}</h2>
+          <p class="result-summary">${r.summary}</p>
+          <h3 style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.85rem;color:var(--ink);">Your recommended next steps</h3>
+          <div class="result-actions-grid">${actionsHtml}</div>
+          <div class="result-warning">${r.warning}</div>
+          <div class="result-ctas">
+            <a class="button button-brand" href="${cta1Url}" data-cta="hrs-result-primary">${r.cta1.label}</a>
+            <a class="button button-light" href="/before-you-hire-a-head-of-marketing" data-cta="hrs-result-guide">Read the full guide →</a>
+          </div>
+          <button class="result-restart" onclick="restartQuiz()">↺ Retake the scorecard</button>
+        </div>
+      `;
+      return;
+    }
+
+    // Normal question view
+    resultDiv.style.display = "none";
+    container.style.display = "block";
+    nav.style.display = "flex";
+
+    const pct = Math.round((current / questions.length) * 100);
+    progressBar.style.width = pct + "%";
+    progressLabel.textContent = `Question ${current + 1} of ${questions.length}`;
+
+    const q = questions[current];
+    const selected = answers[current];
+
+    container.innerHTML = `
+      <div class="quiz-question-card">
+        <p class="quiz-question-label">${String(current + 1).padStart(2, "0")} / ${questions.length} &nbsp;·&nbsp; ${q.dimension}</p>
+        <p class="quiz-question-text">${q.q}</p>
+        <div class="quiz-options">
+          ${q.options.map((opt, i) => `
+            <button
+              class="quiz-option${selected === opt.score ? " selected" : ""}"
+              onclick="selectOption(${opt.score}, ${i})"
+              data-idx="${i}"
+            >
+              <span class="quiz-option-score">${["A","B","C"][i]}</span>
+              <span>
+                <span class="quiz-option-text">${opt.text}</span>
+                ${opt.sub ? `<span class="quiz-option-sublabel">${opt.sub}</span>` : ""}
+              </span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+
+    // Back button
+    const backBtn = document.getElementById("btn-back");
+    backBtn.style.display = current > 0 ? "inline-flex" : "none";
+
+    // Next button label
+    const nextBtn = document.getElementById("btn-next");
+    nextBtn.textContent = current === questions.length - 1 ? "See my result →" : "Next →";
+    nextBtn.disabled = selected === null;
+    nextBtn.style.opacity = selected === null ? "0.5" : "1";
+  }
+
+  function selectOption(score, idx) {
+    answers[current] = score;
+    render();
+  }
+
+  function quizNext() {
+    if (answers[current] === null) return;
+    current++;
+    render();
+    document.getElementById("scorecard").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function quizBack() {
+    if (current > 0) {
+      current--;
+      render();
+    }
+  }
+
+  function restartQuiz() {
+    current = 0;
+    answers = new Array(questions.length).fill(null);
+    render();
+    document.getElementById("scorecard").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Expose to inline onclick
+  window.selectOption = selectOption;
+  window.quizNext = quizNext;
+  window.quizBack = quizBack;
+  window.restartQuiz = restartQuiz;
+
+  // Init
+  document.addEventListener("DOMContentLoaded", render);
+</script>
+
+</BaseLayout>

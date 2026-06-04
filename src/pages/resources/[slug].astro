@@ -30,7 +30,7 @@ const magnetDetails: Record<string, {
       "Built to be filled in by the founder in one sitting"
     ],
     howToUse:
-      "Score each section honestly — usually one or two areas score noticeably worse than the rest. That's the bottleneck. Use the result to decide whether you need a Strategy Sprint, a fractional CMO engagement, or just a sharper plan you can run yourself.",
+      "Score each section honestly — usually one or two areas score noticeably worse than the rest. That's the bottleneck. Use the result to decide whether you need a 90-Day Growth Sprint, a fractional CMO engagement, or just a sharper plan you can run yourself.",
     whoItsNotFor:
       "Pre-revenue or pre-PMF teams. The scorecard assumes you have customers, traction, and the basic GTM mechanics in place.",
     faq: [
@@ -315,7 +315,7 @@ const schemas = [
   buildFaqSchema(details.faq)
 ];
 
-const description = `${magnet.description} Request the asset by email for ${magnet.audience.toLowerCase()}. Built by We Scale Startups.`;
+const description = magnet.description;
 
 const layoutTitle =
   slug === "growth-bottleneck-scorecard"

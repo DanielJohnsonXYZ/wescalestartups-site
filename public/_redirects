@@ -11,7 +11,8 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 
 # Legacy /case-studies paths (avoid self-301 rules — they break clients and sitemap audits)
 /case-study /case-studies 301
-/case-studies/diadia /case-studies/diadia-health 301
+/case-studies/diadia /case-studies/healthtech-precision-medicine 301
+/case-studies/diadia-health /case-studies/healthtech-precision-medicine 301
 /podcast/episodes/how-startups-win-template /podcast 301
 /quiz /resources/growth-bottleneck-scorecard 301
 /diagnose /resources/growth-bottleneck-scorecard 301

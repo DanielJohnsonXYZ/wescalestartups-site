@@ -21,7 +21,12 @@ const REDIRECT_TO: Record<string, string> = {
   "/team/rahul-van-manen": "/about",
   "/test": "/experimentation",
   "/case-study": "/case-studies",
-  "/case-studies/diadia": "/case-studies/diadia-health"
+  "/diagnose": "/resources/growth-bottleneck-scorecard",
+  "/wss-scale-score": "/resources/growth-bottleneck-scorecard",
+  "/quiz": "/resources/growth-bottleneck-scorecard",
+  "/speaking": "/press",
+  "/case-studies/diadia": "/case-studies/healthtech-precision-medicine",
+  "/case-studies/diadia-health": "/case-studies/healthtech-precision-medicine"
 };
 
 export function sitemapCanonicalPath(path: string): string {

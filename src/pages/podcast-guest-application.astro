@@ -130,7 +130,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
         <p class="eyebrow">Prefer a call?</p>
         <h2>Discuss the podcast or sponsorship directly.</h2>
         <p>
-          If you'd rather talk through the fit, the topic, or sponsorship options, book a 30-minute diagnostic call with Daniel.
+          If you'd rather talk through the fit, the topic, or sponsorship options, book a 20-minute diagnostic call with Daniel.
         </p>
       </div>
       <div class="hero-actions">
@@ -182,5 +182,16 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
     ].join("\n");
 
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    let note = document.getElementById("guest-fallback");
+    if (!note) {
+      note = document.createElement("div");
+      note.id = "guest-fallback";
+      note.setAttribute("role", "status");
+      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
+      form.appendChild(note);
+    }
+    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly — your application has been copied to the clipboard.`;
+    if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
   });
 </script>

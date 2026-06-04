@@ -4,3 +4,4 @@ dist
 .playwright-cli
 .DS_Store
 output
+public/og/default.png

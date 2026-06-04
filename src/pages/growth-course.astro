@@ -147,24 +147,24 @@ const schemas = [
     <div class="shell">
       <div class="max-w-2xl mx-auto text-center">
         <p class="eyebrow">Waitlist now open</p>
-        <h2>£30/month for 12 weeks. Launch date TBD.</h2>
+        <h2>£30/mo for 12 weeks. Join the waitlist for the next cohort.</h2>
         <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
           Join the waitlist to be first in line when the cohort launches. No charge until the course goes live — just early access and a founding-member discount.
         </p>
 
-        <div class="mt-8 card p-8 md:p-10">
+        <form class="mt-8 card p-8 md:p-10" id="course-waitlist" name="course-waitlist">
           <div class="grid gap-4 max-w-md mx-auto">
             <div>
               <label class="text-sm font-semibold" for="course-name">Name</label>
-              <input class="input mt-1" type="text" id="course-name" placeholder="Your name" />
+              <input class="input mt-1" type="text" id="course-name" name="name" required placeholder="Your name" />
             </div>
             <div>
               <label class="text-sm font-semibold" for="course-email">Email</label>
-              <input class="input mt-1" type="email" id="course-email" placeholder="you@company.com" />
+              <input class="input mt-1" type="email" id="course-email" name="email" required placeholder="you@company.com" />
             </div>
             <div>
               <label class="text-sm font-semibold" for="course-stage">Stage</label>
-              <select class="input mt-1" id="course-stage">
+              <select class="input mt-1" id="course-stage" name="stage">
                 <option>Select your stage</option>
                 <option>Pre-PMF</option>
                 <option>Post-PMF, Seed</option>
@@ -175,10 +175,10 @@ const schemas = [
             <button class="button button-brand w-full" type="submit">Join the Waitlist</button>
             <p class="text-xs text-[color:var(--muted)] text-center">No charge until launch. Unsubscribe anytime.</p>
           </div>
-        </div>
+        </form>
 
         <p class="mt-6 text-sm text-[color:var(--muted)]">
-          Prefer working directly? <a class="link-arrow" href={siteConfig.bookingUrl}>Book a 30-minute diagnostic →</a>
+          Prefer working directly? <a class="link-arrow" href={siteConfig.bookingUrl}>Book a 20-minute growth diagnostic →</a>
         </p>
       </div>
     </div>
@@ -188,10 +188,34 @@ const schemas = [
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Not ready for a course?</p>
-        <h2>Book a 30-minute diagnostic instead.</h2>
+        <h2>Book a 20-minute growth diagnostic instead.</h2>
         <p>Sometimes the fastest way to learn is a focused conversation about your actual bottleneck.</p>
       </div>
       <a class="button button-brand" href={siteConfig.bookingUrl} rel="noreferrer" target="_blank">{siteConfig.bookingLabel}</a>
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline define:vars={{ email: siteConfig.email }}>
+  const waitlistForm = document.getElementById("course-waitlist");
+  waitlistForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(waitlistForm);
+    const subject = "Growth course waitlist signup";
+    const body = [
+      `Name: ${data.get("name") || ""}`,
+      `Email: ${data.get("email") || ""}`,
+      `Stage: ${data.get("stage") || ""}`
+    ].join("\n");
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    let note = document.getElementById("waitlist-fallback");
+    if (!note) {
+      note = document.createElement("p");
+      note.id = "waitlist-fallback";
+      note.setAttribute("role", "status");
+      note.style.cssText = "margin-top:1rem;font-size:0.9rem;";
+      waitlistForm.appendChild(note);
+    }
+    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> with the subject "Growth course waitlist".`;
+  });
+</script>

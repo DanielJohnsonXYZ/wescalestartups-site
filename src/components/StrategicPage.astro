@@ -36,7 +36,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title={metaTitle ?? `${title} | We Scale Startups`}
+  title={metaTitle ?? `${title.replace(/\.$/, "")} | We Scale Startups`}
   description={description}
   path={path}
   schema={schema}
@@ -91,7 +91,7 @@ const schema = [
           <p class="eyebrow">Questions</p>
           <h2>What founders usually ask here.</h2>
         </div>
-        <p>Short, visible answers help humans scan the page and help search systems understand what the page is about.</p>
+        <p>Short answers to the questions founders usually ask at this stage.</p>
       </div>
       <div class="grid-3">
         {faqs.map((faq) => (

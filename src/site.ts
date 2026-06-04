@@ -56,7 +56,7 @@ export const siteConfig = {
   lastUpdated: "4 May 2026",
   /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
   siteLastModified: "2026-05-03",
-  ogImage: "/og/default.svg",
+  ogImage: "/og/default.png",
   /**
    * Google Tag Manager — production container for wescalestartups.com only.
    * Do not use the personal-site container (GTM-5S892HK on danieljohnson.xyz).
@@ -549,7 +549,7 @@ export const proofClients = [
   },
   {
     label: "Healthtech (anonymous)",
-    caseSlug: "diadia-health",
+    caseSlug: "healthtech-precision-medicine",
     logoSrc: "/images/logos/healthtech-anon.svg",
     relationship: "Paid client engagement",
     context: "Precision medicine · Fractional CMO",
@@ -660,7 +660,7 @@ export const proofResultsByType = [
   {
     label: "Marketing function from zero",
     summary: "First structured marketing operation for a complex B2B offer — not a deck, a running function.",
-    caseId: "diadia-health"
+    caseId: "healthtech-precision-medicine"
   }
 ] as const;
 
@@ -984,7 +984,7 @@ export const testimonials = [
       "Daniel helped us move from scattered founder-led marketing to a clear weekly acquisition rhythm. Within 90 days we had a sharper ICP, cleaner reporting, and a campaign system the team could run without everything routing back to the founder.",
     name: "B2B SaaS founder",
     role: "CEO",
-    company: "Paid engagement (update name with approval)",
+    company: "Paid engagement",
     result: "ICP, reporting, repeatable campaign rhythm"
   },
   {
@@ -1099,7 +1099,7 @@ export const pricingTiers = [
   {
     name: "Growth Diagnosis",
     duration: "1 week",
-    priceFrom: "from £4,000",
+    priceFrom: "from £4k",
     description: "Plain-English view of the bottleneck and a sequenced plan. Best when you don't know the constraint yet.",
     href: "/services/growth-diagnosis",
     tierBadge: "Best starting point"
@@ -1107,7 +1107,7 @@ export const pricingTiers = [
   {
     name: "90-Day Growth Sprint",
     duration: "12 weeks",
-    priceFrom: "from £15,000",
+    priceFrom: "from £15k",
     description: "Audit → plan → ship 3–5 tests → transfer. Best pre-fundraise or post-launch when you need signal fast.",
     href: "/services/90-day-growth-sprint",
     tierBadge: "Best for fast signal"
@@ -1115,7 +1115,7 @@ export const pricingTiers = [
   {
     name: "Acquisition System Build",
     duration: "8–12 weeks",
-    priceFrom: "from £30,000",
+    priceFrom: "from £30k",
     description: "Channels, landing pages, offers, and reporting working as one system. Best after you've tested channels in isolation.",
     href: "/services/acquisition-system-build",
     tierBadge: "Flagship engagement"
@@ -1123,9 +1123,9 @@ export const pricingTiers = [
   {
     name: "Fractional CMO",
     duration: "3 months minimum",
-    priceFrom: "from £8,000 / month",
+    priceFrom: "from £8k/mo",
     description:
-      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £12,000/month (~2 days/week) when you need deeper operating support.",
+      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £12k/mo (~2 days/week) when you need deeper operating support.",
     href: "/services/fractional-cmo",
     tierBadge: "Highest-touch engagement",
     popularRationale: "Full strategic ownership with execution support when the team needs a senior growth seat."

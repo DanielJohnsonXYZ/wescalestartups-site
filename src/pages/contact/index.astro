@@ -31,7 +31,7 @@ const contactSchema = [
 
 <BaseLayout
   title="Contact | We Scale Startups"
-  description="Contact We Scale Startups: structured growth enquiry, email, and booking links for a 30-minute diagnostic with Daniel Johnson. Built for post-PMF B2B SaaS and AI teams."
+  description="Contact We Scale Startups: growth enquiry, email, and booking links for a 20-minute diagnostic with Daniel Johnson."
   keywords="contact We Scale Startups, growth enquiry, book growth diagnostic, Daniel Johnson WSS"
   path="/contact"
   schema={contactSchema}
@@ -259,5 +259,17 @@ const contactSchema = [
     ].join("\n");
 
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Fallback so the enquiry never dead-ends if no mail client is configured.
+    let note = document.getElementById("enquiry-fallback");
+    if (!note) {
+      note = document.createElement("div");
+      note.id = "enquiry-fallback";
+      note.setAttribute("role", "status");
+      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
+      form.appendChild(note);
+    }
+    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly — your message has been copied to the clipboard.`;
+    if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
   });
 </script>

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/generate-og-png.mjs && astro build",
     "check": "astro check",
     "preview": "astro preview",
     "check:links:crawl": "node scripts/check-crawl-links.mjs --input=docs/crawls/latest.csv",

@@ -170,12 +170,12 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - Book / schedule diagnostic: ${siteConfig.siteUrl}${siteConfig.bookingUrl}
 - ${siteConfig.scorecardName} (self-serve): ${siteConfig.siteUrl}${siteConfig.scorecardUrl}
 - Manual 5-layer diagnose framework: ${siteConfig.siteUrl}/diagnose
-- GTM strategy (pillar): ${siteConfig.siteUrl}/gtm-strategy
-- Engagement models (pillar): ${siteConfig.siteUrl}/engagement-models
-- Execution model (pillar): ${siteConfig.siteUrl}/execution-model
-- Growth engine (pillar): ${siteConfig.siteUrl}/growth-engine
-- How we work (pillar): ${siteConfig.siteUrl}/how-we-work
-- AI growth systems (pillar): ${siteConfig.siteUrl}/ai-growth-systems
+- GTM strategy: ${siteConfig.siteUrl}/gtm-strategy
+- Engagement models: ${siteConfig.siteUrl}/engagement-models
+- Execution model: ${siteConfig.siteUrl}/execution-model
+- Growth engine: ${siteConfig.siteUrl}/growth-engine
+- How we work: ${siteConfig.siteUrl}/how-we-work
+- AI growth systems: ${siteConfig.siteUrl}/ai-growth-systems
 - Industries hub: ${siteConfig.siteUrl}/industries
 - Reports hub: ${siteConfig.siteUrl}/reports
 - Build (execution framing): ${siteConfig.siteUrl}/build

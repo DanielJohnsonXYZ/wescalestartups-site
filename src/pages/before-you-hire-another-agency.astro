@@ -49,6 +49,25 @@ const schema = [buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Bef
     </div>
   </section>
 
+  <section class="section">
+    <div class="shell">
+      <div class="grid-3">
+        <article class="feature-card">
+          <h2>Signs it's the system, not the agency</h2>
+          <p>Each channel reports in its own dashboard, briefs change weekly, and nobody can say what gets scaled or stopped on Monday. A new agency inherits that chaos — it doesn't fix it.</p>
+        </article>
+        <article class="feature-card">
+          <h2>Signs you genuinely need an agency</h2>
+          <p>The channel plan is clear, the offer converts, and you need production capacity — more creative, more pages, more campaigns. That's what agencies are built for, and the brief writes itself.</p>
+        </article>
+        <article class="feature-card">
+          <h2>The order that works</h2>
+          <p>Name the constraint first, install the reporting and decision cadence, then brief the agency inside it. Teams that do this get more from the same retainer — often with a smaller scope.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-alt">
     <div class="shell grid-3">
       {faqs.map((f) => (
@@ -59,4 +78,18 @@ const schema = [buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Bef
       ))}
     </div>
   </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Fix the system before the retainer.</h2>
+        <p>Bring the agency brief. We'll tell you whether the system or the channel is the problem.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="byh-agency-final-book">{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>

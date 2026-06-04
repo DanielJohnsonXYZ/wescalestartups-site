@@ -48,7 +48,7 @@ const stages = [
 <BaseLayout
   path={path}
   title="SEO & LLM content strategy | We Scale Startups"
-  description="How We Scale Startups maps cold search and AI retrieval: topic clusters, buyer stages, internal linking, and conversion CTAs — live reference for the Growth Hub."
+  description="How We Scale Startups maps cold search and AI retrieval: topic clusters, buyer stages, internal linking, and conversion CTAs."
   schema={schema}
   lastUpdated={siteConfig.lastUpdated}
   breadcrumbItems={[
@@ -121,6 +121,20 @@ const stages = [
       </p>
     </div>
   </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Want this mapped for your product?</h2>
+        <p>A 20-minute diagnostic tells you whether content is your constraint — or a distraction.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="seo-final-book">{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
 
 <style>

@@ -46,7 +46,7 @@ export const brandAssets = [
     label: "WSS logo on dark backgrounds (use white / inverted treatment from the colour master)",
     href: "/images/logos/wss-logo.webp"
   },
-  { label: "Default social / Open Graph image (SVG)", href: "/og/default.svg" },
+  { label: "Default social / Open Graph image (PNG)", href: "/og/default.png" },
   { label: "Favicon", href: "/favicon.svg" },
   { label: "Founder headshot (WebP, high resolution)", href: "/images/daniel-headshot-960.webp" },
   { label: "Founder contextual photo — informal / in-environment (WebP)", href: "/images/daniel-aircraft-960.webp" },

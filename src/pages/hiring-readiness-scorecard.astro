@@ -278,11 +278,13 @@ const schema = [
     font-size: 0.95rem;
     line-height: 1.5;
     color: var(--ink);
+    display: block;
   }
   .quiz-option-sublabel {
     font-size: 0.75rem;
     color: var(--muted);
     margin-top: 0.15rem;
+    display: block;
   }
 
   /* Nav buttons */
@@ -565,6 +567,15 @@ const schema = [
       const maxScore = questions.length * 2;
       const r = getResult(total);
 
+      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score === 0).map(d => d.dim);
+      const weakHtml = weakDims.length > 0
+        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
+            <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c05621;margin:0 0 0.6rem;">Your lowest-scoring dimensions</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:0.4rem;font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
+            <p style="font-size:0.82rem;color:var(--muted);margin:0.6rem 0 0;line-height:1.5;">These scored zero. Address them before making any hire.</p>
+          </div>`
+        : '';
+
       const actionsHtml = r.actions.map(a => `
         <div class="result-action-card">
           <h4>${a.title}</h4>
@@ -580,6 +591,7 @@ const schema = [
           <p class="result-label">Your hiring readiness score · ${r.range} = ${r.key === "ready" ? "Ready to hire" : r.key === "fractional" ? "Fractional leadership first" : "Build foundations first"}</p>
           <h2 class="result-headline">${r.headline}</h2>
           <p class="result-summary">${r.summary}</p>
+          ${weakHtml}
           <h3 style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.85rem;color:var(--ink);">Your recommended next steps</h3>
           <div class="result-actions-grid">${actionsHtml}</div>
           <div class="result-warning">${r.warning}</div>
@@ -613,8 +625,7 @@ const schema = [
           ${q.options.map((opt, i) => `
             <button
               class="quiz-option${selected === opt.score ? " selected" : ""}"
-              onclick="selectOption(${opt.score}, ${i})"
-              data-idx="${i}"
+              onclick="selectOption(${opt.score})"
             >
               <span class="quiz-option-score">${["A","B","C"][i]}</span>
               <span>
@@ -638,9 +649,11 @@ const schema = [
     nextBtn.style.opacity = selected === null ? "0.5" : "1";
   }
 
-  function selectOption(score, idx) {
+  function selectOption(score) {
+    const wasNew = answers[current] === null;
     answers[current] = score;
     render();
+    if (wasNew) setTimeout(quizNext, 380);
   }
 
   function quizNext() {

@@ -51,8 +51,9 @@ export function buildPersonSchema() {
 export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     "@id": entityGraph.wssOrganization,
+    areaServed: ["GB", "Europe", "US"],
     name: siteConfig.name,
     url: siteConfig.siteUrl,
     email: siteConfig.email,

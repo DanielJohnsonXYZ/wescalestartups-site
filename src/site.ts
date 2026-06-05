@@ -993,7 +993,7 @@ export const testimonials = [
       "The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint that followed shipped 6 experiments and gave us a weekly cadence that still runs without Daniel today.",
     name: "James Madia",
     role: "Founder",
-    company: "Madia (marketing agency partner)",
+    company: "Madia (paid engagement)",
     result: "Acquisition system built, running without founder"
   },
   {

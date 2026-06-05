@@ -38,6 +38,11 @@ const subAudiences = [
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style is:global>
+    /* Demoted secondary hero CTA — text link so the booking CTA is the single primary action */
+    .page-home-v7 .hero-cta-alt { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+    .page-home-v7 .hero-cta-alt:hover { color: var(--ink); }
+  </style>
 
   {/* HERO */}
   <section class="hero">
@@ -57,7 +62,7 @@ const subAudiences = [
 
           <div class="hero-ctas">
             <a href={siteConfig.bookingUrl} class="btn-primary">{siteConfig.bookingLabel} <span>→</span></a>
-            <a href={siteConfig.scorecardUrl} class="btn-secondary">Take the 5-min scorecard <span>→</span></a>
+            <a href={siteConfig.scorecardUrl} class="hero-cta-alt">Or take the 5-min scorecard →</a>
           </div>
 
           <div class="hero-trust">
@@ -161,22 +166,6 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* SUB-AUDIENCE ROUTING — solves the "we serve more than founders" problem */}
-  <section class="v7-sub-audience" aria-label="Other audiences">
-    <div class="shell">
-      <div class="v7-sub-label">Not a founder?</div>
-      <div class="v7-sub-grid">
-        {subAudiences.map((a) => (
-          <div class="v7-sub-item">
-            <h4>{a.title}</h4>
-            <p>{a.body}</p>
-            <a href={a.href}>{a.label} →</a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   {/* Interactive bottleneck finder */}
   <section>
     <div class="shell">
@@ -249,26 +238,10 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* FIVE BOTTLENECKS */}
-  <section>
-    <div class="shell">
-      <span class="spec-label">The five constraints · § 04</span>
-      <h2 class="section-h">You probably have one of these five <em>bottlenecks</em>.</h2>
-      <p class="section-sub">If pipeline is inconsistent and the founder is still in every decision, it's one of these.</p>
-      <div class="bn-grid">
-        <article class="bn-card"><div class="bn-num">01 / POSITIONING</div><h4>The story lands in the room. Not in the market.</h4><p>Demos go well, pipeline doesn't. The product narrative doesn't carry beyond a live conversation.</p></article>
-        <article class="bn-card"><div class="bn-num">02 / ACQUISITION</div><h4>One channel carries the funnel.</h4><p>If it dips, the quarter dips. There's no second engine.</p></article>
-        <article class="bn-card"><div class="bn-num">03 / CONVERSION</div><h4>Demos and trials don't progress.</h4><p>No shared playbook for what to say, when. Every rep improvises.</p></article>
-        <article class="bn-card"><div class="bn-num">04 / REPORTING</div><h4>No single weekly view of scale, stop, or fix.</h4><p>Paid, organic, and outbound each report in their own dashboards.</p></article>
-        <article class="bn-card" style="grid-column: span 2;"><div class="bn-num">05 / TEAM OWNERSHIP</div><h4>Every campaign, brief, and dashboard routes through the founder.</h4><p>The team executes; you decide. It doesn't scale — and it's why pipeline still depends on you running it.</p></article>
-      </div>
-    </div>
-  </section>
-
   {/* SERVICES TABLE */}
   <section class="services">
     <div class="shell">
-      <span class="spec-label">Four offers · one ladder · § 05</span>
+      <span class="spec-label">Four offers · one ladder · § 04</span>
       <h2 class="section-h">Pick the smallest commitment that answers your <em>biggest</em> question.</h2>
       <p class="section-sub">All four engagements solve a different problem. Start with the one that matches your current constraint — ladder up later.</p>
       <div class="svc-table">
@@ -307,7 +280,7 @@ const subAudiences = [
   {/* CASE STUDIES */}
   <section class="cases">
     <div class="shell">
-      <span class="spec-label">Real engagements · § 06</span>
+      <span class="spec-label">Real engagements · § 05</span>
       <h2 class="section-h">Results, <em>named</em>.</h2>
       <p class="section-sub">Every row labelled — paid client engagement vs programme or lecturing — so nothing reads like an implied client when it isn't.</p>
       <div class="case-grid">
@@ -344,7 +317,7 @@ const subAudiences = [
   {/* Testimonials */}
   <section class="testimonials">
     <div class="shell">
-      <span class="spec-label">Founder voices · § 07</span>
+      <span class="spec-label">Founder voices · § 06</span>
       <h2 class="section-h">What founders <em>say</em>.</h2>
       <p class="section-sub">Paid clients first, mentoring reviews second. All verifiable on request.</p>
       <div class="testim-grid">
@@ -375,7 +348,7 @@ const subAudiences = [
   {/* ABOUT — with real photos */}
   <section class="about">
     <div class="shell">
-      <span class="spec-label">Founder · § 08</span>
+      <span class="spec-label">Founder · § 07</span>
       <div class="about-grid">
         <div class="about-photo-stack">
           <div class="about-photo">
@@ -407,7 +380,7 @@ const subAudiences = [
   {/* FAQ */}
   <section class="faq">
     <div class="shell">
-      <span class="spec-label">Before you book · § 09</span>
+      <span class="spec-label">Before you book · § 08</span>
       <h2 class="section-h">Questions you'll ask before you book.</h2>
       <p class="section-sub">Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership.</p>
       <div class="faq-list">
@@ -435,6 +408,22 @@ const subAudiences = [
           <summary><span class="q-num">/06</span><span class="q-text">Who isn't this for?</span></summary>
           <div class="answer">Pre-PMF startups, founders looking for tactic-of-the-week, teams without internal execution capacity, and volume buyers who want more activity rather than fewer sharper decisions. If that's you, we'll say so on the call and point you somewhere better.</div>
         </details>
+      </div>
+    </div>
+  </section>
+
+  {/* SUB-AUDIENCE ROUTING — investors / corporate / operators, near the end so the founder narrative stays unbroken */}
+  <section class="v7-sub-audience" aria-label="Other audiences">
+    <div class="shell">
+      <div class="v7-sub-label">Not a founder?</div>
+      <div class="v7-sub-grid">
+        {subAudiences.map((a) => (
+          <div class="v7-sub-item">
+            <h4>{a.title}</h4>
+            <p>{a.body}</p>
+            <a href={a.href}>{a.label} →</a>
+          </div>
+        ))}
       </div>
     </div>
   </section>

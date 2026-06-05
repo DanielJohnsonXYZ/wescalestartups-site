@@ -1,0 +1,163 @@
+/* ============================================================
+   Interior alignment pass — bring all non-home pages onto the
+   homepage (v7) design system: Geist bold headings instead of
+   oversized Fraunces serif, v7 violet, consistent spacing.
+   Scoped to body:not(.page-home-v7) so the homepage is untouched.
+   ============================================================ */
+
+body:not(.page-home-v7) {
+  /* v7 tokens */
+  --paper: #f7f6f1;
+  --paper-deep: #efeee7;
+  --surface: #ffffff;
+  --ink: #0a0a0f;
+  --ink-2: #1e1e26;
+  --muted: #5a5a6a;
+  --violet: #6f3ff5;
+  --violet-deep: #5b2bd9;
+}
+
+/* --- Headings: serif display → bold grotesque (matches v7) --- */
+body:not(.page-home-v7) h1,
+body:not(.page-home-v7) h2,
+body:not(.page-home-v7) h3,
+body:not(.page-home-v7) h4 {
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  font-variation-settings: normal;
+}
+
+/* Accent words inside headings: v7 uses upright violet, not italic serif */
+body:not(.page-home-v7) h1 em,
+body:not(.page-home-v7) h2 em,
+body:not(.page-home-v7) h3 em,
+body:not(.page-home-v7) .statement em,
+body:not(.page-home-v7) .showcase-title em {
+  font-style: normal;
+  color: var(--violet);
+}
+
+/* --- Page hero: 5–8.5rem serif → homepage-scale headline --- */
+body:not(.page-home-v7) .hero h1,
+body:not(.page-home-v7) .page-hero h1 {
+  max-width: 21ch;
+  font-size: clamp(2.4rem, 4.4vw, 3.9rem);
+  line-height: 1.04;
+}
+
+body:not(.page-home-v7) .page-hero {
+  padding: 4.5rem 0 3.5rem;
+}
+
+body:not(.page-home-v7) .hero {
+  padding: 4.5rem 0 3.5rem;
+}
+
+body:not(.page-home-v7) .hero-with-portrait h1,
+body:not(.page-home-v7) .wss-hero-redesign h1 {
+  font-size: clamp(2.4rem, 4.2vw, 3.7rem);
+  line-height: 1.05;
+}
+
+/* Hero lede copy: serif 1.6rem → v7 sub style */
+body:not(.page-home-v7) .hero-copy {
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+body:not(.page-home-v7) .page-hero .lede,
+body:not(.page-home-v7) .page-hero p {
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+body:not(.page-home-v7) .hero-foot {
+  margin-top: 2.4rem;
+}
+
+/* --- Oversized section displays brought to v7 scale --- */
+body:not(.page-home-v7) .case-copy h3 {
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+}
+
+body:not(.page-home-v7) .cta-inner h2 {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.06;
+}
+
+body:not(.page-home-v7) .dark-rhythm-section h2,
+body:not(.page-home-v7) .ai-system-section h2 {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+}
+
+body:not(.page-home-v7) .testimonials-header h2,
+body:not(.page-home-v7) .daniel-copy h2,
+body:not(.page-home-v7) .creative-system-grid h2,
+body:not(.page-home-v7) .proof-creative-grid h2 {
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+}
+
+body:not(.page-home-v7) .section-intro h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+}
+
+/* Decorative serif strongs in dark panels */
+body:not(.page-home-v7) .rhythm-flow strong,
+body:not(.page-home-v7) .ai-system-map strong,
+body:not(.page-home-v7) .proof-inner h2,
+body:not(.page-home-v7) .service-selector-aside h3,
+body:not(.page-home-v7) .service-selector-row h3,
+body:not(.page-home-v7) .strategic-panel h2,
+body:not(.page-home-v7) .case-visual strong {
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variation-settings: normal;
+}
+
+/* Eyebrows: match v7 spec-label rhythm */
+body:not(.page-home-v7) .eyebrow,
+body:not(.page-home-v7) .card-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.9rem;
+}
+
+/* --- Section rhythm: 7rem+7rem stacks created ~220px dead zones --- */
+body:not(.page-home-v7) .section {
+  padding: clamp(3.25rem, 5.5vw, 4.5rem) 0;
+}
+
+body:not(.page-home-v7) .section + .section {
+  padding-top: clamp(2.75rem, 4.5vw, 3.75rem);
+}
+
+/* --- Final CTA band: stop the heading column collapsing to one word per line --- */
+body:not(.page-home-v7) .cta-inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+}
+
+body:not(.page-home-v7) .cta-inner h2 {
+  max-width: 18ch;
+}
+
+body:not(.page-home-v7) .cta-inner .hero-actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  body:not(.page-home-v7) .cta-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Proof hero on the v7 scale too */
+body:not(.page-home-v7) .proof-hero h1 {
+  font-size: clamp(2.4rem, 4.4vw, 3.9rem);
+  line-height: 1.05;
+}

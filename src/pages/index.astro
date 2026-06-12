@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig, buyerFaqs } from "../site";
 import { buildFaqSchema } from "../lib/schema";
-import "../styles/home-v7.css";
+import "../styles/home-v8.css";
 
 const faqSchema = buildFaqSchema([...buyerFaqs]);
 
@@ -33,21 +33,15 @@ const subAudiences = [
   description="Fractional CMO who installs a repeatable growth system in 90 days, for post-PMF B2B SaaS and AI founders doing £1–10M ARR."
   path="/"
   schema={faqSchema}
-  bodyClass="page-home-v7"
+  bodyClass="page-home-v8"
 >
-  <style is:global>
-    /* Demoted secondary hero CTA — text link so the booking CTA is the single primary action */
-    .page-home-v7 .hero-cta-alt { font-family: "Geist", ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
-    .page-home-v7 .hero-cta-alt:hover { color: var(--ink); }
-  </style>
-
-  {/* HERO */}
+  {/* ============ HERO — the problem, the promise, the proof ============ */}
   <section class="hero">
     <div class="shell">
-      <span class="spec-label">Fractional CMO · Post-PMF B2B SaaS &amp; AI</span>
+      <span class="hero-badge"><span class="dot"></span> Fractional CMO · Post-PMF B2B SaaS &amp; AI</span>
       <div class="hero-grid">
         <div>
-          <h1>Your pipeline shouldn't depend on <span class="hl">you running</span> it.</h1>
+          <h1>Your pipeline shouldn't depend on <span class="hl">you running it</span>.</h1>
           <p class="lede">We install the acquisition system your team can run <strong>without the founder in every decision</strong> — in 90 days, for the cost of a senior hire's first quarter.</p>
 
           <div class="step-chips">
@@ -66,12 +60,12 @@ const subAudiences = [
             <div class="trust"><span class="trust-v counter" data-target="18" data-suffix="M+" data-prefix="£">£18M+</span><span class="trust-l">Revenue<br />influenced</span></div>
             <div class="trust"><span class="trust-v counter" data-target="6" data-suffix="M+" data-prefix="£">£6M+</span><span class="trust-l">Paid spend<br />managed</span></div>
             <div class="trust"><span class="trust-v counter" data-target="479" data-suffix="+">479+</span><span class="trust-l">Founder<br />sessions</span></div>
-            <div class="trust"><span class="trust-v counter" data-target="4.93" data-decimals="2">4.93<span style="font-size:0.55em;color:var(--ink-3);font-weight:500;">/5</span></span><span class="trust-l">GrowthMentor<br />rating</span></div>
+            <div class="trust"><span class="trust-v counter" data-target="4.93" data-decimals="2">4.93<span style="font-size:0.55em;color:var(--ink-4);font-weight:500;">/5</span></span><span class="trust-l">GrowthMentor<br />rating</span></div>
           </div>
         </div>
 
         {/* Diagnostic widget — with tab switcher */}
-        <aside class="diag-card">
+        <aside class="diag-card glow-card">
           <div class="diag-tabs" role="tablist">
             <button class="diag-tab active" data-tab="saas" role="tab">B2B SaaS</button>
             <button class="diag-tab" data-tab="fintech" role="tab">Fintech</button>
@@ -107,17 +101,17 @@ const subAudiences = [
             <div class="constraint"><span class="constraint-name"><span class="constraint-n">04</span><span class="constraint-text"><strong>Reporting</strong><span data-c="04">Weekly cadence trusted</span></span></span><span class="tag ok" data-t="04">Healthy</span></div>
             <div class="constraint"><span class="constraint-name"><span class="constraint-n">05</span><span class="constraint-text"><strong>Team ownership</strong><span data-c="05">Founder-dependent</span></span></span><span class="tag watch" data-t="05">Watch</span></div>
           </div>
-          <div class="verdict" id="verdict"><strong>Verdict.</strong> Run a 90-day sprint against <em style="color:var(--violet);font-style:italic;">acquisition</em>.</div>
+          <div class="verdict" id="verdict"><strong>Verdict.</strong> Run a 90-day sprint against <em>acquisition</em>.</div>
         </aside>
       </div>
     </div>
   </section>
 
-  {/* LOGO WALL — credentials, replacing the duplicate-stat proof bar */}
+  {/* ============ LOGO WALL — credentials ============ */}
   <section class="logo-wall">
     <div class="shell">
       <div class="logo-wall-label">Trusted by founders, programmes &amp; platforms</div>
-      <div class="logo-row">
+      <div class="logo-row reveal">
         <a href="https://www.jbs.cam.ac.uk/" class="logo-item cred-item" rel="noopener noreferrer" target="_blank" aria-label="Cambridge Judge Business School — guest lecturer">
           <span class="cred-name">Cambridge Judge Business School</span>
           <span class="logo-meta">Guest Lecturer</span>
@@ -146,15 +140,40 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* Interactive bottleneck finder */}
-  <section>
+  {/* ============ MANIFESTO — why a system beats heroics ============ */}
+  <section class="manifesto">
+    <div class="shell">
+      <span class="spec-label">The thesis · § 01</span>
+      <p class="manifesto-quote reveal">Most post-PMF startups don't have a marketing problem. They have a <em>system problem</em> — every growth decision still routes through the founder.</p>
+      <div class="manifesto-grid">
+        <div class="belief-card glow-card reveal" data-d="1">
+          <span class="belief-n">/01 — Diagnose before spend</span>
+          <h4>Name the constraint first.</h4>
+          <p>More budget against an unnamed bottleneck buys activity, not pipeline. Every engagement starts by naming the single constraint that's binding growth.</p>
+        </div>
+        <div class="belief-card glow-card reveal" data-d="2">
+          <span class="belief-n">/02 — Systems over heroics</span>
+          <h4>Install a rhythm, not a hero.</h4>
+          <p>A weekly decision cadence your team owns beats a brilliant operator who leaves. We build the operating system, then transfer it.</p>
+        </div>
+        <div class="belief-card glow-card reveal" data-d="3">
+          <span class="belief-n">/03 — Built to hand off</span>
+          <h4>You shouldn't need us forever.</h4>
+          <p>Success is the quarter the system runs without us — channels aligned, reporting trusted, decisions made on schedule, founder out of the loop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ INTERACTIVE BOTTLENECK FINDER ============ */}
+  <section class="bf-section">
     <div class="shell">
       <span class="spec-label">Interactive · § 02 · Find your bottleneck</span>
       <h2 class="section-h">Which constraint sounds <em>like you</em>?</h2>
       <p class="section-sub">Click whichever feels closest. We'll show you which engagement matches.</p>
 
       <div class="bottleneck-finder">
-        <div class="bf-grid" id="bf-grid">
+        <div class="bf-grid reveal" id="bf-grid">
           <button class="bf-card" data-bn="positioning"><span class="bf-num">01 / POSITIONING</span><span class="bf-name">Story doesn't land</span><span class="bf-q">Demos go well, pipeline doesn't.</span></button>
           <button class="bf-card active" data-bn="acquisition"><span class="bf-num">02 / ACQUISITION</span><span class="bf-name">One-channel risk</span><span class="bf-q">If it dips, the quarter dips.</span></button>
           <button class="bf-card" data-bn="conversion"><span class="bf-num">03 / CONVERSION</span><span class="bf-name">No playbook</span><span class="bf-q">Every rep improvises.</span></button>
@@ -162,7 +181,7 @@ const subAudiences = [
           <button class="bf-card" data-bn="team"><span class="bf-num">05 / TEAM</span><span class="bf-name">Founder bottleneck</span><span class="bf-q">Every brief routes through you.</span></button>
         </div>
 
-        <div class="bf-result" id="bf-result">
+        <div class="bf-result glow-card reveal" id="bf-result">
           <div>
             <div class="bf-result-meta" id="bf-meta">02 · ACQUISITION</div>
             <h4 id="bf-title">One channel carries the funnel.</h4>
@@ -179,53 +198,57 @@ const subAudiences = [
     </div>
   </section>
 
-    {/* SERVICES TABLE */}
+  {/* ============ SERVICES LADDER ============ */}
   <section class="services">
     <div class="shell">
       <span class="spec-label">Four engagements · one ladder · § 03</span>
       <h2 class="section-h">Pick the smallest commitment that answers your <em>biggest</em> question.</h2>
       <p class="section-sub">Each engagement installs what the next one needs — diagnosis names the constraint, the sprint tests the move, the build installs the rhythm, embed operates it. Start small, ladder up.</p>
-      <div class="svc-table">
-        <div class="svc-row">
+      <div class="svc-grid">
+        <article class="svc-card glow-card reveal">
           <span class="svc-step">/01</span>
-          <div><span class="svc-title">Growth Diagnosis</span><span class="svc-price">£4k · 1 week</span></div>
+          <span class="svc-title">Growth Diagnosis</span>
+          <span class="svc-price">£4k · 1 week</span>
           <div class="svc-desc"><strong>Best for</strong>You're not sure what's blocking pipeline.</div>
           <div class="svc-desc"><strong>What gets built</strong>Constraint map, evidence review, 90-day plan.</div>
           <div class="svc-cta"><a href="/services/growth-diagnosis">Read →</a></div>
-        </div>
-        <div class="svc-row">
+        </article>
+        <article class="svc-card glow-card reveal" data-d="1">
           <span class="svc-step">/02</span>
-          <div><span class="svc-title">90-Day Growth Sprint</span><span class="svc-price">£15k · 12 weeks</span></div>
+          <span class="svc-title">90-Day Growth Sprint</span>
+          <span class="svc-price">£15k · 12 weeks</span>
           <div class="svc-desc"><strong>Best for</strong>Focused tests against the named bottleneck this quarter.</div>
           <div class="svc-desc"><strong>What gets built</strong>Experiment backlog, weekly decisions, tested copy.</div>
           <div class="svc-cta"><a href="/services/90-day-growth-sprint">Run →</a></div>
-        </div>
-        <div class="svc-row flagship">
-          <span class="svc-step">/03</span>
-          <div><span class="svc-title">Acquisition System Build<span class="svc-flag">Flagship</span></span><span class="svc-price">£30k · 8–12 weeks</span></div>
+        </article>
+        <article class="svc-card flagship glow-card reveal" data-d="2">
+          <span class="svc-step">/03 <span class="svc-flag">Flagship</span></span>
+          <span class="svc-title">Acquisition System Build</span>
+          <span class="svc-price">£30k · 8–12 weeks</span>
           <div class="svc-desc"><strong>Best for</strong>Channels in isolation; you need them as one system.</div>
           <div class="svc-desc"><strong>What gets built</strong>Channel architecture, offer map, reporting, handoff pack.</div>
           <div class="svc-cta"><a href="/services/acquisition-system-build">Build →</a></div>
-        </div>
-        <div class="svc-row">
+        </article>
+        <article class="svc-card glow-card reveal" data-d="3">
           <span class="svc-step">/04</span>
-          <div><span class="svc-title">Fractional CMO</span><span class="svc-price">£8k/mo · 3-mo min</span></div>
+          <span class="svc-title">Fractional CMO</span>
+          <span class="svc-price">£8k/mo · 3-mo min</span>
           <div class="svc-desc"><strong>Best for</strong>Senior growth leadership without a £150k full-time hire.</div>
           <div class="svc-desc"><strong>What gets built</strong>Operating cadence, agency direction, board reporting.</div>
           <div class="svc-cta"><a href="/services/fractional-cmo">Embed →</a></div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  {/* CASE STUDIES */}
+  {/* ============ CASE STUDIES ============ */}
   <section class="cases">
     <div class="shell">
-      <span class="spec-label">Real engagements · § 05</span>
+      <span class="spec-label">Real engagements · § 04</span>
       <h2 class="section-h">Results, <em>named</em>.</h2>
       <p class="section-sub">Every row labelled — paid client engagement vs programme or lecturing — so nothing reads like an implied client when it isn't.</p>
       <div class="case-grid">
-        <article class="case-card feature">
+        <article class="case-card feature glow-card reveal">
           <span class="case-meta">Paid · Fintech · Fractional CMO</span>
           <h4>Ned</h4>
           <div class="case-sub">Funding platform · Google Ads + SEO overhaul</div>
@@ -237,14 +260,14 @@ const subAudiences = [
           </div>
           <a href="/case-studies/ned" class="case-link">Read the full case study →</a>
         </article>
-        <article class="case-card">
+        <article class="case-card glow-card reveal" data-d="1">
           <span class="case-meta">Paid · Healthtech</span>
           <h4>Healthtech (anon.)</h4>
           <div class="case-sub">Precision medicine · Fractional CMO</div>
           <p>Marketing function <strong>built from zero</strong>. Operating rhythm installed.</p>
           <a href="/case-studies/healthtech-precision-medicine" class="case-link">Read →</a>
         </article>
-        <article class="case-card">
+        <article class="case-card glow-card reveal" data-d="2">
           <span class="case-meta">Paid · Healthtech</span>
           <h4>eQuoo</h4>
           <div class="case-sub">Mental-health app · Fractional CMO</div>
@@ -255,29 +278,29 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* Testimonials */}
+  {/* ============ TESTIMONIALS ============ */}
   <section class="testimonials">
     <div class="shell">
-      <span class="spec-label">Founder voices · § 06</span>
+      <span class="spec-label">Founder voices · § 05</span>
       <h2 class="section-h">What founders <em>say</em>.</h2>
       <p class="section-sub">Paid clients first, mentoring reviews second. All verifiable on request.</p>
       <div class="testim-grid">
-        <figure class="testim-card">
+        <figure class="testim-card glow-card reveal">
           <span class="testim-mark">"</span>
           <blockquote>The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint shipped six experiments and gave us a weekly cadence that still runs without Daniel today.</blockquote>
           <cite><strong>James Madia</strong>Founder, Madia · Paid engagement</cite>
         </figure>
-        <figure class="testim-card">
+        <figure class="testim-card glow-card reveal" data-d="1">
           <span class="testim-mark">"</span>
           <blockquote>Daniel helped us move from scattered founder-led marketing to a clear weekly acquisition rhythm. Within 90 days we had sharper ICP, cleaner reporting, and a campaign system the team could run without everything routing back to the founder.</blockquote>
           <cite><strong>B2B SaaS founder, CEO</strong>Paid engagement · name on request</cite>
         </figure>
-        <figure class="testim-card">
+        <figure class="testim-card glow-card reveal" data-d="2">
           <span class="testim-mark">"</span>
           <blockquote>Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.</blockquote>
           <cite><strong>Dru Riley</strong>Growth mentoring · MentorCruise</cite>
         </figure>
-        <figure class="testim-card">
+        <figure class="testim-card glow-card reveal" data-d="3">
           <span class="testim-mark">"</span>
           <blockquote>Sharp, practical advice with a clear focus on messaging and positioning. He helped me reframe the problem and target the right audience more effectively.</blockquote>
           <cite><strong>Greg Weinstein</strong>Founder mentoring · MentorCruise</cite>
@@ -286,25 +309,25 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* ABOUT — with real photos */}
+  {/* ============ ABOUT — with real photos ============ */}
   <section class="about">
     <div class="shell">
-      <span class="spec-label">Founder · § 07</span>
+      <span class="spec-label">Founder · § 06</span>
       <div class="about-grid">
-        <div class="about-photo-stack">
+        <div class="about-photo-stack reveal">
           <div class="about-photo">
             <img src="/images/daniel-headshot-640.webp" alt="Daniel Johnson, founder of We Scale Startups" loading="lazy" width="640" height="640" decoding="async" />
           </div>
           <div class="about-photo-secondary">
             <img src="/images/daniel-aircraft-640.webp" alt="Daniel Johnson — operator-side context" loading="lazy" width="640" height="640" decoding="async" />
           </div>
-          <div class="about-photo-caption">Daniel Johnson · Daniels-Macbook-Air</div>
+          <div class="about-photo-caption">Daniel Johnson · Founder, We Scale Startups</div>
         </div>
-        <div class="about-content">
+        <div class="about-content reveal" data-d="1">
           <h2>Why I built <em>this</em>.</h2>
           <p>I'm Daniel Johnson. After 15 years operating inside SaaS, fintech, healthtech and EdTech startups — including two exits — I kept seeing the same pattern: founders with great products, stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.</p>
           <p>I built We Scale Startups to be the operator I wished was there. <strong>The work is to diagnose the bottleneck, install the acquisition system, and transfer the weekly rhythm</strong> — so you don't need me forever.</p>
-          <div class="about-creds">
+          <ul class="about-creds">
             <div class="label">Track record</div>
             <li>Two operator-side startup exits</li>
             <li>£18M+ revenue influenced</li>
@@ -312,24 +335,24 @@ const subAudiences = [
             <li>479+ founder sessions · 4.93/5</li>
             <li>MentorCruise Top Mentor · 5.0/5</li>
             <li>Cambridge Judge · Imperial · Techstars</li>
-          </div>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  {/* FAQ */}
+  {/* ============ FAQ ============ */}
   <section class="faq">
     <div class="shell">
-      <span class="spec-label">Before you book · § 08</span>
-      <h2 class="section-h">Questions you'll ask before you book.</h2>
+      <span class="spec-label">Before you book · § 07</span>
+      <h2 class="section-h">Questions you'll ask <em>before you book</em>.</h2>
       <p class="section-sub">Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership.</p>
-      <div class="faq-list">
+      <div class="faq-list reveal">
         <details class="faq-item" open>
           <summary><span class="q-num">/01</span><span class="q-text">Who is We Scale Startups for?</span></summary>
           <div class="answer">Post-PMF B2B SaaS and AI startups, typically Seed to Series B, with real traction and inconsistent acquisition. If you're still searching for product-market fit, we're the wrong call — growth marketing won't fix a product problem.</div>
         </details>
-        <details class="faq-item" open>
+        <details class="faq-item">
           <summary><span class="q-num">/02</span><span class="q-text">How is WSS different from an agency?</span></summary>
           <div class="answer">Agencies are the right choice when the channel plan is clear and you need production capacity. WSS works one level up — naming the bottleneck, aligning channels, installing the weekly decision rhythm, and handing off a system your team (or your agency) can run inside. Many teams need both, often in that order.</div>
         </details>
@@ -353,13 +376,13 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* SUB-AUDIENCE ROUTING — investors / corporate / operators, near the end so the founder narrative stays unbroken */}
-  <section class="v7-sub-audience" aria-label="Other audiences">
+  {/* ============ SUB-AUDIENCE ROUTING ============ */}
+  <section class="v8-sub-audience" aria-label="Other audiences">
     <div class="shell">
-      <div class="v7-sub-label">Not a founder?</div>
-      <div class="v7-sub-grid">
+      <div class="v8-sub-label">Not a founder?</div>
+      <div class="v8-sub-grid reveal">
         {subAudiences.map((a) => (
-          <div class="v7-sub-item">
+          <div class="v8-sub-item">
             <h4>{a.title}</h4>
             <p>{a.body}</p>
             <a href={a.href}>{a.label} →</a>
@@ -369,17 +392,41 @@ const subAudiences = [
     </div>
   </section>
 
-  {/* FINAL CTA */}
+  {/* ============ FINAL CTA ============ */}
   <section class="final-cta">
     <div class="shell">
-      <span class="spec-label" style="color: var(--violet-soft); margin-bottom: 12px;">→ Next step</span>
-      <h2>The next step is a <em>20-minute call</em>.</h2>
-      <p>Bring your current growth picture. You'll leave with your bottleneck named in plain English, and an honest read on whether we're the right call.</p>
-      <a href={siteConfig.bookingUrl} class="btn-primary">{siteConfig.bookingLabel} <span>→</span></a>
+      <span class="spec-label">→ Next step</span>
+      <h2 class="reveal">The next step is a <em>20-minute call</em>.</h2>
+      <p class="reveal" data-d="1">Bring your current growth picture. You'll leave with your bottleneck named in plain English, and an honest read on whether we're the right call.</p>
+      <a href={siteConfig.bookingUrl} class="btn-primary reveal" data-d="2">{siteConfig.bookingLabel} <span>→</span></a>
     </div>
   </section>
 
-    <script is:inline>
+  <script is:inline>
+    // =========== Scroll-reveal ===========
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(e => io.observe(e));
+    })();
+
+    // =========== Pointer-tracked glow on cards ===========
+    (function(){
+      if (window.matchMedia('(hover: none)').matches) return;
+      document.querySelectorAll('.glow-card').forEach(card => {
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+          card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+        });
+      });
+    })();
+
     // =========== Animated counters on scroll ===========
     (function(){
       const counters = document.querySelectorAll('.counter');
@@ -425,7 +472,7 @@ const subAudiences = [
           now: '£42k<span class="unit">/wk</span>', flat: '— flat 6 wks',
           proj: '£128k<span class="unit">/wk</span>', growth: '▲ 3.0× compounding',
           bn: 'Acq.', conf: '88% conf.',
-          verdict: 'Run a 90-day sprint against <em style="color:var(--violet);font-style:italic;">acquisition</em>.',
+          verdict: 'Run a 90-day sprint against <em>acquisition</em>.',
           bars: [38, 42, 36, 40, 48, 58, 68, 78, 88, 100],
           tags: ['ok', 'bad', 'watch', 'ok', 'watch']
         },
@@ -435,7 +482,7 @@ const subAudiences = [
           now: '£68k<span class="unit">/wk</span>', flat: '— spiky 12 wks',
           proj: '£170k<span class="unit">/wk</span>', growth: '▲ 2.5× diversified',
           bn: 'Conv.', conf: '92% conf.',
-          verdict: 'Tighten the demo-to-SQL playbook. <em style="color:var(--violet);font-style:italic;">Sprint</em> recommended.',
+          verdict: 'Tighten the demo-to-SQL playbook. <em>Sprint</em> recommended.',
           bars: [55, 62, 48, 70, 58, 65, 78, 72, 88, 100],
           tags: ['ok', 'ok', 'bad', 'watch', 'ok']
         },
@@ -445,7 +492,7 @@ const subAudiences = [
           now: '£12k<span class="unit">/wk</span>', flat: '— inconsistent',
           proj: '£64k<span class="unit">/wk</span>', growth: '▲ 5.3× building',
           bn: 'All five', conf: '—',
-          verdict: 'Marketing function from zero. <em style="color:var(--violet);font-style:italic;">System Build</em> required.',
+          verdict: 'Marketing function from zero. <em>System Build</em> required.',
           bars: [10, 15, 8, 18, 22, 38, 52, 68, 82, 100],
           tags: ['watch', 'bad', 'watch', 'bad', 'bad']
         }
@@ -506,7 +553,5 @@ const subAudiences = [
         });
       });
     })();
-
-    
   </script>
 </BaseLayout>

@@ -20,7 +20,7 @@
   --violet: #6657ff;
   --violet-deep: #36266d;
   --teal: #07756e;
-  --acid: #d8ff4f;
+  --acid: #cfc4ff;
   --coral: #a83f35;
   --shadow: 0 34px 100px rgba(54, 38, 109, 0.16);
   --logo-1: #7b3eff;
@@ -5381,7 +5381,7 @@ textarea:focus-visible {
 body {
   background:
     radial-gradient(125% 85% at 100% -15%, rgba(102, 87, 255, 0.1), transparent 52%),
-    radial-gradient(90% 55% at 0% 0%, rgba(216, 255, 79, 0.075), transparent 48%),
+    radial-gradient(90% 55% at 0% 0%, rgba(139, 92, 246, 0.06), transparent 48%),
     linear-gradient(180deg, var(--paper) 0%, #f2f4ec 55%, var(--paper-deep) 100%);
 }
 

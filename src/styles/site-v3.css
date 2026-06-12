@@ -1,6 +1,6 @@
 /* ============================================================
    site-v3.css — Global design-token alignment + inner-page upgrade
-   Aligns inner-page palette with the homepage warm design system.
+   Aligns inner-page palette with the v8 light-premium-tech design system.
    Import AFTER global.css in BaseLayout.astro.
    ============================================================ */
 
@@ -10,35 +10,35 @@
    ─────────────────────────────────────────────────────────── */
 :root {
   /* Backgrounds: warm cream instead of cool off-white */
-  --paper:        #f3eee2;
-  --paper-deep:   #ebe5d3;
-  --surface:      #faf8f3;
+  --paper:        #fbfbfe;
+  --paper-deep:   #f3f3f9;
+  --surface:      #ffffff;
 
   /* Ink: warm dark instead of cool near-black */
-  --ink:          #15140f;
-  --ink-2:        #2b2a25;
-  --muted:        #6f6a60;
-  --dim:          #5f5a52;
+  --ink:          #0d0c14;
+  --ink-2:        #36333f;
+  --muted:        #6b6878;
+  --dim:          #6b6878;
 
   /* Lines: warm ink base */
-  --line:         rgba(21, 20, 15, 0.12);
-  --line-strong:  rgba(21, 20, 15, 0.22);
-  --line-soft:    rgba(21, 20, 15, 0.07);
+  --line:         rgba(13, 12, 20, 0.10);
+  --line-strong:  rgba(13, 12, 20, 0.18);
+  --line-soft:    rgba(13, 12, 20, 0.06);
 
   /* Violet: tightened to match homepage gradient anchor */
-  --violet:       #5e2bff;
-  --violet-deep:  #1a0a4d;
-  --violet-tint:  #efe9ff;
+  --violet:       #6657ff;
+  --violet-deep:  #36266d;
+  --violet-tint:  #f0edff;
 
   /* Logo gradient: aligned with homepage purple-to-pink sweep */
-  --logo-1:       #5e2bff;
-  --logo-2:       #9b3dff;
-  --logo-3:       #d046ff;
+  --logo-1:       #6657ff;
+  --logo-2:       #8b5cf6;
+  --logo-3:       #a445ff;
   --logo-grad:    linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
 
   /* Orange accent — matching homepage --h3-accent */
-  --accent:       #a8440b;
-  --accent-tint:  #ffe9d9;
+  --accent:       #6657ff;
+  --accent-tint:  #f0edff;
 
   /* Status tokens */
   --good:         #0f8f4a;
@@ -52,9 +52,9 @@
    ─────────────────────────────────────────────────────────── */
 body {
   background:
-    radial-gradient(125% 85% at 100% -15%, rgba(155,  61, 255, 0.09), transparent 52%),
-    radial-gradient( 90% 55% at   0%   0%, rgba(255, 106,  26, 0.06), transparent 48%),
-    linear-gradient(180deg, var(--paper) 0%, #e8e1d0 60%, var(--paper-deep) 100%);
+    radial-gradient(125% 85% at 100% -15%, rgba(139,  92, 246, 0.08), transparent 52%),
+    radial-gradient( 90% 55% at   0%   0%, rgba(102,  87, 255, 0.05), transparent 48%),
+    linear-gradient(180deg, var(--paper) 0%, #f7f7fc 60%, var(--paper-deep) 100%);
 }
 
 /* ── 3. Page-hero: gradient + subtle grid ──────────────────────
@@ -72,8 +72,8 @@ body {
   inset: -10% -8% auto -8%;
   height: 520px;
   background:
-    radial-gradient(50% 60% at 82%   0%, rgba(208,  70, 255, 0.16), transparent 60%),
-    radial-gradient(40% 60% at  8%  18%, rgba(255, 106,  26, 0.07), transparent 60%);
+    radial-gradient(50% 60% at 82%   0%, rgba(164,  69, 255, 0.13), transparent 60%),
+    radial-gradient(40% 60% at  8%  18%, rgba(102,  87, 255, 0.08), transparent 60%);
   pointer-events: none;
   z-index: 0;
   filter: blur(2px);
@@ -84,8 +84,8 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right,  rgba(21, 20, 15, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(21, 20, 15, 0.04) 1px, transparent 1px);
+    linear-gradient(to right,  rgba(13, 12, 20, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 12, 20, 0.04) 1px, transparent 1px);
   background-size: 46px 46px;
   mask-image:         radial-gradient(75% 65% at 50% 25%, #000 30%, transparent 75%);
   -webkit-mask-image: radial-gradient(75% 65% at 50% 25%, #000 30%, transparent 75%);
@@ -103,7 +103,7 @@ body {
    like the homepage headline treatment.
    ─────────────────────────────────────────────────────────── */
 .page-hero h1 {
-  background: linear-gradient(115deg, var(--ink) 0%, var(--ink-2) 48%, #5e2bff 100%);
+  background: linear-gradient(115deg, var(--ink) 0%, var(--ink-2) 48%, #6657ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -111,7 +111,7 @@ body {
 }
 
 .page-hero h1 em {
-  background: linear-gradient(95deg, #5e2bff 0%, #9b3dff 55%, #d046ff 100%);
+  background: linear-gradient(95deg, #6657ff 0%, #8b5cf6 55%, #a445ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -130,7 +130,7 @@ body {
   gap: 6px;
   color: var(--violet-deep);
   background: var(--violet-tint);
-  border: 1px solid rgba(94, 43, 255, 0.18);
+  border: 1px solid rgba(102, 87, 255, 0.18);
   padding: 4px 10px;
   border-radius: 999px;
   font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -147,7 +147,7 @@ body {
 .strategic-panel-dark .card-kicker {
   background: transparent;
   border-color: transparent;
-  color: var(--acid, #d8ff4f);
+  color: var(--acid, #cfc4ff);
   padding-inline: 0;
 }
 
@@ -156,7 +156,7 @@ body {
    ─────────────────────────────────────────────────────────── */
 .section-alt {
   background:
-    radial-gradient(80% 60% at 100% 0%, rgba(255, 106, 26, 0.04), transparent 55%),
+    radial-gradient(80% 60% at 100% 0%, rgba(102, 87, 255, 0.04), transparent 55%),
     var(--paper);
   border-color: var(--line);
 }
@@ -177,8 +177,8 @@ body {
    ─────────────────────────────────────────────────────────── */
 .cta-inner {
   background:
-    radial-gradient(65% 80% at 85% 0%,   rgba(155, 61, 255, 0.09), transparent 55%),
-    radial-gradient(45% 70% at  8% 100%, rgba(255, 106, 26, 0.05), transparent 50%),
+    radial-gradient(65% 80% at 85% 0%,   rgba(139, 92, 246, 0.09), transparent 55%),
+    radial-gradient(45% 70% at  8% 100%, rgba(102, 87, 255, 0.05), transparent 50%),
     var(--surface);
   border-color: var(--line);
 }
@@ -188,7 +188,7 @@ body {
    ─────────────────────────────────────────────────────────── */
 .cta-band {
   background:
-    radial-gradient(60% 80% at 80% 0%, rgba(155, 61, 255, 0.08), transparent 55%),
+    radial-gradient(60% 80% at 80% 0%, rgba(139, 92, 246, 0.08), transparent 55%),
     var(--paper);
 }
 
@@ -220,5 +220,5 @@ body {
    palette so it doesn't look out of place on scroll.
    ─────────────────────────────────────────────────────────── */
 .site-header {
-  background: rgba(243, 238, 226, 0.82);
+  background: rgba(251, 251, 254, 0.85);
 }

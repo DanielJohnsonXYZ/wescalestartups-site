@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { contactRelatedReading, siteConfig } from "../../site";
+import { contactRelatedReading, siteConfig, mauticNewsletter } from "../../site";
 
 const contactFaqs = [
   {
@@ -234,7 +234,7 @@ const contactSchema = [
   </section>
 </BaseLayout>
 
-<script is:inline define:vars={{ email: siteConfig.email }}>
+<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
   const form = document.getElementById("growth-enquiry");
 
   form?.addEventListener("submit", (event) => {
@@ -257,6 +257,27 @@ const contactSchema = [
       "Help needed:",
       `${data.get("help") || ""}`
     ].join("\n");
+
+    // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
+    // even if no mail client is configured.
+    try {
+      const leadEmail = (data.get("email") || "").toString().trim();
+      if (leadEmail) {
+        fetch(mauticUrl, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            "mauticform[formId]": mauticFormId,
+            "mauticform[email]": leadEmail,
+            "mauticform[source_type]": "contact-form",
+            "mauticform[source_page]": window.location.href,
+            "mauticform[lead_magnet]": "growth-enquiry"
+          }).toString()
+        }).catch(() => {});
+      }
+    } catch (_) {}
 
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig } from "../site";
+import { siteConfig, mauticNewsletter } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -151,7 +151,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
   </section>
 </BaseLayout>
 
-<script is:inline define:vars={{ email: siteConfig.email }}>
+<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
   const form = document.getElementById("guest-application");
 
   form?.addEventListener("submit", (event) => {
@@ -180,6 +180,27 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
       ``,
       `Email: ${data.get("email") || ""}`
     ].join("\n");
+
+    // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
+    // even if no mail client is configured.
+    try {
+      const leadEmail = (data.get("email") || "").toString().trim();
+      if (leadEmail) {
+        fetch(mauticUrl, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            "mauticform[formId]": mauticFormId,
+            "mauticform[email]": leadEmail,
+            "mauticform[source_type]": "podcast-guest-form",
+            "mauticform[source_page]": window.location.href,
+            "mauticform[lead_magnet]": "podcast-guest-application"
+          }).toString()
+        }).catch(() => {});
+      }
+    } catch (_) {}
 
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 

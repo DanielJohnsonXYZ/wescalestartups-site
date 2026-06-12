@@ -968,20 +968,22 @@ function showResults() {
   }
   email.classList.remove('err');
 
-  /* ── TODO: Wire up email capture ──────────────────────────────
-     Replace the fetch call below with your email service endpoint.
-     E.g. ConvertKit, Mailchimp, your own API, etc.
-
-     fetch('/api/subscribe', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({
-         name:  name.value.trim(),
-         email: email.value.trim(),
-         result: BOTTLENECKS[dominantIdx]
-       })
-     });
-  ─────────────────────────────────────────────────────────────── */
+  /* ── Email capture → Mautic (fire-and-forget) ─────────────── */
+  try {
+    fetch('https://comms.wescalestartups.com/form/submit?formId=1', {
+      method: 'POST',
+      mode: 'no-cors',
+      keepalive: true,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'mauticform[formId]': '1',
+        'mauticform[email]': email.value.trim(),
+        'mauticform[source_type]': 'diagnostic-tool',
+        'mauticform[source_page]': window.location.href,
+        'mauticform[lead_magnet]': 'founder-led-growth-bottleneck-map'
+      }).toString()
+    }).catch(function () {});
+  } catch (_) {}
 
   const scores     = calcScores();
   const domIdx     = dominant(scores);

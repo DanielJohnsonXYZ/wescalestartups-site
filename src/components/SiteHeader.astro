@@ -16,15 +16,17 @@ const navGroups = [
       { href: "/services/growth-diagnosis", label: "Growth Diagnosis", note: "Name the bottleneck first" },
       { href: "/services/90-day-growth-sprint", label: "90-Day Sprint", note: "Focused execution cycle" },
       { href: "/services/acquisition-system-build", label: "Acquisition Build", note: "Channels, offers, reporting" },
-      { href: "/services/fractional-cmo", label: "Fractional CMO", note: "Senior growth leadership" }
+      { href: "/services/fractional-cmo", label: "Fractional CMO", note: "Senior growth leadership" },
+      { href: "/how-it-works", label: "How it works", note: "The engagement ladder, explained" }
     ]
   },
   {
     href: "/proof",
-    label: "Proof",
+    label: "Results",
     children: [
       { href: "/case-studies", label: "Case studies", note: "Client work in context" },
       { href: "/testimonials", label: "Testimonials", note: "Founder and operator voices" },
+      { href: "/industries", label: "Industries", note: "SaaS, fintech, healthtech, AI" },
       { href: "/fractional-cmo-vs-agency", label: "WSS vs agency", note: "When each model fits" }
     ]
   },
@@ -34,6 +36,7 @@ const navGroups = [
     label: "Resources",
     children: [
       { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "10 questions, 5 minutes" },
+      { href: "/resources", label: "Templates & tools", note: "Free frameworks and checklists" },
       { href: "/insights", label: "Insights", note: "Strategic reads" },
       { href: "/podcast", label: "Podcast", note: "How Startups Win With AI" }
     ]
@@ -44,7 +47,8 @@ const navGroups = [
     children: [
       { href: "/about", label: "About WSS", note: "Who we are for" },
       { href: "/about/daniel", label: "About Daniel", note: "Founder profile" },
-      { href: "/press", label: "Speaking & press", note: "Talks, media, press kit" }
+      { href: "/press", label: "Speaking & press", note: "Talks, media, press kit" },
+      { href: "/contact", label: "Contact", note: "Send growth context" }
     ]
   }
 ] as const;
@@ -90,13 +94,13 @@ const isGroupActive = (item: typeof navGroups[number]) =>
     </nav>
     <a
       class="button button-brand header-cta header-cta--stacked button-with-subcopy"
-      href="/contact"
-      data-cta="header-contact"
-      aria-label="Contact We Scale Startups"
-      title="Contact We Scale Startups"
+      href={siteConfig.bookingUrl}
+      data-cta="header-book"
+      aria-label="Book a 20-minute growth diagnostic call"
+      title="Book a 20-minute growth diagnostic call"
     >
-      <span class="button-label">Contact</span>
-      <span class="button-subcopy">Send growth context.</span>
+      <span class="button-label">Book a call</span>
+      <span class="button-subcopy">20-min growth diagnostic.</span>
     </a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
@@ -117,12 +121,12 @@ const isGroupActive = (item: typeof navGroups[number]) =>
         ))}
         <a
           class="button button-brand button-with-subcopy"
-          href="/contact"
-          data-cta="mobile-contact"
-          title="Contact We Scale Startups"
+          href={siteConfig.bookingUrl}
+          data-cta="mobile-book"
+          title="Book a 20-minute growth diagnostic call"
         >
-          <span class="button-label">Contact</span>
-          <span class="button-subcopy">Send growth context.</span>
+          <span class="button-label">Book a call</span>
+          <span class="button-subcopy">20-min growth diagnostic.</span>
         </a>
       </nav>
     </details>

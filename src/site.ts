@@ -191,7 +191,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
 /** Primary nav — same on every page (including homepage). */
 export const navigation = [
   { href: "/services", label: "Services" },
-  { href: "/proof", label: "Proof" },
+  { href: "/proof", label: "Results" },
   { href: "/pricing", label: "Pricing" },
   { href: "/insights", label: "Insights" },
   { href: "/about", label: "About" }

@@ -23,7 +23,6 @@ const navGroups = [
     href: "/proof",
     label: "Proof",
     children: [
-      { href: "/proof", label: "Proof hub", note: "Results and operating evidence" },
       { href: "/case-studies", label: "Case studies", note: "Client work in context" },
       { href: "/testimonials", label: "Testimonials", note: "Founder and operator voices" },
       { href: "/fractional-cmo-vs-agency", label: "WSS vs agency", note: "When each model fits" }
@@ -35,22 +34,17 @@ const navGroups = [
     label: "Resources",
     children: [
       { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "10 questions, 5 minutes" },
-      { href: "/resources", label: "Resources hub", note: "Templates and guides" },
       { href: "/insights", label: "Insights", note: "Strategic reads" },
-      { href: "/growth-operating-system", label: "Growth OS", note: "How the system works" },
       { href: "/podcast", label: "Podcast", note: "How Startups Win With AI" }
     ]
   },
   {
     href: "/about",
-    label: "Company",
+    label: "About",
     children: [
       { href: "/about", label: "About WSS", note: "Who we are for" },
-      { href: "/team", label: "Team", note: "People behind WSS" },
       { href: "/about/daniel", label: "About Daniel", note: "Founder profile" },
-      { href: "/press", label: "Speaking & press", note: "Talks, media, press kit" },
-      { href: "/workshops", label: "Workshops", note: "Private team sessions" },
-      { href: "/contact", label: "Contact", note: "Email and details" }
+      { href: "/press", label: "Speaking & press", note: "Talks, media, press kit" }
     ]
   }
 ] as const;

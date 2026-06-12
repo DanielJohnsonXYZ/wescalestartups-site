@@ -30,16 +30,15 @@
   background-position: 48px 0;
   background-attachment: fixed;
   color: var(--ink);
-  font-family: 'Inter', sans-serif;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'ss01', 'cv11';
 }
 @media (max-width: 900px) { .page-home-v7 { background-image: none; } }
 .page-home-v7 h1, .page-home-v7 h2, .page-home-v7 h3, .page-home-v7 h4 {
-  font-family: 'Inter Tight', 'Inter', sans-serif;
-  font-weight: 800;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.02;
   margin: 0;
@@ -64,9 +63,9 @@
 .page-home-v7 .spec-label::before { content: ''; width: 16px; height: 1px; background: var(--violet); }
 
 .page-home-v7 .section-h {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(36px, 4.5vw, 56px);
-  font-weight: 800; letter-spacing: -0.045em; line-height: 1.04;
+  font-weight: 700; letter-spacing: -0.045em; line-height: 1.04;
   margin-bottom: 16px; max-width: 22ch;
 }
 .page-home-v7 .section-h em { font-style: normal; color: var(--violet); }
@@ -111,71 +110,14 @@
 }
 
 /* Inline logo helpers — sized + recoloured for cream background */
-.page-home-v7 .lg-techstars {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 900; font-size: 26px;
-  color: var(--ink); letter-spacing: -0.04em;
-  line-height: 1;
-}
-.page-home-v7 .lg-techstars-underscore { color: #00C474; margin-left: 1px; }
-.page-home-v7 .lg-growthmentor {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: 'Inter Tight', sans-serif; font-weight: 800;
-  font-size: 22px; color: var(--ink); letter-spacing: -0.04em;
-  line-height: 1;
-}
-.page-home-v7 .lg-growthmentor svg { height: 28px; width: auto; }
-.page-home-v7 .lg-imperial {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 800;
-  font-size: 20px; color: #001489; letter-spacing: 0.08em;
-  line-height: 1; text-align: center;
-}
-.page-home-v7 .lg-imperial-sub {
-  font-size: 9px; font-weight: 700;
-  letter-spacing: 0.18em; margin-top: 4px;
-  display: block;
-}
-.page-home-v7 .lg-mentorcruise { color: var(--ink); }
-.page-home-v7 .lg-mentorcruise svg { height: 22px; width: auto; }
-.page-home-v7 .lg-mentorcruise svg path { fill: currentColor; }
-.page-home-v7 .lg-google {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 500;
-  font-size: 22px;
-  letter-spacing: -0.025em;
-  line-height: 1;
-  display: inline-flex; align-items: baseline;
-}
-.page-home-v7 .lg-google .g-b { color: #4285F4; }
-.page-home-v7 .lg-google .g-o { color: #EA4335; }
-.page-home-v7 .lg-google .g-y { color: #FBBC04; }
-.page-home-v7 .lg-google .g-g { color: #34A853; }
-.page-home-v7 .lg-google .g-suffix { color: var(--ink-3); font-weight: 400; margin-left: 6px; }
-.page-home-v7 .lg-cambridge {
-  display: inline-flex; align-items: center; gap: 10px;
-  color: var(--ink);
-}
-.page-home-v7 .lg-cambridge svg { height: 30px; width: auto; flex-shrink: 0; }
-.page-home-v7 .lg-cambridge-text {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 800;
-  font-size: 11px;
-  line-height: 1.15;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  text-align: left;
-}
-.page-home-v7 .lg-cambridge-text .judge {
-  display: block;
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 13px;
-  letter-spacing: 0;
-  color: var(--ink-2);
-  margin-top: 2px;
-}
+
+
+
+
+
+
+
+
 
 /* ============ Hero ============ */
 .page-home-v7 .hero { padding: 80px 0 100px; position: relative; }
@@ -188,7 +130,7 @@
 .page-home-v7 .hero > * { position: relative; z-index: 1; }
 .page-home-v7 .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
 @media (max-width: 1000px) { .page-home-v7 .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
-.page-home-v7 .hero h1 { font-size: clamp(50px, 6.8vw, 84px); font-weight: 900; letter-spacing: -0.052em; line-height: 0.98; margin-bottom: 28px; }
+.page-home-v7 .hero h1 { font-size: clamp(50px, 6.8vw, 84px); font-weight: 700; letter-spacing: -0.052em; line-height: 0.98; margin-bottom: 28px; }
 .page-home-v7 .hero h1 .hl { position: relative; white-space: nowrap; }
 .page-home-v7 .hero h1 .hl::after {
   content: ''; position: absolute; left: -3%; right: -3%; bottom: 4%; height: 22%;
@@ -201,14 +143,14 @@
 .page-home-v7 .step-chip:hover { border-color: var(--violet); color: var(--violet); text-decoration: none; }
 .page-home-v7 .step-chip .n { color: var(--violet); font-weight: 700; }
 .page-home-v7 .hero-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 48px; }
-.page-home-v7 .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; background: var(--violet); color: white; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; border-radius: 8px; letter-spacing: -0.005em; box-shadow: 0 8px 24px rgba(111, 63, 245, 0.2); transition: all 0.18s; }
+.page-home-v7 .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; background: var(--violet); color: white; font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; border-radius: 8px; letter-spacing: -0.005em; box-shadow: 0 8px 24px rgba(111, 63, 245, 0.2); transition: all 0.18s; }
 .page-home-v7 .btn-primary:hover { background: var(--violet-2); transform: translateY(-1px); box-shadow: 0 12px 28px rgba(111, 63, 245, 0.3); text-decoration: none; }
-.page-home-v7 .btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; background: white; color: var(--ink); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; border: 1px solid var(--line-strong); border-radius: 8px; }
+.page-home-v7 .btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; background: white; color: var(--ink); font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; border: 1px solid var(--line-strong); border-radius: 8px; }
 .page-home-v7 .btn-secondary:hover { border-color: var(--ink); text-decoration: none; }
 .page-home-v7 .hero-trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-top: 28px; border-top: 1px solid var(--line); }
 @media (max-width: 700px) { .page-home-v7 .hero-trust { grid-template-columns: 1fr 1fr; } }
 .page-home-v7 .trust { display: flex; flex-direction: column; }
-.page-home-v7 .trust-v { font-family: 'Inter Tight', sans-serif; font-size: 28px; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.page-home-v7 .trust-v { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 28px; font-weight: 700; color: var(--ink); letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .page-home-v7 .trust-l { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); margin-top: 8px; line-height: 1.4; }
 
 /* ============ Diagnostic widget ============ */
@@ -226,11 +168,11 @@
 .page-home-v7 .diag-head-l::before { content: ''; width: 8px; height: 8px; background: var(--violet); border-radius: 50%; box-shadow: 0 0 10px var(--violet); animation: pulse 2.4s ease-in-out infinite; }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 10px var(--violet); } 50% { box-shadow: 0 0 4px var(--violet); } }
 .page-home-v7 .diag-head-r { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; }
-.page-home-v7 .diag-title { font-family: 'Inter Tight', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 4px; }
+.page-home-v7 .diag-title { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 4px; }
 .page-home-v7 .diag-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 18px; line-height: 1.5; }
 .page-home-v7 .diag-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 16px; }
 .page-home-v7 .m-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 4px; }
-.page-home-v7 .m-val { font-family: 'Inter Tight', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; transition: opacity 0.3s; }
+.page-home-v7 .m-val { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; transition: opacity 0.3s; }
 .page-home-v7 .m-val.violet { color: var(--violet); }
 .page-home-v7 .m-val .unit { font-size: 13px; font-weight: 500; color: var(--ink-3); }
 .page-home-v7 .m-foot { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-3); margin-top: 4px; }
@@ -257,7 +199,7 @@
 .page-home-v7 .proof-bar { background: var(--ink); color: var(--paper); border: none; padding: 40px 0; }
 .page-home-v7 .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr) 1.4fr; gap: 32px; align-items: center; }
 @media (max-width: 900px) { .page-home-v7 .proof-grid { grid-template-columns: 1fr 1fr; } }
-.page-home-v7 .proof-stat-v { font-family: 'Inter Tight', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--paper); font-variant-numeric: tabular-nums; }
+.page-home-v7 .proof-stat-v { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--paper); font-variant-numeric: tabular-nums; }
 .page-home-v7 .proof-stat-l { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(247, 246, 241, 0.55); margin-top: 8px; line-height: 1.4; }
 .page-home-v7 .proof-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(247, 246, 241, 0.55); }
 .page-home-v7 .proof-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
@@ -282,7 +224,7 @@
 .page-home-v7 .bf-card.active .bf-q { color: rgba(255,255,255,0.85); }
 .page-home-v7 .bf-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--violet); font-weight: 700; letter-spacing: 0.08em; }
 .page-home-v7 .bf-card.active .bf-num { color: rgba(255,255,255,0.85); }
-.page-home-v7 .bf-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 15px; color: var(--ink); letter-spacing: -0.025em; }
+.page-home-v7 .bf-name { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 15px; color: var(--ink); letter-spacing: -0.025em; }
 .page-home-v7 .bf-q { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
 
 .page-home-v7 .bf-result {
@@ -292,12 +234,12 @@
 }
 @media (max-width: 760px) { .page-home-v7 .bf-result { grid-template-columns: 1fr; } }
 .page-home-v7 .bf-result-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--violet); margin-bottom: 8px; }
-.page-home-v7 .bf-result h4 { font-family: 'Inter Tight', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 8px; }
+.page-home-v7 .bf-result h4 { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 8px; }
 .page-home-v7 .bf-result p { font-size: 15px; color: var(--ink-2); line-height: 1.55; margin-bottom: 12px; }
 .page-home-v7 .bf-result-link { font-size: 14px; font-weight: 600; color: var(--violet); display: inline-flex; align-items: center; gap: 6px; }
 .page-home-v7 .bf-rec { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
 .page-home-v7 .bf-rec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
-.page-home-v7 .bf-rec-svc { font-family: 'Inter Tight', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: var(--violet); }
+.page-home-v7 .bf-rec-svc { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; color: var(--violet); }
 .page-home-v7 .bf-rec-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); }
 
 /* ============ NEW: Growth system diagram ============ */
@@ -327,10 +269,10 @@
   display: inline-flex; align-items: center; justify-content: center;
   width: 30px; height: 30px; border-radius: 100px;
   background: var(--violet-pale); color: var(--violet);
-  font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 13px;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 13px;
 }
 .page-home-v7 .flow-node-name { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
-.page-home-v7 .flow-node h4 { font-family: 'Inter Tight', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 6px; }
+.page-home-v7 .flow-node h4 { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 6px; }
 .page-home-v7 .flow-node p { font-size: 13px; color: var(--ink-3); line-height: 1.5; margin-bottom: 12px; }
 .page-home-v7 .flow-node-out { padding-top: 12px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
 .page-home-v7 .flow-node-out span { color: var(--violet); }
@@ -341,7 +283,7 @@
 .page-home-v7 .bn-card { background: white; border: 1px solid var(--line); border-radius: 10px; padding: 24px; transition: all 0.18s; }
 .page-home-v7 .bn-card:hover { border-color: var(--violet); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(111, 63, 245, 0.08); }
 .page-home-v7 .bn-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--violet); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 10px; }
-.page-home-v7 .bn-card h4 { font-family: 'Inter Tight', sans-serif; font-size: 21px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; line-height: 1.15; }
+.page-home-v7 .bn-card h4 { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 21px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; line-height: 1.15; }
 .page-home-v7 .bn-card p { color: var(--ink-3); font-size: 14px; line-height: 1.5; }
 
 /* ============ Services data table ============ */
@@ -352,12 +294,12 @@
 @media (max-width: 900px) { .page-home-v7 .svc-row { grid-template-columns: 1fr; gap: 6px; padding: 20px 22px; } }
 .page-home-v7 .svc-row.flagship { background: linear-gradient(90deg, var(--violet-pale), rgba(236, 229, 254, 0.4)); }
 .page-home-v7 .svc-step { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--violet); font-weight: 700; letter-spacing: 0.05em; }
-.page-home-v7 .svc-title { font-family: 'Inter Tight', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.025em; }
+.page-home-v7 .svc-title { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.025em; }
 .page-home-v7 .svc-flag { background: var(--violet); color: white; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; margin-left: 8px; vertical-align: middle; font-weight: 600; }
 .page-home-v7 .svc-price { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); letter-spacing: 0.04em; margin-top: 4px; display: block; }
 .page-home-v7 .svc-desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.45; }
 .page-home-v7 .svc-desc strong { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-3); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
-.page-home-v7 .svc-cta a { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--violet); }
+.page-home-v7 .svc-cta a { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 600; color: var(--violet); }
 
 /* ============ Case studies ============ */
 .page-home-v7 .cases { background: var(--paper); }
@@ -366,15 +308,15 @@
 .page-home-v7 .case-card { background: white; border: 1px solid var(--line); border-radius: 10px; padding: 24px; position: relative; }
 .page-home-v7 .case-card.feature { padding: 32px; }
 .page-home-v7 .case-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--violet); background: var(--violet-pale); padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 14px; }
-.page-home-v7 .case-card h4 { font-family: 'Inter Tight', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+.page-home-v7 .case-card h4 { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
 .page-home-v7 .case-card.feature h4 { font-size: 32px; }
 .page-home-v7 .case-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); margin-bottom: 14px; letter-spacing: 0.04em; }
 .page-home-v7 .case-card p { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin-bottom: 14px; }
 .page-home-v7 .case-card p strong { color: var(--violet); font-weight: 700; }
 .page-home-v7 .case-mini-stats { display: flex; gap: 20px; padding-top: 14px; border-top: 1px solid var(--line); margin-bottom: 14px; }
-.page-home-v7 .case-stat-v { font-family: 'Inter Tight', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: var(--violet); line-height: 1; font-variant-numeric: tabular-nums; }
+.page-home-v7 .case-stat-v { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; color: var(--violet); line-height: 1; font-variant-numeric: tabular-nums; }
 .page-home-v7 .case-stat-l { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
-.page-home-v7 .case-link { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--violet); }
+.page-home-v7 .case-link { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 600; color: var(--violet); }
 
 /* ============ NEW: Testimonials ============ */
 .page-home-v7 .testimonials { background: white; }
@@ -382,10 +324,10 @@
 @media (max-width: 760px) { .page-home-v7 .testim-grid { grid-template-columns: 1fr; } }
 .page-home-v7 .testim-card { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 28px; position: relative; transition: all 0.2s; }
 .page-home-v7 .testim-card:hover { border-color: var(--violet-soft); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.page-home-v7 .testim-mark { position: absolute; top: 20px; left: 24px; font-family: 'Inter Tight', sans-serif; font-style: italic; font-size: 56px; line-height: 0.5; color: var(--violet); opacity: 0.18; font-weight: 900; }
+.page-home-v7 .testim-mark { position: absolute; top: 20px; left: 24px; font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 56px; line-height: 0.5; color: var(--violet); opacity: 0.18; font-weight: 700; }
 .page-home-v7 .testim-card blockquote { margin: 0 0 18px; padding-left: 44px; padding-top: 8px; font-size: 16px; line-height: 1.55; color: var(--ink); }
 .page-home-v7 .testim-card cite { font-style: normal; font-size: 12px; color: var(--ink-3); display: block; padding-left: 44px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.06em; }
-.page-home-v7 .testim-card cite strong { font-family: 'Inter Tight', sans-serif; font-style: normal; font-weight: 700; font-size: 16px; color: var(--ink); display: block; margin-bottom: 4px; letter-spacing: -0.02em; text-transform: none; }
+.page-home-v7 .testim-card cite strong { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-style: normal; font-weight: 700; font-size: 16px; color: var(--ink); display: block; margin-bottom: 4px; letter-spacing: -0.02em; text-transform: none; }
 
 /* ============ About ============ */
 .page-home-v7 .about { background: var(--paper-2); }
@@ -401,7 +343,7 @@
 .page-home-v7 .about-photo-secondary { aspect-ratio: 5/3; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line); }
 .page-home-v7 .about-photo-secondary img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .page-home-v7 .about-photo-caption { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-3); text-align: center; text-transform: uppercase; letter-spacing: 0.08em; }
-.page-home-v7 .about-content h2 { font-family: 'Inter Tight', sans-serif; font-size: clamp(34px, 4.2vw, 48px); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px; }
+.page-home-v7 .about-content h2 { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: clamp(34px, 4.2vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 20px; }
 .page-home-v7 .about-content h2 em { color: var(--violet); font-style: normal; }
 .page-home-v7 .about-content p { font-size: 16px; color: var(--ink-2); line-height: 1.6; margin-bottom: 16px; max-width: 60ch; }
 .page-home-v7 .about-content p strong { color: var(--ink); font-weight: 700; }
@@ -419,7 +361,7 @@
   display: flex; justify-content: space-between; align-items: center;
   cursor: pointer; list-style: none;
   padding: 24px 0;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: 19px; font-weight: 700; color: var(--ink);
   letter-spacing: -0.025em; gap: 24px;
   transition: color 0.15s;
@@ -437,102 +379,10 @@
 .page-home-v7 .final-cta { background: var(--ink); color: var(--paper); text-align: center; position: relative; overflow: hidden; padding: 120px 0; }
 .page-home-v7 .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; width: 1000px; height: 600px; transform: translate(-50%, -50%); background: radial-gradient(ellipse, rgba(111, 63, 245, 0.25), transparent 65%); filter: blur(40px); }
 .page-home-v7 .final-cta > * { position: relative; }
-.page-home-v7 .final-cta h2 { color: var(--paper); font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -0.045em; margin-bottom: 20px; font-family: 'Inter Tight', sans-serif; }
+.page-home-v7 .final-cta h2 { color: var(--paper); font-size: clamp(40px, 6vw, 72px); font-weight: 700; letter-spacing: -0.045em; margin-bottom: 20px; font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; }
 .page-home-v7 .final-cta h2 em { color: var(--violet-soft); font-style: normal; }
 .page-home-v7 .final-cta p { color: rgba(247, 246, 241, 0.75); font-size: 18px; max-width: 60ch; margin: 0 auto 32px; }
 .page-home-v7 .final-cta .btn-primary { background: var(--violet); box-shadow: 0 16px 40px rgba(111, 63, 245, 0.4); font-size: 15px; padding: 16px 28px; }
-
-/* ============ NEW: Newsletter modal ============ */
-.page-home-v7 .modal-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(10, 10, 15, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: none;
-  align-items: center; justify-content: center;
-  z-index: 1000;
-  padding: 24px;
-  animation: fadeIn 0.3s ease;
-}
-.page-home-v7 .modal-backdrop.show { display: flex; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.page-home-v7 .modal {
-  background: white;
-  border-radius: 16px;
-  max-width: 480px;
-  width: 100%;
-  padding: 40px;
-  position: relative;
-  box-shadow: 0 32px 80px rgba(10, 10, 15, 0.3);
-  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-@keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
-.page-home-v7 .modal::before {
-  content: ''; position: absolute;
-  top: -100px; right: -50px;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(184, 165, 250, 0.4), transparent 60%);
-  filter: blur(30px);
-  pointer-events: none;
-}
-.page-home-v7 .modal > * { position: relative; }
-.page-home-v7 .modal-close {
-  position: absolute; top: 16px; right: 16px;
-  background: var(--paper-2); border: none;
-  width: 32px; height: 32px; border-radius: 100px;
-  font-size: 18px; color: var(--ink-2); cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-}
-.page-home-v7 .modal-close:hover { background: var(--ink); color: white; }
-.page-home-v7 .modal-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--violet); font-weight: 600;
-  background: var(--violet-pale);
-  padding: 6px 12px; border-radius: 100px;
-  margin-bottom: 20px;
-}
-.page-home-v7 .modal h3 {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 28px; font-weight: 800; letter-spacing: -0.035em;
-  line-height: 1.1; margin-bottom: 12px;
-}
-.page-home-v7 .modal h3 em { color: var(--violet); font-style: normal; }
-.page-home-v7 .modal p { font-size: 15px; color: var(--ink-3); line-height: 1.55; margin-bottom: 24px; }
-.page-home-v7 .modal-form { display: flex; flex-direction: column; gap: 10px; }
-.page-home-v7 .modal-form input {
-  width: 100%; padding: 14px 16px;
-  border: 1px solid var(--line-strong);
-  border-radius: 10px; font-family: inherit; font-size: 14px;
-  background: var(--paper); color: var(--ink);
-  transition: border-color 0.15s;
-}
-.page-home-v7 .modal-form input:focus { outline: none; border-color: var(--violet); box-shadow: 0 0 0 4px var(--violet-pale); }
-.page-home-v7 .modal-form button {
-  padding: 14px 16px;
-  background: var(--violet); color: white;
-  border: none; border-radius: 10px;
-  font-family: inherit; font-size: 14px; font-weight: 600;
-  cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  box-shadow: 0 8px 24px rgba(111, 63, 245, 0.25);
-  transition: all 0.18s;
-}
-.page-home-v7 .modal-form button:hover { background: var(--violet-2); transform: translateY(-1px); }
-.page-home-v7 .modal-foot {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; color: var(--ink-3);
-  margin-top: 16px;
-  text-align: center;
-  letter-spacing: 0.04em;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}
 
 /* ============ Sub-audience routing band ("Not a founder?") ============ */
 .page-home-v7 .v7-sub-audience {
@@ -568,7 +418,7 @@
   .page-home-v7 .v7-sub-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
 }
 .page-home-v7 .v7-sub-item h4 {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.025em;
@@ -582,7 +432,7 @@
   margin: 0 0 12px;
 }
 .page-home-v7 .v7-sub-item a {
-  font-family: 'Inter', sans-serif;
+  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: var(--violet);
@@ -594,3 +444,9 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+
+/* ===== Typographic credential wall (replaces drawn third-party logos) ===== */
+.page-home-v7 .cred-item { display: flex; flex-direction: column; gap: 6px; align-items: center; text-align: center; padding: 10px 18px; }
+.page-home-v7 .cred-name { font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 16px; color: var(--ink); letter-spacing: -0.02em; }
+.page-home-v7 .cred-item .logo-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); }

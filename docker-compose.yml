@@ -1,0 +1,10 @@
+# Dokploy build target for the WSS static site.
+# Routing (www + apex) is handled by Dokploy's domain feature, so this file
+# intentionally carries NO Traefik labels to avoid double-routing.
+# (compose.production.yml keeps the full standalone label set for reference.)
+services:
+  nginx:
+    build: .
+    image: wescalestartups-static:audit-2026-06
+    restart: unless-stopped
+    command: nginx -g 'daemon off;'

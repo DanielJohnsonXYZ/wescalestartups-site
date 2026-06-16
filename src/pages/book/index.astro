@@ -118,6 +118,21 @@ const bookSchema = [
 
   <section class="section">
     <div class="shell">
+      <p class="eyebrow">Before you book</p>
+      <h2>This call isn't for everyone.</h2>
+      <p class="lede" style="max-width:60ch;">It's a fast, honest diagnosis — not junior execution or a free strategy deck. Hold off for now if:</p>
+      <ul class="bring-checklist">
+        <li>You're <strong>pre-idea or pre-revenue</strong> — there's no growth system to diagnose yet.</li>
+        <li>You have <strong>no sales motion</strong> or customers — that comes before scaling acquisition.</li>
+        <li>You want someone to <strong>execute tasks junior-style</strong> rather than name and fix the binding constraint.</li>
+        <li>You're <strong>not ready to act</strong> on the diagnosis once it's clear.</li>
+      </ul>
+      <p class="footer-secondary-cta" style="margin-top:1rem;">If that's you, the <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a> is a better free starting point.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
       <p class="eyebrow">How the {siteConfig.bookingCallDurationPhrase} run</p>
       <ol class="call-phase-list">
         {siteConfig.bookingCallPhases.map((step) => (

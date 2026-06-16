@@ -72,3 +72,15 @@ html { scroll-padding-top: 6.5rem; }
   .hero-cta .btn { width: 100%; text-align: center; justify-content: center; }
   .section-hero h1 { font-size: clamp(1.8rem, 7vw, 2.3rem); }
 }
+
+/* ─── Audit batch 3 (2026-06) ─────────────────────────────────────────── */
+
+/* Invisible CTA fix (High): in header + footer a link-colour rule overrode
+   .button-brand's white text, producing violet text on a violet background.
+   A brand button is always violet-bg, so its text must always be white. */
+.button-brand,
+.button-brand .button-label,
+.button-brand .button-subcopy {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}

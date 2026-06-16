@@ -9,12 +9,12 @@ export const siteConfig = {
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
   calendlyUrl: "https://calendly.com/wescalestartups",
-  bookingLabel: "Book a 20-minute growth diagnostic",
+  bookingLabel: "Book a 20-minute Growth Audit",
   /** Inline copy: "In 30 minutes you'll…", "30 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
   bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
   /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
-  bookingCallShort: "20-minute diagnostic call",
+  bookingCallShort: "20-minute Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
     { phase: "First ~5 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
@@ -1110,7 +1110,9 @@ export const pricingTiers = [
     priceFrom: "from £15k",
     description: "Audit → plan → ship 3–5 tests → transfer. Best pre-fundraise or post-launch when you need signal fast.",
     href: "/services/90-day-growth-sprint",
-    tierBadge: "Best for fast signal"
+    tierBadge: "Most common paid step",
+    mostPopular: true,
+    popularRationale: "The usual bridge from the free Growth Audit — fast, scoped signal before a bigger commitment."
   },
   {
     name: "Acquisition System Build",

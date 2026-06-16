@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { bookRelatedReading, siteConfig, testimonials } from "../../site";
+import { siteConfig, testimonials } from "../../site";
 
 const featuredBookingQuote = testimonials[0];
 const calendlyEmbedUrl = siteConfig.calendlyUrl;
@@ -55,138 +55,76 @@ const bookSchema = [
     <div class="shell">
       <p class="eyebrow">Book call</p>
       <h1>{siteConfig.bookingLabel}</h1>
-      <p>Use this when growth is active but the next move is unclear. The call maps the bottleneck, stage, team, budget, and whether WSS is the right shape of help.</p>
+      <p class="lede">{siteConfig.bookingSubcopy}</p>
       <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href="#book-calendly"
-          data-cta="book-page-calendly-scroll"
-          title={siteConfig.bookingCallReassurance}
-        >
+        <a class="button button-brand button-with-subcopy" href="#book-calendly" data-cta="book-hero-calendly" title={siteConfig.bookingCallReassurance}>
           <span class="button-label">Pick a time</span>
-          <span class="button-subcopy">Inline calendar below · same structured diagnostic</span>
+          <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
         </a>
-        <a
-          class="button button-light button-with-subcopy"
-          href={siteConfig.calendlyUrl}
-          rel="noreferrer"
-          target="_blank"
-          data-cta="book-page-calendly-newtab"
-        >
-          <span class="button-label">Open Calendly in a new tab</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-page-scorecard">
-          {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/proof" data-cta="book-page-proof">
-          Proof hub
-        </a>
-        <a class="button button-light" href="/contact" data-cta="book-page-contact">
-          Contact
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-hero-scorecard">
+          Not ready? {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">What happens on the call</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(1.85rem,3vw,2.4rem);line-height:1.1;font-weight:700;margin:0.35rem 0 1.25rem;">
-        {siteConfig.bookingCallDurationPhrase}, structured — so you leave with clarity, not a sales ambush.
-      </h2>
-      <ol class="call-phase-list">
-        {
-          siteConfig.bookingCallPhases.map((step) => (
-            <li>
-              <strong>{step.phase}</strong>
-              <span>{step.detail}</span>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
   <section class="section">
-    <div class="shell detail-grid">
-      <aside class="detail-aside">
-        <p class="eyebrow">Good fit</p>
-        <p>Post-PMF startup, usually Seed to Series B, with real traction and a growth system that is not clear enough yet.</p>
-        <p><strong>Bring:</strong> current channels, ARR range, pipeline problem, team shape, and what you want to change in 90 days.</p>
-      </aside>
-      <div class="detail-body">
-        <article class="content-block">
-          <h2>Before you pick a slot</h2>
+    <div class="shell">
+      <p class="eyebrow">Free or paid?</p>
+      <h2>This call is free. Here is when to pay for more.</h2>
+      <div class="free-paid-grid">
+        <div class="free-paid-card is-free">
+          <p class="fp-price">Free · {siteConfig.bookingCallDurationPhrase}</p>
+          <h3>20-minute Growth Audit (this call)</h3>
+          <p>For founders who want their bottleneck named fast and an honest read on the next move.</p>
           <ul>
-            <li>Know whether the issue is pipeline volume, conversion, positioning, reporting, or ownership.</li>
-            <li>Be ready to talk about current spend, team capacity, and urgency.</li>
-            <li>
-              If the problem is still fuzzy, complete the{" "}
-              <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a> first and bring the result.
-            </li>
+            <li>Bottleneck named in plain English</li>
+            <li>Likely cause and next best move</li>
+            <li>Whether WSS is the right fit — no pitch</li>
           </ul>
-        </article>
-        <article class="content-block">
-          <h2>What happens next</h2>
-          <ol>
-            <li>You choose a Calendly slot that works on mobile or desktop.</li>
-            <li>The booking source is tracked as a Calendly click.</li>
-            <li>The call focuses on diagnosis, not a generic pitch.</li>
-          </ol>
-        </article>
+        </div>
+        <div class="free-paid-card">
+          <p class="fp-price">Paid · from £4k</p>
+          <h3>Growth Diagnosis (1 week)</h3>
+          <p>When you want the full evidence-backed diagnosis and a sequenced plan, not just a 20-minute read.</p>
+          <ul>
+            <li>Evidence review across the funnel</li>
+            <li>Constraint map + quick-win shortlist</li>
+            <li>Sequenced 90-day recommendation</li>
+          </ul>
+          <p style="margin:.7rem 0 0"><a class="card-link" href="/services/growth-diagnosis">See Growth Diagnosis →</a></p>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Before the call</p>
-      <h2>Context that makes the 20 minutes useful.</h2>
-      <ul class="related-insights-list">
-        {bookRelatedReading.map((item) => (
-          <li>
-            <a class="card-link" href={item.href}>
-              {item.label} →
-            </a>
-          </li>
-        ))}
+      <p class="eyebrow">What you leave with</p>
+      <h2>Four things, in writing, by the end of the call.</h2>
+      <ul class="bring-checklist">
+        <li><strong>Your named bottleneck</strong> — the one constraint holding pipeline back, in plain English.</li>
+        <li><strong>The likely cause</strong> — positioning, acquisition, conversion, reporting, or team ownership.</li>
+        <li><strong>Your next best move</strong> — the highest-leverage action to take next, whether or not you work with us.</li>
+        <li><strong>An honest fit call</strong> — whether WSS is the right help right now, or who to point you to instead.</li>
       </ul>
+      {featuredBookingQuote && (
+        <figure class="booking-quote" style="margin-top:1.5rem">
+          <blockquote><p>“{featuredBookingQuote.quote}”</p></blockquote>
+          <figcaption>— {featuredBookingQuote.name}, {featuredBookingQuote.company}</figcaption>
+        </figure>
+      )}
     </div>
   </section>
 
   <section class="section">
-    <div class="shell detail-grid">
-      <aside class="detail-aside">
-        <p class="eyebrow">What to bring</p>
-        <p>No deck required. These six inputs make the bottleneck obvious faster:</p>
-        <ul class="bring-checklist">
-          <li>Approximate ARR or revenue band</li>
-          <li>Top three blockers (pipeline, conversion, positioning, reporting, ownership)</li>
-          <li>Channels live today and rough monthly spend</li>
-          <li>What you have already tried that did not stick</li>
-          <li>Team shape (who owns growth week to week)</li>
-          <li>Scorecard or quiz output, if you have it</li>
-        </ul>
-      </aside>
-      <div class="detail-body">
-        <article class="content-block risk-reversal-block">
-          <p class="eyebrow">Risk reversal</p>
-          <h2>If the call is not useful, say so on the call.</h2>
-          <p>
-            The default outcome is a named constraint and an honest next step — including “not a fit yet” or “hire internally first.” If you do not leave with a clearer bottleneck than you arrived with, we will point you to the Growth Bottleneck framework on our resources page so you still have a structured next move.
-          </p>
-        </article>
-        {featuredBookingQuote && (
-          <figure class="booking-quote">
-            <blockquote>
-              <p>“{featuredBookingQuote.quote}”</p>
-            </blockquote>
-            <figcaption>
-              — {featuredBookingQuote.name}, {featuredBookingQuote.company}
-            </figcaption>
-          </figure>
-        )}
-      </div>
+    <div class="shell">
+      <p class="eyebrow">How the {siteConfig.bookingCallDurationPhrase} run</p>
+      <ol class="call-phase-list">
+        {siteConfig.bookingCallPhases.map((step) => (
+          <li><strong>{step.phase}</strong><span>{step.detail}</span></li>
+        ))}
+      </ol>
     </div>
   </section>
 
@@ -194,14 +132,12 @@ const bookSchema = [
     <div class="shell">
       <p class="eyebrow">Pick a time</p>
       <h2 id="book-calendly-heading">Book inline — no extra tabs required.</h2>
-      <p class="calendly-lede">
-        Same Calendly account as “open in new tab.” Embedded for people who prefer booking without leaving this page.
+      <div class="calendly-inline-widget" data-url={calendlyEmbedUrl} style="min-width: 320px; height: 700px;" />
+      <p class="calendly-lede" style="margin-top:1rem;">
+        <strong>Calendar not loading?</strong> Some privacy or cookie blockers stop the embed.{" "}
+        <a href={siteConfig.calendlyUrl} rel="noreferrer" target="_blank">Open Calendly in a new tab</a>, or{" "}
+        <a href="/contact#growth-enquiry">send the context via the enquiry form</a> — stage, bottleneck, and what you want help deciding — and we will reply with times.
       </p>
-      <div
-        class="calendly-inline-widget"
-        data-url={calendlyEmbedUrl}
-        style="min-width: 320px; height: 720px;"
-      />
     </div>
   </section>
 
@@ -210,7 +146,7 @@ const bookSchema = [
   <section class="section">
     <div class="shell">
       <p class="eyebrow">FAQ</p>
-      <h2>Booking the diagnostic.</h2>
+      <h2>Booking the audit.</h2>
       <div class="grid-2">
         {bookFaqs.map((item) => (
           <article class="feature-card">
@@ -221,127 +157,4 @@ const bookSchema = [
       </div>
     </div>
   </section>
-
-  <section class="cta-band">
-    <div class="shell cta-inner">
-      <div>
-        <p class="eyebrow">Ready to pick a time?</p>
-        <h2>Open Calendly and lock a slot.</h2>
-        <p>
-          Bring the scorecard or quiz result if you have one. The call stays diagnostic — clear bottleneck, clear next step.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href="#book-calendly"
-          data-cta="book-final-calendly-scroll"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">Pick a time</span>
-          <span class="button-subcopy">Jump to inline calendar · {siteConfig.bookingCallDurationPhrase}</span>
-        </a>
-        <a
-          class="button button-light"
-          href={siteConfig.calendlyUrl}
-          rel="noreferrer"
-          target="_blank"
-          data-cta="book-final-calendly-newtab"
-        >
-          Open Calendly in new tab →
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-final-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/contact" data-cta="book-final-contact">
-          Contact →
-        </a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
-
-<style>
-  .bring-checklist {
-    margin: 0.75rem 0 0;
-    padding-left: 1.15rem;
-    display: grid;
-    gap: 0.45rem;
-    font-size: 0.95rem;
-    line-height: 1.45;
-    color: var(--ink);
-  }
-  .risk-reversal-block {
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.35rem;
-    background: var(--surface);
-  }
-  .risk-reversal-block h2 {
-    font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;
-    font-size: clamp(1.35rem, 2.5vw, 1.65rem);
-    font-weight:700;
-    margin: 0.35rem 0 0.65rem;
-    line-height: 1.15;
-  }
-  .booking-quote {
-    margin: 1.25rem 0 0;
-    padding: 1.15rem 1.25rem;
-    border-left: 4px solid var(--accent);
-    background: var(--surface);
-    border-radius: 0 0.65rem 0.65rem 0;
-  }
-  .booking-quote blockquote {
-    margin: 0;
-    font-size: 1.02rem;
-    line-height: 1.55;
-  }
-  .booking-quote blockquote p {
-    margin: 0;
-  }
-  .booking-quote figcaption {
-    margin-top: 0.65rem;
-    font-size: 0.88rem;
-    color: var(--muted);
-  }
-  .calendly-lede {
-    max-width: 42rem;
-    margin: 0 0 1rem;
-    color: var(--ink);
-    line-height: 1.55;
-  }
-  .calendly-inline-widget {
-    border-radius: 0.75rem;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: #fff;
-  }
-  .call-phase-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 1rem;
-    max-width: 56rem;
-  }
-  .call-phase-list li {
-    display: grid;
-    gap: 0.35rem;
-    padding: 1rem 1.1rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-  }
-  .call-phase-list strong {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .call-phase-list span {
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-</style>

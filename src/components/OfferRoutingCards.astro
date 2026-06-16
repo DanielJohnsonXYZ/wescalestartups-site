@@ -1,6 +1,14 @@
 ---
 // Symptom → offer routing (shared on Services + Pricing). Data: site.ts → serviceDecision.
 import { serviceDecision, siteConfig } from "../site";
+
+// Proof-to-offer routing: one matching client outcome per offer (keyed by href).
+const offerProof: Record<string, { metric: string; client: string }> = {
+  "/services/growth-diagnosis": { metric: "Clearer acquisition narrative", client: "eQuoo · healthtech" },
+  "/services/90-day-growth-sprint": { metric: "Trust-led GTM foundations", client: "Nevly · financial wellness" },
+  "/services/acquisition-system-build": { metric: "Sharper message-market fit", client: "LessonsUp · EdTech" },
+  "/services/fractional-cmo": { metric: "500+ sign-ups from paid search", client: "Ned · fintech" }
+};
 ---
 
 <section class="section section-alt offer-routing-section" aria-label="Which engagement fits">
@@ -18,6 +26,11 @@ import { serviceDecision, siteConfig } from "../site";
             <p class="offer-routing-symptom">{row.condition}</p>
             <h3 class="offer-routing-rec">{row.recommendation}</h3>
             <p class="offer-routing-meta">{row.duration}</p>
+            {offerProof[row.href] && (
+              <p class="offer-routing-proof">
+                <strong>{offerProof[row.href].metric}</strong> — {offerProof[row.href].client}
+              </p>
+            )}
             <span class="card-link">View scope →</span>
           </a>
         ))

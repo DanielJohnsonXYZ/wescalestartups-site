@@ -84,3 +84,8 @@ html { scroll-padding-top: 6.5rem; }
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
+
+/* Pricing badge overlap (2026-06): .recommended-badge and .popular-badge both
+   sit at top:-10px;left:1.1rem, so cards with both (e.g. Growth Diagnosis) stack
+   them. Move the popular badge to the top-right corner. */
+.popular-badge { left: auto !important; right: 1.1rem !important; }

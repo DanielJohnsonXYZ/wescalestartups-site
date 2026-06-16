@@ -109,6 +109,35 @@ const deliverableGallery = [
 
   <ProofLogos />
 
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Results by type</p>
+      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.4vw,2.75rem);line-height:1.05;font-weight:700;margin:0.35rem 0 0.75rem;">
+        Proof grouped by the kind of change founders look for.
+      </h2>
+      <p class="lede" style="max-width: 60ch; margin-bottom: 1.75rem;">
+        Same case studies as below — organised so you can jump to the outcome that matches your constraint.
+      </p>
+      <div class="grid-2 proof-by-type-grid">
+        {
+          proofResultsByType.map((row) => {
+            const c = caseById[row.caseId];
+            if (!c) return null;
+            return (
+              <article class="feature-card proof-by-type-card">
+                <p class="card-kicker">{row.label}</p>
+                <p style="margin:0.5rem 0 0;color:var(--ink-2);line-height:1.55;font-size:0.95rem;">{row.summary}</p>
+                <a class="card-link" href={`/case-studies/${row.caseId}`} data-cta={`proof-by-type-${row.caseId}`}>
+                  Read: {c.data.client} →
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
   <section class="section proof-creative-section">
     <div class="shell proof-creative-grid">
       <div>
@@ -139,34 +168,6 @@ const deliverableGallery = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">Results by type</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.4vw,2.75rem);line-height:1.05;font-weight:700;margin:0.35rem 0 0.75rem;">
-        Proof grouped by the kind of change founders look for.
-      </h2>
-      <p class="lede" style="max-width: 60ch; margin-bottom: 1.75rem;">
-        Same case studies as below — organised so you can jump to the outcome that matches your constraint.
-      </p>
-      <div class="grid-2 proof-by-type-grid">
-        {
-          proofResultsByType.map((row) => {
-            const c = caseById[row.caseId];
-            if (!c) return null;
-            return (
-              <article class="feature-card proof-by-type-card">
-                <p class="card-kicker">{row.label}</p>
-                <p style="margin:0.5rem 0 0;color:var(--ink-2);line-height:1.55;font-size:0.95rem;">{row.summary}</p>
-                <a class="card-link" href={`/case-studies/${row.caseId}`} data-cta={`proof-by-type-${row.caseId}`}>
-                  Read: {c.data.client} →
-                </a>
-              </article>
-            );
-          })
-        }
-      </div>
-    </div>
-  </section>
 
   <TestimonialsBlock testimonials={testimonials} title="What founders say." eyebrow="Testimonials" />
 

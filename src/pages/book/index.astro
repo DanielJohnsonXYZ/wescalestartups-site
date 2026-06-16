@@ -4,7 +4,6 @@ import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig, testimonials } from "../../site";
 
 const featuredBookingQuote = testimonials[0];
-const calendlyEmbedUrl = siteConfig.calendlyUrl;
 
 const bookServiceSchema = {
   "@context": "https://schema.org",
@@ -46,8 +45,8 @@ const bookSchema = [
 
 <BaseLayout
   title={`${siteConfig.bookingLabel} | We Scale Startups`}
-  description={`${siteConfig.bookingLabel} with We Scale Startups. Bring your current bottleneck — we name the constraint in plain English, then pick a Calendly slot.`}
-  keywords="book growth call, startup growth diagnostic, Calendly We Scale Startups, 20 minute growth audit"
+  description={`${siteConfig.bookingLabel} with We Scale Startups. Bring your current bottleneck — we name the constraint in plain English, then pick a time.`}
+  keywords="book growth call, startup growth diagnostic, Cal.com booking, 20 minute growth audit"
   path="/book"
   schema={bookSchema}
 >
@@ -132,16 +131,20 @@ const bookSchema = [
     <div class="shell">
       <p class="eyebrow">Pick a time</p>
       <h2 id="book-calendly-heading">Book inline — no extra tabs required.</h2>
-      <div class="calendly-inline-widget" data-url={calendlyEmbedUrl} style="min-width: 320px; height: 700px;" />
+      <div id="book-cal-inline" style="min-width: 320px; height: 700px; overflow: auto;"></div>
       <p class="calendly-lede" style="margin-top:1rem;">
         <strong>Calendar not loading?</strong> Some privacy or cookie blockers stop the embed.{" "}
-        <a href={siteConfig.calendlyUrl} rel="noreferrer" target="_blank">Open Calendly in a new tab</a>, or{" "}
+        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">Open the booking page in a new tab</a>, or{" "}
         <a href="/contact#growth-enquiry">send the context via the enquiry form</a> — stage, bottleneck, and what you want help deciding — and we will reply with times.
       </p>
     </div>
   </section>
 
-  <script is:inline async src="https://assets.calendly.com/assets/external/widget.js"></script>
+  <script is:inline define:vars={{ calLink: siteConfig.calLink, calOrigin: "https://cal.wescalestartups.com" }}>
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, calOrigin + "/embed/embed.js", "init");
+    Cal("init", { origin: calOrigin });
+    Cal("inline", { elementOrSelector: "#book-cal-inline", calLink: calLink, layout: "month_view" });
+  </script>
 
   <section class="section">
     <div class="shell">

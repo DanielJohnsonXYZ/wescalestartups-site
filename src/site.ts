@@ -8,7 +8,8 @@ export const siteConfig = {
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
-  calendlyUrl: "https://calendly.com/wescalestartups",
+  calUrl: "https://cal.wescalestartups.com/daniel-wescalestartups.com/15min",
+  calLink: "daniel-wescalestartups.com/15min",
   bookingLabel: "Book a 20-minute Growth Audit",
   /** Inline copy: "In 30 minutes you'll…", "30 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,

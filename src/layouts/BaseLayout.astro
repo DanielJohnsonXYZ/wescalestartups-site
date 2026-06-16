@@ -184,7 +184,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
         if (!label) return;
 
         const href = link.href || "";
-        const isCalendly = href.includes("calendly.com");
+        const isCalendly = href.includes("calendly.com") || href.includes("cal.wescalestartups.com");
         const isScorecard = href.includes("growth-bottleneck-scorecard");
         const isPricing = href.includes("/pricing") || link.closest("[data-pricing-link]");
         const isResource = href.includes("/resources") || link.closest("[data-resource-link]");

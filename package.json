@@ -13,7 +13,7 @@
     "verify:agents": "node scripts/verify-agent-discovery.mjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/mdx": "^6.0.3",
     "@fontsource-variable/fraunces": "^5.2.9",
     "@fontsource/geist": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",

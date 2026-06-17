@@ -63,6 +63,12 @@ export const siteConfig = {
    * Do not use the personal-site container (GTM-5S892HK on danieljohnson.xyz).
    */
   gtmId: "GTM-TV6C7GS",
+  /** Bing Webmaster verification token. Set PUBLIC_BING_SITE_VERIFICATION in the host env;
+   *  the meta tag only renders when present (Bing index feeds ChatGPT Search + Copilot). */
+  bingSiteVerification:
+    (typeof import.meta.env.PUBLIC_BING_SITE_VERIFICATION === "string" &&
+      import.meta.env.PUBLIC_BING_SITE_VERIFICATION.trim()) ||
+    "",
   /** Public X (Twitter) profile — used in Person schema sameAs */
   founderTwitter: "https://x.com/djohnsonxyz",
   /** Podcast hub on WSS — entity graph / sameAs */

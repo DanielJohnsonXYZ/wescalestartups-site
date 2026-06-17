@@ -64,6 +64,8 @@ html { scroll-padding-top: 6.5rem; }
 /* 11. Resource detail pages — hierarchy + CTA spacing + mobile (High). */
 .section-hero h1 {
   font-family: "Fraunces Variable", Georgia, serif;
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 600;
   line-height: 1.05; letter-spacing: -0.01em; margin: 0.35rem 0 0.6rem;
 }
 .section-hero .lead { max-width: 60ch; }

@@ -117,3 +117,11 @@ await generateCollection({
   category: "CASE STUDY",
   getTitle: (raw) => JSON.parse(raw).title
 });
+
+await generateCollection({
+  dir: "src/content/services",
+  ext: ".json",
+  outDir: "public/og/services",
+  category: "SERVICE",
+  getTitle: (raw) => JSON.parse(raw).title
+});

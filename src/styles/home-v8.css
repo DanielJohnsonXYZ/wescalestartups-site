@@ -91,6 +91,7 @@
 .page-home-v8 .reveal[data-d="4"] { transition-delay: 0.32s; }
 @media (prefers-reduced-motion: reduce) {
   .page-home-v8 .reveal { opacity: 1; transform: none; transition: none; }
+  .page-home-v8 .hero-badge .dot { animation: none; }
 }
 
 /* ---------- buttons ---------- */

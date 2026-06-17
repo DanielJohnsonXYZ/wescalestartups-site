@@ -334,6 +334,8 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
 <BaseLayout
   title={layoutTitle}
   description={service.data.description}
+  ogImage={`/og/services/${service.id}.png`}
+  ogImageAlt={`${service.data.title} — We Scale Startups`}
   keywords={keywords}
   path={path}
   breadcrumbItems={[

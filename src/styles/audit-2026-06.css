@@ -13,8 +13,11 @@
 html { scroll-padding-top: 6.5rem; }
 :where(section, article, h2, h3, [id]):target { scroll-margin-top: 6.5rem; }
 .header-inner {
-  background: rgba(255, 254, 250, 0.96) !important;
-  box-shadow: 0 10px 34px rgba(16, 13, 24, 0.10) !important;
+  /* Brand-aligned violet-tinted glass header (was cream) — nudges the header
+     into the purple/violet system while keeping dark nav text for AA contrast. */
+  background: rgba(238, 235, 255, 0.97) !important;
+  border-color: rgba(100, 51, 255, 0.18) !important;
+  box-shadow: 0 10px 34px rgba(100, 51, 255, 0.12) !important;
 }
 
 /* 6. Trusted-by strip — real logos, grouped, better contrast (High). */

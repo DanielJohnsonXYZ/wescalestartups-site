@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizScorecard from "../components/QuizScorecard.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig } from "../site";
 
 const path = "/ai-sameness-scorecard";
 
@@ -30,6 +30,168 @@ const schema = [
   ]),
   buildFaqSchema(faqs)
 ];
+
+const questions = [
+  {
+    dimension: "Category Clarity",
+    q: "Can a first-time visitor understand exactly what category your product is in — within 5 seconds of landing on your homepage?",
+    options: [
+      { text: "Yes — the category is unmistakable from the headline alone.", sub: "No scrolling or reading needed.", score: 2 },
+      { text: "Roughly — it's implied but requires a sentence or two to confirm.", sub: "A careful reader gets there.", score: 1 },
+      { text: "No — the homepage leads with features or capabilities, not a clear category.", sub: "Visitors often have to ask what it does.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Specific Buyer Pain",
+    q: "Does your messaging name a specific, painful problem for a specific buyer role — not a general productivity or efficiency benefit?",
+    options: [
+      { text: "Yes — a named role and a named pain, in language that role actually uses.", sub: "Buyers say 'that's exactly my problem'.", score: 2 },
+      { text: "Somewhat — we name a pain but it's broad enough to apply to many roles.", sub: "It's directional but not sharp.", score: 1 },
+      { text: "No — we lead with capabilities or outcomes like 'save time' or 'boost productivity'.", sub: "The pain is implied, not named.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Differentiation",
+    q: "If a buyer compared your homepage side-by-side with your top 3 competitors, would they clearly see why you're different?",
+    options: [
+      { text: "Yes — we have a specific, defensible point of difference that competitors can't easily claim.", sub: "We win because of something concrete.", score: 2 },
+      { text: "Partially — we're somewhat different but the distinction isn't sharp or well-communicated.", sub: "We'd need the demo to explain the difference.", score: 1 },
+      { text: "No — our positioning reads similarly to our main competitors.", sub: "A buyer couldn't easily pick us without a demo.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Proof Quality",
+    q: "Do you have 3 or more case studies with specific, quantified outcomes — for buyers who match your exact ICP?",
+    options: [
+      { text: "Yes — specific results, named customers, and measurable impact for our exact ICP.", sub: "Numbers, names, and context are all there.", score: 2 },
+      { text: "1–2 pieces of proof — or results that are vague ('improved efficiency') or from adjacent segments.", sub: "Directional proof, not precise.", score: 1 },
+      { text: "Minimal or none — we're pre-revenue, early, or haven't packaged proof yet.", sub: "Or we have proof but it's not published.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Trust Layer",
+    q: "Do you have credible trust signals on your homepage — named logos, specific customer quotes, security certifications, or enterprise proof?",
+    options: [
+      { text: "Yes — named logos, specific testimonials with attribution, and relevant credibility signals.", sub: "A sceptical buyer would feel reassured.", score: 2 },
+      { text: "Some — generic testimonials or unnamed logos, or trust signals buried below the fold.", sub: "Present but not compelling.", score: 1 },
+      { text: "No — the homepage has little or no trust proof visible above the fold.", sub: "Buyers have to take our word for it.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Buyer Urgency",
+    q: "Does your messaging communicate why the buyer needs to act now — not just that your product would eventually be useful?",
+    options: [
+      { text: "Yes — we name a specific cost of delay or a time-sensitive reason to act.", sub: "Urgency is built into the narrative, not added as a tactic.", score: 2 },
+      { text: "Implied — the problem sounds serious but we don't name the cost of not acting.", sub: "Buyers understand it's important but not urgent.", score: 1 },
+      { text: "No — our messaging focuses on features and benefits without urgency.", sub: "Buyers put us in the 'explore later' pile.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Use Case Specificity",
+    q: "Is your primary use case specific enough that a buyer can immediately self-identify as a fit — or does it apply to too many situations?",
+    options: [
+      { text: "Yes — a very specific use case for a very specific buyer situation.", sub: "The right buyer knows immediately it's for them.", score: 2 },
+      { text: "Somewhat — the use case is clear but broad enough to apply to many different buyers.", sub: "Buyers self-identify but so does everyone else.", score: 1 },
+      { text: "No — we position broadly to avoid excluding anyone.", sub: "The use case applies to everyone and resonates with no one.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Positioning Test",
+    q: "Have you tested your positioning with real buyers — and iterated the language based on what they actually said?",
+    options: [
+      { text: "Yes — we have buyer interview data and our messaging reflects their exact language.", sub: "Our words are their words.", score: 2 },
+      { text: "Somewhat — we've had positioning conversations but haven't formally extracted and tested the language.", sub: "We have intuition, not systematic proof.", score: 1 },
+      { text: "No — the positioning was written internally and hasn't been validated with real buyers.", sub: "We're guessing at their language.", score: 0 }
+    ]
+  },
+  {
+    dimension: "AI-Specific Claims",
+    q: "Are your AI capability claims specific and verifiable — accuracy rates, speed, specific outputs — rather than generic 'AI-powered' language?",
+    options: [
+      { text: "Yes — we name specific, verifiable claims that a technical buyer could evaluate.", sub: "Numbers, benchmarks, or observable outputs.", score: 2 },
+      { text: "Somewhat — we have some specific claims but also rely on generic AI language.", sub: "Mixed — specific in places, vague in others.", score: 1 },
+      { text: "No — our AI claims are generic: 'AI-powered', 'intelligent', 'smart automation'.", sub: "A buyer can't tell what the AI actually does.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Competitive Clarity",
+    q: "Do you know your top 3 competitors and can you clearly articulate why you win — and why you lose — against each one?",
+    options: [
+      { text: "Yes — we know our competitive position and our sales team can navigate objections for each competitor.", sub: "We know where we win and where we don't.", score: 2 },
+      { text: "Partially — we know who the competitors are but our win/loss reasoning is vague or inconsistent.", sub: "We have a sense but not a clear playbook.", score: 1 },
+      { text: "No — we avoid competitive comparisons or don't have a clear competitive narrative.", sub: "Every deal feels different. No pattern.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Objection Handling",
+    q: "Are your top 3 buyer objections documented — and do your website, outbound, and sales assets pre-empt them?",
+    options: [
+      { text: "Yes — objections are documented, and our assets address them before buyers raise them.", sub: "We neutralise doubt before the demo.", score: 2 },
+      { text: "We handle objections well in conversation but they're not pre-empted in our assets.", sub: "Good sales — but the assets don't do the work.", score: 1 },
+      { text: "No — we discover objections on calls and handle them ad hoc.", sub: "No documentation, no systematic approach.", score: 0 }
+    ]
+  },
+  {
+    dimension: "GTM Repeatability",
+    q: "Do you have a repeatable motion — outbound, inbound, or partner — producing consistent pipeline each week without founder involvement?",
+    options: [
+      { text: "Yes — a consistent motion runs weekly and produces predictable pipeline.", sub: "The founder doesn't need to be on every deal.", score: 2 },
+      { text: "Partially — some repeatable activity exists but pipeline is still inconsistent or founder-dependent.", sub: "It works some weeks but not every week.", score: 1 },
+      { text: "No — most pipeline comes from founder networks, warm intro, or ad hoc activity.", sub: "Nothing systematic is running yet.", score: 0 }
+    ]
+  }
+];
+
+const results = {
+  low: {
+    min: 18,
+    range: "18–24",
+    color: "#22c55e",
+    label: "Low sameness risk",
+    headline: "Your positioning is sharp. Now compound it.",
+    summary: "You've built a differentiated narrative — specific buyer, clear pain, credible proof, and a point of view competitors can't easily copy. The risk now isn't sameness. It's complacency. Strong positioning decays as the market moves and competitors catch up. The work now is testing, iterating, and turning your positioning into repeatable pipeline.",
+    actions: [
+      { title: "Test your positioning systematically", body: "Run 5-second tests with buyers who don't know your product. Measure how accurately they can describe what you do and who you serve." },
+      { title: "Turn your competitive narrative into a sales asset", body: "Document why you win against each top competitor and get it into your sales deck, outbound, and objection-handling scripts." },
+      { title: "Extract more buyer language", body: "Your best proof is in your customers' words. Run 3 win interviews and update your website and outbound with the exact phrases they use." },
+      { title: "Build urgency into the narrative", body: "Specific, credible positioning is necessary but not sufficient. Add a named cost of delay to your messaging to turn interest into action." }
+    ],
+    warning: "<strong>What not to do:</strong> Lock in your current positioning and stop testing. Strong positioning is a living asset — it needs regular iteration as the market, competitors, and buyer language evolve.",
+    cta1: { label: "Book an AI positioning review →", url: null }
+  },
+  medium: {
+    min: 9,
+    range: "9–17",
+    color: "var(--accent)",
+    label: "Medium sameness risk",
+    headline: "You're partially differentiated — but gaps are letting competitors in.",
+    summary: "Some elements of your positioning are strong, but key gaps are softening the impact. Buyers find you interesting but can't easily choose you without a demo. The good news: medium sameness risk usually comes from 2–3 fixable gaps — not a complete rebuild. Identify the weakest dimensions from your score and fix them in order.",
+    actions: [
+      { title: "Sharpen the buyer and pain statement", body: "Replace 'teams that want to automate X' with a specific role + a specific costly problem. The more specific, the more it resonates with the right buyer." },
+      { title: "Package 2–3 pieces of precise proof", body: "Vague testimonials and unnamed logos don't close sameness risk. Get 2–3 case studies with specific numbers, named customers, and context." },
+      { title: "Rewrite one key asset from scratch", body: "Pick your homepage, your cold email, or your LinkedIn summary. Rewrite it with a specific buyer, pain, outcome, and point of difference. Then test the response rate." },
+      { title: "Name the cost of not acting", body: "Your messaging probably describes the benefit of using you. Add a sentence that names what it costs the buyer to wait 90 days. Urgency changes conversion." }
+    ],
+    warning: "<strong>What not to do:</strong> Try to fix everything at once. Pick the 2 dimensions where you scored lowest and fix those first. Broad, unfocused positioning work usually produces a slightly better version of the same thing.",
+    cta1: { label: "Get an AI positioning teardown →", url: null }
+  },
+  high: {
+    min: 0,
+    range: "0–8",
+    color: "#f97316",
+    label: "High sameness risk",
+    headline: "Your positioning is blending into the AI noise.",
+    summary: "Right now, your positioning sounds like most other AI companies. Generic claims, unclear buyer pain, and weak proof mean buyers scroll past, don't reply, or say 'send me more info' — and then nothing happens. This isn't a product problem. It's a positioning problem. And it's fixable. But it requires a deliberate rebuild, not a homepage refresh.",
+    actions: [
+      { title: "Start with the buyer, not the product", body: "Pick one specific buyer role with one specific, costly, frustrating problem. Write one paragraph that describes their world before they use you. That's your starting point." },
+      { title: "Remove all generic AI language", body: "Find every instance of 'AI-powered', 'automate workflows', 'save time', and 'intelligent'. Replace each one with a specific claim a buyer could verify or experience." },
+      { title: "Get one piece of proof that's truly specific", body: "One named case study with a specific outcome beats 10 vague testimonials. Find your best customer story and turn it into a short, specific, verifiable proof point." },
+      { title: "Test with a stranger", body: "Send your homepage to someone who doesn't know your product. Ask them to describe what you do, who it's for, and why they'd buy it. Their answer will show you where sameness is doing the most damage." }
+    ],
+    warning: "<strong>What not to do:</strong> Add more features to the homepage, run ads to current messaging, or hire a content writer to produce more of the same. More volume with generic positioning doesn't fix the underlying problem — it just accelerates the spend.",
+    cta1: { label: "Book an AI positioning teardown →", url: null }
+  }
+};
 ---
 
 <BaseLayout
@@ -39,626 +201,57 @@ const schema = [
   path={path}
   schema={schema}
 >
-
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="shell">
-      <p class="eyebrow">AI Sameness Scorecard · 12 questions · Free</p>
-      <h1>Your AI company may sound too similar to everyone else.</h1>
-      <p class="lede">
-        AI buyers are drowning in identical claims: AI-powered, automate workflows, save time, deploy agents.
-        If your positioning doesn't make the use case, buyer, pain, proof, and trust layer unmistakably clear —
-        you look interesting but not urgent. Score your sameness risk in 5 minutes.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href="#scorecard">Take the scorecard →</a>
-        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE SAMENESS PROBLEM -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">The sameness problem</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        Three ways sameness kills pipeline before the demo.
-      </h2>
-      <div class="grid-3">
-        <article class="feature-card compact-card">
-          <h3>Buyers can't self-qualify</h3>
-          <p>If your homepage doesn't name a specific buyer, role, and pain, the right buyer can't recognise themselves. Generic messaging attracts everyone and converts no one.</p>
-        </article>
-        <article class="feature-card compact-card">
-          <h3>Outbound gets ignored</h3>
-          <p>Cold messages that lead with "AI-powered platform" or "automate your workflows" get deleted. Buyers have seen it 40 times this week. There's no reason to reply.</p>
-        </article>
-        <article class="feature-card compact-card">
-          <h3>Deals stall at "interesting"</h3>
-          <p>When buyers can't articulate why you're different to their team, deals stall. "Interesting" doesn't get budget approval. Specific, credible, urgent positioning does.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE SCORECARD -->
-  <section class="section" id="scorecard">
-    <div class="shell">
-      <p class="eyebrow">The scorecard</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 0.5rem;">
-        Score your AI positioning across 12 dimensions.
-      </h2>
-      <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
-        Answer for your current website and sales assets — not for the product you're building.
-      </p>
-
-      <div id="quiz-container">
-        <div class="quiz-progress-wrap">
-          <div class="quiz-progress-bar" id="progress-bar" style="width:0%"></div>
-        </div>
-        <p class="quiz-progress-label" id="progress-label">Question 1 of 12</p>
-        <div id="quiz-questions"></div>
-        <div class="quiz-nav" id="quiz-nav" style="display:none">
-          <button class="button button-light" id="btn-back" onclick="quizBack()" style="display:none">← Back</button>
-          <button class="button button-brand" id="btn-next" onclick="quizNext()">Next →</button>
-        </div>
-        <div id="quiz-result" style="display:none"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE THREE RISK LEVELS -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">What the score means</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        Three levels of sameness risk — and what each one costs you.
-      </h2>
-      <div class="grid-3">
-        <article class="feature-card" style="border-top:3px solid #22c55e;">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#22c55e;margin:0 0 0.5rem;">Score 18–24 · Low risk</p>
-          <h3>Sharp and differentiated</h3>
-          <p>Your positioning is specific, credible, and commercially useful. Buyers can self-qualify quickly, proof is strong, and your narrative stands out. The work now is testing and compounding.</p>
-        </article>
-        <article class="feature-card" style="border-top:3px solid var(--accent);">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin:0 0 0.5rem;">Score 9–17 · Medium risk</p>
-          <h3>Partially differentiated</h3>
-          <p>Some elements are strong but key gaps are letting competitors in. Buyers may find you interesting but can't easily choose you over alternatives. 2–3 specific fixes will sharpen it.</p>
-        </article>
-        <article class="feature-card" style="border-top:3px solid #f97316;">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#f97316;margin:0 0 0.5rem;">Score 0–8 · High risk</p>
-          <h3>Blending into the noise</h3>
-          <p>Your positioning sounds like most other AI companies. Generic claims, unclear buyer pain, and weak proof mean buyers scroll past, don't reply, or say "we'll come back to this". They won't.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">Common questions</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        What founders ask before taking this scorecard.
-      </h2>
-      <div class="grid-3">
-        {faqs.map((f) => (
-          <article class="feature-card">
-            <h3>{f.question}</h3>
-            <p>{f.answer}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <section class="cta-band">
-    <div class="shell cta-inner">
-      <div>
-        <p class="eyebrow">Want a teardown?</p>
-        <h2>Bring your score. We'll show you exactly where the sameness is — and how to fix it.</h2>
-        <p>
-          {siteConfig.bookingCallDurationPhrase}. We'll look at your homepage, outbound, and proof together and give you 2–3 specific positioning shifts that make you harder to ignore.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="ais-final-book">
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href="/ai-growth-systems" data-cta="ais-ai-page">
-          See our AI GTM work →
-        </a>
-      </div>
-    </div>
-  </section>
-
-</BaseLayout>
-
-<style is:global>
-  .quiz-progress-wrap {
-    height: 4px;
-    background: var(--line);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-bottom: 0.75rem;
-  }
-  .quiz-progress-bar {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 99px;
-    transition: width 300ms ease;
-  }
-  .quiz-progress-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin: 0 0 2rem;
-  }
-  .quiz-question-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  .quiz-question-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin: 0 0 0.75rem;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  }
-  .quiz-question-text {
-    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.35;
-    margin: 0 0 1.5rem;
-    color: var(--ink);
-  }
-  .quiz-options { display: grid; gap: 0.6rem; }
-  .quiz-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    padding: 1rem 1.1rem;
-    background: var(--bg, white);
-    border: 1.5px solid var(--line);
-    border-radius: 0.75rem;
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 140ms ease, background 140ms ease;
-    width: 100%;
-  }
-  .quiz-option:hover { border-color: var(--accent); }
-  .quiz-option.selected {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-  }
-  .quiz-option-letter {
-    flex-shrink: 0;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--muted);
-    margin-top: 0.1rem;
-    transition: background 140ms, border-color 140ms, color 140ms;
-  }
-  .quiz-option.selected .quiz-option-letter {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-  .quiz-option-text { font-size: 0.95rem; line-height: 1.5; color: var(--ink); }
-  .quiz-option-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 0.15rem;
-    display: block;
-  }
-  .quiz-nav {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    margin-top: 1.5rem;
-  }
-
-  /* Result */
-  .result-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem 2rem 2.5rem;
-  }
-  .result-score-display {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .result-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-  }
-  .result-headline {
-    font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    font-weight:700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.75rem;
-    color: var(--ink);
-  }
-  .result-summary {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--muted);
-    margin: 0 0 1.75rem;
-    max-width: 60ch;
-  }
-  .result-actions-grid {
-    display: grid;
-    gap: 0.85rem;
-    margin-bottom: 2rem;
-  }
-  @media (min-width: 640px) { .result-actions-grid { grid-template-columns: 1fr 1fr; } }
-  .result-action-card {
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    background: var(--bg, white);
-  }
-  .result-action-card h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin: 0 0 0.35rem;
-    color: var(--ink);
-  }
-  .result-action-card p {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--muted);
-    margin: 0;
-  }
-  .result-warning {
-    padding: 1rem 1.25rem;
-    border-left: 3px solid #f97316;
-    border-radius: 0 0.5rem 0.5rem 0;
-    background: color-mix(in srgb, #f97316 6%, transparent);
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--ink);
-    margin-bottom: 1.75rem;
-  }
-  .result-warning strong { color: #c05621; }
-  .result-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
-  .result-restart {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 0.82rem;
-    cursor: pointer;
-    text-decoration: underline;
-    margin-top: 1.25rem;
-    display: block;
-  }
-  .result-restart:hover { color: var(--ink); }
-</style>
-
-<script is:inline define:vars={{ bookingUrl: siteConfig.bookingUrl, bookingLabel: siteConfig.bookingLabel }}>
-  const questions = [
-    {
-      dimension: "Category Clarity",
-      q: "Can a first-time visitor understand exactly what category your product is in — within 5 seconds of landing on your homepage?",
-      options: [
-        { text: "Yes — the category is unmistakable from the headline alone.", sub: "No scrolling or reading needed.", score: 2 },
-        { text: "Roughly — it's implied but requires a sentence or two to confirm.", sub: "A careful reader gets there.", score: 1 },
-        { text: "No — the homepage leads with features or capabilities, not a clear category.", sub: "Visitors often have to ask what it does.", score: 0 }
+  <QuizScorecard
+    scrollTargetId="scorecard"
+    hero={{
+      eyebrow: "AI Sameness Scorecard · 12 questions · Free",
+      h1: "Your AI company may sound too similar to everyone else.",
+      lede: "AI buyers are drowning in identical claims: AI-powered, automate workflows, save time, deploy agents.\n        If your positioning doesn't make the use case, buyer, pain, proof, and trust layer unmistakably clear —\n        you look interesting but not urgent. Score your sameness risk in 5 minutes.",
+      primaryLabel: "Take the scorecard →"
+    }}
+    problem={{
+      eyebrow: "The sameness problem",
+      heading: "Three ways sameness kills pipeline before the demo.",
+      cards: [
+        { title: "Buyers can't self-qualify", body: "If your homepage doesn't name a specific buyer, role, and pain, the right buyer can't recognise themselves. Generic messaging attracts everyone and converts no one." },
+        { title: "Outbound gets ignored", body: "Cold messages that lead with \"AI-powered platform\" or \"automate your workflows\" get deleted. Buyers have seen it 40 times this week. There's no reason to reply." },
+        { title: "Deals stall at \"interesting\"", body: "When buyers can't articulate why you're different to their team, deals stall. \"Interesting\" doesn't get budget approval. Specific, credible, urgent positioning does." }
       ]
-    },
-    {
-      dimension: "Specific Buyer Pain",
-      q: "Does your messaging name a specific, painful problem for a specific buyer role — not a general productivity or efficiency benefit?",
-      options: [
-        { text: "Yes — a named role and a named pain, in language that role actually uses.", sub: "Buyers say 'that's exactly my problem'.", score: 2 },
-        { text: "Somewhat — we name a pain but it's broad enough to apply to many roles.", sub: "It's directional but not sharp.", score: 1 },
-        { text: "No — we lead with capabilities or outcomes like 'save time' or 'boost productivity'.", sub: "The pain is implied, not named.", score: 0 }
+    }}
+    scorecard={{
+      eyebrow: "The scorecard",
+      heading: "Score your AI positioning across 12 dimensions.",
+      subcopy: "Answer for your current website and sales assets — not for the product you're building."
+    }}
+    scoreMeaning={{
+      eyebrow: "What the score means",
+      heading: "Three levels of sameness risk — and what each one costs you.",
+      levels: [
+        { borderColor: "#22c55e", labelColor: "#22c55e", label: "Score 18–24 · Low risk", h3: "Sharp and differentiated", body: "Your positioning is specific, credible, and commercially useful. Buyers can self-qualify quickly, proof is strong, and your narrative stands out. The work now is testing and compounding." },
+        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 9–17 · Medium risk", h3: "Partially differentiated", body: "Some elements are strong but key gaps are letting competitors in. Buyers may find you interesting but can't easily choose you over alternatives. 2–3 specific fixes will sharpen it." },
+        { borderColor: "#f97316", labelColor: "#f97316", label: "Score 0–8 · High risk", h3: "Blending into the noise", body: "Your positioning sounds like most other AI companies. Generic claims, unclear buyer pain, and weak proof mean buyers scroll past, don't reply, or say \"we'll come back to this\". They won't." }
       ]
-    },
-    {
-      dimension: "Differentiation",
-      q: "If a buyer compared your homepage side-by-side with your top 3 competitors, would they clearly see why you're different?",
-      options: [
-        { text: "Yes — we have a specific, defensible point of difference that competitors can't easily claim.", sub: "We win because of something concrete.", score: 2 },
-        { text: "Partially — we're somewhat different but the distinction isn't sharp or well-communicated.", sub: "We'd need the demo to explain the difference.", score: 1 },
-        { text: "No — our positioning reads similarly to our main competitors.", sub: "A buyer couldn't easily pick us without a demo.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Proof Quality",
-      q: "Do you have 3 or more case studies with specific, quantified outcomes — for buyers who match your exact ICP?",
-      options: [
-        { text: "Yes — specific results, named customers, and measurable impact for our exact ICP.", sub: "Numbers, names, and context are all there.", score: 2 },
-        { text: "1–2 pieces of proof — or results that are vague ('improved efficiency') or from adjacent segments.", sub: "Directional proof, not precise.", score: 1 },
-        { text: "Minimal or none — we're pre-revenue, early, or haven't packaged proof yet.", sub: "Or we have proof but it's not published.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Trust Layer",
-      q: "Do you have credible trust signals on your homepage — named logos, specific customer quotes, security certifications, or enterprise proof?",
-      options: [
-        { text: "Yes — named logos, specific testimonials with attribution, and relevant credibility signals.", sub: "A sceptical buyer would feel reassured.", score: 2 },
-        { text: "Some — generic testimonials or unnamed logos, or trust signals buried below the fold.", sub: "Present but not compelling.", score: 1 },
-        { text: "No — the homepage has little or no trust proof visible above the fold.", sub: "Buyers have to take our word for it.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Buyer Urgency",
-      q: "Does your messaging communicate why the buyer needs to act now — not just that your product would eventually be useful?",
-      options: [
-        { text: "Yes — we name a specific cost of delay or a time-sensitive reason to act.", sub: "Urgency is built into the narrative, not added as a tactic.", score: 2 },
-        { text: "Implied — the problem sounds serious but we don't name the cost of not acting.", sub: "Buyers understand it's important but not urgent.", score: 1 },
-        { text: "No — our messaging focuses on features and benefits without urgency.", sub: "Buyers put us in the 'explore later' pile.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Use Case Specificity",
-      q: "Is your primary use case specific enough that a buyer can immediately self-identify as a fit — or does it apply to too many situations?",
-      options: [
-        { text: "Yes — a very specific use case for a very specific buyer situation.", sub: "The right buyer knows immediately it's for them.", score: 2 },
-        { text: "Somewhat — the use case is clear but broad enough to apply to many different buyers.", sub: "Buyers self-identify but so does everyone else.", score: 1 },
-        { text: "No — we position broadly to avoid excluding anyone.", sub: "The use case applies to everyone and resonates with no one.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Positioning Test",
-      q: "Have you tested your positioning with real buyers — and iterated the language based on what they actually said?",
-      options: [
-        { text: "Yes — we have buyer interview data and our messaging reflects their exact language.", sub: "Our words are their words.", score: 2 },
-        { text: "Somewhat — we've had positioning conversations but haven't formally extracted and tested the language.", sub: "We have intuition, not systematic proof.", score: 1 },
-        { text: "No — the positioning was written internally and hasn't been validated with real buyers.", sub: "We're guessing at their language.", score: 0 }
-      ]
-    },
-    {
-      dimension: "AI-Specific Claims",
-      q: "Are your AI capability claims specific and verifiable — accuracy rates, speed, specific outputs — rather than generic 'AI-powered' language?",
-      options: [
-        { text: "Yes — we name specific, verifiable claims that a technical buyer could evaluate.", sub: "Numbers, benchmarks, or observable outputs.", score: 2 },
-        { text: "Somewhat — we have some specific claims but also rely on generic AI language.", sub: "Mixed — specific in places, vague in others.", score: 1 },
-        { text: "No — our AI claims are generic: 'AI-powered', 'intelligent', 'smart automation'.", sub: "A buyer can't tell what the AI actually does.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Competitive Clarity",
-      q: "Do you know your top 3 competitors and can you clearly articulate why you win — and why you lose — against each one?",
-      options: [
-        { text: "Yes — we know our competitive position and our sales team can navigate objections for each competitor.", sub: "We know where we win and where we don't.", score: 2 },
-        { text: "Partially — we know who the competitors are but our win/loss reasoning is vague or inconsistent.", sub: "We have a sense but not a clear playbook.", score: 1 },
-        { text: "No — we avoid competitive comparisons or don't have a clear competitive narrative.", sub: "Every deal feels different. No pattern.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Objection Handling",
-      q: "Are your top 3 buyer objections documented — and do your website, outbound, and sales assets pre-empt them?",
-      options: [
-        { text: "Yes — objections are documented, and our assets address them before buyers raise them.", sub: "We neutralise doubt before the demo.", score: 2 },
-        { text: "We handle objections well in conversation but they're not pre-empted in our assets.", sub: "Good sales — but the assets don't do the work.", score: 1 },
-        { text: "No — we discover objections on calls and handle them ad hoc.", sub: "No documentation, no systematic approach.", score: 0 }
-      ]
-    },
-    {
-      dimension: "GTM Repeatability",
-      q: "Do you have a repeatable motion — outbound, inbound, or partner — producing consistent pipeline each week without founder involvement?",
-      options: [
-        { text: "Yes — a consistent motion runs weekly and produces predictable pipeline.", sub: "The founder doesn't need to be on every deal.", score: 2 },
-        { text: "Partially — some repeatable activity exists but pipeline is still inconsistent or founder-dependent.", sub: "It works some weeks but not every week.", score: 1 },
-        { text: "No — most pipeline comes from founder networks, warm intro, or ad hoc activity.", sub: "Nothing systematic is running yet.", score: 0 }
-      ]
-    }
-  ];
-
-  const results = {
-    low: {
-      range: "18–24",
-      color: "#22c55e",
-      label: "Low sameness risk",
-      headline: "Your positioning is sharp. Now compound it.",
-      summary: "You've built a differentiated narrative — specific buyer, clear pain, credible proof, and a point of view competitors can't easily copy. The risk now isn't sameness. It's complacency. Strong positioning decays as the market moves and competitors catch up. The work now is testing, iterating, and turning your positioning into repeatable pipeline.",
-      actions: [
-        { title: "Test your positioning systematically", body: "Run 5-second tests with buyers who don't know your product. Measure how accurately they can describe what you do and who you serve." },
-        { title: "Turn your competitive narrative into a sales asset", body: "Document why you win against each top competitor and get it into your sales deck, outbound, and objection-handling scripts." },
-        { title: "Extract more buyer language", body: "Your best proof is in your customers' words. Run 3 win interviews and update your website and outbound with the exact phrases they use." },
-        { title: "Build urgency into the narrative", body: "Specific, credible positioning is necessary but not sufficient. Add a named cost of delay to your messaging to turn interest into action." }
-      ],
-      warning: "<strong>What not to do:</strong> Lock in your current positioning and stop testing. Strong positioning is a living asset — it needs regular iteration as the market, competitors, and buyer language evolve.",
-      cta1: { label: "Book an AI positioning review →", url: null }
-    },
-    medium: {
-      range: "9–17",
-      color: "var(--accent)",
-      label: "Medium sameness risk",
-      headline: "You're partially differentiated — but gaps are letting competitors in.",
-      summary: "Some elements of your positioning are strong, but key gaps are softening the impact. Buyers find you interesting but can't easily choose you without a demo. The good news: medium sameness risk usually comes from 2–3 fixable gaps — not a complete rebuild. Identify the weakest dimensions from your score and fix them in order.",
-      actions: [
-        { title: "Sharpen the buyer and pain statement", body: "Replace 'teams that want to automate X' with a specific role + a specific costly problem. The more specific, the more it resonates with the right buyer." },
-        { title: "Package 2–3 pieces of precise proof", body: "Vague testimonials and unnamed logos don't close sameness risk. Get 2–3 case studies with specific numbers, named customers, and context." },
-        { title: "Rewrite one key asset from scratch", body: "Pick your homepage, your cold email, or your LinkedIn summary. Rewrite it with a specific buyer, pain, outcome, and point of difference. Then test the response rate." },
-        { title: "Name the cost of not acting", body: "Your messaging probably describes the benefit of using you. Add a sentence that names what it costs the buyer to wait 90 days. Urgency changes conversion." }
-      ],
-      warning: "<strong>What not to do:</strong> Try to fix everything at once. Pick the 2 dimensions where you scored lowest and fix those first. Broad, unfocused positioning work usually produces a slightly better version of the same thing.",
-      cta1: { label: "Get an AI positioning teardown →", url: null }
-    },
-    high: {
-      range: "0–8",
-      color: "#f97316",
-      label: "High sameness risk",
-      headline: "Your positioning is blending into the AI noise.",
-      summary: "Right now, your positioning sounds like most other AI companies. Generic claims, unclear buyer pain, and weak proof mean buyers scroll past, don't reply, or say 'send me more info' — and then nothing happens. This isn't a product problem. It's a positioning problem. And it's fixable. But it requires a deliberate rebuild, not a homepage refresh.",
-      actions: [
-        { title: "Start with the buyer, not the product", body: "Pick one specific buyer role with one specific, costly, frustrating problem. Write one paragraph that describes their world before they use you. That's your starting point." },
-        { title: "Remove all generic AI language", body: "Find every instance of 'AI-powered', 'automate workflows', 'save time', and 'intelligent'. Replace each one with a specific claim a buyer could verify or experience." },
-        { title: "Get one piece of proof that's truly specific", body: "One named case study with a specific outcome beats 10 vague testimonials. Find your best customer story and turn it into a short, specific, verifiable proof point." },
-        { title: "Test with a stranger", body: "Send your homepage to someone who doesn't know your product. Ask them to describe what you do, who it's for, and why they'd buy it. Their answer will show you where sameness is doing the most damage." }
-      ],
-      warning: "<strong>What not to do:</strong> Add more features to the homepage, run ads to current messaging, or hire a content writer to produce more of the same. More volume with generic positioning doesn't fix the underlying problem — it just accelerates the spend.",
-      cta1: { label: "Book an AI positioning teardown →", url: null }
-    }
-  };
-
-  let current = 0;
-  let answers = new Array(questions.length).fill(null);
-
-  function getResult(total) {
-    if (total >= 18) return { key: "low", ...results.low };
-    if (total >= 9) return { key: "medium", ...results.medium };
-    return { key: "high", ...results.high };
-  }
-
-  function render() {
-    const container = document.getElementById("quiz-questions");
-    const nav = document.getElementById("quiz-nav");
-    const progressBar = document.getElementById("progress-bar");
-    const progressLabel = document.getElementById("progress-label");
-    const resultDiv = document.getElementById("quiz-result");
-
-    if (current >= questions.length) {
-      container.style.display = "none";
-      nav.style.display = "none";
-      progressBar.style.width = "100%";
-      progressLabel.textContent = "Complete";
-      resultDiv.style.display = "block";
-
-      const total = answers.reduce((s, a) => s + (a !== null ? a : 0), 0);
-      const maxScore = questions.length * 2;
-      const r = getResult(total);
-
-      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score === 0).map(d => d.dim);
-      const weakHtml = weakDims.length > 0
-        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
-            <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c05621;margin:0 0 0.6rem;">Your highest sameness risk areas</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:0.4rem;font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
-            <p style="font-size:0.82rem;color:var(--muted);margin:0.6rem 0 0;line-height:1.5;">These scored zero. Fix them before adding more activity.</p>
-          </div>`
-        : '';
-
-      const actionsHtml = r.actions.map(a => `
-        <div class="result-action-card">
-          <h4>${a.title}</h4>
-          <p>${a.body}</p>
-        </div>
-      `).join("");
-
-      const cta1Url = r.cta1.url || bookingUrl;
-
-      resultDiv.innerHTML = `
-        <div class="result-card">
-          <div class="result-score-display" style="color:${r.color}">${total}<span style="font-size:1.5rem;color:var(--muted);">/${maxScore}</span></div>
-          <p class="result-label">Your AI sameness score · ${r.range} · ${r.label}</p>
-          <h2 class="result-headline">${r.headline}</h2>
-          <p class="result-summary">${r.summary}</p>
-          ${weakHtml}
-          <h3 style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.85rem;color:var(--ink);">Your 30-day action plan</h3>
-          <div class="result-actions-grid">${actionsHtml}</div>
-          <div class="result-warning">${r.warning}</div>
-          <div class="result-ctas">
-            <a class="button button-brand" href="${cta1Url}" data-cta="ais-result-primary">${r.cta1.label}</a>
-            <a class="button button-light" href="/ai-growth-systems" data-cta="ais-result-ai">See our AI GTM work →</a>
-          </div>
-          <button class="result-restart" onclick="restartQuiz()">↺ Retake the scorecard</button>
-        </div>
-      `;
-      return;
-    }
-
-    resultDiv.style.display = "none";
-    container.style.display = "block";
-    nav.style.display = "flex";
-
-    const pct = Math.round((current / questions.length) * 100);
-    progressBar.style.width = pct + "%";
-    progressLabel.textContent = `Question ${current + 1} of ${questions.length}`;
-
-    const q = questions[current];
-    const selected = answers[current];
-
-    container.innerHTML = `
-      <div class="quiz-question-card">
-        <p class="quiz-question-label">${String(current + 1).padStart(2, "0")} / ${questions.length} &nbsp;·&nbsp; ${q.dimension}</p>
-        <p class="quiz-question-text">${q.q}</p>
-        <div class="quiz-options">
-          ${q.options.map((opt, i) => `
-            <button
-              class="quiz-option${selected === opt.score ? " selected" : ""}"
-              onclick="selectOption(${opt.score}, ${i})"
-            >
-              <span class="quiz-option-letter">${["A","B","C"][i]}</span>
-              <span>
-                <span class="quiz-option-text">${opt.text}</span>
-                ${opt.sub ? `<span class="quiz-option-sub">${opt.sub}</span>` : ""}
-              </span>
-            </button>
-          `).join("")}
-        </div>
-      </div>
-    `;
-
-    const backBtn = document.getElementById("btn-back");
-    backBtn.style.display = current > 0 ? "inline-flex" : "none";
-
-    const nextBtn = document.getElementById("btn-next");
-    nextBtn.textContent = current === questions.length - 1 ? "See my result →" : "Next →";
-    nextBtn.disabled = selected === null;
-    nextBtn.style.opacity = selected === null ? "0.5" : "1";
-  }
-
-  function selectOption(score) {
-    const wasNew = answers[current] === null;
-    answers[current] = score;
-    render();
-    if (wasNew) setTimeout(quizNext, 380);
-  }
-
-  function quizNext() {
-    if (answers[current] === null) return;
-    current++;
-    render();
-    document.getElementById("scorecard").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function quizBack() {
-    if (current > 0) { current--; render(); }
-  }
-
-  function restartQuiz() {
-    current = 0;
-    answers = new Array(questions.length).fill(null);
-    render();
-    document.getElementById("scorecard").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  window.selectOption = selectOption;
-  window.quizNext = quizNext;
-  window.quizBack = quizBack;
-  window.restartQuiz = restartQuiz;
-
-  document.addEventListener("DOMContentLoaded", render);
-</script>
-
+    }}
+    faqSection={{
+      eyebrow: "Common questions",
+      heading: "What founders ask before taking this scorecard."
+    }}
+    faqs={faqs}
+    ctaBand={{
+      eyebrow: "Want a teardown?",
+      heading: "Bring your score. We'll show you exactly where the sameness is — and how to fix it.",
+      body: "We'll look at your homepage, outbound, and proof together and give you 2–3 specific positioning shifts that make you harder to ignore.",
+      secondaryCta: { href: "/ai-growth-systems", label: "See our AI GTM work →", dataCta: "ais-ai-page" }
+    }}
+    questions={questions}
+    results={results}
+    dataCtaPrefix="ais"
+    resultLabelPrefix="Your AI sameness score"
+    weakHeading="Your highest sameness risk areas"
+    weakSubcopy="These scored zero. Fix them before adding more activity."
+    actionPlanHeading="Your 30-day action plan"
+    nextFinalLabel="See my result →"
+    restartLabel="↺ Retake the scorecard"
+    resultSecondaryCta={{ href: "/ai-growth-systems", label: "See our AI GTM work →", dataCta: "ais-result-ai" }}
+  />
 </BaseLayout>

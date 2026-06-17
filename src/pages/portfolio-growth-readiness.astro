@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizScorecard from "../components/QuizScorecard.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig } from "../site";
 
 const path = "/portfolio-growth-readiness";
 
@@ -30,6 +30,168 @@ const schema = [
   ]),
   buildFaqSchema(faqs)
 ];
+
+const questions = [
+  {
+    dimension: "Commercial Narrative",
+    q: "Does the business have a clear, consistent commercial narrative — who it serves, what problem it solves, and why buyers choose it over alternatives — that can be articulated without the CEO in the room?",
+    options: [
+      { text: "Yes — documented, consistent across the team, and validated by buyers.", sub: "A new board member could read it and brief accurately.", score: 2 },
+      { text: "Roughly — directionally understood but not formally documented or consistently applied.", sub: "Varies depending on who is presenting.", score: 1 },
+      { text: "No — the narrative lives with the founder or CEO and has not been extracted or systematised.", sub: "Key-person dependency on commercial storytelling.", score: 0 }
+    ]
+  },
+  {
+    dimension: "ICP Definition",
+    q: "Is the Ideal Customer Profile written down, agreed across commercial functions, and consistently applied to targeting, sales qualification, and marketing?",
+    options: [
+      { text: "Yes — a specific ICP with firmographic, behavioural, and pain criteria, applied consistently.", sub: "Sales and marketing are working from the same definition.", score: 2 },
+      { text: "Informally — there is a shared understanding but it is not formally documented or consistently applied.", sub: "Divergence emerges in practice.", score: 1 },
+      { text: "No — ICP is vague, broad, or defined differently by different parts of the commercial team.", sub: "Targeting and qualification decisions are inconsistent.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Pipeline Visibility",
+    q: "Can the board or operating partner access a reliable weekly view of qualified pipeline — by source, stage, and value — without requesting it from the CEO?",
+    options: [
+      { text: "Yes — a consistent pipeline report is available weekly and reflects qualified, stage-weighted opportunity data.", sub: "Forecasting is based on real data, not intuition.", score: 2 },
+      { text: "Partially — pipeline is tracked but inconsistently, or requires manual aggregation to be meaningful.", sub: "The data exists but the report is unreliable.", score: 1 },
+      { text: "No — pipeline is not systematically tracked or reported at board level.", sub: "Growth discussions are based on anecdote and feel.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Reporting Maturity",
+    q: "Is there a commercial reporting framework that tracks leading and lagging indicators — and that the board uses to make investment and resourcing decisions?",
+    options: [
+      { text: "Yes — a weekly or monthly dashboard tracking pipeline, conversion, CAC, revenue, and growth decisions.", sub: "Reports produce decisions, not just updates.", score: 2 },
+      { text: "Partially — some metrics are tracked but reporting is inconsistent, delayed, or activity-focused rather than decision-focused.", sub: "The board receives updates, not insight.", score: 1 },
+      { text: "No — commercial reporting is ad hoc, retrospective, or not systematically maintained.", sub: "The board cannot reliably assess commercial momentum.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Sales Enablement",
+    q: "Does the sales team have the assets needed to progress and close deals without senior leadership involvement — case studies, ROI models, objection-handling guides, competitive briefs?",
+    options: [
+      { text: "Yes — a complete sales enablement library exists and is actively used by the team.", sub: "Senior involvement is reserved for strategic deals, not routine qualification.", score: 2 },
+      { text: "Partially — some materials exist but the team regularly relies on the CEO or founder to fill gaps.", sub: "Senior time is consumed by deal support rather than strategy.", score: 1 },
+      { text: "No — the team lacks formal sales assets and depends on senior leadership to advance or close significant opportunities.", sub: "Commercial scalability is materially limited.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Acquisition Channels",
+    q: "Are there 2–3 reliable acquisition channels operating systematically and producing consistent pipeline — without depending on founder relationships or one-time events?",
+    options: [
+      { text: "Yes — multiple channels are running systematically with documented processes, owners, and performance data.", sub: "Pipeline is predictable week over week.", score: 2 },
+      { text: "Partially — one channel is working but the business is not yet diversified, or channels are inconsistent.", sub: "Pipeline arrives in waves rather than consistently.", score: 1 },
+      { text: "No — pipeline is primarily relationship-driven, inbound-dependent, or reliant on the founder's network.", sub: "Growth cannot be replicated without the same individuals.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Positioning Clarity",
+    q: "Can a new commercial hire, acquirer, or operating partner understand the business's market positioning in a single document — without needing to interview the leadership team?",
+    options: [
+      { text: "Yes — positioning is documented in a clear, specific brief that holds up independently.", sub: "Consistent whether read by a board member or a new SDR.", score: 2 },
+      { text: "Partially — positioning is understood internally but not packaged for external or new stakeholder consumption.", sub: "The brief would need significant verbal context.", score: 1 },
+      { text: "No — positioning is held informally by the leadership team and has never been formally documented.", sub: "Inconsistency increases with every new team member or stakeholder.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Marketing Leadership",
+    q: "Is there a senior commercial or marketing owner running a weekly GTM cadence — or does commercial direction depend on the CEO, founder, or a vacant role?",
+    options: [
+      { text: "Yes — a senior commercial or marketing lead runs the GTM cadence, owns the reporting, and makes weekly decisions.", sub: "The CEO is informed, not the operator.", score: 2 },
+      { text: "Partially — a marketing function exists but lacks seniority, decision rights, or a consistent operating rhythm.", sub: "Execution happens but without strategic ownership.", score: 1 },
+      { text: "No — commercial direction is founder or CEO-led, or the senior marketing role is vacant.", sub: "Commercial momentum is fragile and key-person dependent.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Website and Conversion",
+    q: "Does the company's website convert ICP visitors into qualified conversations at a commercially acceptable rate — and is that rate tracked and actively improved?",
+    options: [
+      { text: "Yes — conversion rate is tracked, benchmarked, and the subject of ongoing improvement activity.", sub: "The website is a functioning commercial asset.", score: 2 },
+      { text: "Partially — the website exists and generates some inbound but conversion is not actively measured or optimised.", sub: "The website is a brochure, not a growth channel.", score: 1 },
+      { text: "No — the website is not treated as a commercial asset and has not been recently reviewed against ICP conversion.", sub: "Inbound opportunity from the website is likely being lost.", score: 0 }
+    ]
+  },
+  {
+    dimension: "First 60-Day Readiness",
+    q: "If a new commercial leader joined tomorrow, would they find a documented brief, a functioning system, and clear first-60-day priorities — or would they need to build from scratch?",
+    options: [
+      { text: "Yes — onboarding materials, commercial documentation, and a prioritised 60-day agenda are ready.", sub: "A new hire could be productive within the first week.", score: 2 },
+      { text: "Partially — some documentation exists but a new hire would spend significant time reconstructing context.", sub: "Time-to-productivity is longer than it needs to be.", score: 1 },
+      { text: "No — a new commercial leader would inherit an undocumented system and start largely from scratch.", sub: "Onboarding would take months. Value creation is delayed.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Integration and Expansion Readiness",
+    q: "If the business were to expand into a new segment, integrate with an acquisition, or scale commercial headcount, is the commercial infrastructure ready to support it without rebuilding from the ground up?",
+    options: [
+      { text: "Yes — documented processes, clear ICP, reliable reporting, and a trained team that can be scaled.", sub: "Commercial infrastructure is genuinely replicable.", score: 2 },
+      { text: "Partially — the infrastructure could be stretched but would require significant remediation before scaling.", sub: "Expansion would expose existing gaps.", score: 1 },
+      { text: "No — the current commercial system is not documented, systematised, or scalable as it stands.", sub: "Expansion would require rebuilding while operating.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Board and Exit Readiness",
+    q: "Is the commercial narrative, pipeline data, and growth trajectory in a state that would hold up to board-level scrutiny — or an acquirer's commercial due diligence — without significant preparation?",
+    options: [
+      { text: "Yes — the commercial story, data room materials, and growth metrics are clean, consistent, and defensible.", sub: "A commercial due diligence process could begin immediately.", score: 2 },
+      { text: "Partially — the story is compelling but the supporting data and documentation would require 3–6 months of preparation before an exit or significant capital raise.", sub: "The gap is manageable but not trivial.", score: 1 },
+      { text: "No — the commercial narrative, pipeline data, or reporting maturity would not hold up to external scrutiny in their current state.", sub: "Exit or refinancing readiness requires a significant commercial remediation programme.", score: 0 }
+    ]
+  }
+];
+
+const results = {
+  ready: {
+    min: 18,
+    range: "18–24",
+    color: "#22c55e",
+    label: "Commercially ready",
+    headline: "The commercial infrastructure is ready. Focus on scaling and compounding.",
+    summary: "The business has solid commercial foundations: a clear narrative, reliable pipeline, functioning leadership, and reporting that produces decisions. The risk at this stage is complacency — strong commercial infrastructure decays without active maintenance, particularly through periods of rapid hiring, market expansion, or leadership transition. The priority is identifying the weakest remaining dimension and addressing it before it becomes material.",
+    actions: [
+      { title: "Identify and close the lowest-scoring dimension", body: "Review each question individually. The lowest score is the most likely source of future constraint. Address it before scaling activity on top of it." },
+      { title: "Systematise the reference and proof programme", body: "If proof and sales enablement rely on informal relationships or ad hoc case studies, build a structured library. This becomes a disproportionately important asset in any exit or refinancing process." },
+      { title: "Stress-test for leadership transition", body: "If the current commercial leader departed tomorrow, would the system continue to function? Document the operating rhythm, reporting framework, and key decisions so they are not person-dependent." },
+      { title: "Prepare the commercial data room", body: "If an exit or capital event is within 18 months, begin assembling the commercial due diligence package now — pipeline history, CAC, LTV, channel attribution, and ICP documentation." }
+    ],
+    warning: "<strong>Board note:</strong> Strong commercial readiness scores can mask fragility when a single individual holds the system together. Confirm that the ICP, narrative, reporting, and channel ownership are genuinely distributed across the team — not concentrated in one or two key people.",
+    cta1: { label: "Request a commercial readiness review →", url: null }
+  },
+  gaps: {
+    min: 9,
+    range: "9–17",
+    color: "var(--accent)",
+    label: "Commercial gaps identified",
+    headline: "Identifiable gaps are constraining growth velocity and board confidence.",
+    summary: "The business has some commercial infrastructure in place, but specific gaps are slowing pipeline predictability, limiting scalability, or reducing board confidence in the growth trajectory. These gaps are typically addressable in 60–90 days with a targeted commercial improvement programme. The risk is that they are managed reactively rather than resolved structurally — which means they recur.",
+    actions: [
+      { title: "Commission a structured commercial gap analysis", body: "Map the 2–3 lowest-scoring dimensions and quantify their cost: in deal velocity, reporting reliability, or time-to-productivity for new hires. Prioritise by impact on the investment thesis." },
+      { title: "Establish a weekly commercial cadence", body: "If one does not already exist, a weekly commercial meeting with a consistent agenda, owner, and decision log is the single highest-leverage infrastructure investment. It creates visibility, accountability, and momentum." },
+      { title: "Close the sales enablement gap", body: "If the commercial team relies on senior leadership to advance or close deals, the business cannot scale headcount without replicating the dependency. Identify the top 3 missing assets and build them in the next 30 days." },
+      { title: "Introduce a fractional commercial resource", body: "If the senior marketing or commercial role is vacant or underpowered, a fractional CMO or commercial director can build the missing infrastructure in 90–120 days and define the specification for a permanent hire." }
+    ],
+    warning: "<strong>Board note:</strong> Commercial gaps at this level are common in post-acquisition businesses. The risk is not the gaps themselves — it is treating them as background operational issues rather than investment-thesis risks. Gaps in pipeline visibility, positioning clarity, and commercial leadership compound over time and are significantly harder to close under exit pressure.",
+    cta1: { label: "Request a portfolio commercial review →", url: null }
+  },
+  risk: {
+    min: 0,
+    range: "0–8",
+    color: "#f97316",
+    label: "Commercial risk",
+    headline: "Material commercial weaknesses present risk to the investment thesis.",
+    summary: "The commercial system has significant structural weaknesses. Pipeline is unreliable, positioning is unclear, reporting does not support board-level decisions, or commercial leadership is too concentrated in one or two individuals. These are not operational inefficiencies — they are investment-thesis risks. A structured commercial intervention is required, not incremental improvement.",
+    actions: [
+      { title: "Conduct an immediate commercial diagnostic", body: "Before any additional commercial investment — headcount, marketing spend, or channel activation — commission a structured assessment that names the constraint and sequences the fixes. Spend on top of a broken system accelerates the problem." },
+      { title: "Address the narrative and ICP first", body: "If positioning is unclear or the ICP is undefined, every commercial activity downstream is operating with the wrong brief. Positioning and ICP are the foundation. Fix them before fixing channels, reporting, or headcount." },
+      { title: "Establish minimum viable reporting", body: "The board cannot manage commercial risk without reliable pipeline data. A minimum viable weekly pipeline report — source, stage, value, owner — should be the first operating infrastructure commitment, regardless of how basic." },
+      { title: "Assess commercial leadership concentration", body: "If the CEO or founder is the primary commercial driver, quantify the risk. What happens to pipeline if that person is unavailable for 30 days? The answer determines the urgency of the leadership intervention." }
+    ],
+    warning: "<strong>Board note:</strong> Commercial risk at this level is most commonly masked by strong founder relationships, a healthy existing book of business, or a market environment where demand exceeds the need for commercial discipline. These conditions change. Build the infrastructure before they do — not in response to a pipeline miss.",
+    cta1: { label: "Request an urgent commercial review →", url: null }
+  }
+};
 ---
 
 <BaseLayout
@@ -39,617 +201,60 @@ const schema = [
   path={path}
   schema={schema}
 >
-
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="shell">
-      <p class="eyebrow">Portfolio Growth Readiness · 12 questions · For operating partners and portfolio CEOs</p>
-      <h1>Your commercial system may not be ready for the next value creation phase.</h1>
-      <p class="lede">
-        Weak positioning, unreliable pipeline, poor reporting, and missing marketing leadership
-        are the most common constraints on portfolio company growth — and the least visible
-        from the board. This assessment identifies commercial risks and first 60-day
-        improvement opportunities before they become value creation problems.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href="#assessment">Run the assessment →</a>
-        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMMERCIAL RISK CONTEXT -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">Where commercial value creation breaks</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        The four commercial gaps most likely to constrain portfolio growth.
-      </h2>
-      <div class="grid-2" style="gap:1.25rem;">
-        {[
-          {
-            title: "Founder-held commercial narrative",
-            body: "When the positioning, buyer insight, and sales story live in one person's head, the business cannot scale those capabilities into a team, a new market, or a repeatable process. Post-acquisition, this becomes an immediate priority."
-          },
-          {
-            title: "Pipeline that cannot be reported",
-            body: "If the board cannot see a reliable weekly view of qualified pipeline by source, stage, and value — forecasting is speculation. Investment decisions made on unreliable pipeline data carry unnecessary commercial risk."
-          },
-          {
-            title: "Sales that require senior involvement",
-            body: "When the CEO or founder must be present to close significant deals, the business has a key-person dependency that limits headcount scalability, acquirer confidence, and sustainable growth velocity."
-          },
-          {
-            title: "Missing commercial leadership",
-            body: "Without a senior marketing or commercial owner running a weekly GTM cadence, growth stays reactive. Channels are managed in isolation. Reporting reflects activity, not decisions. The board sees output but not direction."
-          }
-        ].map(r => (
-          <div style="padding:1.5rem;border:1px solid var(--line);border-radius:0.85rem;background:var(--surface);">
-            <h3 style="font-size:1rem;font-weight:700;letter-spacing:-0.015em;margin:0 0 0.6rem;">{r.title}</h3>
-            <p style="font-size:0.9rem;color:var(--muted);line-height:1.6;margin:0;">{r.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE ASSESSMENT -->
-  <section class="section" id="assessment">
-    <div class="shell">
-      <p class="eyebrow">The assessment</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 0.5rem;">
-        Score the business across 12 commercial readiness dimensions.
-      </h2>
-      <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
-        Answer for the current state of the business — not the plan or the target. Honest assessment produces useful output.
-      </p>
-
-      <div id="quiz-container">
-        <div class="quiz-progress-wrap">
-          <div class="quiz-progress-bar" id="progress-bar" style="width:0%"></div>
-        </div>
-        <p class="quiz-progress-label" id="progress-label">Question 1 of 12</p>
-        <div id="quiz-questions"></div>
-        <div class="quiz-nav" id="quiz-nav" style="display:none">
-          <button class="button button-light" id="btn-back" onclick="quizBack()" style="display:none">← Back</button>
-          <button class="button button-brand" id="btn-next" onclick="quizNext()">Next →</button>
-        </div>
-        <div id="quiz-result" style="display:none"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT THE SCORE MEANS -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">Interpreting the score</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        Three commercial readiness levels — and what each one means for value creation.
-      </h2>
-      <div class="grid-3">
-        <article class="feature-card" style="border-top:3px solid #22c55e;">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#22c55e;margin:0 0 0.5rem;">Score 18–24 · Commercially ready</p>
-          <h3>Ready for the next value creation phase</h3>
-          <p>Commercial infrastructure is solid. The narrative is clear, pipeline is visible, reporting is reliable, and leadership can operate without key-person dependency. The focus should be on scaling what works and closing the remaining gaps before they become material.</p>
-        </article>
-        <article class="feature-card" style="border-top:3px solid var(--accent);">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin:0 0 0.5rem;">Score 9–17 · Commercial gaps identified</p>
-          <h3>Gaps that will slow value creation</h3>
-          <p>Some commercial infrastructure is in place, but identifiable gaps are constraining growth velocity or board confidence. A targeted commercial improvement programme — typically 60–90 days — can close the material gaps before they affect the investment timeline.</p>
-        </article>
-        <article class="feature-card" style="border-top:3px solid #f97316;">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#f97316;margin:0 0 0.5rem;">Score 0–8 · Commercial risk</p>
-          <h3>Significant risks requiring immediate attention</h3>
-          <p>The commercial system has material weaknesses that present risk to the investment thesis. Pipeline is unreliable, positioning is unclear, or leadership is too concentrated. These require a structured commercial intervention, not incremental improvement.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">Common questions</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        Questions from operating partners and portfolio CEOs.
-      </h2>
-      <div class="grid-3">
-        {faqs.map((f) => (
-          <article class="feature-card">
-            <h3>{f.question}</h3>
-            <p>{f.answer}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <section class="cta-band">
-    <div class="shell cta-inner">
-      <div>
-        <p class="eyebrow">Request a commercial readiness review</p>
-        <h2>Bring the assessment. We'll identify the risks and the first 60-day improvement plan.</h2>
-        <p>
-          {siteConfig.bookingCallDurationPhrase}. We'll review the assessment together, identify the highest-risk commercial gaps, and outline a structured improvement programme — or tell you where else to go. No pitch.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="pgr-final-book">
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href="/engagement-models" data-cta="pgr-engagements">
-          See how we work →
-        </a>
-      </div>
-    </div>
-  </section>
-
-</BaseLayout>
-
-<style is:global>
-  .quiz-progress-wrap {
-    height: 4px;
-    background: var(--line);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-bottom: 0.75rem;
-  }
-  .quiz-progress-bar {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 99px;
-    transition: width 300ms ease;
-  }
-  .quiz-progress-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin: 0 0 2rem;
-  }
-  .quiz-question-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  .quiz-question-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin: 0 0 0.75rem;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  }
-  .quiz-question-text {
-    font-size: clamp(1.05rem, 1.8vw, 1.15rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.35;
-    margin: 0 0 1.5rem;
-    color: var(--ink);
-  }
-  .quiz-options { display: grid; gap: 0.6rem; }
-  .quiz-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    padding: 1rem 1.1rem;
-    background: var(--bg, white);
-    border: 1.5px solid var(--line);
-    border-radius: 0.75rem;
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 140ms ease, background 140ms ease;
-    width: 100%;
-  }
-  .quiz-option:hover { border-color: var(--accent); }
-  .quiz-option.selected {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-  }
-  .quiz-option-letter {
-    flex-shrink: 0;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--muted);
-    margin-top: 0.1rem;
-    transition: background 140ms, border-color 140ms, color 140ms;
-  }
-  .quiz-option.selected .quiz-option-letter {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-  .quiz-option-text { font-size: 0.95rem; line-height: 1.5; color: var(--ink); display: block; }
-  .quiz-option-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; display: block; }
-  .quiz-nav { display: flex; gap: 0.75rem; align-items: center; margin-top: 1.5rem; }
-
-  .result-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem 2rem 2.5rem;
-  }
-  .result-score-display {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .result-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-  }
-  .result-headline {
-    font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    font-weight:700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.75rem;
-    color: var(--ink);
-  }
-  .result-summary {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--muted);
-    margin: 0 0 1.75rem;
-    max-width: 60ch;
-  }
-  .result-actions-grid {
-    display: grid;
-    gap: 0.85rem;
-    margin-bottom: 2rem;
-  }
-  @media (min-width: 640px) { .result-actions-grid { grid-template-columns: 1fr 1fr; } }
-  .result-action-card {
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    background: var(--bg, white);
-  }
-  .result-action-card h4 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.35rem; color: var(--ink); }
-  .result-action-card p { font-size: 0.85rem; line-height: 1.5; color: var(--muted); margin: 0; }
-  .result-warning {
-    padding: 1rem 1.25rem;
-    border-left: 3px solid #f97316;
-    border-radius: 0 0.5rem 0.5rem 0;
-    background: color-mix(in srgb, #f97316 6%, transparent);
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--ink);
-    margin-bottom: 1.75rem;
-  }
-  .result-warning strong { color: #c05621; }
-  .result-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
-  .result-restart {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 0.82rem;
-    cursor: pointer;
-    text-decoration: underline;
-    margin-top: 1.25rem;
-    display: block;
-  }
-  .result-restart:hover { color: var(--ink); }
-</style>
-
-<script is:inline define:vars={{ bookingUrl: siteConfig.bookingUrl, bookingLabel: siteConfig.bookingLabel }}>
-  const questions = [
-    {
-      dimension: "Commercial Narrative",
-      q: "Does the business have a clear, consistent commercial narrative — who it serves, what problem it solves, and why buyers choose it over alternatives — that can be articulated without the CEO in the room?",
-      options: [
-        { text: "Yes — documented, consistent across the team, and validated by buyers.", sub: "A new board member could read it and brief accurately.", score: 2 },
-        { text: "Roughly — directionally understood but not formally documented or consistently applied.", sub: "Varies depending on who is presenting.", score: 1 },
-        { text: "No — the narrative lives with the founder or CEO and has not been extracted or systematised.", sub: "Key-person dependency on commercial storytelling.", score: 0 }
+  <QuizScorecard
+    scrollTargetId="assessment"
+    hero={{
+      eyebrow: "Portfolio Growth Readiness · 12 questions · For operating partners and portfolio CEOs",
+      h1: "Your commercial system may not be ready for the next value creation phase.",
+      lede: "Weak positioning, unreliable pipeline, poor reporting, and missing marketing leadership\n        are the most common constraints on portfolio company growth — and the least visible\n        from the board. This assessment identifies commercial risks and first 60-day\n        improvement opportunities before they become value creation problems.",
+      primaryLabel: "Run the assessment →"
+    }}
+    problem={{
+      eyebrow: "Where commercial value creation breaks",
+      heading: "The four commercial gaps most likely to constrain portfolio growth.",
+      layout: "grid-2",
+      cards: [
+        { title: "Founder-held commercial narrative", body: "When the positioning, buyer insight, and sales story live in one person's head, the business cannot scale those capabilities into a team, a new market, or a repeatable process. Post-acquisition, this becomes an immediate priority." },
+        { title: "Pipeline that cannot be reported", body: "If the board cannot see a reliable weekly view of qualified pipeline by source, stage, and value — forecasting is speculation. Investment decisions made on unreliable pipeline data carry unnecessary commercial risk." },
+        { title: "Sales that require senior involvement", body: "When the CEO or founder must be present to close significant deals, the business has a key-person dependency that limits headcount scalability, acquirer confidence, and sustainable growth velocity." },
+        { title: "Missing commercial leadership", body: "Without a senior marketing or commercial owner running a weekly GTM cadence, growth stays reactive. Channels are managed in isolation. Reporting reflects activity, not decisions. The board sees output but not direction." }
       ]
-    },
-    {
-      dimension: "ICP Definition",
-      q: "Is the Ideal Customer Profile written down, agreed across commercial functions, and consistently applied to targeting, sales qualification, and marketing?",
-      options: [
-        { text: "Yes — a specific ICP with firmographic, behavioural, and pain criteria, applied consistently.", sub: "Sales and marketing are working from the same definition.", score: 2 },
-        { text: "Informally — there is a shared understanding but it is not formally documented or consistently applied.", sub: "Divergence emerges in practice.", score: 1 },
-        { text: "No — ICP is vague, broad, or defined differently by different parts of the commercial team.", sub: "Targeting and qualification decisions are inconsistent.", score: 0 }
+    }}
+    scorecard={{
+      eyebrow: "The assessment",
+      heading: "Score the business across 12 commercial readiness dimensions.",
+      subcopy: "Answer for the current state of the business — not the plan or the target. Honest assessment produces useful output."
+    }}
+    scoreMeaning={{
+      eyebrow: "Interpreting the score",
+      heading: "Three commercial readiness levels — and what each one means for value creation.",
+      levels: [
+        { borderColor: "#22c55e", labelColor: "#22c55e", label: "Score 18–24 · Commercially ready", h3: "Ready for the next value creation phase", body: "Commercial infrastructure is solid. The narrative is clear, pipeline is visible, reporting is reliable, and leadership can operate without key-person dependency. The focus should be on scaling what works and closing the remaining gaps before they become material." },
+        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 9–17 · Commercial gaps identified", h3: "Gaps that will slow value creation", body: "Some commercial infrastructure is in place, but identifiable gaps are constraining growth velocity or board confidence. A targeted commercial improvement programme — typically 60–90 days — can close the material gaps before they affect the investment timeline." },
+        { borderColor: "#f97316", labelColor: "#f97316", label: "Score 0–8 · Commercial risk", h3: "Significant risks requiring immediate attention", body: "The commercial system has material weaknesses that present risk to the investment thesis. Pipeline is unreliable, positioning is unclear, or leadership is too concentrated. These require a structured commercial intervention, not incremental improvement." }
       ]
-    },
-    {
-      dimension: "Pipeline Visibility",
-      q: "Can the board or operating partner access a reliable weekly view of qualified pipeline — by source, stage, and value — without requesting it from the CEO?",
-      options: [
-        { text: "Yes — a consistent pipeline report is available weekly and reflects qualified, stage-weighted opportunity data.", sub: "Forecasting is based on real data, not intuition.", score: 2 },
-        { text: "Partially — pipeline is tracked but inconsistently, or requires manual aggregation to be meaningful.", sub: "The data exists but the report is unreliable.", score: 1 },
-        { text: "No — pipeline is not systematically tracked or reported at board level.", sub: "Growth discussions are based on anecdote and feel.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Reporting Maturity",
-      q: "Is there a commercial reporting framework that tracks leading and lagging indicators — and that the board uses to make investment and resourcing decisions?",
-      options: [
-        { text: "Yes — a weekly or monthly dashboard tracking pipeline, conversion, CAC, revenue, and growth decisions.", sub: "Reports produce decisions, not just updates.", score: 2 },
-        { text: "Partially — some metrics are tracked but reporting is inconsistent, delayed, or activity-focused rather than decision-focused.", sub: "The board receives updates, not insight.", score: 1 },
-        { text: "No — commercial reporting is ad hoc, retrospective, or not systematically maintained.", sub: "The board cannot reliably assess commercial momentum.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Sales Enablement",
-      q: "Does the sales team have the assets needed to progress and close deals without senior leadership involvement — case studies, ROI models, objection-handling guides, competitive briefs?",
-      options: [
-        { text: "Yes — a complete sales enablement library exists and is actively used by the team.", sub: "Senior involvement is reserved for strategic deals, not routine qualification.", score: 2 },
-        { text: "Partially — some materials exist but the team regularly relies on the CEO or founder to fill gaps.", sub: "Senior time is consumed by deal support rather than strategy.", score: 1 },
-        { text: "No — the team lacks formal sales assets and depends on senior leadership to advance or close significant opportunities.", sub: "Commercial scalability is materially limited.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Acquisition Channels",
-      q: "Are there 2–3 reliable acquisition channels operating systematically and producing consistent pipeline — without depending on founder relationships or one-time events?",
-      options: [
-        { text: "Yes — multiple channels are running systematically with documented processes, owners, and performance data.", sub: "Pipeline is predictable week over week.", score: 2 },
-        { text: "Partially — one channel is working but the business is not yet diversified, or channels are inconsistent.", sub: "Pipeline arrives in waves rather than consistently.", score: 1 },
-        { text: "No — pipeline is primarily relationship-driven, inbound-dependent, or reliant on the founder's network.", sub: "Growth cannot be replicated without the same individuals.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Positioning Clarity",
-      q: "Can a new commercial hire, acquirer, or operating partner understand the business's market positioning in a single document — without needing to interview the leadership team?",
-      options: [
-        { text: "Yes — positioning is documented in a clear, specific brief that holds up independently.", sub: "Consistent whether read by a board member or a new SDR.", score: 2 },
-        { text: "Partially — positioning is understood internally but not packaged for external or new stakeholder consumption.", sub: "The brief would need significant verbal context.", score: 1 },
-        { text: "No — positioning is held informally by the leadership team and has never been formally documented.", sub: "Inconsistency increases with every new team member or stakeholder.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Marketing Leadership",
-      q: "Is there a senior commercial or marketing owner running a weekly GTM cadence — or does commercial direction depend on the CEO, founder, or a vacant role?",
-      options: [
-        { text: "Yes — a senior commercial or marketing lead runs the GTM cadence, owns the reporting, and makes weekly decisions.", sub: "The CEO is informed, not the operator.", score: 2 },
-        { text: "Partially — a marketing function exists but lacks seniority, decision rights, or a consistent operating rhythm.", sub: "Execution happens but without strategic ownership.", score: 1 },
-        { text: "No — commercial direction is founder or CEO-led, or the senior marketing role is vacant.", sub: "Commercial momentum is fragile and key-person dependent.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Website and Conversion",
-      q: "Does the company's website convert ICP visitors into qualified conversations at a commercially acceptable rate — and is that rate tracked and actively improved?",
-      options: [
-        { text: "Yes — conversion rate is tracked, benchmarked, and the subject of ongoing improvement activity.", sub: "The website is a functioning commercial asset.", score: 2 },
-        { text: "Partially — the website exists and generates some inbound but conversion is not actively measured or optimised.", sub: "The website is a brochure, not a growth channel.", score: 1 },
-        { text: "No — the website is not treated as a commercial asset and has not been recently reviewed against ICP conversion.", sub: "Inbound opportunity from the website is likely being lost.", score: 0 }
-      ]
-    },
-    {
-      dimension: "First 60-Day Readiness",
-      q: "If a new commercial leader joined tomorrow, would they find a documented brief, a functioning system, and clear first-60-day priorities — or would they need to build from scratch?",
-      options: [
-        { text: "Yes — onboarding materials, commercial documentation, and a prioritised 60-day agenda are ready.", sub: "A new hire could be productive within the first week.", score: 2 },
-        { text: "Partially — some documentation exists but a new hire would spend significant time reconstructing context.", sub: "Time-to-productivity is longer than it needs to be.", score: 1 },
-        { text: "No — a new commercial leader would inherit an undocumented system and start largely from scratch.", sub: "Onboarding would take months. Value creation is delayed.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Integration and Expansion Readiness",
-      q: "If the business were to expand into a new segment, integrate with an acquisition, or scale commercial headcount, is the commercial infrastructure ready to support it without rebuilding from the ground up?",
-      options: [
-        { text: "Yes — documented processes, clear ICP, reliable reporting, and a trained team that can be scaled.", sub: "Commercial infrastructure is genuinely replicable.", score: 2 },
-        { text: "Partially — the infrastructure could be stretched but would require significant remediation before scaling.", sub: "Expansion would expose existing gaps.", score: 1 },
-        { text: "No — the current commercial system is not documented, systematised, or scalable as it stands.", sub: "Expansion would require rebuilding while operating.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Board and Exit Readiness",
-      q: "Is the commercial narrative, pipeline data, and growth trajectory in a state that would hold up to board-level scrutiny — or an acquirer's commercial due diligence — without significant preparation?",
-      options: [
-        { text: "Yes — the commercial story, data room materials, and growth metrics are clean, consistent, and defensible.", sub: "A commercial due diligence process could begin immediately.", score: 2 },
-        { text: "Partially — the story is compelling but the supporting data and documentation would require 3–6 months of preparation before an exit or significant capital raise.", sub: "The gap is manageable but not trivial.", score: 1 },
-        { text: "No — the commercial narrative, pipeline data, or reporting maturity would not hold up to external scrutiny in their current state.", sub: "Exit or refinancing readiness requires a significant commercial remediation programme.", score: 0 }
-      ]
-    }
-  ];
-
-  const results = {
-    ready: {
-      range: "18–24",
-      color: "#22c55e",
-      label: "Commercially ready",
-      headline: "The commercial infrastructure is ready. Focus on scaling and compounding.",
-      summary: "The business has solid commercial foundations: a clear narrative, reliable pipeline, functioning leadership, and reporting that produces decisions. The risk at this stage is complacency — strong commercial infrastructure decays without active maintenance, particularly through periods of rapid hiring, market expansion, or leadership transition. The priority is identifying the weakest remaining dimension and addressing it before it becomes material.",
-      actions: [
-        { title: "Identify and close the lowest-scoring dimension", body: "Review each question individually. The lowest score is the most likely source of future constraint. Address it before scaling activity on top of it." },
-        { title: "Systematise the reference and proof programme", body: "If proof and sales enablement rely on informal relationships or ad hoc case studies, build a structured library. This becomes a disproportionately important asset in any exit or refinancing process." },
-        { title: "Stress-test for leadership transition", body: "If the current commercial leader departed tomorrow, would the system continue to function? Document the operating rhythm, reporting framework, and key decisions so they are not person-dependent." },
-        { title: "Prepare the commercial data room", body: "If an exit or capital event is within 18 months, begin assembling the commercial due diligence package now — pipeline history, CAC, LTV, channel attribution, and ICP documentation." }
-      ],
-      warning: "<strong>Board note:</strong> Strong commercial readiness scores can mask fragility when a single individual holds the system together. Confirm that the ICP, narrative, reporting, and channel ownership are genuinely distributed across the team — not concentrated in one or two key people.",
-      cta1: { label: "Request a commercial readiness review →", url: null }
-    },
-    gaps: {
-      range: "9–17",
-      color: "var(--accent)",
-      label: "Commercial gaps identified",
-      headline: "Identifiable gaps are constraining growth velocity and board confidence.",
-      summary: "The business has some commercial infrastructure in place, but specific gaps are slowing pipeline predictability, limiting scalability, or reducing board confidence in the growth trajectory. These gaps are typically addressable in 60–90 days with a targeted commercial improvement programme. The risk is that they are managed reactively rather than resolved structurally — which means they recur.",
-      actions: [
-        { title: "Commission a structured commercial gap analysis", body: "Map the 2–3 lowest-scoring dimensions and quantify their cost: in deal velocity, reporting reliability, or time-to-productivity for new hires. Prioritise by impact on the investment thesis." },
-        { title: "Establish a weekly commercial cadence", body: "If one does not already exist, a weekly commercial meeting with a consistent agenda, owner, and decision log is the single highest-leverage infrastructure investment. It creates visibility, accountability, and momentum." },
-        { title: "Close the sales enablement gap", body: "If the commercial team relies on senior leadership to advance or close deals, the business cannot scale headcount without replicating the dependency. Identify the top 3 missing assets and build them in the next 30 days." },
-        { title: "Introduce a fractional commercial resource", body: "If the senior marketing or commercial role is vacant or underpowered, a fractional CMO or commercial director can build the missing infrastructure in 90–120 days and define the specification for a permanent hire." }
-      ],
-      warning: "<strong>Board note:</strong> Commercial gaps at this level are common in post-acquisition businesses. The risk is not the gaps themselves — it is treating them as background operational issues rather than investment-thesis risks. Gaps in pipeline visibility, positioning clarity, and commercial leadership compound over time and are significantly harder to close under exit pressure.",
-      cta1: { label: "Request a portfolio commercial review →", url: null }
-    },
-    risk: {
-      range: "0–8",
-      color: "#f97316",
-      label: "Commercial risk",
-      headline: "Material commercial weaknesses present risk to the investment thesis.",
-      summary: "The commercial system has significant structural weaknesses. Pipeline is unreliable, positioning is unclear, reporting does not support board-level decisions, or commercial leadership is too concentrated in one or two individuals. These are not operational inefficiencies — they are investment-thesis risks. A structured commercial intervention is required, not incremental improvement.",
-      actions: [
-        { title: "Conduct an immediate commercial diagnostic", body: "Before any additional commercial investment — headcount, marketing spend, or channel activation — commission a structured assessment that names the constraint and sequences the fixes. Spend on top of a broken system accelerates the problem." },
-        { title: "Address the narrative and ICP first", body: "If positioning is unclear or the ICP is undefined, every commercial activity downstream is operating with the wrong brief. Positioning and ICP are the foundation. Fix them before fixing channels, reporting, or headcount." },
-        { title: "Establish minimum viable reporting", body: "The board cannot manage commercial risk without reliable pipeline data. A minimum viable weekly pipeline report — source, stage, value, owner — should be the first operating infrastructure commitment, regardless of how basic." },
-        { title: "Assess commercial leadership concentration", body: "If the CEO or founder is the primary commercial driver, quantify the risk. What happens to pipeline if that person is unavailable for 30 days? The answer determines the urgency of the leadership intervention." }
-      ],
-      warning: "<strong>Board note:</strong> Commercial risk at this level is most commonly masked by strong founder relationships, a healthy existing book of business, or a market environment where demand exceeds the need for commercial discipline. These conditions change. Build the infrastructure before they do — not in response to a pipeline miss.",
-      cta1: { label: "Request an urgent commercial review →", url: null }
-    }
-  };
-
-  let current = 0;
-  let answers = new Array(questions.length).fill(null);
-
-  function getResult(total) {
-    if (total >= 18) return { key: "ready", ...results.ready };
-    if (total >= 9) return { key: "gaps", ...results.gaps };
-    return { key: "risk", ...results.risk };
-  }
-
-  function render() {
-    const container = document.getElementById("quiz-questions");
-    const nav = document.getElementById("quiz-nav");
-    const progressBar = document.getElementById("progress-bar");
-    const progressLabel = document.getElementById("progress-label");
-    const resultDiv = document.getElementById("quiz-result");
-
-    if (current >= questions.length) {
-      container.style.display = "none";
-      nav.style.display = "none";
-      progressBar.style.width = "100%";
-      progressLabel.textContent = "Assessment complete";
-      resultDiv.style.display = "block";
-
-      const total = answers.reduce((s, a) => s + (a !== null ? a : 0), 0);
-      const maxScore = questions.length * 2;
-      const r = getResult(total);
-
-      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score === 0).map(d => d.dim);
-      const weakHtml = weakDims.length > 0
-        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
-            <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c05621;margin:0 0 0.6rem;">Highest-risk commercial dimensions</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:0.4rem;font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
-            <p style="font-size:0.82rem;color:var(--muted);margin:0.6rem 0 0;line-height:1.5;">These scored zero. Address these before any growth investment.</p>
-          </div>`
-        : '';
-
-      const actionsHtml = r.actions.map(a => `
-        <div class="result-action-card">
-          <h4>${a.title}</h4>
-          <p>${a.body}</p>
-        </div>
-      `).join("");
-
-      const cta1Url = r.cta1.url || bookingUrl;
-
-      resultDiv.innerHTML = `
-        <div class="result-card">
-          <div class="result-score-display" style="color:${r.color}">${total}<span style="font-size:1.5rem;color:var(--muted);">/${maxScore}</span></div>
-          <p class="result-label">Commercial readiness score · ${r.range} · ${r.label}</p>
-          <h2 class="result-headline">${r.headline}</h2>
-          <p class="result-summary">${r.summary}</p>
-          ${weakHtml}
-          <h3 style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.85rem;color:var(--ink);">First 60-day recommended actions</h3>
-          <div class="result-actions-grid">${actionsHtml}</div>
-          <div class="result-warning">${r.warning}</div>
-          <div class="result-ctas">
-            <a class="button button-brand" href="${cta1Url}" data-cta="pgr-result-primary">${r.cta1.label}</a>
-            <a class="button button-light" href="/engagement-models" data-cta="pgr-result-engagements">How we engage →</a>
-          </div>
-          <button class="result-restart" onclick="restartQuiz()">↺ Reassess</button>
-        </div>
-      `;
-      return;
-    }
-
-    resultDiv.style.display = "none";
-    container.style.display = "block";
-    nav.style.display = "flex";
-
-    const pct = Math.round((current / questions.length) * 100);
-    progressBar.style.width = pct + "%";
-    progressLabel.textContent = `Question ${current + 1} of ${questions.length}`;
-
-    const q = questions[current];
-    const selected = answers[current];
-
-    container.innerHTML = `
-      <div class="quiz-question-card">
-        <p class="quiz-question-label">${String(current + 1).padStart(2, "0")} / ${questions.length} &nbsp;·&nbsp; ${q.dimension}</p>
-        <p class="quiz-question-text">${q.q}</p>
-        <div class="quiz-options">
-          ${q.options.map((opt, i) => `
-            <button
-              class="quiz-option${selected === opt.score ? " selected" : ""}"
-              onclick="selectOption(${opt.score})"
-            >
-              <span class="quiz-option-letter">${["A","B","C"][i]}</span>
-              <span>
-                <span class="quiz-option-text">${opt.text}</span>
-                ${opt.sub ? `<span class="quiz-option-sub">${opt.sub}</span>` : ""}
-              </span>
-            </button>
-          `).join("")}
-        </div>
-      </div>
-    `;
-
-    const backBtn = document.getElementById("btn-back");
-    backBtn.style.display = current > 0 ? "inline-flex" : "none";
-
-    const nextBtn = document.getElementById("btn-next");
-    nextBtn.textContent = current === questions.length - 1 ? "See assessment result →" : "Next →";
-    nextBtn.disabled = selected === null;
-    nextBtn.style.opacity = selected === null ? "0.5" : "1";
-  }
-
-  function selectOption(score) {
-    const wasNew = answers[current] === null;
-    answers[current] = score;
-    render();
-    if (wasNew) setTimeout(quizNext, 380);
-  }
-
-  function quizNext() {
-    if (answers[current] === null) return;
-    current++;
-    render();
-    document.getElementById("assessment").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function quizBack() {
-    if (current > 0) { current--; render(); }
-  }
-
-  function restartQuiz() {
-    current = 0;
-    answers = new Array(questions.length).fill(null);
-    render();
-    document.getElementById("assessment").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  window.selectOption = selectOption;
-  window.quizNext = quizNext;
-  window.quizBack = quizBack;
-  window.restartQuiz = restartQuiz;
-
-  document.addEventListener("DOMContentLoaded", render);
-</script>
-
+    }}
+    faqSection={{
+      eyebrow: "Common questions",
+      heading: "Questions from operating partners and portfolio CEOs."
+    }}
+    faqs={faqs}
+    ctaBand={{
+      eyebrow: "Request a commercial readiness review",
+      heading: "Bring the assessment. We'll identify the risks and the first 60-day improvement plan.",
+      body: "We'll review the assessment together, identify the highest-risk commercial gaps, and outline a structured improvement programme — or tell you where else to go. No pitch.",
+      secondaryCta: { href: "/engagement-models", label: "See how we work →", dataCta: "pgr-engagements" }
+    }}
+    questions={questions}
+    results={results}
+    dataCtaPrefix="pgr"
+    resultLabelPrefix="Commercial readiness score"
+    weakHeading="Highest-risk commercial dimensions"
+    weakSubcopy="These scored zero. Address these before any growth investment."
+    actionPlanHeading="First 60-day recommended actions"
+    progressCompleteLabel="Assessment complete"
+    nextFinalLabel="See assessment result →"
+    restartLabel="↺ Reassess"
+    resultSecondaryCta={{ href: "/engagement-models", label: "How we engage →", dataCta: "pgr-result-engagements" }}
+  />
 </BaseLayout>

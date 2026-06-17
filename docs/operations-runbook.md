@@ -139,9 +139,6 @@ Verify before each deletion; these are destructive.
 - [ ] **`wescalestartups-static` Dokploy stack** — remove *after* the Pages DNS
       cutover (see `deployment.md`) is verified.
 - [ ] **`Cap` stack** (cap.wescalestartups.com, 500 since creation) — see §4.
-- [ ] **`wss-coolify-backups` R2 bucket** — leftover from old Coolify platform.
-      Confirm it holds nothing you need *first* (you currently have no other
-      backups, so check before deleting).
 - [ ] **`calcom-calcom-migrate-1`** — exited one-shot migration container.
 - [ ] **Dokploy API keys `codex-2026-05-19`, `codec`** — unused, revoke.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care
@@ -170,9 +167,9 @@ a MySQL + MinIO, and removes a standing 500.
 
 ## 5. Other standing recommendations
 
-- **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. If
-  newsletter needs are modest, **Listmonk** (single Go binary + Postgres) is a
-  far lighter replacement.
+- **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy —
+  keep an eye on disk usage and binlog growth, and confirm the disk-guard cron
+  still runs.
 - **Finish Dokploy update** v0.29.4 → v0.29.8 from the in-UI Update button
   (the API trigger does not swap the image).
 - **Document owners + acceptable downtime per app**, SSH key ownership, and

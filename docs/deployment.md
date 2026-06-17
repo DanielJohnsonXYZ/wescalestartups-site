@@ -86,20 +86,12 @@ redirect both return 200, and Sentry receives a test event.
 
 ## Hetzner Fallback (decommission after cutover)
 
-Useful only while Pages is being verified.
+Useful only while Pages is being verified. The site currently runs on the box
+as the `wescalestartups-static` Dokploy stack (built from
+`compose.production.yml`).
 
-SSH: `ssh coolify` — production folder `/data/codex/wescalestartups-site`.
-
-Rollback to the pre-Astro WordPress web container:
-
-```bash
-cd /data/codex/wescalestartups-site
-docker compose -f compose.production.yml stop
-docker start wordpress-pdgjxv2qnvxcpyuqyh7ensjb
-```
-
-Once the DNS cutover is verified and stable, remove the `wescalestartups-static`
-stack from Dokploy to reclaim the box.
+Once the DNS cutover is verified and stable, stop and remove that stack to
+reclaim the box.
 
 ---
 

@@ -91,7 +91,7 @@ export function buildWebSiteSchema() {
     description: siteConfig.description,
     publisher: { "@id": entityGraph.wssOrganization },
     about: { "@id": entityGraph.wssOrganization },
-    inLanguage: "en-US"
+    inLanguage: "en-GB"
   };
 }
 

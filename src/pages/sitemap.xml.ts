@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { isFinalSitemapPath } from "../lib/sitemapCanonical";
 import { absoluteUrl } from "../lib/utils";
-import { leadMagnets, siteConfig, staticPathLastModified } from "../site";
+import { indexableIndustrySlugs, leadMagnets, siteConfig, staticPathLastModified } from "../site";
 
 export const prerender = true;
 
@@ -126,6 +126,7 @@ ${services
   )
   .join("\n")}
 ${industries
+  .filter((i) => indexableIndustrySlugs.includes(i.id as (typeof indexableIndustrySlugs)[number]))
   .filter((i) => isFinalSitemapPath(`/industries/${i.id}`))
   .map((i) =>
     urlNode(`/industries/${i.id}`, {

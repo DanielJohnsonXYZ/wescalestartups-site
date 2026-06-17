@@ -11,23 +11,23 @@ export const siteConfig = {
   calUrl: "https://cal.wescalestartups.com/daniel-wescalestartups.com/15min",
   calLink: "daniel-wescalestartups.com/15min",
   bookingLabel: "Book a 20-minute Growth Audit",
-  /** Inline copy: "In 30 minutes you'll…", "30 minutes. No deck." */
+  /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
   bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
   /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
   bookingCallShort: "20-minute Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
-    { phase: "First ~5 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
+    { phase: "First ~3 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
     {
-      phase: "Next ~10 minutes",
+      phase: "Next ~8 minutes",
       detail: "Bottleneck read — is the constraint positioning, acquisition, conversion, reporting, or team ownership?"
     },
     {
-      phase: "~10 minutes",
+      phase: "~6 minutes",
       detail: "Options — Growth Diagnosis, Sprint, System Build, Fractional CMO, or the right referral if we are not a fit."
     },
-    { phase: "Last ~5 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
+    { phase: "Last ~3 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
   ],
   /** Short line near booking CTAs (header title, footer) — Growth Hub: call reassurance. */
   bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.`,
@@ -463,6 +463,13 @@ export const industriesHubRelatedReading: readonly { href: string; label: string
 ];
 
 /** /industries/[slug] — same links every sector. */
+/**
+ * Industry slugs that stay indexable (each backed by a named case study + unique proof).
+ * The rest are noindexed in `industries/[slug].astro` and must be EXCLUDED from the
+ * sitemap to avoid "noindex URL submitted in sitemap" warnings — keep both in sync here.
+ */
+export const indexableIndustrySlugs = ["saas-growth", "fintech", "healthtech", "edtech", "vc-support"] as const;
+
 export const industryDetailRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/industries", label: "All industries" },
   { href: "/proof", label: "Proof hub" },

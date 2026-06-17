@@ -33,6 +33,8 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 # Legacy informational pages
 /about-us /about 301
 /about-us/ /about 301
+/how-we-work /how-it-works 301
+/how-we-work/ /how-it-works 301
 /portfolio/greenscreen /case-studies 301
 /portfolio/greenscreen/ /case-studies 301
 /team/rahul-van-manen /about 301

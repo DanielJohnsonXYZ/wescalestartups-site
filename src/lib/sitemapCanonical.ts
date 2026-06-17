@@ -17,6 +17,7 @@ const REDIRECT_TO: Record<string, string> = {
   "/services/customer-research": "/services/90-day-growth-sprint",
   "/services/acquisition-systems": "/services/acquisition-system-build",
   "/about-us": "/about",
+  "/how-we-work": "/how-it-works",
   "/portfolio/greenscreen": "/case-studies",
   "/team/rahul-van-manen": "/about",
   "/test": "/experimentation",

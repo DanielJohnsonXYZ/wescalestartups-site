@@ -37,17 +37,17 @@ html { scroll-padding-top: 6.5rem; }
 
 /* 9. Elevate the Sprint as the bridge offer (High). */
 .pricing-card.is-most-popular {
-  border-color: var(--accent, #6433ff) !important;
+  border-color: var(--accent, #6657ff) !important;
   box-shadow: 0 14px 40px rgba(100, 51, 255, 0.12);
   transform: translateY(-4px);
 }
 @media (max-width: 720px) { .pricing-card.is-most-popular { transform: none; } }
-.pricing-card.is-most-popular .popular-badge { background: var(--accent, #6433ff); color: #fff; }
+.pricing-card.is-most-popular .popular-badge { background: var(--accent, #6657ff); color: #fff; }
 
 /* 8. Proof-to-offer routing (High). */
 .offer-routing-proof {
   margin: 0 0 0.65rem; font-size: 0.82rem; color: var(--muted, #4a4658);
-  border-left: 2px solid var(--accent, #6433ff); padding-left: 0.6rem;
+  border-left: 2px solid var(--accent, #6657ff); padding-left: 0.6rem;
 }
 .offer-routing-proof strong { color: var(--ink, #100d18); }
 
@@ -55,7 +55,7 @@ html { scroll-padding-top: 6.5rem; }
 .free-paid-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 1rem; }
 @media (min-width: 680px) { .free-paid-grid { grid-template-columns: 1fr 1fr; } }
 .free-paid-card { border: 1px solid var(--line, #e7e3da); border-radius: 12px; padding: 1.1rem 1.2rem; background: #fff; }
-.free-paid-card.is-free { border-color: var(--accent, #6433ff); }
+.free-paid-card.is-free { border-color: var(--accent, #6657ff); }
 .free-paid-card h3 { margin: .2rem 0 .5rem; font-size: 1.05rem; }
 .free-paid-card .fp-price { font-size: .82rem; color: var(--muted, #4a4658); font-weight: 600; }
 .free-paid-card ul { margin: .6rem 0 0; padding-left: 1.1rem; }

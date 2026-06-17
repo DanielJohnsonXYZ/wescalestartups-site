@@ -122,7 +122,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/growth-engine": "2026-05-01",
   "/gtm-strategy": "2026-05-03",
   "/how-it-works": "2026-05-04",
-  "/how-we-work": "2026-05-01",
   "/industries": "2026-05-03",
   "/founder-led-growth": "2026-05-04",
   "/growth-operating-system": "2026-05-04",
@@ -199,7 +198,7 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
   ],
-  "/how-we-work": [
+  "/how-it-works": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
   ],
@@ -455,7 +454,7 @@ export const transferPageRelatedReading: readonly { href: string; label: string 
   { href: "/build", label: "Build · execution" },
   { href: "/services/fractional-cmo", label: "Fractional CMO" },
   { href: "/first-30-days", label: "First 30 days" },
-  { href: "/how-we-work", label: "How we work" }
+  { href: "/how-it-works", label: "How it works" }
 ];
 
 /** /press — internal verification paths. */

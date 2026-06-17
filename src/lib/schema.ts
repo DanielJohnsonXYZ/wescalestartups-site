@@ -134,19 +134,6 @@ export function buildFaqSchema(items: Array<{ question: string; answer: string }
   };
 }
 
-export function buildCaseStudySchema(name: string, description: string, path: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: name,
-    description,
-    url: absoluteUrl(path),
-    author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
-    publisher: { "@id": entityGraph.wssOrganization },
-    mainEntityOfPage: absoluteUrl(path)
-  };
-}
-
 export function buildCaseStudyArticleSchema(opts: {
   name: string;
   description: string;

@@ -48,23 +48,34 @@ ufw status verbose
 
 ---
 
-## 2. Backups → Cloudflare R2 ("one nightly job" — done safely)
+## 2. Backups → Cloudflare R2
 
-Yes, a single nightly job is an appropriate RPO here. The catch: **you cannot
-just copy live database volume directories** — a hot Postgres/MySQL data dir
-copied mid-write is corrupt on restore. The safe "one big nightly update" is:
-dump each database to a file, then push dumps + the non-DB volumes to R2 in one
-shot. `restic` does this with encryption, dedup, and retention built in.
+Use Dokploy's built-in backup scheduling first. It keeps backup state visible in
+the same place operators already use for stacks and alerts, and it avoids
+copying live database directories by hand.
 
 ### One-time setup
 
-1. R2 → create an **API token** (Object Read & Write) scoped to the backup
-   bucket. Note the Access Key ID + Secret.
-2. Recreate the backup bucket in an **EU region** (currently `wss-backups` is
-   APAC — wrong continent for a Finland server: slower restores, cross-region
-   egress, and EU data sitting outside the EU). e.g. `wss-backups-eu` in EEUR.
-3. Put the script below at `/usr/local/sbin/wss-backup.sh`, fill the env, and
-   `chmod +x` it. Initialize the repo once: `restic init`.
+1. R2 → create or retrieve a dedicated S3 API token (Object Read & Write)
+   scoped to the `wss-backups` bucket. Note the Access Key ID + Secret.
+2. Dokploy → Settings → Destinations → add S3/R2 destination:
+   - name: `Cloudflare R2 - wss-backups`
+   - bucket: `wss-backups`
+   - endpoint: `https://2f53f880d2dd5bf1dc904eabb154f2a7.r2.cloudflarestorage.com`
+   - region: `auto`
+3. Enable nightly backups and keep the latest 14.
+4. Cover every stateful database/volume: Dokploy Postgres/Redis, n8n, Uptime
+   Kuma, PingCRM, Postiz, Cal.com, CAP Media MySQL/MinIO, Mautic, Hermes,
+   OpenOutreach, and ApplyPilot.
+5. Trigger or wait for the first run, then verify an object appears in R2.
+
+### Restore test
+
+An untested backup is not a backup. Monthly, restore the newest backup into a
+throwaway location/container and sanity-check at least one database table or
+application data directory. Do not restore over production during the test.
+
+### Alternative: restic bundle
 
 ```bash
 #!/usr/bin/env bash
@@ -73,7 +84,7 @@ set -euo pipefail
 # --- R2 / restic config (store these outside the script in real use) ---
 export AWS_ACCESS_KEY_ID="<r2-access-key>"
 export AWS_SECRET_ACCESS_KEY="<r2-secret>"
-export RESTIC_REPOSITORY="s3:https://<accountid>.r2.cloudflarestorage.com/wss-backups-eu"
+export RESTIC_REPOSITORY="s3:https://2f53f880d2dd5bf1dc904eabb154f2a7.r2.cloudflarestorage.com/wss-backups"
 export RESTIC_PASSWORD="<long-random-passphrase>"   # WITHOUT THIS YOU CANNOT RESTORE
 
 STAGE="$(mktemp -d)"
@@ -111,21 +122,9 @@ Cron (nightly at 03:30, with output mailed/logged):
 30 3 * * * root /usr/local/sbin/wss-backup.sh >> /var/log/wss-backup.log 2>&1
 ```
 
-### Restore test (an untested backup is not a backup)
-
-Monthly, prove it works:
-
-```bash
-restic snapshots                          # confirm last night exists
-restic restore latest --target /tmp/restore-test --include /tmp/.../calcom.sql
-# then load the dump into a throwaway container and sanity-check a table.
-```
-
-> Alternative: Dokploy's built-in backups (Settings → Destinations → add the R2
-> bucket, then enable per-database + per-volume backups). Same outcome, less
-> scripting, but it backs up per-service rather than as one bundle and only
-> handles named volumes (not bind mounts). Either is fine — pick one and verify
-> a restore.
+Use this only if Dokploy's built-in backup system is insufficient. It is more
+flexible, but it also adds a custom script and a separate restore password to
+protect.
 
 Also enable **provider-level daily snapshots** in the Hetzner console for a
 cheap whole-box rollback, independent of app backups.
@@ -140,7 +139,9 @@ Verify before each deletion; these are destructive.
       cutover (see `deployment.md`) is verified.
 - [ ] **`Cap` stack** (cap.wescalestartups.com, 500 since creation) — see §4.
 - [ ] **`calcom-calcom-migrate-1`** — exited one-shot migration container.
-- [ ] **Dokploy API keys `codex-2026-05-19`, `codec`** — unused, revoke.
+- [ ] **Dokploy API keys** — live enabled keys were `claudecowork`,
+      `Claude Cowork`, and `Claude` on 2026-06-17. Keep only keys with a
+      current owner/use case and add expiry where practical.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care
       (`docker volume ls`, confirm no stack references each one).
 - [ ] **Floating `:latest` image tags** — pin to a version/digest on cap-web,
@@ -148,30 +149,32 @@ Verify before each deletion; these are destructive.
 
 ---
 
-## 4. Screen recording (Cap replacement)
+## 4. Screen recording (Cap decision)
 
-The self-hosted `Cap` + CAP Media stack (cap-web + media-server + MinIO +
-MySQL = 4 containers, broken since creation) is the heaviest, most fragile thing
-on the box for a feature that free tools cover with zero ops:
+The self-hosted `Cap` web stack is currently a known `500`: it is only a bare
+`cap-web` image without complete env/DB/storage wiring. CAP Media/MinIO routes
+are separate and currently serve the media endpoints. Do not redeploy or remove
+Cap until the owner chooses one of these paths:
 
 - **Cap hosted free tier / desktop app** (cap.so) — same product you chose,
   no server to run. Easiest migration: keep the tool, drop the infra.
 - **Screenity** — free, open-source browser extension, unlimited local
   recordings, no account, no backend.
 
-Recommendation: delete the self-hosted Cap + CAP Media stacks and use Cap's
-hosted free tier (or Screenity for quick clips). This reclaims 4 containers,
-a MySQL + MinIO, and removes a standing 500.
+- Leave it deferred and documented as broken.
+- Properly repair the stack after backups exist.
+- Delete the self-hosted Cap pieces and use Cap hosted or Screenity instead.
 
 ---
 
 ## 5. Other standing recommendations
 
-- **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy —
-  keep an eye on disk usage and binlog growth, and confirm the disk-guard cron
-  still runs.
-- **Finish Dokploy update** v0.29.4 → v0.29.8 from the in-UI Update button
-  (the API trigger does not swap the image).
+- **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
+  disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should
+  target live container `mautic-stack-db-1`; keep an eye on disk usage and
+  binlog growth.
+- **Dokploy update** is complete as of 2026-06-17: live image
+  `dokploy/dokploy:v0.29.8`.
 - **Document owners + acceptable downtime per app**, SSH key ownership, and
   DNS/Cloudflare proxy state — the gaps in Notion §9 are where 3am incidents go
   wrong.

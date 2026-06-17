@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import sentry from "@sentry/astro";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
@@ -12,7 +13,14 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
-  integrations: [mdx()],
+  integrations: [
+    mdx(),
+    sentry({
+      dsn: "https://fe2e76837b766e394a8f102c9256cd65@o4511244994215936.ingest.de.sentry.io/4511245053984848",
+      sourceMapsUploadOptions: { enabled: false },
+      tracesSampleRate: 0.1
+    })
+  ],
   vite: {
     plugins: [tailwindcss()]
   },

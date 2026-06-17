@@ -91,7 +91,7 @@ export function buildWebSiteSchema() {
     description: siteConfig.description,
     publisher: { "@id": entityGraph.wssOrganization },
     about: { "@id": entityGraph.wssOrganization },
-    inLanguage: "en-US"
+    inLanguage: "en-GB"
   };
 }
 
@@ -131,19 +131,6 @@ export function buildFaqSchema(items: Array<{ question: string; answer: string }
         text: item.answer
       }
     }))
-  };
-}
-
-export function buildCaseStudySchema(name: string, description: string, path: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: name,
-    description,
-    url: absoluteUrl(path),
-    author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
-    publisher: { "@id": entityGraph.wssOrganization },
-    mainEntityOfPage: absoluteUrl(path)
   };
 }
 

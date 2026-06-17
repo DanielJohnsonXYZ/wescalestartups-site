@@ -65,6 +65,8 @@ const caseFaqs = [
 <BaseLayout
   title={`${caseStudy.data.title} | We Scale Startups`}
   description={caseStudy.data.summary}
+  ogImage={`/og/cases/${caseStudy.id}.png`}
+  ogImageAlt={`${caseStudy.data.title} — We Scale Startups`}
   path={path}
   breadcrumbItems={[
     { name: "Home", path: "/" },

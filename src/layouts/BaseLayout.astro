@@ -96,6 +96,9 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content={metaRobots} />
+    {siteConfig.bingSiteVerification && (
+      <meta name="msvalidate.01" content={siteConfig.bingSiteVerification} />
+    )}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {currentPath === "/" && (

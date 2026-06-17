@@ -17,14 +17,12 @@ const REDIRECT_TO: Record<string, string> = {
   "/services/customer-research": "/services/90-day-growth-sprint",
   "/services/acquisition-systems": "/services/acquisition-system-build",
   "/about-us": "/about",
+  "/how-we-work": "/how-it-works",
   "/portfolio/greenscreen": "/case-studies",
   "/team/rahul-van-manen": "/about",
   "/test": "/experimentation",
   "/case-study": "/case-studies",
-  "/diagnose": "/resources/growth-bottleneck-scorecard",
-  "/wss-scale-score": "/resources/growth-bottleneck-scorecard",
   "/quiz": "/resources/growth-bottleneck-scorecard",
-  "/speaking": "/press",
   "/case-studies/diadia": "/case-studies/healthtech-precision-medicine",
   "/case-studies/diadia-health": "/case-studies/healthtech-precision-medicine"
 };

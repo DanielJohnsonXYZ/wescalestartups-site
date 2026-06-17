@@ -174,7 +174,6 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - Engagement models: ${siteConfig.siteUrl}/engagement-models
 - Execution model: ${siteConfig.siteUrl}/execution-model
 - Growth engine: ${siteConfig.siteUrl}/growth-engine
-- How we work: ${siteConfig.siteUrl}/how-we-work
 - AI growth systems: ${siteConfig.siteUrl}/ai-growth-systems
 - Industries hub: ${siteConfig.siteUrl}/industries
 - Reports hub: ${siteConfig.siteUrl}/reports

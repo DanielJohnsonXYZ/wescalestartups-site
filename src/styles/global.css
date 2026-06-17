@@ -5046,7 +5046,7 @@ textarea:focus-visible {
   font-weight: 600;
 }
 .wss-hero-redesign .proof-rail-verify a:hover {
-  color: var(--accent, #6433ff);
+  color: var(--accent, #6657ff);
   text-decoration-thickness: 2px;
 }
 
@@ -5112,7 +5112,7 @@ textarea:focus-visible {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent, #6433ff);
+    color: var(--accent, #6657ff);
     background: rgba(124, 58, 237, 0.05);
   }
 }
@@ -5130,7 +5130,7 @@ textarea:focus-visible {
   gap: 0.35rem;
   text-decoration: none;
   font-weight: 600;
-  color: var(--accent, #6433ff);
+  color: var(--accent, #6657ff);
   transition: color 160ms ease;
   position: relative;
   border-bottom: 1px solid transparent;
@@ -5145,7 +5145,7 @@ textarea:focus-visible {
 .link-arrow:hover,
 .link-arrow:focus-visible {
   color: var(--ink, #0b0b0c);
-  border-bottom-color: var(--accent, #6433ff);
+  border-bottom-color: var(--accent, #6657ff);
 }
 .link-arrow:hover {
   /* Subtle pull-right on hover so the arrow direction reads as motion. */

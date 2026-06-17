@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { industryDetailRelatedReading, siteConfig } from "../../site";
+import { indexableIndustrySlugs, industryDetailRelatedReading, siteConfig } from "../../site";
 
 export async function getStaticPaths() {
   const industries = await getCollection("industries");
@@ -34,7 +34,7 @@ const industryFaqs = [
 // Thin-content guard: only industry pages backed by a named case study stay indexable.
 // The rest remain useful for navigation but are noindexed until they carry unique proof
 // (a real case study + sector-specific insight), to avoid doorway-page classification.
-const indexableIndustries = new Set(["saas-growth", "fintech", "healthtech", "edtech", "vc-support"]);
+const indexableIndustries = new Set<string>(indexableIndustrySlugs);
 const industryRobots = indexableIndustries.has(industry.id)
   ? undefined
   : "noindex,follow";

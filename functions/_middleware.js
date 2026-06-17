@@ -89,6 +89,8 @@ export async function onRequest(context) {
   const legacyRedirects = {
     "/about-us": "/about",
     "/about-us/": "/about",
+    "/how-we-work": "/how-it-works",
+    "/how-we-work/": "/how-it-works",
     "/portfolio/greenscreen": "/case-studies",
     "/portfolio/greenscreen/": "/case-studies",
     "/team/rahul-van-manen": "/about",

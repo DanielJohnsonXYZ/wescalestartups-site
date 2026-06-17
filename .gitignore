@@ -5,3 +5,6 @@ dist
 .DS_Store
 output
 public/og/default.png
+public/og/insights/
+public/og/cases/
+public/og/services/

@@ -74,7 +74,7 @@ const isGroupActive = (item: typeof navGroups[number]) =>
       {navGroups.map((item) => (
         "children" in item ? (
           <div class:list={["nav-dropdown", { "is-active": isGroupActive(item) }]}>
-            <a class="nav-link nav-link-parent" href={item.href} aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link nav-link-parent" href={item.href} aria-haspopup="true">
               {item.label}
               <span aria-hidden="true">⌄</span>
             </a>

@@ -8,26 +8,26 @@ export const siteConfig = {
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
-  calUrl: "https://cal.wescalestartups.com/daniel-wescalestartups.com/15min",
-  calLink: "daniel-wescalestartups.com/15min",
+  calUrl: "https://cal.wescalestartups.com/daniel-wescalestartups.com/20min?overlayCalendar=true",
+  calLink: "daniel-wescalestartups.com/20min",
   bookingLabel: "Book a 20-minute Growth Audit",
-  /** Inline copy: "In 30 minutes you'll…", "30 minutes. No deck." */
+  /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
   bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
   /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
   bookingCallShort: "20-minute Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
-    { phase: "First ~5 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
+    { phase: "First ~3 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
     {
-      phase: "Next ~10 minutes",
+      phase: "Next ~8 minutes",
       detail: "Bottleneck read — is the constraint positioning, acquisition, conversion, reporting, or team ownership?"
     },
     {
-      phase: "~10 minutes",
+      phase: "~6 minutes",
       detail: "Options — Growth Diagnosis, Sprint, System Build, Fractional CMO, or the right referral if we are not a fit."
     },
-    { phase: "Last ~5 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
+    { phase: "Last ~3 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
   ],
   /** Short line near booking CTAs (header title, footer) — Growth Hub: call reassurance. */
   bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.`,
@@ -63,6 +63,12 @@ export const siteConfig = {
    * Do not use the personal-site container (GTM-5S892HK on danieljohnson.xyz).
    */
   gtmId: "GTM-TV6C7GS",
+  /** Bing Webmaster verification token. Set PUBLIC_BING_SITE_VERIFICATION in the host env;
+   *  the meta tag only renders when present (Bing index feeds ChatGPT Search + Copilot). */
+  bingSiteVerification:
+    (typeof import.meta.env.PUBLIC_BING_SITE_VERIFICATION === "string" &&
+      import.meta.env.PUBLIC_BING_SITE_VERIFICATION.trim()) ||
+    "",
   /** Public X (Twitter) profile — used in Person schema sameAs */
   founderTwitter: "https://x.com/djohnsonxyz",
   /** Podcast hub on WSS — entity graph / sameAs */
@@ -99,11 +105,6 @@ export const canonicalProofMetrics = [
 ] as const;
 
 /** Short hero proof line (cold inbound) — links to a case study. */
-export const homeHeroProofLine = {
-  text: "Ned: 500+ sign-ups from paid search, 8.6% CTR — clear channel hierarchy.",
-  href: "/case-studies/ned"
-} as const;
-
 /**
  * Per-URL sitemap lastmod (ISO date), aligned to last git change on the backing page/content.
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
@@ -127,7 +128,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/growth-engine": "2026-05-01",
   "/gtm-strategy": "2026-05-03",
   "/how-it-works": "2026-05-04",
-  "/how-we-work": "2026-05-01",
   "/industries": "2026-05-03",
   "/founder-led-growth": "2026-05-04",
   "/growth-operating-system": "2026-05-04",
@@ -198,21 +198,13 @@ export const navigation = [
   { href: "/about", label: "About" }
 ] as const;
 
-/** Footer and contextual links removed from top-level nav. */
-export const footerContextualNav = [
-  { href: "/growth-operating-system", label: "Growth Operating System" },
-  { href: "/founder-led-growth", label: "Founder-led growth" },
-  { href: "/podcast-guest-application", label: "Podcast guest application" },
-  { href: "/contact", label: "Contact" }
-] as const;
-
 /** Strategic pillar pages → related insights (internal links + related reading section). */
 export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
   "/engagement-models": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
   ],
-  "/how-we-work": [
+  "/how-it-works": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
   ],
@@ -265,16 +257,6 @@ export const resourcesRelatedReading: readonly { href: string; label: string }[]
   { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
   { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/reports", label: "Report formats hub" }
-];
-
-/** /book — pre-call context. */
-export const bookRelatedReading: readonly { href: string; label: string }[] = [
-  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
-  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
-  { href: "/resources", label: "Resources hub" },
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/proof", label: "Proof hub" },
-  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
 ];
 
 /** /services/[slug] — related insights and hubs. */
@@ -436,22 +418,6 @@ export const contactRelatedReading: readonly { href: string; label: string }[] =
   { href: "/press", label: "Press kit" }
 ];
 
-/** Cornerstone pages — strategic content hubs. */
-export const cornerstoneRelatedReading: Partial<Record<string, readonly { href: string; label: string }[]>> = {
-  "/growth-operating-system": [
-    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
-    { href: "/diagnose", label: "5-layer diagnostic framework" },
-    { href: "/build", label: "Acquisition System Build" },
-    { href: "/transfer", label: "Transfer · handoff" },
-    { href: "/first-30-days", label: "First 30 days with WSS" }
-  ],
-  "/founder-led-growth": [
-    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
-    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
-    { href: "/start-here", label: "Start here" },
-    { href: "/services/fractional-cmo", label: "Fractional CMO" }
-  ]
-};
 export const industriesHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/case-studies", label: "Case studies" },
@@ -463,6 +429,13 @@ export const industriesHubRelatedReading: readonly { href: string; label: string
 ];
 
 /** /industries/[slug] — same links every sector. */
+/**
+ * Industry slugs that stay indexable (each backed by a named case study + unique proof).
+ * The rest are noindexed in `industries/[slug].astro` and must be EXCLUDED from the
+ * sitemap to avoid "noindex URL submitted in sitemap" warnings — keep both in sync here.
+ */
+export const indexableIndustrySlugs = ["saas-growth", "fintech", "healthtech", "edtech", "vc-support"] as const;
+
 export const industryDetailRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/industries", label: "All industries" },
   { href: "/proof", label: "Proof hub" },
@@ -487,7 +460,7 @@ export const transferPageRelatedReading: readonly { href: string; label: string 
   { href: "/build", label: "Build · execution" },
   { href: "/services/fractional-cmo", label: "Fractional CMO" },
   { href: "/first-30-days", label: "First 30 days" },
-  { href: "/how-we-work", label: "How we work" }
+  { href: "/how-it-works", label: "How it works" }
 ];
 
 /** /press — internal verification paths. */
@@ -496,32 +469,6 @@ export const pressRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/case-studies", label: "Case studies" },
   { href: "/about", label: "About WSS" },
   { href: "/contact", label: "Contact" }
-];
-
-/** Home — crawl shortcuts at the bottom of the page. */
-export const homeRelatedReading: readonly { href: string; label: string }[] = [
-  { href: "/start-here", label: "Start here" },
-  { href: "/services", label: "Services" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/proof", label: "Proof hub" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/diagnose", label: "5-layer diagnostic framework" },
-  { href: "/ai-growth-systems", label: "AI growth systems" },
-  { href: "/industries", label: "Industries" },
-  { href: "/industries/b2b-saas", label: "B2B SaaS industry notes" },
-  { href: "/industries/fintech", label: "FinTech industry notes" },
-  { href: "/industries/healthtech", label: "HealthTech industry notes" },
-  { href: "/industries/edtech", label: "EdTech industry notes" },
-  { href: "/insights", label: "Insights" },
-  { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
-  { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
-  { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
-  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
-  { href: "/case-studies", label: "Case studies" },
-  { href: "/experimentation", label: "Experimentation" },
-  { href: "/when-growth-plateaus", label: "When growth plateaus" },
-  { href: "/contact", label: "Contact" },
-  { href: "/book", label: siteConfig.bookingLabel }
 ];
 
 /** Legal pages — useful internal links (exclude self on each page). */
@@ -665,27 +612,8 @@ export const proofResultsByType = [
   }
 ] as const;
 
-export const credentialLogos = [
-  { src: "/images/logos/google.webp", alt: "Google", label: "Google for Startups" },
-  { src: "/images/logos/cambridge.webp", alt: "University of Cambridge", label: "Cambridge Judge" },
-  { src: "/images/logos/imperial.webp", alt: "Imperial College London", label: "Imperial College London" },
-  { src: "/images/logos/techstars.webp", alt: "Techstars", label: "Techstars" },
-  { src: "/images/logos/general-assembly.png", alt: "General Assembly", label: "General Assembly" },
-  { src: "/images/logos/uksa.webp", alt: "UK Space Agency", label: "UK Space Agency" },
-  { src: "/images/logos/growthmentor-v2.jpg", alt: "GrowthMentor", label: "GrowthMentor" },
-  { src: "/images/logos/newsflare.webp", alt: "Newsflare", label: "Newsflare" },
-  { src: "/images/logos/peachy.png", alt: "Peachy", label: "Peachy" }
-] as const;
-
 /** Compact list for proof/press grids (same numbers as canonicalProofMetrics). */
 export const headlineMetrics = canonicalProofMetrics.map(({ value, label }) => ({ value, label }));
-
-// Pain-led signals — these drive the hero subhead
-export const painSignals = [
-  "Growth still depends on you",
-  "Pipeline is inconsistent",
-  "You're spending, but don't know what to scale"
-] as const;
 
 // Decision layer — ladder: diagnose → sprint → system → embed
 export const serviceDecision = [

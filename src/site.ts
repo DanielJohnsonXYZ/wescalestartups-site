@@ -200,6 +200,10 @@ export const navigation = [
 
 /** Strategic pillar pages → related insights (internal links + related reading section). */
 export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
+  "/ai-driven-growth": [
+    { href: "/insights/learning-latency", label: "Learning latency: the bottleneck you can't see" },
+    { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" }
+  ],
   "/engagement-models": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }

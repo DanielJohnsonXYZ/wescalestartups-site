@@ -1,0 +1,230 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizScorecard from "../components/QuizScorecard.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+
+const path = "/learning-latency-scorecard";
+
+const faqs = [
+  {
+    question: "What is learning latency?",
+    answer:
+      "Learning latency is the time it takes your company to turn a market signal — a sales call, a lost deal, a search trend, a competitor move — into a sharper decision and a shipped asset. The longer that lag, the more activity you spend without compounding. Low learning latency is how small teams out-learn bigger, better-funded ones."
+  },
+  {
+    question: "How is this different from a typical growth audit?",
+    answer:
+      "Most audits grade your channels and tactics. This diagnostic grades your growth system — how fast signal becomes insight, insight becomes experiments, and learnings become memory. It tells you whether your growth can compound, not just whether last month's numbers were up."
+  },
+  {
+    question: "What do I get at the end?",
+    answer:
+      "A score out of 30, your growth stage — from Random Acts of Growth to a Compounding Growth Loop — the specific dimensions slowing you down, and a focused set of next moves. It takes about five minutes."
+  }
+];
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Learning Latency Score", path }
+  ]),
+  buildFaqSchema(faqs)
+];
+
+const questions = [
+  {
+    dimension: "Signal Capture",
+    q: "How systematically do you capture signal from the market — sales calls, lost deals, churn, search, support, competitors, and what AI tools say about your category?",
+    options: [
+      { text: "Signal from every source is captured systematically and reviewed every week.", sub: "Nothing important disappears after the moment it happens.", score: 5 },
+      { text: "Most sources are captured into a shared place on a regular cadence.", sub: "A few gaps, but the habit is real.", score: 4 },
+      { text: "We capture the obvious sources (calls, CRM notes) but miss search, competitors, and AI.", sub: "A partial picture.", score: 3 },
+      { text: "Ad hoc — some notes get written down, but nothing is structured or revisited.", sub: "Capture depends on who remembers.", score: 2 },
+      { text: "We don't really capture it. Insight lives in people's heads and disappears after the call.", sub: "Every week starts blind.", score: 1 }
+    ]
+  },
+  {
+    dimension: "Insight Quality",
+    q: "When you look at the signal you collect, how reliably does it turn into sharper insight — ICP nuance, buying triggers, objections, pain language, and positioning gaps?",
+    options: [
+      { text: "Raw signal is regularly synthesised into clear insight that changes positioning, messaging, and targeting.", sub: "We can point to decisions it drove.", score: 5 },
+      { text: "We extract insight fairly often, though it isn't always acted on.", sub: "Good thinking, inconsistent follow-through.", score: 4 },
+      { text: "We spot patterns occasionally, usually when something goes wrong.", sub: "Reactive, not deliberate.", score: 3 },
+      { text: "We have data but rarely turn it into anything useful.", sub: "It sits in tools, unread.", score: 2 },
+      { text: "We don't analyse signal. Decisions are made on gut and opinion.", sub: "Loudest voice wins.", score: 1 }
+    ]
+  },
+  {
+    dimension: "Experiment Design",
+    q: "How disciplined are your growth experiments — does each one have a clear hypothesis, a success metric, and a defined learning goal before it starts?",
+    options: [
+      { text: "Every experiment has a written hypothesis, a metric, and a learning goal before it starts.", sub: "We always know what a result will teach us.", score: 5 },
+      { text: "Most experiments are structured, though some still ship on instinct.", sub: "Mostly deliberate.", score: 4 },
+      { text: "We run experiments but rarely define success or the learning up front.", sub: "We work out what we meant afterwards.", score: 3 },
+      { text: "We launch activity and hope it works.", sub: "\"Experiment\" really means \"campaign\".", score: 2 },
+      { text: "We don't run experiments — we just do more of whatever feels right.", sub: "Activity, not tests.", score: 1 }
+    ]
+  },
+  {
+    dimension: "Asset Velocity",
+    q: "Once you have an insight, how fast does it become live assets — pages, emails, content, tools, or campaigns in market?",
+    options: [
+      { text: "Insight becomes shipped assets within days, on a predictable cadence.", sub: "A short path from learning to live.", score: 5 },
+      { text: "We ship steadily, though bigger changes can stall.", sub: "Good velocity with occasional bottlenecks.", score: 4 },
+      { text: "Shipping is slow and depends on a few key people.", sub: "Insight waits in a backlog.", score: 3 },
+      { text: "Most insight never makes it into anything that ships.", sub: "Ideas die in docs.", score: 2 },
+      { text: "There's a huge gap between knowing and doing — months pass.", sub: "Insight rarely becomes action.", score: 1 }
+    ]
+  },
+  {
+    dimension: "Feedback Memory",
+    q: "How well does your team remember what it has already learned — are wins, losses, and learnings documented, reused, and built into future work?",
+    options: [
+      { text: "Learnings are documented and actively reused — new work builds on what we already proved.", sub: "The system has memory.", score: 5 },
+      { text: "We document most learnings, though reuse is patchy.", sub: "We remember; we don't always apply.", score: 4 },
+      { text: "Some things are written down but rarely looked at again.", sub: "A graveyard of old docs.", score: 3 },
+      { text: "We rely on memory and repeat the same mistakes.", sub: "Knowledge leaves when people do.", score: 2 },
+      { text: "Every quarter we start over as if nothing happened before.", sub: "No institutional memory.", score: 1 }
+    ]
+  },
+  {
+    dimension: "AI Discoverability",
+    q: "How clear is your positioning, proof, category, and use cases to both buyers and the AI systems that now summarise and recommend products?",
+    options: [
+      { text: "Our category, ICP, use cases, proof, and comparisons are explicit — buyers and AI describe us accurately.", sub: "We show up correctly in AI answers.", score: 5 },
+      { text: "Mostly clear, with a few gaps in proof or comparisons.", sub: "Generally well represented.", score: 4 },
+      { text: "A human can work it out, but AI tools describe us vaguely or wrongly.", sub: "Legible to people, not machines.", score: 3 },
+      { text: "Our positioning is generic and easy to confuse with competitors.", sub: "We blend into the category.", score: 2 },
+      { text: "We have no idea how buyers or AI describe us — and it shows.", sub: "Invisible or misrepresented.", score: 1 }
+    ]
+  }
+];
+
+const results = {
+  compounding: {
+    min: 27,
+    range: "27–30",
+    color: "#22c55e",
+    label: "Compounding Growth Loop",
+    headline: "You're learning fast and feeding it back. Now scale it.",
+    summary: "Your growth operates as a system: signal in, sharper insight out, experiments designed to teach, assets shipped fast, and a memory that makes every cycle smarter than the last. This is rare. The job now is to scale what's working and protect the loop as you add people and channels — the biggest risk is that growth dilutes the discipline that created it.",
+    actions: [
+      { title: "Scale the loop, not just the spend", body: "Add channels and headcount in ways that strengthen the loop rather than fragment it. Document the operating rhythm so new people inherit it instead of diluting it." },
+      { title: "Defend your market memory", body: "Your compounding advantage is institutional memory. Make it impossible to lose as the team grows — owned, structured, and reviewed, not trapped in individuals." },
+      { title: "Press your AI-discoverability lead", body: "You're set up to win as buyers and AI systems shape opinions. Keep your category, proof, and comparisons sharper than anyone else's in the space." }
+    ],
+    warning: "<strong>What not to do:</strong> Bolt on growth tactics that sit outside the loop. Anything that doesn't feed signal, insight, or memory is a step backward from here.",
+    cta1: { label: "Book a Growth Signal Audit →", url: null }
+  },
+  emerging: {
+    min: 21,
+    range: "21–26",
+    color: "var(--accent)",
+    label: "Emerging Growth System",
+    headline: "The system is forming. Now make it faster.",
+    summary: "You have the foundations of a repeatable growth loop — signal is captured, insight drives experiments, and learnings are increasingly reused. The work now is about speed, memory, and asset quality: shortening the time from signal to live asset and making sure nothing learned is ever lost. Small increases in loop speed compound quickly from here.",
+    actions: [
+      { title: "Increase loop speed", body: "Measure your time from insight to shipped asset, then halve it. Velocity is now your biggest lever — the same learning shipped faster is worth more." },
+      { title: "Harden your feedback memory", body: "Make documenting and reusing learnings a non-negotiable step in every cycle, not an afterthought when someone remembers." },
+      { title: "Raise asset quality", body: "With the loop running, invest in the craft of each asset — sharper positioning, better proof, clearer pages. Quality now compounds on top of cadence." }
+    ],
+    warning: "<strong>What not to do:</strong> Get complacent. Emerging systems decay without deliberate cadence — protect the weekly rhythm that got you here.",
+    cta1: { label: "Book a Growth Signal Audit →", url: null }
+  },
+  fragmented: {
+    min: 13,
+    range: "13–20",
+    color: "#f59e0b",
+    label: "Fragmented Growth",
+    headline: "Useful activity — but the loop is broken.",
+    summary: "You're capturing some signal and shipping real work, but the pieces aren't connected. Insight doesn't reliably reach experiments, experiments don't reliably feed memory, and good learnings get forgotten. You're doing the right things in isolation. The opportunity is to connect signal → insight → experiment → asset → memory into one loop so the work starts to compound.",
+    actions: [
+      { title: "Connect signal to experiments", body: "Each week, turn one captured insight into one designed experiment with a clear learning goal. Close the gap between knowing and testing." },
+      { title: "Create one shared memory", body: "Start a single living doc of what you've learned and proven, and review it before planning anything new. Stop re-discovering the same things." },
+      { title: "Tighten your weakest link", body: "Your lowest-scoring areas below are where the loop leaks. Fix those before adding scope or new channels." }
+    ],
+    warning: "<strong>What not to do:</strong> Run more disconnected experiments. Volume without a feedback loop produces motion, not momentum.",
+    cta1: { label: "Book a Growth Signal Audit →", url: null }
+  },
+  random: {
+    min: 6,
+    range: "6–12",
+    color: "#ef4444",
+    label: "Random Acts of Growth",
+    headline: "Lots of activity. Almost no learning.",
+    summary: "Your team is busy — content, campaigns, outbound, calls — but the work isn't compounding. Signal isn't captured, insight isn't extracted, and nothing feeds back into the next move. This isn't a traffic or effort problem; it's a learning-latency problem. The fastest win is to stop adding activity and start capturing and using what the market is already telling you.",
+    actions: [
+      { title: "Pick one signal source and capture it", body: "Start with sales calls or lost deals. Log every one in a shared doc this week. You can't learn from signal you never wrote down." },
+      { title: "Name your single biggest bottleneck", body: "Don't try to fix everything. Find the one area scoring lowest below and concentrate there for the next 30 days." },
+      { title: "Add a hypothesis to your next experiment", body: "Before the next campaign, write one sentence: what we believe, what we'll measure, and what a result will teach us." }
+    ],
+    warning: "<strong>What not to do:</strong> Add more channels, hire another marketer, or increase ad spend. More activity on top of zero learning just burns budget faster.",
+    cta1: { label: "Book a Growth Signal Audit →", url: null }
+  }
+};
+---
+
+<BaseLayout
+  title="Learning Latency Score | We Scale Startups"
+  description="Most startups don't have a traffic problem — they have a learning latency problem. Score your growth loop across 6 dimensions in 5 minutes and find the bottleneck slowing you down."
+  keywords="learning latency, growth signal loop, AI driven growth, growth system diagnostic, growth scorecard, B2B SaaS growth, startup growth bottleneck"
+  path={path}
+  schema={schema}
+>
+  <QuizScorecard
+    scrollTargetId="scorecard"
+    hero={{
+      eyebrow: "Learning Latency Score · 6 dimensions · Free",
+      h1: "Find out where your growth system is leaking revenue.",
+      lede: "Most startups don't have a traffic problem. They have a <strong>learning latency</strong> problem — the lag between what the market tells them and what they actually do next.\n        Score your growth loop across six dimensions in under five minutes and find the bottleneck slowing you down.",
+      primaryLabel: "Take the diagnostic →"
+    }}
+    problem={{
+      eyebrow: "The learning latency problem",
+      heading: "Three ways slow learning leaks revenue.",
+      cards: [
+        { title: "Signal disappears", body: "Sales calls, lost deals, and churn are full of insight — but if it's never captured, every week your team starts blind. You pay for the lesson and forget it." },
+        { title: "Insight never ships", body: "Even when you know what the market wants, a slow path from insight to live asset means competitors act on the same truth first. Knowing isn't the advantage. Acting on it fast is." },
+        { title: "The team forgets", body: "Without a feedback memory, you re-run old experiments and repeat old mistakes. Growth that doesn't remember can't compound." }
+      ]
+    }}
+    scorecard={{
+      eyebrow: "The diagnostic",
+      heading: "Score your growth loop across six dimensions.",
+      subcopy: "Answer for how your team actually operates today — not how you intend to operate. Each area is scored 1 to 5."
+    }}
+    scoreMeaning={{
+      eyebrow: "What the score means",
+      heading: "Four growth stages — and what each one needs next.",
+      levels: [
+        { borderColor: "#22c55e", labelColor: "#22c55e", label: "Score 27–30 · Compounding Growth Loop", h3: "Learning fast, compounding", body: "Signal in, sharper insight out, experiments that teach, assets shipped fast, and a memory that makes every cycle smarter. Rare. The job now is to scale it without diluting the discipline." },
+        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 21–26 · Emerging Growth System", h3: "Foundations in place", body: "A repeatable loop is forming. The work now is speed, memory, and asset quality — shortening the time from signal to live asset and making sure nothing learned is lost." },
+        { borderColor: "#f59e0b", labelColor: "#f59e0b", label: "Score 13–20 · Fragmented Growth", h3: "Right things, disconnected", body: "You capture some signal and ship real work, but the pieces aren't joined up. Connect signal → insight → experiment → asset → memory so the work starts to compound." },
+        { borderColor: "#ef4444", labelColor: "#ef4444", label: "Score 6–12 · Random Acts of Growth", h3: "Activity without learning", body: "Lots of motion, no compounding. Signal isn't captured and nothing feeds back. Stop adding activity; start capturing and using what the market already tells you." }
+      ]
+    }}
+    faqSection={{
+      eyebrow: "Common questions",
+      heading: "What founders ask before taking this diagnostic."
+    }}
+    faqs={faqs}
+    ctaBand={{
+      eyebrow: "Want the full read?",
+      heading: "Bring your score. We'll find the bottleneck and your next three experiments.",
+      body: "We'll look at how signal moves through your team and show you exactly where learning is slow — plus the highest-leverage fixes to speed it up.",
+      secondaryCta: { href: "/ai-driven-growth", label: "Read the AI Driven Growth framework →", dataCta: "lls-framework" }
+    }}
+    questions={questions}
+    results={results}
+    maxScore={30}
+    weakThreshold={2}
+    dataCtaPrefix="lls"
+    resultLabelPrefix="Your Learning Latency Score"
+    weakHeading="Your slowest learning loops"
+    weakSubcopy="These scored 2 or below — the dimensions adding the most latency between signal and revenue. Start here."
+    actionPlanHeading="Your next moves"
+    nextFinalLabel="See my score →"
+    restartLabel="↺ Retake the diagnostic"
+    resultSecondaryCta={{ href: "/ai-driven-growth", label: "Read the framework →", dataCta: "lls-result-framework" }}
+  />
+</BaseLayout>

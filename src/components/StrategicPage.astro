@@ -22,9 +22,24 @@ interface Props {
   }>;
   /** Optional override; defaults to `strategicPageRelatedInsights[path]`. */
   relatedInsights?: Array<{ href: string; label: string }>;
+  /** Optional scorecard CTA override; defaults to the global Growth Bottleneck Scorecard. */
+  scorecardUrl?: string;
+  scorecardLabel?: string;
 }
 
-const { path, eyebrow, title, metaTitle, description, lede, sections, faqs, relatedInsights: relatedInsightsProp } = Astro.props;
+const {
+  path,
+  eyebrow,
+  title,
+  metaTitle,
+  description,
+  lede,
+  sections,
+  faqs,
+  relatedInsights: relatedInsightsProp,
+  scorecardUrl = siteConfig.scorecardUrl,
+  scorecardLabel = siteConfig.scorecardLabel
+} = Astro.props;
 const relatedInsights = relatedInsightsProp ?? [...(strategicPageRelatedInsights[path] ?? [])];
 const schema = [
   buildBreadcrumbSchema([
@@ -61,8 +76,8 @@ const schema = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="strategic-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
+        <a class="button button-light" href={scorecardUrl} data-cta="strategic-hero-scorecard">
+          Or, {scorecardLabel} →
         </a>
         <a class="button button-light" href="/services" data-cta="strategic-hero-services">Compare services</a>
       </div>
@@ -143,8 +158,8 @@ const schema = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="strategic-final-scorecard">
-          Or, {siteConfig.scorecardLabel} →
+        <a class="button button-light" href={scorecardUrl} data-cta="strategic-final-scorecard">
+          Or, {scorecardLabel} →
         </a>
       </div>
     </div>

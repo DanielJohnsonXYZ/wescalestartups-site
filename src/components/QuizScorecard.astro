@@ -44,6 +44,10 @@ interface Props {
   ctaBand: { eyebrow: string; heading: string; body: string; secondaryCta: CtaLink };
   questions: QuizQuestion[];
   results: Record<string, QuizResult>;
+  /** Max achievable score. Defaults to questions.length * 2 (legacy 0–2 scales). */
+  maxScore?: number;
+  /** A dimension is flagged "weak" when its score is <= this. Defaults to 0. */
+  weakThreshold?: number;
   dataCtaPrefix: string;
   resultLabelPrefix: string;
   weakHeading: string;
@@ -73,6 +77,8 @@ const {
   // Scoring engine data
   questions,
   results,
+  maxScore,
+  weakThreshold = 0,
   // Result rendering knobs
   dataCtaPrefix,
   resultLabelPrefix,
@@ -84,6 +90,8 @@ const {
   restartLabel = "↺ Retake the scorecard",
   resultSecondaryCta
 } = Astro.props;
+
+const resolvedMaxScore = maxScore ?? questions.length * 2;
 ---
 
 <!-- HERO -->
@@ -223,6 +231,8 @@ const {
     bookingLabel: siteConfig.bookingLabel,
     questions,
     results,
+    maxScore: resolvedMaxScore,
+    weakThreshold,
     scrollTargetId,
     dataCtaPrefix,
     resultLabelPrefix,
@@ -263,10 +273,9 @@ const {
       resultDiv.style.display = "block";
 
       const total = answers.reduce((s, a) => s + (a !== null ? a : 0), 0);
-      const maxScore = questions.length * 2;
       const r = getResult(total);
 
-      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score === 0).map(d => d.dim);
+      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score !== null && d.score <= weakThreshold).map(d => d.dim);
       const weakHtml = weakDims.length > 0
         ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
             <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c05621;margin:0 0 0.6rem;">${weakHeading}</p>
@@ -325,7 +334,7 @@ const {
               class="quiz-option${selected === opt.score ? " selected" : ""}"
               onclick="selectOption(${opt.score})"
             >
-              <span class="quiz-option-letter">${["A","B","C"][i]}</span>
+              <span class="quiz-option-letter">${String.fromCharCode(65 + i)}</span>
               <span>
                 <span class="quiz-option-text">${opt.text}</span>
                 ${opt.sub ? `<span class="quiz-option-sub">${opt.sub}</span>` : ""}

@@ -1,0 +1,95 @@
+---
+import StrategicPage from "../components/StrategicPage.astro";
+
+const sections = [
+  {
+    title: "The problem is not lack of activity. It is lack of learning.",
+    body: "Founders are posting, teams are writing content, agencies are running campaigns, and AI tools are generating emails, blogs, ads, and landing pages — yet pipeline stays inconsistent. The issue is not that startups are doing too little. It is that too much growth work is disconnected from real market learning.",
+    points: [
+      "Sales calls do not improve positioning.",
+      "Lost deals do not improve messaging.",
+      "Search insights do not improve content; competitor research does not improve differentiation.",
+      "The company stays busy, but does not get smarter. That is Random Acts of Growth."
+    ]
+  },
+  {
+    title: "AI has changed the bottleneck.",
+    body: "Before AI, execution was expensive. Now it is increasingly cheap — so the advantage has moved. It is no longer who can create the most content or send the most messages. It is who can learn from the market fastest and turn that learning into better growth decisions.",
+    points: [
+      "Especially true for AI startups, where product, category, buyer, and language all evolve at once.",
+      "Traditional playbooks break because they assume the market is already understood.",
+      "AI Driven Growth is built for markets that are still forming.",
+      "AI does not replace strategy — it raises the cost of not having one."
+    ]
+  },
+  {
+    title: "The mechanism: the Growth Signal Loop.",
+    body: "AI Driven Growth works through a simple loop: Market Signals → Strategic Insight → Growth Experiments → Revenue Assets → Feedback Memory. It moves a startup from scattered activity to a repeatable growth operating system that gets smarter every week.",
+    points: [
+      "Market Signals — capture what sales calls, lost deals, search, and customers are already telling you.",
+      "Strategic Insight — turn messy data into clear ICP, triggers, objections, and positioning (AI clusters; human judgement decides).",
+      "Growth Experiments — design focused tests that teach the company something, not just launch campaigns.",
+      "Revenue Assets + Feedback Memory — turn winning insight into pages, tools, and sequences, then feed every result back in. The moat is market memory."
+    ]
+  },
+  {
+    title: "What We Scale Startups helps with.",
+    body: "We help founders and growth teams build this loop across the areas that matter most — clarifying ICP, sharpening positioning, identifying the anti-customer, improving the website journey, designing better experiments, and building AI-discoverable assets that turn insight into pipeline.",
+    points: [
+      "Growth audits, positioning work, and website strategy.",
+      "AI-generated tools, founder-led content systems, GEO and SEO assets.",
+      "Outbound experiments, sales enablement, drip email, and referral loops.",
+      "The goal is not more marketing tasks — it is a growth system that compounds."
+    ]
+  },
+  {
+    title: "Find your Learning Latency Score.",
+    body: "Your biggest growth bottleneck may not be traffic, content, ads, or sales. It may be the delay between what the market is telling you and what your company does next. The diagnostic scores six areas from 1 to 5 and names the highest-leverage fix.",
+    points: [
+      "Signal Capture and Insight Quality — are you collecting and reading the market clearly?",
+      "Experiment Design and Asset Velocity — do activities teach you something, and does insight become assets quickly?",
+      "Feedback Memory — does every experiment improve the next decision?",
+      "AI Discoverability — can buyers and AI systems understand and recommend you?"
+    ]
+  },
+  {
+    title: "AI will not fix weak positioning. It will expose it faster.",
+    body: "In AI-native markets, products change fast and buyers are still forming their beliefs — which makes positioning more important, not less. The companies that win will not be the ones producing the most. They will be the ones learning fastest.",
+    points: [
+      "Growth = Signal Quality × Learning Speed × Execution Velocity × Feedback Memory.",
+      "Signal beats volume; learning speed beats campaign speed.",
+      "Your website is now a training layer for buyers, search engines, and AI assistants.",
+      "Memory is the moat — everyone has similar tools; few have a richer memory of the market."
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "What is AI Driven Growth?",
+    answer:
+      "A methodology for building a Growth Signal Loop — a system that captures market signals, turns them into sharper positioning and experiments, and feeds every result back so the company learns faster. The aim is to reduce the time between market signal and revenue."
+  },
+  {
+    question: "How is this different from using AI to automate marketing?",
+    answer:
+      "Automation produces more output. AI Driven Growth uses AI to learn faster. AI makes execution cheap, so volume is no longer the advantage — signal quality, learning speed, and market memory are. We use AI to sharpen judgement, not just to ship more."
+  },
+  {
+    question: "Who is it for?",
+    answer:
+      "Pre-seed to Series B AI and B2B startups with some traction but inconsistent pipeline, where the product, category, and buyer language are all still evolving and generic playbooks break."
+  }
+];
+---
+
+<StrategicPage
+  path="/ai-driven-growth"
+  eyebrow="AI Driven Growth"
+  title="AI has made growth faster. Most startups are just getting faster at doing the wrong things."
+  metaTitle="AI Driven Growth for AI and B2B Startups | We Scale Startups"
+  description="AI Driven Growth helps AI and B2B startups build a Growth Signal Loop — turning market signals into sharper positioning, better experiments, and repeatable revenue. Most teams use AI to do more; we help you use AI to learn faster."
+  lede="We Scale Startups helps AI and B2B startups build Growth Signal Loops — systems that turn market signals into sharper positioning, better experiments, and repeatable revenue. Most startups do not need more random marketing activity; they need a faster way to learn what the market wants and what to test next."
+  sections={sections}
+  faqs={faqs}
+/>

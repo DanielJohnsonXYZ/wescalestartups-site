@@ -5913,9 +5913,11 @@ body {
 }
 
 /* ── 11. Strategic panels: warm surface ────────────────────────
-   Used on StrategicPage.astro inner pages.
+   Used on StrategicPage.astro inner pages. Excludes the dark variant
+   so it doesn't clobber .strategic-panel-dark's gradient (equal
+   specificity, later in source) and leave white-on-white text.
    ─────────────────────────────────────────────────────────── */
-.strategic-panel {
+.strategic-panel:not(.strategic-panel-dark) {
   background: var(--surface);
   border-color: var(--line);
 }

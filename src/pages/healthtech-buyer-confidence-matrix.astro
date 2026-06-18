@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizScorecard from "../components/QuizScorecard.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { siteConfig } from "../site";
 
 const path = "/healthtech-buyer-confidence-matrix";
 
@@ -30,6 +30,179 @@ const schema = [
   ]),
   buildFaqSchema(faqs)
 ];
+
+const buyerTypes = [
+  { role: "Clinician / clinical lead", needs: "Clinical evidence, workflow fit, peer validation, time-to-value clarity" },
+  { role: "Clinic owner / practice manager", needs: "ROI case, operational efficiency, staff adoption risk, implementation support" },
+  { role: "Provider group / NHS trust", needs: "Procurement compliance, integration requirements, governance, scalability proof" },
+  { role: "Employer / HR / occupational health", needs: "Population health outcomes, cost per employee, data privacy, workforce ROI" },
+  { role: "Insurer / payer", needs: "Claims reduction evidence, actuarial proof, network fit, regulatory compliance" },
+  { role: "Patient / end user", needs: "Ease of use, privacy reassurance, clinical credibility, outcome clarity" },
+  { role: "Implementation / IT", needs: "Integration requirements, security certifications, technical documentation, support SLA" },
+  { role: "Board / investor", needs: "Market size, commercial traction, regulatory pathway, reimbursement strategy" }
+];
+
+const questions = [
+  {
+    dimension: "Buyer vs User Clarity",
+    q: "Do you know exactly who approves, budgets for, and signs off on buying your product — and is that person different from the primary end user?",
+    options: [
+      { text: "Yes — we have a clear map of buyer vs user, and our GTM treats them differently.", sub: "Separate messaging, proof, and process for each.", score: 2 },
+      { text: "Roughly — we know they're different people but we don't systematically address each one.", sub: "We handle it in conversation, not in assets.", score: 1 },
+      { text: "No — we mostly sell to whoever is in the room, user and buyer alike.", sub: "Our messaging doesn't distinguish between them.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Stakeholder Messaging",
+    q: "Does your website, outbound, and sales deck address the real buyer's concerns — cost, risk, compliance, workflow fit — not just the user's experience?",
+    options: [
+      { text: "Yes — we have specific messaging and assets for each key stakeholder type.", sub: "ROI case, compliance brief, and implementation guide all exist.", score: 2 },
+      { text: "Partially — the buyer's concerns are mentioned but the primary message is still user-experience led.", sub: "Buyers have to read between the lines.", score: 1 },
+      { text: "No — our messaging focuses on product features, clinical outcomes, or user experience.", sub: "A CFO or procurement lead wouldn't find what they need.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Clinical or Operational Credibility",
+    q: "Do you have credible clinical, operational, or technical proof that someone with a healthcare background — a clinician, clinical director, or CIO — would find convincing?",
+    options: [
+      { text: "Yes — peer-reviewed evidence, named clinical advisors, or validated outcomes from a credible institution.", sub: "Credibility a sceptical clinician would respect.", score: 2 },
+      { text: "Some — pilot data or informal clinical validation, but not yet published or formally peer-reviewed.", sub: "Internally credible, not yet externally validated.", score: 1 },
+      { text: "No — our credibility is based on team backgrounds or product design, not clinical evidence.", sub: "A clinical buyer would need to take our word for it.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Workflow Fit",
+    q: "Can a buyer clearly understand how your product fits into their existing clinical or operational workflow — without sitting through a full demo?",
+    options: [
+      { text: "Yes — integration points, workflow changes, and adoption requirements are clear in our assets.", sub: "A buyer can evaluate fit before booking a call.", score: 2 },
+      { text: "Somewhat — workflow fit is explained in the demo but isn't visible in our marketing or outreach.", sub: "Buyers have to commit to a conversation to understand it.", score: 1 },
+      { text: "No — workflow fit is unclear until late in the sales process.", sub: "Integration surprises often slow or kill deals.", score: 0 }
+    ]
+  },
+  {
+    dimension: "ROI Case",
+    q: "Do you have a quantified ROI case — cost savings, time reduction, revenue impact, or clinical outcome improvement — that a buyer can use to justify purchase internally?",
+    options: [
+      { text: "Yes — a specific, verifiable ROI model with numbers a buyer can take to their board or finance team.", sub: "The business case practically writes itself.", score: 2 },
+      { text: "Directional — we can talk to value but don't have a formal, shareable ROI model or calculator.", sub: "Buyers have to build their own case.", score: 1 },
+      { text: "No — we focus on clinical or user value rather than financial or operational ROI.", sub: "A finance or operations buyer wouldn't find what they need.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Evidence and Proof",
+    q: "Do you have published evidence — case studies, pilot results, peer validation, or reference customers — that a risk-averse healthcare buyer would find reassuring before committing?",
+    options: [
+      { text: "Yes — multiple published case studies with named organisations, specific outcomes, and verifiable results.", sub: "Proof a procurement committee would accept.", score: 2 },
+      { text: "Some — 1–2 case studies or testimonials, but they're early, small, or lack specific outcomes.", sub: "Present but not yet compelling to a cautious buyer.", score: 1 },
+      { text: "No or minimal — we're early stage, pre-revenue, or haven't packaged our proof yet.", sub: "Buyers have to rely on our word and our demo.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Compliance Reassurance",
+    q: "Does your messaging proactively address the compliance, regulatory, and data privacy concerns your buyer will face — before they have to ask?",
+    options: [
+      { text: "Yes — GDPR, data sovereignty, clinical safety, and relevant regulatory standards are addressed in our materials.", sub: "We don't wait to be asked. We pre-empt the concern.", score: 2 },
+      { text: "Partially — we can answer compliance questions but don't proactively raise them in our assets.", sub: "Buyers need to ask before they get reassurance.", score: 1 },
+      { text: "No — compliance and regulatory questions catch us unprepared or slow the deal significantly.", sub: "Deals frequently stall here.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Implementation Clarity",
+    q: "Can a buyer clearly understand what implementation looks like — timeline, IT requirements, training, and operational disruption — before they commit?",
+    options: [
+      { text: "Yes — implementation timeline, IT requirements, staff training, and go-live process are documented and shared early.", sub: "Buyers know what they're committing to before they sign.", score: 2 },
+      { text: "Roughly — we cover implementation in the sales process but not in written materials buyers can review internally.", sub: "Champions have to relay information verbally.", score: 1 },
+      { text: "No — implementation details are unclear until contracting, or vary too much to document.", sub: "Implementation surprises are a common deal-breaker.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Procurement Navigation",
+    q: "Do you have materials or a defined process that helps your internal champion navigate procurement, legal review, or committee approval?",
+    options: [
+      { text: "Yes — a procurement pack, security questionnaire responses, DPA template, and reference contacts are all ready.", sub: "We reduce the admin burden for our champion.", score: 2 },
+      { text: "Partially — we support procurement reactively but don't have a ready-to-use pack.", sub: "Champions have to chase us for each document.", score: 1 },
+      { text: "No — procurement is handled ad hoc and often becomes a bottleneck.", sub: "Deals frequently slow or die in procurement.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Reference Access",
+    q: "Can a buyer speak to a reference customer in a similar organisation type before committing — and do you proactively offer this?",
+    options: [
+      { text: "Yes — we have willing reference customers across our key buyer types and offer introductions proactively.", sub: "Peer conversation is part of our standard process.", score: 2 },
+      { text: "Somewhat — we can arrange references but only when asked, and the pool is limited.", sub: "References are available but not routinely offered.", score: 1 },
+      { text: "No — we don't yet have reference customers willing to speak to prospects.", sub: "Buyers have to trust us without peer validation.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Risk Reduction",
+    q: "Do you offer a proof of concept, pilot programme, or low-commitment entry point that meaningfully reduces the perceived risk of a full purchase?",
+    options: [
+      { text: "Yes — a structured pilot or POC with defined scope, success criteria, and a clear path to full deployment.", sub: "Risk is quantified and bounded. Easy to say yes.", score: 2 },
+      { text: "Informally — we can offer trials or pilots but they're not structured or consistently proposed.", sub: "The risk reduction offer varies by deal.", score: 1 },
+      { text: "No — buyers must commit to a full purchase or nothing.", sub: "The first commitment feels too large for a cautious buyer.", score: 0 }
+    ]
+  },
+  {
+    dimension: "Conversion Path",
+    q: "Is there a clear, low-friction next step for a buyer who is interested but not yet ready to fully commit — and does it appear in your outreach and website?",
+    options: [
+      { text: "Yes — a buyer confidence review, a pilot proposal, or a stakeholder briefing is offered as a low-risk next step.", sub: "There's a bridge between interest and commitment.", score: 2 },
+      { text: "Partly — we have a demo CTA but nothing between 'interested' and 'ready to buy'.", sub: "Buyers who aren't ready go cold.", score: 1 },
+      { text: "No — the only CTA is a demo or a discovery call, which feels like too big a commitment for early-stage buyers.", sub: "The gap between interest and action is too large.", score: 0 }
+    ]
+  }
+];
+
+const results = {
+  strong: {
+    min: 18,
+    range: "18–24",
+    color: "#22c55e",
+    label: "Strong buyer confidence",
+    headline: "Your buyer confidence is strong. Now sharpen and scale it.",
+    summary: "Your messaging, proof, and sales process are doing the work for the real buyer — not just the user. Deals move at a predictable pace and your champions can make the case internally. The opportunity now is to systematically strengthen the weakest remaining layers and build the proof assets that will let you move upmarket or into larger organisations.",
+    actions: [
+      { title: "Audit your weakest confidence layer", body: "Even strong performers have a weakest dimension. Review your score question by question — the lowest-scoring area is where deals are most likely to slow." },
+      { title: "Build an upmarket proof pack", body: "If you're ready to target larger organisations or NHS trusts, your current proof may not meet their threshold. Identify what that buyer tier needs and build toward it." },
+      { title: "Systematise your reference programme", body: "Ad hoc references are good. A structured programme — matched by buyer type and organisation size — is better. Build a reference bank and offer it proactively." },
+      { title: "Package a competitor-ready brief", body: "Strong buyer confidence means you're in more competitive evaluations. A clear, honest competitive narrative — where you win and where you don't — builds trust and speeds decisions." }
+    ],
+    warning: "<strong>What not to do:</strong> Assume that strong buyer confidence today will remain strong as you move upmarket or into new buyer types. Each new stakeholder layer — board, insurer, NHS procurement — requires its own proof and reassurance. Don't reuse assets built for one buyer on another.",
+    cta1: { label: "Book a buyer confidence review →", url: null }
+  },
+  partial: {
+    min: 9,
+    range: "9–17",
+    color: "var(--accent)",
+    label: "Partial buyer confidence",
+    headline: "Your champions are sold. Your buyers aren't — yet.",
+    summary: "Some confidence layers are working well, but key gaps are slowing deals at the committee, board, or procurement stage. Your product is good enough to get past the initial conversation — but the real buyer still has unanswered questions that your assets aren't pre-empting. One or two targeted fixes will significantly improve deal velocity and close rate.",
+    actions: [
+      { title: "Build a buyer-specific one-pager", body: "Create a 1–2 page brief for the decision-maker that covers ROI, compliance, implementation, and risk reduction. Give it to your champion to share internally — it does the selling when you're not in the room." },
+      { title: "Quantify the ROI case", body: "If you don't have a documented ROI model, this is usually the highest-leverage fix. Even a simple before/after cost comparison makes a buyer's internal case dramatically easier." },
+      { title: "Pre-empt the top 3 buyer objections", body: "Identify the 3 questions that most often slow or stall deals. Address them proactively in your sales deck, outreach, and website — before buyers need to ask." },
+      { title: "Create a structured pilot offer", body: "A defined pilot with clear scope, timeline, and success criteria reduces the commitment threshold for a cautious buyer. Make it easy to say yes to something small." }
+    ],
+    warning: "<strong>What not to do:</strong> Push harder on the user experience message. If deals are stalling at committee or board level, more user-facing content won't fix it. The gap is at the buyer layer — and that requires buyer-specific proof and reassurance.",
+    cta1: { label: "Get a HealthTech buyer confidence review →", url: null }
+  },
+  weak: {
+    min: 0,
+    range: "0–8",
+    color: "#f97316",
+    label: "Weak buyer confidence",
+    headline: "Your messaging is built for users. Your buyers aren't convinced.",
+    summary: "Right now, your GTM is doing a good job of convincing the people who use your product — but the people who buy it are under-served. Decision-makers, procurement teams, and finance approvers don't have the evidence, reassurance, or internal case-making tools they need. Deals that should close are stalling, and you may not fully know why.",
+    actions: [
+      { title: "Map your buyer stakeholders first", body: "List every person who must approve, influence, or review the purchase. For each one, write down what they need to believe before saying yes. This map is your GTM blueprint." },
+      { title: "Build one complete ROI case study", body: "A single case study with named organisation, specific outcomes, and a quantified ROI — even from a small pilot — will do more for deal velocity than any amount of product marketing." },
+      { title: "Write a compliance and data brief", body: "A single-page document covering GDPR, data sovereignty, clinical safety, and relevant standards answers 80% of compliance questions before buyers ask. It's the fastest way to remove a common stall point." },
+      { title: "Create a low-commitment next step", body: "If your only CTA is 'book a demo', interested buyers who aren't ready will go cold. Add a structured pilot offer or a 'buyer confidence review' as a bridge between interest and commitment." }
+    ],
+    warning: "<strong>What not to do:</strong> Invest in more user-facing marketing, more clinical content, or more product features to drive pipeline. Until the buyer confidence gap is addressed, more user-side activity won't fix deal velocity. Build for the buyer first.",
+    cta1: { label: "Book a HealthTech buyer confidence review →", url: null }
+  }
+};
 ---
 
 <BaseLayout
@@ -39,643 +212,77 @@ const schema = [
   path={path}
   schema={schema}
 >
-
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="shell">
-      <p class="eyebrow">HealthTech Buyer Confidence Matrix · 12 questions · Free</p>
-      <h1>You may be convincing users — but not building enough confidence with the real buyer.</h1>
-      <p class="lede">
-        In HealthTech, the person using your product is rarely the person buying it.
-        Clinicians, patients, and end users experience the value — but clinic owners,
-        procurement teams, boards, and insurers make the decision. If your messaging
-        only works for users, deals stall at the people who matter most.
-        Score your buyer confidence in 5 minutes.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href="#scorecard">Start the matrix →</a>
-        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE BUYER GAP -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">The HealthTech buyer gap</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        The three ways HealthTech GTM breaks at the buyer layer.
-      </h2>
-      <div class="grid-3">
-        <article class="feature-card compact-card">
-          <h3>You're speaking to the user, not the buyer</h3>
-          <p>Clinical experience, patient outcomes, and ease of use matter to the user. The buyer needs ROI, compliance assurance, implementation clarity, and organisational risk reduction. Two completely different conversations.</p>
-        </article>
-        <article class="feature-card compact-card">
-          <h3>Your champion can't make the case internally</h3>
-          <p>Even when a clinician or team lead is sold, they still need to take it to a committee, a CFO, or a board. If you haven't given them the language and proof to do that, the deal stalls — and they blame the process, not you.</p>
-        </article>
-        <article class="feature-card compact-card">
-          <h3>The risk feels too large for the value offered</h3>
-          <p>Healthcare buyers are trained to protect against failure. Implementation disruption, compliance risk, and staff adoption costs are all real concerns. If you don't address them proactively, the default answer is "not yet".</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- BUYER STAKEHOLDER MAP -->
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">Who are you actually selling to?</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        HealthTech has up to eight buyer types — each with different proof requirements.
-      </h2>
-      <div class="grid-2" style="gap:1rem;">
-        {[
-          { role: "Clinician / clinical lead", needs: "Clinical evidence, workflow fit, peer validation, time-to-value clarity" },
-          { role: "Clinic owner / practice manager", needs: "ROI case, operational efficiency, staff adoption risk, implementation support" },
-          { role: "Provider group / NHS trust", needs: "Procurement compliance, integration requirements, governance, scalability proof" },
-          { role: "Employer / HR / occupational health", needs: "Population health outcomes, cost per employee, data privacy, workforce ROI" },
-          { role: "Insurer / payer", needs: "Claims reduction evidence, actuarial proof, network fit, regulatory compliance" },
-          { role: "Patient / end user", needs: "Ease of use, privacy reassurance, clinical credibility, outcome clarity" },
-          { role: "Implementation / IT", needs: "Integration requirements, security certifications, technical documentation, support SLA" },
-          { role: "Board / investor", needs: "Market size, commercial traction, regulatory pathway, reimbursement strategy" }
-        ].map(b => (
-          <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:0.75rem;background:var(--surface);">
-            <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 0.35rem;">{b.role}</p>
-            <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;margin:0;">{b.needs}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE SCORECARD -->
-  <section class="section section-alt" id="scorecard">
-    <div class="shell">
-      <p class="eyebrow">The matrix</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 0.5rem;">
-        Score your buyer confidence across 12 dimensions.
-      </h2>
-      <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
-        Answer for your primary buyer — the person who signs or approves the purchase, not the end user.
-      </p>
-
-      <div id="quiz-container">
-        <div class="quiz-progress-wrap">
-          <div class="quiz-progress-bar" id="progress-bar" style="width:0%"></div>
-        </div>
-        <p class="quiz-progress-label" id="progress-label">Question 1 of 12</p>
-        <div id="quiz-questions"></div>
-        <div class="quiz-nav" id="quiz-nav" style="display:none">
-          <button class="button button-light" id="btn-back" onclick="quizBack()" style="display:none">← Back</button>
-          <button class="button button-brand" id="btn-next" onclick="quizNext()">Next →</button>
-        </div>
-        <div id="quiz-result" style="display:none"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE THREE CONFIDENCE LEVELS -->
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">What the score means</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        Three levels of buyer confidence — and what each one costs you in deal velocity.
-      </h2>
-      <div class="grid-3">
-        <article class="feature-card" style="border-top:3px solid #22c55e;">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#22c55e;margin:0 0 0.5rem;">Score 18–24 · Strong</p>
-          <h3>Strong buyer confidence</h3>
-          <p>Your messaging, proof, and sales process address the real buyer's concerns. Deals move at a predictable pace. The work now is scaling what's working and sharpening the weakest layers.</p>
-        </article>
-        <article class="feature-card" style="border-top:3px solid var(--accent);">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin:0 0 0.5rem;">Score 9–17 · Partial</p>
-          <h3>Partial buyer confidence</h3>
-          <p>Some confidence layers are strong but key gaps are slowing deals. Champions are sold but can't bring the rest of the committee along. One or two targeted fixes will significantly improve conversion and deal velocity.</p>
-        </article>
-        <article class="feature-card" style="border-top:3px solid #f97316;">
-          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#f97316;margin:0 0 0.5rem;">Score 0–8 · Weak</p>
-          <h3>Weak buyer confidence</h3>
-          <p>Your messaging and proof are built for users, not buyers. The real decision-maker isn't convinced — and your champion doesn't have the assets to convince them. Deals stall at committee, board, or procurement review.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">Common questions</p>
-      <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
-        What HealthTech founders ask before taking this matrix.
-      </h2>
-      <div class="grid-3">
-        {faqs.map((f) => (
-          <article class="feature-card">
-            <h3>{f.question}</h3>
-            <p>{f.answer}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <section class="cta-band">
-    <div class="shell cta-inner">
-      <div>
-        <p class="eyebrow">Want a buyer confidence review?</p>
-        <h2>Bring your score. We'll identify the exact confidence gap slowing your deals.</h2>
-        <p>
-          {siteConfig.bookingCallDurationPhrase}. We'll map your buyer stakeholders, identify the weakest confidence layer, and recommend the first asset to build — whether that's an ROI case, a compliance brief, or an implementation guide.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="htbcm-final-book">
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href="/industries" data-cta="htbcm-industries">
-          See our HealthTech work →
-        </a>
-      </div>
-    </div>
-  </section>
-
-</BaseLayout>
-
-<style is:global>
-  .quiz-progress-wrap {
-    height: 4px;
-    background: var(--line);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-bottom: 0.75rem;
-  }
-  .quiz-progress-bar {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 99px;
-    transition: width 300ms ease;
-  }
-  .quiz-progress-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin: 0 0 2rem;
-  }
-  .quiz-question-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  .quiz-question-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin: 0 0 0.75rem;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  }
-  .quiz-question-text {
-    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.35;
-    margin: 0 0 1.5rem;
-    color: var(--ink);
-  }
-  .quiz-options { display: grid; gap: 0.6rem; }
-  .quiz-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    padding: 1rem 1.1rem;
-    background: var(--bg, white);
-    border: 1.5px solid var(--line);
-    border-radius: 0.75rem;
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 140ms ease, background 140ms ease;
-    width: 100%;
-  }
-  .quiz-option:hover { border-color: var(--accent); }
-  .quiz-option.selected {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-  }
-  .quiz-option-letter {
-    flex-shrink: 0;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--muted);
-    margin-top: 0.1rem;
-    transition: background 140ms, border-color 140ms, color 140ms;
-  }
-  .quiz-option.selected .quiz-option-letter {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-  .quiz-option-text { font-size: 0.95rem; line-height: 1.5; color: var(--ink); display: block; }
-  .quiz-option-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 0.15rem;
-    display: block;
-  }
-  .quiz-nav {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    margin-top: 1.5rem;
-  }
-  .result-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem 2rem 2.5rem;
-  }
-  .result-score-display {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .result-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-  }
-  .result-headline {
-    font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    font-weight:700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.75rem;
-    color: var(--ink);
-  }
-  .result-summary {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--muted);
-    margin: 0 0 1.75rem;
-    max-width: 60ch;
-  }
-  .result-actions-grid {
-    display: grid;
-    gap: 0.85rem;
-    margin-bottom: 2rem;
-  }
-  @media (min-width: 640px) { .result-actions-grid { grid-template-columns: 1fr 1fr; } }
-  .result-action-card {
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    background: var(--bg, white);
-  }
-  .result-action-card h4 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.35rem; color: var(--ink); }
-  .result-action-card p { font-size: 0.85rem; line-height: 1.5; color: var(--muted); margin: 0; }
-  .result-warning {
-    padding: 1rem 1.25rem;
-    border-left: 3px solid #f97316;
-    border-radius: 0 0.5rem 0.5rem 0;
-    background: color-mix(in srgb, #f97316 6%, transparent);
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--ink);
-    margin-bottom: 1.75rem;
-  }
-  .result-warning strong { color: #c05621; }
-  .result-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
-  .result-restart {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 0.82rem;
-    cursor: pointer;
-    text-decoration: underline;
-    margin-top: 1.25rem;
-    display: block;
-  }
-  .result-restart:hover { color: var(--ink); }
-</style>
-
-<script is:inline define:vars={{ bookingUrl: siteConfig.bookingUrl, bookingLabel: siteConfig.bookingLabel }}>
-  const questions = [
-    {
-      dimension: "Buyer vs User Clarity",
-      q: "Do you know exactly who approves, budgets for, and signs off on buying your product — and is that person different from the primary end user?",
-      options: [
-        { text: "Yes — we have a clear map of buyer vs user, and our GTM treats them differently.", sub: "Separate messaging, proof, and process for each.", score: 2 },
-        { text: "Roughly — we know they're different people but we don't systematically address each one.", sub: "We handle it in conversation, not in assets.", score: 1 },
-        { text: "No — we mostly sell to whoever is in the room, user and buyer alike.", sub: "Our messaging doesn't distinguish between them.", score: 0 }
+  <QuizScorecard
+    scrollTargetId="scorecard"
+    hero={{
+      eyebrow: "HealthTech Buyer Confidence Matrix · 12 questions · Free",
+      h1: "You may be convincing users — but not building enough confidence with the real buyer.",
+      lede: "In HealthTech, the person using your product is rarely the person buying it.\n        Clinicians, patients, and end users experience the value — but clinic owners,\n        procurement teams, boards, and insurers make the decision. If your messaging\n        only works for users, deals stall at the people who matter most.\n        Score your buyer confidence in 5 minutes.",
+      primaryLabel: "Start the matrix →"
+    }}
+    problem={{
+      eyebrow: "The HealthTech buyer gap",
+      heading: "The three ways HealthTech GTM breaks at the buyer layer.",
+      cards: [
+        { title: "You're speaking to the user, not the buyer", body: "Clinical experience, patient outcomes, and ease of use matter to the user. The buyer needs ROI, compliance assurance, implementation clarity, and organisational risk reduction. Two completely different conversations." },
+        { title: "Your champion can't make the case internally", body: "Even when a clinician or team lead is sold, they still need to take it to a committee, a CFO, or a board. If you haven't given them the language and proof to do that, the deal stalls — and they blame the process, not you." },
+        { title: "The risk feels too large for the value offered", body: "Healthcare buyers are trained to protect against failure. Implementation disruption, compliance risk, and staff adoption costs are all real concerns. If you don't address them proactively, the default answer is \"not yet\"." }
       ]
-    },
-    {
-      dimension: "Stakeholder Messaging",
-      q: "Does your website, outbound, and sales deck address the real buyer's concerns — cost, risk, compliance, workflow fit — not just the user's experience?",
-      options: [
-        { text: "Yes — we have specific messaging and assets for each key stakeholder type.", sub: "ROI case, compliance brief, and implementation guide all exist.", score: 2 },
-        { text: "Partially — the buyer's concerns are mentioned but the primary message is still user-experience led.", sub: "Buyers have to read between the lines.", score: 1 },
-        { text: "No — our messaging focuses on product features, clinical outcomes, or user experience.", sub: "A CFO or procurement lead wouldn't find what they need.", score: 0 }
+    }}
+    scorecard={{
+      eyebrow: "The matrix",
+      heading: "Score your buyer confidence across 12 dimensions.",
+      subcopy: "Answer for your primary buyer — the person who signs or approves the purchase, not the end user.",
+      sectionClass: "section section-alt"
+    }}
+    scoreMeaning={{
+      eyebrow: "What the score means",
+      heading: "Three levels of buyer confidence — and what each one costs you in deal velocity.",
+      sectionClass: "section",
+      levels: [
+        { borderColor: "#22c55e", labelColor: "#22c55e", label: "Score 18–24 · Strong", h3: "Strong buyer confidence", body: "Your messaging, proof, and sales process address the real buyer's concerns. Deals move at a predictable pace. The work now is scaling what's working and sharpening the weakest layers." },
+        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 9–17 · Partial", h3: "Partial buyer confidence", body: "Some confidence layers are strong but key gaps are slowing deals. Champions are sold but can't bring the rest of the committee along. One or two targeted fixes will significantly improve conversion and deal velocity." },
+        { borderColor: "#f97316", labelColor: "#f97316", label: "Score 0–8 · Weak", h3: "Weak buyer confidence", body: "Your messaging and proof are built for users, not buyers. The real decision-maker isn't convinced — and your champion doesn't have the assets to convince them. Deals stall at committee, board, or procurement review." }
       ]
-    },
-    {
-      dimension: "Clinical or Operational Credibility",
-      q: "Do you have credible clinical, operational, or technical proof that someone with a healthcare background — a clinician, clinical director, or CIO — would find convincing?",
-      options: [
-        { text: "Yes — peer-reviewed evidence, named clinical advisors, or validated outcomes from a credible institution.", sub: "Credibility a sceptical clinician would respect.", score: 2 },
-        { text: "Some — pilot data or informal clinical validation, but not yet published or formally peer-reviewed.", sub: "Internally credible, not yet externally validated.", score: 1 },
-        { text: "No — our credibility is based on team backgrounds or product design, not clinical evidence.", sub: "A clinical buyer would need to take our word for it.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Workflow Fit",
-      q: "Can a buyer clearly understand how your product fits into their existing clinical or operational workflow — without sitting through a full demo?",
-      options: [
-        { text: "Yes — integration points, workflow changes, and adoption requirements are clear in our assets.", sub: "A buyer can evaluate fit before booking a call.", score: 2 },
-        { text: "Somewhat — workflow fit is explained in the demo but isn't visible in our marketing or outreach.", sub: "Buyers have to commit to a conversation to understand it.", score: 1 },
-        { text: "No — workflow fit is unclear until late in the sales process.", sub: "Integration surprises often slow or kill deals.", score: 0 }
-      ]
-    },
-    {
-      dimension: "ROI Case",
-      q: "Do you have a quantified ROI case — cost savings, time reduction, revenue impact, or clinical outcome improvement — that a buyer can use to justify purchase internally?",
-      options: [
-        { text: "Yes — a specific, verifiable ROI model with numbers a buyer can take to their board or finance team.", sub: "The business case practically writes itself.", score: 2 },
-        { text: "Directional — we can talk to value but don't have a formal, shareable ROI model or calculator.", sub: "Buyers have to build their own case.", score: 1 },
-        { text: "No — we focus on clinical or user value rather than financial or operational ROI.", sub: "A finance or operations buyer wouldn't find what they need.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Evidence and Proof",
-      q: "Do you have published evidence — case studies, pilot results, peer validation, or reference customers — that a risk-averse healthcare buyer would find reassuring before committing?",
-      options: [
-        { text: "Yes — multiple published case studies with named organisations, specific outcomes, and verifiable results.", sub: "Proof a procurement committee would accept.", score: 2 },
-        { text: "Some — 1–2 case studies or testimonials, but they're early, small, or lack specific outcomes.", sub: "Present but not yet compelling to a cautious buyer.", score: 1 },
-        { text: "No or minimal — we're early stage, pre-revenue, or haven't packaged our proof yet.", sub: "Buyers have to rely on our word and our demo.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Compliance Reassurance",
-      q: "Does your messaging proactively address the compliance, regulatory, and data privacy concerns your buyer will face — before they have to ask?",
-      options: [
-        { text: "Yes — GDPR, data sovereignty, clinical safety, and relevant regulatory standards are addressed in our materials.", sub: "We don't wait to be asked. We pre-empt the concern.", score: 2 },
-        { text: "Partially — we can answer compliance questions but don't proactively raise them in our assets.", sub: "Buyers need to ask before they get reassurance.", score: 1 },
-        { text: "No — compliance and regulatory questions catch us unprepared or slow the deal significantly.", sub: "Deals frequently stall here.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Implementation Clarity",
-      q: "Can a buyer clearly understand what implementation looks like — timeline, IT requirements, training, and operational disruption — before they commit?",
-      options: [
-        { text: "Yes — implementation timeline, IT requirements, staff training, and go-live process are documented and shared early.", sub: "Buyers know what they're committing to before they sign.", score: 2 },
-        { text: "Roughly — we cover implementation in the sales process but not in written materials buyers can review internally.", sub: "Champions have to relay information verbally.", score: 1 },
-        { text: "No — implementation details are unclear until contracting, or vary too much to document.", sub: "Implementation surprises are a common deal-breaker.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Procurement Navigation",
-      q: "Do you have materials or a defined process that helps your internal champion navigate procurement, legal review, or committee approval?",
-      options: [
-        { text: "Yes — a procurement pack, security questionnaire responses, DPA template, and reference contacts are all ready.", sub: "We reduce the admin burden for our champion.", score: 2 },
-        { text: "Partially — we support procurement reactively but don't have a ready-to-use pack.", sub: "Champions have to chase us for each document.", score: 1 },
-        { text: "No — procurement is handled ad hoc and often becomes a bottleneck.", sub: "Deals frequently slow or die in procurement.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Reference Access",
-      q: "Can a buyer speak to a reference customer in a similar organisation type before committing — and do you proactively offer this?",
-      options: [
-        { text: "Yes — we have willing reference customers across our key buyer types and offer introductions proactively.", sub: "Peer conversation is part of our standard process.", score: 2 },
-        { text: "Somewhat — we can arrange references but only when asked, and the pool is limited.", sub: "References are available but not routinely offered.", score: 1 },
-        { text: "No — we don't yet have reference customers willing to speak to prospects.", sub: "Buyers have to trust us without peer validation.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Risk Reduction",
-      q: "Do you offer a proof of concept, pilot programme, or low-commitment entry point that meaningfully reduces the perceived risk of a full purchase?",
-      options: [
-        { text: "Yes — a structured pilot or POC with defined scope, success criteria, and a clear path to full deployment.", sub: "Risk is quantified and bounded. Easy to say yes.", score: 2 },
-        { text: "Informally — we can offer trials or pilots but they're not structured or consistently proposed.", sub: "The risk reduction offer varies by deal.", score: 1 },
-        { text: "No — buyers must commit to a full purchase or nothing.", sub: "The first commitment feels too large for a cautious buyer.", score: 0 }
-      ]
-    },
-    {
-      dimension: "Conversion Path",
-      q: "Is there a clear, low-friction next step for a buyer who is interested but not yet ready to fully commit — and does it appear in your outreach and website?",
-      options: [
-        { text: "Yes — a buyer confidence review, a pilot proposal, or a stakeholder briefing is offered as a low-risk next step.", sub: "There's a bridge between interest and commitment.", score: 2 },
-        { text: "Partly — we have a demo CTA but nothing between 'interested' and 'ready to buy'.", sub: "Buyers who aren't ready go cold.", score: 1 },
-        { text: "No — the only CTA is a demo or a discovery call, which feels like too big a commitment for early-stage buyers.", sub: "The gap between interest and action is too large.", score: 0 }
-      ]
-    }
-  ];
-
-  const results = {
-    strong: {
-      range: "18–24",
-      color: "#22c55e",
-      label: "Strong buyer confidence",
-      headline: "Your buyer confidence is strong. Now sharpen and scale it.",
-      summary: "Your messaging, proof, and sales process are doing the work for the real buyer — not just the user. Deals move at a predictable pace and your champions can make the case internally. The opportunity now is to systematically strengthen the weakest remaining layers and build the proof assets that will let you move upmarket or into larger organisations.",
-      actions: [
-        { title: "Audit your weakest confidence layer", body: "Even strong performers have a weakest dimension. Review your score question by question — the lowest-scoring area is where deals are most likely to slow." },
-        { title: "Build an upmarket proof pack", body: "If you're ready to target larger organisations or NHS trusts, your current proof may not meet their threshold. Identify what that buyer tier needs and build toward it." },
-        { title: "Systematise your reference programme", body: "Ad hoc references are good. A structured programme — matched by buyer type and organisation size — is better. Build a reference bank and offer it proactively." },
-        { title: "Package a competitor-ready brief", body: "Strong buyer confidence means you're in more competitive evaluations. A clear, honest competitive narrative — where you win and where you don't — builds trust and speeds decisions." }
-      ],
-      warning: "<strong>What not to do:</strong> Assume that strong buyer confidence today will remain strong as you move upmarket or into new buyer types. Each new stakeholder layer — board, insurer, NHS procurement — requires its own proof and reassurance. Don't reuse assets built for one buyer on another.",
-      cta1: { label: "Book a buyer confidence review →", url: null }
-    },
-    partial: {
-      range: "9–17",
-      color: "var(--accent)",
-      label: "Partial buyer confidence",
-      headline: "Your champions are sold. Your buyers aren't — yet.",
-      summary: "Some confidence layers are working well, but key gaps are slowing deals at the committee, board, or procurement stage. Your product is good enough to get past the initial conversation — but the real buyer still has unanswered questions that your assets aren't pre-empting. One or two targeted fixes will significantly improve deal velocity and close rate.",
-      actions: [
-        { title: "Build a buyer-specific one-pager", body: "Create a 1–2 page brief for the decision-maker that covers ROI, compliance, implementation, and risk reduction. Give it to your champion to share internally — it does the selling when you're not in the room." },
-        { title: "Quantify the ROI case", body: "If you don't have a documented ROI model, this is usually the highest-leverage fix. Even a simple before/after cost comparison makes a buyer's internal case dramatically easier." },
-        { title: "Pre-empt the top 3 buyer objections", body: "Identify the 3 questions that most often slow or stall deals. Address them proactively in your sales deck, outreach, and website — before buyers need to ask." },
-        { title: "Create a structured pilot offer", body: "A defined pilot with clear scope, timeline, and success criteria reduces the commitment threshold for a cautious buyer. Make it easy to say yes to something small." }
-      ],
-      warning: "<strong>What not to do:</strong> Push harder on the user experience message. If deals are stalling at committee or board level, more user-facing content won't fix it. The gap is at the buyer layer — and that requires buyer-specific proof and reassurance.",
-      cta1: { label: "Get a HealthTech buyer confidence review →", url: null }
-    },
-    weak: {
-      range: "0–8",
-      color: "#f97316",
-      label: "Weak buyer confidence",
-      headline: "Your messaging is built for users. Your buyers aren't convinced.",
-      summary: "Right now, your GTM is doing a good job of convincing the people who use your product — but the people who buy it are under-served. Decision-makers, procurement teams, and finance approvers don't have the evidence, reassurance, or internal case-making tools they need. Deals that should close are stalling, and you may not fully know why.",
-      actions: [
-        { title: "Map your buyer stakeholders first", body: "List every person who must approve, influence, or review the purchase. For each one, write down what they need to believe before saying yes. This map is your GTM blueprint." },
-        { title: "Build one complete ROI case study", body: "A single case study with named organisation, specific outcomes, and a quantified ROI — even from a small pilot — will do more for deal velocity than any amount of product marketing." },
-        { title: "Write a compliance and data brief", body: "A single-page document covering GDPR, data sovereignty, clinical safety, and relevant standards answers 80% of compliance questions before buyers ask. It's the fastest way to remove a common stall point." },
-        { title: "Create a low-commitment next step", body: "If your only CTA is 'book a demo', interested buyers who aren't ready will go cold. Add a structured pilot offer or a 'buyer confidence review' as a bridge between interest and commitment." }
-      ],
-      warning: "<strong>What not to do:</strong> Invest in more user-facing marketing, more clinical content, or more product features to drive pipeline. Until the buyer confidence gap is addressed, more user-side activity won't fix deal velocity. Build for the buyer first.",
-      cta1: { label: "Book a HealthTech buyer confidence review →", url: null }
-    }
-  };
-
-  let current = 0;
-  let answers = new Array(questions.length).fill(null);
-
-  function getResult(total) {
-    if (total >= 18) return { key: "strong", ...results.strong };
-    if (total >= 9) return { key: "partial", ...results.partial };
-    return { key: "weak", ...results.weak };
-  }
-
-  function render() {
-    const container = document.getElementById("quiz-questions");
-    const nav = document.getElementById("quiz-nav");
-    const progressBar = document.getElementById("progress-bar");
-    const progressLabel = document.getElementById("progress-label");
-    const resultDiv = document.getElementById("quiz-result");
-
-    if (current >= questions.length) {
-      container.style.display = "none";
-      nav.style.display = "none";
-      progressBar.style.width = "100%";
-      progressLabel.textContent = "Complete";
-      resultDiv.style.display = "block";
-
-      const total = answers.reduce((s, a) => s + (a !== null ? a : 0), 0);
-      const maxScore = questions.length * 2;
-      const r = getResult(total);
-
-      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score === 0).map(d => d.dim);
-      const weakHtml = weakDims.length > 0
-        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
-            <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c05621;margin:0 0 0.6rem;">Your weakest buyer confidence layers</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:0.4rem;font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
-            <p style="font-size:0.82rem;color:var(--muted);margin:0.6rem 0 0;line-height:1.5;">These scored zero. Build assets for these layers first.</p>
-          </div>`
-        : '';
-
-      const actionsHtml = r.actions.map(a => `
-        <div class="result-action-card">
-          <h4>${a.title}</h4>
-          <p>${a.body}</p>
-        </div>
-      `).join("");
-
-      const cta1Url = r.cta1.url || bookingUrl;
-
-      resultDiv.innerHTML = `
-        <div class="result-card">
-          <div class="result-score-display" style="color:${r.color}">${total}<span style="font-size:1.5rem;color:var(--muted);">/${maxScore}</span></div>
-          <p class="result-label">Your buyer confidence score · ${r.range} · ${r.label}</p>
-          <h2 class="result-headline">${r.headline}</h2>
-          <p class="result-summary">${r.summary}</p>
-          ${weakHtml}
-          <h3 style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.85rem;color:var(--ink);">Your recommended first moves</h3>
-          <div class="result-actions-grid">${actionsHtml}</div>
-          <div class="result-warning">${r.warning}</div>
-          <div class="result-ctas">
-            <a class="button button-brand" href="${cta1Url}" data-cta="htbcm-result-primary">${r.cta1.label}</a>
-            <a class="button button-light" href="/industries" data-cta="htbcm-result-industries">See our HealthTech work →</a>
-          </div>
-          <button class="result-restart" onclick="restartQuiz()">↺ Retake the matrix</button>
-        </div>
-      `;
-      return;
-    }
-
-    resultDiv.style.display = "none";
-    container.style.display = "block";
-    nav.style.display = "flex";
-
-    const pct = Math.round((current / questions.length) * 100);
-    progressBar.style.width = pct + "%";
-    progressLabel.textContent = `Question ${current + 1} of ${questions.length}`;
-
-    const q = questions[current];
-    const selected = answers[current];
-
-    container.innerHTML = `
-      <div class="quiz-question-card">
-        <p class="quiz-question-label">${String(current + 1).padStart(2, "0")} / ${questions.length} &nbsp;·&nbsp; ${q.dimension}</p>
-        <p class="quiz-question-text">${q.q}</p>
-        <div class="quiz-options">
-          ${q.options.map((opt, i) => `
-            <button
-              class="quiz-option${selected === opt.score ? " selected" : ""}"
-              onclick="selectOption(${opt.score})"
-            >
-              <span class="quiz-option-letter">${["A","B","C"][i]}</span>
-              <span>
-                <span class="quiz-option-text">${opt.text}</span>
-                ${opt.sub ? `<span class="quiz-option-sub">${opt.sub}</span>` : ""}
-              </span>
-            </button>
-          `).join("")}
+    }}
+    faqSection={{
+      eyebrow: "Common questions",
+      heading: "What HealthTech founders ask before taking this matrix.",
+      sectionClass: "section section-alt"
+    }}
+    faqs={faqs}
+    ctaBand={{
+      eyebrow: "Want a buyer confidence review?",
+      heading: "Bring your score. We'll identify the exact confidence gap slowing your deals.",
+      body: "We'll map your buyer stakeholders, identify the weakest confidence layer, and recommend the first asset to build — whether that's an ROI case, a compliance brief, or an implementation guide.",
+      secondaryCta: { href: "/industries", label: "See our HealthTech work →", dataCta: "htbcm-industries" }
+    }}
+    questions={questions}
+    results={results}
+    dataCtaPrefix="htbcm"
+    resultLabelPrefix="Your buyer confidence score"
+    weakHeading="Your weakest buyer confidence layers"
+    weakSubcopy="These scored zero. Build assets for these layers first."
+    actionPlanHeading="Your recommended first moves"
+    nextFinalLabel="See my result →"
+    restartLabel="↺ Retake the matrix"
+    resultSecondaryCta={{ href: "/industries", label: "See our HealthTech work →", dataCta: "htbcm-result-industries" }}
+  >
+    <section slot="after-problem" class="section">
+      <div class="shell">
+        <p class="eyebrow">Who are you actually selling to?</p>
+        <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
+          HealthTech has up to eight buyer types — each with different proof requirements.
+        </h2>
+        <div class="grid-2" style="gap:1rem;">
+          {buyerTypes.map(b => (
+            <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:0.75rem;background:var(--surface);">
+              <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 0.35rem;">{b.role}</p>
+              <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;margin:0;">{b.needs}</p>
+            </div>
+          ))}
         </div>
       </div>
-    `;
-
-    const backBtn = document.getElementById("btn-back");
-    backBtn.style.display = current > 0 ? "inline-flex" : "none";
-
-    const nextBtn = document.getElementById("btn-next");
-    nextBtn.textContent = current === questions.length - 1 ? "See my result →" : "Next →";
-    nextBtn.disabled = selected === null;
-    nextBtn.style.opacity = selected === null ? "0.5" : "1";
-  }
-
-  function selectOption(score) {
-    const wasNew = answers[current] === null;
-    answers[current] = score;
-    render();
-    if (wasNew) setTimeout(quizNext, 380);
-  }
-
-  function quizNext() {
-    if (answers[current] === null) return;
-    current++;
-    render();
-    document.getElementById("scorecard").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function quizBack() {
-    if (current > 0) { current--; render(); }
-  }
-
-  function restartQuiz() {
-    current = 0;
-    answers = new Array(questions.length).fill(null);
-    render();
-    document.getElementById("scorecard").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  window.selectOption = selectOption;
-  window.quizNext = quizNext;
-  window.quizBack = quizBack;
-  window.restartQuiz = restartQuiz;
-
-  document.addEventListener("DOMContentLoaded", render);
-</script>
-
+    </section>
+  </QuizScorecard>
 </BaseLayout>

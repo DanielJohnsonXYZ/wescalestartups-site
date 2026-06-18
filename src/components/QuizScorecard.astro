@@ -1,0 +1,379 @@
+---
+import { siteConfig } from "../site";
+import "../styles/quiz.css";
+
+/**
+ * Shared interactive quiz/scorecard component.
+ *
+ * Renders the full marketing-section scaffolding (hero, problem band,
+ * interactive scorecard, "what the score means" band, FAQ, CTA band) plus the
+ * shared inline scoring engine. All per-page copy and behaviour is driven by
+ * props. Two optional named slots handle the structural extras:
+ *   - slot="after-problem"  → e.g. healthtech's Buyer Stakeholder Map
+ *   - (the portfolio "commercial gaps" band is rendered via the `problem`
+ *      prop's `layout: "grid-2"` option, see below)
+ */
+
+interface QuizOption { text: string; sub?: string; score: number; }
+interface QuizQuestion { dimension: string; q: string; options: QuizOption[]; }
+interface ResultAction { title: string; body: string; }
+interface QuizResult {
+  min: number;
+  range: string;
+  color: string;
+  label: string;
+  headline: string;
+  summary: string;
+  actions: ResultAction[];
+  warning: string;
+  cta1: { label: string; url: string | null };
+}
+interface Card { title: string; body: string; }
+interface ScoreLevel { borderColor: string; labelColor: string; label: string; h3: string; body: string; }
+interface Faq { question: string; answer: string; }
+interface CtaLink { href: string; label: string; dataCta: string; }
+
+interface Props {
+  hero: { eyebrow: string; h1: string; lede: string; primaryLabel: string };
+  problem: { eyebrow: string; heading: string; layout?: string; cards: Card[] };
+  scorecard: { eyebrow: string; heading: string; subcopy: string; sectionClass?: string };
+  scrollTargetId: string;
+  scoreMeaning: { eyebrow: string; heading: string; sectionClass?: string; levels: ScoreLevel[] };
+  faqSection: { eyebrow: string; heading: string; sectionClass?: string };
+  faqs: Faq[];
+  ctaBand: { eyebrow: string; heading: string; body: string; secondaryCta: CtaLink };
+  questions: QuizQuestion[];
+  results: Record<string, QuizResult>;
+  dataCtaPrefix: string;
+  resultLabelPrefix: string;
+  weakHeading: string;
+  weakSubcopy: string;
+  actionPlanHeading: string;
+  progressCompleteLabel?: string;
+  nextFinalLabel?: string;
+  restartLabel?: string;
+  resultSecondaryCta: CtaLink;
+}
+
+const {
+  // Hero band
+  hero,
+  // Problem band (cards). layout: "grid-3" (default) or "grid-2"
+  problem,
+  // Scorecard section intro
+  scorecard,
+  scrollTargetId,
+  // "What the score means" band
+  scoreMeaning,
+  // FAQ band
+  faqSection,
+  faqs,
+  // CTA band
+  ctaBand,
+  // Scoring engine data
+  questions,
+  results,
+  // Result rendering knobs
+  dataCtaPrefix,
+  resultLabelPrefix,
+  weakHeading,
+  weakSubcopy,
+  actionPlanHeading,
+  progressCompleteLabel = "Complete",
+  nextFinalLabel = "See my result →",
+  restartLabel = "↺ Retake the scorecard",
+  resultSecondaryCta
+} = Astro.props;
+---
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="shell">
+    <p class="eyebrow">{hero.eyebrow}</p>
+    <h1 set:html={hero.h1} />
+    <p class="lede" set:html={hero.lede} />
+    <div class="hero-actions">
+      <a class="button button-brand" href={`#${scrollTargetId}`}>{hero.primaryLabel}</a>
+      <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM BAND -->
+<section class="section section-alt">
+  <div class="shell">
+    <p class="eyebrow">{problem.eyebrow}</p>
+    <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
+      {problem.heading}
+    </h2>
+    {problem.layout === "grid-2" ? (
+      <div class="grid-2" style="gap:1.25rem;">
+        {problem.cards.map((r) => (
+          <div style="padding:1.5rem;border:1px solid var(--line);border-radius:0.85rem;background:var(--surface);">
+            <h3 style="font-size:1rem;font-weight:700;letter-spacing:-0.015em;margin:0 0 0.6rem;">{r.title}</h3>
+            <p style="font-size:0.9rem;color:var(--muted);line-height:1.6;margin:0;">{r.body}</p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="grid-3">
+        {problem.cards.map((c) => (
+          <article class="feature-card compact-card">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<!-- OPTIONAL EXTRA SECTION (e.g. HealthTech buyer stakeholder map) -->
+<slot name="after-problem" />
+
+<!-- INTERACTIVE SCORECARD -->
+<section class={scorecard.sectionClass || "section"} id={scrollTargetId}>
+  <div class="shell">
+    <p class="eyebrow">{scorecard.eyebrow}</p>
+    <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 0.5rem;">
+      {scorecard.heading}
+    </h2>
+    <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
+      {scorecard.subcopy}
+    </p>
+
+    <div id="quiz-container">
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar" id="progress-bar" style="width:0%"></div>
+      </div>
+      <p class="quiz-progress-label" id="progress-label">Question 1 of 12</p>
+      <div id="quiz-questions"></div>
+      <div class="quiz-nav" id="quiz-nav" style="display:none">
+        <button class="button button-light" id="btn-back" onclick="quizBack()" style="display:none">← Back</button>
+        <button class="button button-brand" id="btn-next" onclick="quizNext()">Next →</button>
+      </div>
+      <div id="quiz-result" style="display:none"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT THE SCORE MEANS -->
+<section class={scoreMeaning.sectionClass || "section section-alt"}>
+  <div class="shell">
+    <p class="eyebrow">{scoreMeaning.eyebrow}</p>
+    <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
+      {scoreMeaning.heading}
+    </h2>
+    <div class="grid-3">
+      {scoreMeaning.levels.map((lvl) => (
+        <article class="feature-card" style={`border-top:3px solid ${lvl.borderColor};`}>
+          <p style={`font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:${lvl.labelColor};margin:0 0 0.5rem;`}>{lvl.label}</p>
+          <h3>{lvl.h3}</h3>
+          <p>{lvl.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class={faqSection.sectionClass || "section"}>
+  <div class="shell">
+    <p class="eyebrow">{faqSection.eyebrow}</p>
+    <h2 style="font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);line-height:1.08;font-weight:700;margin:0.4rem 0 2rem;">
+      {faqSection.heading}
+    </h2>
+    <div class="grid-3">
+      {faqs.map((f) => (
+        <article class="feature-card">
+          <h3>{f.question}</h3>
+          <p>{f.answer}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="shell cta-inner">
+    <div>
+      <p class="eyebrow">{ctaBand.eyebrow}</p>
+      <h2>{ctaBand.heading}</h2>
+      <p>
+        {siteConfig.bookingCallDurationPhrase}. {ctaBand.body}
+      </p>
+    </div>
+    <div class="hero-actions">
+      <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta={`${dataCtaPrefix}-final-book`}>
+        <span class="button-label">{siteConfig.bookingLabel}</span>
+        <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+      </a>
+      <a class="button button-light" href={ctaBand.secondaryCta.href} data-cta={ctaBand.secondaryCta.dataCta}>
+        {ctaBand.secondaryCta.label}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script
+  is:inline
+  define:vars={{
+    bookingUrl: siteConfig.bookingUrl,
+    bookingLabel: siteConfig.bookingLabel,
+    questions,
+    results,
+    scrollTargetId,
+    dataCtaPrefix,
+    resultLabelPrefix,
+    weakHeading,
+    weakSubcopy,
+    actionPlanHeading,
+    progressCompleteLabel,
+    nextFinalLabel,
+    restartLabel,
+    resultSecondaryCta
+  }}
+>
+  let current = 0;
+  let answers = new Array(questions.length).fill(null);
+
+  function getResult(total) {
+    const keys = Object.keys(results);
+    for (const key of keys) {
+      const r = results[key];
+      if (total >= r.min) return { key, ...r };
+    }
+    const lastKey = keys[keys.length - 1];
+    return { key: lastKey, ...results[lastKey] };
+  }
+
+  function render() {
+    const container = document.getElementById("quiz-questions");
+    const nav = document.getElementById("quiz-nav");
+    const progressBar = document.getElementById("progress-bar");
+    const progressLabel = document.getElementById("progress-label");
+    const resultDiv = document.getElementById("quiz-result");
+
+    if (current >= questions.length) {
+      container.style.display = "none";
+      nav.style.display = "none";
+      progressBar.style.width = "100%";
+      progressLabel.textContent = progressCompleteLabel;
+      resultDiv.style.display = "block";
+
+      const total = answers.reduce((s, a) => s + (a !== null ? a : 0), 0);
+      const maxScore = questions.length * 2;
+      const r = getResult(total);
+
+      const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score === 0).map(d => d.dim);
+      const weakHtml = weakDims.length > 0
+        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
+            <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#c05621;margin:0 0 0.6rem;">${weakHeading}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:0.4rem;font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
+            <p style="font-size:0.82rem;color:var(--muted);margin:0.6rem 0 0;line-height:1.5;">${weakSubcopy}</p>
+          </div>`
+        : '';
+
+      const actionsHtml = r.actions.map(a => `
+        <div class="result-action-card">
+          <h4>${a.title}</h4>
+          <p>${a.body}</p>
+        </div>
+      `).join("");
+
+      const cta1Url = r.cta1.url || bookingUrl;
+
+      resultDiv.innerHTML = `
+        <div class="result-card">
+          <div class="result-score-display" style="color:${r.color}">${total}<span style="font-size:1.5rem;color:var(--muted);">/${maxScore}</span></div>
+          <p class="result-label">${resultLabelPrefix} · ${r.range} · ${r.label}</p>
+          <h2 class="result-headline">${r.headline}</h2>
+          <p class="result-summary">${r.summary}</p>
+          ${weakHtml}
+          <h3 style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.85rem;color:var(--ink);">${actionPlanHeading}</h3>
+          <div class="result-actions-grid">${actionsHtml}</div>
+          <div class="result-warning">${r.warning}</div>
+          <div class="result-ctas">
+            <a class="button button-brand" href="${cta1Url}" data-cta="${dataCtaPrefix}-result-primary">${r.cta1.label}</a>
+            <a class="button button-light" href="${resultSecondaryCta.href}" data-cta="${resultSecondaryCta.dataCta}">${resultSecondaryCta.label}</a>
+          </div>
+          <button class="result-restart" onclick="restartQuiz()">${restartLabel}</button>
+        </div>
+      `;
+      return;
+    }
+
+    resultDiv.style.display = "none";
+    container.style.display = "block";
+    nav.style.display = "flex";
+
+    const pct = Math.round((current / questions.length) * 100);
+    progressBar.style.width = pct + "%";
+    progressLabel.textContent = `Question ${current + 1} of ${questions.length}`;
+
+    const q = questions[current];
+    const selected = answers[current];
+
+    container.innerHTML = `
+      <div class="quiz-question-card">
+        <p class="quiz-question-label">${String(current + 1).padStart(2, "0")} / ${questions.length} &nbsp;·&nbsp; ${q.dimension}</p>
+        <p class="quiz-question-text">${q.q}</p>
+        <div class="quiz-options">
+          ${q.options.map((opt, i) => `
+            <button
+              class="quiz-option${selected === opt.score ? " selected" : ""}"
+              onclick="selectOption(${opt.score})"
+            >
+              <span class="quiz-option-letter">${["A","B","C"][i]}</span>
+              <span>
+                <span class="quiz-option-text">${opt.text}</span>
+                ${opt.sub ? `<span class="quiz-option-sub">${opt.sub}</span>` : ""}
+              </span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+
+    const backBtn = document.getElementById("btn-back");
+    backBtn.style.display = current > 0 ? "inline-flex" : "none";
+
+    const nextBtn = document.getElementById("btn-next");
+    nextBtn.textContent = current === questions.length - 1 ? nextFinalLabel : "Next →";
+    nextBtn.disabled = selected === null;
+    nextBtn.style.opacity = selected === null ? "0.5" : "1";
+  }
+
+  function selectOption(score) {
+    const wasNew = answers[current] === null;
+    answers[current] = score;
+    render();
+    if (wasNew) setTimeout(quizNext, 380);
+  }
+
+  function quizNext() {
+    if (answers[current] === null) return;
+    current++;
+    render();
+    document.getElementById(scrollTargetId).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function quizBack() {
+    if (current > 0) { current--; render(); }
+  }
+
+  function restartQuiz() {
+    current = 0;
+    answers = new Array(questions.length).fill(null);
+    render();
+    document.getElementById(scrollTargetId).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  window.selectOption = selectOption;
+  window.quizNext = quizNext;
+  window.quizBack = quizBack;
+  window.restartQuiz = restartQuiz;
+
+  document.addEventListener("DOMContentLoaded", render);
+</script>

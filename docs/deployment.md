@@ -55,42 +55,40 @@ get readable production stack traces:
 Create the token in Sentry → Settings → Auth Tokens (org auth tokens are
 region-aware, so no `SENTRY_URL` is needed for the EU `de.sentry.io` org).
 
-## Production DNS Cutover (the last manual step)
+## Production DNS Cutover
 
-Production currently still resolves through Cloudflare to the Hetzner origin.
-Pages custom domains are added for `wescalestartups.com` and
-`www.wescalestartups.com` but stay **pending** until the zone DNS records point
-at Pages.
+Production is cut over to Cloudflare Pages as of 2026-06-18. Public DNS returns
+Cloudflare edge IPs because the records are proxied, so verify by comparing the
+public domain with `wescalestartups-site.pages.dev` rather than by expecting a
+visible CNAME answer.
 
-Required Cloudflare permission: **`Zone DNS Edit`** for the
-`wescalestartups.com` zone (a Pages-only token is not enough).
+Expected zone records:
 
-Change the existing proxied A records:
+```text
+wescalestartups.com      CNAME  wescalestartups-site.pages.dev  proxied
+www.wescalestartups.com  CNAME  wescalestartups-site.pages.dev  proxied
+```
+
+Keep the MX and TXT records unchanged (email + verification).
+
+Historical records that should not be restored except for rollback:
 
 ```text
 wescalestartups.com      A      65.109.232.75
 www.wescalestartups.com  A      65.109.232.75
 ```
 
-to proxied CNAME records (keep the orange cloud / proxied on):
-
-```text
-wescalestartups.com      CNAME  wescalestartups-site.pages.dev
-www.wescalestartups.com  CNAME  wescalestartups-site.pages.dev
-```
-
-Keep the MX and TXT records unchanged (email + verification).
-
-Verify after cutover: `https://wescalestartups.com` and the `www` →apex
-redirect both return 200, and Sentry receives a test event.
+Verification used on 2026-06-18: `https://wescalestartups.com` returned 200,
+`https://www.wescalestartups.com` redirected to the apex, and forcing the old
+Hetzner IP with `curl --resolve ...:65.109.232.75` returned 502 instead of the
+production page.
 
 ## Hetzner Fallback (decommission after cutover)
 
-Useful only while Pages is being verified. The site currently runs on the box
-as the `wescalestartups-static` Dokploy stack (built from
-`compose.production.yml`).
+Useful only while Pages is being verified. The site can still run on the box as
+the `wescalestartups-static` Dokploy stack (built from `compose.production.yml`).
 
-Once the DNS cutover is verified and stable, stop and remove that stack to
+Once the Pages cutover is considered stable, stop and remove that stack to
 reclaim the box.
 
 ---

@@ -50,24 +50,49 @@ ufw status verbose
 
 ## 2. Backups → Cloudflare R2
 
-Use Dokploy's built-in backup scheduling first. It keeps backup state visible in
-the same place operators already use for stacks and alerts, and it avoids
-copying live database directories by hand.
+Current state as of 2026-06-18:
 
-### One-time setup
+- R2 bucket: `wss-backups`
+- Dokploy destination: `Cloudflare R2 - wss-backups`
+- Endpoint: `https://2f53f880d2dd5bf1dc904eabb154f2a7.r2.cloudflarestorage.com`
+- Region: `auto`
+- Schedule: root crontab runs `/opt/backup.sh` daily at `02:00 UTC`
+- Retention: delete R2 objects older than 14 days
+- Log: `/var/log/wss-backup.log`
+- Previous script backup: `/opt/backup.sh.bak-codex-20260618-001245`
 
-1. R2 → create or retrieve a dedicated S3 API token (Object Read & Write)
-   scoped to the `wss-backups` bucket. Note the Access Key ID + Secret.
-2. Dokploy → Settings → Destinations → add S3/R2 destination:
-   - name: `Cloudflare R2 - wss-backups`
-   - bucket: `wss-backups`
-   - endpoint: `https://2f53f880d2dd5bf1dc904eabb154f2a7.r2.cloudflarestorage.com`
-   - region: `auto`
-3. Enable nightly backups and keep the latest 14.
-4. Cover every stateful database/volume: Dokploy Postgres/Redis, n8n, Uptime
-   Kuma, PingCRM, Postiz, Cal.com, CAP Media MySQL/MinIO, Mautic, Hermes,
-   OpenOutreach, and ApplyPilot.
-5. Trigger or wait for the first run, then verify an object appears in R2.
+The native Dokploy `backup` and `volume_backup` schedule tables are currently
+empty. All live services are Dokploy compose stacks, so the working backup
+mechanism is the host cron script plus a Dokploy S3 destination row for
+operator visibility.
+
+The script creates database dumps and volume archives before uploading to R2.
+The first full run on 2026-06-18 wrote `r2:wss-backups/2026-06-18/` with 32
+objects totaling about 3.19 GiB.
+
+Covered database dumps:
+
+- Dokploy Postgres
+- Cal.com Postgres
+- PingCRM Postgres
+- Postiz Postgres
+- Postiz Temporal Postgres
+- CAP Media MySQL
+- Mautic MySQL
+
+Covered volumes:
+
+- Dokploy Postgres/Redis
+- n8n
+- Uptime Kuma
+- PingCRM Postgres, avatars, WhatsApp sessions
+- Postiz config, Postgres, Redis, uploads, Temporal Postgres
+- Cal.com Postgres
+- CAP Media MinIO and MySQL
+- Mautic MySQL, config, media files/images
+- Hermes data
+- OpenOutreach data
+- ApplyPilot workspace, home, browser data
 
 ### Restore test
 
@@ -75,56 +100,21 @@ An untested backup is not a backup. Monthly, restore the newest backup into a
 throwaway location/container and sanity-check at least one database table or
 application data directory. Do not restore over production during the test.
 
-### Alternative: restic bundle
+Read-only verification:
 
 ```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-# --- R2 / restic config (store these outside the script in real use) ---
-export AWS_ACCESS_KEY_ID="<r2-access-key>"
-export AWS_SECRET_ACCESS_KEY="<r2-secret>"
-export RESTIC_REPOSITORY="s3:https://2f53f880d2dd5bf1dc904eabb154f2a7.r2.cloudflarestorage.com/wss-backups"
-export RESTIC_PASSWORD="<long-random-passphrase>"   # WITHOUT THIS YOU CANNOT RESTORE
-
-STAGE="$(mktemp -d)"
-trap 'rm -rf "$STAGE"' EXIT
-
-# --- 1. Dump databases (consistent snapshots) ---
-# Dokploy/Swarm container names will differ; resolve with `docker ps`.
-docker exec dokploy-postgres pg_dumpall -U dokploy > "$STAGE/dokploy.sql"
-docker exec calcom-db        pg_dumpall -U calcom   > "$STAGE/calcom.sql"
-# ...repeat for postiz, pingcrm (postgres) and mautic, cap (mysqldump):
-# docker exec <mysql-container> sh -c 'exec mysqldump --all-databases -uroot -p"$MYSQL_ROOT_PASSWORD"' > "$STAGE/<name>.sql"
-
-# --- 2. Back up dumps + non-DB named volumes in one snapshot ---
-# Volumes live at /var/lib/docker/volumes/<name>/_data. Back up app data
-# (uploads, configs, n8n, whatsapp sessions, hermes data) — NOT raw DB volumes
-# (the dumps above are the consistent copy).
-restic backup \
-  "$STAGE" \
-  /var/lib/docker/volumes/services_n8n-data/_data \
-  /var/lib/docker/volumes/postiz_postiz-uploads/_data \
-  /var/lib/docker/volumes/pingcrm-gc2kl3_avatars/_data \
-  /var/lib/docker/volumes/pingcrm-gc2kl3_whatsapp_sessions/_data \
-  /var/lib/docker/volumes/hermes-gateway_hermes-data/_data \
-  --tag nightly
-
-# --- 3. Retention ---
-restic forget --prune \
-  --keep-daily 7 --keep-weekly 4 --keep-monthly 3
+rclone lsf r2:wss-backups/2026-06-18 --recursive
+rclone size r2:wss-backups/2026-06-18
 ```
 
-Cron (nightly at 03:30, with output mailed/logged):
+Dry restore pattern:
 
 ```bash
-# /etc/cron.d/wss-backup
-30 3 * * * root /usr/local/sbin/wss-backup.sh >> /var/log/wss-backup.log 2>&1
+mkdir -p /tmp/wss-restore-check
+rclone copy r2:wss-backups/2026-06-18/databases/dokploy-postgres-2026-06-18.sql.gz /tmp/wss-restore-check/
+gzip -t /tmp/wss-restore-check/dokploy-postgres-2026-06-18.sql.gz
+gzip -cd /tmp/wss-restore-check/dokploy-postgres-2026-06-18.sql.gz | sed -n '1,20p'
 ```
-
-Use this only if Dokploy's built-in backup system is insufficient. It is more
-flexible, but it also adds a custom script and a separate restore password to
-protect.
 
 Also enable **provider-level daily snapshots** in the Hetzner console for a
 cheap whole-box rollback, independent of app backups.
@@ -135,8 +125,8 @@ cheap whole-box rollback, independent of app backups.
 
 Verify before each deletion; these are destructive.
 
-- [ ] **`wescalestartups-static` Dokploy stack** — remove *after* the Pages DNS
-      cutover (see `deployment.md`) is verified.
+- [ ] **`wescalestartups-static` Dokploy stack** — remove after the Pages DNS
+      cutover has stayed stable long enough to no longer need a Hetzner fallback.
 - [ ] **`Cap` stack** (cap.wescalestartups.com, 500 since creation) — see §4.
 - [ ] **`calcom-calcom-migrate-1`** — exited one-shot migration container.
 - [ ] **Dokploy API keys** — live enabled keys were `claudecowork`,

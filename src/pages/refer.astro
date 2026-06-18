@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/refer";
+
+// Low-friction gift to send a founder: the free diagnostic.
+const shareTarget = `${siteConfig.siteUrl}/learning-latency-scorecard`;
+const shareUrl = `${shareTarget}?utm_source=referral&utm_medium=share&utm_campaign=refer-a-friend`;
+const shareText =
+  "Most startups don't have a traffic problem — they have a learning latency problem. This free 5-minute diagnostic finds where your growth system is slowest:";
+
+const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+const whatsappHref = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
+const emailHref = `mailto:?subject=${encodeURIComponent(
+  "A 5-minute growth diagnostic worth trying"
+)}&body=${encodeURIComponent(`${shareText}\n\n${shareUrl}\n\n— sent via We Scale Startups`)}`;
+const introMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
+  "Founder intro / referral"
+)}&body=${encodeURIComponent(
+  "Hi Daniel,\n\nI think you should talk to:\n\nName:\nCompany:\nWhy they'd benefit:\n\n(Happy for you to mention I sent you.)"
+)}`;
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Refer a founder", path }
+  ])
+];
+---
+
+<BaseLayout
+  title="Refer a founder | We Scale Startups"
+  description="Know a founder whose growth feels busy but inconsistent? Send them the free Learning Latency Score, or introduce them directly — and help them find their bottleneck."
+  path={path}
+  schema={schema}
+  lastUpdated={siteConfig.lastUpdated}
+>
+  <section class="page-hero" aria-labelledby="refer-title">
+    <div class="shell max-w-3xl">
+      <p class="eyebrow">Refer a founder</p>
+      <h1 id="refer-title">Know a founder who's busy but not compounding?</h1>
+      <p class="hero-copy">
+        If a founder you rate is doing all the growth activity and still seeing inconsistent pipeline, the
+        most useful thing you can send them isn't advice — it's a way to find the bottleneck. Share the free
+        Learning Latency Score, or introduce them to us directly.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={introMailto} data-cta="refer-intro">Introduce a founder →</a>
+        <a class="button button-light" href="#share" data-cta="refer-share">Or share the diagnostic</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell max-w-3xl">
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-6">Two ways to refer</h2>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="card p-7">
+          <p class="eyebrow">Highest value</p>
+          <h3 class="text-lg font-bold tracking-[-0.02em] mt-1 mb-2">Introduce them directly</h3>
+          <p class="text-[color:var(--muted)] leading-relaxed mb-5">
+            A warm intro is the best gift for both sides. Send us their name and why they'd benefit — we'll
+            reach out gently, no pitch unless there's a clear fit.
+          </p>
+          <a class="link-arrow" href={introMailto} data-cta="refer-intro-card">Send a warm intro →</a>
+        </div>
+        <div class="card p-7">
+          <p class="eyebrow">Lowest friction</p>
+          <h3 class="text-lg font-bold tracking-[-0.02em] mt-1 mb-2">Send the free diagnostic</h3>
+          <p class="text-[color:var(--muted)] leading-relaxed mb-5">
+            No intro needed. Share the 5-minute Learning Latency Score so they can self-diagnose where their
+            growth system is slowest — and decide for themselves.
+          </p>
+          <a class="link-arrow" href="#share" data-cta="refer-share-card">Get the share links →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="share">
+    <div class="shell max-w-2xl">
+      <p class="eyebrow">Share the diagnostic</p>
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-4">Send the Learning Latency Score</h2>
+      <p class="text-[color:var(--muted)] mb-8">
+        Free, no signup to start, ~5 minutes. They'll get a score out of 30, their growth stage, and the
+        slowest loop to fix first.
+      </p>
+      <div class="card p-7 md:p-8">
+        <div class="flex flex-wrap gap-3">
+          <a class="button button-dark" href={linkedinHref} target="_blank" rel="noopener" data-cta="refer-linkedin">Share on LinkedIn</a>
+          <a class="button button-light" href={xHref} target="_blank" rel="noopener" data-cta="refer-x">Share on X</a>
+          <a class="button button-light" href={whatsappHref} target="_blank" rel="noopener" data-cta="refer-whatsapp">WhatsApp</a>
+          <a class="button button-light" href={emailHref} data-cta="refer-email">Email</a>
+          <button class="button button-light" type="button" id="refer-copy" data-link={shareUrl} data-cta="refer-copy">
+            Copy link
+          </button>
+        </div>
+        <p class="mt-5 text-sm text-[color:var(--muted)] break-all">
+          <span class="font-semibold text-[color:var(--ink)]">Link:</span> {shareUrl}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell max-w-3xl">
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-6">What they get</h2>
+      <ul class="space-y-3 text-[color:var(--muted)] list-disc pl-5">
+        <li>A score out of 30 across six dimensions of their growth loop</li>
+        <li>Their stage — from Random Acts of Growth to a Compounding Growth Loop</li>
+        <li>The slowest loop adding latency between market signal and revenue</li>
+        <li>A focused set of next moves — and the option to <a class="link-arrow" href={siteConfig.bookingUrl}>book a Growth Signal Audit</a></li>
+      </ul>
+      <p class="mt-8 text-[color:var(--muted)]">
+        Prefer to talk first? <a class="link-arrow" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var btn = document.getElementById("refer-copy");
+      if (!btn) return;
+      var original = btn.textContent;
+      btn.addEventListener("click", function () {
+        var link = btn.getAttribute("data-link") || "";
+        var done = function () {
+          btn.textContent = "Copied!";
+          setTimeout(function () {
+            btn.textContent = original;
+          }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(link).then(done, done);
+        } else {
+          var t = document.createElement("textarea");
+          t.value = link;
+          document.body.appendChild(t);
+          t.select();
+          try { document.execCommand("copy"); } catch (e) {}
+          document.body.removeChild(t);
+          done();
+        }
+      });
+    })();
+  </script>
+</BaseLayout>

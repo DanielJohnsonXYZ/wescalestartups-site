@@ -66,6 +66,7 @@ export const GET: APIRoute = async () => {
       "/growth-engine",
       "/ai-growth-systems",
       "/ai-driven-growth",
+      "/learning-latency-scorecard",
       "/fractional-cmo-vs-agency",
       "/fractional-cmo-vs-full-time-cmo",
       "/when-growth-plateaus",

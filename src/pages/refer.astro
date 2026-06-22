@@ -1,27 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig } from "../site";
+import { siteConfig, mauticNewsletter } from "../site";
 
 const path = "/refer";
-
-// Low-friction gift to send a founder: the free diagnostic.
-const shareTarget = `${siteConfig.siteUrl}/learning-latency-scorecard`;
-const shareUrl = `${shareTarget}?utm_source=referral&utm_medium=share&utm_campaign=refer-a-friend`;
-const shareText =
-  "Most startups don't have a traffic problem — they have a learning latency problem. This free 5-minute diagnostic finds where your growth system is slowest:";
-
-const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
-const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-const whatsappHref = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
-const emailHref = `mailto:?subject=${encodeURIComponent(
-  "A 5-minute growth diagnostic worth trying"
-)}&body=${encodeURIComponent(`${shareText}\n\n${shareUrl}\n\n— sent via We Scale Startups`)}`;
-const introMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-  "Founder intro / referral"
-)}&body=${encodeURIComponent(
-  "Hi Daniel,\n\nI think you should talk to:\n\nName:\nCompany:\nWhy they'd benefit:\n\n(Happy for you to mention I sent you.)"
-)}`;
 
 const schema = [
   buildBreadcrumbSchema([
@@ -32,119 +14,324 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Refer a founder | We Scale Startups"
-  description="Know a founder whose growth feels busy but inconsistent? Send them the free Learning Latency Score, or introduce them directly — and help them find their bottleneck."
+  title="Refer a founder — earn £500 | We Scale Startups"
+  description="Know a post-PMF B2B SaaS founder with a pipeline problem? Refer them to We Scale Startups and earn £500 when they sign."
   path={path}
   schema={schema}
   lastUpdated={siteConfig.lastUpdated}
 >
+
+  <!-- HERO -->
   <section class="page-hero" aria-labelledby="refer-title">
     <div class="shell max-w-3xl">
-      <p class="eyebrow">Refer a founder</p>
-      <h1 id="refer-title">Know a founder who's busy but not compounding?</h1>
+      <p class="eyebrow">Referral programme</p>
+      <h1 id="refer-title">Know a founder who needs a <span class="grad">growth system</span>?</h1>
       <p class="hero-copy">
-        If a founder you rate is doing all the growth activity and still seeing inconsistent pipeline, the
-        most useful thing you can send them isn't advice — it's a way to find the bottleneck. Share the free
-        Learning Latency Score, or introduce them to us directly.
+        If you know a post-PMF B2B SaaS or AI founder with a pipeline problem,
+        introduce them to We Scale Startups.
+        <strong>We'll pay you £500 when they sign.</strong>
       </p>
       <div class="hero-actions">
-        <a class="button button-brand" href={introMailto} data-cta="refer-intro">Introduce a founder →</a>
-        <a class="button button-light" href="#share" data-cta="refer-share">Or share the diagnostic</a>
+        <a class="button button-brand" href="#refer-form" data-cta="refer-hero-cta">Make a referral →</a>
+        <a class="button button-light" href="#how-it-works" data-cta="refer-hero-how">How it works</a>
       </div>
     </div>
   </section>
 
+  <!-- REWARD STATS -->
   <section class="section">
     <div class="shell max-w-3xl">
-      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-6">Two ways to refer</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="card p-7 text-center">
+          <p class="text-4xl font-bold tracking-[-0.04em] text-[color:var(--accent)]">£500</p>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Flat referral reward, any engagement tier</p>
+        </div>
+        <div class="card p-7 text-center">
+          <p class="text-4xl font-bold tracking-[-0.04em] text-[color:var(--ink)]">14 days</p>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Paid after the founder's first invoice</p>
+        </div>
+        <div class="card p-7 text-center">
+          <p class="text-4xl font-bold tracking-[-0.04em] text-[color:var(--ink)]">No limit</p>
+          <p class="mt-2 text-sm text-[color:var(--muted)]">Refer as many founders as you like</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-alt" id="how-it-works">
+    <div class="shell max-w-3xl">
+      <p class="eyebrow">§ 01 · How it works</p>
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-8">Three steps, zero friction.</h2>
+      <div class="space-y-0 divide-y divide-[color:var(--line)]">
+        <div class="flex gap-6 py-7">
+          <div class="w-9 h-9 shrink-0 rounded-full border border-[color:var(--line)] flex items-center justify-center text-sm font-semibold text-[color:var(--muted)] mt-1">1</div>
+          <div>
+            <h3 class="font-bold text-lg tracking-[-0.02em] mb-1">Submit the form below</h3>
+            <p class="text-[color:var(--muted)] leading-relaxed">Tell us who you're referring and why you think they're a good fit. A name and a line of context is enough — we'll take it from there.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 py-7">
+          <div class="w-9 h-9 shrink-0 rounded-full border border-[color:var(--line)] flex items-center justify-center text-sm font-semibold text-[color:var(--muted)] mt-1">2</div>
+          <div>
+            <h3 class="font-bold text-lg tracking-[-0.02em] mb-1">We reach out within 48 hours</h3>
+            <p class="text-[color:var(--muted)] leading-relaxed">Daniel contacts the founder directly for a <strong>20-minute growth diagnostic call</strong>. No hard sell — just an honest look at their constraint.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 py-7">
+          <div class="w-9 h-9 shrink-0 rounded-full border border-[color:var(--line)] flex items-center justify-center text-sm font-semibold text-[color:var(--muted)] mt-1">3</div>
+          <div>
+            <h3 class="font-bold text-lg tracking-[-0.02em] mb-1">You get paid £500</h3>
+            <p class="text-[color:var(--muted)] leading-relaxed">When the founder signs any WSS engagement, we pay your <strong>£500 referral fee via bank transfer</strong> within 14 days of their first invoice.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO CAN REFER -->
+  <section class="section">
+    <div class="shell max-w-3xl">
+      <p class="eyebrow">§ 02 · Who can refer</p>
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-8">This works for anyone in the startup ecosystem.</h2>
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="card p-7">
-          <p class="eyebrow">Highest value</p>
-          <h3 class="text-lg font-bold tracking-[-0.02em] mt-1 mb-2">Introduce them directly</h3>
-          <p class="text-[color:var(--muted)] leading-relaxed mb-5">
-            A warm intro is the best gift for both sides. Send us their name and why they'd benefit — we'll
-            reach out gently, no pitch unless there's a clear fit.
-          </p>
-          <a class="link-arrow" href={introMailto} data-cta="refer-intro-card">Send a warm intro →</a>
+          <p class="text-2xl mb-3">🚀</p>
+          <h3 class="font-bold text-base tracking-[-0.01em] mb-2">Existing WSS clients</h3>
+          <p class="text-[color:var(--muted)] text-sm leading-relaxed">You've seen the system work. If you know another founder with the same growth problem, send them over.</p>
         </div>
         <div class="card p-7">
-          <p class="eyebrow">Lowest friction</p>
-          <h3 class="text-lg font-bold tracking-[-0.02em] mt-1 mb-2">Send the free diagnostic</h3>
-          <p class="text-[color:var(--muted)] leading-relaxed mb-5">
-            No intro needed. Share the 5-minute Learning Latency Score so they can self-diagnose where their
-            growth system is slowest — and decide for themselves.
-          </p>
-          <a class="link-arrow" href="#share" data-cta="refer-share-card">Get the share links →</a>
+          <p class="text-2xl mb-3">🤝</p>
+          <h3 class="font-bold text-base tracking-[-0.01em] mb-2">Advisors &amp; angels</h3>
+          <p class="text-[color:var(--muted)] text-sm leading-relaxed">Portfolio founders stuck on pipeline and still doing everything themselves — this is the call they need.</p>
+        </div>
+        <div class="card p-7">
+          <p class="text-2xl mb-3">🏦</p>
+          <h3 class="font-bold text-base tracking-[-0.01em] mb-2">VCs &amp; investors</h3>
+          <p class="text-[color:var(--muted)] text-sm leading-relaxed">Post-PMF SaaS companies in your portfolio where the product works but pipeline is still founder-dependent.</p>
+        </div>
+        <div class="card p-7">
+          <p class="text-2xl mb-3">🎙️</p>
+          <h3 class="font-bold text-base tracking-[-0.01em] mb-2">Podcast listeners &amp; followers</h3>
+          <p class="text-[color:var(--muted)] text-sm leading-relaxed">If you've consumed the content and know someone who fits — founders doing £1–10M ARR — you're qualified to refer.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-alt" id="share">
+  <!-- FORM -->
+  <section class="section section-alt" id="refer-form">
     <div class="shell max-w-2xl">
-      <p class="eyebrow">Share the diagnostic</p>
-      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-4">Send the Learning Latency Score</h2>
-      <p class="text-[color:var(--muted)] mb-8">
-        Free, no signup to start, ~5 minutes. They'll get a score out of 30, their growth stage, and the
-        slowest loop to fix first.
-      </p>
-      <div class="card p-7 md:p-8">
-        <div class="flex flex-wrap gap-3">
-          <a class="button button-dark" href={linkedinHref} target="_blank" rel="noopener" data-cta="refer-linkedin">Share on LinkedIn</a>
-          <a class="button button-light" href={xHref} target="_blank" rel="noopener" data-cta="refer-x">Share on X</a>
-          <a class="button button-light" href={whatsappHref} target="_blank" rel="noopener" data-cta="refer-whatsapp">WhatsApp</a>
-          <a class="button button-light" href={emailHref} data-cta="refer-email">Email</a>
-          <button class="button button-light" type="button" id="refer-copy" data-link={shareUrl} data-cta="refer-copy">
-            Copy link
-          </button>
+      <p class="eyebrow">§ 03 · Make your referral</p>
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-2">Send us the intro.</h2>
+      <p class="text-[color:var(--muted)] mb-8">Takes about 2 minutes. We'll confirm receipt by email.</p>
+
+      <form class="card p-8 md:p-10 space-y-5" id="referral-form" name="referral-form" novalidate>
+
+        <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)]">Your details</p>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Your name <span class="text-[color:var(--accent)]">*</span></span>
+            <input type="text" name="your_name" required placeholder="Jane Smith"
+              class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Your email <span class="text-[color:var(--accent)]">*</span></span>
+            <input type="email" name="your_email" required placeholder="jane@example.com"
+              class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none" />
+          </label>
         </div>
-        <p class="mt-5 text-sm text-[color:var(--muted)] break-all">
-          <span class="font-semibold text-[color:var(--ink)]">Link:</span> {shareUrl}
-        </p>
-      </div>
+
+        <label class="block">
+          <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Your relationship to WSS</span>
+          <select name="your_role"
+            class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none">
+            <option value="" disabled selected>Select one…</option>
+            <option value="client">Current or past client</option>
+            <option value="advisor">Advisor / angel investor</option>
+            <option value="vc">VC / fund</option>
+            <option value="podcast">Podcast listener / follower</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+
+        <hr class="border-[color:var(--line)]" />
+
+        <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)]">Founder you're referring</p>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Founder's name <span class="text-[color:var(--accent)]">*</span></span>
+            <input type="text" name="founder_name" required placeholder="Alex Jones"
+              class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Founder's email <span class="text-[color:var(--accent)]">*</span></span>
+            <input type="email" name="founder_email" required placeholder="alex@theirstartup.com"
+              class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none" />
+          </label>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Company</span>
+            <input type="text" name="company" placeholder="Their Startup Ltd"
+              class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Approx. ARR stage</span>
+            <select name="stage"
+              class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none">
+              <option value="" disabled selected>Select one…</option>
+              <option value="sub-1m">Under £1M ARR</option>
+              <option value="1-5m">£1M–£5M ARR</option>
+              <option value="5-10m">£5M–£10M ARR</option>
+              <option value="10m+">£10M+ ARR</option>
+              <option value="unknown">Not sure</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="block">
+          <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">Why are you referring them? <span class="font-normal normal-case tracking-normal">(optional but helpful)</span></span>
+          <textarea name="context" rows="4" placeholder="e.g. They're post-PMF, pipeline depends on the founder, single paid channel, looking for senior growth support…"
+            class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"></textarea>
+        </label>
+
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <p class="text-sm text-[color:var(--muted)]">We'll confirm receipt within 24 hours.<br/>Reward paid 14 days after the founder's first invoice.</p>
+          <button class="button button-brand" type="submit" id="refer-submit">Submit referral →</button>
+        </div>
+
+        <div id="refer-fallback" role="status" class="hidden"></div>
+      </form>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section class="section">
     <div class="shell max-w-3xl">
-      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-6">What they get</h2>
-      <ul class="space-y-3 text-[color:var(--muted)] list-disc pl-5">
-        <li>A score out of 30 across six dimensions of their growth loop</li>
-        <li>Their stage — from Random Acts of Growth to a Compounding Growth Loop</li>
-        <li>The slowest loop adding latency between market signal and revenue</li>
-        <li>A focused set of next moves — and the option to <a class="link-arrow" href={siteConfig.bookingUrl}>book a Growth Signal Audit</a></li>
-      </ul>
-      <p class="mt-8 text-[color:var(--muted)]">
-        Prefer to talk first? <a class="link-arrow" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
-      </p>
+      <p class="eyebrow">§ 04 · Questions</p>
+      <h2 class="text-2xl font-bold tracking-[-0.04em] mb-8">A few things people usually ask.</h2>
+      <div class="space-y-0 divide-y divide-[color:var(--line)] border-t border-[color:var(--line)]">
+        {[
+          {
+            q: "Does the founder need to know I'm referring them?",
+            a: "Yes — a warm intro always converts better than a cold one. We recommend giving them a heads-up before you submit. If you'd prefer a blind referral, note that in the context field and we'll handle it carefully."
+          },
+          {
+            q: "Which engagements qualify?",
+            a: "Any paid WSS engagement counts — Growth Diagnosis (£4k), 90-Day Sprint (£15k), Acquisition System Build (£30k), or Fractional CMO (£8k/mo). The £500 reward is fixed regardless of engagement size."
+          },
+          {
+            q: "How long is the referral window?",
+            a: "If the founder you refer signs within 12 months of your submission, you're eligible for the reward. If they come back after a gap, just re-submit to refresh the attribution."
+          },
+          {
+            q: "Is there a limit to how many referrals I can make?",
+            a: "No limit. Refer as many qualified founders as you like — £500 per conversion, every time."
+          },
+          {
+            q: "What if the founder isn't a good fit?",
+            a: "No problem — Daniel will give them an honest read on the call. If they're pre-PMF or not ready, we'll say so and point them somewhere useful. You won't be penalised for referring someone who turns out not to be the right fit."
+          }
+        ].map(({ q, a }) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold text-base list-none [&::-webkit-details-marker]:hidden">
+              {q}
+              <span class="shrink-0 text-lg text-[color:var(--muted)] transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-[color:var(--muted)] leading-relaxed text-sm">{a}</p>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
-  <script is:inline>
-    (function () {
-      var btn = document.getElementById("refer-copy");
-      if (!btn) return;
-      var original = btn.textContent;
-      btn.addEventListener("click", function () {
-        var link = btn.getAttribute("data-link") || "";
-        var done = function () {
-          btn.textContent = "Copied!";
-          setTimeout(function () {
-            btn.textContent = original;
-          }, 1800);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(link).then(done, done);
-        } else {
-          var t = document.createElement("textarea");
-          t.value = link;
-          document.body.appendChild(t);
-          t.select();
-          try { document.execCommand("copy"); } catch (e) {}
-          document.body.removeChild(t);
-          done();
-        }
-      });
-    })();
-  </script>
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Questions first?</p>
+        <h2>Book a 20-minute call with Daniel.</h2>
+        <p>Happy to answer questions about fit, the process, or what happens after you refer someone.</p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="refer-book"
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={`mailto:${siteConfig.email}?subject=Referral%20programme%20question`} data-cta="refer-email">
+          Or, email {siteConfig.email} →
+        </a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
+  const form = document.getElementById("referral-form");
+  const fallback = document.getElementById("refer-fallback");
+
+  form?.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const data = new FormData(form);
+
+    const yourName     = (data.get("your_name")     || "").toString().trim();
+    const yourEmail    = (data.get("your_email")    || "").toString().trim();
+    const yourRole     = (data.get("your_role")     || "").toString().trim();
+    const founderName  = (data.get("founder_name")  || "").toString().trim();
+    const founderEmail = (data.get("founder_email") || "").toString().trim();
+    const company      = (data.get("company")       || "").toString().trim();
+    const stage        = (data.get("stage")         || "").toString().trim();
+    const context      = (data.get("context")       || "").toString().trim();
+
+    const subject = "Founder referral: " + founderName + (company ? " (" + company + ")" : "");
+    const body = [
+      "Referred by: " + yourName + " <" + yourEmail + ">" + (yourRole ? " — " + yourRole : ""),
+      "",
+      "Founder: " + founderName + " <" + founderEmail + ">",
+      "Company: " + (company || "—"),
+      "ARR stage: " + (stage || "—"),
+      "",
+      "Context:",
+      context || "(none provided)"
+    ].join("\n");
+
+    try {
+      if (yourEmail) {
+        fetch(mauticUrl, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            "mauticform[formId]": mauticFormId,
+            "mauticform[email]": yourEmail,
+            "mauticform[source_type]": "referral-form",
+            "mauticform[source_page]": window.location.href,
+            "mauticform[lead_magnet]": "referral-programme"
+          }).toString()
+        }).catch(function () {});
+      }
+    } catch (_) {}
+
+    window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+
+    if (fallback) {
+      fallback.classList.remove("hidden");
+      fallback.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
+      fallback.innerHTML = "Your email draft should have opened. If it didn't, email <a href=\"mailto:" + email + "\">" + email + "</a> directly.";
+    }
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(subject + "\n\n" + body).catch(function () {});
+    }
+  });
+</script>

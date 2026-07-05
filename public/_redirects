@@ -35,7 +35,34 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /about-us/ /about 301
 /how-we-work /how-it-works 301
 /how-we-work/ /how-it-works 301
-/portfolio/greenscreen /case-studies 301
-/portfolio/greenscreen/ /case-studies 301
 /team/rahul-van-manen /about 301
 /team/rahul-van-manen/ /about 301
+
+# Legacy portfolio URLs (old WordPress) → case studies. Specific slugs first, catch-all last.
+/portfolio/greenscreen /case-studies 301
+/portfolio/greenscreen/ /case-studies 301
+/portfolio/equoo /case-studies/equoo 301
+/portfolio/equoo/ /case-studies/equoo 301
+/portfolio/nevly /case-studies/nevly 301
+/portfolio/nevly/ /case-studies/nevly 301
+/portfolio/ned /case-studies/ned 301
+/portfolio/ned/ /case-studies/ned 301
+/portfolio/lessonsup /case-studies/lessonsup 301
+/portfolio/lessonsup/ /case-studies/lessonsup 301
+/portfolio/* /case-studies 301
+
+# Legacy pricing + ad landing pages
+/pricing-plans /pricing 301
+/pricing-plans/ /pricing 301
+/google-ads /services/acquisition-system-build 301
+/google-ads/ /services/acquisition-system-build 301
+/meta-ads /services/acquisition-system-build 301
+/meta-ads/ /services/acquisition-system-build 301
+
+# Legacy blog → insights hub
+/blog /insights 301
+/blog/* /insights 301
+
+# Legacy VC-marketing guide → insights hub
+/the-ultimate-guide-to-venture-capital-marketing-for-startups /insights 301
+/the-ultimate-guide-to-venture-capital-marketing-for-startups/ /insights 301

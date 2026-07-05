@@ -35,9 +35,17 @@ export async function onRequest(context) {
   }
 
   // Junk / legacy e-commerce paths from old index — 410 so crawlers drop them (not soft-404 to home).
+  // Also flush dead WordPress theme artifacts (Bing crawl lists these as 301/302/404 noise).
   if (
     /^\/item\/[0-9]+\/?$/.test(path) ||
-    /^\/wheel-arch-|^\/loungefly-/i.test(path)
+    /^\/wheel-arch-|^\/loungefly-/i.test(path) ||
+    /^\/dslc_hf\//.test(path) ||
+    /^\/staff\//.test(path) ||
+    /^\/project\//.test(path) ||
+    /^\/partner-view\//.test(path) ||
+    /^\/wp-content\//.test(path) ||
+    /^\/wp-admin\//.test(path) ||
+    /^\/wp-includes\//.test(path)
   ) {
     return new Response(null, { status: 410, statusText: "Gone" });
   }
@@ -91,14 +99,43 @@ export async function onRequest(context) {
     "/about-us/": "/about",
     "/how-we-work": "/how-it-works",
     "/how-we-work/": "/how-it-works",
+    "/team/rahul-van-manen": "/about",
+    "/team/rahul-van-manen/": "/about",
+    // Legacy portfolio slugs (old WordPress) → matching case studies
     "/portfolio/greenscreen": "/case-studies",
     "/portfolio/greenscreen/": "/case-studies",
-    "/team/rahul-van-manen": "/about",
-    "/team/rahul-van-manen/": "/about"
+    "/portfolio/equoo": "/case-studies/equoo",
+    "/portfolio/equoo/": "/case-studies/equoo",
+    "/portfolio/nevly": "/case-studies/nevly",
+    "/portfolio/nevly/": "/case-studies/nevly",
+    "/portfolio/ned": "/case-studies/ned",
+    "/portfolio/ned/": "/case-studies/ned",
+    "/portfolio/lessonsup": "/case-studies/lessonsup",
+    "/portfolio/lessonsup/": "/case-studies/lessonsup",
+    // Legacy pricing + ad landing pages
+    "/pricing-plans": "/pricing",
+    "/pricing-plans/": "/pricing",
+    "/google-ads": "/services/acquisition-system-build",
+    "/google-ads/": "/services/acquisition-system-build",
+    "/meta-ads": "/services/acquisition-system-build",
+    "/meta-ads/": "/services/acquisition-system-build",
+    // Legacy VC-marketing guide
+    "/the-ultimate-guide-to-venture-capital-marketing-for-startups": "/insights",
+    "/the-ultimate-guide-to-venture-capital-marketing-for-startups/": "/insights"
   };
 
   if (legacyRedirects[path]) {
     url.pathname = legacyRedirects[path];
+    return Response.redirect(url.toString(), 301);
+  }
+
+  // Prefix-based legacy redirects (any remaining old portfolio or blog URL).
+  if (/^\/portfolio\//.test(path)) {
+    url.pathname = "/case-studies";
+    return Response.redirect(url.toString(), 301);
+  }
+  if (path === "/blog" || /^\/blog\//.test(path)) {
+    url.pathname = "/insights";
     return Response.redirect(url.toString(), 301);
   }
 

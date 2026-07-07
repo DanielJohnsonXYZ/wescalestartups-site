@@ -157,6 +157,39 @@ const bookSchema = [
 
   <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
+  <!-- Track the actual booking conversion from the inline Calendly widget. A link-click event
+       cannot see a booking completed inside the Calendly iframe, so listen for Calendly's
+       postMessage events and push them to the dataLayer. Mark `booking_completed` as a GA4 key event. -->
+  <script is:inline>
+    (function () {
+      function isCalendlyEvent(e) {
+        return (
+          e.origin === "https://calendly.com" &&
+          e.data &&
+          typeof e.data.event === "string" &&
+          e.data.event.indexOf("calendly.") === 0
+        );
+      }
+      window.addEventListener("message", function (e) {
+        if (!isCalendlyEvent(e)) return;
+        window.dataLayer = window.dataLayer || [];
+        if (e.data.event === "calendly.event_scheduled") {
+          window.dataLayer.push({
+            event: "booking_completed",
+            booking_source: "calendly_inline",
+            page_path: window.location.pathname
+          });
+        } else if (e.data.event === "calendly.date_and_time_selected") {
+          window.dataLayer.push({
+            event: "booking_time_selected",
+            booking_source: "calendly_inline",
+            page_path: window.location.pathname
+          });
+        }
+      });
+    })();
+  </script>
+
   <section class="section">
     <div class="shell">
       <p class="eyebrow">FAQ</p>

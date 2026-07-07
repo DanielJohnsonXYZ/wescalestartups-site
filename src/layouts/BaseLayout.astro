@@ -84,7 +84,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); cta_click, calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download. Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
+    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); cta_click, calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download. Booking (inline Calendly on /book): booking_time_selected, booking_completed (mark booking_completed as a GA4 key event — this is the true call conversion). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
     <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
     <script is:inline set:html={gtmScript} />
     <!-- End Google Tag Manager -->

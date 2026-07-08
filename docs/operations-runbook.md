@@ -157,7 +157,61 @@ Cap until the owner chooses one of these paths:
 
 ---
 
-## 5. Other standing recommendations
+## 5. OpenOutreach
+
+OpenOutreach (`github.com/eracle/OpenOutreach`) is a self-hosted, Dockerized
+Django app for AI-driven B2B lead-gen: it drives a real browser over **VNC**
+(Playwright) to run LinkedIn discovery/outreach, with an optional SMTP email
+channel. It runs as a Dokploy compose stack on the box. Its state lives in a
+single data volume (SQLite at `data/db.sqlite3`), already captured by the R2
+backup as "OpenOutreach data" (§2).
+
+Because it embeds a browser logged into a LinkedIn account and a Django admin,
+the **exposure surface is the main thing to get right** on a public host.
+
+### Setup / health checklist
+
+Run from an operator machine with SSH to the box (CI agents cannot reach it).
+
+- [ ] **Stack is up.** `docker ps | grep -i openoutreach` shows a running,
+      non-restarting container.
+- [ ] **Data volume is mounted and matches the backup.** Confirm the volume the
+      stack mounts (the container's `data/`) is the same one the backup script
+      archives as "OpenOutreach data". A backup of the wrong/empty volume is
+      worse than none. Verify a recent object exists:
+      `rclone lsf r2:wss-backups/<latest-date>/volumes | grep -i openoutreach`.
+- [ ] **VNC and admin are NOT publicly reachable.** The container exposes VNC
+      (`5900`, `6080`) and Django admin (`8000`). Unauthenticated VNC on a public
+      IP = full remote control of a browser session that is signed into LinkedIn.
+      Check what is actually bound to the public interface:
+      `ss -tlnp | grep -E '5900|6080|8000'` — these should be bound to
+      `127.0.0.1`/Tailscale only, or fronted by Traefik with auth, never `0.0.0.0`.
+      Cross-check against the Hetzner Cloud Firewall (§1): only 22/80/443 inbound.
+- [ ] **Image tag is pinned.** §3 flags `openoutreach` as still on floating
+      `:latest`. Pin to a specific `ghcr.io/eracle/openoutreach` digest so a
+      redeploy can't silently pull a breaking image.
+- [ ] **Secrets are set in Dokploy env, not committed anywhere.** Required:
+      LinkedIn account credentials and an LLM API key (OpenAI/Anthropic). Optional
+      (email channel): BetterContact email-finder key and SMTP mailbox creds.
+- [ ] **LinkedIn session is healthy.** Via the (private) VNC view, confirm the
+      session is logged in and not sitting on a checkpoint/challenge — a blocked
+      session silently stalls all outreach.
+- [ ] **If the SMTP channel is enabled: sending domain is warmed and
+      authenticated.** SPF, DKIM, and DMARC on the sending domain, with
+      conservative daily pacing caps. Cold volume from an unauthenticated domain
+      burns both the domain and the LinkedIn account.
+
+### Known-good vs. gaps (as of this review)
+
+- ✅ Data volume is in the R2 backup set (§2).
+- ❌ Still on a floating `:latest` tag (§3) — pin it.
+- ⚠️ VNC/admin exposure, secret storage, and (if used) email deliverability are
+  not yet recorded here; verify them against the checklist above and note the
+  results so the next operator isn't guessing.
+
+---
+
+## 6. Other standing recommendations
 
 - **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
   disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should

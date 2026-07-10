@@ -56,9 +56,9 @@ const {
   breadcrumbItems,
   showSiteHeader = true,
   bodyClass = "",
-  announcementText = `New resource: ${siteConfig.scorecardName}. ${siteConfig.scorecardTagline}`,
+  announcementText = `New: the ${siteConfig.scorecardName}. Find your growth constraint in 5 minutes.`,
   announcementHref = siteConfig.scorecardUrl,
-  announcementLinkText = `${siteConfig.scorecardLabel} →`,
+  announcementLinkText = "Take the scorecard →",
   announcementDismissible = true,
   announcementVariant = "brand",
   announcementPill
@@ -230,7 +230,6 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
-    {showSiteHeader && <SiteHeader currentPath={currentPath} />}
     <AnnouncementBanner
       text={announcementText}
       href={announcementHref}
@@ -239,6 +238,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
       variant={announcementVariant}
       pill={announcementPill}
     />
+    {showSiteHeader && <SiteHeader currentPath={currentPath} />}
     <main id="main-content">
       {
         breadcrumbItems && breadcrumbItems.length > 0 && (

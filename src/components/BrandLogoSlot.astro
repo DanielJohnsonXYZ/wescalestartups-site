@@ -1,7 +1,7 @@
 ---
 /**
  * Accessible placeholder when an official partner logo file is not yet approved in-repo.
- * Does not reproduce trademark artwork — label + “pending” treatment only.
+ * Does not reproduce trademark artwork, label + “pending” treatment only.
  */
 interface Props {
   label: string;
@@ -9,7 +9,7 @@ interface Props {
   class?: string;
 }
 const { label, href, class: className = "" } = Astro.props;
-const aria = `${label} logo — official brand asset not yet in press kit`;
+const aria = `${label} logo, official brand asset not yet in press kit`;
 ---
 
 {

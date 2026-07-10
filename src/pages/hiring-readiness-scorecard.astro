@@ -9,17 +9,17 @@ const faqs = [
   {
     question: "How is this different from just posting a job description?",
     answer:
-      "A job description describes who you want. This scorecard tells you whether the company is ready to receive them. Most failed marketing hires aren't a hiring mistake — they're a readiness mistake."
+      "A job description describes who you want. This scorecard tells you whether the company is ready to receive them. Most failed marketing hires aren't a hiring mistake, they're a readiness mistake."
   },
   {
     question: "What if I score in the middle zone?",
     answer:
-      "A middle score usually means some GTM foundations are in place but the gaps are structural — unclear ICP, weak proof, no weekly rhythm. A fractional CMO can fill those gaps in 90–120 days and set the hire up to succeed."
+      "A middle score usually means some GTM foundations are in place but the gaps are structural, unclear ICP, weak proof, no weekly rhythm. A fractional CMO can fill those gaps in 90–120 days and set the hire up to succeed."
   },
   {
     question: "Can WSS help us prepare before we hire?",
     answer:
-      "Yes. Role definition, GTM foundations, positioning clarity, proof systems, and weekly rhythm are all within scope. We can make you ready — then help you hire into a real brief."
+      "Yes. Role definition, GTM foundations, positioning clarity, proof systems, and weekly rhythm are all within scope. We can make you ready, then help you hire into a real brief."
   }
 ];
 
@@ -34,110 +34,110 @@ const schema = [
 const questions = [
   {
     dimension: "ICP Clarity",
-    q: "Can your team describe your ideal customer in one sentence — industry, size, role, and pain — without the founder's help?",
+    q: "Can your team describe your ideal customer in one sentence, industry, size, role, and pain, without the founder's help?",
     options: [
-      { text: "Yes — it's written down, shared, and consistent across the team.", sub: "Everyone uses the same language.", score: 2 },
-      { text: "Roughly — but it varies by team member or context.", sub: "The founder often clarifies it.", score: 1 },
-      { text: "No — it's vague or still evolving.", sub: "Most answers sound different.", score: 0 }
+      { text: "Yes, it's written down, shared, and consistent across the team.", sub: "Everyone uses the same language.", score: 2 },
+      { text: "Roughly, but it varies by team member or context.", sub: "The founder often clarifies it.", score: 1 },
+      { text: "No, it's vague or still evolving.", sub: "Most answers sound different.", score: 0 }
     ]
   },
   {
     dimension: "Positioning Clarity",
-    q: "Does your website explain who you serve, what problem you solve, and why now — in language your buyers actually use?",
+    q: "Does your website explain who you serve, what problem you solve, and why now, in language your buyers actually use?",
     options: [
-      { text: "Yes — buyers have confirmed it reflects their language and pain.", sub: "We've tested this with real customers.", score: 2 },
-      { text: "Somewhat — it's directionally right but a bit generic.", sub: "We haven't formally tested it.", score: 1 },
-      { text: "No — it sounds like most SaaS sites or is still founder-drafted.", sub: "Buyers often need extra explanation.", score: 0 }
+      { text: "Yes, buyers have confirmed it reflects their language and pain.", sub: "We've tested this with real customers.", score: 2 },
+      { text: "Somewhat, it's directionally right but a bit generic.", sub: "We haven't formally tested it.", score: 1 },
+      { text: "No, it sounds like most SaaS sites or is still founder-drafted.", sub: "Buyers often need extra explanation.", score: 0 }
     ]
   },
   {
     dimension: "Founder Sales Narrative",
     q: "Has the founder's key sales story, objection-handling, and buyer language been written down and successfully used by others?",
     options: [
-      { text: "Yes — it's documented and others are using it effectively.", sub: "AEs or SDRs don't need the founder on calls.", score: 2 },
-      { text: "Partially — some of it is captured but the founder still holds the best version.", sub: "The founder is still the best closer.", score: 1 },
-      { text: "No — it's entirely in the founder's head and has never been fully extracted.", sub: "Deals usually need founder involvement.", score: 0 }
+      { text: "Yes, it's documented and others are using it effectively.", sub: "AEs or SDRs don't need the founder on calls.", score: 2 },
+      { text: "Partially, some of it is captured but the founder still holds the best version.", sub: "The founder is still the best closer.", score: 1 },
+      { text: "No, it's entirely in the founder's head and has never been fully extracted.", sub: "Deals usually need founder involvement.", score: 0 }
     ]
   },
   {
     dimension: "Proof Strength",
     q: "Do you have 3 or more case studies or testimonials with specific, verifiable outcomes for your exact ICP?",
     options: [
-      { text: "Yes — specific results, named customers, and quantified outcomes.", sub: "Revenue impact, time saved, or conversion uplift stated.", score: 2 },
-      { text: "1–2 references — but they're vague or from adjacent segments.", sub: "Directional proof, not precise.", score: 1 },
-      { text: "Minimal or none — we're still building proof.", sub: "Or proof exists but isn't packaged.", score: 0 }
+      { text: "Yes, specific results, named customers, and quantified outcomes.", sub: "Revenue impact, time saved, or conversion uplift stated.", score: 2 },
+      { text: "1–2 references, but they're vague or from adjacent segments.", sub: "Directional proof, not precise.", score: 1 },
+      { text: "Minimal or none, we're still building proof.", sub: "Or proof exists but isn't packaged.", score: 0 }
     ]
   },
   {
     dimension: "Channel Learning",
-    q: "Do you know which one or two acquisition channels have consistently produced your best-fit customers — with data to back it up?",
+    q: "Do you know which one or two acquisition channels have consistently produced your best-fit customers, with data to back it up?",
     options: [
-      { text: "Yes — we know our best channels and can attribute pipeline to them.", sub: "Data exists. Decisions are made from it.", score: 2 },
+      { text: "Yes, we know our best channels and can attribute pipeline to them.", sub: "Data exists. Decisions are made from it.", score: 2 },
       { text: "We have a strong hunch, but attribution is messy.", sub: "Directional confidence, not hard data.", score: 1 },
-      { text: "No clear signal — we've tried several things without a pattern.", sub: "Pipeline source is unclear.", score: 0 }
+      { text: "No clear signal, we've tried several things without a pattern.", sub: "Pipeline source is unclear.", score: 0 }
     ]
   },
   {
     dimension: "CRM and Reporting",
-    q: "Is there a weekly view of pipeline, source, and funnel performance that the team reviews — without the founder prompting it?",
+    q: "Is there a weekly view of pipeline, source, and funnel performance that the team reviews, without the founder prompting it?",
     options: [
-      { text: "Yes — a weekly review runs consistently with clear owners.", sub: "Decisions come out of it.", score: 2 },
-      { text: "Partially — some reporting exists but it's ad hoc or founder-driven.", sub: "No consistent cadence.", score: 1 },
-      { text: "No — there's no regular reporting cadence.", sub: "Pipeline is tracked informally at best.", score: 0 }
+      { text: "Yes, a weekly review runs consistently with clear owners.", sub: "Decisions come out of it.", score: 2 },
+      { text: "Partially, some reporting exists but it's ad hoc or founder-driven.", sub: "No consistent cadence.", score: 1 },
+      { text: "No, there's no regular reporting cadence.", sub: "Pipeline is tracked informally at best.", score: 0 }
     ]
   },
   {
     dimension: "Sales Alignment",
-    q: "Is there a defined sales process — stages, qualification criteria, and handoffs — that the team actually follows?",
+    q: "Is there a defined sales process, stages, qualification criteria, and handoffs, that the team actually follows?",
     options: [
-      { text: "Yes — documented, followed, and reviewed regularly.", sub: "The process doesn't depend on the founder.", score: 2 },
-      { text: "Roughly — there's a loose process that people follow inconsistently.", sub: "Edge cases go back to the founder.", score: 1 },
-      { text: "No — sales is mostly ad hoc or founder-led.", sub: "Every deal is handled differently.", score: 0 }
+      { text: "Yes, documented, followed, and reviewed regularly.", sub: "The process doesn't depend on the founder.", score: 2 },
+      { text: "Roughly, there's a loose process that people follow inconsistently.", sub: "Edge cases go back to the founder.", score: 1 },
+      { text: "No, sales is mostly ad hoc or founder-led.", sub: "Every deal is handled differently.", score: 0 }
     ]
   },
   {
     dimension: "Role Clarity",
-    q: "Have you written a clear brief for the marketing role — including what they own, what success looks like at 90 days, and what they won't do?",
+    q: "Have you written a clear brief for the marketing role, including what they own, what success looks like at 90 days, and what they won't do?",
     options: [
-      { text: "Yes — written, agreed, and stress-tested with a clear 90-day outcome.", sub: "The brief is ready. Scope is defined.", score: 2 },
-      { text: "Draft stage — we know roughly what we want but haven't committed it to paper.", sub: "It would need a few hours to sharpen.", score: 1 },
-      { text: "No — we'd figure out the role once we find the right person.", sub: "The brief doesn't exist yet.", score: 0 }
+      { text: "Yes, written, agreed, and stress-tested with a clear 90-day outcome.", sub: "The brief is ready. Scope is defined.", score: 2 },
+      { text: "Draft stage, we know roughly what we want but haven't committed it to paper.", sub: "It would need a few hours to sharpen.", score: 1 },
+      { text: "No, we'd figure out the role once we find the right person.", sub: "The brief doesn't exist yet.", score: 0 }
     ]
   },
   {
     dimension: "Budget",
-    q: "Do you have a confirmed marketing budget — including salary, execution budget, and tools — that's been stress-tested by the board or finance?",
+    q: "Do you have a confirmed marketing budget, including salary, execution budget, and tools, that's been stress-tested by the board or finance?",
     options: [
-      { text: "Yes — salary and execution budget both confirmed with runway to invest.", sub: "The hire can actually do the job.", score: 2 },
+      { text: "Yes, salary and execution budget both confirmed with runway to invest.", sub: "The hire can actually do the job.", score: 2 },
       { text: "Salary is confirmed, but execution budget is vague or assumed.", sub: "The hire may struggle to get resources.", score: 1 },
-      { text: "Not yet confirmed — we're still figuring out what we can afford.", sub: "Budget may not support the hire.", score: 0 }
+      { text: "Not yet confirmed, we're still figuring out what we can afford.", sub: "Budget may not support the hire.", score: 0 }
     ]
   },
   {
     dimension: "Weekly GTM Rhythm",
-    q: "Is there a weekly growth meeting — with a consistent agenda, clear owner, and decisions coming out of it — running for at least 3 months?",
+    q: "Is there a weekly growth meeting, with a consistent agenda, clear owner, and decisions coming out of it, running for at least 3 months?",
     options: [
-      { text: "Yes — weekly, with agenda, owner, and documented decisions.", sub: "The rhythm is set. Someone could inherit it.", score: 2 },
+      { text: "Yes, weekly, with agenda, owner, and documented decisions.", sub: "The rhythm is set. Someone could inherit it.", score: 2 },
       { text: "Occasional growth conversations, but no consistent weekly rhythm.", sub: "It depends on the founder's availability.", score: 1 },
-      { text: "No regular meeting — growth is discussed reactively.", sub: "Pipeline surprises are common.", score: 0 }
+      { text: "No regular meeting, growth is discussed reactively.", sub: "Pipeline surprises are common.", score: 0 }
     ]
   },
   {
     dimension: "Execution Support",
-    q: "Will the new marketing leader have enough internal support — or budget for external support — to actually execute?",
+    q: "Will the new marketing leader have enough internal support, or budget for external support, to actually execute?",
     options: [
-      { text: "Yes — design, ops, data, and/or agency budget are available.", sub: "The hire won't be fully solo.", score: 2 },
+      { text: "Yes, design, ops, data, and/or agency budget are available.", sub: "The hire won't be fully solo.", score: 2 },
       { text: "Some support exists but it's limited or dependent on other priorities.", sub: "The hire may need to fight for resource.", score: 1 },
-      { text: "No — they'd be a team of one with no external budget.", sub: "Execution depends entirely on them alone.", score: 0 }
+      { text: "No, they'd be a team of one with no external budget.", sub: "Execution depends entirely on them alone.", score: 0 }
     ]
   },
   {
     dimension: "Gap Diagnosis",
-    q: "Do you know specifically what marketing is currently failing at — strategy, execution, leadership, or all three — and why?",
+    q: "Do you know specifically what marketing is currently failing at, strategy, execution, leadership, or all three, and why?",
     options: [
-      { text: "Yes — we know exactly what's missing and can articulate why.", sub: "The brief reflects this diagnosis.", score: 2 },
+      { text: "Yes, we know exactly what's missing and can articulate why.", sub: "The brief reflects this diagnosis.", score: 2 },
       { text: "We have a general sense but it's not precisely diagnosed.", sub: "It's something like 'we need more pipeline'.", score: 1 },
-      { text: "Not sure — we know growth is stalling but don't know the root cause.", sub: "We're hiring to find out.", score: 0 }
+      { text: "Not sure, we know growth is stalling but don't know the root cause.", sub: "We're hiring to find out.", score: 0 }
     ]
   }
 ];
@@ -149,12 +149,12 @@ const results = {
     color: "#22c55e",
     label: "Ready to hire",
     headline: "You're ready to make a strong marketing hire.",
-    summary: "Your GTM foundations are solid enough for a senior marketing leader to land, orient quickly, and execute. The risk now isn't hiring too early — it's hiring at the wrong level or writing a brief that's too vague. Use this moment to define the role sharply, nail the 90-day outcomes, and get the interview process right.",
+    summary: "Your GTM foundations are solid enough for a senior marketing leader to land, orient quickly, and execute. The risk now isn't hiring too early, it's hiring at the wrong level or writing a brief that's too vague. Use this moment to define the role sharply, nail the 90-day outcomes, and get the interview process right.",
     actions: [
       { title: "Define the role precisely", body: "Write a brief with 90-day outcomes, scope boundaries, and decision rights. The better the brief, the better the hire." },
       { title: "Match seniority to the actual job", body: "Don't hire a CMO for a Head of Growth job. Match the level to the decisions they need to make, not the title you want to give." },
       { title: "Set a hiring rhythm", body: "Build a scorecard for candidates. Know the 3 non-negotiables before the first interview." },
-      { title: "Preserve founder involvement in year one", body: "Even a strong hire needs context. Schedule weekly check-ins for the first 90 days — not to supervise, but to transfer knowledge." }
+      { title: "Preserve founder involvement in year one", body: "Even a strong hire needs context. Schedule weekly check-ins for the first 90 days, not to supervise, but to transfer knowledge." }
     ],
     warning: "<strong>What not to do:</strong> Assume the hire will fix positioning, proof, and pipeline alone. Even strong marketers need a clear brief and regular founder context in year one. Don't disappear.",
     cta1: { label: "Book a hiring readiness review →", url: null }
@@ -165,12 +165,12 @@ const results = {
     color: "var(--accent)",
     label: "Fractional leadership first",
     headline: "You need fractional leadership before making a permanent hire.",
-    summary: "Some foundations are in place, but the gaps are structural. A permanent hire would spend 60–90 days figuring out what's missing before they could execute anything. A fractional CMO can diagnose and close those gaps faster — and then hand over to a permanent hire who has a real system to run.",
+    summary: "Some foundations are in place, but the gaps are structural. A permanent hire would spend 60–90 days figuring out what's missing before they could execute anything. A fractional CMO can diagnose and close those gaps faster, and then hand over to a permanent hire who has a real system to run.",
     actions: [
       { title: "Identify the top 2–3 gaps", body: "ICP clarity, positioning, proof, or rhythm? Focus fractional time on the gaps that will block the permanent hire most." },
-      { title: "Use fractional to build the brief", body: "A good fractional CMO will define the role for the person who follows them — so the permanent hire lands into a real position." },
+      { title: "Use fractional to build the brief", body: "A good fractional CMO will define the role for the person who follows them, so the permanent hire lands into a real position." },
       { title: "Set a 90–120 day milestone", body: "What needs to be true before you switch from fractional to permanent? Write it down now and work backwards." },
-      { title: "Keep recruiting passive", body: "Run a light talent search in the background. When the system is ready, you want candidates warm — not starting from scratch." }
+      { title: "Keep recruiting passive", body: "Run a light talent search in the background. When the system is ready, you want candidates warm, not starting from scratch." }
     ],
     warning: "<strong>What not to do:</strong> Hire a permanent Head of Marketing now to \"figure it out\". Without clear ICP, positioning, proof, and rhythm, even a great marketer will struggle for 6+ months before contributing. The hire will be frustrated and expensive.",
     cta1: { label: "Explore fractional CMO engagement →", url: "/services/fractional-cmo" }
@@ -181,14 +181,14 @@ const results = {
     color: "#f97316",
     label: "Build foundations first",
     headline: "Build the foundations before making any marketing hire.",
-    summary: "A senior marketing hire right now would inherit a mess — unclear ICP, weak positioning, limited proof, no weekly rhythm, and an undefined role. They'd spend their first 6 months building the foundation while being measured on pipeline they couldn't possibly generate yet. This is the most expensive version of the hiring mistake.",
+    summary: "A senior marketing hire right now would inherit a mess, unclear ICP, weak positioning, limited proof, no weekly rhythm, and an undefined role. They'd spend their first 6 months building the foundation while being measured on pipeline they couldn't possibly generate yet. This is the most expensive version of the hiring mistake.",
     actions: [
       { title: "Fix ICP and positioning first", body: "Until buyers can clearly identify with your messaging, no channel will work at scale. This is the highest-leverage starting point." },
       { title: "Build proof before outbound", body: "Get 2–3 case studies with specific, verifiable outcomes. Without proof, outbound and content are fighting uphill." },
       { title: "Start a weekly GTM rhythm now", body: "Even a 30-minute weekly review with a consistent agenda will change how the team thinks about growth. Start before the hire arrives." },
       { title: "Define the role before recruiting", body: "What specifically is failing? Until you can name the constraint precisely, you can't write a brief. Don't recruit into ambiguity." }
     ],
-    warning: "<strong>What not to do:</strong> Hire a senior marketer and expect them to diagnose and fix the foundations while also generating pipeline. That's two jobs at once. Build the system first — then hire someone to run and improve it.",
+    warning: "<strong>What not to do:</strong> Hire a senior marketer and expect them to diagnose and fix the foundations while also generating pipeline. That's two jobs at once. Build the system first, then hire someone to run and improve it.",
     cta1: { label: "Book a GTM foundations review →", url: null }
   }
 };
@@ -206,16 +206,16 @@ const results = {
     hero={{
       eyebrow: "Hiring Readiness Scorecard · 12 questions · Free",
       h1: "Before you hire a Head of Marketing, check what they'd be walking into.",
-      lede: "Most failed marketing hires aren't a people problem — they're a readiness problem.\n        Score your GTM foundations in 5 minutes and find out whether you're ready to hire,\n        need fractional leadership first, or need to build the foundations entirely.",
+      lede: "Most failed marketing hires aren't a people problem, they're a readiness problem.\n        Score your GTM foundations in 5 minutes and find out whether you're ready to hire,\n        need fractional leadership first, or need to build the foundations entirely.",
       primaryLabel: "Start the scorecard →"
     }}
     problem={{
       eyebrow: "Why this matters",
-      heading: "The three most common hiring mistakes — and how to avoid all of them.",
+      heading: "The three most common hiring mistakes, and how to avoid all of them.",
       cards: [
         { title: "Hiring too early", body: "Before ICP, positioning, and proof are clear, a marketing leader spends the first 60 days figuring out what the company actually sells and to whom. They can't win." },
         { title: "Hiring at the wrong level", body: "A senior CMO in a channel-execution role will churn in 6 months. A junior generalist asked to own strategy will struggle. Mismatched level = mismatched expectations." },
-        { title: "Hiring without a real brief", body: "If you can't say what \"good\" looks like at 30, 60, and 90 days — the hire will define success themselves. That rarely aligns with what the founder actually needed." }
+        { title: "Hiring without a real brief", body: "If you can't say what \"good\" looks like at 30, 60, and 90 days, the hire will define success themselves. That rarely aligns with what the founder actually needed." }
       ]
     }}
     scorecard={{
@@ -225,11 +225,11 @@ const results = {
     }}
     scoreMeaning={{
       eyebrow: "The three outcomes",
-      heading: "What your score predicts — and what to do next.",
+      heading: "What your score predicts, and what to do next.",
       levels: [
         { borderColor: "#22c55e", labelColor: "#22c55e", label: "Score 18–24", h3: "Ready to hire", body: "Your GTM foundations are strong enough for a senior marketing leader to land and execute. Focus on defining the role, the 90-day brief, and the right seniority level." },
         { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 9–17", h3: "Fractional leadership first", body: "Some foundations are in place but the gaps are structural. A fractional CMO can build the missing system in 90–120 days, then hand to a permanent hire who has a real brief to work from." },
-        { borderColor: "#f97316", labelColor: "#f97316", label: "Score 0–8", h3: "Build foundations first", body: "A senior marketing hire would inherit chaos: unclear ICP, weak positioning, no proof system, no rhythm. Build the foundations first — then hire someone into a system that can actually work." }
+        { borderColor: "#f97316", labelColor: "#f97316", label: "Score 0–8", h3: "Build foundations first", body: "A senior marketing hire would inherit chaos: unclear ICP, weak positioning, no proof system, no rhythm. Build the foundations first, then hire someone into a system that can actually work." }
       ]
     }}
     faqSection={{

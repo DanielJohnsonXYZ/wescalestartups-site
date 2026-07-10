@@ -93,14 +93,13 @@ const isGroupActive = (item: typeof navGroups[number]) =>
       ))}
     </nav>
     <a
-      class="button button-brand header-cta header-cta--stacked button-with-subcopy"
+      class="button button-brand header-cta"
       href={siteConfig.bookingUrl}
       data-cta="header-book"
       aria-label="Book a 20-minute Growth Audit call"
       title="Book a 20-minute Growth Audit call"
     >
-      <span class="button-label">Book a call</span>
-      <span class="button-subcopy">20-min Growth Audit.</span>
+      Book a call <span aria-hidden="true">→</span>
     </a>
     <details class="mobile-menu">
       <summary class="button button-light">Menu</summary>
@@ -120,13 +119,12 @@ const isGroupActive = (item: typeof navGroups[number]) =>
           )
         ))}
         <a
-          class="button button-brand button-with-subcopy"
+          class="button button-brand"
           href={siteConfig.bookingUrl}
           data-cta="mobile-book"
           title="Book a 20-minute Growth Audit call"
         >
-          <span class="button-label">Book a call</span>
-          <span class="button-subcopy">20-min Growth Audit.</span>
+          Book a call →
         </a>
       </nav>
     </details>

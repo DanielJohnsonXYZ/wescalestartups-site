@@ -16,7 +16,7 @@ const schema = [
 <BaseLayout
   path={path}
   title="Daniel Johnson | We Scale Startups"
-  description="Daniel Johnson — founder of We Scale Startups, fractional CMO and growth operator for post-PMF B2B SaaS and AI startups."
+  description="Daniel Johnson, founder of We Scale Startups, fractional CMO and growth operator for post-PMF B2B SaaS and AI startups."
   schema={schema}
   breadcrumbItems={[
     { name: "Home", path: "/" },
@@ -50,7 +50,7 @@ const schema = [
         {canonicalProofMetrics.map((m) => (
           <li>
             <strong>{m.value}</strong> {m.label}
-            {"note" in m && m.note ? ` — ${m.note}` : ""}
+            {"note" in m && m.note ? `, ${m.note}` : ""}
           </li>
         ))}
       </ul>

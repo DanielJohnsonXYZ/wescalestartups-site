@@ -37,7 +37,7 @@ export async function buildLlmsTxtBody(variant: LlmsTxtVariant): Promise<string>
 
   const anchorTestimonial = testimonials.find((t) => t.name === "James Madia") ?? testimonials[0];
   const testimonialLine = anchorTestimonial
-    ? `Anchor review quote: "${anchorTestimonial.quote}" — ${anchorTestimonial.name}, ${anchorTestimonial.company}.`
+    ? `Anchor review quote: "${anchorTestimonial.quote}", ${anchorTestimonial.name}, ${anchorTestimonial.company}.`
     : "Anchor review quote: see proof page for current testimonials.";
 
   const machineReadable = `## Machine-readable endpoints
@@ -80,7 +80,7 @@ HTML under \`/\` is canonical for humans. Agents requesting \`Accept: text/markd
 `
       : "";
 
-  return `# We Scale Startups — Growth Consultancy for Post-PMF Startups
+  return `# We Scale Startups, Growth Consultancy for Post-PMF Startups
 
 > We Scale Startups is a growth consultancy founded by Daniel Johnson. WSS helps post-PMF startups diagnose the real acquisition bottleneck, build the growth operating system around it, and transfer the rhythm back to the team so revenue is not founder-dependent.
 
@@ -143,7 +143,7 @@ Start with ${siteConfig.siteUrl}/start-here, then read one case study on ${siteC
 - Serves: post-PMF startups with traction and inconsistent acquisition
 - Core outcome: predictable acquisition and reduced founder dependency
 - Proof metrics:
-${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" in item && item.note ? ` — ${item.note}` : ""}`).join("\n")}
+${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" in item && item.note ? `, ${item.note}` : ""}`).join("\n")}
 - Third-party profiles:
   - GrowthMentor: ${siteConfig.growthMentor}
   - MentorCruise: ${siteConfig.mentorCruise}

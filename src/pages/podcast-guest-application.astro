@@ -48,7 +48,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
       <SectionIntro
         eyebrow="Who we're looking for"
         title="Founders and operators with real AI growth stories."
-        body="We want practical, specific examples — not theory. If your startup is using AI to grow faster, save time, or make better commercial decisions, we want to hear from you."
+        body="We want practical, specific examples, not theory. If your startup is using AI to grow faster, save time, or make better commercial decisions, we want to hear from you."
       />
       <div class="max-w-3xl grid gap-4">
         <div class="card p-6">
@@ -57,7 +57,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
             <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're a founder, operator, or growth leader at a post-PMF startup</span></li>
             <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're using AI in a way that creates measurable commercial outcomes</span></li>
             <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You can share specific examples, numbers, and lessons learned</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're comfortable on record — clear speaking, practical takeaways</span></li>
+            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're comfortable on record, clear speaking, practical takeaways</span></li>
           </ul>
         </div>
         <div class="card p-6">
@@ -212,7 +212,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
       note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
       form.appendChild(note);
     }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly — your application has been copied to the clipboard.`;
+    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your application has been copied to the clipboard.`;
     if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
   });
 </script>

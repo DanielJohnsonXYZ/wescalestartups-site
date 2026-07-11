@@ -38,10 +38,10 @@ Aim for: at least one Series A founder, one healthtech/fintech reference, one "s
 
 Pricing in `src/site.ts` is approved for launch:
 
-- Growth Diagnosis — `from £4,000` (1 week)
-- 90-Day Growth Sprint — `from £15,000` (12 weeks)
-- Acquisition System Build — `from £30,000` (8–12 weeks)
-- Fractional CMO — `from £8,000 / month` (3-month minimum)
+- Growth Diagnosis — `from £2,000` (1 week)
+- 90-Day Growth Sprint — `from £8,000` (12 weeks)
+- Acquisition System Build — `from £15,000` (8–12 weeks)
+- Fractional CMO — `from £5,000 / month` (3-month minimum; Plus from £7,500 / month)
 
 These can be revisited later if offer packaging changes.
 

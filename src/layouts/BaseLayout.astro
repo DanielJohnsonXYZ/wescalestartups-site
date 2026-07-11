@@ -3,6 +3,7 @@ import EasterEgg from "../components/EasterEgg.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import AnnouncementBanner from "../components/AnnouncementBanner.astro";
+import StickyBookCta from "../components/StickyBookCta.astro";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -38,6 +39,8 @@ interface Props {
   announcementDismissible?: boolean;
   announcementVariant?: "default" | "brand" | "muted" | "dark-hero";
   announcementPill?: string;
+  /** Sticky book CTA (off on /book and pages with their own booking block). */
+  stickyBookCta?: boolean;
 }
 
 const {
@@ -61,10 +64,13 @@ const {
   announcementLinkText = "Take the scorecard →",
   announcementDismissible = true,
   announcementVariant = "brand",
-  announcementPill
+  announcementPill,
+  stickyBookCta: stickyBookCtaProp
 } = Astro.props;
 
 const currentPath = normalizePath(path);
+const stickyBookCta =
+  stickyBookCtaProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
 const canonical = absoluteUrl(currentPath);
 const imageUrl = absoluteUrl(ogImage);
 const ogImageAlt = ogImageAltProp ?? title;
@@ -84,7 +90,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); cta_click, calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download. Booking (inline Calendly on /book): booking_time_selected, booking_completed (mark booking_completed as a GA4 key event — this is the true call conversion). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
+    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); ai_referral (AI referrer/utm); cta_click, book_call (/book or Calendly), calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download; sticky_book_cta_shown. Booking (inline Calendly on /book): booking_time_selected, booking_completed (mark booking_completed + book_call as GA4 key events). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
     <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
     <script is:inline set:html={gtmScript} />
     <!-- End Google Tag Manager -->
@@ -161,6 +167,29 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
         page_location: window.location.href
       });
 
+      (function () {
+        var AI_SOURCES = ["chatgpt", "openai", "perplexity", "gemini", "claude", "copilot", "you.com", "phind"];
+        var params = new URLSearchParams(window.location.search);
+        var utmSource = (params.get("utm_source") || "").toLowerCase();
+        var utmMedium = (params.get("utm_medium") || "").toLowerCase();
+        var referrerHost = "";
+        try {
+          referrerHost = document.referrer ? new URL(document.referrer).hostname.toLowerCase() : "";
+        } catch (err) {}
+        var matchedSource = AI_SOURCES.find(function (source) {
+          return utmSource.indexOf(source) !== -1 || referrerHost.indexOf(source) !== -1;
+        });
+        if (!matchedSource && utmMedium !== "ai" && utmMedium !== "llm") return;
+        window.dataLayer.push({
+          event: "ai_referral",
+          ai_source: matchedSource || utmSource || "unknown",
+          ai_medium: utmMedium || "referrer",
+          ai_referrer_host: referrerHost || "none",
+          page_path: window.location.pathname,
+          page_location: window.location.href
+        });
+      })();
+
       document.addEventListener("click", (event) => {
         const target = event.target;
         const link = target instanceof Element ? target.closest("a") : null;
@@ -184,13 +213,14 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
 
         const href = link.href || "";
         const isCalendly = href.includes("calendly.com") || href.includes("cal.wescalestartups.com");
+        const isBookPath = /\/book\/?(\?|$|#)/.test(href) || href.endsWith("/book") || href.includes("/book?");
         const isScorecard = href.includes("growth-bottleneck-scorecard");
         const isPricing = href.includes("/pricing") || link.closest("[data-pricing-link]");
         const isResource = href.includes("/resources") || link.closest("[data-resource-link]");
         const isOutbound = href.startsWith("http") && !href.includes(window.location.hostname);
 
         let eventName = "cta_click";
-        if (isCalendly) eventName = "calendly_click";
+        if (isCalendly || isBookPath) eventName = "book_call";
         else if (isScorecard) eventName = "scorecard_start";
         else if (isPricing) eventName = "pricing_click";
         else if (isResource) eventName = "resource_click";
@@ -203,6 +233,16 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
           cta_href: href,
           page_path: window.location.pathname
         });
+
+        // Keep calendly_click for existing GTM mappings while book_call is the key event.
+        if (isCalendly) {
+          window.dataLayer.push({
+            event: "calendly_click",
+            cta_label: label,
+            cta_href: href,
+            page_path: window.location.pathname
+          });
+        }
       });
 
       document.addEventListener("submit", (event) => {
@@ -275,6 +315,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
       )}
     </main>
     <SiteFooter />
+    <StickyBookCta enabled={stickyBookCta} />
     <EasterEgg />
   </body>
 </html>

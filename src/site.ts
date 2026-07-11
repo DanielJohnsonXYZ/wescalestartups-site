@@ -235,6 +235,7 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   ],
   "/fractional-cmo-vs-agency": [
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+    { href: "/insights/fractional-cmo-cost-uk", label: "Fractional CMO cost (UK)" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
   ],
   "/when-growth-plateaus": [
@@ -344,7 +345,7 @@ export const insightsThemeGroups: readonly {
     description:
       "When fractional leadership fits, how it differs from agencies and full-time hires, and what good looks like.",
     pillarId: "what-is-a-fractional-cmo",
-    spokeInsightIds: ["when-to-hire-fractional-cmo"]
+    spokeInsightIds: ["when-to-hire-fractional-cmo", "fractional-cmo-cost-uk"]
   },
   {
     title: "Startup GTM",
@@ -861,6 +862,11 @@ export const buyerFaqs = [
     question: "How is WSS different from a typical agency?",
     answer:
       "Agencies are the right choice when the channel plan is clear and you need production capacity. WSS works one level up: naming the bottleneck, aligning channels, installing weekly decision rules, and handing off a system your team or agency can run inside."
+  },
+  {
+    question: "How much does We Scale Startups cost?",
+    answer:
+      "Public UK bands: Growth Diagnosis from £2k, 90-Day Growth Sprint from £8k, Acquisition System Build from £15k, Fractional CMO from £5k/mo (Plus from £7.5k/mo for ~2 days/week). Final scope depends on team, channel mix, and execution depth."
   },
   {
     question: "What is the first step?",

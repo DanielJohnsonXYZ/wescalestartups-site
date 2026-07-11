@@ -121,7 +121,18 @@ export async function onRequest(context) {
     "/meta-ads/": "/services/acquisition-system-build",
     // Legacy VC-marketing guide
     "/the-ultimate-guide-to-venture-capital-marketing-for-startups": "/insights",
-    "/the-ultimate-guide-to-venture-capital-marketing-for-startups/": "/insights"
+    "/the-ultimate-guide-to-venture-capital-marketing-for-startups/": "/insights",
+    // Legacy WordPress / Bing soft-404 paths
+    "/growth-package": "/pricing",
+    "/growth-package/": "/pricing",
+    "/fintech": "/industries/fintech",
+    "/fintech/": "/industries/fintech",
+    "/choosing-the-perfect-fractional-cmo": "/services/fractional-cmo",
+    "/choosing-the-perfect-fractional-cmo/": "/services/fractional-cmo",
+    "/choosing-the-perfect-fractional-cmo-for-your-startup": "/services/fractional-cmo",
+    "/choosing-the-perfect-fractional-cmo-for-your-startup/": "/services/fractional-cmo",
+    "/choosing-the-perfect-cmo": "/services/fractional-cmo",
+    "/choosing-the-perfect-cmo/": "/services/fractional-cmo"
   };
 
   if (legacyRedirects[path]) {
@@ -129,13 +140,17 @@ export async function onRequest(context) {
     return Response.redirect(url.toString(), 301);
   }
 
-  // Prefix-based legacy redirects (any remaining old portfolio or blog URL).
+  // Prefix-based legacy redirects (any remaining old portfolio, blog, or team URL).
   if (/^\/portfolio\//.test(path)) {
     url.pathname = "/case-studies";
     return Response.redirect(url.toString(), 301);
   }
   if (path === "/blog" || /^\/blog\//.test(path)) {
     url.pathname = "/insights";
+    return Response.redirect(url.toString(), 301);
+  }
+  if (/^\/team\//.test(path)) {
+    url.pathname = "/about";
     return Response.redirect(url.toString(), 301);
   }
 

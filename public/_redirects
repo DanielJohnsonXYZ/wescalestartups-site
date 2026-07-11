@@ -66,3 +66,16 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 # Legacy VC-marketing guide → insights hub
 /the-ultimate-guide-to-venture-capital-marketing-for-startups /insights 301
 /the-ultimate-guide-to-venture-capital-marketing-for-startups/ /insights 301
+
+# Legacy WordPress / Bing soft-404 paths (AEO crawl hygiene)
+/growth-package /pricing 301
+/growth-package/ /pricing 301
+/fintech /industries/fintech 301
+/fintech/ /industries/fintech 301
+/team/* /about 301
+/choosing-the-perfect-fractional-cmo /services/fractional-cmo 301
+/choosing-the-perfect-fractional-cmo/ /services/fractional-cmo 301
+/choosing-the-perfect-fractional-cmo-for-your-startup /services/fractional-cmo 301
+/choosing-the-perfect-fractional-cmo-for-your-startup/ /services/fractional-cmo 301
+/choosing-the-perfect-cmo /services/fractional-cmo 301
+/choosing-the-perfect-cmo/ /services/fractional-cmo 301

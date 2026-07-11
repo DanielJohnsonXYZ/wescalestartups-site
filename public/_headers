@@ -66,8 +66,10 @@
   Cache-Control: public, max-age=300, must-revalidate
 
 /llms.txt
+  Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
 /llms-full.txt
+  Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
 /markdown/home.md
   Content-Type: text/markdown; charset=utf-8

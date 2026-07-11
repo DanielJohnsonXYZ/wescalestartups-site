@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
+import TldrCallout from "../components/TldrCallout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, strategicPageRelatedInsights, vsAgency, wssVsAgencyPage } from "../site";
 
@@ -32,6 +33,7 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
     <div class="shell">
       <p class="eyebrow">Comparison</p>
       <h1>Marketing agency vs a growth partner: choose the level where the problem lives.</h1>
+      <TldrCallout text="Hire an agency when the channel plan is clear and you need production. Hire WSS when the founder is still the growth bottleneck — diagnosis, priorities, system design, and weekly scale/stop/fix decisions before more execution." />
       <p class="lede">
         Agencies are useful when the strategy is clear and the team needs execution capacity. WSS is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions.
       </p>

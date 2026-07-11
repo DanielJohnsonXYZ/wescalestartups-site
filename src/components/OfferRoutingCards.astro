@@ -16,7 +16,7 @@ const offerProof: Record<string, { metric: string; client: string }> = {
     <p class="eyebrow">Which offer is right?</p>
     <h2 class="offer-routing-h2">Match where you are to the engagement.</h2>
     <p class="offer-routing-lede">
-      If the symptom is wrong, the scope is wrong. Use this to self-route — then confirm on the call.
+      If the symptom is wrong, the scope is wrong. Use this to self-route, then confirm on the call.
     </p>
     <div class="offer-routing-grid">
       {
@@ -28,7 +28,7 @@ const offerProof: Record<string, { metric: string; client: string }> = {
             <p class="offer-routing-meta">{row.duration}</p>
             {offerProof[row.href] && (
               <p class="offer-routing-proof">
-                <strong>{offerProof[row.href].metric}</strong> — {offerProof[row.href].client}
+                <strong>{offerProof[row.href].metric}</strong>, {offerProof[row.href].client}
               </p>
             )}
             <span class="card-link">View scope →</span>
@@ -41,7 +41,7 @@ const offerProof: Record<string, { metric: string; client: string }> = {
       <a href={siteConfig.bookingUrl} data-cta="offer-routing-book">
         {siteConfig.bookingLabel}
       </a>
-      — we usually name the right tier in the first ten minutes.
+     , we usually name the right tier in the first ten minutes.
     </p>
   </div>
 </section>

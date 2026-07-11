@@ -6206,3 +6206,66 @@ html { scroll-padding-top: 6.5rem; }
    sit at top:-10px;left:1.1rem, so cards with both (e.g. Growth Diagnosis) stack
    them. Move the popular badge to the top-right corner. */
 .popular-badge { left: auto !important; right: 1.1rem !important; }
+
+/* ══ 2026-07 refinement layer: header, banner, spacing, related reading ══ */
+
+/* Header: cleaner bar, single-line CTA, consistent rhythm */
+.site-header { padding: 0.5rem 0; }
+.header-inner {
+  min-height: 56px;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: auto;
+  max-width: none;
+  min-height: 40px;
+  padding: 0.55rem 1.05rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Announcement bar above the header: one tight line */
+.announcement-banner { padding: 0.4rem 0; font-size: 0.82rem; border-bottom: 1px solid var(--line); }
+.announcement-banner .banner-inner { row-gap: 0.15rem; }
+
+/* Less dead space between header/banner and page content */
+.page-hero { padding-top: clamp(2.25rem, 4.5vw, 3.5rem); }
+.breadcrumb-wrap { padding-top: 0.75rem; }
+
+/* Related reading: card grid instead of a bare link list */
+.related-insights-list {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1fr;
+  margin-top: 1.25rem;
+}
+@media (min-width: 640px) { .related-insights-list { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .related-insights-list { grid-template-columns: repeat(3, 1fr); } }
+.related-insights-list li {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.related-insights-list li:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 22px rgba(16, 13, 24, 0.06);
+}
+.related-insights-list li .card-link {
+  display: block;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}

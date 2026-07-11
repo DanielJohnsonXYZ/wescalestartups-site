@@ -1,28 +1,63 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { methodologyBrand, siteConfig } from "../site";
+import { siteConfig } from "../site";
 
 const startHereFaqs = [
   {
-    question: "How long does the guided path take?",
+    question: "How long does this path take?",
     answer:
-      "About 35 minutes if you follow the three-step path: scorecard, one proof read, then the diagnostic call. You can stop after step one or two if you are not ready to talk yet."
+      "About 35 minutes end to end: 5 for the scorecard, 10 for a case study, 20 for the call. You can stop after any step."
   },
   {
     question: "Do I have to book a call?",
     answer:
-      "No. The scorecard, written diagnostic framework, and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
+      "No. The scorecard and case studies are there so you can self-qualify. Book when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
   },
   {
     question: "Is We Scale Startups a marketing agency?",
     answer:
-      "No. WSS works at diagnosis and system level: bottleneck, acquisition design, reporting cadence, and transfer. Agencies often execute inside that system once the constraint is clear — many teams use both."
+      "No. WSS works at diagnosis and system level: bottleneck, acquisition design, reporting cadence, and transfer. Agencies execute inside that system once the constraint is clear, and many teams use both."
   },
   {
     question: "Should I use this site or Daniel Johnson's personal site?",
     answer:
-      "Start here on wescalestartups.com when you want the WSS engagement ladder: Growth Diagnosis, 90-Day Sprint, Acquisition System Build, or fractional CMO through the firm. Use danieljohnson.xyz when you are explicitly exploring a fractional CMO relationship with Daniel as the principal — the positioning overlaps, but the commercial path and contracts differ."
+      "Use wescalestartups.com for the WSS engagement ladder: Growth Diagnosis, 90-Day Sprint, Acquisition System Build, or Fractional CMO. Use danieljohnson.xyz if you're exploring a fractional CMO relationship with Daniel as the principal."
+  }
+];
+
+const steps = [
+  {
+    num: "01",
+    time: "5 minutes",
+    title: "Score yourself",
+    body: "Take the Growth Bottleneck Scorecard. 10 questions across the five layers that block pipeline: customer, offer, acquisition, evidence, and team ownership. You leave with your constraint named.",
+    ctaLabel: "Take the scorecard",
+    ctaHref: siteConfig.scorecardUrl
+  },
+  {
+    num: "02",
+    time: "10 minutes",
+    title: "Read one case study",
+    body: "Pick the one that looks most like your situation. Every case uses the same Problem / Action / Result format, so you can see exactly how the work happens and what it produces.",
+    ctaLabel: "See the case studies",
+    ctaHref: "/proof"
+  },
+  {
+    num: "03",
+    time: "20 minutes",
+    title: "Book the Growth Audit call",
+    body: "Free, 20 minutes, no pitch. Bring your scorecard result and current numbers. You leave with the bottleneck named in plain English and an honest read on whether WSS is the right call.",
+    ctaLabel: "Book the call",
+    ctaHref: siteConfig.bookingUrl
+  },
+  {
+    num: "04",
+    time: "When you're ready",
+    title: "Start with the smallest engagement that answers your question",
+    body: "Growth Diagnosis from £2k if the constraint is unclear. 90-Day Sprint from £8k for focused tests. Acquisition System Build from £15k for one connected system. Fractional CMO from £5k/mo for senior leadership.",
+    ctaLabel: "Compare engagements",
+    ctaHref: "/pricing"
   }
 ];
 
@@ -38,7 +73,7 @@ const startHereSchema = [
 <BaseLayout
   path="/start-here"
   title="Start here | We Scale Startups"
-  description="Entry path for post-PMF founders: match your stage to the WSS offer ladder, or self-qualify with the scorecard before booking."
+  description="The four-step path for founders: score your growth bottleneck, read one case study, book the audit call, then pick the smallest engagement that fits."
   keywords="We Scale Startups onboarding, post-PMF founder guide, growth consultancy fit, which engagement first, startup growth decision tree"
   schema={startHereSchema}
   lastUpdated={siteConfig.lastUpdated}
@@ -47,200 +82,76 @@ const startHereSchema = [
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Start here</p>
-      <h1>Pick your door. Same methodology: {methodologyBrand.tagline}</h1>
+      <h1>Four steps. About 35 minutes. No demos.</h1>
       <p class="lede">
-        WSS works with <strong>post-PMF B2B SaaS and AI</strong> teams where growth still runs through the founder. If you are not sure
-        which offer fits — scorecard, sprint, system build, or fractional bench — use this page as the router. No demos; book only when
-        step three makes sense.
-      </p>
-      <p class="lede lede-tight">
-        <strong>Company vs personal path:</strong> Engagements on this site run through We Scale Startups. If you are comparing a{' '}
-        <strong>solo fractional CMO</strong> relationship with Daniel as principal, his parallel orientation is at{' '}
-        <a href={`${siteConfig.danielSite}/start-here/`}>danieljohnson.xyz/start-here</a> — overlap in positioning, different contract path.
+        WSS works with <strong>AI and B2B SaaS startups</strong> where growth still runs through the founder. This page is the
+        whole path, in order. Do step one now; book a call only when step three makes sense.
       </p>
     </div>
   </section>
 
-  <!-- Route by commercial intent (Growth Hub: Start here as guided router) -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">Which engagement?</p>
-      <h2 class="route-section-h2">Pick the path that matches what you need right now.</h2>
-      <p class="route-section-lede">
-        Different founders arrive with different clarity. Self-route here, then confirm fit on the diagnostic. See the full ladder on{' '}
-        <a href="/pricing">Pricing</a> and how delivery works on <a href="/how-it-works">How it works</a>.
-      </p>
-      <ul class="engagement-route-grid">
-        <li>
-          <a class="engagement-route-card" href={siteConfig.scorecardUrl}>
-            <span class="engagement-route-label">I don't know what's blocking growth</span>
-            <span class="engagement-route-action">{siteConfig.scorecardLabel} →</span>
-          </a>
-        </li>
-        <li>
-          <a class="engagement-route-card" href="/services/growth-diagnosis">
-            <span class="engagement-route-label">I need a senior diagnosis first</span>
-            <span class="engagement-route-action">Growth Diagnosis →</span>
-          </a>
-        </li>
-        <li>
-          <a class="engagement-route-card" href="/services/90-day-growth-sprint">
-            <span class="engagement-route-label">I need execution this quarter</span>
-            <span class="engagement-route-action">90-Day Growth Sprint →</span>
-          </a>
-        </li>
-        <li>
-          <a class="engagement-route-card" href="/services/acquisition-system-build">
-            <span class="engagement-route-label">I need a connected acquisition system</span>
-            <span class="engagement-route-action">Acquisition System Build →</span>
-          </a>
-        </li>
-        <li>
-          <a class="engagement-route-card" href="/services/fractional-cmo">
-            <span class="engagement-route-label">I need ongoing senior leadership</span>
-            <span class="engagement-route-action">Fractional CMO →</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- DECISION TREE -->
+  <!-- THE PATH -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Decision tree</p>
-      <h2>Pick the smallest commitment that answers your question right now.</h2>
-      <p class="lede" style="max-width: 60ch; margin-top: 0.75rem;">
-        Three honest reads — including one where we tell you not to hire us yet.
-      </p>
-
-      <div class="decision-grid">
-        <article class="decision-card">
-          <span class="decision-num">01</span>
-          <h3>Unsure what's broken?</h3>
-          <p>You suspect growth is stuck but the team can't agree what's blocking pipeline.</p>
-          <p class="decision-action">Take the scorecard. 5 minutes. Score yourself across the 5 layers (positioning, acquisition, conversion, reporting, team).</p>
-          <a class="button button-brand" href={siteConfig.scorecardUrl}>
-            {siteConfig.scorecardLabel} →
-          </a>
-        </article>
-
-        <article class="decision-card decision-card-primary">
-          <span class="decision-num">02</span>
-          <h3>Know the bottleneck but need senior judgement?</h3>
-          <p>You can name the constraint but want a second opinion before spending more or hiring.</p>
-          <p class="decision-action">
-            {siteConfig.bookingLabel}. Bring the picture, leave with a plain-English read on what to do next.
-          </p>
+      {steps.map((step) => (
+        <article class="start-step">
+          <span class="start-step-num">{step.num}</span>
+          <div>
+            <p class="step-time">{step.time}</p>
+            <h2 class="step-title">{step.title}</h2>
+            <p>{step.body}</p>
+          </div>
           <a
             class="button button-brand"
-            href={siteConfig.bookingUrl}
-            title={siteConfig.bookingCallReassurance}
+            href={step.ctaHref}
+            data-cta={`start-here-step-${step.num}`}
           >
-            {siteConfig.bookingLabel} →
+            {step.ctaLabel} →
           </a>
         </article>
-
-        <article class="decision-card">
-          <span class="decision-num">03</span>
-          <h3>Need proof first?</h3>
-          <p>You want to see how we work before talking to us.</p>
-          <p class="decision-action">Read one case study that looks like your situation. Same Problem / Action / Result format every time.</p>
-          <a class="button button-brand" href="/proof">See proof →</a>
-        </article>
-      </div>
+      ))}
     </div>
   </section>
 
-  <!-- READING PATHS BY STAGE -->
+  <!-- FIT CHECK -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Reading paths by stage</p>
-      <h2>The honest version: WSS isn't right for everyone.</h2>
+      <p class="eyebrow">Before you invest the 35 minutes</p>
+      <h2>WSS isn't right for everyone.</h2>
 
       <div class="stage-grid">
         <article class="stage-card">
           <p class="card-kicker">Pre-PMF</p>
-          <h3>You're still searching for the problem.</h3>
+          <h3>Still searching for the problem?</h3>
           <p>Some signal, no repeatable customer. Growth marketing won't fix it.</p>
           <p class="stage-action">
-            <strong>Don't hire us yet.</strong> Spend the time on customer research and product. Come back when there's repeatable revenue and the constraint is acquisition, not the offer.
+            <strong>Don't hire us yet.</strong> Spend the time on customer research and product. Come back when there's repeatable revenue.
           </p>
-          <a class="card-link" href="/insights">Read why pre-PMF teams shouldn't hire a fractional CMO →</a>
         </article>
 
         <article class="stage-card stage-card-fit">
           <p class="card-kicker">Post-PMF, founder still selling</p>
-          <h3>Paying customers, real demand, but pipeline arrives in bursts.</h3>
-          <p>Founder owns every revenue call. The team is running but nobody can confidently say what's working.</p>
+          <h3>Paying customers, but pipeline arrives in bursts?</h3>
+          <p>The founder owns every revenue call and nobody can say confidently what's working.</p>
           <p class="stage-action">
-            <strong>Best fit.</strong> Start with a {siteConfig.bookingCallShort}. We'll diagnose the bottleneck and decide together whether a Sprint or Fractional CMO engagement makes sense.
+            <strong>Best fit.</strong> Follow the four steps above, starting with the scorecard.
           </p>
-          <a class="card-link" href="/founder-led-growth">Read: founder-led growth constraint →</a>
-          <a class="card-link" href={siteConfig.bookingUrl} title={siteConfig.bookingCallReassurance}>
-            {siteConfig.bookingLabel} →
-          </a>
         </article>
 
         <article class="stage-card">
-          <p class="card-kicker">Post-PMF, scaling, plateau</p>
-          <h3>£1m–£10m ARR, team in place, growth slowing or stalled.</h3>
-          <p>Founder is the bottleneck on growth decisions. Channels are running but disconnected.</p>
+          <p class="card-kicker">Scaling, then a plateau</p>
+          <h3>£1m–£10m ARR and growth slowing?</h3>
+          <p>Channels running but disconnected; growth decisions still route through the founder.</p>
           <p class="stage-action">
-            <strong>Core fit.</strong> Read the Fractional CMO scope, then book the diagnostic. Most teams in this band start with the system build and add fractional leadership.
+            <strong>Core fit.</strong> Most teams in this band start with the System Build, then add fractional leadership.
           </p>
-          <a class="card-link" href="/services/fractional-cmo">See Fractional CMO scope →</a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 3-STEP PATH (kept from old version, refined) -->
+  <!-- FAQ -->
   <section class="section">
-    <div class="shell">
-      <p class="eyebrow">If you want the short version</p>
-      <h2>Three steps. No demos.</h2>
-
-      <article class="start-step">
-        <span class="start-step-num">01</span>
-        <div>
-          <h3>Score yourself in 5 minutes</h3>
-          <p>
-            The Growth Bottleneck Scorecard maps which of five constraints is blocking pipeline before you add another channel, hire, or agency.
-          </p>
-        </div>
-        <a class="button button-brand" href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel}</a>
-      </article>
-
-      <article class="start-step">
-        <span class="start-step-num">02</span>
-        <div>
-          <h3>Read one case study</h3>
-          <p>Find the case that looks most like your situation. Same Problem / Action / Result format every time, readable in 60 seconds.</p>
-        </div>
-        <a class="button button-brand" href="/proof">See proof</a>
-      </article>
-
-      <article class="start-step">
-        <span class="start-step-num">03</span>
-        <div>
-          <h3>{siteConfig.bookingLabel}</h3>
-          <p>Bring the scorecard result and your current growth picture. You'll leave with a plain-English view of the bottleneck and which engagement (if any) actually fits.</p>
-        </div>
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          title={siteConfig.bookingCallReassurance}
-          data-cta="start-here-step3-book"
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">FAQ</p>
       <h2>Before you commit time.</h2>
@@ -259,19 +170,18 @@ const startHereSchema = [
   <section class="cta-band">
     <div class="shell cta-inner">
       <div>
-        <p class="eyebrow">Already done step one?</p>
+        <p class="eyebrow">Already know your bottleneck?</p>
         <h2>Skip ahead and book the call.</h2>
-        <p>Bring your scorecard result. We'll spend the {siteConfig.bookingCallDurationPhrase} on the bottleneck, not on intros.</p>
+        <p>Bring your current growth picture. We'll spend the {siteConfig.bookingCallDurationPhrase} on the bottleneck, not on intros.</p>
       </div>
       <div class="hero-actions">
         <a
-          class="button button-brand button-with-subcopy"
+          class="button button-brand"
           href={siteConfig.bookingUrl}
           data-cta="start-here-final"
           title={siteConfig.bookingCallReassurance}
         >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          {siteConfig.bookingLabel} →
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="start-here-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
@@ -282,134 +192,50 @@ const startHereSchema = [
 </BaseLayout>
 
 <style>
-  .route-section-h2 {
-    font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;
-    font-size: clamp(1.85rem, 3vw, 2.35rem);
-    font-weight:700;
-    line-height: 1.1;
-    margin: 0.35rem 0 0.75rem;
-    color: var(--ink);
-  }
-  .route-section-lede {
-    margin: 0 0 1.5rem;
-    max-width: 60ch;
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-  .lede-tight {
-    max-width: 68ch;
-    font-size: 0.92rem;
-    margin-top: 1rem !important;
-  }
-  .lede-tight a {
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .engagement-route-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .start-step {
     display: grid;
-    gap: 0.75rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 640px) {
-    .engagement-route-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 1100px) {
-    .engagement-route-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  @media (min-width: 1400px) {
-    .engagement-route-grid {
-      grid-template-columns: repeat(6, 1fr);
-    }
-  }
-  .engagement-route-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    height: 100%;
-    padding: 1rem 1.05rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.85rem;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-  .engagement-route-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(16, 13, 24, 0.06);
-  }
-  .engagement-route-label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    line-height: 1.35;
-    color: var(--ink);
-  }
-  .engagement-route-action {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .decision-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-    margin-top: 2rem;
-  }
-  @media (min-width: 880px) {
-    .decision-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .decision-card {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem 1.6rem;
+    margin-top: 1rem;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 1.25rem;
-    padding: 1.5rem 1.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
   }
-  .decision-card-primary {
-    border-color: var(--accent);
-    box-shadow: 0 14px 32px -18px color-mix(in srgb, var(--accent) 40%, transparent);
+  @media (max-width: 720px) {
+    .start-step { grid-template-columns: 1fr; gap: 0.85rem; }
   }
-  .decision-num {
+  .start-step-num {
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.7rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--accent);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.02em;
   }
-  .decision-card h3 {
-    font-size: 1.05rem;
+  .step-time {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin: 0 0 0.3rem;
+  }
+  .step-title {
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    margin: 0;
+    margin: 0 0 0.45rem;
     color: var(--ink);
   }
-  .decision-card p {
+  .start-step p {
     color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.92rem;
+    line-height: 1.55;
     margin: 0;
+    max-width: 62ch;
   }
-  .decision-action {
-    color: var(--ink) !important;
-    border-top: 1px solid var(--line);
-    padding-top: 0.85rem;
-    margin-top: 0.4rem !important;
-  }
-  .decision-card .button {
-    margin-top: auto;
-    align-self: start;
-  }
+  .start-step .button { align-self: center; white-space: nowrap; }
 
   .stage-grid {
     display: grid;

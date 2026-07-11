@@ -14,24 +14,24 @@ export const siteConfig = {
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
   bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
-  /** Hero, pricing, quiz — noun phrase (not the imperative CTA). */
+  /** Hero, pricing, quiz, noun phrase (not the imperative CTA). */
   bookingCallShort: "20-minute Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
-    { phase: "First ~3 minutes", detail: "Context — stage, traction, channels, and what you think is blocking growth." },
+    { phase: "First ~3 minutes", detail: "Context, stage, traction, channels, and what you think is blocking growth." },
     {
       phase: "Next ~8 minutes",
-      detail: "Bottleneck read — is the constraint positioning, acquisition, conversion, reporting, or team ownership?"
+      detail: "Bottleneck read, is the constraint positioning, acquisition, conversion, reporting, or team ownership?"
     },
     {
       phase: "~6 minutes",
-      detail: "Options — Growth Diagnosis, Sprint, System Build, Fractional CMO, or the right referral if we are not a fit."
+      detail: "Options, Growth Diagnosis, Sprint, System Build, Fractional CMO, or the right referral if we are not a fit."
     },
     { phase: "Last ~3 minutes", detail: "Clear next step. No pitch unless there is a genuine fit." }
   ],
-  /** Short line near booking CTAs (header title, footer) — Growth Hub: call reassurance. */
-  bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership — no pitch unless there's a clear fit.`,
-  /** Primary self-serve diagnostic — keep CTAs consistent sitewide. */
+  /** Short line near booking CTAs (header title, footer), Growth Hub: call reassurance. */
+  bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership, no pitch unless there's a clear fit.`,
+  /** Primary self-serve diagnostic, keep CTAs consistent sitewide. */
   scorecardName: "Growth Bottleneck Scorecard",
   scorecardTagline: "10 questions. 5 minutes. Find the constraint stopping pipeline from becoming predictable.",
   scorecardLabel: "Take the Growth Bottleneck Scorecard",
@@ -39,10 +39,10 @@ export const siteConfig = {
   scorecardUrl: "/resources/growth-bottleneck-scorecard",
   /** When true, PodcastSeries JSON-LD and feed links are enabled on /podcast. */
   podcastLive: false,
-  /** Newsletter — single name, description, and cadence sitewide. */
+  /** Newsletter, single name, description, and cadence sitewide. */
   newsletterName: "The Growth Bottleneck",
   newsletterDescription: "One practical note on SaaS pipeline, positioning, and founder-led growth systems.",
-  newsletterFrequencyLine: "Biweekly — one note you can act on.",
+  newsletterFrequencyLine: "Biweekly, one note you can act on.",
   email: "daniel@wescalestartups.com",
   phone: "+44 20 3886 0931",
   address: "81 Curtain Road, London EC2A 3AG, United Kingdom",
@@ -59,7 +59,7 @@ export const siteConfig = {
   siteLastModified: "2026-05-03",
   ogImage: "/og/default.png",
   /**
-   * Google Tag Manager — production container for wescalestartups.com only.
+   * Google Tag Manager, production container for wescalestartups.com only.
    * Do not use the personal-site container (GTM-5S892HK on danieljohnson.xyz).
    */
   gtmId: "GTM-TV6C7GS",
@@ -69,14 +69,14 @@ export const siteConfig = {
     (typeof import.meta.env.PUBLIC_BING_SITE_VERIFICATION === "string" &&
       import.meta.env.PUBLIC_BING_SITE_VERIFICATION.trim()) ||
     "",
-  /** Public X (Twitter) profile — used in Person schema sameAs */
+  /** Public X (Twitter) profile, used in Person schema sameAs */
   founderTwitter: "https://x.com/djohnsonxyz",
-  /** Podcast hub on WSS — entity graph / sameAs */
+  /** Podcast hub on WSS, entity graph / sameAs */
   podcastUrl: "https://wescalestartups.com/podcast"
 } as const;
 
 /**
- * Canonical JSON-LD @id nodes — Person is rooted on danieljohnson.xyz; Organization on this domain.
+ * Canonical JSON-LD @id nodes, Person is rooted on danieljohnson.xyz; Organization on this domain.
  * Keeps Knowledge Graph / LLM entity resolution from splitting Daniel across two Person IDs.
  */
 export const entityGraph = {
@@ -85,13 +85,13 @@ export const entityGraph = {
   wssWebsite: `${siteConfig.siteUrl}/#website`
 } as const;
 
-/** Named methodology — use on home, GTM, llms.txt, and press for consistent entity language. */
+/** Named methodology, use on home, GTM, llms.txt, and press for consistent entity language. */
 export const methodologyBrand = {
   shortName: "Growth Bottleneck System",
   tagline: "Diagnose the bottleneck, build the acquisition system, transfer the weekly cadence."
 } as const;
 
-/** Single source of truth for proof numbers — use everywhere (home, press, about, footer, llms). */
+/** Single source of truth for proof numbers, use everywhere (home, press, about, footer, llms). */
 export const revenueInfluencedNote =
   "Aggregate revenue generated or influenced across client and operator-side engagements." as const;
 
@@ -104,7 +104,7 @@ export const canonicalProofMetrics = [
   { value: "2", label: "Operator-side exits" }
 ] as const;
 
-/** Short hero proof line (cold inbound) — links to a case study. */
+/** Short hero proof line (cold inbound), links to a case study. */
 /**
  * Per-URL sitemap lastmod (ISO date), aligned to last git change on the backing page/content.
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
@@ -189,7 +189,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/resources/ai-search-visibility-checklist": "2026-05-11"
 };
 
-/** Primary nav — same on every page (including homepage). */
+/** Primary nav, same on every page (including homepage). */
 export const navigation = [
   { href: "/services", label: "Services" },
   { href: "/proof", label: "Results" },
@@ -246,14 +246,14 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
   ]
 };
 
-/** /diagnose — related reports and insights (internal crawl). */
+/** /diagnose, related reports and insights (internal crawl). */
 export const diagnoseRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
   { href: "/reports", label: "Report formats (bottleneck, system, AI visibility)" }
 ];
 
-/** /resources — frameworks, quiz, reports (internal crawl). */
+/** /resources, frameworks, quiz, reports (internal crawl). */
 export const resourcesRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
@@ -263,7 +263,7 @@ export const resourcesRelatedReading: readonly { href: string; label: string }[]
   { href: "/reports", label: "Report formats hub" }
 ];
 
-/** /services/[slug] — related insights and hubs. */
+/** /services/[slug], related insights and hubs. */
 export const serviceRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
   "growth-diagnosis": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
@@ -289,7 +289,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
   ]
 };
 
-/** /pricing — decision context and self-serve paths. */
+/** /pricing, decision context and self-serve paths. */
 export const pricingRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/services", label: "Compare the four engagements" },
   { href: "/fractional-cmo-vs-agency", label: "Fractional CMO vs agency" },
@@ -298,7 +298,7 @@ export const pricingRelatedReading: readonly { href: string; label: string }[] =
   { href: "/resources", label: "Resources and scorecard" }
 ];
 
-/** /services hub — pricing, proof, diagnosis. */
+/** /services hub, pricing, proof, diagnosis. */
 export const servicesHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/pricing", label: "Pricing ranges" },
   { href: "/how-it-works", label: "How it works" },
@@ -315,7 +315,7 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/industries/edtech", label: "EdTech industry notes" }
 ];
 
-/** /insights hub — frameworks and proof. */
+/** /insights hub, frameworks and proof. */
 export const insightsHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/reports", label: "Report formats" },
   { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
@@ -331,7 +331,7 @@ export const insightsHubRelatedReading: readonly { href: string; label: string }
 
 /**
  * Content clusters for /insights: pillar insight id + spoke ids (src/content/insights/).
- * Aligns with Growth Hub strategy — four pillars, 6–8 articles per cluster over time.
+ * Aligns with Growth Hub strategy, four pillars, 6–8 articles per cluster over time.
  */
 export const insightsThemeGroups: readonly {
   title: string;
@@ -358,7 +358,7 @@ export const insightsThemeGroups: readonly {
   },
   {
     title: "AI-native marketing",
-    description: "AI in research, content, outbound, and measurement — without losing citable expertise.",
+    description: "AI in research, content, outbound, and measurement, without losing citable expertise.",
     pillarId: "ai-native-gtm",
     spokeInsightIds: ["make-ai-search-visibility-citable"]
   },
@@ -370,7 +370,7 @@ export const insightsThemeGroups: readonly {
   }
 ] as const;
 
-/** /testimonials — proof and next steps. */
+/** /testimonials, proof and next steps. */
 export const testimonialsRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/case-studies", label: "Case studies" },
@@ -378,7 +378,7 @@ export const testimonialsRelatedReading: readonly { href: string; label: string 
   { href: "/resources", label: "Resources" }
 ];
 
-/** Case study detail pages — standard crawl paths. */
+/** Case study detail pages, standard crawl paths. */
 export const caseStudyRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/case-studies", label: "All case studies" },
@@ -386,7 +386,7 @@ export const caseStudyRelatedReading: readonly { href: string; label: string }[]
   { href: "/book", label: siteConfig.bookingLabel }
 ];
 
-/** /proof — cases, services, press. */
+/** /proof, cases, services, press. */
 export const proofHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/case-studies", label: "Case studies" },
   { href: "/testimonials", label: "Testimonials" },
@@ -410,7 +410,7 @@ export const aboutRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/services", label: "Services" },
   { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
-  { href: "https://danieljohnson.xyz/", label: "Daniel Johnson — personal site" }
+  { href: "https://danieljohnson.xyz/", label: "Daniel Johnson, personal site" }
 ];
 
 /** /contact. */
@@ -432,11 +432,11 @@ export const industriesHubRelatedReading: readonly { href: string; label: string
   { href: "/industries/vc-support", label: "VC & portfolio marketing support" }
 ];
 
-/** /industries/[slug] — same links every sector. */
+/** /industries/[slug], same links every sector. */
 /**
  * Industry slugs that stay indexable (each backed by a named case study + unique proof).
  * The rest are noindexed in `industries/[slug].astro` and must be EXCLUDED from the
- * sitemap to avoid "noindex URL submitted in sitemap" warnings — keep both in sync here.
+ * sitemap to avoid "noindex URL submitted in sitemap" warnings, keep both in sync here.
  */
 export const indexableIndustrySlugs = ["saas-growth", "fintech", "healthtech", "edtech", "vc-support"] as const;
 
@@ -467,7 +467,7 @@ export const transferPageRelatedReading: readonly { href: string; label: string 
   { href: "/how-it-works", label: "How it works" }
 ];
 
-/** /press — internal verification paths. */
+/** /press, internal verification paths. */
 export const pressRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/proof", label: "Proof hub" },
   { href: "/case-studies", label: "Case studies" },
@@ -475,7 +475,7 @@ export const pressRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/contact", label: "Contact" }
 ];
 
-/** Legal pages — useful internal links (exclude self on each page). */
+/** Legal pages, useful internal links (exclude self on each page). */
 export const privacyPageRelatedLinks: readonly { href: string; label: string }[] = [
   { href: "/", label: "Home" },
   { href: "/contact", label: "Contact" },
@@ -533,7 +533,7 @@ export const proofClients = [
   }
 ] as const;
 
-/** Non-client marks on /proof — each logo paired with how the relationship should be read. */
+/** Non-client marks on /proof, each logo paired with how the relationship should be read. */
 export const proofEcosystemLogos = [
   {
     src: "/images/logos/google.webp",
@@ -579,15 +579,15 @@ export const proofEcosystemLogos = [
   }
 ] as const;
 
-/** Pricing / services — short reassurance lines (Growth Hub: trust near price). */
+/** Pricing / services, short reassurance lines (Growth Hub: trust near price). */
 export const pricingTrustBullets = [
-  "Scope is agreed after the diagnostic call — no surprise lock-in on diagnosis or sprint.",
+  "Scope is agreed after the diagnostic call, no surprise lock-in on diagnosis or sprint.",
   "No pitch unless there's a genuine fit; the first job is naming the bottleneck.",
-  "Deliverables and weekly cadence transfer to your team — not a slide deck handoff.",
+  "Deliverables and weekly cadence transfer to your team, not a slide deck handoff.",
   "Works alongside existing agencies or internal marketers when execution is already in motion."
 ] as const;
 
-/** Proof page — scan results by commercial outcome type (links to case studies). */
+/** Proof page, scan results by commercial outcome type (links to case studies). */
 export const proofResultsByType = [
   {
     label: "Positioning & narrative",
@@ -611,7 +611,7 @@ export const proofResultsByType = [
   },
   {
     label: "Marketing function from zero",
-    summary: "First structured marketing operation for a complex B2B offer — not a deck, a running function.",
+    summary: "First structured marketing operation for a complex B2B offer, not a deck, a running function.",
     caseId: "healthtech-precision-medicine"
   }
 ] as const;
@@ -619,7 +619,7 @@ export const proofResultsByType = [
 /** Compact list for proof/press grids (same numbers as canonicalProofMetrics). */
 export const headlineMetrics = canonicalProofMetrics.map(({ value, label }) => ({ value, label }));
 
-// Decision layer — ladder: diagnose → sprint → system → embed
+// Decision layer, ladder: diagnose → sprint → system → embed
 export const serviceDecision = [
   {
     condition: "You don't know the bottleneck yet",
@@ -634,7 +634,7 @@ export const serviceDecision = [
     duration: "12 weeks"
   },
   {
-    condition: "You've tried channels in isolation — now you need one rhythm",
+    condition: "You've tried channels in isolation, now you need one rhythm",
     recommendation: "Acquisition System Build",
     href: "/services/acquisition-system-build",
     duration: "8–12 weeks"
@@ -655,11 +655,11 @@ export const serviceSnapshots = [
     badge: "Best starting point",
     bestFor: "Post-PMF teams with traction but conflicting views on what blocks pipeline.",
     problem:
-      "Activity across channels without a shared read on the binding constraint — so every bet feels political.",
+      "Activity across channels without a shared read on the binding constraint, so every bet feels political.",
     get: "A constraint map, evidence review, quick wins, and a 90-day recommendation.",
     keyDeliverables: ["Constraint map and evidence pack", "Quick-win shortlist", "Sequenced 90-day recommendation"],
     timeline: "1 week",
-    price: "from £4k",
+    price: "from £2k",
     cta: "Diagnose the bottleneck"
   },
   {
@@ -668,11 +668,11 @@ export const serviceSnapshots = [
     href: "/services/90-day-growth-sprint",
     badge: "Best for fast signal",
     bestFor: "Teams that need focused tests this quarter, not another broad strategy deck.",
-    problem: "Lots of motion but too little learning — experiments aren't tied to one bottleneck.",
+    problem: "Lots of motion but too little learning, experiments aren't tied to one bottleneck.",
     get: "Experiment roadmap, weekly decisions, campaign/page iterations, transfer notes.",
     keyDeliverables: ["ICE-scored experiment backlog", "Weekly decision log", "Shipped tests + learnings pack"],
     timeline: "12 weeks",
-    price: "from £15k",
+    price: "from £8k",
     cta: "Run a growth sprint"
   },
   {
@@ -685,7 +685,7 @@ export const serviceSnapshots = [
     get: "Channel strategy, offer map, landing/campaign briefs, reporting and handoff.",
     keyDeliverables: ["Channel hierarchy & offer map", "Campaign/landing briefs", "Reporting rhythm + handoff pack"],
     timeline: "8–12 weeks",
-    price: "from £30k",
+    price: "from £15k",
     cta: "Build the acquisition system"
   },
   {
@@ -694,11 +694,11 @@ export const serviceSnapshots = [
     href: "/services/fractional-cmo",
     badge: "Highest-touch engagement",
     bestFor: "Teams that need senior growth judgement before a full-time CMO hire.",
-    problem: "The founder still owns every growth decision — there's no senior owner inside the team.",
+    problem: "The founder still owns every growth decision, there's no senior owner inside the team.",
     get: "Priorities, cadence, decision rules, team/agency direction, founder clarity.",
     keyDeliverables: ["Weekly growth cadence", "Board-ready reporting rhythm", "Agency/hire direction"],
     timeline: "3+ months",
-    price: "from £8k/mo",
+    price: "from £5k/mo",
     cta: "Add fractional leadership"
   }
 ] as const;
@@ -769,7 +769,7 @@ export const leadMagnets = [
     id: "first-marketing-hire-scorecard",
     title: "First Marketing Hire Scorecard",
     audience: "Founders hiring marketing",
-    description: "Score whether you need a generalist, growth marketer, or leader — and what to test first.",
+    description: "Score whether you need a generalist, growth marketer, or leader, and what to test first.",
     href: "/resources/first-marketing-hire-scorecard"
   },
   {
@@ -785,10 +785,10 @@ export const proofStandards = [
   "We separate before, work done, and result so you can see what changed.",
   "We avoid anonymous claims where there is no permissioned proof.",
   "We connect results to the system built, not a single tactic taken out of context.",
-  "Deliverables are practical working assets — playbooks, dashboards, and decision logs — not theatre or slides."
+  "Deliverables are practical working assets, playbooks, dashboards, and decision logs, not theatre or slides."
 ] as const;
 
-// Who this is NOT for — disqualifies bad-fit leads, increases trust
+// Who this is NOT for, disqualifies bad-fit leads, increases trust
 export const notFor = [
   {
     title: "Pre-PMF startups",
@@ -796,7 +796,7 @@ export const notFor = [
   },
   {
     title: "Founders looking for a tactic of the week",
-    body: "We don't sell hacks. The work is diagnosis, system design, and a few sharp bets — not 14 channels at once."
+    body: "We don't sell hacks. The work is diagnosis, system design, and a few sharp bets, not 14 channels at once."
   },
   {
     title: "Teams without execution capacity",
@@ -812,7 +812,7 @@ export const notFor = [
   }
 ] as const;
 
-// WSS vs agency — explicit positioning (complementary to good agencies, not dismissive)
+// WSS vs agency, explicit positioning (complementary to good agencies, not dismissive)
 export const vsAgency = [
   {
     label: "What gets delivered",
@@ -827,7 +827,7 @@ export const vsAgency = [
   {
     label: "Reporting",
     agency: "Often channel metrics and delivery dashboards",
-    wss: "Commercial signal — scale, stop, fix calls"
+    wss: "Commercial signal, scale, stop, fix calls"
   },
   {
     label: "Decision rights",
@@ -864,12 +864,12 @@ export const buyerFaqs = [
   },
   {
     question: "What is the first step?",
-    answer: `Start with ${siteConfig.bookingLabel.toLowerCase()} or ${siteConfig.scorecardLabel.toLowerCase()} — ${siteConfig.scorecardTagline.toLowerCase()} The first job is to identify the constraint before adding more activity.`
+    answer: `Start with ${siteConfig.bookingLabel.toLowerCase()} or ${siteConfig.scorecardLabel.toLowerCase()}, ${siteConfig.scorecardTagline.toLowerCase()} The first job is to identify the constraint before adding more activity.`
   },
   {
     question: "Do you guarantee results?",
     answer:
-      "No. Anyone who guarantees marketing outcomes either doesn't understand the work or doesn't intend to do it. What we guarantee is the operating system — a constraint named, a plan to move it, and a weekly rhythm your team can run."
+      "No. Anyone who guarantees marketing outcomes either doesn't understand the work or doesn't intend to do it. What we guarantee is the operating system, a constraint named, a plan to move it, and a weekly rhythm your team can run."
   },
   {
     question: "Who isn't this for?",
@@ -1013,12 +1013,12 @@ export const first30Days = [
   {
     week: "Week 2",
     title: "Name the bottleneck",
-    body: "Reset priorities around the binding constraint — positioning, acquisition, conversion, reporting, or ownership."
+    body: "Reset priorities around the binding constraint, positioning, acquisition, conversion, reporting, or ownership."
   },
   {
     week: "Week 3",
     title: "Build the first artefacts",
-    body: "Channel hierarchy, reporting rhythm, campaign priorities — documented so the team can execute."
+    body: "Channel hierarchy, reporting rhythm, campaign priorities, documented so the team can execute."
   },
   {
     week: "Week 4",
@@ -1027,12 +1027,12 @@ export const first30Days = [
   }
 ] as const;
 
-// Pricing — approved ranges for filtering bad-fit leads.
+// Pricing, approved ranges for filtering bad-fit leads.
 export const pricingTiers = [
   {
     name: "Growth Diagnosis",
     duration: "1 week",
-    priceFrom: "from £4k",
+    priceFrom: "from £2k",
     description: "Plain-English view of the bottleneck and a sequenced plan. Best when you don't know the constraint yet.",
     href: "/services/growth-diagnosis",
     tierBadge: "Best starting point"
@@ -1040,17 +1040,17 @@ export const pricingTiers = [
   {
     name: "90-Day Growth Sprint",
     duration: "12 weeks",
-    priceFrom: "from £15k",
+    priceFrom: "from £8k",
     description: "Audit → plan → ship 3–5 tests → transfer. Best pre-fundraise or post-launch when you need signal fast.",
     href: "/services/90-day-growth-sprint",
     tierBadge: "Most common paid step",
     mostPopular: true,
-    popularRationale: "The usual bridge from the free Growth Audit — fast, scoped signal before a bigger commitment."
+    popularRationale: "The usual bridge from the free Growth Audit, fast, scoped signal before a bigger commitment."
   },
   {
     name: "Acquisition System Build",
     duration: "8–12 weeks",
-    priceFrom: "from £30k",
+    priceFrom: "from £15k",
     description: "Channels, landing pages, offers, and reporting working as one system. Best after you've tested channels in isolation.",
     href: "/services/acquisition-system-build",
     tierBadge: "Flagship engagement"
@@ -1058,33 +1058,33 @@ export const pricingTiers = [
   {
     name: "Fractional CMO",
     duration: "3 months minimum",
-    priceFrom: "from £8k/mo",
+    priceFrom: "from £5k/mo",
     description:
-      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £12k/mo (~2 days/week) when you need deeper operating support.",
+      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £7.5k/mo (~2 days/week) when you need deeper operating support.",
     href: "/services/fractional-cmo",
     tierBadge: "Highest-touch engagement",
     popularRationale: "Full strategic ownership with execution support when the team needs a senior growth seat."
   }
 ] as const;
 
-// Daniel's "why I built this" — operator credibility, founder layer
+// Daniel's "why I built this", operator credibility, founder layer
 export const founderStory = {
-  intro: "I'm Daniel. After 15 years operating inside SaaS, fintech, healthtech and EdTech startups — including two exits — I kept seeing the same pattern: founders with great products who were stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.",
+  intro: "I'm Daniel. After 15 years operating inside SaaS, fintech, healthtech and EdTech startups, including two exits, I kept seeing the same pattern: founders with great products who were stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.",
   why: "I built WSS to be the operator I wished was there: senior judgement that diagnoses the real constraint, builds the system, and then transfers it so you don't need me forever.",
   credentials: [
     "Two operator-side startup exits",
-    "£18M+ revenue influenced — aggregate across client and operator-side engagements",
+    "£18M+ revenue influenced, aggregate across client and operator-side engagements",
     "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
     "479+ founder sessions · 4.93/5 on GrowthMentor",
-    "MentorCruise Top Mentor — 5.0/5 across 30+ reviews",
+    "MentorCruise Top Mentor, 5.0/5 across 30+ reviews",
     "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad"
   ]
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// Mautic — email signup forms (replaces placeholder ConvertKit). Configure in
+// Mautic, email signup forms (replaces placeholder ConvertKit). Configure in
 // Cloudflare Pages: PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID
-// Default form id "1" is a guess — set PUBLIC_MAUTIC_NEWSLETTER_FORM_ID in production to your real form.
+// Default form id "1" is a guess, set PUBLIC_MAUTIC_NEWSLETTER_FORM_ID in production to your real form.
 // ──────────────────────────────────────────────────────────────────────────
 const mauticBaseRaw =
   (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||

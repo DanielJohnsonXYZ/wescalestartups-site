@@ -14,7 +14,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Refer a founder — earn £500 | We Scale Startups"
+  title="Refer a founder, earn £500 | We Scale Startups"
   description="Know a post-PMF B2B SaaS founder with a pipeline problem? Refer them to We Scale Startups and earn £500 when they sign."
   path={path}
   schema={schema}
@@ -68,14 +68,14 @@ const schema = [
           <div class="w-9 h-9 shrink-0 rounded-full border border-[color:var(--line)] flex items-center justify-center text-sm font-semibold text-[color:var(--muted)] mt-1">1</div>
           <div>
             <h3 class="font-bold text-lg tracking-[-0.02em] mb-1">Submit the form below</h3>
-            <p class="text-[color:var(--muted)] leading-relaxed">Tell us who you're referring and why you think they're a good fit. A name and a line of context is enough — we'll take it from there.</p>
+            <p class="text-[color:var(--muted)] leading-relaxed">Tell us who you're referring and why you think they're a good fit. A name and a line of context is enough, we'll take it from there.</p>
           </div>
         </div>
         <div class="flex gap-6 py-7">
           <div class="w-9 h-9 shrink-0 rounded-full border border-[color:var(--line)] flex items-center justify-center text-sm font-semibold text-[color:var(--muted)] mt-1">2</div>
           <div>
             <h3 class="font-bold text-lg tracking-[-0.02em] mb-1">We reach out within 48 hours</h3>
-            <p class="text-[color:var(--muted)] leading-relaxed">Daniel contacts the founder directly for a <strong>20-minute growth diagnostic call</strong>. No hard sell — just an honest look at their constraint.</p>
+            <p class="text-[color:var(--muted)] leading-relaxed">Daniel contacts the founder directly for a <strong>20-minute growth diagnostic call</strong>. No hard sell, just an honest look at their constraint.</p>
           </div>
         </div>
         <div class="flex gap-6 py-7">
@@ -103,7 +103,7 @@ const schema = [
         <div class="card p-7">
           <p class="text-2xl mb-3">🤝</p>
           <h3 class="font-bold text-base tracking-[-0.01em] mb-2">Advisors &amp; angels</h3>
-          <p class="text-[color:var(--muted)] text-sm leading-relaxed">Portfolio founders stuck on pipeline and still doing everything themselves — this is the call they need.</p>
+          <p class="text-[color:var(--muted)] text-sm leading-relaxed">Portfolio founders stuck on pipeline and still doing everything themselves, this is the call they need.</p>
         </div>
         <div class="card p-7">
           <p class="text-2xl mb-3">🏦</p>
@@ -113,7 +113,7 @@ const schema = [
         <div class="card p-7">
           <p class="text-2xl mb-3">🎙️</p>
           <h3 class="font-bold text-base tracking-[-0.01em] mb-2">Podcast listeners &amp; followers</h3>
-          <p class="text-[color:var(--muted)] text-sm leading-relaxed">If you've consumed the content and know someone who fits — founders doing £1–10M ARR — you're qualified to refer.</p>
+          <p class="text-[color:var(--muted)] text-sm leading-relaxed">If you've consumed the content and know someone who fits, founders doing £1–10M ARR, you're qualified to refer.</p>
         </div>
       </div>
     </div>
@@ -218,11 +218,11 @@ const schema = [
         {[
           {
             q: "Does the founder need to know I'm referring them?",
-            a: "Yes — a warm intro always converts better than a cold one. We recommend giving them a heads-up before you submit. If you'd prefer a blind referral, note that in the context field and we'll handle it carefully."
+            a: "Yes, a warm intro always converts better than a cold one. We recommend giving them a heads-up before you submit. If you'd prefer a blind referral, note that in the context field and we'll handle it carefully."
           },
           {
             q: "Which engagements qualify?",
-            a: "Any paid WSS engagement counts — Growth Diagnosis (£4k), 90-Day Sprint (£15k), Acquisition System Build (£30k), or Fractional CMO (£8k/mo). The £500 reward is fixed regardless of engagement size."
+            a: "Any paid WSS engagement counts, Growth Diagnosis (£2k), 90-Day Sprint (£8k), Acquisition System Build (£15k), or Fractional CMO (£5k/mo). The £500 reward is fixed regardless of engagement size."
           },
           {
             q: "How long is the referral window?",
@@ -230,11 +230,11 @@ const schema = [
           },
           {
             q: "Is there a limit to how many referrals I can make?",
-            a: "No limit. Refer as many qualified founders as you like — £500 per conversion, every time."
+            a: "No limit. Refer as many qualified founders as you like, £500 per conversion, every time."
           },
           {
             q: "What if the founder isn't a good fit?",
-            a: "No problem — Daniel will give them an honest read on the call. If they're pre-PMF or not ready, we'll say so and point them somewhere useful. You won't be penalised for referring someone who turns out not to be the right fit."
+            a: "No problem, Daniel will give them an honest read on the call. If they're pre-PMF or not ready, we'll say so and point them somewhere useful. You won't be penalised for referring someone who turns out not to be the right fit."
           }
         ].map(({ q, a }) => (
           <details class="group py-5">
@@ -294,7 +294,7 @@ const schema = [
 
     const subject = "Founder referral: " + founderName + (company ? " (" + company + ")" : "");
     const body = [
-      "Referred by: " + yourName + " <" + yourEmail + ">" + (yourRole ? " — " + yourRole : ""),
+      "Referred by: " + yourName + " <" + yourEmail + ">" + (yourRole ? ", " + yourRole : ""),
       "",
       "Founder: " + founderName + " <" + founderEmail + ">",
       "Company: " + (company || "—"),

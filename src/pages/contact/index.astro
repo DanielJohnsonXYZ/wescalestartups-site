@@ -16,7 +16,7 @@ const contactFaqs = [
   {
     question: "How fast do you respond?",
     answer:
-      "Enquiries are read by the operator, not a gatekeeper. If there is a fit, you will get a clear next step — or an honest no / referral."
+      "Enquiries are read by the operator, not a gatekeeper. If there is a fit, you will get a clear next step, or an honest no / referral."
   }
 ];
 
@@ -94,9 +94,9 @@ const contactSchema = [
           <select name="budget" required>
             <option value="">Choose one</option>
             <option>Exploring</option>
-            <option>£3k to £8k</option>
-            <option>£8k to £15k</option>
-            <option>£15k+</option>
+            <option>£2k to £5k</option>
+            <option>£5k to £10k</option>
+            <option>£10k+</option>
           </select>
         </label>
         <label>Timeline<input name="timeline" placeholder="Now, this quarter, next quarter..." /></label>
@@ -116,6 +116,10 @@ const contactSchema = [
           {siteConfig.bookingLabel} →
         </a>
         <p>
+          Or book directly:{" "}
+          <a href="https://cal.wescalestartups.com" data-cta="contact-cal-direct" rel="noreferrer" target="_blank">cal.wescalestartups.com</a>
+        </p>
+        <p>
           Prefer async?{" "}
           <a href={siteConfig.scorecardUrl} data-cta="contact-side-scorecard">{siteConfig.scorecardLabel}</a>.
         </p>
@@ -124,14 +128,31 @@ const contactSchema = [
     </div>
   </section>
 
-  <!-- Route by enquiry type — speaking, podcast, partnership, press all -->
+  <!-- Direct booking, cal.wescalestartups.com embed -->
+  <section class="section section-alt" id="book-a-time">
+    <div class="shell">
+      <p class="eyebrow">Book a time</p>
+      <h2>Pick a slot that works for you.</h2>
+      <p>Booking runs on <a href="https://cal.wescalestartups.com" rel="noreferrer" target="_blank">cal.wescalestartups.com</a>. If the calendar doesn't load, open it directly.</p>
+      <div class="cal-embed-wrap">
+        <iframe
+          src="https://cal.wescalestartups.com"
+          title="Book a call with We Scale Startups"
+          loading="lazy"
+          style="width:100%;min-height:640px;border:1px solid var(--line);border-radius:0.85rem;background:#fff;"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Route by enquiry type, speaking, podcast, partnership, press all -->
   <!-- have specific better destinations than the generic enquiry form.    -->
   <!-- Source: Notion 354f99a79fdb81eebd81df3dfa282659                      -->
   <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">Routing by enquiry type</p>
       <h2>Not a growth engagement? Here's the right page.</h2>
-      <p>The enquiry form above is for growth engagement enquiries. For everything else, use one of these direct routes — they reach the right inbox faster.</p>
+      <p>The enquiry form above is for growth engagement enquiries. For everything else, use one of these direct routes, they reach the right inbox faster.</p>
       <div class="grid-3 mt-6">
         <article class="feature-card">
           <p class="card-kicker">Speaking enquiries</p>
@@ -161,13 +182,13 @@ const contactSchema = [
           <p class="card-kicker">Partnerships</p>
           <h3>Co-marketing, integrations, syndication</h3>
           <p>Send context on what you're proposing, who it's for, and the shape of the partnership. We respond when there's a clear fit.</p>
-          <a class="card-link" href={`mailto:${siteConfig.email}?subject=Partnership%20enquiry`}>Email — Partnership enquiry →</a>
+          <a class="card-link" href={`mailto:${siteConfig.email}?subject=Partnership%20enquiry`}>Email, Partnership enquiry →</a>
         </article>
         <article class="feature-card">
           <p class="card-kicker">Accelerator / VC programmes</p>
           <h3>Portfolio workshops &amp; mentor pools</h3>
           <p>Daniel mentors through Google for Startups, Techstars, and runs portfolio diagnosis workshops for VC firms.</p>
-          <a class="card-link" href={`mailto:${siteConfig.email}?subject=Portfolio%20workshop%20or%20mentor%20enquiry`}>Email — Programme enquiry →</a>
+          <a class="card-link" href={`mailto:${siteConfig.email}?subject=Portfolio%20workshop%20or%20mentor%20enquiry`}>Email, Programme enquiry →</a>
         </article>
       </div>
       <p class="mt-6 text-sm" style="color:var(--muted, #666);">
@@ -211,9 +232,9 @@ const contactSchema = [
     <div class="shell cta-inner">
       <div>
         <p class="eyebrow">Rather talk it through?</p>
-        <h2>Send the form — or book the call.</h2>
+        <h2>Send the form, or book the call.</h2>
         <p>
-          In {siteConfig.bookingCallDurationPhrase}, we can usually tell whether the constraint is positioning, acquisition, conversion, reporting, or ownership — and whether WSS is the right shape of help.
+          In {siteConfig.bookingCallDurationPhrase}, we can usually tell whether the constraint is positioning, acquisition, conversion, reporting, or ownership, and whether WSS is the right shape of help.
         </p>
       </div>
       <div class="hero-actions">
@@ -290,7 +311,7 @@ const contactSchema = [
       note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
       form.appendChild(note);
     }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly — your message has been copied to the clipboard.`;
+    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your message has been copied to the clipboard.`;
     if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
   });
 </script>

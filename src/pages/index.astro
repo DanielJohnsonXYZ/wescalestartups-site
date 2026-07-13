@@ -1,553 +1,703 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig, buyerFaqs, testimonials } from "../site";
+import {
+  buyerFaqs,
+  canonicalProofMetrics,
+  proofEcosystemLogos,
+  serviceSnapshots,
+  siteConfig,
+  testimonials
+} from "../site";
 import { buildFaqSchema } from "../lib/schema";
-import "../styles/home-v8.css";
+import "../styles/home-v9.css";
 
 const faqSchema = buildFaqSchema([...buyerFaqs]);
 const homepageQuotes = testimonials
-  .filter((t) => t.category === "paid-client" || t.category === "paid-advisory")
+  .filter((testimonial) => testimonial.category === "paid-client" || testimonial.category === "paid-advisory")
   .slice(0, 3);
 
-// "Not a founder?" routing, investors / corporate / operators
-const subAudiences = [
+const principles = [
   {
-    title: "Investors & funds.",
-    body: "Diagnose growth across a portfolio in two weeks. Same framework, applied across companies.",
-    href: "/resources/vc-portfolio-growth-diagnosis",
-    label: "VC Portfolio Diagnosis"
+    number: "01",
+    title: "Name the constraint first.",
+    body: "More budget against an unnamed bottleneck buys activity, not pipeline. We begin by naming the one constraint binding growth."
   },
   {
-    title: "Corporate & accelerator partners.",
-    body: "Workshops, keynote talks, and programme advisory for cohorts and innovation teams.",
+    number: "02",
+    title: "Install a rhythm, not a hero.",
+    body: "A weekly decision cadence your team owns beats a brilliant operator who leaves. We build the system, then transfer it."
+  },
+  {
+    number: "03",
+    title: "Build to hand off.",
+    body: "Success is the quarter the system runs without us: reporting trusted, decisions made on schedule, founder out of the loop."
+  }
+];
+
+const constraints = [
+  {
+    key: "customer",
+    number: "01",
+    label: "Customer",
+    short: "ICP too broad",
+    symptom: "Everyone could use it. Nobody feels it is built for them.",
+    title: "The customer picture is too broad to convert.",
+    description: "Narrowing is growth. We define exactly who this is for, who it is not for, and collect the customer evidence that earns the next budget decision.",
+    service: "Growth Diagnosis",
+    href: "/services/growth-diagnosis",
+    meta: "from £2k · 1 week"
+  },
+  {
+    key: "positioning",
+    number: "02",
+    label: "Offer & positioning",
+    short: "Story does not land",
+    symptom: "Demos go well. Pipeline does not follow.",
+    title: "Your story lands in the room, not in the market.",
+    description: "We rebuild the offer and message against the customer's real alternatives, then test it live with a pre-agreed threshold for what counts as signal.",
+    service: "90-Day Growth Sprint",
+    href: "/services/90-day-growth-sprint",
+    meta: "from £8k · 12 weeks"
+  },
+  {
+    key: "acquisition",
+    number: "03",
+    label: "Acquisition",
+    short: "One-channel risk",
+    symptom: "If one engine dips, the quarter dips with it.",
+    title: "One channel is carrying the whole funnel.",
+    description: "We design the second engine, connect the channels into one decision view, and install the weekly rule for what to scale, stop or repair.",
+    service: "Acquisition System Build",
+    href: "/services/acquisition-system-build",
+    meta: "from £15k · 8–12 weeks"
+  },
+  {
+    key: "evidence",
+    number: "04",
+    label: "Experiments & evidence",
+    short: "Decisions on opinion",
+    symptom: "Dashboards disagree. Tests never conclude.",
+    title: "Growth decisions are running on opinion.",
+    description: "Every test gets a hypothesis, threshold and kill criterion. Your team gets one trusted weekly view and three possible calls: scale, stop or fix.",
+    service: "Acquisition System Build",
+    href: "/services/acquisition-system-build",
+    meta: "from £15k · 8–12 weeks"
+  },
+  {
+    key: "team",
+    number: "05",
+    label: "Growth loop",
+    short: "Founder bottleneck",
+    symptom: "Every campaign and brief still routes through you.",
+    title: "The founder is still the operating system.",
+    description: "We install senior judgement, decision rights and a weekly cadence inside the team—then deliberately transfer ownership so pipeline no longer waits for you.",
+    service: "Fractional CMO",
+    href: "/services/fractional-cmo",
+    meta: "from £5k/mo · 3-month minimum"
+  }
+];
+
+const selectedConstraint = constraints[4];
+
+const fitFor = [
+  "Post-PMF B2B SaaS and AI startups, Seed to Series B.",
+  "Real traction, inconsistent pipeline.",
+  "A founder who still owns too many growth decisions.",
+  "A team that needs one operating system, not more disconnected execution.",
+  "Leaders willing to share the numbers every week."
+];
+
+const notFor = [
+  "Pre-PMF products still searching for fit.",
+  "Teams wanting only ads management.",
+  "Founders looking for a one-off campaign.",
+  "Volume buyers who want more activity rather than fewer, sharper decisions.",
+  "Companies unwilling to share numbers weekly."
+];
+
+const timeline = [
+  {
+    when: "Week 1",
+    title: "Name the constraint",
+    body: "Evidence review, funnel data and founder context. One bottleneck named in plain English, with a reporting baseline."
+  },
+  {
+    when: "Weeks 2–4",
+    title: "Design & launch",
+    body: "ICP, offer and channel architecture. First tests live. The weekly decision meeting starts and keeps its slot."
+  },
+  {
+    when: "Month 2",
+    title: "Scale the signal",
+    body: "Double down on the strongest channel and repair the conversion leaks the tests exposed. One dashboard, trusted."
+  },
+  {
+    when: "Month 3",
+    title: "Transfer ownership",
+    body: "Cadence documented, dashboard owned and decisions made by the team. The founder leaves the loop deliberately."
+  },
+  {
+    when: "Day 90",
+    title: "Board-ready review",
+    body: "What moved, what did not, and next quarter's plan—with a system that runs without you in every decision."
+  }
+];
+
+const caseStudies = [
+  {
+    type: "Paid · Healthtech · Fractional CMO",
+    name: "Healthtech (anon.)",
+    logo: "/images/logos/healthtech-anon.svg",
+    context: "Precision medicine · Marketing function from zero",
+    body: "Built the marketing operation from scratch: outbound, events and agency coordination. The CEO moved from doing everything to a weekly review, with the system left in the team.",
+    stats: [
+      ["464", "Media placements"],
+      ["18", "Clinicians in pilot"],
+      ["30–40%", "LinkedIn accept rate"]
+    ],
+    href: "/case-studies/healthtech-precision-medicine",
+    feature: true
+  },
+  {
+    type: "Paid · Fintech",
+    name: "Ned",
+    logo: "/images/logos/ned.svg",
+    context: "Funding platform · Paid search + SEO",
+    body: "500+ sign-ups in two months from paid search, with an 8.6% CTR and $0.74 CPC.",
+    stats: [
+      ["500+", "Sign-ups"],
+      ["8.6%", "CTR"]
+    ],
+    href: "/case-studies/ned",
+    feature: false
+  },
+  {
+    type: "Paid · Healthtech",
+    name: "eQuoo",
+    logo: "/images/logos/equoo.svg",
+    context: "Mental-health app · Fractional CMO",
+    body: "A clearer acquisition narrative and channel hierarchy for a trust-sensitive category.",
+    stats: [
+      ["1", "Clear narrative"],
+      ["1", "Channel hierarchy"]
+    ],
+    href: "/case-studies/equoo",
+    feature: false
+  }
+];
+
+const subAudiences = [
+  {
+    title: "Investors & funds",
+    body: "Diagnose growth across a portfolio in two weeks. The same framework, applied across companies.",
+    href: "/resources/vc-portfolio-growth-diagnosis",
+    label: "Portfolio diagnosis"
+  },
+  {
+    title: "Corporate & accelerator partners",
+    body: "Workshops, keynote talks and programme advisory for cohorts and innovation teams.",
     href: "/speaking",
     label: "Speaking & workshops"
   },
   {
-    title: "Operators, advisors & referrers.",
-    body: "Refer a founder, come on the podcast, or partner on a deal. Drop a line.",
+    title: "Operators, advisors & referrers",
+    body: "Refer a founder, come on the podcast or partner on a deal. Drop a line.",
     href: "/contact",
     label: "Get in touch"
   }
 ];
 ---
+
 <BaseLayout
   title="We Scale Startups | Growth Systems for Seed–Series B B2B SaaS & AI"
-  description="Fractional CMO who installs a repeatable growth system in 90 days, for post-PMF B2B SaaS and AI founders doing £1–10M ARR."
+  description="We diagnose the growth bottleneck, install the acquisition system, and transfer the weekly rhythm so post-PMF B2B SaaS and AI teams can run pipeline without founder heroics."
   path="/"
   schema={faqSchema}
-  bodyClass="page-home-v8"
+  bodyClass="page-home-v9"
+  showAnnouncement={false}
   stickyBookCta={false}
 >
-  {/* ============ HERO, the problem, the promise, the proof ============ */}
-  <section class="hero">
-    <div class="shell">
-      <span class="hero-badge"><span class="dot"></span> Growth partner · Seed–Series B B2B SaaS &amp; AI</span>
-      <div class="hero-grid">
-        <div>
-          <h1>Build a growth system your team can run <span class="hl">without you</span>.</h1>
-          <p class="lede">For post-PMF B2B SaaS and AI teams. We diagnose the constraint, install the acquisition system, and transfer the weekly growth rhythm in 90 days, <strong>so pipeline no longer depends on the founder</strong>.</p>
+  <div class="v9-scroll-progress" aria-hidden="true"></div>
 
-          <div class="hero-ctas">
-            <a href={siteConfig.bookingUrl} class="btn-primary">{siteConfig.bookingLabel} <span>→</span></a>
-            <a href="#client-results" class="hero-cta-alt">See client results ↓</a>
+  <section class="v9-hero" id="top" aria-labelledby="v9-hero-title">
+    <div class="v9-aurora v9-aurora-one" aria-hidden="true"></div>
+    <div class="v9-aurora v9-aurora-two" aria-hidden="true"></div>
+    <div class="v9-shell">
+      <div class="v9-hero-grid">
+        <div class="v9-hero-copy">
+          <div class="v9-kicker">
+            <span class="v9-live-dot" aria-hidden="true"></span>
+            Growth systems for Seed–Series B B2B SaaS &amp; AI
           </div>
-
-          <div class="hero-trust">
-            <div class="trust"><span class="trust-v">£18M+</span><span class="trust-l">Revenue<br />influenced</span></div>
-            <div class="trust"><span class="trust-v">£6M+</span><span class="trust-l">Paid spend<br />managed</span></div>
-            <div class="trust"><span class="trust-v">479+</span><span class="trust-l">Founder<br />sessions</span></div>
-            <div class="trust"><span class="trust-v">4.93<span style="font-size:0.55em;color:var(--ink-4);font-weight:500;">/5</span></span><span class="trust-l">GrowthMentor<br />rating</span></div>
+          <h1 id="v9-hero-title">Build a growth system your team can run <em>without you.</em></h1>
+          <p class="v9-hero-lede">Your product is ahead of your pipeline. We diagnose the constraint, install the acquisition system and transfer the weekly growth rhythm in 90 days—<strong>so revenue compounds without the founder in every decision.</strong></p>
+          <div class="v9-hero-actions">
+            <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl} data-cta="v9-hero-book">
+              <span>{siteConfig.bookingLabel}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="v9-text-link" href={siteConfig.scorecardUrl} data-cta="v9-hero-scorecard">
+              Find my bottleneck <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div class="v9-hero-reassurance">
+            <span>Free</span>
+            <span>20 minutes</span>
+            <span>No pitch</span>
+            <span>Leave with the constraint named</span>
           </div>
         </div>
 
-        <aside class="hero-system-card glow-card" aria-label="The 90-day growth system">
-          <div class="hero-system-head">
-            <span>90-day growth system</span>
-            <span>Built to hand off</span>
-          </div>
-          <h2>From founder bottleneck to team-owned growth.</h2>
-          <p class="hero-system-intro">A practical operating system, installed with your team rather than left behind in a strategy deck.</p>
-          <ol class="hero-system-steps">
-            <li>
-              <span class="hero-system-number">01</span>
-              <span><strong>Name the constraint</strong><small>Evidence, funnel data, customer signal.</small></span>
-            </li>
-            <li>
-              <span class="hero-system-number">02</span>
-              <span><strong>Prove what moves</strong><small>Focused tests with a decision threshold.</small></span>
-            </li>
-            <li>
-              <span class="hero-system-number">03</span>
-              <span><strong>Install the rhythm</strong><small>Channels, reporting, weekly decisions.</small></span>
-            </li>
-            <li>
-              <span class="hero-system-number">04</span>
-              <span><strong>Transfer ownership</strong><small>Your team runs the system by day 90.</small></span>
-            </li>
-          </ol>
-          <div class="hero-system-proof">
+        <div class="v9-os-card v9-hover-glow">
+          <div class="v9-os-head">
             <div>
-              <span class="hero-system-proof-label">Selected client result · Fintech</span>
-              <strong>500+ sign-ups in two months</strong>
-              <span>8.6% CTR · $0.74 CPC</span>
+              <span class="v9-window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>WSS / Growth OS</span>
             </div>
-            <a href="/case-studies/ned">Read case study →</a>
+            <span class="v9-system-status"><i aria-hidden="true"></i> System online</span>
           </div>
-        </aside>
+          <div class="v9-os-stage">
+            <div class="v9-os-input">
+              <span>Current state</span>
+              <strong>Founder-dependent growth</strong>
+              <small>Scattered activity · slow decisions · one-person bottleneck</small>
+            </div>
+            <div class="v9-os-flow" role="img" aria-label="Diagnose, prove, install and transfer the growth system">
+              <div class="v9-flow-line" aria-hidden="true"></div>
+              <div class="v9-flow-step"><span>01</span><strong>Diagnose</strong><i aria-hidden="true"></i></div>
+              <div class="v9-flow-step"><span>02</span><strong>Prove</strong><i aria-hidden="true"></i></div>
+              <div class="v9-flow-step"><span>03</span><strong>Install</strong><i aria-hidden="true"></i></div>
+              <div class="v9-flow-step"><span>04</span><strong>Transfer</strong><i aria-hidden="true"></i></div>
+            </div>
+            <div class="v9-os-output">
+              <span>Day 90 state</span>
+              <strong>Team-owned pipeline</strong>
+              <small>One cadence · trusted reporting · decisions on schedule</small>
+            </div>
+          </div>
+          <div class="v9-os-proof">
+            <div>
+              <span>Selected client signal</span>
+              <strong>500+ sign-ups</strong>
+              <small>in two months · Fintech</small>
+            </div>
+            <div class="v9-os-proof-chart" aria-hidden="true">
+              <i style="--bar: 30%"></i><i style="--bar: 45%"></i><i style="--bar: 38%"></i><i style="--bar: 58%"></i><i style="--bar: 74%"></i><i style="--bar: 96%"></i>
+            </div>
+            <a href="/case-studies/ned" aria-label="Read the Ned fintech case study">View proof →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="v9-metric-rail" aria-label="We Scale Startups track record">
+        {canonicalProofMetrics.slice(0, 4).map((metric, index) => (
+          <div class="v9-metric">
+            <span class="v9-metric-index">0{index + 1}</span>
+            <strong>{metric.value}</strong>
+            <span>{metric.label}</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  {/* ============ LOGO WALL, credentials ============ */}
-  <section class="logo-wall">
-    <div class="shell">
-      <div class="logo-wall-label">Trusted by founders, programmes &amp; platforms</div>
-      <div class="logo-row-groups reveal">
-        <div class="logo-group">
-          <p class="logo-group-label">Startup programmes &amp; mentoring</p>
-          <div class="logo-row">
-            <a href="https://startup.google.com/" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Google for Startups, mentor">
-              <img class="logo-img" src="/images/logos/google.webp" alt="Google for Startups" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">Mentor</span>
-            </a>
-            <a href="https://www.techstars.com" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Techstars, mentor and speaker">
-              <img class="logo-img" src="/images/logos/techstars.webp" alt="Techstars" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">Mentor &amp; speaker</span>
-            </a>
-            <a href="https://www.gov.uk/government/organisations/uk-space-agency" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="UK Space Agency, startup ecosystem support">
-              <img class="logo-img" src="/images/logos/uksa.webp" alt="UK Space Agency" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">Ecosystem support</span>
-            </a>
+  <section class="v9-credibility" aria-labelledby="v9-credibility-title">
+    <div class="v9-shell">
+      <div class="v9-credibility-head">
+        <p id="v9-credibility-title">Trusted across startup programmes, classrooms and founder teams</p>
+        <span>Relationships labelled clearly. No implied client logos.</span>
+      </div>
+      <div class="v9-logo-track">
+        {proofEcosystemLogos.map((logo) => (
+          <div class="v9-logo-item">
+            <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+            <span>{logo.relationship}</span>
           </div>
-        </div>
-        <div class="logo-group">
-          <p class="logo-group-label">Guest lecturing &amp; teaching</p>
-          <div class="logo-row">
-            <a href="https://www.jbs.cam.ac.uk/" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Cambridge Judge Business School, guest lecturer">
-              <img class="logo-img" src="/images/logos/cambridge.webp" alt="Cambridge Judge Business School" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">Guest lecturer</span>
-            </a>
-            <a href="https://www.imperial.ac.uk/business-school" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="Imperial College Business School, speaker">
-              <img class="logo-img" src="/images/logos/imperial.webp" alt="Imperial College Business School" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">Speaker</span>
-            </a>
-            <a href="https://generalassemb.ly/" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="General Assembly, growth teaching">
-              <img class="logo-img" src="/images/logos/general-assembly.webp" alt="General Assembly" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">Growth teaching</span>
-            </a>
-          </div>
-        </div>
-        <div class="logo-group">
-          <p class="logo-group-label">Founder reviews</p>
-          <div class="logo-row">
-            <a href="https://app.growthmentor.com/mentors/daniel-johnson" class="logo-item" rel="noopener noreferrer" target="_blank" aria-label="GrowthMentor, 4.93 across 479+ sessions">
-              <img class="logo-img" src="/images/logos/growthmentor-v2.jpg" alt="GrowthMentor" width="130" height="30" loading="lazy" decoding="async" />
-              <span class="logo-meta">★ 4.93 · 479+ sessions</span>
-            </a>
-            <a href="https://mentorcruise.com/mentor/danieljohnson/" class="logo-item cred-item" rel="noopener noreferrer" target="_blank" aria-label="MentorCruise, Top Mentor, 5.0 out of 5">
-              <span class="cred-name">MentorCruise</span>
-              <span class="logo-meta">Top Mentor · 5.0/5</span>
-            </a>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
 
-  {/* ============ MANIFESTO, why a system beats heroics ============ */}
-  <section class="manifesto">
-    <div class="shell">
-      <span class="spec-label">The thesis · § 01</span>
-      <p class="manifesto-quote reveal">Most Seed–Series B B2B SaaS and AI startups don't have a product problem. They have a <em>distribution problem</em>: every growth decision still routes through the founder, so pipeline moves at the speed of one person.</p>
-      <div class="manifesto-grid">
-        <div class="belief-card glow-card reveal" data-d="1">
-          <span class="belief-n">/01, Diagnose before spend</span>
-          <h2>Name the constraint first.</h2>
-          <p>More budget against an unnamed bottleneck buys activity, not pipeline. Every engagement starts by naming the single constraint that's binding growth.</p>
-        </div>
-        <div class="belief-card glow-card reveal" data-d="2">
-          <span class="belief-n">/02, Systems over heroics</span>
-          <h2>Install a rhythm, not a hero.</h2>
-          <p>A weekly decision cadence your team owns beats a brilliant operator who leaves. We build the operating system, then transfer it.</p>
-        </div>
-        <div class="belief-card glow-card reveal" data-d="3">
-          <span class="belief-n">/03, Built to hand off</span>
-          <h2>You shouldn't need us forever.</h2>
-          <p>Success is the quarter the system runs without us, channels aligned, reporting trusted, decisions made on schedule, founder out of the loop.</p>
-        </div>
+  <section class="v9-thesis" id="approach" aria-labelledby="v9-thesis-title">
+    <div class="v9-shell">
+      <div class="v9-section-intro v9-section-intro-dark">
+        <span class="v9-section-number">01 / The thesis</span>
+        <p>Why good products still get stuck</p>
       </div>
-    </div>
-  </section>
-
-  {/* ============ INTERACTIVE BOTTLENECK FINDER ============ */}
-  <section class="bf-section">
-    <div class="shell">
-      <span class="spec-label">The system · § 02 · WSS Growth Operating System</span>
-      <h2 class="section-h">The WSS Growth <em>Operating System</em>.</h2>
-      <p class="section-sub">The same arc we teach founders: know the customer, prove the problem, sharpen the offer, test cheaply, then install the growth loop. No decision passes on opinion; evidence moves from <strong>word → action → money</strong> before it earns budget. Click the constraint that sounds like you.</p>
-
-      <div class="bottleneck-finder">
-        <div class="bf-grid reveal" id="bf-grid">
-          <button class="bf-card" data-bn="customer"><span class="bf-num">01 / CUSTOMER</span><span class="bf-name">ICP too broad</span><span class="bf-q">Everyone could use it, no one buys it.</span></button>
-          <button class="bf-card" data-bn="positioning"><span class="bf-num">02 / OFFER &amp; POSITIONING</span><span class="bf-name">Story doesn't land</span><span class="bf-q">Demos go well, pipeline doesn't.</span></button>
-          <button class="bf-card active" data-bn="acquisition"><span class="bf-num">03 / ACQUISITION</span><span class="bf-name">One-channel risk</span><span class="bf-q">If it dips, the quarter dips.</span></button>
-          <button class="bf-card" data-bn="evidence"><span class="bf-num">04 / EXPERIMENTS &amp; EVIDENCE</span><span class="bf-name">Decisions on opinion</span><span class="bf-q">Dashboards disagree, tests never conclude.</span></button>
-          <button class="bf-card" data-bn="team"><span class="bf-num">05 / GROWTH LOOP</span><span class="bf-name">Founder bottleneck</span><span class="bf-q">Every brief routes through you.</span></button>
+      <div class="v9-thesis-grid">
+        <div>
+          <h2 id="v9-thesis-title">Most post-PMF startups do not have a product problem. They have a <em>distribution problem.</em></h2>
+          <p class="v9-thesis-lede">Every growth decision still routes through the founder, so pipeline moves at the speed of one person.</p>
         </div>
-
-        <div class="bf-result glow-card reveal" id="bf-result">
-          <div>
-            <div class="bf-result-meta" id="bf-meta">03 · ACQUISITION</div>
-            <h3 id="bf-title">One channel carries the funnel.</h3>
-            <p id="bf-desc">Diversify before the dip: design the second engine and the weekly decision rule that scales it.</p>
-            <a class="bf-result-link" id="bf-link" href="/services/acquisition-system-build">Acquisition System Build →</a>
-          </div>
-          <div class="bf-rec">
-            <span class="bf-rec-label">Recommended engagement</span>
-            <span class="bf-rec-svc" id="bf-svc">Acquisition System Build</span>
-            <span class="bf-rec-meta" id="bf-svc-meta">from £15k · 8–12 weeks · Flagship</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {/* ============ PHOTO STRIP, break up the text ============ */}
-  <section class="photo-strip" aria-label="Daniel Johnson teaching and speaking">
-    <div class="shell">
-      <div class="photo-strip-grid reveal">
-        <figure>
-          <img src="/images/speaking/daniel-speaking-nomad-960.webp" alt="Daniel Johnson teaching a founder cohort" loading="lazy" decoding="async" width="960" height="640" />
-          <figcaption>Teaching the growth system to a founder cohort</figcaption>
-        </figure>
-        <figure>
-          <img src="/images/speaking/daniel-speaking-shenzhen-960.webp" alt="Daniel Johnson speaking on startup growth in Shenzhen" loading="lazy" decoding="async" width="960" height="640" />
-          <figcaption>On stage: acquisition systems for AI-era startups</figcaption>
+        <figure class="v9-teaching-card v9-hover-glow">
+          <img src="/images/speaking/daniel-speaking-nomad-960.webp" alt="Daniel Johnson teaching the growth system to a founder cohort" width="960" height="640" loading="lazy" decoding="async" />
+          <figcaption>
+            <span>In the room, not on the sidelines</span>
+            <strong>Teaching acquisition systems to a founder cohort</strong>
+          </figcaption>
         </figure>
       </div>
-    </div>
-  </section>
-
-  {/* ============ FIT, built for / not for ============ */}
-  <section class="fit">
-    <div class="shell">
-      <span class="spec-label">Self-qualify · § 03</span>
-      <h2 class="section-h">Built for some teams. <em>Not for others.</em></h2>
-      <p class="section-sub">Better you know in 30 seconds than 15 minutes into a call.</p>
-      <div class="fit-grid">
-        <div class="fit-card for glow-card reveal">
-          <span class="fit-label yes">Built for</span>
-          <ul>
-            <li>Post-PMF B2B SaaS and AI startups, Seed to Series B.</li>
-            <li>Real traction, inconsistent pipeline.</li>
-            <li>Founder still owns too many growth decisions.</li>
-            <li>A team that needs a system, not more disconnected execution.</li>
-            <li>Willing to share numbers weekly.</li>
-          </ul>
-        </div>
-        <div class="fit-card against glow-card reveal" data-d="1">
-          <span class="fit-label no">Not for</span>
-          <ul>
-            <li>Pre-PMF products still searching for fit.</li>
-            <li>Teams wanting only ads management.</li>
-            <li>Founders looking for a one-off campaign.</li>
-            <li>Volume buyers who want more activity, not fewer sharper decisions.</li>
-            <li>Companies unwilling to share numbers weekly.</li>
-          </ul>
-        </div>
+      <div class="v9-principle-grid">
+        {principles.map((principle) => (
+          <article class="v9-principle v9-hover-glow">
+            <span>{principle.number}</span>
+            <h3>{principle.title}</h3>
+            <p>{principle.body}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  {/* ============ SERVICES LADDER ============ */}
-  <section class="services">
-    <div class="shell">
-      <span class="spec-label">Four engagements · one ladder · § 04</span>
-      <h2 class="section-h">Pick the smallest commitment that answers your <em>biggest</em> question.</h2>
-      <p class="section-sub">Each engagement installs what the next one needs, diagnosis names the constraint, the sprint tests the move, the build installs the rhythm, embed operates it. Start small, ladder up.</p>
-      <div class="svc-grid">
-        <article class="svc-card glow-card reveal">
-          <span class="svc-step">/01</span>
-          <span class="svc-title">Growth Diagnosis</span>
-          <span class="svc-price">£2k · 1 week</span>
-          <div class="svc-desc"><strong>Best for</strong>You're not sure what's blocking pipeline.</div>
-          <div class="svc-desc"><strong>What gets built</strong>Constraint map, evidence review, 90-day plan.</div>
-          <div class="svc-cta"><a href="/services/growth-diagnosis">Read →</a></div>
-        </article>
-        <article class="svc-card glow-card reveal" data-d="1">
-          <span class="svc-step">/02</span>
-          <span class="svc-title">90-Day Growth Sprint</span>
-          <span class="svc-price">£8k · 12 weeks</span>
-          <div class="svc-desc"><strong>Best for</strong>Focused tests against the named bottleneck this quarter.</div>
-          <div class="svc-desc"><strong>What gets built</strong>Experiment backlog, weekly decisions, tested copy.</div>
-          <div class="svc-cta"><a href="/services/90-day-growth-sprint">Run →</a></div>
-        </article>
-        <article class="svc-card flagship glow-card reveal" data-d="2">
-          <span class="svc-step">/03 <span class="svc-flag">Flagship</span></span>
-          <span class="svc-title">Acquisition System Build</span>
-          <span class="svc-price">£15k · 8–12 weeks</span>
-          <div class="svc-desc"><strong>Best for</strong>Channels in isolation; you need them as one system.</div>
-          <div class="svc-desc"><strong>What gets built</strong>Channel architecture, offer map, reporting, handoff pack.</div>
-          <div class="svc-cta"><a href="/services/acquisition-system-build">Build →</a></div>
-        </article>
-        <article class="svc-card glow-card reveal" data-d="3">
-          <span class="svc-step">/04</span>
-          <span class="svc-title">Fractional CMO</span>
-          <span class="svc-price">£5k/mo · 3-mo min</span>
-          <div class="svc-desc"><strong>Best for</strong>Senior growth leadership without a £150k full-time hire.</div>
-          <div class="svc-desc"><strong>What gets built</strong>Operating cadence, agency direction, board reporting.</div>
-          <div class="svc-cta"><a href="/services/fractional-cmo">Embed →</a></div>
-        </article>
+  <section class="v9-system" id="system" aria-labelledby="v9-system-title">
+    <div class="v9-shell">
+      <div class="v9-section-intro">
+        <span class="v9-section-number">02 / The operating system</span>
+        <p>Click the constraint that sounds like your team</p>
       </div>
-    </div>
-  </section>
-
-  {/* ============ 90-DAY TIMELINE ============ */}
-  <section class="timeline">
-    <div class="shell">
-      <span class="spec-label">After you book · § 05</span>
-      <h2 class="section-h">What actually happens in <em>90 days</em>.</h2>
-      <p class="section-sub">Not a strategy deck and a wave goodbye. A week-by-week operating programme with a handoff date.</p>
-      <div class="tl-grid">
-        <div class="tl-step glow-card reveal">
-          <span class="tl-when">Week 1</span>
-          <h3>Name the constraint</h3>
-          <p>Evidence review, funnel data, founder context. The single bottleneck named in plain English, with a reporting baseline.</p>
-        </div>
-        <div class="tl-step glow-card reveal" data-d="1">
-          <span class="tl-when">Weeks 2–4</span>
-          <h3>Design &amp; launch</h3>
-          <p>ICP, offer, channel architecture. First tests live. The weekly decision meeting starts, and keeps its slot.</p>
-        </div>
-        <div class="tl-step glow-card reveal" data-d="2">
-          <span class="tl-when">Month 2</span>
-          <h3>Scale the signal</h3>
-          <p>Double down on the strongest channel and fix the conversion leaks the tests exposed. One dashboard, trusted.</p>
-        </div>
-        <div class="tl-step glow-card reveal" data-d="3">
-          <span class="tl-when">Month 3</span>
-          <h3>Transfer ownership</h3>
-          <p>Cadence documented, dashboard owned, decisions made by the team. The founder leaves the loop deliberately.</p>
-        </div>
-        <div class="tl-step tl-final glow-card reveal" data-d="4">
-          <span class="tl-when">Day 90</span>
-          <h3>Board-ready review</h3>
-          <p>What moved, what didn't, and next quarter's plan, with a system that runs without you in every decision.</p>
-        </div>
+      <div class="v9-system-heading">
+        <h2 id="v9-system-title">Growth gets simpler when you name what is <em>actually</em> stuck.</h2>
+        <p>Five constraints. One binding bottleneck. No decision earns budget on opinion alone—evidence must move from <strong>word → action → money.</strong></p>
       </div>
-    </div>
-  </section>
 
-  {/* ============ CASE STUDIES ============ */}
-  <section class="cases" id="client-results">
-    <div class="shell">
-      <span class="spec-label">Real engagements · § 06</span>
-      <h2 class="section-h">Client results.</h2>
-      <p class="section-sub">Every result is labelled: paid client engagement, programme, or lecturing. Nothing here reads like an implied client when it isn't one.</p>
-      <div class="case-grid">
-        <article class="case-card feature glow-card reveal">
-          <span class="case-meta">Paid · Healthtech · Fractional CMO</span>
-          <h3>Healthtech (anon.)</h3>
-          <div class="case-sub">Precision medicine · Marketing function from zero</div>
-          <p>Built the marketing operation from scratch: outbound, events, agency coordination. <strong>CEO moved from doing everything to a weekly review</strong>, with the system left in the team.</p>
-          <div class="case-mini-stats">
-            <div><div class="case-stat-v">464</div><div class="case-stat-l">Media placements</div></div>
-            <div><div class="case-stat-v">18</div><div class="case-stat-l">Clinicians in pilot</div></div>
-            <div><div class="case-stat-v">30–40%</div><div class="case-stat-l">LinkedIn accept rate</div></div>
+      <div class="v9-diagnostic">
+        <div class="v9-constraint-tabs" role="tablist" aria-label="Growth constraints">
+          {constraints.map((constraint) => (
+            <button
+              type="button"
+              class:list={["v9-constraint-tab", { "is-active": constraint.key === selectedConstraint.key }]}
+              role="tab"
+              aria-selected={constraint.key === selectedConstraint.key ? "true" : "false"}
+              tabindex={constraint.key === selectedConstraint.key ? 0 : -1}
+              data-constraint={constraint.key}
+              data-number={constraint.number}
+              data-label={constraint.label}
+              data-title={constraint.title}
+              data-description={constraint.description}
+              data-service={constraint.service}
+              data-href={constraint.href}
+              data-meta={constraint.meta}
+            >
+              <span>{constraint.number}</span>
+              <span>
+                <strong>{constraint.short}</strong>
+                <small>{constraint.label}</small>
+              </span>
+              <i aria-hidden="true">↗</i>
+            </button>
+          ))}
+        </div>
+
+        <div class="v9-diagnostic-output v9-hover-glow" role="tabpanel" aria-live="polite">
+          <div class="v9-output-topline">
+            <span id="v9-output-meta">{selectedConstraint.number} / {selectedConstraint.label}</span>
+            <span>Recommended next move</span>
           </div>
-          <a href="/case-studies/healthtech-precision-medicine" class="case-link">Read the full case study →</a>
-        </article>
-        <article class="case-card glow-card reveal" data-d="1">
-          <span class="case-meta">Paid · Fintech</span>
-          <h3>Ned</h3>
-          <div class="case-sub">Funding platform · Paid search + SEO</div>
-          <p><strong>500+ sign-ups</strong> in two months from paid search. CTR 8.6%, CPC $0.74.</p>
-          <a href="/case-studies/ned" class="case-link">Read →</a>
-        </article>
-        <article class="case-card glow-card reveal" data-d="2">
-          <span class="case-meta">Paid · Healthtech</span>
-          <h3>eQuoo</h3>
-          <div class="case-sub">Mental-health app · Fractional CMO</div>
-          <p>Clearer <strong>acquisition narrative</strong> and channel hierarchy.</p>
-          <a href="/case-studies/equoo" class="case-link">Read →</a>
-        </article>
+          <div class="v9-output-signal">
+            <span>Constraint detected</span>
+            <i aria-hidden="true"></i>
+          </div>
+          <h3 id="v9-output-title">{selectedConstraint.title}</h3>
+          <p id="v9-output-description">{selectedConstraint.description}</p>
+          <div class="v9-output-recommendation">
+            <div>
+              <span>Best-fit engagement</span>
+              <strong id="v9-output-service">{selectedConstraint.service}</strong>
+              <small id="v9-output-price">{selectedConstraint.meta}</small>
+            </div>
+            <a id="v9-output-link" class="v9-button v9-button-dark" href={selectedConstraint.href}>Explore this engagement <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  {/* ============ TESTIMONIALS ============ */}
-  <section class="testimonials">
-    <div class="shell">
-      <span class="spec-label">Founder voices · § 07</span>
-      <h2 class="section-h">What founders <em>say</em>.</h2>
-      <p class="section-sub">Paid client and paid advisory work. Mentoring-platform reviews live on /testimonials.</p>
-      <div class="testim-grid">
-        {homepageQuotes.map((t, i) => (
-          <figure class={`testim-card glow-card reveal`} data-d={i || undefined}>
-            <span class="testim-mark">"</span>
-            <blockquote>{t.quote}</blockquote>
-            <cite>
-              <strong>{t.name}{t.role ? `, ${t.role}` : ""}</strong>
-              {t.company}
-            </cite>
+  <section class="v9-fit" aria-labelledby="v9-fit-title">
+    <div class="v9-shell">
+      <div class="v9-section-intro">
+        <span class="v9-section-number">03 / Self-qualify</span>
+        <p>Better to know in 30 seconds than 15 minutes into a call</p>
+      </div>
+      <h2 id="v9-fit-title">Built for some teams. <em>Not for others.</em></h2>
+      <div class="v9-fit-grid">
+        <div class="v9-fit-card v9-fit-yes">
+          <div class="v9-fit-card-head"><span>✓</span><strong>Built for</strong></div>
+          <ul>{fitFor.map((item) => <li>{item}</li>)}</ul>
+        </div>
+        <div class="v9-fit-card v9-fit-no">
+          <div class="v9-fit-card-head"><span>×</span><strong>Not for</strong></div>
+          <ul>{notFor.map((item) => <li>{item}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="v9-work" id="work" aria-labelledby="v9-work-title">
+    <div class="v9-shell">
+      <div class="v9-section-intro v9-section-intro-dark">
+        <span class="v9-section-number">04 / Four engagements, one ladder</span>
+        <p>Start with the smallest commitment that answers the biggest question</p>
+      </div>
+      <div class="v9-work-heading">
+        <h2 id="v9-work-title">Diagnosis names it. A sprint proves it. A build installs it. Embed operates it.</h2>
+        <a class="v9-text-link v9-text-link-light" href="/pricing">Compare all pricing →</a>
+      </div>
+      <div class="v9-service-grid">
+        {serviceSnapshots.map((service, index) => (
+          <article class:list={["v9-service-card", "v9-hover-glow", { "is-featured": index === 2 }]}>
+            <div class="v9-service-head">
+              <span>0{index + 1}</span>
+              <span>{service.badge}</span>
+            </div>
+            <h3>{service.title}</h3>
+            <div class="v9-service-price"><strong>{service.price}</strong><span>{service.timeline}</span></div>
+            <p>{service.bestFor}</p>
+            <ul>{service.keyDeliverables.map((deliverable) => <li>{deliverable}</li>)}</ul>
+            <a href={service.href}>{service.cta} <span aria-hidden="true">↗</span></a>
+          </article>
+        ))}
+      </div>
+
+      <div class="v9-timeline-wrap" aria-labelledby="v9-timeline-title">
+        <div class="v9-timeline-heading">
+          <span>After you book</span>
+          <h3 id="v9-timeline-title">What actually happens in 90 days</h3>
+          <p>Not a strategy deck and a wave goodbye. A week-by-week operating programme with a handoff date.</p>
+        </div>
+        <ol class="v9-timeline">
+          {timeline.map((step, index) => (
+            <li class:list={{ "is-final": index === timeline.length - 1 }}>
+              <div class="v9-timeline-marker"><span>{index + 1}</span></div>
+              <span>{step.when}</span>
+              <h4>{step.title}</h4>
+              <p>{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="v9-results" id="results" aria-labelledby="v9-results-title">
+    <div class="v9-shell">
+      <div class="v9-section-intro">
+        <span class="v9-section-number">05 / Real engagements</span>
+        <p>Paid work is labelled as paid work. Teaching is labelled as teaching.</p>
+      </div>
+      <div class="v9-results-heading">
+        <h2 id="v9-results-title">Proof that the system leaves the room with your team.</h2>
+        <a class="v9-text-link" href="/case-studies">All case studies →</a>
+      </div>
+      <div class="v9-case-grid">
+        {caseStudies.map((study) => (
+          <article class:list={["v9-case-card", "v9-hover-glow", { "is-featured": study.feature }]}>
+            <div class="v9-case-topline"><span>{study.type}</span><img src={study.logo} alt="" loading="lazy" decoding="async" /></div>
+            <h3>{study.name}</h3>
+            <span class="v9-case-context">{study.context}</span>
+            <p>{study.body}</p>
+            <div class="v9-case-stats">
+              {study.stats.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}
+            </div>
+            <a href={study.href}>Read the case study <span aria-hidden="true">↗</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="v9-voices" aria-labelledby="v9-voices-title">
+    <div class="v9-shell">
+      <div class="v9-voices-heading">
+        <div>
+          <span class="v9-section-number">06 / Founder voices</span>
+          <h2 id="v9-voices-title">What it feels like when growth finally has a rhythm.</h2>
+        </div>
+        <div class="v9-rating-lockup">
+          <strong>4.93/5</strong>
+          <span>GrowthMentor rating<br />across 479+ sessions</span>
+        </div>
+      </div>
+      <div class="v9-quote-grid">
+        {homepageQuotes.map((quote, index) => (
+          <figure class:list={["v9-quote", { "is-primary": index === 0 }]}>
+            <blockquote>“{quote.quote}”</blockquote>
+            <figcaption>
+              <strong>{quote.name}{quote.role ? ` · ${quote.role}` : ""}</strong>
+              <span>{quote.company}</span>
+            </figcaption>
           </figure>
         ))}
       </div>
-      <p class="section-sub" style="margin-top:1.5rem;">
-        <a href="/testimonials">All founder voices, including mentoring reviews →</a>
-      </p>
     </div>
   </section>
 
-  {/* ============ DIAGNOSTIC CTA ============ */}
-  <section class="diag-cta">
-    <div class="shell">
-      <div class="diag-cta-card glow-card reveal">
-        <div>
-          <span class="spec-label">Free diagnostic · § 08</span>
-          <h2>Find the constraint costing this quarter's pipeline.</h2>
-          <p>Take the 5-minute Growth Bottleneck Scorecard, built from 479+ founder sessions, and get a founder-ready readout across positioning, acquisition, conversion, reporting and team ownership.</p>
+  <section class="v9-founder" id="about" aria-labelledby="v9-founder-title">
+    <div class="v9-shell">
+      <div class="v9-founder-grid">
+        <div class="v9-founder-visual">
+          <div class="v9-founder-main-image">
+            <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="960" loading="lazy" decoding="async" />
+          </div>
+          <div class="v9-founder-small-image">
+            <img src="/images/daniel-aircraft-640.webp" alt="Daniel Johnson in the cockpit of an aircraft" width="640" height="640" loading="lazy" decoding="async" />
+          </div>
+          <span class="v9-founder-caption">Daniel Johnson · Founder · Operator</span>
         </div>
-        <div class="diag-cta-actions">
-          <a href={siteConfig.scorecardUrl} class="btn-primary">Take the 5-min scorecard <span>→</span></a>
-          <a href={siteConfig.bookingUrl} class="hero-cta-alt">Or skip straight to the 20-min call →</a>
+        <div class="v9-founder-copy">
+          <span class="v9-section-number">07 / Why I built this</span>
+          <h2 id="v9-founder-title">The operator I wished had been in the room.</h2>
+          <p>After 15 years operating inside SaaS, fintech, healthtech and EdTech startups—including two exits—I kept seeing the same pattern: founders with great products, stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.</p>
+          <p><strong>We Scale Startups exists to diagnose the bottleneck, install the acquisition system and transfer the weekly rhythm—so you do not need us forever.</strong></p>
+          <div class="v9-founder-track">
+            <span>Two operator-side exits</span>
+            <span>£18M+ revenue influenced</span>
+            <span>£6M+ paid acquisition spend</span>
+            <span>Cambridge Judge · Imperial · Techstars</span>
+          </div>
+          <a class="v9-text-link" href="/about/daniel">More about Daniel →</a>
         </div>
       </div>
     </div>
   </section>
 
-  {/* ============ ABOUT, with real photos ============ */}
-  <section class="about">
-    <div class="shell">
-      <span class="spec-label">Founder · § 09</span>
-      <div class="about-grid">
-        <div class="about-photo-stack reveal">
-          <div class="about-photo">
-            <img src="/images/daniel-headshot-640.webp" alt="Daniel Johnson, founder of We Scale Startups" loading="lazy" width="640" height="640" decoding="async" />
+  <section class="v9-scorecard" aria-labelledby="v9-scorecard-title">
+    <div class="v9-shell">
+      <div class="v9-scorecard-card">
+        <div class="v9-scorecard-copy">
+          <span class="v9-section-number">Free diagnostic · 5 minutes</span>
+          <h2 id="v9-scorecard-title">Find the constraint costing this quarter's pipeline.</h2>
+          <p>Ten questions across positioning, acquisition, conversion, reporting and team ownership. Built from 479+ founder sessions.</p>
+          <div class="v9-scorecard-actions">
+            <a class="v9-button v9-button-primary" href={siteConfig.scorecardUrl}>Take the scorecard <span aria-hidden="true">↗</span></a>
+            <a class="v9-text-link v9-text-link-light" href={siteConfig.bookingUrl}>Or book the 20-minute call →</a>
           </div>
-          <div class="about-photo-secondary">
-            <img src="/images/daniel-aircraft-640.webp" alt="Daniel Johnson, operator-side context" loading="lazy" width="640" height="640" decoding="async" />
-          </div>
-          <div class="about-photo-caption">Daniel Johnson · Founder, We Scale Startups</div>
         </div>
-        <div class="about-content reveal" data-d="1">
-          <h2>Why I built <em>this</em>.</h2>
-          <p>I'm Daniel Johnson. After 15 years operating inside SaaS, fintech, healthtech and EdTech startups, including two exits, I kept seeing the same pattern: founders with great products, stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.</p>
-          <p>I built We Scale Startups to be the operator I wished was there. <strong>The work is to diagnose the bottleneck, install the acquisition system, and transfer the weekly rhythm</strong>, so you don't need me forever.</p>
-          <ul class="about-creds">
-            <div class="label">Track record</div>
-            <li>Two operator-side startup exits</li>
-            <li>£18M+ revenue influenced</li>
-            <li>£6M+ paid acquisition spend</li>
-            <li>479+ founder sessions · 4.93/5</li>
-            <li>MentorCruise Top Mentor · 5.0/5</li>
-            <li>Cambridge Judge · Imperial · Techstars</li>
-          </ul>
+        <div class="v9-scorecard-visual" aria-hidden="true">
+          <div class="v9-scorecard-ring">
+            <span>Growth</span>
+            <strong>Bottleneck</strong>
+            <small>Scorecard</small>
+          </div>
+          <div class="v9-scorecard-label v9-scorecard-label-one">Positioning</div>
+          <div class="v9-scorecard-label v9-scorecard-label-two">Acquisition</div>
+          <div class="v9-scorecard-label v9-scorecard-label-three">Ownership</div>
         </div>
       </div>
     </div>
   </section>
 
-  {/* ============ FAQ ============ */}
-  <section class="faq">
-    <div class="shell">
-      <span class="spec-label">Before you book · § 10</span>
-      <h2 class="section-h">Questions you'll ask <em>before you book</em>.</h2>
-      <p class="section-sub">Short answers for teams deciding whether they need more execution, sharper diagnosis, or senior growth ownership.</p>
-      <div class="faq-list reveal">
-        <details class="faq-item" open>
-          <summary><span class="q-num">/01</span><span class="q-text">Who is We Scale Startups for?</span></summary>
-          <div class="answer">Post-PMF B2B SaaS and AI startups, typically Seed to Series B, with real traction and inconsistent acquisition. If you're still searching for product-market fit, we're the wrong call, growth marketing won't fix a product problem.</div>
-        </details>
-        <details class="faq-item">
-          <summary><span class="q-num">/02</span><span class="q-text">How is WSS different from an agency?</span></summary>
-          <div class="answer">Agencies are the right choice when the channel plan is clear and you need production capacity. WSS works one level up, naming the bottleneck, aligning channels, installing the weekly decision rhythm, and handing off a system your team (or your agency) can run inside. Many teams need both, often in that order.</div>
-        </details>
-        <details class="faq-item">
-          <summary><span class="q-num">/03</span><span class="q-text">What does the first call actually cover?</span></summary>
-          <div class="answer">20 minutes. Bring your current numbers and the constraint you suspect is binding pipeline. You'll leave with the constraint named in plain English, the next move sketched out, and an honest read on whether WSS is the right call.</div>
-        </details>
-        <details class="faq-item">
-          <summary><span class="q-num">/04</span><span class="q-text">What does it cost?</span></summary>
-          <div class="answer">Four engagements, four price points, UK-based. Diagnosis from £2k (one week). 90-Day Sprint from £8k. Acquisition System Build from £15k. Fractional CMO from £5k/mo, 3-month minimum. <a href="/pricing">Full pricing →</a></div>
-        </details>
-        <details class="faq-item">
-          <summary><span class="q-num">/05</span><span class="q-text">Do you guarantee results?</span></summary>
-          <div class="answer">No. Anyone who guarantees marketing outcomes either doesn't understand the work or doesn't intend to do it. What we guarantee is the operating system, a constraint named, a plan to move it, and a weekly rhythm your team can run.</div>
-        </details>
-        <details class="faq-item">
-          <summary><span class="q-num">/06</span><span class="q-text">Who isn't this for?</span></summary>
-          <div class="answer">Pre-PMF startups, founders looking for tactic-of-the-week, teams without internal execution capacity, and volume buyers who want more activity rather than fewer sharper decisions. If that's you, we'll say so on the call and point you somewhere better.</div>
-        </details>
+  <section class="v9-faq" aria-labelledby="v9-faq-title">
+    <div class="v9-shell v9-faq-grid">
+      <div class="v9-faq-intro">
+        <span class="v9-section-number">08 / Before you book</span>
+        <h2 id="v9-faq-title">Questions founders ask before the first call.</h2>
+        <p>Short answers for teams deciding whether they need more execution, sharper diagnosis or senior growth ownership.</p>
+        <a class="v9-text-link" href="/contact">Ask a different question →</a>
       </div>
-    </div>
-  </section>
-
-  {/* ============ SUB-AUDIENCE ROUTING ============ */}
-  <section class="v8-sub-audience" aria-label="Other audiences">
-    <div class="shell">
-      <div class="v8-sub-label">Not a founder?</div>
-      <div class="v8-sub-grid reveal">
-        {subAudiences.map((a) => (
-          <div class="v8-sub-item">
-            <h2>{a.title}</h2>
-            <p>{a.body}</p>
-            <a href={a.href}>{a.label} →</a>
-          </div>
+      <div class="v9-faq-list">
+        {buyerFaqs.map((faq, index) => (
+          <details class="v9-faq-item" open={index === 0}>
+            <summary><span>0{index + 1}</span><strong>{faq.question}</strong><i aria-hidden="true"></i></summary>
+            <div><p>{faq.answer}</p></div>
+          </details>
         ))}
       </div>
     </div>
   </section>
 
-  {/* ============ FINAL CTA ============ */}
-  <section class="final-cta">
-    <div class="shell">
-      <span class="spec-label">→ Next step</span>
-      <h2 class="reveal">The next step is a <em>20-minute call</em>.</h2>
-      <p class="reveal" data-d="1">Bring your current growth picture. You'll leave with your bottleneck named in plain English, and an honest read on whether we're the right call.</p>
-      <a href={siteConfig.bookingUrl} class="btn-primary reveal" data-d="2">{siteConfig.bookingLabel} <span>→</span></a>
+  <section class="v9-other" aria-label="Other ways to work with We Scale Startups">
+    <div class="v9-shell">
+      <span class="v9-section-number">Not a founder?</span>
+      <div class="v9-other-grid">
+        {subAudiences.map((audience) => (
+          <article>
+            <h2>{audience.title}</h2>
+            <p>{audience.body}</p>
+            <a href={audience.href}>{audience.label} <span aria-hidden="true">↗</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="v9-final" aria-labelledby="v9-final-title">
+    <div class="v9-shell">
+      <span class="v9-final-orbit" aria-hidden="true"></span>
+      <p>One honest conversation. One constraint named.</p>
+      <h2 id="v9-final-title">The next step is a <em>20-minute call.</em></h2>
+      <p>Bring your current growth picture. Leave with your bottleneck named in plain English and an honest read on whether we are the right call.</p>
+      <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
   <script is:inline>
-    // =========== Pointer-tracked glow on cards ===========
-    (function(){
-      if (window.matchMedia('(hover: none)').matches) return;
-      document.querySelectorAll('.glow-card').forEach(card => {
-        card.addEventListener('pointermove', (e) => {
-          const r = card.getBoundingClientRect();
-          card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-          card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    (function () {
+      var progress = document.querySelector(".v9-scroll-progress");
+      var frame = 0;
+
+      function updateProgress() {
+        frame = 0;
+        if (!progress) return;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var value = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        progress.style.transform = "scaleX(" + value + ")";
+      }
+
+      window.addEventListener("scroll", function () {
+        if (!frame) frame = requestAnimationFrame(updateProgress);
+      }, { passive: true });
+      window.addEventListener("resize", updateProgress, { passive: true });
+      updateProgress();
+
+      var tabs = Array.from(document.querySelectorAll(".v9-constraint-tab"));
+      var outputMeta = document.getElementById("v9-output-meta");
+      var outputTitle = document.getElementById("v9-output-title");
+      var outputDescription = document.getElementById("v9-output-description");
+      var outputService = document.getElementById("v9-output-service");
+      var outputPrice = document.getElementById("v9-output-price");
+      var outputLink = document.getElementById("v9-output-link");
+
+      function selectConstraint(tab, track) {
+        tabs.forEach(function (item) {
+          var active = item === tab;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-selected", active ? "true" : "false");
+          item.tabIndex = active ? 0 : -1;
+        });
+
+        if (outputMeta) outputMeta.textContent = tab.dataset.number + " / " + tab.dataset.label;
+        if (outputTitle) outputTitle.textContent = tab.dataset.title || "";
+        if (outputDescription) outputDescription.textContent = tab.dataset.description || "";
+        if (outputService) outputService.textContent = tab.dataset.service || "";
+        if (outputPrice) outputPrice.textContent = tab.dataset.meta || "";
+        if (outputLink) outputLink.href = tab.dataset.href || "/services";
+
+        if (track) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "home_system_constraint_select",
+            constraint: tab.dataset.constraint || "unknown"
+          });
+        }
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener("click", function () { selectConstraint(tab, true); });
+        tab.addEventListener("keydown", function (event) {
+          if (event.key !== "ArrowDown" && event.key !== "ArrowUp" && event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+          event.preventDefault();
+          var direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : -1;
+          var next = tabs[(index + direction + tabs.length) % tabs.length];
+          next.focus();
+          selectConstraint(next, true);
         });
       });
-    })();
 
-    // =========== Find-your-bottleneck interactive ===========
-    (function(){
-      const data = {
-        customer: { meta: '01 · CUSTOMER', title: 'The ICP is too broad to convert.', desc: 'Narrowing is growth. We define exactly who this is for, who it is not for, and gather the customer evidence that proves it.', svc: 'Growth Diagnosis', meta2: 'from £2k · 1 week · Best starting point', link: '/services/growth-diagnosis' },
-        positioning: { meta: '02 · OFFER & POSITIONING', title: 'Your story lands in the room. Not in the market.', desc: 'The offer and message get rebuilt against your customer\'s real alternatives, then tested live with a pre-set threshold.', svc: '90-Day Growth Sprint', meta2: 'from £8k · 12 weeks · Best for fast signal', link: '/services/90-day-growth-sprint' },
-        acquisition: { meta: '03 · ACQUISITION', title: 'One channel carries the funnel.', desc: 'Diversify before the dip: design the second engine and the weekly decision rule that scales it.', svc: 'Acquisition System Build', meta2: 'from £15k · 8–12 weeks · Flagship', link: '/services/acquisition-system-build' },
-        evidence: { meta: '04 · EXPERIMENTS & EVIDENCE', title: 'Decisions run on opinion, not evidence.', desc: 'Every test gets a hypothesis, a threshold, and a kill criterion. One weekly decision view your team owns: scale, stop, or fix.', svc: 'Acquisition System Build', meta2: 'from £15k · 8–12 weeks · Flagship', link: '/services/acquisition-system-build' },
-        team: { meta: '05 · GROWTH LOOP', title: 'Every campaign and brief routes through the founder.', desc: 'Senior judgement without a £150k hire. Embedded leadership that installs the loop, then transfers it to your team.', svc: 'Fractional CMO', meta2: 'from £5k/mo · 3-month min', link: '/services/fractional-cmo' }
-      };
-      const cards = document.querySelectorAll('.bf-card');
-      function update(key) {
-        const d = data[key];
-        document.getElementById('bf-meta').textContent = d.meta;
-        document.getElementById('bf-title').textContent = d.title;
-        document.getElementById('bf-desc').textContent = d.desc;
-        document.getElementById('bf-svc').textContent = d.svc;
-        document.getElementById('bf-svc-meta').textContent = d.meta2;
-        document.getElementById('bf-link').href = d.link;
-        document.getElementById('bf-link').textContent = d.svc + ' →';
-      }
-      cards.forEach(c => {
-        c.addEventListener('click', () => {
-          cards.forEach(o => o.classList.remove('active'));
-          c.classList.add('active');
-          update(c.dataset.bn);
+      document.querySelectorAll(".v9-hover-glow").forEach(function (card) {
+        card.addEventListener("pointermove", function (event) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty("--pointer-x", ((event.clientX - rect.left) / rect.width * 100) + "%");
+          card.style.setProperty("--pointer-y", ((event.clientY - rect.top) / rect.height * 100) + "%");
         });
       });
     })();

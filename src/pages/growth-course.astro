@@ -3,142 +3,157 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig, mauticNewsletter } from "../site";
 
-const courseFeatures = [
+const weeks = [
   {
-    module: "01",
-    title: "What growth actually is (and isn't)",
-    description: "Stop confusing growth with marketing tactics. Learn the system view."
+    week: "0",
+    focus: "Qualify + baseline",
+    evidence: "Product live, buyer hypothesis, baseline, founder commitment"
   },
   {
-    module: "02",
-    title: "Finding the bottleneck",
-    description: "Use the 5-layer diagnostic framework to name what's blocking pipeline."
+    week: "1",
+    focus: "Buyer + pipeline",
+    evidence: "50–100 qualified accounts; 40 personalised approaches launched"
   },
   {
-    module: "03",
-    title: "Positioning that converts",
-    description: "Move from generic \"AI-powered\" claims to specific buyer-focused messaging."
+    week: "2",
+    focus: "Conversations",
+    evidence: "5 meaningful replies or 3 calls booked; 5 buyer conversations"
   },
   {
-    module: "04",
-    title: "Acquisition channel sequencing",
-    description: "Learn which channels to test first, and how to avoid channel sprawl."
+    week: "3",
+    focus: "Offer, price, ask",
+    evidence: "Tested offer + pricing hypothesis; 3 explicit commercial asks"
   },
   {
-    module: "05",
-    title: "Conversion and funnel logic",
-    description: "Fix the pages and flows that leak pipeline before the demo."
-  },
-  {
-    module: "06",
-    title: "Reporting that drives decisions",
-    description: "Build a growth scorecard that tells you what to scale, kill, or fix."
-  },
-  {
-    module: "07",
-    title: "Building the experiment backlog",
-    description: "How to generate, prioritise, and run growth experiments that compound."
-  },
-  {
-    module: "08",
-    title: "Transfer: making it repeatable",
-    description: "Document the system so the team can run without founder heroics."
-  },
-  {
-    module: "09",
-    title: "AI-native GTM workflows",
-    description: "Use generative and agentic AI to accelerate research, testing, and iteration."
-  },
-  {
-    module: "10",
-    title: "When to hire, what to outsource",
-    description: "Decision framework for fractional CMO, agency, or in-house hire."
-  },
-  {
-    module: "11",
-    title: "Case study walkthrough",
-    description: "See the system applied to a real post-PMF SaaS startup."
-  },
-  {
-    module: "12",
-    title: "Your 90-day growth plan",
-    description: "Leave with a prioritised roadmap, ownership, and decision cadence."
+    week: "4",
+    focus: "Decide",
+    evidence: "Money-level signal, supported iteration, or evidence-backed pivot"
   }
 ];
 
+const outcomes = [
+  "One clearly defined customer and buying situation",
+  "A tested problem and offer, priced",
+  "A live target list and founder-led outbound motion",
+  "At least three explicit commercial asks made",
+  "A money-level signal — or an evidence-backed stop / reposition / pivot",
+  "A practical 30-day GTM operating cadence after the sprint"
+];
+
+const path = "/growth-course";
 const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", path: "/" },
-    { name: "Growth Course", path: "/growth-course" }
+    { name: "First Customers Sprint", path }
   ])
 ];
 ---
 
 <BaseLayout
-  title="What the Heck is Growth? | We Scale Startups"
-  description="A 12-module cohort course on startup growth systems. For founders and operators who want to build repeatable acquisition without founder dependency."
-  path="/growth-course"
+  title="First Customers Sprint | The AI Growth Accelerator"
+  description="Four-week done-with-you sprint for technical B2B AI and SaaS founders with a live product but no repeatable pipeline. Leave with commercial evidence — or the proof you need to pivot."
+  path={path}
   schema={schemas}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "First Customers Sprint", path }
+  ]}
   lastUpdated={siteConfig.lastUpdated}
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">Course</p>
-      <h1>What the Heck is Growth?</h1>
-      <p class="hero-copy">
-        A 12-module cohort course for post-PMF founders and operators who are done guessing at acquisition. 
-        Learn to diagnose the bottleneck, build the system, and transfer the rhythm, the same method WSS uses with clients.
+      <p class="eyebrow">The AI Growth Accelerator</p>
+      <h1>First Customers Sprint</h1>
+      <p class="lede">
+        You shipped the product. Now prove somebody will buy it. A four-week, done-with-you sprint for technical B2B AI and SaaS founders with a live product but no repeatable pipeline.
       </p>
       <div class="hero-actions">
-        <a class="button button-brand" href="#waitlist">Join the Waitlist, £30/mo</a>
-        <a class="button button-light" href="/services">Work with us instead →</a>
+        <a class="button button-brand" href="#waitlist" data-cta="fcs-waitlist">Join the founding waitlist</a>
+        <a class="button button-light" href="/workshops" data-cta="fcs-workshops">Programme / workshop enquiry →</a>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <p class="eyebrow">Who this is for</p>
-        <h2>Founders and operators who want to understand growth, properly.</h2>
-        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
-          You've got traction. You know growth matters. But every time you open a book or blog, it's either too tactical (run this ad) or too vague (growth is a mindset). 
-          This course is the practical, system-level view, the same one used with WSS clients.
-        </p>
-      </div>
-
-      <div class="grid gap-5 md:grid-cols-3">
-        <div class="card p-6">
-          <p class="card-label">Post-PMF Founders</p>
-          <p>Seed to Series B, traction but inconsistent acquisition, founder still the best salesperson.</p>
-        </div>
-        <div class="card p-6">
-          <p class="card-label">First Growth Hires</p>
-          <p>Recently promoted or hired to run growth, need a framework before the team drifts.</p>
-        </div>
-        <div class="card p-6">
-          <p class="card-label">Ops People</p>
-          <p>Running marketing, sales, or product, want to understand how the pieces fit into a system.</p>
-        </div>
+      <p class="eyebrow">Who this is for</p>
+      <h2>All of these must be true.</h2>
+      <div class="grid-2" style="margin-top: 2rem;">
+        <article class="feature-card">
+          <h3>Fits</h3>
+          <ul class="mt-3 space-y-2 text-[color:var(--muted)]">
+            <li>Technical B2B AI or SaaS founder, product already live</li>
+            <li>0–10 customers, or customers but no dependable pipeline</li>
+            <li>You personally own sales; buyer can be reached directly</li>
+            <li>4–6 hrs/week; willing to talk to prospects and make a real paid ask</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>Not for (this version)</h3>
+          <ul class="mt-3 space-y-2 text-[color:var(--muted)]">
+            <li>Consumer apps · pure self-serve / PLG</li>
+            <li>Long-cycle enterprise with procurement reviews</li>
+            <li>Idea-stage builders · agencies</li>
+            <li>Founders mainly wanting prompts, tools, or passive lessons</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="shell">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <p class="eyebrow">12 Modules</p>
-        <h2>What you'll learn.</h2>
-      </div>
-
-      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {courseFeatures.map((item) => (
-          <div class="card p-6">
-            <p class="text-sm font-semibold text-[color:var(--accent)] mb-2">Module {item.module}</p>
-            <h3 class="text-lg font-bold tracking-[-0.04em]">{item.title}</h3>
-            <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]">{item.description}</p>
-          </div>
+      <p class="eyebrow">What you get</p>
+      <h2>Four weeks. Commercial evidence and a justified decision.</h2>
+      <p class="lede" style="max-width: 60ch; margin-top: 0.75rem;">
+        We do not promise your first ten customers or a repeatable growth loop. We promise evidence that passes the ladder: word → action → money.
+      </p>
+      <div class="grid-2" style="margin-top: 2rem;">
+        {outcomes.map((item) => (
+          <article class="feature-card">
+            <p>{item}</p>
+          </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">The method</p>
+      <h2>Four steps. Gates measure evidence quality, not activity.</h2>
+      <div class="grid gap-4 mt-8">
+        {weeks.map((item) => (
+          <article class="feature-card" style="display: grid; gap: 0.35rem;">
+            <p class="card-label">Week {item.week}</p>
+            <h3>{item.focus}</h3>
+            <p class="text-[color:var(--muted)]">{item.evidence}</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-6 text-[color:var(--muted)]" style="max-width: 65ch;">
+        A founder who sends 40 right messages, hears silence, and discovers a fatal positioning problem has succeeded — the pivot memo graduates with equal standing.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Founding cohort</p>
+      <h2>Small on purpose. Real asks on your product.</h2>
+      <div class="grid-3" style="margin-top: 2rem;">
+        <article class="feature-card">
+          <h3>4–8 founders</h3>
+          <p>Every important customer interaction gets reviewed. Live working session + office hour each week.</p>
+        </article>
+        <article class="feature-card">
+          <h3>£750–1,000 founding</h3>
+          <p>Target price £1,200–1,500 from cohort two. One price, one experience. Halfway refund.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Entry path</h3>
+          <p>Waitlist → £100 refundable deposit → Founder Diagnostic for accepted founders (credited to the sprint).</p>
+        </article>
       </div>
     </div>
   </section>
@@ -146,13 +161,13 @@ const schemas = [
   <section class="section" id="waitlist">
     <div class="shell">
       <div class="max-w-2xl mx-auto text-center">
-        <p class="eyebrow">Waitlist now open</p>
-        <h2>£30/mo for 12 weeks. Join the waitlist for the next cohort.</h2>
+        <p class="eyebrow">Founding waitlist</p>
+        <h2>Join the list for the next First Customers Sprint.</h2>
         <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
-          Join the waitlist to be first in line when the cohort launches. No charge until the course goes live, just early access and a founding-member discount.
+          Tell us where you are. Qualified founders get the £100 deposit link next — not a content drip.
         </p>
 
-        <form class="mt-8 card p-8 md:p-10" id="course-waitlist" name="course-waitlist">
+        <form class="mt-8 card p-8 md:p-10 text-left" id="course-waitlist" name="course-waitlist">
           <div class="grid gap-4 max-w-md mx-auto">
             <div>
               <label class="text-sm font-semibold" for="course-name">Name</label>
@@ -163,22 +178,43 @@ const schemas = [
               <input class="input mt-1" type="email" id="course-email" name="email" required placeholder="you@company.com" />
             </div>
             <div>
-              <label class="text-sm font-semibold" for="course-stage">Stage</label>
-              <select class="input mt-1" id="course-stage" name="stage">
-                <option>Select your stage</option>
-                <option>Pre-PMF</option>
-                <option>Post-PMF, Seed</option>
-                <option>Series A</option>
-                <option>Series B+</option>
+              <label class="text-sm font-semibold" for="course-product">Is the product live?</label>
+              <select class="input mt-1" id="course-product" name="product" required>
+                <option value="">Select</option>
+                <option>Yes — live and usable by customers</option>
+                <option>Almost — days from live</option>
+                <option>No — still building</option>
               </select>
             </div>
-            <button class="button button-brand w-full" type="submit">Join the Waitlist</button>
-            <p class="text-xs text-[color:var(--muted)] text-center">No charge until launch. Unsubscribe anytime.</p>
+            <div>
+              <label class="text-sm font-semibold" for="course-stage">Pipeline today</label>
+              <select class="input mt-1" id="course-stage" name="stage" required>
+                <option value="">Select</option>
+                <option>0 customers, no dependable pipeline</option>
+                <option>1–10 customers, no dependable pipeline</option>
+                <option>Some customers, still founder-led and irregular</option>
+                <option>Other / not sure</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm font-semibold" for="course-time">Can you commit 4–6 hrs/week for 4 weeks?</label>
+              <select class="input mt-1" id="course-time" name="time" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>Maybe</option>
+                <option>No</option>
+              </select>
+            </div>
+            <button class="button button-brand w-full" type="submit" data-cta="fcs-waitlist-submit">Join the waitlist</button>
+            <p class="text-xs text-[color:var(--muted)] text-center">
+              Founding price £750–1,000. Deposit link sent only if you look like a fit.
+            </p>
           </div>
         </form>
 
         <p class="mt-6 text-sm text-[color:var(--muted)]">
-          Prefer working directly? <a class="link-arrow" href={siteConfig.bookingUrl}>Book a 20-minute growth diagnostic →</a>
+          Running an accelerator or VC platform?{" "}
+          <a class="link-arrow" href="/workshops" data-cta="fcs-to-workshops">See portfolio workshops →</a>
         </p>
       </div>
     </div>
@@ -187,11 +223,15 @@ const schemas = [
   <section class="cta-band">
     <div class="shell cta-inner">
       <div>
-        <p class="eyebrow">Not ready for a course?</p>
-        <h2>Book a 20-minute growth diagnostic instead.</h2>
-        <p>Sometimes the fastest way to learn is a focused conversation about your actual bottleneck.</p>
+        <p class="eyebrow">Instructor</p>
+        <h2>Daniel Johnson</h2>
+        <p>
+          Founder, We Scale Startups. Mentor: Google for Startups, Techstars. Taught startup growth at Cambridge Judge; lectured at Imperial. 479+ founder sessions.
+        </p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <a class="button button-brand" href={`mailto:${siteConfig.email}?subject=First%20Customers%20Sprint`} data-cta="fcs-email">
+        Email Daniel →
+      </a>
     </div>
   </section>
 </BaseLayout>
@@ -201,11 +241,13 @@ const schemas = [
   waitlistForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(waitlistForm);
-    const subject = "Growth course waitlist signup";
+    const subject = "First Customers Sprint waitlist";
     const body = [
       `Name: ${data.get("name") || ""}`,
       `Email: ${data.get("email") || ""}`,
-      `Stage: ${data.get("stage") || ""}`
+      `Product live: ${data.get("product") || ""}`,
+      `Pipeline: ${data.get("stage") || ""}`,
+      `Time commitment: ${data.get("time") || ""}`
     ].join("\n");
     try {
       const leadEmail = (data.get("email") || "").toString().trim();
@@ -220,7 +262,7 @@ const schemas = [
             "mauticform[email]": leadEmail,
             "mauticform[source_type]": "course-waitlist-form",
             "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "growth-course-waitlist"
+            "mauticform[lead_magnet]": "first-customers-sprint-waitlist"
           }).toString()
         }).catch(() => {});
       }
@@ -235,6 +277,6 @@ const schemas = [
       note.style.cssText = "margin-top:1rem;font-size:0.9rem;";
       waitlistForm.appendChild(note);
     }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> with the subject "Growth course waitlist".`;
+    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> with the subject "First Customers Sprint waitlist".`;
   });
 </script>

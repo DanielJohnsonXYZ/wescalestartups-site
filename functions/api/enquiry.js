@@ -49,14 +49,17 @@ async function notifyByEmail(env, record) {
 }
 
 async function forwardToMautic(env, record) {
-  if (!env.MAUTIC_FORM_URL || !env.MAUTIC_FORM_ID) return;
+  const formId = env.MAUTIC_FORM_ID || env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID;
+  const baseUrl = env.PUBLIC_MAUTIC_BASE_URL?.replace(/\/$/, "");
+  const formUrl = env.MAUTIC_FORM_URL || (baseUrl && formId ? `${baseUrl}/form/submit?formId=${encodeURIComponent(formId)}` : "");
+  if (!formUrl || !formId) return;
   const email = record.fields.email || record.fields.your_email;
   if (!email) return;
-  await fetch(env.MAUTIC_FORM_URL, {
+  await fetch(formUrl, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      "mauticform[formId]": env.MAUTIC_FORM_ID,
+      "mauticform[formId]": formId,
       "mauticform[email]": email,
       "mauticform[source_type]": record.formId,
       "mauticform[source_page]": record.page,

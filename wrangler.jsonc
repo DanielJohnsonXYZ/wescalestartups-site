@@ -10,7 +10,9 @@
     }
   ],
   "vars": {
-    "LEAD_RETENTION_DAYS": "90"
+    "LEAD_RETENTION_DAYS": "90",
+    "LEAD_NOTIFICATION_TO": "daniel@wescalestartups.com",
+    "LEAD_NOTIFICATION_FROM": "We Scale Startups <notifications@wescalestartups.com>"
   },
   "env": {
     "preview": {
@@ -21,7 +23,9 @@
         }
       ],
       "vars": {
-        "LEAD_RETENTION_DAYS": "90"
+        "LEAD_RETENTION_DAYS": "90",
+        "LEAD_NOTIFICATION_TO": "daniel@wescalestartups.com",
+        "LEAD_NOTIFICATION_FROM": "We Scale Startups <notifications@wescalestartups.com>"
       }
     }
   }

@@ -16,7 +16,9 @@ These variables send an operator notification through Resend after the durable w
 - `LEAD_NOTIFICATION_TO`
 - `LEAD_NOTIFICATION_FROM` (must be a verified sender)
 
-These variables forward the submitter's email and source metadata to the existing Mautic form:
+Current non-secret configuration sends from `notifications@wescalestartups.com` to `daniel@wescalestartups.com`. The Resend key remains an encrypted Cloudflare secret in both environments and must never be committed.
+
+The Function reuses the existing `PUBLIC_MAUTIC_BASE_URL` and `PUBLIC_MAUTIC_NEWSLETTER_FORM_ID` bindings to forward the submitter's email and source metadata. `MAUTIC_FORM_URL` and `MAUTIC_FORM_ID` remain supported as explicit overrides.
 
 - `MAUTIC_FORM_URL`
 - `MAUTIC_FORM_ID`

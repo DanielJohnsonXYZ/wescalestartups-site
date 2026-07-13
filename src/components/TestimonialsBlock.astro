@@ -5,7 +5,7 @@ interface Testimonial {
   role: string;
   company: string;
   result: string;
-  category?: "paid-client" | "advisory" | "speaking";
+  category?: "paid-client" | "paid-advisory" | "advisory" | "speaking";
 }
 
 interface Props {
@@ -20,12 +20,13 @@ const { testimonials, title = "What founders say.", eyebrow = "Testimonials", gr
 
 const labels: Record<NonNullable<Testimonial["category"]>, string> = {
   "paid-client": "Paid WSS engagements",
-  advisory: "Founder advisory · GrowthMentor & MentorCruise",
+  "paid-advisory": "Paid founder advisory",
+  advisory: "Mentoring · GrowthMentor & MentorCruise",
   speaking: "Speaking · workshops · programmes"
 };
 
 const grouped = groupByCategory
-  ? (["paid-client", "advisory", "speaking"] as const)
+  ? (["paid-client", "paid-advisory", "advisory", "speaking"] as const)
       .map((key) => ({
         key,
         label: labels[key],

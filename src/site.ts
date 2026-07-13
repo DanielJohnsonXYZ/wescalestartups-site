@@ -936,22 +936,23 @@ export const testimonials = [
     company: "Paid engagement",
     result: "ICP, reporting, repeatable campaign rhythm"
   },
-  // Advisory quotes below verified against GrowthMentor reviews mirrored on danieljohnson.xyz/testimonials (2026-07-13).
-  // Keep demoted off homepage commercial proof — mentoring sessions, not paid WSS retainers.
+  // Verified against GrowthMentor reviews (danieljohnson.xyz/testimonials, 2026-07-13).
+  // paid-advisory = paid advisory work (also left a public GrowthMentor review).
+  // advisory = mentoring-platform sessions.
   {
-    category: "advisory" as const,
+    category: "paid-advisory" as const,
     quote:
       "Daniel offered sharp, practical advice during our session, with a clear focus on messaging and positioning. He helped me reframe the problem, pushing me to dig deeper into the why behind our customers' needs.",
     name: "Greg Weinstein",
-    role: "Founder mentoring session",
+    role: "Paid founder advisory",
     company: "GrowthMentor review",
     result: "Messaging and positioning clarity"
   },
   {
-    category: "advisory" as const,
+    category: "paid-advisory" as const,
     quote: "Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.",
     name: "Dru Riley",
-    role: "Growth mentoring session",
+    role: "Paid growth advisory",
     company: "GrowthMentor review",
     result: "SEO and content direction"
   },
@@ -974,19 +975,19 @@ export const testimonials = [
     result: "Growth direction and next steps"
   },
   {
-    category: "advisory" as const,
+    category: "paid-advisory" as const,
     quote:
       "Daniel Johnson is the \"no fluff\", straight-to-the-point person to talk to for marketing. Daniel brought me back to reality by underscoring the importance of fundamentals.",
     name: "Jawad Ahmed",
-    role: "Marketing mentoring session",
+    role: "Paid marketing advisory",
     company: "GrowthMentor review",
     result: "Growth fundamentals"
   },
   {
-    category: "advisory" as const,
+    category: "paid-advisory" as const,
     quote: "Daniel helped me enormously (and I don't say that lightly!). Daniel's systematic approach to marketing is second-to-none.",
     name: "Ash Bailey",
-    role: "Growth mentoring session",
+    role: "Paid growth advisory",
     company: "GrowthMentor review",
     result: "Systematic marketing support"
   },
@@ -1000,11 +1001,11 @@ export const testimonials = [
     result: "Funnel gap diagnosis"
   },
   {
-    category: "advisory" as const,
+    category: "paid-advisory" as const,
     quote:
       "In just a short space of time, Daniel provided insane value — covering exactly how to structure and develop a GTM strategy end-to-end and providing insights that would have taken much longer to figure out alone.",
     name: "Indie",
-    role: "Founder mentoring session",
+    role: "Paid founder advisory",
     company: "GrowthMentor review",
     result: "End-to-end GTM clarity"
   }

@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig, buyerFaqs } from "../site";
+import { siteConfig, buyerFaqs, testimonials } from "../site";
 import { buildFaqSchema } from "../lib/schema";
 import "../styles/home-v8.css";
 
 const faqSchema = buildFaqSchema([...buyerFaqs]);
+const homepageQuotes = testimonials
+  .filter((t) => t.category === "paid-client" || t.category === "paid-advisory")
+  .slice(0, 3);
 
 // "Not a founder?" routing, investors / corporate / operators
 const subAudiences = [
@@ -375,16 +378,21 @@ const subAudiences = [
     <div class="shell">
       <span class="spec-label">Founder voices · § 07</span>
       <h2 class="section-h">What founders <em>say</em>.</h2>
-      <p class="section-sub">Paid client engagements only on this page. Mentoring reviews live on /testimonials and external profiles.</p>
+      <p class="section-sub">Paid client and paid advisory work. Mentoring-platform reviews live on /testimonials.</p>
       <div class="testim-grid">
-        <figure class="testim-card glow-card reveal">
-          <span class="testim-mark">"</span>
-          <blockquote>Daniel helped us move from scattered founder-led marketing to a clear weekly acquisition rhythm. Within 90 days we had sharper ICP, cleaner reporting, and a campaign system the team could run without everything routing back to the founder.</blockquote>
-          <cite><strong>B2B SaaS founder, CEO</strong>Paid engagement · name on request</cite>
-        </figure>
+        {homepageQuotes.map((t, i) => (
+          <figure class={`testim-card glow-card reveal`} data-d={i || undefined}>
+            <span class="testim-mark">"</span>
+            <blockquote>{t.quote}</blockquote>
+            <cite>
+              <strong>{t.name}{t.role ? `, ${t.role}` : ""}</strong>
+              {t.company}
+            </cite>
+          </figure>
+        ))}
       </div>
       <p class="section-sub" style="margin-top:1.5rem;">
-        <a href="/testimonials">More founder voices, including mentoring reviews →</a>
+        <a href="/testimonials">All founder voices, including mentoring reviews →</a>
       </p>
     </div>
   </section>

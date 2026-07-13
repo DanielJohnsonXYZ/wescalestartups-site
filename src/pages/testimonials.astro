@@ -7,7 +7,7 @@ const testimonialsFaqs = [
   {
     question: "Are these testimonials from paid engagements?",
     answer:
-      "Quotes are labelled by engagement type where possible: client work, founder advisory sessions, or mentoring platforms. External profiles like GrowthMentor provide additional public verification."
+      "Quotes are labelled by engagement type: paid client work, paid founder advisory, or mentoring-platform sessions. External profiles like GrowthMentor provide additional public verification."
   },
   {
     question: "Why show mentoring reviews alongside client work?",
@@ -29,22 +29,29 @@ const testimonialsSchema = [
   buildFaqSchema(testimonialsFaqs)
 ];
 
-type Category = "Client" | "Founder advisory" | "Mentoring" | "Other";
+type Category = "Client" | "Paid advisory" | "Mentoring" | "Other";
 
-function categorise(role: string, company: string): Category {
+function toFilterCategory(
+  category: (typeof testimonials)[number]["category"] | undefined,
+  role: string,
+  company: string
+): Category {
+  if (category === "paid-client") return "Client";
+  if (category === "paid-advisory") return "Paid advisory";
+  if (category === "advisory") return "Mentoring";
   const s = `${role} ${company}`.toLowerCase();
   if (/client|fractional cmo|sprint|engagement/.test(s)) return "Client";
-  if (/founder|advisory|growth session|advisor|operator/.test(s)) return "Founder advisory";
+  if (/paid.*advisory|founder advisory/.test(s)) return "Paid advisory";
   if (/mentor|growthmentor|mentorcruise|ppc|marketing mentoring/.test(s)) return "Mentoring";
   return "Other";
 }
 
 const decorated = testimonials.map((t) => ({
   ...t,
-  category: t.category === "paid-client" ? "Client" : categorise(t.role ?? "", t.company ?? "")
+  category: toFilterCategory(t.category, t.role ?? "", t.company ?? "")
 }));
 
-const categoryOrder: Category[] = ["Client", "Founder advisory", "Mentoring"];
+const categoryOrder: Category[] = ["Client", "Paid advisory", "Mentoring"];
 const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
   acc[c] = decorated.filter((d) => d.category === c).length;
   return acc;

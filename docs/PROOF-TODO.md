@@ -19,7 +19,8 @@ Source: CRM / Notion / Gmail brief + GrowthMentor reviews (danieljohnson.xyz/tes
 
 - **Anonymous B2B SaaS founder** — only paid-client homepage quote (origin still not in CRM/email).
 - **Healthtech (anonymous)** case — keep anonymous.
-- **Advisory / GrowthMentor** — Greg Weinstein, Dru Riley, Christian W K, Joshua Pitzalis, Jawad Ahmed, Ash Bailey, Egor Donde, Indie — verbatim or near-verbatim from public GrowthMentor reviews. Stay demoted off homepage commercial proof.
+- **Paid advisory** — Greg Weinstein, Dru Riley, Jawad Ahmed, Ash Bailey, Indie (also left GrowthMentor reviews). Shown on homepage + `/proof` under paid advisory.
+- **Mentoring** — Christian W K, Joshua Pitzalis, Egor Donde — platform sessions only; `/testimonials` filter.
 
 ## Ops
 

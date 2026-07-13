@@ -36,7 +36,8 @@ export async function buildLlmsTxtBody(variant: LlmsTxtVariant): Promise<string>
     .join("\n");
 
   const paidClientQuotes = testimonials.filter((t) => t.category === "paid-client");
-  const anchorTestimonial = paidClientQuotes[0] ?? testimonials[0];
+  const paidAdvisoryQuotes = testimonials.filter((t) => t.category === "paid-advisory");
+  const anchorTestimonial = paidClientQuotes[0] ?? paidAdvisoryQuotes[0] ?? testimonials[0];
   const testimonialLine = anchorTestimonial
     ? `Anchor review quote: "${anchorTestimonial.quote}", ${anchorTestimonial.name}, ${anchorTestimonial.company}.`
     : "Anchor review quote: see proof page for current testimonials.";

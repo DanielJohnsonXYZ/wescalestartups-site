@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
 
 const title = "Podcast Guest Strategy: 100 Ranked Guests for We Scale Startups";
 const description =
@@ -133,7 +134,11 @@ const templates = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  metaRobots={siteConfig.podcastLive ? "index,follow,max-image-preview:large" : "noindex,follow"}
+>
   <main class="strategy-page">
     <section class="hero">
       <p class="eyebrow">Podcast Guest Strategy</p>

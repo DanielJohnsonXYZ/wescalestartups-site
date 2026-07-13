@@ -2,7 +2,7 @@ const BOOKING_CALL_DURATION_PHRASE = "20 minutes" as const;
 
 export const siteConfig = {
   name: "We Scale Startups",
-  title: "We Scale Startups | Fractional CMO for Post-PMF B2B SaaS",
+  title: "We Scale Startups | Fractional CMO for Seed–Series B B2B SaaS & AI",
   description:
     "Fractional CMO for post-PMF B2B SaaS and AI startups: diagnose the bottleneck, build the acquisition system, transfer the weekly rhythm so pipeline compounds without founder heroics.",
   siteUrl: "https://wescalestartups.com",
@@ -493,20 +493,20 @@ export const termsPageRelatedLinks: readonly { href: string; label: string }[] =
 
 export const proofClients = [
   {
-    label: "Ned",
-    caseSlug: "ned",
-    logoSrc: "/images/logos/ned-icon.png",
-    relationship: "Paid client engagement",
-    context: "Fintech · Fractional CMO",
-    proof: "500+ sign-ups from paid search"
-  },
-  {
     label: "Healthtech (anonymous)",
     caseSlug: "healthtech-precision-medicine",
     logoSrc: "/images/logos/healthtech-anon.svg",
     relationship: "Paid client engagement",
     context: "Precision medicine · Fractional CMO",
-    proof: "Marketing function built from zero"
+    proof: "Marketing function built from zero · CEO on weekly review"
+  },
+  {
+    label: "Ned",
+    caseSlug: "ned",
+    logoSrc: "/images/logos/ned-icon.png",
+    relationship: "Paid client engagement",
+    context: "Fintech · Paid acquisition + SEO",
+    proof: "500+ sign-ups from paid search"
   },
   {
     label: "eQuoo",
@@ -715,6 +715,7 @@ export const leadMagnets = [
     description:
       "10 questions across the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
     href: "/resources/growth-bottleneck-scorecard",
+    downloadPath: "/downloads/guides/growth-bottleneck-scorecard.md",
     primary: true
   },
   {
@@ -722,63 +723,72 @@ export const leadMagnets = [
     title: "90-Day Growth Sprint Planner",
     audience: "Startup leadership teams",
     description: "Map a quarter of tests, owners, decision rules, and reporting so the team stops running disconnected activity.",
-    href: "/resources/90-day-growth-sprint-planner"
+    href: "/resources/90-day-growth-sprint-planner",
+    downloadPath: "/downloads/guides/90-day-growth-sprint-planner.md"
   },
   {
     id: "vc-portfolio-growth-diagnosis",
     title: "VC Portfolio Growth Diagnosis Template",
     audience: "VCs and accelerator teams",
     description: "A portfolio workshop format for spotting whether a founder needs positioning, acquisition, team, or reporting help first.",
-    href: "/resources/vc-portfolio-growth-diagnosis"
+    href: "/resources/vc-portfolio-growth-diagnosis",
+    downloadPath: "/downloads/guides/vc-portfolio-growth-diagnosis.md"
   },
   {
     id: "acquisition-channel-matrix",
     title: "Acquisition Channel Decision Matrix",
     audience: "Growth teams · 10 minutes",
     description: "Score paid, organic, partnerships, outbound, and content against your current stage, team capacity, and ICP clarity.",
-    href: "/resources/acquisition-channel-matrix"
+    href: "/resources/acquisition-channel-matrix",
+    downloadPath: "/downloads/guides/acquisition-channel-matrix.md"
   },
   {
     id: "fractional-cmo-hiring-checklist",
     title: "Fractional CMO Hiring Checklist",
     audience: "Founders hiring senior GTM leadership",
     description: "The questions to ask, the artefacts to expect in week 1, and the red flags that mean the operator can't build a system.",
-    href: "/resources/fractional-cmo-hiring-checklist"
+    href: "/resources/fractional-cmo-hiring-checklist",
+    downloadPath: "/downloads/guides/fractional-cmo-hiring-checklist.md"
   },
   {
     id: "ai-native-gtm-stack-map",
     title: "AI-Native GTM Stack Map",
     audience: "Teams adopting AI for GTM",
     description: "Map where generative and agentic AI accelerate research, messaging, experiments, and reporting in your current stack.",
-    href: "/resources/ai-native-gtm-stack-map"
+    href: "/resources/ai-native-gtm-stack-map",
+    downloadPath: "/downloads/guides/ai-native-gtm-stack-map.md"
   },
   {
     id: "founder-led-growth-diagnostic",
     title: "Founder-led Growth Diagnostic",
     audience: "Founder-led GTM teams",
     description: "Structured prompts to see whether the bottleneck is positioning, channel fit, conversion, or team cadence.",
-    href: "/resources/founder-led-growth-diagnostic"
+    href: "/resources/founder-led-growth-diagnostic",
+    downloadPath: "/downloads/guides/founder-led-growth-diagnostic.md"
   },
   {
     id: "agency-brief-template",
     title: "Agency Brief Template",
     audience: "Founders briefing agencies or freelancers",
     description: "One-page brief so channel partners get goals, constraints, proof, and success metrics in one pass.",
-    href: "/resources/agency-brief-template"
+    href: "/resources/agency-brief-template",
+    downloadPath: "/downloads/guides/agency-brief-template.md"
   },
   {
     id: "first-marketing-hire-scorecard",
     title: "First Marketing Hire Scorecard",
     audience: "Founders hiring marketing",
     description: "Score whether you need a generalist, growth marketer, or leader, and what to test first.",
-    href: "/resources/first-marketing-hire-scorecard"
+    href: "/resources/first-marketing-hire-scorecard",
+    downloadPath: "/downloads/guides/first-marketing-hire-scorecard.md"
   },
   {
     id: "ai-search-visibility-checklist",
     title: "AI Search Visibility Checklist",
     audience: "Teams cited in AI answers",
     description: "Make claims citable: sources, structure, and proof pages LLMs can quote.",
-    href: "/resources/ai-search-visibility-checklist"
+    href: "/resources/ai-search-visibility-checklist",
+    downloadPath: "/downloads/guides/ai-search-visibility-checklist.md"
   }
 ] as const;
 
@@ -926,21 +936,15 @@ export const testimonials = [
     company: "Paid engagement",
     result: "ICP, reporting, repeatable campaign rhythm"
   },
-  {
-    category: "paid-client" as const,
-    quote:
-      "The WSS diagnosis named the exact bottleneck we had been debating for months. The 90-day sprint that followed shipped 6 experiments and gave us a weekly cadence that still runs without Daniel today.",
-    name: "James Madia",
-    role: "Founder",
-    company: "Madia (paid engagement)",
-    result: "Acquisition system built, running without founder"
-  },
+  // Advisory quotes below verified against GrowthMentor reviews mirrored on danieljohnson.xyz/testimonials (2026-07-13).
+  // Keep demoted off homepage commercial proof — mentoring sessions, not paid WSS retainers.
   {
     category: "advisory" as const,
-    quote: "Daniel offered sharp, practical advice with a clear focus on messaging and positioning. He helped me reframe the problem and target the right audience more effectively.",
+    quote:
+      "Daniel offered sharp, practical advice during our session, with a clear focus on messaging and positioning. He helped me reframe the problem, pushing me to dig deeper into the why behind our customers' needs.",
     name: "Greg Weinstein",
     role: "Founder mentoring session",
-    company: "MentorCruise review",
+    company: "GrowthMentor review",
     result: "Messaging and positioning clarity"
   },
   {
@@ -948,64 +952,61 @@ export const testimonials = [
     quote: "Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.",
     name: "Dru Riley",
     role: "Growth mentoring session",
-    company: "MentorCruise review",
+    company: "GrowthMentor review",
     result: "SEO and content direction"
   },
   {
     category: "advisory" as const,
-    quote: "Daniel helped me understand the importance of keyword research, building a Google Ads strategy, and targeting the right audience.",
+    quote:
+      "Spoke with Daniel on PPC and building a Google Ads strategy was an incredibly valuable experience. He helped me understand the importance of keyword research and targeting the right audience.",
     name: "Christian W K",
     role: "PPC mentoring session",
-    company: "MentorCruise review",
+    company: "GrowthMentor review",
     result: "Google Ads strategy"
   },
   {
     category: "advisory" as const,
-    quote: "He asked insightful questions to understand my business goals and challenges. He came across as knowledgeable and experienced even in our short conversation.",
+    quote:
+      "My initial call with Daniel was very promising. He asked insightful questions to understand my business goals and challenges. Came across as knowledgeable and experienced, even in our short conversation.",
     name: "Joshua Pitzalis",
     role: "Founder mentoring session",
-    company: "MentorCruise review",
+    company: "GrowthMentor review",
     result: "Growth direction and next steps"
   },
   {
     category: "advisory" as const,
-    quote: "Daniel brought me back to reality by underscoring the importance of fundamentals. He helped put growth marketing into perspective.",
+    quote:
+      "Daniel Johnson is the \"no fluff\", straight-to-the-point person to talk to for marketing. Daniel brought me back to reality by underscoring the importance of fundamentals.",
     name: "Jawad Ahmed",
     role: "Marketing mentoring session",
-    company: "MentorCruise review",
+    company: "GrowthMentor review",
     result: "Growth fundamentals"
   },
   {
     category: "advisory" as const,
-    quote: "Daniel's systematic approach to marketing is second-to-none.",
+    quote: "Daniel helped me enormously (and I don't say that lightly!). Daniel's systematic approach to marketing is second-to-none.",
     name: "Ash Bailey",
     role: "Growth mentoring session",
-    company: "MentorCruise review",
+    company: "GrowthMentor review",
     result: "Systematic marketing support"
   },
   {
     category: "advisory" as const,
-    quote: "Very helpful session. Daniel has a lot of experience and gives very concrete advice. Highly recommended.",
-    name: "Tobias K",
-    role: "Startup growth session",
-    company: "GrowthMentor review",
-    result: "Concrete growth direction"
-  },
-  {
-    category: "advisory" as const,
-    quote: "Daniel quickly identified the gaps in our acquisition funnel and gave me a clear prioritised action list. Saved us months of guesswork.",
-    name: "Priya S",
-    role: "B2B SaaS founder session",
-    company: "GrowthMentor review",
-    result: "Funnel clarity and prioritisation"
-  },
-  {
-    category: "advisory" as const,
-    quote: "Excellent session. Daniel cut through the noise and helped me focus on the one channel that actually made sense for our stage.",
-    name: "Marco R",
+    quote:
+      "Daniel is a pro! Within 10 mins he identified the gaps in our funnel and actual problem that I oversaw. Looking forward to multiple follow-up calls!",
+    name: "Egor Donde",
     role: "Founder mentoring session",
     company: "GrowthMentor review",
-    result: "Channel focus and clarity"
+    result: "Funnel gap diagnosis"
+  },
+  {
+    category: "advisory" as const,
+    quote:
+      "In just a short space of time, Daniel provided insane value — covering exactly how to structure and develop a GTM strategy end-to-end and providing insights that would have taken much longer to figure out alone.",
+    name: "Indie",
+    role: "Founder mentoring session",
+    company: "GrowthMentor review",
+    result: "End-to-end GTM clarity"
   }
 ] as const;
 
@@ -1090,8 +1091,8 @@ export const founderStory = {
 // ──────────────────────────────────────────────────────────────────────────
 // Mautic, email signup forms (replaces placeholder ConvertKit). Configure in
 // Cloudflare Pages: PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID
-// Default form id "1" is a guess, set PUBLIC_MAUTIC_NEWSLETTER_FORM_ID in production to your real form.
-// ──────────────────────────────────────────────────────────────────────────
+// Form ID 1 = "Newsletter Sign Up" on comms.wescalestartups.com (4k+ submissions).
+// Form ID 2 = DJ.xyz only — do not use here. Prefer setting the Pages secret to "1" explicitly.
 const mauticBaseRaw =
   (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||
   "https://comms.wescalestartups.com";

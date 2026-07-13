@@ -1,5 +1,5 @@
 ---
-import CfEmailOff from "../../components/CfEmailOff.astro";
+import EmailSignup from "../../components/EmailSignup.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
@@ -36,7 +36,7 @@ const magnetDetails: Record<string, {
     faq: [
       {
         question: "Do I need to be a paying client to get the scorecard?",
-        answer: "No. Request it via the form, get it in the next reply. We use it as a diagnostic step before any engagement conversation."
+        answer: "No. Use the interactive scorecard on this page, or download the printable companion. We use it as a diagnostic step before any engagement conversation."
       },
       {
         question: "What if my score is bad in every section?",
@@ -298,12 +298,7 @@ if (!magnet || !details) {
   return Astro.redirect("/resources/");
 }
 
-function guideRequestMailto(title: string) {
-  const subject = `Send me the ${title}`;
-  const body = `Please send the ${title}.\n\nFound it on: ${siteConfig.siteUrl}/resources/${slug}\n\nA bit about my company:\n— Stage / ARR:\n— Team size:\n— Current biggest growth question:`;
-  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
+const downloadPath = "downloadPath" in magnet ? magnet.downloadPath : undefined;
 const otherMagnets = leadMagnets.filter((m) => m.id !== slug).slice(0, 3);
 
 const schemas = [
@@ -336,16 +331,32 @@ const layoutTitle =
       <h1>{magnet.title}</h1>
       <p class="lead">{magnet.description}</p>
       <div class="hero-cta">
-        <CfEmailOff>
-          <a class="btn btn-primary" href={guideRequestMailto(magnet.title)} data-cta={`magnet-hero-${slug}`}>
-            Request the {magnet.title} →
+        {downloadPath ? (
+          <a
+            class="btn btn-primary"
+            href={downloadPath}
+            download
+            data-cta={`magnet-download-${slug}`}
+          >
+            Download the {magnet.title} →
           </a>
-        </CfEmailOff>
+        ) : null}
         <a class="btn btn-ghost" href="/services" data-cta={`magnet-hero-services-${slug}`}>
           Or see services →
         </a>
       </div>
-      <p class="hero-microcopy">Free. No autoresponder funnel. Reply by email, usually within a working day.</p>
+      <p class="hero-microcopy">
+        Instant download. Optional: leave your email below for the Growth Bottleneck note — no autoresponder theatre.
+      </p>
+      <EmailSignup
+        formId={`magnet-${slug}`}
+        heading="Want the biweekly growth note too?"
+        subtext="One practical note on pipeline, positioning, and founder-led systems."
+        buttonLabel="Get the note →"
+        sourceType="lead_magnet"
+        leadMagnet={slug}
+        sourcePage={`/resources/${slug}`}
+      />
     </div>
   </section>
 

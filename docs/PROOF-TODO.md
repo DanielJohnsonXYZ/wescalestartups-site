@@ -1,77 +1,29 @@
-# Proof TODO — post-launch proof upgrades
+# Proof clearance — status (2026-07-13)
 
-The site overhaul now launches with short public MentorCruise review excerpts and approved pricing. The items below are follow-up upgrades, not blockers for this release.
+Source: CRM / Notion / Gmail brief + GrowthMentor reviews (danieljohnson.xyz/testimonials). Do not invent quotes or case numbers.
 
-## 1. Testimonials (launched with public snippets)
+## Do not publish (hold)
 
-The first launch version uses short public MentorCruise review excerpts for Kenneth, Ab, and Dominic so the site does not ship placeholder testimonials.
+| Item | Why |
+| --- | --- |
+| **James Madia / "Madia (paid engagement)"** | Unverifiable in CRM/email; not present in GrowthMentor review dump. **Removed.** |
+| **Marketplace / FRONTLINE / Boehringer-Ingelheim / Hustle & Hive figures** | Subcontract data. **Case deleted; URL 301 → `/case-studies`.** |
+| **₱1.1M annual misallocation** | Source not found. |
+| **Shopee TH 312%/81% GMV** | Benchmark vs client-finding ambiguity — hold. |
+| **Diadia Health name + logo** | **Permanent — do not use.** Anonymised healthtech case only. |
+| **18-month eCommerce fractional CMO case** | Not found — do not invent. |
+| **Well Squared / Bien Health "case study"** | Draft; engagement never delivered. |
+| **Tobias K / Priya S / Marco R** | Claimed GrowthMentor quotes; **not found** in the 2026-07-13 review dump. **Removed.** |
 
-Next upgrade: pull 3–5 fuller permissioned quotes following the brief that was already drafted in Notion:
+## Live proof
 
-- Reviewer name
-- Role / company (with permission)
-- 2–4 sentence quote
-- One specific result they'd attribute to the work
+- **Anonymous B2B SaaS founder** — only paid-client homepage quote (origin still not in CRM/email).
+- **Healthtech (anonymous)** case — keep anonymous.
+- **Advisory / GrowthMentor** — Greg Weinstein, Dru Riley, Christian W K, Joshua Pitzalis, Jawad Ahmed, Ash Bailey, Egor Donde, Indie — verbatim or near-verbatim from public GrowthMentor reviews. Stay demoted off homepage commercial proof.
 
-**Sources to pull from:**
-- [ ] [MentorCruise reviews](https://mentorcruise.com/mentor/danieljohnson/) — 30+ reviews, 5.0/5
-- [ ] GrowthMentor reviews
-- [ ] LinkedIn recommendations
-- [ ] Past client emails — search Gmail for "thank you" / "great work" from clients
-- [ ] Conference feedback / post-event surveys
+## Ops
 
-**Where they go:** Edit the `testimonials` array in `src/site.ts`.
-
-```ts
-{
-  quote: "Daniel rebuilt our acquisition motion in 8 weeks. Pipeline is now predictable for the first time.",
-  name: "Jane Doe",
-  role: "CEO",
-  company: "Acme",
-  result: "Cut CAC by 35% in 8 weeks"
-}
-```
-
-Aim for: at least one Series A founder, one healthtech/fintech reference, one "system over heroics" angle.
-
-## 2. Pricing tiers
-
-Pricing in `src/site.ts` is approved for launch:
-
-- Growth Diagnosis — `from £2,000` (1 week)
-- 90-Day Growth Sprint — `from £8,000` (12 weeks)
-- Acquisition System Build — `from £15,000` (8–12 weeks)
-- Fractional CMO — `from £5,000 / month` (3-month minimum; Plus from £7,500 / month)
-
-These can be revisited later if offer packaging changes.
-
-## 3. Logos
-
-Current `trustLogos` in `site.ts`: Ned, eQuoo, LessonsUp, Nevly, Diadia Health.
-- [ ] Add Diadia Health logo file to `/public/images/logos/diadia.webp` (or similar)
-- [ ] Update `ProofLogos.astro` if you want actual logo images instead of text labels (the component already supports `src` + `alt` if you swap the data)
-
-## 4. Hero photo (already in place)
-
-Daniel's headshot is already wired into the hero (`/images/daniel-headshot-960.webp`) and the new `DanielStory.astro` section. No action needed unless you want a different photo.
-
-## 5. Sitemap
-
-Done for this release: `src/pages/sitemap.xml.ts` includes the five new pages:
-- `/start-here`
-- `/how-it-works`
-- `/first-30-days`
-- `/pricing`
-- `/proof`
-
-Keep this list in sync if new hardcoded top-level routes are added later.
-
-## 6. Real case study upgrade (optional but high-impact)
-
-The Notion `Case Studies` page has three full case studies that aren't on the site yet:
-
-1. **Diadia Health** — added in this overhaul as `src/content/cases/diadia-health.json`
-2. **eCommerce automation platform (anonymised)** — 18-month fractional CMO engagement, multi-channel rebuild
-3. **FRONTLINE / Boehringer-Ingelheim (via Hustle & Hive)** — performance audit that flagged a ₱1.1M annual misallocation
-
-Cases 2 and 3 would substantially upgrade the proof hub. To add them, mirror the JSON shape of `diadia-health.json` and drop in `src/content/cases/`. The `src/pages/case-studies/[slug].astro` dynamic route will pick them up automatically.
+- [x] Mautic form ID **1** = "Newsletter Sign Up" (wescalestartups.com). ID 2 = DJ.xyz only. Code default `"1"` is correct. Optional: re-save Cloudflare Pages secret as `1` for certainty.
+- [x] Calendly: `https://calendly.com/wescalestartups`
+- [x] Diadia: never name/logo
+- [ ] Deploy scrubbed proof + remediation when ready

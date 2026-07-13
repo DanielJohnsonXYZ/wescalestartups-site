@@ -1,22 +1,14 @@
 ---
-import CfEmailOff from "../../components/CfEmailOff.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { leadMagnets, resourcesRelatedReading, siteConfig } from "../../site";
 
-function guideRequestMailto(title: string, id: string) {
-  const outlineUrl = `${siteConfig.siteUrl}/resources#${id}`;
-  const subject = `Send me the ${title}`;
-  const body = `Please send the ${title}.\n\nOn-page outline: ${outlineUrl}`;
-  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
 const resourcesFaqs = [
   {
     question: "Are these resources really free?",
     answer:
-      "Yes. They exist to help founders self-diagnose and brief agencies or operators with clearer context. Optional email capture may apply on some flows."
+      "Yes. They exist to help founders self-diagnose and brief agencies or operators with clearer context. Downloads are instant; newsletter signup is optional."
   },
   {
     question: "Do resources replace an engagement?",
@@ -24,9 +16,9 @@ const resourcesFaqs = [
       "No. They sharpen the question. If the bottleneck is still unclear after the scorecard or guides, diagnosis or a sprint is usually the next step."
   },
   {
-    question: "How do I request a specific guide?",
+    question: "How do I get a specific guide?",
     answer:
-      "Use the request button on each card. Your email will include a link to the on-page outline so we know which asset you mean."
+      "Open the resource page and download the markdown template, or use the download button on each card below."
   }
 ];
 
@@ -137,17 +129,26 @@ const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
             <p class="resource-outline-link">
               <a
                 class="card-link"
-                href={`${siteConfig.siteUrl}/resources#${guide.id}`}
+                href={`/resources/${guide.id}`}
                 data-cta={`resources-outline-${guide.id}`}
               >
-                Canonical link to this outline →
+                Open full resource page →
               </a>
             </p>
-            <CfEmailOff>
-              <a class="button button-light" href={guideRequestMailto(guide.title, guide.id)} data-cta={`resources-request-${guide.id}`}>
-                Request the guide
+            {leadMagnets.find((m) => m.id === guide.id)?.downloadPath ? (
+              <a
+                class="button button-light"
+                href={leadMagnets.find((m) => m.id === guide.id)!.downloadPath}
+                download
+                data-cta={`resources-download-${guide.id}`}
+              >
+                Download the guide
               </a>
-            </CfEmailOff>
+            ) : (
+              <a class="button button-light" href={`/resources/${guide.id}`} data-cta={`resources-open-${guide.id}`}>
+                Open the guide
+              </a>
+            )}
           </article>
         ))}
       </div>
@@ -161,7 +162,7 @@ const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
           <SectionIntro
             eyebrow="More templates"
             title="Additional worksheets and checklists."
-            body="Each opens as a full resource page with outline, FAQ, and email request."
+            body="Each opens as a full resource page with outline, FAQ, and instant download."
           />
           <div class="grid-3">
             {moreMagnets.map((m) => (

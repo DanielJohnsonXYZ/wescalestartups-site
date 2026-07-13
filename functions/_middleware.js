@@ -132,7 +132,18 @@ export async function onRequest(context) {
     "/choosing-the-perfect-fractional-cmo-for-your-startup": "/services/fractional-cmo",
     "/choosing-the-perfect-fractional-cmo-for-your-startup/": "/services/fractional-cmo",
     "/choosing-the-perfect-cmo": "/services/fractional-cmo",
-    "/choosing-the-perfect-cmo/": "/services/fractional-cmo"
+    "/choosing-the-perfect-cmo/": "/services/fractional-cmo",
+    // IA consolidation
+    "/growth-engine": "/growth-operating-system",
+    "/growth-engine/": "/growth-operating-system",
+    "/ai-driven-growth": "/growth-operating-system",
+    "/ai-driven-growth/": "/growth-operating-system",
+    "/execution-model": "/how-it-works",
+    "/execution-model/": "/how-it-works",
+    "/engagement-models": "/how-it-works",
+    "/engagement-models/": "/how-it-works",
+    "/case-studies/marketplace-performance-audit": "/case-studies",
+    "/case-studies/marketplace-performance-audit/": "/case-studies"
   };
 
   if (legacyRedirects[path]) {

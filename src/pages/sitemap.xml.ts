@@ -61,11 +61,7 @@ export const GET: APIRoute = async () => {
       "/book",
       "/gtm-strategy",
       "/first-30-days",
-      "/engagement-models",
-      "/execution-model",
-      "/growth-engine",
       "/ai-growth-systems",
-      "/ai-driven-growth",
       "/learning-latency-scorecard",
       "/fractional-cmo-vs-agency",
       "/fractional-cmo-vs-full-time-cmo",
@@ -94,13 +90,13 @@ export const GET: APIRoute = async () => {
       "/newsletter",
       "/refer",
       "/wss-scale-score",
-      "/podcast",
+      ...(siteConfig.podcastLive
+        ? ["/podcast", "/podcast-guest-application", "/podcast-guest-strategy"]
+        : []),
       "/insights/glossary",
       "/seo-content-strategy",
       "/growth-operating-system",
       "/founder-led-growth",
-      "/podcast-guest-application",
-      "/podcast-guest-strategy",
       "/privacy",
       "/terms",
       "/llms.txt",
@@ -158,16 +154,18 @@ ${insights
     })
   )
   .join("\n")}
-${podcastEpisodes
-  .filter((ep) => !ep.data.draft && ep.id !== "how-startups-win-template")
-  .map((ep) =>
-    urlNode(`/podcast/episodes/${ep.id}`, {
-      lastmod: ep.data.publishedAt.toISOString().slice(0, 10),
-      changefreq: "monthly",
-      priority: "0.68"
-    })
-  )
-  .join("\n")}
+${siteConfig.podcastLive
+  ? podcastEpisodes
+      .filter((ep) => !ep.data.draft && ep.id !== "how-startups-win-template")
+      .map((ep) =>
+        urlNode(`/podcast/episodes/${ep.id}`, {
+          lastmod: ep.data.publishedAt.toISOString().slice(0, 10),
+          changefreq: "monthly",
+          priority: "0.68"
+        })
+      )
+      .join("\n")
+  : ""}
 </urlset>`;
 
   return new Response(xml, {

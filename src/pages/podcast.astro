@@ -54,6 +54,7 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
   keywords="startup podcast, AI growth, startup AI adoption, founder interviews, B2B SaaS podcast, growth strategies"
   schema={podcastSchemas}
   lastUpdated={siteConfig.lastUpdated}
+  metaRobots={siteConfig.podcastLive ? "index,follow,max-image-preview:large" : "noindex,follow"}
 >
   <!-- HERO -->
   <section class="page-hero podcast-hero">

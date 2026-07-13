@@ -117,7 +117,7 @@ const contactSchema = [
         </a>
         <p>
           Or book directly:{" "}
-          <a href="https://cal.wescalestartups.com" data-cta="contact-cal-direct" rel="noreferrer" target="_blank">cal.wescalestartups.com</a>
+          <a href={siteConfig.calUrl} data-cta="contact-cal-direct" rel="noreferrer" target="_blank">Open Calendly</a>
         </p>
         <p>
           Prefer async?{" "}
@@ -128,22 +128,54 @@ const contactSchema = [
     </div>
   </section>
 
-  <!-- Direct booking, cal.wescalestartups.com embed -->
+  <!-- Same Calendly stack as /book — do not iframe cal.wescalestartups.com (blocked by CSP frame-src). -->
   <section class="section section-alt" id="book-a-time">
     <div class="shell">
       <p class="eyebrow">Book a time</p>
       <h2>Pick a slot that works for you.</h2>
-      <p>Booking runs on <a href="https://cal.wescalestartups.com" rel="noreferrer" target="_blank">cal.wescalestartups.com</a>. If the calendar doesn't load, open it directly.</p>
-      <div class="cal-embed-wrap">
-        <iframe
-          src="https://cal.wescalestartups.com"
-          title="Book a call with We Scale Startups"
-          loading="lazy"
-          style="width:100%;min-height:640px;border:1px solid var(--line);border-radius:0.85rem;background:#fff;"
-        ></iframe>
-      </div>
+      <p>
+        Same calendar as the Growth Audit. If the embed does not load,{" "}
+        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">open Calendly in a new tab</a>
+        {" "}or use the enquiry form above.
+      </p>
+      <div
+        id="contact-cal-inline"
+        class="calendly-inline-widget"
+        data-url={siteConfig.calLink}
+        style="min-width:320px;height:700px;overflow:auto;border:1px solid var(--line);border-radius:0.85rem;background:#fff;"
+      ></div>
     </div>
   </section>
+  <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script is:inline>
+    (function () {
+      function isCalendlyEvent(e) {
+        return (
+          e.origin === "https://calendly.com" &&
+          e.data &&
+          typeof e.data.event === "string" &&
+          e.data.event.indexOf("calendly.") === 0
+        );
+      }
+      window.addEventListener("message", function (e) {
+        if (!isCalendlyEvent(e)) return;
+        window.dataLayer = window.dataLayer || [];
+        if (e.data.event === "calendly.event_scheduled") {
+          window.dataLayer.push({
+            event: "booking_completed",
+            booking_source: "calendly_contact",
+            page_path: window.location.pathname
+          });
+        } else if (e.data.event === "calendly.date_and_time_selected") {
+          window.dataLayer.push({
+            event: "booking_time_selected",
+            booking_source: "calendly_contact",
+            page_path: window.location.pathname
+          });
+        }
+      });
+    })();
+  </script>
 
   <!-- Route by enquiry type, speaking, podcast, partnership, press all -->
   <!-- have specific better destinations than the generic enquiry form.    -->

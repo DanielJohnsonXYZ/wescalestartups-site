@@ -79,3 +79,17 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /choosing-the-perfect-fractional-cmo-for-your-startup/ /services/fractional-cmo 301
 /choosing-the-perfect-cmo /services/fractional-cmo 301
 /choosing-the-perfect-cmo/ /services/fractional-cmo 301
+
+# IA consolidation — overlapping conceptual pages
+/growth-engine /growth-operating-system 301
+/growth-engine/ /growth-operating-system 301
+/ai-driven-growth /growth-operating-system 301
+/ai-driven-growth/ /growth-operating-system 301
+/execution-model /how-it-works 301
+/execution-model/ /how-it-works 301
+/engagement-models /how-it-works 301
+/engagement-models/ /how-it-works 301
+
+# Withdrawn case (confidentiality / unverified provenance) — do not 200
+/case-studies/marketplace-performance-audit /case-studies 301
+/case-studies/marketplace-performance-audit/ /case-studies 301

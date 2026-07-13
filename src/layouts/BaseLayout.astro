@@ -41,6 +41,8 @@ interface Props {
   announcementPill?: string;
   /** Sticky book CTA (off on /book and pages with their own booking block). */
   stickyBookCta?: boolean;
+  /** When false, hide the sitewide announcement banner (e.g. /book). */
+  showAnnouncement?: boolean;
 }
 
 const {
@@ -65,12 +67,15 @@ const {
   announcementDismissible = true,
   announcementVariant = "brand",
   announcementPill,
-  stickyBookCta: stickyBookCtaProp
+  stickyBookCta: stickyBookCtaProp,
+  showAnnouncement: showAnnouncementProp
 } = Astro.props;
 
 const currentPath = normalizePath(path);
 const stickyBookCta =
   stickyBookCtaProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
+const showAnnouncement =
+  showAnnouncementProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
 const canonical = absoluteUrl(currentPath);
 const imageUrl = absoluteUrl(ogImage);
 const ogImageAlt = ogImageAltProp ?? title;
@@ -270,14 +275,16 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <AnnouncementBanner
-      text={announcementText}
-      href={announcementHref}
-      linkText={announcementLinkText}
-      dismissible={announcementDismissible}
-      variant={announcementVariant}
-      pill={announcementPill}
-    />
+    {showAnnouncement && (
+      <AnnouncementBanner
+        text={announcementText}
+        href={announcementHref}
+        linkText={announcementLinkText}
+        dismissible={announcementDismissible}
+        variant={announcementVariant}
+        pill={announcementPill}
+      />
+    )}
     {showSiteHeader && <SiteHeader currentPath={currentPath} />}
     <main id="main-content">
       {

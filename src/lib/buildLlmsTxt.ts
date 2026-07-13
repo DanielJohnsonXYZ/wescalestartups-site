@@ -35,7 +35,8 @@ export async function buildLlmsTxtBody(variant: LlmsTxtVariant): Promise<string>
     .map((row) => `- ${row.label}: agency = ${row.agency}; WSS = ${row.wss}.`)
     .join("\n");
 
-  const anchorTestimonial = testimonials.find((t) => t.name === "James Madia") ?? testimonials[0];
+  const paidClientQuotes = testimonials.filter((t) => t.category === "paid-client");
+  const anchorTestimonial = paidClientQuotes[0] ?? testimonials[0];
   const testimonialLine = anchorTestimonial
     ? `Anchor review quote: "${anchorTestimonial.quote}", ${anchorTestimonial.name}, ${anchorTestimonial.company}.`
     : "Anchor review quote: see proof page for current testimonials.";

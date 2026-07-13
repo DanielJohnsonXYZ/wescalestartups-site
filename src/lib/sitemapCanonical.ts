@@ -24,7 +24,13 @@ const REDIRECT_TO: Record<string, string> = {
   "/case-study": "/case-studies",
   "/quiz": "/resources/growth-bottleneck-scorecard",
   "/case-studies/diadia": "/case-studies/healthtech-precision-medicine",
-  "/case-studies/diadia-health": "/case-studies/healthtech-precision-medicine"
+  "/case-studies/diadia-health": "/case-studies/healthtech-precision-medicine",
+  // IA consolidation — overlapping conceptual pages → canonical Growth OS
+  "/growth-engine": "/growth-operating-system",
+  "/ai-driven-growth": "/growth-operating-system",
+  "/execution-model": "/how-it-works",
+  "/engagement-models": "/how-it-works",
+  "/case-studies/marketplace-performance-audit": "/case-studies"
 };
 
 export function sitemapCanonicalPath(path: string): string {

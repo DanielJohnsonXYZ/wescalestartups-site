@@ -2987,13 +2987,28 @@ textarea:focus-visible {
   padding: 1.8rem;
 }
 
-.pricing-card h3 {
+.pricing-card h3,
+.pricing-card .pricing-tier-title {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
   font-size: 1.7rem;
   line-height: 1;
   font-weight: 500;
 }
+
+.form-status {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.form-status[hidden] { display: none; }
+.form-status[data-state="success"] { border-color: #26744a; background: #edf9f2; color: #174d31; }
+.form-status[data-state="error"] { border-color: #a23a3a; background: #fff2f2; color: #762727; }
+.form-status a { color: inherit; font-weight: 700; text-decoration: underline; }
 
 .pricing-meta {
   display: flex;
@@ -6236,6 +6251,8 @@ html { scroll-padding-top: 6.5rem; }
 /* Announcement bar above the header: one tight line */
 .announcement-banner { padding: 0.4rem 0; font-size: 0.82rem; border-bottom: 1px solid var(--line); }
 .announcement-banner .banner-inner { row-gap: 0.15rem; }
+.announcement-banner--brand .banner-link { color: #4a1aaf; }
+.nav-link { color: rgba(40, 34, 53, 0.84); }
 
 /* Less dead space between header/banner and page content */
 .page-hero { padding-top: clamp(2.25rem, 4.5vw, 3.5rem); }

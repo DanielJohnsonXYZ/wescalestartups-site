@@ -1,0 +1,129 @@
+---
+const consentKey = "wss-consent-v1";
+---
+
+<aside
+  class="consent-banner"
+  id="consent-banner"
+  aria-labelledby="consent-title"
+  data-consent-key={consentKey}
+  hidden
+>
+  <div>
+    <h2 id="consent-title">Your privacy choices</h2>
+    <p>
+      We use necessary storage to run this site. With your permission, analytics helps us understand
+      which pages and journeys are useful. You can change your choice at any time.
+      <a href="/privacy">Read our privacy notice</a>.
+    </p>
+  </div>
+  <div class="consent-actions">
+    <button class="button button-light" type="button" data-consent="denied">Reject analytics</button>
+    <button class="button button-brand" type="button" data-consent="granted">Accept analytics</button>
+  </div>
+</aside>
+
+<button class="consent-settings" type="button" data-consent-settings hidden>
+  Privacy choices
+</button>
+
+<script is:inline define:vars={{ consentKey }}>
+  (function () {
+    const banner = document.getElementById("consent-banner");
+    const settings = document.querySelector("[data-consent-settings]");
+
+    function readChoice() {
+      try {
+        const value = localStorage.getItem(consentKey);
+        return value === "granted" || value === "denied" ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function updateGoogleConsent(choice) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag("consent", "update", {
+        analytics_storage: choice,
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
+    }
+
+    function applyChoice(choice) {
+      try { localStorage.setItem(consentKey, choice); } catch (_) {}
+      updateGoogleConsent(choice);
+      window.dispatchEvent(new CustomEvent("wss:analytics-consent", {
+        detail: { granted: choice === "granted" }
+      }));
+      if (banner) banner.hidden = true;
+      if (settings) settings.hidden = false;
+    }
+
+    document.querySelectorAll("[data-consent]").forEach((button) => {
+      button.addEventListener("click", () => applyChoice(button.getAttribute("data-consent")));
+    });
+
+    settings?.addEventListener("click", () => {
+      if (banner) banner.hidden = false;
+      settings.hidden = true;
+      banner?.querySelector("button")?.focus();
+    });
+
+    if (readChoice()) {
+      if (settings) settings.hidden = false;
+    } else if (banner) {
+      banner.hidden = false;
+    }
+  })();
+</script>
+
+<style>
+  .consent-banner {
+    position: fixed;
+    z-index: 10000;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    max-width: 64rem;
+    margin-inline: auto;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: 0 1rem 3rem rgba(25, 18, 46, 0.18);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+  }
+  .consent-banner[hidden] { display: none; }
+  .consent-banner h2 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+  .consent-banner p { margin: 0; max-width: 48rem; font-size: 0.9rem; line-height: 1.55; }
+  .consent-banner a { color: var(--violet); text-decoration: underline; }
+  .consent-actions { display: flex; gap: 0.65rem; flex-wrap: wrap; justify-content: flex-end; }
+  .consent-settings {
+    position: fixed;
+    z-index: 9999;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 0.55rem 0.8rem;
+    font: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem rgba(25, 18, 46, 0.12);
+  }
+  .consent-settings[hidden] { display: none; }
+  @media (max-width: 720px) {
+    .consent-banner { grid-template-columns: 1fr; }
+    .consent-actions { justify-content: stretch; }
+    .consent-actions .button { flex: 1 1 10rem; }
+  }
+</style>

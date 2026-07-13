@@ -24,7 +24,7 @@ auto-deploys to Pages — so "push" already means "deploy" for this site.
 
 ## Cloudflare Pages
 
-Project: `wescalestartups-site`
+Project: `wescalestartups-com`
 
 - Production branch: `main`
 - Build command: `npm run build`
@@ -36,7 +36,7 @@ also supported:
 
 ```bash
 npm run build
-npx wrangler pages deploy dist --project-name=wescalestartups-site --branch=main
+npx wrangler pages deploy dist --project-name=wescalestartups-com --branch=main
 ```
 
 `functions/_middleware.js` redirects `www.wescalestartups.com` to the apex

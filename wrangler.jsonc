@@ -1,6 +1,28 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "wescalestartups-site",
+  "name": "wescalestartups-com",
   "compatibility_date": "2026-04-20",
-  "pages_build_output_dir": "dist"
+  "pages_build_output_dir": "dist",
+  "kv_namespaces": [
+    {
+      "binding": "LEADS",
+      "id": "97b2d4b96ce643118457b46240bbeaef"
+    }
+  ],
+  "vars": {
+    "LEAD_RETENTION_DAYS": "90"
+  },
+  "env": {
+    "preview": {
+      "kv_namespaces": [
+        {
+          "binding": "LEADS",
+          "id": "3f9698c458dd4078aaa7df90adda0c34"
+        }
+      ],
+      "vars": {
+        "LEAD_RETENTION_DAYS": "90"
+      }
+    }
+  }
 }

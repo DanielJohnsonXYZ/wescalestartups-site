@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig, mauticNewsletter } from "../site";
+import { siteConfig } from "../site";
 
 const courseFeatures = [
   {
@@ -152,7 +152,14 @@ const schemas = [
           Join the waitlist to be first in line when the cohort launches. No charge until the course goes live, just early access and a founding-member discount.
         </p>
 
-        <form class="mt-8 card p-8 md:p-10" id="course-waitlist" name="course-waitlist">
+        <form
+          class="mt-8 card p-8 md:p-10"
+          id="course-waitlist"
+          name="course-waitlist"
+          data-wss-enquiry
+          data-fallback-email={siteConfig.email}
+        >
+          <input type="text" name="_website" tabindex="-1" autocomplete="off" hidden />
           <div class="grid gap-4 max-w-md mx-auto">
             <div>
               <label class="text-sm font-semibold" for="course-name">Name</label>
@@ -174,6 +181,7 @@ const schemas = [
             </div>
             <button class="button button-brand w-full" type="submit">Join the Waitlist</button>
             <p class="text-xs text-[color:var(--muted)] text-center">No charge until launch. Unsubscribe anytime.</p>
+            <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
           </div>
         </form>
 
@@ -195,46 +203,3 @@ const schemas = [
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
-  const waitlistForm = document.getElementById("course-waitlist");
-  waitlistForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(waitlistForm);
-    const subject = "Growth course waitlist signup";
-    const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Stage: ${data.get("stage") || ""}`
-    ].join("\n");
-    try {
-      const leadEmail = (data.get("email") || "").toString().trim();
-      if (leadEmail) {
-        fetch(mauticUrl, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            "mauticform[formId]": mauticFormId,
-            "mauticform[email]": leadEmail,
-            "mauticform[source_type]": "course-waitlist-form",
-            "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "growth-course-waitlist"
-          }).toString()
-        }).catch(() => {});
-      }
-    } catch (_) {}
-
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    let note = document.getElementById("waitlist-fallback");
-    if (!note) {
-      note = document.createElement("p");
-      note.id = "waitlist-fallback";
-      note.setAttribute("role", "status");
-      note.style.cssText = "margin-top:1rem;font-size:0.9rem;";
-      waitlistForm.appendChild(note);
-    }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> with the subject "Growth course waitlist".`;
-  });
-</script>

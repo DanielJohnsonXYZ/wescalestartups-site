@@ -37,6 +37,7 @@ const subAudiences = [
   path="/"
   schema={faqSchema}
   bodyClass="page-home-v8"
+  stickyBookCta={false}
 >
   {/* ============ HERO, the problem, the promise, the proof ============ */}
   <section class="hero">
@@ -44,19 +45,12 @@ const subAudiences = [
       <span class="hero-badge"><span class="dot"></span> Growth partner · Seed–Series B B2B SaaS &amp; AI</span>
       <div class="hero-grid">
         <div>
-          <h1>We drive growth for <span class="hl">B2B SaaS &amp; AI startups</span>.</h1>
-          <p class="lede">Your product is ahead of your pipeline. We diagnose what's blocking growth, install the acquisition system, and hand it to your team in 90 days, <strong>so revenue compounds without the founder in every decision</strong>.</p>
-
-          <div class="step-chips">
-            <a href="/services/growth-diagnosis" class="step-chip"><span class="n">01</span> Diagnose</a>
-            <a href="/services/90-day-growth-sprint" class="step-chip"><span class="n">02</span> Sprint</a>
-            <a href="/services/acquisition-system-build" class="step-chip"><span class="n">03</span> Build</a>
-            <a href="/services/fractional-cmo" class="step-chip"><span class="n">04</span> Embed</a>
-          </div>
+          <h1>Build a growth system your team can run <span class="hl">without you</span>.</h1>
+          <p class="lede">For post-PMF B2B SaaS and AI teams. We diagnose the constraint, install the acquisition system, and transfer the weekly growth rhythm in 90 days, <strong>so pipeline no longer depends on the founder</strong>.</p>
 
           <div class="hero-ctas">
             <a href={siteConfig.bookingUrl} class="btn-primary">{siteConfig.bookingLabel} <span>→</span></a>
-            <a href={siteConfig.scorecardUrl} class="hero-cta-alt">Or find the constraint costing this quarter's pipeline, free 5-min diagnostic →</a>
+            <a href="#client-results" class="hero-cta-alt">See client results ↓</a>
           </div>
 
           <div class="hero-trust">
@@ -67,30 +61,39 @@ const subAudiences = [
           </div>
         </div>
 
-        {/* 60-second bottleneck check, funnels into the full scorecard */}
-        <aside class="diag-card glow-card" id="mini-check">
-          <div class="diag-head">
-            <span class="diag-head-l">Growth Bottleneck Check</span>
-            <span class="diag-head-r" id="mc-progress">3 questions · 60 seconds</span>
+        <aside class="hero-system-card glow-card" aria-label="The 90-day growth system">
+          <div class="hero-system-head">
+            <span>90-day growth system</span>
+            <span>Built to hand off</span>
           </div>
-          <div class="diag-title">Where is growth actually stuck?</div>
-          <div class="diag-sub">Answer honestly. You'll get a first read on your constraint, then the full scorecard can pressure-test it.</div>
-          <div class="mc-questions">
-            <div class="mc-q" data-q="loop">
-              <p>Could your team run pipeline for a month without you?</p>
-              <div class="mc-btns"><button type="button" data-a="yes">Yes</button><button type="button" data-a="no">No</button></div>
+          <h2>From founder bottleneck to team-owned growth.</h2>
+          <p class="hero-system-intro">A practical operating system, installed with your team rather than left behind in a strategy deck.</p>
+          <ol class="hero-system-steps">
+            <li>
+              <span class="hero-system-number">01</span>
+              <span><strong>Name the constraint</strong><small>Evidence, funnel data, customer signal.</small></span>
+            </li>
+            <li>
+              <span class="hero-system-number">02</span>
+              <span><strong>Prove what moves</strong><small>Focused tests with a decision threshold.</small></span>
+            </li>
+            <li>
+              <span class="hero-system-number">03</span>
+              <span><strong>Install the rhythm</strong><small>Channels, reporting, weekly decisions.</small></span>
+            </li>
+            <li>
+              <span class="hero-system-number">04</span>
+              <span><strong>Transfer ownership</strong><small>Your team runs the system by day 90.</small></span>
+            </li>
+          </ol>
+          <div class="hero-system-proof">
+            <div>
+              <span class="hero-system-proof-label">Selected client result · Fintech</span>
+              <strong>500+ sign-ups in two months</strong>
+              <span>8.6% CTR · $0.74 CPC</span>
             </div>
-            <div class="mc-q" data-q="acquisition">
-              <p>Does more than one channel reliably create pipeline?</p>
-              <div class="mc-btns"><button type="button" data-a="yes">Yes</button><button type="button" data-a="no">No</button></div>
-            </div>
-            <div class="mc-q" data-q="customer">
-              <p>Do you know, with evidence, why customers pick you?</p>
-              <div class="mc-btns"><button type="button" data-a="yes">Yes</button><button type="button" data-a="no">No</button></div>
-            </div>
+            <a href="/case-studies/ned">Read case study →</a>
           </div>
-          <div class="verdict" id="mc-verdict" hidden><strong>First read.</strong> <span id="mc-verdict-text"></span></div>
-          <a class="btn-primary mc-cta" id="mc-cta" href={siteConfig.scorecardUrl} hidden>Run the full 5-min scorecard <span>→</span></a>
         </aside>
       </div>
     </div>
@@ -337,7 +340,7 @@ const subAudiences = [
   </section>
 
   {/* ============ CASE STUDIES ============ */}
-  <section class="cases">
+  <section class="cases" id="client-results">
     <div class="shell">
       <span class="spec-label">Real engagements · § 06</span>
       <h2 class="section-h">Client results.</h2>
@@ -508,18 +511,6 @@ const subAudiences = [
   </section>
 
   <script is:inline>
-    // =========== Scroll-reveal ===========
-    (function(){
-      const els = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-      els.forEach(e => io.observe(e));
-    })();
-
     // =========== Pointer-tracked glow on cards ===========
     (function(){
       if (window.matchMedia('(hover: none)').matches) return;
@@ -528,42 +519,6 @@ const subAudiences = [
           const r = card.getBoundingClientRect();
           card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
           card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-        });
-      });
-    })();
-
-    // =========== Growth Bottleneck Check, 3-question teaser ===========
-    (function(){
-      const card = document.getElementById('mini-check');
-      if (!card) return;
-      const questions = card.querySelectorAll('.mc-q');
-      const total = questions.length;
-      const verdicts = {
-        loop: 'The growth loop still runs through you. The system, not another hire, is the fix.',
-        acquisition: 'Acquisition is carried by one engine. Diversify before the dip.',
-        customer: 'The customer picture is running on assumption, not evidence. Start there.',
-        healthy: 'No obvious red flag. Run the full scorecard to pressure-test all five layers.'
-      };
-      const answers = {};
-      function finish() {
-        const firstNo = ['customer', 'acquisition', 'loop'].find(k => answers[k] === 'no');
-        document.getElementById('mc-verdict-text').textContent = verdicts[firstNo || 'healthy'];
-        document.getElementById('mc-verdict').hidden = false;
-        document.getElementById('mc-cta').hidden = false;
-        document.getElementById('mc-progress').textContent = 'First read below';
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'home_scorecard_hook_select', constraint: firstNo || 'healthy' });
-      }
-      questions.forEach(q => {
-        q.querySelectorAll('button').forEach(btn => {
-          btn.addEventListener('click', () => {
-            answers[q.dataset.q] = btn.dataset.a;
-            q.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            const done = Object.keys(answers).length;
-            document.getElementById('mc-progress').textContent = done + ' of ' + total + ' answered';
-            if (done === total) finish();
-          });
         });
       });
     })();

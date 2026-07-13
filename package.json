@@ -9,6 +9,8 @@
     "build": "node scripts/generate-og-png.mjs && astro build",
     "check": "astro check",
     "preview": "astro preview",
+    "test": "npm run test:enquiry",
+    "test:enquiry": "node scripts/test-enquiry-function.mjs",
     "check:links:crawl": "node scripts/check-crawl-links.mjs --input=docs/crawls/latest.csv",
     "verify:agents": "node scripts/verify-agent-discovery.mjs"
   },

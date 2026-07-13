@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { contactRelatedReading, siteConfig, mauticNewsletter } from "../../site";
+import { contactRelatedReading, siteConfig } from "../../site";
 
 const contactFaqs = [
   {
@@ -63,7 +63,14 @@ const contactSchema = [
 
   <section class="section">
     <div class="shell contact-grid contact-grid-form">
-      <form class="contact-option contact-form" id="growth-enquiry" name="growth-enquiry">
+      <form
+        class="contact-option contact-form"
+        id="growth-enquiry"
+        name="growth-enquiry"
+        data-wss-enquiry
+        data-fallback-email={siteConfig.email}
+      >
+        <input type="text" name="_website" tabindex="-1" autocomplete="off" hidden />
         <p class="card-kicker">Structured enquiry</p>
         <h2>Tell us what is happening now.</h2>
         <label>Name<input name="name" autocomplete="name" required /></label>
@@ -102,6 +109,7 @@ const contactSchema = [
         <label>Timeline<input name="timeline" placeholder="Now, this quarter, next quarter..." /></label>
         <label>What do you need help with?<textarea name="help" rows="4"></textarea></label>
         <button class="button button-brand" type="submit">Send enquiry</button>
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
       </form>
       <aside class="contact-option">
         <p class="card-kicker">Prefer a call?</p>
@@ -116,10 +124,6 @@ const contactSchema = [
           {siteConfig.bookingLabel} →
         </a>
         <p>
-          Or book directly:{" "}
-          <a href="https://cal.wescalestartups.com" data-cta="contact-cal-direct" rel="noreferrer" target="_blank">cal.wescalestartups.com</a>
-        </p>
-        <p>
           Prefer async?{" "}
           <a href={siteConfig.scorecardUrl} data-cta="contact-side-scorecard">{siteConfig.scorecardLabel}</a>.
         </p>
@@ -128,20 +132,15 @@ const contactSchema = [
     </div>
   </section>
 
-  <!-- Direct booking, cal.wescalestartups.com embed -->
+  <!-- Canonical booking route; embedding the old Cal.com host was blocked by both CSP and X-Frame-Options. -->
   <section class="section section-alt" id="book-a-time">
     <div class="shell">
       <p class="eyebrow">Book a time</p>
-      <h2>Pick a slot that works for you.</h2>
-      <p>Booking runs on <a href="https://cal.wescalestartups.com" rel="noreferrer" target="_blank">cal.wescalestartups.com</a>. If the calendar doesn't load, open it directly.</p>
-      <div class="cal-embed-wrap">
-        <iframe
-          src="https://cal.wescalestartups.com"
-          title="Book a call with We Scale Startups"
-          loading="lazy"
-          style="width:100%;min-height:640px;border:1px solid var(--line);border-radius:0.85rem;background:#fff;"
-        ></iframe>
-      </div>
+      <h2>Use the verified booking page.</h2>
+      <p>The booking page shows current availability, timezone, and confirmation details in one place.</p>
+      <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="contact-calendar-book">
+        {siteConfig.bookingLabel} →
+      </a>
     </div>
   </section>
 
@@ -254,64 +253,3 @@ const contactSchema = [
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
-  const form = document.getElementById("growth-enquiry");
-
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const subject = `WSS enquiry from ${data.get("company") || data.get("name") || "website"}`;
-    const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Company: ${data.get("company") || ""}`,
-      `Stage: ${data.get("stage") || ""}`,
-      `ARR: ${data.get("arr") || ""}`,
-      `Channels: ${data.get("channels") || ""}`,
-      `Budget: ${data.get("budget") || ""}`,
-      `Timeline: ${data.get("timeline") || ""}`,
-      "",
-      "Current bottleneck:",
-      `${data.get("bottleneck") || ""}`,
-      "",
-      "Help needed:",
-      `${data.get("help") || ""}`
-    ].join("\n");
-
-    // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
-    // even if no mail client is configured.
-    try {
-      const leadEmail = (data.get("email") || "").toString().trim();
-      if (leadEmail) {
-        fetch(mauticUrl, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            "mauticform[formId]": mauticFormId,
-            "mauticform[email]": leadEmail,
-            "mauticform[source_type]": "contact-form",
-            "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "growth-enquiry"
-          }).toString()
-        }).catch(() => {});
-      }
-    } catch (_) {}
-
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Fallback so the enquiry never dead-ends if no mail client is configured.
-    let note = document.getElementById("enquiry-fallback");
-    if (!note) {
-      note = document.createElement("div");
-      note.id = "enquiry-fallback";
-      note.setAttribute("role", "status");
-      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
-      form.appendChild(note);
-    }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your message has been copied to the clipboard.`;
-    if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
-  });
-</script>

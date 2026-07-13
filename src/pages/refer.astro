@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig, mauticNewsletter } from "../site";
+import { siteConfig } from "../site";
 
 const path = "/refer";
 
@@ -126,7 +126,14 @@ const schema = [
       <h2 class="text-2xl font-bold tracking-[-0.04em] mb-2">Send us the intro.</h2>
       <p class="text-[color:var(--muted)] mb-8">Takes about 2 minutes. We'll confirm receipt by email.</p>
 
-      <form class="card p-8 md:p-10 space-y-5" id="referral-form" name="referral-form" novalidate>
+      <form
+        class="card p-8 md:p-10 space-y-5"
+        id="referral-form"
+        name="referral-form"
+        data-wss-enquiry
+        data-fallback-email={siteConfig.email}
+      >
+        <input type="text" name="_website" tabindex="-1" autocomplete="off" hidden />
 
         <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)]">Your details</p>
 
@@ -204,7 +211,7 @@ const schema = [
           <button class="button button-brand" type="submit" id="refer-submit">Submit referral →</button>
         </div>
 
-        <div id="refer-fallback" role="status" class="hidden"></div>
+        <div id="refer-fallback" class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
       </form>
     </div>
   </section>
@@ -274,64 +281,3 @@ const schema = [
   </section>
 
 </BaseLayout>
-
-<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
-  const form = document.getElementById("referral-form");
-  const fallback = document.getElementById("refer-fallback");
-
-  form?.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const data = new FormData(form);
-
-    const yourName     = (data.get("your_name")     || "").toString().trim();
-    const yourEmail    = (data.get("your_email")    || "").toString().trim();
-    const yourRole     = (data.get("your_role")     || "").toString().trim();
-    const founderName  = (data.get("founder_name")  || "").toString().trim();
-    const founderEmail = (data.get("founder_email") || "").toString().trim();
-    const company      = (data.get("company")       || "").toString().trim();
-    const stage        = (data.get("stage")         || "").toString().trim();
-    const context      = (data.get("context")       || "").toString().trim();
-
-    const subject = "Founder referral: " + founderName + (company ? " (" + company + ")" : "");
-    const body = [
-      "Referred by: " + yourName + " <" + yourEmail + ">" + (yourRole ? ", " + yourRole : ""),
-      "",
-      "Founder: " + founderName + " <" + founderEmail + ">",
-      "Company: " + (company || "—"),
-      "ARR stage: " + (stage || "—"),
-      "",
-      "Context:",
-      context || "(none provided)"
-    ].join("\n");
-
-    try {
-      if (yourEmail) {
-        fetch(mauticUrl, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            "mauticform[formId]": mauticFormId,
-            "mauticform[email]": yourEmail,
-            "mauticform[source_type]": "referral-form",
-            "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "referral-programme"
-          }).toString()
-        }).catch(function () {});
-      }
-    } catch (_) {}
-
-    window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-    if (fallback) {
-      fallback.classList.remove("hidden");
-      fallback.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
-      fallback.innerHTML = "Your email draft should have opened. If it didn't, email <a href=\"mailto:" + email + "\">" + email + "</a> directly.";
-    }
-
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(subject + "\n\n" + body).catch(function () {});
-    }
-  });
-</script>

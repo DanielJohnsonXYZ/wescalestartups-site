@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig, mauticNewsletter } from "../site";
+import { siteConfig } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -80,7 +80,14 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
         title="Tell us about yourself and your AI story."
         body="The more specific you are, the faster we can see if there's a fit for the show."
       />
-      <form class="max-w-2xl card p-8 md:p-10 space-y-5" id="guest-application" name="guest-application">
+      <form
+        class="max-w-2xl card p-8 md:p-10 space-y-5"
+        id="guest-application"
+        name="guest-application"
+        data-wss-enquiry
+        data-fallback-email={siteConfig.email}
+      >
+        <input type="text" name="_website" tabindex="-1" autocomplete="off" hidden />
         {guestFields.map((field) => (
           <label class="block">
             <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">
@@ -104,6 +111,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
           </label>
         ))}
         <button class="button button-brand" type="submit">Submit Application</button>
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
       </form>
     </div>
   </section>
@@ -150,69 +158,3 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
-  const form = document.getElementById("guest-application");
-
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-
-    const subject = `Podcast Guest Application: ${data.get("name") || "Guest"} (${data.get("company") || ""})`;
-    const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Company: ${data.get("company") || ""}`,
-      `Role: ${data.get("role") || ""}`,
-      `Website: ${data.get("website") || ""}`,
-      `LinkedIn: ${data.get("linkedin") || ""}`,
-      ``,
-      `What are you building?`,
-      `${data.get("what-building") || ""}`,
-      ``,
-      `How are you using AI?`,
-      `${data.get("how-using-ai") || ""}`,
-      ``,
-      `Practical lessons for listeners:`,
-      `${data.get("practical-lessons") || ""}`,
-      ``,
-      `Relevant links:`,
-      `${data.get("relevant-links") || ""}`,
-      ``,
-      `Email: ${data.get("email") || ""}`
-    ].join("\n");
-
-    // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
-    // even if no mail client is configured.
-    try {
-      const leadEmail = (data.get("email") || "").toString().trim();
-      if (leadEmail) {
-        fetch(mauticUrl, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            "mauticform[formId]": mauticFormId,
-            "mauticform[email]": leadEmail,
-            "mauticform[source_type]": "podcast-guest-form",
-            "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "podcast-guest-application"
-          }).toString()
-        }).catch(() => {});
-      }
-    } catch (_) {}
-
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    let note = document.getElementById("guest-fallback");
-    if (!note) {
-      note = document.createElement("div");
-      note.id = "guest-fallback";
-      note.setAttribute("role", "status");
-      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
-      form.appendChild(note);
-    }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your application has been copied to the clipboard.`;
-    if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
-  });
-</script>

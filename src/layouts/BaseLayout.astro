@@ -4,6 +4,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import AnnouncementBanner from "../components/AnnouncementBanner.astro";
 import StickyBookCta from "../components/StickyBookCta.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -78,11 +79,13 @@ const ogImageMime = ogImage.toLowerCase().endsWith(".svg") ? "image/svg+xml" : o
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
 const allSchemas = [buildPersonSchema(), buildOrganizationSchema(), buildWebSiteSchema(), ...pageSchemas].filter(Boolean);
 const serializedSchemas = allSchemas.map((item) => JSON.stringify(item).replace(/</g, "\\u003c"));
-// GTM bootstrap — dataLayer initialised immediately so events queue; gtm.js deferred to first interaction or idle (3s cap) to keep it off the critical path.
-const gtmScript = `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-(function(){var loaded=false;function load(){if(loaded)return;loaded=true;var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${siteConfig.gtmId}';document.head.appendChild(j);}
-['pointerdown','keydown','scroll','touchstart'].forEach(function(e){addEventListener(e,load,{once:true,passive:true});});
-if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}else{setTimeout(load,3000);}})();`;
+// Consent Mode defaults to denied. GTM is not requested until the visitor explicitly opts in.
+const gtmScript = `window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+(function(){var loaded=false,scheduled=false;function load(){if(loaded)return;loaded=true;window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${siteConfig.gtmId}';document.head.appendChild(j);}
+function schedule(){if(scheduled||loaded)return;scheduled=true;function onIntent(){load();}['pointerdown','keydown','scroll','touchstart'].forEach(function(e){addEventListener(e,onIntent,{once:true,passive:true});});if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}else{setTimeout(load,3000);}}
+function hasConsent(){try{return localStorage.getItem('wss-consent-v1')==='granted';}catch(e){return false;}}
+if(hasConsent())schedule();addEventListener('wss:analytics-consent',function(e){if(e.detail&&e.detail.granted)schedule();});})();`;
 ---
 
 <!doctype html>
@@ -91,7 +94,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); ai_referral (AI referrer/utm); cta_click, book_call (/book or Calendly), calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download; sticky_book_cta_shown. Booking (inline Calendly on /book): booking_time_selected, booking_completed (mark booking_completed + book_call as GA4 key events). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
-    <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
+    <!-- Consent-aware Google Tag Manager bootstrap. No GTM request occurs before opt-in. -->
     <script is:inline set:html={gtmScript} />
     <!-- End Google Tag Manager -->
     <title>{title}</title>
@@ -245,30 +248,9 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
         }
       });
 
-      document.addEventListener("submit", (event) => {
-        const form = event.target;
-        if (!(form instanceof HTMLFormElement)) return;
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "form_submit",
-          form_id: form.id || form.name || "unknown",
-          form_action: form.action || "unknown",
-          page_path: window.location.pathname
-        });
-      });
     </script>
   </head>
   <body class={bodyClass}>
-    <!-- Google Tag Manager (noscript) — immediately after <body> per GTM install instructions. -->
-    <noscript>
-      <iframe
-        height="0"
-        src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.gtmId}`}
-        style="display:none;visibility:hidden"
-        width="0"
-      />
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
     <AnnouncementBanner
       text={announcementText}
@@ -317,5 +299,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
     <SiteFooter />
     <StickyBookCta enabled={stickyBookCta} />
     <EasterEgg />
+    <ConsentBanner />
+    <script is:inline src="/scripts/enquiry-form.js"></script>
   </body>
 </html>

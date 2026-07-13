@@ -554,6 +554,8 @@
   text-transform: uppercase; letter-spacing: 0.12em; color: var(--violet);
   margin-bottom: 4px;
 }
+.page-home-v8 .about-creds li.label { padding-left: 0; }
+.page-home-v8 .about-creds li.label::before { content: none; }
 .page-home-v8 .about-creds li { font-size: 13.5px; color: var(--ink-2); list-style: none; position: relative; padding-left: 18px; }
 .page-home-v8 .about-creds li::before { content: "→"; position: absolute; left: 0; color: var(--violet); font-size: 12px; }
 

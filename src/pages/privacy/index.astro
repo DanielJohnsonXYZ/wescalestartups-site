@@ -12,7 +12,7 @@ const privacySchema = buildBreadcrumbSchema([
 <BaseLayout
   title="Privacy | We Scale Startups"
   description="How We Scale Startups handles enquiry, analytics, scheduling, and communication data. A plain-English privacy notice."
-  keywords="We Scale Startups privacy policy, data protection, Cal.com analytics"
+  keywords="We Scale Startups privacy policy, data protection, Calendly analytics"
   path="/privacy"
   schema={privacySchema}
 >
@@ -38,32 +38,60 @@ const privacySchema = buildBreadcrumbSchema([
       </aside>
 
       <div class="detail-body legal-body">
+        <p><strong>Last updated:</strong> 13 July 2026</p>
         <article class="content-block">
           <h2>What we collect</h2>
           <p>When you contact us or book a call, we may collect your name, email address, company, role, website, scheduling details, and the context you choose to share about your growth challenge.</p>
           <p>When you browse the site, analytics and infrastructure tools may collect basic technical data such as pages visited, device type, approximate location, referrer, and browser information.</p>
-          <p>If you join the email list via a form on this site, your address is processed by our Mautic instance for that purpose only.</p>
+          <p>If you join the email list, your address and the source of the signup are processed by our Mautic instance for that purpose. Structured enquiries may be stored in our Cloudflare-hosted lead store before being forwarded to our communications tools.</p>
         </article>
 
         <article class="content-block">
           <h2>How we use it</h2>
           <ul>
             <li>To respond to enquiries and decide whether there is a useful commercial fit.</li>
-            <li>To schedule and run calls through tools such as Cal.com.</li>
-            <li>To improve website performance, messaging, and conversion flows.</li>
-            <li>To send follow-up material where it is relevant to the conversation.</li>
+            <li>To schedule and run calls through Calendly.</li>
+            <li>To operate, secure, and diagnose the website.</li>
+            <li>With your consent, to understand website use and improve messaging and conversion flows.</li>
+            <li>To send newsletter material where you asked to receive it, with an unsubscribe option in every email.</li>
           </ul>
         </article>
 
         <article class="content-block">
-          <h2>Third-party tools</h2>
-          <p>We may use service providers for hosting, analytics, scheduling, email, and operational workflows. These providers process data only for the purposes needed to deliver the service.</p>
+          <h2>Lawful bases</h2>
+          <ul>
+            <li><strong>Consent</strong> for optional analytics and email newsletters. You can withdraw it at any time.</li>
+            <li><strong>Steps at your request before a contract</strong> when you send an enquiry or book a commercial call.</li>
+            <li><strong>Legitimate interests</strong> in operating and securing a business website, responding to relevant B2B enquiries, and keeping proportionate business records, balanced against your rights.</li>
+            <li><strong>Legal obligation</strong> where records must be kept or disclosed by law.</li>
+          </ul>
+        </article>
+
+        <article class="content-block">
+          <h2>Providers and recipients</h2>
+          <p>We use Cloudflare for hosting, delivery, security, and durable enquiry storage; Google Tag Manager and Google Analytics for consented analytics; Microsoft Clarity for consented experience analytics; Sentry for consented error monitoring; Calendly for scheduling; Mautic for email and lead communications; and Resend for transactional enquiry notifications where configured.</p>
+          <p>These providers receive only the information needed for their service. We do not sell personal information.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>Cookies and analytics choices</h2>
+          <p>Necessary storage supports security and remembers your privacy choice. Google Analytics, Microsoft Clarity, and optional browser monitoring are disabled until you select “Accept analytics”. Use the “Privacy choices” control at the bottom of any page to reject or change that choice.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>Retention</h2>
+          <p>Website enquiries stored in the lead-capture system expire after 90 days by default unless the information becomes part of an active client, referral, contractual, or legal record. Newsletter details remain until you unsubscribe or ask for deletion. Booking, analytics, communications, and security records follow the relevant configured retention period and are reviewed so they are not kept longer than necessary.</p>
+        </article>
+
+        <article class="content-block">
+          <h2>International transfers</h2>
+          <p>Some providers may process data outside the UK. Where UK data-protection law treats this as a restricted transfer, we use the provider's applicable UK transfer mechanism, adequacy regulation, or contractual safeguards and supplementary measures as appropriate.</p>
         </article>
 
         <article class="content-block">
           <h2>Your choices</h2>
           <p>
-            You can ask to access, correct, or delete personal information we hold about you. Email <!--email_off-->{siteConfig.email}<!--/email_off--> and we will respond within a reasonable timeframe.
+            You can ask to access, correct, delete, restrict, or receive personal information, object to certain processing, or withdraw consent. Email <!--email_off-->{siteConfig.email}<!--/email_off-->. We normally respond within one month. If you are unhappy with our response, you can complain to the <a href="https://ico.org.uk/make-a-complaint/" rel="noreferrer" target="_blank">Information Commissioner's Office</a>.
           </p>
         </article>
       </div>

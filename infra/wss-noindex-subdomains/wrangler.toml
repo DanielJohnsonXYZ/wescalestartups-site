@@ -1,0 +1,22 @@
+name = "wss-noindex-subdomains"
+main = "worker.js"
+compatibility_date = "2026-04-01"
+workers_dev = false
+
+# Orange-clouded hosts only. DNS-only origins (comms/pingcrm) need
+# Cloudflare proxy enabled before these routes can apply — then uncomment.
+[[routes]]
+pattern = "hai.wescalestartups.com/*"
+zone_name = "wescalestartups.com"
+
+[[routes]]
+pattern = "uptime.wescalestartups.com/*"
+zone_name = "wescalestartups.com"
+
+# [[routes]]
+# pattern = "comms.wescalestartups.com/*"
+# zone_name = "wescalestartups.com"
+#
+# [[routes]]
+# pattern = "pingcrm.wescalestartups.com/*"
+# zone_name = "wescalestartups.com"

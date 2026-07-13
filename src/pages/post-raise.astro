@@ -1,0 +1,536 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { canonicalProofMetrics, serviceSnapshots, siteConfig, testimonials } from "../site";
+
+const path = "/post-raise";
+
+const proofMetrics = canonicalProofMetrics.slice(0, 4);
+
+const moments = [
+  "Cash in the bank and a board that expects a pipeline update before the next one.",
+  "No one inside the company owns growth decisions yet — every channel call still routes through you.",
+  "Hiring a CMO now is slow, expensive, and risky before you know which channel actually works.",
+  "Marketing activity is happening — it just isn't a system yet, and it can't survive you stepping back."
+];
+
+const builtFor = [
+  "Closed a Seed–Series A round in the last ~6 months",
+  "Post-PMF, real traction, first outside capital",
+  "No senior marketing hire in place yet",
+  "Board or investors expecting a pipeline update next quarter",
+  "Willing to share numbers weekly"
+];
+
+const notFor = [
+  "Still pre-PMF, searching for fit",
+  "Already have a CMO or VP Marketing in place",
+  "Want a one-off campaign, not a system",
+  "Volume buyers who want more activity, not sharper decisions"
+];
+
+const diagnosis = serviceSnapshots.find((s) => s.href === "/services/growth-diagnosis")!;
+const fractional = serviceSnapshots.find((s) => s.href === "/services/fractional-cmo")!;
+
+const featuredTestimonial = testimonials.find((t) => t.category === "paid-client")!;
+
+const faqs = [
+  {
+    question: "We just raised — why not just hire a CMO now?",
+    answer:
+      "Because you don't yet know which channel or offer works, and a £150k hire made on a guess is expensive to get wrong. WSS names the constraint and proves the channel first, so your first senior marketing hire (if you make one) walks into a system, not a blank page."
+  },
+  {
+    question: "We don't have any marketing hires at all yet — is that a problem?",
+    answer:
+      "No — it's the exact stage this is built for. The engagement installs the system with whoever you have (including just you), then hands the weekly rhythm to whoever joins next."
+  },
+  {
+    question: "How is this different from an agency?",
+    answer:
+      "Agencies are the right call once the channel plan is clear and you need production capacity. WSS works one level up — naming the bottleneck, aligning channels, and installing the decision rhythm your team (or your agency) runs inside. Many founders need both, in that order."
+  }
+];
+
+const relatedReading = [
+  { href: "/before-you-hire-a-head-of-marketing", label: "Before you hire a head of marketing" },
+  { href: "/founder-led-growth", label: "Founder-led growth" },
+  { href: "/fractional-cmo-vs-full-time-cmo", label: "Fractional CMO vs full-time CMO" },
+  { href: "/pricing", label: "Pricing" }
+];
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Post-raise growth", path }
+  ]),
+  buildFaqSchema(faqs)
+];
+---
+
+<BaseLayout
+  path={path}
+  title="Just raised? Build the pipeline before the CMO hire | We Scale Startups"
+  description="For founders who just closed a Seed–Series A round: install the acquisition system in 90 days without a £150k CMO hire yet. Growth Diagnosis or Fractional CMO."
+  keywords="post-raise marketing, just raised startup growth, fractional CMO after fundraising, Seed Series A pipeline, growth diagnosis"
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Post-raise growth", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Just raised</p>
+      <h1>
+        You've got the capital.<br />
+        Now you need the <em>pipeline to match</em> — without a £150k CMO hire yet.
+      </h1>
+      <p class="lede">
+        We install the acquisition system in 90 days and hand the weekly rhythm to your team, so growth
+        stops waiting on a hire you haven't made and a founder who's in every decision.
+      </p>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="post-raise-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="post-raise-hero-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="hero-proof" style="grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: none; padding-top: 0; margin-top: 0;">
+        {proofMetrics.map((metric) => (
+          <div>
+            <strong>{metric.value}</strong>
+            <span>{metric.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">The moment you're in</p>
+      <h2>The round closed. The pressure didn't.</h2>
+      <ol class="moment-list">
+        {moments.map((item, i) => (
+          <li>
+            <span class="moment-num">{String(i + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Self-qualify</p>
+      <h2>Built for this moment. Not for every moment.</h2>
+      <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
+        Better you know in 30 seconds than 15 minutes into a call.
+      </p>
+      <div class="fit-grid">
+        <div class="fit-card for">
+          <span class="fit-label yes">Built for</span>
+          <ul>
+            {builtFor.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="fit-card against">
+          <span class="fit-label no">Not for</span>
+          <ul>
+            {notFor.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Where to start</p>
+      <h2>The smallest commitment that answers your biggest question.</h2>
+      <p class="lede" style="max-width: 56ch; margin-top: 0.5rem;">
+        Most post-raise founders start in one of two places, depending on how sure you are of the constraint.
+      </p>
+      <div class="ladder">
+        <a class="ladder-item recommended" href={diagnosis.href} data-cta="post-raise-ladder-diagnosis">
+          <div>
+            <div class="ladder-name">
+              {diagnosis.title}
+              <span class="ladder-tag">Best first step</span>
+            </div>
+            <p class="ladder-desc">
+              You're not sure yet what's blocking pipeline. Constraint map, evidence review, 90-day plan.
+            </p>
+          </div>
+          <div class="ladder-meta">
+            <span class="ladder-price">{diagnosis.price} · {diagnosis.timeline}</span>
+            <span class="ladder-link">Read →</span>
+          </div>
+        </a>
+        <a class="ladder-item" href={fractional.href} data-cta="post-raise-ladder-fcmo">
+          <div>
+            <div class="ladder-name">{fractional.title}</div>
+            <p class="ladder-desc">
+              You know you need senior ownership now, not in six months when a full-time hire lands. Operating
+              cadence, agency direction, board reporting.
+            </p>
+          </div>
+          <div class="ladder-meta">
+            <span class="ladder-price">{fractional.price} · 3-mo min</span>
+            <span class="ladder-link">Read →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Founder voices</p>
+      <figure class="quote-card">
+        <blockquote>
+          <p>“{featuredTestimonial.quote}”</p>
+        </blockquote>
+        <figcaption>
+          <strong>{featuredTestimonial.name}</strong>
+          <span>
+            {featuredTestimonial.role} · {featuredTestimonial.company}
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Before you book</p>
+      <h2>What founders usually ask here.</h2>
+      <div class="grid-3" style="margin-top: 1.75rem;">
+        {faqs.map((faq) => (
+          <article class="feature-card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related reading</p>
+      <h2>Context that pairs with this moment.</h2>
+      <ul class="related-insights-list" style="margin-top: 1.5rem;">
+        {relatedReading.map((item) => (
+          <li>
+            <a class="card-link" href={item.href}>
+              {item.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>The next step is a 20-minute call.</h2>
+        <p>
+          Bring your current numbers and the round you just closed. You'll leave with the constraint named in
+          plain English, and an honest read on whether we're the right call.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="post-raise-final-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="post-raise-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .moment-list {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+
+  .moment-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .moment-list li:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .moment-num {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--violet);
+    min-width: 1.75rem;
+    padding-top: 0.2rem;
+  }
+
+  .moment-list p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  @media (max-width: 760px) {
+    .fit-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fit-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.5rem 1.4rem;
+  }
+
+  .fit-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    display: inline-block;
+    border-radius: 100px;
+    padding: 0.3rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .fit-label.yes {
+    color: #0e9f6e;
+    background: rgba(14, 159, 110, 0.09);
+  }
+
+  .fit-label.no {
+    color: #e05d38;
+    background: rgba(224, 93, 56, 0.09);
+  }
+
+  .fit-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fit-card li {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+    padding: 0.65rem 0 0.65rem 1.6rem;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .fit-card li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .fit-card li::before {
+    position: absolute;
+    left: 0.1rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+  }
+
+  .fit-card.for li::before {
+    content: "✓";
+    color: #0e9f6e;
+  }
+
+  .fit-card.against li::before {
+    content: "✕";
+    color: #e05d38;
+  }
+
+  .ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
+  }
+
+  .ladder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--surface);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .ladder-item:hover {
+    border-color: rgba(102, 87, 255, 0.35);
+    box-shadow: 0 12px 32px rgba(54, 38, 109, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .ladder-item.recommended {
+    border-color: rgba(102, 87, 255, 0.45);
+    background: linear-gradient(135deg, rgba(102, 87, 255, 0.08), rgba(255, 254, 250, 0.95));
+  }
+
+  .ladder-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ladder-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--violet);
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+  }
+
+  .ladder-desc {
+    margin: 0.35rem 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 48ch;
+  }
+
+  .ladder-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .ladder-price {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .ladder-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--violet);
+  }
+
+  @media (max-width: 720px) {
+    .ladder-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ladder-meta {
+      align-items: flex-start;
+      flex-direction: row;
+      gap: 0.75rem;
+    }
+  }
+
+  .quote-card {
+    margin: 1.5rem 0 0;
+    padding: 1.75rem 1.75rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    border-left: 3px solid var(--violet);
+  }
+
+  .quote-card blockquote {
+    margin: 0;
+  }
+
+  .quote-card blockquote p {
+    margin: 0;
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .quote-card figcaption {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .quote-card figcaption strong {
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .quote-card figcaption span {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+</style>

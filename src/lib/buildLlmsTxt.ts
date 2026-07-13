@@ -183,6 +183,7 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - Transfer (handoff framing): ${siteConfig.siteUrl}/transfer
 - Experimentation (hypothesis-led tests): ${siteConfig.siteUrl}/experimentation
 - When growth plateaus (cornerstone): ${siteConfig.siteUrl}/when-growth-plateaus
+- Post-raise (just closed a round): ${siteConfig.siteUrl}/post-raise
 
 ## Published insights
 

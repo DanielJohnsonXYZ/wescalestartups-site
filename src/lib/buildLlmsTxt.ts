@@ -184,6 +184,7 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - Experimentation (hypothesis-led tests): ${siteConfig.siteUrl}/experimentation
 - When growth plateaus (cornerstone): ${siteConfig.siteUrl}/when-growth-plateaus
 - Post-raise (just closed a round): ${siteConfig.siteUrl}/post-raise
+- AI SaaS Growth Audit (Post-PMF, founder owns growth): ${siteConfig.siteUrl}/ai-saas-growth-audit
 
 ## Published insights
 

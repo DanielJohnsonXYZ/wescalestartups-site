@@ -80,6 +80,11 @@ export async function onRequest(context) {
     return Response.redirect(url.toString(), 301);
   }
 
+  if (path === "/ai-saas-growth-audit" || path === "/ai-saas-growth-audit/") {
+    url.pathname = "/ai-growth-audit";
+    return Response.redirect(url.toString(), 301);
+  }
+
   const serviceRedirects = {
     "/services/growth-strategy": "/services/growth-diagnosis",
     "/services/growth-strategy/": "/services/growth-diagnosis",

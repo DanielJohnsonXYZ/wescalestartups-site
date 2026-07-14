@@ -98,7 +98,7 @@ export const GET: APIRoute = async () => {
       "/growth-operating-system",
       "/founder-led-growth",
       "/post-raise",
-      "/ai-saas-growth-audit",
+      "/ai-growth-audit",
       "/privacy",
       "/terms",
       "/llms.txt",

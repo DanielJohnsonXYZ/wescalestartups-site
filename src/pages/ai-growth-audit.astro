@@ -1,72 +1,116 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { canonicalProofMetrics, siteConfig, testimonials } from "../site";
+import { proofClients, proofEcosystemLogos, siteConfig, testimonials } from "../site";
 
 const path = "/ai-growth-audit";
 const bookHref = "#book-calendly";
 const calUrl = `${siteConfig.calLink}?utm_source=outbound&utm_medium=email&utm_campaign=ai-growth-audit`;
-const primaryCtaLabel = "Book your free Growth Audit";
+const primaryCtaLabel = "Book a free 20-minute Growth Audit";
 const primaryCtaSubcopy = `Free · ${siteConfig.bookingCallDurationPhrase} · Leave with your bottleneck named`;
-const ctaReassurance = "No deck required. No pitch unless there’s a clear fit.";
+const scorecardSoftLink = "Not ready to talk? Take the 5-minute scorecard.";
 
-const proofMetrics = canonicalProofMetrics.slice(0, 4);
+const proofMetrics = [
+  {
+    value: "£18M+",
+    label: "in client revenue influenced",
+    detail: "Across client and operator-side engagements"
+  },
+  {
+    value: "£6M+",
+    label: "in paid media managed",
+    detail: "Acquisition spend directed and reviewed"
+  },
+  {
+    value: "479+",
+    label: "founders and teams advised",
+    detail: "Founder sessions across programmes and clients"
+  },
+  {
+    value: "4.93/5",
+    label: "on GrowthMentor",
+    detail: "Average mentor rating across 479+ sessions",
+    href: siteConfig.growthMentorReviews
+  }
+];
+
+const logoStrip = [
+  ...proofClients
+    .filter((c) => c.logoSrc && c.label !== "Healthtech (anonymous)")
+    .slice(0, 4)
+    .map((c) => ({
+      src: c.logoSrc!,
+      alt: c.label,
+      name: c.label
+    })),
+  ...proofEcosystemLogos
+    .filter((l) => ["Google for Startups", "Techstars", "GrowthMentor"].includes(l.name))
+    .map((l) => ({ src: l.src, alt: l.alt, name: l.name }))
+];
 
 const outcomes = [
   {
     title: "Your named bottleneck",
-    body: "The one constraint holding pipeline back, in plain English. Not a laundry list."
+    body: "The one constraint holding pipeline back, in plain English."
   },
   {
     title: "The likely cause",
-    body: "Positioning, acquisition, conversion, reporting, or ownership. One primary call."
+    body: "Positioning, acquisition, conversion, retention, or operating rhythm."
   },
   {
-    title: "What not to spend on yet",
-    body: "Where campaign volume, tool sprawl, or a CMO hire would amplify the wrong thing."
+    title: "The clearest next move",
+    body: "What to do this week, including what not to spend on yet."
   },
   {
     title: "An honest fit call",
-    body: "Whether We Scale Startups is the right help now, or a clear no with a better next step."
+    body: "Whether WSS is the right help now, or a clear no."
   }
 ];
 
-const builtFor = [
-  "Post-PMF AI / B2B SaaS with real customers, not a pitch deck",
-  "You still own the weekly growth decisions (no CMO or VP Marketing yet)",
-  "Seed–Series A capital in, or board pressure for a cleaner pipeline story",
-  "Willing to bring numbers: funnel, channels, what’s working and what’s noise"
+const afterAudit = [
+  {
+    title: "Do nothing yet",
+    body: "If the constraint isn’t urgent, you leave with clarity and wait."
+  },
+  {
+    title: "Fix it internally",
+    body: "A named bottleneck your team can act on without hiring WSS."
+  },
+  {
+    title: "Short Growth Diagnosis",
+    body: "Evidence review and a 90-day plan when you need more depth (from £2k)."
+  },
+  {
+    title: "Work with WSS",
+    body: "Only if there’s a genuine fit for sprint, system build, or fractional leadership."
+  }
 ];
 
-const notFor = [
-  "Pre-PMF or still hunting for fit",
-  "You already have a senior marketing owner in seat",
-  "You want a campaign sprint with no diagnosis",
-  "You want junior execution, not a named constraint"
+const fitRows = [
+  { yes: "Post-PMF AI / B2B SaaS with real customers", no: "Pre-PMF or still hunting for fit" },
+  { yes: "You still own weekly growth decisions", no: "You already have a CMO / VP Marketing" },
+  { yes: "Willing to bring rough funnel numbers", no: "You want a campaign sprint with no diagnosis" }
 ];
 
-const featuredTestimonial = testimonials.find((t) => t.category === "paid-client")!;
+const featuredTestimonial =
+  testimonials.find((t) => t.name === "Greg Weinstein") ??
+  testimonials.find((t) => t.category === "paid-advisory")!;
 
 const faqs = [
   {
     question: "What should I bring?",
     answer:
-      "No deck. Bring the current picture: stage, traction, main channels, and what you think is blocking pipeline. Rough numbers beat a polished story."
+      "No deck. Stage, traction, main channels, and what you think is blocking pipeline. Rough numbers beat a polished story."
   },
   {
     question: "Is there a pitch at the end?",
     answer:
-      "Only if there is a genuine fit. The default outcome is a named bottleneck and a clear next step, including telling you not to hire us yet when that is the honest answer."
+      "Only if there’s a genuine fit. Default outcome: named bottleneck, next move, and an honest yes/no on working together."
   },
   {
     question: "We just raised. Should we hire a CMO instead?",
     answer:
-      "Often not yet. A senior hire before the constraint is named is expensive to reverse. The audit tells you whether the bottleneck is strategy, channel, conversion, reporting, or ownership, then whether fractional help or a hire is the right next move."
-  },
-  {
-    question: "How is this different from an agency call?",
-    answer:
-      "Agencies produce once the channel plan is clear. This call works one level up: name the bottleneck first, then decide what to build, buy, or hire."
+      "Often not yet. A senior hire before the constraint is named is expensive to reverse. The audit tells you whether the bottleneck is strategy, channel, conversion, retention, or ownership."
   }
 ];
 
@@ -82,62 +126,98 @@ const schema = [
 <BaseLayout
   path={path}
   title="AI SaaS Growth Audit | We Scale Startups"
-  description="20-minute Growth Audit for Post-PMF AI SaaS founders who still own growth. Leave with the pipeline constraint named before you hire more marketing capacity."
+  description="20-minute Growth Audit for Post-PMF AI SaaS founders who still own growth. Leave with the pipeline constraint named before you hire, increase spend, or add another agency."
   keywords="AI SaaS growth audit, post-PMF AI startup marketing, founder-led growth, fractional CMO AI startup"
   schema={schema}
-  breadcrumbItems={[
-    { name: "Home", path: "/" },
-    { name: "AI SaaS Growth Audit", path }
-  ]}
   stickyBookCta={true}
   stickyBookHref={bookHref}
-  stickyBookCtaLabel="Book your audit →"
+  stickyBookCtaLabel="Book a Growth Audit →"
+  headerCtaLabel="Book a Growth Audit"
+  headerCtaHref={bookHref}
+  showFooterScorecard={false}
+  showFooterNewsletter={false}
   showAnnouncement={false}
 >
-  <section class="page-hero">
-    <div class="shell">
-      <p class="eyebrow">We Scale Startups</p>
-      <h1>
-        Your product is ahead of your growth system.<br />
-        <em>Let’s name the constraint in 20 minutes.</em>
-      </h1>
-      <p class="lede">
-        For Post-PMF AI SaaS founders who still own growth. Free Growth Audit with We Scale Startups. You leave
-        with the bottleneck named in plain English, before you hire marketers or an agency around a guess.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={bookHref}
-          data-cta="ai-audit-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{primaryCtaLabel}</span>
-          <span class="button-subcopy">{primaryCtaSubcopy}</span>
-        </a>
+  <section class="page-hero audit-hero">
+    <div class="shell audit-hero-grid">
+      <div class="audit-hero-copy">
+        <p class="eyebrow">We Scale Startups · Growth Audit</p>
+        <h1>
+          Post-PMF AI SaaS, but growth still runs through the founder?<br />
+          <em>Find the bottleneck before you hire, increase spend, or add another agency.</em>
+        </h1>
+        <p class="lede">
+          In a free 20-minute Growth Audit, we identify whether the constraint is positioning, acquisition,
+          conversion, retention, or operating rhythm, then give you the clearest next move.
+        </p>
+        <div class="hero-actions audit-hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={bookHref}
+            data-cta="ai-audit-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{primaryCtaLabel}</span>
+            <span class="button-subcopy">{primaryCtaSubcopy}</span>
+          </a>
+        </div>
+        <p class="soft-secondary">
+          <a href={siteConfig.scorecardUrl} data-cta="ai-audit-hero-scorecard">{scorecardSoftLink}</a>
+        </p>
       </div>
-      <p class="cta-reassurance">{ctaReassurance}</p>
+
+      <aside class="daniel-card" aria-label="Delivered by Daniel Johnson">
+        <img
+          src="/images/daniel-headshot-640.webp"
+          alt="Daniel Johnson, Founding Partner at We Scale Startups"
+          width="640"
+          height="640"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="daniel-card-body">
+          <p class="daniel-card-kicker">Your audit is with</p>
+          <p class="daniel-card-name">Daniel Johnson</p>
+          <p class="daniel-card-role">Founding Partner, We Scale Startups</p>
+          <p class="daniel-card-proof">
+            £18M+ revenue influenced · £6M+ media managed · advisor to post-PMF SaaS teams
+          </p>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section audit-tight">
     <div class="shell">
-      <div class="hero-proof" style="grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: none; padding-top: 0; margin-top: 0;">
+      <div class="hero-proof audit-proof">
         {proofMetrics.map((metric) => (
           <div>
             <strong>{metric.value}</strong>
             <span>{metric.label}</span>
+            {metric.href ? (
+              <a class="proof-source" href={metric.href} rel="noreferrer" target="_blank">
+                {metric.detail} →
+              </a>
+            ) : (
+              <small>{metric.detail}</small>
+            )}
           </div>
+        ))}
+      </div>
+
+      <div class="logo-strip" aria-label="Clients and programmes">
+        {logoStrip.map((logo) => (
+          <img src={logo.src} alt={logo.alt} title={logo.name} width="120" height="40" loading="lazy" decoding="async" />
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt audit-tight">
     <div class="shell">
       <p class="eyebrow">What you leave with</p>
       <h2>Four things by the end of the call.</h2>
-      <div class="grid-2" style="margin-top: 1.75rem;">
+      <div class="grid-2 audit-outcomes">
         {outcomes.map((item) => (
           <article class="feature-card">
             <h3>{item.title}</h3>
@@ -145,102 +225,105 @@ const schema = [
           </article>
         ))}
       </div>
-      <div class="mid-cta">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={bookHref}
-          data-cta="ai-audit-outcomes-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{primaryCtaLabel}</span>
-          <span class="button-subcopy">{primaryCtaSubcopy}</span>
-        </a>
-        <p class="cta-reassurance">{ctaReassurance}</p>
-      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section audit-tight">
     <div class="shell">
-      <p class="eyebrow">How the {siteConfig.bookingCallDurationPhrase} run</p>
-      <h2>No deck. Direct diagnosis.</h2>
-      <ol class="call-phase-list" style="margin-top: 1.5rem;">
-        {siteConfig.bookingCallPhases.map((step) => (
-          <li>
-            <strong>{step.phase}</strong>
-            <span>{step.detail}</span>
-          </li>
+      <p class="eyebrow">Fit check</p>
+      <h2>Built for this stage. Clear on who it is not for.</h2>
+      <div class="fit-table">
+        <div class="fit-table-head">
+          <span>Good fit</span>
+          <span>Not a fit</span>
+        </div>
+        {fitRows.map((row) => (
+          <div class="fit-table-row">
+            <p><span class="fit-mark yes">✓</span>{row.yes}</p>
+            <p><span class="fit-mark no">✕</span>{row.no}</p>
+          </div>
         ))}
-      </ol>
+      </div>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt audit-tight">
     <div class="shell">
-      <p class="eyebrow">Self-qualify</p>
-      <h2>Built for this stage. Not for every founder.</h2>
-      <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
-        Better you know in 30 seconds than 15 minutes into a call.
+      <p class="eyebrow">After the audit</p>
+      <h2>What happens after the audit.</h2>
+      <p class="lede audit-lede">
+        The answer may be to do nothing, fix it internally, complete a short diagnosis, or work with WSS. The call
+        decides that. It does not assume a retainer.
       </p>
-      <div class="fit-grid">
-        <div class="fit-card for">
-          <span class="fit-label yes">Built for</span>
-          <ul>
-            {builtFor.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div class="fit-card against">
-          <span class="fit-label no">Not for</span>
-          <ul>
-            {notFor.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div class="mid-cta">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={bookHref}
-          data-cta="ai-audit-fit-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{primaryCtaLabel}</span>
-          <span class="button-subcopy">{primaryCtaSubcopy}</span>
-        </a>
-        <p class="cta-reassurance">{ctaReassurance}</p>
+      <div class="grid-2 audit-outcomes">
+        {afterAudit.map((item) => (
+          <article class="feature-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section" id="book-calendly" aria-labelledby="book-calendly-heading">
+  <section class="section audit-tight">
+    <div class="shell">
+      <p class="eyebrow">Founder voice</p>
+      <figure class="quote-card">
+        <blockquote>
+          <p>“{featuredTestimonial.quote}”</p>
+        </blockquote>
+        <figcaption>
+          <strong>{featuredTestimonial.name}</strong>
+          <span>
+            {featuredTestimonial.role} · {featuredTestimonial.company} · {featuredTestimonial.result}
+          </span>
+          <a href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
+            Read GrowthMentor reviews →
+          </a>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section-alt audit-tight" id="book-calendly" aria-labelledby="book-calendly-heading">
     <div class="shell">
       <p class="eyebrow">Book now</p>
-      <h2 id="book-calendly-heading">Book your free Growth Audit.</h2>
-      <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
+      <h2 id="book-calendly-heading">Book a free 20-minute Growth Audit.</h2>
+      <p class="lede audit-lede">
         Choose a slot below. Bring where pipeline is stuck. You’ll leave with the constraint named in plain
         English.
       </p>
+      <div class="book-primary-cta">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.calUrl}
+          data-cta="ai-audit-book-section"
+          rel="noreferrer"
+          target="_blank"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{primaryCtaLabel}</span>
+          <span class="button-subcopy">{primaryCtaSubcopy}</span>
+        </a>
+        <p class="soft-secondary">
+          <a href={siteConfig.scorecardUrl} data-cta="ai-audit-book-scorecard">{scorecardSoftLink}</a>
+        </p>
+      </div>
       <div
         id="book-cal-inline"
         class="calendly-inline-widget"
         data-url={calUrl}
-        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.5rem;"
+        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.25rem;"
       >
       </div>
-      <p class="calendly-lede" style="margin-top:1rem;">
+      <p class="calendly-lede">
         <strong>Calendar not loading?</strong>
-        {" "}
-        Some privacy blockers stop the embed.
         {" "}
         <a href={siteConfig.calUrl} rel="noreferrer" target="_blank" data-cta="ai-audit-calendly-fallback">
           Open the booking page in a new tab
         </a>
-        , or
-        {" "}
-        <a href="/contact#growth-enquiry">send context via the enquiry form</a>.
+        .
       </p>
     </div>
   </section>
@@ -276,28 +359,11 @@ const schema = [
     })();
   </script>
 
-  <section class="section section-alt">
+  <section class="section audit-tight">
     <div class="shell">
-      <p class="eyebrow">Founder voice</p>
-      <figure class="quote-card">
-        <blockquote>
-          <p>“{featuredTestimonial.quote}”</p>
-        </blockquote>
-        <figcaption>
-          <strong>{featuredTestimonial.name}</strong>
-          <span>
-            {featuredTestimonial.role} · {featuredTestimonial.company}
-          </span>
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">Before you book</p>
+      <p class="eyebrow">FAQ</p>
       <h2>Usual questions.</h2>
-      <div class="grid-2" style="margin-top: 1.75rem;">
+      <div class="grid-2 audit-outcomes">
         {faqs.map((faq) => (
           <article class="feature-card">
             <h3>{faq.question}</h3>
@@ -305,7 +371,7 @@ const schema = [
           </article>
         ))}
       </div>
-      <div class="mid-cta">
+      <div class="book-primary-cta final-cta">
         <a
           class="button button-brand button-with-subcopy"
           href={bookHref}
@@ -315,146 +381,225 @@ const schema = [
           <span class="button-label">{primaryCtaLabel}</span>
           <span class="button-subcopy">{primaryCtaSubcopy}</span>
         </a>
-        <p class="cta-reassurance">{ctaReassurance}</p>
+        <p class="soft-secondary">
+          <a href={siteConfig.scorecardUrl} data-cta="ai-audit-faq-scorecard">{scorecardSoftLink}</a>
+        </p>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .cta-reassurance {
-    margin: 0.75rem 0 0;
-    font-size: 0.9rem;
-    color: var(--muted);
-    max-width: 42ch;
+  .audit-tight {
+    padding-block: clamp(2.25rem, 4vw, 3.25rem);
   }
 
-  .mid-cta {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
+  .audit-hero {
+    padding-bottom: 1.5rem;
   }
 
-  .call-phase-list {
-    list-style: none;
+  .audit-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .audit-hero-copy h1 {
+    max-width: 18ch;
+  }
+
+  .audit-hero-copy .lede {
+    max-width: 54ch;
+    font-size: 1.08rem;
+    color: var(--ink-2);
+  }
+
+  .audit-hero-actions {
+    margin-top: 1.25rem;
+  }
+
+  .soft-secondary {
+    margin: 0.85rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .soft-secondary a {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .soft-secondary a:hover {
+    color: var(--violet);
+  }
+
+  .daniel-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(16, 17, 20, 0.06);
+  }
+
+  .daniel-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .daniel-card-body {
+    padding: 1.15rem 1.2rem 1.35rem;
+  }
+
+  .daniel-card-kicker {
     margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0;
-  }
-
-  .call-phase-list li {
-    display: grid;
-    gap: 0.25rem;
-    padding: 1rem 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .call-phase-list li:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .call-phase-list strong {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 0.72rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--violet);
   }
 
-  .call-phase-list span {
+  .daniel-card-name {
+    margin: 0.35rem 0 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .daniel-card-role {
+    margin: 0.15rem 0 0;
     color: var(--ink-2);
-    line-height: 1.55;
+    font-size: 0.95rem;
   }
 
-  .fit-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .daniel-card-proof {
+    margin: 0.85rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+
+  .audit-proof {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
     gap: 1rem;
+  }
+
+  .audit-proof small,
+  .audit-proof .proof-source {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .audit-proof .proof-source:hover {
+    color: var(--violet);
+  }
+
+  .logo-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem 2rem;
     margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
   }
 
-  @media (max-width: 760px) {
-    .fit-grid {
-      grid-template-columns: 1fr;
-    }
+  .logo-strip img {
+    height: 28px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.72;
   }
 
-  .fit-card {
-    background: var(--surface);
+  .audit-outcomes {
+    margin-top: 1.25rem;
+  }
+
+  .audit-lede {
+    max-width: 54ch;
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+  }
+
+  .fit-table {
+    margin-top: 1.25rem;
     border: 1px solid var(--line);
     border-radius: 1rem;
-    padding: 1.5rem 1.4rem;
+    overflow: hidden;
+    background: var(--surface);
   }
 
-  .fit-label {
+  .fit-table-head,
+  .fit-table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fit-table-head {
+    background: color-mix(in srgb, var(--violet) 8%, white);
     font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.68rem;
-    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    display: inline-block;
-    border-radius: 100px;
-    padding: 0.3rem 0.75rem;
-    margin-bottom: 1rem;
+    color: var(--violet);
   }
 
-  .fit-label.yes {
-    color: #0e9f6e;
-    background: rgba(14, 159, 110, 0.09);
-  }
-
-  .fit-label.no {
-    color: #e05d38;
-    background: rgba(224, 93, 56, 0.09);
-  }
-
-  .fit-card ul {
-    list-style: none;
+  .fit-table-head span,
+  .fit-table-row p {
+    padding: 0.9rem 1.1rem;
     margin: 0;
-    padding: 0;
+    border-right: 1px solid var(--line);
   }
 
-  .fit-card li {
-    font-size: 0.92rem;
+  .fit-table-head span:last-child,
+  .fit-table-row p:last-child {
+    border-right: none;
+  }
+
+  .fit-table-row + .fit-table-row {
+    border-top: 1px solid var(--line);
+  }
+
+  .fit-table-row p {
     color: var(--ink-2);
-    line-height: 1.5;
-    padding: 0.65rem 0 0.65rem 1.6rem;
-    border-bottom: 1px solid var(--line);
-    position: relative;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    display: flex;
+    gap: 0.55rem;
+    align-items: flex-start;
   }
 
-  .fit-card li:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .fit-card li::before {
-    position: absolute;
-    left: 0.1rem;
+  .fit-mark {
     font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
 
-  .fit-card.for li::before {
-    content: "✓";
+  .fit-mark.yes {
     color: #0e9f6e;
   }
 
-  .fit-card.against li::before {
-    content: "✕";
+  .fit-mark.no {
     color: #e05d38;
   }
 
   .quote-card {
-    margin: 1.5rem 0 0;
-    padding: 1.75rem 1.75rem 1.5rem;
+    margin: 1.25rem 0 0;
+    padding: 1.5rem 1.5rem 1.35rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1.25rem;
+    border-radius: 1.15rem;
     border-left: 3px solid var(--violet);
   }
 
@@ -465,7 +610,7 @@ const schema = [
   .quote-card blockquote p {
     margin: 0;
     font-family: "Fraunces Variable", Georgia, serif;
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    font-size: clamp(1.12rem, 2vw, 1.3rem);
     font-style: italic;
     line-height: 1.5;
     color: var(--ink);
@@ -475,16 +620,94 @@ const schema = [
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.2rem;
   }
 
   .quote-card figcaption strong {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: var(--ink);
   }
 
-  .quote-card figcaption span {
-    font-size: 0.82rem;
+  .quote-card figcaption span,
+  .quote-card figcaption a {
+    font-size: 0.85rem;
     color: var(--muted);
+  }
+
+  .quote-card figcaption a:hover {
+    color: var(--violet);
+  }
+
+  .book-primary-cta {
+    margin-top: 1.25rem;
+  }
+
+  .final-cta {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .calendly-lede {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  :global(.page-hero.audit-hero .eyebrow),
+  .eyebrow {
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 1;
+    color: var(--violet);
+  }
+
+  :global(.audit-tight p),
+  :global(.audit-tight .feature-card p) {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+
+  :global(.audit-tight h2) {
+    margin-top: 0.15rem;
+    max-width: 22ch;
+  }
+
+  @media (max-width: 900px) {
+    .audit-hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .daniel-card {
+      max-width: 360px;
+    }
+
+    .audit-proof {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .fit-table-head,
+    .fit-table-row {
+      grid-template-columns: 1fr;
+    }
+
+    .fit-table-head span,
+    .fit-table-row p {
+      border-right: none;
+    }
+
+    .fit-table-head span + span,
+    .fit-table-row p + p {
+      border-top: 1px solid var(--line);
+    }
+
+    .audit-proof {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

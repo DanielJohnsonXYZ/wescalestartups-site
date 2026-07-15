@@ -45,6 +45,14 @@ interface Props {
   stickyBookHref?: string;
   /** Sticky CTA button label override. */
   stickyBookCtaLabel?: string;
+  /** Header primary CTA label. */
+  headerCtaLabel?: string;
+  /** Header primary CTA href. */
+  headerCtaHref?: string;
+  /** When false, hide footer scorecard secondary CTA. */
+  showFooterScorecard?: boolean;
+  /** When false, hide footer newsletter signup. */
+  showFooterNewsletter?: boolean;
   /** When false, hide the sitewide announcement banner (e.g. /book). */
   showAnnouncement?: boolean;
 }
@@ -74,6 +82,10 @@ const {
   stickyBookCta: stickyBookCtaProp,
   stickyBookHref,
   stickyBookCtaLabel,
+  headerCtaLabel,
+  headerCtaHref,
+  showFooterScorecard = true,
+  showFooterNewsletter = true,
   showAnnouncement: showAnnouncementProp
 } = Astro.props;
 
@@ -291,7 +303,13 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
         pill={announcementPill}
       />
     )}
-    {showSiteHeader && <SiteHeader currentPath={currentPath} />}
+    {showSiteHeader && (
+      <SiteHeader
+        currentPath={currentPath}
+        ctaLabel={headerCtaLabel}
+        ctaHref={headerCtaHref}
+      />
+    )}
     <main id="main-content">
       {
         breadcrumbItems && breadcrumbItems.length > 0 && (
@@ -327,7 +345,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
         </section>
       )}
     </main>
-    <SiteFooter />
+    <SiteFooter showScorecardCta={showFooterScorecard} showNewsletter={showFooterNewsletter} />
     <StickyBookCta
       enabled={stickyBookCta}
       href={stickyBookHref}

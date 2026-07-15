@@ -4,6 +4,15 @@
 import EmailSignup from "./EmailSignup.astro";
 import { siteConfig } from "../site";
 
+interface Props {
+  /** When false, hide the secondary scorecard CTA in the brand column. */
+  showScorecardCta?: boolean;
+  /** When false, hide the newsletter signup block. */
+  showNewsletter?: boolean;
+}
+
+const { showScorecardCta = true, showNewsletter = true } = Astro.props;
+
 const groups = [
   {
     label: "Work with us",
@@ -80,17 +89,21 @@ const groups = [
         Contact →
       </a>
       <p class="footer-book-reassurance">Send the growth context, stage, bottleneck, budget, and timeline. We will reply with the clearest next step.</p>
-      <p class="footer-secondary-cta">
-        Or, <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel} →</a>
-      </p>
-      <div class="footer-newsletter" aria-label="Newsletter signup">
-        <EmailSignup
-          variant="light"
-          formId="footer-newsletter"
-          heading={siteConfig.newsletterName}
-          subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
-        />
-      </div>
+      {showScorecardCta && (
+        <p class="footer-secondary-cta">
+          Or, <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel} →</a>
+        </p>
+      )}
+      {showNewsletter && (
+        <div class="footer-newsletter" aria-label="Newsletter signup">
+          <EmailSignup
+            variant="light"
+            formId="footer-newsletter"
+            heading={siteConfig.newsletterName}
+            subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
+          />
+        </div>
+      )}
     </div>
 
     {groups.map((group) => (

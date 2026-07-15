@@ -6,9 +6,21 @@ interface Props {
   enabled?: boolean;
   /** ScrollY (px) after which the bar appears. */
   revealAfter?: number;
+  /** Override destination (e.g. #book-calendly on dedicated audit pages). */
+  href?: string;
+  /** Override sticky button label. */
+  ctaLabel?: string;
+  /** Override hint under the sticky label. */
+  hint?: string;
 }
 
-const { enabled = true, revealAfter = 640 } = Astro.props;
+const {
+  enabled = true,
+  revealAfter = 640,
+  href = siteConfig.bookingUrl,
+  ctaLabel = "Book a call →",
+  hint = `Free · ${siteConfig.bookingCallDurationPhrase} · No pitch`
+} = Astro.props;
 ---
 
 {enabled && (
@@ -21,15 +33,15 @@ const { enabled = true, revealAfter = 640 } = Astro.props;
     <div class="sticky-book-cta-inner">
       <div class="sticky-book-cta-copy">
         <span class="sticky-book-cta-label">{siteConfig.bookingLabel}</span>
-        <span class="sticky-book-cta-hint">Free · {siteConfig.bookingCallDurationPhrase} · No pitch</span>
+        <span class="sticky-book-cta-hint">{hint}</span>
       </div>
       <div class="sticky-book-cta-actions">
         <a
           class="button button-brand sticky-book-cta-primary"
-          href={siteConfig.bookingUrl}
+          href={href}
           data-cta="sticky-book-cta"
         >
-          Book a call →
+          {ctaLabel}
         </a>
         <button
           class="sticky-book-cta-dismiss"

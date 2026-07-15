@@ -6,6 +6,9 @@ import { canonicalProofMetrics, siteConfig, testimonials } from "../site";
 const path = "/ai-growth-audit";
 const bookHref = "#book-calendly";
 const calUrl = `${siteConfig.calLink}?utm_source=outbound&utm_medium=email&utm_campaign=ai-growth-audit`;
+const primaryCtaLabel = "Book your free Growth Audit";
+const primaryCtaSubcopy = `Free · ${siteConfig.bookingCallDurationPhrase} · Leave with your bottleneck named`;
+const ctaReassurance = "No deck required. No pitch unless there’s a clear fit.";
 
 const proofMetrics = canonicalProofMetrics.slice(0, 4);
 
@@ -86,7 +89,9 @@ const schema = [
     { name: "Home", path: "/" },
     { name: "AI SaaS Growth Audit", path }
   ]}
-  stickyBookCta={false}
+  stickyBookCta={true}
+  stickyBookHref={bookHref}
+  stickyBookCtaLabel="Book your audit →"
   showAnnouncement={false}
 >
   <section class="page-hero">
@@ -104,16 +109,14 @@ const schema = [
         <a
           class="button button-brand button-with-subcopy"
           href={bookHref}
-          data-cta="ai-audit-hero-pick-time"
+          data-cta="ai-audit-hero-book"
           title={siteConfig.bookingCallReassurance}
         >
-          <span class="button-label">Pick a time</span>
-          <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.calUrl} data-cta="ai-audit-hero-calendly-tab" rel="noreferrer" target="_blank">
-          Open calendar in a new tab →
+          <span class="button-label">{primaryCtaLabel}</span>
+          <span class="button-subcopy">{primaryCtaSubcopy}</span>
         </a>
       </div>
+      <p class="cta-reassurance">{ctaReassurance}</p>
     </div>
   </section>
 
@@ -141,6 +144,18 @@ const schema = [
             <p>{item.body}</p>
           </article>
         ))}
+      </div>
+      <div class="mid-cta">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={bookHref}
+          data-cta="ai-audit-outcomes-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{primaryCtaLabel}</span>
+          <span class="button-subcopy">{primaryCtaSubcopy}</span>
+        </a>
+        <p class="cta-reassurance">{ctaReassurance}</p>
       </div>
     </div>
   </section>
@@ -185,16 +200,28 @@ const schema = [
           </ul>
         </div>
       </div>
+      <div class="mid-cta">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={bookHref}
+          data-cta="ai-audit-fit-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{primaryCtaLabel}</span>
+          <span class="button-subcopy">{primaryCtaSubcopy}</span>
+        </a>
+        <p class="cta-reassurance">{ctaReassurance}</p>
+      </div>
     </div>
   </section>
 
   <section class="section" id="book-calendly" aria-labelledby="book-calendly-heading">
     <div class="shell">
-      <p class="eyebrow">Next step</p>
-      <h2 id="book-calendly-heading">Pick a time. That’s it.</h2>
+      <p class="eyebrow">Book now</p>
+      <h2 id="book-calendly-heading">Book your free Growth Audit.</h2>
       <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
-        Free · {siteConfig.bookingCallDurationPhrase}. Bring where pipeline is stuck. You’ll leave with the
-        constraint named.
+        Choose a slot below. Bring where pipeline is stuck. You’ll leave with the constraint named in plain
+        English.
       </p>
       <div
         id="book-cal-inline"
@@ -208,7 +235,9 @@ const schema = [
         {" "}
         Some privacy blockers stop the embed.
         {" "}
-        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">Open the booking page in a new tab</a>
+        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank" data-cta="ai-audit-calendly-fallback">
+          Open the booking page in a new tab
+        </a>
         , or
         {" "}
         <a href="/contact#growth-enquiry">send context via the enquiry form</a>.
@@ -276,11 +305,38 @@ const schema = [
           </article>
         ))}
       </div>
+      <div class="mid-cta">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={bookHref}
+          data-cta="ai-audit-faq-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{primaryCtaLabel}</span>
+          <span class="button-subcopy">{primaryCtaSubcopy}</span>
+        </a>
+        <p class="cta-reassurance">{ctaReassurance}</p>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  .cta-reassurance {
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 42ch;
+  }
+
+  .mid-cta {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
   .call-phase-list {
     list-style: none;
     margin: 0;

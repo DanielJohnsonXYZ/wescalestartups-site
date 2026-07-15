@@ -41,6 +41,10 @@ interface Props {
   announcementPill?: string;
   /** Sticky book CTA (off on /book and pages with their own booking block). */
   stickyBookCta?: boolean;
+  /** Sticky CTA destination override (defaults to /book). */
+  stickyBookHref?: string;
+  /** Sticky CTA button label override. */
+  stickyBookCtaLabel?: string;
   /** When false, hide the sitewide announcement banner (e.g. /book). */
   showAnnouncement?: boolean;
 }
@@ -68,6 +72,8 @@ const {
   announcementVariant = "brand",
   announcementPill,
   stickyBookCta: stickyBookCtaProp,
+  stickyBookHref,
+  stickyBookCtaLabel,
   showAnnouncement: showAnnouncementProp
 } = Astro.props;
 
@@ -322,7 +328,11 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
       )}
     </main>
     <SiteFooter />
-    <StickyBookCta enabled={stickyBookCta} />
+    <StickyBookCta
+      enabled={stickyBookCta}
+      href={stickyBookHref}
+      ctaLabel={stickyBookCtaLabel}
+    />
     <EasterEgg />
   </body>
 </html>

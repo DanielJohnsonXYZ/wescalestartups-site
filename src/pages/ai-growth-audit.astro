@@ -1,67 +1,70 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
-import { canonicalProofMetrics, serviceSnapshots, siteConfig, testimonials } from "../site";
+import { canonicalProofMetrics, siteConfig, testimonials } from "../site";
 
 const path = "/ai-growth-audit";
-const bookHref = `${siteConfig.bookingUrl}?utm_source=outbound&utm_medium=email&utm_campaign=ai-growth-audit`;
+const bookHref = "#book-calendly";
+const calUrl = `${siteConfig.calLink}?utm_source=outbound&utm_medium=email&utm_campaign=ai-growth-audit`;
 
 const proofMetrics = canonicalProofMetrics.slice(0, 4);
 
-const moments = [
-  "Product works. Early customers exist. Growth still routes through the founder every week.",
-  "The category language is moving faster than the pipeline system, so messaging keeps getting rewritten mid-campaign.",
-  "You can hire marketers or an agency, but nobody has named the constraint yet, so headcount just amplifies noise.",
-  "Board asks for a growth update and the honest answer is still 'we're testing a few things'."
+const outcomes = [
+  {
+    title: "Your named bottleneck",
+    body: "The one constraint holding pipeline back, in plain English. Not a laundry list."
+  },
+  {
+    title: "The likely cause",
+    body: "Positioning, acquisition, conversion, reporting, or ownership. One primary call."
+  },
+  {
+    title: "What not to spend on yet",
+    body: "Where campaign volume, tool sprawl, or a CMO hire would amplify the wrong thing."
+  },
+  {
+    title: "An honest fit call",
+    body: "Whether We Scale Startups is the right help now, or a clear no with a better next step."
+  }
 ];
 
 const builtFor = [
-  "Post-PMF AI / B2B SaaS with real traction, not a pitch deck",
-  "Founder still owns growth decisions (no CMO / VP Marketing yet)",
-  "Seed–Series A capital already in, or about to pressure the pipeline",
-  "Willing to bring numbers, not just a brand story",
-  "Want a named bottleneck before hiring more marketing capacity"
+  "Post-PMF AI / B2B SaaS with real customers, not a pitch deck",
+  "You still own the weekly growth decisions (no CMO or VP Marketing yet)",
+  "Seed–Series A capital in, or board pressure for a cleaner pipeline story",
+  "Willing to bring numbers: funnel, channels, what’s working and what’s noise"
 ];
 
 const notFor = [
-  "Pre-PMF, still searching for fit",
-  "Already have a senior marketing owner in seat",
-  "Want a campaign sprint with no diagnosis",
-  "Volume buyers who want more activity, not sharper decisions"
+  "Pre-PMF or still hunting for fit",
+  "You already have a senior marketing owner in seat",
+  "You want a campaign sprint with no diagnosis",
+  "You want junior execution, not a named constraint"
 ];
-
-const diagnosis = serviceSnapshots.find((s) => s.href === "/services/growth-diagnosis")!;
-const fractional = serviceSnapshots.find((s) => s.href === "/services/fractional-cmo")!;
 
 const featuredTestimonial = testimonials.find((t) => t.category === "paid-client")!;
 
 const faqs = [
   {
-    question: "Is this the same as the generic book page?",
+    question: "What should I bring?",
     answer:
-      "Same call length and outcome. This page is the dedicated brief for Post-PMF AI SaaS founders who still own growth. You arrive pre-qualified, so the audit starts faster."
+      "No deck. Bring the current picture: stage, traction, main channels, and what you think is blocking pipeline. Rough numbers beat a polished story."
   },
   {
-    question: "What happens on the Growth Audit?",
-    answer: siteConfig.bookingCallReassurance
+    question: "Is there a pitch at the end?",
+    answer:
+      "Only if there is a genuine fit. The default outcome is a named bottleneck and a clear next step, including telling you not to hire us yet when that is the honest answer."
   },
   {
-    question: "We already raised. Should we just hire a CMO?",
+    question: "We just raised. Should we hire a CMO instead?",
     answer:
-      "Often not yet. A senior hire made before the constraint is named is expensive to reverse. The audit names whether the bottleneck is positioning, acquisition, conversion, reporting, or ownership, then whether fractional support or a hire is the right next move."
+      "Often not yet. A senior hire before the constraint is named is expensive to reverse. The audit tells you whether the bottleneck is strategy, channel, conversion, reporting, or ownership, then whether fractional help or a hire is the right next move."
   },
   {
-    question: "How is this different from an agency pitch?",
+    question: "How is this different from an agency call?",
     answer:
-      "Agencies produce once the channel plan is clear. We work one level up: name the bottleneck, lock the weekly decision rhythm, then decide what to build, buy, or hire."
+      "Agencies produce once the channel plan is clear. This call works one level up: name the bottleneck first, then decide what to build, buy, or hire."
   }
-];
-
-const relatedReading = [
-  { href: "/post-raise", label: "Just raised? Build the pipeline before the CMO hire" },
-  { href: "/ai-driven-growth", label: "AI Driven Growth" },
-  { href: "/founder-led-growth", label: "Founder-led growth" },
-  { href: "/before-you-hire-a-head-of-marketing", label: "Before you hire a head of marketing" }
 ];
 
 const schema = [
@@ -75,9 +78,9 @@ const schema = [
 
 <BaseLayout
   path={path}
-  title="AI SaaS Growth Audit | Post-PMF founders who still own growth | We Scale Startups"
-  description="For Post-PMF AI SaaS founders who still own growth: a 20-minute Growth Audit that names the pipeline constraint before you hire more marketing capacity."
-  keywords="AI SaaS growth audit, post-PMF AI startup marketing, founder-led growth AI SaaS, fractional CMO AI startup"
+  title="AI SaaS Growth Audit | We Scale Startups"
+  description="20-minute Growth Audit for Post-PMF AI SaaS founders who still own growth. Leave with the pipeline constraint named before you hire more marketing capacity."
+  keywords="AI SaaS growth audit, post-PMF AI startup marketing, founder-led growth, fractional CMO AI startup"
   schema={schema}
   breadcrumbItems={[
     { name: "Home", path: "/" },
@@ -88,28 +91,27 @@ const schema = [
 >
   <section class="page-hero">
     <div class="shell">
-      <p class="eyebrow">We Scale Startups · Growth Audit</p>
+      <p class="eyebrow">We Scale Startups</p>
       <h1>
-        Post-PMF AI SaaS.<br />
-        Founder still owns growth.<br />
-        <em>Name the constraint before you hire around it.</em>
+        Your product is ahead of your growth system.<br />
+        <em>Let’s name the constraint in 20 minutes.</em>
       </h1>
       <p class="lede">
-        A 20-minute Growth Audit for AI and B2B SaaS founders who already have traction, still make the weekly
-        growth calls themselves, and need a clear bottleneck before adding marketing headcount or agency volume.
+        For Post-PMF AI SaaS founders who still own growth. Free Growth Audit with We Scale Startups. You leave
+        with the bottleneck named in plain English, before you hire marketers or an agency around a guess.
       </p>
       <div class="hero-actions">
         <a
           class="button button-brand button-with-subcopy"
           href={bookHref}
-          data-cta="ai-saas-audit-hero-book"
+          data-cta="ai-audit-hero-pick-time"
           title={siteConfig.bookingCallReassurance}
         >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          <span class="button-label">Pick a time</span>
+          <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="ai-saas-audit-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
+        <a class="button button-light" href={siteConfig.calUrl} data-cta="ai-audit-hero-calendly-tab" rel="noreferrer" target="_blank">
+          Open calendar in a new tab →
         </a>
       </div>
     </div>
@@ -130,20 +132,35 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">The moment you're in</p>
-      <h2>The product is ahead of the growth system.</h2>
-      <ol class="moment-list">
-        {moments.map((item, i) => (
+      <p class="eyebrow">What you leave with</p>
+      <h2>Four things by the end of the call.</h2>
+      <div class="grid-2" style="margin-top: 1.75rem;">
+        {outcomes.map((item) => (
+          <article class="feature-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">How the {siteConfig.bookingCallDurationPhrase} run</p>
+      <h2>No deck. Direct diagnosis.</h2>
+      <ol class="call-phase-list" style="margin-top: 1.5rem;">
+        {siteConfig.bookingCallPhases.map((step) => (
           <li>
-            <span class="moment-num">{String(i + 1).padStart(2, "0")}</span>
-            <p>{item}</p>
+            <strong>{step.phase}</strong>
+            <span>{step.detail}</span>
           </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">Self-qualify</p>
       <h2>Built for this stage. Not for every founder.</h2>
@@ -171,91 +188,68 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section" id="book-calendly" aria-labelledby="book-calendly-heading">
     <div class="shell">
-      <p class="eyebrow">What you leave with</p>
-      <h2>Bottleneck named. Next move clear.</h2>
-      <div class="grid-3" style="margin-top: 1.75rem;">
-        <article class="feature-card">
-          <h3>Constraint in plain English</h3>
-          <p>
-            Positioning, acquisition, conversion, reporting, or ownership. One primary bottleneck, not a laundry
-            list.
-          </p>
-        </article>
-        <article class="feature-card">
-          <h3>What not to spend on yet</h3>
-          <p>
-            An honest cut on campaign volume, tool sprawl, or a premature CMO hire that would amplify the wrong
-            thing.
-          </p>
-        </article>
-        <article class="feature-card">
-          <h3>Fit, or a clear no</h3>
-          <p>
-            If WSS is not the right call, you still leave with the diagnosis. No deck theatre at the end.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell">
-      <p class="eyebrow">Where to start</p>
-      <h2>The smallest commitment that answers the biggest question.</h2>
-      <p class="lede" style="max-width: 56ch; margin-top: 0.5rem;">
-        Most founders on this page start with the free audit, then choose Diagnosis or Fractional CMO only if the
-        constraint is clear.
+      <p class="eyebrow">Next step</p>
+      <h2 id="book-calendly-heading">Pick a time. That’s it.</h2>
+      <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
+        Free · {siteConfig.bookingCallDurationPhrase}. Bring where pipeline is stuck. You’ll leave with the
+        constraint named.
       </p>
-      <div class="ladder">
-        <a class="ladder-item recommended" href={bookHref} data-cta="ai-saas-audit-ladder-book">
-          <div>
-            <div class="ladder-name">
-              20-minute Growth Audit
-              <span class="ladder-tag">Start here</span>
-            </div>
-            <p class="ladder-desc">
-              Free diagnostic call. Bring the current funnel picture. Leave with the constraint named.
-            </p>
-          </div>
-          <div class="ladder-meta">
-            <span class="ladder-price">Free · {siteConfig.bookingCallDurationPhrase}</span>
-            <span class="ladder-link">Book →</span>
-          </div>
-        </a>
-        <a class="ladder-item" href={diagnosis.href} data-cta="ai-saas-audit-ladder-diagnosis">
-          <div>
-            <div class="ladder-name">{diagnosis.title}</div>
-            <p class="ladder-desc">
-              You're not sure yet what's blocking pipeline. Constraint map, evidence review, 90-day plan.
-            </p>
-          </div>
-          <div class="ladder-meta">
-            <span class="ladder-price">{diagnosis.price} · {diagnosis.timeline}</span>
-            <span class="ladder-link">Read →</span>
-          </div>
-        </a>
-        <a class="ladder-item" href={fractional.href} data-cta="ai-saas-audit-ladder-fcmo">
-          <div>
-            <div class="ladder-name">{fractional.title}</div>
-            <p class="ladder-desc">
-              You need senior ownership now, not in six months when a full-time hire lands. Operating cadence,
-              channel direction, board reporting.
-            </p>
-          </div>
-          <div class="ladder-meta">
-            <span class="ladder-price">{fractional.price} · 3-mo min</span>
-            <span class="ladder-link">Read →</span>
-          </div>
-        </a>
+      <div
+        id="book-cal-inline"
+        class="calendly-inline-widget"
+        data-url={calUrl}
+        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.5rem;"
+      >
       </div>
+      <p class="calendly-lede" style="margin-top:1rem;">
+        <strong>Calendar not loading?</strong>
+        {" "}
+        Some privacy blockers stop the embed.
+        {" "}
+        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">Open the booking page in a new tab</a>
+        , or
+        {" "}
+        <a href="/contact#growth-enquiry">send context via the enquiry form</a>.
+      </p>
     </div>
   </section>
 
+  <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script is:inline>
+    (function () {
+      function isCalendlyEvent(e) {
+        return (
+          e.origin === "https://calendly.com" &&
+          e.data &&
+          typeof e.data.event === "string" &&
+          e.data.event.indexOf("calendly.") === 0
+        );
+      }
+      window.addEventListener("message", function (e) {
+        if (!isCalendlyEvent(e)) return;
+        window.dataLayer = window.dataLayer || [];
+        if (e.data.event === "calendly.event_scheduled") {
+          window.dataLayer.push({
+            event: "booking_completed",
+            booking_source: "calendly_inline",
+            page_path: window.location.pathname
+          });
+        } else if (e.data.event === "calendly.date_and_time_selected") {
+          window.dataLayer.push({
+            event: "booking_time_selected",
+            booking_source: "calendly_inline",
+            page_path: window.location.pathname
+          });
+        }
+      });
+    })();
+  </script>
+
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Founder voices</p>
+      <p class="eyebrow">Founder voice</p>
       <figure class="quote-card">
         <blockquote>
           <p>“{featuredTestimonial.quote}”</p>
@@ -273,8 +267,8 @@ const schema = [
   <section class="section">
     <div class="shell">
       <p class="eyebrow">Before you book</p>
-      <h2>What founders usually ask here.</h2>
-      <div class="grid-3" style="margin-top: 1.75rem;">
+      <h2>Usual questions.</h2>
+      <div class="grid-2" style="margin-top: 1.75rem;">
         {faqs.map((faq) => (
           <article class="feature-card">
             <h3>{faq.question}</h3>
@@ -284,90 +278,9 @@ const schema = [
       </div>
     </div>
   </section>
-
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Context that pairs with this stage.</h2>
-      <ul class="related-insights-list" style="margin-top: 1.5rem;">
-        {relatedReading.map((item) => (
-          <li>
-            <a class="card-link" href={item.href}>
-              {item.label} →
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <section class="cta-band">
-    <div class="shell cta-inner">
-      <div>
-        <p class="eyebrow">Next step</p>
-        <h2>Book the Growth Audit.</h2>
-        <p>
-          Bring your current numbers and what you think is blocking pipeline. You'll leave with the constraint
-          named in plain English, and an honest read on whether we're the right call.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={bookHref}
-          data-cta="ai-saas-audit-final-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="ai-saas-audit-final-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
-  .moment-list {
-    list-style: none;
-    margin: 1.75rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 0;
-  }
-
-  .moment-list li {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .moment-list li:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .moment-num {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--violet);
-    min-width: 1.75rem;
-    padding-top: 0.2rem;
-  }
-
-  .moment-list p {
-    margin: 0;
-    color: var(--ink-2);
-    font-size: 1.02rem;
-    line-height: 1.55;
-  }
-
   .fit-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -445,104 +358,6 @@ const schema = [
   .fit-card.against li::before {
     content: "✕";
     color: #e05d38;
-  }
-
-  .ladder {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    margin-top: 1.75rem;
-  }
-
-  .ladder-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1.25rem 1.35rem;
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    background: var(--surface);
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-  }
-
-  .ladder-item:hover {
-    border-color: rgba(102, 87, 255, 0.35);
-    box-shadow: 0 12px 32px rgba(54, 38, 109, 0.1);
-    transform: translateY(-2px);
-  }
-
-  .ladder-item.recommended {
-    border-color: rgba(102, 87, 255, 0.45);
-    background: linear-gradient(135deg, rgba(102, 87, 255, 0.08), rgba(255, 254, 250, 0.95));
-  }
-
-  .ladder-name {
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .ladder-tag {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #fff;
-    background: var(--violet);
-    padding: 0.2rem 0.55rem;
-    border-radius: 100px;
-  }
-
-  .ladder-desc {
-    margin: 0.35rem 0 0;
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.5;
-    max-width: 48ch;
-  }
-
-  .ladder-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.35rem;
-    flex-shrink: 0;
-  }
-
-  .ladder-price {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--ink-2);
-    white-space: nowrap;
-  }
-
-  .ladder-link {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--violet);
-  }
-
-  @media (max-width: 720px) {
-    .ladder-item {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .ladder-meta {
-      align-items: flex-start;
-      flex-direction: row;
-      gap: 0.75rem;
-    }
   }
 
   .quote-card {

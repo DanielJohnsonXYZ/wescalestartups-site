@@ -102,7 +102,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
                 name={field.name}
                 required={field.required}
                 placeholder={"placeholder" in field ? field.placeholder : undefined}
-                inputmode={"inputmode" in field ? field.inputmode : undefined}
+                inputmode={"inputmode" in field ? (field.inputmode as astroHTML.JSX.HTMLAttributes["inputmode"]) : undefined}
                 autocomplete={"autocomplete" in field ? field.autocomplete : undefined}
                 class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
               />

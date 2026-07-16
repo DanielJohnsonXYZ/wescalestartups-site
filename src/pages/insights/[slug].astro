@@ -57,7 +57,7 @@ const schemas = [
   articlePublishedTime={publishedIso}
   articleModifiedTime={modifiedIso}
   schema={schemas}
-  lastUpdated={siteConfig.lastUpdated}
+  lastUpdated={formatDate(updatedAt)}
   breadcrumbItems={[
     { name: "Home", path: "/" },
     { name: "Insights", path: "/insights" },
@@ -92,6 +92,22 @@ const schemas = [
       </article>
     </div>
   </section>
+
+  {insight.data.faqs?.length > 0 && (
+    <section class="section faq-section">
+      <div class="shell content-block">
+        <h2>Frequently asked questions</h2>
+        <div class="faq-list">
+          {insight.data.faqs.map((faq) => (
+            <div class="faq-item">
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="cta-band">
     <div class="shell cta-inner">

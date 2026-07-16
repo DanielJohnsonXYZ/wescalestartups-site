@@ -11,7 +11,7 @@ interface Props {
 
 const {
   currentPath,
-  ctaLabel = "Book a call",
+  ctaLabel = "Get in touch",
   ctaHref = siteConfig.bookingUrl
 } = Astro.props;
 const isActive = (href: string) => href === "/" ? currentPath === "/" : currentPath.startsWith(href);
@@ -141,4 +141,5 @@ const isGroupActive = (item: typeof navGroups[number]) =>
 
 <style is:global>
   @import "../styles/mobile-qa.css";
+  @import "../styles/white-theme.css";
 </style>

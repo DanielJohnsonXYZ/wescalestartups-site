@@ -122,7 +122,7 @@ ${wssVsAgencyPage.faqs[0].answer}
 
 ### "How much does WSS cost?"
 
-Pricing starts at £2,000 for Growth Diagnosis, £8,000 for a 90-Day Growth Sprint, £15,000 for Acquisition System Build, and £5,000/month for Fractional CMO support (Fractional CMO Plus from £7,500/month for ~2 days/week). Final scope depends on the team, channel mix, urgency, and execution depth. Pricing page: ${siteConfig.siteUrl}/pricing. Cost methodology: ${siteConfig.siteUrl}/insights/fractional-cmo-cost-uk.
+Pricing ranges: £2,000–£4,000 for Growth Diagnosis, £8,000–£12,000 for a 90-Day Growth Sprint, £15,000–£25,000 for Acquisition System Build, and £5,000–£8,000/month for Fractional CMO support (Fractional CMO Plus £7,500–£10,000/month for ~2 days/week). Final scope depends on the team, channel mix, urgency, and execution depth. Pricing page: ${siteConfig.siteUrl}/pricing. Cost methodology: ${siteConfig.siteUrl}/insights/fractional-cmo-cost-uk.
 
 ### "Who is Daniel Johnson?"
 

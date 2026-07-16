@@ -10,27 +10,46 @@ import {
 } from "../site";
 import { buildFaqSchema } from "../lib/schema";
 import "../styles/home-v9.css";
+import "../styles/home-v9-white.css";
 
 const faqSchema = buildFaqSchema([...buyerFaqs]);
-const homepageQuotes = testimonials
-  .filter((testimonial) => testimonial.category === "paid-client" || testimonial.category === "paid-advisory")
-  .slice(0, 3);
+const homepageQuotes = testimonials;
+
+const quoteInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+// TODO(Daniel): drop the "What the hell is growth?" YouTube video ID in here
+// (the bit after watch?v=) and the embed goes live automatically.
+const growthVideoId = "";
+
+const foundations = [
+  "We can describe our best customer in one sentence",
+  "We talk to customers every single week",
+  "Growth ideas become experiments, not debates",
+  "We trust our numbers enough to bet budget on them",
+  "Growth runs on a weekly rhythm, not founder heroics"
+];
 
 const principles = [
   {
     number: "01",
-    title: "Name the constraint first.",
-    body: "More budget against an unnamed bottleneck buys activity, not pipeline. We begin by naming the one constraint binding growth."
+    title: "Research. Know the customer cold.",
+    body: "The teams that win understand their market better than anyone else in it. We build real customer evidence: interviews, data, objections and alternatives, sharp enough to bet budget on."
   },
   {
     number: "02",
-    title: "Install a rhythm, not a hero.",
-    body: "A weekly decision cadence your team owns beats a brilliant operator who leaves. We build the system, then transfer it."
+    title: "Experiment. Place smart bets.",
+    body: "Every growth idea becomes a structured experiment with a hypothesis, a threshold and an owner, so you learn faster than competitors can copy."
   },
   {
     number: "03",
-    title: "Build to hand off.",
-    body: "Success is the quarter the system runs without us: reporting trusted, decisions made on schedule, founder out of the loop."
+    title: "Test. Let evidence decide.",
+    body: "We test relentlessly and keep score honestly. What works gets more fuel. What does not gets killed quickly and cheaply, before it burns the quarter."
   }
 ];
 
@@ -45,7 +64,7 @@ const constraints = [
     description: "Narrowing is growth. We define exactly who this is for, who it is not for, and collect the customer evidence that earns the next budget decision.",
     service: "Growth Diagnosis",
     href: "/services/growth-diagnosis",
-    meta: "from £2k · 1 week"
+    meta: "£2k–£4k · 1 week"
   },
   {
     key: "positioning",
@@ -57,7 +76,7 @@ const constraints = [
     description: "We rebuild the offer and message against the customer's real alternatives, then test it live with a pre-agreed threshold for what counts as signal.",
     service: "90-Day Growth Sprint",
     href: "/services/90-day-growth-sprint",
-    meta: "from £8k · 12 weeks"
+    meta: "£8k–£12k · 12 weeks"
   },
   {
     key: "acquisition",
@@ -69,7 +88,7 @@ const constraints = [
     description: "We design the second engine, connect the channels into one decision view, and install the weekly rule for what to scale, stop or repair.",
     service: "Acquisition System Build",
     href: "/services/acquisition-system-build",
-    meta: "from £15k · 8–12 weeks"
+    meta: "£15k–£25k · 8–12 weeks"
   },
   {
     key: "evidence",
@@ -81,7 +100,7 @@ const constraints = [
     description: "Every test gets a hypothesis, threshold and kill criterion. Your team gets one trusted weekly view and three possible calls: scale, stop or fix.",
     service: "Acquisition System Build",
     href: "/services/acquisition-system-build",
-    meta: "from £15k · 8–12 weeks"
+    meta: "£15k–£25k · 8–12 weeks"
   },
   {
     key: "team",
@@ -90,10 +109,10 @@ const constraints = [
     short: "Founder bottleneck",
     symptom: "Every campaign and brief still routes through you.",
     title: "The founder is still the operating system.",
-    description: "We install senior judgement, decision rights and a weekly cadence inside the team—then deliberately transfer ownership so pipeline no longer waits for you.",
+    description: "We install senior judgement, decision rights and a weekly cadence inside the team, then deliberately transfer ownership so pipeline no longer waits for you.",
     service: "Fractional CMO",
     href: "/services/fractional-cmo",
-    meta: "from £5k/mo · 3-month minimum"
+    meta: "£5k–£8k/mo · 3-month minimum"
   }
 ];
 
@@ -139,7 +158,7 @@ const timeline = [
   {
     when: "Day 90",
     title: "Board-ready review",
-    body: "What moved, what did not, and next quarter's plan—with a system that runs without you in every decision."
+    body: "What moved, what did not, and next quarter's plan, with a system your team can run on its own."
   }
 ];
 
@@ -209,8 +228,8 @@ const subAudiences = [
 ---
 
 <BaseLayout
-  title="We Scale Startups | Growth Systems for Seed–Series B B2B SaaS & AI"
-  description="We diagnose the growth bottleneck, install the acquisition system, and transfer the weekly rhythm so post-PMF B2B SaaS and AI teams can run pipeline without founder heroics."
+  title="We Scale Startups | Sustainable, High-Quality Growth for AI Startups & B2B SaaS"
+  description="We build the growth infrastructure AI startups and B2B SaaS teams need to hit the KPI that matters: customer research, experimentation and testing systems, built from first principles."
   path="/"
   schema={faqSchema}
   bodyClass="page-home-v9"
@@ -227,13 +246,13 @@ const subAudiences = [
         <div class="v9-hero-copy">
           <div class="v9-kicker">
             <span class="v9-live-dot" aria-hidden="true"></span>
-            Growth systems for Seed–Series B B2B SaaS &amp; AI
+            Sustainable growth for AI startups &amp; B2B SaaS
           </div>
-          <h1 id="v9-hero-title">Build a growth system your team can run <em>without you.</em></h1>
-          <p class="v9-hero-lede">Your product is ahead of your pipeline. We diagnose the constraint, install the acquisition system and transfer the weekly growth rhythm in 90 days—<strong>so revenue compounds without the founder in every decision.</strong></p>
+          <h1 id="v9-hero-title">Sustainable, high-quality growth for <em>AI companies and startups.</em></h1>
+          <p class="v9-hero-lede">Most startups do not stall because the product is weak. They stall because nobody truly understands the customer. We build the research, experimentation and testing infrastructure that turns customer insight into pipeline, <strong>so growth compounds quarter after quarter.</strong></p>
           <div class="v9-hero-actions">
             <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl} data-cta="v9-hero-book">
-              <span>{siteConfig.bookingLabel}</span>
+              <span>Grow your AI startup</span>
               <span aria-hidden="true">↗</span>
             </a>
             <a class="v9-text-link" href={siteConfig.scorecardUrl} data-cta="v9-hero-scorecard">
@@ -244,7 +263,7 @@ const subAudiences = [
             <span>Free</span>
             <span>20 minutes</span>
             <span>No pitch</span>
-            <span>Leave with the constraint named</span>
+            <span>Leave with your next move</span>
           </div>
         </div>
 
@@ -252,39 +271,26 @@ const subAudiences = [
           <div class="v9-os-head">
             <div>
               <span class="v9-window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span>WSS / Growth OS</span>
+              <span>WSS / Foundations Check</span>
             </div>
-            <span class="v9-system-status"><i aria-hidden="true"></i> System online</span>
+            <span class="v9-system-status"><i aria-hidden="true"></i> Live</span>
           </div>
-          <div class="v9-os-stage">
-            <div class="v9-os-input">
-              <span>Current state</span>
-              <strong>Founder-dependent growth</strong>
-              <small>Scattered activity · slow decisions · one-person bottleneck</small>
-            </div>
-            <div class="v9-os-flow" role="img" aria-label="Diagnose, prove, install and transfer the growth system">
-              <div class="v9-flow-line" aria-hidden="true"></div>
-              <div class="v9-flow-step"><span>01</span><strong>Diagnose</strong><i aria-hidden="true"></i></div>
-              <div class="v9-flow-step"><span>02</span><strong>Prove</strong><i aria-hidden="true"></i></div>
-              <div class="v9-flow-step"><span>03</span><strong>Install</strong><i aria-hidden="true"></i></div>
-              <div class="v9-flow-step"><span>04</span><strong>Transfer</strong><i aria-hidden="true"></i></div>
-            </div>
-            <div class="v9-os-output">
-              <span>Day 90 state</span>
-              <strong>Team-owned pipeline</strong>
-              <small>One cadence · trusted reporting · decisions on schedule</small>
-            </div>
+          <div class="v9-found-list" role="group" aria-label="Growth foundations checklist. Toggle each statement that is true for your team.">
+            {foundations.map((item) => (
+              <button type="button" class="v9-found-item" aria-pressed="false">
+                <i aria-hidden="true">✓</i>
+                <span>{item}</span>
+              </button>
+            ))}
           </div>
-          <div class="v9-os-proof">
-            <div>
-              <span>Selected client signal</span>
-              <strong>500+ sign-ups</strong>
-              <small>in two months · Fintech</small>
+          <div class="v9-found-score">
+            <div class="v9-found-score-top">
+              <span>Foundations in place</span>
+              <strong id="v9-found-count">0 / 5</strong>
             </div>
-            <div class="v9-os-proof-chart" aria-hidden="true">
-              <i style="--bar: 30%"></i><i style="--bar: 45%"></i><i style="--bar: 38%"></i><i style="--bar: 58%"></i><i style="--bar: 74%"></i><i style="--bar: 96%"></i>
-            </div>
-            <a href="/case-studies/ned" aria-label="Read the Ned fintech case study">View proof →</a>
+            <div class="v9-found-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="v9-found-verdict" id="v9-found-verdict" aria-live="polite">Tap everything that is true for your team. Thirty seconds, honest answers.</p>
+            <a href={siteConfig.bookingUrl} data-cta="v9-hero-foundations">Talk it through with Daniel →</a>
           </div>
         </div>
       </div>
@@ -318,6 +324,15 @@ const subAudiences = [
     </div>
   </section>
 
+
+  <div class="v9-ticker" aria-hidden="true">
+    <div class="v9-ticker-track">
+      {Array.from({ length: 6 }).map(() => (
+        <span>Research <i>→</i> Experiment <i>→</i> Test <i>→</i> Scale <i>→</i></span>
+      ))}
+    </div>
+  </div>
+
   <section class="v9-thesis" id="approach" aria-labelledby="v9-thesis-title">
     <div class="v9-shell">
       <div class="v9-section-intro v9-section-intro-dark">
@@ -326,8 +341,8 @@ const subAudiences = [
       </div>
       <div class="v9-thesis-grid">
         <div>
-          <h2 id="v9-thesis-title">Most post-PMF startups do not have a product problem. They have a <em>distribution problem.</em></h2>
-          <p class="v9-thesis-lede">Every growth decision still routes through the founder, so pipeline moves at the speed of one person.</p>
+          <h2 id="v9-thesis-title">Most post-PMF startups do not have a product problem. They have a <em>customer understanding problem.</em></h2>
+          <p class="v9-thesis-lede">You cannot grow a market you do not understand. When nobody owns customer insight, every channel, message and launch is a guess, and guesses do not compound.</p>
         </div>
         <figure class="v9-teaching-card v9-hover-glow">
           <img src="/images/speaking/daniel-speaking-nomad-960.webp" alt="Daniel Johnson teaching the growth system to a founder cohort" width="960" height="640" loading="lazy" decoding="async" />
@@ -356,8 +371,8 @@ const subAudiences = [
         <p>Click the constraint that sounds like your team</p>
       </div>
       <div class="v9-system-heading">
-        <h2 id="v9-system-title">Growth gets simpler when you name what is <em>actually</em> stuck.</h2>
-        <p>Five constraints. One binding bottleneck. No decision earns budget on opinion alone—evidence must move from <strong>word → action → money.</strong></p>
+        <h2 id="v9-system-title">Growth gets simpler when you <em>understand your customers.</em></h2>
+        <p>Five places where customer understanding usually breaks down. Click the one that sounds most like your team, <strong>and see the way through.</strong></p>
       </div>
 
       <div class="v9-diagnostic">
@@ -429,6 +444,31 @@ const subAudiences = [
           <ul>{notFor.map((item) => <li>{item}</li>)}</ul>
         </div>
       </div>
+
+      <div class="v9-fit-video v9-hover-glow">
+        <div>
+          <span class="v9-section-number">For the "not yet" teams</span>
+          <h3>What the hell is growth, anyway?</h3>
+          <p>If you read the right-hand column and thought "that's us", don't book a call yet. Watch this first: what growth actually is, and the foundations to build before you spend a pound on channels.</p>
+        </div>
+        {growthVideoId ? (
+          <div class="v9-video-frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${growthVideoId}`}
+              title="What the hell is growth?"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        ) : (
+          <a class="v9-video-frame v9-video-placeholder" href="/growth-operating-system">
+            <span>▶</span>
+            <strong>Watch: What the hell is growth?</strong>
+            <small>Video landing here soon · read the Growth Operating System in the meantime</small>
+          </a>
+        )}
+      </div>
     </div>
   </section>
 
@@ -439,8 +479,8 @@ const subAudiences = [
         <p>Start with the smallest commitment that answers the biggest question</p>
       </div>
       <div class="v9-work-heading">
-        <h2 id="v9-work-title">Diagnosis names it. A sprint proves it. A build installs it. Embed operates it.</h2>
-        <a class="v9-text-link v9-text-link-light" href="/pricing">Compare all pricing →</a>
+        <h2 id="v9-work-title">Different relationships come in <em>all shapes and sizes.</em></h2>
+        <a class="v9-text-link" href="/pricing">Compare all pricing →</a>
       </div>
       <div class="v9-service-grid">
         {serviceSnapshots.map((service, index) => (
@@ -485,7 +525,7 @@ const subAudiences = [
         <p>Paid work is labelled as paid work. Teaching is labelled as teaching.</p>
       </div>
       <div class="v9-results-heading">
-        <h2 id="v9-results-title">Proof that the system leaves the room with your team.</h2>
+        <h2 id="v9-results-title">We've worked with some lovely people <em>along the way.</em></h2>
         <a class="v9-text-link" href="/case-studies">All case studies →</a>
       </div>
       <div class="v9-case-grid">
@@ -505,6 +545,15 @@ const subAudiences = [
     </div>
   </section>
 
+
+  <div class="v9-ticker" aria-hidden="true">
+    <div class="v9-ticker-track">
+      {Array.from({ length: 6 }).map(() => (
+        <span>Research <i>→</i> Experiment <i>→</i> Test <i>→</i> Scale <i>→</i></span>
+      ))}
+    </div>
+  </div>
+
   <section class="v9-voices" aria-labelledby="v9-voices-title">
     <div class="v9-shell">
       <div class="v9-voices-heading">
@@ -522,6 +571,7 @@ const subAudiences = [
           <figure class:list={["v9-quote", { "is-primary": index === 0 }]}>
             <blockquote>“{quote.quote}”</blockquote>
             <figcaption>
+              <span class="v9-quote-avatar" aria-hidden="true">{quoteInitials(quote.name)}</span>
               <strong>{quote.name}{quote.role ? ` · ${quote.role}` : ""}</strong>
               <span>{quote.company}</span>
             </figcaption>
@@ -546,8 +596,8 @@ const subAudiences = [
         <div class="v9-founder-copy">
           <span class="v9-section-number">07 / Why I built this</span>
           <h2 id="v9-founder-title">The operator I wished had been in the room.</h2>
-          <p>After 15 years operating inside SaaS, fintech, healthtech and EdTech startups—including two exits—I kept seeing the same pattern: founders with great products, stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.</p>
-          <p><strong>We Scale Startups exists to diagnose the bottleneck, install the acquisition system and transfer the weekly rhythm—so you do not need us forever.</strong></p>
+          <p>After 15 years operating inside SaaS, fintech, healthtech and EdTech startups, including two exits, I kept seeing the same pattern: founders with great products, stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.</p>
+          <p><strong>We Scale Startups exists so founders get infrastructure, not opinions: customer research, an experiment engine and a weekly rhythm built around the one KPI that matters, so you do not need us forever.</strong></p>
           <div class="v9-founder-track">
             <span>Two operator-side exits</span>
             <span>£18M+ revenue influenced</span>
@@ -565,8 +615,8 @@ const subAudiences = [
       <div class="v9-scorecard-card">
         <div class="v9-scorecard-copy">
           <span class="v9-section-number">Free diagnostic · 5 minutes</span>
-          <h2 id="v9-scorecard-title">Find the constraint costing this quarter's pipeline.</h2>
-          <p>Ten questions across positioning, acquisition, conversion, reporting and team ownership. Built from 479+ founder sessions.</p>
+          <h2 id="v9-scorecard-title">Have you built the foundations to <em>scale growth?</em></h2>
+          <p>Ten questions across positioning, acquisition, conversion, reporting and team ownership. Five minutes to find the missing foundation, built from 479+ founder sessions.</p>
           <div class="v9-scorecard-actions">
             <a class="v9-button v9-button-primary" href={siteConfig.scorecardUrl}>Take the scorecard <span aria-hidden="true">↗</span></a>
             <a class="v9-text-link v9-text-link-light" href={siteConfig.bookingUrl}>Or book the 20-minute call →</a>
@@ -623,9 +673,9 @@ const subAudiences = [
   <section class="v9-final" aria-labelledby="v9-final-title">
     <div class="v9-shell">
       <span class="v9-final-orbit" aria-hidden="true"></span>
-      <p>One honest conversation. One constraint named.</p>
-      <h2 id="v9-final-title">The next step is a <em>20-minute call.</em></h2>
-      <p>Bring your current growth picture. Leave with your bottleneck named in plain English and an honest read on whether we are the right call.</p>
+      <p>One honest conversation. No pitch.</p>
+      <h2 id="v9-final-title">The next step is a <em>conversation.</em></h2>
+      <p>Bring your current growth picture. Leave with an honest read on your foundations, and on whether we are the right people to help.</p>
       <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} <span aria-hidden="true">↗</span></a>
     </div>
   </section>
@@ -690,6 +740,35 @@ const subAudiences = [
           var next = tabs[(index + direction + tabs.length) % tabs.length];
           next.focus();
           selectConstraint(next, true);
+        });
+      });
+
+      var foundItems = Array.from(document.querySelectorAll(".v9-found-item"));
+      var foundCount = document.getElementById("v9-found-count");
+      var foundVerdict = document.getElementById("v9-found-verdict");
+      var foundBars = Array.from(document.querySelectorAll(".v9-found-bar i"));
+      var foundVerdicts = [
+        "Foundations first. Spending on channels now would leak, start with customer research.",
+        "One foundation is not a system yet. Nail the customer picture before scaling spend.",
+        "Some signal, plenty of guesswork. A diagnosis would name what to fix first.",
+        "Close. One or two missing foundations are capping how fast you can compound.",
+        "Nearly there. Tighten the last foundation and growth stops depending on heroics.",
+        "Solid foundations. Now it is about compounding, let's talk about scaling."
+      ];
+
+      function updateFoundations() {
+        var on = foundItems.filter(function (item) { return item.getAttribute("aria-pressed") === "true"; }).length;
+        if (foundCount) foundCount.textContent = on + " / " + foundItems.length;
+        if (foundVerdict) foundVerdict.textContent = foundVerdicts[on] || foundVerdicts[0];
+        foundBars.forEach(function (bar, index) { bar.classList.toggle("is-on", index < on); });
+      }
+
+      foundItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+          item.setAttribute("aria-pressed", item.getAttribute("aria-pressed") === "true" ? "false" : "true");
+          updateFoundations();
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "home_foundations_toggle" });
         });
       });
 

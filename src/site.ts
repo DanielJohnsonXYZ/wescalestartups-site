@@ -2,15 +2,15 @@ const BOOKING_CALL_DURATION_PHRASE = "20 minutes" as const;
 
 export const siteConfig = {
   name: "We Scale Startups",
-  title: "We Scale Startups | Fractional CMO for Seed–Series B B2B SaaS & AI",
+  title: "We Scale Startups | Sustainable, High-Quality Growth for AI Startups & B2B SaaS",
   description:
-    "Fractional CMO for post-PMF B2B SaaS and AI startups: diagnose the bottleneck, build the acquisition system, transfer the weekly rhythm so pipeline compounds without founder heroics.",
+    "We build the growth infrastructure AI startups and B2B SaaS teams need to hit the KPI that matters: customer research, experimentation and testing systems, built from first principles.",
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
   calUrl: "https://calendly.com/wescalestartups",
   calLink: "https://calendly.com/wescalestartups",
-  bookingLabel: "Book a 20-minute Growth Audit",
+  bookingLabel: "Get in touch",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
   bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
@@ -662,7 +662,7 @@ export const serviceSnapshots = [
     get: "A constraint map, evidence review, quick wins, and a 90-day recommendation.",
     keyDeliverables: ["Constraint map and evidence pack", "Quick-win shortlist", "Sequenced 90-day recommendation"],
     timeline: "1 week",
-    price: "from £2k",
+    price: "£2k–£4k",
     cta: "Diagnose the bottleneck"
   },
   {
@@ -675,7 +675,7 @@ export const serviceSnapshots = [
     get: "Experiment roadmap, weekly decisions, campaign/page iterations, transfer notes.",
     keyDeliverables: ["ICE-scored experiment backlog", "Weekly decision log", "Shipped tests + learnings pack"],
     timeline: "12 weeks",
-    price: "from £8k",
+    price: "£8k–£12k",
     cta: "Run a growth sprint"
   },
   {
@@ -688,7 +688,7 @@ export const serviceSnapshots = [
     get: "Channel strategy, offer map, landing/campaign briefs, reporting and handoff.",
     keyDeliverables: ["Channel hierarchy & offer map", "Campaign/landing briefs", "Reporting rhythm + handoff pack"],
     timeline: "8–12 weeks",
-    price: "from £15k",
+    price: "£15k–£25k",
     cta: "Build the acquisition system"
   },
   {
@@ -701,7 +701,7 @@ export const serviceSnapshots = [
     get: "Priorities, cadence, decision rules, team/agency direction, founder clarity.",
     keyDeliverables: ["Weekly growth cadence", "Board-ready reporting rhythm", "Agency/hire direction"],
     timeline: "3+ months",
-    price: "from £5k/mo",
+    price: "£5k–£8k/mo",
     cta: "Add fractional leadership"
   }
 ] as const;
@@ -863,7 +863,7 @@ export const buyerFaqs = [
   {
     question: "What does We Scale Startups do?",
     answer:
-      "We Scale Startups diagnoses the real growth bottleneck, builds the acquisition system around it, and transfers the operating rhythm so post-PMF founders are not stuck in every growth decision."
+      "We build the infrastructure startups need to hit the growth KPI they actually care about, working from first principles instead of recycled playbooks. Customer research, an experiment engine and a testing rhythm, engineered around your number and handed to your team to run."
   },
   {
     question: "Who is WSS best for?",
@@ -878,11 +878,11 @@ export const buyerFaqs = [
   {
     question: "How much does We Scale Startups cost?",
     answer:
-      "Public UK bands: Growth Diagnosis from £2k, 90-Day Growth Sprint from £8k, Acquisition System Build from £15k, Fractional CMO from £5k/mo (Plus from £7.5k/mo for ~2 days/week). Final scope depends on team, channel mix, and execution depth."
+      "Public UK ranges: Growth Diagnosis £2k–£4k, 90-Day Growth Sprint £8k–£12k, Acquisition System Build £15k–£25k, Fractional CMO £5k–£8k/mo (Plus £7.5k–£10k/mo for ~2 days/week). Where you land in the range depends on team, channel mix, and execution depth."
   },
   {
     question: "What is the first step?",
-    answer: `Start with ${siteConfig.bookingLabel.toLowerCase()} or ${siteConfig.scorecardLabel.toLowerCase()}, ${siteConfig.scorecardTagline.toLowerCase()} The first job is to identify the constraint before adding more activity.`
+    answer: `Get in touch for a free 20-minute call, or take the ${siteConfig.scorecardName}: 10 questions, 5 minutes. Either way, the first job is to understand the customer and name the constraint before adding more activity.`
   },
   {
     question: "Do you guarantee results?",
@@ -1005,7 +1005,7 @@ export const testimonials = [
   {
     category: "paid-advisory" as const,
     quote:
-      "In just a short space of time, Daniel provided insane value — covering exactly how to structure and develop a GTM strategy end-to-end and providing insights that would have taken much longer to figure out alone.",
+      "In just a short space of time, Daniel provided insane value, covering exactly how to structure and develop a GTM strategy end-to-end and providing insights that would have taken much longer to figure out alone.",
     name: "Indie",
     role: "Paid founder advisory",
     company: "GrowthMentor review",
@@ -1042,7 +1042,7 @@ export const pricingTiers = [
   {
     name: "Growth Diagnosis",
     duration: "1 week",
-    priceFrom: "from £2k",
+    priceFrom: "£2k–£4k",
     description: "Plain-English view of the bottleneck and a sequenced plan. Best when you don't know the constraint yet.",
     href: "/services/growth-diagnosis",
     tierBadge: "Best starting point"
@@ -1050,7 +1050,7 @@ export const pricingTiers = [
   {
     name: "90-Day Growth Sprint",
     duration: "12 weeks",
-    priceFrom: "from £8k",
+    priceFrom: "£8k–£12k",
     description: "Audit → plan → ship 3–5 tests → transfer. Best pre-fundraise or post-launch when you need signal fast.",
     href: "/services/90-day-growth-sprint",
     tierBadge: "Most common paid step",
@@ -1060,7 +1060,7 @@ export const pricingTiers = [
   {
     name: "Acquisition System Build",
     duration: "8–12 weeks",
-    priceFrom: "from £15k",
+    priceFrom: "£15k–£25k",
     description: "Channels, landing pages, offers, and reporting working as one system. Best after you've tested channels in isolation.",
     href: "/services/acquisition-system-build",
     tierBadge: "Flagship engagement"
@@ -1068,9 +1068,9 @@ export const pricingTiers = [
   {
     name: "Fractional CMO",
     duration: "3 months minimum",
-    priceFrom: "from £5k/mo",
+    priceFrom: "£5k–£8k/mo",
     description:
-      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus from £7.5k/mo (~2 days/week) when you need deeper operating support.",
+      "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus £7.5k–£10k/mo (~2 days/week) when you need deeper operating support.",
     href: "/services/fractional-cmo",
     tierBadge: "Highest-touch engagement",
     popularRationale: "Full strategic ownership with execution support when the team needs a senior growth seat."

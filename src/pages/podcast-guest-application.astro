@@ -12,16 +12,18 @@ const schemas = [
 ];
 
 const guestFields = [
-  { name: "name", label: "Name", type: "text" as const, required: true },
-  { name: "company", label: "Company", type: "text" as const, required: true },
-  { name: "role", label: "Role / Title", type: "text" as const, required: true },
-  { name: "website", label: "Website", type: "url" as const, required: false },
-  { name: "linkedin", label: "LinkedIn Profile", type: "url" as const, required: false },
+  { name: "name", label: "Name", type: "text" as const, required: true, autocomplete: "name" },
+  { name: "company", label: "Company", type: "text" as const, required: true, autocomplete: "organization" },
+  { name: "role", label: "Role / Title", type: "text" as const, required: true, autocomplete: "organization-title" },
+  // Use text (not url): browsers reject linkedin.com/... without https:// and the tooltip
+  // often sits above the fold, so Submit looks dead.
+  { name: "website", label: "Website", type: "text" as const, required: false, placeholder: "https://", inputmode: "url", autocomplete: "url" },
+  { name: "linkedin", label: "LinkedIn Profile", type: "text" as const, required: false, placeholder: "https://linkedin.com/in/…", inputmode: "url" },
   { name: "what-building", label: "What are you building?", type: "textarea" as const, required: true },
   { name: "how-using-ai", label: "How are you using AI in your startup?", type: "textarea" as const, required: true },
   { name: "practical-lessons", label: "What practical lessons can listeners take away?", type: "textarea" as const, required: true },
   { name: "relevant-links", label: "Relevant links (product, press, LinkedIn, etc.)", type: "textarea" as const, required: false },
-  { name: "email", label: "Email", type: "email" as const, required: true }
+  { name: "email", label: "Email", type: "email" as const, required: true, autocomplete: "email" }
 ];
 
 const suggestedCopy = "Want to be a guest? We are looking for founders, operators, and growth leaders with practical examples of how AI is helping startups grow faster, save time, or make better commercial decisions.";
@@ -81,7 +83,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
         title="Tell us about yourself and your AI story."
         body="The more specific you are, the faster we can see if there's a fit for the show."
       />
-      <form class="max-w-2xl card p-8 md:p-10 space-y-5" id="guest-application" name="guest-application">
+      <form class="max-w-2xl card p-8 md:p-10 space-y-5" id="guest-application" name="guest-application" novalidate>
         {guestFields.map((field) => (
           <label class="block">
             <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">
@@ -99,13 +101,255 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
                 type={field.type}
                 name={field.name}
                 required={field.required}
+                placeholder={"placeholder" in field ? field.placeholder : undefined}
+                inputmode={"inputmode" in field ? field.inputmode : undefined}
+                autocomplete={"autocomplete" in field ? field.autocomplete : undefined}
                 class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
               />
             )}
           </label>
         ))}
-        <button class="button button-brand" type="submit">Submit Application</button>
+        <button class="button button-brand" type="submit" id="guest-submit">Submit Application</button>
+        <p id="guest-status" class="guest-status" role="status" aria-live="polite" hidden></p>
       </form>
+
+      <script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
+        (function () {
+          const form = document.getElementById("guest-application");
+          if (!(form instanceof HTMLFormElement)) return;
+
+          const status = document.getElementById("guest-status");
+          const submitBtn = document.getElementById("guest-submit");
+          const MAILTO_SAFE_LENGTH = 1800;
+
+          function val(name) {
+            const raw = form.elements.namedItem(name);
+            if (!(raw instanceof HTMLInputElement || raw instanceof HTMLTextAreaElement)) return "";
+            return raw.value.trim();
+          }
+
+          function normalizeUrl(value) {
+            if (!value) return "";
+            if (/^[a-z][a-z0-9+.-]*:/i.test(value)) return value;
+            return "https://" + value;
+          }
+
+          function showStatus(html, ok) {
+            if (!(status instanceof HTMLElement)) return;
+            status.hidden = false;
+            status.className = "guest-status" + (ok ? " guest-status--ok" : " guest-status--err");
+            status.innerHTML = html;
+            status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+
+          function fieldError(name, message) {
+            const el = form.elements.namedItem(name);
+            if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+              el.setCustomValidity(message || "");
+              if (message) el.reportValidity();
+            }
+          }
+
+          form.addEventListener("input", (event) => {
+            const t = event.target;
+            if (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement) {
+              t.setCustomValidity("");
+            }
+          });
+
+          form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            // Clear previous custom errors, then enforce required fields ourselves
+            // so we can scroll to the first problem near the submit button.
+            for (const el of Array.from(form.elements)) {
+              if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+                el.setCustomValidity("");
+              }
+            }
+
+            const required = ["name", "company", "role", "what-building", "how-using-ai", "practical-lessons", "email"];
+            for (const name of required) {
+              if (!val(name)) {
+                fieldError(name, "Please fill in this field.");
+                return;
+              }
+            }
+
+            const emailVal = val("email");
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+              fieldError("email", "Please enter a valid email address.");
+              return;
+            }
+
+            const website = normalizeUrl(val("website"));
+            const linkedin = normalizeUrl(val("linkedin"));
+
+            const subject = "Podcast Guest Application: " + (val("name") || "Guest") + " (" + (val("company") || "") + ")";
+            const body = [
+              "Name: " + val("name"),
+              "Company: " + val("company"),
+              "Role: " + val("role"),
+              "Website: " + website,
+              "LinkedIn: " + linkedin,
+              "",
+              "What are you building?",
+              val("what-building"),
+              "",
+              "How are you using AI?",
+              val("how-using-ai"),
+              "",
+              "Practical lessons for listeners:",
+              val("practical-lessons"),
+              "",
+              "Relevant links:",
+              val("relevant-links"),
+              "",
+              "Email: " + emailVal
+            ].join("\n");
+
+            if (submitBtn instanceof HTMLButtonElement) {
+              submitBtn.disabled = true;
+              submitBtn.textContent = "Submitting…";
+            }
+
+            // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
+            // even if no mail client is configured.
+            try {
+              fetch(mauticUrl, {
+                method: "POST",
+                mode: "no-cors",
+                keepalive: true,
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                  "mauticform[formId]": mauticFormId,
+                  "mauticform[email]": emailVal,
+                  "mauticform[source_type]": "podcast-guest-form",
+                  "mauticform[source_page]": window.location.href,
+                  "mauticform[lead_magnet]": "podcast-guest-application"
+                }).toString()
+              }).catch(function () {});
+            } catch (_) {}
+
+            // Prefer a same-origin API when available (Pages Function); fall back to clipboard + mailto.
+            let apiOk = false;
+            try {
+              const res = await fetch("/api/podcast-guest", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                  name: val("name"),
+                  company: val("company"),
+                  role: val("role"),
+                  website: website,
+                  linkedin: linkedin,
+                  whatBuilding: val("what-building"),
+                  howUsingAi: val("how-using-ai"),
+                  practicalLessons: val("practical-lessons"),
+                  relevantLinks: val("relevant-links"),
+                  email: emailVal,
+                  page: window.location.href
+                })
+              });
+              apiOk = res.ok;
+            } catch (_) {
+              apiOk = false;
+            }
+
+            let copied = false;
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(subject + "\n\n" + body);
+                copied = true;
+              }
+            } catch (_) {}
+
+            const mailtoHref =
+              "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+            const mailtoShort =
+              "mailto:" +
+              email +
+              "?subject=" +
+              encodeURIComponent(subject) +
+              "&body=" +
+              encodeURIComponent(
+                "Hi Daniel,\n\nI'd like to apply as a podcast guest. My application is ready to paste from my clipboard" +
+                  (copied ? "" : " (copy failed — please re-open the form)") +
+                  ".\n\nName: " +
+                  val("name") +
+                  "\nCompany: " +
+                  val("company") +
+                  "\nEmail: " +
+                  emailVal +
+                  "\n"
+              );
+
+            // Only auto-open mailto when short enough; long bodies silently fail in many clients.
+            const openHref = mailtoHref.length <= MAILTO_SAFE_LENGTH ? mailtoHref : mailtoShort;
+            try {
+              const a = document.createElement("a");
+              a.href = openHref;
+              a.rel = "noopener";
+              a.style.display = "none";
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+            } catch (_) {}
+
+            if (submitBtn instanceof HTMLButtonElement) {
+              submitBtn.textContent = "Application submitted";
+            }
+
+            const clipboardLine = copied
+              ? " A copy is on your clipboard."
+              : "";
+            const apiLine = apiOk
+              ? " We've received your application."
+              : " If an email draft did not open, send it to <a href=\"mailto:" +
+                email +
+                "\">" +
+                email +
+                "</a>.";
+
+            showStatus(
+              "<strong>Thanks — you're in.</strong>" +
+                apiLine +
+                clipboardLine +
+                ' <a href="' +
+                openHref +
+                '">Open email draft →</a>',
+              true
+            );
+          });
+        })();
+      </script>
+
+      <style>
+        .guest-status {
+          margin: 0;
+          padding: 1rem 1.1rem;
+          border-radius: 8px;
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+        .guest-status--ok {
+          border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+          background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+          color: var(--ink);
+        }
+        .guest-status--err {
+          border: 1px solid #c44;
+          background: #fff5f5;
+          color: #5a1515;
+        }
+        .guest-status a {
+          text-decoration: underline;
+        }
+        #guest-submit:disabled {
+          opacity: 0.7;
+          cursor: default;
+        }
+      </style>
     </div>
   </section>
 
@@ -151,69 +395,3 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
-  const form = document.getElementById("guest-application");
-
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-
-    const subject = `Podcast Guest Application: ${data.get("name") || "Guest"} (${data.get("company") || ""})`;
-    const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Company: ${data.get("company") || ""}`,
-      `Role: ${data.get("role") || ""}`,
-      `Website: ${data.get("website") || ""}`,
-      `LinkedIn: ${data.get("linkedin") || ""}`,
-      ``,
-      `What are you building?`,
-      `${data.get("what-building") || ""}`,
-      ``,
-      `How are you using AI?`,
-      `${data.get("how-using-ai") || ""}`,
-      ``,
-      `Practical lessons for listeners:`,
-      `${data.get("practical-lessons") || ""}`,
-      ``,
-      `Relevant links:`,
-      `${data.get("relevant-links") || ""}`,
-      ``,
-      `Email: ${data.get("email") || ""}`
-    ].join("\n");
-
-    // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
-    // even if no mail client is configured.
-    try {
-      const leadEmail = (data.get("email") || "").toString().trim();
-      if (leadEmail) {
-        fetch(mauticUrl, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            "mauticform[formId]": mauticFormId,
-            "mauticform[email]": leadEmail,
-            "mauticform[source_type]": "podcast-guest-form",
-            "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "podcast-guest-application"
-          }).toString()
-        }).catch(() => {});
-      }
-    } catch (_) {}
-
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    let note = document.getElementById("guest-fallback");
-    if (!note) {
-      note = document.createElement("div");
-      note.id = "guest-fallback";
-      note.setAttribute("role", "status");
-      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
-      form.appendChild(note);
-    }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your application has been copied to the clipboard.`;
-    if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
-  });
-</script>

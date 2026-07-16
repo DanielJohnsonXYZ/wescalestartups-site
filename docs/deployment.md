@@ -44,11 +44,12 @@ domain (preserving path + query) and handles legacy redirects + agent
 content negotiation.
 
 `functions/api/podcast-guest.js` receives podcast guest applications from
-`/podcast-guest-application`. Delivery order:
+`/podcast-guest-application` and always emails **daniel@wescalestartups.com**.
+Delivery order:
 
-1. `RESEND_API_KEY` (+ optional `GUEST_APPLICATION_TO`, `GUEST_APPLICATION_FROM`)
+1. `RESEND_API_KEY` (+ optional `GUEST_APPLICATION_FROM` for a verified sender domain)
 2. `GUEST_APPLICATION_WEBHOOK_URL` (Zapier / Make / n8n / Discord)
-3. FormSubmit.co to `GUEST_APPLICATION_TO` (default `daniel@wescalestartups.com`) — no secret required; the first live submit sends an activation email. Set `GUEST_APPLICATION_DISABLE_FORMSUBMIT=1` to turn this off.
+3. FormSubmit.co to daniel@wescalestartups.com — no secret required; the first live submit sends an activation email. Set `GUEST_APPLICATION_DISABLE_FORMSUBMIT=1` to turn this off.
 
 The form also captures the applicant email in Mautic and shows an on-page success state with clipboard + mailto backup.
 

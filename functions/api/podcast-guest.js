@@ -1,9 +1,10 @@
 /**
  * Podcast guest application intake.
  *
- * Delivery (first match wins):
- * 1. RESEND_API_KEY + GUEST_APPLICATION_TO → email via Resend
+ * Always emails daniel@wescalestartups.com. Delivery (first match wins):
+ * 1. RESEND_API_KEY → email via Resend
  * 2. GUEST_APPLICATION_WEBHOOK_URL → POST JSON (Zapier/Make/n8n/Discord)
+ * 3. FormSubmit.co fallback
  *
  * Always returns JSON. Client still copies to clipboard + offers mailto as backup.
  */
@@ -85,7 +86,8 @@ export async function onRequestPost(context) {
   const env = context.env || {};
   const subject = `Podcast Guest Application: ${data.name} (${data.company})`;
   const textBody = buildBody(data);
-  const to = (env.GUEST_APPLICATION_TO || "daniel@wescalestartups.com").trim();
+  // Always notify Daniel — do not allow env overrides to divert applications.
+  const to = "daniel@wescalestartups.com";
 
   // 1) Resend
   if (env.RESEND_API_KEY) {
@@ -105,7 +107,7 @@ export async function onRequestPost(context) {
         })
       });
       if (res.ok) {
-        return json(200, { ok: true, via: "resend" });
+        return json(200, { ok: true, via: "resend", to });
       }
       const detail = await res.text().catch(() => "");
       console.error("Resend failed", res.status, detail.slice(0, 300));
@@ -128,7 +130,7 @@ export async function onRequestPost(context) {
         })
       });
       if (res.ok || res.status === 202 || res.status === 204) {
-        return json(200, { ok: true, via: "webhook" });
+        return json(200, { ok: true, via: "webhook", to });
       }
       console.error("Webhook failed", res.status);
     } catch (err) {
@@ -160,7 +162,7 @@ export async function onRequestPost(context) {
         })
       });
       if (res.ok) {
-        return json(200, { ok: true, via: "formsubmit" });
+        return json(200, { ok: true, via: "formsubmit", to });
       }
       console.error("FormSubmit failed", res.status, (await res.text().catch(() => "")).slice(0, 200));
     } catch (err) {

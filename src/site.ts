@@ -928,6 +928,9 @@ export const wssVsAgencyPage = {
   ]
 } as const;
 
+// Optional per-testimonial photo: add `image: "/images/testimonials/<name>.webp"`
+// to any entry below (drop the file in public/images/testimonials/) and the
+// homepage avatar automatically shows the photo instead of initials.
 export const testimonials = [
   {
     category: "paid-client" as const,

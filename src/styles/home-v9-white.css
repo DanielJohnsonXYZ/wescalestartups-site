@@ -477,3 +477,93 @@
 @media (prefers-reduced-motion: reduce) {
   .v9-ticker-track { padding-left: 0; animation: none; }
 }
+
+/* ============================================================
+   Design pass v2: violet CTAs, serif hero, soft hero wash,
+   scroll-reveal, quotes show-more, section air
+   ============================================================ */
+
+/* Violet primary CTAs on light backgrounds; mint stays inside
+   the dark scorecard panel and dark header pill. */
+.v9-button-primary {
+  background: var(--v9-violet);
+  color: #ffffff;
+  box-shadow: 0 16px 40px rgba(102, 87, 255, 0.28);
+}
+
+.v9-button-primary:hover {
+  background: var(--v9-violet-deep);
+  box-shadow: 0 20px 46px rgba(102, 87, 255, 0.34);
+}
+
+.v9-scorecard-card .v9-button-primary {
+  background: var(--v9-mint);
+  color: #090a0f;
+  box-shadow: 0 16px 40px rgba(200, 255, 101, 0.14);
+}
+
+.v9-scorecard-card .v9-button-primary:hover {
+  background: #d7ff8d;
+}
+
+/* Serif hero headline (Fraunces), shorter line */
+.v9-hero h1 {
+  max-width: 12ch;
+  font-family: var(--v9-display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 100;
+  font-size: clamp(3.4rem, 5.8vw, 6.1rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em !important;
+}
+
+.v9-hero h1 em {
+  font-weight: 460;
+}
+
+/* Softer hero: drop the grid lines, add a quiet violet/mint wash */
+.v9-hero {
+  background:
+    radial-gradient(58% 52% at 80% 8%, rgba(128, 108, 255, 0.13), transparent 66%),
+    radial-gradient(42% 38% at 4% 88%, rgba(200, 255, 101, 0.12), transparent 70%),
+    var(--v9-paper);
+  background-size: auto;
+}
+
+/* Scroll reveal */
+.v9-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 550ms ease, transform 550ms ease;
+}
+
+.v9-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Quotes: collapse to 6 with a show-more */
+.v9-quote.is-collapsed {
+  display: none !important;
+}
+
+.v9-quotes-more {
+  display: flex;
+  margin: 2.25rem auto 0;
+}
+
+/* More air between the mid-page sections */
+.v9-system,
+.v9-results,
+.v9-voices,
+.v9-founder {
+  padding: clamp(6rem, 10vw, 10rem) 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v9-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

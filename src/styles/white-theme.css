@@ -5,3 +5,24 @@
   --paper-deep: #f4f5f1;
   --surface: #ffffff;
 }
+
+/* v9 design language, carried to interior pages */
+.button {
+  border-radius: 999px;
+  padding: 0.82rem 1.3rem;
+  font-weight: 650;
+}
+
+.header-inner {
+  border-radius: 999px;
+}
+
+.nav-link {
+  border-radius: 999px;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.03em;
+}

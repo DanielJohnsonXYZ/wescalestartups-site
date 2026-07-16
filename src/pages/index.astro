@@ -15,6 +15,11 @@ import "../styles/home-v9-white.css";
 const faqSchema = buildFaqSchema([...buyerFaqs]);
 const homepageQuotes = testimonials;
 
+// Optional real photos: add `image: "/images/testimonials/<name>.webp"` to any
+// testimonial in site.ts and it replaces the initials avatar automatically.
+const quoteImage = (quote: (typeof testimonials)[number]): string | undefined =>
+  "image" in quote ? (quote as { image?: string }).image : undefined;
+
 const quoteInitials = (name: string) =>
   name
     .split(/\s+/)
@@ -248,7 +253,7 @@ const subAudiences = [
             <span class="v9-live-dot" aria-hidden="true"></span>
             Sustainable growth for AI startups &amp; B2B SaaS
           </div>
-          <h1 id="v9-hero-title">Sustainable, high-quality growth for <em>AI companies and startups.</em></h1>
+          <h1 id="v9-hero-title">Sustainable, high-quality growth for <em>AI startups.</em></h1>
           <p class="v9-hero-lede">Most startups do not stall because the product is weak. They stall because nobody truly understands the customer. We build the research, experimentation and testing infrastructure that turns customer insight into pipeline, <strong>so growth compounds quarter after quarter.</strong></p>
           <div class="v9-hero-actions">
             <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl} data-cta="v9-hero-book">
@@ -571,13 +576,16 @@ const subAudiences = [
           <figure class:list={["v9-quote", { "is-primary": index === 0 }]}>
             <blockquote>“{quote.quote}”</blockquote>
             <figcaption>
-              <span class="v9-quote-avatar" aria-hidden="true">{quoteInitials(quote.name)}</span>
+              <span class="v9-quote-avatar" aria-hidden="true">{quoteImage(quote) ? <img src={quoteImage(quote)} alt="" loading="lazy" decoding="async" /> : quoteInitials(quote.name)}</span>
               <strong>{quote.name}{quote.role ? ` · ${quote.role}` : ""}</strong>
               <span>{quote.company}</span>
             </figcaption>
           </figure>
         ))}
       </div>
+      <button type="button" class="v9-button v9-button-dark v9-quotes-more" id="v9-quotes-more">
+        Show more lovely people <span aria-hidden="true">↓</span>
+      </button>
     </div>
   </section>
 
@@ -635,6 +643,15 @@ const subAudiences = [
       </div>
     </div>
   </section>
+
+
+  <div class="v9-ticker" aria-hidden="true">
+    <div class="v9-ticker-track">
+      {Array.from({ length: 6 }).map(() => (
+        <span>Research <i>→</i> Experiment <i>→</i> Test <i>→</i> Scale <i>→</i></span>
+      ))}
+    </div>
+  </div>
 
   <section class="v9-faq" aria-labelledby="v9-faq-title">
     <div class="v9-shell v9-faq-grid">
@@ -771,6 +788,36 @@ const subAudiences = [
           window.dataLayer.push({ event: "home_foundations_toggle" });
         });
       });
+
+      var quoteCards = Array.prototype.slice.call(document.querySelectorAll(".v9-quote"));
+      var quotesMore = document.getElementById("v9-quotes-more");
+      if (quotesMore && quoteCards.length > 6) {
+        quoteCards.slice(6).forEach(function (quote) { quote.classList.add("is-collapsed"); });
+        quotesMore.addEventListener("click", function () {
+          quoteCards.forEach(function (quote) { quote.classList.remove("is-collapsed"); });
+          quotesMore.remove();
+        });
+      } else if (quotesMore) {
+        quotesMore.remove();
+      }
+
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+        var revealTargets = document.querySelectorAll(
+          ".v9-principle, .v9-service-card, .v9-case-card, .v9-quote, .v9-fit-card, .v9-timeline li, .v9-diagnostic-output, .v9-constraint-tabs, .v9-fit-video, .v9-scorecard-card, .v9-other-grid article, .v9-metric"
+        );
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          });
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+        revealTargets.forEach(function (el, index) {
+          el.classList.add("v9-reveal");
+          el.style.transitionDelay = (index % 3) * 70 + "ms";
+          revealObserver.observe(el);
+        });
+      }
 
       document.querySelectorAll(".v9-hover-glow").forEach(function (card) {
         card.addEventListener("pointermove", function (event) {

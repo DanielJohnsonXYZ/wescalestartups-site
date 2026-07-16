@@ -1,4 +1,4 @@
-/* Sitewide white theme: lifts the base palette to pure white.
+/* Sitewide white theme (r2): lifts the base palette to pure white.
    Loaded globally via SiteHeader (present on every page). */
 :root:root {
   --paper: #ffffff;

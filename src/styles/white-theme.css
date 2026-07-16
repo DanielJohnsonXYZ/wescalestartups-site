@@ -26,3 +26,9 @@ h2,
 h3 {
   letter-spacing: -0.03em;
 }
+
+/* Stacked CTA (label + subcopy): soft rectangle, not a full pill */
+.button-with-subcopy {
+  border-radius: 1.1rem;
+  padding: 0.85rem 1.35rem;
+}

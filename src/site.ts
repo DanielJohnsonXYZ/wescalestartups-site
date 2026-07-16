@@ -13,7 +13,7 @@ export const siteConfig = {
   bookingLabel: "Get in touch",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
-  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
+  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · No pitch`,
   /** Hero, pricing, quiz, noun phrase (not the imperative CTA). */
   bookingCallShort: "20-minute Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */

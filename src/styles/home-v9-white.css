@@ -506,8 +506,10 @@
   background: #d7ff8d;
 }
 
-/* Serif hero headline (Fraunces), shorter line */
-.v9-hero h1 {
+/* Serif hero headline (Fraunces), shorter line.
+   ID in the selector beats global.css's `body:not(.page-home-v8) h1`
+   (which pins Geist 700 sitewide at 0-2-2 specificity). */
+.page-home-v9 .v9-hero h1#v9-hero-title {
   max-width: 12ch;
   font-family: var(--v9-display);
   font-weight: 500;

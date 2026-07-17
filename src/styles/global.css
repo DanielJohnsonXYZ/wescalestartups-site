@@ -2978,6 +2978,7 @@ textarea:focus-visible {
 }
 
 .pricing-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;

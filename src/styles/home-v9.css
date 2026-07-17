@@ -282,11 +282,14 @@
   color: rgba(255, 255, 255, 0.42);
 }
 
-.page-home-v9 .header-cta {
+.page-home-v9 .header-cta,
+.page-home-v9 .header-cta .button-label,
+.page-home-v9 .header-cta .button-subcopy {
   min-height: 44px;
   border-radius: 999px;
   background: var(--v9-mint);
-  color: var(--v9-night);
+  color: var(--v9-night) !important;
+  -webkit-text-fill-color: var(--v9-night) !important;
   box-shadow: none;
   padding-inline: 1.1rem;
 }

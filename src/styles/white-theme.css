@@ -37,3 +37,17 @@ h3 {
 :root {
   --wss-theme-rev: 2;
 }
+
+/* Primary hero CTA everywhere: violet, matching the homepage's
+   primary button. `.button-dark` alone (mailto, 404 "Go home",
+   podcast host link) stays neutral — only the stacked primary
+   CTA pattern (`.button-with-subcopy`) is a "book a call" action. */
+.button-dark.button-with-subcopy {
+  background: var(--violet);
+  box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
+}
+
+.button-dark.button-with-subcopy:hover {
+  background: var(--violet-deep);
+  box-shadow: 0 22px 52px rgba(102, 87, 255, 0.32);
+}

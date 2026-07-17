@@ -949,6 +949,7 @@ export const testimonials = [
     quote:
       "Daniel offered sharp, practical advice during our session, with a clear focus on messaging and positioning. He helped me reframe the problem, pushing me to dig deeper into the why behind our customers' needs.",
     name: "Greg Weinstein",
+    image: "/images/testimonials/greg-weinstein.webp",
     role: "Paid founder advisory",
     company: "GrowthMentor review",
     result: "Messaging and positioning clarity"
@@ -957,6 +958,7 @@ export const testimonials = [
     category: "paid-advisory" as const,
     quote: "Daniel went above and beyond to share tactical feedback and help overhaul our approach to SEO.",
     name: "Dru Riley",
+    image: "/images/testimonials/dru-riley.webp",
     role: "Paid growth advisory",
     company: "GrowthMentor review",
     result: "SEO and content direction"
@@ -966,6 +968,7 @@ export const testimonials = [
     quote:
       "Spoke with Daniel on PPC and building a Google Ads strategy was an incredibly valuable experience. He helped me understand the importance of keyword research and targeting the right audience.",
     name: "Christian W K",
+    image: "/images/testimonials/christian-w-k.webp",
     role: "PPC mentoring session",
     company: "GrowthMentor review",
     result: "Google Ads strategy"
@@ -975,6 +978,7 @@ export const testimonials = [
     quote:
       "My initial call with Daniel was very promising. He asked insightful questions to understand my business goals and challenges. Came across as knowledgeable and experienced, even in our short conversation.",
     name: "Joshua Pitzalis",
+    image: "/images/testimonials/joshua-pitzalis.webp",
     role: "Founder mentoring session",
     company: "GrowthMentor review",
     result: "Growth direction and next steps"
@@ -984,6 +988,7 @@ export const testimonials = [
     quote:
       "Daniel Johnson is the \"no fluff\", straight-to-the-point person to talk to for marketing. Daniel brought me back to reality by underscoring the importance of fundamentals.",
     name: "Jawad Ahmed",
+    image: "/images/testimonials/jawad-ahmed.webp",
     role: "Paid marketing advisory",
     company: "GrowthMentor review",
     result: "Growth fundamentals"
@@ -1001,6 +1006,7 @@ export const testimonials = [
     quote:
       "Daniel is a pro! Within 10 mins he identified the gaps in our funnel and actual problem that I oversaw. Looking forward to multiple follow-up calls!",
     name: "Egor Donde",
+    image: "/images/testimonials/egor-donde.webp",
     role: "Founder mentoring session",
     company: "GrowthMentor review",
     result: "Funnel gap diagnosis"

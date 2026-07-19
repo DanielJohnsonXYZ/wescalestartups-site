@@ -97,3 +97,9 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 # Withdrawn case (confidentiality / unverified provenance) — do not 200
 /case-studies/marketplace-performance-audit /case-studies 301
 /case-studies/marketplace-performance-audit/ /case-studies 301
+
+# Legacy pre-Astro blog guides (404 live, but still surfacing in Google with real impressions -- confirmed 2026-07-19 via direct curl check)
+/10x-your-marketing-roi-with-effective-go-to-market-strategies /insights/measure-gtm-roi-without-attribution-stack 301
+/10x-your-marketing-roi-with-effective-go-to-market-strategies/ /insights/measure-gtm-roi-without-attribution-stack 301
+/the-ultimate-guide-to-developing-a-go-to-market-strategy-for-startups-updated /insights/b2b-saas-gtm-strategy 301
+/the-ultimate-guide-to-developing-a-go-to-market-strategy-for-startups-updated/ /insights/b2b-saas-gtm-strategy 301

@@ -8,6 +8,7 @@
     "start": "astro dev",
     "build": "node scripts/generate-og-png.mjs && astro build",
     "check": "astro check",
+    "check:theme": "node scripts/check-site-theme.mjs",
     "preview": "astro preview",
     "check:links:crawl": "node scripts/check-crawl-links.mjs --input=docs/crawls/latest.csv",
     "verify:agents": "node scripts/verify-agent-discovery.mjs"

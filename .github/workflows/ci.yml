@@ -30,6 +30,9 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: npm run build
 
+      - name: Sitewide theme contract
+        run: npm run check:theme
+
       - name: Crawl link check (if export exists)
         run: |
           if [ -f docs/crawls/latest.csv ]; then

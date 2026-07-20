@@ -8,6 +8,7 @@ import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "
 import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
 import "../styles/global.css";
+import "../styles/site-v9.css";
 
 interface Props {
   title?: string;
@@ -281,7 +282,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
       });
     </script>
   </head>
-  <body class={bodyClass}>
+  <body class:list={["theme-wss-v9", bodyClass]}>
     <!-- Google Tag Manager (noscript) — immediately after <body> per GTM install instructions. -->
     <noscript>
       <iframe

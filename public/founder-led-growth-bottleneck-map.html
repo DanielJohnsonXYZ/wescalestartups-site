@@ -5,38 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Founder-Led Growth Bottleneck Map | We Scale Startups</title>
   <meta name="description" content="Identify your biggest GTM bottleneck in under 5 minutes. Free diagnostic for post-PMF SaaS founders.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #07101f;
-      --surface:      #0f1d30;
-      --surface-2:    #172640;
-      --surface-3:    #1f3050;
-      --accent:       #10b981;
-      --accent-h:     #059669;
-      --accent-dim:   rgba(16,185,129,0.12);
-      --text:         #f0f4f8;
-      --muted:        #7a91a8;
-      --dim:          #3d5470;
-      --border:       #1a2f47;
-      --border-l:     #243e5c;
+      --bg:           #ffffff;
+      --surface:      #ffffff;
+      --surface-2:    #f6f7f3;
+      --surface-3:    #e9e9f0;
+      --accent:       #806cff;
+      --accent-h:     #4d3fc4;
+      --accent-dim:   rgba(128,108,255,0.11);
+      --text:         #111117;
+      --muted:        #55535b;
+      --dim:          #85828d;
+      --border:       rgba(17,17,23,0.10);
+      --border-l:     rgba(17,17,23,0.18);
       --red:          #f87171;
       --red-bg:       rgba(248,113,113,0.1);
       --yellow:       #fbbf24;
       --yellow-bg:    rgba(251,191,36,0.1);
       --green:        #34d399;
       --green-bg:     rgba(52,211,153,0.1);
-      --r:            12px;
-      --r-sm:         8px;
+      --r:            18px;
+      --r-sm:         999px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
+      background:
+        linear-gradient(rgba(17,17,23,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,17,23,0.04) 1px, transparent 1px),
+        radial-gradient(circle at 80% 4%, rgba(128,108,255,0.16), transparent 30%),
+        var(--bg);
+      background-size: 64px 64px, 64px 64px, auto, auto;
       color: var(--text);
       min-height: 100vh;
       line-height: 1.6;
@@ -44,31 +49,46 @@
 
     /* ── Header ── */
     .site-header {
-      border-bottom: 1px solid var(--border);
-      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 16px 24px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(18px) saturate(130%);
     }
     .site-header-inner {
-      max-width: 760px;
+      max-width: 900px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      min-height: 64px;
+      padding: 8px 10px 8px 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: rgba(13,14,21,0.94);
+      box-shadow: 0 18px 60px rgba(17,17,23,0.16);
     }
     .logo {
-      font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
-      color: var(--text);
     }
-    .logo span { color: var(--accent); }
+    .logo img {
+      width: 82px;
+      height: auto;
+      filter: brightness(0) invert(1);
+    }
     .header-badge {
-      font-size: 12px;
-      color: var(--muted);
-      background: var(--surface);
-      border: 1px solid var(--border-l);
-      padding: 4px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #090a0f;
+      background: #c8ff65;
+      border: 0;
+      padding: 8px 14px;
       border-radius: 100px;
     }
 
@@ -104,13 +124,15 @@
     }
     .intro-inner h1 {
       font-size: clamp(28px, 5.5vw, 46px);
-      font-weight: 800;
-      line-height: 1.12;
-      letter-spacing: -0.025em;
+      font-weight: 650;
+      line-height: 0.98;
+      letter-spacing: -0.05em;
       margin-bottom: 20px;
     }
     .intro-inner h1 em {
-      font-style: normal;
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
       color: var(--accent);
     }
     .intro-sub {
@@ -124,10 +146,11 @@
     }
     .benefits {
       list-style: none;
-      background: var(--surface);
+      background: rgba(255,255,255,0.88);
       border: 1px solid var(--border-l);
       border-radius: var(--r);
       padding: 20px 24px;
+      box-shadow: 0 20px 55px rgba(17,17,23,0.08);
       text-align: left;
       margin-bottom: 36px;
     }
@@ -361,7 +384,7 @@
 
     /* Score bars */
     .scores-card {
-      background: var(--surface);
+      background: rgba(255,255,255,0.94);
       border: 1px solid var(--border-l);
       border-radius: var(--r);
       padding: 24px;
@@ -400,7 +423,7 @@
 
     /* Content cards */
     .card {
-      background: var(--surface);
+      background: rgba(255,255,255,0.94);
       border: 1px solid var(--border-l);
       border-radius: var(--r);
       padding: 28px;
@@ -435,7 +458,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      border: 1px solid rgba(16,185,129,0.25);
+      border: 1px solid rgba(128,108,255,0.28);
     }
     .plan-body { flex: 1; }
     .plan-wk {
@@ -465,11 +488,17 @@
 
     /* CTA */
     .cta-card {
-      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.03));
-      border: 1px solid rgba(16,185,129,0.25);
+      background:
+        radial-gradient(circle at 82% 12%, rgba(128,108,255,0.30), transparent 36%),
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        #11121a;
+      background-size: auto, 52px 52px, 52px 52px, auto;
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: var(--r);
       padding: 40px 32px;
       text-align: center;
+      color: #fff;
     }
     .cta-card h3 {
       font-size: 22px;
@@ -479,7 +508,7 @@
     }
     .cta-card > p {
       font-size: 15px;
-      color: var(--muted);
+      color: #a8a7b4;
       max-width: 420px;
       margin: 0 auto 28px;
       line-height: 1.65;
@@ -535,12 +564,12 @@
     }
   </style>
 </head>
-<body>
+<body class="theme-wss-v9 standalone-tool">
 
 <!-- ══════════════ HEADER ══════════════ -->
 <header class="site-header">
   <div class="site-header-inner">
-    <a href="https://wescalestartups.com" class="logo">We Scale <span>Startups</span></a>
+    <a href="https://wescalestartups.com" class="logo" aria-label="We Scale Startups home"><img src="/images/logos/wss-logo.webp" alt="We Scale Startups" width="120" height="68"></a>
     <span class="header-badge">Free Diagnostic</span>
   </div>
 </header>

@@ -4,26 +4,6 @@
    ============================================================ */
 
 .page-home-v9 {
-  --v9-night: #090a0f;
-  --v9-night-2: #11121a;
-  --v9-night-3: #191a24;
-  --v9-paper: #f2efe6;
-  --v9-paper-2: #e9e5da;
-  --v9-white: #fffdf7;
-  --v9-ink: #111117;
-  --v9-copy: #55535b;
-  --v9-copy-dark: #a8a7b4;
-  --v9-line: rgba(17, 17, 23, 0.14);
-  --v9-line-dark: rgba(255, 255, 255, 0.12);
-  --v9-violet: #806cff;
-  --v9-violet-bright: #a796ff;
-  --v9-violet-deep: #4d3fc4;
-  --v9-mint: #c8ff65;
-  --v9-coral: #ff836f;
-  --v9-radius: 1.15rem;
-  --v9-display: "Fraunces Variable", Georgia, serif;
-  --v9-sans: "Geist", Inter, ui-sans-serif, system-ui, sans-serif;
-  --v9-mono: "JetBrains Mono", ui-monospace, monospace;
   background: var(--v9-paper);
   color: var(--v9-ink);
 }

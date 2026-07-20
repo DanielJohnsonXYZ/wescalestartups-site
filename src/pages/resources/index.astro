@@ -84,38 +84,61 @@ const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
   schema={resourcesSchema}
   lastUpdated={siteConfig.lastUpdated}
 >
-  <section class="page-hero">
-    <div class="shell">
-      <p class="eyebrow">Resources</p>
-      <h1>Practical growth guides for teams between traction and scale.</h1>
-      <p>
-        Use these when you need a clearer diagnosis before hiring, briefing an agency, or adding more channel activity. Prefer the fastest pass? Start with the{" "}
-        <a href="/resources/growth-bottleneck-scorecard">{siteConfig.scorecardName}</a>, {siteConfig.scorecardTagline}
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="resources-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="resources-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/proof" data-cta="resources-proof">See proof</a>
+  <section class="page-hero resources-hero">
+    <div class="shell resources-hero-layout">
+      <div class="resources-hero-copy">
+        <p class="eyebrow">Resources</p>
+        <h1>Practical growth guides for teams between <em>traction and scale.</em></h1>
+        <p>
+          Diagnose the real constraint, make the next decision, and brief your team with more clarity. No generic playbooks and no decorative PDF funnel.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#guides" data-cta="resources-browse">
+            Browse the resource library ↓
+          </a>
+          <a class="button button-light" href="/proof" data-cta="resources-proof">See the work →</a>
+        </div>
       </div>
+
+      <aside class="resource-router" aria-labelledby="resource-router-title">
+        <div class="resource-router-head">
+          <div>
+            <span class="resource-window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>WSS / Starting point</span>
+          </div>
+          <span class="resource-router-status"><i aria-hidden="true"></i> Free</span>
+        </div>
+        <div class="resource-router-body">
+          <p class="resource-router-label">Not sure where to start?</p>
+          <h2 id="resource-router-title">Find the bottleneck first.</h2>
+          <p class="resource-router-copy">
+            Score positioning, acquisition, conversion, reporting, and founder dependency before you add more activity.
+          </p>
+          <div class="resource-router-metrics" aria-label="Scorecard details">
+            <span><strong>10</strong> questions</span>
+            <span><strong>5</strong> minutes</span>
+            <span><strong>£0</strong> cost</span>
+          </div>
+          <ol class="resource-router-steps">
+            <li><span>01</span> Answer honestly</li>
+            <li><span>02</span> See the constraint</li>
+            <li><span>03</span> Get the next move</li>
+          </ol>
+          <a class="button resource-router-cta" href={siteConfig.scorecardUrl} data-cta="resources-scorecard">
+            Take the Growth Bottleneck Scorecard <span aria-hidden="true">↗</span>
+          </a>
+          <p class="resource-router-note">No email required to see your result.</p>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="guides">
     <div class="shell">
       <SectionIntro
         eyebrow="Guides & templates"
-        title="Request working assets, outlines on-page, files by email."
-        body="Most items below are outlines you can read here; you request the full template or worksheet by email (no decorative PDF funnel). Each resource page explains what you get and how to use it."
+        title="Start with the tool that matches the decision."
+        body="Read every outline on-page, then download the working guide or template when you need it. Each resource explains who it is for, what is inside, and how to use it."
       />
       <div class="grid-3">
         {guides.map((guide) => (
@@ -298,8 +321,247 @@ const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
 </BaseLayout>
 
 <style>
+  .resources-hero {
+    padding-block: clamp(4.25rem, 7vw, 6.75rem);
+  }
+
+  .resources-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    align-items: center;
+    gap: clamp(3rem, 6vw, 6.75rem);
+  }
+
+  .resources-hero-copy {
+    min-width: 0;
+  }
+
+  .resources-hero .resources-hero-copy h1 {
+    max-width: 13ch;
+    font-size: clamp(3.05rem, 5.1vw, 5.25rem);
+  }
+
+  .resources-hero .resources-hero-copy > p:not(.eyebrow) {
+    max-width: 54ch;
+  }
+
+  .resource-router {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 1.15rem;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      #16151d;
+    background-size: 32px 32px, 32px 32px, auto;
+    box-shadow: 0 30px 80px rgba(27, 23, 52, 0.22);
+    color: #fff;
+  }
+
+  .resource-router-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.62);
+    font-family: var(--v9-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .resource-router-head > div,
+  .resource-router-status {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .resource-window-dots {
+    display: inline-flex;
+    gap: 0.28rem;
+  }
+
+  .resource-window-dots i,
+  .resource-router-status i {
+    display: block;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+  }
+
+  .resource-window-dots i:first-child {
+    background: #ff887a;
+  }
+
+  .resource-window-dots i:nth-child(2) {
+    background: #ffc86b;
+  }
+
+  .resource-window-dots i:last-child,
+  .resource-router-status i {
+    background: var(--v9-mint);
+    box-shadow: 0 0 12px rgba(200, 255, 101, 0.55);
+  }
+
+  .resource-router-body {
+    padding: clamp(1.5rem, 3.5vw, 2.35rem);
+  }
+
+  .resources-hero .resource-router-label {
+    margin: 0 0 0.65rem;
+    color: var(--v9-mint);
+    font-family: var(--v9-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .resources-hero .resource-router h2 {
+    max-width: 12ch;
+    margin: 0;
+    color: #fff;
+    font-family: var(--v9-sans);
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
+    font-weight: 640;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .resources-hero .resource-router-copy {
+    margin: 1rem 0 1.4rem;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .resource-router-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 1.35rem;
+    border-block: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .resource-router-metrics span {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.9rem 0.75rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--v9-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .resource-router-metrics span:first-child {
+    padding-left: 0;
+  }
+
+  .resource-router-metrics span:last-child {
+    border-right: 0;
+  }
+
+  .resource-router-metrics strong {
+    color: #fff;
+    font-family: var(--v9-sans);
+    font-size: 1.25rem;
+    letter-spacing: -0.03em;
+  }
+
+  .resource-router-steps {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0 0 1.45rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .resource-router-steps li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.82rem;
+  }
+
+  .resource-router-steps span {
+    color: var(--v9-violet-bright);
+    font-family: var(--v9-mono);
+    font-size: 0.62rem;
+  }
+
+  .resources-hero .resource-router-cta {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 50px;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--v9-violet);
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet));
+    color: #fff;
+    font-size: 0.77rem;
+    box-shadow: 0 16px 36px rgba(77, 63, 196, 0.28);
+  }
+
+  .resources-hero .resource-router-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px rgba(77, 63, 196, 0.36);
+  }
+
+  .resources-hero .resource-router-note {
+    margin: 0.75rem 0 0;
+    color: rgba(255, 255, 255, 0.44);
+    font-family: var(--v9-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   .resource-outline-link {
     margin: 0.5rem 0 0.75rem;
     font-size: 0.9rem;
+  }
+
+  @media (max-width: 1000px) {
+    .resources-hero-layout {
+      grid-template-columns: 1fr;
+      gap: 2.75rem;
+    }
+
+    .resource-router {
+      width: min(100%, 640px);
+    }
+  }
+
+  @media (max-width: 620px) {
+    .resources-hero {
+      padding-block: 3.5rem;
+    }
+
+    .resources-hero .resources-hero-copy h1 {
+      font-size: clamp(2.8rem, 14vw, 3.65rem);
+    }
+
+    .resource-router-head > div > span:last-child {
+      display: none;
+    }
+
+    .resource-router-body {
+      padding: 1.35rem;
+    }
+
+    .resource-router-metrics span {
+      padding-inline: 0.5rem;
+    }
+
+    .resources-hero .resource-router-cta {
+      font-size: 0.7rem;
+    }
   }
 </style>

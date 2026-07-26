@@ -70,6 +70,7 @@ const missingFromSitemap = [];
 const unsizedImages = [];
 const missingAssets = [];
 const redirectLinks = [];
+const missingInternalPages = [];
 const indexableMetadata = [];
 const titles = new Map();
 const descriptions = new Map();
@@ -150,6 +151,14 @@ for (const file of htmlFiles) {
     if (!href.startsWith("/") || href.startsWith("//")) continue;
     const linkedRoute = normalizeRoute(new URL(href, siteOrigin).pathname);
     if (redirectSources.has(linkedRoute)) redirectLinks.push(`${relative} -> ${href}`);
+    if (
+      !redirectSources.has(linkedRoute) &&
+      !path.posix.extname(linkedRoute) &&
+      !linkedRoute.startsWith("/cdn-cgi/") &&
+      !fs.existsSync(outputForRoute(linkedRoute))
+    ) {
+      missingInternalPages.push(`${relative} -> ${href}`);
+    }
   }
 }
 
@@ -164,6 +173,9 @@ if (missingAssets.length) {
 }
 if (redirectLinks.length) {
   fail(`Internal links still point at redirect aliases:\n${[...new Set(redirectLinks)].sort().join("\n")}`);
+}
+if (missingInternalPages.length) {
+  fail(`Internal page links have no generated output:\n${[...new Set(missingInternalPages)].sort().join("\n")}`);
 }
 if (indexableMetadata.length) {
   fail(`Indexable page metadata/structure defects:\n${indexableMetadata.join("\n")}`);

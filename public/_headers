@@ -19,7 +19,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-site
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://app.growthmentor.com https://assets.calendly.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.google.com https://stats.g.doubleclick.net https://*.clarity.ms https://c.bing.com https://*.ingest.de.sentry.io https://*.calendly.com https://comms.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://comms.wescalestartups.com; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms https://app.growthmentor.com https://app.contaktly.com https://assets.calendly.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.analytics.google.com https://www.googletagmanager.com https://www.google.com https://stats.g.doubleclick.net https://*.clarity.ms https://c.bing.com https://*.ingest.de.sentry.io https://*.calendly.com https://app.contaktly.com https://comms.wescalestartups.com https://static.cloudflareinsights.com; frame-src https://calendly.com https://app.contaktly.com https://www.youtube-nocookie.com https://www.youtube.com; base-uri 'self'; form-action 'self' mailto: https://comms.wescalestartups.com; frame-ancestors 'self'
 
 # Homepage HTML response: middleware intercepts and serves /markdown/home.md
 # for `Accept: text/markdown` requests *before* this static HTML is consulted,
@@ -28,7 +28,7 @@
 # `Vary: Accept` here prevents needless edge cache fragmentation on `/`.
 /
   Link: </llms.txt>; rel="alternate"; type="text/plain", </llms-full.txt>; rel="alternate"; type="text/markdown", </markdown/home.md>; rel="alternate"; type="text/markdown", </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="alternate"; type="application/json"
-  Cache-Control: public, max-age=300, must-revalidate
+  Cache-Control: no-cache, max-age=0, must-revalidate
 
 /about
   Cache-Control: public, max-age=300, must-revalidate
@@ -68,19 +68,31 @@
 /llms.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
+  X-Robots-Tag: noindex, nofollow
 /llms-full.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
+  X-Robots-Tag: noindex, nofollow
 /markdown/home.md
   Content-Type: text/markdown; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
+  X-Robots-Tag: noindex, nofollow
 /.well-known/api-catalog
   Content-Type: application/json; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
+  X-Robots-Tag: noindex, nofollow
 /.well-known/agent-skills/index.json
   Content-Type: application/json; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
+  X-Robots-Tag: noindex, nofollow
 /robots.txt
   Cache-Control: public, max-age=300, must-revalidate
 /sitemap.xml
   Cache-Control: public, max-age=300, must-revalidate
+
+# Keep Cloudflare Pages preview and branch hostnames out of search.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow

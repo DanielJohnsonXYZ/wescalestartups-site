@@ -33,6 +33,9 @@ jobs:
       - name: Sitewide theme contract
         run: npm run check:theme
 
+      - name: Generated-site integrity
+        run: npm run verify:build
+
       - name: Crawl link check (if export exists)
         run: |
           if [ -f docs/crawls/latest.csv ]; then

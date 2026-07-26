@@ -22,8 +22,6 @@ function urlNode(path: string, opts: UrlOpts) {
 function staticUrlMeta(path: string): Pick<UrlOpts, "changefreq" | "priority"> {
   if (path === "/") return { changefreq: "weekly", priority: "1.0" };
   if (path === "/privacy" || path === "/terms") return { changefreq: "yearly", priority: "0.35" };
-  const agentMirrors = new Set(["/llms.txt", "/llms-full.txt", "/markdown/home.md"]);
-  if (agentMirrors.has(path)) return { changefreq: "monthly", priority: "0.55" };
   const weekly = new Set([
     "/start-here",
     "/services",
@@ -62,6 +60,7 @@ export const GET: APIRoute = async () => {
       "/gtm-strategy",
       "/first-30-days",
       "/ai-growth-systems",
+      "/ai-sameness-scorecard",
       "/learning-latency-scorecard",
       "/fractional-cmo-vs-agency",
       "/fractional-cmo-vs-full-time-cmo",
@@ -91,19 +90,22 @@ export const GET: APIRoute = async () => {
       "/refer",
       "/wss-scale-score",
       ...(siteConfig.podcastLive
-        ? ["/podcast", "/podcast-guest-application", "/podcast-guest-strategy"]
+        ? ["/podcast", "/podcast-guest-application"]
         : []),
       "/insights/glossary",
       "/seo-content-strategy",
       "/growth-operating-system",
       "/founder-led-growth",
+      "/founder-led-growth-bottleneck-map",
+      "/healthtech-buyer-confidence-matrix",
+      "/hiring-readiness-scorecard",
+      "/portfolio-growth-readiness",
+      "/facts/daniel-johnson",
+      "/facts/we-scale-startups",
       "/post-raise",
       "/ai-growth-audit",
       "/privacy",
       "/terms",
-      "/llms.txt",
-      "/llms-full.txt",
-      "/markdown/home.md",
       ...leadMagnets.map((m) => m.href)
     ])
   ].filter(isFinalSitemapPath);

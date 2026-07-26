@@ -157,8 +157,8 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
       <p class="quiz-progress-label" id="progress-label">Question 1 of 12</p>
       <div id="quiz-questions"></div>
       <div class="quiz-nav" id="quiz-nav" style="display:none">
-        <button class="button button-light" id="btn-back" onclick="quizBack()" style="display:none">← Back</button>
-        <button class="button button-brand" id="btn-next" onclick="quizNext()">Next →</button>
+        <button class="button button-light" id="btn-back" type="button" style="display:none">← Back</button>
+        <button class="button button-brand" id="btn-next" type="button">Next →</button>
       </div>
       <div id="quiz-result" style="display:none"></div>
     </div>
@@ -307,9 +307,10 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
             <a class="button button-brand" href="${cta1Url}" data-cta="${dataCtaPrefix}-result-primary">${r.cta1.label}</a>
             <a class="button button-light" href="${resultSecondaryCta.href}" data-cta="${resultSecondaryCta.dataCta}">${resultSecondaryCta.label}</a>
           </div>
-          <button class="result-restart" onclick="restartQuiz()">${restartLabel}</button>
+          <button class="result-restart" id="btn-restart" type="button">${restartLabel}</button>
         </div>
       `;
+      document.getElementById("btn-restart")?.addEventListener("click", restartQuiz);
       return;
     }
 
@@ -332,7 +333,8 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
           ${q.options.map((opt, i) => `
             <button
               class="quiz-option${selected === opt.score ? " selected" : ""}"
-              onclick="selectOption(${opt.score})"
+              type="button"
+              data-quiz-score="${opt.score}"
             >
               <span class="quiz-option-letter">${String.fromCharCode(65 + i)}</span>
               <span>
@@ -344,6 +346,12 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
         </div>
       </div>
     `;
+    container.querySelectorAll("[data-quiz-score]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const score = Number(button.getAttribute("data-quiz-score"));
+        if (Number.isFinite(score)) selectOption(score);
+      });
+    });
 
     const backBtn = document.getElementById("btn-back");
     backBtn.style.display = current > 0 ? "inline-flex" : "none";
@@ -379,10 +387,9 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
     document.getElementById(scrollTargetId).scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  window.selectOption = selectOption;
-  window.quizNext = quizNext;
-  window.quizBack = quizBack;
-  window.restartQuiz = restartQuiz;
-
-  document.addEventListener("DOMContentLoaded", render);
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("btn-back")?.addEventListener("click", quizBack);
+    document.getElementById("btn-next")?.addEventListener("click", quizNext);
+    render();
+  });
 </script>

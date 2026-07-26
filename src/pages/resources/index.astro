@@ -74,10 +74,42 @@ const guides = [
 
 const guideIds = new Set(guides.map((g) => g.id));
 const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
+const diagnosticTools = [
+  {
+    href: "/founder-led-growth-bottleneck-map",
+    title: "Founder-Led Growth Bottleneck Map",
+    audience: "Founder dependency",
+    description: "Map how much of the GTM system still lives in the founder's head."
+  },
+  {
+    href: "/ai-sameness-scorecard",
+    title: "AI Sameness Scorecard",
+    audience: "AI positioning",
+    description: "Test whether your category, promise, and proof sound distinct enough to buy."
+  },
+  {
+    href: "/hiring-readiness-scorecard",
+    title: "Hiring Readiness Scorecard",
+    audience: "First senior hire",
+    description: "Check whether a Head of Marketing would inherit a working system or a mess."
+  },
+  {
+    href: "/healthtech-buyer-confidence-matrix",
+    title: "HealthTech Buyer Confidence Matrix",
+    audience: "HealthTech",
+    description: "Find where trust is breaking between product users and the economic buyer."
+  },
+  {
+    href: "/portfolio-growth-readiness",
+    title: "Portfolio Growth Readiness",
+    audience: "Investors and M&A",
+    description: "Assess commercial readiness across PE-backed and acquired businesses."
+  }
+] as const;
 ---
 
 <BaseLayout
-  title="Resources | We Scale Startups"
+  title="Free Startup Growth Resources | We Scale Startups"
   description="Free growth diagnosis guides, sprint planners, and portfolio templates for post-PMF startups building repeatable growth systems."
   keywords="growth bottleneck scorecard, 90-day growth sprint, VC portfolio template, startup growth diagnosis, post-PMF GTM, fractional CMO resources"
   path="/resources"
@@ -205,6 +237,26 @@ const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
       </section>
     )
   }
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Interactive diagnostics"
+        title="Use the scorecard for the decision in front of you."
+        body="Each tool gives an immediate result and a practical next move. No email is required to see the diagnosis."
+      />
+      <div class="grid-3">
+        {diagnosticTools.map((tool) => (
+          <article class="feature-card">
+            <p class="card-kicker">{tool.audience}</p>
+            <h3><a href={tool.href}>{tool.title}</a></h3>
+            <p>{tool.description}</p>
+            <a class="card-link" href={tool.href}>Run the diagnostic →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="shell">

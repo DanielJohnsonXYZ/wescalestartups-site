@@ -68,7 +68,9 @@ export async function onRequest(context) {
             "Content-Type": "text/markdown; charset=utf-8",
             Link: HOMEPAGE_AGENT_LINK,
             Vary: "Accept",
-            "Cache-Control": "public, max-age=300, must-revalidate"
+            "Cache-Control": "no-cache, max-age=0, must-revalidate",
+            "CDN-Cache-Control": "no-store",
+            "X-Robots-Tag": "noindex, nofollow"
           }
         });
       }
@@ -147,6 +149,19 @@ export async function onRequest(context) {
     "/execution-model/": "/how-it-works",
     "/engagement-models": "/how-it-works",
     "/engagement-models/": "/how-it-works",
+    // Withdrawn internal planning page and overlapping noindex industry pages
+    "/podcast-guest-strategy": "/podcast",
+    "/podcast-guest-strategy/": "/podcast",
+    "/industries/ai-genai": "/ai-growth-systems",
+    "/industries/ai-genai/": "/ai-growth-systems",
+    "/industries/b2b-growth": "/industries/saas-growth",
+    "/industries/b2b-growth/": "/industries/saas-growth",
+    "/industries/b2b-saas": "/industries/saas-growth",
+    "/industries/b2b-saas/": "/industries/saas-growth",
+    "/industries/ecommerce": "/industries",
+    "/industries/ecommerce/": "/industries",
+    "/industries/seed-to-series-b": "/start-here",
+    "/industries/seed-to-series-b/": "/start-here",
     "/case-studies/marketplace-performance-audit": "/case-studies",
     "/case-studies/marketplace-performance-audit/": "/case-studies"
   };
@@ -178,5 +193,20 @@ export async function onRequest(context) {
     return Response.redirect(url.toString(), 301);
   }
 
-  return context.next();
+  const response = await context.next();
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!/\btext\/html\b/i.test(contentType)) return response;
+
+  // HTML must never outlive its hashed assets at the outer Cloudflare zone.
+  // Fingerprinted assets remain immutable via public/_headers; documents revalidate.
+  const headers = new Headers(response.headers);
+  headers.set("Cache-Control", "no-cache, max-age=0, must-revalidate");
+  headers.set("CDN-Cache-Control", "no-store");
+  if (path === "/" || path === "") headers.set("Link", HOMEPAGE_AGENT_LINK);
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
 }

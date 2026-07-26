@@ -2,9 +2,8 @@
 # Primary content negotiation + redirect logic lives in functions/_middleware.js.
 # These rules act as a fallback safety net for environments where Pages Functions
 # may be unavailable (e.g. raw static hosting), so legacy URLs still resolve.
-# Redirect chain fix: send http://www and https://www directly to https://wescalestartups.com (single hop)
-http://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
-https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
+# Host canonicalisation is handled in functions/_middleware.js. Pages _redirects
+# accepts path rules only; absolute host rules are ignored by Wrangler.
 
 /test /experimentation 301
 /test/ /experimentation 301
@@ -53,7 +52,6 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /portfolio/ned/ /case-studies/ned 301
 /portfolio/lessonsup /case-studies/lessonsup 301
 /portfolio/lessonsup/ /case-studies/lessonsup 301
-/portfolio/* /case-studies 301
 
 # Legacy pricing + ad landing pages
 /pricing-plans /pricing 301
@@ -65,7 +63,6 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 
 # Legacy blog → insights hub
 /blog /insights 301
-/blog/* /insights 301
 
 # Legacy VC-marketing guide → insights hub
 /the-ultimate-guide-to-venture-capital-marketing-for-startups /insights 301
@@ -76,7 +73,6 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /growth-package/ /pricing 301
 /fintech /industries/fintech 301
 /fintech/ /industries/fintech 301
-/team/* /about 301
 /choosing-the-perfect-fractional-cmo /services/fractional-cmo 301
 /choosing-the-perfect-fractional-cmo/ /services/fractional-cmo 301
 /choosing-the-perfect-fractional-cmo-for-your-startup /services/fractional-cmo 301
@@ -94,6 +90,20 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 /engagement-models /how-it-works 301
 /engagement-models/ /how-it-works 301
 
+# Withdrawn internal planning page and overlapping noindex industry pages
+/podcast-guest-strategy /podcast 301
+/podcast-guest-strategy/ /podcast 301
+/industries/ai-genai /ai-growth-systems 301
+/industries/ai-genai/ /ai-growth-systems 301
+/industries/b2b-growth /industries/saas-growth 301
+/industries/b2b-growth/ /industries/saas-growth 301
+/industries/b2b-saas /industries/saas-growth 301
+/industries/b2b-saas/ /industries/saas-growth 301
+/industries/ecommerce /industries 301
+/industries/ecommerce/ /industries 301
+/industries/seed-to-series-b /start-here 301
+/industries/seed-to-series-b/ /start-here 301
+
 # Withdrawn case (confidentiality / unverified provenance) — do not 200
 /case-studies/marketplace-performance-audit /case-studies 301
 /case-studies/marketplace-performance-audit/ /case-studies 301
@@ -107,3 +117,8 @@ https://www.wescalestartups.com/*  https://wescalestartups.com/:splat  301
 # Legacy Web3 blog post (off-ICP, thin generic content, real lingering GSC impressions -- confirmed 2026-07-21)
 /web3-marketing-tips-for-startups-unlocking-the-power-of-blockchain-for-next-level-growth /insights 301
 /web3-marketing-tips-for-startups-unlocking-the-power-of-blockchain-for-next-level-growth/ /insights 301
+
+# Catch-all legacy namespaces last so exact rules above take priority.
+/portfolio/* /case-studies 301
+/blog/* /insights 301
+/team/* /about 301

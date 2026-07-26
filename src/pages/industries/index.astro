@@ -4,7 +4,7 @@ import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { sortByOrder } from "../../lib/utils";
-import { industriesHubRelatedReading, siteConfig } from "../../site";
+import { indexableIndustrySlugs, industriesHubRelatedReading, siteConfig } from "../../site";
 
 const industriesHubFaqs = [
   {
@@ -29,8 +29,11 @@ const industriesSchema = [
 
 const coreIndustryIds = new Set(["saas-growth", "fintech", "healthtech", "edtech"]);
 const allIndustries = sortByOrder(await getCollection("industries"));
-const coreIndustries = allIndustries.filter((industry) => coreIndustryIds.has(industry.id));
-const moreIndustries = allIndustries.filter((industry) => !coreIndustryIds.has(industry.id));
+const publishedIndustries = allIndustries.filter((industry) =>
+  indexableIndustrySlugs.includes(industry.id as (typeof indexableIndustrySlugs)[number])
+);
+const coreIndustries = publishedIndustries.filter((industry) => coreIndustryIds.has(industry.id));
+const moreIndustries = publishedIndustries.filter((industry) => !coreIndustryIds.has(industry.id));
 ---
 
 <BaseLayout

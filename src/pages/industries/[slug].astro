@@ -14,6 +14,10 @@ export async function getStaticPaths() {
 
 const { industry } = Astro.props;
 const path = `/industries/${industry.id}`;
+const industryMetaTitle =
+  industry.id === "vc-support"
+    ? "VC Portfolio Growth Systems | We Scale Startups"
+    : `${industry.data.title} Growth Systems | We Scale Startups`;
 
 const industryFaqs = [
   {
@@ -50,7 +54,7 @@ const industrySchema = [
 ---
 
 <BaseLayout
-  title={`${industry.data.title} | We Scale Startups`}
+  title={industryMetaTitle}
   description={industry.data.description}
   path={path}
   schema={industrySchema}

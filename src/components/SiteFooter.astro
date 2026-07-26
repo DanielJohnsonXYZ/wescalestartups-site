@@ -21,6 +21,7 @@ const groups = [
       { href: "/services/90-day-growth-sprint", label: "90-Day Growth Sprint" },
       { href: "/services/acquisition-system-build", label: "Acquisition System Build" },
       { href: "/services/fractional-cmo", label: "Fractional CMO" },
+      { href: "/ai-growth-audit", label: "AI Growth Audit" },
       { href: "/pricing", label: "Pricing" },
       { href: "/contact", label: "Contact" }
     ]
@@ -42,9 +43,11 @@ const groups = [
       { href: siteConfig.scorecardUrl, label: siteConfig.scorecardName },
       { href: "/resources", label: "All resources & templates" },
       { href: "/growth-operating-system", label: "Growth Operating System" },
+      { href: "/growth-course", label: "Free growth course" },
+      { href: "/newsletter", label: siteConfig.newsletterName },
       { href: "/insights", label: "Insights" },
       { href: "/gtm-strategy", label: "GTM Strategy Guide" },
-      { href: "/podcast", label: "Podcast" }
+      ...(siteConfig.podcastLive ? [{ href: "/podcast", label: "Podcast" }] : [])
     ]
   },
   {
@@ -53,8 +56,10 @@ const groups = [
       { href: "/about", label: "About WSS" },
       { href: "/team", label: "Team" },
       { href: "/about/daniel", label: "About Daniel" },
+      { href: "/facts/we-scale-startups", label: "Verified company facts" },
       { href: "/press", label: "Speaking & press" },
       { href: "/workshops", label: "Workshops" },
+      { href: "/refer", label: "Refer a founder" },
       { href: "/contact", label: "Contact" },
       { href: siteConfig.linkedin, label: "LinkedIn", external: true }
     ]
@@ -219,7 +224,7 @@ const groups = [
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--accent);
+    color: var(--violet-deep);
     margin: 0 0 0.85rem;
   }
   .footer-links {

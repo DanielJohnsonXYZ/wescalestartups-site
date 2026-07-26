@@ -172,6 +172,8 @@ const caseStudies = [
     type: "Paid · Healthtech · Fractional CMO",
     name: "Healthtech (anon.)",
     logo: "/images/logos/healthtech-anon.svg",
+    logoWidth: 189,
+    logoHeight: 40,
     context: "Precision medicine · Marketing function from zero",
     body: "Built the marketing operation from scratch: outbound, events and agency coordination. The CEO moved from doing everything to a weekly review, with the system left in the team.",
     stats: [
@@ -186,6 +188,8 @@ const caseStudies = [
     type: "Paid · Fintech",
     name: "Ned",
     logo: "/images/logos/ned.svg",
+    logoWidth: 220,
+    logoHeight: 72,
     context: "Funding platform · Paid search + SEO",
     body: "500+ sign-ups in two months from paid search, with an 8.6% CTR and $0.74 CPC.",
     stats: [
@@ -199,6 +203,8 @@ const caseStudies = [
     type: "Paid · Healthtech",
     name: "eQuoo",
     logo: "/images/logos/equoo.svg",
+    logoWidth: 220,
+    logoHeight: 72,
     context: "Mental-health app · Fractional CMO",
     body: "A clearer acquisition narrative and channel hierarchy for a trust-sensitive category.",
     stats: [
@@ -233,8 +239,8 @@ const subAudiences = [
 ---
 
 <BaseLayout
-  title="We Scale Startups | Sustainable, High-Quality Growth for AI Startups & B2B SaaS"
-  description="We build the growth infrastructure AI startups and B2B SaaS teams need to hit the KPI that matters: customer research, experimentation and testing systems, built from first principles."
+  title="Growth Systems for AI Startups & B2B SaaS | We Scale Startups"
+  description="Growth systems for post-PMF AI startups and B2B SaaS: customer research, focused experiments, acquisition infrastructure, and a testing rhythm your team owns."
   path="/"
   schema={faqSchema}
   bodyClass="page-home-v9"
@@ -321,7 +327,7 @@ const subAudiences = [
       <div class="v9-logo-track">
         {proofEcosystemLogos.map((logo) => (
           <div class="v9-logo-item">
-            <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+            <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
             <span>{logo.relationship}</span>
           </div>
         ))}
@@ -468,9 +474,9 @@ const subAudiences = [
           </div>
         ) : (
           <a class="v9-video-frame v9-video-placeholder" href="/growth-operating-system">
-            <span>▶</span>
-            <strong>Watch: What the hell is growth?</strong>
-            <small>Video landing here soon · read the Growth Operating System in the meantime</small>
+            <span aria-hidden="true">→</span>
+            <strong>Read: What a growth operating system actually does</strong>
+            <small>A practical guide to the research, experiment, test, and transfer rhythm</small>
           </a>
         )}
       </div>
@@ -536,7 +542,7 @@ const subAudiences = [
       <div class="v9-case-grid">
         {caseStudies.map((study) => (
           <article class:list={["v9-case-card", "v9-hover-glow", { "is-featured": study.feature }]}>
-            <div class="v9-case-topline"><span>{study.type}</span><img src={study.logo} alt="" loading="lazy" decoding="async" /></div>
+            <div class="v9-case-topline"><span>{study.type}</span><img src={study.logo} alt="" width={study.logoWidth} height={study.logoHeight} loading="lazy" decoding="async" /></div>
             <h3>{study.name}</h3>
             <span class="v9-case-context">{study.context}</span>
             <p>{study.body}</p>
@@ -576,7 +582,7 @@ const subAudiences = [
           <figure class:list={["v9-quote", { "is-primary": index === 0 }]}>
             <blockquote>“{quote.quote}”</blockquote>
             <figcaption>
-              <span class="v9-quote-avatar" aria-hidden="true">{quoteImage(quote) ? <img src={quoteImage(quote)} alt="" loading="lazy" decoding="async" /> : quoteInitials(quote.name)}</span>
+              <span class="v9-quote-avatar" aria-hidden="true">{quoteImage(quote) ? <img src={quoteImage(quote)} alt="" width="160" height="160" loading="lazy" decoding="async" /> : quoteInitials(quote.name)}</span>
               <strong>{quote.name}{quote.role ? ` · ${quote.role}` : ""}</strong>
               <span>{quote.company}</span>
             </figcaption>

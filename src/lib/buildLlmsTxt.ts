@@ -173,9 +173,8 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - ${siteConfig.scorecardName} (self-serve): ${siteConfig.siteUrl}${siteConfig.scorecardUrl}
 - Manual 5-layer diagnose framework: ${siteConfig.siteUrl}/diagnose
 - GTM strategy: ${siteConfig.siteUrl}/gtm-strategy
-- Engagement models: ${siteConfig.siteUrl}/engagement-models
-- Execution model: ${siteConfig.siteUrl}/execution-model
-- Growth engine: ${siteConfig.siteUrl}/growth-engine
+- How engagements work: ${siteConfig.siteUrl}/how-it-works
+- Growth operating system: ${siteConfig.siteUrl}/growth-operating-system
 - AI growth systems: ${siteConfig.siteUrl}/ai-growth-systems
 - Industries hub: ${siteConfig.siteUrl}/industries
 - Reports hub: ${siteConfig.siteUrl}/reports

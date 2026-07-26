@@ -50,13 +50,13 @@ export const siteConfig = {
   twitterHandle: "@djohnsonxyz",
   founderName: "Daniel Johnson",
   founderLinkedin: "https://www.linkedin.com/in/danieljohnsonxyz/",
-  growthMentor: "https://app.growthmentor.com/mentors/daniel-johnson",
-  growthMentorReviews: "https://app.growthmentor.com/mentors/daniel-johnson#reviews-section",
+  growthMentor: "https://www.growthmentor.com/mentors/daniel-johnson",
+  growthMentorReviews: "https://www.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
-  lastUpdated: "4 May 2026",
+  lastUpdated: "26 July 2026",
   /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
-  siteLastModified: "2026-05-03",
+  siteLastModified: "2026-07-26",
   ogImage: "/og/default.png",
   /**
    * Google Tag Manager, production container for wescalestartups.com only.
@@ -110,9 +110,10 @@ export const canonicalProofMetrics = [
  * Unlisted paths fall back to siteLastModified. Refresh entries when you edit a route.
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
-  "/": "2026-05-07",
-  "/about": "2026-05-05",
+  "/": "2026-07-26",
+  "/about": "2026-07-26",
   "/ai-growth-systems": "2026-05-01",
+  "/ai-sameness-scorecard": "2026-07-26",
   "/book": "2026-05-04",
   "/build": "2026-05-03",
   "/case-studies": "2026-05-03",
@@ -128,10 +129,14 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/growth-engine": "2026-05-01",
   "/gtm-strategy": "2026-05-03",
   "/how-it-works": "2026-05-04",
-  "/industries": "2026-05-03",
+  "/industries": "2026-07-26",
   "/founder-led-growth": "2026-05-04",
+  "/founder-led-growth-bottleneck-map": "2026-07-26",
+  "/healthtech-buyer-confidence-matrix": "2026-07-26",
+  "/hiring-readiness-scorecard": "2026-07-26",
   "/post-raise": "2026-07-13",
   "/ai-growth-audit": "2026-07-15",
+  "/portfolio-growth-readiness": "2026-07-26",
   "/growth-operating-system": "2026-05-04",
   "/insights": "2026-05-04",
   "/llms.txt": "2026-05-03",
@@ -145,8 +150,8 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/privacy": "2026-05-03",
   "/proof": "2026-05-04",
   "/reports": "2026-05-01",
-  "/resources": "2026-05-03",
-  "/services": "2026-05-04",
+  "/resources": "2026-07-26",
+  "/services": "2026-07-26",
   "/start-here": "2026-05-04",
   "/terms": "2026-05-03",
   "/testimonials": "2026-05-03",
@@ -171,6 +176,8 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/industries/seed-to-series-b": "2026-05-03",
   "/industries/vc-support": "2026-05-04",
   "/about/daniel": "2026-05-11",
+  "/facts/daniel-johnson": "2026-07-26",
+  "/facts/we-scale-startups": "2026-07-26",
   "/team": "2026-05-12",
   "/speaking": "2026-05-11",
   "/workshops": "2026-05-11",
@@ -218,7 +225,7 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
   ],
-  "/growth-engine": [
+  "/growth-operating-system": [
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
   ],
@@ -262,7 +269,8 @@ export const resourcesRelatedReading: readonly { href: string; label: string }[]
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
   { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
   { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
-  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+  { href: "/growth-course", label: "Free growth course" },
+  { href: "/newsletter", label: siteConfig.newsletterName },
   { href: "/reports", label: "Report formats hub" }
 ];
 
@@ -288,7 +296,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
     { href: "/fractional-cmo-vs-agency", label: "Fractional CMO vs agency" },
     { href: "/first-30-days", label: "First 30 days with WSS" },
-    { href: "/engagement-models", label: "Engagement models" }
+    { href: "/how-it-works", label: "How engagements work" }
   ]
 };
 
@@ -312,7 +320,9 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
   { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
-  { href: "/industries/b2b-saas", label: "B2B SaaS industry notes" },
+  { href: "/ai-growth-audit", label: "AI Growth Audit" },
+  { href: "/before-you-hire-another-agency", label: "Before you hire another agency" },
+  { href: "/industries/saas-growth", label: "SaaS growth industry notes" },
   { href: "/industries/fintech", label: "FinTech industry notes" },
   { href: "/industries/healthtech", label: "HealthTech industry notes" },
   { href: "/industries/edtech", label: "EdTech industry notes" }
@@ -325,7 +335,7 @@ export const insightsHubRelatedReading: readonly { href: string; label: string }
   { href: "/diagnose", label: "5-layer framework" },
   { href: "/proof", label: "Proof hub" },
   { href: "/resources", label: "Resources" },
-  { href: "/industries/b2b-saas", label: "B2B SaaS market notes" },
+  { href: "/industries/saas-growth", label: "SaaS growth market notes" },
   { href: "/industries/fintech", label: "FinTech market notes" },
   { href: "/industries/healthtech", label: "HealthTech market notes" },
   { href: "/industries/edtech", label: "EdTech market notes" },
@@ -413,6 +423,7 @@ export const aboutRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/services", label: "Services" },
   { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+  { href: "/facts/daniel-johnson", label: "Verified Daniel Johnson facts" },
   { href: "https://danieljohnson.xyz/", label: "Daniel Johnson, personal site" }
 ];
 
@@ -540,42 +551,56 @@ export const proofClients = [
 export const proofEcosystemLogos = [
   {
     src: "/images/logos/google.webp",
+    width: 544,
+    height: 184,
     alt: "Google for Startups",
     name: "Google for Startups",
     relationship: "Mentor · startup programmes"
   },
   {
     src: "/images/logos/cambridge.webp",
+    width: 544,
+    height: 184,
     alt: "Cambridge Judge Business School",
     name: "Cambridge Judge",
     relationship: "Guest lecturing · entrepreneurship"
   },
   {
     src: "/images/logos/imperial.webp",
+    width: 520,
+    height: 57,
     alt: "Imperial College London",
     name: "Imperial College",
     relationship: "Invited growth teaching · startup support"
   },
   {
     src: "/images/logos/techstars.webp",
+    width: 260,
+    height: 104,
     alt: "Techstars",
     name: "Techstars",
     relationship: "Mentor · startup programmes"
   },
   {
     src: "/images/logos/uksa.webp",
+    width: 360,
+    height: 101,
     alt: "UK Space Agency",
     name: "UK Space Agency",
     relationship: "Startup ecosystem support"
   },
   {
     src: "/images/logos/general-assembly.webp",
+    width: 219,
+    height: 230,
     alt: "General Assembly",
     name: "General Assembly",
     relationship: "Growth teaching · startup education"
   },
   {
     src: "/images/logos/growthmentor-v2.jpg",
+    width: 225,
+    height: 225,
     alt: "GrowthMentor",
     name: "GrowthMentor",
     relationship: "External reviews · 479+ mentor sessions"
@@ -772,7 +797,7 @@ export const leadMagnets = [
     id: "agency-brief-template",
     title: "Agency Brief Template",
     audience: "Founders briefing agencies or freelancers",
-    description: "One-page brief so channel partners get goals, constraints, proof, and success metrics in one pass.",
+    description: "A one-page agency brief that gives channel partners the goals, constraints, proof, decision rules, and success metrics they need in one pass.",
     href: "/resources/agency-brief-template",
     downloadPath: "/downloads/guides/agency-brief-template.md"
   },
@@ -780,7 +805,7 @@ export const leadMagnets = [
     id: "first-marketing-hire-scorecard",
     title: "First Marketing Hire Scorecard",
     audience: "Founders hiring marketing",
-    description: "Score whether you need a generalist, growth marketer, or leader, and what to test first.",
+    description: "Score whether your next marketing hire should be a generalist, growth marketer, or leader, and define what they need to test first.",
     href: "/resources/first-marketing-hire-scorecard",
     downloadPath: "/downloads/guides/first-marketing-hire-scorecard.md"
   },
@@ -788,7 +813,7 @@ export const leadMagnets = [
     id: "ai-search-visibility-checklist",
     title: "AI Search Visibility Checklist",
     audience: "Teams cited in AI answers",
-    description: "Make claims citable: sources, structure, and proof pages LLMs can quote.",
+    description: "Make your claims citable with clear sources, structured answers, entity signals, and proof pages that search engines and AI assistants can quote.",
     href: "/resources/ai-search-visibility-checklist",
     downloadPath: "/downloads/guides/ai-search-visibility-checklist.md"
   }

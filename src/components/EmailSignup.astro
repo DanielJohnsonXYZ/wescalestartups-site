@@ -11,6 +11,9 @@ interface Props {
   sourceType?: "newsletter" | "lead_magnet" | "contact_enquiry";
   sourcePage?: string;
   leadMagnet?: string;
+  /** Use a dedicated Mautic form while keeping the shared component and host. */
+  mauticFormId?: string;
+  finePrint?: string;
 }
 
 const {
@@ -21,10 +24,15 @@ const {
   buttonLabel = "Get the note ->",
   sourceType = "newsletter",
   sourcePage = Astro.url.pathname,
-  leadMagnet = ""
+  leadMagnet = "",
+  mauticFormId: mauticFormIdOverride,
+  finePrint = "No spam. Unsubscribe any time."
 } = Astro.props;
 
-const { submitUrl, formId: mauticFormId } = mauticNewsletter;
+const mauticFormId = mauticFormIdOverride ?? mauticNewsletter.formId;
+const submitUrl = mauticFormIdOverride
+  ? `${mauticNewsletter.baseUrl}/form/submit?formId=${encodeURIComponent(mauticFormIdOverride)}`
+  : mauticNewsletter.submitUrl;
 const sourcePageValue = sourcePage || Astro.url.pathname;
 ---
 
@@ -61,7 +69,7 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
       />
       <button type="submit" class="button button-brand">{buttonLabel}</button>
     </form>
-    <p class="email-signup-fine">No spam. Unsubscribe any time.</p>
+    <p class="email-signup-fine">{finePrint}</p>
   </div>
 </div>
 

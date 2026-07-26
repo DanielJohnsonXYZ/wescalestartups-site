@@ -1,0 +1,249 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { pricingTiers, proofClients, siteConfig } from "../../site";
+
+const path = "/facts/we-scale-startups";
+
+const quickFacts: Array<[string, string]> = [
+  ["Legal / trading name", "We Scale Startups"],
+  ["Founder", "Daniel Johnson"],
+  ["Headquarters", siteConfig.address],
+  ["Website", siteConfig.siteUrl],
+  ["Email", siteConfig.email],
+  ["Phone", siteConfig.phone],
+  ["LinkedIn", siteConfig.linkedin],
+  ["Contact", `${siteConfig.siteUrl}${siteConfig.bookingUrl}`]
+];
+
+const industriesServed = ["B2B SaaS", "AI / ML startups", "Fintech", "Healthtech", "Ecommerce", "EdTech"];
+
+const programmeAffiliations = [
+  "Google for Startups",
+  "Techstars",
+  "Cambridge Judge Business School",
+  "Imperial College London",
+  "UK Space Agency",
+  "General Assembly",
+  "GrowthMentor"
+];
+
+const faqs = [
+  {
+    question: "What is We Scale Startups?",
+    answer:
+      "We Scale Startups is a London-based growth consultancy founded by Daniel Johnson. It builds the growth infrastructure post-PMF B2B SaaS and AI startups need: customer research, an experiment engine, and a weekly testing rhythm, handed to the founder's team rather than kept as agency dependency."
+  },
+  {
+    question: "What services does We Scale Startups offer?",
+    answer:
+      "We Scale Startups offers four engagements: Growth Diagnosis (£2k–£4k, 1 week), 90-Day Growth Sprint (£8k–£12k, 12 weeks), Acquisition System Build (£15k–£25k, 8–12 weeks), and Fractional CMO (£5k–£8k/mo, 3-month minimum)."
+  },
+  {
+    question: "Who does We Scale Startups work with?",
+    answer:
+      "We Scale Startups works with post-PMF startups from Seed to Series B across B2B SaaS, AI/ML, fintech, healthtech, ecommerce, and EdTech."
+  },
+  {
+    question: "Who founded We Scale Startups?",
+    answer:
+      "We Scale Startups was founded by Daniel Johnson, a growth operator with 15+ years across SaaS, fintech, healthtech and EdTech startups, including two operator-side exits."
+  },
+  {
+    question: "Where is We Scale Startups based?",
+    answer: `We Scale Startups is headquartered at ${siteConfig.address}.`
+  },
+  {
+    question: "What is We Scale Startups' track record?",
+    answer:
+      "We Scale Startups has influenced £18M+ in revenue and managed £6M+ in paid acquisition spend, supporting 20+ startups. Client engagements include Ned, eQuoo, LessonsUp, Nevly, and an anonymous healthtech client."
+  }
+];
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Facts", path: "/facts/we-scale-startups" },
+    { name: "We Scale Startups", path }
+  ]),
+  buildFaqSchema(faqs)
+];
+---
+
+<BaseLayout
+  path={path}
+  title="We Scale Startups — Company Facts"
+  description="Verified facts about We Scale Startups: services, pricing, industries served, track record, client roster, and identity links."
+  metaRobots="index,follow,max-image-preview:large"
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Facts", path: "/facts/we-scale-startups" },
+    { name: "We Scale Startups", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Company facts</p>
+      <h1>We Scale Startups</h1>
+      <p class="lede">
+        A reference page of verifiable facts about We Scale Startups. For the full company story, see
+        <a href="/about">About</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Quick facts</p>
+      <dl class="facts-list">
+        {quickFacts.map(([label, value]) => (
+          <div class="facts-row">
+            <dt>{label}</dt>
+            <dd>{value.startsWith("http") || value.includes("@") ? <a href={value.includes("@") ? `mailto:${value}` : value} rel="noopener noreferrer" target="_blank">{value}</a> : value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Identity statement</p>
+      <p class="lead-copy">
+        We Scale Startups is a growth consultancy that builds the infrastructure post-PMF B2B SaaS and AI startups
+        need to hit the one KPI that matters: customer research, an experiment engine, and a weekly testing rhythm,
+        engineered from first principles rather than recycled playbooks. Engagements range from a 1-week Growth
+        Diagnosis to ongoing fractional CMO leadership, and each is built to hand a working system back to the
+        founder's team.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Services and pricing</p>
+      <ul class="related-insights-list">
+        {pricingTiers.map((tier) => (
+          <li>
+            <strong>{tier.name}</strong> — {tier.priceFrom}, {tier.duration}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Industries served</p>
+      <ul class="related-insights-list">
+        {industriesServed.map((i) => <li>{i}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Track record</p>
+      <ul class="related-insights-list">
+        <li><strong>£18M+</strong> revenue influenced, aggregate across client and operator-side engagements</li>
+        <li><strong>£6M+</strong> paid acquisition spend managed</li>
+        <li><strong>20+</strong> startups supported</li>
+      </ul>
+      <p class="eyebrow" style="margin-top:1.5rem">Client roster</p>
+      <ul class="related-insights-list">
+        {proofClients.map((c) => (
+          <li>
+            <strong>{c.label}</strong> — {c.relationship}, {c.context}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Programme affiliations</p>
+      <ul class="related-insights-list">
+        {programmeAffiliations.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Identity links</p>
+      <ul class="related-insights-list">
+        <li><a class="card-link" href={siteConfig.linkedin} rel="noopener noreferrer" target="_blank">LinkedIn company page →</a></li>
+        <li><a class="card-link" href={siteConfig.siteUrl} rel="noopener noreferrer" target="_blank">wescalestartups.com →</a></li>
+        <li><a class="card-link" href="/facts/daniel-johnson">Founder: Daniel Johnson →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <div class="grid-3">
+        {faqs.map((faq) => (
+          <article class="feature-card">
+            <h2>{faq.question}</h2>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related</p>
+      <ul class="related-insights-list">
+        <li><a class="card-link" href="/about">About We Scale Startups →</a></li>
+        <li><a class="card-link" href="/facts/daniel-johnson">Daniel Johnson — founder facts →</a></li>
+        <li><a class="card-link" href="/pricing">Pricing →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Talk to the team.</h2>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-facts-book">{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .facts-list {
+    margin: 0;
+    max-width: 44rem;
+    border-top: 1px solid var(--line);
+  }
+  .facts-row {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .facts-row dt {
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .facts-row dd {
+    margin: 0;
+    word-break: break-word;
+  }
+  @media (max-width: 40rem) {
+    .facts-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

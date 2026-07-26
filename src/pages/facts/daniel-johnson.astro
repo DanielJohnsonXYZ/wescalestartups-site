@@ -1,0 +1,222 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
+
+const path = "/facts/daniel-johnson";
+
+const quickFacts: Array<[string, string]> = [
+  ["Full name", "Daniel Johnson"],
+  ["Role", "Founder and Fractional CMO"],
+  ["Company", "We Scale Startups"],
+  ["Based in", "London, United Kingdom"],
+  ["Personal site", siteConfig.danielSite],
+  ["LinkedIn", siteConfig.founderLinkedin],
+  ["X / Twitter", siteConfig.founderTwitter],
+  ["Contact", `${siteConfig.siteUrl}${siteConfig.bookingUrl}`]
+];
+
+const identityLinks = [
+  { label: "LinkedIn", href: siteConfig.founderLinkedin },
+  { label: "X / Twitter", href: siteConfig.founderTwitter },
+  { label: "Personal site", href: siteConfig.danielSite },
+  { label: "GrowthMentor profile", href: siteConfig.growthMentor },
+  { label: "MentorCruise profile", href: siteConfig.mentorCruise },
+  { label: "We Scale Startups", href: siteConfig.siteUrl }
+];
+
+const faqs = [
+  {
+    question: "Who is Daniel Johnson?",
+    answer:
+      "Daniel Johnson is the founder and Fractional CMO of We Scale Startups, a London-based growth consultancy for post-PMF B2B SaaS and AI startups. He has operated inside SaaS, fintech, healthtech and EdTech startups for over 15 years, including two operator-side exits."
+  },
+  {
+    question: "What company did Daniel Johnson found?",
+    answer:
+      "Daniel Johnson founded We Scale Startups, a growth consultancy that builds acquisition systems and provides fractional CMO leadership for post-PMF startups from Seed to Series B."
+  },
+  {
+    question: "What is Daniel Johnson's track record?",
+    answer:
+      "Daniel Johnson has influenced £18M+ in revenue and managed £6M+ in paid acquisition spend across client and operator-side engagements. He has run 479+ founder sessions (4.93/5 rating on GrowthMentor) and holds a MentorCruise Top Mentor rating of 5.0/5 across 30+ reviews. He has advised 20+ startups and has two operator-side exits."
+  },
+  {
+    question: "What credentials and affiliations does Daniel Johnson have?",
+    answer:
+      "Daniel Johnson is a mentor for Google for Startups and Techstars, has guest lectured at Cambridge Judge Business School, and has delivered invited growth teaching at Imperial College London. He is also affiliated with the UK Space Agency startup ecosystem and General Assembly."
+  },
+  {
+    question: "Where is Daniel Johnson based?",
+    answer: "Daniel Johnson is based in London, United Kingdom, where We Scale Startups is headquartered."
+  },
+  {
+    question: "How can I contact Daniel Johnson?",
+    answer: `Daniel Johnson can be contacted via ${siteConfig.siteUrl}${siteConfig.bookingUrl} or through We Scale Startups' LinkedIn page.`
+  }
+];
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Facts", path: "/facts/daniel-johnson" },
+    { name: "Daniel Johnson", path }
+  ]),
+  buildFaqSchema(faqs)
+];
+---
+
+<BaseLayout
+  path={path}
+  title="Daniel Johnson — Facts | We Scale Startups"
+  description="Verified facts about Daniel Johnson: founder of We Scale Startups, fractional CMO, growth operator track record, credentials, and identity links."
+  metaRobots="index,follow,max-image-preview:large"
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Facts", path: "/facts/daniel-johnson" },
+    { name: "Daniel Johnson", path }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Founder facts</p>
+      <h1>Daniel Johnson</h1>
+      <p class="lede">
+        A reference page of verifiable facts about Daniel Johnson, founder of We Scale Startups. For narrative
+        background, see the <a href="/about/daniel">founder profile</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Quick facts</p>
+      <dl class="facts-list">
+        {quickFacts.map(([label, value]) => (
+          <div class="facts-row">
+            <dt>{label}</dt>
+            <dd>{value.startsWith("http") ? <a href={value} rel="noopener noreferrer" target="_blank">{value}</a> : value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Identity statement</p>
+      <p class="lead-copy">
+        Daniel Johnson is the founder and Fractional CMO of We Scale Startups. He has operated inside SaaS, fintech,
+        healthtech and EdTech startups for over 15 years, including two operator-side exits. He founded We Scale
+        Startups to provide the senior growth judgement early-stage founders otherwise lack: diagnosing the real
+        growth constraint, building the acquisition system, and transferring the operating rhythm to the founder's
+        team.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Track record</p>
+      <ul class="related-insights-list">
+        {canonicalProofMetrics.map((m) => (
+          <li>
+            <strong>{m.value}</strong> {m.label}
+            {"note" in m && m.note ? `, ${m.note}` : ""}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Credentials and affiliations</p>
+      <ul class="related-insights-list">
+        {founderStory.credentials.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Identity links</p>
+      <ul class="related-insights-list">
+        {identityLinks.map((link) => (
+          <li>
+            <a class="card-link" href={link.href} rel="noopener noreferrer" target="_blank">
+              {link.label} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <div class="grid-3">
+        {faqs.map((faq) => (
+          <article class="feature-card">
+            <h2>{faq.question}</h2>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Related</p>
+      <ul class="related-insights-list">
+        <li><a class="card-link" href="/about/daniel">Daniel Johnson — founder profile →</a></li>
+        <li><a class="card-link" href="/facts/we-scale-startups">We Scale Startups — company facts →</a></li>
+        <li><a class="card-link" href="/about">About We Scale Startups →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Talk to Daniel directly.</h2>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="daniel-facts-book">{siteConfig.bookingLabel} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .facts-list {
+    margin: 0;
+    max-width: 44rem;
+    border-top: 1px solid var(--line);
+  }
+  .facts-row {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .facts-row dt {
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .facts-row dd {
+    margin: 0;
+    word-break: break-word;
+  }
+  @media (max-width: 40rem) {
+    .facts-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

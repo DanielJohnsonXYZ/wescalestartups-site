@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../../site";
+---
+
+<BaseLayout
+  title="Your 90-Day Growth Experiment Planner | We Scale Startups"
+  description="Download the editable 90-Day Growth Experiment Planner and companion field guide."
+  path="/resources/90-day-growth-sprint-planner/thanks"
+  metaRobots="noindex,follow"
+  lastUpdated={false}
+  showAnnouncement={false}
+>
+  <section class="section section-hero">
+    <div class="shell">
+      <p class="eyebrow">Planner unlocked</p>
+      <h1>Your 90-day experiment system is ready.</h1>
+      <p class="lead">
+        Start with the workbook, then keep the short field guide beside you when you run the first planning session.
+        The first email contains the same links so you can return to them later.
+      </p>
+      <div class="download-grid">
+        <article class="download-card">
+          <p class="eyebrow">Editable workbook</p>
+          <h2>90-Day Growth Experiment Planner</h2>
+          <p>Five working sheets: planning dashboard, backlog, 13-week plan, weekly review, and decision log.</p>
+          <a
+            class="button button-dark"
+            href="/downloads/90-day-growth-experiment-planner.xlsx"
+            download
+            data-cta="download-90-day-growth-experiment-planner-xlsx"
+          >
+            Download the Excel planner →
+          </a>
+        </article>
+        <article class="download-card">
+          <p class="eyebrow">Companion guide</p>
+          <h2>Growth Experiment Field Guide</h2>
+          <p>Three concise pages on choosing the priority, writing hypotheses, using ICE, and making weekly decisions.</p>
+          <a
+            class="button button-light"
+            href="/downloads/90-day-growth-experiment-planner-guide.pdf"
+            download
+            data-cta="download-90-day-growth-experiment-planner-pdf"
+          >
+            Download the PDF guide →
+          </a>
+        </article>
+      </div>
+      <div class="next-step">
+        <p class="eyebrow">If the plan is still fuzzy</p>
+        <h2>Bring the priority and backlog to a 20-minute Growth Audit.</h2>
+        <p>We will pressure-test the constraint and the first experiment sequence. No pitch unless there is a genuine fit.</p>
+        <a class="btn btn-primary" href={siteConfig.bookingUrl} data-cta="planner-thanks-book-growth-audit">
+          Book the Growth Audit →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .download-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 760px) {
+    .download-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .download-card,
+  .next-step {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .download-card h2,
+  .next-step h2 { margin-bottom: 0.75rem; }
+  .download-card p:not(.eyebrow),
+  .next-step p:not(.eyebrow) { color: var(--muted); }
+  .download-card .button { margin-top: 1rem; }
+  .next-step {
+    background: color-mix(in srgb, var(--violet) 8%, var(--surface));
+    border-color: color-mix(in srgb, var(--violet) 30%, var(--line));
+  }
+  .next-step .btn { margin-top: 1rem; }
+</style>

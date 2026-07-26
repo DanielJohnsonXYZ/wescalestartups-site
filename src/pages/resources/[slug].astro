@@ -49,31 +49,32 @@ const magnetDetails: Record<string, {
     ]
   },
   "90-day-growth-sprint-planner": {
-    format: "Sprint planning worksheet · 60 minutes to complete",
-    bestFor: "Startup leadership teams preparing a quarter of focused growth work",
+    format: "Editable Excel planner + 3-page field guide · 60 minutes to set up",
+    bestFor: "Post-PMF startup teams that need a focused quarter of learning, not another channel list",
     whatYouGet: [
-      "Diagnosis input template, the questions to answer before you sequence experiments",
-      "Experiment backlog format with ICE scoring and decision rules",
-      "Weekly review rhythm template (Monday read, Wednesday ship, Friday decide)",
-      "Owner map, who owns each experiment and how it gets reviewed",
-      "Transfer checklist, what gets handed back to the team at the end of the quarter"
+      "Start Here dashboard for one priority, baseline, target, and progress",
+      "Experiment backlog with hypothesis prompts, ICE scoring, owners, metrics, and decision rules",
+      "13-week plan with dates that update from your chosen quarter start",
+      "Weekly review sheet built around keep, change, stop, or scale decisions",
+      "Decision log that turns a quarter of activity into reusable growth judgement",
+      "A concise PDF field guide with a worked B2B AI startup example"
     ],
     howToUse:
-      "Block 60 minutes with the founder + growth lead. Work through the diagnosis section first, then sequence experiments. The output is a one-page sprint plan you can execute against for the next 13 weeks.",
+      "Block 60 minutes with the founder and growth owner. Set one measurable commercial priority, rank only the experiments the team can interpret, then protect a 30-minute Friday decision review for all 13 weeks.",
     whoItsNotFor:
-      "Solo founders without an internal owner to receive the system. The planner assumes there's at least one person inside the company who will run the sprint.",
+      "Teams looking for a generic library of growth tactics. The planner is deliberately opinionated: one priority, a small experiment portfolio, and a decision every week.",
     faq: [
       {
+        question: "What format is the planner?",
+        answer: "You get an editable Excel workbook with five working sheets plus a three-page PDF field guide. The email sequence helps you install it over the following two weeks."
+      },
+      {
         question: "Do I have to use the full 90 days?",
-        answer: "No. The structure works for 30, 60, or 90-day cycles. Most teams find 90 days is the right length to test, scale, and decide on a channel."
+        answer: "No. The structure works for shorter cycles, but 13 weeks is long enough to establish a baseline, run meaningful tests, and carry the learning into the next quarter."
       },
       {
-        question: "What if my team can't commit to weekly reviews?",
-        answer: "Bi-weekly works but the cycle slows. Weekly is the default because growth experiments compound only when decisions are made fast."
-      },
-      {
-        question: "Can WSS run the sprint with us?",
-        answer: "Yes, that's our 90-Day Growth Sprint engagement. The planner is the self-serve version of the same structure."
+        question: "What happens after I enter my email?",
+        answer: "You are taken straight to both downloads and receive five practical emails over 16 days. The first delivers the files; the remaining four help you choose a priority, use a worked example, avoid common failure modes, and pressure-test the plan."
       }
     ]
   },
@@ -299,6 +300,7 @@ if (!magnet || !details) {
 }
 
 const downloadPath = "downloadPath" in magnet ? magnet.downloadPath : undefined;
+const isGrowthExperimentPlanner = slug === "90-day-growth-sprint-planner";
 const otherMagnets = leadMagnets.filter((m) => m.id !== slug).slice(0, 3);
 
 const schemas = [
@@ -331,7 +333,15 @@ const layoutTitle =
       <h1>{magnet.title}</h1>
       <p class="lead">{magnet.description}</p>
       <div class="hero-cta">
-        {downloadPath ? (
+        {isGrowthExperimentPlanner ? (
+          <a
+            class="btn btn-primary"
+            href="#get-planner"
+            data-cta="magnet-get-90-day-growth-experiment-planner"
+          >
+            Get the planner + field guide →
+          </a>
+        ) : downloadPath ? (
           <a
             class="btn btn-primary"
             href={downloadPath}
@@ -346,17 +356,27 @@ const layoutTitle =
         </a>
       </div>
       <p class="hero-microcopy">
-        Instant download. Optional: leave your email below for the Growth Bottleneck note — no autoresponder theatre.
+        {isGrowthExperimentPlanner
+          ? "Free. The editable workbook and guide are available immediately after signup."
+          : "Instant download. Optional: leave your email below for the Growth Bottleneck note."}
       </p>
-      <EmailSignup
-        formId={`magnet-${slug}`}
-        heading="Want the biweekly growth note too?"
-        subtext="One practical note on pipeline, positioning, and founder-led systems."
-        buttonLabel="Get the note →"
-        sourceType="lead_magnet"
-        leadMagnet={slug}
-        sourcePage={`/resources/${slug}`}
-      />
+      <div id={isGrowthExperimentPlanner ? "get-planner" : undefined}>
+        <EmailSignup
+          formId={`magnet-${slug}`}
+          heading={isGrowthExperimentPlanner ? "Send me the 90-Day Growth Experiment Planner" : "Want the biweekly growth note too?"}
+          subtext={isGrowthExperimentPlanner
+            ? "Get the editable workbook, the concise field guide, and five practical emails that help you turn it into a working quarterly rhythm."
+            : "One practical note on pipeline, positioning, and founder-led systems."}
+          buttonLabel={isGrowthExperimentPlanner ? "Get the planner →" : "Get the note →"}
+          sourceType="lead_magnet"
+          leadMagnet={slug}
+          sourcePage={`/resources/${slug}`}
+          mauticFormId={isGrowthExperimentPlanner ? "3" : undefined}
+          finePrint={isGrowthExperimentPlanner
+            ? "Includes the five-email planner implementation series. Unsubscribe any time."
+            : "No spam. Unsubscribe any time."}
+        />
+      </div>
     </div>
   </section>
 

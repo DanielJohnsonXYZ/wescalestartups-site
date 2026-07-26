@@ -722,11 +722,11 @@ export const leadMagnets = [
   },
   {
     id: "90-day-growth-sprint-planner",
-    title: "90-Day Growth Sprint Planner",
-    audience: "Startup leadership teams",
-    description: "Map a quarter of tests, owners, decision rules, and reporting so the team stops running disconnected activity.",
+    title: "90-Day Growth Experiment Planner",
+    audience: "Post-PMF startup leadership teams",
+    description: "Turn one commercial priority into a 13-week sequence of experiments, owners, decision rules, and reusable learning.",
     href: "/resources/90-day-growth-sprint-planner",
-    downloadPath: "/downloads/guides/90-day-growth-sprint-planner.md"
+    downloadPath: undefined
   },
   {
     id: "vc-portfolio-growth-diagnosis",

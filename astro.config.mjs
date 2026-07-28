@@ -14,7 +14,7 @@ export default defineConfig({
     enabled: false
   },
   integrations: [
-    mdx(),
+    mdx({ gfm: true }),
     sentry({
       // Upload source maps only when a token is present (CI). Local builds skip it silently.
       // Create an org auth token in Sentry (Settings -> Auth Tokens), set it as the

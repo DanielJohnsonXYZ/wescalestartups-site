@@ -1,80 +1,157 @@
 ---
 title: "B2B SaaS Traction Can Hide Churn"
-description: "Early revenue can mask a broken retention model. Learn how to distinguish durable B2B SaaS traction from a costly acquisition-led traction trap."
-excerpt: "Strong early numbers feel like validation. Often they're just masking a retention problem that hasn't shown up in the metrics yet."
-tldr: "A B2B SaaS startup can show real early traction (paying customers, strong signup volume, even seven-figure revenue) while quietly building on a retention model that was never actually validated. The traction trap happens when founders read acquisition momentum as product-market fit, without checking whether customers stick around, why they leave when they do, or whether the people signing up are even the right buyers. The fix isn't more acquisition spend, it's a structured retention diagnostic run in parallel with growth: define the real ICP, build a voice-of-customer process before scaling, and treat early churn as data instead of noise."
+description: "Growth can be real and still be a trap. Four numbers that separate durable B2B SaaS traction from an acquisition-funded leak, with 2025 retention benchmarks."
+excerpt: "Strong early numbers feel like validation. Increasingly it's expansion revenue, not retention, holding the headline number up."
+tldr: "A B2B SaaS company can post real traction (paying customers, rising signups, seven-figure ARR) on top of a retention model nobody has tested. The trap isn't that founders ignore churn. It's that the aggregate numbers founders watch are mathematically incapable of showing it: new acquisition backfills the leak, and expansion revenue papers over gross churn. In Benchmarkit's 2025 survey, median gross revenue retention has slipped from 90% to 88% over three years while expansion has climbed to 40% of all new ARR, meaning the industry's headline retention number is increasingly held up by upsells rather than by customers staying. The fix is four specific numbers, run together, before the next acquisition push."
 publishedAt: 2026-07-24
+updatedAt: 2026-07-28
 author: "Daniel Johnson"
 tags: ["b2b-saas", "growth-systems", "gtm"]
 faqs:
   - question: "How do I know if my early traction is real or a traction trap?"
-    answer: "Look past top-line growth to two numbers: cohort retention curves (do customers from three months ago still use the product, or has that cohort quietly hollowed out?) and unprompted churn reasons (do you actually know why people leave, or are you guessing?). Real traction holds up when you segment by cohort and ask customers directly. A traction trap looks strong in aggregate and falls apart the moment you check either one."
-  - question: "Why do customers churn even when a B2B SaaS product is working as designed?"
-    answer: "Often because the product is solving a real problem for the wrong customer, or because it delivers a smaller, less urgent version of the value the buyer thought they were getting. A product can function exactly as intended and still churn heavily if it never becomes load-bearing in the customer's workflow, which usually traces back to who the acquisition channel brought in rather than what the product does."
+    answer: "Check three things aggregate growth can't show you. First, cohort retention curves: are customers from three months ago still active, or has that cohort hollowed out? Second, gross revenue retention alongside net; if NRR looks fine but GRR is falling, expansion is masking churn. Third, unprompted churn reasons from actual conversations. Real traction survives all three. A traction trap looks strong in aggregate and falls apart the moment you segment it."
+  - question: "What's the difference between gross and net revenue retention, and why does it matter here?"
+    answer: "Net revenue retention includes upsells, cross-sells and price increases; gross retention excludes them and can never exceed 100%. An NRR of 105% could be 90% GRR plus 15% expansion, or 70% GRR plus 35% expansion, the same headline number describing very different businesses. Since expansion now accounts for around 40% of all new ARR in B2B SaaS (Benchmarkit, 2025), reporting NRR without GRR hides more than it used to."
   - question: "Is high early churn normal for an early-stage B2B SaaS startup?"
-    answer: "Some churn is normal while a startup is still finding product-market fit. What separates normal early churn from a traction trap is whether the founder has a structured explanation for why each cohort left. Elevated churn with no voice-of-customer process behind it is a founder flying blind, not an expected part of the journey."
+    answer: "Some churn is normal pre-product-market-fit. ChartMogul's data puts top-quartile 90-day retention for new-customer cohorts at about 90% across ARR bands, rising to 98% for companies with an average sale price above $500 per month, so heavy churn inside the first quarter is a genuine outlier rather than a rite of passage. ChartMogul attributes low 90-day retention specifically to onboarding problems or acquisition of bad-fit customers. What separates normal early churn from a trap is whether you have a structured explanation for why each cohort left."
+  - question: "Why do customers churn even when a B2B SaaS product is working as designed?"
+    answer: "Usually because it solves a real problem for the wrong customer, or delivers a less urgent version of the value the buyer expected. A product can function exactly as intended and still churn heavily if it never becomes load-bearing in the customer's workflow, which usually traces back to who the acquisition channel brought in rather than what the product does."
   - question: "What's the difference between an acquisition problem and a retention problem?"
-    answer: "An acquisition problem means not enough of the right people are finding out about the product. A retention problem means the right volume of people are arriving, trying the product, and leaving anyway. Founders default to treating every growth stall as an acquisition problem because it's the more comfortable diagnosis; retention problems implicate the product and the ICP, which is a harder conversation."
+    answer: "An acquisition problem means not enough of the right people are finding you. A retention problem means the right volume arrives, tries the product, and leaves anyway. Founders default to the acquisition diagnosis because it's the more comfortable one; retention problems implicate the product and the ICP. The Max MRR calculation settles it quickly: if new MRR divided by your monthly cancellation rate sits near your current MRR, the ceiling is churn, and more acquisition won't move it."
   - question: "Should I keep spending on acquisition if churn is high?"
-    answer: "Not without first fixing the leak. Pouring more top-of-funnel spend into a broken retention model just increases the rate at which you burn cash to replace customers who were never going to stay, and it can mask the retention problem even further by keeping the top-line growth number moving while the underlying business gets worse."
+    answer: "Not without fixing the leak first. Benchmarkit's 2025 data puts median new-customer CAC at $2.00 of sales and marketing spend per $1 of new ARR, versus $1.00 for expansion ARR, so a dollar of revenue bought from a new logo costs roughly twice a dollar bought from an existing account. Replacing churned customers is the most expensive growth on the menu. Pouring spend into a broken retention model burns cash faster and masks the problem by keeping the topline moving."
   - question: "What's the fastest way to start diagnosing a possible traction trap?"
-    answer: "Pull cohort retention for your last three to six months of new customers and look at it separately from your aggregate growth chart. Then call five customers who churned in the last quarter and ask them directly, in their own words, why they stopped. Most founders have never done either exercise, and the answers are usually more specific and more fixable than the vague 'not the right time' explanation that shows up in exit surveys."
+    answer: "Two exercises, both doable in a week. Pull cohort retention for your last three to six months of new customers and look at it separately from your aggregate chart. Then call five customers who churned last quarter and ask, in their own words, why they stopped. Most founders have done neither, and the answers are usually more specific and more fixable than the 'not the right time' that shows up in exit surveys."
 ---
 
-The dashboard looks good. Signups are up, revenue crossed a milestone, maybe there's even a screenshot worth posting. Then, a few months later, a chunk of that same cohort has quietly gone quiet: canceled, downgraded, or just stopped logging in. The founder's instinct is to look for a new acquisition channel to replace what was lost. The number that actually explains what happened, cohort retention, was sitting in the data the entire time, uninspected.
+The dashboard looks good. Signups up, revenue past a milestone, a chart worth screenshotting. Four months later a chunk of that cohort has gone quiet: cancelled, downgraded, or simply stopped logging in. The instinct is to find a new channel to replace what was lost.
 
-This is the traction trap: real, measurable early growth that isn't validation of anything, because nobody checked whether the customers arriving were staying, or why the ones who left actually left.
+Here's the uncomfortable part: the number that explained it was in the data the whole time. Nobody looked, because the number founders *do* look at was still going up.
 
-## Growth and retention are answering two different questions
+That's the traction trap. Not the absence of growth. Real, measurable growth that isn't evidence of what everyone assumes it's evidence of.
 
-Acquisition metrics answer "can we get people to sign up or pay." Retention answers "did we actually solve a problem worth keeping." Early in a company's life, it's tempting to treat the first question as a proxy for the second, mostly because it's the number that moves fastest and feels the best to report. But a signup, or even a first payment, is a bet by the customer that the product will work out. Retention is the only honest scorecard for whether that bet paid off.
+## Why the topline chart cannot show you the leak
 
-The trap compounds because the two metrics can diverge for months before anyone notices. A founder watching monthly revenue or signup count can see real, sustained growth even while the underlying cohorts are hollowing out, because new acquisition is backfilling the losses faster than anyone is measuring them. The topline chart keeps climbing. The business underneath it is getting worse.
+Start with the arithmetic, because it's the part most founders have never actually run.
 
-### Three ways early traction hides a retention problem
+If you add a constant amount of new revenue each month and lose a constant *percentage* of your base, you have a hard ceiling. New revenue is linear. Churn is proportional to size. They converge, and growth stops. Jason Cohen calls the resulting number [Max MRR](https://longform.asmartbear.com/max-mrr/):
 
-**1. The acquisition channel was never bringing the right buyer.** A funnel can produce a healthy volume of signups or leads while quietly filling with people who were never going to be a durable customer, drawn in by an offer, a price point, or a message that resonated with the wrong audience. The top-of-funnel number looks like demand. It's actually a mismatch that shows up later as churn, refunds, or accounts that never activate, once the gap between why they signed up and what the product actually does for a real, paying use case becomes obvious.
+> **Max MRR = New MRR ÷ monthly cancellation rate**
 
-**2. Strong organic or word-of-mouth growth in one context doesn't transfer automatically.** A product that grows well in a specific market, channel, or use case can look ready to scale that exact motion elsewhere, when in fact the retention mechanics (habits, integrations, workflows) that made it stick were specific to that original context and were never rebuilt for the new one. The signup numbers can look identical in the new context. The conversion-to-retained-customer number tells a different story, because the thing that made people stay wasn't actually present.
+Cohen's worked example runs at $1,000 of new MRR a month and 5% cancellation, plateauing at $20,000. Scale it to something closer to a post-PMF business: at £10,000 of new MRR a month and 5% monthly cancellation, you plateau at £200,000 MRR. At 2% cancellation, the same acquisition engine reaches £500,000. Same marketing, same sales team, 2.5x the company.
 
-**3. Nobody built a process for finding out why customers leave.** This is the quiet one. Founders, especially technical ones, are often deeply attached to what they built and can describe its features in detail, without having a systematic way of finding out what job the customer actually hired the product to do, or why they stopped. Product feedback tends to arrive as feature requests, which are easy to act on and rarely address the real reason for churn. The result is a founder who is busy and responsive to feedback, and still losing the same type of customer for the same underlying reason every quarter.
+Two things follow, and both explain why the trap is so hard to see from the inside.
 
-## A diagnostic for telling real traction from a trap
+**One: the ceiling arrives long before the market runs out.** Founders reach for market-size or channel explanations when growth stalls. Usually it's churn, and it was churn all along, it just wasn't the dominant term in the equation until the base got big enough.
 
-Run this before your next round of acquisition spend, a fundraising conversation, or a "let's expand to a new segment" decision:
+**Two: revenue is a lagging indicator of the thing that matters.** Cohen's analysis of [Buffer's public metrics](https://buffer.com/metrics) shows this cleanly. Buffer ran roughly 6% monthly cancellation from 2014 to 2020, accelerating new MRR the whole time and growing linearly to about $140k MRR. Cancellation never improved. Then it ticked up another point to 7%, and revenue *fell*, from $140k to $90k, even though new MRR was still large. The ceiling had dropped below the business. In 2023 Joel Gascoigne reset the company around a narrower ideal customer and a pricing model that fitted them; new MRR rose, cancellation eased slightly, and growth restarted. Had Buffer instead cut cancellation from 8% to 3% over 2014 to 2019, Cohen's model puts revenue at roughly double where it landed.
 
-**1. Pull cohort retention, not aggregate growth.** Take your last four to six monthly cohorts of new customers and track what percentage of each one is still active and paying at 30, 60, and 90 days. If your aggregate revenue or user count is growing but cohort retention is flat or declining, the growth is coming entirely from new acquisition covering for a leak, not from a product that's getting stickier.
+Nothing about Buffer's monthly growth chart, in the good years, said "this ends at $140k." Max MRR said it years ahead.
 
-**2. Talk to five customers who churned last quarter, and ask "why," not "how was it."** Not an exit survey with checkboxes, an actual conversation. You're listening for the emotional job the product failed to do, not a list of missing features. A customer who says "it was fine, just didn't fit right now" is usually protecting your feelings, not giving you the real answer; keep asking until you get something specific.
+## The 2026 version of the trap: expansion is doing the hiding
 
-**3. Separate signups by acquisition source and check retention by source.** If one channel is producing high volume but disproportionately low retention, that channel isn't a growth engine, it's a treadmill: it requires constant new spend to replace the customers it churns, and every dollar you put into scaling it further makes the underlying problem larger, not smaller.
+The traditional framing is that new acquisition masks churn. That's still true. But there's a second mask, and it's the one doing most of the work right now.
 
-**4. Ask whether this exact retention model has been tested in a new context before scaling it there.** Expansion into a new market, segment, or channel inherits none of the retention mechanics that made the original motion work unless you deliberately rebuild them. Treat a new context as an unproven hypothesis, not a scaled copy of what already worked.
+Net revenue retention includes upsells, cross-sells and price increases. Gross revenue retention doesn't. So an NRR of 105% can be 90% GRR plus 15% expansion, a healthy business, or 70% GRR plus 35% expansion, a business bleeding customers and covering it with the ones that remain. **From the NRR number alone, these are indistinguishable.**
 
-**5. Check whether "no complaints" is being mistaken for "retention is fine."** Silence from customers is not validation. If you don't have a structured way of hearing from the ones who are quietly disengaging before they cancel, the absence of complaints just means you haven't built a way to hear them yet.
+And the mask is getting heavier. [Benchmarkit's 2025 report](https://www.benchmarkit.ai/2025benchmarks) found:
 
-## What this looks like in practice
+- Median NRR at 101%, down from 105% in 2021 and 103% in 2022 (n=228)
+- Median GRR sliding from 90% to 88% across three years (n=225), though Benchmarkit notes this could partly reflect selection bias in who responded
+- Expansion ARR rising to **40% of all new ARR**, up five percentage points in a single year, and above 50% for companies over $50M ARR (n=81)
 
-Take an anonymized composite drawn from a recurring pattern across early-stage consumer-adjacent and marketplace startups: a subscription app with a strong, loyal user base in its home market and real, defensible seven-figure run-rate revenue. The growth chart looked healthy. Underneath it, weekly churn was running above 30%, and customer acquisition cost on paid channels had crept past the annual value of a subscriber, quietly offset by organic and word-of-mouth signups that made the blended numbers look fine. When the team tested expansion into a new geographic market, using the same paid channels and the same product, signup volume matched the home market almost exactly. Conversion to an active, paying subscriber came in at roughly a sixth of the target, because the specific retention mechanics that made the product sticky at home, built over years of organic trust and habit, had never been rebuilt for a market with none of that context. The lesson wasn't "the product doesn't travel." It was that nobody had separated "people will sign up" from "people will stay" until the expansion forced the question.
+Both retention numbers have softened by roughly the same amount. What's changed underneath is the mix: a growing share of the revenue holding NRR near 100% is coming from selling more to existing accounts rather than from those accounts staying. Benchmarkit's own read is that companies are increasing their dependence on expansion ARR. A board deck showing NRR alone in 2026 is therefore showing less than the same slide did in 2021.
 
-A second, related pattern: a marketplace-style product generating a strong daily volume of new signups through performance marketing, with the majority of those signups never converting into a completed transaction. The acquisition number looked like proof of demand. It was actually proof that the ad creative and targeting were attracting people looking for something adjacent to, but not actually, what the marketplace offered, a mismatch invisible in the top-of-funnel metrics and only visible once someone checked completion rate by source.
+There's a cost angle too. Benchmarkit puts the median new-customer CAC ratio at **$2.00 of sales and marketing spend per $1 of new ARR** (bottom quartile: $2.82, n=73), against **$1.00** for expansion ARR (n=21, and very few companies measure this at all). Buying a dollar of revenue from a new logo costs roughly twice what buying it from an existing account does. Which makes replacing churned customers the most expensive growth available, and it's where most early-stage budgets go first.
+
+## Where your numbers should actually sit
+
+Benchmarks are only useful segmented by contract value; a $20/month product and a $250k/year product have almost nothing in common. Two reference points.
+
+Annual revenue retention by ACV, from [SaaS Capital's 2025 survey of private B2B SaaS](https://www.saas-capital.com/blog-posts/what-is-a-good-retention-rate-for-a-private-saas-company/):
+
+| ACV band | Median NRR | Top quartile | Bottom quartile |
+|---|---|---|---|
+| $25k–$50k | 102% | 111% | 97% |
+
+Higher ACV correlates with higher NRR and, at the top end, higher GRR: longer sales cycles, real implementation, dedicated account management. The practical implication is that if you sell below $25k ACV, you should judge yourself against the low end of the gradient. An NRR near 100% down there is a different achievement to an NRR near 100% at enterprise pricing.
+
+New-customer cohort retention, from [ChartMogul's SaaS Retention Report](https://chartmogul.com/reports/saas-retention-report/) across 2,100+ SaaS businesses:
+
+| Cohort age | Top quartile, any ARR | Top quartile, ASP >$500/mo | Top quartile, ASP &lt;$10/mo |
+|---|---|---|---|
+| 3 months | 90% | 98% | 87% |
+| 12 months | 70% | — | — |
+
+Two details in that data are worth more than the headline numbers.
+
+First, ChartMogul's own read: *"A low retention rate in the first 3 months signals issues with onboarding or acquisition (i.e. acquisition of bad-fit customers)."* Ninety-day churn is rarely a product problem. It's a targeting problem or an activation problem, and those get fixed in different places.
+
+Second, the shape of the curve. Retention decays exponentially through month 11, then drops sharply in months 11 and 12 as annual plans come up for renewal. If you sell annual contracts and only look at monthly logo churn, your first eleven months look reassuring and your renewal cliff is invisible until it arrives.
+
+*ChartMogul's 2023 report draws on cohorts from January 2021 to December 2022. Since industry GRR has softened since, treat these levels as a generous benchmark rather than a current one. The shape of the curve is the durable part.*
+
+## The Traction Trap Test: four numbers, run together
+
+None of these work alone. That's the point: the trap survives precisely because each number, viewed in isolation, has an innocent explanation.
+
+| # | Pull this | Passing | Failing |
+|---|---|---|---|
+| 1 | **Cohort retention** at 30/60/90 days for your last 4–6 monthly cohorts | Curves flat or improving cohort over cohort | Aggregate revenue rising while cohort curves flatten or decline |
+| 2 | **GRR alongside NRR**, same period | Gap under ~10 points; GRR carrying the number | NRR healthy only because expansion is wide; GRR falling |
+| 3 | **Retention split by acquisition source** | Retention broadly consistent across channels | One high-volume channel materially below the rest |
+| 4 | **Max MRR** (new MRR ÷ monthly cancellation) | Ceiling comfortably above your 24-month plan | Current MRR approaching the ceiling |
+
+**1. Cohort retention, not aggregate growth.** Take your last four to six monthly cohorts and track what share of each is still active and paying at 30, 60 and 90 days. If total revenue is growing while those curves are flat or declining, growth is coming entirely from new acquisition covering a leak, not from a product getting stickier.
+
+**2. GRR next to NRR, every time.** If you only report one retention number, report gross. Net without gross tells you the business is holding together; it doesn't tell you whether it's holding together because customers stay or because a handful of accounts keep buying more. Those need completely different responses.
+
+**3. Retention by acquisition source.** A channel producing high volume and disproportionately low retention isn't a growth engine, it's a treadmill: it needs constant spend to replace what it churns, and at $2.00 of CAC per $1 of new ARR, scaling it makes the hole bigger, not smaller. This is also the single fastest diagnostic most teams have never run. The data is usually already sitting in the CRM, just never joined up.
+
+**4. Max MRR.** Run the division. If current MRR is within striking distance of the ceiling, no acquisition plan will fix it, because you're optimising the numerator of a fraction whose denominator is the problem.
+
+## Then talk to five people who left
+
+The numbers tell you *that*. They don't tell you *why*, and the why is where the fix lives.
+
+Not an exit survey with checkboxes, an actual conversation with five customers who churned last quarter. You're listening for the job the product failed to do, not a list of missing features. Feature requests are easy to act on and rarely address the real reason someone left.
+
+Two reasons this is worth the discomfort.
+
+Bain surveyed 362 companies and found **80% believed they delivered a superior experience to customers. Asked directly, customers said 8% of companies actually did.** That's [the delivery gap](https://media.bain.com/bainweb/PDFs/cms/hotTopics/closingdeliverygap.pdf), and it isn't a gap in effort. Over 95% of the management teams Bain surveyed described themselves as customer-focused. It's a gap in *knowing*, and it doesn't close on its own.
+
+And Fred Reichheld's HBR work on defection makes the structural point: companies fail to learn from churn not because the lessons aren't there, but because [defection is unpleasant to study, hard to define, and career-hazardous to analyse honestly](https://www.bain.com/insights/learning-from-customer-defections/). The information exists. The process for extracting it usually doesn't.
+
+Which is why "nobody's complaining" means nothing. Most churned customers never complain on the way out. Absence of complaint is absence of a listening mechanism, not evidence of satisfaction.
 
 ## Common mistakes founders make with the traction trap
 
-**Reading revenue or signup growth as product-market fit validation on its own.** Growth is necessary evidence, not sufficient evidence. It has to be checked against retention by cohort before it means what founders want it to mean.
+**Reading growth as product-market fit.** Growth is necessary evidence, not sufficient evidence. It has to be checked against cohort retention before it means what you want it to mean.
 
-**Treating churn as a support or product-polish issue instead of a diagnostic signal.** Elevated churn is data about who you're attracting and what job they hired you for. Routing it to a support backlog instead of a structured review buries the one number most likely to explain what's actually wrong.
+**Reporting NRR without GRR.** With expansion now supplying 40% of new ARR industry-wide, NRR alone is a materially weaker signal than it was five years ago.
 
-**Scaling an acquisition channel before checking its retention rate.** More volume from a channel that produces poor retention doesn't fix the leak, it accelerates the rate at which you're burning cash to replace customers who were never going to stay.
+**Treating churn as a support ticket.** Elevated churn is data about who you're attracting and what they hired you for. Routed to a support backlog, it buries the one number most likely to explain what's wrong.
 
-**Assuming a retention model transfers to a new market or segment untested.** The habits, trust, and workflows that made a product sticky in its original context don't travel with the signup form. Treat every expansion as a fresh retention hypothesis.
+**Scaling a channel before checking its retention.** More volume from a low-retention channel doesn't fix the leak. At a $2.00 CAC ratio, it accelerates the cash burn required to replace people who were never going to stay.
 
-**Mistaking the absence of complaints for the presence of satisfaction.** Most churned customers don't complain on the way out. If there's no structured process for hearing from disengaging customers before they leave, "nobody's complaining" is not evidence anything is fine.
+**Assuming retention transfers to a new market.** The habits, trust and workflows that made a product sticky in its first context don't travel with the signup form. Buffer's 2023 strategy reset went the other way, narrowing back to the customer the product actually fitted rather than reaching for new markets. Treat every expansion as a fresh retention hypothesis.
 
 ## The takeaway
 
-Early traction is real information, but it's only answering the acquisition question. Before it becomes the story you tell investors, your team, or yourself about why the business is working, check it against cohort retention and a handful of honest conversations with the customers who left. The founders who catch a traction trap early treat growth and retention as two separate questions that both need answering; the ones who get caught by it only found out the two had diverged after a year of acquisition spend built on top of a leak nobody measured.
+Early traction is real information. It's just only answering the acquisition question.
 
-This matters even more once you've fixed who's coming in the door: a [tightly defined ICP](/insights/define-icp-by-mindset-not-demographics) makes the retention diagnostic sharper, because you're checking whether the right people are staying, not just whether people in general are. And it connects directly to activation: if [buyers never reach real time-to-value](/insights/b2b-saas-pilot-time-to-value) in the first place, they were never going to be a retention story either.
+Before it becomes the story you tell investors, your team or yourself, put it next to four numbers, cohort curves, gross retention alongside net, retention by source, and your Max MRR ceiling, and five honest conversations with people who left. That's a week of work. It's considerably cheaper than a year of acquisition spend layered on top of a leak nobody measured.
 
-If your growth numbers look good and you're not fully sure whether retention underneath them would hold up to a cohort-level check, [talk to us about a growth diagnosis](/contact) before the next acquisition push papers over a leak that's still there.
+This gets sharper once you've fixed who's coming in the door: a [tightly defined ICP](/insights/define-icp-by-mindset-not-demographics) means you're checking whether the *right* people stay, not whether people in general do. And it connects directly to activation: if [buyers never reach real time-to-value](/insights/b2b-saas-pilot-time-to-value), the 90-day cohort number was decided before they ever opened the product.
+
+If your growth numbers look good and you're not certain retention underneath them would survive a cohort-level check, [start with a growth diagnosis](/services/growth-diagnosis) before the next acquisition push papers over a leak that's still there.
+
+## Sources
+
+- Jason Cohen, [Max MRR: Your growth ceiling](https://longform.asmartbear.com/max-mrr/), A Smart Bear, July 2025 — growth-ceiling formula and Buffer analysis
+- [Buffer public metrics](https://buffer.com/metrics) — underlying MRR and cancellation data
+- Benchmarkit, [2025 B2B SaaS Performance Metrics Benchmarks](https://www.benchmarkit.ai/2025benchmarks), May 2025 — GRR (n=225), NRR (n=228), expansion ARR share (n=81), new CAC ratio (n=73), expansion CAC ratio (n=21), drawn from 583 total survey participants
+- SaaS Capital, [What is a Good Retention Rate for a Private SaaS Company in 2025?](https://www.saas-capital.com/blog-posts/what-is-a-good-retention-rate-for-a-private-saas-company/), September 2025 — retention by ACV
+- ChartMogul, [SaaS Retention Report](https://chartmogul.com/reports/saas-retention-report/), 2,100+ SaaS businesses — new-business cohort retention curves
+- Allen, Reichheld, Hamilton and Markey, [Closing the delivery gap](https://media.bain.com/bainweb/PDFs/cms/hotTopics/closingdeliverygap.pdf), Bain &amp; Company, 2005, n=362 — the 80%/8% delivery gap
+- Fred Reichheld, [Learning from Customer Defections](https://www.bain.com/insights/learning-from-customer-defections/), Harvard Business Review, March 1996 — why companies fail to learn from churn

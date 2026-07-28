@@ -2687,6 +2687,71 @@ textarea:focus-visible {
   margin-top: 3rem;
 }
 
+/* --- Article prose tables (markdown/GFM) --- */
+.article-body table {
+  width: 100%;
+  margin: 1.75rem 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow: hidden;
+  background: var(--surface);
+  font-size: 0.95rem;
+}
+
+.article-body thead th {
+  border-bottom: 1px solid var(--line-strong);
+  padding: 0.8rem 1rem;
+  color: var(--ink);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.article-body tbody tr {
+  border-bottom: 1px solid var(--line);
+}
+
+.article-body tbody tr:last-child {
+  border-bottom: none;
+}
+
+.article-body tbody td {
+  padding: 0.8rem 1rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  vertical-align: top;
+  color: var(--muted);
+}
+
+.article-body tbody td:first-child {
+  color: var(--ink);
+}
+
+.article-body tbody td strong {
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .article-body table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .article-body tbody td,
+  .article-body thead th {
+    white-space: normal;
+    min-width: 8.5rem;
+  }
+}
+
 /* --- WSS vs Agency table --- */
 .vs-agency-section {
   padding-top: 3rem;

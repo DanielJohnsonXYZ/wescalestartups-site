@@ -61,7 +61,9 @@ const pressSchema = [
       <p class="eyebrow">Company press kit</p>
       <h1 id="press-kit-heading">Official press information for We Scale Startups.</h1>
       <p class="press-hero-deck">
-        For accurate company descriptions, proof, and media assets. Podcast, speaking, and expert commentary:{" "}
+        For accurate company descriptions, proof, and media assets. Company show:{" "}
+        <a href="/podcast">{siteConfig.podcastName}</a>
+        {" "}({siteConfig.podcastYoutubeHandle}). Podcast guest pitches, speaking, and expert commentary:{" "}
         <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">{siteConfig.founderName}&rsquo;s media kit</a>.
       </p>
       <div class="hero-actions press-hero-actions">
@@ -187,7 +189,9 @@ const pressSchema = [
       <article class="content-block" style="margin-top: 1rem; max-width: 62ch;">
         <p>{founderBio}</p>
         <p>
-          For podcast, speaking, or expert commentary requests, see{" "}
+          Daniel hosts{" "}
+          <a href="/podcast">{siteConfig.podcastName}</a>
+          {" "}({siteConfig.podcastYoutubeHandle}). For guest pitches on other shows, speaking, or expert commentary, see{" "}
           <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">Daniel Johnson&apos;s media kit</a>.
         </p>
       </article>

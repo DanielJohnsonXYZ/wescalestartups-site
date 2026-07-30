@@ -30,7 +30,7 @@ const episodeSchema = {
   datePublished: e.publishedAt.toISOString().slice(0, 10),
   partOfSeries: {
     "@type": "PodcastSeries",
-    name: "How Startups Win With AI",
+    name: siteConfig.podcastName,
     url: absoluteUrl("/podcast")
   },
   ...(e.youtubeId
@@ -53,7 +53,7 @@ const breadcrumb = buildBreadcrumbSchema([
 
 <BaseLayout
   path={path}
-  title={`${e.title} | How Startups Win With AI`}
+  title={`${e.title} | ${siteConfig.podcastName}`}
   description={e.summary.slice(0, 155)}
   schema={[breadcrumb, episodeSchema]}
   breadcrumbItems={[

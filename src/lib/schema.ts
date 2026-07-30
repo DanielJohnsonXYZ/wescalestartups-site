@@ -74,6 +74,7 @@ export function buildOrganizationSchema() {
       siteConfig.linkedin,
       siteConfig.danielSite,
       siteConfig.podcastUrl,
+      siteConfig.podcastYoutubeUrl,
       siteConfig.growthMentor,
       siteConfig.mentorCruise,
       siteConfig.founderLinkedin

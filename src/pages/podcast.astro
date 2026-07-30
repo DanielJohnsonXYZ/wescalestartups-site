@@ -7,25 +7,28 @@ import { siteConfig } from "../site";
 
 const podcastFaqs = [
   {
-    question: "What is How Startups Win With AI about?",
-    answer: "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies. Less hype, more what's actually working."
+    question: `What is ${siteConfig.podcastName} about?`,
+    answer:
+      "AI is rewriting the startup growth playbook. The show explores what that means in practice: which old growth assumptions are breaking, what AI makes possible, what remains uniquely human, and what startup leaders should do differently. Not another channel about AI tools or productivity hacks."
   },
   {
     question: "Who is the host?",
-    answer: "Daniel Johnson, founder of We Scale Startups. Daniel works with post-PMF B2B SaaS and AI startups on growth strategy, experimentation, and practical AI adoption."
+    answer:
+      "Daniel Johnson, founder of We Scale Startups. Daniel works with post-PMF B2B SaaS and AI startups on growth strategy, experimentation, and practical AI adoption."
   },
   {
-    question: "Where can I listen?",
-    answer:
-      "The show is launching soon. Spotify, Apple Podcasts, and YouTube links will go live with episode one, we are not publishing placeholder directory URLs. Join the list on this page for a single note when the feed is ready."
+    question: "Where can I watch or listen?",
+    answer: `Subscribe on YouTube at ${siteConfig.podcastYoutubeHandle}. Spotify and Apple Podcasts will go live with episode one. Join ${siteConfig.newsletterName} on this site if you want one email when the audio feed is ready.`
   },
   {
     question: "Can I apply to be a guest?",
-    answer: "Yes. If you're a founder or operator with a practical AI growth story, apply via email or the guest application page. We look for real examples, honest lessons, and useful takeaways."
+    answer:
+      "Yes. If you're a founder, marketer, investor, or operator with a practical perspective on how AI is changing growth, apply via the guest application page. We look for real examples, honest lessons, and useful takeaways."
   },
   {
     question: "How does this relate to WSS?",
-    answer: "The podcast is part of how WSS shares practical thinking on AI and growth. Commercial work still runs through diagnosis and engagements on this site."
+    answer:
+      "The podcast is part of how WSS shares practical thinking on AI and growth. Commercial work still runs through diagnosis and engagements on this site."
   }
 ];
 
@@ -33,25 +36,44 @@ const podcastSeriesSchema = siteConfig.podcastLive
   ? {
       "@context": "https://schema.org",
       "@type": "PodcastSeries",
-      name: "How Startups Win With AI",
-      description:
-        "Smart conversations on how ambitious startups use AI to grow faster, save time, and build stronger companies.",
+      name: siteConfig.podcastName,
+      description: siteConfig.podcastDescription,
       url: absoluteUrl("/podcast"),
       author: {
         "@type": "Organization",
         "@id": `${siteConfig.siteUrl}/#organization`
-      }
+      },
+      sameAs: [siteConfig.podcastYoutubeUrl, siteConfig.podcastYoutubeChannelUrl]
     }
   : null;
 
 const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [podcastSeriesSchema] : [])];
+
+const showThemes = [
+  {
+    title: "Breaking assumptions",
+    body: "Which old growth assumptions no longer hold when AI changes how companies build, sell, and compete."
+  },
+  {
+    title: "What AI makes possible",
+    body: "Practical shifts in products, customer understanding, content, decisions, and team structure."
+  },
+  {
+    title: "What stays human",
+    body: "Judgment, trust, taste, and the advantages that do not disappear when tools get cheaper."
+  },
+  {
+    title: "What leaders do differently",
+    body: "How founders and operators should adapt the growth playbook, without chasing every new tactic."
+  }
+];
 ---
 
 <BaseLayout
   path="/podcast"
-  title="How Startups Win With AI | We Scale Startups"
-  description="How ambitious startups use AI to grow faster and build stronger companies. Hosted by Daniel Johnson, founder of We Scale Startups."
-  keywords="startup podcast, AI growth, startup AI adoption, founder interviews, B2B SaaS podcast, growth strategies"
+  title={`${siteConfig.podcastName} | We Scale Startups`}
+  description={siteConfig.podcastDescription}
+  keywords="Luck Doesn't Scale, startup podcast, AI growth, startup AI adoption, founder interviews, B2B SaaS podcast, growth playbook"
   schema={podcastSchemas}
   lastUpdated={siteConfig.lastUpdated}
   metaRobots={siteConfig.podcastLive ? "index,follow,max-image-preview:large" : "noindex,follow"}
@@ -60,36 +82,55 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
   <section class="page-hero podcast-hero">
     <div class="shell">
       <p class="eyebrow">Podcast</p>
-      <h1>How Startups Win With AI</h1>
-      <p class="podcast-tagline">Smart conversations on growth, speed, and what's actually working.</p>
+      <h1>{siteConfig.podcastName}</h1>
+      <p class="podcast-tagline">{siteConfig.podcastTagline}</p>
       <p class="podcast-description">
-        The podcast for founders and operators who want practical AI adoption stories, not hype, not tool lists, just what's actually working inside ambitious startups.
+        It is changing how companies build products, understand customers, create content, make decisions, structure teams and compete.
+        {siteConfig.podcastName} explores what this means in practice, hosted by Daniel Johnson, founder of We Scale Startups.
       </p>
       <div class="hero-actions podcast-cta-group">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="podcast-book">
-          {siteConfig.bookingLabel}
+        <a
+          class="button button-brand"
+          href={siteConfig.podcastYoutubeUrl}
+          target="_blank"
+          rel="noopener"
+          data-cta="podcast-youtube"
+        >
+          Subscribe on YouTube →
         </a>
         <a class="button button-light" href="/podcast-guest-application" data-cta="podcast-guest-page">
-          Podcast guest application →
+          Apply as a guest →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- LAUNCH LIST -->
+  <!-- SUBSCRIBE -->
   <section class="section section-alt podcast-subscribe">
     <div class="shell">
-      <p class="eyebrow">Launching soon</p>
-      <h2>Spotify, Apple Podcasts, and YouTube will go live with episode one.</h2>
+      <p class="eyebrow">Watch &amp; follow</p>
+      <h2>Subscribe on YouTube now. Audio directories follow with episode one.</h2>
       <p class="lede">
-        We are not linking generic directory URLs before the feed exists. Join <strong>{siteConfig.newsletterName}</strong> for one email when the show is live, or book a diagnostic if you want help with growth systems now.
+        The channel is live at <strong>{siteConfig.podcastYoutubeHandle}</strong>. Spotify and Apple Podcasts will go live with episode one, we are not publishing placeholder directory URLs. Prefer email? Join <strong>{siteConfig.newsletterName}</strong> for one note when the feed is ready.
       </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.scorecardUrl} data-cta="podcast-scorecard">
-          {siteConfig.scorecardLabel} →
+      <div class="subscribe-buttons">
+        <a
+          class="subscribe-btn"
+          href={siteConfig.podcastYoutubeUrl}
+          target="_blank"
+          rel="noopener"
+          data-cta="podcast-youtube-card"
+        >
+          <strong>YouTube</strong>
+          <span>{siteConfig.podcastYoutubeHandle} · subscribe for new episodes</span>
         </a>
-        <a class="button button-light" href="/resources" data-cta="podcast-resources">
-          Resources →
+        <a class="subscribe-btn" href="/newsletter" data-cta="podcast-newsletter">
+          <strong>{siteConfig.newsletterName}</strong>
+          <span>One email when the audio feed launches</span>
+        </a>
+        <a class="subscribe-btn" href="/podcast-guest-application" data-cta="podcast-guest-card">
+          <strong>Guest application</strong>
+          <span>Founders, marketers, investors, operators</span>
         </a>
       </div>
     </div>
@@ -109,27 +150,17 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
   <section class="section">
     <div class="shell">
       <SectionIntro
-        eyebrow="What we cover"
-        title="Less hype. More useful advantage."
-        body="Each episode explores how startups are using AI in growth, marketing, operations, and decision-making, with honest lessons on what worked and what didn't."
+        eyebrow="What we examine"
+        title="An ongoing investigation into how startup growth itself is changing."
+        body="The show brings together founders, marketers, investors and operators. This is not another channel about AI tools or productivity hacks."
       />
       <div class="podcast-pillars">
-        <article class="pillar-card">
-          <h3>Growth</h3>
-          <p>How startups use AI to create demand, improve acquisition, sharpen positioning, and run better campaigns.</p>
-        </article>
-        <article class="pillar-card">
-          <h3>Speed</h3>
-          <p>How lean teams use AI to move faster without adding headcount, research, synthesis, iteration.</p>
-        </article>
-        <article class="pillar-card">
-          <h3>Better Decisions</h3>
-          <p>How founders and operators use AI to think more clearly and make better commercial calls.</p>
-        </article>
-        <article class="pillar-card">
-          <h3>What Not To Do</h3>
-          <p>Honest conversations about what's overhyped, distracting, or not worth the time.</p>
-        </article>
+        {showThemes.map((theme) => (
+          <article class="pillar-card">
+            <h3>{theme.title}</h3>
+            <p>{theme.body}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -139,21 +170,21 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
     <div class="shell">
       <SectionIntro
         eyebrow="Audience"
-        title="Built for startup founders and operators."
-        body="If you're building a B2B SaaS or AI company and want practical AI adoption stories, this show is for you."
+        title="Built for people who run growth in ambitious startups."
+        body="If you care about what still works, what is disappearing, and what the new playbook might look like, this show is for you."
       />
       <div class="audience-grid">
         <article class="audience-card">
-          <h3>Startup Founders</h3>
-          <p>Thinking: "We should be growing faster with AI."</p>
+          <h3>Startup founders</h3>
+          <p>Thinking: "AI changed the game, what should we actually do differently?"</p>
         </article>
         <article class="audience-card">
-          <h3>Growth Leaders</h3>
-          <p>Thinking: "How are other startups actually using AI well?"</p>
+          <h3>Marketers &amp; growth leaders</h3>
+          <p>Thinking: "Which advantages are disappearing, and which ones are still ours?"</p>
         </article>
         <article class="audience-card">
-          <h3>Operators</h3>
-          <p>Thinking: "How do we use AI without becoming generic?"</p>
+          <h3>Investors &amp; operators</h3>
+          <p>Thinking: "What remains uniquely human when every team has the same tools?"</p>
         </article>
       </div>
     </div>
@@ -164,19 +195,13 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
     <div class="shell">
       <SectionIntro
         eyebrow="Guest applications"
-        title="Have a practical AI growth story?"
-        body="If you're a founder or operator with honest lessons on using AI inside a startup, apply to be a guest."
+        title="Have a practical perspective on AI and growth?"
+        body="If you're a founder, marketer, investor, or operator with honest lessons on how startup growth is changing, apply to be a guest."
       />
       <div class="hero-actions">
-        <!--email_off-->
-        <a
-          class="button button-brand"
-          href={`mailto:${siteConfig.email}?subject=Podcast%20Guest%20Application`}
-          data-cta="podcast-guest"
-        >
+        <a class="button button-brand" href="/podcast-guest-application" data-cta="podcast-guest">
           Apply to be a guest →
         </a>
-        <!--/email_off-->
         <a class="button button-light" href="/press" data-cta="podcast-press">
           Press kit
         </a>
@@ -230,7 +255,7 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
           Daniel is the founder of We Scale Startups, where he helps post-PMF B2B SaaS and AI startups build repeatable growth systems. He mentors founders through Google for Startups, Techstars, and GrowthMentor (479+ sessions, ★4.93/5).
         </p>
         <p>
-          The podcast is where Daniel explores how ambitious startups are using AI in practical, commercially useful ways, less hype, more what's actually working.
+          {siteConfig.podcastName} is where Daniel investigates how startup growth itself is changing: what still works, what is breaking, and what the new playbook might look like.
         </p>
         <div class="hero-actions">
           <a class="button button-dark" href={siteConfig.founderLinkedin} target="_blank" rel="noopener" data-cta="host-linkedin">
@@ -251,7 +276,7 @@ const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [
         <p class="eyebrow">Work with WSS</p>
         <h2>Turn AI advantage into a repeatable system.</h2>
         <p>
-          The podcast shows what's possible. WSS builds the growth system so your team can run it without founder heroics.
+          The podcast explores what is changing. WSS builds the growth system so your team can run it without founder heroics.
         </p>
       </div>
       <div class="hero-actions">

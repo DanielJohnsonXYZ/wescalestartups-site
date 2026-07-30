@@ -26,12 +26,13 @@ const guestFields = [
   { name: "email", label: "Email", type: "email" as const, required: true, autocomplete: "email" }
 ];
 
-const suggestedCopy = "Want to be a guest? We are looking for founders, operators, and growth leaders with practical examples of how AI is helping startups grow faster, save time, or make better commercial decisions.";
+const suggestedCopy =
+  "Want to be a guest? We are looking for founders, marketers, investors, and operators with practical perspectives on how AI is changing startup growth: what is breaking, what still works, and what leaders should do differently.";
 ---
 
 <BaseLayout
-  title="Podcast Guest Application | We Scale Startups"
-  description="Apply to be a guest on the How Startups Win With AI podcast. Founders, operators, and growth leaders sharing practical AI-driven growth lessons."
+  title={`Podcast Guest Application | ${siteConfig.podcastName}`}
+  description={`Apply to be a guest on ${siteConfig.podcastName}. Founders, marketers, investors, and operators examining how AI is rewriting the startup growth playbook.`}
   path="/podcast-guest-application"
   schema={schemas}
   metaRobots={siteConfig.podcastLive ? "index,follow,max-image-preview:large" : "noindex,follow"}
@@ -39,7 +40,7 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Podcast Guest Application</p>
-      <h1>Apply to be a guest on <span class="grad">How Startups Win With AI</span></h1>
+      <h1>Apply to be a guest on <span class="grad">{siteConfig.podcastName}</span></h1>
       <p class="max-w-3xl">
         {suggestedCopy}
       </p>
@@ -357,12 +358,12 @@ const suggestedCopy = "Want to be a guest? We are looking for founders, operator
     <div class="shell">
       <SectionIntro
         eyebrow="Sponsorship"
-        title="Interested in sponsoring the podcast?"
+        title={`Interested in sponsoring ${siteConfig.podcastName}?`}
         body="Reach a high-intent audience of founders and operators building AI-native startups."
       />
       <div class="max-w-3xl card p-8 md:p-10">
         <p class="text-lg leading-8 text-[color:var(--muted)]">
-          The podcast reaches founders and operators at post-PMF startups who are actively using AI to grow. Sponsorship includes pre-roll mentions, show notes links, and optional founder-led partnership discussions.
+          {siteConfig.podcastName} reaches founders and operators at post-PMF startups who are actively figuring out how AI changes growth. Sponsorship includes pre-roll mentions, show notes links, and optional founder-led partnership discussions.
         </p>
         <a class="button button-brand mt-6" href={`mailto:${siteConfig.email}?subject=Podcast%20Sponsorship%20Enquiry`}>Enquire About Sponsorship →</a>
       </div>

@@ -39,6 +39,14 @@ export const siteConfig = {
   scorecardUrl: "/resources/growth-bottleneck-scorecard",
   /** When true, PodcastSeries JSON-LD and feed links are enabled on /podcast. */
   podcastLive: false,
+  /** Show name, YouTube channel, and copy for /podcast and guest surfaces. */
+  podcastName: "Luck Doesn't Scale",
+  podcastYoutubeHandle: "@wescalestartups",
+  podcastYoutubeUrl: "https://www.youtube.com/@wescalestartups",
+  podcastYoutubeChannelUrl: "https://www.youtube.com/channel/UCxJgt06e3L0Y5XOJyIB0iVw",
+  podcastTagline: "AI is rewriting the startup growth playbook.",
+  podcastDescription:
+    "Luck Doesn't Scale explores what AI means for startup growth in practice: which old assumptions are breaking, what AI makes possible, what remains uniquely human, and what leaders should do differently. Hosted by Daniel Johnson, founder of We Scale Startups.",
   /** Newsletter, single name, description, and cadence sitewide. */
   newsletterName: "The Growth Bottleneck",
   newsletterDescription: "One practical note on SaaS pipeline, positioning, and founder-led growth systems.",

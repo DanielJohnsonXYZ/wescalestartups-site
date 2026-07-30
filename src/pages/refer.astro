@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig, mauticNewsletter } from "../site";
+import { siteConfig, customerIoNewsletter } from "../site";
 
 const path = "/refer";
 
@@ -275,7 +275,7 @@ const schema = [
 
 </BaseLayout>
 
-<script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
+<script is:inline define:vars={{ email: siteConfig.email, cioUrl: customerIoNewsletter.submitUrl, cioFormId: customerIoNewsletter.formId }}>
   const form = document.getElementById("referral-form");
   const fallback = document.getElementById("refer-fallback");
 
@@ -306,18 +306,17 @@ const schema = [
 
     try {
       if (yourEmail) {
-        fetch(mauticUrl, {
+        fetch(cioUrl, {
           method: "POST",
-          mode: "no-cors",
           keepalive: true,
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            "mauticform[formId]": mauticFormId,
-            "mauticform[email]": yourEmail,
-            "mauticform[source_type]": "referral-form",
-            "mauticform[source_page]": window.location.href,
-            "mauticform[lead_magnet]": "referral-programme"
-          }).toString()
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            form_id: cioFormId,
+            email: yourEmail,
+            source_type: "referral-form",
+            source_page: window.location.href,
+            lead_magnet: "referral-programme"
+          })
         }).catch(function () {});
       }
     } catch (_) {}

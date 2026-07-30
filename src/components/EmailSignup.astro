@@ -1,6 +1,6 @@
 ---
-// EmailSignup.astro - inline email capture; posts to Mautic (see site.ts).
-import { mauticNewsletter, siteConfig } from "../site";
+// EmailSignup.astro — inline email capture; posts to Customer.io via /api/forms.
+import { customerIoNewsletter, siteConfig } from "../site";
 
 interface Props {
   heading?: string;
@@ -11,8 +11,8 @@ interface Props {
   sourceType?: "newsletter" | "lead_magnet" | "contact_enquiry";
   sourcePage?: string;
   leadMagnet?: string;
-  /** Use a dedicated Mautic form while keeping the shared component and host. */
-  mauticFormId?: string;
+  /** Customer.io form id (Integrations → Forms). Defaults to site newsletter form. */
+  cioFormId?: string;
   finePrint?: string;
 }
 
@@ -25,14 +25,12 @@ const {
   sourceType = "newsletter",
   sourcePage = Astro.url.pathname,
   leadMagnet = "",
-  mauticFormId: mauticFormIdOverride,
+  cioFormId: cioFormIdProp,
   finePrint = "No spam. Unsubscribe any time."
 } = Astro.props;
 
-const mauticFormId = mauticFormIdOverride ?? mauticNewsletter.formId;
-const submitUrl = mauticFormIdOverride
-  ? `${mauticNewsletter.baseUrl}/form/submit?formId=${encodeURIComponent(mauticFormIdOverride)}`
-  : mauticNewsletter.submitUrl;
+const cioFormId = cioFormIdProp ?? customerIoNewsletter.formId;
+const submitUrl = customerIoNewsletter.submitUrl;
 const sourcePageValue = sourcePage || Astro.url.pathname;
 ---
 
@@ -49,33 +47,35 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
       method="post"
       accept-charset="UTF-8"
       data-cta={`email-signup-${formId}`}
-      data-mautic-source-form
+      data-cio-source-form
     >
-      <input type="hidden" name="mauticform[formId]" value={mauticFormId} />
-      <input type="hidden" name="mauticform[source_type]" value={sourceType} />
-      <input type="hidden" name="mauticform[source_page]" value={sourcePageValue} data-source-page />
-      <input type="hidden" name="mauticform[lead_magnet]" value={leadMagnet} />
-      <input type="hidden" name="mauticform[utm_source]" value="" data-utm-field="utm_source" />
-      <input type="hidden" name="mauticform[utm_medium]" value="" data-utm-field="utm_medium" />
-      <input type="hidden" name="mauticform[utm_campaign]" value="" data-utm-field="utm_campaign" />
+      <input type="hidden" name="form_id" value={cioFormId} />
+      <input type="hidden" name="source_type" value={sourceType} />
+      <input type="hidden" name="source_page" value={sourcePageValue} data-source-page />
+      <input type="hidden" name="lead_magnet" value={leadMagnet} />
+      <input type="hidden" name="utm_source" value="" data-utm-field="utm_source" />
+      <input type="hidden" name="utm_medium" value="" data-utm-field="utm_medium" />
+      <input type="hidden" name="utm_campaign" value="" data-utm-field="utm_campaign" />
       <label class="sr-only" for={`email-field-${formId}`}>Your email address</label>
       <input
         id={`email-field-${formId}`}
         type="email"
-        name="mauticform[email]"
+        name="email"
         placeholder="you@company.com"
         required
         autocomplete="email"
       />
       <button type="submit" class="button button-brand">{buttonLabel}</button>
     </form>
-    <p class="email-signup-fine">{finePrint}</p>
+    <p class="email-signup-fine" data-signup-status>{finePrint}</p>
   </div>
 </div>
 
 <script is:inline>
-  document.querySelectorAll("form[data-mautic-source-form]").forEach((form) => {
+  document.querySelectorAll("form[data-cio-source-form]").forEach((form) => {
     if (!(form instanceof HTMLFormElement)) return;
+    if (form.dataset.cioBound) return;
+    form.dataset.cioBound = "1";
 
     const pageField = form.querySelector("[data-source-page]");
     if (pageField instanceof HTMLInputElement) {
@@ -88,6 +88,54 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
       const key = field.dataset.utmField;
       if (!key) return;
       field.value = params.get(key) || "";
+    });
+
+    const status = form.parentElement?.querySelector("[data-signup-status]");
+    const button = form.querySelector('button[type="submit"]');
+    const defaultFine = status?.textContent || "No spam. Unsubscribe any time.";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const email = (data.get("email") || "").toString().trim();
+      if (!email) return;
+
+      if (button instanceof HTMLButtonElement) {
+        button.disabled = true;
+      }
+      if (status) status.textContent = "Subscribing…";
+
+      try {
+        const res = await fetch(form.action || "/api/forms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            email,
+            form_id: (data.get("form_id") || "").toString(),
+            source_type: (data.get("source_type") || "").toString(),
+            source_page: (data.get("source_page") || window.location.href).toString(),
+            lead_magnet: (data.get("lead_magnet") || "").toString(),
+            utm_source: (data.get("utm_source") || "").toString(),
+            utm_medium: (data.get("utm_medium") || "").toString(),
+            utm_campaign: (data.get("utm_campaign") || "").toString()
+          })
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (res.ok && payload.ok) {
+          form.reset();
+          if (pageField instanceof HTMLInputElement) pageField.value = window.location.href;
+          if (status) status.textContent = "You're in. Check your inbox.";
+        } else {
+          if (status) status.textContent = "Something went wrong — try again in a moment.";
+        }
+      } catch (_) {
+        if (status) status.textContent = "Something went wrong — try again in a moment.";
+      } finally {
+        if (button instanceof HTMLButtonElement) button.disabled = false;
+        if (status && status.textContent === "Subscribing…") {
+          status.textContent = defaultFine;
+        }
+      }
     });
   });
 </script>

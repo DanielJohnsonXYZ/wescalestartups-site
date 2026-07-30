@@ -147,21 +147,6 @@ export async function onRequest(context) {
     "/ai-driven-growth/": "/growth-operating-system",
     "/execution-model": "/how-it-works",
     "/execution-model/": "/how-it-works",
-    "/engagement-models": "/how-it-works",
-    "/engagement-models/": "/how-it-works",
-    // Withdrawn internal planning page and overlapping noindex industry pages
-    "/podcast-guest-strategy": "/podcast",
-    "/podcast-guest-strategy/": "/podcast",
-    "/industries/ai-genai": "/ai-growth-systems",
-    "/industries/ai-genai/": "/ai-growth-systems",
-    "/industries/b2b-growth": "/industries/saas-growth",
-    "/industries/b2b-growth/": "/industries/saas-growth",
-    "/industries/b2b-saas": "/industries/saas-growth",
-    "/industries/b2b-saas/": "/industries/saas-growth",
-    "/industries/ecommerce": "/industries",
-    "/industries/ecommerce/": "/industries",
-    "/industries/seed-to-series-b": "/start-here",
-    "/industries/seed-to-series-b/": "/start-here",
     "/case-studies/marketplace-performance-audit": "/case-studies",
     "/case-studies/marketplace-performance-audit/": "/case-studies"
   };

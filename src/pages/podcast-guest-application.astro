@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig, mauticNewsletter } from "../site";
+import { siteConfig, customerIoNewsletter } from "../site";
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -114,7 +114,7 @@ const suggestedCopy =
         <p id="guest-status" class="guest-status" role="status" aria-live="polite" hidden></p>
       </form>
 
-      <script is:inline define:vars={{ email: siteConfig.email, mauticUrl: mauticNewsletter.submitUrl, mauticFormId: mauticNewsletter.formId }}>
+      <script is:inline define:vars={{ email: siteConfig.email, cioUrl: customerIoNewsletter.submitUrl, cioFormId: customerIoNewsletter.formId }}>
         (function () {
           const form = document.getElementById("guest-application");
           if (!(form instanceof HTMLFormElement)) return;
@@ -214,21 +214,20 @@ const suggestedCopy =
               submitBtn.textContent = "Submitting…";
             }
 
-            // Capture the lead in Mautic (fire-and-forget) so submissions are never lost,
+            // Capture the lead in Customer.io (fire-and-forget) so submissions are never lost,
             // even if no mail client is configured.
             try {
-              fetch(mauticUrl, {
+              fetch(cioUrl, {
                 method: "POST",
-                mode: "no-cors",
                 keepalive: true,
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams({
-                  "mauticform[formId]": mauticFormId,
-                  "mauticform[email]": emailVal,
-                  "mauticform[source_type]": "podcast-guest-form",
-                  "mauticform[source_page]": window.location.href,
-                  "mauticform[lead_magnet]": "podcast-guest-application"
-                }).toString()
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                  form_id: cioFormId,
+                  email: emailVal,
+                  source_type: "podcast-guest-form",
+                  source_page: window.location.href,
+                  lead_magnet: "podcast-guest-application"
+                })
               }).catch(function () {});
             } catch (_) {}
 

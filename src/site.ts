@@ -10,12 +10,12 @@ export const siteConfig = {
   bookingUrl: "/book",
   calUrl: "https://calendly.com/wescalestartups",
   calLink: "https://calendly.com/wescalestartups",
-  bookingLabel: "Get in touch",
+  bookingLabel: "Book a Growth Audit",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
-  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · No pitch`,
-  /** Hero, pricing, quiz, noun phrase (not the imperative CTA). */
-  bookingCallShort: "20-minute Growth Audit call",
+  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
+  /** Hero, pricing, quiz, noun phrase (not the imperative CTA). Duration lives in microcopy, not the button. */
+  bookingCallShort: "Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
   bookingCallPhases: [
     { phase: "First ~3 minutes", detail: "Context, stage, traction, channels, and what you think is blocking growth." },
@@ -127,7 +127,22 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/case-studies": "2026-05-03",
   "/contact": "2026-05-03",
   "/diagnose": "2026-05-03",
-  "/engagement-models": "2026-05-01",
+  "/engagement-models": "2026-07-26",
+  "/faq": "2026-07-26",
+  "/alternatives": "2026-07-26",
+  "/alternatives/marketing-agency": "2026-07-26",
+  "/alternatives/full-time-cmo": "2026-07-26",
+  "/alternatives/kalungi": "2026-07-26",
+  "/alternatives/chief-outsiders": "2026-07-26",
+  "/alternatives/nogood": "2026-07-26",
+  "/compare/fractional-cmo-providers": "2026-07-26",
+  "/locations": "2026-07-26",
+  "/locations/london": "2026-07-26",
+  "/evidence": "2026-07-26",
+  "/research": "2026-07-26",
+  "/research/founder-session-patterns": "2026-07-26",
+  "/benchmarks": "2026-07-26",
+  "/benchmarks/uk-fractional-cmo-pricing": "2026-07-26",
   "/execution-model": "2026-05-01",
   "/experimentation": "2026-05-03",
   "/growth-course": "2026-05-04",
@@ -1134,22 +1149,17 @@ export const founderStory = {
 } as const;
 
 // ──────────────────────────────────────────────────────────────────────────
-// Mautic, email signup forms (replaces placeholder ConvertKit). Configure in
-// Cloudflare Pages: PUBLIC_MAUTIC_BASE_URL, PUBLIC_MAUTIC_NEWSLETTER_FORM_ID
-// Form ID 1 = "Newsletter Sign Up" on comms.wescalestartups.com (4k+ submissions).
-// Form ID 2 = DJ.xyz only — do not use here. Prefer setting the Pages secret to "1" explicitly.
-const mauticBaseRaw =
-  (typeof import.meta.env.PUBLIC_MAUTIC_BASE_URL === "string" && import.meta.env.PUBLIC_MAUTIC_BASE_URL.trim()) ||
-  "https://comms.wescalestartups.com";
-const mauticBase = mauticBaseRaw.replace(/\/$/, "");
-const mauticNewsletterFormId =
-  (typeof import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID === "string" &&
-    import.meta.env.PUBLIC_MAUTIC_NEWSLETTER_FORM_ID.trim()) ||
-  "1";
+// Customer.io email capture (replaces Mautic / comms.wescalestartups.com).
+// Browser posts to same-origin /api/forms; Pages Function proxies to the
+// Track Forms API with CUSTOMER_IO_SITE_ID + CUSTOMER_IO_TRACK_API_KEY.
+// PUBLIC_CUSTOMER_IO_FORM_ID — arbitrary form id string (Integrations → Forms).
+const customerIoFormId =
+  (typeof import.meta.env.PUBLIC_CUSTOMER_IO_FORM_ID === "string" &&
+    import.meta.env.PUBLIC_CUSTOMER_IO_FORM_ID.trim()) ||
+  "wss-newsletter";
 
-export const mauticNewsletter = {
-  baseUrl: mauticBase,
-  formId: mauticNewsletterFormId,
-  /** This Mautic host 404s on `/form/submit/{id}`; use `?formId=` (matches Mautic 7 embed docs). */
-  submitUrl: `${mauticBase}/form/submit?formId=${encodeURIComponent(mauticNewsletterFormId)}`
+export const customerIoNewsletter = {
+  formId: customerIoFormId,
+  /** Same-origin Cloudflare Pages Function → Customer.io Forms API. */
+  submitUrl: "/api/forms"
 } as const;

@@ -24,7 +24,11 @@ Source: CRM / Notion / Gmail brief + GrowthMentor reviews (danieljohnson.xyz/tes
 
 ## Ops
 
-- [x] Mautic form ID **1** = "Newsletter Sign Up" (wescalestartups.com). ID 2 = DJ.xyz only. Code default `"1"` is correct. Optional: re-save Cloudflare Pages secret as `1` for certainty.
+- [x] Customer.io form id **`wss-newsletter`** = WSS site captures (was Mautic form ID 1). DJ.xyz uses **`dj-newsletter`**.
+- [ ] Set Cloudflare Pages `CUSTOMER_IO_*` secrets (**`CUSTOMER_IO_REGION=eu`**) on WSS + DJ (Production + Preview).
+- [ ] Add DNS CNAME `email.wescalestartups.com` → `e-trk-eu.customeriomail.com` (CIO link tracking).
+- [ ] Live form test → confirm person in CIO EU workspace; then start the three welcome journeys.
 - [x] Calendly: `https://calendly.com/wescalestartups`
 - [x] Diadia: never name/logo
 - [ ] Deploy scrubbed proof + remediation when ready
+- [ ] **Chase 1–2 named founder quotes with a real engagement metric** for the homepage voices wall (largest proof gap vs category peers; do not invent).

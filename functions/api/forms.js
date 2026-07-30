@@ -102,11 +102,18 @@ export async function onRequestPost(context) {
     "utm_medium",
     "utm_campaign",
     "first_name",
-    "name"
+    "name",
+    "booked_diagnostic"
   ];
   for (const key of passThrough) {
     const v = clip(payload[key]);
     if (v) data[key] = v;
+  }
+  // Normalise boolean-ish booking flag for journey exit conditions.
+  if (data.booked_diagnostic) {
+    const raw = data.booked_diagnostic.toLowerCase();
+    data.booked_diagnostic =
+      raw === "1" || raw === "true" || raw === "yes" ? "true" : data.booked_diagnostic;
   }
 
   const region = (env.CUSTOMER_IO_REGION || "eu").trim().toLowerCase();

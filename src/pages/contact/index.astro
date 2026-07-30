@@ -322,6 +322,13 @@ const contactSchema = [
     try {
       const leadEmail = (data.get("email") || "").toString().trim();
       if (leadEmail) {
+        try {
+          if (typeof window.wssRememberLeadEmail === "function") {
+            window.wssRememberLeadEmail(leadEmail);
+          } else {
+            sessionStorage.setItem("wss_lead_email", leadEmail);
+          }
+        } catch (_) {}
         fetch(cioUrl, {
           method: "POST",
           keepalive: true,

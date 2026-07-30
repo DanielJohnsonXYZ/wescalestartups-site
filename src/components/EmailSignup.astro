@@ -122,6 +122,13 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
         });
         const payload = await res.json().catch(() => ({}));
         if (res.ok && payload.ok) {
+          try {
+            if (typeof window.wssRememberLeadEmail === "function") {
+              window.wssRememberLeadEmail(email);
+            } else {
+              sessionStorage.setItem("wss_lead_email", email);
+            }
+          } catch (_) {}
           form.reset();
           if (pageField instanceof HTMLInputElement) pageField.value = window.location.href;
           if (status) status.textContent = "You're in. Check your inbox.";

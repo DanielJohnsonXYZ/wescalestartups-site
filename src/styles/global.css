@@ -1873,6 +1873,43 @@ textarea:focus-visible {
   font-size: 1.04rem;
 }
 
+.article-body p {
+  margin: 0 0 1.15rem;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1.15rem;
+  padding-left: 1.4rem;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.article-body li:last-child {
+  margin-bottom: 0;
+}
+
+.article-body li > ul,
+.article-body li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.article-body li::marker {
+  color: var(--violet);
+}
+
 .insight-card {
   display: flex;
   flex-direction: column;

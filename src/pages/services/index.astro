@@ -2,7 +2,7 @@
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { pricingTrustBullets, serviceSnapshots, servicesHubRelatedReading, siteConfig } from "../../site";
+import { mentoringOffer, pricingTrustBullets, serviceSnapshots, servicesHubRelatedReading, siteConfig } from "../../site";
 
 const servicesHubFaqs = [
   {
@@ -47,7 +47,7 @@ const servicesSchema = [
       <p class="eyebrow">Services</p>
       <h1>Four ways to fix the bottleneck, pick the smallest that solves it.</h1>
       <p>
-        Each offer includes who it is for, the problem it solves, timeline, starting price, and what ships. Confirm scope on a {siteConfig.bookingCallShort}.
+        Each offer includes who it is for, the problem it solves, timeline, starting price, and what ships. Confirm scope on a {siteConfig.bookingCallShort}. If you only need an hour of senior judgement, start with <a href="/mentoring">Growth Mentoring</a> instead.
       </p>
       <div class="hero-actions">
         <a
@@ -100,6 +100,22 @@ const servicesSchema = [
           ))
         }
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <article class="mentoring-strip">
+        <div>
+          <p class="eyebrow">Smaller than an engagement</p>
+          <h2>{mentoringOffer.title}</h2>
+          <p>{mentoringOffer.bestFor}</p>
+          <p class="mentoring-strip-meta">{mentoringOffer.price} · {mentoringOffer.timeline}</p>
+        </div>
+        <a class="button button-brand" href={mentoringOffer.href} data-cta="services-hub-mentoring">
+          See mentoring →
+        </a>
+      </article>
     </div>
   </section>
 
@@ -244,5 +260,35 @@ const servicesSchema = [
     color: var(--muted);
     font-size: 0.9rem;
     line-height: 1.5;
+  }
+
+  /* Mentoring sits below the ladder, so it gets a strip rather than a fifth card. */
+  .mentoring-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.6rem 1.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: var(--surface);
+  }
+  .mentoring-strip > div { max-width: 62ch; }
+  .mentoring-strip h2 {
+    margin: 0.3rem 0 0.5rem;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+  .mentoring-strip p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+  .mentoring-strip-meta {
+    margin-top: 0.5rem !important;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
   }
 </style>

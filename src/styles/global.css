@@ -1645,8 +1645,13 @@ textarea:focus-visible {
   gap: 1rem;
 }
 
+/* `display: grid` was missing here, so every `class="grid-2"` used on its own
+   (rather than `class="grid grid-2"`) fell back to a block of stacked,
+   gapless cards, on /book, /newsletter, /refer, /mentoring and others. */
 .grid-2 {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 .operator-grid {
@@ -2272,6 +2277,7 @@ textarea:focus-visible {
   .showcase-stats,
   .case-metrics,
   .hero-proof,
+  .grid-2,
   .grid-3,
   .grid-4,
   .grid-5,
@@ -5133,7 +5139,7 @@ textarea:focus-visible {
 
 
 /* Hero proof-rail verification link — points to live GrowthMentor profile so
-   the 479+ / 4.93 stat is independently checkable. Subtle but clickable. */
+   the 479+ / 4.96 stat is independently checkable. Subtle but clickable. */
 .wss-hero-redesign .proof-rail-verify {
   margin-top: 0.48rem;
   text-align: center;

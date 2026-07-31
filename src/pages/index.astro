@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   buyerFaqs,
   canonicalProofMetrics,
+  mentoringOffer,
   proofEcosystemLogos,
   serviceSnapshots,
   siteConfig,
@@ -32,29 +33,85 @@ const quoteInitials = (name: string) =>
 // (the bit after watch?v=) and the embed goes live automatically.
 const growthVideoId = "";
 
+// Hero foundations check. Each statement maps to the constraint that shows up when
+// it isn't true, so the card can name a likely bottleneck instead of just scoring.
 const foundations = [
-  "We can describe our best customer in one sentence",
-  "We talk to customers every single week",
-  "Growth ideas become experiments, not debates",
-  "We trust our numbers enough to bet budget on them",
-  "Growth runs on a weekly rhythm, not founder heroics"
+  {
+    label: "We can describe our best customer in one sentence",
+    area: "Customer",
+    gap: "The customer picture is too broad to convert."
+  },
+  {
+    label: "We talk to customers every single week",
+    area: "Research",
+    gap: "Nobody owns customer evidence, so messaging is guesswork."
+  },
+  {
+    label: "Growth ideas become experiments, not debates",
+    area: "Experiments",
+    gap: "Growth decisions are being made on opinion."
+  },
+  {
+    label: "We trust our numbers enough to bet budget on them",
+    area: "Reporting",
+    gap: "Reporting isn't trusted enough to move budget."
+  },
+  {
+    label: "Growth runs on a weekly rhythm, not founder heroics",
+    area: "Growth loop",
+    gap: "The founder is still the operating system."
+  }
 ];
 
-const principles = [
+// The four steps of the engagement, written as a process rather than three ideas.
+const processSteps = [
   {
     number: "01",
-    title: "Research. Know the customer cold.",
-    body: "The teams that win understand their market better than anyone else in it. We build real customer evidence: interviews, data, objections and alternatives, sharp enough to bet budget on."
+    stage: "Research",
+    title: "Know the customer cold",
+    body: "Before anything ships, we go and find out what your buyers actually believe, compare and object to.",
+    steps: [
+      "Interview 8–12 customers, plus people who evaluated you and said no",
+      "Pull the funnel data and find where money is actually leaking",
+      "Map the real alternatives, including doing nothing"
+    ],
+    output: "A one-page customer picture your whole team agrees on."
   },
   {
     number: "02",
-    title: "Experiment. Place smart bets.",
-    body: "Every growth idea becomes a structured experiment with a hypothesis, a threshold and an owner, so you learn faster than competitors can copy."
+    stage: "Experiment",
+    title: "Place a small number of smart bets",
+    body: "Ideas become experiments. Each one gets a hypothesis, a number to beat and a person who owns it.",
+    steps: [
+      "Score the backlog and pick the three bets that move the constraint",
+      "Write the hypothesis and the threshold before anything goes live",
+      "Set a kill date so nothing runs on politeness"
+    ],
+    output: "A live experiment queue with owners and decision dates."
   },
   {
     number: "03",
-    title: "Test. Let evidence decide.",
-    body: "We test relentlessly and keep score honestly. What works gets more fuel. What does not gets killed quickly and cheaply, before it burns the quarter."
+    stage: "Test",
+    title: "Let the evidence decide",
+    body: "We run the tests, read them honestly, and make one of three calls every week: scale, fix or stop.",
+    steps: [
+      "One weekly meeting where the numbers are read out loud",
+      "Winners get more budget the same week they win",
+      "Losers get killed cheaply, before they eat the quarter"
+    ],
+    output: "A weekly decision log, so you can see why each call was made."
+  },
+  {
+    number: "04",
+    stage: "Scale",
+    title: "Hand the system over",
+    body: "The rhythm has to survive us. We transfer ownership deliberately, with a date in the diary.",
+    steps: [
+      "Your team runs the meeting while we sit in the back",
+      "Dashboard, cadence and decision rules documented",
+      "Board-ready review of what moved and what is next"
+    ],
+    output: "A growth system your team runs without us."
   }
 ];
 
@@ -245,7 +302,6 @@ const subAudiences = [
   schema={faqSchema}
   bodyClass="page-home-v9"
   showAnnouncement={false}
-  stickyBookCta={false}
 >
   <div class="v9-scroll-progress" aria-hidden="true"></div>
 
@@ -260,7 +316,7 @@ const subAudiences = [
             Sustainable growth for AI startups &amp; B2B SaaS
           </div>
           <h1 id="v9-hero-title">Sustainable, high-quality growth for <em>AI startups.</em></h1>
-          <p class="v9-hero-lede">Most startups do not stall because the product is weak. They stall because growth is a chase: a new channel every month, nothing that compounds. Our structured, proven, step-by-step process takes you from chasing growth to <strong>predictable, repeatable, scalable growth.</strong></p>
+          <p class="v9-hero-lede">We install one growth process, research, experiments and evidence, plus the weekly rhythm your team keeps running after we leave. The monthly scramble for a new channel gets replaced by <strong>growth that compounds.</strong></p>
           <div class="v9-hero-actions">
             <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl} data-cta="v9-hero-book">
               <span>Grow your AI startup</span>
@@ -286,11 +342,15 @@ const subAudiences = [
             </div>
             <span class="v9-system-status"><i aria-hidden="true"></i> Live</span>
           </div>
+          <p class="v9-found-prompt">Tick what is genuinely true for your team. Thirty seconds, honest answers.</p>
           <div class="v9-found-list" role="group" aria-label="Growth foundations checklist. Toggle each statement that is true for your team.">
             {foundations.map((item) => (
-              <button type="button" class="v9-found-item" aria-pressed="false">
+              <button type="button" class="v9-found-item" aria-pressed="false" data-area={item.area} data-gap={item.gap}>
                 <i aria-hidden="true">✓</i>
-                <span>{item}</span>
+                <span>
+                  <strong>{item.label}</strong>
+                  <small>{item.area}</small>
+                </span>
               </button>
             ))}
           </div>
@@ -300,7 +360,11 @@ const subAudiences = [
               <strong id="v9-found-count">0 / 5</strong>
             </div>
             <div class="v9-found-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-            <p class="v9-found-verdict" id="v9-found-verdict" aria-live="polite">Tap everything that is true for your team. Thirty seconds, honest answers.</p>
+            <div class="v9-found-readout" aria-live="polite">
+              <span class="v9-found-readout-label" id="v9-found-readout-label">Your likely constraint</span>
+              <strong id="v9-found-gap">Tick the statements above to see it.</strong>
+              <p class="v9-found-verdict" id="v9-found-verdict">Most teams stall on one or two of these. Naming which one is the whole job.</p>
+            </div>
             <a href={siteConfig.bookingUrl} data-cta="v9-hero-foundations">Talk it through with Daniel →</a>
           </div>
         </div>
@@ -318,7 +382,7 @@ const subAudiences = [
     </div>
   </section>
 
-  <section class="v9-credibility" aria-labelledby="v9-credibility-title">
+  <section class="v9-credibility v9-credibility-centred" aria-labelledby="v9-credibility-title">
     <div class="v9-shell">
       <div class="v9-credibility-head">
         <p id="v9-credibility-title">Trusted across startup programmes, classrooms and founder teams</p>
@@ -352,8 +416,8 @@ const subAudiences = [
       </div>
       <div class="v9-thesis-grid">
         <div>
-          <h2 id="v9-thesis-title">Most post-PMF startups do not have a product problem. They have a <em>customer understanding problem.</em></h2>
-          <p class="v9-thesis-lede">You cannot grow a market you do not understand. When nobody owns customer insight, every channel, message and launch is a guess, and guesses do not compound.</p>
+          <h2 id="v9-thesis-title">Nine times out of ten, the thing blocking growth is <em>how well you know your customer.</em></h2>
+          <p class="v9-thesis-lede">You cannot grow a market you do not understand. When nobody owns customer insight, every channel, message and launch becomes a guess, and guesses get expensive at this stage.</p>
         </div>
         <figure class="v9-teaching-card v9-hover-glow">
           <img src="/images/speaking/daniel-speaking-nomad-960.webp" alt="Daniel Johnson teaching the growth system to a founder cohort" width="960" height="640" loading="lazy" decoding="async" />
@@ -363,14 +427,30 @@ const subAudiences = [
           </figcaption>
         </figure>
       </div>
-      <div class="v9-principle-grid">
-        {principles.map((principle) => (
-          <article class="v9-principle v9-hover-glow">
-            <span>{principle.number}</span>
-            <h3>{principle.title}</h3>
-            <p>{principle.body}</p>
-          </article>
-        ))}
+      <div class="v9-process">
+        <div class="v9-process-head">
+          <span class="v9-section-number">The process, step by step</span>
+          <h3>Four steps, in this order, every time.</h3>
+          <p>No step gets skipped. Each one produces something specific you can point at, which is how you know it actually happened.</p>
+        </div>
+        <ol class="v9-process-list">
+          {processSteps.map((step) => (
+            <li class="v9-process-step v9-hover-glow">
+              <div class="v9-process-step-head">
+                <span class="v9-process-number">{step.number}</span>
+                <div>
+                  <span class="v9-process-stage">{step.stage}</span>
+                  <h4>{step.title}</h4>
+                </div>
+              </div>
+              <p class="v9-process-body">{step.body}</p>
+              <ul class="v9-process-actions">
+                {step.steps.map((line) => <li>{line}</li>)}
+              </ul>
+              <p class="v9-process-output"><span>You end up with</span><strong>{step.output}</strong></p>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   </section>
@@ -379,52 +459,60 @@ const subAudiences = [
     <div class="v9-shell">
       <div class="v9-section-intro">
         <span class="v9-section-number">02 / Find your constraint</span>
-        <p>Click the constraint that sounds like your team</p>
+        <p>Pick the symptom. Get the diagnosis.</p>
       </div>
       <div class="v9-system-heading">
         <h2 id="v9-system-title">Growth gets simpler when you <em>understand your customers.</em></h2>
-        <p>Five places where customer understanding usually breaks down. Click the one that sounds most like your team, <strong>and see the way through.</strong></p>
+        <p>Almost every stuck growth team is stuck in one of five places. Pick the symptom on the left that sounds most like your team. The panel on the right names what is actually going on and <strong>what to do about it.</strong></p>
       </div>
 
       <div class="v9-diagnostic">
-        <div class="v9-constraint-tabs" role="tablist" aria-label="Growth constraints">
-          {constraints.map((constraint) => (
-            <button
-              type="button"
-              class:list={["v9-constraint-tab", { "is-active": constraint.key === selectedConstraint.key }]}
-              role="tab"
-              aria-selected={constraint.key === selectedConstraint.key ? "true" : "false"}
-              tabindex={constraint.key === selectedConstraint.key ? 0 : -1}
-              data-constraint={constraint.key}
-              data-number={constraint.number}
-              data-label={constraint.label}
-              data-title={constraint.title}
-              data-description={constraint.description}
-              data-service={constraint.service}
-              data-href={constraint.href}
-              data-meta={constraint.meta}
-            >
-              <span>{constraint.number}</span>
-              <span>
-                <strong>{constraint.short}</strong>
-                <small>{constraint.label}</small>
-              </span>
-              <i aria-hidden="true">↗</i>
-            </button>
-          ))}
+        <div class="v9-constraint-picker">
+          <p class="v9-picker-label"><span>Step 1</span> Which of these sounds like you?</p>
+          <div class="v9-constraint-tabs" role="tablist" aria-label="Growth constraints">
+            {constraints.map((constraint) => (
+              <button
+                type="button"
+                class:list={["v9-constraint-tab", { "is-active": constraint.key === selectedConstraint.key }]}
+                role="tab"
+                aria-selected={constraint.key === selectedConstraint.key ? "true" : "false"}
+                tabindex={constraint.key === selectedConstraint.key ? 0 : -1}
+                data-constraint={constraint.key}
+                data-number={constraint.number}
+                data-label={constraint.label}
+                data-short={constraint.short}
+                data-symptom={constraint.symptom}
+                data-title={constraint.title}
+                data-description={constraint.description}
+                data-service={constraint.service}
+                data-href={constraint.href}
+                data-meta={constraint.meta}
+              >
+                <span class="v9-constraint-tab-num">{constraint.number}</span>
+                <span class="v9-constraint-tab-copy">
+                  <small>{constraint.label}</small>
+                  <strong>“{constraint.symptom}”</strong>
+                </span>
+                <i aria-hidden="true">→</i>
+              </button>
+            ))}
+          </div>
         </div>
 
         <div class="v9-diagnostic-output v9-hover-glow" role="tabpanel" aria-live="polite">
           <div class="v9-output-topline">
             <span id="v9-output-meta">{selectedConstraint.number} / {selectedConstraint.label}</span>
-            <span>Recommended next move</span>
+            <span>Step 2 · The diagnosis</span>
           </div>
           <div class="v9-output-signal">
             <span>Constraint detected</span>
             <i aria-hidden="true"></i>
           </div>
           <h3 id="v9-output-title">{selectedConstraint.title}</h3>
-          <p id="v9-output-description">{selectedConstraint.description}</p>
+          <div class="v9-output-block">
+            <span class="v9-output-block-label">What we do about it</span>
+            <p id="v9-output-description">{selectedConstraint.description}</p>
+          </div>
           <div class="v9-output-recommendation">
             <div>
               <span>Best-fit engagement</span>
@@ -433,6 +521,7 @@ const subAudiences = [
             </div>
             <a id="v9-output-link" class="v9-button v9-button-dark" href={selectedConstraint.href}>Explore this engagement <span aria-hidden="true">↗</span></a>
           </div>
+          <p class="v9-output-footnote">Not sure which one? The <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardName}</a> asks ten questions and picks for you.</p>
         </div>
       </div>
     </div>
@@ -509,6 +598,21 @@ const subAudiences = [
         ))}
       </div>
 
+      <div class="v9-mentoring-strip">
+        <div>
+          <span class="v9-section-number">Smaller than an engagement</span>
+          <h3>{mentoringOffer.title}</h3>
+          <p>{mentoringOffer.bestFor}</p>
+        </div>
+        <div class="v9-mentoring-strip-action">
+          <strong>{mentoringOffer.price}</strong>
+          <small>{mentoringOffer.timeline}</small>
+          <a class="v9-button v9-button-dark" href={mentoringOffer.href} data-cta="v9-mentoring">
+            See mentoring <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
       <div class="v9-timeline-wrap" aria-labelledby="v9-timeline-title">
         <div class="v9-timeline-heading">
           <span>After you book</span>
@@ -573,8 +677,8 @@ const subAudiences = [
           <h2 id="v9-voices-title">What it feels like when growth finally has a rhythm.</h2>
         </div>
         <div class="v9-rating-lockup">
-          <strong>4.93/5</strong>
-          <span>GrowthMentor rating<br />across 479+ sessions</span>
+          <strong>4.96/5</strong>
+          <span>Mentor rating<br />across 479+ sessions</span>
         </div>
       </div>
       <div class="v9-quote-grid">
@@ -769,7 +873,10 @@ const subAudiences = [
       var foundItems = Array.from(document.querySelectorAll(".v9-found-item"));
       var foundCount = document.getElementById("v9-found-count");
       var foundVerdict = document.getElementById("v9-found-verdict");
+      var foundGap = document.getElementById("v9-found-gap");
+      var foundReadoutLabel = document.getElementById("v9-found-readout-label");
       var foundBars = Array.from(document.querySelectorAll(".v9-found-bar i"));
+      var foundTouched = false;
       var foundVerdicts = [
         "Foundations first. Spending on channels now would leak, start with customer research.",
         "One foundation is not a system yet. Nail the customer picture before scaling spend.",
@@ -784,10 +891,29 @@ const subAudiences = [
         if (foundCount) foundCount.textContent = on + " / " + foundItems.length;
         if (foundVerdict) foundVerdict.textContent = foundVerdicts[on] || foundVerdicts[0];
         foundBars.forEach(function (bar, index) { bar.classList.toggle("is-on", index < on); });
+
+        // The first statement left unticked is the most likely binding constraint,
+        // the list runs in the order these usually break down.
+        var firstGap = foundItems.filter(function (item) {
+          return item.getAttribute("aria-pressed") !== "true";
+        })[0];
+
+        if (!foundGap || !foundReadoutLabel) return;
+        if (!foundTouched) {
+          foundReadoutLabel.textContent = "Your likely constraint";
+          foundGap.textContent = "Tick the statements above to see it.";
+        } else if (firstGap) {
+          foundReadoutLabel.textContent = "Your likely constraint · " + (firstGap.dataset.area || "");
+          foundGap.textContent = firstGap.dataset.gap || "";
+        } else {
+          foundReadoutLabel.textContent = "No obvious gap";
+          foundGap.textContent = "All five in place. The work now is compounding what you already have.";
+        }
       }
 
       foundItems.forEach(function (item) {
         item.addEventListener("click", function () {
+          foundTouched = true;
           item.setAttribute("aria-pressed", item.getAttribute("aria-pressed") === "true" ? "false" : "true");
           updateFoundations();
           window.dataLayer = window.dataLayer || [];
@@ -809,7 +935,7 @@ const subAudiences = [
 
       if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
         var revealTargets = document.querySelectorAll(
-          ".v9-principle, .v9-service-card, .v9-case-card, .v9-quote, .v9-fit-card, .v9-timeline li, .v9-diagnostic-output, .v9-constraint-tabs, .v9-fit-video, .v9-scorecard-card, .v9-other-grid article, .v9-metric"
+          ".v9-process-step, .v9-service-card, .v9-case-card, .v9-quote, .v9-fit-card, .v9-timeline li, .v9-diagnostic-output, .v9-constraint-tabs, .v9-fit-video, .v9-scorecard-card, .v9-other-grid article, .v9-metric"
         );
         var revealObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {

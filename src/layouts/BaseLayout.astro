@@ -3,7 +3,7 @@ import EasterEgg from "../components/EasterEgg.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import AnnouncementBanner from "../components/AnnouncementBanner.astro";
-import StickyBookCta from "../components/StickyBookCta.astro";
+import StickyCta from "../components/StickyCta.astro";
 import { buildOrganizationSchema, buildPersonSchema, buildWebSiteSchema } from "../lib/schema";
 import { absoluteUrl, normalizePath } from "../lib/utils";
 import { siteConfig } from "../site";
@@ -40,11 +40,13 @@ interface Props {
   announcementDismissible?: boolean;
   announcementVariant?: "default" | "brand" | "muted" | "dark-hero";
   announcementPill?: string;
-  /** Sticky book CTA (off on /book and pages with their own booking block). */
+  /** Sticky bottom CTA (off on /book and pages with their own booking block). */
   stickyBookCta?: boolean;
-  /** Sticky CTA destination override (defaults to /book). */
+  /** "newsletter" (default) is the Growth Notes signup; "book" is the booking bar. */
+  stickyCtaVariant?: "newsletter" | "book";
+  /** Booking variant only: destination override (defaults to /book). */
   stickyBookHref?: string;
-  /** Sticky CTA button label override. */
+  /** Booking variant only: button label override. */
   stickyBookCtaLabel?: string;
   /** Header primary CTA label. */
   headerCtaLabel?: string;
@@ -81,6 +83,7 @@ const {
   announcementVariant = "brand",
   announcementPill,
   stickyBookCta: stickyBookCtaProp,
+  stickyCtaVariant = "newsletter",
   stickyBookHref,
   stickyBookCtaLabel,
   headerCtaLabel,
@@ -91,8 +94,13 @@ const {
 } = Astro.props;
 
 const currentPath = normalizePath(path);
-const stickyBookCta =
-  stickyBookCtaProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
+// The newsletter bar is welcome everywhere except the pages whose whole job is the
+// signup itself; the booking variant still steps aside on /book.
+const stickyCtaOffByDefault =
+  stickyCtaVariant === "newsletter"
+    ? currentPath === "/newsletter"
+    : currentPath === "/book" || currentPath.startsWith("/book/");
+const stickyCta = stickyBookCtaProp ?? !stickyCtaOffByDefault;
 const showAnnouncement =
   showAnnouncementProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
 const canonical = absoluteUrl(currentPath);
@@ -114,7 +122,7 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); ai_referral (AI referrer/utm); cta_click, book_call (/book or Calendly), calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download; sticky_book_cta_shown. Booking (inline Calendly on /book): booking_time_selected, booking_completed (mark booking_completed + book_call as GA4 key events). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
+    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); ai_referral (AI referrer/utm); cta_click, book_call (/book or Calendly), calendly_click, scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download; sticky_cta_shown, newsletter_signup. Booking (inline Calendly on /book): booking_time_selected, booking_completed (mark booking_completed + book_call as GA4 key events). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
     <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
     <script is:inline set:html={gtmScript} />
     <!-- End Google Tag Manager -->
@@ -347,8 +355,9 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
       )}
     </main>
     <SiteFooter showScorecardCta={showFooterScorecard} showNewsletter={showFooterNewsletter} />
-    <StickyBookCta
-      enabled={stickyBookCta}
+    <StickyCta
+      enabled={stickyCta}
+      variant={stickyCtaVariant}
       href={stickyBookHref}
       ctaLabel={stickyBookCtaLabel}
     />

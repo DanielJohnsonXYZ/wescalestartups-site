@@ -1,0 +1,400 @@
+---
+// StickyCta.astro — the sitewide bottom bar.
+//
+// Default variant is the Growth Notes signup: a low-friction ask that suits a
+// reader who is halfway down a page and not ready to book. Pages that are
+// themselves a booking surface (e.g. /ai-growth-audit) can opt into the
+// booking variant instead.
+import { customerIoNewsletter, siteConfig } from "../site";
+
+interface Props {
+  /** Set false on /book and pages that already end in a full-width booking block. */
+  enabled?: boolean;
+  /** "newsletter" (default) captures an email; "book" links to the booking page. */
+  variant?: "newsletter" | "book";
+  /** ScrollY (px) after which the bar appears. */
+  revealAfter?: number;
+  /** Booking variant only: destination override (e.g. #book-calendly). */
+  href?: string;
+  /** Booking variant only: button label override. */
+  ctaLabel?: string;
+  /** Override the hint under the label. */
+  hint?: string;
+}
+
+const {
+  enabled = true,
+  variant = "newsletter",
+  revealAfter = 640,
+  href = siteConfig.bookingUrl,
+  ctaLabel = `${siteConfig.bookingLabel} →`,
+  hint
+} = Astro.props;
+
+const isNewsletter = variant === "newsletter";
+const label = isNewsletter ? siteConfig.newsletterCtaLabel : siteConfig.bookingLabel;
+const resolvedHint =
+  hint ??
+  (isNewsletter
+    ? siteConfig.newsletterFrequencyLine
+    : `Free · ${siteConfig.bookingCallDurationPhrase} · No pitch`);
+---
+
+{enabled && (
+  <div
+    class:list={["sticky-cta", `sticky-cta--${variant}`]}
+    data-reveal-after={revealAfter}
+    role="complementary"
+    inert
+  >
+    <div class="sticky-cta-inner">
+      <div class="sticky-cta-copy">
+        <span class="sticky-cta-label">{label}</span>
+        <span class="sticky-cta-hint" data-sticky-status>{resolvedHint}</span>
+      </div>
+
+      {isNewsletter ? (
+        <form
+          class="sticky-cta-form"
+          id="sticky-newsletter"
+          action={customerIoNewsletter.submitUrl}
+          method="post"
+          accept-charset="UTF-8"
+          data-cta="sticky-newsletter"
+        >
+          <input type="hidden" name="form_id" value={customerIoNewsletter.formId} />
+          <input type="hidden" name="source_type" value="newsletter" />
+          <input type="hidden" name="source_page" value="" data-sticky-page />
+          <label class="sticky-cta-sr" for="sticky-newsletter-email">Your email address</label>
+          <input
+            id="sticky-newsletter-email"
+            type="email"
+            name="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          />
+          <button class="button button-brand sticky-cta-primary" type="submit">Sign up</button>
+          <button class="sticky-cta-dismiss" type="button" aria-label="Dismiss newsletter signup">×</button>
+        </form>
+      ) : (
+        <div class="sticky-cta-actions">
+          <a class="button button-brand sticky-cta-primary" href={href} data-cta="sticky-book-cta">
+            {ctaLabel}
+          </a>
+          <button class="sticky-cta-dismiss" type="button" aria-label="Dismiss booking bar">×</button>
+        </div>
+      )}
+    </div>
+  </div>
+)}
+
+<style>
+  .sticky-cta {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 1rem;
+    z-index: 45;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(120%);
+    transition: opacity 280ms ease, transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+
+  .sticky-cta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .sticky-cta.is-dismissed {
+    display: none;
+  }
+
+  .sticky-cta-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: min(760px, 100%);
+    padding: 0.7rem 0.75rem 0.7rem 1.35rem;
+    border-radius: 1.1rem;
+    background: color-mix(in srgb, var(--ink, #0b0b0c) 96%, transparent);
+    color: #fff;
+    box-shadow:
+      0 18px 42px -12px color-mix(in srgb, var(--ink, #0b0b0c) 65%, transparent),
+      0 2px 8px -1px color-mix(in srgb, var(--ink, #0b0b0c) 50%, transparent);
+    backdrop-filter: saturate(140%) blur(6px);
+  }
+
+  .sticky-cta-copy {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .sticky-cta-label {
+    font-size: 0.875rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sticky-cta-hint {
+    font-size: 0.72rem;
+    color: color-mix(in srgb, #fff 62%, transparent);
+    margin-top: 2px;
+  }
+
+  .sticky-cta-form,
+  .sticky-cta-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .sticky-cta-form input[type="email"] {
+    width: 15rem;
+    max-width: 40vw;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid color-mix(in srgb, #fff 22%, transparent);
+    border-radius: 0.7rem;
+    background: color-mix(in srgb, #fff 8%, transparent);
+    color: #fff;
+    font: inherit;
+    font-size: 0.85rem;
+    outline: none;
+  }
+
+  .sticky-cta-form input[type="email"]::placeholder {
+    color: color-mix(in srgb, #fff 45%, transparent);
+  }
+
+  .sticky-cta-form input[type="email"]:focus {
+    border-color: color-mix(in srgb, #fff 55%, transparent);
+    background: color-mix(in srgb, #fff 13%, transparent);
+  }
+
+  .sticky-cta-primary {
+    padding-block: 0.55rem;
+    padding-inline: 1.05rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .sticky-cta-dismiss {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, #fff 18%, transparent);
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 150ms ease;
+    flex-shrink: 0;
+  }
+
+  .sticky-cta-dismiss:hover,
+  .sticky-cta-dismiss:focus-visible {
+    background: color-mix(in srgb, #fff 14%, transparent);
+    outline: none;
+  }
+
+  .sticky-cta-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 720px) {
+    .sticky-cta { bottom: 0.75rem; }
+    .sticky-cta-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.6rem;
+      padding: 0.85rem 0.9rem;
+    }
+    .sticky-cta-copy { flex: none; }
+    .sticky-cta-label { white-space: normal; }
+    .sticky-cta-form input[type="email"] {
+      width: auto;
+      max-width: none;
+      flex: 1;
+      min-width: 0;
+    }
+    .sticky-cta-dismiss {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 0.9rem;
+    }
+    .sticky-cta-inner { position: relative; }
+    .sticky-cta-copy { padding-right: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sticky-cta { transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var bar = document.querySelector(".sticky-cta");
+    if (!bar) return;
+
+    var revealAfter = Number(bar.getAttribute("data-reveal-after") || 640);
+    var dismissKey = "wss-sticky-cta-dismissed";
+    var dismissed = false;
+    var overlapSelector =
+      "footer, .site-footer, form, .cta-band, .book-embed, #calendly-inline-widget, #book-calendly, #book-cal-inline, .calendly-inline-widget";
+    var overlapsSensitiveArea = false;
+    var shownFired = false;
+
+    try {
+      dismissed = sessionStorage.getItem(dismissKey) === "1";
+    } catch (err) {
+      // sessionStorage may be blocked
+    }
+
+    if (dismissed) {
+      bar.classList.add("is-dismissed");
+      return;
+    }
+
+    function update() {
+      if (dismissed) return;
+      var shouldShow = window.scrollY > revealAfter && !overlapsSensitiveArea;
+      bar.classList.toggle("is-visible", shouldShow);
+      bar.toggleAttribute("inert", !shouldShow);
+      if (shouldShow && !shownFired) {
+        shownFired = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "sticky_cta_shown",
+          cta_variant: bar.classList.contains("sticky-cta--newsletter") ? "newsletter" : "book",
+          page_path: window.location.pathname
+        });
+      }
+    }
+
+    function dismiss() {
+      dismissed = true;
+      bar.classList.remove("is-visible");
+      bar.setAttribute("inert", "");
+      bar.classList.add("is-dismissed");
+      try {
+        sessionStorage.setItem(dismissKey, "1");
+      } catch (err) {
+        // ignore
+      }
+    }
+
+    var dismissBtn = bar.querySelector(".sticky-cta-dismiss");
+    if (dismissBtn) dismissBtn.addEventListener("click", dismiss);
+
+    // The bar's own form is excluded from the overlap watch: it is the bar.
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          overlapsSensitiveArea = entries.some(function (entry) {
+            return entry.isIntersecting;
+          });
+          update();
+        },
+        { rootMargin: "0px 0px -12% 0px", threshold: 0.02 }
+      );
+
+      document.querySelectorAll(overlapSelector).forEach(function (el) {
+        if (bar.contains(el)) return;
+        observer.observe(el);
+      });
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
+
+    var form = bar.querySelector(".sticky-cta-form");
+    if (!form) return;
+
+    var status = bar.querySelector("[data-sticky-status]");
+    var defaultHint = status ? status.textContent : "";
+    var pageField = form.querySelector("[data-sticky-page]");
+    if (pageField) pageField.value = window.location.href;
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var data = new FormData(form);
+      var email = (data.get("email") || "").toString().trim();
+      if (!email) return;
+
+      var button = form.querySelector('button[type="submit"]');
+      if (button) button.disabled = true;
+      if (status) status.textContent = "Subscribing…";
+
+      fetch(form.action || "/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          email: email,
+          form_id: (data.get("form_id") || "").toString(),
+          source_type: "newsletter",
+          source_page: (data.get("source_page") || window.location.href).toString(),
+          lead_magnet: "",
+          utm_source: "",
+          utm_medium: "",
+          utm_campaign: ""
+        })
+      })
+        .then(function (res) {
+          return res.json().catch(function () {
+            return {};
+          }).then(function (payload) {
+            return { ok: res.ok && payload.ok };
+          });
+        })
+        .catch(function () {
+          return { ok: false };
+        })
+        .then(function (result) {
+          if (button) button.disabled = false;
+          if (!status) return;
+          if (result.ok) {
+            form.reset();
+            status.textContent = "You're in. Check your inbox.";
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: "newsletter_signup",
+              signup_source: "sticky_cta",
+              page_path: window.location.pathname
+            });
+            setTimeout(dismiss, 2400);
+          } else {
+            status.textContent = "Something went wrong — try again in a moment.";
+            setTimeout(function () {
+              if (status.textContent.indexOf("Something went wrong") === 0) {
+                status.textContent = defaultHint;
+              }
+            }, 4000);
+          }
+        });
+    });
+  })();
+</script>

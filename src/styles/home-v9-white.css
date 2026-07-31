@@ -598,3 +598,442 @@
     transition: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-07 homepage refinement
+   1. Hero foundations card now names a likely constraint, not just a score.
+   2. Logo strip centres instead of hanging off a half-empty final row.
+   3. Thesis section becomes an explicit four-step process.
+   4. Constraint picker leads with the symptom, in two labelled steps.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* 1. Foundations card ------------------------------------------------ */
+
+.v9-found-prompt {
+  margin: 0;
+  padding: 0.95rem 1.15rem 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--v9-mono);
+  font-size: 0.58rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.page-home-v9 .v9-found-list { padding-top: 0.75rem; }
+
+.page-home-v9 .v9-found-item > span {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.page-home-v9 .v9-found-item strong {
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.page-home-v9 .v9-found-item small {
+  color: rgba(255, 255, 255, 0.34);
+  font-family: var(--v9-mono);
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.page-home-v9 .v9-found-item[aria-pressed="true"] small { color: rgba(200, 255, 101, 0.72); }
+
+.v9-found-readout {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(128, 108, 255, 0.28);
+  border-radius: 0.7rem;
+  background: rgba(128, 108, 255, 0.08);
+}
+
+.v9-found-readout-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--v9-mono);
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.v9-found-readout strong {
+  color: #fffdf7;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.page-home-v9 .v9-found-verdict {
+  min-height: 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+/* 2. Centred credibility logos --------------------------------------- */
+
+.v9-credibility-centred .v9-logo-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 0;
+  gap: 0.75rem;
+}
+
+.v9-credibility-centred .v9-logo-item {
+  display: grid;
+  flex: 0 1 clamp(160px, 15vw, 210px);
+  min-height: 96px;
+  justify-items: center;
+  align-content: center;
+  gap: 0.65rem;
+  border: 1px solid var(--v9-line);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+.v9-credibility-centred .v9-logo-item img {
+  object-position: center;
+  max-width: 108px;
+  height: 30px;
+}
+
+.v9-credibility-centred .v9-logo-item span {
+  font-size: 0.52rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+}
+
+/* 3. Four-step process ----------------------------------------------- */
+
+.v9-process {
+  margin-top: clamp(3.5rem, 7vw, 6.5rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--v9-line);
+}
+
+.v9-process-head {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 62ch;
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+
+.v9-process-head .v9-section-number { color: var(--v9-violet-deep); }
+
+.v9-process-head h3 {
+  margin: 0;
+  color: var(--v9-ink);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.v9-process-head p {
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.v9-process-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.v9-process-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.35rem 1.3rem 1.3rem;
+  border: 1px solid var(--v9-line);
+  border-radius: var(--v9-radius);
+  background: var(--v9-white);
+}
+
+.v9-process-step-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.v9-process-number {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(102, 87, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(102, 87, 255, 0.1);
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+}
+
+.v9-process-stage {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.v9-process-step h4 {
+  margin: 0;
+  color: var(--v9-ink);
+  font-size: 1.02rem;
+  font-weight: 620;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.v9-process-body {
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.v9-process-actions {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.v9-process-actions li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--v9-copy);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.v9-process-actions li::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--v9-violet);
+}
+
+.v9-process-output {
+  display: grid;
+  gap: 0.2rem;
+  margin: auto 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--v9-line);
+}
+
+.v9-process-output span {
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.v9-process-output strong {
+  color: var(--v9-violet-deep);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* 4. Constraint picker ------------------------------------------------ */
+
+.v9-picker-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.9rem;
+  color: var(--v9-copy);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.v9-picker-label span {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--v9-violet);
+  color: #fff;
+  font-family: var(--v9-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.page-home-v9 .v9-constraint-tab {
+  grid-template-columns: 1.9rem 1fr auto;
+  gap: 0.85rem;
+  align-items: start;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.v9-constraint-tab-num {
+  padding-top: 0.15rem;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+}
+
+.v9-constraint-tab-copy {
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.page-home-v9 .v9-constraint-tab-copy small {
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.page-home-v9 .v9-constraint-tab-copy strong {
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.page-home-v9 .v9-constraint-tab.is-active .v9-constraint-tab-copy strong { font-weight: 620; }
+
+.page-home-v9 .v9-constraint-tab i {
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-top: 0.1rem;
+  font-size: 0.75rem;
+}
+
+/* The panel used to rely on `margin-top: auto` to float the signal row down.
+   With the extra labelled blocks there is no slack left, so space it explicitly. */
+.page-home-v9 .v9-output-signal {
+  margin-top: clamp(1.5rem, 3vw, 2.6rem);
+  margin-bottom: 1rem;
+}
+
+.v9-output-block {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1.6rem;
+}
+
+.v9-output-block-label {
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.page-home-v9 .v9-output-block p {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.page-home-v9 .v9-output-footnote {
+  max-width: 60ch;
+  margin: 1.25rem 0 0;
+  color: var(--v9-copy);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.v9-output-footnote a {
+  color: var(--v9-violet-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1080px) {
+  .v9-process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .v9-constraint-tabs { grid-template-columns: repeat(5, minmax(240px, 1fr)); }
+  .page-home-v9 .v9-constraint-tab { grid-template-columns: 1fr auto; }
+  .page-home-v9 .v9-constraint-tab .v9-constraint-tab-num { grid-column: 1; }
+  .page-home-v9 .v9-constraint-tab .v9-constraint-tab-copy { grid-column: 1 / -1; }
+}
+
+@media (max-width: 680px) {
+  .v9-process-list { grid-template-columns: 1fr; }
+  .v9-credibility-centred .v9-logo-item { flex: 1 1 42%; }
+}
+
+/* Mentoring strip (below the engagement ladder) --------------------- */
+
+.v9-mentoring-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 1.6rem 1.75rem;
+  border: 1px solid var(--v9-line);
+  border-radius: var(--v9-radius);
+  background: var(--v9-white);
+}
+
+.v9-mentoring-strip > div:first-child { max-width: 62ch; }
+
+.v9-mentoring-strip h3 {
+  margin: 0.45rem 0 0.5rem;
+  color: var(--v9-ink);
+  font-size: 1.35rem;
+  letter-spacing: -0.025em;
+}
+
+.v9-mentoring-strip p {
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.v9-mentoring-strip-action {
+  display: grid;
+  gap: 0.15rem;
+  justify-items: start;
+}
+
+.v9-mentoring-strip-action strong {
+  color: var(--v9-violet-deep);
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.v9-mentoring-strip-action small {
+  margin-bottom: 0.65rem;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

@@ -126,7 +126,7 @@ Pricing ranges: £2,000–£4,000 for Growth Diagnosis, £8,000–£12,000 for a
 
 ### "Who is Daniel Johnson?"
 
-Daniel Johnson is the founder of We Scale Startups and a fractional CMO / growth operator. His proof base includes two operator-side exits, £18M+ revenue influenced (aggregate across client and operator-side engagements), £6M+ paid acquisition spend managed, 479+ founder sessions (4.93/5 on GrowthMentor), 20+ startups supported, and public teaching/speaking through startup and university programmes. Personal site: ${siteConfig.danielSite}.
+Daniel Johnson is the founder of We Scale Startups and a fractional CMO / growth operator. His proof base includes two operator-side exits, £18M+ revenue influenced (aggregate across client and operator-side engagements), £6M+ paid acquisition spend managed, 479+ founder sessions (4.96/5 on GrowthMentor), 20+ startups supported, and public teaching/speaking through startup and university programmes. Personal site: ${siteConfig.danielSite}.
 
 ### "What should a first-time visitor read?"
 

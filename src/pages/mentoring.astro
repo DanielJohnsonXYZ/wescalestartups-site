@@ -1,0 +1,468 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from "../lib/schema";
+import { mentoringOffer, siteConfig } from "../site";
+
+const mentoringFaqs = [
+  {
+    question: "How is mentoring different from the Growth Diagnosis?",
+    answer:
+      "Mentoring is an hour of senior judgement on a decision you already own. Growth Diagnosis is a week of evidence work that ends in a written constraint map and a sequenced plan. If you know the question, book mentoring. If you don't know which question matters, book the diagnosis."
+  },
+  {
+    question: "Who is actually on the call?",
+    answer: `${siteConfig.founderName}, every time. There is no associate layer, which is also why the number of monthly slots is limited.`
+  },
+  {
+    question: "Do I need to prepare anything?",
+    answer:
+      "Send the context ahead of the session: the decision, what you have tried, and any numbers you trust. Fifteen minutes of prep on your side usually doubles what the hour is worth."
+  },
+  {
+    question: "Can my team join instead of me?",
+    answer:
+      "Yes. Team mentoring is built for a growth team of two to five, so the decisions land with the people who have to execute them."
+  },
+  {
+    question: "What if I need more than mentoring?",
+    answer:
+      "We'll say so on the call, and the fee for a single session comes off the first month of any engagement you go on to book."
+  }
+];
+
+const mentoringSchema = [
+  buildServiceSchema(
+    mentoringOffer.title,
+    `${mentoringOffer.tagline} ${mentoringOffer.bestFor}`,
+    mentoringOffer.href
+  ),
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Mentoring", path: "/mentoring" }
+  ]),
+  buildFaqSchema(mentoringFaqs)
+];
+
+const howItRuns = [
+  {
+    step: "01",
+    title: "Send the decision",
+    body: "You book a slot and write two or three lines on what you are trying to decide. That is the whole brief."
+  },
+  {
+    step: "02",
+    title: "Sixty minutes on it",
+    body: "No preamble and no deck. We work the actual decision, including the parts you have been avoiding."
+  },
+  {
+    step: "03",
+    title: "A written summary",
+    body: "You get what we decided, what we ruled out, and what to check next, in writing, within a day."
+  },
+  {
+    step: "04",
+    title: "Two weeks of follow-up",
+    body: "Questions by email while you act on it, because the decision rarely survives first contact unchanged."
+  }
+];
+---
+
+<BaseLayout
+  path="/mentoring"
+  title="Growth Mentoring for Founders | We Scale Startups"
+  description="1:1 growth mentoring with Daniel Johnson for founders, first marketers and growth leads. 479+ sessions, 4.96/5 mentor rating. Single sessions or a monthly slot."
+  keywords="startup growth mentoring, founder mentor, B2B SaaS growth mentor, fractional CMO mentoring, GrowthMentor"
+  schema={mentoringSchema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Mentoring", path: "/mentoring" }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Mentoring</p>
+      <h1>Senior growth judgement, by the hour.</h1>
+      <p class="lede">
+        {mentoringOffer.problem} Sixty minutes with {siteConfig.founderName}, on the decision in front of you, with a written
+        summary afterwards so it does not evaporate.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-brand" href="#mentoring-formats" data-cta="mentoring-hero-formats">
+          See the formats →
+        </a>
+        <a class="button button-light" href={siteConfig.bookingUrl} data-cta="mentoring-hero-book">
+          Or talk it through first →
+        </a>
+      </div>
+      <ul class="mentoring-proof" aria-label="Mentoring track record">
+        {mentoringOffer.proof.map((item) => (
+          <li>
+            <strong>{item.value}</strong>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Who it is for"
+        title="You do not need a project. You need an answer."
+        body={mentoringOffer.bestFor}
+      />
+      <div class="mentoring-split">
+        <div class="mentoring-panel">
+          <h3>Bring one of these</h3>
+          <ul class="mentoring-topics">
+            {mentoringOffer.topics.map((topic) => <li>{topic}</li>)}
+          </ul>
+        </div>
+        <div class="mentoring-panel is-muted">
+          <h3>Mentoring is the wrong call if…</h3>
+          <ul class="mentoring-topics is-negative">
+            <li>You want someone to execute the work, not to help you decide it</li>
+            <li>The constraint is unclear and needs a week of evidence, not an hour</li>
+            <li>You are pre-revenue and still looking for product-market fit</li>
+          </ul>
+          <p class="mentoring-panel-note">
+            In the first two cases, <a href="/services/growth-diagnosis">Growth Diagnosis</a> is the honest starting point.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="mentoring-formats" aria-labelledby="mentoring-formats-title">
+    <div class="shell">
+      <p class="eyebrow">Formats</p>
+      <h2 id="mentoring-formats-title">Three ways to book it.</h2>
+      <div class="mentoring-format-grid">
+        {mentoringOffer.formats.map((format, index) => (
+          <article class:list={["mentoring-format", { "is-featured": index === 1 }]}>
+            {index === 1 && <span class="mentoring-format-badge">Most booked</span>}
+            <h3>{format.name}</h3>
+            <p class="mentoring-format-price">
+              <strong>{format.price}</strong>
+              <span>{format.duration}</span>
+            </p>
+            <p class="mentoring-format-body">{format.description}</p>
+            <ul class="mentoring-format-includes">
+              {format.includes.map((line) => <li>{line}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <p class="mentoring-format-note">
+        Prices in GBP, excluding VAT where it applies. US and other non-UK clients are invoiced in GBP at the
+        prevailing rate unless we agree otherwise before the first session.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="How a session runs"
+        title="One hour, four moving parts."
+        body="The format is deliberately boring, so the hour goes on your decision rather than on the process around it."
+      />
+      <ol class="mentoring-steps">
+        {howItRuns.map((item) => (
+          <li>
+            <span class="mentoring-step-number">{item.step}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Where the sessions come from</p>
+      <h2>479 sessions, mostly with people who never became clients.</h2>
+      <p class="lead-copy" style="max-width:64ch;">
+        Most of that history is on GrowthMentor and MentorCruise, mentoring founders through Google for Startups,
+        Techstars and university programmes. The rating is public and independently collected, which is the point of
+        quoting it.
+      </p>
+      <ul class="related-insights-list">
+        <li>
+          <a class="card-link" href={siteConfig.growthMentorReviews} rel="noopener" target="_blank">
+            Read the GrowthMentor reviews →
+          </a>
+        </li>
+        <li>
+          <a class="card-link" href={siteConfig.mentorCruise} rel="noopener" target="_blank">
+            MentorCruise profile →
+          </a>
+        </li>
+        <li>
+          <a class="card-link" href="/testimonials">Founder testimonials →</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Before you book a session.</h2>
+      <div class="grid-2">
+        {mentoringFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <EmailSignup
+        variant="light"
+        formId="mentoring-newsletter"
+        heading={`Not ready to book? Get ${siteConfig.newsletterName}.`}
+        subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
+        sourcePage="/mentoring"
+      />
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Book a session</p>
+        <h2>Bring the decision you keep putting off.</h2>
+        <p>
+          Slots are limited each month because {siteConfig.founderName} runs every session. Send the context and we will
+          confirm a time.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href="/contact?topic=mentoring" data-cta="mentoring-final-book">
+          {mentoringOffer.cta} →
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="mentoring-final-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mentoring-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mentoring-proof li {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+  }
+  .mentoring-proof strong {
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .mentoring-proof span {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .mentoring-split {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 860px) {
+    .mentoring-split { grid-template-columns: 1fr 1fr; }
+  }
+  .mentoring-panel {
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: var(--surface);
+  }
+  .mentoring-panel.is-muted { background: var(--paper-deep, #f4f5f1); }
+  .mentoring-panel h3 {
+    margin: 0 0 0.9rem;
+    font-size: 1.05rem;
+  }
+  .mentoring-topics {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mentoring-topics li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .mentoring-topics li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent, #6657ff);
+  }
+  .mentoring-topics.is-negative li::before {
+    content: "×";
+    color: var(--muted);
+  }
+  .mentoring-panel-note {
+    margin: 1.1rem 0 0;
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+  .mentoring-panel-note a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .mentoring-format-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 900px) {
+    .mentoring-format-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .mentoring-format {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.6rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: #fff;
+  }
+  .mentoring-format.is-featured {
+    border-color: var(--accent, #6657ff);
+    box-shadow: 0 18px 44px rgba(102, 87, 255, 0.12);
+  }
+  .mentoring-format-badge {
+    position: absolute;
+    top: -0.7rem;
+    left: 1.4rem;
+    padding: 0.22rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent, #6657ff);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .mentoring-format h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .mentoring-format-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0;
+  }
+  .mentoring-format-price strong {
+    font-size: 1.6rem;
+    letter-spacing: -0.03em;
+  }
+  .mentoring-format-price span {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .mentoring-format-body {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .mentoring-format-includes {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.4rem 0 0;
+    padding: 0.9rem 0 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+  }
+  .mentoring-format-includes li {
+    position: relative;
+    padding-left: 1.35rem;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+  .mentoring-format-includes li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent, #6657ff);
+    font-size: 0.8rem;
+  }
+  .mentoring-format-note {
+    margin: 1.4rem 0 0;
+    max-width: 62ch;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .mentoring-steps {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+  @media (min-width: 780px) {
+    .mentoring-steps { grid-template-columns: repeat(4, 1fr); }
+  }
+  .mentoring-steps li {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding: 1.3rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: var(--surface);
+  }
+  .mentoring-step-number {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--accent, #6657ff);
+  }
+  .mentoring-steps h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .mentoring-steps p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+</style>

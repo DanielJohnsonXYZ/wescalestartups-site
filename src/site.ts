@@ -13,7 +13,13 @@ export const siteConfig = {
   bookingLabel: "Book a Growth Audit",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
-  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
+  /**
+   * Sits inside the stacked CTA button, so it has to stay short. The longer
+   * promise lives in `bookingLede` (page copy) and `bookingCallReassurance` (title).
+   */
+  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · No pitch`,
+  /** Hero paragraph on /book, the full version of the promise. */
+  bookingLede: `Free, ${BOOKING_CALL_DURATION_PHRASE}, no deck required. You'll leave with your biggest growth bottleneck named in plain English and an honest read on what to do about it.`,
   /** Hero, pricing, quiz, noun phrase (not the imperative CTA). Duration lives in microcopy, not the button. */
   bookingCallShort: "Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
@@ -48,9 +54,11 @@ export const siteConfig = {
   podcastDescription:
     "Luck Doesn't Scale explores what AI means for startup growth in practice: which old assumptions are breaking, what AI makes possible, what remains uniquely human, and what leaders should do differently. Hosted by Daniel Johnson, founder of We Scale Startups.",
   /** Newsletter, single name, description, and cadence sitewide. */
-  newsletterName: "The Growth Bottleneck",
+  newsletterName: "Growth Notes",
   newsletterDescription: "One practical note on SaaS pipeline, positioning, and founder-led growth systems.",
   newsletterFrequencyLine: "Biweekly, one note you can act on.",
+  /** Sticky newsletter CTA (sitewide bottom bar). */
+  newsletterCtaLabel: "Sign up to Growth Notes",
   email: "daniel@wescalestartups.com",
   phone: "+44 20 3886 0931",
   address: "81 Curtain Road, London EC2A 3AG, United Kingdom",
@@ -107,7 +115,7 @@ export const canonicalProofMetrics = [
   { value: "£18M+", label: "Revenue influenced", note: revenueInfluencedNote },
   { value: "£6M+", label: "Paid acquisition spend managed" },
   { value: "479+", label: "Founder sessions" },
-  { value: "4.93/5", label: "GrowthMentor rating" },
+  { value: "4.96/5", label: "Mentor rating" },
   { value: "20+", label: "Startups supported" },
   { value: "2", label: "Operator-side exits" }
 ] as const;
@@ -166,6 +174,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/llms-full.txt": "2026-05-03",
   "/markdown/home.md": "2026-05-03",
   "/press": "2026-05-04",
+  "/mentoring": "2026-07-31",
   "/pricing": "2026-05-03",
   "/podcast": "2026-05-04",
   "/insights/glossary": "2026-05-05",
@@ -754,6 +763,75 @@ export const serviceSnapshots = [
   }
 ] as const;
 
+/**
+ * Mentoring sits below the engagement ladder: 1:1 time with Daniel for founders and
+ * growth leads who want senior judgement on a specific decision, not a project.
+ * Backed by 479+ sessions on GrowthMentor and MentorCruise.
+ */
+export const mentoringOffer = {
+  title: "Growth Mentoring",
+  href: "/mentoring",
+  badge: "Lightest commitment",
+  tagline: "1:1 growth mentoring for founders and first marketers.",
+  bestFor:
+    "Founders, first marketers and growth leads who want senior judgement on a live decision, without hiring anyone.",
+  problem: "You do not need a project. You need someone who has run this before to pressure-test the call you are about to make.",
+  price: "From £250/session",
+  timeline: "60 minutes · single session or monthly",
+  cta: "Book a mentoring session",
+  formats: [
+    {
+      name: "Single session",
+      price: "£250",
+      duration: "60 minutes",
+      description:
+        "One decision, worked through properly: pricing, positioning, a channel call, a first growth hire, or a board question you need an answer to.",
+      includes: [
+        "Pre-read of your context before we start",
+        "A written summary of what we decided",
+        "Follow-up questions by email for two weeks"
+      ]
+    },
+    {
+      name: "Monthly mentoring",
+      price: "£600/month",
+      duration: "2 sessions a month",
+      description:
+        "A standing slot for the person carrying growth. We track the same numbers month to month, so the advice compounds instead of resetting.",
+      includes: [
+        "Two 60-minute sessions each month",
+        "A shared decision log we both keep updated",
+        "Async questions between sessions"
+      ]
+    },
+    {
+      name: "Team mentoring",
+      price: "From £1,200/month",
+      duration: "Team sessions + async",
+      description:
+        "For a growth team of two to five. Same cadence, run with the whole team so decisions land with the people who execute them.",
+      includes: [
+        "Monthly team session plus 1:1s",
+        "Review of live experiments and reporting",
+        "Cadence and decision rules your team keeps"
+      ]
+    }
+  ],
+  topics: [
+    "Pricing and packaging decisions",
+    "Positioning and ICP definition",
+    "Which channel to commit to next",
+    "First growth or marketing hire",
+    "Setting up reporting a board will trust",
+    "Whether to keep, fix or fire an agency"
+  ],
+  proof: [
+    { value: "479+", label: "Mentoring sessions delivered" },
+    { value: "4.96/5", label: "Mentor rating" },
+    { value: "20+", label: "Startups supported" }
+  ]
+} as const;
+
 // Lead magnets remain the secondary path. Each one has its own standalone
 // landing page at /resources/{id} for SEO-crawlable, paid-ad-ready
 // surfaces (rendered by /src/pages/resources/[slug].astro).
@@ -1094,20 +1172,39 @@ export const first30Days = [
   }
 ] as const;
 
-// Pricing, approved ranges for filtering bad-fit leads.
+/**
+ * Pricing, approved ranges for filtering bad-fit leads.
+ * `priceFrom` is the contracting currency (GBP). `priceFromUsd` is an indicative
+ * conversion shown to US buyers, invoicing stays in GBP unless agreed otherwise.
+ * `recommended` drives the "most founders start here" badge, so the array order
+ * can change (mentoring first) without moving the badge.
+ */
 export const pricingTiers = [
+  {
+    name: "Growth Mentoring",
+    duration: "60 minutes · single or monthly",
+    priceFrom: "From £250",
+    priceFromUsd: "≈ $320",
+    description:
+      "1:1 time with Daniel on one live decision. Best when you want senior judgement, not a project.",
+    href: "/mentoring",
+    tierBadge: "Lightest commitment"
+  },
   {
     name: "Growth Diagnosis",
     duration: "1 week",
     priceFrom: "£2k–£4k",
+    priceFromUsd: "≈ $2.5k–$5k",
     description: "Plain-English view of the bottleneck and a sequenced plan. Best when you don't know the constraint yet.",
     href: "/services/growth-diagnosis",
-    tierBadge: "Best starting point"
+    tierBadge: "Best starting point",
+    recommended: true
   },
   {
     name: "90-Day Growth Sprint",
     duration: "12 weeks",
     priceFrom: "£8k–£12k",
+    priceFromUsd: "≈ $10k–$15k",
     description: "Audit → plan → ship 3–5 tests → transfer. Best pre-fundraise or post-launch when you need signal fast.",
     href: "/services/90-day-growth-sprint",
     tierBadge: "Most common paid step",
@@ -1118,6 +1215,7 @@ export const pricingTiers = [
     name: "Acquisition System Build",
     duration: "8–12 weeks",
     priceFrom: "£15k–£25k",
+    priceFromUsd: "≈ $19k–$32k",
     description: "Channels, landing pages, offers, and reporting working as one system. Best after you've tested channels in isolation.",
     href: "/services/acquisition-system-build",
     tierBadge: "Flagship engagement"
@@ -1126,6 +1224,7 @@ export const pricingTiers = [
     name: "Fractional CMO",
     duration: "3 months minimum",
     priceFrom: "£5k–£8k/mo",
+    priceFromUsd: "≈ $6.5k–$10k/mo",
     description:
       "Senior growth leadership inside the team. Best for Seed–Series B teams not ready for a full-time CMO. Fractional CMO Plus £7.5k–£10k/mo (~2 days/week) when you need deeper operating support.",
     href: "/services/fractional-cmo",
@@ -1142,7 +1241,7 @@ export const founderStory = {
     "Two operator-side startup exits",
     "£18M+ revenue influenced, aggregate across client and operator-side engagements",
     "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
-    "479+ founder sessions · 4.93/5 on GrowthMentor",
+    "479+ founder sessions · 4.96/5 on GrowthMentor",
     "MentorCruise Top Mentor, 5.0/5 across 30+ reviews",
     "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad"
   ]

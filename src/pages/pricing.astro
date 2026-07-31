@@ -11,7 +11,11 @@ const pricingFaqs = [
   },
   {
     question: "Which engagement do most founders start with?",
-    answer: "Most start with Growth Diagnosis when the bottleneck is unclear. If the constraint is already visible, a sprint, system build, or fractional CMO scope may be cleaner."
+    answer: "Most start with Growth Diagnosis when the bottleneck is unclear. If the constraint is already visible, a sprint, system build, or fractional CMO scope may be cleaner. If you only need senior judgement on one decision, book a mentoring session instead."
+  },
+  {
+    question: "Do you work with US companies?",
+    answer: "Yes. Engagements run remotely with a working overlap that covers UK and US hours. Contracting and invoicing stay in GBP unless we agree otherwise before we start, and the dollar figures on this page are indicative conversions for sizing, not quotes."
   },
   {
     question: "Are media spend and tools included?",
@@ -23,7 +27,7 @@ const pricingFaqs = [
 <BaseLayout
   path="/pricing"
   title="Startup Growth Pricing | We Scale Startups"
-  description="Engagement ranges for Growth Diagnosis, 90-Day Sprint, Acquisition System Build, and Fractional CMO. Honest ranges so you can self-qualify."
+  description="Published ranges for Growth Mentoring, Growth Diagnosis, the 90-Day Sprint, Acquisition System Build, and Fractional CMO, in GBP with indicative USD, so you can self-qualify."
   keywords="fractional CMO pricing, growth diagnosis cost, 90-day growth sprint price, acquisition system build, post-PMF startup consulting UK"
   schema={[buildBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -33,10 +37,15 @@ const pricingFaqs = [
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Pricing</p>
-      <h1>Honest UK pricing. No "request a quote" gating.</h1>
+      <h1>Here is what everything costs.</h1>
       <p class="lede">
-        All prices in GBP, set for the UK market. Every tier is a range: where you land depends on team complexity, scope, and timeline.
-        If the ranges aren't workable for you, an agency or in-house hire will probably be a better fit.
+        Every tier is a range, because where you land depends on team size, scope and timeline. Nothing here is hidden
+        behind a form. If the ranges do not work for you, an agency or an in-house hire is probably the better call, and
+        we will say so.
+      </p>
+      <p class="pricing-currency-note">
+        We contract in GBP and work with UK and US teams. The dollar figures below are indicative at current rates, for
+        sizing rather than for invoicing.
       </p>
     </div>
   </section>
@@ -44,19 +53,28 @@ const pricingFaqs = [
   <section class="section">
     <div class="shell">
       <div class="pricing-grid">
-        {pricingTiers.map((tier, idx) => (
+        {pricingTiers.map((tier) => {
+          const isRecommended = "recommended" in tier && tier.recommended;
+          return (
           <article
             class:list={[
               "pricing-card",
-              { "is-recommended": idx === 0 },
+              { "is-recommended": isRecommended },
               { "is-most-popular": "mostPopular" in tier && tier.mostPopular }
             ]}
           >
-            {idx === 0 && <span class="recommended-badge">Most founders start here</span>}
-            {"tierBadge" in tier && tier.tierBadge && <span class="popular-badge">{tier.tierBadge}</span>}
+            {isRecommended && <span class="recommended-badge">Most founders start here</span>}
+            {/* The recommended badge already says "best starting point"; showing both
+                puts two near-identical pills on the same card. */}
+            {!isRecommended && "tierBadge" in tier && tier.tierBadge && (
+              <span class="popular-badge">{tier.tierBadge}</span>
+            )}
             <h3>{tier.name}</h3>
             <div class="pricing-meta">
               <span class="pricing-price">{tier.priceFrom}</span>
+              {"priceFromUsd" in tier && tier.priceFromUsd && (
+                <span class="pricing-price-usd">{tier.priceFromUsd}</span>
+              )}
               <span class="pricing-duration">{tier.duration}</span>
             </div>
             <p>{tier.description}</p>
@@ -65,13 +83,15 @@ const pricingFaqs = [
             )}
             <a class="card-link" href={tier.href}>Learn more →</a>
           </article>
-        ))}
+          );
+        })}
       </div>
 
       <div class="pricing-disclaimer">
         Final fee depends on team size, channel mix, and the depth of execution required.
         Every engagement starts with a {siteConfig.bookingCallShort} so we agree on scope before any contract.
-        Limited number of clients each quarter.
+        Limited number of clients each quarter. UK clients: VAT is added where it applies. US clients: invoiced in GBP
+        unless we agree otherwise, no local entity or sales tax involved.
       </div>
 
       <ul class="pricing-trust-list" aria-label="How engagements work">
@@ -158,6 +178,36 @@ const pricingFaqs = [
 </BaseLayout>
 
 <style>
+  .pricing-currency-note {
+    max-width: 62ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+  /* Price and its USD equivalent on one line, duration on its own beneath,
+     so the three values stop reading as a single run-on string. */
+  .pricing-meta {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: baseline;
+    gap: 0.2rem 0.55rem;
+  }
+  .pricing-price-usd {
+    grid-column: 2;
+    color: var(--muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+  .pricing-duration { grid-column: 1 / -1; }
+
+  /* Five tiers in a two-column grid leaves the last card stranded beside a
+     hole; let it take the full row instead. */
+  .pricing-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
   .pricing-trust-list {
     margin: 1.75rem 0 0;
     padding: 1.15rem 1.25rem 1.2rem 1.5rem;

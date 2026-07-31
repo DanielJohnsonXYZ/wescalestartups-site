@@ -53,7 +53,7 @@ const insightsSchema = [
       <p class="eyebrow">Insights</p>
       <h1>Growth notes for founders between traction and scale.</h1>
       <p class="lede">
-        Notes are organised into four clusters (fractional CMO, GTM, AI-native marketing, and growth diagnostics), each with a pillar hub and spokes, so topics gain depth and internal links, not a flat archive. Pick a cluster below or scroll for every published note.
+        Four clusters, each with a pillar page and its spokes: fractional CMO, GTM, AI-native marketing, and growth diagnostics. Pick a cluster below, or scroll for every published note.
       </p>
       <div class="hero-actions">
         <a
@@ -66,9 +66,8 @@ const insightsSchema = [
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
         <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="insights-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
+          {siteConfig.scorecardLabel} →
         </a>
-        <a class="button button-light" href="/fractional-cmo-vs-agency" data-cta="insights-hero-vs-agency">WSS vs agency</a>
       </div>
     </div>
   </section>
@@ -119,8 +118,8 @@ const insightsSchema = [
     <div class="shell">
       <SectionIntro
         eyebrow="Published notes"
-        title="Start with the bottleneck, then choose the work."
-        body="Each article is written to answer a real founder question, not to fill a blog archive."
+        title="Every note answers one founder question."
+        body="Written for the decision in front of you: what to diagnose, what to build, and what to stop paying for."
       />
       <div class="grid-3">
         {insights.map((item) => (

@@ -168,6 +168,6 @@ Map these dataLayer events to GA4 (mark conversions where noted):
 | `ai_referral` | Audience / report: AI-sourced sessions (`ai_source`) |
 | `book_call` | Key event — clicks to `/book` or Calendly |
 | `booking_completed` | Key event — booked call (already on /book) |
-| `sticky_book_cta_shown` | Funnel diagnostics |
+| `sticky_cta_shown` | Funnel diagnostics |
 
 Filter exploration: `ai_referral` → `book_call` → `booking_completed`.

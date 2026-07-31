@@ -387,7 +387,13 @@
   border-bottom: 1px solid var(--v9-line);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.section-intro, .content-header, .testimonials-header) h2,
+/* Written out rather than wrapped in :where() so this beats global.css's
+   `body:not(.page-home-v8) .section-intro h2` (0-2-2). With :where() the
+   SectionIntro component rendered at 37px while a plain section <h2>
+   rendered at 63px, so pages mixing the two showed both sizes. */
+.theme-wss-v9:not(.page-home-v9) .section-intro h2,
+.theme-wss-v9:not(.page-home-v9) .content-header h2,
+.theme-wss-v9:not(.page-home-v9) .testimonials-header h2,
 .theme-wss-v9:not(.page-home-v9) .section > .shell > h2 {
   max-width: 18ch;
   font-size: clamp(2.35rem, 4.4vw, 4.35rem);

@@ -327,15 +327,15 @@ const layoutTitle =
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
 >
-  <section class="section section-hero">
+  <section class="page-hero">
     <div class="shell">
       <p class="eyebrow"><a href="/resources">Resources</a> · {magnet.audience}</p>
       <h1>{magnet.title}</h1>
-      <p class="lead">{magnet.description}</p>
-      <div class="hero-cta">
+      <p class="hero-copy">{magnet.description}</p>
+      <div class="hero-actions">
         {isGrowthExperimentPlanner ? (
           <a
-            class="btn btn-primary"
+            class="button button-brand"
             href="#get-planner"
             data-cta="magnet-get-90-day-growth-experiment-planner"
           >
@@ -343,7 +343,7 @@ const layoutTitle =
           </a>
         ) : downloadPath ? (
           <a
-            class="btn btn-primary"
+            class="button button-brand"
             href={downloadPath}
             download
             data-cta={`magnet-download-${slug}`}
@@ -351,7 +351,7 @@ const layoutTitle =
             Download the {magnet.title} →
           </a>
         ) : null}
-        <a class="btn btn-ghost" href="/services" data-cta={`magnet-hero-services-${slug}`}>
+        <a class="button button-light" href="/services" data-cta={`magnet-hero-services-${slug}`}>
           Or see services →
         </a>
       </div>
@@ -438,16 +438,16 @@ const layoutTitle =
     <div class="shell">
       <h2>Need more than a template?</h2>
       <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call. Bring your result, we'll pressure-test the constraint it names and sketch the next move in 20 minutes.</p>
-      <div class="hero-cta">
+      <div class="hero-actions">
         <a
-          class="btn btn-primary"
+          class="button button-brand"
           href={siteConfig.bookingUrl}
           data-cta={`magnet-final-book-${slug}`}
           title={siteConfig.bookingCallReassurance}
         >
           {siteConfig.bookingLabel} →
         </a>
-        <a class="btn btn-ghost" href="/resources" data-cta={`magnet-final-resources-${slug}`}>
+        <a class="button button-light" href="/resources" data-cta={`magnet-final-resources-${slug}`}>
           Back to all resources →
         </a>
       </div>

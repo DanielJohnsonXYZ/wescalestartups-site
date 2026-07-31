@@ -294,12 +294,25 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Keep :where() here: raising this selector's specificity makes it tie with
+   (and then beat, on source order) the .page-hero .eyebrow rule above. */
 .theme-wss-v9:not(.page-home-v9) .page-hero :where(p, .lede, .hero-copy) {
   max-width: 62ch;
   color: var(--v9-copy);
   font-family: var(--v9-sans);
   font-size: clamp(1.05rem, 1.45vw, 1.22rem);
   line-height: 1.62;
+}
+
+/* Restated here to beat global.css's `body:not(.page-home-v8) .page-hero p`,
+   which would otherwise scale this mono line up to hero body size. */
+.theme-wss-v9:not(.page-home-v9) .page-hero .hero-microcopy {
+  max-width: none;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
 }
 
 .theme-wss-v9:not(.page-home-v9) .page-hero p + p {

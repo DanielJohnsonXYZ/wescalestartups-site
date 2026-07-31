@@ -1171,6 +1171,9 @@
 
 .v9-service-head {
   display: flex;
+  /* Reserve the pill's height on every card, otherwise the featured card's
+     badge makes its header taller and knocks all four cards out of line. */
+  min-height: 1.65rem;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;

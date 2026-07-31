@@ -203,11 +203,12 @@
   overflow: hidden;
   padding: clamp(4.75rem, 8vw, 7.5rem) 0 clamp(4rem, 7vw, 6.5rem);
   border-bottom: 1px solid var(--v9-line);
+  /* Matches the homepage hero: no grid lines, a quiet violet/mint wash. */
   background:
-    linear-gradient(rgba(17, 17, 23, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 17, 23, 0.045) 1px, transparent 1px),
+    radial-gradient(58% 52% at 80% 8%, rgba(128, 108, 255, 0.13), transparent 66%),
+    radial-gradient(42% 38% at 4% 88%, rgba(200, 255, 101, 0.12), transparent 70%),
     var(--v9-paper);
-  background-size: 64px 64px, 64px 64px, auto;
+  background-size: auto;
   color: var(--v9-ink);
 }
 
@@ -263,16 +264,22 @@
   box-shadow: 0 0 0 0.26rem rgba(200, 255, 101, 0.13), 0 0 18px rgba(200, 255, 101, 0.75);
 }
 
+/* Serif (Fraunces) headline, matching the homepage hero. Interior pages
+   run a touch smaller so the homepage stays the fullest expression.
+   Specificity here already beats global.css's `body:not(.page-home-v8) h1`,
+   which otherwise pins Geist 700 sitewide. */
 .theme-wss-v9:not(.page-home-v9) .page-hero h1 {
-  max-width: 17ch;
+  max-width: 15ch;
   margin: 0 0 1.6rem;
   background: none;
   color: var(--v9-ink);
-  font-family: var(--v9-sans);
-  font-size: clamp(3.15rem, 5.8vw, 5.8rem);
-  font-weight: 650;
-  line-height: 0.96;
-  letter-spacing: -0.055em;
+  font-family: var(--v9-display);
+  font-size: clamp(2.9rem, 5.2vw, 5.3rem);
+  font-weight: 500;
+  font-variation-settings: "opsz" 100;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
   -webkit-text-fill-color: currentColor;
 }
 
@@ -283,7 +290,7 @@
   color: var(--v9-violet-deep);
   font-family: var(--v9-display);
   font-style: italic;
-  font-weight: 440;
+  font-weight: 460;
   -webkit-text-fill-color: transparent;
 }
 
@@ -687,7 +694,8 @@
 
   .theme-wss-v9:not(.page-home-v9) .page-hero h1 {
     max-width: none;
-    font-size: clamp(2.7rem, 13vw, 4rem);
+    font-size: clamp(2.35rem, 10.5vw, 3.6rem);
+    line-height: 1.02;
   }
 
   .theme-wss-v9:not(.page-home-v9) .page-hero .hero-actions {

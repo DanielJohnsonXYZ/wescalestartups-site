@@ -677,8 +677,10 @@
 
 .v9-credibility-head {
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
   margin-bottom: 1.6rem;
   color: var(--v9-copy);
   font-size: 0.72rem;
@@ -737,10 +739,10 @@
 }
 
 .v9-thesis h2 {
-  max-width: 15ch;
+  max-width: 16ch;
   margin: 0;
-  font-size: clamp(3rem, 5.7vw, 6rem);
-  line-height: 0.94;
+  font-size: clamp(2.2rem, 3.5vw, 3.7rem);
+  line-height: 1.02;
   text-wrap: balance;
 }
 
@@ -1169,6 +1171,9 @@
 
 .v9-service-head {
   display: flex;
+  /* Reserve the pill's height on every card, otherwise the featured card's
+     badge makes its header taller and knocks all four cards out of line. */
+  min-height: 1.65rem;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -2018,11 +2023,12 @@
   .v9-founder-grid,
   .v9-faq-grid { grid-template-columns: 1fr; }
 
-  .v9-thesis h2,
   .v9-system-heading h2,
   .v9-results-heading h2,
   .v9-voices-heading h2,
   .v9-founder-copy h2 { font-size: clamp(3rem, 8vw, 5rem); }
+
+  .v9-thesis h2 { font-size: clamp(2.6rem, 6.4vw, 4rem); }
 
   .v9-teaching-card { max-width: 580px; transform: none; }
   .v9-principle { min-height: 280px; }
@@ -2100,7 +2106,6 @@
   .v9-founder,
   .v9-faq { padding: 4.75rem 0; }
 
-  .v9-thesis h2,
   .v9-system-heading h2,
   .v9-fit h2,
   .v9-work-heading h2,
@@ -2108,6 +2113,8 @@
   .v9-voices-heading h2,
   .v9-founder-copy h2,
   .v9-faq-intro h2 { font-size: clamp(2.75rem, 13vw, 4rem); }
+
+  .v9-thesis h2 { font-size: clamp(2.35rem, 10.5vw, 3.3rem); }
 
   .v9-principle-grid { grid-template-columns: 1fr; }
   .v9-principle { min-height: auto; padding: 1.3rem; }

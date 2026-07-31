@@ -221,6 +221,11 @@ const sourcePageValue = sourcePage || Astro.url.pathname;
     .email-signup-form .button {
       width: 100%;
     }
+    /* Once the form stacks, the 220px basis applies to height, not width,
+       which stretches the field into a giant box. */
+    .email-signup-form input[type="email"] {
+      flex: 0 0 auto;
+    }
   }
   .email-signup-fine {
     font-size: 0.78rem;

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig, customerIoNewsletter } from "../site";
 
@@ -98,46 +99,40 @@ const schemas = [
 
   <section class="section">
     <div class="shell">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <p class="eyebrow">Who this is for</p>
-        <h2>Founders and operators who want to understand growth, properly.</h2>
-        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
-          You've got traction. You know growth matters. But every time you open a book or blog, it's either too tactical (run this ad) or too vague (growth is a mindset). 
-          This course is the practical, system-level view, the same one used with WSS clients.
-        </p>
-      </div>
+      <SectionIntro
+        eyebrow="Who this is for"
+        title="Founders and operators who want to understand growth, properly."
+        body="You've got traction. You know growth matters. But every time you open a book or blog, it's either too tactical (run this ad) or too vague (growth is a mindset). This course is the practical, system-level view, the same one used with WSS clients."
+      />
 
-      <div class="grid gap-5 md:grid-cols-3">
-        <div class="card p-6">
-          <p class="card-label">Post-PMF Founders</p>
+      <div class="grid-3">
+        <article class="feature-card">
+          <p class="card-kicker">Post-PMF founders</p>
           <p>Seed to Series B, traction but inconsistent acquisition, founder still the best salesperson.</p>
-        </div>
-        <div class="card p-6">
-          <p class="card-label">First Growth Hires</p>
+        </article>
+        <article class="feature-card">
+          <p class="card-kicker">First growth hires</p>
           <p>Recently promoted or hired to run growth, need a framework before the team drifts.</p>
-        </div>
-        <div class="card p-6">
-          <p class="card-label">Ops People</p>
+        </article>
+        <article class="feature-card">
+          <p class="card-kicker">Ops people</p>
           <p>Running marketing, sales, or product, want to understand how the pieces fit into a system.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="shell">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <p class="eyebrow">12 Modules</p>
-        <h2>What you'll learn.</h2>
-      </div>
+      <SectionIntro eyebrow="12 Modules" title="What you'll learn." />
 
-      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid-3">
         {courseFeatures.map((item) => (
-          <div class="card p-6">
-            <p class="text-sm font-semibold text-[color:var(--accent)] mb-2">Module {item.module}</p>
-            <h3 class="text-lg font-bold tracking-[-0.04em]">{item.title}</h3>
-            <p class="mt-2 text-sm leading-7 text-[color:var(--muted)]">{item.description}</p>
-          </div>
+          <article class="feature-card">
+            <p class="card-kicker">Module {item.module}</p>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -145,42 +140,32 @@ const schemas = [
 
   <section class="section" id="waitlist">
     <div class="shell">
-      <div class="max-w-2xl mx-auto text-center">
-        <p class="eyebrow">Waitlist now open</p>
-        <h2>£30/mo for 12 weeks. Join the waitlist for the next cohort.</h2>
-        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
-          Join the waitlist to be first in line when the cohort launches. No charge until the course goes live, just early access and a founding-member discount.
-        </p>
+      <SectionIntro
+        eyebrow="Waitlist now open"
+        title="£30/mo for 12 weeks. Join the waitlist for the next cohort."
+        body="Join the waitlist to be first in line when the cohort launches. No charge until the course goes live, just early access and a founding-member discount."
+      />
 
-        <form class="mt-8 card p-8 md:p-10" id="course-waitlist" name="course-waitlist">
-          <div class="grid gap-4 max-w-md mx-auto">
-            <div>
-              <label class="text-sm font-semibold" for="course-name">Name</label>
-              <input class="input mt-1" type="text" id="course-name" name="name" required placeholder="Your name" />
-            </div>
-            <div>
-              <label class="text-sm font-semibold" for="course-email">Email</label>
-              <input class="input mt-1" type="email" id="course-email" name="email" required placeholder="you@company.com" />
-            </div>
-            <div>
-              <label class="text-sm font-semibold" for="course-stage">Stage</label>
-              <select class="input mt-1" id="course-stage" name="stage">
-                <option>Select your stage</option>
-                <option>Pre-PMF</option>
-                <option>Post-PMF, Seed</option>
-                <option>Series A</option>
-                <option>Series B+</option>
-              </select>
-            </div>
-            <button class="button button-brand w-full" type="submit">Join the Waitlist</button>
-            <p class="text-xs text-[color:var(--muted)] text-center">No charge until launch. Unsubscribe anytime.</p>
-          </div>
-        </form>
+      <form class="contact-option contact-form" id="course-waitlist" name="course-waitlist">
+        <p class="card-kicker">Reserve your place</p>
+        <label for="course-name">Name<input type="text" id="course-name" name="name" required placeholder="Your name" /></label>
+        <label for="course-email">Email<input type="email" id="course-email" name="email" required placeholder="you@company.com" /></label>
+        <label for="course-stage">Stage
+          <select id="course-stage" name="stage">
+            <option>Select your stage</option>
+            <option>Pre-PMF</option>
+            <option>Post-PMF, Seed</option>
+            <option>Series A</option>
+            <option>Series B+</option>
+          </select>
+        </label>
+        <button class="button button-brand" type="submit">Join the waitlist</button>
+        <p class="not-for-footnote">No charge until launch. Unsubscribe anytime.</p>
+      </form>
 
-        <p class="mt-6 text-sm text-[color:var(--muted)]">
-          Prefer working directly? <a class="link-arrow" href={siteConfig.bookingUrl}>Book a 20-minute growth diagnostic →</a>
-        </p>
-      </div>
+      <p class="not-for-footnote">
+        Prefer working directly? <a class="link-arrow" href={siteConfig.bookingUrl}>Book a 20-minute growth diagnostic →</a>
+      </p>
     </div>
   </section>
 

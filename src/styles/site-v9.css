@@ -411,6 +411,12 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  /* The pill is inline-flex, but as a grid or flex child it gets blockified
+     and stretches the full column. Keep it hugging its label everywhere. */
+  width: fit-content;
+  max-width: 100%;
+  justify-self: start;
+  align-self: start;
 }
 
 /* Cards: quieter surfaces, stronger typography ---------------- */

@@ -726,7 +726,7 @@
 /* Thesis ---------------------------------------------------- */
 
 .v9-thesis {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
   background: var(--v9-night);
   color: var(--v9-white);
 }
@@ -828,7 +828,7 @@
 /* Diagnostic ------------------------------------------------ */
 
 .v9-system {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
   background:
     radial-gradient(55% 65% at 100% 15%, rgba(128, 108, 255, 0.09), transparent 68%),
     var(--v9-paper);
@@ -1023,7 +1023,7 @@
 /* Fit ------------------------------------------------------- */
 
 .v9-fit {
-  padding: clamp(5rem, 8vw, 8rem) 0;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
   border-top: 1px solid var(--v9-line);
   background: var(--v9-paper-2);
 }
@@ -1115,7 +1115,7 @@
 /* Engagements ----------------------------------------------- */
 
 .v9-work {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
   background:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
@@ -1348,7 +1348,7 @@
 /* Results --------------------------------------------------- */
 
 .v9-results {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
   background: var(--v9-paper);
 }
 
@@ -1471,7 +1471,7 @@
 /* Voices ---------------------------------------------------- */
 
 .v9-voices {
-  padding: clamp(5rem, 8vw, 8rem) 0;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
   border-top: 1px solid var(--v9-line);
   background: var(--v9-paper-2);
 }
@@ -1548,7 +1548,7 @@
 /* Founder --------------------------------------------------- */
 
 .v9-founder {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
   background: var(--v9-white);
 }
 
@@ -1761,7 +1761,7 @@
 /* FAQ ------------------------------------------------------- */
 
 .v9-faq {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
   background: var(--v9-paper);
 }
 
@@ -1892,7 +1892,7 @@
 .v9-final {
   position: relative;
   overflow: hidden;
-  padding: clamp(7rem, 12vw, 12rem) 0;
+  padding: clamp(6rem, 10vw, 10rem) 0;
   background: var(--v9-night);
   color: var(--v9-white);
   text-align: center;

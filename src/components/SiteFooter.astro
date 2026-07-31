@@ -61,7 +61,6 @@ const groups = [
       { href: "/press", label: "Speaking & press" },
       { href: "/workshops", label: "Workshops" },
       { href: "/refer", label: "Refer a founder" },
-      { href: "/contact", label: "Contact" },
       { href: siteConfig.linkedin, label: "LinkedIn", external: true }
     ]
   },
@@ -100,16 +99,6 @@ const groups = [
           Or, <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardLabel} →</a>
         </p>
       )}
-      {showNewsletter && (
-        <div class="footer-newsletter" aria-label="Newsletter signup">
-          <EmailSignup
-            variant="light"
-            formId="footer-newsletter"
-            heading={siteConfig.newsletterName}
-            subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
-          />
-        </div>
-      )}
     </div>
 
     {groups.map((group) => (
@@ -127,6 +116,17 @@ const groups = [
         </nav>
       </div>
     ))}
+
+    {showNewsletter && (
+      <div class="footer-newsletter" aria-label="Newsletter signup">
+        <EmailSignup
+          variant="light"
+          formId="footer-newsletter"
+          heading={siteConfig.newsletterName}
+          subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
+        />
+      </div>
+    )}
   </div>
 
   <div class="shell footer-bottom">
@@ -149,13 +149,17 @@ const groups = [
   }
   @media (min-width: 720px) {
     .site-footer-v2 .footer-grid {
-      grid-template-columns: 1.4fr repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
+    /* The brand block is far taller than a link column; letting it span the
+       row stops the remaining groups being pushed into a half-empty row. */
+    .site-footer-v2 .footer-brand { grid-column: 1 / -1; }
   }
   @media (min-width: 1080px) {
     .site-footer-v2 .footer-grid {
       grid-template-columns: 1.6fr repeat(5, 1fr);
     }
+    .site-footer-v2 .footer-brand { grid-column: auto; }
   }
 
   .footer-brand p.footer-summary {
@@ -198,26 +202,18 @@ const groups = [
   }
 
   .footer-newsletter {
-    margin-top: 1.25rem;
-    max-width: 36rem;
+    grid-column: 1 / -1;
     min-width: 0;
   }
   .footer-newsletter :global(.email-signup-strip) {
     margin: 0;
-    padding: 1.1rem 1.15rem;
+    padding: 1.4rem 1.5rem;
   }
   .footer-newsletter :global(.email-signup-heading) {
     font-size: 1rem;
   }
   .footer-newsletter :global(.email-signup-sub) {
     font-size: 0.82rem;
-  }
-  .footer-newsletter :global(.email-signup-form) {
-    flex-direction: column;
-  }
-  .footer-newsletter :global(.email-signup-form input[type="email"]),
-  .footer-newsletter :global(.email-signup-form .button) {
-    width: 100%;
   }
 
   .footer-col h2 {

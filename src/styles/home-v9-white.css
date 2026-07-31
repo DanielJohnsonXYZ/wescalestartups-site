@@ -8,7 +8,7 @@
 
 .page-home-v9 {
   --v9-paper: #ffffff;
-  --v9-paper-2: #f6f7f3;
+  --v9-paper-2: #f0f1e9;
   --v9-white: #ffffff;
 }
 
@@ -108,14 +108,21 @@
 
 /* Engagements ------------------------------------------------ */
 
+/* White, so it reads as a beat against the alt-surface fit section above
+   it rather than merging into one long band. */
 .v9-work {
   border-top: 1px solid var(--v9-line);
   background:
     linear-gradient(rgba(17, 17, 23, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(17, 17, 23, 0.035) 1px, transparent 1px),
-    var(--v9-paper-2);
+    var(--v9-paper);
   background-size: 72px 72px, 72px 72px, auto;
   color: var(--v9-ink);
+}
+
+/* Breaks the founder / scorecard / faq run of three identical whites. */
+.v9-scorecard {
+  background: var(--v9-paper-2);
 }
 
 .v9-service-card {
@@ -581,7 +588,7 @@
 .v9-results,
 .v9-voices,
 .v9-founder {
-  padding: clamp(6rem, 10vw, 10rem) 0;
+  padding: clamp(5rem, 8vw, 8rem) 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

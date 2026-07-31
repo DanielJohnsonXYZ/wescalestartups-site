@@ -40,8 +40,8 @@ const suggestedCopy =
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Podcast Guest Application</p>
-      <h1>Apply to be a guest on <span class="grad">{siteConfig.podcastName}</span></h1>
-      <p class="max-w-3xl">
+      <h1>Apply to be a guest on <em>{siteConfig.podcastName}</em></h1>
+      <p class="hero-copy">
         {suggestedCopy}
       </p>
     </div>
@@ -54,25 +54,25 @@ const suggestedCopy =
         title="Founders and operators with real AI growth stories."
         body="We want practical, specific examples, not theory. If your startup is using AI to grow faster, save time, or make better commercial decisions, we want to hear from you."
       />
-      <div class="max-w-3xl grid gap-4">
-        <div class="card p-6">
-          <h3 class="font-bold text-lg">What makes a great guest</h3>
-          <ul class="mt-4 space-y-3">
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're a founder, operator, or growth leader at a post-PMF startup</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're using AI in a way that creates measurable commercial outcomes</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You can share specific examples, numbers, and lessons learned</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>You're comfortable on record, clear speaking, practical takeaways</span></li>
+      <div class="grid-2">
+        <article class="feature-card">
+          <p class="card-kicker">What makes a great guest</p>
+          <ul class="note-list">
+            <li>You're a founder, operator, or growth leader at a post-PMF startup</li>
+            <li>You're using AI in a way that creates measurable commercial outcomes</li>
+            <li>You can share specific examples, numbers, and lessons learned</li>
+            <li>You're comfortable on record, clear speaking, practical takeaways</li>
           </ul>
-        </div>
-        <div class="card p-6">
-          <h3 class="font-bold text-lg">Topics we love</h3>
-          <ul class="mt-4 space-y-3">
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>AI-native GTM: how AI changed your acquisition model</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>Agentic workflows that replaced manual growth work</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>Using AI to sharpen positioning, ICP, or pricing</span></li>
-            <li class="flex gap-3"><span class="text-[color:var(--accent)] mt-1">✦</span><span>AI tools that improved conversion, retention, or sales efficiency</span></li>
+        </article>
+        <article class="feature-card">
+          <p class="card-kicker">Topics we love</p>
+          <ul class="note-list">
+            <li>AI-native GTM: how AI changed your acquisition model</li>
+            <li>Agentic workflows that replaced manual growth work</li>
+            <li>Using AI to sharpen positioning, ICP, or pricing</li>
+            <li>AI tools that improved conversion, retention, or sales efficiency</li>
           </ul>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -84,18 +84,15 @@ const suggestedCopy =
         title="Tell us about yourself and your AI story."
         body="The more specific you are, the faster we can see if there's a fit for the show."
       />
-      <form class="max-w-2xl card p-8 md:p-10 space-y-5" id="guest-application" name="guest-application" novalidate>
+      <form class="contact-option contact-form" id="guest-application" name="guest-application" novalidate>
         {guestFields.map((field) => (
-          <label class="block">
-            <span class="block text-sm font-semibold uppercase tracking-[0.1em] text-[color:var(--muted)] mb-2">
-              {field.label}{field.required && <span class="text-[color:var(--accent)]"> *</span>}
-            </span>
+          <label>
+            {field.label}
             {field.type === "textarea" ? (
               <textarea
                 name={field.name}
                 rows="4"
                 required={field.required}
-                class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
               ></textarea>
             ) : (
               <input
@@ -105,12 +102,11 @@ const suggestedCopy =
                 placeholder={"placeholder" in field ? field.placeholder : undefined}
                 inputmode={"inputmode" in field ? (field.inputmode as astroHTML.JSX.HTMLAttributes["inputmode"]) : undefined}
                 autocomplete={"autocomplete" in field ? field.autocomplete : undefined}
-                class="w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
               />
             )}
           </label>
         ))}
-        <button class="button button-brand" type="submit" id="guest-submit">Submit Application</button>
+        <button class="button button-brand" type="submit" id="guest-submit">Submit application</button>
         <p id="guest-status" class="guest-status" role="status" aria-live="polite" hidden></p>
       </form>
 
@@ -360,11 +356,13 @@ const suggestedCopy =
         title={`Interested in sponsoring ${siteConfig.podcastName}?`}
         body="Reach a high-intent audience of founders and operators building AI-native startups."
       />
-      <div class="max-w-3xl card p-8 md:p-10">
-        <p class="text-lg leading-8 text-[color:var(--muted)]">
+      <div class="content-block">
+        <p>
           {siteConfig.podcastName} reaches founders and operators at post-PMF startups who are actively figuring out how AI changes growth. Sponsorship includes pre-roll mentions, show notes links, and optional founder-led partnership discussions.
         </p>
-        <a class="button button-brand mt-6" href={`mailto:${siteConfig.email}?subject=Podcast%20Sponsorship%20Enquiry`}>Enquire About Sponsorship →</a>
+        <p>
+          <a class="button button-brand" href={`mailto:${siteConfig.email}?subject=Podcast%20Sponsorship%20Enquiry`}>Enquire about sponsorship →</a>
+        </p>
       </div>
     </div>
   </section>

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/generate-og-png.mjs && astro build",
+    "build": "node scripts/generate-og-png.mjs && astro build && node scripts/patch-bottleneck-map-dist.mjs",
     "check": "astro check",
     "check:theme": "node scripts/check-site-theme.mjs",
     "verify:build": "node scripts/verify-build-integrity.mjs",

@@ -12,6 +12,7 @@ Cloudflare-proxied hosts.
 | `uptime.wescalestartups.com` | Uptime Kuma on Hetzner via CF | Orange-cloud | Worker live |
 | `comms.wescalestartups.com` | Mautic (Apache) on `65.109.232.75` | DNS-only | Needs proxy or Traefik header |
 | `pingcrm.wescalestartups.com` | PingCRM on Hetzner | DNS-only | Needs proxy or Traefik header |
+| `cal.wescalestartups.com` | Cal.com (Dokploy/Traefik) on `65.109.232.75` | TBD | Needs proxy or Traefik header — see `calcom-troubleshooting.md` |
 
 Main site `wescalestartups.com` / `www` is **not** covered by this Worker.
 

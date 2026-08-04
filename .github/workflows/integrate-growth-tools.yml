@@ -25,6 +25,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Escape the generated Astro title expression
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          file = Path('scripts/integrate-growth-tools.mjs')
+          source = file.read_text()
+          source = source.replace('title={\\`${title} | Free WSS Growth Tool\\`}', 'title={\\`\\${title} | Free WSS Growth Tool\\`}')
+          file.write_text(source)
+          PY
       - name: Generate native growth tool pages
         run: node scripts/integrate-growth-tools.mjs
       - name: Verify Astro and site integrity

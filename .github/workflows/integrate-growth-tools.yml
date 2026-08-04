@@ -36,6 +36,15 @@ jobs:
           PY
       - name: Generate native growth tool pages
         run: node scripts/integrate-growth-tools.mjs
+      - name: Remove obsolete standalone history fragment
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          file = Path('public/growth-tools/app.js')
+          source = file.read_text()
+          source = source.replace('}window.scrollTo(0,0);});\n', '')
+          file.write_text(source)
+          PY
       - name: Verify Astro and site integrity
         run: |
           npm run check

@@ -69,6 +69,15 @@ jobs:
           replacement = "export function getStaticPaths() {\n  const tools = " + match.group(1) + " as const;\n  return tools.map"
           file.write_text(source[:match.start()] + replacement + source[match.end():])
           PY
+      - name: Preserve the existing legacy bottleneck page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          file = Path('public/_redirects')
+          lines = file.read_text().splitlines()
+          lines = [line for line in lines if not line.startswith('/founder-led-growth-bottleneck-map')]
+          file.write_text('\n'.join(lines).rstrip() + '\n')
+          PY
       - name: Verify generated JavaScript syntax
         run: node --check public/growth-tools/app.js
       - name: Verify Astro and site integrity

@@ -56,6 +56,19 @@ jobs:
           )
           file.write_text(source[:start] + navigation + source[end:])
           PY
+      - name: Keep static path data inside getStaticPaths
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          file = Path('src/pages/resources/[tool].astro')
+          source = file.read_text()
+          match = re.search(r'const tools = ([\s\S]*?) as const;\n\nexport function getStaticPaths\(\) \{\n  return tools\.map', source)
+          if not match:
+              raise SystemExit('Unable to locate generated tools list')
+          replacement = "export function getStaticPaths() {\n  const tools = " + match.group(1) + " as const;\n  return tools.map"
+          file.write_text(source[:match.start()] + replacement + source[match.end():])
+          PY
       - name: Verify generated JavaScript syntax
         run: node --check public/growth-tools/app.js
       - name: Verify Astro and site integrity

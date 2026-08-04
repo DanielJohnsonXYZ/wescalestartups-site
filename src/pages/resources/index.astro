@@ -76,34 +76,44 @@ const guideIds = new Set(guides.map((g) => g.id));
 const moreMagnets = leadMagnets.filter((m) => !guideIds.has(m.id));
 const diagnosticTools = [
   {
-    href: "/founder-led-growth-bottleneck-map",
-    title: "Founder-Led Growth Bottleneck Map",
-    audience: "Founder dependency",
-    description: "Map how much of the GTM system still lives in the founder's head."
+    href: "/resources/growth-dependency",
+    title: "What is keeping growth dependent on you?",
+    audience: "Growth dependency diagnostic",
+    description: "Find the commercial capability that still relies on founder knowledge, effort or judgement, then identify the evidence that would prove it has been transferred.",
+    time: "4 minutes",
+    featured: true
   },
   {
-    href: "/ai-sameness-scorecard",
-    title: "AI Sameness Scorecard",
-    audience: "AI positioning",
-    description: "Test whether your category, promise, and proof sound distinct enough to buy."
+    href: "/resources/customer-segment",
+    title: "Which customer segment should we prioritise next?",
+    audience: "Customer segment prioritisation",
+    description: "Compare two or three real customer segments using evidence, economics, retention and delivery fit, then choose where to focus.",
+    time: "6 minutes",
+    featured: false
   },
   {
-    href: "/hiring-readiness-scorecard",
-    title: "Hiring Readiness Scorecard",
-    audience: "First senior hire",
-    description: "Check whether a Head of Marketing would inherit a working system or a mess."
+    href: "/resources/positioning",
+    title: "How do I explain what my product does?",
+    audience: "Positioning and messaging builder",
+    description: "Turn customer evidence into one clear positioning direction, a homepage message and a practical customer test.",
+    time: "8 minutes",
+    featured: false
   },
   {
-    href: "/healthtech-buyer-confidence-matrix",
-    title: "HealthTech Buyer Confidence Matrix",
-    audience: "HealthTech",
-    description: "Find where trust is breaking between product users and the economic buyer."
+    href: "/resources/gtm-leak",
+    title: "Where are we losing customers?",
+    audience: "GTM leak diagnostic",
+    description: "Separate volume, conversion and measurement problems across the customer journey, then identify the stage with the greatest likely commercial impact.",
+    time: "5 minutes",
+    featured: false
   },
   {
-    href: "/portfolio-growth-readiness",
-    title: "Portfolio Growth Readiness",
-    audience: "Investors and M&A",
-    description: "Assess commercial readiness across PE-backed and acquired businesses."
+    href: "/resources/weekly-focus",
+    title: "What should I focus on this week?",
+    audience: "Weekly constraint planner",
+    description: "Compare the strongest diagnoses, choose one constraint and leave with one evidence target and exactly three actions.",
+    time: "5 minutes",
+    featured: false
   }
 ] as const;
 ---
@@ -125,8 +135,8 @@ const diagnosticTools = [
           Diagnose the real constraint, make the next decision, and brief your team with more clarity. No generic playbooks and no decorative PDF funnel.
         </p>
         <div class="hero-actions">
-          <a class="button button-dark" href="#guides" data-cta="resources-browse">
-            Browse the resource library ↓
+          <a class="button button-dark" href="#growth-tools" data-cta="resources-browse">
+            Explore the growth tools ↓
           </a>
           <a class="button button-light" href="/proof" data-cta="resources-proof">See the work →</a>
         </div>
@@ -156,12 +166,49 @@ const diagnosticTools = [
             <li><span>02</span> See the constraint</li>
             <li><span>03</span> Get the next move</li>
           </ol>
-          <a class="button resource-router-cta" href={siteConfig.scorecardUrl} data-cta="resources-scorecard">
-            Take the Growth Bottleneck Scorecard <span aria-hidden="true">↗</span>
+          <a class="button resource-router-cta" href="/resources/growth-dependency" data-cta="resources-scorecard">
+            Start the Growth Dependency Diagnostic <span aria-hidden="true">↗</span>
           </a>
           <p class="resource-router-note">No email required to see your result.</p>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="growth-tools">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Interactive growth tools"
+        title="Start with the decision holding growth back."
+        body="Five connected tools to diagnose the constraint, clarify the evidence and choose what to do next. No sign-up is required, and completed results carry into the Weekly Focus Planner."
+      />
+      {diagnosticTools.filter((tool) => tool.featured).map((tool) => (
+        <article class="growth-tool-featured">
+          <div>
+            <p class="card-kicker">Recommended starting point</p>
+            <h3><a href={tool.href}>{tool.title}</a></h3>
+            <p>{tool.description}</p>
+            <div class="growth-tool-card-meta"><span>{tool.time}</span><span>Immediate result</span><span>No email gate</span></div>
+            <a class="button button-brand" href={tool.href} data-cta="resources-growth-tool-featured">Run the diagnostic →</a>
+          </div>
+          <div class="growth-tool-featured-preview" aria-hidden="true">
+            <span>Strongest signal</span>
+            <strong>Founder-held sales knowledge</strong>
+            <p>See the evidence, the success condition and the recommended next tool.</p>
+          </div>
+        </article>
+      ))}
+      <div class="growth-tool-card-grid">
+        {diagnosticTools.filter((tool) => !tool.featured).map((tool, index) => (
+          <article class="feature-card growth-tool-card">
+            <p class="card-kicker">0{index + 2} · {tool.audience}</p>
+            <h3><a href={tool.href}>{tool.title}</a></h3>
+            <p>{tool.description}</p>
+            <div class="growth-tool-card-meta"><span>{tool.time}</span><span>Private in your browser</span></div>
+            <a class="card-link" href={tool.href} data-cta={`resources-growth-tool-${index + 2}`}>Use the tool →</a>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -237,26 +284,6 @@ const diagnosticTools = [
       </section>
     )
   }
-
-  <section class="section">
-    <div class="shell">
-      <SectionIntro
-        eyebrow="Interactive diagnostics"
-        title="Use the scorecard for the decision in front of you."
-        body="Each tool gives an immediate result and a practical next move. No email is required to see the diagnosis."
-      />
-      <div class="grid-3">
-        {diagnosticTools.map((tool) => (
-          <article class="feature-card">
-            <p class="card-kicker">{tool.audience}</p>
-            <h3><a href={tool.href}>{tool.title}</a></h3>
-            <p>{tool.description}</p>
-            <a class="card-link" href={tool.href}>Run the diagnostic →</a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <section class="section">
     <div class="shell">
@@ -616,4 +643,18 @@ const diagnosticTools = [
       font-size: 0.7rem;
     }
   }
+
+  .growth-tool-featured { display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.65fr);gap:clamp(2rem,5vw,5rem);align-items:center;border:1px solid var(--border);border-radius:1.5rem;padding:clamp(1.6rem,4vw,3.2rem);background:var(--surface);box-shadow:var(--shadow-soft);margin-bottom:1rem; }
+  .growth-tool-featured h3 { max-width:18ch;font-size:clamp(2rem,4vw,3.5rem);margin:.55rem 0 1rem; }
+  .growth-tool-featured p { max-width:62ch; }
+  .growth-tool-featured-preview { border-radius:1.1rem;padding:1.45rem;background:var(--ink);color:white; }
+  .growth-tool-featured-preview span { display:block;color:rgba(255,255,255,.65);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800; }
+  .growth-tool-featured-preview strong { display:block;font-family:var(--font-display);font-size:clamp(1.45rem,3vw,2.2rem);line-height:1.05;margin:.7rem 0; }
+  .growth-tool-featured-preview p { color:rgba(255,255,255,.76);margin-bottom:0; }
+  .growth-tool-card-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem; }
+  .growth-tool-card { display:flex;flex-direction:column;min-height:19rem; }
+  .growth-tool-card .card-link { margin-top:auto; }
+  .growth-tool-card-meta { display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 1.25rem; }
+  .growth-tool-card-meta span { border-radius:999px;background:var(--surface-muted);padding:.38rem .6rem;font-size:.72rem;font-weight:750; }
+  @media(max-width:780px){.growth-tool-featured,.growth-tool-card-grid{grid-template-columns:1fr}.growth-tool-card{min-height:auto}}
 </style>

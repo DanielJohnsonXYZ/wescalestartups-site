@@ -1,0 +1,68 @@
+---
+import GrowthToolPage from "../../components/GrowthToolPage.astro";
+
+export function getStaticPaths() {
+  const tools = [
+  {
+    "slug": "growth-dependency",
+    "id": "bottleneck",
+    "title": "What is keeping growth dependent on you?",
+    "label": "Growth dependency diagnostic",
+    "description": "Find the commercial capability that still relies on founder knowledge, effort or judgement, then identify the evidence that would prove it has been transferred.",
+    "time": "4 minutes",
+    "questions": "12 questions",
+    "previewTitle": "Founder-held sales knowledge",
+    "previewText": "The strongest sales narrative and objection handling still work best when the founder is personally involved."
+  },
+  {
+    "slug": "customer-segment",
+    "id": "customer",
+    "title": "Which customer segment should we prioritise next?",
+    "label": "Customer segment prioritisation",
+    "description": "Compare two or three real customer segments using evidence, economics, retention and delivery fit, then choose where to focus.",
+    "time": "6 minutes",
+    "questions": "7 criteria",
+    "previewTitle": "Leading option",
+    "previewText": "A prioritised segment, the strongest evidence behind it and the group to deprioritise for now."
+  },
+  {
+    "slug": "positioning",
+    "id": "positioning",
+    "title": "How do I explain what my product does?",
+    "label": "Positioning and messaging builder",
+    "description": "Turn customer evidence into one clear positioning direction, a homepage message and a practical customer test.",
+    "time": "8 minutes",
+    "questions": "9 prompts",
+    "previewTitle": "A clear working message",
+    "previewText": "One positioning foundation, homepage direction, sales introduction and validation plan."
+  },
+  {
+    "slug": "gtm-leak",
+    "id": "leak",
+    "title": "Where are we losing customers?",
+    "label": "GTM leak diagnostic",
+    "description": "Separate volume, conversion and measurement problems across the customer journey, then identify the stage with the greatest likely commercial impact.",
+    "time": "5 minutes",
+    "questions": "6 stages",
+    "previewTitle": "Activation conversion leak",
+    "previewText": "The stage to focus on, the failure type, the primary metric and the next evidence target."
+  },
+  {
+    "slug": "weekly-focus",
+    "id": "weekly",
+    "title": "What should I focus on this week?",
+    "label": "Weekly constraint planner",
+    "description": "Compare the strongest diagnoses, choose one constraint and leave with one evidence target and exactly three actions.",
+    "time": "5 minutes",
+    "questions": "One focused week",
+    "previewTitle": "One constraint, not five priorities",
+    "previewText": "A Friday evidence target, three time-boxed actions and an explicit defer list."
+  }
+] as const;
+  return tools.map((tool) => ({ params: { tool: tool.slug }, props: tool }));
+}
+
+const tool = Astro.props;
+---
+
+<GrowthToolPage {...tool} />

@@ -36,15 +36,27 @@ jobs:
           PY
       - name: Generate native growth tool pages
         run: node scripts/integrate-growth-tools.mjs
-      - name: Remove obsolete standalone history fragment
+      - name: Replace standalone history routing with real page navigation
         run: |
           python - <<'PY'
           from pathlib import Path
           file = Path('public/growth-tools/app.js')
           source = file.read_text()
-          source = source.replace('}window.scrollTo(0,0);});\n', '')
-          file.write_text(source)
+          start = source.index('function currentPath()')
+          end = source.index("document.addEventListener('click'")
+          navigation = """function currentPath(){return ROUTES.includes(location.pathname)?location.pathname:ROUTES[0];}
+function currentTool(){return Object.keys(TOOL_META).find(k=>TOOL_META[k].route===currentPath())||'bottleneck';}
+function go(path,source='navigation'){
+  const destination=ROUTES.includes(path)?path:'/resources#growth-tools';
+  const destinationTool=Object.keys(TOOL_META).find(k=>TOOL_META[k].route===destination)||'';
+  if(destinationTool)track('Next Tool Selected',{tool:currentTool(),source,destination:destinationTool});
+  window.location.assign(destination);
+}
+"""
+          file.write_text(source[:start] + navigation + source[end:])
           PY
+      - name: Verify generated JavaScript syntax
+        run: node --check public/growth-tools/app.js
       - name: Verify Astro and site integrity
         run: |
           npm run check

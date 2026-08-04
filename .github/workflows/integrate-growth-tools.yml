@@ -1,0 +1,43 @@
+name: Integrate WSS growth tools
+
+on:
+  push:
+    branches:
+      - feature/resources-growth-tools
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/resources-growth-tools
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate native growth tool pages
+        run: node scripts/integrate-growth-tools.mjs
+      - name: Verify Astro and site integrity
+        run: |
+          npm run check
+          npm run build
+          npm run check:theme
+          npm run verify:build
+      - name: Commit generated integration
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/growth-tools src/components/GrowthToolPage.astro src/pages/resources src/styles/growth-tools.css src/components/SiteHeader.astro src/pages/sitemap.xml.ts public/_redirects
+          git commit -m "feat: add native WSS growth tools"
+          git push origin HEAD:feature/resources-growth-tools

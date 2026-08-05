@@ -1,15 +1,8 @@
+import { checkFormRequest } from "./_form-guard.js";
+
 /**
  * Customer.io Forms API proxy.
- *
- * Keeps Track API credentials server-side. Clients POST JSON (or form-urlencoded)
- * to /api/forms; we forward to:
- *   POST https://track[.eu].customer.io/api/v1/forms/{form_id}/submit
- *
- * Cloudflare Pages env (Production + Preview):
- *   CUSTOMER_IO_SITE_ID
- *   CUSTOMER_IO_TRACK_API_KEY
- *   CUSTOMER_IO_REGION          — "eu" (default; WSS workspace) or "us"
- *   CUSTOMER_IO_FORM_ID         — default form id when body omits form_id
+ * Keeps Track API credentials server-side and validates public submissions.
  */
 
 const MAX_ATTR = 1000;
@@ -37,26 +30,12 @@ function trackBase(region) {
 
 async function readPayload(request) {
   const contentType = (request.headers.get("Content-Type") || "").toLowerCase();
-  if (contentType.includes("application/json")) {
-    return await request.json();
-  }
-  if (
-    contentType.includes("application/x-www-form-urlencoded") ||
-    contentType.includes("multipart/form-data")
-  ) {
+  if (contentType.includes("application/json")) return await request.json();
+  if (contentType.includes("application/x-www-form-urlencoded") || contentType.includes("multipart/form-data")) {
     const form = await request.formData();
-    const out = {};
-    for (const [key, value] of form.entries()) {
-      if (typeof value === "string") out[key] = value;
-    }
-    return out;
+    return Object.fromEntries([...form.entries()].filter(([, value]) => typeof value === "string"));
   }
-  // Fallback: try JSON, then empty.
-  try {
-    return await request.json();
-  } catch {
-    return {};
-  }
+  try { return await request.json(); } catch { return {}; }
 }
 
 export async function onRequestPost(context) {
@@ -67,53 +46,32 @@ export async function onRequestPost(context) {
     return json(400, { ok: false, error: "Invalid request body" });
   }
 
-  const email = clip(payload.email || payload.Email, 320);
-  if (!email || !EMAIL_RE.test(email)) {
-    return json(400, { ok: false, error: "Valid email required" });
+  const guard = await checkFormRequest(context, payload);
+  if (!guard.ok) {
+    console.warn("Rejected /api/forms submission", guard.reason);
+    return json(200, { ok: true });
   }
+
+  const email = clip(payload.email || payload.Email, 320);
+  if (!email || !EMAIL_RE.test(email)) return json(400, { ok: false, error: "Valid email required" });
 
   const env = context.env || {};
   const siteId = (env.CUSTOMER_IO_SITE_ID || "").trim();
-  const apiKey = (
-    env.CUSTOMER_IO_TRACK_API_KEY ||
-    env.CUSTOMER_IO_API_KEY ||
-    ""
-  ).trim();
+  const apiKey = (env.CUSTOMER_IO_TRACK_API_KEY || env.CUSTOMER_IO_API_KEY || "").trim();
   if (!siteId || !apiKey) {
-    console.error("Customer.io credentials missing (CUSTOMER_IO_SITE_ID / CUSTOMER_IO_TRACK_API_KEY)");
-    return json(503, {
-      ok: false,
-      error: "Email capture unavailable",
-      hint: "Set CUSTOMER_IO_SITE_ID and CUSTOMER_IO_TRACK_API_KEY on Cloudflare Pages"
-    });
+    console.error("Customer.io credentials missing");
+    return json(503, { ok: false, error: "Email capture unavailable" });
   }
 
-  const formId =
-    clip(payload.form_id || payload.formId, 150) ||
-    clip(env.CUSTOMER_IO_FORM_ID, 150) ||
-    "wss-newsletter";
-
+  const formId = clip(payload.form_id || payload.formId, 150) || clip(env.CUSTOMER_IO_FORM_ID, 150) || "wss-newsletter";
   const data = { email };
-  const passThrough = [
-    "source_type",
-    "source_page",
-    "lead_magnet",
-    "utm_source",
-    "utm_medium",
-    "utm_campaign",
-    "first_name",
-    "name",
-    "booked_diagnostic"
-  ];
-  for (const key of passThrough) {
-    const v = clip(payload[key]);
-    if (v) data[key] = v;
+  for (const key of ["source_type", "source_page", "lead_magnet", "utm_source", "utm_medium", "utm_campaign", "first_name", "name", "booked_diagnostic"]) {
+    const value = clip(payload[key]);
+    if (value) data[key] = value;
   }
-  // Normalise boolean-ish booking flag for journey exit conditions.
   if (data.booked_diagnostic) {
     const raw = data.booked_diagnostic.toLowerCase();
-    data.booked_diagnostic =
-      raw === "1" || raw === "true" || raw === "yes" ? "true" : data.booked_diagnostic;
+    data.booked_diagnostic = raw === "1" || raw === "true" || raw === "yes" ? "true" : data.booked_diagnostic;
   }
 
   const region = (env.CUSTOMER_IO_REGION || "eu").trim().toLowerCase();
@@ -123,18 +81,10 @@ export async function onRequestPost(context) {
   try {
     const res = await fetch(url, {
       method: "POST",
-      headers: {
-        Authorization: `Basic ${auth}`,
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
+      headers: { Authorization: `Basic ${auth}`, "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({ data })
     });
-
-    if (res.ok || res.status === 204) {
-      return json(200, { ok: true, form_id: formId });
-    }
-
+    if (res.ok || res.status === 204) return json(200, { ok: true, form_id: formId });
     const detail = await res.text().catch(() => "");
     console.error("Customer.io forms submit failed", res.status, detail.slice(0, 400));
     return json(502, { ok: false, error: "Customer.io rejected submission" });

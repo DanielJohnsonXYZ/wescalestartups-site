@@ -1,3 +1,5 @@
+import { checkFormRequest } from "./_form-guard.js";
+
 /**
  * Podcast guest application intake.
  *
@@ -5,6 +7,9 @@
  * 1. RESEND_API_KEY → email via Resend
  * 2. GUEST_APPLICATION_WEBHOOK_URL → POST JSON (Zapier/Make/n8n/Discord)
  * 3. FormSubmit.co fallback
+ *
+ * Validates Origin / same-site page URL / honeypot / disposable domains before delivery.
+ * `website` is a real applicant field — honeypot is `company_website` only.
  *
  * Always returns JSON. Client still copies to clipboard + offers mailto as backup.
  */
@@ -57,6 +62,16 @@ export async function onRequestPost(context) {
     payload = await context.request.json();
   } catch {
     return json(400, { ok: false, error: "Invalid JSON" });
+  }
+
+  const guard = await checkFormRequest(context, payload, {
+    sourcePageField: "page",
+    honeypotFields: ["company_website"],
+    rateLimitBucket: "podcast-guest"
+  });
+  if (!guard.ok) {
+    console.warn("Rejected /api/podcast-guest submission", guard.reason);
+    return json(200, { ok: true });
   }
 
   const data = {

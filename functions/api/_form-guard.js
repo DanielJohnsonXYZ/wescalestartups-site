@@ -7,6 +7,8 @@ const DISPOSABLE_DOMAINS = new Set([
   "immenseignite.info"
 ]);
 
+const DEFAULT_HONEYPOT_FIELDS = ["website", "company_website"];
+
 function hostnameFrom(value) {
   if (typeof value !== "string" || !value.trim()) return "";
   try {
@@ -20,26 +22,40 @@ function isAllowedHost(hostname) {
   return ALLOWED_HOSTS.has(hostname) || hostname.endsWith(".wescalestartups-site.pages.dev");
 }
 
-async function rateLimit(context) {
+async function rateLimit(context, bucket = "forms") {
   const store = context.env?.FORM_RATE_LIMIT;
   if (!store?.get || !store?.put) return true;
 
   const ip = context.request.headers.get("CF-Connecting-IP") || "unknown";
   const minute = Math.floor(Date.now() / 60000);
-  const key = `forms:${ip}:${minute}`;
+  const key = `${bucket}:${ip}:${minute}`;
   const count = Number(await store.get(key) || 0);
   if (count >= 8) return false;
   await store.put(key, String(count + 1), { expirationTtl: 120 });
   return true;
 }
 
-export async function checkFormRequest(context, payload) {
+/**
+ * @param {object} context Cloudflare Pages function context
+ * @param {object} payload Parsed request body
+ * @param {object} [options]
+ * @param {string} [options.sourcePageField="source_page"] Absolute same-site page URL field
+ * @param {string[]} [options.honeypotFields] Fields that must be empty (bots fill them)
+ * @param {string} [options.rateLimitBucket="forms"] KV key prefix when FORM_RATE_LIMIT is bound
+ */
+export async function checkFormRequest(context, payload, options = {}) {
+  const sourcePageField = options.sourcePageField || "source_page";
+  const honeypotFields = options.honeypotFields || DEFAULT_HONEYPOT_FIELDS;
+  const rateLimitBucket = options.rateLimitBucket || "forms";
+
   const originHost = hostnameFrom(context.request.headers.get("Origin"));
   const refererHost = hostnameFrom(context.request.headers.get("Referer"));
-  const sourceHost = hostnameFrom(payload?.source_page);
+  const sourceHost = hostnameFrom(payload?.[sourcePageField]);
 
-  if (payload?.website || payload?.company_website) {
-    return { ok: false, reason: "honeypot" };
+  for (const field of honeypotFields) {
+    if (payload?.[field]) {
+      return { ok: false, reason: "honeypot" };
+    }
   }
 
   if (!originHost || !isAllowedHost(originHost)) {
@@ -60,7 +76,7 @@ export async function checkFormRequest(context, payload) {
     return { ok: false, reason: "email_domain" };
   }
 
-  if (!(await rateLimit(context))) {
+  if (!(await rateLimit(context, rateLimitBucket))) {
     return { ok: false, reason: "rate_limit" };
   }
 

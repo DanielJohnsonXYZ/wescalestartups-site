@@ -106,6 +106,16 @@ const suggestedCopy =
             )}
           </label>
         ))}
+        {/* Honeypot — must stay empty. Real company site uses `website`. */}
+        <label class="hp-field" aria-hidden="true">
+          Company website
+          <input
+            type="text"
+            name="company_website"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </label>
         <button class="button button-brand" type="submit" id="guest-submit">Submit application</button>
         <p id="guest-status" class="guest-status" role="status" aria-live="polite" hidden></p>
       </form>
@@ -244,7 +254,8 @@ const suggestedCopy =
                   practicalLessons: val("practical-lessons"),
                   relevantLinks: val("relevant-links"),
                   email: emailVal,
-                  page: window.location.href
+                  page: window.location.href,
+                  company_website: val("company_website")
                 })
               });
               apiOk = res.ok;
@@ -344,6 +355,13 @@ const suggestedCopy =
         #guest-submit:disabled {
           opacity: 0.7;
           cursor: default;
+        }
+        .hp-field {
+          position: absolute;
+          left: -10000px;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
         }
       </style>
     </div>

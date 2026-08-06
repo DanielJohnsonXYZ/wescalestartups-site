@@ -22,7 +22,7 @@ const REDIRECT_TO: Record<string, string> = {
   "/team/rahul-van-manen": "/about",
   "/test": "/experimentation",
   "/case-study": "/case-studies",
-  "/quiz": "/resources/growth-bottleneck-scorecard",
+  "/quiz": "/resources/growth-dependency",
   "/case-studies/diadia": "/case-studies/healthtech-precision-medicine",
   "/case-studies/diadia-health": "/case-studies/healthtech-precision-medicine",
   // IA consolidation — overlapping conceptual pages → canonical Growth OS
@@ -36,7 +36,10 @@ const REDIRECT_TO: Record<string, string> = {
   "/industries/b2b-saas": "/industries/saas-growth",
   "/industries/ecommerce": "/industries",
   "/industries/seed-to-series-b": "/start-here",
-  "/case-studies/marketplace-performance-audit": "/case-studies"
+  "/case-studies/marketplace-performance-audit": "/case-studies",
+  "/resources/growth-bottleneck-scorecard": "/resources/growth-dependency",
+  "/resources/founder-led-growth-diagnostic": "/resources/growth-dependency",
+  "/founder-led-growth-bottleneck-map": "/resources/growth-dependency"
 };
 
 export function sitemapCanonicalPath(path: string): string {

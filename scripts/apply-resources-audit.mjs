@@ -857,8 +857,8 @@ const check = (condition, message) => {
 };
 const htmlPath = (route) => {
   if (route === "/") return "dist/index.html";
-  if (/\.(xml|txt)$/.test(route)) return `dist/${route.replace(/^\//, "")}`;
-  return `dist/${route.replace(/^\//, "")}.html`;
+  if (/\.(xml|txt)$/.test(route)) return "dist/" + route.replace(/^\//, "");
+  return "dist/" + route.replace(/^\//, "") + ".html";
 };
 const loadHtml = (route) => {
   const file = htmlPath(route);
@@ -909,7 +909,7 @@ const collect = (directory) => {
   for (const entry of fs.readdirSync(path.join(root, directory), { withFileTypes: true })) {
     const rel = path.join(directory, entry.name);
     if (entry.isDirectory()) collect(rel);
-    else if (/\\.(astro|ts|js|mjs|md|html|json)$/.test(entry.name)) sourceFiles.push(rel);
+    else if (/\\.(astro|ts|js|mjs|md|mdx|html|json)$/.test(entry.name)) sourceFiles.push(rel);
   }
 };
 collect("src");
@@ -1137,6 +1137,40 @@ sitemap = replaceAll(
 );
 sitemap = replaceAll(sitemap, '      "/founder-led-growth-bottleneck-map",\n', '');
 write("src/pages/sitemap.xml.ts", sitemap);
+
+// Replace every internal reference with the final canonical route.
+const canonicalResourceReplacements = new Map([
+  ["/resources/growth-bottleneck-scorecard", "/resources/growth-dependency"],
+  ["/resources/founder-led-growth-diagnostic", "/resources/growth-dependency"],
+  ["/founder-led-growth-bottleneck-map", "/resources/growth-dependency"],
+  ["https://wss-growth-tools.vercel.app/customer", "/resources/customer-segment"]
+]);
+const canonicalSweepExtensions = /\.(astro|ts|js|mjs|md|mdx|html|json)$/;
+const canonicalSweepExcluded = new Set([
+  "src/lib/sitemapCanonical.ts",
+  "scripts/apply-resources-audit.mjs",
+  "scripts/patch-resources-generator.mjs"
+]);
+const sweepCanonicalLinks = (directory) => {
+  const absoluteDirectory = path.join(root, directory);
+  if (!fs.existsSync(absoluteDirectory)) return;
+  for (const entry of fs.readdirSync(absoluteDirectory, { withFileTypes: true })) {
+    const relative = path.join(directory, entry.name).replaceAll(path.sep, "/");
+    if (entry.isDirectory()) {
+      sweepCanonicalLinks(relative);
+      continue;
+    }
+    if (!canonicalSweepExtensions.test(entry.name) || canonicalSweepExcluded.has(relative)) continue;
+    const content = read(relative);
+    let updated = content;
+    for (const [legacy, canonical] of canonicalResourceReplacements) {
+      updated = updated.split(legacy).join(canonical);
+    }
+    if (updated !== content) write(relative, updated);
+  }
+};
+sweepCanonicalLinks("src");
+sweepCanonicalLinks("public");
 
 // Printable companion now points to the canonical interactive diagnostic.
 let printable = read("public/downloads/guides/growth-bottleneck-scorecard.md");

@@ -22,7 +22,8 @@ function loadState(){
     return saved && saved.version === 2 ? saved : defaultState();
   }catch(e){return defaultState();}
 }
-function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(e){return false;}}
+function scrollToolIntoView(){document.getElementById("growth-tool-start")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});}
 function esc(value){return String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function clean(value){return String(value ?? '').trim().replace(/\s+/g,' ').replace(/[.!?]+$/,'');}
 function lowerFirst(value){const x=clean(value);return x ? x[0].toLowerCase()+x.slice(1) : '';}
@@ -52,9 +53,13 @@ function go(path,source='navigation'){
   window.location.assign(destination);
 }
 document.addEventListener('click',e=>{
-  const routeEl=e.target.closest('[data-route]');
+  const target=e.target instanceof Element?e.target:null;
+  if(!target)return;
+  const launch=target.closest('[data-tool-launch]');
+  if(launch){e.preventDefault();const tool=launch.dataset.toolLaunch;if(tool==='bottleneck')startBottleneck();else if(tool==='customer')startCustomer();else if(tool==='positioning')startPositioning();else if(tool==='leak')startLeak();else if(tool==='weekly')startWeekly();requestAnimationFrame(scrollToolIntoView);return;}
+  const routeEl=target.closest('[data-route]');
   if(routeEl){e.preventDefault();go(routeEl.dataset.route,routeEl.dataset.source||'link');}
-  const tracked=e.target.closest('[data-track]');
+  const tracked=target.closest('[data-track]');
   if(tracked)track(tracked.dataset.track,{tool:tracked.dataset.tool||currentTool()||'collection'});
 });
 
@@ -86,13 +91,13 @@ function home(){
 function introPage(tool,copy){
   return layout(`<section class="tool-intro shell"><a href="/resources#growth-tools" class="micro">← All growth tools</a><div style="margin-top:24px"><span class="eyebrow">${esc(copy.label)}</span><h2>${esc(copy.title)}</h2><p class="lead">${esc(copy.lead)}</p><div class="button-row"><button class="btn primary" onclick="${copy.startFn}()">${copy.startLabel||'Start the tool'} →</button>${copy.exampleFn?`<button class="btn secondary" onclick="${copy.exampleFn}()">Use a WSS example</button>`:''}</div><p class="micro">${esc(copy.meta)}</p></div><div class="tool-benefits">${copy.benefits.map(b=>`<div class="benefit"><strong>${esc(b[0])}</strong><span>${esc(b[1])}</span></div>`).join('')}</div></section>`,copy.title,copy.lead);
 }
-function progress(step,total,title){return `<div class="progress-meta"><strong>${esc(title)}</strong><span>Step ${step+1} of ${total}</span></div><div class="progress-track"><div class="progress-fill" style="width:${Math.round((step+1)/total*100)}%"></div></div>`;}
-function optionButton(label,desc,index,selected,fn){return `<button type="button" class="option ${selected?'selected':''}" onclick="${fn}(${index})"><span class="option-mark">${String.fromCharCode(65+index)}</span><span><strong>${esc(label)}</strong><span class="desc">${esc(desc)}</span></span></button>`;}
+function progress(step,total,title){const value=step+1;return `<div class="progress-meta"><strong>${esc(title)}</strong><span>Step ${value} of ${total}</span></div><div class="progress-track" role="progressbar" aria-label="${esc(title)}" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${value}"><div class="progress-fill" style="width:${Math.round(value/total*100)}%"></div></div>`;}
+function optionButton(label,desc,index,selected,fn){return `<button type="button" class="option ${selected?'selected':''}" aria-pressed="${selected?'true':'false'}" onclick="${fn}(${index})"><span class="option-mark">${String.fromCharCode(65+index)}</span><span><strong>${esc(label)}</strong><span class="desc">${esc(desc)}</span></span></button>`;}
 function evidenceItems(items){return `<div class="evidence-list">${items.map((x,i)=>`<div class="evidence-item"><b>${i+1}</b><p>${esc(x)}</p></div>`).join('')}</div>`;}
 function actionItems(items){return `<div class="action-list">${items.map((x,i)=>`<div class="action-item"><b>${i+1}</b><p>${esc(x)}</p></div>`).join('')}</div>`;}
 function resultActions(copy,tool){return `<div class="result-actions"><button class="btn primary" onclick="copyText(${JSON.stringify(copy)})">Copy result</button><button class="btn secondary" onclick="window.print();track('PDF Selected',{tool:'${tool}'})">Print or save as PDF</button><button class="btn secondary" onclick="restartTool('${tool}')">Retake</button></div>`;}
 function nextCard(title,text,route,label,sourceTool){return `<div class="next-card"><div><h3>${esc(title)}</h3><p>${esc(text)}</p></div><a class="btn" href="${route}" data-route="${route}" data-source="${sourceTool}" onclick="track('Next Tool Selected',{tool:'${sourceTool}',destination:'${route}'})">${esc(label)} →</a></div>`;}
-function restartTool(tool){delete state.drafts[tool];delete state.results[tool];saveState();session={};render();window.scrollTo(0,0);track('Tool Restarted',{tool});}
+function restartTool(tool){delete state.drafts[tool];delete state.results[tool];saveState();session={};render();scrollToolIntoView();track('Tool Restarted',{tool});}
 
 
 // 1. Founder dependency diagnostic
@@ -123,8 +128,8 @@ window.startBottleneck=function(){
   session.tool='bottleneck';session.step=0;session.answers=(state.drafts.bottleneck?.answers||Array(bottleneckQuestions.length).fill(null));track('Tool Started',{tool:'bottleneck'});renderBottleneckStep();
 };
 window.chooseBottleneck=function(i){session.answers[session.step]=i;state.drafts.bottleneck={answers:session.answers};saveState();renderBottleneckStep();};
-window.bottleneckNext=function(){if(session.answers[session.step]===null)return;if(session.step<bottleneckQuestions.length-1){session.step++;renderBottleneckStep();window.scrollTo(0,0);}else finishBottleneck();};
-window.bottleneckBack=function(){if(session.step===0){session={};render();}else{session.step--;renderBottleneckStep();window.scrollTo(0,0);}};
+window.bottleneckNext=function(){if(session.answers[session.step]===null)return;if(session.step<bottleneckQuestions.length-1){session.step++;renderBottleneckStep();scrollToolIntoView();}else finishBottleneck();};
+window.bottleneckBack=function(){if(session.step===0){session={};render();}else{session.step--;renderBottleneckStep();scrollToolIntoView();}};
 function renderBottleneckStep(){
   const q=bottleneckQuestions[session.step];
   app.innerHTML=layout(`<div class="wizard">${progress(session.step,bottleneckQuestions.length,q.c)}<section class="panel"><span class="step-kicker">${esc(q.c)}</span><h2>${esc(q.q)}</h2><p class="intro">${esc(q.h)}</p><div class="options">${q.o.map((o,i)=>optionButton(o[0],o[1],i,session.answers[session.step]===i,'chooseBottleneck')).join('')}</div><div class="wizard-actions"><button class="back" onclick="bottleneckBack()">← ${session.step===0?'Start':'Back'}</button><button class="btn primary" onclick="bottleneckNext()" ${session.answers[session.step]===null?'disabled':''}>${session.step===bottleneckQuestions.length-1?'See my result':'Continue'} →</button></div></section></div>`,TOOL_META.bottleneck.title,TOOL_META.bottleneck.desc);
@@ -168,10 +173,10 @@ window.setSegmentCount=function(count){
 window.updateSegmentName=function(i,value){session.names[i]=value;persistCustomer();const btn=document.getElementById('segmentContinue');if(btn)btn.disabled=!validSegments();};
 function validSegments(){const names=session.names.map(clean);return names.length>=2&&names.every(n=>n.split(' ').length>=3)&&new Set(names.map(n=>n.toLowerCase())).size===names.length;}
 function persistCustomer(){state.drafts.customer={step:session.step,names:session.names,ratings:session.ratings};saveState();}
-window.customerNamesNext=function(){if(!validSegments())return;session.names=session.names.map(clean);session.step=1;persistCustomer();renderCustomer();window.scrollTo(0,0);};
+window.customerNamesNext=function(){if(!validSegments())return;session.names=session.names.map(clean);session.step=1;persistCustomer();renderCustomer();scrollToolIntoView();};
 window.chooseCustomerRating=function(segIndex,value){const ci=session.step-1;if(!session.ratings[ci])session.ratings[ci]=[];session.ratings[ci][segIndex]=value;persistCustomer();renderCustomer();};
-window.customerNext=function(){const ci=session.step-1;if(session.ratings[ci]?.length!==session.names.length||session.ratings[ci].some(v=>v===undefined))return;if(session.step<customerCriteria.length){session.step++;persistCustomer();renderCustomer();window.scrollTo(0,0);}else finishCustomer();};
-window.customerBack=function(){if(session.step===0){session={};render();}else{session.step--;persistCustomer();renderCustomer();window.scrollTo(0,0);}};
+window.customerNext=function(){const ci=session.step-1;if(session.ratings[ci]?.length!==session.names.length||session.ratings[ci].some(v=>v===undefined))return;if(session.step<customerCriteria.length){session.step++;persistCustomer();renderCustomer();scrollToolIntoView();}else finishCustomer();};
+window.customerBack=function(){if(session.step===0){session={};render();}else{session.step--;persistCustomer();renderCustomer();scrollToolIntoView();}};
 function renderCustomer(){
   if(session.step===0){
     app.innerHTML=layout(`<div class="wizard">${progress(0,customerCriteria.length+1,'Define the segments')}<section class="panel"><span class="step-kicker">Customer options</span><h2>Which segments are you genuinely considering?</h2><p class="intro">Use a specific role or company type, stage and relevant situation. Compare two by default, or add a third when it is a real decision.</p><div class="button-row"><button class="btn ${session.names.length===2?'primary':'secondary'}" onclick="setSegmentCount(2)">Compare 2</button><button class="btn ${session.names.length===3?'primary':'secondary'}" onclick="setSegmentCount(3)">Compare 3</button></div><div class="segment-list">${session.names.map((n,i)=>`<div class="field"><label>Segment ${i+1}</label><input value="${esc(n)}" oninput="updateSegmentName(${i},this.value)" placeholder="e.g. Post-PMF B2B SaaS founders with inconsistent pipeline"><div class="hint">Role or company type + stage + relevant situation.</div></div>`).join('')}</div><div class="quality ${validSegments()?'good':'warn'}">${validSegments()?'These segments are specific enough to compare.':'Each segment needs at least three words and must be meaningfully different.'}</div><div class="wizard-actions"><button class="back" onclick="customerBack()">← Start</button><button id="segmentContinue" class="btn primary" onclick="customerNamesNext()" ${validSegments()?'':'disabled'}>Start comparison →</button></div></section></div>`,TOOL_META.customer.title,TOOL_META.customer.desc);return;
@@ -230,8 +235,8 @@ function positioningQuality(field,value){
   return{ok:true,kind:'good',text:'Specific enough to use in the working direction.'};
 }
 window.updatePositioning=function(value){const f=positioningFields[session.step];session.answers[f.key]=value;state.drafts.positioning={answers:session.answers};saveState();const q=positioningQuality(f,value);const el=document.getElementById('positionQuality');if(el){el.className=`quality ${q.kind}`;el.textContent=q.text;}const btn=document.getElementById('positionNext');if(btn)btn.disabled=!q.ok;};
-window.positionNext=function(){const f=positioningFields[session.step],q=positioningQuality(f,session.answers[f.key]||'');if(!q.ok)return;session.answers[f.key]=clean(session.answers[f.key]);if(session.step<positioningFields.length-1){session.step++;renderPositioning();window.scrollTo(0,0);}else renderPositionReview();};
-window.positionBack=function(){if(session.step===0){session={};render();}else{session.step--;renderPositioning();window.scrollTo(0,0);}};
+window.positionNext=function(){const f=positioningFields[session.step],q=positioningQuality(f,session.answers[f.key]||'');if(!q.ok)return;session.answers[f.key]=clean(session.answers[f.key]);if(session.step<positioningFields.length-1){session.step++;renderPositioning();scrollToolIntoView();}else renderPositionReview();};
+window.positionBack=function(){if(session.step===0){session={};render();}else{session.step--;renderPositioning();scrollToolIntoView();}};
 function renderPositioning(){
   const f=positioningFields[session.step],v=session.answers[f.key]||'',q=positioningQuality(f,v);
   app.innerHTML=layout(`<div class="wizard">${progress(session.step,positioningFields.length,f.title)}<section class="panel"><span class="step-kicker">${esc(f.title)}</span><h2>${esc(f.q)}</h2><p class="intro">${esc(f.hint)}</p><div class="field"><label>Your answer</label><textarea autofocus oninput="updatePositioning(this.value)" placeholder="${esc(f.placeholder)}">${esc(v)}</textarea><div id="positionQuality" class="quality ${q.kind}">${esc(q.text)}</div></div><details style="margin-top:14px"><summary class="micro">See a useful example</summary><p>${esc(f.example)}</p></details><div class="wizard-actions"><button class="back" onclick="positionBack()">← ${session.step===0?'Start':'Back'}</button><button id="positionNext" class="btn primary" onclick="positionNext()" ${q.ok?'':'disabled'}>${session.step===positioningFields.length-1?'Review direction':'Continue'} →</button></div></section></div>`,TOOL_META.positioning.title,TOOL_META.positioning.desc);
@@ -283,8 +288,8 @@ window.startLeak=function(){const d=state.drafts.leak||{};session={tool:'leak',s
 function persistLeak(){state.drafts.leak={step:session.step,answers:session.answers};saveState();}
 window.chooseLeakStatus=function(id){session.answers[session.step].status=id;persistLeak();renderLeak();};
 window.chooseLeakImpact=function(id){session.answers[session.step].impact=id;persistLeak();renderLeak();};
-window.leakNext=function(){const a=session.answers[session.step];if(!a.status||!a.impact)return;if(session.step<leakStages.length-1){session.step++;persistLeak();renderLeak();window.scrollTo(0,0);}else finishLeak();};
-window.leakBack=function(){if(session.step===0){session={};render();}else{session.step--;persistLeak();renderLeak();window.scrollTo(0,0);}};
+window.leakNext=function(){const a=session.answers[session.step];if(!a.status||!a.impact)return;if(session.step<leakStages.length-1){session.step++;persistLeak();renderLeak();scrollToolIntoView();}else finishLeak();};
+window.leakBack=function(){if(session.step===0){session={};render();}else{session.step--;persistLeak();renderLeak();scrollToolIntoView();}};
 function renderLeak(){
   const s=leakStages[session.step],a=session.answers[session.step];
   app.innerHTML=layout(`<div class="wizard">${progress(session.step,leakStages.length,s.name)}<section class="panel"><span class="step-kicker">${esc(s.name)}</span><h2>What is happening at this stage?</h2><p class="intro">${esc(s.desc)}</p><div class="options">${leakStatus.map((o,i)=>`<button type="button" class="option ${a.status===o.id?'selected':''}" onclick="chooseLeakStatus('${o.id}')"><span class="option-mark">${String.fromCharCode(65+i)}</span><span><strong>${esc(o.label)}</strong><span class="desc">${esc(o.desc)}</span></span></button>`).join('')}</div><h3 style="margin-top:28px">How commercially important is this stage right now?</h3><div class="rating-buttons">${impacts.map(i=>`<button class="rating ${a.impact===i.id?'selected':''}" onclick="chooseLeakImpact('${i.id}')">${esc(i.label)}</button>`).join('')}</div><div class="wizard-actions"><button class="back" onclick="leakBack()">← ${session.step===0?'Start':'Back'}</button><button class="btn primary" onclick="leakNext()" ${a.status&&a.impact?'':'disabled'}>${session.step===leakStages.length-1?'See diagnosis':'Continue'} →</button></div></section></div>`,TOOL_META.leak.title,TOOL_META.leak.desc);
@@ -334,9 +339,9 @@ function persistWeekly(){state.drafts.weekly={step:session.step,candidates:sessi
 window.toggleCandidate=function(id){if(session.selected.includes(id))session.selected=session.selected.filter(x=>x!==id);else if(session.selected.length<3)session.selected.push(id);persistWeekly();renderWeekly();};
 window.addManualCandidate=function(){const input=document.getElementById('manualCandidate'),name=clean(input?.value);if(name.split(' ').length<3)return;const id='manual-'+uid();session.candidates.push({id,source:'Manual priority',name,evidenceTarget:`Collect evidence that confirms whether ${name.toLowerCase()} is the current commercial constraint.`,actions:[`Define the current baseline and the specific evidence that would change the decision.`,`Run one customer-facing or operational test related to ${name.toLowerCase()}.`,`Review the result on Friday and decide whether to continue, change or stop.`]});session.selected.push(id);persistWeekly();renderWeekly();};
 function selectedCandidates(){return session.candidates.filter(c=>session.selected.includes(c.id));}
-window.weeklyCandidatesNext=function(){if(selectedCandidates().length<2)return;session.step=1;persistWeekly();renderWeekly();window.scrollTo(0,0);};
+window.weeklyCandidatesNext=function(){if(selectedCandidates().length<2)return;session.step=1;persistWeekly();renderWeekly();scrollToolIntoView();};
 window.chooseWeeklyRating=function(candidateId,value){const ci=session.step-1;session.ratings[ci][candidateId]=value;persistWeekly();renderWeekly();};
-window.weeklyNext=function(){const ci=session.step-1,cands=selectedCandidates();if(cands.some(c=>session.ratings[ci][c.id]===undefined))return;if(session.step<weeklyCriteria.length){session.step++;persistWeekly();renderWeekly();window.scrollTo(0,0);}else{session.step=weeklyCriteria.length+1;persistWeekly();renderWeekly();}};
+window.weeklyNext=function(){const ci=session.step-1,cands=selectedCandidates();if(cands.some(c=>session.ratings[ci][c.id]===undefined))return;if(session.step<weeklyCriteria.length){session.step++;persistWeekly();renderWeekly();scrollToolIntoView();}else{session.step=weeklyCriteria.length+1;persistWeekly();renderWeekly();}};
 window.setHours=function(h){session.hours=h;persistWeekly();renderWeekly();};
 window.finishWeekly=function(){
   const cands=selectedCandidates();const totals=cands.map(c=>({c,score:weeklyCriteria.reduce((sum,cr,ci)=>sum+(session.ratings[ci][c.id]||1)*cr.weight,0)})).sort((a,b)=>b.score-a.score);const top=totals[0],second=totals[1];const gap=top.score-second.score;const conf=gap>=1.6?'strong':gap>=.7?'medium':'low';
@@ -345,7 +350,7 @@ window.finishWeekly=function(){
   const result={name:top.c.name,source:top.c.source,confidence:conf,evidenceTarget:top.c.evidenceTarget,actions,defer:totals.slice(1).map(x=>x.c.name),hours:session.hours,review:['Did we reach the evidence target?','What changed our understanding of the customer or constraint?','Should we continue, change or stop this work next week?'],createdAt:new Date().toISOString()};
   state.results.weekly=result;delete state.drafts.weekly;saveState();track('Tool Completed',{tool:'weekly',source:top.c.source});session={};render();
 };
-window.weeklyBack=function(){if(session.step===0){session={};render();}else{session.step--;persistWeekly();renderWeekly();window.scrollTo(0,0);}};
+window.weeklyBack=function(){if(session.step===0){session={};render();}else{session.step--;persistWeekly();renderWeekly();scrollToolIntoView();}};
 function renderWeekly(){
   if(session.step===0){
     const cards=session.candidates.map(c=>`<button class="option ${session.selected.includes(c.id)?'selected':''}" onclick="toggleCandidate('${c.id}')"><span class="option-mark">${session.selected.includes(c.id)?'✓':'+'}</span><span><strong>${esc(c.name)}</strong><span class="desc">${esc(c.source)}</span></span></button>`).join('');

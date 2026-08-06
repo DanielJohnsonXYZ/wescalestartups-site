@@ -1,0 +1,59 @@
+name: Apply Resources hub audit
+
+on:
+  push:
+    branches: [fix/resources-hub-audit-2026-08-06]
+    paths:
+      - scripts/apply-resources-audit.mjs
+      - .github/workflows/apply-resources-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/resources-hub-audit-2026-08-06
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Apply audit fixes
+        run: node scripts/apply-resources-audit.mjs
+
+      - name: Check tool JavaScript
+        run: node --check public/growth-tools/app.js
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Production build
+        run: npm run build
+
+      - name: Theme contract
+        run: npm run check:theme
+
+      - name: Generated-site integrity
+        run: npm run verify:build
+
+      - name: Resources integrity
+        run: npm run verify:resources
+
+      - name: Commit verified changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix: audit and optimise Resources hub"
+          git pull --rebase origin fix/resources-hub-audit-2026-08-06
+          git push origin HEAD:fix/resources-hub-audit-2026-08-06

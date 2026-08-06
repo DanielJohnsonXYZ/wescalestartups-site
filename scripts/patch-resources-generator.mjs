@@ -12,6 +12,13 @@ if (source.includes(broken)) {
   changed = true;
 }
 
+const beforeExtensions = "astro|ts|js|mjs|md|html|json";
+const afterExtensions = "astro|ts|js|mjs|md|mdx|html|json";
+if (source.includes(beforeExtensions)) {
+  source = source.split(beforeExtensions).join(afterExtensions);
+  changed = true;
+}
+
 const sweepMarker = "// Printable companion now points to the canonical interactive diagnostic.";
 const sweepGuard = "const canonicalResourceReplacements = new Map([";
 const sweepBlock = `// Replace every internal reference with the final canonical route.
@@ -21,7 +28,7 @@ const canonicalResourceReplacements = new Map([
   ["/founder-led-growth-bottleneck-map", "/resources/growth-dependency"],
   ["https://wss-growth-tools.vercel.app/customer", "/resources/customer-segment"]
 ]);
-const canonicalSweepExtensions = /\\.(astro|ts|js|mjs|md|html|json)$/;
+const canonicalSweepExtensions = /\\.(astro|ts|js|mjs|md|mdx|html|json)$/;
 const canonicalSweepExcluded = new Set([
   "src/lib/sitemapCanonical.ts",
   "scripts/apply-resources-audit.mjs",

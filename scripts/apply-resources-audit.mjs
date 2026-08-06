@@ -855,8 +855,11 @@ const failures = [];
 const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
-const htmlPath = (route) =>
-  route === "/" ? "dist/index.html" : \`dist/\${route.replace(/^\\//, "")}.html\`;
+const htmlPath = (route) => {
+  if (route === "/") return "dist/index.html";
+  if (/\.(xml|txt)$/.test(route)) return `dist/${route.replace(/^\//, "")}`;
+  return `dist/${route.replace(/^\//, "")}.html`;
+};
 const loadHtml = (route) => {
   const file = htmlPath(route);
   check(exists(file), \`Missing generated page: \${route} (\${file})\`);
@@ -1073,8 +1076,8 @@ app = replaceOnce(
 );
 app = replaceOnce(
   app,
-  `function optionButton(label,desc,index,selected,fn){return \`<button type="button" class="option \${selected?'selected':''}" onclick="\${fn}(\${index})">\`;}`,
-  `function optionButton(label,desc,index,selected,fn){return \`<button type="button" class="option \${selected?'selected':''}" aria-pressed="\${selected?'true':'false'}" onclick="\${fn}(\${index})">\`;}`,
+  `class="option \${selected?'selected':''}" onclick="\${fn}(\${index})"`,
+  `class="option \${selected?'selected':''}" aria-pressed="\${selected?'true':'false'}" onclick="\${fn}(\${index})"`,
   "option aria-pressed"
 );
 write("public/growth-tools/app.js", app);
@@ -1146,12 +1149,14 @@ pkg.scripts["verify:resources"] = "node scripts/verify-resources.mjs";
 write("package.json", JSON.stringify(pkg, null, 2));
 
 let ci = read(".github/workflows/ci.yml");
-ci = replaceOnce(
-  ci,
-  '      - name: Crawl link check (if export exists)\n',
-  '      - name: Resources hub integrity\n        run: npm run verify:resources\n\n      - name: Crawl link check (if export exists)\n',
-  "Resources CI step"
-);
+if (!ci.includes("Resources hub integrity")) {
+  ci = replaceOnce(
+    ci,
+    '      - name: Crawl link check (if export exists)\n',
+    '      - name: Resources hub integrity\n        run: npm run verify:resources\n\n      - name: Crawl link check (if export exists)\n',
+    "Resources CI step"
+  );
+}
 write(".github/workflows/ci.yml", ci);
 
 remove("src/pages/founder-led-growth-bottleneck-map.astro");

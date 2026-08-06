@@ -11,8 +11,8 @@ const check = (condition, message) => {
 };
 const htmlPath = (route) => {
   if (route === "/") return "dist/index.html";
-  if (/.(xml|txt)$/.test(route)) return "dist/" + route.replace(/^//, "");
-  return "dist/" + route.replace(/^//, "") + ".html";
+  if (/\.(xml|txt)$/.test(route)) return "dist/" + route.replace(/^\//, "");
+  return "dist/" + route.replace(/^\//, "") + ".html";
 };
 const loadHtml = (route) => {
   const file = htmlPath(route);

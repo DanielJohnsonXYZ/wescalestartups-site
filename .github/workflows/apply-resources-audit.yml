@@ -1,16 +1,8 @@
 name: Apply Resources hub audit
 
 on:
-  push:
-    branches: [fix/resources-hub-audit-2026-08-06]
-    paths:
-      - scripts/apply-resources-audit.mjs
-      - .github/workflows/apply-resources-audit.yml
-  pull_request:
-    branches: [main]
-    paths:
-      - scripts/apply-resources-audit.mjs
-      - .github/workflows/apply-resources-audit.yml
+  issue_comment:
+    types: [created]
   workflow_dispatch:
 
 permissions:
@@ -18,7 +10,7 @@ permissions:
 
 jobs:
   apply-and-verify:
-    if: github.actor != 'github-actions[bot]'
+    if: github.actor != 'github-actions[bot]' && (github.event_name == 'workflow_dispatch' || (github.event.issue.number == 63 && contains(github.event.comment.body, '/apply-resources-audit')))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

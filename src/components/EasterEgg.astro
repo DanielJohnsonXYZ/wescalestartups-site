@@ -2,6 +2,7 @@
 // EasterEgg.astro, Konami code (↑↑↓↓←→←→BA) triggers a hidden growth tip
 // No props needed, just drop anywhere in BaseLayout
 import EmailSignup from "./EmailSignup.astro";
+import StageSelector from "./StageSelector.astro";
 ---
 
 <div id="easter-egg" aria-hidden="true" role="dialog" aria-label="Secret message">
@@ -19,6 +20,8 @@ import EmailSignup from "./EmailSignup.astro";
     buttonLabel="Sign up"
   />
 </div>
+
+<StageSelector />
 
 <script>
   (() => {

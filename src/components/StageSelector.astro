@@ -1,0 +1,515 @@
+---
+import { siteConfig } from "../site";
+
+const stages = [
+  {
+    key: "validate",
+    number: "01",
+    label: "Validate",
+    title: "Getting Started",
+    summary: "You have an idea or early product, but you are still working out who it is for, what matters enough to pay for and how to reach the first customers.",
+    signals: ["No clear customer yet", "Assumptions need testing", "Little or no repeatable revenue"],
+    nextMove: "Validate the customer, problem and offer before investing heavily in acquisition.",
+    href: "/growth-course",
+    cta: "Explore getting started",
+    secondaryHref: "https://wss-growth-tools.vercel.app/customer",
+    secondary: "Choose your first customer with a free tool"
+  },
+  {
+    key: "repeat",
+    number: "02",
+    label: "Repeat",
+    title: "Finding Repeatability",
+    summary: "You have customers or early traction, but growth remains inconsistent, founder-led or difficult to reproduce.",
+    signals: ["Some evidence of demand", "Positioning is still changing", "Channels work unpredictably"],
+    nextMove: "Identify the binding growth constraint and build a repeatable learning and acquisition rhythm.",
+    href: siteConfig.scorecardUrl,
+    cta: "Build repeatable growth",
+    secondaryHref: siteConfig.scorecardUrl,
+    secondary: "Find your bottleneck in five minutes"
+  },
+  {
+    key: "scale",
+    number: "03",
+    label: "Scale",
+    title: "Ready to Scale",
+    summary: "You understand the customer and have something that works, but need stronger systems, ownership and commercial leadership to scale efficiently.",
+    signals: ["Proven customer demand", "Working acquisition channels", "Team or founder bottlenecks"],
+    nextMove: "Scale the strongest signal while transferring the system and decisions into the team.",
+    href: "/services/fractional-cmo",
+    cta: "Scale what works",
+    secondaryHref: "/services/fractional-cmo",
+    secondary: "Explore Fractional CMO support"
+  }
+] as const;
+
+const selectedStage = stages[1];
+---
+
+<template id="wss-stage-selector-template">
+  <section class="v9-stage-selector" id="choose-your-path" aria-labelledby="stage-selector-title">
+    <div class="v9-shell">
+      <div class="stage-selector-intro">
+        <span class="stage-selector-kicker">Start here / Choose your path</span>
+        <h2 id="stage-selector-title">Where are you in your <em>growth journey?</em></h2>
+        <p>Different stages need different evidence, systems and support. Choose the description that sounds closest to your company right now.</p>
+      </div>
+
+      <div class="stage-selector-shell">
+        <div class="stage-selector-tabs" role="tablist" aria-label="Company growth stage">
+          {stages.map((stage) => (
+            <button
+              type="button"
+              class:list={["stage-selector-tab", { "is-active": stage.key === selectedStage.key }]}
+              role="tab"
+              aria-selected={stage.key === selectedStage.key ? "true" : "false"}
+              tabindex={stage.key === selectedStage.key ? 0 : -1}
+              data-stage-key={stage.key}
+              data-number={stage.number}
+              data-label={stage.label}
+              data-title={stage.title}
+              data-summary={stage.summary}
+              data-signals={JSON.stringify(stage.signals)}
+              data-next-move={stage.nextMove}
+              data-href={stage.href}
+              data-cta={stage.cta}
+              data-secondary-href={stage.secondaryHref}
+              data-secondary={stage.secondary}
+            >
+              <span class="stage-selector-number">{stage.number}</span>
+              <span class="stage-selector-tab-copy">
+                <small>{stage.label}</small>
+                <strong>{stage.title}</strong>
+              </span>
+              <span class="stage-selector-arrow" aria-hidden="true">↗</span>
+            </button>
+          ))}
+        </div>
+
+        <div class="stage-selector-progress" aria-hidden="true">
+          <span class="stage-selector-progress-fill"></span>
+        </div>
+
+        <div class="stage-selector-output" role="tabpanel" aria-live="polite">
+          <div class="stage-selector-output-copy">
+            <span class="stage-selector-output-label" id="stage-output-label">{selectedStage.number} / {selectedStage.label}</span>
+            <h3 id="stage-output-title">{selectedStage.title}</h3>
+            <p id="stage-output-summary">{selectedStage.summary}</p>
+            <ul id="stage-output-signals">
+              {selectedStage.signals.map((signal) => <li>{signal}</li>)}
+            </ul>
+          </div>
+
+          <div class="stage-selector-next">
+            <span>Your next move</span>
+            <p id="stage-output-next">{selectedStage.nextMove}</p>
+            <div class="stage-selector-actions">
+              <a class="stage-selector-primary" id="stage-output-primary" href={selectedStage.href} data-cta="stage-selector-repeat-primary">
+                <span>{selectedStage.cta}</span><span aria-hidden="true">→</span>
+              </a>
+              <a class="stage-selector-secondary" id="stage-output-secondary" href={selectedStage.secondaryHref} data-cta="stage-selector-repeat-secondary">
+                {selectedStage.secondary} <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+  (() => {
+    if (window.location.pathname !== "/") return;
+
+    const template = document.getElementById("wss-stage-selector-template");
+    const credibility = document.querySelector(".v9-credibility");
+    const ticker = document.querySelector(".v9-ticker");
+    if (!(template instanceof HTMLTemplateElement) || !credibility || !ticker) return;
+    if (document.getElementById("choose-your-path")) return;
+
+    ticker.before(template.content.cloneNode(true));
+
+    const section = document.getElementById("choose-your-path");
+    if (!section) return;
+
+    const tabs = Array.from(section.querySelectorAll<HTMLButtonElement>(".stage-selector-tab"));
+    const label = section.querySelector("#stage-output-label");
+    const title = section.querySelector("#stage-output-title");
+    const summary = section.querySelector("#stage-output-summary");
+    const signals = section.querySelector("#stage-output-signals");
+    const nextMove = section.querySelector("#stage-output-next");
+    const primary = section.querySelector("#stage-output-primary");
+    const secondary = section.querySelector("#stage-output-secondary");
+    const progress = section.querySelector(".stage-selector-progress-fill");
+
+    const activate = (tab: HTMLButtonElement) => {
+      const activeIndex = tabs.indexOf(tab);
+      tabs.forEach((item, index) => {
+        const isActive = item === tab;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-selected", String(isActive));
+        item.tabIndex = isActive ? 0 : -1;
+        if (isActive) item.setAttribute("data-active-index", String(index));
+        else item.removeAttribute("data-active-index");
+      });
+
+      if (label) label.textContent = `${tab.dataset.number} / ${tab.dataset.label}`;
+      if (title) title.textContent = tab.dataset.title || "";
+      if (summary) summary.textContent = tab.dataset.summary || "";
+      if (nextMove) nextMove.textContent = tab.dataset.nextMove || "";
+
+      if (signals) {
+        let items: string[] = [];
+        try { items = JSON.parse(tab.dataset.signals || "[]") as string[]; } catch {}
+        signals.innerHTML = "";
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          signals.appendChild(li);
+        });
+      }
+
+      if (primary instanceof HTMLAnchorElement) {
+        primary.href = tab.dataset.href || "#";
+        const primaryLabel = primary.querySelector("span:first-child");
+        if (primaryLabel) primaryLabel.textContent = tab.dataset.cta || "Explore this path";
+        primary.dataset.cta = `stage-selector-${tab.dataset.stageKey}-primary`;
+      }
+
+      if (secondary instanceof HTMLAnchorElement) {
+        secondary.href = tab.dataset.secondaryHref || "#";
+        secondary.innerHTML = `${tab.dataset.secondary || "Learn more"} <span aria-hidden="true">→</span>`;
+        secondary.dataset.cta = `stage-selector-${tab.dataset.stageKey}-secondary`;
+      }
+
+      if (progress instanceof HTMLElement) {
+        progress.style.width = `${((activeIndex + 1) / tabs.length) * 100}%`;
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "stage_selector_select",
+        stage_key: tab.dataset.stageKey,
+        stage_label: tab.dataset.label,
+        page_path: window.location.pathname
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => activate(tab));
+      tab.addEventListener("keydown", (event) => {
+        const index = tabs.indexOf(tab);
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+          event.preventDefault();
+          const next = tabs[(index + 1) % tabs.length];
+          if (next) {
+            next.focus();
+            activate(next);
+          }
+        }
+        if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+          event.preventDefault();
+          const previous = tabs[(index - 1 + tabs.length) % tabs.length];
+          if (previous) {
+            previous.focus();
+            activate(previous);
+          }
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .v9-stage-selector {
+    padding: clamp(5rem, 8vw, 8.5rem) 0;
+    border-top: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
+    background:
+      linear-gradient(rgba(17, 17, 23, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17, 17, 23, 0.035) 1px, transparent 1px),
+      var(--v9-paper, #fff);
+    background-size: 72px 72px, 72px 72px, auto;
+    color: var(--v9-ink, #111117);
+  }
+
+  .stage-selector-intro {
+    max-width: 860px;
+    margin: 0 auto clamp(2.5rem, 5vw, 4.25rem);
+    text-align: center;
+  }
+
+  .stage-selector-kicker {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--v9-violet, #806cff);
+    font-family: var(--v9-mono, "JetBrains Mono", monospace);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .stage-selector-intro h2 {
+    max-width: 13ch;
+    margin: 0 auto;
+    color: inherit;
+    font-family: var(--v9-sans, "Geist", sans-serif);
+    font-size: clamp(2.6rem, 5vw, 5.2rem);
+    font-weight: 650;
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+
+  .stage-selector-intro h2 em {
+    color: var(--v9-violet, #806cff);
+    font-family: var(--v9-display, "Fraunces Variable", Georgia, serif);
+    font-style: italic;
+    font-weight: 440;
+  }
+
+  .stage-selector-intro p {
+    max-width: 66ch;
+    margin: 1.4rem auto 0;
+    color: var(--v9-copy, #64616c);
+    font-size: clamp(1rem, 1.5vw, 1.12rem);
+    line-height: 1.65;
+  }
+
+  .stage-selector-shell {
+    overflow: hidden;
+    border: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
+    border-radius: 18px;
+    background: var(--v9-white, #fff);
+    box-shadow: 0 28px 80px rgba(17, 17, 23, 0.08);
+  }
+
+  .stage-selector-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .stage-selector-tab {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    min-height: 138px;
+    border: 0;
+    border-right: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
+    background: transparent;
+    padding: 1.6rem;
+    color: var(--v9-ink, #111117);
+    text-align: left;
+    cursor: pointer;
+    transition: background 180ms ease, color 180ms ease;
+  }
+
+  .stage-selector-tab:last-child { border-right: 0; }
+  .stage-selector-tab:hover { background: rgba(128, 108, 255, 0.045); }
+  .stage-selector-tab.is-active { background: rgba(128, 108, 255, 0.075); }
+
+  .stage-selector-number {
+    color: var(--v9-violet, #806cff);
+    font-family: var(--v9-display, "Fraunces Variable", Georgia, serif);
+    font-size: clamp(2.2rem, 3.6vw, 3.6rem);
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .stage-selector-tab-copy { display: grid; gap: 0.35rem; }
+  .stage-selector-tab-copy small {
+    color: var(--v9-copy, #64616c);
+    font-family: var(--v9-mono, "JetBrains Mono", monospace);
+    font-size: 0.65rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .stage-selector-tab-copy strong {
+    font-family: var(--v9-sans, "Geist", sans-serif);
+    font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+  }
+
+  .stage-selector-arrow {
+    color: var(--v9-copy, #64616c);
+    font-size: 1.1rem;
+    transition: transform 180ms ease, color 180ms ease;
+  }
+
+  .stage-selector-tab:hover .stage-selector-arrow,
+  .stage-selector-tab.is-active .stage-selector-arrow {
+    color: var(--v9-violet, #806cff);
+    transform: translate(2px, -2px);
+  }
+
+  .stage-selector-progress {
+    height: 3px;
+    background: rgba(17, 17, 23, 0.08);
+  }
+
+  .stage-selector-progress-fill {
+    display: block;
+    width: 66.666%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--v9-violet, #806cff), var(--v9-mint, #c8ff65));
+    transition: width 260ms ease;
+  }
+
+  .stage-selector-output {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+    min-height: 350px;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(128, 108, 255, 0.2), transparent 34%),
+      var(--v9-night, #0d0e15);
+    color: var(--v9-white, #fff);
+  }
+
+  .stage-selector-output-copy,
+  .stage-selector-next { padding: clamp(2rem, 4vw, 4rem); }
+
+  .stage-selector-output-label,
+  .stage-selector-next > span {
+    display: block;
+    color: var(--v9-mint, #c8ff65);
+    font-family: var(--v9-mono, "JetBrains Mono", monospace);
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .stage-selector-output h3 {
+    margin: 1.15rem 0 1rem;
+    color: inherit;
+    font-family: var(--v9-sans, "Geist", sans-serif);
+    font-size: clamp(2rem, 3.8vw, 4rem);
+    font-weight: 650;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .stage-selector-output-copy > p {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--v9-copy-dark, #a8a7b4);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .stage-selector-output ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.7rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stage-selector-output li {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 0.55rem 0.75rem;
+    color: rgba(255, 255, 255, 0.74);
+    font-family: var(--v9-mono, "JetBrains Mono", monospace);
+    font-size: 0.64rem;
+  }
+
+  .stage-selector-next {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .stage-selector-next > p {
+    margin: 1rem 0 0;
+    color: var(--v9-white, #fff);
+    font-family: var(--v9-display, "Fraunces Variable", Georgia, serif);
+    font-size: clamp(1.35rem, 2.4vw, 2.2rem);
+    font-weight: 440;
+    line-height: 1.18;
+  }
+
+  .stage-selector-actions {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  .stage-selector-primary {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    border-radius: 999px;
+    background: var(--v9-mint, #c8ff65);
+    padding: 0.85rem 1.25rem 0.85rem 1.4rem;
+    color: var(--v9-night, #0d0e15);
+    font-size: 0.86rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: transform 180ms ease, background 180ms ease;
+  }
+
+  .stage-selector-primary:hover {
+    transform: translateY(-2px);
+    background: #d7ff8d;
+  }
+
+  .stage-selector-secondary {
+    display: inline-flex;
+    width: fit-content;
+    gap: 0.55rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .stage-selector-tabs { grid-template-columns: 1fr; }
+    .stage-selector-tab {
+      min-height: 96px;
+      border-right: 0;
+      border-bottom: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
+      padding: 1.15rem 1.25rem;
+    }
+    .stage-selector-tab:last-child { border-bottom: 0; }
+    .stage-selector-number { font-size: 2.25rem; }
+    .stage-selector-output { grid-template-columns: 1fr; }
+    .stage-selector-next {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .v9-stage-selector { padding: 4.5rem 0; }
+    .stage-selector-intro { text-align: left; }
+    .stage-selector-intro h2 { margin-left: 0; }
+    .stage-selector-intro p { margin-left: 0; }
+    .stage-selector-shell { border-radius: 12px; }
+    .stage-selector-tab { grid-template-columns: 52px minmax(0, 1fr) auto; }
+    .stage-selector-output-copy,
+    .stage-selector-next { padding: 1.5rem; }
+    .stage-selector-primary { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage-selector-tab,
+    .stage-selector-arrow,
+    .stage-selector-progress-fill,
+    .stage-selector-primary { transition: none; }
+  }
+</style>

@@ -43,7 +43,7 @@ h3 {
    podcast host link) stays neutral — only the stacked primary
    CTA pattern (`.button-with-subcopy`) is a "book a call" action. */
 .button-dark.button-with-subcopy {
-  background: var(--violet);
+  background: linear-gradient(135deg, var(--violet-deep), var(--v9-violet-cta, var(--violet-deep)));
   box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
 }
 

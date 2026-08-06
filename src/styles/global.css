@@ -5855,7 +5855,7 @@ body::after {
   --accent-tint:  #f0edff;
 
   /* Status tokens */
-  --good:         #0f8f4a;
+  --good:         #0c7a3f;
   --warn-color:   #92400e;
   --bad:          #c43030;
 }
@@ -6233,7 +6233,7 @@ html { scroll-padding-top: 6.5rem; }
 .logo-wall .logo-group-label {
   font-family: "JetBrains Mono", monospace;
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--ink-4, #8a8696); text-align: center; margin: 0 0 16px;
+  color: var(--muted, #55535b); text-align: center; margin: 0 0 16px;
 }
 .logo-wall .logo-group + .logo-group { margin-top: 30px; }
 .logo-wall .logo-img {

@@ -22,6 +22,8 @@
   --v9-violet: #806cff;
   --v9-violet-bright: #a796ff;
   --v9-violet-deep: #4d3fc4;
+  /* CTA gradient light end: darkest violet that keeps white text ≥4.5:1. */
+  --v9-violet-cta: #6c56f2;
   --v9-mint: #c8ff65;
   --v9-coral: #ff836f;
   --v9-radius: 1.15rem;
@@ -162,7 +164,7 @@
 }
 
 .theme-wss-v9 .nav-menu-link span {
-  color: rgba(255, 255, 255, 0.44);
+  color: rgba(255, 255, 255, 0.64);
 }
 
 .theme-wss-v9 .header-cta,
@@ -344,7 +346,7 @@
   padding: 0.9rem 1.3rem;
   border: 1px solid var(--v9-violet);
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet)) !important;
+  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet-cta)) !important;
   box-shadow: 0 16px 36px rgba(77, 63, 196, 0.22);
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
@@ -579,7 +581,7 @@
 
 .theme-wss-v9:not(.page-home-v9) main .button-brand {
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet));
+  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet-cta));
   box-shadow: 0 14px 32px rgba(77, 63, 196, 0.2);
 }
 

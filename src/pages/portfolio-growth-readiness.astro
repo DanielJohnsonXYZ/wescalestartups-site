@@ -146,7 +146,7 @@ const results = {
   ready: {
     min: 18,
     range: "18–24",
-    color: "#22c55e",
+    color: "var(--good)",
     label: "Commercially ready",
     headline: "The commercial infrastructure is ready. Focus on scaling and compounding.",
     summary: "The business has solid commercial foundations: a clear narrative, reliable pipeline, functioning leadership, and reporting that produces decisions. The risk at this stage is complacency, strong commercial infrastructure decays without active maintenance, particularly through periods of rapid hiring, market expansion, or leadership transition. The priority is identifying the weakest remaining dimension and addressing it before it becomes material.",
@@ -162,7 +162,7 @@ const results = {
   gaps: {
     min: 9,
     range: "9–17",
-    color: "var(--accent)",
+    color: "var(--violet-deep)",
     label: "Commercial gaps identified",
     headline: "Identifiable gaps are constraining growth velocity and board confidence.",
     summary: "The business has some commercial infrastructure in place, but specific gaps are slowing pipeline predictability, limiting scalability, or reducing board confidence in the growth trajectory. These gaps are typically addressable in 60–90 days with a targeted commercial improvement programme. The risk is that they are managed reactively rather than resolved structurally, which means they recur.",
@@ -178,7 +178,7 @@ const results = {
   risk: {
     min: 0,
     range: "0–8",
-    color: "#f97316",
+    color: "var(--warn-color)",
     label: "Commercial risk",
     headline: "Material commercial weaknesses present risk to the investment thesis.",
     summary: "The commercial system has significant structural weaknesses. Pipeline is unreliable, positioning is unclear, reporting does not support board-level decisions, or commercial leadership is too concentrated in one or two individuals. These are not operational inefficiencies, they are investment-thesis risks. A structured commercial intervention is required, not incremental improvement.",
@@ -229,9 +229,9 @@ const results = {
       eyebrow: "Interpreting the score",
       heading: "Three commercial readiness levels, and what each one means for value creation.",
       levels: [
-        { borderColor: "#22c55e", labelColor: "#22c55e", label: "Score 18–24 · Commercially ready", h3: "Ready for the next value creation phase", body: "Commercial infrastructure is solid. The narrative is clear, pipeline is visible, reporting is reliable, and leadership can operate without key-person dependency. The focus should be on scaling what works and closing the remaining gaps before they become material." },
-        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 9–17 · Commercial gaps identified", h3: "Gaps that will slow value creation", body: "Some commercial infrastructure is in place, but identifiable gaps are constraining growth velocity or board confidence. A targeted commercial improvement programme, typically 60–90 days, can close the material gaps before they affect the investment timeline." },
-        { borderColor: "#f97316", labelColor: "#f97316", label: "Score 0–8 · Commercial risk", h3: "Significant risks requiring immediate attention", body: "The commercial system has material weaknesses that present risk to the investment thesis. Pipeline is unreliable, positioning is unclear, or leadership is too concentrated. These require a structured commercial intervention, not incremental improvement." }
+        { borderColor: "var(--good)", labelColor: "var(--good)", label: "Score 18–24 · Commercially ready", h3: "Ready for the next value creation phase", body: "Commercial infrastructure is solid. The narrative is clear, pipeline is visible, reporting is reliable, and leadership can operate without key-person dependency. The focus should be on scaling what works and closing the remaining gaps before they become material." },
+        { borderColor: "var(--violet-deep)", labelColor: "var(--violet-deep)", label: "Score 9–17 · Commercial gaps identified", h3: "Gaps that will slow value creation", body: "Some commercial infrastructure is in place, but identifiable gaps are constraining growth velocity or board confidence. A targeted commercial improvement programme, typically 60–90 days, can close the material gaps before they affect the investment timeline." },
+        { borderColor: "var(--warn-color)", labelColor: "var(--warn-color)", label: "Score 0–8 · Commercial risk", h3: "Significant risks requiring immediate attention", body: "The commercial system has material weaknesses that present risk to the investment thesis. Pipeline is unreliable, positioning is unclear, or leadership is too concentrated. These require a structured commercial intervention, not incremental improvement." }
       ]
     }}
     faqSection={{

@@ -647,7 +647,7 @@
   background: linear-gradient(90deg, transparent, rgba(128, 108, 255, 0.32), transparent);
 }
 
-.theme-wss-v9 .site-footer-v2 h2 {
+.theme-wss-v9 .site-footer-v2 :is(h2, h3) {
   color: var(--v9-violet-deep);
 }
 

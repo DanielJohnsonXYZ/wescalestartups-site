@@ -63,3 +63,5 @@ jobs:
           git commit -m "fix: audit and optimise Resources hub"
           git pull --rebase origin fix/resources-hub-audit-2026-08-06
           git push origin HEAD:fix/resources-hub-audit-2026-08-06
+
+# Registered on main for this audited branch run.

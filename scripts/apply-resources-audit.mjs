@@ -21,6 +21,13 @@ const replaceOnce = (source, oldValue, newValue, label) => {
 };
 const replaceAll = (source, oldValue, newValue) => source.split(oldValue).join(newValue);
 
+const alreadyApplied = fs.existsSync(path.join(root, "src/data/growthTools.ts"))
+  && fs.existsSync(path.join(root, "scripts/verify-resources.mjs"));
+if (alreadyApplied && !process.argv.includes("--force")) {
+  console.log("Resources audit source already materialised.");
+  process.exit(0);
+}
+
 const growthToolsData = `export const growthTools = [
   {
     slug: "growth-dependency",

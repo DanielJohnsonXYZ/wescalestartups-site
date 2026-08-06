@@ -62,6 +62,7 @@ async function verifyTurnstile(context, token) {
  * @param {string} [options.sourcePageField="source_page"] Absolute same-site page URL field
  * @param {string[]} [options.honeypotFields] Fields that must be empty (bots fill them)
  * @param {string} [options.turnstileField="cf-turnstile-response"] Turnstile token field
+ * @param {boolean} [options.skipTurnstile=false] Server-path only (e.g. /api/booked). Never set from client payload.
  */
 export async function checkFormRequest(context, payload, options = {}) {
   const sourcePageField = options.sourcePageField || "source_page";
@@ -69,12 +70,8 @@ export async function checkFormRequest(context, payload, options = {}) {
   const tokenField = options.turnstileField || "cf-turnstile-response";
 
   const enforceTurnstile = context.env?.TURNSTILE_ENFORCE === "1";
-  // Calendly booking stamps use keepalive on unload — no Turnstile token.
-  // Skip Turnstile for that path only; Origin / source_page still apply.
-  const skipTurnstile =
-    payload?.booked_diagnostic === true ||
-    payload?.booked_diagnostic === "true";
-  if (enforceTurnstile && !skipTurnstile) {
+  // skipTurnstile is set only by trusted server handlers (path-based), never from payload.
+  if (enforceTurnstile && !options.skipTurnstile) {
     const ts = await verifyTurnstile(context, payload?.[tokenField]);
     if (!ts.ok) return ts;
   }

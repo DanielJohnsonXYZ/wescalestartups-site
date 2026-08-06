@@ -5,9 +5,8 @@
  *
  * Also stamps booked_diagnostic=true in Customer.io when a booking completes,
  * using the email from sessionStorage (set by site forms) or Calendly payload.
- * No Turnstile here: keepalive + page unload make an async challenge unreliable,
- * and booked_diagnostic is too important to drop. Server skips Turnstile for
- * this stamp and still applies Origin / source_page checks.
+ * Posts to /api/booked (not /api/forms): keepalive + unload cannot run Turnstile,
+ * so that path uses Origin / source_page only. /api/forms has zero Turnstile exemptions.
  */
 (function () {
   var SRC = "https://assets.calendly.com/assets/external/widget.js";
@@ -56,14 +55,13 @@
     bookedSent = true;
     rememberEmail(email);
     try {
-      fetch("/api/forms", {
+      fetch("/api/booked", {
         method: "POST",
         keepalive: true,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           email: email,
           form_id: "wss-newsletter",
-          booked_diagnostic: "true",
           source_page: window.location.href,
           lead_magnet: source || "calendly-booking"
         })

@@ -1,3 +1,4 @@
+// Trigger Resources audit after PR creation.
 import fs from "node:fs";
 import path from "node:path";
 

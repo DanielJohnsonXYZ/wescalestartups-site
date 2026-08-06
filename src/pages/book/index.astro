@@ -54,7 +54,7 @@ const bookSchema = [
     <div class="shell">
       <p class="eyebrow">Book call</p>
       <h1>{siteConfig.bookingLabel}</h1>
-      <p class="lede">{siteConfig.bookingSubcopy}</p>
+      <p class="lede">{siteConfig.bookingLede}</p>
       <div class="hero-actions">
         <a class="button button-brand button-with-subcopy" href="#book-calendly" data-cta="book-hero-calendly" title={siteConfig.bookingCallReassurance}>
           <span class="button-label">Pick a time</span>
@@ -102,10 +102,10 @@ const bookSchema = [
       <p class="eyebrow">What you leave with</p>
       <h2>Four things, in writing, by the end of the call.</h2>
       <ul class="bring-checklist">
-        <li><strong>Your named bottleneck</strong>, the one constraint holding pipeline back, in plain English.</li>
-        <li><strong>The likely cause</strong>, positioning, acquisition, conversion, reporting, or team ownership.</li>
-        <li><strong>Your next best move</strong>, the highest-leverage action to take next, whether or not you work with us.</li>
-        <li><strong>An honest fit call</strong>, whether WSS is the right help right now, or who to point you to instead.</li>
+        <li><strong>Your named bottleneck</strong>The one constraint holding pipeline back, in plain English.</li>
+        <li><strong>The likely cause</strong>Positioning, acquisition, conversion, reporting, or team ownership.</li>
+        <li><strong>Your next best move</strong>The highest-leverage action to take next, whether or not you work with us.</li>
+        <li><strong>An honest fit call</strong>Whether WSS is the right help right now, or who to point you to instead.</li>
       </ul>
       {featuredBookingQuote && (
         <figure class="booking-quote" style="margin-top:1.5rem">
@@ -121,7 +121,7 @@ const bookSchema = [
       <p class="eyebrow">Before you book</p>
       <h2>This call isn't for everyone.</h2>
       <p class="lede" style="max-width:60ch;">It's a fast, honest diagnosis, not junior execution or a free strategy deck. Hold off for now if:</p>
-      <ul class="bring-checklist">
+      <ul class="bring-checklist is-negative">
         <li>You're <strong>pre-idea or pre-revenue</strong>, there's no growth system to diagnose yet.</li>
         <li>You have <strong>no sales motion</strong> or customers, that comes before scaling acquisition.</li>
         <li>You want someone to <strong>execute tasks junior-style</strong> rather than name and fix the binding constraint.</li>

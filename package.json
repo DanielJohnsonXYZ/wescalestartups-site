@@ -9,7 +9,7 @@
     "precheck": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
     "check": "astro check",
     "prebuild": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
-    "build": "node --check public/growth-tools/app.js && node scripts/generate-og-png.mjs && astro build && node scripts/check-site-theme.mjs && node scripts/capture-integrity-report.mjs",
+    "build": "node --check public/growth-tools/app.js && node scripts/generate-og-png.mjs && astro build && node scripts/check-site-theme.mjs && node scripts/verify-build-integrity.mjs && node scripts/verify-resources.mjs",
     "check:theme": "node scripts/check-site-theme.mjs",
     "verify:build": "node scripts/verify-build-integrity.mjs",
     "verify:resources": "node scripts/verify-resources.mjs",

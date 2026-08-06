@@ -6048,17 +6048,11 @@ body {
    Scoped to body:not(.page-home-v8) so the homepage is untouched.
    ============================================================ */
 
-body:not(.page-home-v8) {
-  /* v7 tokens */
-  --paper: #fbfbfe;
-  --paper-deep: #f6f6fb;
-  --surface: #ffffff;
-  --ink: #0d0c14;
-  --ink-2: #36333f;
-  --muted: #6b6878;
-  --violet: #6657ff;
-  --violet-deep: #4f41d8;
-}
+/* v7 token block removed: it was scoped to body:not(.page-home-v8) — a
+   class no body carries — so it silently overrode the v9 bridge tokens
+   (custom properties set on body beat those inherited from :root) and
+   split the palette in two. Tokens now resolve from the .theme-wss-v9
+   bridge in site-v9.css. */
 
 /* --- Headings: serif display → bold grotesque (matches v7) --- */
 body:not(.page-home-v8) h1,

@@ -960,18 +960,18 @@ site = replaceAll(site, '"/resources/founder-led-growth-diagnostic": "2026-05-11
 site = replaceOnce(
   site,
   '  "/resources/90-day-growth-sprint-planner": "2026-05-11",',
-  '  "/resources/growth-dependency": "2026-08-06",\\n  "/resources/customer-segment": "2026-08-06",\\n  "/resources/positioning": "2026-08-06",\\n  "/resources/gtm-leak": "2026-08-06",\\n  "/resources/weekly-focus": "2026-08-06",\\n  "/resources/90-day-growth-sprint-planner": "2026-08-06",',
+  '  "/resources/growth-dependency": "2026-08-06",\n  "/resources/customer-segment": "2026-08-06",\n  "/resources/positioning": "2026-08-06",\n  "/resources/gtm-leak": "2026-08-06",\n  "/resources/weekly-focus": "2026-08-06",\n  "/resources/90-day-growth-sprint-planner": "2026-08-06",',
   "resource lastmod insertion"
 );
 site = replaceAll(site, '"/resources/growth-bottleneck-scorecard"', '"/resources/growth-dependency"');
 site = replaceAll(site, '10 questions, 5 minutes', '12 questions, 4 minutes');
 site = replaceAll(site, '10 questions. 5 minutes.', '12 questions. 4 minutes.');
 site = site.replace(
-  /\\n  \\{\\n    id: "growth-bottleneck-scorecard",[\\s\\S]*?\\n  \\},(?=\\n  \\{\\n    id: "90-day-growth-sprint-planner")/,
+  /\n  \{\n    id: "growth-bottleneck-scorecard",[\s\S]*?\n  \},(?=\n  \{\n    id: "90-day-growth-sprint-planner")/,
   ""
 );
 site = site.replace(
-  /\\n  \\{\\n    id: "founder-led-growth-diagnostic",[\\s\\S]*?\\n  \\},(?=\\n  \\{\\n    id: "agency-brief-template")/,
+  /\n  \{\n    id: "founder-led-growth-diagnostic",[\s\S]*?\n  \},(?=\n  \{\n    id: "agency-brief-template")/,
   ""
 );
 write("src/site.ts", site);
@@ -980,20 +980,20 @@ write("src/site.ts", site);
 let signup = read("src/components/EmailSignup.astro");
 signup = replaceOnce(
   signup,
-  '  finePrint?: string;\\n}',
-  '  finePrint?: string;\\n  /** Optional same-origin destination after a successful signup. */\\n  successRedirect?: string;\\n}',
+  '  finePrint?: string;\n}',
+  '  finePrint?: string;\n  /** Optional same-origin destination after a successful signup. */\n  successRedirect?: string;\n}',
   "EmailSignup successRedirect interface"
 );
 signup = replaceOnce(
   signup,
-  '  finePrint = "No spam. Unsubscribe any time."\\n} = Astro.props;',
-  '  finePrint = "No spam. Unsubscribe any time.",\\n  successRedirect = ""\\n} = Astro.props;',
+  '  finePrint = "No spam. Unsubscribe any time."\n} = Astro.props;',
+  '  finePrint = "No spam. Unsubscribe any time.",\n  successRedirect = ""\n} = Astro.props;',
   "EmailSignup successRedirect prop"
 );
 signup = replaceOnce(
   signup,
-  '      data-cio-source-form\\n    >',
-  '      data-cio-source-form\\n      data-success-redirect={successRedirect}\\n    >',
+  '      data-cio-source-form\n    >',
+  '      data-cio-source-form\n      data-success-redirect={successRedirect}\n    >',
   "EmailSignup successRedirect attribute"
 );
 signup = replaceOnce(
@@ -1012,14 +1012,14 @@ write("src/components/EmailSignup.astro", signup);
 let magnetPage = read("src/pages/resources/[slug].astro");
 magnetPage = replaceOnce(
   magnetPage,
-  '  buildFaqSchema(details.faq)\\n];',
-  '  buildFaqSchema(details.faq),\\n  {\\n    "@context": "https://schema.org",\\n    "@type": "DigitalDocument",\\n    name: magnet.title,\\n    description: magnet.description,\\n    url: `${siteConfig.siteUrl}/resources/${slug}`,\\n    inLanguage: "en-GB",\\n    isAccessibleForFree: true,\\n    publisher: { "@id": `${siteConfig.siteUrl}/#organization` }\\n  }\\n];',
+  '  buildFaqSchema(details.faq)\n];',
+  '  buildFaqSchema(details.faq),\n  {\n    "@context": "https://schema.org",\n    "@type": "DigitalDocument",\n    name: magnet.title,\n    description: magnet.description,\n    url: `${siteConfig.siteUrl}/resources/${slug}`,\n    inLanguage: "en-GB",\n    isAccessibleForFree: true,\n    publisher: { "@id": `${siteConfig.siteUrl}/#organization` }\n  }\n];',
   "lead magnet DigitalDocument schema"
 );
 magnetPage = replaceOnce(
   magnetPage,
-  '          finePrint={isGrowthExperimentPlanner\\n            ? "Includes the five-email planner implementation series. Unsubscribe any time."\\n            : "No spam. Unsubscribe any time."}\\n        />',
-  '          finePrint={isGrowthExperimentPlanner\\n            ? "Includes the five-email planner implementation series. Unsubscribe any time."\\n            : "No spam. Unsubscribe any time."}\\n          successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}\\n        />',
+  '          finePrint={isGrowthExperimentPlanner\n            ? "Includes the five-email planner implementation series. Unsubscribe any time."\n            : "No spam. Unsubscribe any time."}\n        />',
+  '          finePrint={isGrowthExperimentPlanner\n            ? "Includes the five-email planner implementation series. Unsubscribe any time."\n            : "No spam. Unsubscribe any time."}\n          successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}\n        />',
   "planner success redirect prop"
 );
 magnetPage = replaceAll(magnetPage, 'title="Three questions founders ask before requesting it."', 'title="Questions to check before using it."');
@@ -1035,8 +1035,8 @@ write("src/components/StageSelector.astro", stageSelector);
 let header = read("src/components/SiteHeader.astro");
 header = replaceOnce(
   header,
-  '      { href: "/resources#growth-tools", label: "Growth tools", note: "Five connected diagnostics" },\\n      { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "10 questions, 5 minutes" },\\n      { href: "/resources", label: "Templates & guides", note: "Free frameworks and checklists" },',
-  '      { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "12 questions, 4 minutes" },\\n      { href: "/resources#growth-tools", label: "All growth tools", note: "Five connected decisions" },\\n      { href: "/resources#templates", label: "Templates & guides", note: "Free working resources" },',
+  '      { href: "/resources#growth-tools", label: "Growth tools", note: "Five connected diagnostics" },\n      { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "10 questions, 5 minutes" },\n      { href: "/resources", label: "Templates & guides", note: "Free frameworks and checklists" },',
+  '      { href: siteConfig.scorecardUrl, label: "Growth Bottleneck Scorecard", note: "12 questions, 4 minutes" },\n      { href: "/resources#growth-tools", label: "All growth tools", note: "Five connected decisions" },\n      { href: "/resources#templates", label: "Templates & guides", note: "Free working resources" },',
   "Resources navigation"
 );
 write("src/components/SiteHeader.astro", header);
@@ -1046,13 +1046,13 @@ let app = read("public/growth-tools/app.js");
 app = replaceOnce(
   app,
   'function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}',
-  'function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(e){return false;}}\\nfunction scrollToolIntoView(){document.getElementById("growth-tool-start")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});}',
+  'function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(e){return false;}}\nfunction scrollToolIntoView(){document.getElementById("growth-tool-start")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});}',
   "safe saveState and tool scrolling"
 );
 app = replaceOnce(
   app,
-  "document.addEventListener('click',e=>{\\n  const routeEl=e.target.closest('[data-route]');",
-  "document.addEventListener('click',e=>{\\n  const target=e.target instanceof Element?e.target:null;\\n  if(!target)return;\\n  const launch=target.closest('[data-tool-launch]');\\n  if(launch){e.preventDefault();const tool=launch.dataset.toolLaunch;if(tool==='bottleneck')startBottleneck();else if(tool==='customer')startCustomer();else if(tool==='positioning')startPositioning();else if(tool==='leak')startLeak();else if(tool==='weekly')startWeekly();requestAnimationFrame(scrollToolIntoView);return;}\\n  const routeEl=target.closest('[data-route]');",
+  "document.addEventListener('click',e=>{\n  const routeEl=e.target.closest('[data-route]');",
+  "document.addEventListener('click',e=>{\n  const target=e.target instanceof Element?e.target:null;\n  if(!target)return;\n  const launch=target.closest('[data-tool-launch]');\n  if(launch){e.preventDefault();const tool=launch.dataset.toolLaunch;if(tool==='bottleneck')startBottleneck();else if(tool==='customer')startCustomer();else if(tool==='positioning')startPositioning();else if(tool==='leak')startLeak();else if(tool==='weekly')startWeekly();requestAnimationFrame(scrollToolIntoView);return;}\n  const routeEl=target.closest('[data-route]');",
   "safe click target and one-click launch"
 );
 app = replaceAll(app, "const tracked=e.target.closest('[data-track]');", "const tracked=target.closest('[data-track]');");
@@ -1073,7 +1073,7 @@ write("public/growth-tools/app.js", app);
 
 let growthCss = read("src/styles/growth-tools.css");
 if (!growthCss.includes("@media(prefers-reduced-motion:reduce)")) {
-  growthCss += '\\n@media(prefers-reduced-motion:reduce){#growth-tool-app *,#growth-tool-app *::before,#growth-tool-app *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}#growth-tool-app .ticker-track{animation:none!important}}\\n';
+  growthCss += '\n@media(prefers-reduced-motion:reduce){#growth-tool-app *,#growth-tool-app *::before,#growth-tool-app *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}#growth-tool-app .ticker-track{animation:none!important}}\n';
 }
 write("src/styles/growth-tools.css", growthCss);
 
@@ -1081,8 +1081,8 @@ write("src/styles/growth-tools.css", growthCss);
 let middleware = read("functions/_middleware.js");
 middleware = replaceOnce(
   middleware,
-  '  const legacyRedirects = {\\n',
-  '  const legacyRedirects = {\\n    "/quiz": "/resources/growth-dependency",\\n    "/quiz/": "/resources/growth-dependency",\\n    "/resources/growth-bottleneck-scorecard": "/resources/growth-dependency",\\n    "/resources/growth-bottleneck-scorecard/": "/resources/growth-dependency",\\n    "/resources/founder-led-growth-diagnostic": "/resources/growth-dependency",\\n    "/resources/founder-led-growth-diagnostic/": "/resources/growth-dependency",\\n    "/founder-led-growth-bottleneck-map": "/resources/growth-dependency",\\n    "/founder-led-growth-bottleneck-map/": "/resources/growth-dependency",\\n',
+  '  const legacyRedirects = {\n',
+  '  const legacyRedirects = {\n    "/quiz": "/resources/growth-dependency",\n    "/quiz/": "/resources/growth-dependency",\n    "/resources/growth-bottleneck-scorecard": "/resources/growth-dependency",\n    "/resources/growth-bottleneck-scorecard/": "/resources/growth-dependency",\n    "/resources/founder-led-growth-diagnostic": "/resources/growth-dependency",\n    "/resources/founder-led-growth-diagnostic/": "/resources/growth-dependency",\n    "/founder-led-growth-bottleneck-map": "/resources/growth-dependency",\n    "/founder-led-growth-bottleneck-map/": "/resources/growth-dependency",\n',
   "resource middleware redirects"
 );
 write("functions/_middleware.js", middleware);
@@ -1099,15 +1099,15 @@ const redirectBlock = `# Consolidated growth diagnosis URLs
 /founder-led-growth-bottleneck-map/ /resources/growth-dependency 301
 
 `;
-redirects = replaceOnce(redirects, "# Legacy contact path\\n", redirectBlock + "# Legacy contact path\\n", "static resource redirects");
+redirects = replaceOnce(redirects, "# Legacy contact path\n", redirectBlock + "# Legacy contact path\n", "static resource redirects");
 write("public/_redirects", redirects);
 
 let sitemapCanonical = read("src/lib/sitemapCanonical.ts");
 sitemapCanonical = replaceAll(sitemapCanonical, '"/quiz": "/resources/growth-bottleneck-scorecard"', '"/quiz": "/resources/growth-dependency"');
 sitemapCanonical = replaceOnce(
   sitemapCanonical,
-  '  "/case-studies/marketplace-performance-audit": "/case-studies"\\n};',
-  '  "/case-studies/marketplace-performance-audit": "/case-studies",\\n  "/resources/growth-bottleneck-scorecard": "/resources/growth-dependency",\\n  "/resources/founder-led-growth-diagnostic": "/resources/growth-dependency",\\n  "/founder-led-growth-bottleneck-map": "/resources/growth-dependency"\\n};',
+  '  "/case-studies/marketplace-performance-audit": "/case-studies"\n};',
+  '  "/case-studies/marketplace-performance-audit": "/case-studies",\n  "/resources/growth-bottleneck-scorecard": "/resources/growth-dependency",\n  "/resources/founder-led-growth-diagnostic": "/resources/growth-dependency",\n  "/founder-led-growth-bottleneck-map": "/resources/growth-dependency"\n};',
   "sitemap resource redirects"
 );
 write("src/lib/sitemapCanonical.ts", sitemapCanonical);
@@ -1116,15 +1116,15 @@ let sitemap = read("src/pages/sitemap.xml.ts");
 sitemap = replaceOnce(
   sitemap,
   'import { isFinalSitemapPath } from "../lib/sitemapCanonical";',
-  'import { growthToolRoutes } from "../data/growthTools";\\nimport { isFinalSitemapPath } from "../lib/sitemapCanonical";',
+  'import { growthToolRoutes } from "../data/growthTools";\nimport { isFinalSitemapPath } from "../lib/sitemapCanonical";',
   "growthTools sitemap import"
 );
 sitemap = replaceAll(
   sitemap,
-  '      "/resources/growth-dependency",\\n      "/resources/customer-segment",\\n      "/resources/positioning",\\n      "/resources/gtm-leak",\\n      "/resources/weekly-focus",',
+  '      "/resources/growth-dependency",\n      "/resources/customer-segment",\n      "/resources/positioning",\n      "/resources/gtm-leak",\n      "/resources/weekly-focus",',
   '      ...growthToolRoutes,'
 );
-sitemap = replaceAll(sitemap, '      "/founder-led-growth-bottleneck-map",\\n', '');
+sitemap = replaceAll(sitemap, '      "/founder-led-growth-bottleneck-map",\n', '');
 write("src/pages/sitemap.xml.ts", sitemap);
 
 // Printable companion now points to the canonical interactive diagnostic.
@@ -1140,8 +1140,8 @@ write("package.json", JSON.stringify(pkg, null, 2));
 let ci = read(".github/workflows/ci.yml");
 ci = replaceOnce(
   ci,
-  '      - name: Crawl link check (if export exists)\\n',
-  '      - name: Resources hub integrity\\n        run: npm run verify:resources\\n\\n      - name: Crawl link check (if export exists)\\n',
+  '      - name: Crawl link check (if export exists)\n',
+  '      - name: Resources hub integrity\n        run: npm run verify:resources\n\n      - name: Crawl link check (if export exists)\n',
   "Resources CI step"
 );
 write(".github/workflows/ci.yml", ci);

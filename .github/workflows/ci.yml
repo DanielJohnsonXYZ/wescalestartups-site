@@ -36,6 +36,9 @@ jobs:
       - name: Generated-site integrity
         run: npm run verify:build
 
+      - name: Resources hub integrity
+        run: npm run verify:resources
+
       - name: Crawl link check (if export exists)
         run: |
           if [ -f docs/crawls/latest.csv ]; then

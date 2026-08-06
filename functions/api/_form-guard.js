@@ -69,7 +69,12 @@ export async function checkFormRequest(context, payload, options = {}) {
   const tokenField = options.turnstileField || "cf-turnstile-response";
 
   const enforceTurnstile = context.env?.TURNSTILE_ENFORCE === "1";
-  if (enforceTurnstile) {
+  // Calendly booking stamps use keepalive on unload — no Turnstile token.
+  // Skip Turnstile for that path only; Origin / source_page still apply.
+  const skipTurnstile =
+    payload?.booked_diagnostic === true ||
+    payload?.booked_diagnostic === "true";
+  if (enforceTurnstile && !skipTurnstile) {
     const ts = await verifyTurnstile(context, payload?.[tokenField]);
     if (!ts.ok) return ts;
   }

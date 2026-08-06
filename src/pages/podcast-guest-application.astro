@@ -170,40 +170,6 @@ const turnstileSiteKey =
             }
           }
 
-          function turnstileToken() {
-            const data = new FormData(form);
-            return (data.get("cf-turnstile-response") || "").toString();
-          }
-
-          function resetTurnstile() {
-            try {
-              if (window.turnstile) {
-                const widget = form.querySelector(".cf-turnstile");
-                if (widget) window.turnstile.reset(widget);
-              }
-            } catch (_) {}
-          }
-
-          /** Wait for a fresh Turnstile token after reset (tokens are single-use). */
-          function waitForTurnstileToken(timeoutMs) {
-            return new Promise(function (resolve) {
-              const start = Date.now();
-              function poll() {
-                const token = turnstileToken();
-                if (token) {
-                  resolve(token);
-                  return;
-                }
-                if (Date.now() - start >= timeoutMs) {
-                  resolve("");
-                  return;
-                }
-                setTimeout(poll, 100);
-              }
-              poll();
-            });
-          }
-
           form.addEventListener("input", (event) => {
             const t = event.target;
             if (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement) {
@@ -267,11 +233,27 @@ const turnstileSiteKey =
               submitBtn.textContent = "Submitting…";
             }
 
-            const guestToken = turnstileToken();
+            // Best-effort CIO capture — no Turnstile token (single-use; guest API owns it).
+            // When TURNSTILE_ENFORCE=1 this side-post is soft-rejected; the application email still sends.
+            try {
+              fetch(cioUrl, {
+                method: "POST",
+                keepalive: true,
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                  form_id: cioFormId,
+                  email: emailVal,
+                  source_type: "podcast-guest-form",
+                  source_page: window.location.href,
+                  lead_magnet: "podcast-guest-application"
+                })
+              }).catch(function () {});
+            } catch (_) {}
 
             // Prefer a same-origin API when available (Pages Function); fall back to clipboard + mailto.
             let apiOk = false;
             try {
+              const data = new FormData(form);
               const res = await fetch("/api/podcast-guest", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -288,33 +270,13 @@ const turnstileSiteKey =
                   email: emailVal,
                   page: window.location.href,
                   company_website: val("company_website"),
-                  "cf-turnstile-response": guestToken
+                  "cf-turnstile-response": (data.get("cf-turnstile-response") || "").toString()
                 })
               });
               apiOk = res.ok;
             } catch (_) {
               apiOk = false;
             }
-
-            // Capture the lead in Customer.io. Turnstile tokens are single-use, so
-            // reset and wait for a fresh token before the second POST.
-            try {
-              resetTurnstile();
-              const cioToken = await waitForTurnstileToken(8000);
-              fetch(cioUrl, {
-                method: "POST",
-                keepalive: true,
-                headers: { "Content-Type": "application/json", Accept: "application/json" },
-                body: JSON.stringify({
-                  form_id: cioFormId,
-                  email: emailVal,
-                  source_type: "podcast-guest-form",
-                  source_page: window.location.href,
-                  lead_magnet: "podcast-guest-application",
-                  "cf-turnstile-response": cioToken
-                })
-              }).catch(function () {});
-            } catch (_) {}
 
             let copied = false;
             try {

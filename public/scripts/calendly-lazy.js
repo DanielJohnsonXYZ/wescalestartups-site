@@ -5,15 +5,15 @@
  *
  * Also stamps booked_diagnostic=true in Customer.io when a booking completes,
  * using the email from sessionStorage (set by site forms) or Calendly payload.
- * When TURNSTILE_ENFORCE is on, this path needs a programmatic Turnstile token.
+ * No Turnstile here: keepalive + page unload make an async challenge unreliable,
+ * and booked_diagnostic is too important to drop. Server skips Turnstile for
+ * this stamp and still applies Origin / source_page checks.
  */
 (function () {
   var SRC = "https://assets.calendly.com/assets/external/widget.js";
   var EMAIL_KEY = "wss_lead_email";
   var loaded = false;
   var bookedSent = false;
-  var turnstileWidgetId = null;
-  var pendingTurnstileCb = null;
 
   function loadCalendly() {
     if (loaded) return;
@@ -51,85 +51,24 @@
     return "";
   }
 
-  function turnstileSiteKey() {
-    var meta = document.querySelector('meta[name="cf-turnstile-sitekey"]');
-    return meta && meta.content ? meta.content.trim() : "";
-  }
-
-  function finishTurnstile(token) {
-    var fn = pendingTurnstileCb;
-    pendingTurnstileCb = null;
-    if (typeof fn === "function") {
-      try {
-        fn(token || "");
-      } catch (_) {}
-    }
-  }
-
-  /**
-   * Obtain a Turnstile token for the background booking stamp.
-   * Renders an invisible widget once, then executes/resets as needed.
-   */
-  function getTurnstileToken(cb) {
-    var key = turnstileSiteKey();
-    if (!key || typeof window.turnstile === "undefined") {
-      cb("");
-      return;
-    }
-
-    pendingTurnstileCb = cb;
-
-    try {
-      if (turnstileWidgetId == null) {
-        var host = document.createElement("div");
-        host.setAttribute("aria-hidden", "true");
-        host.style.cssText =
-          "position:absolute;width:0;height:0;overflow:hidden;clip:rect(0,0,0,0);";
-        document.body.appendChild(host);
-        turnstileWidgetId = window.turnstile.render(host, {
-          sitekey: key,
-          size: "invisible",
-          callback: function (token) {
-            finishTurnstile(token);
-          },
-          "error-callback": function () {
-            finishTurnstile("");
-          },
-          "timeout-callback": function () {
-            finishTurnstile("");
-          }
-        });
-      } else {
-        window.turnstile.reset(turnstileWidgetId);
-      }
-      window.turnstile.execute(turnstileWidgetId);
-    } catch (_) {
-      finishTurnstile("");
-    }
-  }
-
   function markBookedDiagnostic(email, source) {
     if (bookedSent || !email) return;
     bookedSent = true;
     rememberEmail(email);
-
-    getTurnstileToken(function (token) {
-      try {
-        fetch("/api/forms", {
-          method: "POST",
-          keepalive: true,
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            email: email,
-            form_id: "wss-newsletter",
-            booked_diagnostic: "true",
-            source_page: window.location.href,
-            lead_magnet: source || "calendly-booking",
-            "cf-turnstile-response": token || ""
-          })
-        }).catch(function () {});
-      } catch (_) {}
-    });
+    try {
+      fetch("/api/forms", {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          email: email,
+          form_id: "wss-newsletter",
+          booked_diagnostic: "true",
+          source_page: window.location.href,
+          lead_magnet: source || "calendly-booking"
+        })
+      }).catch(function () {});
+    } catch (_) {}
   }
 
   function isCalendlyEvent(e) {

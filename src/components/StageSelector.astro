@@ -133,7 +133,7 @@ const selectedStage = stages[1];
     const section = document.getElementById("choose-your-path");
     if (!section) return;
 
-    const tabs = Array.from(section.querySelectorAll(".stage-selector-tab"));
+    const tabs = Array.from(section.querySelectorAll<HTMLButtonElement>(".stage-selector-tab"));
     const label = section.querySelector("#stage-output-label");
     const title = section.querySelector("#stage-output-title");
     const summary = section.querySelector("#stage-output-summary");
@@ -143,8 +143,7 @@ const selectedStage = stages[1];
     const secondary = section.querySelector("#stage-output-secondary");
     const progress = section.querySelector(".stage-selector-progress-fill");
 
-    const activate = (tab) => {
-      if (!(tab instanceof HTMLButtonElement)) return;
+    const activate = (tab: HTMLButtonElement) => {
       const activeIndex = tabs.indexOf(tab);
       tabs.forEach((item, index) => {
         const isActive = item === tab;
@@ -161,8 +160,8 @@ const selectedStage = stages[1];
       if (nextMove) nextMove.textContent = tab.dataset.nextMove || "";
 
       if (signals) {
-        let items = [];
-        try { items = JSON.parse(tab.dataset.signals || "[]"); } catch (error) {}
+        let items: string[] = [];
+        try { items = JSON.parse(tab.dataset.signals || "[]") as string[]; } catch {}
         signals.innerHTML = "";
         items.forEach((item) => {
           const li = document.createElement("li");
@@ -204,14 +203,18 @@ const selectedStage = stages[1];
         if (event.key === "ArrowRight" || event.key === "ArrowDown") {
           event.preventDefault();
           const next = tabs[(index + 1) % tabs.length];
-          next?.focus();
-          activate(next);
+          if (next) {
+            next.focus();
+            activate(next);
+          }
         }
         if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
           event.preventDefault();
           const previous = tabs[(index - 1 + tabs.length) % tabs.length];
-          previous?.focus();
-          activate(previous);
+          if (previous) {
+            previous.focus();
+            activate(previous);
+          }
         }
       });
     });

@@ -107,6 +107,10 @@ const gtmScript = `window.dataLayer=window.dataLayer||[];window.dataLayer.push({
 (function(){var loaded=false;function load(){if(loaded)return;loaded=true;var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${siteConfig.gtmId}';document.head.appendChild(j);}
 ['pointerdown','keydown','scroll','touchstart'].forEach(function(e){addEventListener(e,load,{once:true,passive:true});});
 if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}else{setTimeout(load,3000);}})();`;
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
 ---
 
 <!doctype html>
@@ -165,6 +169,9 @@ if('requestIdleCallback' in window){requestIdleCallback(load,{timeout:3000});}el
 
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    {turnstileSiteKey && <meta name="cf-turnstile-sitekey" content={turnstileSiteKey} />}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <meta name="ai:summary" content={description} />
     <meta name="ai:role" content="Growth consultancy and fractional CMO support for post-PMF startups" />

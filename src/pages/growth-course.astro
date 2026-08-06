@@ -73,6 +73,11 @@ const schemas = [
     { name: "Growth Course", path: "/growth-course" }
   ])
 ];
+
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
 ---
 
 <BaseLayout
@@ -159,6 +164,14 @@ const schemas = [
             <option>Series B+</option>
           </select>
         </label>
+        {turnstileSiteKey && (
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="light"
+            data-size="flexible"
+          />
+        )}
         <button class="button button-brand" type="submit">Join the waitlist</button>
         <p class="not-for-footnote">No charge until launch. Unsubscribe anytime.</p>
       </form>
@@ -204,7 +217,8 @@ const schemas = [
             email: leadEmail,
             source_type: "course-waitlist-form",
             source_page: window.location.href,
-            lead_magnet: "growth-course-waitlist"
+            lead_magnet: "growth-course-waitlist",
+            "cf-turnstile-response": (data.get("cf-turnstile-response") || "").toString()
           })
         }).catch(() => {});
       }

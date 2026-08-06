@@ -20,6 +20,9 @@
   <meta name="twitter:title" content="Founder-Led Growth Bottleneck Map | We Scale Startups">
   <meta name="twitter:description" content="Identify your biggest GTM bottleneck in under 5 minutes. Free diagnostic for post-PMF SaaS founders.">
   <meta name="twitter:image" content="https://wescalestartups.com/og/default.png">
+  <!-- Public site key — safe to hardcode in static HTML (not a secret). -->
+  <meta name="cf-turnstile-sitekey" content="0x4AAAAAAEIhzoHuWLsynQnO">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -659,6 +662,12 @@
     <div class="form-fields">
       <input type="text"  id="f-name"  placeholder="First name" autocomplete="given-name" />
       <input type="email" id="f-email" placeholder="Work email address" autocomplete="email" />
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAEIhzoHuWLsynQnO"
+        data-theme="light"
+        data-size="flexible"
+      ></div>
     </div>
     <button class="btn-submit" onclick="showResults()">See My Results →</button>
     <p class="privacy">No spam. We'll send your results plus occasional GTM insights from We Scale Startups. Unsubscribe any time.</p>
@@ -1030,6 +1039,8 @@ function showResults() {
 
   /* ── Email capture → Customer.io via /api/forms (fire-and-forget) ── */
   try {
+    var tsInput = document.querySelector('#capture-screen input[name="cf-turnstile-response"]');
+    var tsToken = tsInput && tsInput.value ? tsInput.value : '';
     fetch('/api/forms', {
       method: 'POST',
       keepalive: true,
@@ -1040,7 +1051,8 @@ function showResults() {
         source_type: 'diagnostic-tool',
         source_page: window.location.href,
         lead_magnet: 'founder-led-growth-bottleneck-map',
-        first_name: (name.value.trim().split(' ')[0]) || ''
+        first_name: (name.value.trim().split(' ')[0]) || '',
+        'cf-turnstile-response': tsToken
       })
     }).catch(function () {});
   } catch (_) {}

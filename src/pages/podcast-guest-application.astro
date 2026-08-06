@@ -28,6 +28,11 @@ const guestFields = [
 
 const suggestedCopy =
   "Want to be a guest? We are looking for founders, marketers, investors, and operators with practical perspectives on how AI is changing startup growth: what is breaking, what still works, and what leaders should do differently.";
+
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
 ---
 
 <BaseLayout
@@ -116,6 +121,14 @@ const suggestedCopy =
             autocomplete="off"
           />
         </label>
+        {turnstileSiteKey && (
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="light"
+            data-size="flexible"
+          />
+        )}
         <button class="button button-brand" type="submit" id="guest-submit">Submit application</button>
         <p id="guest-status" class="guest-status" role="status" aria-live="polite" hidden></p>
       </form>
@@ -155,6 +168,40 @@ const suggestedCopy =
               el.setCustomValidity(message || "");
               if (message) el.reportValidity();
             }
+          }
+
+          function turnstileToken() {
+            const data = new FormData(form);
+            return (data.get("cf-turnstile-response") || "").toString();
+          }
+
+          function resetTurnstile() {
+            try {
+              if (window.turnstile) {
+                const widget = form.querySelector(".cf-turnstile");
+                if (widget) window.turnstile.reset(widget);
+              }
+            } catch (_) {}
+          }
+
+          /** Wait for a fresh Turnstile token after reset (tokens are single-use). */
+          function waitForTurnstileToken(timeoutMs) {
+            return new Promise(function (resolve) {
+              const start = Date.now();
+              function poll() {
+                const token = turnstileToken();
+                if (token) {
+                  resolve(token);
+                  return;
+                }
+                if (Date.now() - start >= timeoutMs) {
+                  resolve("");
+                  return;
+                }
+                setTimeout(poll, 100);
+              }
+              poll();
+            });
           }
 
           form.addEventListener("input", (event) => {
@@ -220,22 +267,7 @@ const suggestedCopy =
               submitBtn.textContent = "Submitting…";
             }
 
-            // Capture the lead in Customer.io (fire-and-forget) so submissions are never lost,
-            // even if no mail client is configured.
-            try {
-              fetch(cioUrl, {
-                method: "POST",
-                keepalive: true,
-                headers: { "Content-Type": "application/json", Accept: "application/json" },
-                body: JSON.stringify({
-                  form_id: cioFormId,
-                  email: emailVal,
-                  source_type: "podcast-guest-form",
-                  source_page: window.location.href,
-                  lead_magnet: "podcast-guest-application"
-                })
-              }).catch(function () {});
-            } catch (_) {}
+            const guestToken = turnstileToken();
 
             // Prefer a same-origin API when available (Pages Function); fall back to clipboard + mailto.
             let apiOk = false;
@@ -255,13 +287,34 @@ const suggestedCopy =
                   relevantLinks: val("relevant-links"),
                   email: emailVal,
                   page: window.location.href,
-                  company_website: val("company_website")
+                  company_website: val("company_website"),
+                  "cf-turnstile-response": guestToken
                 })
               });
               apiOk = res.ok;
             } catch (_) {
               apiOk = false;
             }
+
+            // Capture the lead in Customer.io. Turnstile tokens are single-use, so
+            // reset and wait for a fresh token before the second POST.
+            try {
+              resetTurnstile();
+              const cioToken = await waitForTurnstileToken(8000);
+              fetch(cioUrl, {
+                method: "POST",
+                keepalive: true,
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                  form_id: cioFormId,
+                  email: emailVal,
+                  source_type: "podcast-guest-form",
+                  source_page: window.location.href,
+                  lead_magnet: "podcast-guest-application",
+                  "cf-turnstile-response": cioToken
+                })
+              }).catch(function () {});
+            } catch (_) {}
 
             let copied = false;
             try {

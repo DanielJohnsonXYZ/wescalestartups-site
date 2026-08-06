@@ -66,8 +66,7 @@ export async function onRequestPost(context) {
 
   const guard = await checkFormRequest(context, payload, {
     sourcePageField: "page",
-    honeypotFields: ["company_website"],
-    rateLimitBucket: "podcast-guest"
+    honeypotFields: ["company_website"]
   });
   if (!guard.ok) {
     console.warn("Rejected /api/podcast-guest submission", guard.reason);

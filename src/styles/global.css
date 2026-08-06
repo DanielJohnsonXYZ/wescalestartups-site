@@ -5066,7 +5066,7 @@ textarea:focus-visible {
   padding: 0.25rem 0.45rem;
   border-radius: 6px;
   background: var(--violet-soft);
-  color: var(--violet);
+  color: var(--violet-deep);
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.68rem;
   font-weight: 800;

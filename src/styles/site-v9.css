@@ -48,6 +48,13 @@
   --violet-tint: rgba(128, 108, 255, 0.1);
   --accent: var(--v9-violet);
   --acid: var(--v9-mint);
+  --border: var(--v9-line);
+  --shadow-soft: var(--v9-shadow);
+  --surface-muted: var(--v9-paper-2);
+  --surface-dim: var(--v9-paper-2);
+  --bg: var(--v9-paper);
+  --font-display: var(--v9-display);
+  --violet-soft: rgba(128, 108, 255, 0.12);
   color: var(--v9-ink);
   font-family: var(--v9-sans);
 }

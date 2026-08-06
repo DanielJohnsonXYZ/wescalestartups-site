@@ -214,7 +214,7 @@
   color: var(--v9-copy);
   font-family: var(--v9-mono);
   font-size: 0.62rem;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -305,7 +305,7 @@
   color: #fffdf7;
   font-family: var(--v9-sans);
   font-size: 1.05rem;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.02em;
 }
 
 .v9-found-bar {
@@ -377,7 +377,7 @@
   font-family: var(--v9-mono);
   font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.04em;
 }
 
 .v9-quote-avatar img {
@@ -545,7 +545,7 @@
   font-variation-settings: "opsz" 100;
   font-size: clamp(3.4rem, 5.8vw, 6.1rem);
   line-height: 0.98;
-  letter-spacing: -0.035em !important;
+  letter-spacing: -0.035em;
 }
 
 .v9-hero h1 em {

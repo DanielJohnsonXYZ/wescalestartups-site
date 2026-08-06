@@ -1,25 +1,21 @@
 import fs from "node:fs";
+import { spawnSync } from "node:child_process";
 
-const messages = [];
-const originalError = console.error;
-const originalWarn = console.warn;
-const originalLog = console.log;
+const checks = [
+  ["site_integrity", "scripts/verify-build-integrity.mjs"],
+  ["resources_integrity", "scripts/verify-resources.mjs"]
+];
+const output = [];
 
-console.error = (...args) => messages.push(args.map(String).join(" "));
-console.warn = (...args) => messages.push(args.map(String).join(" "));
-console.log = (...args) => messages.push(args.map(String).join(" "));
-process.exitCode = 0;
+for (const [name, script] of checks) {
+  const result = spawnSync(process.execPath, [script], {
+    cwd: process.cwd(),
+    encoding: "utf8"
+  });
+  output.push(`[${name}] exit_code=${result.status ?? 1}`);
+  if (result.stdout?.trim()) output.push(result.stdout.trim());
+  if (result.stderr?.trim()) output.push(result.stderr.trim());
+}
 
-await import(`./verify-build-integrity.mjs?capture=${Date.now()}`);
-const checkerExitCode = process.exitCode || 0;
-
-console.error = originalError;
-console.warn = originalWarn;
-console.log = originalLog;
-process.exitCode = 0;
-
-fs.writeFileSync(
-  "dist/integrity-report.txt",
-  [`checker_exit_code=${checkerExitCode}`, ...messages].join("\n") + "\n"
-);
-originalLog(`[integrity-capture] wrote ${messages.length} lines to dist/integrity-report.txt`);
+fs.writeFileSync("dist/integrity-report.txt", output.join("\n") + "\n");
+console.log(`[integrity-capture] wrote ${output.length} sections to dist/integrity-report.txt`);

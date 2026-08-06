@@ -1114,15 +1114,6 @@ textarea:focus-visible {
 }
 
 .hero h1,
-.page-hero h1 {
-  max-width: 980px;
-  margin: 0;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 8.5rem;
-  line-height: 0.92;
-  font-weight: 360;
-}
-
 .hero-with-portrait h1 {
   max-width: 980px;
   font-size: clamp(3.25rem, 5.9vw, 5.9rem);
@@ -1975,10 +1966,6 @@ textarea:focus-visible {
 .page-hero {
   padding: 6rem 0 4rem;
   border-bottom: 1px solid var(--line);
-}
-
-.page-hero h1 {
-  font-size: 5rem;
 }
 
 .page-hero p {
@@ -5440,14 +5427,6 @@ body::after {
 /* ---- 1. Typography rhythm: clamp the page-hero + section-intro headlines so
        the same H1/H2 doesn't tower on a 1440 viewport and crush on a 13" laptop.
        text-wrap: balance gives the senior, intentionally-broken line look. ---- */
-.page-hero h1 {
-  font-size: clamp(2.85rem, 5.6vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.018em;
-  text-wrap: balance;
-  font-weight: 360;
-}
-
 .section-intro h2 {
   font-size: clamp(2.4rem, 4.6vw, 4.7rem);
   line-height: 1.02;
@@ -5910,26 +5889,6 @@ body {
 .page-hero .shell {
   position: relative;
   z-index: 1;
-}
-
-/* ── 4. Page-hero h1: warm gradient text ───────────────────────
-   The hero headline gets a warm ink→violet sweep so it reads
-   like the homepage headline treatment.
-   ─────────────────────────────────────────────────────────── */
-.page-hero h1 {
-  background: linear-gradient(115deg, var(--ink) 0%, var(--ink-2) 48%, #6657ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--ink); /* fallback */
-}
-
-.page-hero h1 em {
-  background: linear-gradient(95deg, #6657ff 0%, #8b5cf6 55%, #a445ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
 }
 
 /* ── 5. Global eyebrow pill ────────────────────────────────────

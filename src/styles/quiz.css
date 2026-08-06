@@ -36,7 +36,7 @@
   letter-spacing: 0.1em;
   color: var(--accent);
   margin: 0 0 0.75rem;
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 .quiz-question-text {
   font-size: clamp(1.05rem, 1.8vw, 1.2rem);
@@ -107,7 +107,7 @@
   padding: 2rem 2rem 2.5rem;
 }
 .result-score-display {
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1;

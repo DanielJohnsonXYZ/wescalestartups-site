@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "precheck": "node scripts/apply-resources-audit.mjs",
+    "precheck": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
     "check": "astro check",
-    "prebuild": "node scripts/apply-resources-audit.mjs",
+    "prebuild": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
     "build": "node scripts/generate-og-png.mjs && astro build",
     "check:theme": "node scripts/check-site-theme.mjs",
     "verify:build": "node scripts/verify-build-integrity.mjs",

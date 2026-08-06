@@ -28,6 +28,11 @@ const guestFields = [
 
 const suggestedCopy =
   "Want to be a guest? We are looking for founders, marketers, investors, and operators with practical perspectives on how AI is changing startup growth: what is breaking, what still works, and what leaders should do differently.";
+
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
 ---
 
 <BaseLayout
@@ -116,6 +121,14 @@ const suggestedCopy =
             autocomplete="off"
           />
         </label>
+        {turnstileSiteKey && (
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="light"
+            data-size="flexible"
+          />
+        )}
         <button class="button button-brand" type="submit" id="guest-submit">Submit application</button>
         <p id="guest-status" class="guest-status" role="status" aria-live="polite" hidden></p>
       </form>
@@ -220,8 +233,8 @@ const suggestedCopy =
               submitBtn.textContent = "Submitting…";
             }
 
-            // Capture the lead in Customer.io (fire-and-forget) so submissions are never lost,
-            // even if no mail client is configured.
+            // Best-effort CIO capture — no Turnstile token (single-use; guest API owns it).
+            // When TURNSTILE_ENFORCE=1 this side-post is soft-rejected; the application email still sends.
             try {
               fetch(cioUrl, {
                 method: "POST",
@@ -240,6 +253,7 @@ const suggestedCopy =
             // Prefer a same-origin API when available (Pages Function); fall back to clipboard + mailto.
             let apiOk = false;
             try {
+              const data = new FormData(form);
               const res = await fetch("/api/podcast-guest", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -255,7 +269,8 @@ const suggestedCopy =
                   relevantLinks: val("relevant-links"),
                   email: emailVal,
                   page: window.location.href,
-                  company_website: val("company_website")
+                  company_website: val("company_website"),
+                  "cf-turnstile-response": (data.get("cf-turnstile-response") || "").toString()
                 })
               });
               apiOk = res.ok;

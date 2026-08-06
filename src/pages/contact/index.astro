@@ -27,6 +27,11 @@ const contactSchema = [
   ]),
   buildFaqSchema(contactFaqs)
 ];
+
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
 ---
 
 <BaseLayout
@@ -101,6 +106,14 @@ const contactSchema = [
         </label>
         <label>Timeline<input name="timeline" placeholder="Now, this quarter, next quarter..." /></label>
         <label>What do you need help with?<textarea name="help" rows="4"></textarea></label>
+        {turnstileSiteKey && (
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="light"
+            data-size="flexible"
+          />
+        )}
         <button class="button button-brand" type="submit">Send enquiry</button>
       </form>
       <aside class="contact-option">
@@ -338,7 +351,8 @@ const contactSchema = [
             email: leadEmail,
             source_type: "contact-form",
             source_page: window.location.href,
-            lead_magnet: "growth-enquiry"
+            lead_magnet: "growth-enquiry",
+            "cf-turnstile-response": (data.get("cf-turnstile-response") || "").toString()
           })
         }).catch(() => {});
       }

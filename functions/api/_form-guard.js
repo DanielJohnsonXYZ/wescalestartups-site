@@ -3,10 +3,6 @@ const ALLOWED_HOSTS = new Set([
   "www.wescalestartups.com"
 ]);
 
-const DISPOSABLE_DOMAINS = new Set([
-  "immenseignite.info"
-]);
-
 const DEFAULT_HONEYPOT_FIELDS = ["website", "company_website"];
 
 function hostnameFrom(value) {
@@ -22,17 +18,41 @@ function isAllowedHost(hostname) {
   return ALLOWED_HOSTS.has(hostname) || hostname.endsWith(".wescalestartups-site.pages.dev");
 }
 
-async function rateLimit(context, bucket = "forms") {
-  const store = context.env?.FORM_RATE_LIMIT;
-  if (!store?.get || !store?.put) return true;
+/**
+ * Verify a Cloudflare Turnstile token with siteverify.
+ * Fail closed when secret/token missing or Cloudflare is unreachable.
+ * @param {object} context Cloudflare Pages function context
+ * @param {string|undefined|null} token
+ * @returns {Promise<{ok: true}|{ok: false, reason: string}>}
+ */
+async function verifyTurnstile(context, token) {
+  const secret = context.env?.TURNSTILE_SECRET_KEY;
 
-  const ip = context.request.headers.get("CF-Connecting-IP") || "unknown";
-  const minute = Math.floor(Date.now() / 60000);
-  const key = `${bucket}:${ip}:${minute}`;
-  const count = Number(await store.get(key) || 0);
-  if (count >= 8) return false;
-  await store.put(key, String(count + 1), { expirationTtl: 120 });
-  return true;
+  // Fail CLOSED when unconfigured, but only once the rollout flag is on.
+  // See TURNSTILE_ENFORCE below.
+  if (!secret) return { ok: false, reason: "turnstile_unconfigured" };
+  if (!token) return { ok: false, reason: "turnstile_missing" };
+
+  const body = new FormData();
+  body.append("secret", secret);
+  body.append("response", token);
+  const ip = context.request.headers.get("CF-Connecting-IP");
+  if (ip) body.append("remoteip", ip);
+
+  try {
+    const res = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      { method: "POST", body }
+    );
+    const data = await res.json();
+    return data?.success
+      ? { ok: true }
+      : { ok: false, reason: `turnstile_failed:${(data?.["error-codes"] || []).join(",")}` };
+  } catch (err) {
+    console.error("Turnstile verify error", err);
+    // Network failure to Cloudflare's own endpoint: fail closed.
+    return { ok: false, reason: "turnstile_unreachable" };
+  }
 }
 
 /**
@@ -41,12 +61,20 @@ async function rateLimit(context, bucket = "forms") {
  * @param {object} [options]
  * @param {string} [options.sourcePageField="source_page"] Absolute same-site page URL field
  * @param {string[]} [options.honeypotFields] Fields that must be empty (bots fill them)
- * @param {string} [options.rateLimitBucket="forms"] KV key prefix when FORM_RATE_LIMIT is bound
+ * @param {string} [options.turnstileField="cf-turnstile-response"] Turnstile token field
+ * @param {boolean} [options.skipTurnstile=false] Server-path only (e.g. /api/booked). Never set from client payload.
  */
 export async function checkFormRequest(context, payload, options = {}) {
   const sourcePageField = options.sourcePageField || "source_page";
   const honeypotFields = options.honeypotFields || DEFAULT_HONEYPOT_FIELDS;
-  const rateLimitBucket = options.rateLimitBucket || "forms";
+  const tokenField = options.turnstileField || "cf-turnstile-response";
+
+  const enforceTurnstile = context.env?.TURNSTILE_ENFORCE === "1";
+  // skipTurnstile is set only by trusted server handlers (path-based), never from payload.
+  if (enforceTurnstile && !options.skipTurnstile) {
+    const ts = await verifyTurnstile(context, payload?.[tokenField]);
+    if (!ts.ok) return ts;
+  }
 
   const originHost = hostnameFrom(context.request.headers.get("Origin"));
   const refererHost = hostnameFrom(context.request.headers.get("Referer"));
@@ -68,16 +96,6 @@ export async function checkFormRequest(context, payload, options = {}) {
 
   if (!sourceHost || !isAllowedHost(sourceHost)) {
     return { ok: false, reason: "source_page" };
-  }
-
-  const email = String(payload?.email || payload?.Email || "").trim().toLowerCase();
-  const emailDomain = email.split("@").pop() || "";
-  if (DISPOSABLE_DOMAINS.has(emailDomain)) {
-    return { ok: false, reason: "email_domain" };
-  }
-
-  if (!(await rateLimit(context, rateLimitBucket))) {
-    return { ok: false, reason: "rate_limit" };
   }
 
   return { ok: true };

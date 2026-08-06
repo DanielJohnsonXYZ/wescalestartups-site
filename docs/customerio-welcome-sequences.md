@@ -23,7 +23,7 @@ Implementation sheet for WSS welcome automation in Customer.io. The site posts t
 
 Not covered by welcome journeys (profile still created): `referral-form`, `course-waitlist-form`, `podcast-guest-form`.
 
-Enquiry journey exit: when `booked_diagnostic = true` (segment **Booked diagnostic**). Set by Calendly booking completion via `/api/forms` after a prior form email is remembered in sessionStorage.
+Enquiry journey exit: when `booked_diagnostic = true` (segment **Booked diagnostic**). Set by Calendly booking completion via `/api/booked` after a prior form email is remembered in sessionStorage.
 
 ### Still needs a human
 

@@ -21,6 +21,16 @@
 /ourteam /team 301
 /ourteam/ /team 301
 
+# Consolidated growth diagnosis URLs
+/quiz /resources/growth-dependency 301
+/quiz/ /resources/growth-dependency 301
+/resources/growth-bottleneck-scorecard /resources/growth-dependency 301
+/resources/growth-bottleneck-scorecard/ /resources/growth-dependency 301
+/resources/founder-led-growth-diagnostic /resources/growth-dependency 301
+/resources/founder-led-growth-diagnostic/ /resources/growth-dependency 301
+/founder-led-growth-bottleneck-map /resources/growth-dependency 301
+/founder-led-growth-bottleneck-map/ /resources/growth-dependency 301
+
 # Legacy contact path
 /contact-us /contact 301
 /contact-us/ /contact 301

@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { growthToolRoutes } from "../data/growthTools";
 import { isFinalSitemapPath } from "../lib/sitemapCanonical";
 import { absoluteUrl } from "../lib/utils";
 import { indexableIndustrySlugs, leadMagnets, siteConfig, staticPathLastModified } from "../site";
@@ -80,11 +81,7 @@ export const GET: APIRoute = async () => {
       "/press",
       "/press-kit-download",
       "/resources",
-      "/resources/growth-dependency",
-      "/resources/customer-segment",
-      "/resources/positioning",
-      "/resources/gtm-leak",
-      "/resources/weekly-focus",
+      ...growthToolRoutes,
       "/reports",
       "/testimonials",
       "/build",
@@ -101,7 +98,6 @@ export const GET: APIRoute = async () => {
       "/seo-content-strategy",
       "/growth-operating-system",
       "/founder-led-growth",
-      "/founder-led-growth-bottleneck-map",
       "/healthtech-buyer-confidence-matrix",
       "/hiring-readiness-scorecard",
       "/portfolio-growth-readiness",

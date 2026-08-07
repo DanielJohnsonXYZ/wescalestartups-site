@@ -33,10 +33,10 @@ export const siteConfig = {
   bookingCallReassurance: `Bring your current bottleneck. In ${BOOKING_CALL_DURATION_PHRASE} we name whether the constraint is positioning, acquisition, conversion, reporting, or team ownership, no pitch unless there's a clear fit.`,
   /** Primary self-serve diagnostic, keep CTAs consistent sitewide. */
   scorecardName: "Growth Bottleneck Scorecard",
-  scorecardTagline: "10 questions. 5 minutes. Find the constraint stopping pipeline from becoming predictable.",
+  scorecardTagline: "12 questions. 4 minutes. Find the commercial capability that still depends on the founder.",
   scorecardLabel: "Take the Growth Bottleneck Scorecard",
   scorecardLabelLong: "Take the Growth Bottleneck Scorecard",
-  scorecardUrl: "/resources/growth-bottleneck-scorecard",
+  scorecardUrl: "/resources/growth-dependency",
   /** When true, PodcastSeries JSON-LD and feed links are enabled on /podcast. */
   podcastLive: false,
   /** Show name, YouTube channel, and copy for /podcast and guest surfaces. */
@@ -62,9 +62,9 @@ export const siteConfig = {
   growthMentorReviews: "https://www.growthmentor.com/mentors/daniel-johnson#reviews-section",
   mentorCruise: "https://mentorcruise.com/mentor/danieljohnson/",
   danielSite: "https://danieljohnson.xyz",
-  lastUpdated: "26 July 2026",
+  lastUpdated: "6 August 2026",
   /** ISO date for sitemap lastmod on static URLs (keep in sync when you refresh sitewide copy). */
-  siteLastModified: "2026-07-26",
+  siteLastModified: "2026-08-06",
   ogImage: "/og/default.png",
   /**
    * Google Tag Manager, production container for wescalestartups.com only.
@@ -127,7 +127,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/case-studies": "2026-05-03",
   "/contact": "2026-05-03",
   "/diagnose": "2026-05-03",
-  "/engagement-models": "2026-07-26",
   "/faq": "2026-07-26",
   "/alternatives": "2026-07-26",
   "/alternatives/marketing-agency": "2026-07-26",
@@ -143,18 +142,16 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/research/founder-session-patterns": "2026-07-26",
   "/benchmarks": "2026-07-26",
   "/benchmarks/uk-fractional-cmo-pricing": "2026-07-26",
-  "/execution-model": "2026-05-01",
   "/experimentation": "2026-05-03",
   "/growth-course": "2026-05-04",
   "/wss-scale-score": "2026-05-04",
   "/first-30-days": "2026-05-03",
   "/fractional-cmo-vs-agency": "2026-05-04",
-  "/growth-engine": "2026-05-01",
   "/gtm-strategy": "2026-05-03",
   "/how-it-works": "2026-05-04",
   "/industries": "2026-07-26",
   "/founder-led-growth": "2026-05-04",
-  "/founder-led-growth-bottleneck-map": "2026-07-26",
+  
   "/healthtech-buyer-confidence-matrix": "2026-07-26",
   "/hiring-readiness-scorecard": "2026-07-26",
   "/post-raise": "2026-07-13",
@@ -173,7 +170,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/privacy": "2026-05-03",
   "/proof": "2026-05-04",
   "/reports": "2026-05-01",
-  "/resources": "2026-07-26",
+  "/resources": "2026-08-06",
   "/services": "2026-07-26",
   "/start-here": "2026-05-04",
   "/terms": "2026-05-03",
@@ -209,13 +206,18 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/before-you-hire-another-agency": "2026-05-11",
   "/growth-dashboard-template": "2026-05-11",
   "/board-growth-report-template": "2026-05-11",
-  "/resources/growth-bottleneck-scorecard": "2026-05-11",
-  "/resources/90-day-growth-sprint-planner": "2026-05-11",
+  
+  "/resources/growth-dependency": "2026-08-06",
+  "/resources/customer-segment": "2026-08-06",
+  "/resources/positioning": "2026-08-06",
+  "/resources/gtm-leak": "2026-08-06",
+  "/resources/weekly-focus": "2026-08-06",
+  "/resources/90-day-growth-sprint-planner": "2026-08-06",
   "/resources/vc-portfolio-growth-diagnosis": "2026-05-11",
   "/resources/acquisition-channel-matrix": "2026-05-11",
   "/resources/fractional-cmo-hiring-checklist": "2026-05-11",
   "/resources/ai-native-gtm-stack-map": "2026-05-11",
-  "/resources/founder-led-growth-diagnostic": "2026-05-11",
+  
   "/resources/agency-brief-template": "2026-05-11",
   "/resources/first-marketing-hire-scorecard": "2026-05-11",
   "/resources/ai-search-visibility-checklist": "2026-05-11"
@@ -232,21 +234,9 @@ export const navigation = [
 
 /** Strategic pillar pages → related insights (internal links + related reading section). */
 export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
-  "/ai-driven-growth": [
-    { href: "/insights/learning-latency", label: "Learning latency: the bottleneck you can't see" },
-    { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" }
-  ],
-  "/engagement-models": [
-    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
-    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
-  ],
   "/how-it-works": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
-  ],
-  "/execution-model": [
-    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
-    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
   ],
   "/growth-operating-system": [
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
@@ -274,7 +264,7 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
     { href: "/insights/pipeline-plateau-post-pmf", label: "Pipeline plateau after PMF" },
     { href: "/insights/systems-vs-activity-retainers", label: "Systems vs activity retainers" },
     { href: "/experimentation", label: "Experimentation discipline" },
-    { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+    { href: "/resources/growth-dependency", label: "Growth Bottleneck Scorecard" },
     { href: "/services", label: "Services" }
   ]
 };
@@ -288,7 +278,7 @@ export const diagnoseRelatedReading: readonly { href: string; label: string }[] 
 
 /** /resources, frameworks, quiz, reports (internal crawl). */
 export const resourcesRelatedReading: readonly { href: string; label: string }[] = [
-  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+  { href: "/resources/growth-dependency", label: "Growth Bottleneck Scorecard" },
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
   { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
   { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" },
@@ -302,7 +292,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
   "growth-diagnosis": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/what-a-growth-report-should-answer", label: "What a growth report should answer" },
-    { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+    { href: "/resources/growth-dependency", label: "Growth Bottleneck Scorecard" },
     { href: "/reports", label: "Report formats" }
   ],
   "90-day-growth-sprint": [
@@ -337,7 +327,7 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/pricing", label: "Pricing ranges" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/proof", label: "Proof hub" },
-  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+  { href: "/resources/growth-dependency", label: "Growth Bottleneck Scorecard" },
   { href: "/fractional-cmo-vs-agency", label: "WSS vs agency" },
   { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
   { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
@@ -354,7 +344,7 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
 /** /insights hub, frameworks and proof. */
 export const insightsHubRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/reports", label: "Report formats" },
-  { href: "/resources/growth-bottleneck-scorecard", label: "Growth Bottleneck Scorecard" },
+  { href: "/resources/growth-dependency", label: "Growth Bottleneck Scorecard" },
   { href: "/diagnose", label: "5-layer framework" },
   { href: "/proof", label: "Proof hub" },
   { href: "/resources", label: "Resources" },
@@ -759,16 +749,6 @@ export const serviceSnapshots = [
 // surfaces (rendered by /src/pages/resources/[slug].astro).
 export const leadMagnets = [
   {
-    id: "growth-bottleneck-scorecard",
-    title: "Growth Bottleneck Scorecard",
-    audience: "Post-PMF founders · ~5 minutes",
-    description:
-      "10 questions across the five constraints that usually block repeatable pipeline: positioning, acquisition, conversion, reporting, and team ownership.",
-    href: "/resources/growth-bottleneck-scorecard",
-    downloadPath: "/downloads/guides/growth-bottleneck-scorecard.md",
-    primary: true
-  },
-  {
     id: "90-day-growth-sprint-planner",
     title: "90-Day Growth Experiment Planner",
     audience: "Post-PMF startup leadership teams",
@@ -807,14 +787,6 @@ export const leadMagnets = [
     description: "Map where generative and agentic AI accelerate research, messaging, experiments, and reporting in your current stack.",
     href: "/resources/ai-native-gtm-stack-map",
     downloadPath: "/downloads/guides/ai-native-gtm-stack-map.md"
-  },
-  {
-    id: "founder-led-growth-diagnostic",
-    title: "Founder-led Growth Diagnostic",
-    audience: "Founder-led GTM teams",
-    description: "Structured prompts to see whether the bottleneck is positioning, channel fit, conversion, or team cadence.",
-    href: "/resources/founder-led-growth-diagnostic",
-    downloadPath: "/downloads/guides/founder-led-growth-diagnostic.md"
   },
   {
     id: "agency-brief-template",
@@ -930,7 +902,7 @@ export const buyerFaqs = [
   },
   {
     question: "What is the first step?",
-    answer: `Get in touch for a free 20-minute call, or take the ${siteConfig.scorecardName}: 10 questions, 5 minutes. Either way, the first job is to understand the customer and name the constraint before adding more activity.`
+    answer: `Get in touch for a free 20-minute call, or take the ${siteConfig.scorecardName}: 12 questions, 4 minutes. Either way, the first job is to understand the customer and name the constraint before adding more activity.`
   },
   {
     question: "Do you guarantee results?",

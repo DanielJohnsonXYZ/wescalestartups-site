@@ -7,29 +7,56 @@
 @import "@fontsource/jetbrains-mono/500.css";
 @import "tailwindcss";
 
+/* Single source of truth for legacy token names at :root level.
+   Values are aligned with the v9 system (site-v9.css); the
+   .theme-wss-v9 bridge re-declares most of these on <body>, so this
+   block only matters for the <html> element and non-themed contexts.
+   Keep the two in sync. */
 :root {
-  --paper: #f8f9f4;
-  --paper-deep: #edf0e8;
-  --surface: #fffefa;
-  --ink: #100d18;
-  --ink-2: #282235;
-  --muted: #5d5868;
-  --dim: #5f5a52;
-  --line: rgba(16, 13, 24, 0.12);
-  --line-strong: rgba(16, 13, 24, 0.22);
-  --violet: #6657ff;
-  --violet-deep: #36266d;
+  --paper: #ffffff;
+  --paper-deep: #f0f1e9;
+  --surface: #ffffff;
+  --ink: #111117;
+  --ink-2: #2f2e35;
+  --muted: #55535b;
+  --dim: #55535b;
+  --line: rgba(17, 17, 23, 0.14);
+  --line-strong: rgba(17, 17, 23, 0.24);
+  --line-soft: rgba(17, 17, 23, 0.09);
+  --violet: #806cff;
+  --violet-deep: #4d3fc4;
+  --violet-tint: rgba(128, 108, 255, 0.1);
   --teal: #07756e;
-  --acid: #cfc4ff;
+  --acid: #c8ff65;
   --coral: #a83f35;
   --shadow: 0 34px 100px rgba(54, 38, 109, 0.16);
-  --logo-1: #7b3eff;
-  --logo-2: #a445ff;
-  --logo-3: #c44dff;
+  --logo-1: #806cff;
+  --logo-2: #8b5cf6;
+  --logo-3: #a445ff;
   --logo-grad: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
   /* Semantic accent: maps to brand violet so component-scoped styles
      (var(--accent)) render with the site's primary accent color. */
   --accent: var(--violet);
+  --accent-tint: #f0edff;
+  /* Status colors (AA on white) */
+  --good: #0c7a3f;
+  --warn-color: #92400e;
+  --bad: #c43030;
+}
+
+/* Screen-reader-only text: keeps the document outline intact where a
+   section has no visible heading. position:absolute keeps it out of
+   grid/flex flow. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* --- 2026 polish pass: header, CTA, proof, services, diagrams --- */
@@ -688,7 +715,6 @@
 
 * {
   box-sizing: border-box;
-  letter-spacing: 0 !important;
 }
 
 html {
@@ -854,7 +880,7 @@ textarea:focus-visible {
 }
 
 .shell {
-  width: min(100% - 2rem, 1240px);
+  width: min(100% - 3rem, 1320px);
   margin-inline: auto;
 }
 
@@ -930,11 +956,29 @@ textarea:focus-visible {
   justify-content: center;
   min-height: 44px;
   border: 1px solid transparent;
-  border-radius: 8px;
-  padding: 0.82rem 1.05rem;
-  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.82rem 1.3rem;
+  font-weight: 650;
   line-height: 1.1;
   white-space: nowrap;
+}
+
+/* Stacked CTA (label + subcopy): soft rectangle, not a full pill.
+   The primary stacked CTA is the "book a call" action, so it carries
+   the brand gradient; `.button-dark` alone stays neutral. */
+.button-with-subcopy {
+  border-radius: 1.1rem;
+  padding: 0.85rem 1.35rem;
+}
+
+.button-dark.button-with-subcopy {
+  background: linear-gradient(135deg, var(--violet-deep), var(--v9-violet-cta, var(--violet-deep)));
+  box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
+}
+
+.button-dark.button-with-subcopy:hover {
+  background: var(--violet-deep);
+  box-shadow: 0 22px 52px rgba(102, 87, 255, 0.32);
 }
 
 .header-cta {
@@ -1114,15 +1158,6 @@ textarea:focus-visible {
 }
 
 .hero h1,
-.page-hero h1 {
-  max-width: 980px;
-  margin: 0;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 8.5rem;
-  line-height: 0.92;
-  font-weight: 360;
-}
-
 .hero-with-portrait h1 {
   max-width: 980px;
   font-size: clamp(3.25rem, 5.9vw, 5.9rem);
@@ -1494,7 +1529,7 @@ textarea:focus-visible {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: clamp(4.75rem, 8vw, 7.5rem) 0;
 }
 
 .section-alt {
@@ -1977,10 +2012,6 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--line);
 }
 
-.page-hero h1 {
-  font-size: 5rem;
-}
-
 .page-hero p {
   max-width: 740px;
   color: var(--muted);
@@ -2090,7 +2121,7 @@ textarea:focus-visible {
   line-height: 1.7;
 }
 
-.site-footer h2 {
+.site-footer :is(h2, h3) {
   margin: 0 0 1rem;
   color: var(--dim);
   font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -2203,7 +2234,7 @@ textarea:focus-visible {
 
 @media (max-width: 640px) {
   .shell {
-    width: min(100% - 1.25rem, 1240px);
+    width: min(100% - 1.25rem, 1320px);
   }
 
   .brand img {
@@ -2689,7 +2720,7 @@ textarea:focus-visible {
   font-weight: 400;
 }
 
-.case-mini h4 {
+.case-mini :is(h3, h4) {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
   font-size: 1.4rem;
@@ -5066,7 +5097,7 @@ textarea:focus-visible {
   padding: 0.25rem 0.45rem;
   border-radius: 6px;
   background: var(--violet-soft);
-  color: var(--violet);
+  color: var(--violet-deep);
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.68rem;
   font-weight: 800;
@@ -5368,10 +5399,6 @@ body::after {
   box-shadow: var(--shadow-elevated-md);
 }
 
-.section {
-  padding: clamp(4.5rem, 9vw, 7rem) 0;
-}
-
 .lead-copy {
   font-size: 1.09rem;
   line-height: 1.72;
@@ -5440,14 +5467,6 @@ body::after {
 /* ---- 1. Typography rhythm: clamp the page-hero + section-intro headlines so
        the same H1/H2 doesn't tower on a 1440 viewport and crush on a 13" laptop.
        text-wrap: balance gives the senior, intentionally-broken line look. ---- */
-.page-hero h1 {
-  font-size: clamp(2.85rem, 5.6vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.018em;
-  text-wrap: balance;
-  font-weight: 360;
-}
-
 .section-intro h2 {
   font-size: clamp(2.4rem, 4.6vw, 4.7rem);
   line-height: 1.02;
@@ -5703,7 +5722,7 @@ body::after {
   pointer-events: none;
 }
 
-.site-footer-v2 .footer-col h2 {
+.site-footer-v2 .footer-col :is(h2, h3) {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   color: var(--violet);
@@ -5818,47 +5837,8 @@ body::after {
    Import AFTER global.css in BaseLayout.astro.
    ============================================================ */
 
-/* ── 1. Warm design tokens ─────────────────────────────────────
-   Override the cooler global.css palette with the warmer values
-   used by the homepage (home-hero-v3.css --h3-* variables).
-   ─────────────────────────────────────────────────────────── */
-:root {
-  /* Backgrounds: warm cream instead of cool off-white */
-  --paper:        #fbfbfe;
-  --paper-deep:   #f3f3f9;
-  --surface:      #ffffff;
-
-  /* Ink: warm dark instead of cool near-black */
-  --ink:          #0d0c14;
-  --ink-2:        #36333f;
-  --muted:        #6b6878;
-  --dim:          #6b6878;
-
-  /* Lines: warm ink base */
-  --line:         rgba(13, 12, 20, 0.10);
-  --line-strong:  rgba(13, 12, 20, 0.18);
-  --line-soft:    rgba(13, 12, 20, 0.06);
-
-  /* Violet: tightened to match homepage gradient anchor */
-  --violet:       #6657ff;
-  --violet-deep:  #36266d;
-  --violet-tint:  #f0edff;
-
-  /* Logo gradient: aligned with homepage purple-to-pink sweep */
-  --logo-1:       #6657ff;
-  --logo-2:       #8b5cf6;
-  --logo-3:       #a445ff;
-  --logo-grad:    linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
-
-  /* Orange accent — matching homepage --h3-accent */
-  --accent:       #6657ff;
-  --accent-tint:  #f0edff;
-
-  /* Status tokens */
-  --good:         #0f8f4a;
-  --warn-color:   #92400e;
-  --bad:          #c43030;
-}
+/* (Design tokens consolidated into the single :root block at the top
+   of this file; values align with the v9 system.) */
 
 /* ── 2. Body: warm gradient background ─────────────────────────
    Replace the cool purple/acid gradient with a warm
@@ -5910,26 +5890,6 @@ body {
 .page-hero .shell {
   position: relative;
   z-index: 1;
-}
-
-/* ── 4. Page-hero h1: warm gradient text ───────────────────────
-   The hero headline gets a warm ink→violet sweep so it reads
-   like the homepage headline treatment.
-   ─────────────────────────────────────────────────────────── */
-.page-hero h1 {
-  background: linear-gradient(115deg, var(--ink) 0%, var(--ink-2) 48%, #6657ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--ink); /* fallback */
-}
-
-.page-hero h1 em {
-  background: linear-gradient(95deg, #6657ff 0%, #8b5cf6 55%, #a445ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
 }
 
 /* ── 5. Global eyebrow pill ────────────────────────────────────
@@ -6045,26 +6005,20 @@ body {
    Interior alignment pass — bring all non-home pages onto the
    homepage (v8 light premium tech) design system: Geist bold headings instead of
    oversized Fraunces serif, v7 violet, consistent spacing.
-   Scoped to body:not(.page-home-v8) so the homepage is untouched.
+   Scoped to body:not(.page-home-v9) so the homepage is untouched.
    ============================================================ */
 
-body:not(.page-home-v8) {
-  /* v7 tokens */
-  --paper: #fbfbfe;
-  --paper-deep: #f6f6fb;
-  --surface: #ffffff;
-  --ink: #0d0c14;
-  --ink-2: #36333f;
-  --muted: #6b6878;
-  --violet: #6657ff;
-  --violet-deep: #4f41d8;
-}
+/* v7 token block removed: it was scoped to body:not(.page-home-v9) — a
+   class no body carries — so it silently overrode the v9 bridge tokens
+   (custom properties set on body beat those inherited from :root) and
+   split the palette in two. Tokens now resolve from the .theme-wss-v9
+   bridge in site-v9.css. */
 
 /* --- Headings: serif display → bold grotesque (matches v7) --- */
-body:not(.page-home-v8) h1,
-body:not(.page-home-v8) h2,
-body:not(.page-home-v8) h3,
-body:not(.page-home-v8) h4 {
+body:not(.page-home-v9) h1,
+body:not(.page-home-v9) h2,
+body:not(.page-home-v9) h3,
+body:not(.page-home-v9) h4 {
   font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -6073,89 +6027,89 @@ body:not(.page-home-v8) h4 {
 }
 
 /* Accent words inside headings: v7 uses upright violet, not italic serif */
-body:not(.page-home-v8) h1 em,
-body:not(.page-home-v8) h2 em,
-body:not(.page-home-v8) h3 em,
-body:not(.page-home-v8) .statement em,
-body:not(.page-home-v8) .showcase-title em {
+body:not(.page-home-v9) h1 em,
+body:not(.page-home-v9) h2 em,
+body:not(.page-home-v9) h3 em,
+body:not(.page-home-v9) .statement em,
+body:not(.page-home-v9) .showcase-title em {
   font-style: normal;
   color: var(--violet);
 }
 
 /* --- Page hero: 5–8.5rem serif → homepage-scale headline --- */
-body:not(.page-home-v8) .hero h1,
-body:not(.page-home-v8) .page-hero h1 {
+body:not(.page-home-v9) .hero h1,
+body:not(.page-home-v9) .page-hero h1 {
   max-width: 21ch;
   font-size: clamp(2.4rem, 4.4vw, 3.9rem);
   line-height: 1.04;
 }
 
-body:not(.page-home-v8) .page-hero {
+body:not(.page-home-v9) .page-hero {
   padding: 4.5rem 0 3.5rem;
 }
 
-body:not(.page-home-v8) .hero {
+body:not(.page-home-v9) .hero {
   padding: 4.5rem 0 3.5rem;
 }
 
-body:not(.page-home-v8) .hero-with-portrait h1,
-body:not(.page-home-v8) .wss-hero-redesign h1 {
+body:not(.page-home-v9) .hero-with-portrait h1,
+body:not(.page-home-v9) .wss-hero-redesign h1 {
   font-size: clamp(2.4rem, 4.2vw, 3.7rem);
   line-height: 1.05;
 }
 
 /* Hero lede copy: serif 1.6rem → v7 sub style */
-body:not(.page-home-v8) .hero-copy {
+body:not(.page-home-v9) .hero-copy {
   font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.05rem, 1.4vw, 1.2rem);
   line-height: 1.6;
   color: var(--muted);
 }
 
-body:not(.page-home-v8) .page-hero .lede,
-body:not(.page-home-v8) .page-hero p {
+body:not(.page-home-v9) .page-hero .lede,
+body:not(.page-home-v9) .page-hero p {
   font-size: 1.08rem;
   line-height: 1.6;
 }
 
-body:not(.page-home-v8) .hero-foot {
+body:not(.page-home-v9) .hero-foot {
   margin-top: 2.4rem;
 }
 
 /* --- Oversized section displays brought to v7 scale --- */
-body:not(.page-home-v8) .case-copy h3 {
+body:not(.page-home-v9) .case-copy h3 {
   font-size: clamp(1.9rem, 2.8vw, 2.6rem);
 }
 
-body:not(.page-home-v8) .cta-inner h2 {
+body:not(.page-home-v9) .cta-inner h2 {
   font-size: clamp(2rem, 3.2vw, 2.8rem);
   line-height: 1.06;
 }
 
-body:not(.page-home-v8) .dark-rhythm-section h2,
-body:not(.page-home-v8) .ai-system-section h2 {
+body:not(.page-home-v9) .dark-rhythm-section h2,
+body:not(.page-home-v9) .ai-system-section h2 {
   font-size: clamp(2rem, 3.4vw, 3rem);
 }
 
-body:not(.page-home-v8) .testimonials-header h2,
-body:not(.page-home-v8) .daniel-copy h2,
-body:not(.page-home-v8) .creative-system-grid h2,
-body:not(.page-home-v8) .proof-creative-grid h2 {
+body:not(.page-home-v9) .testimonials-header h2,
+body:not(.page-home-v9) .daniel-copy h2,
+body:not(.page-home-v9) .creative-system-grid h2,
+body:not(.page-home-v9) .proof-creative-grid h2 {
   font-size: clamp(1.9rem, 3vw, 2.7rem);
 }
 
-body:not(.page-home-v8) .section-intro h2 {
+body:not(.page-home-v9) .section-intro h2 {
   font-size: clamp(1.7rem, 2.6vw, 2.3rem);
 }
 
 /* Decorative serif strongs in dark panels */
-body:not(.page-home-v8) .rhythm-flow strong,
-body:not(.page-home-v8) .ai-system-map strong,
-body:not(.page-home-v8) .proof-inner h2,
-body:not(.page-home-v8) .service-selector-aside h3,
-body:not(.page-home-v8) .service-selector-row h3,
-body:not(.page-home-v8) .strategic-panel h2,
-body:not(.page-home-v8) .case-visual strong {
+body:not(.page-home-v9) .rhythm-flow strong,
+body:not(.page-home-v9) .ai-system-map strong,
+body:not(.page-home-v9) .proof-inner h2,
+body:not(.page-home-v9) .service-selector-aside h3,
+body:not(.page-home-v9) .service-selector-row h3,
+body:not(.page-home-v9) .strategic-panel h2,
+body:not(.page-home-v9) .case-visual strong {
   font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -6163,44 +6117,44 @@ body:not(.page-home-v8) .case-visual strong {
 }
 
 /* Eyebrows: match v7 spec-label rhythm */
-body:not(.page-home-v8) .eyebrow,
-body:not(.page-home-v8) .card-kicker {
+body:not(.page-home-v9) .eyebrow,
+body:not(.page-home-v9) .card-kicker {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   margin-bottom: 0.9rem;
 }
 
 /* --- Section rhythm: 7rem+7rem stacks created ~220px dead zones --- */
-body:not(.page-home-v8) .section {
+body:not(.page-home-v9) .section {
   padding: clamp(3.25rem, 5.5vw, 4.5rem) 0;
 }
 
-body:not(.page-home-v8) .section + .section {
+body:not(.page-home-v9) .section + .section {
   padding-top: clamp(2.75rem, 4.5vw, 3.75rem);
 }
 
 /* --- Final CTA band: stop the heading column collapsing to one word per line --- */
-body:not(.page-home-v8) .cta-inner {
+body:not(.page-home-v9) .cta-inner {
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
 }
 
-body:not(.page-home-v8) .cta-inner h2 {
+body:not(.page-home-v9) .cta-inner h2 {
   max-width: 18ch;
 }
 
-body:not(.page-home-v8) .cta-inner .hero-actions {
+body:not(.page-home-v9) .cta-inner .hero-actions {
   justify-content: flex-end;
   flex-wrap: wrap;
 }
 
 @media (max-width: 860px) {
-  body:not(.page-home-v8) .cta-inner {
+  body:not(.page-home-v9) .cta-inner {
     grid-template-columns: 1fr;
   }
 }
 
 /* Proof hero on the v7 scale too */
-body:not(.page-home-v8) .proof-hero h1 {
+body:not(.page-home-v9) .proof-hero h1 {
   font-size: clamp(2.4rem, 4.4vw, 3.9rem);
   line-height: 1.05;
 }
@@ -6239,7 +6193,7 @@ html { scroll-padding-top: 6.5rem; }
 .logo-wall .logo-group-label {
   font-family: "JetBrains Mono", monospace;
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--ink-4, #8a8696); text-align: center; margin: 0 0 16px;
+  color: var(--muted, #55535b); text-align: center; margin: 0 0 16px;
 }
 .logo-wall .logo-group + .logo-group { margin-top: 30px; }
 .logo-wall .logo-img {

@@ -54,10 +54,6 @@
 }
 
 @media (max-width: 720px) {
-  .shell {
-    width: min(100% - 1.25rem, 1240px);
-  }
-
   .announcement-bar .shell {
     justify-content: flex-start;
     text-align: left;

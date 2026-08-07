@@ -102,6 +102,14 @@ export async function onRequest(context) {
   }
 
   const legacyRedirects = {
+    "/quiz": "/resources/growth-dependency",
+    "/quiz/": "/resources/growth-dependency",
+    "/resources/growth-bottleneck-scorecard": "/resources/growth-dependency",
+    "/resources/growth-bottleneck-scorecard/": "/resources/growth-dependency",
+    "/resources/founder-led-growth-diagnostic": "/resources/growth-dependency",
+    "/resources/founder-led-growth-diagnostic/": "/resources/growth-dependency",
+    "/founder-led-growth-bottleneck-map": "/resources/growth-dependency",
+    "/founder-led-growth-bottleneck-map/": "/resources/growth-dependency",
     "/about-us": "/about",
     "/about-us/": "/about",
     "/how-we-work": "/how-it-works",

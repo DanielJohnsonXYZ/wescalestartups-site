@@ -46,7 +46,7 @@ const bookSchema = [
 <BaseLayout
   title={`${siteConfig.bookingLabel} | We Scale Startups`}
   description={`${siteConfig.bookingLabel} with We Scale Startups. Bring your current bottleneck, we name the constraint in plain English, then pick a time.`}
-  keywords="book growth call, startup growth diagnostic, Calendly booking, 20 minute growth audit"
+  keywords="book growth call, startup growth diagnostic, Cal.com booking, 20 minute growth audit"
   path="/book"
   schema={bookSchema}
 >
@@ -56,7 +56,7 @@ const bookSchema = [
       <h1>{siteConfig.bookingLabel}</h1>
       <p class="lede">{siteConfig.bookingSubcopy}</p>
       <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href="#book-calendly" data-cta="book-hero-calendly" title={siteConfig.bookingCallReassurance}>
+        <a class="button button-brand button-with-subcopy" href="#book-cal" data-cta="book-hero-cal" title={siteConfig.bookingCallReassurance}>
           <span class="button-label">Pick a time</span>
           <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
         </a>
@@ -142,11 +142,16 @@ const bookSchema = [
     </div>
   </section>
 
-  <section class="section section-alt" id="book-calendly" aria-labelledby="book-calendly-heading">
+  <section class="section section-alt" id="book-cal" aria-labelledby="book-cal-heading">
     <div class="shell">
       <p class="eyebrow">Pick a time</p>
-      <h2 id="book-calendly-heading">Book inline, no extra tabs required.</h2>
-      <div id="book-cal-inline" class="calendly-inline-widget" data-url={siteConfig.calLink} style="min-width: 320px; height: 700px; overflow: auto;"></div>
+      <h2 id="book-cal-heading">Book inline, no extra tabs required.</h2>
+      <div
+        id="book-cal-inline"
+        class="cal-inline-widget"
+        data-cal-link={siteConfig.calLink}
+        style="min-width: 320px; height: 700px; overflow: auto; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
+      ></div>
       <p class="calendly-lede" style="margin-top:1rem;">
         <strong>Calendar not loading?</strong> Some privacy or cookie blockers stop the embed.{" "}
         <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">Open the booking page in a new tab</a>, or{" "}
@@ -155,40 +160,7 @@ const bookSchema = [
     </div>
   </section>
 
-  <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-  <!-- Track the actual booking conversion from the inline Calendly widget. A link-click event
-       cannot see a booking completed inside the Calendly iframe, so listen for Calendly's
-       postMessage events and push them to the dataLayer. Mark `booking_completed` as a GA4 key event. -->
-  <script is:inline>
-    (function () {
-      function isCalendlyEvent(e) {
-        return (
-          e.origin === "https://calendly.com" &&
-          e.data &&
-          typeof e.data.event === "string" &&
-          e.data.event.indexOf("calendly.") === 0
-        );
-      }
-      window.addEventListener("message", function (e) {
-        if (!isCalendlyEvent(e)) return;
-        window.dataLayer = window.dataLayer || [];
-        if (e.data.event === "calendly.event_scheduled") {
-          window.dataLayer.push({
-            event: "booking_completed",
-            booking_source: "calendly_inline",
-            page_path: window.location.pathname
-          });
-        } else if (e.data.event === "calendly.date_and_time_selected") {
-          window.dataLayer.push({
-            event: "booking_time_selected",
-            booking_source: "calendly_inline",
-            page_path: window.location.pathname
-          });
-        }
-      });
-    })();
-  </script>
+  <script is:inline src="/scripts/cal-embed-lazy.js" defer></script>
 
   <section class="section">
     <div class="shell">

@@ -165,11 +165,84 @@ Cap until the owner chooses one of these paths:
 - Success redirect: `https://wescalestartups.com/book/thanks`
 - Old username path `/daniel-wescalestartups.com/*` is redirected by Traefik
   file middleware: `/etc/dokploy/traefik/dynamic/cal-olduser-redirect.yml`
+- Availability: Tue/Thu 10:00–18:00 Europe/London (event schedule `20min - Tue/Thu UK`)
 - Google Calendar + Google Meet are required for invites; OAuth consent screen
   must stay published (or keep test users) or Meet/calendar sync breaks for
   new bookers outside the test list.
-- Pause Calendly (`calendly.com/wescalestartups`) once Cal.com is the only
-  public booking surface so Slack/old links cannot create orphan bookings.
+- Pause Calendly (`calendly.com/wescalestartups` and `/20min`) once Cal.com is
+  the only public booking surface so Slack/old links cannot create orphan bookings.
+- Signup spam accounts on the Cal.com instance were removed (empty locked users
+  with no bookings/credentials). Keep `NEXT_PUBLIC_DISABLE_SIGNUP=true`.
+
+### 5a. Publish Google OAuth consent (required for Meet invites)
+
+Google Cloud Console → the project whose OAuth client is in
+`GOOGLE_API_CREDENTIALS` on the Cal.com stack:
+
+1. Open [Google Auth Platform → Audience](https://console.cloud.google.com/auth/audience)
+   (or APIs & Services → OAuth consent screen).
+2. Sign in as `daniel@wescalestartups.com` (security key / passkey if prompted).
+3. If Publishing status is **Testing**, either:
+   - **Publish App** (preferred for real bookers), or
+   - keep Testing and add every booker email under **Test users** (does not scale).
+4. Confirm scopes include Calendar + Meet as already granted to the Cal.com app.
+5. Book a test slot from a non-test Gmail and confirm the calendar invite + Meet link arrive.
+
+### 5b. Cloudflare Health Check for the booking URL
+
+Create a zone Health Check that hits the public booking page every few minutes
+and emails/Slack-alerts on failure.
+
+Dashboard path: Cloudflare → domain `wescalestartups.com` → **SSL/TLS** is not
+the right place — use **Traffic → Health Checks** (or search “Health Checks”),
+then **Create**:
+
+| Field | Value |
+| --- | --- |
+| Name | `cal-growth-audit` |
+| Address | `cal.wescalestartups.com` |
+| Protocol | HTTPS |
+| Path | `/daniel/20min` |
+| Port | 443 |
+| Expected codes | `200` |
+| Interval | 60s (or plan minimum) |
+| Retries | 2 |
+| Follow redirects | on |
+| Notification | email `daniel@wescalestartups.com` and/or existing Slack webhook |
+
+API equivalent (needs a token with `Health Checks:Edit` + zone read):
+
+```bash
+export CLOUDFLARE_API_TOKEN=...   # create at dash.cloudflare.com/profile/api-tokens
+ZONE_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/zones?name=wescalestartups.com" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['result'][0]['id'])")
+
+curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/healthchecks" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "name": "cal-growth-audit",
+    "address": "cal.wescalestartups.com",
+    "type": "HTTPS",
+    "check_regions": ["WEU", "EEU"],
+    "http_config": {
+      "path": "/daniel/20min",
+      "port": 443,
+      "method": "GET",
+      "expected_codes": ["200"],
+      "follow_redirects": true,
+      "allow_insecure": false
+    },
+    "interval": 60,
+    "retries": 2,
+    "timeout": 10,
+    "suspended": false
+  }'
+```
+
+Then add a Notification policy for Health Check status in
+**Notifications → Add → Health Checks status notification**.
 
 ## 6. Other standing recommendations
 

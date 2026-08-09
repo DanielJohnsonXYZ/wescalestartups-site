@@ -135,7 +135,8 @@ Verify before each deletion; these are destructive.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care
       (`docker volume ls`, confirm no stack references each one).
 - [ ] **Floating `:latest` image tags** — pin to a version/digest on cap-web,
-      cap-media-server, minio, uptime-kuma, cal.com, openoutreach, code-server.
+      cap-media-server, minio, uptime-kuma, openoutreach, code-server.
+      Cal.com is already digest-pinned in Dokploy compose `solaRKyqDbTFdedKF69nj`.
 
 ---
 
@@ -157,7 +158,111 @@ Cap until the owner chooses one of these paths:
 
 ---
 
-## 5. Other standing recommendations
+## 5. Cal.com booking (self-hosted)
+
+- Public URL: `https://cal.wescalestartups.com/daniel/20min`
+- Site embed + CTAs use `siteConfig.calLink` / `calUrl` in `src/site.ts`
+- Success redirect: `https://wescalestartups.com/book/thanks`
+- Old username path `/daniel-wescalestartups.com/*` is redirected by Traefik
+  file middleware: `/etc/dokploy/traefik/dynamic/cal-olduser-redirect.yml`
+- Availability: Tue/Thu 10:00–18:00 Europe/London (event schedule `20min - Tue/Thu UK`)
+- Google Calendar + Google Meet are required for invites; OAuth consent screen
+  must stay published (or keep test users) or Meet/calendar sync breaks for
+  new bookers outside the test list.
+- Pause Calendly (`calendly.com/wescalestartups` and `/20min`) once Cal.com is
+  the only public booking surface so Slack/old links cannot create orphan bookings.
+- Signup spam accounts on the Cal.com instance were removed (empty locked users
+  with no bookings/credentials). Keep `NEXT_PUBLIC_DISABLE_SIGNUP=true`.
+
+### 5a. Publish Google OAuth consent (required for Meet invites)
+
+Google rejected `https://cal.wescalestartups.com/` as the OAuth homepage because it
+redirects to login and does not describe the app. Use the public app page instead:
+
+| Consent screen field | Value |
+| --- | --- |
+| App name | `WSS Calendar` |
+| Application home page | `https://cal.wescalestartups.com/wss-calendar` |
+| Privacy policy | `https://wescalestartups.com/privacy` |
+| Terms of Service | `https://wescalestartups.com/terms` |
+| Authorised domains | `wescalestartups.com` |
+| Logo | omit unless you want branding verification |
+
+Do **not** use `https://cal.wescalestartups.com/` (that redirects to login). Use the
+`/wss-calendar` path. That page is served as a public static HTML document on the
+Cal host (`/etc/dokploy/compose/cal-oauth-home`) and must show **WSS Calendar**
+as the main heading with no login wall. The marketing site mirror is
+`https://wescalestartups.com/wss-calendar` after PR merge.
+
+Google Cloud Console → the project whose OAuth client is in
+`GOOGLE_API_CREDENTIALS` on the Cal.com stack:
+
+1. Open `https://cal.wescalestartups.com/wss-calendar` in an incognito window —
+   confirm no login and the H1 is **WSS Calendar**.
+2. Open [Google Auth Platform → Branding](https://console.cloud.google.com/auth/branding)
+   and set the fields in the table above. Save.
+3. Open [Audience](https://console.cloud.google.com/auth/audience). User type **External**.
+   If status is **Testing**, click **Publish app** (or resubmit verification).
+4. Confirm scopes still include Calendar + Meet for the Cal.com host connection.
+5. Book a test slot from a non-test Gmail and confirm the calendar invite + Meet link arrive.
+
+### 5b. Cloudflare Health Check for the booking URL
+
+Create a zone Health Check that hits the public booking page every few minutes
+and emails/Slack-alerts on failure.
+
+Dashboard path: Cloudflare → domain `wescalestartups.com` → **SSL/TLS** is not
+the right place — use **Traffic → Health Checks** (or search “Health Checks”),
+then **Create**:
+
+| Field | Value |
+| --- | --- |
+| Name | `cal-growth-audit` |
+| Address | `cal.wescalestartups.com` |
+| Protocol | HTTPS |
+| Path | `/daniel/20min` |
+| Port | 443 |
+| Expected codes | `200` |
+| Interval | 60s (or plan minimum) |
+| Retries | 2 |
+| Follow redirects | on |
+| Notification | email `daniel@wescalestartups.com` and/or existing Slack webhook |
+
+API equivalent (needs a token with `Health Checks:Edit` + zone read):
+
+```bash
+export CLOUDFLARE_API_TOKEN=...   # create at dash.cloudflare.com/profile/api-tokens
+ZONE_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/zones?name=wescalestartups.com" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['result'][0]['id'])")
+
+curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/healthchecks" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "name": "cal-growth-audit",
+    "address": "cal.wescalestartups.com",
+    "type": "HTTPS",
+    "check_regions": ["WEU", "EEU"],
+    "http_config": {
+      "path": "/daniel/20min",
+      "port": 443,
+      "method": "GET",
+      "expected_codes": ["200"],
+      "follow_redirects": true,
+      "allow_insecure": false
+    },
+    "interval": 60,
+    "retries": 2,
+    "timeout": 10,
+    "suspended": false
+  }'
+```
+
+Then add a Notification policy for Health Check status in
+**Notifications → Add → Health Checks status notification**.
+
+## 6. Other standing recommendations
 
 - **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
   disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should

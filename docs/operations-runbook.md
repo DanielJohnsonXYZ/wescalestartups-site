@@ -163,6 +163,8 @@ Cap until the owner chooses one of these paths:
 - Public URL: `https://cal.wescalestartups.com/daniel/20min`
 - Site embed + CTAs use `siteConfig.calLink` / `calUrl` in `src/site.ts`
 - Success redirect: `https://wescalestartups.com/book/thanks`
+- Stack: `calcom` + Postgres 16 + **Redis 7** (`calcom-redis`, AOF, 128MB cap,
+  `REDIS_URL=redis://calcom-redis:6379`) for cache/queues/rate limits
 - Old username path `/daniel-wescalestartups.com/*` is redirected by Traefik
   file middleware: `/etc/dokploy/traefik/dynamic/cal-olduser-redirect.yml`
 - Availability: Tue/Thu 10:00–18:00 Europe/London (event schedule `20min - Tue/Thu UK`)

@@ -135,7 +135,8 @@ Verify before each deletion; these are destructive.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care
       (`docker volume ls`, confirm no stack references each one).
 - [ ] **Floating `:latest` image tags** — pin to a version/digest on cap-web,
-      cap-media-server, minio, uptime-kuma, cal.com, openoutreach, code-server.
+      cap-media-server, minio, uptime-kuma, openoutreach, code-server.
+      Cal.com is already digest-pinned in Dokploy compose `solaRKyqDbTFdedKF69nj`.
 
 ---
 

@@ -176,16 +176,27 @@ Cap until the owner chooses one of these paths:
 
 ### 5a. Publish Google OAuth consent (required for Meet invites)
 
+Google rejected `https://cal.wescalestartups.com/` as the OAuth homepage because it
+redirects to login and does not describe the app. Use the public app page instead:
+
+| Consent screen field | Value |
+| --- | --- |
+| App name | `WSS Calendar` |
+| Application home page | `https://wescalestartups.com/wss-calendar` |
+| Privacy policy | `https://wescalestartups.com/privacy` |
+| Terms of Service | `https://wescalestartups.com/terms` |
+| Authorised domains | `wescalestartups.com` |
+| Logo | omit unless you want branding verification |
+
 Google Cloud Console → the project whose OAuth client is in
 `GOOGLE_API_CREDENTIALS` on the Cal.com stack:
 
-1. Open [Google Auth Platform → Audience](https://console.cloud.google.com/auth/audience)
-   (or APIs & Services → OAuth consent screen).
-2. Sign in as `daniel@wescalestartups.com` (security key / passkey if prompted).
-3. If Publishing status is **Testing**, either:
-   - **Publish App** (preferred for real bookers), or
-   - keep Testing and add every booker email under **Test users** (does not scale).
-4. Confirm scopes include Calendar + Meet as already granted to the Cal.com app.
+1. Deploy/merge so `/wss-calendar` is live, then open it in an incognito window (no login).
+2. Open [Google Auth Platform → Branding](https://console.cloud.google.com/auth/branding)
+   and set the fields in the table above. Save.
+3. Open [Audience](https://console.cloud.google.com/auth/audience). User type **External**.
+   If status is **Testing**, click **Publish app**.
+4. Confirm scopes still include Calendar + Meet for the Cal.com host connection.
 5. Book a test slot from a non-test Gmail and confirm the calendar invite + Meet link arrive.
 
 ### 5b. Cloudflare Health Check for the booking URL

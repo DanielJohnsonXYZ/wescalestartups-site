@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+import { siteConfig } from "../site";
+
+const path = "/wss-calendar";
+const appName = "WSS Calendar";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: appName, path }
+]);
+---
+
+<BaseLayout
+  title={`${appName} | We Scale Startups`}
+  description="WSS Calendar is the scheduling app We Scale Startups uses for Growth Audit bookings. It connects Google Calendar and Google Meet so invitees get a real meeting link."
+  keywords="WSS Calendar, We Scale Startups scheduling, Growth Audit booking, Google Calendar, Google Meet"
+  path={path}
+  schema={schema}
+  showAnnouncement={false}
+  stickyBookCta={false}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">We Scale Startups · Scheduling app</p>
+      <h1>{appName}</h1>
+      <p class="lede">
+        {appName} is the booking and calendar application operated by {siteConfig.name}. It powers
+        public Growth Audit scheduling on this site and on{" "}
+        <a href={siteConfig.calOrigin}>{siteConfig.calOrigin.replace("https://", "")}</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Purpose</p>
+      <h2>What {appName} does</h2>
+      <p class="lede" style="max-width:62ch;">
+        Founders book a free {siteConfig.bookingCallDurationPhrase} Growth Audit. {appName} checks
+        Daniel Johnson’s availability, writes the appointment to Google Calendar, and attaches a Google
+        Meet link so both sides get a calendar invite with a working video URL.
+      </p>
+      <ul class="bring-checklist" style="margin-top:1.25rem;">
+        <li>
+          <strong>Public booking</strong> — visitors pick a time for the Growth Audit without creating an account.
+        </li>
+        <li>
+          <strong>Google Calendar access</strong> — used only so the host calendar stays accurate and double-bookings are avoided.
+        </li>
+        <li>
+          <strong>Google Meet</strong> — creates the meeting location on each confirmed booking and includes it in the invite.
+        </li>
+        <li>
+          <strong>Email confirmations and reminders</strong> — booking, reschedule, and reminder messages for host and guest.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">Who operates it</p>
+      <h2>{siteConfig.name}</h2>
+      <p class="lede" style="max-width:62ch;">
+        {appName} is not a consumer product for third-party teams. It is the internal scheduling stack for
+        {siteConfig.name}, used to run Growth Audit calls with founders. Support contact:{" "}
+        <!--email_off-->
+        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        <!--/email_off-->.
+      </p>
+      <div class="hero-actions" style="margin-top:1.25rem;">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-calendar-book">
+          Book a Growth Audit →
+        </a>
+        <a class="button button-light" href={siteConfig.calUrl} data-cta="wss-calendar-direct" rel="noreferrer" target="_blank">
+          Open the public calendar →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Policies</p>
+      <h2>Privacy and terms</h2>
+      <p class="lede" style="max-width:62ch;">
+        Scheduling data (name, email, company, intake answers, and meeting times) is handled under the same
+        company policies as the rest of {siteConfig.name}.
+      </p>
+      <ul class="bring-checklist" style="margin-top:1.25rem;">
+        <li><a href="/privacy">Privacy policy</a></li>
+        <li><a href="/terms">Terms of use</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Create a Cloudflare Health Check for the Growth Audit booking URL.
-# Requires: CLOUDFLARE_API_TOKEN with Zone.Health Checks Edit + Zone Read
+# Requires: Pro+ zone plan, and CLOUDFLARE_API_TOKEN with Zone.Health Checks Edit + Zone Read.
+# Free plan returns: health checks disabled for zone.
 set -euo pipefail
 
 ZONE_NAME="${ZONE_NAME:-wescalestartups.com}"

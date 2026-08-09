@@ -206,14 +206,22 @@ Google Cloud Console → the project whose OAuth client is in
 4. Confirm scopes still include Calendar + Meet for the Cal.com host connection.
 5. Book a test slot from a non-test Gmail and confirm the calendar invite + Meet link arrive.
 
-### 5b. Cloudflare Health Check for the booking URL
+### 5b. Booking URL uptime monitor
 
-Create a zone Health Check that hits the public booking page every few minutes
-and emails/Slack-alerts on failure.
+**Cloudflare Health Checks require Pro+.** On the Free plan the API returns
+`health checks disabled for zone`. Upgrade `wescalestartups.com` to Pro, then
+create a check (or run `scripts/create-cal-cloudflare-healthcheck.sh` with a
+token that has Zone → Health Checks → Edit).
 
-Dashboard path: Cloudflare → domain `wescalestartups.com` → **SSL/TLS** is not
-the right place — use **Traffic → Health Checks** (or search “Health Checks”),
-then **Create**:
+Until then, a host cron monitor runs on the Hetzner box:
+
+- Script: `/opt/wss-monitors/cal-booking-check.sh`
+- Cron: `/etc/cron.d/wss-cal-booking-monitor` (every 2 minutes)
+- Alert: Dokploy Slack webhook (`WSS Alerts`) on down / recovery
+- Target: `https://cal.wescalestartups.com/daniel/20min` (expects HTTP 200)
+
+Dashboard path after Pro upgrade: Cloudflare → **Traffic → Health Checks** →
+**Create**:
 
 | Field | Value |
 | --- | --- |

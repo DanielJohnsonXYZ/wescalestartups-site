@@ -50,6 +50,15 @@ const bookSchema = [
   path="/book"
   schema={bookSchema}
 >
+  <script is:inline>
+    (function () {
+      try {
+        if (new URLSearchParams(window.location.search).get("booked") === "1") {
+          window.location.replace("/book/thanks");
+        }
+      } catch (_) {}
+    })();
+  </script>
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Book call</p>

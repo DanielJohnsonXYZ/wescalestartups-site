@@ -157,7 +157,20 @@ Cap until the owner chooses one of these paths:
 
 ---
 
-## 5. Other standing recommendations
+## 5. Cal.com booking (self-hosted)
+
+- Public URL: `https://cal.wescalestartups.com/daniel/20min`
+- Site embed + CTAs use `siteConfig.calLink` / `calUrl` in `src/site.ts`
+- Success redirect: `https://wescalestartups.com/book/thanks`
+- Old username path `/daniel-wescalestartups.com/*` is redirected by Traefik
+  file middleware: `/etc/dokploy/traefik/dynamic/cal-olduser-redirect.yml`
+- Google Calendar + Google Meet are required for invites; OAuth consent screen
+  must stay published (or keep test users) or Meet/calendar sync breaks for
+  new bookers outside the test list.
+- Pause Calendly (`calendly.com/wescalestartups`) once Cal.com is the only
+  public booking surface so Slack/old links cannot create orphan bookings.
+
+## 6. Other standing recommendations
 
 - **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
   disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should

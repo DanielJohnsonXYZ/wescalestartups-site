@@ -91,6 +91,7 @@ export const GET: APIRoute = async () => {
       "/newsletter",
       "/refer",
       "/wss-scale-score",
+      "/wss-calendar",
       ...(siteConfig.podcastLive
         ? ["/podcast", "/podcast-guest-application"]
         : []),

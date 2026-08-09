@@ -182,20 +182,27 @@ redirects to login and does not describe the app. Use the public app page instea
 | Consent screen field | Value |
 | --- | --- |
 | App name | `WSS Calendar` |
-| Application home page | `https://wescalestartups.com/wss-calendar` |
+| Application home page | `https://cal.wescalestartups.com/wss-calendar` |
 | Privacy policy | `https://wescalestartups.com/privacy` |
 | Terms of Service | `https://wescalestartups.com/terms` |
 | Authorised domains | `wescalestartups.com` |
 | Logo | omit unless you want branding verification |
 
+Do **not** use `https://cal.wescalestartups.com/` (that redirects to login). Use the
+`/wss-calendar` path. That page is served as a public static HTML document on the
+Cal host (`/etc/dokploy/compose/cal-oauth-home`) and must show **WSS Calendar**
+as the main heading with no login wall. The marketing site mirror is
+`https://wescalestartups.com/wss-calendar` after PR merge.
+
 Google Cloud Console → the project whose OAuth client is in
 `GOOGLE_API_CREDENTIALS` on the Cal.com stack:
 
-1. Deploy/merge so `/wss-calendar` is live, then open it in an incognito window (no login).
+1. Open `https://cal.wescalestartups.com/wss-calendar` in an incognito window —
+   confirm no login and the H1 is **WSS Calendar**.
 2. Open [Google Auth Platform → Branding](https://console.cloud.google.com/auth/branding)
    and set the fields in the table above. Save.
 3. Open [Audience](https://console.cloud.google.com/auth/audience). User type **External**.
-   If status is **Testing**, click **Publish app**.
+   If status is **Testing**, click **Publish app** (or resubmit verification).
 4. Confirm scopes still include Calendar + Meet for the Cal.com host connection.
 5. Book a test slot from a non-test Gmail and confirm the calendar invite + Meet link arrive.
 

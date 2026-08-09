@@ -80,7 +80,7 @@ A shared technical QA checklist for the three Daniel-adjacent sites. Run it befo
 
 | Site | Calendly slug |
 |---|---|
-| WSS | `calendly.com/wescalestartups` |
+| WSS | `cal.wescalestartups.com/daniel/20min` |
 | DJ.xyz | `calendly.com/danieljohnson` (or DJ-branded equivalent) |
 | HAA | TBD |
 

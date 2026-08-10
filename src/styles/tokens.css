@@ -45,6 +45,9 @@
   --v9-violet: #806cff;
   --v9-violet-bright: #a796ff;
   --v9-violet-deep: #4d3fc4;
+  /* CTA gradient light end: the lightest violet that still holds white label
+     text at or above 4.5:1. Introduced by #65. */
+  --v9-violet-cta: #6c56f2;
   --v9-mint: #c8ff65;
   --v9-coral: #ff836f;
 
@@ -84,7 +87,7 @@
 
   --violet: var(--v9-violet-deep);
   --violet-deep: var(--v9-violet-deep);
-  --violet-soft: rgba(128, 108, 255, 0.13);
+  --violet-soft: rgba(128, 108, 255, 0.12);
   --violet-tint: rgba(128, 108, 255, 0.1);
   --accent: var(--v9-violet-deep);
   --accent-tint: rgba(128, 108, 255, 0.1);
@@ -110,6 +113,9 @@
   --shadow-elevated-sm: 0 4px 22px rgba(17, 17, 23, 0.055);
   --shadow-elevated-md: 0 16px 48px rgba(17, 17, 23, 0.085);
   --shadow-elevated-lg: var(--v9-shadow-lift);
+
+  --bg: var(--v9-paper);
+  --font-display: var(--v9-display);
 
   /* Logo ------------------------------------------------------ */
   --logo-1: #6657ff;

@@ -7,30 +7,6 @@
 @import "@fontsource/jetbrains-mono/500.css";
 @import "tailwindcss";
 
-:root {
-  --paper: #f8f9f4;
-  --paper-deep: #edf0e8;
-  --surface: #fffefa;
-  --ink: #100d18;
-  --ink-2: #282235;
-  --muted: #5d5868;
-  --dim: #5f5a52;
-  --line: rgba(16, 13, 24, 0.12);
-  --line-strong: rgba(16, 13, 24, 0.22);
-  --violet: #6657ff;
-  --violet-deep: #36266d;
-  --teal: #07756e;
-  --acid: #cfc4ff;
-  --coral: #a83f35;
-  --shadow: 0 34px 100px rgba(54, 38, 109, 0.16);
-  --logo-1: #7b3eff;
-  --logo-2: #a445ff;
-  --logo-3: #c44dff;
-  --logo-grad: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
-  /* Semantic accent: maps to brand violet so component-scoped styles
-     (var(--accent)) render with the site's primary accent color. */
-  --accent: var(--violet);
-}
 
 /* --- 2026 polish pass: header, CTA, proof, services, diagrams --- */
 .site-header {
@@ -698,6 +674,20 @@
 
 * {
   box-sizing: border-box;
+}
+
+/* Long URLs and other unbreakable tokens must not force a container wider
+   than the viewport: `main` is overflow:clip, so anything that overflows is
+   cut off rather than scrollable. break-word only acts when a word genuinely
+   cannot fit, so normal copy is unaffected. */
+p,
+li,
+dd,
+td,
+th,
+figcaption,
+blockquote {
+  overflow-wrap: break-word;
 }
 
 html {
@@ -5278,15 +5268,6 @@ textarea:focus-visible {
    Notion: https://www.notion.so/354f99a79fdb81428590e795bdd48904
    Radii, elevation, backdrop, section rhythm, cards, CTAs, image treatment.
    ============================================================================= */
-:root {
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --line-soft: rgba(16, 13, 24, 0.09);
-  --shadow-elevated-sm: 0 4px 22px rgba(16, 13, 24, 0.055);
-  --shadow-elevated-md: 0 16px 48px rgba(16, 13, 24, 0.085);
-  --shadow-elevated-lg: 0 36px 96px rgba(54, 38, 109, 0.11);
-}
 
 body {
   background:
@@ -5840,43 +5821,6 @@ body::after {
    Override the cooler global.css palette with the warmer values
    used by the homepage (home-hero-v3.css --h3-* variables).
    ─────────────────────────────────────────────────────────── */
-:root {
-  /* Backgrounds: warm cream instead of cool off-white */
-  --paper:        #fbfbfe;
-  --paper-deep:   #f3f3f9;
-  --surface:      #ffffff;
-
-  /* Ink: warm dark instead of cool near-black */
-  --ink:          #0d0c14;
-  --ink-2:        #36333f;
-  --muted:        #6b6878;
-  --dim:          #6b6878;
-
-  /* Lines: warm ink base */
-  --line:         rgba(13, 12, 20, 0.10);
-  --line-strong:  rgba(13, 12, 20, 0.18);
-  --line-soft:    rgba(13, 12, 20, 0.06);
-
-  /* Violet: tightened to match homepage gradient anchor */
-  --violet:       #6657ff;
-  --violet-deep:  #36266d;
-  --violet-tint:  #f0edff;
-
-  /* Logo gradient: aligned with homepage purple-to-pink sweep */
-  --logo-1:       #6657ff;
-  --logo-2:       #8b5cf6;
-  --logo-3:       #a445ff;
-  --logo-grad:    linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
-
-  /* Orange accent — matching homepage --h3-accent */
-  --accent:       #6657ff;
-  --accent-tint:  #f0edff;
-
-  /* Status tokens */
-  --good:         #0f8f4a;
-  --warn-color:   #92400e;
-  --bad:          #c43030;
-}
 
 /* ── 2. Body: warm gradient background ─────────────────────────
    Replace the cool purple/acid gradient with a warm

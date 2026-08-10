@@ -6,60 +6,9 @@
    interaction language to every route through BaseLayout.
    ============================================================ */
 
-.theme-wss-v9 {
-  --v9-night: #090a0f;
-  --v9-night-2: #11121a;
-  --v9-night-3: #191a24;
-  --v9-paper: #ffffff;
-  --v9-paper-2: #f0f1e9;
-  --v9-white: #ffffff;
-  --v9-ink: #111117;
-  --v9-copy: #55535b;
-  --v9-copy-dark: #a8a7b4;
-  --v9-line: rgba(17, 17, 23, 0.14);
-  --v9-line-strong: rgba(17, 17, 23, 0.24);
-  --v9-line-dark: rgba(255, 255, 255, 0.12);
-  --v9-violet: #806cff;
-  --v9-violet-bright: #a796ff;
-  --v9-violet-deep: #4d3fc4;
-  --v9-mint: #c8ff65;
-  --v9-coral: #ff836f;
-  --v9-radius: 1.15rem;
-  --v9-radius-small: 0.8rem;
-  --v9-display: "Fraunces Variable", Georgia, serif;
-  --v9-sans: "Geist", Inter, ui-sans-serif, system-ui, sans-serif;
-  --v9-mono: "JetBrains Mono", ui-monospace, monospace;
-  --v9-shadow: 0 20px 55px rgba(17, 17, 23, 0.08);
-  --v9-shadow-lift: 0 26px 70px rgba(17, 17, 23, 0.13);
-
-  /* Bridge legacy component variables onto the active system. */
-  --paper: var(--v9-paper);
-  --paper-deep: var(--v9-paper-2);
-  --surface: var(--v9-white);
-  --surface-2: var(--v9-paper-2);
-  --ink: var(--v9-ink);
-  --ink-2: #2f2e35;
-  --muted: var(--v9-copy);
-  --line: var(--v9-line);
-  --line-soft: rgba(17, 17, 23, 0.09);
-  --line-strong: var(--v9-line-strong);
-  /* Legacy alias, used for `color` in 56 of its 70 uses across global.css and
-     page-scoped styles. Like --accent it resolves to the deep violet so accent
-     text clears AA; --v9-violet remains the display violet for fills and large
-     type, and site-v9 rules reference it directly. */
-  --violet: var(--v9-violet-deep);
-  --violet-deep: var(--v9-violet-deep);
-  --violet-tint: rgba(128, 108, 255, 0.1);
-  /* --accent is the *text* accent: component-scoped styles use it for labels,
-     kickers and result lines, and 32 of its 90 uses are `color`. The display
-     violet (#806cff) only reaches 3.81:1 on white, under the 4.5:1 AA
-     threshold for body-size text, so the accent resolves to the deep violet
-     (7.3:1) instead. Use --violet / --v9-violet for fills and large display. */
-  --accent: var(--v9-violet-deep);
-  --acid: var(--v9-mint);
-  color: var(--v9-ink);
-  font-family: var(--v9-sans);
-}
+/* Tokens live in tokens.css, which BaseLayout imports before this file.
+   This layer promotes the homepage's header, type, surfaces and interaction
+   language to every route. */
 
 .theme-wss-v9:not(.page-home-v9) {
   background:

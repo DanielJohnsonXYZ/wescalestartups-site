@@ -1,0 +1,126 @@
+/* ============================================================
+   We Scale Startups — design tokens
+
+   THE single definition site for every custom property the site
+   uses. Nothing else may define these: the whole class of bugs
+   this file replaces came from four competing definition sites
+   (three :root blocks in global.css, a `:root:root` hack in
+   white-theme.css and a bridge in site-v9.css) that disagreed
+   with each other, plus a layer that redefined them again on
+   <body> and so outranked all of them.
+
+   Defined on :root, not on the theme class, so html-level rules
+   resolve too and no selector needs to win a specificity fight
+   to read a token.
+
+   Two violets, deliberately:
+     --v9-violet      #806cff  display only — fills, large type,
+                               decorative washes. 3.81:1 on white,
+                               which is under AA for body text.
+     --v9-violet-deep #4d3fc4  text and UI — 7.3:1 on white.
+   --violet and --accent both resolve to the deep one because
+   between them 88 of their ~160 uses are `color`.
+   ============================================================ */
+
+:root {
+  /* Surfaces ------------------------------------------------- */
+  --v9-night: #090a0f;
+  --v9-night-2: #11121a;
+  --v9-night-3: #191a24;
+  --v9-paper: #ffffff;
+  --v9-paper-2: #f0f1e9;
+  --v9-white: #ffffff;
+
+  /* Ink and copy --------------------------------------------- */
+  --v9-ink: #111117;
+  --v9-copy: #55535b;
+  --v9-copy-dark: #a8a7b4;
+
+  /* Lines ---------------------------------------------------- */
+  --v9-line: rgba(17, 17, 23, 0.14);
+  --v9-line-strong: rgba(17, 17, 23, 0.24);
+  --v9-line-dark: rgba(255, 255, 255, 0.12);
+
+  /* Brand ---------------------------------------------------- */
+  --v9-violet: #806cff;
+  --v9-violet-bright: #a796ff;
+  --v9-violet-deep: #4d3fc4;
+  --v9-mint: #c8ff65;
+  --v9-coral: #ff836f;
+
+  /* Shape and elevation -------------------------------------- */
+  --v9-radius: 1.15rem;
+  --v9-radius-small: 0.8rem;
+  --v9-shadow: 0 20px 55px rgba(17, 17, 23, 0.08);
+  --v9-shadow-lift: 0 26px 70px rgba(17, 17, 23, 0.13);
+
+  /* Type ----------------------------------------------------- */
+  --v9-display: "Fraunces Variable", Georgia, serif;
+  --v9-sans: "Geist", Inter, ui-sans-serif, system-ui, sans-serif;
+  --v9-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ----------------------------------------------------------
+     Aliases. 649 classes across 85 Astro files reference these
+     older names, so they stay as the public contract and simply
+     resolve to the primitives above.
+     ---------------------------------------------------------- */
+  --paper: var(--v9-paper);
+  --paper-deep: var(--v9-paper-2);
+  --surface: var(--v9-white);
+  --surface-2: var(--v9-paper-2);
+  --surface-dim: var(--v9-paper-2);
+  --surface-muted: var(--v9-paper-2);
+
+  --ink: var(--v9-ink);
+  --ink-2: #2f2e35;
+  --ink-4: #6f6d78;
+  --muted: var(--v9-copy);
+  --dim: var(--v9-copy);
+
+  --line: var(--v9-line);
+  --line-soft: rgba(17, 17, 23, 0.09);
+  --line-strong: var(--v9-line-strong);
+  --border: var(--v9-line);
+
+  --violet: var(--v9-violet-deep);
+  --violet-deep: var(--v9-violet-deep);
+  --violet-soft: rgba(128, 108, 255, 0.13);
+  --violet-tint: rgba(128, 108, 255, 0.1);
+  --accent: var(--v9-violet-deep);
+  --accent-tint: rgba(128, 108, 255, 0.1);
+  --acid: var(--v9-mint);
+  --teal: #07756e;
+  --coral: var(--v9-coral);
+
+  /* Status. Text-safe shades: the display versions (#22c55e,
+     #f97316, #f59e0b, #ef4444) sit between 2.1:1 and 3.8:1 on
+     white and are only used for borders and fills. */
+  --good: #15803d;
+  --warn-color: #b45309;
+  --bad: #b91c1c;
+
+  /* Shape aliases -------------------------------------------- */
+  --radius-sm: var(--v9-radius-small);
+  --radius-md: var(--v9-radius);
+  --radius-lg: var(--v9-radius);
+
+  /* Elevation aliases ---------------------------------------- */
+  --shadow: var(--v9-shadow);
+  --shadow-soft: var(--v9-shadow);
+  --shadow-elevated-sm: 0 4px 22px rgba(17, 17, 23, 0.055);
+  --shadow-elevated-md: 0 16px 48px rgba(17, 17, 23, 0.085);
+  --shadow-elevated-lg: var(--v9-shadow-lift);
+
+  /* Logo ------------------------------------------------------ */
+  --logo-1: #6657ff;
+  --logo-2: #8b5cf6;
+  --logo-3: #a445ff;
+  --logo-grad: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
+}
+
+/* The body contract enforced by scripts/check-site-theme.mjs.
+   Carries the inherited defaults only — never token definitions. */
+.theme-wss-v9 {
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+}

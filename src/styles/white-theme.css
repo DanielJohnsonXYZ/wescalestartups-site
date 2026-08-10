@@ -1,11 +1,5 @@
-/* Sitewide white theme (r2): lifts the base palette to pure white.
-   Loaded globally via SiteHeader (present on every page). */
-:root:root {
-  --paper: #ffffff;
-  --paper-deep: #f4f5f1;
-  --surface: #ffffff;
-}
-
+/* v9 design language carried to interior pages. Token definitions live in
+   tokens.css; this file only carries shape/skin rules. */
 /* v9 design language, carried to interior pages */
 .button {
   border-radius: 999px;
@@ -31,11 +25,6 @@ h3 {
 .button-with-subcopy {
   border-radius: 1.1rem;
   padding: 0.85rem 1.35rem;
-}
-
-/* cache-buster rule: forces a new asset hash after an edge-cached 404 */
-:root {
-  --wss-theme-rev: 2;
 }
 
 /* Primary hero CTA everywhere: violet, matching the homepage's

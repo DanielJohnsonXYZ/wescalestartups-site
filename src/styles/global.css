@@ -852,8 +852,12 @@ textarea:focus-visible {
   max-width: min(62ch, 100%);
 }
 
+/* The one container. Previously 1240px here, overridden to 1320px by
+   site-v9.css on every route, with two more mobile-gutter copies in this file
+   and mobile-qa.css. The gutter narrows on small screens via clamp rather than
+   a separate breakpoint rule. */
 .shell {
-  width: min(100% - 2rem, 1240px);
+  width: min(100% - clamp(1.25rem, 4vw, 3rem), 1320px);
   margin-inline: auto;
 }
 
@@ -923,15 +927,20 @@ textarea:focus-visible {
   color: var(--ink);
 }
 
+/* The one button system. Previously this skin was assembled from four places:
+   this block, a radius/shadow pass later in the file, a pill re-skin in
+   white-theme.css and !important overrides in site-v9.css. Shape and weight
+   live here; site-v9.css only varies buttons where a context genuinely differs
+   (the mint header CTA, the hero's underlined secondary link). */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
   border: 1px solid transparent;
-  border-radius: 8px;
-  padding: 0.82rem 1.05rem;
-  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.82rem 1.3rem;
+  font-weight: 650;
   line-height: 1.1;
   white-space: nowrap;
 }
@@ -952,14 +961,15 @@ textarea:focus-visible {
 }
 
 .button-brand {
-  background-color: var(--violet);
-  background: var(--violet);
+  background-color: var(--v9-violet-deep);
+  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet));
   color: #fff;
-  box-shadow: 0 14px 32px rgba(102, 87, 255, 0.24);
+  box-shadow: 0 16px 42px rgba(77, 63, 196, 0.26);
 }
 
 .button-brand:hover {
-  background: #5144df;
+  background: linear-gradient(135deg, #3f33a8, var(--v9-violet-deep));
+  box-shadow: 0 22px 52px rgba(77, 63, 196, 0.32);
   transform: translateY(-1px);
 }
 
@@ -1492,8 +1502,10 @@ textarea:focus-visible {
   to { transform: translateX(-50%); }
 }
 
+/* One section rhythm. site-v9.css sets the live value for interior routes;
+   this is the base for anything outside that scope. */
 .section {
-  padding: 6rem 0;
+  padding-block: clamp(4.75rem, 8vw, 7.5rem);
 }
 
 .section-alt {
@@ -2204,10 +2216,6 @@ textarea:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .shell {
-    width: min(100% - 1.25rem, 1240px);
-  }
-
   .brand img {
     width: 74px;
   }
@@ -5295,19 +5303,6 @@ body::after {
   background: rgba(102, 87, 255, 0.06);
 }
 
-.button,
-.hero-primary-cta {
-  border-radius: var(--radius-sm);
-}
-
-.button-brand {
-  box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
-}
-
-.button-brand:hover {
-  box-shadow: 0 22px 52px rgba(102, 87, 255, 0.32);
-}
-
 .button-dark:hover {
   box-shadow: var(--shadow-elevated-sm);
 }
@@ -5365,10 +5360,6 @@ body::after {
 .showcase,
 .case-feature {
   box-shadow: var(--shadow-elevated-md);
-}
-
-.section {
-  padding: clamp(4.5rem, 9vw, 7rem) 0;
 }
 
 .lead-copy {

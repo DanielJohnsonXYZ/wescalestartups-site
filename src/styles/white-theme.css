@@ -1,12 +1,5 @@
 /* v9 design language carried to interior pages. Token definitions live in
    tokens.css; this file only carries shape/skin rules. */
-/* v9 design language, carried to interior pages */
-.button {
-  border-radius: 999px;
-  padding: 0.82rem 1.3rem;
-  font-weight: 650;
-}
-
 .header-inner {
   border-radius: 999px;
 }

@@ -44,10 +44,6 @@
 
 /* Shared shell ------------------------------------------------ */
 
-.theme-wss-v9:not(.page-home-v9) .shell {
-  width: min(calc(100% - 3rem), 1320px);
-}
-
 /* Header: one recognisable object on every page ---------------- */
 
 .theme-wss-v9 .site-header {

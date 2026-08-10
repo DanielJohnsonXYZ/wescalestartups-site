@@ -50,17 +50,13 @@ Covered database dumps (live stacks):
 - Cal.com Postgres
 - Postiz Postgres
 - Postiz Temporal Postgres
-- Mautic MySQL
-- Rolo Postgres
 
 Covered volumes (live stacks):
 
 - Dokploy Postgres/Redis + Dokploy data volumes
 - Postiz config, Postgres, Redis, uploads, Temporal Postgres
 - Cal.com Postgres **and Cal.com Redis** (`calcom_calcom-redis`, added 2026-08-10)
-- Mautic MySQL, config, media files/images
 - Hermes data
-- Rolo Postgres data
 
 ### Restore test
 
@@ -207,7 +203,10 @@ Until then, a host cron monitor runs on the Hetzner box:
 - Script: `/opt/wss-monitors/cal-booking-check.sh`
 - Cron: `/etc/cron.d/wss-cal-booking-monitor` (every 2 minutes)
 - Alert: Dokploy Slack webhook (`WSS Alerts`) on down / recovery
-- Target: `https://cal.wescalestartups.com/daniel/20min` (expects HTTP 200)
+- Target: Cal booking page via **Traefik origin** (`--resolve` to `127.0.0.1`),
+  path `/daniel/20min`, expects HTTP **200** + booking content. Public HTTPS from
+  the server IP often gets Cloudflare bot challenge (`403`), so edge-only checks
+  are unreliable from this host.
 
 Dashboard path after Pro upgrade: Cloudflare → **Traffic → Health Checks** →
 **Create**:
@@ -261,12 +260,21 @@ Then add a Notification policy for Health Check status in
 
 ## 6. Other standing recommendations
 
-- **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
-  disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should
-  target live container `mautic-stack-db-1`; keep an eye on disk usage and
-  binlog growth.
-- **Dokploy update** is complete as of 2026-06-17: live image
-  `dokploy/dokploy:v0.29.8`.
+- **Disk guard** runs every 30 minutes from `/etc/cron.d/wss-disk-guard`
+  (dead Mautic prune paths removed 2026-08-10).
+- **Dokploy** live image: `dokploy/dokploy:v0.29.14` (upgraded 2026-08-10).
+  Container must stay on both `dokploy` and `dokploy-network` bridges so it can
+  reach Postgres/Redis and Traefik.
+- **Healthchecks** hit Traefik on localhost (`--resolve …:127.0.0.1`) for Cal
+  `/daniel/20min` + `/daniel/60min`, Postiz, Hermes, Dokploy. Cloudflare bot
+  `403` is no longer treated as success for apps on this box. Marketing Pages
+  edge may log `WARN edge_cf_challenge` from the server IP.
+- **fail2ban** enabled (`sshd` jail). Traefik logs rotate via
+  `/etc/logrotate.d/wss-traefik`.
+- **Removed** Uptime Kuma + Netdata (unused, no Traefik routes) and leftover
+  `rolo-tycuaq_*` Docker networks.
 - **Document owners + acceptable downtime per app**, SSH key ownership, and
   DNS/Cloudflare proxy state — the gaps in Notion §9 are where 3am incidents go
   wrong.
+- Live Dokploy compose stacks: **Cal.com**, **Hermes Gateway**, **Postiz**,
+  **Cal OAuth Home**.

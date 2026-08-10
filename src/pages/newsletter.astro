@@ -5,69 +5,99 @@ import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { insightsHubRelatedReading, siteConfig } from "../site";
 
-const schemas = [
-  buildBreadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Newsletter", path: "/newsletter" }
-  ])
+const breadcrumbItems = [
+  { name: "Home", path: "/" },
+  { name: "Newsletter", path: "/newsletter" }
+];
+
+const schemas = [buildBreadcrumbSchema(breadcrumbItems)];
+
+const insideEachIssue = [
+  {
+    kicker: "Diagnosis",
+    body: "How to name the real constraint before you add channel spend."
+  },
+  {
+    kicker: "Systems",
+    body: "Systems vs activity, what “repeatable acquisition” actually looks like."
+  },
+  {
+    kicker: "Patterns",
+    body: "Patterns from fractional CMO work with Seed–Series B teams."
+  },
+  {
+    kicker: "Depth",
+    body: "Deeper essays on Insights when a topic deserves the long version."
+  }
 ];
 ---
 
 <BaseLayout
-  title={`${siteConfig.newsletterName}, newsletter | We Scale Startups`}
+  title={`${siteConfig.newsletterName} newsletter | We Scale Startups`}
   description={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
   path="/newsletter"
   schema={schemas}
+  breadcrumbItems={breadcrumbItems}
   lastUpdated={siteConfig.lastUpdated}
+  showFooterNewsletter={false}
 >
-  <section class="page-hero" aria-labelledby="wss-newsletter-title">
+  <section class="page-hero newsletter-hero" aria-labelledby="wss-newsletter-title">
     <div class="shell">
       <p class="eyebrow">Newsletter</p>
-      <h1 id="wss-newsletter-title">{siteConfig.newsletterName}</h1>
-      <p class="hero-copy">
-        {siteConfig.newsletterDescription} {siteConfig.newsletterFrequencyLine} Sent from Daniel Johnson · {siteConfig.email}.
+      <h1 id="wss-newsletter-title">The Growth <em>Bottleneck</em></h1>
+      <p class="lede">
+        {siteConfig.newsletterDescription} {siteConfig.newsletterFrequencyLine}
       </p>
-      <p class="hero-copy">
-        Same list as the site footer, one name and cadence everywhere.
+      <p class="hero-microcopy">
+        Written by {siteConfig.founderName} · sent from {siteConfig.email} · unsubscribe any time
       </p>
-      <p class="hero-copy">
-        For Daniel’s personal writing list (occasional growth notes from{" "}
-        <a class="link-arrow" href={`${siteConfig.danielSite}/newsletter/`} rel="noopener">
-          danieljohnson.xyz
+      <div class="hero-actions">
+        <a class="button button-brand" href="#subscribe" data-cta="newsletter-hero-subscribe">
+          Get the next issue →
         </a>
-        ), use that page, this list is the We Scale Startups / operator lens.
-      </p>
+        <a class="button button-light" href="/insights" data-cta="newsletter-hero-insights">
+          Read the notes first →
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt" id="subscribe">
     <div class="shell">
       <SectionIntro
         eyebrow="Subscribe"
         title="Get the next issue"
         body="Single opt-in, you’ll get the next send automatically. Unsubscribe any time."
       />
-      <EmailSignup
-        variant="light"
-        formId="page-newsletter-growth-bottleneck"
-        heading={siteConfig.newsletterName}
-        subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
-      />
+      <div class="newsletter-signup-block">
+        <EmailSignup
+          variant="light"
+          formId="page-newsletter-growth-bottleneck"
+          heading={siteConfig.newsletterName}
+          subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
+        />
+      </div>
+      <p class="not-for-footnote newsletter-disambiguation">
+        This is the same list as the signup in the site footer, one name and one cadence everywhere.
+        For Daniel’s personal writing list (occasional growth notes), use
+        <a href={`${siteConfig.danielSite}/newsletter/`} rel="noopener">danieljohnson.xyz</a>
+        instead, this list is the We Scale Startups operator lens.
+      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <SectionIntro eyebrow="Inside each issue" title="What you’ll read" />
-      <div class="grid-2">
-        {[
-          "How to name the real constraint before you add channel spend",
-          "Systems vs activity, what “repeatable acquisition” actually looks like",
-          "Patterns from fractional CMO work with Seed–Series B teams",
-          "Deeper essays on Insights when a topic deserves the long version"
-        ].map((item) => (
+      <SectionIntro
+        eyebrow="Inside each issue"
+        title="What you’ll read"
+        body="Short, specific, and written from live fractional CMO work, not a roundup of other people’s links."
+      />
+      <div class="newsletter-issue-grid">
+        {insideEachIssue.map((item) => (
           <article class="feature-card">
-            <p>{item}</p>
+            <p class="card-kicker">{item.kicker}</p>
+            <p>{item.body}</p>
           </article>
         ))}
       </div>
@@ -80,13 +110,59 @@ const schemas = [
   <section class="section section-alt">
     <div class="shell">
       <SectionIntro eyebrow="Keep exploring" title="Related on the site" />
-      <div class="grid-2">
+      <ul class="related-insights-list">
         {insightsHubRelatedReading.map((link) => (
-          <a class="feature-card card-link" href={link.href}>
-            {link.label} →
-          </a>
+          <li>
+            <a class="card-link" href={link.href}>{link.label} →</a>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 </BaseLayout>
+
+<style is:global>
+  /* The hero stacks lede + byline, and the sitewide `p + p` pull-up collapses
+     the gap between them into a single block of text. Give the byline air. */
+  .theme-wss-v9 .page-hero.newsletter-hero p.hero-microcopy {
+    margin-top: 1.1rem;
+  }
+
+  /* The shared signup strip caps its contents at 600px, which reads as a small
+     island on this page, where the form is the primary action rather than a
+     footer afterthought. Give it more room and a little more presence. */
+  .newsletter-signup-block .email-signup-strip {
+    margin: 2rem 0 0;
+    padding: 2.25rem 2rem;
+  }
+
+  /* Left-align the form with the rest of the page instead of centring it in
+     the card, so the signup shares the same left axis as the footnote below. */
+  .newsletter-signup-block .email-signup-inner {
+    max-width: 780px;
+    margin: 0;
+    gap: 1.25rem;
+  }
+
+  .newsletter-signup-block .email-signup-heading {
+    font-size: 1.35rem;
+  }
+
+  .newsletter-disambiguation {
+    max-width: 68ch;
+  }
+
+  /* Own grid rather than the sitewide `.grid-2`, which has no `display: grid`
+     and no small-screen collapse, so two columns survive onto phones. */
+  .newsletter-issue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 720px) {
+    .newsletter-issue-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

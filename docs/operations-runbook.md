@@ -96,23 +96,25 @@ cheap whole-box rollback, independent of app backups.
 - [x] **Compose `.env` permissions** — set to `600` under
       `/etc/dokploy/compose/*/code/.env`.
 - [x] **Cal.com image pins** — app + Postgres 16 + Redis 7 digest-pinned in
-      compose (and Dokploy DB `composeFile`). Mautic `pull_policy` changed from
-      `always` to `if_not_present`.
+      compose (and Dokploy DB `composeFile`).
 - [x] **Dokploy password rotated** — set via host DB using Dokploy’s bcrypt
       hasher. Enable **2FA** in Dokploy → Settings (still off as of harden).
 
 ### Done 2026-08-10 (decommission unused stacks)
 
 - [x] **`wescalestartups-static`** — stopped/removed from Dokploy + Traefik.
-      Marketing site is Cloudflare Pages only (`www` / apex). Kept
-      `noindex-static` for Mautic `robots.txt`.
+      Marketing site is Cloudflare Pages only (`www` / apex).
 - [x] **`rolo`** — stopped/removed (app, DB volume, Dokploy domain, backup
       dump entry). Compose dirs archived under `/root/wss-decommission-*`.
+- [x] **`Mautic` / `comms.wescalestartups.com`** — fully removed (app, worker,
+      cron, MySQL, all volumes, Traefik routers, Dokploy compose/domain,
+      backup dumps, healthcheck). Also removed `noindex-static`. Archive:
+      `/root/wss-decommission-mautic-*`. Delete Cloudflare DNS for `comms`.
 
 ### Still optional
 
 - [ ] **Ghost DNS** (Cloudflare) — delete unused names that still point at the
-      box or CF: `n8n`, `uptime`, `hai`, `applypilot`, `monitor`,
+      box or CF: `comms`, `n8n`, `uptime`, `hai`, `applypilot`, `monitor`,
       `outreach-vnc`, `outreach-admin`, `rolo`, and leftover
       `video`/`minio`/`cap` records.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care

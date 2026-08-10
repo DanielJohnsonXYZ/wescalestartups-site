@@ -43,7 +43,11 @@
   --line: var(--v9-line);
   --line-soft: rgba(17, 17, 23, 0.09);
   --line-strong: var(--v9-line-strong);
-  --violet: var(--v9-violet);
+  /* Legacy alias, used for `color` in 56 of its 70 uses across global.css and
+     page-scoped styles. Like --accent it resolves to the deep violet so accent
+     text clears AA; --v9-violet remains the display violet for fills and large
+     type, and site-v9 rules reference it directly. */
+  --violet: var(--v9-violet-deep);
   --violet-deep: var(--v9-violet-deep);
   --violet-tint: rgba(128, 108, 255, 0.1);
   /* --accent is the *text* accent: component-scoped styles use it for labels,
@@ -270,9 +274,7 @@
 }
 
 /* Serif (Fraunces) headline, matching the homepage hero. Interior pages
-   run a touch smaller so the homepage stays the fullest expression.
-   Specificity here already beats global.css's `body:not(.page-home-v8) h1`,
-   which otherwise pins Geist 700 sitewide. */
+   run a touch smaller so the homepage stays the fullest expression. */
 .theme-wss-v9:not(.page-home-v9) .page-hero h1 {
   max-width: 15ch;
   margin: 0 0 1.6rem;
@@ -309,8 +311,8 @@
   line-height: 1.62;
 }
 
-/* Restated here to beat global.css's `body:not(.page-home-v8) .page-hero p`,
-   which would otherwise scale this mono line up to hero body size. */
+/* Restated so the mono microcopy keeps its own size rather than inheriting
+   the hero body scale from the rule above. */
 .theme-wss-v9:not(.page-home-v9) .page-hero .hero-microcopy {
   max-width: none;
   color: var(--v9-copy);
@@ -392,8 +394,7 @@
   border-bottom: 1px solid var(--v9-line);
 }
 
-/* Written out rather than wrapped in :where() so this beats global.css's
-   `body:not(.page-home-v8) .section-intro h2` (0-2-2). With :where() the
+/* Written out rather than wrapped in :where(): at zero specificity the
    SectionIntro component rendered at 37px while a plain section <h2>
    rendered at 63px, so pages mixing the two showed both sizes. */
 .theme-wss-v9:not(.page-home-v9) .section-intro h2,
@@ -607,6 +608,34 @@
 }
 
 /* Closing CTA: a recurring dark system object ----------------- */
+
+/* Closing CTA grid. global.css sizes this `1fr auto`, so the button column
+   takes its intrinsic width and the stacked "Book a Growth Audit" CTA squeezes
+   the heading column until it sets one word per line. Give both columns
+   explicit shares instead, and cap the heading so it breaks on sense rather
+   than on the column edge. */
+.theme-wss-v9:not(.page-home-v9) .cta-inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+}
+
+.theme-wss-v9:not(.page-home-v9) .cta-inner h2 {
+  max-width: 18ch;
+}
+
+.theme-wss-v9:not(.page-home-v9) .cta-inner .hero-actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .theme-wss-v9:not(.page-home-v9) .cta-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-wss-v9:not(.page-home-v9) .cta-inner .hero-actions {
+    justify-content: flex-start;
+  }
+}
 
 .theme-wss-v9:not(.page-home-v9) .cta-band {
   padding-block: clamp(4.5rem, 8vw, 7rem);

@@ -231,11 +231,6 @@
     grid-template-columns: 1fr;
   }
 
-  .testimonials-grid {
-    grid-template-columns: repeat(6, minmax(82vw, 1fr));
-    scroll-padding-inline: 0.65rem;
-  }
-
   .testimonial-card {
     min-height: auto;
   }

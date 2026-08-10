@@ -993,6 +993,27 @@ textarea:focus-visible {
   transform: translateY(-1px);
 }
 
+/* Stacked CTA (label + subcopy): a soft rectangle rather than a full pill,
+   because it is a two-line block, not an inline control. Was in
+   white-theme.css. */
+.button-with-subcopy {
+  border-radius: 1.1rem;
+  padding: 0.85rem 1.35rem;
+}
+
+/* The stacked primary CTA is always a "book a call" action, so it takes the
+   brand violet even when marked .button-dark. Plain .button-dark (mailto, the
+   404 "Go home" link, the podcast host link) stays neutral. */
+.button-dark.button-with-subcopy {
+  background: var(--v9-violet-deep);
+  box-shadow: 0 16px 42px rgba(77, 63, 196, 0.26);
+}
+
+.button-dark.button-with-subcopy:hover {
+  background: #3f33a8;
+  box-shadow: 0 22px 52px rgba(77, 63, 196, 0.32);
+}
+
 .client-logo-tile {
   min-width: 8.6rem;
   min-height: 4rem;

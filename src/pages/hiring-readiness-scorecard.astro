@@ -146,7 +146,7 @@ const results = {
   ready: {
     min: 18,
     range: "18–24",
-    color: "#15803d",
+    color: "var(--good)",
     label: "Ready to hire",
     headline: "You're ready to make a strong marketing hire.",
     summary: "Your GTM foundations are solid enough for a senior marketing leader to land, orient quickly, and execute. The risk now isn't hiring too early, it's hiring at the wrong level or writing a brief that's too vague. Use this moment to define the role sharply, nail the 90-day outcomes, and get the interview process right.",
@@ -162,7 +162,7 @@ const results = {
   fractional: {
     min: 9,
     range: "9–17",
-    color: "var(--accent)",
+    color: "var(--violet-deep)",
     label: "Fractional leadership first",
     headline: "You need fractional leadership before making a permanent hire.",
     summary: "Some foundations are in place, but the gaps are structural. A permanent hire would spend 60–90 days figuring out what's missing before they could execute anything. A fractional CMO can diagnose and close those gaps faster, and then hand over to a permanent hire who has a real system to run.",
@@ -178,7 +178,7 @@ const results = {
   foundations: {
     min: 0,
     range: "0–8",
-    color: "#c2410c",
+    color: "var(--warn-color)",
     label: "Build foundations first",
     headline: "Build the foundations before making any marketing hire.",
     summary: "A senior marketing hire right now would inherit a mess, unclear ICP, weak positioning, limited proof, no weekly rhythm, and an undefined role. They'd spend their first 6 months building the foundation while being measured on pipeline they couldn't possibly generate yet. This is the most expensive version of the hiring mistake.",
@@ -227,9 +227,9 @@ const results = {
       eyebrow: "The three outcomes",
       heading: "What your score predicts, and what to do next.",
       levels: [
-        { borderColor: "#22c55e", labelColor: "#15803d", label: "Score 18–24", h3: "Ready to hire", body: "Your GTM foundations are strong enough for a senior marketing leader to land and execute. Focus on defining the role, the 90-day brief, and the right seniority level." },
-        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 9–17", h3: "Fractional leadership first", body: "Some foundations are in place but the gaps are structural. A fractional CMO can build the missing system in 90–120 days, then hand to a permanent hire who has a real brief to work from." },
-        { borderColor: "#f97316", labelColor: "#c2410c", label: "Score 0–8", h3: "Build foundations first", body: "A senior marketing hire would inherit chaos: unclear ICP, weak positioning, no proof system, no rhythm. Build the foundations first, then hire someone into a system that can actually work." }
+        { borderColor: "var(--good)", labelColor: "var(--good)", label: "Score 18–24", h3: "Ready to hire", body: "Your GTM foundations are strong enough for a senior marketing leader to land and execute. Focus on defining the role, the 90-day brief, and the right seniority level." },
+        { borderColor: "var(--violet-deep)", labelColor: "var(--violet-deep)", label: "Score 9–17", h3: "Fractional leadership first", body: "Some foundations are in place but the gaps are structural. A fractional CMO can build the missing system in 90–120 days, then hand to a permanent hire who has a real brief to work from." },
+        { borderColor: "var(--warn-color)", labelColor: "var(--warn-color)", label: "Score 0–8", h3: "Build foundations first", body: "A senior marketing hire would inherit chaos: unclear ICP, weak positioning, no proof system, no rhythm. Build the foundations first, then hire someone into a system that can actually work." }
       ]
     }}
     faqSection={{

@@ -8,6 +8,21 @@
 @import "tailwindcss";
 
 
+/* Screen-reader-only text: keeps the document outline intact where a
+   section has no visible heading. position:absolute keeps it out of
+   grid/flex flow. From #65. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* --- 2026 polish pass: header, CTA, proof, services, diagrams --- */
 .site-header {
   padding: 0.55rem 0;
@@ -945,6 +960,24 @@ textarea:focus-visible {
   white-space: nowrap;
 }
 
+/* Stacked CTA (label + subcopy): soft rectangle, not a full pill.
+   The primary stacked CTA is the "book a call" action, so it carries
+   the brand gradient; `.button-dark` alone stays neutral. */
+.button-with-subcopy {
+  border-radius: 1.1rem;
+  padding: 0.85rem 1.35rem;
+}
+
+.button-dark.button-with-subcopy {
+  background: linear-gradient(135deg, var(--violet-deep), var(--v9-violet-cta, var(--violet-deep)));
+  box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
+}
+
+.button-dark.button-with-subcopy:hover {
+  background: var(--violet-deep);
+  box-shadow: 0 22px 52px rgba(102, 87, 255, 0.32);
+}
+
 .header-cta {
   min-width: 104px;
   padding-inline: 0.9rem;
@@ -1144,15 +1177,6 @@ textarea:focus-visible {
 }
 
 .hero h1,
-.page-hero h1 {
-  max-width: 980px;
-  margin: 0;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 8.5rem;
-  line-height: 0.92;
-  font-weight: 360;
-}
-
 .hero-with-portrait h1 {
   max-width: 980px;
   font-size: clamp(3.25rem, 5.9vw, 5.9rem);
@@ -2009,10 +2033,6 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--line);
 }
 
-.page-hero h1 {
-  font-size: 5rem;
-}
-
 .page-hero p {
   max-width: 740px;
   color: var(--muted);
@@ -2122,7 +2142,7 @@ textarea:focus-visible {
   line-height: 1.7;
 }
 
-.site-footer h2 {
+.site-footer :is(h2, h3) {
   margin: 0 0 1rem;
   color: var(--dim);
   font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -2726,7 +2746,7 @@ textarea:focus-visible {
   font-weight: 400;
 }
 
-.case-mini h4 {
+.case-mini :is(h3, h4) {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
   font-size: 1.4rem;
@@ -5103,7 +5123,7 @@ textarea:focus-visible {
   padding: 0.25rem 0.45rem;
   border-radius: 6px;
   background: var(--violet-soft);
-  color: var(--violet);
+  color: var(--violet-deep);
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.68rem;
   font-weight: 800;
@@ -5451,14 +5471,6 @@ body::after {
 /* ---- 1. Typography rhythm: clamp the page-hero + section-intro headlines so
        the same H1/H2 doesn't tower on a 1440 viewport and crush on a 13" laptop.
        text-wrap: balance gives the senior, intentionally-broken line look. ---- */
-.page-hero h1 {
-  font-size: clamp(2.85rem, 5.6vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.018em;
-  text-wrap: balance;
-  font-weight: 360;
-}
-
 .section-intro h2 {
   font-size: clamp(2.4rem, 4.6vw, 4.7rem);
   line-height: 1.02;
@@ -5714,7 +5726,7 @@ body::after {
   pointer-events: none;
 }
 
-.site-footer-v2 .footer-col h2 {
+.site-footer-v2 .footer-col :is(h2, h3) {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   color: var(--violet);
@@ -5829,10 +5841,8 @@ body::after {
    Import AFTER global.css in BaseLayout.astro.
    ============================================================ */
 
-/* ── 1. Warm design tokens ─────────────────────────────────────
-   Override the cooler global.css palette with the warmer values
-   used by the homepage (home-hero-v3.css --h3-* variables).
-   ─────────────────────────────────────────────────────────── */
+/* (Design tokens consolidated into the single :root block at the top
+   of this file; values align with the v9 system.) */
 
 /* ── 2. Body: warm gradient background ─────────────────────────
    Replace the cool purple/acid gradient with a warm
@@ -5884,26 +5894,6 @@ body {
 .page-hero .shell {
   position: relative;
   z-index: 1;
-}
-
-/* ── 4. Page-hero h1: warm gradient text ───────────────────────
-   The hero headline gets a warm ink→violet sweep so it reads
-   like the homepage headline treatment.
-   ─────────────────────────────────────────────────────────── */
-.page-hero h1 {
-  background: linear-gradient(115deg, var(--ink) 0%, var(--ink-2) 48%, #6657ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--ink); /* fallback */
-}
-
-.page-hero h1 em {
-  background: linear-gradient(95deg, #6657ff 0%, #8b5cf6 55%, #a445ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
 }
 
 /* ── 5. Global eyebrow pill ────────────────────────────────────
@@ -6047,7 +6037,7 @@ html { scroll-padding-top: 6.5rem; }
 .logo-wall .logo-group-label {
   font-family: "JetBrains Mono", monospace;
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--ink-4, #8a8696); text-align: center; margin: 0 0 16px;
+  color: var(--muted, #55535b); text-align: center; margin: 0 0 16px;
 }
 .logo-wall .logo-group + .logo-group { margin-top: 30px; }
 .logo-wall .logo-img {

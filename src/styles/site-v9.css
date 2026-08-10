@@ -109,7 +109,7 @@
 }
 
 .theme-wss-v9 .nav-menu-link span {
-  color: rgba(255, 255, 255, 0.44);
+  color: rgba(255, 255, 255, 0.64);
 }
 
 .theme-wss-v9 .header-cta,
@@ -289,7 +289,7 @@
   padding: 0.9rem 1.3rem;
   border: 1px solid var(--v9-violet);
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet)) !important;
+  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet-cta)) !important;
   box-shadow: 0 16px 36px rgba(77, 63, 196, 0.22);
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
@@ -536,7 +536,7 @@
 
 .theme-wss-v9:not(.page-home-v9) main .button-brand {
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet));
+  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet-cta));
   box-shadow: 0 14px 32px rgba(77, 63, 196, 0.2);
 }
 
@@ -630,7 +630,7 @@
   background: linear-gradient(90deg, transparent, rgba(128, 108, 255, 0.32), transparent);
 }
 
-.theme-wss-v9 .site-footer-v2 h2 {
+.theme-wss-v9 .site-footer-v2 :is(h2, h3) {
   color: var(--v9-violet-deep);
 }
 

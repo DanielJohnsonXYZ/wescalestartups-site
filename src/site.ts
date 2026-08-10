@@ -8,8 +8,11 @@ export const siteConfig = {
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
-  calUrl: "https://calendly.com/wescalestartups",
-  calLink: "https://calendly.com/wescalestartups",
+  /** Public Cal.com booking page (self-hosted). */
+  calUrl: "https://cal.wescalestartups.com/daniel/20min",
+  /** Cal.com username/event path used by the inline embed (no leading slash). */
+  calLink: "daniel/20min",
+  calOrigin: "https://cal.wescalestartups.com",
   bookingLabel: "Book a Growth Audit",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
@@ -122,12 +125,13 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/about": "2026-07-26",
   "/ai-growth-systems": "2026-05-01",
   "/ai-sameness-scorecard": "2026-07-26",
-  "/book": "2026-05-04",
+  "/book": "2026-08-09",
+  "/book/thanks": "2026-08-09",
+  "/wss-calendar": "2026-08-09",
   "/build": "2026-05-03",
   "/case-studies": "2026-05-03",
   "/contact": "2026-05-03",
   "/diagnose": "2026-05-03",
-  "/engagement-models": "2026-07-26",
   "/faq": "2026-07-26",
   "/alternatives": "2026-07-26",
   "/alternatives/marketing-agency": "2026-07-26",
@@ -143,13 +147,11 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/research/founder-session-patterns": "2026-07-26",
   "/benchmarks": "2026-07-26",
   "/benchmarks/uk-fractional-cmo-pricing": "2026-07-26",
-  "/execution-model": "2026-05-01",
   "/experimentation": "2026-05-03",
   "/growth-course": "2026-05-04",
   "/wss-scale-score": "2026-05-04",
   "/first-30-days": "2026-05-03",
   "/fractional-cmo-vs-agency": "2026-05-04",
-  "/growth-engine": "2026-05-01",
   "/gtm-strategy": "2026-05-03",
   "/how-it-works": "2026-05-04",
   "/industries": "2026-07-26",
@@ -237,21 +239,9 @@ export const navigation = [
 
 /** Strategic pillar pages → related insights (internal links + related reading section). */
 export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
-  "/ai-driven-growth": [
-    { href: "/insights/learning-latency", label: "Learning latency: the bottleneck you can't see" },
-    { href: "/insights/make-ai-search-visibility-citable", label: "Make AI search visibility citable" }
-  ],
-  "/engagement-models": [
-    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose the bottleneck before spend" },
-    { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
-  ],
   "/how-it-works": [
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
-  ],
-  "/execution-model": [
-    { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
-    { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
   ],
   "/growth-operating-system": [
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },

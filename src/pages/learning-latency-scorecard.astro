@@ -104,7 +104,7 @@ const results = {
   compounding: {
     min: 27,
     range: "27–30",
-    color: "#15803d",
+    color: "var(--good)",
     label: "Compounding Growth Loop",
     headline: "You're learning fast and feeding it back. Now scale it.",
     summary: "Your growth operates as a system: signal in, sharper insight out, experiments designed to teach, assets shipped fast, and a memory that makes every cycle smarter than the last. This is rare. The job now is to scale what's working and protect the loop as you add people and channels, the biggest risk is that growth dilutes the discipline that created it.",
@@ -119,7 +119,7 @@ const results = {
   emerging: {
     min: 21,
     range: "21–26",
-    color: "var(--accent)",
+    color: "var(--violet-deep)",
     label: "Emerging Growth System",
     headline: "The system is forming. Now make it faster.",
     summary: "You have the foundations of a repeatable growth loop, signal is captured, insight drives experiments, and learnings are increasingly reused. The work now is about speed, memory, and asset quality: shortening the time from signal to live asset and making sure nothing learned is ever lost. Small increases in loop speed compound quickly from here.",
@@ -134,7 +134,7 @@ const results = {
   fragmented: {
     min: 13,
     range: "13–20",
-    color: "#b45309",
+    color: "var(--warn-color)",
     label: "Fragmented Growth",
     headline: "Useful activity, but the loop is broken.",
     summary: "You're capturing some signal and shipping real work, but the pieces aren't connected. Insight doesn't reliably reach experiments, experiments don't reliably feed memory, and good learnings get forgotten. You're doing the right things in isolation. The opportunity is to connect signal → insight → experiment → asset → memory into one loop so the work starts to compound.",
@@ -149,7 +149,7 @@ const results = {
   random: {
     min: 6,
     range: "6–12",
-    color: "#b91c1c",
+    color: "var(--bad)",
     label: "Random Acts of Growth",
     headline: "Lots of activity. Almost no learning.",
     summary: "Your team is busy, content, campaigns, outbound, calls, but the work isn't compounding. Signal isn't captured, insight isn't extracted, and nothing feeds back into the next move. This isn't a traffic or effort problem; it's a learning-latency problem. The fastest win is to stop adding activity and start capturing and using what the market is already telling you.",
@@ -197,10 +197,10 @@ const results = {
       eyebrow: "What the score means",
       heading: "Four growth stages, and what each one needs next.",
       levels: [
-        { borderColor: "#22c55e", labelColor: "#15803d", label: "Score 27–30 · Compounding Growth Loop", h3: "Learning fast, compounding", body: "Signal in, sharper insight out, experiments that teach, assets shipped fast, and a memory that makes every cycle smarter. Rare. The job now is to scale it without diluting the discipline." },
-        { borderColor: "var(--accent)", labelColor: "var(--accent)", label: "Score 21–26 · Emerging Growth System", h3: "Foundations in place", body: "A repeatable loop is forming. The work now is speed, memory, and asset quality, shortening the time from signal to live asset and making sure nothing learned is lost." },
-        { borderColor: "#f59e0b", labelColor: "#b45309", label: "Score 13–20 · Fragmented Growth", h3: "Right things, disconnected", body: "You capture some signal and ship real work, but the pieces aren't joined up. Connect signal → insight → experiment → asset → memory so the work starts to compound." },
-        { borderColor: "#ef4444", labelColor: "#b91c1c", label: "Score 6–12 · Random Acts of Growth", h3: "Activity without learning", body: "Lots of motion, no compounding. Signal isn't captured and nothing feeds back. Stop adding activity; start capturing and using what the market already tells you." }
+        { borderColor: "var(--good)", labelColor: "var(--good)", label: "Score 27–30 · Compounding Growth Loop", h3: "Learning fast, compounding", body: "Signal in, sharper insight out, experiments that teach, assets shipped fast, and a memory that makes every cycle smarter. Rare. The job now is to scale it without diluting the discipline." },
+        { borderColor: "var(--violet-deep)", labelColor: "var(--violet-deep)", label: "Score 21–26 · Emerging Growth System", h3: "Foundations in place", body: "A repeatable loop is forming. The work now is speed, memory, and asset quality, shortening the time from signal to live asset and making sure nothing learned is lost." },
+        { borderColor: "var(--warn-color)", labelColor: "var(--warn-color)", label: "Score 13–20 · Fragmented Growth", h3: "Right things, disconnected", body: "You capture some signal and ship real work, but the pieces aren't joined up. Connect signal → insight → experiment → asset → memory so the work starts to compound." },
+        { borderColor: "var(--bad)", labelColor: "var(--bad)", label: "Score 6–12 · Random Acts of Growth", h3: "Activity without learning", body: "Lots of motion, no compounding. Signal isn't captured and nothing feeds back. Stop adding activity; start capturing and using what the market already tells you." }
       ]
     }}
     faqSection={{

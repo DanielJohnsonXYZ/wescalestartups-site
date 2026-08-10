@@ -103,7 +103,7 @@ const groups = [
 
     {groups.map((group) => (
       <div class="footer-col">
-        <h2>{group.label}</h2>
+        <h3>{group.label}</h3>
         <nav class="footer-links" aria-label={`${group.label} links`}>
           {group.links.map((link) => (
             <a
@@ -216,7 +216,7 @@ const groups = [
     font-size: 0.82rem;
   }
 
-  .footer-col h2 {
+  .footer-col :is(h2, h3) {
     font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;

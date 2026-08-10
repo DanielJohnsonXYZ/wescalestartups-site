@@ -36,7 +36,7 @@
   letter-spacing: 0.1em;
   color: var(--accent);
   margin: 0 0 0.75rem;
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 .quiz-question-text {
   font-size: clamp(1.05rem, 1.8vw, 1.2rem);
@@ -107,7 +107,7 @@
   padding: 2rem 2rem 2.5rem;
 }
 .result-score-display {
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1;
@@ -171,7 +171,7 @@
   color: var(--ink);
   margin-bottom: 1.75rem;
 }
-.result-warning strong { color: #c05621; }
+.result-warning strong { color: var(--warn-color); }
 .result-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .result-restart {
   background: none;

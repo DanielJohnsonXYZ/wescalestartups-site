@@ -4,8 +4,7 @@ import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { proofClients, proofEcosystemLogos, siteConfig, testimonials } from "../site";
 
 const path = "/ai-growth-audit";
-const bookHref = "#book-calendly";
-const calUrl = `${siteConfig.calLink}?utm_source=outbound&utm_medium=email&utm_campaign=ai-growth-audit`;
+const bookHref = "#book-cal";
 const primaryCtaLabel = "Book a free 20-minute Growth Audit";
 const primaryCtaSubcopy = `Free · ${siteConfig.bookingCallDurationPhrase} · Leave with your bottleneck named`;
 const scorecardSoftLink = "Not ready to talk? Take the 5-minute scorecard.";
@@ -286,10 +285,10 @@ const schema = [
     </div>
   </section>
 
-  <section class="section section-alt audit-tight" id="book-calendly" aria-labelledby="book-calendly-heading">
+  <section class="section section-alt audit-tight" id="book-cal" aria-labelledby="book-cal-heading">
     <div class="shell">
       <p class="eyebrow">Book now</p>
-      <h2 id="book-calendly-heading">Book a free 20-minute Growth Audit.</h2>
+      <h2 id="book-cal-heading">Book a free 20-minute Growth Audit.</h2>
       <p class="lede audit-lede">
         Choose a slot below. Bring where pipeline is stuck. You’ll leave with the constraint named in plain
         English.
@@ -312,15 +311,15 @@ const schema = [
       </div>
       <div
         id="book-cal-inline"
-        class="calendly-inline-widget"
-        data-url={calUrl}
-        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.25rem;"
+        class="cal-inline-widget"
+        data-cal-link={siteConfig.calLink}
+        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
       >
       </div>
       <p class="calendly-lede">
         <strong>Calendar not loading?</strong>
         {" "}
-        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank" data-cta="ai-audit-calendly-fallback">
+        <a href={siteConfig.calUrl} rel="noreferrer" target="_blank" data-cta="ai-audit-cal-fallback">
           Open the booking page in a new tab
         </a>
         .
@@ -328,36 +327,7 @@ const schema = [
     </div>
   </section>
 
-  <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <script is:inline>
-    (function () {
-      function isCalendlyEvent(e) {
-        return (
-          e.origin === "https://calendly.com" &&
-          e.data &&
-          typeof e.data.event === "string" &&
-          e.data.event.indexOf("calendly.") === 0
-        );
-      }
-      window.addEventListener("message", function (e) {
-        if (!isCalendlyEvent(e)) return;
-        window.dataLayer = window.dataLayer || [];
-        if (e.data.event === "calendly.event_scheduled") {
-          window.dataLayer.push({
-            event: "booking_completed",
-            booking_source: "calendly_inline",
-            page_path: window.location.pathname
-          });
-        } else if (e.data.event === "calendly.date_and_time_selected") {
-          window.dataLayer.push({
-            event: "booking_time_selected",
-            booking_source: "calendly_inline",
-            page_path: window.location.pathname
-          });
-        }
-      });
-    })();
-  </script>
+  <script is:inline src="/scripts/cal-embed-lazy.js" defer></script>
 
   <section class="section audit-tight">
     <div class="shell">
@@ -587,11 +557,11 @@ const schema = [
   }
 
   .fit-mark.yes {
-    color: #22c55e;
+    color: var(--good);
   }
 
   .fit-mark.no {
-    color: #f97316;
+    color: var(--warn-color);
   }
 
   .quote-card {

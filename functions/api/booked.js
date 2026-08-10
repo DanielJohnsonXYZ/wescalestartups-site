@@ -65,7 +65,7 @@ export async function onRequestPost(context) {
     const value = clip(payload[key]);
     if (value) data[key] = value;
   }
-  if (!data.lead_magnet) data.lead_magnet = "calendly-booking";
+  if (!data.lead_magnet) data.lead_magnet = "calcom-booking";
 
   const region = (env.CUSTOMER_IO_REGION || "eu").trim().toLowerCase();
   const url = `${trackBase(region)}/api/v1/forms/${encodeURIComponent(formId)}/submit`;

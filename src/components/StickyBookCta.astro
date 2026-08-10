@@ -6,7 +6,7 @@ interface Props {
   enabled?: boolean;
   /** ScrollY (px) after which the bar appears. */
   revealAfter?: number;
-  /** Override destination (e.g. #book-calendly on dedicated audit pages). */
+  /** Override destination (e.g. #book-cal on dedicated audit pages). */
   href?: string;
   /** Override sticky button label. */
   ctaLabel?: string;
@@ -181,7 +181,7 @@ const {
     var revealAfter = Number(bar.getAttribute("data-reveal-after") || 640);
     var dismissKey = "wss-sticky-book-cta-dismissed";
     var dismissed = false;
-    var overlapSelector = "footer, .site-footer, form, .cta-band, .book-embed, #calendly-inline-widget, #book-calendly, #book-cal-inline, .calendly-inline-widget";
+    var overlapSelector = "footer, .site-footer, form, .cta-band, .book-embed, #book-cal-inline, #book-cal, .cal-inline-widget, #calendly-inline-widget, #book-calendly, .calendly-inline-widget";
     var overlapsSensitiveArea = false;
     var shownFired = false;
 

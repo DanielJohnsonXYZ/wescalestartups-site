@@ -204,12 +204,21 @@
   line-height: 1.55;
 }
 
+/* Flex items default to min-width:auto, so a 120px logo plus the relationship
+   label could not shrink to fit the ~180px tile and spilled over the tile edge
+   (and over the label). Let the pair wrap instead. */
 .proof-client-logo-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.5rem;
+  min-width: 0;
   margin-bottom: 0.65rem;
+}
+
+.proof-client-logo-row > * {
+  min-width: 0;
 }
 
 .proof-client-logo {
@@ -220,12 +229,13 @@
   object-position: left center;
 }
 
+/* Own row beneath the logo: at 11ch beside a 120px logo this label broke into
+   three ragged lines inside the ~180px tile. */
 .proof-client-relationship {
-  flex-shrink: 0;
-  max-width: 11ch;
+  flex: 1 0 100%;
   font-size: 0.58rem;
   line-height: 1.25;
-  text-align: right;
+  text-align: left;
   color: var(--dim);
   font-family: "JetBrains Mono", ui-monospace, monospace;
   text-transform: uppercase;
@@ -1854,7 +1864,7 @@ textarea:focus-visible {
 
 .article-layout {
   display: grid;
-  grid-template-columns: 0.72fr 1.28fr;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   gap: 2rem;
   align-items: start;
 }
@@ -2167,7 +2177,10 @@ textarea:focus-visible {
   .article-layout,
   .cta-inner,
   .footer-grid {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr), not 1fr: a `1fr` track is `minmax(auto, 1fr)` and so
+       cannot shrink below its content's min-content width, which long URLs,
+       wide tables and unbreakable strings push past the viewport. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero .hero-actions {

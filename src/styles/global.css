@@ -688,7 +688,6 @@
 
 * {
   box-sizing: border-box;
-  letter-spacing: 0 !important;
 }
 
 html {
@@ -2369,13 +2368,19 @@ textarea:focus-visible {
 }
 
 /* --- Button with subcopy (outcome-led primary CTA) --- */
+/* The stacked CTA is a block, not an inline pill: `.button`'s nowrap would
+   size it to its longest subcopy line (~670px) and overflow narrow grid
+   columns, colliding with the CTA-band heading. Let it wrap and stay inside
+   its container at every width, not just under the mobile breakpoint. */
 .button-with-subcopy {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.15rem;
   padding: 0.85rem 1.25rem;
   min-height: 64px;
+  max-width: 100%;
   text-align: left;
+  white-space: normal;
 }
 
 .button-with-subcopy .button-label {

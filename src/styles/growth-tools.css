@@ -24,3 +24,5 @@
 
 #growth-tool-app .tool-intro h2,#growth-tool-app .result-head h2{font-size:clamp(2.55rem,5.4vw,4.4rem);line-height:1;letter-spacing:-.055em;margin:1.1rem 0 1.25rem;}
 #growth-tool-app .growth-tool-app{padding-bottom:1rem;}
+
+@media(prefers-reduced-motion:reduce){#growth-tool-app *,#growth-tool-app *::before,#growth-tool-app *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}#growth-tool-app .ticker-track{animation:none!important}}

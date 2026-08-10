@@ -1,6 +1,6 @@
 # Growth Bottleneck Scorecard (printable companion)
 
-Prefer the interactive version: https://wescalestartups.com/resources/growth-bottleneck-scorecard
+Prefer the interactive version: https://wescalestartups.com/resources/growth-dependency
 
 Score each section 1–5. The lowest score is usually the constraint.
 

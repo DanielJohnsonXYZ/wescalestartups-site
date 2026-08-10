@@ -9,7 +9,7 @@
 - **Services:** [What we offer](https://wescalestartups.com/services)
 - **Pricing:** [Engagement & fees](https://wescalestartups.com/pricing)
 - **Proof:** [Case studies & results](https://wescalestartups.com/proof)
-- **Scorecard:** [Growth Bottleneck Scorecard](https://wescalestartups.com/resources/growth-bottleneck-scorecard)
+- **Scorecard:** [Growth Bottleneck Scorecard](https://wescalestartups.com/resources/growth-dependency)
 - **Contact:** [Email & details](https://wescalestartups.com/contact)
 - **Company press kit:** [Press & media](https://wescalestartups.com/press)
 

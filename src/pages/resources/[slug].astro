@@ -309,7 +309,17 @@ const schemas = [
     { name: "Resources", path: "/resources" },
     { name: magnet.title, path: `/resources/${slug}` }
   ]),
-  buildFaqSchema(details.faq)
+  buildFaqSchema(details.faq),
+  {
+    "@context": "https://schema.org",
+    "@type": "DigitalDocument",
+    name: magnet.title,
+    description: magnet.description,
+    url: `${siteConfig.siteUrl}/resources/${slug}`,
+    inLanguage: "en-GB",
+    isAccessibleForFree: true,
+    publisher: { "@id": `${siteConfig.siteUrl}/#organization` }
+  }
 ];
 
 const description = magnet.description;
@@ -374,6 +384,7 @@ const layoutTitle =
           finePrint={isGrowthExperimentPlanner
             ? "Includes the five-email planner implementation series. Unsubscribe any time."
             : "No spam. Unsubscribe any time."}
+          successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}
         />
       </div>
     </div>
@@ -406,7 +417,7 @@ const layoutTitle =
 
   <section class="section section-alt">
     <div class="shell">
-      <SectionIntro eyebrow="FAQ" title="Three questions founders ask before requesting it." />
+      <SectionIntro eyebrow="FAQ" title="Questions to check before using it." />
       <div class="faq-stack">
         {details.faq.map((item, index) => (
           <details class="faq-item" open={index === 0}>

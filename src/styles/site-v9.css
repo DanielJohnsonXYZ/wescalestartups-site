@@ -568,6 +568,19 @@
   color: var(--v9-copy-dark);
 }
 
+/* Light cards nested inside those dark panels: the rule above reaches every
+   descendant, so tile copy on a white card rendered in the dark panel's
+   light-grey (#a8a7b4 on white is 2.37:1, well under AA). Restore the
+   light-surface copy colour for the cards themselves. */
+.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile),
+.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile) :where(p, li, span) {
+  color: var(--v9-copy);
+}
+
+.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile) :where(h2, h3, strong, a) {
+  color: var(--v9-ink);
+}
+
 /* Buttons outside the hero ------------------------------------ */
 
 .theme-wss-v9:not(.page-home-v9) main .button-brand {

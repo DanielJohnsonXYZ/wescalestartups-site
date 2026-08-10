@@ -101,18 +101,27 @@ cheap whole-box rollback, independent of app backups.
 - [x] **Dokploy password rotated** — set via host DB using Dokploy’s bcrypt
       hasher. Enable **2FA** in Dokploy → Settings (still off as of harden).
 
+### Done 2026-08-10 (decommission unused stacks)
+
+- [x] **`wescalestartups-static`** — stopped/removed from Dokploy + Traefik.
+      Marketing site is Cloudflare Pages only (`www` / apex). Kept
+      `noindex-static` for Mautic `robots.txt`.
+- [x] **`rolo`** — stopped/removed (app, DB volume, Dokploy domain, backup
+      dump entry). Compose dirs archived under `/root/wss-decommission-*`.
+
 ### Still optional
 
-- [ ] **`wescalestartups-static` Dokploy stack** — remove after Pages DNS
-      cutover has stayed stable long enough to no longer need a Hetzner fallback.
 - [ ] **Ghost DNS** (Cloudflare) — delete unused names that still point at the
       box or CF: `n8n`, `uptime`, `hai`, `applypilot`, `monitor`,
-      `outreach-vnc`, `outreach-admin`, and any leftover `video`/`minio`/`cap`
-      records. Token available to the agent lacked DNS edit rights.
+      `outreach-vnc`, `outreach-admin`, `rolo`, and leftover
+      `video`/`minio`/`cap` records.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care
       (`docker volume ls`, confirm no stack references each one).
 - [ ] **ACME junk** — Traefik `acme.json` still holds certs for retired
       hostnames; safe to leave until those DNS names are gone.
+- [ ] **Hetzner Backups** — not free (20% of server ≈ €3–4/mo for `cx43`).
+      R2 app backups remain the free path; enable Hetzner Backups only if you
+      want whole-VM rollback.
 
 ---
 

@@ -141,14 +141,25 @@ const groups = [
 
 <style>
   .site-footer-v2 { padding-top: 4rem; padding-bottom: 2rem; }
+  /* Two columns of links on small screens rather than one. Stacked single-file
+     the six groups ran to ~2000px, which made the footer around 30% of the
+     whole page on shorter routes. The brand and newsletter blocks stay full
+     width since their content needs the measure. */
   .site-footer-v2 .footer-grid {
     display: grid;
-    gap: 2.5rem;
-    grid-template-columns: 1fr;
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
     margin-bottom: 3rem;
+  }
+
+  .site-footer-v2 .footer-brand,
+  .site-footer-v2 .footer-newsletter {
+    grid-column: 1 / -1;
   }
   @media (min-width: 720px) {
     .site-footer-v2 .footer-grid {
+      gap: 2.5rem;
       grid-template-columns: repeat(3, 1fr);
     }
     /* The brand block is far taller than a link column; letting it span the
@@ -160,6 +171,9 @@ const groups = [
       grid-template-columns: 1.6fr repeat(5, 1fr);
     }
     .site-footer-v2 .footer-brand { grid-column: auto; }
+    /* align-items: start (set above) matters most here: stretched to the row
+       height, a two-link group like Legal rendered as a 509px empty box. */
+    .site-footer-v2 .footer-newsletter { grid-column: 1 / -1; }
   }
 
   .footer-brand p.footer-summary {

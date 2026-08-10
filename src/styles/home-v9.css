@@ -937,11 +937,16 @@
   color: white;
 }
 
+/* justify-content: flex-start, not space-between: the panel has a min-height
+   to match the tab column, and distributing that slack between five children
+   (plus the `margin-top: auto` that used to sit on .v9-output-signal) opened a
+   115px void under the topline at tablet widths. The recommendation block
+   pins itself to the bottom instead. */
 .v9-diagnostic-output {
   display: flex;
   min-height: 510px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   overflow: hidden;
   border: 1px solid var(--v9-line);
   border-radius: var(--v9-radius);
@@ -966,7 +971,7 @@
 
 .v9-output-signal {
   justify-content: flex-start;
-  margin-top: auto;
+  margin-top: 2.25rem;
   margin-bottom: 1.1rem;
   color: var(--v9-violet-deep);
 }
@@ -996,6 +1001,7 @@
 }
 
 .v9-output-recommendation {
+  margin-top: auto;
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -1983,9 +1989,11 @@
 }
 
 .page-home-v9 .site-footer-v2::before { background: linear-gradient(90deg, transparent, rgba(200, 255, 101, 0.3), transparent); }
-.page-home-v9 .site-footer-v2 h2 { color: var(--v9-violet-bright); }
-.page-home-v9 .site-footer-v2 a:hover { color: white; }
-.page-home-v9 .site-footer-v2 .footer-bottom { border-color: rgba(255, 255, 255, 0.1); }
+/* The dark-footer overrides that used to live here (violet-bright headings,
+   white link hover, translucent-white divider) are superseded further down by
+   the light-footer values. Leaving them in place meant the same selector was
+   declared twice with opposite colours, one of which would have been white on
+   a near-white surface. */
 
 /* Responsive ------------------------------------------------ */
 
@@ -2035,7 +2043,10 @@
   .v9-principle > span { margin-bottom: 3rem; }
 
   .v9-diagnostic { grid-template-columns: 1fr; }
-  .v9-constraint-tabs { grid-template-columns: repeat(5, minmax(190px, 1fr)); overflow-x: auto; border-left: 1px solid var(--v9-line); scrollbar-width: thin; }
+  /* Stacked, not a horizontal scroller: five tabs in an overflow-x row cut the
+     last card off mid-word and exposed a raw scrollbar. */
+  .v9-constraint-tabs { grid-template-columns: minmax(0, 1fr); border-left: 1px solid var(--v9-line); }
+  .v9-diagnostic-output { min-height: auto; }
   .v9-constraint-tab { min-height: 110px; grid-template-columns: 1fr auto; align-content: space-between; border-right: 1px solid var(--v9-line); padding: 1rem; }
   .v9-constraint-tab > span:first-child { grid-column: 1; }
   .v9-constraint-tab > span:nth-child(2) { grid-column: 1 / -1; }
@@ -2044,7 +2055,7 @@
   .v9-constraint-tab.is-active { padding-left: 1rem; }
 
   .v9-case-grid,
-  .v9-quote-grid { grid-template-columns: 1.15fr 0.85fr; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; }
+  .v9-quote-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .v9-case-card,
   .v9-quote { scroll-snap-align: start; }
   .v9-case-card:last-child,
@@ -2146,10 +2157,12 @@
   .v9-timeline p { grid-column: 2; }
   .v9-timeline h4 { min-height: 0; margin: 0.4rem 0; }
 
+  /* One column rather than a 86vw flex rail: the rail bled past the shell via
+     negative margins and left every card clipped at the viewport edge. */
   .v9-case-grid,
-  .v9-quote-grid { display: flex; gap: 0.7rem; margin-inline: -0.625rem; padding: 0 0.625rem 0.75rem; }
+  .v9-quote-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.7rem; }
   .v9-case-card,
-  .v9-quote { display: flex !important; min-width: min(86vw, 355px); }
+  .v9-quote { display: flex !important; min-width: 0; }
   .v9-case-card { min-height: 480px; }
   .v9-case-card h3 { font-size: 2.45rem; }
 
@@ -2688,7 +2701,7 @@
 @media (max-width: 900px) {
   .v9-hero { min-height: auto; padding-top: 6.25rem; }
   .v9-hero h1 { max-width: 14ch; font-size: clamp(2.9rem, 8.5vw, 5.2rem); }
-  .page-home-v9 .v9-quote-grid { grid-template-columns: repeat(9, minmax(300px, 1fr)); }
+  .page-home-v9 .v9-quote-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-home-v9 .v9-quote:last-child { display: flex; }
   .v9-fit-video { grid-template-columns: 1fr; }
 }

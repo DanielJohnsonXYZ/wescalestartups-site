@@ -433,8 +433,7 @@ main .button:hover {
   z-index: 1;
 }
 
-.v9-os-head,
-.v9-os-proof {
+.v9-os-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -485,139 +484,6 @@ main .button:hover {
   border-radius: 50%;
   background: currentColor;
   box-shadow: 0 0 12px currentColor;
-}
-
-.v9-os-stage {
-  padding: 1.4rem;
-}
-
-.v9-os-input,
-.v9-os-output {
-  display: grid;
-  gap: 0.32rem;
-  border: 1px solid var(--v9-line-dark);
-  border-radius: 0.85rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.v9-os-stage span,
-.v9-os-stage small {
-  color: rgba(255, 255, 255, 0.42);
-  font-family: var(--v9-mono);
-  font-size: 0.58rem;
-}
-
-.v9-os-stage strong {
-  font-size: 0.95rem;
-  font-weight: 560;
-}
-
-.v9-os-output {
-  border-color: rgba(200, 255, 101, 0.2);
-  background: linear-gradient(90deg, rgba(200, 255, 101, 0.06), rgba(128, 108, 255, 0.06));
-}
-
-.v9-os-output strong {
-  color: var(--v9-mint);
-}
-
-.v9-os-flow {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.25rem;
-  padding: 1.35rem 0;
-}
-
-.v9-flow-line {
-  position: absolute;
-  top: 2.1rem;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, var(--v9-violet), var(--v9-mint));
-}
-
-.v9-flow-step {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  gap: 0.4rem;
-  text-align: center;
-}
-
-.v9-flow-step span {
-  display: grid;
-  width: 1.55rem;
-  height: 1.55rem;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 50%;
-  background: var(--v9-night-2);
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.v9-flow-step:last-child span {
-  border-color: var(--v9-mint);
-  color: var(--v9-mint);
-}
-
-.v9-flow-step strong {
-  color: rgba(255, 255, 255, 0.52);
-  font-family: var(--v9-mono);
-  font-size: 0.55rem;
-  font-weight: 400;
-}
-
-.v9-os-proof {
-  align-items: end;
-  border-top: 1px solid var(--v9-line-dark);
-  background: rgba(0, 0, 0, 0.14);
-}
-
-.v9-os-proof > div:first-child {
-  display: grid;
-  gap: 0.2rem;
-}
-
-.v9-os-proof strong {
-  color: var(--v9-white);
-  font-family: var(--v9-sans);
-  font-size: 1.05rem;
-  letter-spacing: -0.03em;
-  text-transform: none;
-}
-
-.v9-os-proof small {
-  color: rgba(255, 255, 255, 0.38);
-  font-size: 0.53rem;
-  text-transform: none;
-}
-
-.v9-os-proof a {
-  color: var(--v9-mint);
-  white-space: nowrap;
-}
-
-.v9-os-proof-chart {
-  display: flex;
-  width: 100px;
-  height: 42px;
-  align-items: end;
-  gap: 4px;
-}
-
-.v9-os-proof-chart i {
-  width: 100%;
-  height: var(--bar);
-  border-radius: 2px 2px 0 0;
-  background: linear-gradient(var(--v9-violet-bright), var(--v9-violet));
-}
-
-.v9-os-proof-chart i:last-child {
-  background: var(--v9-mint);
 }
 
 .v9-metric-rail {
@@ -2083,12 +1949,6 @@ main .button:hover {
 
   .v9-os-head { padding: 0.8rem; }
   .v9-os-head > div > span:last-child { display: none; }
-  .v9-os-stage { padding: 0.8rem; }
-  .v9-os-input,
-  .v9-os-output { padding: 0.8rem; }
-  .v9-flow-step strong { display: none; }
-  .v9-os-proof { flex-wrap: wrap; padding: 0.9rem; }
-  .v9-os-proof-chart { order: 3; width: 100%; }
 
   .v9-metric-rail { grid-template-columns: repeat(2, 1fr); }
   .v9-metric { min-height: 118px; padding: 1rem; border-bottom: 1px solid var(--v9-line-dark); }

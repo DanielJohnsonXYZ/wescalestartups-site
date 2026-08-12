@@ -1,4 +1,5 @@
 import { checkFormRequest } from "./_form-guard.js";
+import { basicAuth } from "./_basic-auth.js";
 
 /**
  * Customer.io Forms API proxy.
@@ -76,7 +77,12 @@ export async function onRequestPost(context) {
 
   const region = (env.CUSTOMER_IO_REGION || "eu").trim().toLowerCase();
   const url = `${trackBase(region)}/api/v1/forms/${encodeURIComponent(formId)}/submit`;
-  const auth = btoa(`${siteId}:${apiKey}`);
+  const credentials = basicAuth(siteId, apiKey, "/api/forms");
+  if (!credentials.ok) {
+    console.error("Customer.io credentials unusable", credentials.reason);
+    return json(503, { ok: false, error: "Email capture unavailable" });
+  }
+  const auth = credentials.auth;
 
   try {
     const res = await fetch(url, {

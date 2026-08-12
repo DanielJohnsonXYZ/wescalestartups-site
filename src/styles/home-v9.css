@@ -53,7 +53,13 @@
   color: var(--v9-night);
 }
 
-.v9-shell {
+/* Homepage shells use the shared .shell class. These rules keep the homepage's
+   exact gutters and — importantly — the stacking context: .v9-shell carried
+   position/z-index so section ornaments (aurora blobs, orbit rings, grid
+   washes) paint behind content, which the shared .shell does not do.
+   Scoped to `main` so header and footer shells keep the sitewide treatment.
+   The width overrides are dropped at declassify; the stacking rule stays. */
+.page-home-v9 main .shell {
   position: relative;
   z-index: 2;
   width: min(calc(100% - 3rem), 1320px);
@@ -1943,7 +1949,7 @@
 
 @keyframes v9-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-.v9-final .v9-shell {
+.v9-final .shell {
   display: grid;
   justify-items: center;
 }
@@ -2007,7 +2013,7 @@
 }
 
 @media (max-width: 900px) {
-  .v9-shell,
+  .page-home-v9 main .shell,
   .page-home-v9 .site-header .shell { width: min(calc(100% - 2rem), 1320px); }
 
   .page-home-v9 .nav-links,
@@ -2069,7 +2075,7 @@
 }
 
 @media (max-width: 680px) {
-  .v9-shell,
+  .page-home-v9 main .shell,
   .page-home-v9 .site-header .shell { width: min(calc(100% - 1.25rem), 1320px); }
 
   .page-home-v9 .site-header { padding-top: 0.65rem; }
@@ -2176,7 +2182,7 @@
   .v9-founder-track { grid-template-columns: 1fr; }
 
   .v9-scorecard { padding: 0; background: var(--v9-night-2); }
-  .v9-scorecard .v9-shell { width: 100%; }
+  .page-home-v9 main .v9-scorecard .shell { width: 100%; }
   .v9-scorecard-card { border-radius: 0; }
   .v9-scorecard-copy { padding: 4.5rem 1.25rem 1rem; }
   .v9-scorecard-copy h2 { font-size: clamp(3rem, 13vw, 4rem); }

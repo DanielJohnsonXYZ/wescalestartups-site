@@ -1,955 +1,18 @@
-@import "@fontsource-variable/fraunces";
-@import "@fontsource/geist/400.css";
-@import "@fontsource/geist/500.css";
-@import "@fontsource/geist/600.css";
-@import "@fontsource/geist/700.css";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
-@import "tailwindcss";
-
-/* Single source of truth for legacy token names at :root level.
-   Values are aligned with the v9 system (site-v9.css); the
-   .theme-wss-v9 bridge re-declares most of these on <body>, so this
-   block only matters for the <html> element and non-themed contexts.
-   Keep the two in sync. */
-:root {
-  --paper: #ffffff;
-  --paper-deep: #f0f1e9;
-  --surface: #ffffff;
-  --ink: #111117;
-  --ink-2: #2f2e35;
-  --muted: #55535b;
-  --dim: #55535b;
-  --line: rgba(17, 17, 23, 0.14);
-  --line-strong: rgba(17, 17, 23, 0.24);
-  --line-soft: rgba(17, 17, 23, 0.09);
-  --violet: #806cff;
-  --violet-deep: #4d3fc4;
-  --violet-tint: rgba(128, 108, 255, 0.1);
-  --teal: #07756e;
-  --acid: #c8ff65;
-  --coral: #a83f35;
-  --shadow: 0 34px 100px rgba(54, 38, 109, 0.16);
-  --logo-1: #806cff;
-  --logo-2: #8b5cf6;
-  --logo-3: #a445ff;
-  --logo-grad: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
-  /* Semantic accent: maps to brand violet so component-scoped styles
-     (var(--accent)) render with the site's primary accent color. */
-  --accent: var(--violet);
-  --accent-tint: #f0edff;
-  /* Status colors (AA on white) */
-  --good: #0c7a3f;
-  --warn-color: #92400e;
-  --bad: #c43030;
-}
-
-/* Screen-reader-only text: keeps the document outline intact where a
-   section has no visible heading. position:absolute keeps it out of
-   grid/flex flow. */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* --- 2026 polish pass: header, CTA, proof, services, diagrams --- */
-.site-header {
-  padding: 0.55rem 0;
-}
-
-.header-inner {
-  min-height: 54px;
-  padding: 0.5rem 0.58rem 0.5rem 0.78rem;
-}
-
-.brand img {
-  width: 82px;
-  max-height: 46px;
-  object-fit: contain;
-}
-
-.nav-links {
-  gap: 0.18rem;
-}
-
-.nav-link {
-  padding: 0.55rem 0.62rem;
-  font-size: 0.84rem;
-}
-
-.header-cta {
-  min-height: 42px;
-  min-width: auto;
-  padding: 0.72rem 0.95rem;
-}
-
-.related-insights-list {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.related-insights-list li {
-  margin: 0;
-}
-
-@media (min-width: 641px) {
-  .header-cta.header-cta--stacked.button-with-subcopy {
-    max-width: 11.75rem;
-    min-height: auto;
-    padding: 0.42rem 0.72rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.12rem;
-    line-height: 1.2;
-    text-align: left;
-  }
-
-  .header-cta.header-cta--stacked .button-label {
-    font-size: 0.78rem;
-    line-height: 1.2;
-  }
-
-  .header-cta.header-cta--stacked .button-subcopy {
-    font-size: 0.62rem;
-    line-height: 1.25;
-    opacity: 0.88;
-    white-space: normal;
-  }
-}
-
-.hero-with-portrait {
-  padding-top: 4rem;
-}
-
-.hero-with-portrait h1 {
-  max-width: 900px;
-  font-size: clamp(3.2rem, 5.35vw, 5.75rem);
-}
-
-.hero-cta-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1rem;
-  align-items: center;
-  margin-top: 1.75rem;
-}
-
-.hero-cta-group p {
-  max-width: 330px;
-  margin: 0;
-  color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.76rem;
-  line-height: 1.45;
-}
-
-.hero-primary-cta {
-  min-width: 142px;
-  min-height: 48px;
-  padding-inline: 1.25rem;
-}
-
-.hero-secondary {
-  margin-top: 0.85rem;
-}
-
-.hero-proof {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.1rem;
-}
-
-.hero-proof strong {
-  font-size: clamp(1.7rem, 2.6vw, 2.45rem);
-}
-
-.hero-proof span {
-  max-width: 11rem;
-}
-
-.proof-strip {
-  padding-bottom: 4rem;
-}
-
-.proof-inner {
-  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-  align-items: stretch;
-  padding: 1.25rem;
-}
-
-.proof-inner > div:first-child {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.proof-inner h2 {
-  max-width: 320px;
-  margin: 0;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: clamp(1.6rem, 2vw, 2.2rem);
-  line-height: 1.05;
-  font-weight: 420;
-}
-
-.proof-client-row {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.72rem;
-}
-
-.proof-client-tile {
-  min-height: 132px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background:
-    linear-gradient(150deg, rgba(102, 87, 255, 0.06), rgba(216, 255, 79, 0.04)),
-    #fffefa;
-  padding: 1rem;
-}
-
-.proof-clients-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.proof-strip-lede {
-  margin: 0.85rem 0 0;
-  max-width: 52ch;
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.proof-client-logo-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.65rem;
-}
-
-.proof-client-logo {
-  max-height: 40px;
-  width: auto;
-  max-width: 120px;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.proof-client-relationship {
-  flex-shrink: 0;
-  max-width: 11ch;
-  font-size: 0.58rem;
-  line-height: 1.25;
-  text-align: right;
-  color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.proof-client-tile strong {
-  display: block;
-  color: var(--ink);
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 1.18rem;
-  line-height: 1;
-  font-weight: 520;
-}
-
-.proof-client-tile strong a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.proof-client-tile strong a:hover {
-  color: var(--violet);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.proof-client-context {
-  display: block;
-  margin-top: 0.6rem;
-  color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.66rem;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-.proof-client-tile p {
-  margin: 0.8rem 0 0;
-  color: var(--muted);
-  font-size: 0.86rem;
-  line-height: 1.45;
-}
-
-.proof-ecosystem {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
-}
-
-.proof-ecosystem-lede {
-  margin: 0.5rem 0 1rem;
-  max-width: 60ch;
-  font-size: 0.88rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.proof-eco-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.proof-eco-tile {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  padding: 0.85rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.proof-eco-logo {
-  max-height: 32px;
-  width: auto;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.proof-eco-name {
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: var(--ink);
-}
-
-.proof-eco-rel {
-  font-size: 0.72rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-.proof-speaking-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
-}
-
-.proof-speaking-row article {
-  display: grid;
-  grid-template-columns: 5.5rem minmax(0, 1fr);
-  gap: 0.85rem;
-  align-items: center;
-  min-width: 0;
-  padding: 0.75rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #fffefa;
-}
-
-.proof-speaking-row img {
-  width: 5.5rem;
-  height: 5.5rem;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.proof-speaking-row strong,
-.proof-speaking-row span {
-  display: block;
-}
-
-.proof-speaking-row strong {
-  color: var(--ink);
-  font-size: 0.95rem;
-  line-height: 1.25;
-}
-
-.proof-speaking-row span {
-  margin-top: 0.25rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-  line-height: 1.45;
-}
-
-@media (max-width: 780px) {
-  .proof-speaking-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 420px) {
-  .proof-speaking-row article {
-    grid-template-columns: 4.4rem minmax(0, 1fr);
-  }
-
-  .proof-speaking-row img {
-    width: 4.4rem;
-    height: 4.4rem;
-  }
-}
-
-.testimonials-section {
-  background: linear-gradient(180deg, rgba(255, 254, 250, 0), rgba(237, 240, 232, 0.82));
-}
-
-.testimonials-grid {
-  grid-template-columns: repeat(6, minmax(230px, 1fr));
-  overflow-x: auto;
-  padding-bottom: 0.4rem;
-  scroll-snap-type: x proximity;
-}
-
-.testimonial-card {
-  min-height: 310px;
-  scroll-snap-align: start;
-}
-
-.testimonial-card blockquote p {
-  font-size: 1.06rem;
-}
-
-.services-system-section {
-  border-block: 1px solid var(--line);
-}
-
-.service-selector {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 1fr);
-  gap: 1.1rem;
-  align-items: stretch;
-}
-
-.service-selector-aside {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background-color: var(--ink);
-  background:
-    linear-gradient(160deg, rgba(16, 13, 24, 0.96), rgba(54, 38, 109, 0.92)),
-    var(--ink);
-  color: #fff;
-  padding: 1.5rem;
-}
-
-.service-selector-aside .eyebrow {
-  color: var(--acid);
-}
-
-.service-selector-aside h3 {
-  margin: 0 0 1rem;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1;
-  font-weight: 390;
-}
-
-.service-selector-aside p {
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.7;
-}
-
-.service-selector-list {
-  display: grid;
-  gap: 0.7rem;
-}
-
-.service-selector-row {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) minmax(142px, 0.24fr);
-  gap: 1rem;
-  align-items: center;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  padding: 1rem;
-}
-
-.service-selector-row:hover {
-  border-color: rgba(102, 87, 255, 0.48);
-  transform: translateY(-1px);
-  box-shadow: 0 20px 50px rgba(16, 13, 24, 0.08);
-}
-
-.service-selector-row.is-priority {
-  border-color: rgba(102, 87, 255, 0.5);
-}
-
-.service-selector-index {
-  color: var(--violet);
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 2.25rem;
-  font-style: italic;
-  line-height: 1;
-}
-
-.service-selector-row h3 {
-  margin: 0 0 0.45rem;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: clamp(1.45rem, 2.2vw, 2rem);
-  line-height: 1.05;
-  font-weight: 460;
-}
-
-.service-selector-row p {
-  margin: 0.25rem 0 0;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.service-selector-meta {
-  display: grid;
-  gap: 0.35rem;
-  align-content: center;
-  justify-items: end;
-  text-align: right;
-}
-
-.service-selector-meta span,
-.service-selector-meta em {
-  color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.68rem;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-.service-selector-meta strong {
-  color: var(--violet);
-  font-size: 1rem;
-}
-
-.dark-rhythm-section .eyebrow {
-  color: var(--acid);
-}
-
-.rhythm-flow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.85rem;
-}
-
-.rhythm-flow article {
-  position: relative;
-  min-height: 260px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 1.15rem;
-}
-
-.rhythm-flow span {
-  color: var(--acid);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-}
-
-.rhythm-flow strong {
-  display: block;
-  margin-top: 4.4rem;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: clamp(1.55rem, 2.2vw, 2.25rem);
-  line-height: 1;
-  font-weight: 420;
-}
-
-.rhythm-flow b {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: var(--acid);
-  font-size: 1.4rem;
-  font-weight: 400;
-}
-
-.strategic-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.strategic-panel {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  padding: 1.35rem;
-}
-
-.strategic-panel-dark {
-  background-color: var(--ink);
-  background:
-    linear-gradient(135deg, #100d18, #302455),
-    var(--ink);
-  color: #fff;
-}
-
-.strategic-panel span {
-  color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-}
-
-.strategic-panel-dark span {
-  color: var(--acid);
-}
-
-.strategic-panel h2 {
-  margin: 3rem 0 0.8rem;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: clamp(1.65rem, 2.6vw, 2.45rem);
-  line-height: 1;
-  font-weight: 420;
-}
-
-.strategic-panel p,
-.strategic-panel li {
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.strategic-panel-dark p,
-.strategic-panel-dark li {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-@media (max-width: 1120px) {
-  .proof-client-row,
-  .ai-system-lines {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .testimonials-grid {
-    grid-template-columns: repeat(6, minmax(260px, 1fr));
-  }
-}
-
-@media (max-width: 980px) {
-  .proof-inner,
-  .service-selector,
-  .dark-rhythm-grid,
-  .ai-system-grid,
-  .strategic-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .service-selector-row {
-    grid-template-columns: 48px minmax(0, 1fr);
-  }
-
-  .service-selector-meta {
-    grid-column: 2;
-    justify-items: start;
-    text-align: left;
-  }
-
-  .rhythm-flow {
-    grid-template-columns: 1fr;
-  }
-
-  .rhythm-flow article {
-    min-height: 180px;
-  }
-}
-
-@media (max-width: 640px) {
-  .header-inner {
-    gap: 0.5rem;
-  }
-
-  .brand img {
-    width: 68px;
-  }
-
-  .header-cta {
-    display: none;
-  }
-
-  .hero-with-portrait h1 {
-    font-size: clamp(3rem, 17vw, 4.1rem);
-  }
-
-  .hero-cta-group,
-  .hero-primary-cta {
-    width: 100%;
-  }
-
-  .hero-cta-group p {
-    max-width: none;
-  }
-
-  .proof-client-row,
-  .ai-system-lines {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-proof {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .service-selector-row {
-    grid-template-columns: 1fr;
-  }
-
-  .service-selector-meta {
-    grid-column: auto;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  background: var(--paper);
-  color: var(--ink);
-  overflow-x: clip;
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: clip;
-  background:
-    linear-gradient(180deg, rgba(248, 249, 244, 0.96), rgba(248, 249, 244, 0.96)),
-    linear-gradient(90deg, rgba(102, 87, 255, 0.07), rgba(216, 255, 79, 0.06));
-  color: var(--ink);
-  font-family: "Geist", system-ui, sans-serif;
-  line-height: 1.55;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-body::after {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  content: "";
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
-  mix-blend-mode: multiply;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a,
-button,
-summary {
-  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-}
-
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid rgba(102, 87, 255, 0.35);
-  outline-offset: 3px;
-}
-
-.skip-link {
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  z-index: 200;
-  transform: translateY(-200%);
-  border-radius: 8px;
-  background: var(--ink);
-  color: #fff;
-  padding: 0.75rem 1rem;
-  font-weight: 700;
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-/* Visible breadcrumbs (pairs with BreadcrumbList JSON-LD) */
-.breadcrumb-wrap {
-  padding: 0.65rem 0 0;
-}
-
-.breadcrumb-nav ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.28rem 0.5rem;
-  align-items: center;
-  font-size: 0.8rem;
-  line-height: 1.3;
-  color: var(--muted);
-}
-
-.breadcrumb-nav li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.breadcrumb-nav li:not(:last-child)::after {
-  content: "/";
-  color: var(--dim);
-  font-weight: 400;
-  pointer-events: none;
-}
-
-.breadcrumb-nav a {
-  color: var(--muted);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-.breadcrumb-nav a:hover {
-  color: var(--ink-2);
-}
-
-.breadcrumb-nav [aria-current="page"] {
-  color: var(--ink-2);
-  font-weight: 600;
-}
-
-/* TL;DR callout — LLM-friendly lead summary */
-.tldr-callout {
-  margin: 1rem 0 1.25rem;
-  padding: 1rem 1.15rem;
-  border-radius: 0.85rem;
-  border: 1px solid color-mix(in srgb, var(--teal) 28%, var(--line));
-  background: color-mix(in srgb, var(--teal) 7%, var(--surface));
-  max-width: 62ch;
-}
-
-.tldr-callout-label {
-  margin: 0 0 0.35rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--teal);
-}
-
-.tldr-callout-body {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: var(--ink-2);
-}
-
-.page-hero .tldr-callout {
-  max-width: min(62ch, 100%);
-}
-
-.hero-redesign-grid .tldr-callout {
-  max-width: min(62ch, 100%);
-}
-
-.shell {
-  width: min(100% - 3rem, 1320px);
-  margin-inline: auto;
-}
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  padding: 0.85rem 0;
-}
-
-.header-inner {
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  gap: 1.15rem;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 254, 250, 0.9);
-  padding: 0.62rem 0.7rem 0.62rem 0.95rem;
-  box-shadow: 0 8px 30px rgba(16, 13, 24, 0.06);
-  backdrop-filter: blur(22px) saturate(180%);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex: 0 0 auto;
-  font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 1.28rem;
-  font-weight: 450;
-}
-
-.brand img {
-  width: 92px;
-  height: auto;
-}
-
-.brand span {
-  display: inline;
-}
-
-.brand em {
-  color: var(--violet);
-  font-style: italic;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1rem;
-  flex: 1 1 auto;
-}
-
-.nav-link {
-  border-radius: 8px;
-  padding: 0.62rem 0.72rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.nav-link:hover,
-.nav-link.is-active {
-  background: rgba(16, 13, 24, 0.05);
-  color: var(--ink);
-}
-
+/* ============================================================
+   We Scale Startups — components
+
+   Buttons, cards, sections, heroes, proof, pricing, articles and
+   the page-level blocks built on top of base.css.
+
+   Split from global.css on source order; loads after base.css
+   and before site-v9.css. Do not reorder.
+   ============================================================ */
+
+/* The one button system. Previously this skin was assembled from four places:
+   this block, a radius/shadow pass later in the file, a pill re-skin in
+   white-theme.css and !important overrides in site-v9.css. Shape and weight
+   live here; site-v9.css only varies buttons where a context genuinely differs
+   (the mint header CTA, the hero's underlined secondary link). */
 .button {
   display: inline-flex;
   align-items: center;
@@ -997,14 +60,15 @@ textarea:focus-visible {
 }
 
 .button-brand {
-  background-color: var(--violet);
-  background: var(--violet);
+  background-color: var(--v9-violet-deep);
+  background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet));
   color: #fff;
-  box-shadow: 0 14px 32px rgba(102, 87, 255, 0.24);
+  box-shadow: 0 16px 42px rgba(77, 63, 196, 0.26);
 }
 
 .button-brand:hover {
-  background: #5144df;
+  background: linear-gradient(135deg, #3f33a8, var(--v9-violet-deep));
+  box-shadow: 0 22px 52px rgba(77, 63, 196, 0.32);
   transform: translateY(-1px);
 }
 
@@ -1026,6 +90,27 @@ textarea:focus-visible {
 
 .button-acid:hover {
   transform: translateY(-1px);
+}
+
+/* Stacked CTA (label + subcopy): a soft rectangle rather than a full pill,
+   because it is a two-line block, not an inline control. Was in
+   white-theme.css. */
+.button-with-subcopy {
+  border-radius: 1.1rem;
+  padding: 0.85rem 1.35rem;
+}
+
+/* The stacked primary CTA is always a "book a call" action, so it takes the
+   brand violet even when marked .button-dark. Plain .button-dark (mailto, the
+   404 "Go home" link, the podcast host link) stays neutral. */
+.button-dark.button-with-subcopy {
+  background: var(--v9-violet-deep);
+  box-shadow: 0 16px 42px rgba(77, 63, 196, 0.26);
+}
+
+.button-dark.button-with-subcopy:hover {
+  background: #3f33a8;
+  box-shadow: 0 22px 52px rgba(77, 63, 196, 0.32);
 }
 
 .client-logo-tile {
@@ -1528,8 +613,10 @@ textarea:focus-visible {
   to { transform: translateX(-50%); }
 }
 
+/* One section rhythm. site-v9.css sets the live value for interior routes;
+   this is the base for anything outside that scope. */
 .section {
-  padding: clamp(4.75rem, 8vw, 7.5rem) 0;
+  padding-block: clamp(4.75rem, 8vw, 7.5rem);
 }
 
 .section-alt {
@@ -1890,7 +977,7 @@ textarea:focus-visible {
 
 .article-layout {
   display: grid;
-  grid-template-columns: 0.72fr 1.28fr;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   gap: 2rem;
   align-items: start;
 }
@@ -2199,7 +1286,10 @@ textarea:focus-visible {
   .article-layout,
   .cta-inner,
   .footer-grid {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr), not 1fr: a `1fr` track is `minmax(auto, 1fr)` and so
+       cannot shrink below its content's min-content width, which long URLs,
+       wide tables and unbreakable strings push past the viewport. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero .hero-actions {
@@ -2233,10 +1323,6 @@ textarea:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .shell {
-    width: min(100% - 1.25rem, 1320px);
-  }
-
   .brand img {
     width: 74px;
   }
@@ -2400,13 +1486,19 @@ textarea:focus-visible {
 }
 
 /* --- Button with subcopy (outcome-led primary CTA) --- */
+/* The stacked CTA is a block, not an inline pill: `.button`'s nowrap would
+   size it to its longest subcopy line (~670px) and overflow narrow grid
+   columns, colliding with the CTA-band heading. Let it wrap and stay inside
+   its container at every width, not just under the mobile breakpoint. */
 .button-with-subcopy {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.15rem;
   padding: 0.85rem 1.25rem;
   min-height: 64px;
+  max-width: 100%;
   text-align: left;
+  white-space: normal;
 }
 
 .button-with-subcopy .button-label {
@@ -5291,15 +4383,6 @@ textarea:focus-visible {
    Notion: https://www.notion.so/354f99a79fdb81428590e795bdd48904
    Radii, elevation, backdrop, section rhythm, cards, CTAs, image treatment.
    ============================================================================= */
-:root {
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --line-soft: rgba(16, 13, 24, 0.09);
-  --shadow-elevated-sm: 0 4px 22px rgba(16, 13, 24, 0.055);
-  --shadow-elevated-md: 0 16px 48px rgba(16, 13, 24, 0.085);
-  --shadow-elevated-lg: 0 36px 96px rgba(54, 38, 109, 0.11);
-}
 
 body {
   background:
@@ -5325,19 +4408,6 @@ body::after {
 .nav-link:hover,
 .nav-link.is-active {
   background: rgba(102, 87, 255, 0.06);
-}
-
-.button,
-.hero-primary-cta {
-  border-radius: var(--radius-sm);
-}
-
-.button-brand {
-  box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
-}
-
-.button-brand:hover {
-  box-shadow: 0 22px 52px rgba(102, 87, 255, 0.32);
 }
 
 .button-dark:hover {
@@ -5997,166 +5067,6 @@ body {
    ─────────────────────────────────────────────────────────── */
 .site-header {
   background: rgba(251, 251, 254, 0.85);
-}
-
-
-/* ───────── LAYER: interior-v7-align.css ───────── */
-/* ============================================================
-   Interior alignment pass — bring all non-home pages onto the
-   homepage (v8 light premium tech) design system: Geist bold headings instead of
-   oversized Fraunces serif, v7 violet, consistent spacing.
-   Scoped to body:not(.page-home-v9) so the homepage is untouched.
-   ============================================================ */
-
-/* v7 token block removed: it was scoped to body:not(.page-home-v9) — a
-   class no body carries — so it silently overrode the v9 bridge tokens
-   (custom properties set on body beat those inherited from :root) and
-   split the palette in two. Tokens now resolve from the .theme-wss-v9
-   bridge in site-v9.css. */
-
-/* --- Headings: serif display → bold grotesque (matches v7) --- */
-body:not(.page-home-v9) h1,
-body:not(.page-home-v9) h2,
-body:not(.page-home-v9) h3,
-body:not(.page-home-v9) h4 {
-  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.06;
-  font-variation-settings: normal;
-}
-
-/* Accent words inside headings: v7 uses upright violet, not italic serif */
-body:not(.page-home-v9) h1 em,
-body:not(.page-home-v9) h2 em,
-body:not(.page-home-v9) h3 em,
-body:not(.page-home-v9) .statement em,
-body:not(.page-home-v9) .showcase-title em {
-  font-style: normal;
-  color: var(--violet);
-}
-
-/* --- Page hero: 5–8.5rem serif → homepage-scale headline --- */
-body:not(.page-home-v9) .hero h1,
-body:not(.page-home-v9) .page-hero h1 {
-  max-width: 21ch;
-  font-size: clamp(2.4rem, 4.4vw, 3.9rem);
-  line-height: 1.04;
-}
-
-body:not(.page-home-v9) .page-hero {
-  padding: 4.5rem 0 3.5rem;
-}
-
-body:not(.page-home-v9) .hero {
-  padding: 4.5rem 0 3.5rem;
-}
-
-body:not(.page-home-v9) .hero-with-portrait h1,
-body:not(.page-home-v9) .wss-hero-redesign h1 {
-  font-size: clamp(2.4rem, 4.2vw, 3.7rem);
-  line-height: 1.05;
-}
-
-/* Hero lede copy: serif 1.6rem → v7 sub style */
-body:not(.page-home-v9) .hero-copy {
-  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-body:not(.page-home-v9) .page-hero .lede,
-body:not(.page-home-v9) .page-hero p {
-  font-size: 1.08rem;
-  line-height: 1.6;
-}
-
-body:not(.page-home-v9) .hero-foot {
-  margin-top: 2.4rem;
-}
-
-/* --- Oversized section displays brought to v7 scale --- */
-body:not(.page-home-v9) .case-copy h3 {
-  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
-}
-
-body:not(.page-home-v9) .cta-inner h2 {
-  font-size: clamp(2rem, 3.2vw, 2.8rem);
-  line-height: 1.06;
-}
-
-body:not(.page-home-v9) .dark-rhythm-section h2,
-body:not(.page-home-v9) .ai-system-section h2 {
-  font-size: clamp(2rem, 3.4vw, 3rem);
-}
-
-body:not(.page-home-v9) .testimonials-header h2,
-body:not(.page-home-v9) .daniel-copy h2,
-body:not(.page-home-v9) .creative-system-grid h2,
-body:not(.page-home-v9) .proof-creative-grid h2 {
-  font-size: clamp(1.9rem, 3vw, 2.7rem);
-}
-
-body:not(.page-home-v9) .section-intro h2 {
-  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
-}
-
-/* Decorative serif strongs in dark panels */
-body:not(.page-home-v9) .rhythm-flow strong,
-body:not(.page-home-v9) .ai-system-map strong,
-body:not(.page-home-v9) .proof-inner h2,
-body:not(.page-home-v9) .service-selector-aside h3,
-body:not(.page-home-v9) .service-selector-row h3,
-body:not(.page-home-v9) .strategic-panel h2,
-body:not(.page-home-v9) .case-visual strong {
-  font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  font-variation-settings: normal;
-}
-
-/* Eyebrows: match v7 spec-label rhythm */
-body:not(.page-home-v9) .eyebrow,
-body:not(.page-home-v9) .card-kicker {
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.9rem;
-}
-
-/* --- Section rhythm: 7rem+7rem stacks created ~220px dead zones --- */
-body:not(.page-home-v9) .section {
-  padding: clamp(3.25rem, 5.5vw, 4.5rem) 0;
-}
-
-body:not(.page-home-v9) .section + .section {
-  padding-top: clamp(2.75rem, 4.5vw, 3.75rem);
-}
-
-/* --- Final CTA band: stop the heading column collapsing to one word per line --- */
-body:not(.page-home-v9) .cta-inner {
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-}
-
-body:not(.page-home-v9) .cta-inner h2 {
-  max-width: 18ch;
-}
-
-body:not(.page-home-v9) .cta-inner .hero-actions {
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-
-@media (max-width: 860px) {
-  body:not(.page-home-v9) .cta-inner {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Proof hero on the v7 scale too */
-body:not(.page-home-v9) .proof-hero h1 {
-  font-size: clamp(2.4rem, 4.4vw, 3.9rem);
-  line-height: 1.05;
 }
 
 

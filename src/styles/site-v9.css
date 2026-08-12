@@ -6,60 +6,9 @@
    interaction language to every route through BaseLayout.
    ============================================================ */
 
-.theme-wss-v9 {
-  --v9-night: #090a0f;
-  --v9-night-2: #11121a;
-  --v9-night-3: #191a24;
-  --v9-paper: #ffffff;
-  --v9-paper-2: #f0f1e9;
-  --v9-white: #ffffff;
-  --v9-ink: #111117;
-  --v9-copy: #55535b;
-  --v9-copy-dark: #a8a7b4;
-  --v9-line: rgba(17, 17, 23, 0.14);
-  --v9-line-strong: rgba(17, 17, 23, 0.24);
-  --v9-line-dark: rgba(255, 255, 255, 0.12);
-  --v9-violet: #806cff;
-  --v9-violet-bright: #a796ff;
-  --v9-violet-deep: #4d3fc4;
-  /* CTA gradient light end: darkest violet that keeps white text ≥4.5:1. */
-  --v9-violet-cta: #6c56f2;
-  --v9-mint: #c8ff65;
-  --v9-coral: #ff836f;
-  --v9-radius: 1.15rem;
-  --v9-radius-small: 0.8rem;
-  --v9-display: "Fraunces Variable", Georgia, serif;
-  --v9-sans: "Geist", Inter, ui-sans-serif, system-ui, sans-serif;
-  --v9-mono: "JetBrains Mono", ui-monospace, monospace;
-  --v9-shadow: 0 20px 55px rgba(17, 17, 23, 0.08);
-  --v9-shadow-lift: 0 26px 70px rgba(17, 17, 23, 0.13);
-
-  /* Bridge legacy component variables onto the active system. */
-  --paper: var(--v9-paper);
-  --paper-deep: var(--v9-paper-2);
-  --surface: var(--v9-white);
-  --surface-2: var(--v9-paper-2);
-  --ink: var(--v9-ink);
-  --ink-2: #2f2e35;
-  --muted: var(--v9-copy);
-  --line: var(--v9-line);
-  --line-soft: rgba(17, 17, 23, 0.09);
-  --line-strong: var(--v9-line-strong);
-  --violet: var(--v9-violet);
-  --violet-deep: var(--v9-violet-deep);
-  --violet-tint: rgba(128, 108, 255, 0.1);
-  --accent: var(--v9-violet);
-  --acid: var(--v9-mint);
-  --border: var(--v9-line);
-  --shadow-soft: var(--v9-shadow);
-  --surface-muted: var(--v9-paper-2);
-  --surface-dim: var(--v9-paper-2);
-  --bg: var(--v9-paper);
-  --font-display: var(--v9-display);
-  --violet-soft: rgba(128, 108, 255, 0.12);
-  color: var(--v9-ink);
-  font-family: var(--v9-sans);
-}
+/* Tokens live in tokens.css, which BaseLayout imports before this file.
+   This layer promotes the homepage's header, type, surfaces and interaction
+   language to every route. */
 
 .theme-wss-v9:not(.page-home-v9) {
   background:
@@ -94,10 +43,6 @@
 }
 
 /* Shared shell ------------------------------------------------ */
-
-.theme-wss-v9:not(.page-home-v9) .shell {
-  width: min(calc(100% - 3rem), 1320px);
-}
 
 /* Header: one recognisable object on every page ---------------- */
 
@@ -274,9 +219,7 @@
 }
 
 /* Serif (Fraunces) headline, matching the homepage hero. Interior pages
-   run a touch smaller so the homepage stays the fullest expression.
-   Specificity here already beats global.css's `body:not(.page-home-v8) h1`,
-   which otherwise pins Geist 700 sitewide. */
+   run a touch smaller so the homepage stays the fullest expression. */
 .theme-wss-v9:not(.page-home-v9) .page-hero h1 {
   max-width: 15ch;
   margin: 0 0 1.6rem;
@@ -313,8 +256,8 @@
   line-height: 1.62;
 }
 
-/* Restated here to beat global.css's `body:not(.page-home-v8) .page-hero p`,
-   which would otherwise scale this mono line up to hero body size. */
+/* Restated so the mono microcopy keeps its own size rather than inheriting
+   the hero body scale from the rule above. */
 .theme-wss-v9:not(.page-home-v9) .page-hero .hero-microcopy {
   max-width: none;
   color: var(--v9-copy);
@@ -396,8 +339,7 @@
   border-bottom: 1px solid var(--v9-line);
 }
 
-/* Written out rather than wrapped in :where() so this beats global.css's
-   `body:not(.page-home-v8) .section-intro h2` (0-2-2). With :where() the
+/* Written out rather than wrapped in :where(): at zero specificity the
    SectionIntro component rendered at 37px while a plain section <h2>
    rendered at 63px, so pages mixing the two showed both sizes. */
 .theme-wss-v9:not(.page-home-v9) .section-intro h2,
@@ -577,6 +519,19 @@
   color: var(--v9-copy-dark);
 }
 
+/* Light cards nested inside those dark panels: the rule above reaches every
+   descendant, so tile copy on a white card rendered in the dark panel's
+   light-grey (#a8a7b4 on white is 2.37:1, well under AA). Restore the
+   light-surface copy colour for the cards themselves. */
+.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article),
+.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article) :where(p, li, span) {
+  color: var(--v9-copy);
+}
+
+.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article) :where(h2, h3, strong, a) {
+  color: var(--v9-ink);
+}
+
 /* Buttons outside the hero ------------------------------------ */
 
 .theme-wss-v9:not(.page-home-v9) main .button-brand {
@@ -598,6 +553,34 @@
 }
 
 /* Closing CTA: a recurring dark system object ----------------- */
+
+/* Closing CTA grid. global.css sizes this `1fr auto`, so the button column
+   takes its intrinsic width and the stacked "Book a Growth Audit" CTA squeezes
+   the heading column until it sets one word per line. Give both columns
+   explicit shares instead, and cap the heading so it breaks on sense rather
+   than on the column edge. */
+.theme-wss-v9:not(.page-home-v9) .cta-inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+}
+
+.theme-wss-v9:not(.page-home-v9) .cta-inner h2 {
+  max-width: 18ch;
+}
+
+.theme-wss-v9:not(.page-home-v9) .cta-inner .hero-actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .theme-wss-v9:not(.page-home-v9) .cta-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-wss-v9:not(.page-home-v9) .cta-inner .hero-actions {
+    justify-content: flex-start;
+  }
+}
 
 .theme-wss-v9:not(.page-home-v9) .cta-band {
   padding-block: clamp(4.5rem, 8vw, 7rem);

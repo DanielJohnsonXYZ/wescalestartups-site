@@ -327,16 +327,22 @@
   max-width: 760px;
 }
 
-.v9-kicker {
+/* The hero label uses the shared .eyebrow. Only the layout is kept local: it
+   carries a live-dot span and needs the flex row and hero spacing. Colour,
+   family, size and tracking come from the shared eyebrow so it matches the
+   label on every other page. */
+/* Hero eyebrow: plain mono text, not the pill. site-v9.css does exactly this
+   reset for interior .page-hero eyebrows; the homepage hero needs its own
+   because it uses .v9-hero. Colour, family and tracking still come from the
+   shared eyebrow, so the label matches the rest of the site. */
+.v9-hero .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
   margin-bottom: 2.2rem;
-  color: rgba(255, 255, 255, 0.64);
-  font-family: var(--v9-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .v9-live-dot {
@@ -2065,7 +2071,7 @@
 
   .v9-hero { padding-top: 7.25rem; background-size: 44px 44px, 44px 44px, auto; }
   .v9-hero-grid { gap: 2.5rem; padding: 1.75rem 0 3rem; }
-  .v9-kicker { margin-bottom: 1.5rem; font-size: 0.57rem; }
+  .v9-hero .eyebrow { margin-bottom: 1.5rem; font-size: 0.57rem; }
   .v9-hero h1 { font-size: clamp(3.4rem, 16vw, 5rem); line-height: 0.9; }
   .v9-hero-lede { margin-top: 1.6rem; font-size: 0.96rem; line-height: 1.62; }
   .v9-hero-actions { align-items: flex-start; flex-direction: column; gap: 1rem; }
@@ -2225,9 +2231,8 @@
   padding: 1.25rem 0 5rem;
 }
 
-.v9-kicker {
+.v9-hero .eyebrow {
   margin-bottom: 1.6rem;
-  color: var(--v9-copy);
 }
 
 .v9-hero h1 {

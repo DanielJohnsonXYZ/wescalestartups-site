@@ -228,9 +228,9 @@ const selectedStage = stages[1];
     background:
       linear-gradient(rgba(17, 17, 23, 0.035) 1px, transparent 1px),
       linear-gradient(90deg, rgba(17, 17, 23, 0.035) 1px, transparent 1px),
-      var(--v9-paper, #fff);
+      var(--v9-paper);
     background-size: 72px 72px, 72px 72px, auto;
-    color: var(--v9-ink, #111117);
+    color: var(--v9-ink);
   }
 
   .stage-selector-intro {
@@ -242,7 +242,7 @@ const selectedStage = stages[1];
   .stage-selector-kicker {
     display: block;
     margin-bottom: 1rem;
-    color: var(--v9-violet, #806cff);
+    color: var(--v9-violet);
     font-family: var(--v9-mono, "JetBrains Mono", monospace);
     font-size: 0.68rem;
     font-weight: 500;
@@ -263,7 +263,7 @@ const selectedStage = stages[1];
   }
 
   .stage-selector-intro h2 em {
-    color: var(--v9-violet, #806cff);
+    color: var(--v9-violet);
     font-family: var(--v9-display, "Fraunces Variable", Georgia, serif);
     font-style: italic;
     font-weight: 440;
@@ -272,7 +272,7 @@ const selectedStage = stages[1];
   .stage-selector-intro p {
     max-width: 66ch;
     margin: 1.4rem auto 0;
-    color: var(--v9-copy, #64616c);
+    color: var(--v9-copy);
     font-size: clamp(1rem, 1.5vw, 1.12rem);
     line-height: 1.65;
   }
@@ -281,7 +281,7 @@ const selectedStage = stages[1];
     overflow: hidden;
     border: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
     border-radius: 18px;
-    background: var(--v9-white, #fff);
+    background: var(--v9-white);
     box-shadow: 0 28px 80px rgba(17, 17, 23, 0.08);
   }
 
@@ -301,7 +301,7 @@ const selectedStage = stages[1];
     border-right: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
     background: transparent;
     padding: 1.6rem;
-    color: var(--v9-ink, #111117);
+    color: var(--v9-ink);
     text-align: left;
     cursor: pointer;
     transition: background 180ms ease, color 180ms ease;
@@ -312,7 +312,7 @@ const selectedStage = stages[1];
   .stage-selector-tab.is-active { background: rgba(128, 108, 255, 0.075); }
 
   .stage-selector-number {
-    color: var(--v9-violet, #806cff);
+    color: var(--v9-violet);
     font-family: var(--v9-display, "Fraunces Variable", Georgia, serif);
     font-size: clamp(2.2rem, 3.6vw, 3.6rem);
     font-style: italic;
@@ -321,7 +321,7 @@ const selectedStage = stages[1];
 
   .stage-selector-tab-copy { display: grid; gap: 0.35rem; }
   .stage-selector-tab-copy small {
-    color: var(--v9-copy, #64616c);
+    color: var(--v9-copy);
     font-family: var(--v9-mono, "JetBrains Mono", monospace);
     font-size: 0.65rem;
     letter-spacing: 0.07em;
@@ -336,14 +336,14 @@ const selectedStage = stages[1];
   }
 
   .stage-selector-arrow {
-    color: var(--v9-copy, #64616c);
+    color: var(--v9-copy);
     font-size: 1.1rem;
     transition: transform 180ms ease, color 180ms ease;
   }
 
   .stage-selector-tab:hover .stage-selector-arrow,
   .stage-selector-tab.is-active .stage-selector-arrow {
-    color: var(--v9-violet, #806cff);
+    color: var(--v9-violet);
     transform: translate(2px, -2px);
   }
 
@@ -356,7 +356,7 @@ const selectedStage = stages[1];
     display: block;
     width: 66.666%;
     height: 100%;
-    background: linear-gradient(90deg, var(--v9-violet, #806cff), var(--v9-mint, #c8ff65));
+    background: linear-gradient(90deg, var(--v9-violet), var(--v9-mint));
     transition: width 260ms ease;
   }
 
@@ -366,8 +366,8 @@ const selectedStage = stages[1];
     min-height: 350px;
     background:
       radial-gradient(circle at 85% 20%, rgba(128, 108, 255, 0.2), transparent 34%),
-      var(--v9-night, #0d0e15);
-    color: var(--v9-white, #fff);
+      var(--v9-night);
+    color: var(--v9-white);
   }
 
   .stage-selector-output-copy,
@@ -376,7 +376,7 @@ const selectedStage = stages[1];
   .stage-selector-output-label,
   .stage-selector-next > span {
     display: block;
-    color: var(--v9-mint, #c8ff65);
+    color: var(--v9-mint);
     font-family: var(--v9-mono, "JetBrains Mono", monospace);
     font-size: 0.66rem;
     letter-spacing: 0.07em;
@@ -396,7 +396,7 @@ const selectedStage = stages[1];
   .stage-selector-output-copy > p {
     max-width: 62ch;
     margin: 0;
-    color: var(--v9-copy-dark, #a8a7b4);
+    color: var(--v9-copy-dark);
     font-size: 1rem;
     line-height: 1.7;
   }
@@ -429,7 +429,7 @@ const selectedStage = stages[1];
 
   .stage-selector-next > p {
     margin: 1rem 0 0;
-    color: var(--v9-white, #fff);
+    color: var(--v9-white);
     font-family: var(--v9-display, "Fraunces Variable", Georgia, serif);
     font-size: clamp(1.35rem, 2.4vw, 2.2rem);
     font-weight: 440;
@@ -451,9 +451,9 @@ const selectedStage = stages[1];
     justify-content: center;
     gap: 1.25rem;
     border-radius: 999px;
-    background: var(--v9-mint, #c8ff65);
+    background: var(--v9-mint);
     padding: 0.85rem 1.25rem 0.85rem 1.4rem;
-    color: var(--v9-night, #0d0e15);
+    color: var(--v9-night);
     font-size: 0.86rem;
     font-weight: 650;
     text-decoration: none;

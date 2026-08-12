@@ -1,6 +1,15 @@
 /* ============================================================
    We Scale Startups — shared v9 design system
 
+   NOTE ON `:not(.no-shared-chrome)`
+   These selectors used to read `:not(.page-home-v9)`, excluding the homepage
+   while it ran a parallel design system. The homepage now uses this system, so
+   the exclusion is gone — but the qualifier is NOT redundant: it contributes a
+   class to the selector, and these rules were written to win at that weight.
+   Dropping it lowers them from 0-2-0 to 0-1-0 and they start losing fights
+   across all 121 interior pages. `.no-shared-chrome` is never set in markup;
+   it preserves the weight and leaves a documented opt-out hook.
+
    The homepage remains the fullest expression of the system.
    This layer promotes its tokens, header, type, surfaces and
    interaction language to every route through BaseLayout.
@@ -10,18 +19,18 @@
    This layer promotes the homepage's header, type, surfaces and interaction
    language to every route. */
 
-.theme-wss-v9:not(.page-home-v9) {
+.theme-wss-v9:not(.no-shared-chrome) {
   background:
     radial-gradient(80% 44% at 100% 0%, rgba(128, 108, 255, 0.08), transparent 62%),
     var(--v9-paper);
 }
 
-.theme-wss-v9:not(.page-home-v9) main {
+.theme-wss-v9:not(.no-shared-chrome) main {
   overflow: clip;
   background: var(--v9-paper);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(h1, h2, h3, h4) {
+.theme-wss-v9:not(.no-shared-chrome) :where(h1, h2, h3, h4) {
   color: var(--v9-ink);
   font-family: var(--v9-sans);
   font-weight: 650;
@@ -29,7 +38,7 @@
   letter-spacing: -0.04em;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(h1, h2, h3) em {
+.theme-wss-v9:not(.no-shared-chrome) :where(h1, h2, h3) em {
   color: var(--v9-violet-deep);
   font-family: var(--v9-display);
   font-style: italic;
@@ -132,13 +141,13 @@
 
 /* Breadcrumbs ------------------------------------------------- */
 
-.theme-wss-v9:not(.page-home-v9) .breadcrumb-wrap {
+.theme-wss-v9:not(.no-shared-chrome) .breadcrumb-wrap {
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--v9-line);
   background: var(--v9-paper);
 }
 
-.theme-wss-v9:not(.page-home-v9) .breadcrumb-nav {
+.theme-wss-v9:not(.no-shared-chrome) .breadcrumb-nav {
   color: var(--v9-copy);
   font-family: var(--v9-mono);
   font-size: 0.67rem;
@@ -146,13 +155,13 @@
   text-transform: uppercase;
 }
 
-.theme-wss-v9:not(.page-home-v9) .breadcrumb-nav a:hover {
+.theme-wss-v9:not(.no-shared-chrome) .breadcrumb-nav a:hover {
   color: var(--v9-violet-deep);
 }
 
 /* Interior hero: the homepage language, compressed for depth --- */
 
-.theme-wss-v9:not(.page-home-v9) .page-hero {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero {
   position: relative;
   overflow: hidden;
   padding: clamp(4.75rem, 8vw, 7.5rem) 0 clamp(4rem, 7vw, 6.5rem);
@@ -166,7 +175,7 @@
   color: var(--v9-ink);
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero::before {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero::before {
   content: "";
   position: absolute;
   inset: -35% -12% auto 36%;
@@ -178,7 +187,7 @@
   pointer-events: none;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero::after {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
@@ -187,12 +196,12 @@
   pointer-events: none;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .shell {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .shell {
   position: relative;
   z-index: 2;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .eyebrow {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
@@ -208,7 +217,7 @@
   text-transform: uppercase;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .eyebrow::before {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .eyebrow::before {
   content: "";
   width: 0.42rem;
   height: 0.42rem;
@@ -220,7 +229,7 @@
 
 /* Serif (Fraunces) headline, matching the homepage hero. Interior pages
    run a touch smaller so the homepage stays the fullest expression. */
-.theme-wss-v9:not(.page-home-v9) .page-hero h1 {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero h1 {
   max-width: 15ch;
   margin: 0 0 1.6rem;
   background: none;
@@ -235,7 +244,7 @@
   -webkit-text-fill-color: currentColor;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero h1 em {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero h1 em {
   background: linear-gradient(115deg, var(--v9-violet-deep), var(--v9-violet) 72%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -248,7 +257,7 @@
 
 /* Keep :where() here: raising this selector's specificity makes it tie with
    (and then beat, on source order) the .page-hero .eyebrow rule above. */
-.theme-wss-v9:not(.page-home-v9) .page-hero :where(p, .lede, .hero-copy) {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero :where(p, .lede, .hero-copy) {
   max-width: 62ch;
   color: var(--v9-copy);
   font-family: var(--v9-sans);
@@ -258,7 +267,7 @@
 
 /* Restated so the mono microcopy keeps its own size rather than inheriting
    the hero body scale from the rule above. */
-.theme-wss-v9:not(.page-home-v9) .page-hero .hero-microcopy {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-microcopy {
   max-width: none;
   color: var(--v9-copy);
   font-family: var(--v9-mono);
@@ -267,24 +276,24 @@
   line-height: 1.5;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero p + p {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero p + p {
   margin-top: -0.55rem;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero a:not(.button) {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero a:not(.button) {
   color: var(--v9-violet-deep);
   font-weight: 650;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .hero-actions {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-actions {
   display: flex;
   align-items: center;
   gap: 1.25rem;
   margin-top: 2rem;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .button-brand,
-.theme-wss-v9:not(.page-home-v9) .page-hero .button-dark {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand,
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .button-dark {
   min-height: 50px;
   padding: 0.9rem 1.3rem;
   border: 1px solid var(--v9-violet);
@@ -295,13 +304,13 @@
   -webkit-text-fill-color: #fff !important;
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .button-brand:hover,
-.theme-wss-v9:not(.page-home-v9) .page-hero .button-dark:hover {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand:hover,
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .button-dark:hover {
   transform: translateY(-2px);
   box-shadow: 0 20px 44px rgba(77, 63, 196, 0.3);
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .button-light {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .button-light {
   min-height: auto;
   padding: 0.35rem 0;
   border: 0;
@@ -312,7 +321,7 @@
   color: var(--v9-ink);
 }
 
-.theme-wss-v9:not(.page-home-v9) .page-hero .button-light:hover {
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .button-light:hover {
   transform: none;
   border-color: var(--v9-violet-deep);
   color: var(--v9-violet-deep);
@@ -320,13 +329,13 @@
 
 /* Sections and editorial rhythm ------------------------------- */
 
-.theme-wss-v9:not(.page-home-v9) .section {
+.theme-wss-v9:not(.no-shared-chrome) .section {
   padding-block: clamp(4.75rem, 8vw, 7.5rem);
   border-bottom: 1px solid var(--v9-line);
   background: var(--v9-paper);
 }
 
-.theme-wss-v9:not(.page-home-v9) .section-alt {
+.theme-wss-v9:not(.no-shared-chrome) .section-alt {
   background:
     linear-gradient(rgba(17, 17, 23, 0.032) 1px, transparent 1px),
     linear-gradient(90deg, rgba(17, 17, 23, 0.032) 1px, transparent 1px),
@@ -334,7 +343,7 @@
   background-size: 72px 72px, 72px 72px, auto;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.section-intro, .content-header, .testimonials-header) {
+.theme-wss-v9:not(.no-shared-chrome) :where(.section-intro, .content-header, .testimonials-header) {
   padding-bottom: 1.15rem;
   border-bottom: 1px solid var(--v9-line);
 }
@@ -342,20 +351,20 @@
 /* Written out rather than wrapped in :where(): at zero specificity the
    SectionIntro component rendered at 37px while a plain section <h2>
    rendered at 63px, so pages mixing the two showed both sizes. */
-.theme-wss-v9:not(.page-home-v9) .section-intro h2,
-.theme-wss-v9:not(.page-home-v9) .content-header h2,
-.theme-wss-v9:not(.page-home-v9) .testimonials-header h2,
-.theme-wss-v9:not(.page-home-v9) .section > .shell > h2 {
+.theme-wss-v9:not(.no-shared-chrome) .section-intro h2,
+.theme-wss-v9:not(.no-shared-chrome) .content-header h2,
+.theme-wss-v9:not(.no-shared-chrome) .testimonials-header h2,
+.theme-wss-v9:not(.no-shared-chrome) .section > .shell > h2 {
   max-width: 18ch;
   font-size: clamp(2.35rem, 4.4vw, 4.35rem);
   line-height: 0.98;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.section-intro, .content-header, .testimonials-header) p {
+.theme-wss-v9:not(.no-shared-chrome) :where(.section-intro, .content-header, .testimonials-header) p {
   color: var(--v9-copy);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.eyebrow, .card-kicker) {
+.theme-wss-v9:not(.no-shared-chrome) :where(.eyebrow, .card-kicker) {
   color: var(--v9-violet-deep);
   font-family: var(--v9-mono);
   font-size: 0.67rem;
@@ -372,7 +381,7 @@
 
 /* Cards: quieter surfaces, stronger typography ---------------- */
 
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .feature-card,
   .case-card,
   .insight-card,
@@ -402,7 +411,7 @@
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .feature-card,
   .case-card,
   .insight-card,
@@ -430,7 +439,7 @@
   box-shadow: var(--v9-shadow);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .feature-card,
   .case-card,
   .insight-card,
@@ -445,7 +454,7 @@
   line-height: 1.02;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .feature-card,
   .case-card,
   .insight-card,
@@ -461,23 +470,23 @@
   line-height: 1.62;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.card-link, .resource-outline-link a) {
+.theme-wss-v9:not(.no-shared-chrome) :where(.card-link, .resource-outline-link a) {
   color: var(--v9-ink);
   font-weight: 650;
   text-decoration-color: var(--v9-violet);
   text-underline-offset: 0.24em;
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.card-link, .resource-outline-link a):hover {
+.theme-wss-v9:not(.no-shared-chrome) :where(.card-link, .resource-outline-link a):hover {
   color: var(--v9-violet-deep);
 }
 
-.theme-wss-v9:not(.page-home-v9) .pricing-card.is-most-popular {
+.theme-wss-v9:not(.no-shared-chrome) .pricing-card.is-most-popular {
   border-color: rgba(128, 108, 255, 0.62) !important;
   box-shadow: var(--v9-shadow);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.recommended-badge, .popular-badge) {
+.theme-wss-v9:not(.no-shared-chrome) :where(.recommended-badge, .popular-badge) {
   border-radius: 999px;
   background: var(--v9-violet-deep);
   color: #fff;
@@ -486,7 +495,7 @@
 }
 
 /* Dark system panels keep the homepage's operating-system note. */
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .strategic-panel-dark,
   .dark-rhythm-section,
   .service-selector-aside,
@@ -501,7 +510,7 @@
   color: var(--v9-white);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .strategic-panel-dark,
   .dark-rhythm-section,
   .service-selector-aside,
@@ -510,7 +519,7 @@
   color: var(--v9-white);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(
+.theme-wss-v9:not(.no-shared-chrome) :where(
   .strategic-panel-dark,
   .dark-rhythm-section,
   .service-selector-aside,
@@ -523,29 +532,29 @@
    descendant, so tile copy on a white card rendered in the dark panel's
    light-grey (#a8a7b4 on white is 2.37:1, well under AA). Restore the
    light-surface copy colour for the cards themselves. */
-.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article),
-.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article) :where(p, li, span) {
+.theme-wss-v9:not(.no-shared-chrome) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article),
+.theme-wss-v9:not(.no-shared-chrome) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article) :where(p, li, span) {
   color: var(--v9-copy);
 }
 
-.theme-wss-v9:not(.page-home-v9) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article) :where(h2, h3, strong, a) {
+.theme-wss-v9:not(.no-shared-chrome) :where(.proof-client-tile, .proof-eco-tile, .proof-speaking-row article) :where(h2, h3, strong, a) {
   color: var(--v9-ink);
 }
 
 /* Buttons outside the hero ------------------------------------ */
 
-.theme-wss-v9:not(.page-home-v9) main .button-brand {
+.theme-wss-v9:not(.no-shared-chrome) main .button-brand {
   border-radius: 999px;
   background: linear-gradient(135deg, var(--v9-violet-deep), var(--v9-violet-cta));
   box-shadow: 0 14px 32px rgba(77, 63, 196, 0.2);
 }
 
-.theme-wss-v9:not(.page-home-v9) main .button-brand:hover {
+.theme-wss-v9:not(.no-shared-chrome) main .button-brand:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 40px rgba(77, 63, 196, 0.28);
 }
 
-.theme-wss-v9:not(.page-home-v9) main .button-light {
+.theme-wss-v9:not(.no-shared-chrome) main .button-light {
   border-color: var(--v9-line-strong);
   border-radius: 999px;
   background: var(--v9-white);
@@ -559,36 +568,36 @@
    the heading column until it sets one word per line. Give both columns
    explicit shares instead, and cap the heading so it breaks on sense rather
    than on the column edge. */
-.theme-wss-v9:not(.page-home-v9) .cta-inner {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner {
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-inner h2 {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner h2 {
   max-width: 18ch;
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-inner .hero-actions {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner .hero-actions {
   justify-content: flex-end;
   flex-wrap: wrap;
 }
 
 @media (max-width: 860px) {
-  .theme-wss-v9:not(.page-home-v9) .cta-inner {
+  .theme-wss-v9:not(.no-shared-chrome) .cta-inner {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .theme-wss-v9:not(.page-home-v9) .cta-inner .hero-actions {
+  .theme-wss-v9:not(.no-shared-chrome) .cta-inner .hero-actions {
     justify-content: flex-start;
   }
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-band {
+.theme-wss-v9:not(.no-shared-chrome) .cta-band {
   padding-block: clamp(4.5rem, 8vw, 7rem);
   border-bottom: 1px solid var(--v9-line);
   background: var(--v9-paper-2);
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-inner {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner {
   position: relative;
   overflow: hidden;
   padding: clamp(2.25rem, 5vw, 4.5rem);
@@ -604,17 +613,17 @@
   color: var(--v9-white);
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-inner :where(h2, h3) {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner :where(h2, h3) {
   color: var(--v9-white);
   font-size: clamp(2.5rem, 5vw, 4.8rem);
   line-height: 0.96;
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-inner :where(p, li) {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner :where(p, li) {
   color: var(--v9-copy-dark);
 }
 
-.theme-wss-v9:not(.page-home-v9) .cta-inner .eyebrow {
+.theme-wss-v9:not(.no-shared-chrome) .cta-inner .eyebrow {
   color: var(--v9-mint);
 }
 
@@ -650,7 +659,7 @@
 
 @media (max-width: 1060px) {
   .theme-wss-v9 .site-header .shell,
-  .theme-wss-v9:not(.page-home-v9) .shell {
+  .theme-wss-v9:not(.no-shared-chrome) .shell {
     width: min(calc(100% - 2rem), 1320px);
   }
 
@@ -693,7 +702,7 @@
   }
 
   .theme-wss-v9 .site-header .shell,
-  .theme-wss-v9:not(.page-home-v9) .shell {
+  .theme-wss-v9:not(.no-shared-chrome) .shell {
     width: min(calc(100% - 1.25rem), 1320px);
   }
 
@@ -706,37 +715,37 @@
     width: 70px;
   }
 
-  .theme-wss-v9:not(.page-home-v9) .page-hero {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero {
     padding: 3.75rem 0 3.5rem;
   }
 
-  .theme-wss-v9:not(.page-home-v9) .page-hero h1 {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero h1 {
     max-width: none;
     font-size: clamp(2.35rem, 10.5vw, 3.6rem);
     line-height: 1.02;
   }
 
-  .theme-wss-v9:not(.page-home-v9) .page-hero .hero-actions {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-actions {
     align-items: flex-start;
     gap: 1rem;
   }
 
-  .theme-wss-v9:not(.page-home-v9) .page-hero .button-brand,
-  .theme-wss-v9:not(.page-home-v9) .page-hero .button-dark {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand,
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-dark {
     width: auto;
   }
 
-  .theme-wss-v9:not(.page-home-v9) .section {
+  .theme-wss-v9:not(.no-shared-chrome) .section {
     padding-block: 4.5rem;
   }
 
-  .theme-wss-v9:not(.page-home-v9) .cta-inner {
+  .theme-wss-v9:not(.no-shared-chrome) .cta-inner {
     border-radius: var(--v9-radius);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-wss-v9:not(.page-home-v9) :where(
+  .theme-wss-v9:not(.no-shared-chrome) :where(
     .feature-card,
     .case-card,
     .insight-card,

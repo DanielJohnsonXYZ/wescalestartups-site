@@ -3,34 +3,36 @@
    A high-trust editorial growth operating system.
    ============================================================ */
 
-.page-home-v9 {
+/* This file is imported only by src/pages/index.astro, so bare selectors are
+   homepage-scoped by load. The old `.page-home-v9` body-class gate is gone. */
+body {
   background: var(--v9-paper);
   color: var(--v9-ink);
 }
 
-.page-home-v9::after {
+body::after {
   z-index: 120;
   opacity: 0.025;
   mix-blend-mode: multiply;
 }
 
-.page-home-v9 main {
+main {
   overflow: clip;
   background: var(--v9-paper);
 }
 
-.page-home-v9 h1,
-.page-home-v9 h2,
-.page-home-v9 h3,
-.page-home-v9 h4,
-.page-home-v9 p {
+h1,
+h2,
+h3,
+h4,
+p {
   margin-top: 0;
 }
 
-.page-home-v9 h1,
-.page-home-v9 h2,
-.page-home-v9 h3,
-.page-home-v9 h4 {
+h1,
+h2,
+h3,
+h4 {
   color: inherit;
   font-family: var(--v9-sans);
   font-weight: 650;
@@ -38,9 +40,9 @@
   letter-spacing: -0.04em;
 }
 
-.page-home-v9 h1 em,
-.page-home-v9 h2 em,
-.page-home-v9 h3 em {
+h1 em,
+h2 em,
+h3 em {
   color: var(--v9-violet);
   font-family: var(--v9-display);
   font-style: italic;
@@ -48,7 +50,7 @@
   letter-spacing: -0.045em;
 }
 
-.page-home-v9 ::selection {
+::selection {
   background: var(--v9-mint);
   color: var(--v9-night);
 }
@@ -59,7 +61,7 @@
    washes) paint behind content, which the shared .shell does not do.
    Scoped to `main` so header and footer shells keep the sitewide treatment.
    The width overrides are dropped at declassify; the stacking rule stays. */
-.page-home-v9 main .shell {
+main .shell {
   position: relative;
   z-index: 2;
   width: min(calc(100% - 3rem), 1320px);
@@ -113,7 +115,7 @@
    interior ones (52px vs 44px, wider label/arrow gap), and the trailing arrow
    span is set a size up. Colour, gradient and hover come from the shared
    system so there is one button appearance across the site. */
-.page-home-v9 main .button {
+main .button {
   min-height: 52px;
   gap: 1.4rem;
   padding: 0.85rem 1.25rem 0.85rem 1.45rem;
@@ -121,11 +123,11 @@
   line-height: 1;
 }
 
-.page-home-v9 main .button span:last-child {
+main .button span:last-child {
   font-size: 1rem;
 }
 
-.page-home-v9 main .button:hover {
+main .button:hover {
   transform: translateY(-2px);
 }
 
@@ -179,7 +181,7 @@
 
 /* Header ---------------------------------------------------- */
 
-.page-home-v9 .site-header {
+.site-header {
   position: absolute;
   inset: 0 0 auto;
   z-index: 60;
@@ -187,11 +189,11 @@
   background: transparent;
 }
 
-.page-home-v9 .site-header .shell {
+.site-header .shell {
   width: min(calc(100% - 3rem), 1320px);
 }
 
-.page-home-v9 .header-inner {
+.header-inner {
   min-height: 64px;
   gap: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -204,14 +206,14 @@
   -webkit-backdrop-filter: blur(24px) saturate(140%);
 }
 
-.page-home-v9 .brand img {
+.brand img {
   width: 82px;
   max-height: 42px;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
 
-.page-home-v9 .nav-link {
+.nav-link {
   border-radius: 999px;
   padding: 0.58rem 0.7rem;
   color: rgba(255, 255, 255, 0.66);
@@ -219,35 +221,35 @@
   font-weight: 500;
 }
 
-.page-home-v9 .nav-link:hover,
-.page-home-v9 .nav-link.is-active {
+.nav-link:hover,
+.nav-link.is-active {
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
 
-.page-home-v9 .nav-menu {
+.nav-menu {
   border-color: rgba(255, 255, 255, 0.12);
   background: rgba(17, 18, 26, 0.97);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
 }
 
-.page-home-v9 .nav-menu-link {
+.nav-menu-link {
   color: rgba(255, 255, 255, 0.72);
 }
 
-.page-home-v9 .nav-menu-link:hover,
-.page-home-v9 .nav-menu-link.is-active {
+.nav-menu-link:hover,
+.nav-menu-link.is-active {
   background: rgba(255, 255, 255, 0.07);
   color: #fff;
 }
 
-.page-home-v9 .nav-menu-link span {
+.nav-menu-link span {
   color: rgba(255, 255, 255, 0.42);
 }
 
-.page-home-v9 .header-cta,
-.page-home-v9 .header-cta .button-label,
-.page-home-v9 .header-cta .button-subcopy {
+.header-cta,
+.header-cta .button-label,
+.header-cta .button-subcopy {
   min-height: 44px;
   border-radius: 999px;
   background: var(--v9-mint);
@@ -257,7 +259,7 @@
   padding-inline: 1.1rem;
 }
 
-.page-home-v9 .header-cta:hover {
+.header-cta:hover {
   background: #dcff9e;
 }
 
@@ -1971,13 +1973,13 @@
 
 /* Footer handoff -------------------------------------------- */
 
-.page-home-v9 .site-footer-v2 {
+.site-footer-v2 {
   border-top-color: rgba(255, 255, 255, 0.08);
   background: var(--v9-night);
   color: rgba(255, 255, 255, 0.68);
 }
 
-.page-home-v9 .site-footer-v2::before { background: linear-gradient(90deg, transparent, rgba(200, 255, 101, 0.3), transparent); }
+.site-footer-v2::before { background: linear-gradient(90deg, transparent, rgba(200, 255, 101, 0.3), transparent); }
 /* The dark-footer overrides that used to live here (violet-bright headings,
    white link hover, translucent-white divider) are superseded further down by
    the light-footer values. Leaving them in place meant the same selector was
@@ -1987,7 +1989,7 @@
 /* Responsive ------------------------------------------------ */
 
 @media (max-width: 1120px) {
-  .page-home-v9 .nav-link { padding-inline: 0.52rem; font-size: 0.73rem; }
+  .nav-link { padding-inline: 0.52rem; font-size: 0.73rem; }
   .v9-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(380px, 0.75fr); gap: 3rem; }
   .v9-hero h1 { font-size: clamp(4rem, 7.5vw, 6.1rem); }
   .v9-service-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1996,17 +1998,17 @@
 }
 
 @media (max-width: 900px) {
-  .page-home-v9 main .shell,
-  .page-home-v9 .site-header .shell { width: min(calc(100% - 2rem), 1320px); }
+  main .shell,
+  .site-header .shell { width: min(calc(100% - 2rem), 1320px); }
 
-  .page-home-v9 .nav-links,
-  .page-home-v9 .header-cta { display: none; }
+  .nav-links,
+  .header-cta { display: none; }
 
-  .page-home-v9 .mobile-menu { display: block; margin-left: auto; }
-  .page-home-v9 .mobile-menu summary { border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.07); color: white; border-radius: 999px; }
-  .page-home-v9 .mobile-menu nav { right: 0 !important; left: auto !important; width: min(356px, calc(100vw - 2rem)); max-height: calc(100vh - 7rem); overflow-y: auto; border-color: rgba(255, 255, 255, 0.12); background: rgba(17, 18, 26, 0.98); }
-  .page-home-v9 .mobile-menu .nav-link { color: rgba(255, 255, 255, 0.8); }
-  .page-home-v9 .mobile-subnav-link { color: rgba(255, 255, 255, 0.55); }
+  .mobile-menu { display: block; margin-left: auto; }
+  .mobile-menu summary { border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.07); color: white; border-radius: 999px; }
+  .mobile-menu nav { right: 0 !important; left: auto !important; width: min(356px, calc(100vw - 2rem)); max-height: calc(100vh - 7rem); overflow-y: auto; border-color: rgba(255, 255, 255, 0.12); background: rgba(17, 18, 26, 0.98); }
+  .mobile-menu .nav-link { color: rgba(255, 255, 255, 0.8); }
+  .mobile-subnav-link { color: rgba(255, 255, 255, 0.55); }
 
   .v9-hero { min-height: auto; padding-top: 8.5rem; }
   .v9-hero-grid { grid-template-columns: 1fr; gap: 3.5rem; padding-bottom: 4rem; }
@@ -2058,13 +2060,13 @@
 }
 
 @media (max-width: 680px) {
-  .page-home-v9 main .shell,
-  .page-home-v9 .site-header .shell { width: min(calc(100% - 1.25rem), 1320px); }
+  main .shell,
+  .site-header .shell { width: min(calc(100% - 1.25rem), 1320px); }
 
-  .page-home-v9 .site-header { padding-top: 0.65rem; }
-  .page-home-v9 .header-inner { min-height: 56px; padding: 0.35rem 0.38rem 0.35rem 0.8rem; }
-  .page-home-v9 .brand img { width: 70px; }
-  .page-home-v9 .mobile-menu summary { min-height: 40px; padding: 0.65rem 0.85rem; font-size: 0.76rem; }
+  .site-header { padding-top: 0.65rem; }
+  .header-inner { min-height: 56px; padding: 0.35rem 0.38rem 0.35rem 0.8rem; }
+  .brand img { width: 70px; }
+  .mobile-menu summary { min-height: 40px; padding: 0.65rem 0.85rem; font-size: 0.76rem; }
 
   .v9-section-intro { grid-template-columns: 1fr; gap: 0.55rem; margin-bottom: 2.75rem; }
   .v9-section-intro p { text-align: left; font-size: 0.75rem; }
@@ -2165,7 +2167,7 @@
   .v9-founder-track { grid-template-columns: 1fr; }
 
   .v9-scorecard { padding: 0; background: var(--v9-night-2); }
-  .page-home-v9 main .v9-scorecard .shell { width: 100%; }
+  main .v9-scorecard .shell { width: 100%; }
   .v9-scorecard-card { border-radius: 0; }
   .v9-scorecard-copy { padding: 4.5rem 1.25rem 1rem; }
   .v9-scorecard-copy h2 { font-size: clamp(3rem, 13vw, 4rem); }
@@ -2189,9 +2191,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-home-v9 *,
-  .page-home-v9 *::before,
-  .page-home-v9 *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -2200,7 +2202,7 @@
 }
 
 @media (prefers-contrast: more) {
-  .page-home-v9 { --v9-copy: #3e3d43; --v9-copy-dark: #cac9d2; --v9-line: rgba(17, 17, 23, 0.28); --v9-line-dark: rgba(255, 255, 255, 0.24); }
+  { --v9-copy: #3e3d43; --v9-copy-dark: #cac9d2; --v9-line: rgba(17, 17, 23, 0.28); --v9-line-dark: rgba(255, 255, 255, 0.24); }
 }
 
 /* ============================================================
@@ -2379,15 +2381,15 @@
 
 /* Footer ----------------------------------------------------- */
 
-.page-home-v9 .site-footer-v2 {
+.site-footer-v2 {
   border-top: 1px solid var(--v9-line);
   background: var(--v9-paper-2);
   color: inherit;
 }
 
-.page-home-v9 .site-footer-v2 h2 { color: var(--v9-violet-deep); }
-.page-home-v9 .site-footer-v2 a:hover { color: var(--v9-ink); }
-.page-home-v9 .site-footer-v2 .footer-bottom { border-color: var(--v9-line); }
+.site-footer-v2 h2 { color: var(--v9-violet-deep); }
+.site-footer-v2 a:hover { color: var(--v9-ink); }
+.site-footer-v2 .footer-bottom { border-color: var(--v9-line); }
 
 /* Ticker divider --------------------------------------------- */
 
@@ -2539,19 +2541,19 @@
 
 /* Voices: dense grid + avatars ------------------------------- */
 
-.page-home-v9 .v9-quote-grid {
+.v9-quote-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
 }
 
-.page-home-v9 .v9-quote { min-height: 240px; }
+.v9-quote { min-height: 240px; }
 
-.page-home-v9 .v9-quote blockquote {
+.v9-quote blockquote {
   font-size: clamp(1.02rem, 1.3vw, 1.28rem);
   line-height: 1.4;
 }
 
-.page-home-v9 .v9-quote.is-primary blockquote {
+.v9-quote.is-primary blockquote {
   font-size: clamp(1.15rem, 1.6vw, 1.5rem);
 }
 
@@ -2689,8 +2691,8 @@
 @media (max-width: 900px) {
   .v9-hero { min-height: auto; padding-top: 6.25rem; }
   .v9-hero h1 { max-width: 14ch; font-size: clamp(2.9rem, 8.5vw, 5.2rem); }
-  .page-home-v9 .v9-quote-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .page-home-v9 .v9-quote:last-child { display: flex; }
+  .v9-quote-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v9-quote:last-child { display: flex; }
   .v9-fit-video { grid-template-columns: 1fr; }
 }
 
@@ -2713,18 +2715,25 @@
    the dark scorecard panel and dark header pill. */
 /* The scorecard CTA sits on the dark night panel, where the violet gradient
    has too little contrast — it keeps the mint treatment. */
-.page-home-v9 main .v9-scorecard-card .button-brand {
+main .v9-scorecard-card .button-brand {
   background: var(--v9-mint);
   color: #090a0f;
   box-shadow: 0 16px 40px rgba(200, 255, 101, 0.14);
 }
 
-.page-home-v9 main .v9-scorecard-card .button-brand:hover {
+main .v9-scorecard-card .button-brand:hover {
   background: #d7ff8d;
 }
 
-/* Serif hero headline (Fraunces), shorter line. */
-.page-home-v9 .v9-hero h1 {
+/* Serif hero headline (Fraunces), shorter line.
+   Prefixed with .theme-wss-v9 to reach 0-2-1. The shared heading rule in
+   site-v9.css is `.theme-wss-v9:not(...) :where(h1,h2,h3,h4)` at 0-2-0, which
+   sets Geist — while the homepage was excluded from it that never mattered,
+   but now that the homepage uses the shared system a bare `.v9-hero h1`
+   (0-1-1) loses and the serif hero silently renders as sans. Every OTHER
+   homepage heading is meant to take the shared treatment; this is the one
+   deliberate exception. */
+.theme-wss-v9 .v9-hero h1 {
   max-width: 12ch;
   font-family: var(--v9-display);
   font-weight: 500;
@@ -2734,7 +2743,7 @@
   letter-spacing: -0.035em;
 }
 
-.v9-hero h1 em {
+.theme-wss-v9 .v9-hero h1 em {
   font-weight: 460;
 }
 

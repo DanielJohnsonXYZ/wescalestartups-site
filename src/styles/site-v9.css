@@ -439,6 +439,15 @@
   box-shadow: var(--v9-shadow);
 }
 
+/* A pulled quote keeps the shared card surface but carries a violet left rule,
+   which is what distinguishes it from a plain card. It lives here rather than
+   with the .quote-card recipe in components.css because the shared card
+   contract above sets `border` wholesale at this weight and would otherwise
+   flatten the accent back to a hairline. */
+.theme-wss-v9:not(.no-shared-chrome) .quote-card {
+  border-left: 3px solid var(--violet);
+}
+
 .theme-wss-v9:not(.no-shared-chrome) :where(
   .feature-card,
   .case-card,

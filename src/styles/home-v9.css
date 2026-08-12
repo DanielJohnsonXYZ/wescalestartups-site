@@ -108,48 +108,25 @@
   text-transform: uppercase;
 }
 
-.v9-button {
-  display: inline-flex;
+/* Homepage buttons use the shared .button/.button-brand/.button-dark skin.
+   Only the geometry is kept local: homepage CTAs are deliberately larger than
+   interior ones (52px vs 44px, wider label/arrow gap), and the trailing arrow
+   span is set a size up. Colour, gradient and hover come from the shared
+   system so there is one button appearance across the site. */
+.page-home-v9 main .button {
   min-height: 52px;
-  align-items: center;
-  justify-content: center;
   gap: 1.4rem;
-  border: 1px solid transparent;
-  border-radius: 999px;
   padding: 0.85rem 1.25rem 0.85rem 1.45rem;
-  font-family: var(--v9-sans);
   font-size: 0.86rem;
-  font-weight: 650;
   line-height: 1;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.v9-button span:last-child {
+.page-home-v9 main .button span:last-child {
   font-size: 1rem;
 }
 
-.v9-button:hover {
+.page-home-v9 main .button:hover {
   transform: translateY(-2px);
-}
-
-.v9-button-primary {
-  background: var(--v9-mint);
-  color: var(--v9-night);
-  box-shadow: 0 16px 40px rgba(200, 255, 101, 0.14);
-}
-
-.v9-button-primary:hover {
-  background: #d7ff8d;
-  box-shadow: 0 20px 46px rgba(200, 255, 101, 0.2);
-}
-
-.v9-button-dark {
-  background: var(--v9-night);
-  color: var(--v9-white);
-}
-
-.v9-button-dark:hover {
-  background: var(--v9-violet-deep);
 }
 
 .v9-text-link {
@@ -2092,7 +2069,7 @@
   .v9-hero h1 { font-size: clamp(3.4rem, 16vw, 5rem); line-height: 0.9; }
   .v9-hero-lede { margin-top: 1.6rem; font-size: 0.96rem; line-height: 1.62; }
   .v9-hero-actions { align-items: flex-start; flex-direction: column; gap: 1rem; }
-  .v9-hero .v9-button { width: 100%; }
+  .v9-hero .button { width: 100%; }
   .v9-hero-reassurance { gap: 0.4rem 0.8rem; }
   .v9-hero-reassurance span:not(:last-child)::after { margin-left: 0.8rem; }
 
@@ -2143,7 +2120,7 @@
   .v9-diagnostic-output h3 { font-size: clamp(2.25rem, 11vw, 3.3rem); }
   .v9-output-topline span:last-child { display: none; }
   .v9-output-recommendation { align-items: stretch; flex-direction: column; }
-  .v9-output-recommendation .v9-button { width: 100%; margin-top: 0.75rem; }
+  .v9-output-recommendation .button { width: 100%; margin-top: 0.75rem; }
 
   .v9-fit h2 { margin-bottom: 2.25rem; }
   .v9-fit-grid { grid-template-columns: 1fr; }
@@ -2187,7 +2164,7 @@
   .v9-scorecard-copy { padding: 4.5rem 1.25rem 1rem; }
   .v9-scorecard-copy h2 { font-size: clamp(3rem, 13vw, 4rem); }
   .v9-scorecard-actions { align-items: stretch; flex-direction: column; }
-  .v9-scorecard-actions .v9-button { width: 100%; }
+  .v9-scorecard-actions .button { width: 100%; }
   .v9-scorecard-visual { min-height: 380px; overflow: hidden; }
   .v9-scorecard-visual::before { width: 360px; height: 360px; }
   .v9-scorecard-visual::after { width: 270px; height: 270px; }
@@ -2729,24 +2706,15 @@
 
 /* Violet primary CTAs on light backgrounds; mint stays inside
    the dark scorecard panel and dark header pill. */
-.v9-button-primary {
-  background: var(--v9-violet);
-  color: #ffffff;
-  box-shadow: 0 16px 40px rgba(102, 87, 255, 0.28);
-}
-
-.v9-button-primary:hover {
-  background: var(--v9-violet-deep);
-  box-shadow: 0 20px 46px rgba(102, 87, 255, 0.34);
-}
-
-.v9-scorecard-card .v9-button-primary {
+/* The scorecard CTA sits on the dark night panel, where the violet gradient
+   has too little contrast — it keeps the mint treatment. */
+.page-home-v9 main .v9-scorecard-card .button-brand {
   background: var(--v9-mint);
   color: #090a0f;
   box-shadow: 0 16px 40px rgba(200, 255, 101, 0.14);
 }
 
-.v9-scorecard-card .v9-button-primary:hover {
+.page-home-v9 main .v9-scorecard-card .button-brand:hover {
   background: #d7ff8d;
 }
 

@@ -295,6 +295,23 @@
   padding-top: 1.2rem;
 }
 
+/* Modifiers for the proof rail. These were inline style attributes on /proof
+   and /post-raise, which no media query could override — the rail stayed four
+   columns at 390px and pushed its figures past the viewport. As classes they
+   participate in the cascade normally. */
+.hero-proof-quad {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hero-proof-flush {
+  border-top: none;
+  padding-top: 0;
+}
+
+.hero-proof-tight {
+  margin-top: 0;
+}
+
 .hero-proof strong {
   display: block;
   color: var(--violet);
@@ -854,6 +871,98 @@
   font-weight: 700;
 }
 
+/* ── .quote-card and .fit-card ──────────────────────────────────
+   Both names are already listed in the shared card contract in site-v9.css
+   (border, radius, hover, heading and body colour), but neither had a base
+   recipe anywhere — so /post-raise and /ai-growth-audit each hand-rolled one,
+   ~45 lines apiece, and the two copies had drifted apart in padding, radius
+   and type size. This is the canonical pair.
+   ─────────────────────────────────────────────────────────── */
+.quote-card {
+  margin: 1.5rem 0 0;
+  padding: 1.75rem 1.75rem 1.5rem;
+  border: 1px solid var(--line);
+  /* The violet left rule that distinguishes a pulled quote is applied in
+     site-v9.css — the shared card contract there sets `border` at a higher
+     weight than this recipe can reach. */
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.quote-card blockquote {
+  margin: 0;
+}
+
+.quote-card blockquote p {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--v9-display);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.quote-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 1rem;
+}
+
+.quote-card figcaption strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.quote-card figcaption span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.fit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 760px) {
+  .fit-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.fit-card {
+  padding: 1.5rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+/* Status pill on a fit card. The text shades are the AA-safe tokens; the
+   translucent fills stay bright so the yes/no read stays obvious. */
+.fit-label {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-family: var(--v9-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fit-label.yes {
+  background: rgba(34, 197, 94, 0.09);
+  color: var(--good);
+}
+
+.fit-label.no {
+  background: rgba(239, 68, 68, 0.09);
+  color: var(--bad);
+}
+
 .service-card,
 .industry-card,
 .case-card,
@@ -1125,8 +1234,13 @@
   color: var(--muted);
 }
 
+/* minmax(0, 1fr), not the implicit `auto` column: an auto-sized grid column
+   takes its minimum from content, so a single wide descendant sized the whole
+   column to 415px inside a 370px shell and every card overflowed the viewport
+   by 45px on the ten /industries pages. */
 .detail-body {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
 }
 

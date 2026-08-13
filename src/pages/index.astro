@@ -9,7 +9,7 @@ import {
   testimonials
 } from "../site";
 import { buildFaqSchema } from "../lib/schema";
-import "../styles/home-v9.css";
+import "../styles/home.css";
 
 const faqSchema = buildFaqSchema([...buyerFaqs]);
 const homepageQuotes = testimonials;
@@ -242,7 +242,7 @@ const subAudiences = [
   description="Growth systems for post-PMF AI startups and B2B SaaS: customer research, focused experiments, acquisition infrastructure, and a testing rhythm your team owns."
   path="/"
   schema={faqSchema}
-  bodyClass="page-home-v9"
+ 
   showAnnouncement={false}
   stickyBookCta={false}
 >
@@ -251,17 +251,17 @@ const subAudiences = [
   <section class="v9-hero" id="top" aria-labelledby="v9-hero-title">
     <div class="v9-aurora v9-aurora-one" aria-hidden="true"></div>
     <div class="v9-aurora v9-aurora-two" aria-hidden="true"></div>
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-hero-grid">
         <div class="v9-hero-copy">
-          <div class="v9-kicker">
+          <div class="eyebrow">
             <span class="v9-live-dot" aria-hidden="true"></span>
             Sustainable growth for AI startups &amp; B2B SaaS
           </div>
           <h1 id="v9-hero-title">Sustainable, high-quality growth for <em>AI startups.</em></h1>
           <p class="v9-hero-lede">Most startups do not stall because the product is weak. They stall because growth is a chase: a new channel every month, nothing that compounds. Our structured, proven, step-by-step process takes you from chasing growth to <strong>predictable, repeatable, scalable growth.</strong></p>
           <div class="v9-hero-actions">
-            <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl} data-cta="v9-hero-book">
+            <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="v9-hero-book">
               <span>Grow your AI startup</span>
               <span aria-hidden="true">↗</span>
             </a>
@@ -318,7 +318,7 @@ const subAudiences = [
   </section>
 
   <section class="v9-credibility" aria-labelledby="v9-credibility-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-credibility-head">
         <p id="v9-credibility-title">Trusted across startup programmes, classrooms and founder teams</p>
         <span>Relationships labelled clearly. No implied client logos.</span>
@@ -344,7 +344,7 @@ const subAudiences = [
   </div>
 
   <section class="v9-thesis" id="approach" aria-labelledby="v9-thesis-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-section-intro v9-section-intro-dark">
         <span class="v9-section-number">01 / The thesis</span>
         <p>Why good products still get stuck</p>
@@ -375,7 +375,7 @@ const subAudiences = [
   </section>
 
   <section class="v9-system" id="system" aria-labelledby="v9-system-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-section-intro">
         <span class="v9-section-number">02 / Find your constraint</span>
         <p>Click the constraint that sounds like your team</p>
@@ -430,7 +430,7 @@ const subAudiences = [
               <strong id="v9-output-service">{selectedConstraint.service}</strong>
               <small id="v9-output-price">{selectedConstraint.meta}</small>
             </div>
-            <a id="v9-output-link" class="v9-button v9-button-dark" href={selectedConstraint.href}>Explore this engagement <span aria-hidden="true">↗</span></a>
+            <a id="v9-output-link" class="button button-dark" href={selectedConstraint.href}>Explore this engagement <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </div>
@@ -438,7 +438,7 @@ const subAudiences = [
   </section>
 
   <section class="v9-fit" aria-labelledby="v9-fit-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-section-intro">
         <span class="v9-section-number">03 / Self-qualify</span>
         <p>Better to know in 30 seconds than 15 minutes into a call</p>
@@ -483,7 +483,7 @@ const subAudiences = [
   </section>
 
   <section class="v9-work" id="work" aria-labelledby="v9-work-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-section-intro v9-section-intro-dark">
         <span class="v9-section-number">04 / Four engagements, one ladder</span>
         <p>Start with the smallest commitment that answers the biggest question</p>
@@ -529,7 +529,7 @@ const subAudiences = [
   </section>
 
   <section class="v9-results" id="results" aria-labelledby="v9-results-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-section-intro">
         <span class="v9-section-number">05 / Real engagements</span>
         <p>Paid work is labelled as paid work. Teaching is labelled as teaching.</p>
@@ -565,7 +565,7 @@ const subAudiences = [
   </div>
 
   <section class="v9-voices" aria-labelledby="v9-voices-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-voices-heading">
         <div>
           <span class="v9-section-number">06 / Founder voices</span>
@@ -588,14 +588,14 @@ const subAudiences = [
           </figure>
         ))}
       </div>
-      <button type="button" class="v9-button v9-button-dark v9-quotes-more" id="v9-quotes-more">
+      <button type="button" class="button button-dark v9-quotes-more" id="v9-quotes-more">
         Show more lovely people <span aria-hidden="true">↓</span>
       </button>
     </div>
   </section>
 
   <section class="v9-founder" id="about" aria-labelledby="v9-founder-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-founder-grid">
         <div class="v9-founder-visual">
           <div class="v9-founder-main-image">
@@ -624,14 +624,14 @@ const subAudiences = [
   </section>
 
   <section class="v9-scorecard" aria-labelledby="v9-scorecard-title">
-    <div class="v9-shell">
+    <div class="shell">
       <div class="v9-scorecard-card">
         <div class="v9-scorecard-copy">
           <span class="v9-section-number">Free diagnostic · 5 minutes</span>
           <h2 id="v9-scorecard-title">Have you built the foundations to <em>scale growth?</em></h2>
           <p>Ten questions across positioning, acquisition, conversion, reporting and team ownership. Five minutes to find the missing foundation, built from 479+ founder sessions.</p>
           <div class="v9-scorecard-actions">
-            <a class="v9-button v9-button-primary" href={siteConfig.scorecardUrl}>Take the scorecard <span aria-hidden="true">↗</span></a>
+            <a class="button button-brand" href={siteConfig.scorecardUrl}>Take the scorecard <span aria-hidden="true">↗</span></a>
             <a class="v9-text-link v9-text-link-light" href={siteConfig.bookingUrl}>Or book the 20-minute call →</a>
           </div>
         </div>
@@ -659,7 +659,7 @@ const subAudiences = [
   </div>
 
   <section class="v9-faq" aria-labelledby="v9-faq-title">
-    <div class="v9-shell v9-faq-grid">
+    <div class="shell v9-faq-grid">
       <div class="v9-faq-intro">
         <span class="v9-section-number">08 / Before you book</span>
         <h2 id="v9-faq-title">Questions founders ask before the first call.</h2>
@@ -678,7 +678,7 @@ const subAudiences = [
   </section>
 
   <section class="v9-other" aria-label="Other ways to work with We Scale Startups">
-    <div class="v9-shell">
+    <div class="shell">
       <span class="v9-section-number">Not a founder?</span>
       <div class="v9-other-grid">
         {subAudiences.map((audience) => (
@@ -693,12 +693,12 @@ const subAudiences = [
   </section>
 
   <section class="v9-final" aria-labelledby="v9-final-title">
-    <div class="v9-shell">
+    <div class="shell">
       <span class="v9-final-orbit" aria-hidden="true"></span>
       <p>One honest conversation. No pitch.</p>
       <h2 id="v9-final-title">The next step is a <em>conversation.</em></h2>
       <p>Bring your current growth picture. Leave with an honest read on your foundations, and on whether we are the right people to help.</p>
-      <a class="v9-button v9-button-primary" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} <span aria-hidden="true">↗</span></a>
+      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 

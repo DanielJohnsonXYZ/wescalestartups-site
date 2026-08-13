@@ -3,34 +3,36 @@
    A high-trust editorial growth operating system.
    ============================================================ */
 
-.page-home-v9 {
+/* This file is imported only by src/pages/index.astro, so bare selectors are
+   homepage-scoped by load. The old `.page-home-v9` body-class gate is gone. */
+body {
   background: var(--v9-paper);
   color: var(--v9-ink);
 }
 
-.page-home-v9::after {
+body::after {
   z-index: 120;
   opacity: 0.025;
   mix-blend-mode: multiply;
 }
 
-.page-home-v9 main {
+main {
   overflow: clip;
   background: var(--v9-paper);
 }
 
-.page-home-v9 h1,
-.page-home-v9 h2,
-.page-home-v9 h3,
-.page-home-v9 h4,
-.page-home-v9 p {
+h1,
+h2,
+h3,
+h4,
+p {
   margin-top: 0;
 }
 
-.page-home-v9 h1,
-.page-home-v9 h2,
-.page-home-v9 h3,
-.page-home-v9 h4 {
+h1,
+h2,
+h3,
+h4 {
   color: inherit;
   font-family: var(--v9-sans);
   font-weight: 650;
@@ -38,9 +40,9 @@
   letter-spacing: -0.04em;
 }
 
-.page-home-v9 h1 em,
-.page-home-v9 h2 em,
-.page-home-v9 h3 em {
+h1 em,
+h2 em,
+h3 em {
   color: var(--v9-violet);
   font-family: var(--v9-display);
   font-style: italic;
@@ -48,12 +50,18 @@
   letter-spacing: -0.045em;
 }
 
-.page-home-v9 ::selection {
+::selection {
   background: var(--v9-mint);
   color: var(--v9-night);
 }
 
-.v9-shell {
+/* Homepage shells use the shared .shell class. These rules keep the homepage's
+   exact gutters and — importantly — the stacking context: .v9-shell carried
+   position/z-index so section ornaments (aurora blobs, orbit rings, grid
+   washes) paint behind content, which the shared .shell does not do.
+   Scoped to `main` so header and footer shells keep the sitewide treatment.
+   The width overrides are dropped at declassify; the stacking rule stays. */
+main .shell {
   position: relative;
   z-index: 2;
   width: min(calc(100% - 3rem), 1320px);
@@ -102,48 +110,25 @@
   text-transform: uppercase;
 }
 
-.v9-button {
-  display: inline-flex;
+/* Homepage buttons use the shared .button/.button-brand/.button-dark skin.
+   Only the geometry is kept local: homepage CTAs are deliberately larger than
+   interior ones (52px vs 44px, wider label/arrow gap), and the trailing arrow
+   span is set a size up. Colour, gradient and hover come from the shared
+   system so there is one button appearance across the site. */
+main .button {
   min-height: 52px;
-  align-items: center;
-  justify-content: center;
   gap: 1.4rem;
-  border: 1px solid transparent;
-  border-radius: 999px;
   padding: 0.85rem 1.25rem 0.85rem 1.45rem;
-  font-family: var(--v9-sans);
   font-size: 0.86rem;
-  font-weight: 650;
   line-height: 1;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.v9-button span:last-child {
+main .button span:last-child {
   font-size: 1rem;
 }
 
-.v9-button:hover {
+main .button:hover {
   transform: translateY(-2px);
-}
-
-.v9-button-primary {
-  background: var(--v9-mint);
-  color: var(--v9-night);
-  box-shadow: 0 16px 40px rgba(200, 255, 101, 0.14);
-}
-
-.v9-button-primary:hover {
-  background: #d7ff8d;
-  box-shadow: 0 20px 46px rgba(200, 255, 101, 0.2);
-}
-
-.v9-button-dark {
-  background: var(--v9-night);
-  color: var(--v9-white);
-}
-
-.v9-button-dark:hover {
-  background: var(--v9-violet-deep);
 }
 
 .v9-text-link {
@@ -196,7 +181,7 @@
 
 /* Header ---------------------------------------------------- */
 
-.page-home-v9 .site-header {
+.site-header {
   position: absolute;
   inset: 0 0 auto;
   z-index: 60;
@@ -204,11 +189,11 @@
   background: transparent;
 }
 
-.page-home-v9 .site-header .shell {
+.site-header .shell {
   width: min(calc(100% - 3rem), 1320px);
 }
 
-.page-home-v9 .header-inner {
+.header-inner {
   min-height: 64px;
   gap: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -221,14 +206,14 @@
   -webkit-backdrop-filter: blur(24px) saturate(140%);
 }
 
-.page-home-v9 .brand img {
+.brand img {
   width: 82px;
   max-height: 42px;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
 
-.page-home-v9 .nav-link {
+.nav-link {
   border-radius: 999px;
   padding: 0.58rem 0.7rem;
   color: rgba(255, 255, 255, 0.66);
@@ -236,35 +221,35 @@
   font-weight: 500;
 }
 
-.page-home-v9 .nav-link:hover,
-.page-home-v9 .nav-link.is-active {
+.nav-link:hover,
+.nav-link.is-active {
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
 
-.page-home-v9 .nav-menu {
+.nav-menu {
   border-color: rgba(255, 255, 255, 0.12);
   background: rgba(17, 18, 26, 0.97);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
 }
 
-.page-home-v9 .nav-menu-link {
+.nav-menu-link {
   color: rgba(255, 255, 255, 0.72);
 }
 
-.page-home-v9 .nav-menu-link:hover,
-.page-home-v9 .nav-menu-link.is-active {
+.nav-menu-link:hover,
+.nav-menu-link.is-active {
   background: rgba(255, 255, 255, 0.07);
   color: #fff;
 }
 
-.page-home-v9 .nav-menu-link span {
+.nav-menu-link span {
   color: rgba(255, 255, 255, 0.42);
 }
 
-.page-home-v9 .header-cta,
-.page-home-v9 .header-cta .button-label,
-.page-home-v9 .header-cta .button-subcopy {
+.header-cta,
+.header-cta .button-label,
+.header-cta .button-subcopy {
   min-height: 44px;
   border-radius: 999px;
   background: var(--v9-mint);
@@ -274,7 +259,7 @@
   padding-inline: 1.1rem;
 }
 
-.page-home-v9 .header-cta:hover {
+.header-cta:hover {
   background: #dcff9e;
 }
 
@@ -344,16 +329,22 @@
   max-width: 760px;
 }
 
-.v9-kicker {
+/* The hero label uses the shared .eyebrow. Only the layout is kept local: it
+   carries a live-dot span and needs the flex row and hero spacing. Colour,
+   family, size and tracking come from the shared eyebrow so it matches the
+   label on every other page. */
+/* Hero eyebrow: plain mono text, not the pill. site-v9.css does exactly this
+   reset for interior .page-hero eyebrows; the homepage hero needs its own
+   because it uses .v9-hero. Colour, family and tracking still come from the
+   shared eyebrow, so the label matches the rest of the site. */
+.v9-hero .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
   margin-bottom: 2.2rem;
-  color: rgba(255, 255, 255, 0.64);
-  font-family: var(--v9-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .v9-live-dot {
@@ -442,8 +433,7 @@
   z-index: 1;
 }
 
-.v9-os-head,
-.v9-os-proof {
+.v9-os-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -494,139 +484,6 @@
   border-radius: 50%;
   background: currentColor;
   box-shadow: 0 0 12px currentColor;
-}
-
-.v9-os-stage {
-  padding: 1.4rem;
-}
-
-.v9-os-input,
-.v9-os-output {
-  display: grid;
-  gap: 0.32rem;
-  border: 1px solid var(--v9-line-dark);
-  border-radius: 0.85rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.v9-os-stage span,
-.v9-os-stage small {
-  color: rgba(255, 255, 255, 0.42);
-  font-family: var(--v9-mono);
-  font-size: 0.58rem;
-}
-
-.v9-os-stage strong {
-  font-size: 0.95rem;
-  font-weight: 560;
-}
-
-.v9-os-output {
-  border-color: rgba(200, 255, 101, 0.2);
-  background: linear-gradient(90deg, rgba(200, 255, 101, 0.06), rgba(128, 108, 255, 0.06));
-}
-
-.v9-os-output strong {
-  color: var(--v9-mint);
-}
-
-.v9-os-flow {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.25rem;
-  padding: 1.35rem 0;
-}
-
-.v9-flow-line {
-  position: absolute;
-  top: 2.1rem;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, var(--v9-violet), var(--v9-mint));
-}
-
-.v9-flow-step {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  gap: 0.4rem;
-  text-align: center;
-}
-
-.v9-flow-step span {
-  display: grid;
-  width: 1.55rem;
-  height: 1.55rem;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 50%;
-  background: var(--v9-night-2);
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.v9-flow-step:last-child span {
-  border-color: var(--v9-mint);
-  color: var(--v9-mint);
-}
-
-.v9-flow-step strong {
-  color: rgba(255, 255, 255, 0.52);
-  font-family: var(--v9-mono);
-  font-size: 0.55rem;
-  font-weight: 400;
-}
-
-.v9-os-proof {
-  align-items: end;
-  border-top: 1px solid var(--v9-line-dark);
-  background: rgba(0, 0, 0, 0.14);
-}
-
-.v9-os-proof > div:first-child {
-  display: grid;
-  gap: 0.2rem;
-}
-
-.v9-os-proof strong {
-  color: var(--v9-white);
-  font-family: var(--v9-sans);
-  font-size: 1.05rem;
-  letter-spacing: -0.03em;
-  text-transform: none;
-}
-
-.v9-os-proof small {
-  color: rgba(255, 255, 255, 0.38);
-  font-size: 0.53rem;
-  text-transform: none;
-}
-
-.v9-os-proof a {
-  color: var(--v9-mint);
-  white-space: nowrap;
-}
-
-.v9-os-proof-chart {
-  display: flex;
-  width: 100px;
-  height: 42px;
-  align-items: end;
-  gap: 4px;
-}
-
-.v9-os-proof-chart i {
-  width: 100%;
-  height: var(--bar);
-  border-radius: 2px 2px 0 0;
-  background: linear-gradient(var(--v9-violet-bright), var(--v9-violet));
-}
-
-.v9-os-proof-chart i:last-child {
-  background: var(--v9-mint);
 }
 
 .v9-metric-rail {
@@ -1525,8 +1382,12 @@
   padding: clamp(1.4rem, 2.5vw, 2.3rem);
 }
 
+/* The featured quote uses the text-safe violet, not the display one. White on
+   --v9-violet is 3.81:1 — fine behind large display type, under AA for the
+   attribution line beneath it. --v9-violet-deep takes the same white to
+   7.44:1, which is the split tokens.css already documents. */
 .v9-quote.is-primary {
-  background: var(--v9-violet);
+  background: var(--v9-violet-deep);
   color: white;
 }
 
@@ -1549,7 +1410,9 @@
 .v9-quote.is-primary figcaption { border-color: rgba(255, 255, 255, 0.22); }
 .v9-quote figcaption strong { font-size: 0.72rem; }
 .v9-quote figcaption span { color: var(--v9-copy); font-size: 0.64rem; }
-.v9-quote.is-primary figcaption span { color: rgba(255, 255, 255, 0.65); }
+/* 0.65 alpha on the deep violet is 4.13:1, just under AA; 0.8 gives 5.39:1
+   and still reads as secondary against the name above it. */
+.v9-quote.is-primary figcaption span { color: rgba(255, 255, 255, 0.8); }
 
 /* Founder --------------------------------------------------- */
 
@@ -1943,7 +1806,7 @@
 
 @keyframes v9-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-.v9-final .v9-shell {
+.v9-final .shell {
   display: grid;
   justify-items: center;
 }
@@ -1982,13 +1845,13 @@
 
 /* Footer handoff -------------------------------------------- */
 
-.page-home-v9 .site-footer-v2 {
+.site-footer-v2 {
   border-top-color: rgba(255, 255, 255, 0.08);
   background: var(--v9-night);
   color: rgba(255, 255, 255, 0.68);
 }
 
-.page-home-v9 .site-footer-v2::before { background: linear-gradient(90deg, transparent, rgba(200, 255, 101, 0.3), transparent); }
+.site-footer-v2::before { background: linear-gradient(90deg, transparent, rgba(200, 255, 101, 0.3), transparent); }
 /* The dark-footer overrides that used to live here (violet-bright headings,
    white link hover, translucent-white divider) are superseded further down by
    the light-footer values. Leaving them in place meant the same selector was
@@ -1998,7 +1861,7 @@
 /* Responsive ------------------------------------------------ */
 
 @media (max-width: 1120px) {
-  .page-home-v9 .nav-link { padding-inline: 0.52rem; font-size: 0.73rem; }
+  .nav-link { padding-inline: 0.52rem; font-size: 0.73rem; }
   .v9-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(380px, 0.75fr); gap: 3rem; }
   .v9-hero h1 { font-size: clamp(4rem, 7.5vw, 6.1rem); }
   .v9-service-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2007,17 +1870,17 @@
 }
 
 @media (max-width: 900px) {
-  .v9-shell,
-  .page-home-v9 .site-header .shell { width: min(calc(100% - 2rem), 1320px); }
+  main .shell,
+  .site-header .shell { width: min(calc(100% - 2rem), 1320px); }
 
-  .page-home-v9 .nav-links,
-  .page-home-v9 .header-cta { display: none; }
+  .nav-links,
+  .header-cta { display: none; }
 
-  .page-home-v9 .mobile-menu { display: block; margin-left: auto; }
-  .page-home-v9 .mobile-menu summary { border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.07); color: white; border-radius: 999px; }
-  .page-home-v9 .mobile-menu nav { right: 0 !important; left: auto !important; width: min(356px, calc(100vw - 2rem)); max-height: calc(100vh - 7rem); overflow-y: auto; border-color: rgba(255, 255, 255, 0.12); background: rgba(17, 18, 26, 0.98); }
-  .page-home-v9 .mobile-menu .nav-link { color: rgba(255, 255, 255, 0.8); }
-  .page-home-v9 .mobile-subnav-link { color: rgba(255, 255, 255, 0.55); }
+  .mobile-menu { display: block; margin-left: auto; }
+  .mobile-menu summary { border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.07); color: white; border-radius: 999px; }
+  .mobile-menu nav { right: 0 !important; left: auto !important; width: min(356px, calc(100vw - 2rem)); max-height: calc(100vh - 7rem); overflow-y: auto; border-color: rgba(255, 255, 255, 0.12); background: rgba(17, 18, 26, 0.98); }
+  .mobile-menu .nav-link { color: rgba(255, 255, 255, 0.8); }
+  .mobile-subnav-link { color: rgba(255, 255, 255, 0.55); }
 
   .v9-hero { min-height: auto; padding-top: 8.5rem; }
   .v9-hero-grid { grid-template-columns: 1fr; gap: 3.5rem; padding-bottom: 4rem; }
@@ -2069,35 +1932,29 @@
 }
 
 @media (max-width: 680px) {
-  .v9-shell,
-  .page-home-v9 .site-header .shell { width: min(calc(100% - 1.25rem), 1320px); }
+  main .shell,
+  .site-header .shell { width: min(calc(100% - 1.25rem), 1320px); }
 
-  .page-home-v9 .site-header { padding-top: 0.65rem; }
-  .page-home-v9 .header-inner { min-height: 56px; padding: 0.35rem 0.38rem 0.35rem 0.8rem; }
-  .page-home-v9 .brand img { width: 70px; }
-  .page-home-v9 .mobile-menu summary { min-height: 40px; padding: 0.65rem 0.85rem; font-size: 0.76rem; }
+  .site-header { padding-top: 0.65rem; }
+  .header-inner { min-height: 56px; padding: 0.35rem 0.38rem 0.35rem 0.8rem; }
+  .brand img { width: 70px; }
+  .mobile-menu summary { min-height: 40px; padding: 0.65rem 0.85rem; font-size: 0.76rem; }
 
   .v9-section-intro { grid-template-columns: 1fr; gap: 0.55rem; margin-bottom: 2.75rem; }
   .v9-section-intro p { text-align: left; font-size: 0.75rem; }
 
   .v9-hero { padding-top: 7.25rem; background-size: 44px 44px, 44px 44px, auto; }
   .v9-hero-grid { gap: 2.5rem; padding: 1.75rem 0 3rem; }
-  .v9-kicker { margin-bottom: 1.5rem; font-size: 0.57rem; }
+  .v9-hero .eyebrow { margin-bottom: 1.5rem; font-size: 0.57rem; }
   .v9-hero h1 { font-size: clamp(3.4rem, 16vw, 5rem); line-height: 0.9; }
   .v9-hero-lede { margin-top: 1.6rem; font-size: 0.96rem; line-height: 1.62; }
   .v9-hero-actions { align-items: flex-start; flex-direction: column; gap: 1rem; }
-  .v9-hero .v9-button { width: 100%; }
+  .v9-hero .button { width: 100%; }
   .v9-hero-reassurance { gap: 0.4rem 0.8rem; }
   .v9-hero-reassurance span:not(:last-child)::after { margin-left: 0.8rem; }
 
   .v9-os-head { padding: 0.8rem; }
   .v9-os-head > div > span:last-child { display: none; }
-  .v9-os-stage { padding: 0.8rem; }
-  .v9-os-input,
-  .v9-os-output { padding: 0.8rem; }
-  .v9-flow-step strong { display: none; }
-  .v9-os-proof { flex-wrap: wrap; padding: 0.9rem; }
-  .v9-os-proof-chart { order: 3; width: 100%; }
 
   .v9-metric-rail { grid-template-columns: repeat(2, 1fr); }
   .v9-metric { min-height: 118px; padding: 1rem; border-bottom: 1px solid var(--v9-line-dark); }
@@ -2137,7 +1994,7 @@
   .v9-diagnostic-output h3 { font-size: clamp(2.25rem, 11vw, 3.3rem); }
   .v9-output-topline span:last-child { display: none; }
   .v9-output-recommendation { align-items: stretch; flex-direction: column; }
-  .v9-output-recommendation .v9-button { width: 100%; margin-top: 0.75rem; }
+  .v9-output-recommendation .button { width: 100%; margin-top: 0.75rem; }
 
   .v9-fit h2 { margin-bottom: 2.25rem; }
   .v9-fit-grid { grid-template-columns: 1fr; }
@@ -2176,12 +2033,12 @@
   .v9-founder-track { grid-template-columns: 1fr; }
 
   .v9-scorecard { padding: 0; background: var(--v9-night-2); }
-  .v9-scorecard .v9-shell { width: 100%; }
+  main .v9-scorecard .shell { width: 100%; }
   .v9-scorecard-card { border-radius: 0; }
   .v9-scorecard-copy { padding: 4.5rem 1.25rem 1rem; }
   .v9-scorecard-copy h2 { font-size: clamp(3rem, 13vw, 4rem); }
   .v9-scorecard-actions { align-items: stretch; flex-direction: column; }
-  .v9-scorecard-actions .v9-button { width: 100%; }
+  .v9-scorecard-actions .button { width: 100%; }
   .v9-scorecard-visual { min-height: 380px; overflow: hidden; }
   .v9-scorecard-visual::before { width: 360px; height: 360px; }
   .v9-scorecard-visual::after { width: 270px; height: 270px; }
@@ -2200,9 +2057,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-home-v9 *,
-  .page-home-v9 *::before,
-  .page-home-v9 *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -2211,7 +2068,7 @@
 }
 
 @media (prefers-contrast: more) {
-  .page-home-v9 { --v9-copy: #3e3d43; --v9-copy-dark: #cac9d2; --v9-line: rgba(17, 17, 23, 0.28); --v9-line-dark: rgba(255, 255, 255, 0.24); }
+  { --v9-copy: #3e3d43; --v9-copy-dark: #cac9d2; --v9-line: rgba(17, 17, 23, 0.28); --v9-line-dark: rgba(255, 255, 255, 0.24); }
 }
 
 /* ============================================================
@@ -2242,9 +2099,8 @@
   padding: 1.25rem 0 5rem;
 }
 
-.v9-kicker {
+.v9-hero .eyebrow {
   margin-bottom: 1.6rem;
-  color: var(--v9-copy);
 }
 
 .v9-hero h1 {
@@ -2391,15 +2247,15 @@
 
 /* Footer ----------------------------------------------------- */
 
-.page-home-v9 .site-footer-v2 {
+.site-footer-v2 {
   border-top: 1px solid var(--v9-line);
   background: var(--v9-paper-2);
   color: inherit;
 }
 
-.page-home-v9 .site-footer-v2 h2 { color: var(--v9-violet-deep); }
-.page-home-v9 .site-footer-v2 a:hover { color: var(--v9-ink); }
-.page-home-v9 .site-footer-v2 .footer-bottom { border-color: var(--v9-line); }
+.site-footer-v2 h2 { color: var(--v9-violet-deep); }
+.site-footer-v2 a:hover { color: var(--v9-ink); }
+.site-footer-v2 .footer-bottom { border-color: var(--v9-line); }
 
 /* Ticker divider --------------------------------------------- */
 
@@ -2551,19 +2407,19 @@
 
 /* Voices: dense grid + avatars ------------------------------- */
 
-.page-home-v9 .v9-quote-grid {
+.v9-quote-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
 }
 
-.page-home-v9 .v9-quote { min-height: 240px; }
+.v9-quote { min-height: 240px; }
 
-.page-home-v9 .v9-quote blockquote {
+.v9-quote blockquote {
   font-size: clamp(1.02rem, 1.3vw, 1.28rem);
   line-height: 1.4;
 }
 
-.page-home-v9 .v9-quote.is-primary blockquote {
+.v9-quote.is-primary blockquote {
   font-size: clamp(1.15rem, 1.6vw, 1.5rem);
 }
 
@@ -2701,8 +2557,8 @@
 @media (max-width: 900px) {
   .v9-hero { min-height: auto; padding-top: 6.25rem; }
   .v9-hero h1 { max-width: 14ch; font-size: clamp(2.9rem, 8.5vw, 5.2rem); }
-  .page-home-v9 .v9-quote-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .page-home-v9 .v9-quote:last-child { display: flex; }
+  .v9-quote-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v9-quote:last-child { display: flex; }
   .v9-fit-video { grid-template-columns: 1fr; }
 }
 
@@ -2723,29 +2579,27 @@
 
 /* Violet primary CTAs on light backgrounds; mint stays inside
    the dark scorecard panel and dark header pill. */
-.v9-button-primary {
-  background: var(--v9-violet);
-  color: #ffffff;
-  box-shadow: 0 16px 40px rgba(102, 87, 255, 0.28);
-}
-
-.v9-button-primary:hover {
-  background: var(--v9-violet-deep);
-  box-shadow: 0 20px 46px rgba(102, 87, 255, 0.34);
-}
-
-.v9-scorecard-card .v9-button-primary {
+/* The scorecard CTA sits on the dark night panel, where the violet gradient
+   has too little contrast — it keeps the mint treatment. */
+main .v9-scorecard-card .button-brand {
   background: var(--v9-mint);
   color: #090a0f;
   box-shadow: 0 16px 40px rgba(200, 255, 101, 0.14);
 }
 
-.v9-scorecard-card .v9-button-primary:hover {
+main .v9-scorecard-card .button-brand:hover {
   background: #d7ff8d;
 }
 
-/* Serif hero headline (Fraunces), shorter line. */
-.page-home-v9 .v9-hero h1 {
+/* Serif hero headline (Fraunces), shorter line.
+   Prefixed with .theme-wss-v9 to reach 0-2-1. The shared heading rule in
+   site-v9.css is `.theme-wss-v9:not(...) :where(h1,h2,h3,h4)` at 0-2-0, which
+   sets Geist — while the homepage was excluded from it that never mattered,
+   but now that the homepage uses the shared system a bare `.v9-hero h1`
+   (0-1-1) loses and the serif hero silently renders as sans. Every OTHER
+   homepage heading is meant to take the shared treatment; this is the one
+   deliberate exception. */
+.theme-wss-v9 .v9-hero h1 {
   max-width: 12ch;
   font-family: var(--v9-display);
   font-weight: 500;
@@ -2755,7 +2609,7 @@
   letter-spacing: -0.035em;
 }
 
-.v9-hero h1 em {
+.theme-wss-v9 .v9-hero h1 em {
   font-weight: 460;
 }
 

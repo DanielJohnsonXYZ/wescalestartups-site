@@ -160,9 +160,13 @@ Cap until the owner chooses one of these paths:
 
 ## 5. Cal.com booking (self-hosted)
 
-- Public URL: `https://cal.wescalestartups.com/daniel/20min`
+- Public URL (Growth Audit): `https://cal.wescalestartups.com/daniel/20min`
+- Public URL (podcast recording, 60 min): `https://cal.wescalestartups.com/daniel/podcast`
+  — full title, description, questions, and checklist in
+  [`docs/cal-podcast-event-type.md`](./cal-podcast-event-type.md)
 - Site embed + CTAs use `siteConfig.calLink` / `calUrl` in `src/site.ts`
-- Success redirect: `https://wescalestartups.com/book/thanks`
+  (Growth Audit). Podcast booking uses `podcastCalLink` / `podcastCalUrl` once live.
+- Success redirect (Growth Audit): `https://wescalestartups.com/book/thanks`
 - Stack: `calcom` + Postgres 16 + **Redis 7** (`calcom-redis`, AOF, 128MB cap,
   `REDIS_URL=redis://calcom-redis:6379`) for cache/queues/rate limits
 - Old username path `/daniel-wescalestartups.com/*` is redirected by Traefik

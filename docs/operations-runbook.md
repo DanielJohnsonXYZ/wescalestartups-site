@@ -222,6 +222,36 @@ Until then, a host cron monitor runs on the Hetzner box:
 - Alert: Dokploy Slack webhook (`WSS Alerts`) on down / recovery
 - Target: `https://cal.wescalestartups.com/daniel/20min` (expects HTTP 200)
 
+### 5c. Lead-capture health probe
+
+HTTP 200 on `/api/forms` is not a success signal — the abuse guard soft-rejects
+with `{"ok":true}` and a broken Customer.io write can look identical in the
+browser. The probe POSTs the synthetic profile and requires `"form_id"` in the
+JSON body.
+
+- Script (repo): `scripts/lead-capture-check.sh`
+- Install on Hetzner: copy to `/opt/wss-monitors/lead-capture-check.sh` and
+  fold into the same cron as the booking monitor (same `SLACK_WEBHOOK`):
+
+```cron
+# /etc/cron.d/wss-cal-booking-monitor — keep existing interval; append lead capture
+*/2 * * * * root SLACK_WEBHOOK='…' /opt/wss-monitors/cal-booking-check.sh
+*/5 * * * * root SLACK_WEBHOOK='…' FORM_MONITOR_SECRET='…' /opt/wss-monitors/lead-capture-check.sh
+```
+
+- Synthetic email: `monitor+run@wescalestartups.com` (Customer.io `cio_id`
+  `b6f30d00e205e305`) — permanently unsubscribed, `monitor=true`, marked
+  “Never a lead”. Do not swap in a real address.
+- Targets: `POST /api/forms` and `POST /api/booked` on `wescalestartups.com`
+- Pass: response body contains `"form_id"` (Customer.io accepted the write)
+- Fail (Slack alert): bare `{"ok":true}` (abuse guard), CIO rejection,
+  HTML/502 edge crash, or Cloudflare Bot Fight challenge page
+- When `TURNSTILE_ENFORCE=1`: set `FORM_MONITOR_SECRET` on Cloudflare Pages
+  (Production) and on the host cron env; the probe sends `X-WSS-Monitor`.
+  Turnstile is skipped only for that secret + the synthetic email.
+- Allowlist the Hetzner egress IP (or skip Bot Fight) for those two POSTs so
+  the probe is not challenged with a managed interstitial.
+
 Dashboard path after Pro upgrade: Cloudflare → **Traffic → Health Checks** →
 **Create**:
 

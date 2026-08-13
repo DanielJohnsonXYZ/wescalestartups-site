@@ -229,26 +229,34 @@ with `{"ok":true}` and a broken Customer.io write can look identical in the
 browser. The probe POSTs the synthetic profile and requires `"form_id"` in the
 JSON body.
 
-- Script (repo): `scripts/lead-capture-check.sh`
-- Install on Hetzner: copy to `/opt/wss-monitors/lead-capture-check.sh` and
-  fold into the same cron as the booking monitor (same `SLACK_WEBHOOK`):
+- Script (repo): `scripts/lead-capture-check.sh` (v2)
+- Install on Hetzner: copy to `/opt/wss-monitors/lead-capture-check.sh`.
+  Set `SLACK_WEBHOOK` **inside the cron line** — cron does not inherit shell
+  env, and v1 aborted before probing when it was unset. v2 treats the webhook
+  as optional (failures still go to the logfile + cron mail).
 
 ```cron
 # /etc/cron.d/wss-cal-booking-monitor — keep existing interval; append lead capture
 */2 * * * * root SLACK_WEBHOOK='…' /opt/wss-monitors/cal-booking-check.sh
-*/5 * * * * root SLACK_WEBHOOK='…' FORM_MONITOR_SECRET='…' /opt/wss-monitors/lead-capture-check.sh
+*/5 * * * * root SLACK_WEBHOOK='…' /opt/wss-monitors/lead-capture-check.sh
 ```
 
+- Logfile: `/var/log/wss-lead-capture.log` (falls back to `/tmp/…` if
+  unwritable). Every run writes an `OK` or `ALERT` line — use this (or the
+  synthetic profile’s `source_page` stamp in Customer.io) to confirm cron is
+  live.
 - Synthetic email: `monitor+run@wescalestartups.com` (Customer.io `cio_id`
   `b6f30d00e205e305`) — permanently unsubscribed, `monitor=true`, marked
   “Never a lead”. Do not swap in a real address.
 - Targets: `POST /api/forms` and `POST /api/booked` on `wescalestartups.com`
 - Pass: response body contains `"form_id"` (Customer.io accepted the write)
-- Fail (Slack alert): bare `{"ok":true}` (abuse guard), CIO rejection,
-  HTML/502 edge crash, or Cloudflare Bot Fight challenge page
-- When `TURNSTILE_ENFORCE=1`: set `FORM_MONITOR_SECRET` on Cloudflare Pages
-  (Production) and on the host cron env; the probe sends `X-WSS-Monitor`.
-  Turnstile is skipped only for that secret + the synthetic email.
+- Fail (Slack / stderr / logfile): bare `{"ok":true}` (abuse guard), CIO
+  rejection, HTML/502 edge crash, empty body, or Cloudflare Bot Fight
+  challenge page
+- Leave `TURNSTILE_ENFORCE` off until every form ships a widget. When you turn
+  it on: set `FORM_MONITOR_SECRET` on Cloudflare Pages (Production) and in the
+  cron env; the probe sends `X-WSS-Monitor`. Turnstile is skipped only for
+  that secret + the synthetic email.
 - Allowlist the Hetzner egress IP (or skip Bot Fight) for those two POSTs so
   the probe is not challenged with a managed interstitial.
 

@@ -5,6 +5,10 @@ const ALLOWED_HOSTS = new Set([
 
 const DEFAULT_HONEYPOT_FIELDS = ["website", "company_website"];
 
+/** Synthetic Customer.io profile used by scripts/lead-capture-check.sh — never a real lead. */
+const MONITOR_PROBE_EMAIL = "monitor+run@wescalestartups.com";
+const MONITOR_HEADER = "X-WSS-Monitor";
+
 function hostnameFrom(value) {
   if (typeof value !== "string" || !value.trim()) return "";
   try {
@@ -16,6 +20,29 @@ function hostnameFrom(value) {
 
 function isAllowedHost(hostname) {
   return ALLOWED_HOSTS.has(hostname) || hostname.endsWith(".wescalestartups-site.pages.dev");
+}
+
+function secretsEqual(a, b) {
+  if (typeof a !== "string" || typeof b !== "string" || a.length === 0 || a.length !== b.length) {
+    return false;
+  }
+  let out = 0;
+  for (let i = 0; i < a.length; i++) out |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return out === 0;
+}
+
+/**
+ * Cron probe may skip Turnstile when FORM_MONITOR_SECRET matches X-WSS-Monitor
+ * and the body email is the allowlisted synthetic address. Origin / Referer /
+ * source_page / honeypot checks still run.
+ */
+function isMonitorProbe(context, payload) {
+  const expected = (context.env?.FORM_MONITOR_SECRET || "").trim();
+  if (!expected) return false;
+  const provided = context.request.headers.get(MONITOR_HEADER) || "";
+  if (!secretsEqual(provided, expected)) return false;
+  const email = String(payload?.email || payload?.Email || "").trim().toLowerCase();
+  return email === MONITOR_PROBE_EMAIL;
 }
 
 /**
@@ -62,7 +89,7 @@ async function verifyTurnstile(context, token) {
  * @param {string} [options.sourcePageField="source_page"] Absolute same-site page URL field
  * @param {string[]} [options.honeypotFields] Fields that must be empty (bots fill them)
  * @param {string} [options.turnstileField="cf-turnstile-response"] Turnstile token field
- * @param {boolean} [options.skipTurnstile=false] Server-path only (e.g. /api/booked). Never set from client payload.
+ * @param {boolean} [options.skipTurnstile=false] Server-path only (e.g. /api/booked). Never set from client payload. Also skipped for the synthetic monitor probe when FORM_MONITOR_SECRET matches.
  */
 export async function checkFormRequest(context, payload, options = {}) {
   const sourcePageField = options.sourcePageField || "source_page";
@@ -71,7 +98,9 @@ export async function checkFormRequest(context, payload, options = {}) {
 
   const enforceTurnstile = context.env?.TURNSTILE_ENFORCE === "1";
   // skipTurnstile is set only by trusted server handlers (path-based), never from payload.
-  if (enforceTurnstile && !options.skipTurnstile) {
+  // Monitor probe: secret header + synthetic email only (see isMonitorProbe).
+  const skipTurnstile = options.skipTurnstile || isMonitorProbe(context, payload);
+  if (enforceTurnstile && !skipTurnstile) {
     const ts = await verifyTurnstile(context, payload?.[tokenField]);
     if (!ts.ok) return ts;
   }

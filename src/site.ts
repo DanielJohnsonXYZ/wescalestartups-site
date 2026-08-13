@@ -13,6 +13,16 @@ export const siteConfig = {
   /** Cal.com username/event path used by the inline embed (no leading slash). */
   calLink: "daniel/20min",
   calOrigin: "https://cal.wescalestartups.com",
+  /**
+   * Founder community offered after Growth Audit bookings (Cal event description,
+   * reminder/follow-up emails, and /book/thanks). WhatsApp is the live join path.
+   */
+  growingPains: {
+    name: "Growing Pains",
+    blurb: "A community for founders to discuss actionable growth.",
+    whatsappUrl: "https://chat.whatsapp.com/EcodIBMP93TCl82pTHjEbn",
+    whatsappLabel: "Join the WhatsApp group"
+  },
   bookingLabel: "Book a Growth Audit",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
@@ -126,7 +136,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/ai-growth-systems": "2026-05-01",
   "/ai-sameness-scorecard": "2026-07-26",
   "/book": "2026-08-09",
-  "/book/thanks": "2026-08-09",
+  "/book/thanks": "2026-08-13",
   "/wss-calendar": "2026-08-09",
   "/build": "2026-05-03",
   "/case-studies": "2026-05-03",

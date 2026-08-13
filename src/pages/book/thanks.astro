@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
+
+const community = siteConfig.growingPains;
 ---
 
 <BaseLayout
@@ -43,6 +45,27 @@ import { siteConfig } from "../../site";
       <p class="lede" style="margin-top:1.25rem;max-width:56ch;">
         No deck. Default outcome: a named constraint and a clear next move — including a no if we are not the right help.
       </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">After the call</p>
+      <h2>{community.name}</h2>
+      <p class="lede" style="max-width:56ch;">
+        {community.blurb} Optional, not a pitch — a WhatsApp group for founders who want to keep talking about what to do next.
+      </p>
+      <div class="hero-actions" style="margin-top:1.25rem;">
+        <a
+          class="button button-brand"
+          href={community.whatsappUrl}
+          data-cta="book-thanks-growing-pains"
+          rel="noreferrer"
+          target="_blank"
+        >
+          {community.whatsappLabel} →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

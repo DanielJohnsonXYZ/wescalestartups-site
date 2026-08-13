@@ -175,6 +175,9 @@ Cap until the owner chooses one of these paths:
   the only public booking surface so Slack/old links cannot create orphan bookings.
 - Signup spam accounts on the Cal.com instance were removed (empty locked users
   with no bookings/credentials). Keep `NEXT_PUBLIC_DISABLE_SIGNUP=true`.
+- Growing Pains founder community (WhatsApp) belongs on the Growth Audit event
+  description plus attendee reminder/follow-up workflows. Paste-ready copy:
+  `docs/cal-growing-pains-community.md`. Site mirror after booking: `/book/thanks`.
 
 ### 5a. Publish Google OAuth consent (required for Meet invites)
 

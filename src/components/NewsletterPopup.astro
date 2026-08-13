@@ -1,0 +1,227 @@
+---
+// NewsletterPopup.astro — newsletter invite, shown once on exit intent
+// (desktop) or when the reader is deep into the page (any device).
+//
+// Built on <dialog>, so focus handling, Esc and the backdrop come from the
+// platform rather than hand-rolled JS. Frequency: at most once every
+// `dismissDays`, and never again for anyone who subscribes (EmailSignup
+// dispatches `newsletter:subscribed` on success).
+import EmailSignup from "./EmailSignup.astro";
+import { siteConfig } from "../site";
+
+interface Props {
+  /** Set false on pages that already lead with the signup, or on /book. */
+  enabled?: boolean;
+  /** Scroll progress (0–1) that opens the popup when exit intent never fires. */
+  scrollTrigger?: number;
+  /** Quiet period before the reader is interrupted, in seconds. */
+  delaySeconds?: number;
+  /** How long a dismissal is remembered. */
+  dismissDays?: number;
+}
+
+const {
+  enabled = true,
+  scrollTrigger = 0.55,
+  delaySeconds = 12,
+  dismissDays = 30
+} = Astro.props;
+---
+
+{enabled && (
+  <dialog
+    class="nl-popup"
+    data-newsletter-popup
+    data-scroll-trigger={scrollTrigger}
+    data-delay-seconds={delaySeconds}
+    data-dismiss-days={dismissDays}
+    aria-label={`Subscribe to ${siteConfig.newsletterName}`}
+  >
+    <button class="nl-popup-close" type="button" data-newsletter-popup-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+    <EmailSignup
+      variant="light"
+      formId="popup-newsletter"
+      sourceType="newsletter"
+      heading="Practical founder-led GTM, one email at a time."
+      subtext={siteConfig.newsletterFrequencyLine}
+      buttonLabel={`Subscribe to ${siteConfig.newsletterName} →`}
+    />
+  </dialog>
+)}
+
+{enabled && (
+  <script is:inline>
+    (() => {
+      const dialog = document.querySelector("dialog[data-newsletter-popup]");
+      if (!dialog || typeof dialog.showModal !== "function") return;
+
+      const KEY = "wss-newsletter-popup";
+      const trigger = Number(dialog.dataset.scrollTrigger) || 0.55;
+      const delay = (Number(dialog.dataset.delaySeconds) || 12) * 1000;
+      const dismissMs = (Number(dialog.dataset.dismissDays) || 30) * 86400000;
+
+      let state = {};
+      try {
+        state = JSON.parse(window.localStorage.getItem(KEY) || "{}") || {};
+      } catch (_) {}
+
+      const save = (patch) => {
+        Object.assign(state, patch);
+        try {
+          window.localStorage.setItem(KEY, JSON.stringify(state));
+        } catch (_) {}
+      };
+
+      const close = () => {
+        if (dialog.open) dialog.close();
+      };
+
+      document.addEventListener("newsletter:subscribed", () => {
+        save({ subscribed: true });
+        // Leave the confirmation on screen long enough to read.
+        if (dialog.open) window.setTimeout(close, 2600);
+      });
+
+      dialog
+        .querySelector("[data-newsletter-popup-close]")
+        ?.addEventListener("click", close);
+
+      // Clicking the backdrop (anywhere outside the card) dismisses.
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) close();
+      });
+
+      dialog.addEventListener("close", () => {
+        document.body.style.removeProperty("overflow");
+      });
+
+      if (state.subscribed) return;
+      if (state.shownAt && Date.now() - state.shownAt < dismissMs) return;
+
+      let opened = false;
+
+      const disarm = () => {
+        document.removeEventListener("mouseout", onExitIntent);
+        window.removeEventListener("scroll", onScroll);
+      };
+
+      const open = () => {
+        if (opened || document.querySelector("dialog[open]")) return;
+        opened = true;
+        disarm();
+        save({ shownAt: Date.now() });
+        dialog.showModal();
+        document.body.style.overflow = "hidden";
+      };
+
+      function onExitIntent(event) {
+        if (!event.relatedTarget && event.clientY <= 0) open();
+      }
+
+      function onScroll() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (max > 0 && window.scrollY / max >= trigger) open();
+      }
+
+      window.setTimeout(() => {
+        if (opened) return;
+        document.addEventListener("mouseout", onExitIntent);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      }, delay);
+    })();
+  </script>
+)}
+
+<style>
+  .nl-popup {
+    /* inset + auto margins are what centre a modal <dialog> in the top layer. */
+    inset: 0;
+    margin: auto;
+    width: min(30rem, calc(100vw - 2rem));
+    max-width: none;
+    height: fit-content;
+    padding: 0;
+    border: 0;
+    border-radius: 0.75rem;
+    background: transparent;
+    overflow: visible;
+    box-shadow: 0 24px 60px rgba(17, 17, 23, 0.28);
+  }
+
+  .nl-popup::backdrop {
+    background: rgba(17, 17, 23, 0.55);
+    backdrop-filter: blur(2px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nl-popup[open] {
+      animation: nl-popup-in 220ms ease-out;
+    }
+    .nl-popup[open]::backdrop {
+      animation: nl-popup-fade 220ms ease-out;
+    }
+  }
+
+  @keyframes nl-popup-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  @keyframes nl-popup-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* EmailSignup brings its own surface, border and radius. */
+  .nl-popup :global(.email-signup-strip) {
+    margin: 0;
+    padding: 1.6rem 1.5rem;
+  }
+
+  .nl-popup :global(.email-signup-heading) {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  /* Keep the heading clear of the close button on narrow viewports. */
+  .nl-popup :global(.email-signup-copy) {
+    padding-right: 2.2rem;
+  }
+
+  .nl-popup-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .nl-popup-close:hover,
+  .nl-popup-close:focus-visible {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .nl-popup-close svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+</style>

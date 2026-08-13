@@ -155,6 +155,11 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
               if (widget) window.turnstile.reset(widget);
             }
           } catch (_) {}
+          // Lets the newsletter popup retire itself for anyone who has signed
+          // up — newsletter forms only, not lead-magnet downloads.
+          if ((data.get("source_type") || "").toString() === "newsletter") {
+            document.dispatchEvent(new CustomEvent("newsletter:subscribed"));
+          }
           const successRedirect = form.dataset.successRedirect || "";
           if (status) status.textContent = successRedirect ? "Success. Opening your downloads…" : "You're in. Check your inbox.";
           if (successRedirect) {

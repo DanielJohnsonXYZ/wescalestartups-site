@@ -295,6 +295,23 @@
   padding-top: 1.2rem;
 }
 
+/* Modifiers for the proof rail. These were inline style attributes on /proof
+   and /post-raise, which no media query could override — the rail stayed four
+   columns at 390px and pushed its figures past the viewport. As classes they
+   participate in the cascade normally. */
+.hero-proof-quad {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hero-proof-flush {
+  border-top: none;
+  padding-top: 0;
+}
+
+.hero-proof-tight {
+  margin-top: 0;
+}
+
 .hero-proof strong {
   display: block;
   color: var(--violet);
@@ -1217,8 +1234,13 @@
   color: var(--muted);
 }
 
+/* minmax(0, 1fr), not the implicit `auto` column: an auto-sized grid column
+   takes its minimum from content, so a single wide descendant sized the whole
+   column to 415px inside a 370px shell and every card overflowed the viewport
+   by 45px on the ten /industries pages. */
 .detail-body {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
 }
 

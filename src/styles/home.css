@@ -1382,8 +1382,12 @@ main .button:hover {
   padding: clamp(1.4rem, 2.5vw, 2.3rem);
 }
 
+/* The featured quote uses the text-safe violet, not the display one. White on
+   --v9-violet is 3.81:1 — fine behind large display type, under AA for the
+   attribution line beneath it. --v9-violet-deep takes the same white to
+   7.44:1, which is the split tokens.css already documents. */
 .v9-quote.is-primary {
-  background: var(--v9-violet);
+  background: var(--v9-violet-deep);
   color: white;
 }
 
@@ -1406,7 +1410,9 @@ main .button:hover {
 .v9-quote.is-primary figcaption { border-color: rgba(255, 255, 255, 0.22); }
 .v9-quote figcaption strong { font-size: 0.72rem; }
 .v9-quote figcaption span { color: var(--v9-copy); font-size: 0.64rem; }
-.v9-quote.is-primary figcaption span { color: rgba(255, 255, 255, 0.65); }
+/* 0.65 alpha on the deep violet is 4.13:1, just under AA; 0.8 gives 5.39:1
+   and still reads as secondary against the name above it. */
+.v9-quote.is-primary figcaption span { color: rgba(255, 255, 255, 0.8); }
 
 /* Founder --------------------------------------------------- */
 

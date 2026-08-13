@@ -179,6 +179,31 @@ Cap until the owner chooses one of these paths:
   description plus attendee reminder/follow-up workflows. Paste-ready copy:
   `docs/cal-growing-pains-community.md`. Site mirror after booking: `/book/thanks`.
 
+### 5d. Cloudflare must not cache or bot-challenge Cal
+
+`NEXTAUTH_URL` / `NEXT_PUBLIC_WEBAPP_URL` are already `https://cal.wescalestartups.com`.
+Hitting the origin (`65.109.232.75`) returns HTTP 200 with no 503s. The login /
+`/event-types` redirect loop is at the Cloudflare edge, not the Cal container.
+
+A leftover WordPress Page Rule matches **all** hosts:
+
+| Rule | Actions |
+| --- | --- |
+| `*wescalestartups.com/*` | Cache Everything, edge TTL 7200s |
+| `*wescalestartups.com/wp-admin/*` | Bypass cache |
+| `*wescalestartups.com/wp-login.php*` | Bypass cache |
+
+That first rule also matches `cal.wescalestartups.com/*`, so Next.js HTML, RSC
+payloads, and auth pages get cached. Combined with Bot Fight on `/api/auth/*`,
+the app hydrates mismatched HTML, `/api/auth/session` never sticks, and the
+client bounces `/event-types` → `/auth/login` in a loop (RSC retries + 503s).
+
+Fix in Cloudflare (then purge `cal.wescalestartups.com`):
+
+1. Narrow Cache Everything to `wescalestartups.com/*` and `www.wescalestartups.com/*` only.
+2. Add a higher-priority Page Rule: `cal.wescalestartups.com/*` → Cache Level **Bypass**, Security Level **Essentially Off** (or skip Bot Fight for that hostname).
+3. Confirm Bot Fight / Super Bot Fight is not challenging `/api/auth/*` or `/_next/*` on Cal.
+
 ### 5a. Publish Google OAuth consent (required for Meet invites)
 
 Google rejected `https://cal.wescalestartups.com/` as the OAuth homepage because it

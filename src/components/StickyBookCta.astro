@@ -112,12 +112,13 @@ const {
     gap: 0.6rem 0.75rem;
     width: min(720px, 100%);
     padding: 0.85rem 0.9rem 0.9rem 1.25rem;
+    /* A pill no longer fits now the bar carries two rows of CTAs. */
     border-radius: 1.25rem;
-    background: color-mix(in srgb, var(--ink, #0b0b0c) 96%, transparent);
+    background: color-mix(in srgb, var(--ink) 96%, transparent);
     color: #fff;
     box-shadow:
-      0 18px 42px -12px color-mix(in srgb, var(--ink, #0b0b0c) 65%, transparent),
-      0 2px 8px -1px color-mix(in srgb, var(--ink, #0b0b0c) 50%, transparent);
+      0 18px 42px -12px color-mix(in srgb, var(--ink) 65%, transparent),
+      0 2px 8px -1px color-mix(in srgb, var(--ink) 50%, transparent);
     backdrop-filter: saturate(140%) blur(6px);
   }
 
@@ -196,30 +197,30 @@ const {
   .sticky-book-cta-actions :global(.whatsapp-cta) {
     border: 1px solid #fff;
     background: #fff;
-    color: var(--ink, #111117);
+    color: var(--ink);
   }
 
   .sticky-book-cta-btn-newsletter:hover,
   .sticky-book-cta-btn-newsletter:focus-visible,
   .sticky-book-cta-actions :global(.whatsapp-cta):hover,
   .sticky-book-cta-actions :global(.whatsapp-cta):focus-visible {
-    background: color-mix(in srgb, #fff 88%, var(--ink, #111117));
-    border-color: color-mix(in srgb, #fff 88%, var(--ink, #111117));
+    background: color-mix(in srgb, #fff 88%, var(--ink));
+    border-color: color-mix(in srgb, #fff 88%, var(--ink));
     outline: none;
   }
 
   /* Booking keeps top billing, in the brand violet, on its own row. */
   .sticky-book-cta-lead {
     width: 100%;
-    border: 1px solid var(--violet, #6657ff);
-    background: var(--violet, #6657ff);
+    border: 1px solid var(--violet);
+    background: var(--violet);
     color: #fff;
   }
 
   .sticky-book-cta-lead:hover,
   .sticky-book-cta-lead:focus-visible {
-    background: color-mix(in srgb, var(--violet, #6657ff) 85%, white);
-    border-color: color-mix(in srgb, var(--violet, #6657ff) 85%, white);
+    background: color-mix(in srgb, var(--violet) 85%, white);
+    border-color: color-mix(in srgb, var(--violet) 85%, white);
     outline: none;
   }
 

@@ -88,14 +88,31 @@
     gap: 0.7rem;
   }
 
+  /* The proof rail is four columns; at 390px that is 79px per cell, which the
+     stat figures (£18M+, 4.93/5 at ~27px) overflow. Two columns give them
+     room. */
+  .hero-proof,
+  .hero-proof-quad {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 0.9rem;
+  }
+
+  /* Any button, anywhere, may wrap on a narrow viewport. `.button` sets
+     white-space: nowrap, which sizes it to its longest label — a 373px
+     "Take the Growth Bottleneck Scorecard" button does not fit a 370px shell,
+     and pushed the /industries content blocks past the viewport. Only the CTA
+     containers below also go full-width; that part is a layout choice. */
+  .button {
+    white-space: normal;
+    text-align: center;
+  }
+
   .wss-hero-redesign .btn,
   .hero-actions .button,
   .cta-inner .button,
   .home-podcast-actions .button {
     width: 100%;
     min-height: 48px;
-    white-space: normal;
-    text-align: center;
   }
 
   .founder-card {

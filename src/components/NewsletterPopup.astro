@@ -80,6 +80,12 @@ const {
         if (dialog.open) dialog.close();
       };
 
+      // The sticky bar pitches the same newsletter; two interruptions at once
+      // is one too many, so it stands down while the dialog is up.
+      const flagOpen = (isOpen) => {
+        document.documentElement.toggleAttribute("data-newsletter-popup-open", isOpen);
+      };
+
       document.addEventListener("newsletter:subscribed", () => {
         save({ subscribed: true });
         // Leave the confirmation on screen long enough to read.
@@ -97,6 +103,7 @@ const {
 
       dialog.addEventListener("close", () => {
         document.body.style.removeProperty("overflow");
+        flagOpen(false);
       });
 
       if (state.subscribed) return;
@@ -116,6 +123,7 @@ const {
         save({ shownAt: Date.now() });
         dialog.showModal();
         document.body.style.overflow = "hidden";
+        flagOpen(true);
       };
 
       function onExitIntent(event) {

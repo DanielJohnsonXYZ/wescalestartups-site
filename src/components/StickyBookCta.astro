@@ -45,27 +45,30 @@ const {
       </button>
       <div class="sticky-book-cta-actions">
         <a
-          class="sticky-book-cta-btn sticky-book-cta-lead"
+          class="sticky-book-cta-lead"
           href={href}
           data-cta="sticky-book-cta"
         >
           {ctaLabel}
         </a>
         <div class="sticky-book-cta-duo">
-          <a
-            class="sticky-book-cta-btn sticky-book-cta-btn-newsletter"
-            href="/newsletter"
-            data-cta="sticky-newsletter"
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-              <path d="m3 7 9 6 9-6"></path>
-            </svg>
-            Subscribe to {siteConfig.newsletterName}
+          <a class="cta-card" href="/newsletter" data-cta="sticky-newsletter">
+            <span class="cta-card-badge">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m3 7 9 6 9-6"></path>
+              </svg>
+            </span>
+            <span class="cta-card-copy">
+              <span class="cta-card-title">Subscribe to {siteConfig.newsletterName}</span>
+              <span class="cta-card-sub">{siteConfig.newsletterFrequencyLine}</span>
+            </span>
+            <span class="cta-card-arrow" aria-hidden="true">→</span>
           </a>
           <WhatsAppCta
-            class="sticky-book-cta-btn sticky-book-cta-btn-whatsapp"
+            card
             label="Join the WhatsApp group"
+            sublabel="Founders trading growth notes in real time."
             cta="sticky-whatsapp"
           />
         </div>
@@ -97,6 +100,13 @@ const {
 
   .sticky-book-cta.is-dismissed {
     display: none;
+  }
+
+  /* The newsletter popup pitches the same signup — the bar stands down while
+     the dialog is up rather than sitting dimmed behind its backdrop. */
+  :root[data-newsletter-popup-open] .sticky-book-cta {
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* Two rows: the booking line (with the dismiss control) above a row of
@@ -165,56 +175,106 @@ const {
   }
 
   .sticky-book-cta-duo > *,
-  .sticky-book-cta-duo :global(.whatsapp-cta) {
+  .sticky-book-cta-duo :global(.cta-card) {
     flex: 1 1 0;
     min-width: 0;
   }
 
-  .sticky-book-cta-btn,
-  .sticky-book-cta-actions :global(.whatsapp-cta) {
+  /* Each half is a small card: icon badge, title, one line of detail, and an
+     arrow that leans in on hover. */
+  .sticky-book-cta-duo :global(.cta-card) {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid color-mix(in srgb, #fff 14%, transparent);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, #fff 7%, transparent);
+    color: #fff;
+    text-align: left;
+    transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card):hover,
+  .sticky-book-cta-duo :global(.cta-card):focus-visible {
+    background: color-mix(in srgb, #fff 13%, transparent);
+    border-color: color-mix(in srgb, #fff 30%, transparent);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-badge) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    min-height: 2.4rem;
-    padding-block: 0.5rem;
-    padding-inline: 0.9rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    line-height: 1.25;
-    text-align: center;
-    transition: background 150ms ease, border-color 150ms ease;
-  }
-
-  .sticky-book-cta-btn svg {
     flex-shrink: 0;
-  }
-
-  /* Identical treatment for both halves — same size, same colour, same
-     weight. Anything else makes one of them the junior partner. */
-  .sticky-book-cta-btn-newsletter,
-  .sticky-book-cta-actions :global(.whatsapp-cta) {
-    border: 1px solid #fff;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 999px;
     background: #fff;
     color: var(--ink);
   }
 
-  .sticky-book-cta-btn-newsletter:hover,
-  .sticky-book-cta-btn-newsletter:focus-visible,
-  .sticky-book-cta-actions :global(.whatsapp-cta):hover,
-  .sticky-book-cta-actions :global(.whatsapp-cta):focus-visible {
-    background: color-mix(in srgb, #fff 88%, var(--ink));
-    border-color: color-mix(in srgb, #fff 88%, var(--ink));
-    outline: none;
+  .sticky-book-cta-duo :global(.cta-card-badge svg) {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-copy) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-title) {
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-sub) {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: color-mix(in srgb, #fff 62%, transparent);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-arrow) {
+    margin-left: auto;
+    padding-left: 0.35rem;
+    font-size: 0.85rem;
+    color: color-mix(in srgb, #fff 55%, transparent);
+    transition: transform 160ms ease, color 160ms ease;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card):hover :global(.cta-card-arrow),
+  .sticky-book-cta-duo :global(.cta-card):focus-visible :global(.cta-card-arrow) {
+    transform: translateX(2px);
+    color: #fff;
   }
 
   /* Booking keeps top billing, in the brand violet, on its own row. */
   .sticky-book-cta-lead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 2.4rem;
+    padding: 0.5rem 0.9rem;
     border: 1px solid var(--violet);
+    border-radius: 0.75rem;
     background: var(--violet);
     color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    transition: background 160ms ease, border-color 160ms ease;
   }
 
   .sticky-book-cta-lead:hover,
@@ -252,9 +312,8 @@ const {
     .sticky-book-cta-duo {
       flex-direction: column;
     }
-    .sticky-book-cta-btn,
-    .sticky-book-cta-actions :global(.whatsapp-cta) {
-      min-height: 2.6rem;
+    .sticky-book-cta-duo :global(.cta-card) {
+      padding: 0.65rem 0.7rem;
     }
   }
 

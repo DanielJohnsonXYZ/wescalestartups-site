@@ -13,6 +13,12 @@ export const siteConfig = {
   /** Cal.com username/event path used by the inline embed (no leading slash). */
   calLink: "daniel/20min",
   calOrigin: "https://cal.wescalestartups.com",
+  /**
+   * 60-minute Luck Doesn't Scale podcast recording invite.
+   * Create/publish the event type first (see docs/cal-podcast-event-type.md).
+   */
+  podcastCalUrl: "https://cal.wescalestartups.com/daniel/podcast",
+  podcastCalLink: "daniel/podcast",
   bookingLabel: "Book a Growth Audit",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,

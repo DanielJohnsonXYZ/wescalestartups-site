@@ -934,6 +934,11 @@ const subAudiences = [
       line-height: 1.55;
       color: var(--muted);
     }
+    /* Pin the CTA block to the bottom so it lines up with the signup form's
+       own button instead of leaving dead space under a shorter card. */
+    .v9-community-whatsapp :global(.whatsapp-cta) {
+      margin-top: auto;
+    }
     .v9-community-fine {
       font-size: 0.78rem;
       color: var(--muted);

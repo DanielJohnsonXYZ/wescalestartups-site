@@ -7,6 +7,7 @@
 // `dismissDays`, and never again for anyone who subscribes (EmailSignup
 // dispatches `newsletter:subscribed` on success).
 import EmailSignup from "./EmailSignup.astro";
+import WhatsAppCta from "./WhatsAppCta.astro";
 import { siteConfig } from "../site";
 
 interface Props {
@@ -35,21 +36,42 @@ const {
     data-scroll-trigger={scrollTrigger}
     data-delay-seconds={delaySeconds}
     data-dismiss-days={dismissDays}
-    aria-label={`Subscribe to ${siteConfig.newsletterName}`}
+    aria-labelledby="nl-popup-heading"
   >
     <button class="nl-popup-close" type="button" data-newsletter-popup-close aria-label="Close">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
         <path d="M6 6l12 12M18 6L6 18"></path>
       </svg>
     </button>
-    <EmailSignup
-      variant="light"
-      formId="popup-newsletter"
-      sourceType="newsletter"
-      heading="Practical founder-led GTM, one email at a time."
-      subtext={siteConfig.newsletterFrequencyLine}
-      buttonLabel={`Subscribe to ${siteConfig.newsletterName} →`}
-    />
+
+    <div class="nl-popup-head">
+      <p class="nl-popup-eyebrow">Stay in the loop</p>
+      <h2 id="nl-popup-heading">Two ways to keep in touch.</h2>
+    </div>
+
+    <div class="nl-popup-panels">
+      <EmailSignup
+        variant="light"
+        formId="popup-newsletter"
+        sourceType="newsletter"
+        heading="Practical founder-led GTM, one email at a time."
+        subtext={siteConfig.newsletterFrequencyLine}
+        buttonLabel={`Subscribe to ${siteConfig.newsletterName} →`}
+      />
+
+      <div class="nl-popup-panel">
+        <p class="nl-popup-panel-eyebrow">{siteConfig.growingPains.name}</p>
+        <h3>Talk it through with other founders.</h3>
+        <p class="nl-popup-panel-sub">
+          {siteConfig.growingPains.blurb} A WhatsApp group working the same problems in real time. No pitching, no noise.
+        </p>
+        <WhatsAppCta
+          class="button button-brand nl-popup-panel-cta"
+          label="Join the WhatsApp group →"
+          cta="popup-whatsapp"
+        />
+      </div>
+    </div>
   </dialog>
 )}
 
@@ -150,15 +172,88 @@ const {
     /* inset + auto margins are what centre a modal <dialog> in the top layer. */
     inset: 0;
     margin: auto;
-    width: min(30rem, calc(100vw - 2rem));
+    width: min(34rem, calc(100vw - 2rem));
     max-width: none;
+    max-height: calc(100dvh - 2rem);
     height: fit-content;
-    padding: 0;
-    border: 0;
+    padding: 1.5rem 1.35rem 1.35rem;
+    border: 1px solid var(--line);
     border-radius: 0.75rem;
-    background: transparent;
-    overflow: visible;
+    background: var(--paper);
+    overflow: auto;
     box-shadow: 0 24px 60px rgba(17, 17, 23, 0.28);
+  }
+
+  .nl-popup-head {
+    margin-bottom: 1rem;
+    padding-right: 2rem;
+  }
+
+  .nl-popup-eyebrow {
+    margin: 0 0 0.3rem;
+    font-family: var(--v9-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--violet-deep);
+  }
+
+  .nl-popup-head h2 {
+    margin: 0;
+    font-family: var(--v9-display);
+    font-size: 1.45rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  /* Equal billing: two panels, same surface, same padding, same CTA weight. */
+  .nl-popup-panels {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .nl-popup-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+  }
+
+  .nl-popup-panel-eyebrow {
+    margin: 0;
+    font-family: var(--v9-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--violet-deep);
+  }
+
+  .nl-popup-panel h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .nl-popup-panel-sub {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* Matches the signup's own submit button, so neither half outranks the
+     other on the way out of the dialog. */
+  .nl-popup :global(.nl-popup-panel-cta) {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.35rem;
   }
 
   .nl-popup::backdrop {
@@ -188,15 +283,22 @@ const {
     }
   }
 
-  /* EmailSignup brings its own surface, border and radius. */
+  /* EmailSignup brings its own surface, border and radius — match the
+     WhatsApp panel's padding so the pair reads as one control. */
   .nl-popup :global(.email-signup-strip) {
     margin: 0;
-    padding: 1.6rem 1.5rem;
+    padding: 1.4rem 1.5rem;
   }
 
   .nl-popup :global(.email-signup-heading) {
     font-size: 1.05rem;
     line-height: 1.35;
+  }
+
+  /* Full-width submit, so both panels end in the same size of button. */
+  .nl-popup :global(.email-signup-form .button) {
+    width: 100%;
+    justify-content: center;
   }
 
   /* Keep the heading clear of the close button on narrow viewports. */

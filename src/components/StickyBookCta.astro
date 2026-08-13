@@ -36,26 +36,13 @@ const {
         <span class="sticky-book-cta-label">{siteConfig.bookingLabel}</span>
         <span class="sticky-book-cta-hint">{hint}</span>
       </div>
-      <div class="sticky-book-cta-secondary" aria-label="More ways to connect">
-        <a
-          class="sticky-book-cta-icon-link"
-          href="/newsletter"
-          data-cta="sticky-newsletter"
-          aria-label={`Read ${siteConfig.newsletterName}`}
-          title={siteConfig.newsletterName}
-        >
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-            <path d="m3 7 9 6 9-6"></path>
-          </svg>
-        </a>
-        <WhatsAppCta
-          class="sticky-book-cta-icon-link"
-          iconOnly
-          ariaLabel="Join the WhatsApp community"
-          cta="sticky-whatsapp"
-        />
-      </div>
+      <button
+        class="sticky-book-cta-dismiss"
+        type="button"
+        aria-label="Dismiss booking bar"
+      >
+        ×
+      </button>
       <div class="sticky-book-cta-actions">
         <a
           class="button button-brand sticky-book-cta-primary"
@@ -64,13 +51,22 @@ const {
         >
           {ctaLabel}
         </a>
-        <button
-          class="sticky-book-cta-dismiss"
-          type="button"
-          aria-label="Dismiss booking bar"
+        <a
+          class="sticky-book-cta-ghost"
+          href="/newsletter"
+          data-cta="sticky-newsletter"
         >
-          ×
-        </button>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m3 7 9 6 9-6"></path>
+          </svg>
+          Subscribe to {siteConfig.newsletterName}
+        </a>
+        <WhatsAppCta
+          class="sticky-book-cta-ghost"
+          label="Join the WhatsApp group"
+          cta="sticky-whatsapp"
+        />
       </div>
     </div>
   </div>
@@ -101,13 +97,20 @@ const {
     display: none;
   }
 
+  /* Two rows: the booking line (with the dismiss control) above a row of
+     labelled CTAs, so the newsletter and the WhatsApp group read as real
+     offers rather than mystery icons. */
   .sticky-book-cta-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "copy dismiss"
+      "actions actions";
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem 0.75rem;
     width: min(720px, 100%);
-    padding: 0.75rem 0.9rem 0.75rem 1.25rem;
-    border-radius: 999px;
+    padding: 0.85rem 0.9rem 0.9rem 1.25rem;
+    border-radius: 1.25rem;
     background: color-mix(in srgb, var(--ink, #0b0b0c) 96%, transparent);
     color: #fff;
     box-shadow:
@@ -117,11 +120,11 @@ const {
   }
 
   .sticky-book-cta-copy {
+    grid-area: copy;
     display: flex;
     flex-direction: column;
     line-height: 1.2;
     min-width: 0;
-    flex: 1;
   }
 
   .sticky-book-cta-label {
@@ -141,57 +144,60 @@ const {
     margin-top: 2px;
   }
 
-  /* Secondary links (newsletter, WhatsApp) — compact icon-only slot so the
-     booking CTA stays the visually dominant action. Hidden on narrow
-     viewports (see media query below) rather than competing with the
-     primary CTA and dismiss control for thumb space. */
-  .sticky-book-cta-secondary {
+  .sticky-book-cta-actions {
+    grid-area: actions;
     display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    flex-shrink: 0;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 0.4rem;
   }
 
-  /* The WhatsApp link is rendered by a child component, so its element never
-     carries this file's scope attribute — match it through :global as well as
-     the locally rendered newsletter link. */
-  .sticky-book-cta-icon-link,
-  .sticky-book-cta-secondary :global(.whatsapp-cta) {
+  /* Secondary CTAs carry their label and icon — outlined rather than solid so
+     the booking CTA still leads, but they read as buttons, not decoration.
+     The WhatsApp link is rendered by a child component, so its element never
+     carries this file's scope attribute: match it through :global too. */
+  .sticky-book-cta-primary,
+  .sticky-book-cta-ghost,
+  .sticky-book-cta-actions :global(.whatsapp-cta) {
+    flex: 1 1 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    gap: 0.45rem;
+    min-height: 2.4rem;
+    min-width: 0;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
     border-radius: 999px;
-    border: 1px solid color-mix(in srgb, #fff 18%, transparent);
-    background: transparent;
-    color: #fff;
-    transition: background 150ms ease;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
   }
 
-  .sticky-book-cta-icon-link:hover,
-  .sticky-book-cta-icon-link:focus-visible,
-  .sticky-book-cta-secondary :global(.whatsapp-cta):hover,
-  .sticky-book-cta-secondary :global(.whatsapp-cta):focus-visible {
-    background: color-mix(in srgb, #fff 14%, transparent);
+  .sticky-book-cta-ghost,
+  .sticky-book-cta-actions :global(.whatsapp-cta) {
+    border: 1px solid color-mix(in srgb, #fff 32%, transparent);
+    background: color-mix(in srgb, #fff 8%, transparent);
+    color: #fff;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+
+  .sticky-book-cta-ghost:hover,
+  .sticky-book-cta-ghost:focus-visible,
+  .sticky-book-cta-actions :global(.whatsapp-cta):hover,
+  .sticky-book-cta-actions :global(.whatsapp-cta):focus-visible {
+    background: color-mix(in srgb, #fff 18%, transparent);
+    border-color: color-mix(in srgb, #fff 55%, transparent);
     outline: none;
   }
 
-  .sticky-book-cta-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+  .sticky-book-cta-ghost svg {
     flex-shrink: 0;
   }
 
-  .sticky-book-cta-primary {
-    padding-block: 0.55rem;
-    padding-inline: 1rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
-
   .sticky-book-cta-dismiss {
+    grid-area: dismiss;
+    flex-shrink: 0;
     width: 2rem;
     height: 2rem;
     border-radius: 999px;
@@ -211,10 +217,12 @@ const {
   }
 
   @media (max-width: 640px) {
-    /* Below tablet width the bar is already tight (label hides at 520px);
-       drop the secondary links entirely so booking + dismiss stay reachable. */
-    .sticky-book-cta-secondary {
-      display: none;
+    /* One CTA per row — full-width targets beat a cramped row, and all three
+       stay reachable instead of the secondary links being dropped. */
+    .sticky-book-cta-primary,
+    .sticky-book-cta-ghost,
+    .sticky-book-cta-actions :global(.whatsapp-cta) {
+      flex: 1 1 100%;
     }
   }
 
@@ -225,9 +233,6 @@ const {
     .sticky-book-cta-inner {
       padding-left: 1rem;
       gap: 0.5rem;
-    }
-    .sticky-book-cta-label {
-      display: none;
     }
   }
 

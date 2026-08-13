@@ -2,6 +2,7 @@
 // SiteFooter.astro, restructured into 5 clean groups:
 // Work with us · Proof · Resources · Company · Legal
 import EmailSignup from "./EmailSignup.astro";
+import WhatsAppCta from "./WhatsAppCta.astro";
 import { siteConfig } from "../site";
 
 interface Props {
@@ -118,13 +119,19 @@ const groups = [
     ))}
 
     {showNewsletter && (
-      <div class="footer-newsletter" aria-label="Newsletter signup">
+      <div class="footer-newsletter" aria-label="Newsletter and community">
         <EmailSignup
           variant="light"
           formId="footer-newsletter"
           heading={siteConfig.newsletterName}
           subtext={`${siteConfig.newsletterDescription} ${siteConfig.newsletterFrequencyLine}`}
         />
+        <div class="footer-whatsapp">
+          <p class="footer-whatsapp-copy">
+            Prefer real-time? Join founders and operators comparing notes on pipeline, positioning, and growth systems.
+          </p>
+          <WhatsAppCta class="button button-acid" label="Join the WhatsApp group" cta="footer-whatsapp" />
+        </div>
       </div>
     )}
   </div>
@@ -218,16 +225,41 @@ const groups = [
   .footer-newsletter {
     grid-column: 1 / -1;
     min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: stretch;
   }
   .footer-newsletter :global(.email-signup-strip) {
     margin: 0;
     padding: 1.4rem 1.5rem;
+    flex: 1 1 320px;
   }
   .footer-newsletter :global(.email-signup-heading) {
     font-size: 1rem;
   }
   .footer-newsletter :global(.email-signup-sub) {
     font-size: 0.82rem;
+  }
+
+  /* WhatsApp block sits beside the newsletter strip, same light-card
+     treatment (surface + line) so the pair reads as one module. */
+  .footer-whatsapp {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.4rem 1.5rem;
+    border-radius: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .footer-whatsapp-copy {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--muted);
   }
 
   .footer-col :is(h2, h3) {

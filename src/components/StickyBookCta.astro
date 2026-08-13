@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../site";
+import WhatsAppCta from "./WhatsAppCta.astro";
 
 interface Props {
   /** Set false on /book and pages that already end in a full-width booking block. */
@@ -34,6 +35,26 @@ const {
       <div class="sticky-book-cta-copy">
         <span class="sticky-book-cta-label">{siteConfig.bookingLabel}</span>
         <span class="sticky-book-cta-hint">{hint}</span>
+      </div>
+      <div class="sticky-book-cta-secondary" aria-label="More ways to connect">
+        <a
+          class="sticky-book-cta-icon-link"
+          href="/newsletter"
+          data-cta="sticky-newsletter"
+          aria-label={`Read ${siteConfig.newsletterName}`}
+          title={siteConfig.newsletterName}
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m3 7 9 6 9-6"></path>
+          </svg>
+        </a>
+        <WhatsAppCta
+          class="sticky-book-cta-icon-link"
+          iconOnly
+          ariaLabel="Join the WhatsApp community"
+          cta="sticky-whatsapp"
+        />
       </div>
       <div class="sticky-book-cta-actions">
         <a
@@ -120,6 +141,36 @@ const {
     margin-top: 2px;
   }
 
+  /* Secondary links (newsletter, WhatsApp) — compact icon-only slot so the
+     booking CTA stays the visually dominant action. Hidden on narrow
+     viewports (see media query below) rather than competing with the
+     primary CTA and dismiss control for thumb space. */
+  .sticky-book-cta-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .sticky-book-cta-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, #fff 18%, transparent);
+    background: transparent;
+    color: #fff;
+    transition: background 150ms ease;
+  }
+
+  .sticky-book-cta-icon-link:hover,
+  .sticky-book-cta-icon-link:focus-visible {
+    background: color-mix(in srgb, #fff 14%, transparent);
+    outline: none;
+  }
+
   .sticky-book-cta-actions {
     display: flex;
     align-items: center;
@@ -151,6 +202,14 @@ const {
   .sticky-book-cta-dismiss:focus-visible {
     background: color-mix(in srgb, #fff 14%, transparent);
     outline: none;
+  }
+
+  @media (max-width: 640px) {
+    /* Below tablet width the bar is already tight (label hides at 520px);
+       drop the secondary links entirely so booking + dismiss stay reachable. */
+    .sticky-book-cta-secondary {
+      display: none;
+    }
   }
 
   @media (max-width: 520px) {

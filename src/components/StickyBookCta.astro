@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../site";
+import WhatsAppCta from "./WhatsAppCta.astro";
 
 interface Props {
   /** Set false on /book and pages that already end in a full-width booking block. */
@@ -35,21 +36,42 @@ const {
         <span class="sticky-book-cta-label">{siteConfig.bookingLabel}</span>
         <span class="sticky-book-cta-hint">{hint}</span>
       </div>
+      <button
+        class="sticky-book-cta-dismiss"
+        type="button"
+        aria-label="Dismiss booking bar"
+      >
+        ×
+      </button>
       <div class="sticky-book-cta-actions">
         <a
-          class="button button-brand sticky-book-cta-primary"
+          class="sticky-book-cta-lead"
           href={href}
           data-cta="sticky-book-cta"
         >
           {ctaLabel}
         </a>
-        <button
-          class="sticky-book-cta-dismiss"
-          type="button"
-          aria-label="Dismiss booking bar"
-        >
-          ×
-        </button>
+        <div class="sticky-book-cta-duo">
+          <a class="cta-card" href="/newsletter" data-cta="sticky-newsletter">
+            <span class="cta-card-badge">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m3 7 9 6 9-6"></path>
+              </svg>
+            </span>
+            <span class="cta-card-copy">
+              <span class="cta-card-title">Subscribe to {siteConfig.newsletterName}</span>
+              <span class="cta-card-sub">{siteConfig.newsletterFrequencyLine}</span>
+            </span>
+            <span class="cta-card-arrow" aria-hidden="true">→</span>
+          </a>
+          <WhatsAppCta
+            card
+            label="Join the WhatsApp group"
+            sublabel="Founders trading growth notes in real time."
+            cta="sticky-whatsapp"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -80,13 +102,28 @@ const {
     display: none;
   }
 
+  /* The newsletter popup pitches the same signup — the bar stands down while
+     the dialog is up rather than sitting dimmed behind its backdrop. */
+  :root[data-newsletter-popup-open] .sticky-book-cta {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Two rows: the booking line (with the dismiss control) above a row of
+     labelled CTAs, so the newsletter and the WhatsApp group read as real
+     offers rather than mystery icons. */
   .sticky-book-cta-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "copy dismiss"
+      "actions actions";
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem 0.75rem;
     width: min(720px, 100%);
-    padding: 0.75rem 0.9rem 0.75rem 1.25rem;
-    border-radius: 999px;
+    padding: 0.85rem 0.9rem 0.9rem 1.25rem;
+    /* A pill no longer fits now the bar carries two rows of CTAs. */
+    border-radius: 1.25rem;
     background: color-mix(in srgb, var(--ink) 96%, transparent);
     color: #fff;
     box-shadow:
@@ -96,11 +133,11 @@ const {
   }
 
   .sticky-book-cta-copy {
+    grid-area: copy;
     display: flex;
     flex-direction: column;
     line-height: 1.2;
     min-width: 0;
-    flex: 1;
   }
 
   .sticky-book-cta-label {
@@ -121,20 +158,135 @@ const {
   }
 
   .sticky-book-cta-actions {
+    grid-area: actions;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.4rem;
-    flex-shrink: 0;
   }
 
-  .sticky-book-cta-primary {
-    padding-block: 0.55rem;
-    padding-inline: 1rem;
+  /* The newsletter and the group get identical space and identical weight —
+     neither is the junior partner. The WhatsApp link is rendered by a child
+     component, so its element never carries this file's scope attribute:
+     match it through :global too. */
+  .sticky-book-cta-duo {
+    display: flex;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+
+  .sticky-book-cta-duo > *,
+  .sticky-book-cta-duo :global(.cta-card) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* Each half is a small card: icon badge, title, one line of detail, and an
+     arrow that leans in on hover. */
+  .sticky-book-cta-duo :global(.cta-card) {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid color-mix(in srgb, #fff 14%, transparent);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, #fff 7%, transparent);
+    color: #fff;
+    text-align: left;
+    transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card):hover,
+  .sticky-book-cta-duo :global(.cta-card):focus-visible {
+    background: color-mix(in srgb, #fff 13%, transparent);
+    border-color: color-mix(in srgb, #fff 30%, transparent);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-badge) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-badge svg) {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-copy) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-title) {
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-sub) {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: color-mix(in srgb, #fff 62%, transparent);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card-arrow) {
+    margin-left: auto;
+    padding-left: 0.35rem;
     font-size: 0.85rem;
-    white-space: nowrap;
+    color: color-mix(in srgb, #fff 55%, transparent);
+    transition: transform 160ms ease, color 160ms ease;
+  }
+
+  .sticky-book-cta-duo :global(.cta-card):hover :global(.cta-card-arrow),
+  .sticky-book-cta-duo :global(.cta-card):focus-visible :global(.cta-card-arrow) {
+    transform: translateX(2px);
+    color: #fff;
+  }
+
+  /* Booking keeps top billing, in the brand violet, on its own row. */
+  .sticky-book-cta-lead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.4rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--violet);
+    border-radius: 0.75rem;
+    background: var(--violet);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    transition: background 160ms ease, border-color 160ms ease;
+  }
+
+  .sticky-book-cta-lead:hover,
+  .sticky-book-cta-lead:focus-visible {
+    background: color-mix(in srgb, var(--violet) 85%, white);
+    border-color: color-mix(in srgb, var(--violet) 85%, white);
+    outline: none;
   }
 
   .sticky-book-cta-dismiss {
+    grid-area: dismiss;
+    flex-shrink: 0;
     width: 2rem;
     height: 2rem;
     border-radius: 999px;
@@ -153,6 +305,18 @@ const {
     outline: none;
   }
 
+  @media (max-width: 640px) {
+    /* Stacked — still equal-sized, just full-width targets rather than two
+       cramped columns, and all three stay reachable instead of the secondary
+       links being dropped. */
+    .sticky-book-cta-duo {
+      flex-direction: column;
+    }
+    .sticky-book-cta-duo :global(.cta-card) {
+      padding: 0.65rem 0.7rem;
+    }
+  }
+
   @media (max-width: 520px) {
     .sticky-book-cta {
       bottom: 0.75rem;
@@ -160,9 +324,6 @@ const {
     .sticky-book-cta-inner {
       padding-left: 1rem;
       gap: 0.5rem;
-    }
-    .sticky-book-cta-label {
-      display: none;
     }
   }
 

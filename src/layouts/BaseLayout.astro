@@ -1,5 +1,6 @@
 ---
 import EasterEgg from "../components/EasterEgg.astro";
+import NewsletterPopup from "../components/NewsletterPopup.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import AnnouncementBanner from "../components/AnnouncementBanner.astro";
@@ -49,6 +50,8 @@ interface Props {
   stickyBookHref?: string;
   /** Sticky CTA button label override. */
   stickyBookCtaLabel?: string;
+  /** Newsletter popup (off on /newsletter and the booking flow). */
+  newsletterPopup?: boolean;
   /** Header primary CTA label. */
   headerCtaLabel?: string;
   /** Header primary CTA href. */
@@ -86,6 +89,7 @@ const {
   stickyBookCta: stickyBookCtaProp,
   stickyBookHref,
   stickyBookCtaLabel,
+  newsletterPopup: newsletterPopupProp,
   headerCtaLabel,
   headerCtaHref,
   showFooterScorecard = true,
@@ -98,6 +102,11 @@ const stickyBookCta =
   stickyBookCtaProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
 const showAnnouncement =
   showAnnouncementProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
+// Don't interrupt readers who are already on the signup page or in the
+// booking flow — everywhere else the popup is on by default.
+const newsletterPopup =
+  newsletterPopupProp ??
+  !(currentPath === "/newsletter" || currentPath === "/book" || currentPath.startsWith("/book/"));
 const canonical = absoluteUrl(currentPath);
 const imageUrl = absoluteUrl(ogImage);
 const ogImageAlt = ogImageAltProp ?? title;
@@ -362,6 +371,7 @@ const turnstileSiteKey =
       href={stickyBookHref}
       ctaLabel={stickyBookCtaLabel}
     />
+    <NewsletterPopup enabled={newsletterPopup} />
     <EasterEgg />
   </body>
 </html>

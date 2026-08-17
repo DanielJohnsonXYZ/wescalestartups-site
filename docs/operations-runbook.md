@@ -182,8 +182,10 @@ Cap until the owner chooses one of these paths:
 ### 5d. Cloudflare must not cache or bot-challenge Cal
 
 `NEXTAUTH_URL` / `NEXT_PUBLIC_WEBAPP_URL` are already `https://cal.wescalestartups.com`.
-Hitting the origin (`65.109.232.75`) returns HTTP 200 with no 503s. The login /
-`/event-types` redirect loop is at the Cloudflare edge, not the Cal container.
+Hitting the origin (`65.109.232.75`) for `/auth/login` and `/wss-calendar` returns
+HTTP 200. A **404** on `/daniel/20min` is a missing Cal.com user/event slug, not a
+down container — see §5e. The login / `/event-types` redirect loop is at the
+Cloudflare edge, not the Cal container.
 
 A leftover WordPress Page Rule matches **all** hosts:
 
@@ -245,10 +247,19 @@ token that has Zone → Health Checks → Edit).
 
 Until then, a host cron monitor runs on the Hetzner box:
 
-- Script: `/opt/wss-monitors/cal-booking-check.sh`
-- Cron: `/etc/cron.d/wss-cal-booking-monitor` (every 2 minutes)
+- Script (repo): `scripts/cal-booking-check.sh` → install to `/opt/wss-monitors/cal-booking-check.sh`
+- Cron: `/etc/cron.d/wss-cal-booking-monitor` (every 5 minutes)
 - Alert: Dokploy Slack webhook (`WSS Alerts`) on down / recovery
-- Target: `https://cal.wescalestartups.com/daniel/20min` (expects HTTP 200)
+- Targets (origin IP `65.109.232.75`, expect HTTP 200):
+  - `Cal booking` → `/daniel/20min`
+  - `Cal 60min` → `/daniel/60min`
+- Slack line on failure:
+  `WSS health FAIL: Cal booking → HTTP 404 (origin https://cal.wescalestartups.com/daniel/20min)`
+
+HTTP 404 here is Cal.com saying the username or event type does not exist.
+It is **not** Cloudflare Bot Fight (that is HTTP 403 + `cf-mitigated: challenge`).
+Restore with §5e; do not change `siteConfig.calLink` unless the username
+intentionally moved.
 
 ### 5c. Lead-capture health probe
 
@@ -265,7 +276,7 @@ JSON body.
 
 ```cron
 # /etc/cron.d/wss-cal-booking-monitor — keep existing interval; append lead capture
-*/2 * * * * root SLACK_WEBHOOK='…' /opt/wss-monitors/cal-booking-check.sh
+*/5 * * * * root SLACK_WEBHOOK='…' /opt/wss-monitors/cal-booking-check.sh
 */5 * * * * root SLACK_WEBHOOK='…' /opt/wss-monitors/lead-capture-check.sh
 ```
 
@@ -337,6 +348,101 @@ curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/healthcheck
 
 Then add a Notification policy for Health Check status in
 **Notifications → Add → Health Checks status notification**.
+
+### 5e. Booking URL 404 — restore `daniel` / `20min` / `60min`
+
+Incident (2026-08-17): Slack `#general` flooded every 5 minutes with
+
+```
+WSS health FAIL: Cal booking → HTTP 404 (origin https://cal.wescalestartups.com/daniel/20min)
+WSS health FAIL: Cal 60min → HTTP 404 (origin https://cal.wescalestartups.com/daniel/60min)
+```
+
+The marketing site config (`src/site.ts` `calUrl` / `calLink`, `/book` embed) is
+already pointing at the right paths. The live embed is broken because Cal.com
+itself 404s those paths. Do not retarget the site until a new username is
+intentional. The self-hosted Cal.com **origin** returns a Next.js 404 (`404:
+This page could not be found. | We Scale Startups`) for `/daniel`,
+`/daniel/20min`, and `/daniel/60min`. `/auth/login` and `/wss-calendar` still
+200, so the stack is up — the public username or event slugs are gone (rename,
+hidden event, or spam-user cleanup that took the real account). Traefik still
+301s the old `/daniel-wescalestartups.com/*` path onto the same missing
+`/daniel/*` URLs.
+
+This cannot be fixed from Cloudflare Pages. SSH to `dokploy-wss` (or log into
+Cal from a normal browser — Bot Fight challenges datacenter IPs).
+
+#### A. Confirm it is still a 404 on origin
+
+```bash
+# from this repo, or copy the script to the box
+./scripts/cal-booking-diagnose.sh
+```
+
+Expect `/auth/login` → 200 and `/daniel/20min` → 404. If `/daniel/20min` is
+already 200, the monitor is stale — copy the new `cal-booking-check.sh` and
+the next run will send `WSS health RECOVERED`.
+
+#### B. Fastest: Cal UI (trusted browser, not a cloud agent)
+
+1. Open `https://cal.wescalestartups.com/auth/login` as `daniel@wescalestartups.com`.
+2. **Settings → Profile → Username** must be exactly `daniel`.
+3. **Event Types**: Growth Audit slug `20min`, 1-hour slug `60min`, neither hidden.
+4. Incognito: `https://cal.wescalestartups.com/daniel/20min` and `/daniel/60min`
+   must render the booker (HTTP 200), not the Cal 404 page.
+5. On the Hetzner box, flush Cal Redis so a cached 404 cannot stick:
+
+```bash
+docker ps --format '{{.Names}}' | grep -i redis
+docker exec <calcom-redis-container> redis-cli FLUSHALL
+```
+
+#### C. If the UI has no user or the username will not save: Postgres
+
+`scripts/cal-booking-diagnose.sh` on the box prints `users`, `EventType`, and
+`Profile` (org-era). Then, only if the row exists and the username is wrong:
+
+```sql
+-- inspect first
+SELECT id, username, email, name FROM "users";
+SELECT id, slug, title, hidden, "userId", "teamId" FROM "EventType";
+
+-- restore public username (adjust email if needed)
+UPDATE "users"
+SET username = 'daniel'
+WHERE email = 'daniel@wescalestartups.com';
+
+-- org-era installs also key public pages off Profile.username
+UPDATE "Profile"
+SET username = 'daniel'
+WHERE "userId" = (SELECT id FROM "users" WHERE email = 'daniel@wescalestartups.com');
+
+-- unhide + rename slugs if the events exist under other slugs
+UPDATE "EventType" SET slug = '20min', hidden = false
+WHERE "userId" = (SELECT id FROM "users" WHERE username = 'daniel')
+  AND (slug = '20min' OR title ILIKE '%growth audit%')
+  AND (title NOT ILIKE '%hour%' AND title NOT ILIKE '%60%');
+
+UPDATE "EventType" SET slug = '60min', hidden = false
+WHERE "userId" = (SELECT id FROM "users" WHERE username = 'daniel')
+  AND (slug = '60min' OR title ILIKE '%60%' OR title ILIKE '%1 hour%' OR title ILIKE '%one hour%');
+```
+
+If `users` has no `daniel@wescalestartups.com` row, do **not** create a blank
+user (Google Calendar / Meet OAuth will be missing). Restore the latest Cal.com
+Postgres dump from R2 (`wss-backups/…/databases/`, see §2) into a throwaway
+database, copy the `users` / `EventType` / credential rows, or restore the
+whole Cal DB from the last known-good dump.
+
+After any SQL: recycle the Cal.com app container and flush Redis, then re-run
+`./scripts/cal-booking-diagnose.sh` until `/daniel/20min` is HTTP 200.
+
+#### D. Do not “fix” this by pointing the site at Calendly
+
+Calendly (`calendly.com/wescalestartups`) is the legacy surface. Changing
+`siteConfig.calLink` without a live Cal username leaves `/book` and every CTA
+on a 404. Restore the Cal paths above; only then consider pausing Calendly
+again (§5).
 
 ## 6. Other standing recommendations
 

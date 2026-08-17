@@ -3,11 +3,17 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteConfig } from "../../site";
 
 const community = siteConfig.growingPains;
+const hostName = siteConfig.founderName;
+const defaultPending = siteConfig.bookingRequiresHostConfirmation;
 ---
 
 <BaseLayout
-  title={`You're booked | ${siteConfig.bookingLabel}`}
-  description="Your Growth Audit is confirmed. Check your email for the Google Meet link, then bring the bottleneck you want named."
+  title={defaultPending ? `Request sent | ${siteConfig.bookingLabel}` : `You're booked | ${siteConfig.bookingLabel}`}
+  description={
+    defaultPending
+      ? `${hostName} still needs to confirm or decline this booking. Google Calendar and the Meet link are created only after he accepts.`
+      : "Your Growth Audit is confirmed. Check your email for the Google Meet link, then bring the bottleneck you want named."
+  }
   path="/book/thanks"
   metaRobots="noindex,follow"
   lastUpdated={false}
@@ -15,12 +21,25 @@ const community = siteConfig.growingPains;
   stickyBookCta={false}
 >
   <section class="page-hero" aria-labelledby="booked-heading">
-    <div class="shell">
-      <p class="eyebrow">You are booked</p>
-      <h1 id="booked-heading">Your Growth Audit is on the calendar.</h1>
+    <div class="shell" data-booking-thanks data-requires-confirmation={defaultPending ? "true" : "false"}>
+      <p class="eyebrow">
+        <span data-thanks-copy="pending" hidden={!defaultPending ? true : undefined}>Request sent</span>
+        <span data-thanks-copy="confirmed" hidden={defaultPending ? true : undefined}>You are booked</span>
+      </p>
+      <h1 id="booked-heading">
+        <span data-thanks-copy="pending" hidden={!defaultPending ? true : undefined}>Your Growth Audit is waiting on confirmation.</span>
+        <span data-thanks-copy="confirmed" hidden={defaultPending ? true : undefined}>Your Growth Audit is on the calendar.</span>
+      </h1>
       <p class="lede">
-        Check your email for the Google Meet link and calendar invite. Before the call, jot the bottleneck you want named —
-        positioning, acquisition, conversion, retention, or operating rhythm.
+        <span data-thanks-copy="pending" hidden={!defaultPending ? true : undefined}>
+          {hostName} still needs to confirm or decline this booking. Until he accepts, it will not appear on Google
+          Calendar and there is no Meet link yet. Watch your email for the confirmation — the calendar invite and
+          video URL arrive only after that.
+        </span>
+        <span data-thanks-copy="confirmed" hidden={defaultPending ? true : undefined}>
+          Check your email for the Google Meet link and calendar invite. Before the call, jot the bottleneck you want named —
+          positioning, acquisition, conversion, retention, or operating rhythm.
+        </span>
       </p>
       <div class="hero-actions">
         <a class="button button-brand" href={siteConfig.calUrl} data-cta="book-thanks-manage" rel="noreferrer" target="_blank">
@@ -68,4 +87,33 @@ const community = siteConfig.growingPains;
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      var KEY = "wss_booking_status";
+      var root = document.querySelector("[data-booking-thanks]");
+      if (!root) return;
+      var requires = root.getAttribute("data-requires-confirmation") === "true";
+
+      function state() {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var qStatus = (params.get("status") || "").toLowerCase();
+          if (params.get("pending") === "1" || qStatus === "pending") return "pending";
+          if (params.get("confirmed") === "1" || qStatus === "confirmed" || qStatus === "accepted") {
+            return "confirmed";
+          }
+          var stored = sessionStorage.getItem(KEY) || "";
+          if (stored === "pending" || stored === "confirmed") return stored;
+        } catch (_) {}
+        return requires ? "pending" : "confirmed";
+      }
+
+      var current = state();
+      var nodes = root.querySelectorAll("[data-thanks-copy]");
+      for (var i = 0; i < nodes.length; i++) {
+        nodes[i].hidden = nodes[i].getAttribute("data-thanks-copy") !== current;
+      }
+    })();
+  </script>
 </BaseLayout>

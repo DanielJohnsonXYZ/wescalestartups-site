@@ -14,7 +14,7 @@ const schema = buildBreadcrumbSchema([
 
 <BaseLayout
   title={`${appName} | We Scale Startups`}
-  description="WSS Calendar is the scheduling app We Scale Startups uses for Growth Audit bookings. It connects Google Calendar and Google Meet so invitees get a real meeting link."
+  description="WSS Calendar is the scheduling app We Scale Startups uses for Growth Audit bookings. Confirmed bookings connect Google Calendar and Google Meet so invitees get a real meeting link."
   keywords="WSS Calendar, We Scale Startups scheduling, Growth Audit booking, Google Calendar, Google Meet"
   path={path}
   schema={schema}
@@ -39,8 +39,9 @@ const schema = buildBreadcrumbSchema([
       <h2>What {appName} does</h2>
       <p class="lede" style="max-width:62ch;">
         Founders book a free {siteConfig.bookingCallDurationPhrase} Growth Audit. {appName} checks
-        Daniel Johnson’s availability, writes the appointment to Google Calendar, and attaches a Google
-        Meet link so both sides get a calendar invite with a working video URL.
+        Daniel Johnson’s availability. After the host confirms the request, it writes the appointment
+        to Google Calendar and attaches a Google Meet link so both sides get a calendar invite with a
+        working video URL. Requests that are still waiting on confirmation are not added to the calendar.
       </p>
       <ul class="bring-checklist" style="margin-top:1.25rem;">
         <li>
@@ -50,7 +51,7 @@ const schema = buildBreadcrumbSchema([
           <strong>Google Calendar access</strong> — used only so the host calendar stays accurate and double-bookings are avoided.
         </li>
         <li>
-          <strong>Google Meet</strong> — creates the meeting location on each confirmed booking and includes it in the invite.
+          <strong>Google Meet</strong> — creates the meeting location on each confirmed booking and includes it in the invite. Pending requests do not get a Meet link until the host accepts.
         </li>
         <li>
           <strong>Email confirmations and reminders</strong> — booking, reschedule, and reminder messages for host and guest.

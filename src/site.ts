@@ -14,6 +14,13 @@ export const siteConfig = {
   calLink: "daniel/20min",
   calOrigin: "https://cal.wescalestartups.com",
   /**
+   * Growth Audit event types currently use Cal.com Requires Confirmation.
+   * Pending requests do not write Google Calendar / Meet until the host accepts.
+   * After turning that setting off in Cal, set this to false so /book/thanks
+   * defaults to confirmed copy. See docs/operations-runbook.md §5e.
+   */
+  bookingRequiresHostConfirmation: true,
+  /**
    * Founder community offered after Growth Audit bookings (Cal event description,
    * reminder/follow-up emails, and /book/thanks). WhatsApp is the live join path.
    */
@@ -135,9 +142,9 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/about": "2026-07-26",
   "/ai-growth-systems": "2026-05-01",
   "/ai-sameness-scorecard": "2026-07-26",
-  "/book": "2026-08-09",
-  "/book/thanks": "2026-08-13",
-  "/wss-calendar": "2026-08-09",
+  "/book": "2026-08-17",
+  "/book/thanks": "2026-08-17",
+  "/wss-calendar": "2026-08-17",
   "/build": "2026-05-03",
   "/case-studies": "2026-05-03",
   "/contact": "2026-05-03",

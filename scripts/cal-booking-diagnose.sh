@@ -12,6 +12,8 @@ set -uo pipefail
 ORIGIN_IP="${CAL_ORIGIN_IP:-65.109.232.75}"
 HOST="${CAL_HOST:-cal.wescalestartups.com}"
 UA='WSS-cal-booking-diagnose/1.0'
+CODE_20=""
+CODE_60=""
 
 probe() {
   local path="$1"
@@ -25,6 +27,20 @@ probe() {
   title=$(python3 -c "import re,sys; t=open(sys.argv[1],errors='replace').read(); m=re.search(r'<title[^>]*>(.*?)</title>', t, re.I|re.S); print((m.group(1).strip() if m else '')[:90])" "$tmp" 2>/dev/null || true)
   printf '%-42s %s  %s\n' "$path" "$http" "$title"
   rm -f "$tmp"
+  case "$path" in
+    /daniel/20min) CODE_20=$http ;;
+    /daniel/60min) CODE_60=$http ;;
+  esac
+}
+
+booking_exit() {
+  if [ "${CODE_20}" = "200" ] && [ "${CODE_60}" = "200" ]; then
+    exit 0
+  fi
+  echo
+  echo "FAIL: booking paths are not HTTP 200 (20min=${CODE_20:-?} 60min=${CODE_60:-?})."
+  echo "Restore username/slugs — docs/operations-runbook.md §5e."
+  exit 1
 }
 
 echo "=== origin HTTP (${ORIGIN_IP}) ==="
@@ -49,7 +65,7 @@ echo
 echo "=== Docker Cal.com / Postgres (Hetzner only) ==="
 if ! command -v docker >/dev/null 2>&1; then
   echo "docker not available here. SSH to dokploy-wss and re-run."
-  exit 0
+  booking_exit
 fi
 
 echo "--- containers matching cal / postgres ---"
@@ -81,7 +97,7 @@ if [ -z "$DATABASE_URL" ]; then
   echo "Could not read DATABASE_URL from a Cal.com app container."
   echo "In Dokploy → calcom → Environment, copy DATABASE_URL and run:"
   echo "  docker exec -i <postgres-container> psql \"\$DATABASE_URL\" -c 'SELECT id, username, email FROM users;'"
-  exit 0
+  booking_exit
 fi
 
 echo
@@ -124,3 +140,4 @@ run_sql 'SELECT id, username, "userId", "organizationId" FROM "Profile" ORDER BY
 
 echo
 echo "Next: docs/operations-runbook.md §5e (restore username + event slugs, then flush Redis)."
+booking_exit

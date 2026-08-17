@@ -160,8 +160,8 @@ Cap until the owner chooses one of these paths:
 
 ## 5. Cal.com booking (self-hosted)
 
-- Public URL: `https://cal.wescalestartups.com/daniel/20min`
-- Site embed + CTAs use `siteConfig.calLink` / `calUrl` in `src/site.ts`
+- Public booking (live): `https://calendly.com/wescalestartups/20min` (`siteConfig.calUrl`)
+- Self-hosted Cal.com (currently 404): `https://cal.wescalestartups.com/daniel/20min`
 - Success redirect: `https://wescalestartups.com/book/thanks`
 - Stack: `calcom` + Postgres 16 + **Redis 7** (`calcom-redis`, AOF, 128MB cap,
   `REDIS_URL=redis://calcom-redis:6379`) for cache/queues/rate limits
@@ -171,8 +171,7 @@ Cap until the owner chooses one of these paths:
 - Google Calendar + Google Meet are required for invites; OAuth consent screen
   must stay published (or keep test users) or Meet/calendar sync breaks for
   new bookers outside the test list.
-- Pause Calendly (`calendly.com/wescalestartups` and `/20min`) once Cal.com is
-  the only public booking surface so Slack/old links cannot create orphan bookings.
+- Calendly is the **live** public calendar until self-hosted Cal.com returns 200.
 - Signup spam accounts on the Cal.com instance were removed (empty locked users
   with no bookings/credentials). Keep `NEXT_PUBLIC_DISABLE_SIGNUP=true`.
 - Growing Pains founder community (WhatsApp) belongs on the Growth Audit event
@@ -258,8 +257,7 @@ Until then, a host cron monitor runs on the Hetzner box:
 
 HTTP 404 here is Cal.com saying the username or event type does not exist.
 It is **not** Cloudflare Bot Fight (that is HTTP 403 + `cf-mitigated: challenge`).
-Restore with §5e; do not change `siteConfig.calLink` unless the username
-intentionally moved.
+Public booking on the marketing site uses Calendly until §5e restores Cal.com.
 
 ### 5c. Lead-capture health probe
 
@@ -457,12 +455,19 @@ whole Cal DB from the last known-good dump.
 After any SQL: recycle the Cal.com app container and flush Redis, then re-run
 `./scripts/cal-booking-diagnose.sh` until `/daniel/20min` is HTTP 200.
 
-#### D. Do not “fix” this by pointing the site at Calendly
+#### D. Public booking is Calendly until Cal.com is restored
 
-Calendly (`calendly.com/wescalestartups`) is the legacy surface. Changing
-`siteConfig.calLink` without a live Cal username leaves `/book` and every CTA
-on a 404. Restore the Cal paths above; only then consider pausing Calendly
-again (§5).
+The site owner is not expected to SSH. While `/daniel/20min` 404s, the public
+Growth Audit calendar is **Calendly**: `https://calendly.com/wescalestartups/20min`
+(`siteConfig.calUrl`, inline embed on `/book`, `/contact`, `/ai-growth-audit`).
+
+Manage times in the Calendly website (email/password you already use there).
+Slack `WSS health FAIL` lines are the old self-hosted calendar; they do not
+mean Calendly is down. Mute `#general` or the webhook if the noise is the
+problem; customers book on Calendly.
+
+Do not point the site back at `cal.wescalestartups.com` until that URL returns
+HTTP 200 in a normal browser.
 
 ## 6. Other standing recommendations
 

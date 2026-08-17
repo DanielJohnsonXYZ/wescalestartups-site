@@ -14,6 +14,10 @@ Paste-ready copy for the self-hosted Cal at `https://cal.wescalestartups.com`.
 
 Site source of truth: `siteConfig.growingPains` in `src/site.ts`. Post-booking page: `/book/thanks`.
 
+If the Growth Audit event type still has **Requires Confirmation** on, the
+calendar invite body (and Meet link) are created only after the host accepts.
+Pending guests should not be told the call is already on the calendar.
+
 ## 1. Event type description (append)
 
 Event types: `Growth Audit` (`/daniel/20min`) and `Growth Audit (1 hour)` (`/daniel/60min`) if present.

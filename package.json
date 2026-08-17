@@ -13,6 +13,7 @@
     "check:theme": "node scripts/check-site-theme.mjs",
     "verify:build": "node scripts/verify-build-integrity.mjs",
     "verify:resources": "node scripts/verify-resources.mjs",
+    "test": "node --test scripts/cal-booking-status.test.mjs",
     "preview": "astro preview",
     "check:links:crawl": "node scripts/check-crawl-links.mjs --input=docs/crawls/latest.csv",
     "verify:agents": "node scripts/verify-agent-discovery.mjs"

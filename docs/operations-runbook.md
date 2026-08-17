@@ -162,7 +162,7 @@ Cap until the owner chooses one of these paths:
 
 - Public URL: `https://cal.wescalestartups.com/daniel/20min`
 - Site embed + CTAs use `siteConfig.calLink` / `calUrl` in `src/site.ts`
-- Success redirect: `https://wescalestartups.com/book/thanks` (append `?status=pending` while Requires Confirmation is on)
+- Success redirect: `https://wescalestartups.com/book/thanks`
 - Stack: `calcom` + Postgres 16 + **Redis 7** (`calcom-redis`, AOF, 128MB cap,
   `REDIS_URL=redis://calcom-redis:6379`) for cache/queues/rate limits
 - Old username path `/daniel-wescalestartups.com/*` is redirected by Traefik
@@ -171,9 +171,9 @@ Cap until the owner chooses one of these paths:
 - Google Calendar + Google Meet are required for invites; OAuth consent screen
   must stay published (or keep test users) or Meet/calendar sync breaks for
   new bookers outside the test list.
-- **Requires Confirmation** on `daniel/20min` holds bookings as pending until
-  Daniel accepts. Pending bookings do **not** write Google Calendar or Meet.
-  See §5e.
+- **Requires Confirmation** on `daniel/20min` is **off** (verified 2026-08-17).
+  New bookings write Google Calendar immediately. Older Unconfirmed rows
+  (for example Rafael) stay pending until the host accepts or declines. See §5e.
 - Pause Calendly (`calendly.com/wescalestartups` and `/20min`) once Cal.com is
   the only public booking surface so Slack/old links cannot create orphan bookings.
 - Signup spam accounts on the Cal.com instance were removed (empty locked users
@@ -182,55 +182,39 @@ Cap until the owner chooses one of these paths:
   description plus attendee reminder/follow-up workflows. Paste-ready copy:
   `docs/cal-growing-pains-community.md`. Site mirror after booking: `/book/thanks`.
 
-### 5e. Requires Confirmation blocks Google Calendar until the host accepts
+### 5e. Requires Confirmation and Google Calendar writes
 
-Cal.com’s **Requires Confirmation** (opt-in) setting on the Growth Audit event
-type (`daniel/20min`) is why a guest can see **Afspraak Verzonden** / “Daniel
-Johnson still needs to confirm or decline” and **not** see the slot on Google
-Calendar. Pending bookings do not create calendar events or Meet links. After
-the host accepts, Cal writes Google Calendar + Meet and emails the invite.
+**Requires Confirmation is off** on Growth Audit (`daniel/20min`) as of
+2026-08-17. New bookings should write Google Calendar + Meet immediately.
+`siteConfig.bookingRequiresHostConfirmation` is `false`, so `/book/thanks`
+defaults to **Booking confirmed**. Keep the Cal success redirect at
+`https://wescalestartups.com/book/thanks`.
 
-The marketing site never writes calendar events. `/book/thanks` must not claim
-the call is on the calendar while the booking is still `PENDING`. Keep
-`siteConfig.bookingRequiresHostConfirmation` in `src/site.ts` aligned with the
-Cal event-type toggle. While confirmation is on, set the Cal success redirect
-to `https://wescalestartups.com/book/thanks?status=pending`.
+Existing **Unconfirmed** rows (booked while confirmation was on) stay pending
+until the host accepts or declines. They do not auto-flip when the setting
+changes.
 
-Live Cal admin login from untrusted IPs is blocked by Cloudflare Bot Fight on
-`POST /api/auth/*`. Do the steps below from a trusted browser, not this cloud
-environment.
+**Still do these in Cal from a trusted browser**
 
-**Confirm a pending booking (do this for the live request)**
+1. **Reconnect Google Calendar** if Event Types → Growth Audit → Advanced →
+   Check for conflicts shows “Something went wrong / Try reconnecting your
+   calendar with all necessary permissions.” Without a healthy Google
+   connection, new bookings still miss the calendar even with confirmation off.
+   Apps → Google Calendar → reconnect, grant Calendar + Meet, then confirm
+   **Add to calendar** is `daniel@wescalestartups.com`.
+2. **Unconfirmed bookings** (for example Rafael): Bookings → Unconfirmed →
+   Confirm or decline each row.
+3. **Admin password / 2FA:** Cal warns the admin password is under 15 characters
+   or 2FA is off. Settings → Security: set a 15+ character password and enable
+   2FA so admin access is not blocked.
 
-1. Open `https://cal.wescalestartups.com` → Bookings → **Unconfirmed**.
-2. Confirm (or decline) the row. You can also use the confirm link in the host
-   email Cal sent when the request arrived.
-3. Check the host Google Calendar and the guest inbox for the invite + Meet link.
+If a confirmed booking is still missing from Google Calendar, check §5a (OAuth
+Audience must be **Published**; Testing mode breaks invites for non-test Gmail)
+and the destination calendar on the Cal host.
 
-Specific request that was missing from calendars:
-
-| Field | Value |
-| --- | --- |
-| Title | Growth Audit \| Jordy Hartendorp × We Scale Startups |
-| When | Tuesday 18 August 2026, 12:00–12:20 Europe/London |
-| Guest | Jordy Hartendorp `<j.hartendorp@gmail.com>` |
-| Organizer | Daniel Johnson |
-| Status when reported | Sent / awaiting organizer |
-
-If the event is still missing **after** confirm, check §5a (OAuth Audience must
-be **Published**; Testing mode breaks invites for non-test Gmail), the Google
-Calendar app connection, and the destination calendar on the Cal host.
-
-**Turn off Requires Confirmation (instant calendar writes)**
-
-Use this if new Growth Audits should appear on Google Calendar immediately:
-
-1. Cal → Event Types → Growth Audit (`daniel/20min`) → **Advanced**.
-2. Turn **Requires Confirmation** off. Repeat for `daniel/60min` if that event
-   type exists and should auto-confirm.
-3. Set the success redirect to `https://wescalestartups.com/book/thanks`.
-4. Set `bookingRequiresHostConfirmation: false` in `src/site.ts` so `/book/thanks`
-   defaults to confirmed copy.
+To turn confirmation back on later: Event Types → Advanced → Requires
+Confirmation, then set `bookingRequiresHostConfirmation: true` and optionally
+redirect to `/book/thanks?status=pending`.
 
 ### 5d. Cloudflare must not cache or bot-challenge Cal
 

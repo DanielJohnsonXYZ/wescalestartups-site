@@ -8,11 +8,11 @@ const defaultPending = siteConfig.bookingRequiresHostConfirmation;
 ---
 
 <BaseLayout
-  title={defaultPending ? `Request sent | ${siteConfig.bookingLabel}` : `You're booked | ${siteConfig.bookingLabel}`}
+  title={defaultPending ? `Request sent | ${siteConfig.bookingLabel}` : `Booking confirmed | ${siteConfig.bookingLabel}`}
   description={
     defaultPending
       ? `${hostName} still needs to confirm or decline this booking. Google Calendar and the Meet link are created only after he accepts.`
-      : "Your Growth Audit is confirmed. Check your email for the Google Meet link, then bring the bottleneck you want named."
+      : "Booking confirmed. Check your email for the Google Meet link and calendar invite, then bring the bottleneck you want named."
   }
   path="/book/thanks"
   metaRobots="noindex,follow"
@@ -24,7 +24,7 @@ const defaultPending = siteConfig.bookingRequiresHostConfirmation;
     <div class="shell" data-booking-thanks data-requires-confirmation={defaultPending ? "true" : "false"}>
       <p class="eyebrow">
         <span data-thanks-copy="pending" hidden={!defaultPending ? true : undefined}>Request sent</span>
-        <span data-thanks-copy="confirmed" hidden={defaultPending ? true : undefined}>You are booked</span>
+        <span data-thanks-copy="confirmed" hidden={defaultPending ? true : undefined}>Booking confirmed</span>
       </p>
       <h1 id="booked-heading">
         <span data-thanks-copy="pending" hidden={!defaultPending ? true : undefined}>Your Growth Audit is waiting on confirmation.</span>

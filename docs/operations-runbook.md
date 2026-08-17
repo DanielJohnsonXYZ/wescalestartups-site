@@ -385,6 +385,26 @@ the next run will send `WSS health RECOVERED`.
 
 #### B. Fastest: Cal UI (trusted browser, not a cloud agent)
 
+**Forgot-password email will not help until the user row exists.** Cal.com’s
+`POST /api/auth/forgot-password` always returns HTTP 201
+`{"message":"password_reset_email_sent"}` even for addresses that are not in
+Postgres (confirmed with a throwaway `@example.com`). No inbox mail means
+either `daniel@wescalestartups.com` is missing, or SMTP is broken. Skip the
+email link. On `dokploy-wss`:
+
+```bash
+./scripts/cal-reset-password-on-host.sh
+```
+
+- Exit 2 / `NO USER` → restore Cal.com Postgres from R2 (§5e C), do not INSERT.
+- User exists → set a password without mail:
+
+```bash
+APPLY=1 CAL_NEW_PASSWORD='choose-a-long-password' ./scripts/cal-reset-password-on-host.sh
+```
+
+Then, from a normal browser (Bot Fight challenges datacenter IPs):
+
 1. Open `https://cal.wescalestartups.com/auth/login` as `daniel@wescalestartups.com`.
 2. **Settings → Profile → Username** must be exactly `daniel`.
 3. **Event Types**: Growth Audit slug `20min`, 1-hour slug `60min`, neither hidden.

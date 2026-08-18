@@ -341,8 +341,15 @@ Then add a Notification policy for Health Check status in
 ## 6. Postiz (self-hosted social scheduling)
 
 `https://postiz.wescalestartups.com` — Next.js frontend + NestJS backend on the
-same origin, on the Hetzner box. Reviewed 2026-08-13 from the public internet
-only (no SSH); items in 6e need an authenticated or on-box check.
+same origin, on the Hetzner box. Running **v2.21.7**; latest upstream is
+**v2.23.0** (2026-08-04). Reviewed 2026-08-13 from the public internet plus
+Daniel's logged-in session; items in 6e still need an on-box check.
+
+> **Setup is incomplete, and that matters more than anything below.** As of
+> 2026-08-13 the Channels list is empty and the calendar has no scheduled
+> posts — no social accounts have been connected, so Postiz cannot publish
+> anything yet. The server side is healthy; the app is simply unused. Connect
+> one channel and schedule a throwaway post before trusting any of it.
 
 ### What is healthy
 
@@ -380,10 +387,14 @@ DISABLE_REGISTRATION=true
 Redeploy, then confirm the endpoint returns `{"register":false}` and `/auth`
 no longer renders the signup form.
 
-Do this **after** confirming the intended admin account already exists —
-`DISABLE_REGISTRATION` restricts signup to a single user, so if no account has
-been created yet, create it first and then flip the flag. Note the flag also
-turns off OAuth/OIDC sign-in, which costs nothing here (see 6c).
+**Lock-out risk is cleared.** `DISABLE_REGISTRATION` restricts signup to a
+single user, so this is only dangerous if no account exists yet. Daniel's
+account was confirmed working on 2026-08-13 (logged in at `/launches`), so the
+flag can be applied safely. Note it also turns off OAuth/OIDC sign-in, which
+costs nothing here (see 6c).
+
+`register: true` means the signup form is open to the public — it is not a
+statement about whether an account exists. Both can be true at once, and were.
 
 ### 6b. Indexable by search engines, and missed by the noindex Worker
 
@@ -448,7 +459,13 @@ every `*.wescalestartups.com` host — check them all first.
 - **Workers and cron containers running.** Scheduled posts failing silently is
   the standard self-hosted Postiz failure and is invisible from outside. Check
   the worker/cron processes and Temporal are up, then schedule one throwaway
-  post and confirm it publishes.
+  post and confirm it publishes. Currently **untestable end-to-end** — with no
+  channels connected there is nothing for the publisher to do, so a healthy
+  worker and a dead one look identical. This only becomes answerable after the
+  first channel is connected.
+- **Upgrade 2.21.7 → 2.23.0** at some point. Not urgent, and worth doing only
+  after a verified backup, since it is a Dokploy image bump plus a Prisma
+  migration on the Postiz database.
 - **Connected channels and token freshness** — expired provider tokens fail at
   publish time, not at login.
 - **`JWT_SECRET`** is long and random, and has never been the compose default.

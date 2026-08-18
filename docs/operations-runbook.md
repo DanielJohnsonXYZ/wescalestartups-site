@@ -341,9 +341,10 @@ Then add a Notification policy for Health Check status in
 ## 6. Postiz (self-hosted social scheduling)
 
 `https://postiz.wescalestartups.com` — Next.js frontend + NestJS backend on the
-same origin, on the Hetzner box. Running **v2.21.7**; latest upstream is
-**v2.23.0** (2026-08-04). Reviewed 2026-08-13 from the public internet plus
-Daniel's logged-in session; items in 6e still need an on-box check.
+same origin, on the Hetzner box. Running **v2.21.7** from a locally built
+custom image (see 6e); latest upstream is **v2.23.0** (2026-08-04). Reviewed
+2026-08-13 → 2026-08-18 from the public internet, Daniel's logged-in session,
+and the stack definition in `wss-infra`. 6a is fixed; 6b, 6d and 6e are open.
 
 > **Setup is incomplete, and that matters more than anything below.** As of
 > 2026-08-13 the Channels list is empty and the calendar has no scheduled
@@ -369,32 +370,40 @@ Daniel's logged-in session; items in 6e still need an on-box check.
   section 1 firewall. Re-verify from an unrestricted host — an egress-filtered
   probe can't distinguish "closed" from "blocked on my side".
 
-### 6a. Registration is open to the internet — fix first
+### 6a. Registration was open to the internet — FIXED 2026-08-18
+
+`/api/auth/can-register` returned `{"register":true}` and `/auth` served a
+complete **Sign Up** form with a live *Create Account* button, so anyone who
+reached the host could create an account and their own org.
+
+Fixed in `wss-infra` ([PR #1][postiz-pr1]) by flipping the literal in
+`compose/wss-postiz/docker-compose.yml`. Now verified:
 
 ```bash
 curl -s https://postiz.wescalestartups.com/api/auth/can-register
-# {"register":true}
+# {"register":false}
 ```
 
-`/auth` also serves a complete **Sign Up** form with a live *Create Account*
-button. Anyone who reaches the host can create an account and their own org on
-our instance. Set in the Postiz service env (Dokploy → Postiz → Environment):
+`/auth` now renders "Registration is disabled" with a login link;
+`/auth/login` still works.
 
-```
-DISABLE_REGISTRATION=true
-```
+[postiz-pr1]: https://github.com/DanielJohnsonXYZ/wss-infra/pull/1
 
-Redeploy, then confirm the endpoint returns `{"register":false}` and `/auth`
-no longer renders the signup form.
+> **Setting this in Dokploy → Environment does nothing.** The compose file
+> hardcoded `DISABLE_REGISTRATION=false` in the service's `environment:`
+> block, and a literal there wins over the Dokploy Environment tab. Adding the
+> variable in the UI and redeploying ran cleanly and silently re-applied
+> `false`. **This trap applies to every variable in that compose file** — to
+> change any of them, edit `wss-infra` and let the git push deploy it. A push
+> to `wss-infra` `main` auto-deploys via the Dokploy webhook; the flip above
+> was live 17 seconds after merge, with no manual redeploy.
 
-**Lock-out risk is cleared.** `DISABLE_REGISTRATION` restricts signup to a
-single user, so this is only dangerous if no account exists yet. Daniel's
-account was confirmed working on 2026-08-13 (logged in at `/launches`), so the
-flag can be applied safely. Note it also turns off OAuth/OIDC sign-in, which
-costs nothing here (see 6c).
-
-`register: true` means the signup form is open to the public — it is not a
-statement about whether an account exists. Both can be true at once, and were.
+Two things that were true at once and are easy to conflate: `register: true`
+described the signup form being open to the public, and said nothing about
+whether an account existed. Daniel's account existed throughout. That mattered
+only because `DISABLE_REGISTRATION` permits signup while the instance has zero
+organizations — so the flag is a lock-out risk **only** on an instance nobody
+has registered on yet.
 
 ### 6b. Indexable by search engines, and missed by the noindex Worker
 
@@ -432,9 +441,11 @@ Google flow's `redirect_uri` is `/integrations/social/youtube`, which would
 have to be registered as an authorised redirect URI in Google Cloud for it to
 work at all.
 
-Either configure the client id/secret properly, or accept 6a's
-`DISABLE_REGISTRATION=true`, which removes the OAuth path along with the dead
-button. Email + password login is unaffected either way.
+Confirmed from the compose file: neither `GOOGLE_CLIENT_ID` nor
+`GITHUB_CLIENT_ID` is set for `postiz-app`. **Resolved as a side effect of
+6a** — `DISABLE_REGISTRATION=true` disables the OAuth path, so the dead button
+is gone. Re-configuring the client id/secret would bring it back; don't,
+unless someone actually wants Google sign-in.
 
 ### 6d. No security response headers
 
@@ -454,21 +465,30 @@ add_header X-Robots-Tag "noindex, nofollow" always;
 If you instead set HSTS with `includeSubDomains` on the apex, it applies to
 every `*.wescalestartups.com` host — check them all first.
 
-### 6e. Needs an on-box / logged-in check
+### 6e. Still open
 
-- **Workers and cron containers running.** Scheduled posts failing silently is
-  the standard self-hosted Postiz failure and is invisible from outside. Check
-  the worker/cron processes and Temporal are up, then schedule one throwaway
-  post and confirm it publishes. Currently **untestable end-to-end** — with no
-  channels connected there is nothing for the publisher to do, so a healthy
-  worker and a dead one look identical. This only becomes answerable after the
-  first channel is connected.
-- **Upgrade 2.21.7 → 2.23.0** at some point. Not urgent, and worth doing only
-  after a verified backup, since it is a Dokploy image bump plus a Prisma
-  migration on the Postiz database.
-- **Connected channels and token freshness** — expired provider tokens fail at
-  publish time, not at login.
-- **`JWT_SECRET`** is long and random, and has never been the compose default.
+The stack is defined in `DanielJohnsonXYZ/wss-infra` →
+`compose/wss-postiz/docker-compose.yml`. Read that file first — most of what
+used to need SSH is answerable from it, and it is where changes must be made
+(see the warning in 6a).
+
+- **The publisher is configured, but unproven.** `RUN_CRON=true` is set and the
+  single container runs everything under pm2 (`sh -c "nginx && pnpm run pm2"`),
+  with Temporal alongside — so the scheduling machinery is enabled, not
+  missing. Whether it actually *publishes* is still **untestable end-to-end**:
+  with no channels connected there is nothing for it to do, so a healthy worker
+  and a dead one look identical. Connect one channel, schedule a throwaway
+  post, confirm it lands.
+- **Do not "just upgrade Postiz".** The image is `wss-postiz-app:personal-linkedin`
+  — a **locally built custom image**, not a stock `ghcr.io/gitroomhq` tag.
+  Bumping to upstream 2.23.0 means rebuilding that image, and a naive tag swap
+  would silently drop whatever the personal-LinkedIn patch does. There is no
+  Dockerfile for it in `wss-infra`; find it before planning any upgrade.
+- **LinkedIn and X credentials are already set** (`LINKEDIN_CLIENT_ID/SECRET`,
+  `X_API_KEY/SECRET`), so those two channels should connect without further
+  provider setup. Token freshness still fails at publish time, not at login.
+- **`JWT_SECRET`** comes from `${POSTIZ_JWT_SECRET}` in the Dokploy env, not a
+  compose literal — confirm it is long and random.
 - **Uploads volume.** `storageProvider: local` with `cloudflareUrl` empty, so
   media sits on the box disk — inside the same disk-fill blast radius that
   Mautic caused before (section 7). Section 2 already lists Postiz uploads in

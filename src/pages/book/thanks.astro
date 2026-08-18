@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { siteConfig } from "../../site";
 
 const community = siteConfig.growingPains;
@@ -40,8 +41,7 @@ const community = siteConfig.growingPains;
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Come prepared</p>
-      <h2>What helps most in {siteConfig.bookingCallDurationPhrase}.</h2>
+      <SectionIntro eyebrow="Come prepared" title={`What helps most in ${siteConfig.bookingCallDurationPhrase}.`} />
       <ul class="bring-checklist">
         <li><strong>Rough funnel numbers</strong>, traffic, demos, close rate, or whatever you track weekly.</li>
         <li><strong>Main channels</strong>, where pipeline comes from today, even if it is messy.</li>
@@ -55,8 +55,7 @@ const community = siteConfig.growingPains;
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">After the call</p>
-      <h2>{community.name}</h2>
+      <SectionIntro eyebrow="After the call" title={community.name} />
       <p class="lede" style="max-width:56ch;">
         {community.blurb} Optional, not a pitch — a WhatsApp group for founders who want to keep talking about what to do next.
       </p>

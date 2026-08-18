@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildServiceSchema } from "../../lib/schema";
 import { first30Days, serviceRelatedInsights, siteConfig } from "../../site";
 
@@ -391,8 +392,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   {details.symptoms && details.symptoms.length > 0 && (
     <section class="section symptoms-section">
       <div class="shell">
-        <p class="eyebrow">Is this you?</p>
-        <h2>The signals that usually bring founders here.</h2>
+        <SectionIntro eyebrow="Is this you?" title="The signals that usually bring founders here." />
         <ul class="symptoms-list">
           {details.symptoms.map((s: string) => <li>{s}</li>)}
         </ul>
@@ -403,8 +403,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   <!-- HANDS-ON FRAMING, clarifies WSS is operator, not just advisor -->
   <section class="section section-alt service-handson">
     <div class="shell">
-      <p class="eyebrow">How we work</p>
-      <h2 class="service-handson-title">{details.handsOn.label}</h2>
+      <SectionIntro eyebrow="How we work" title={details.handsOn.label} />
       <div class="handson-grid">
         <article class="handson-card handson-wss">
           <p class="handson-card-label">What WSS brings</p>
@@ -489,8 +488,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     service.id === "fractional-cmo" && (
       <section class="section section-alt" aria-labelledby="fcmo-first30">
         <div class="shell">
-          <p class="eyebrow">First 30 days</p>
-          <h2 id="fcmo-first30">What happens in month one</h2>
+          <SectionIntro eyebrow="First 30 days" title="What happens in month one" titleId="fcmo-first30" />
           <div class="timeline">
             {first30Days.map((item) => (
               <article class="timeline-row">
@@ -516,8 +514,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   {details.commonMistakes && details.commonMistakes.length > 0 && (
     <section class="section section-alt mistakes-section">
       <div class="shell">
-        <p class="eyebrow">Common mistakes</p>
-        <h2>What founders usually try first, and why it doesn't move the needle.</h2>
+        <SectionIntro eyebrow="Common mistakes" title="What founders usually try first, and why it doesn't move the needle." />
         <div class="mistakes-grid">
           {details.commonMistakes.map((m: { mistake: string; why: string }) => (
             <article class="mistake-card">
@@ -534,8 +531,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   {details.caseProof && details.caseProof.length > 0 && (
     <section class="section case-proof-section">
       <div class="shell">
-        <p class="eyebrow">In their words</p>
-        <h2>What founders say after the engagement.</h2>
+        <SectionIntro eyebrow="In their words" title="What founders say after the engagement." />
         <div class="case-proof-grid">
           {details.caseProof.map((c: { quote: string; who: string }) => (
             <blockquote class="case-proof-quote">
@@ -552,8 +548,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     relatedForService.length > 0 && (
       <section class="section">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes and hubs that pair with this engagement.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes and hubs that pair with this engagement." />
           <ul class="related-insights-list">
             {relatedForService.map((item) => (
               <li>
@@ -571,8 +566,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   <!-- Service-specific FAQs (6 standardised questions) -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>What founders ask before they book.</h2>
+      <SectionIntro eyebrow="FAQ" title="What founders ask before they book." />
       <div class="service-faqs-grid">
         {details.faqs.map(([question, answer]: [string, string]) => (
           <details class="feature-card service-faq-item">
@@ -737,14 +731,6 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     line-height: 1.4;
   }
 
-  .service-handson-title {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-    max-width: 60ch;
-  }
   .handson-grid {
     display: grid;
     gap: 1.25rem;

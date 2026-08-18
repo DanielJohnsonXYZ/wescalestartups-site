@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { methodologyBrand, strategicPageRelatedInsights, siteConfig } from "../site";
 
@@ -70,8 +71,7 @@ const systemComponents = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Why it matters</p>
-      <h2>Post-PMF startups usually die in the middle.</h2>
+      <SectionIntro eyebrow="Why it matters" title="Post-PMF startups usually die in the middle." />
       <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
         You have traction. But pipeline arrives in bursts. The founder is still the best salesperson. Channels are running in isolation. Nobody can confidently say what's working.
       </p>
@@ -90,8 +90,7 @@ const systemComponents = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Four phases</p>
-      <h2>How the system is built.</h2>
+      <SectionIntro eyebrow="Four phases" title="How the system is built." />
       <div class="decision-grid" style="margin-top: 2rem;">
         {systemComponents.map((item) => (
           <article class="decision-card">
@@ -106,8 +105,7 @@ const systemComponents = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">What you get</p>
-      <h2>Working artefacts, not slide decks.</h2>
+      <SectionIntro eyebrow="What you get" title="Working artefacts, not slide decks." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         <li><a class="card-link" href="/diagnose">5-layer diagnostic framework</a>, names the constraint in plain English</li>
         <li><a class="card-link" href="/ai-growth-systems">AI growth systems</a>, narrow, repeatable workflows tied to revenue activity</li>
@@ -120,8 +118,7 @@ const systemComponents = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Who this is for</p>
-      <h2>Post-PMF B2B SaaS and AI startups.</h2>
+      <SectionIntro eyebrow="Who this is for" title="Post-PMF B2B SaaS and AI startups." />
       <div class="grid-3" style="margin-top: 2rem;">
         <article class="feature-card">
           <h3>Seed to Series A</h3>
@@ -141,8 +138,7 @@ const systemComponents = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Deeper context on the system.</h2>
+      <SectionIntro eyebrow="Related reading" title="Deeper context on the system." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         {strategicPageRelatedInsights["/growth-operating-system"]?.map((item) => (
           <li><a class="card-link" href={item.href}>{item.label} →</a></li>

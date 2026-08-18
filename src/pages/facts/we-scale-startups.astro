@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { pricingTiers, proofClients, siteConfig } from "../../site";
 
@@ -95,7 +96,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Quick facts</p>
+      <SectionIntro eyebrow="01" title="Quick facts" />
       <dl class="facts-list">
         {quickFacts.map(([label, value]) => (
           <div class="facts-row">
@@ -109,8 +110,8 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Identity statement</p>
-      <p class="lead-copy">
+      <SectionIntro eyebrow="02" title="Identity statement" />
+      <p class="facts-statement">
         We Scale Startups is a growth consultancy that builds the infrastructure post-PMF B2B SaaS and AI startups
         need to hit the one KPI that matters: customer research, an experiment engine, and a weekly testing rhythm,
         engineered from first principles rather than recycled playbooks. Engagements range from a 1-week Growth
@@ -122,57 +123,72 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Services and pricing</p>
-      <ul class="related-insights-list">
+      <SectionIntro eyebrow="03" title="Services and pricing" />
+      <div class="wss-ledger facts-ledger">
         {pricingTiers.map((tier) => (
-          <li>
-            <strong>{tier.name}</strong> — {tier.priceFrom}, {tier.duration}
-          </li>
+          <div>
+            <h3>{tier.name}</h3>
+            <p>{tier.priceFrom}, {tier.duration}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Industries served</p>
-      <ul class="related-insights-list">
-        {industriesServed.map((i) => <li>{i}</li>)}
-      </ul>
+      <SectionIntro eyebrow="04" title="Industries served" />
+      <div class="wss-ledger facts-ledger">
+        {industriesServed.map((i) => (
+          <div><h3>{i}</h3></div>
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Track record</p>
-      <ul class="related-insights-list">
-        <li><strong>£18M+</strong> revenue influenced, aggregate across client and operator-side engagements</li>
-        <li><strong>£6M+</strong> paid acquisition spend managed</li>
-        <li><strong>20+</strong> startups supported</li>
-      </ul>
-      <p class="eyebrow" style="margin-top:1.5rem">Client roster</p>
-      <ul class="related-insights-list">
+      <SectionIntro eyebrow="05" title="Track record" />
+      <div class="wss-ledger facts-ledger">
+        <div class="facts-metric">
+          <strong>£18M+</strong>
+          <p>revenue influenced, aggregate across client and operator-side engagements</p>
+        </div>
+        <div class="facts-metric">
+          <strong>£6M+</strong>
+          <p>paid acquisition spend managed</p>
+        </div>
+        <div class="facts-metric">
+          <strong>20+</strong>
+          <p>startups supported</p>
+        </div>
+      </div>
+      <h3 class="facts-subhead">Client roster</h3>
+      <div class="wss-ledger facts-ledger">
         {proofClients.map((c) => (
-          <li>
-            <strong>{c.label}</strong> — {c.relationship}, {c.context}
-          </li>
+          <div>
+            <h3>{c.label}</h3>
+            <p>{c.relationship}, {c.context}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Programme affiliations</p>
-      <ul class="related-insights-list">
-        {programmeAffiliations.map((p) => <li>{p}</li>)}
-      </ul>
+      <SectionIntro eyebrow="06" title="Programme affiliations" />
+      <div class="wss-ledger facts-ledger">
+        {programmeAffiliations.map((p) => (
+          <div><h3>{p}</h3></div>
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Identity links</p>
+      <SectionIntro eyebrow="07" title="Identity links" />
       <ul class="related-insights-list">
         <li><a class="card-link" href={siteConfig.linkedin} rel="noopener noreferrer" target="_blank">LinkedIn company page →</a></li>
         <li><a class="card-link" href={siteConfig.siteUrl} rel="noopener noreferrer" target="_blank">wescalestartups.com →</a></li>
@@ -183,11 +199,11 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
+      <SectionIntro eyebrow="08" title="FAQ" />
       <div class="grid-3">
         {faqs.map((faq) => (
           <article class="feature-card">
-            <h2>{faq.question}</h2>
+            <h3>{faq.question}</h3>
             <p>{faq.answer}</p>
           </article>
         ))}
@@ -197,7 +213,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related</p>
+      <SectionIntro eyebrow="09" title="Related" />
       <ul class="related-insights-list">
         <li><a class="card-link" href="/about">About We Scale Startups →</a></li>
         <li><a class="card-link" href="/facts/daniel-johnson">Daniel Johnson — founder facts →</a></li>
@@ -218,32 +234,3 @@ const schema = [
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .facts-list {
-    margin: 0;
-    max-width: 44rem;
-    border-top: 1px solid var(--line);
-  }
-  .facts-row {
-    display: grid;
-    grid-template-columns: 12rem 1fr;
-    gap: 1rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .facts-row dt {
-    font-weight: 600;
-    color: var(--muted);
-  }
-  .facts-row dd {
-    margin: 0;
-    word-break: break-word;
-  }
-  @media (max-width: 40rem) {
-    .facts-row {
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
-    }
-  }
-</style>

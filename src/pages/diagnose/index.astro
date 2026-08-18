@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { diagnoseRelatedReading, siteConfig } from "../../site";
 
@@ -99,8 +100,7 @@ const diagnoseSchema = [
   <!-- 5-LAYER DIAGNOSTIC -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The 5 layers</p>
-      <h2>Score yourself across each layer.</h2>
+      <SectionIntro eyebrow="The 5 layers" title="Score yourself across each layer." />
       <p class="lede" style="max-width:60ch; margin-top:0.75rem;">
         For each one: ask the question, watch for the red signal. The layer with the strongest red signal is your bottleneck.
       </p>
@@ -123,8 +123,7 @@ const diagnoseSchema = [
   <!-- DECISION RULES -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Decision rules</p>
-      <h2>Once you know the constraint, the next move is obvious.</h2>
+      <SectionIntro eyebrow="Decision rules" title="Once you know the constraint, the next move is obvious." />
       <div class="diag-rules-grid">
         {decisionRules.map((r) => (
           <a class="diag-rule-card" href={r.href}>
@@ -139,8 +138,7 @@ const diagnoseSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Using this framework.</h2>
+      <SectionIntro eyebrow="FAQ" title="Using this framework." />
       <div class="grid-3">
         {diagnoseFaqs.map((item) => (
           <article class="feature-card">
@@ -154,8 +152,7 @@ const diagnoseSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Turn the framework into a report or a decision.</h2>
+      <SectionIntro eyebrow="Related reading" title="Turn the framework into a report or a decision." />
       <ul class="related-insights-list">
         {diagnoseRelatedReading.map((item) => (
           <li>

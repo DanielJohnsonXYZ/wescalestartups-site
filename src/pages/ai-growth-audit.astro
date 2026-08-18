@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { proofClients, proofEcosystemLogos, siteConfig, testimonials } from "../site";
 
@@ -218,8 +219,7 @@ const schema = [
 
   <section class="section section-alt audit-tight">
     <div class="shell">
-      <p class="eyebrow">What you leave with</p>
-      <h2>Four things by the end of the call.</h2>
+      <SectionIntro eyebrow="What you leave with" title="Four things by the end of the call." />
       <div class="grid-2 audit-outcomes">
         {outcomes.map((item) => (
           <article class="feature-card">
@@ -233,8 +233,7 @@ const schema = [
 
   <section class="section audit-tight">
     <div class="shell">
-      <p class="eyebrow">Fit check</p>
-      <h2>Built for this stage. Clear on who it is not for.</h2>
+      <SectionIntro eyebrow="Fit check" title="Built for this stage. Clear on who it is not for." />
       <div class="fit-table">
         <div class="fit-table-head">
           <span>Good fit</span>
@@ -252,8 +251,7 @@ const schema = [
 
   <section class="section section-alt audit-tight">
     <div class="shell">
-      <p class="eyebrow">After the audit</p>
-      <h2>What happens after the audit.</h2>
+      <SectionIntro eyebrow="After the audit" title="What happens after the audit." />
       <p class="lede audit-lede">
         The answer may be to do nothing, fix it internally, complete a short diagnosis, or work with WSS. The call
         decides that. It does not assume a retainer.
@@ -291,8 +289,7 @@ const schema = [
 
   <section class="section section-alt audit-tight" id="book-cal" aria-labelledby="book-cal-heading">
     <div class="shell">
-      <p class="eyebrow">Book now</p>
-      <h2 id="book-cal-heading">Book a free 20-minute Growth Audit.</h2>
+      <SectionIntro eyebrow="Book now" title="Book a free 20-minute Growth Audit." titleId="book-cal-heading" />
       <p class="lede audit-lede">
         Choose a slot below. Bring where pipeline is stuck. You’ll leave with the constraint named in plain
         English.
@@ -335,8 +332,7 @@ const schema = [
 
   <section class="section audit-tight">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Usual questions.</h2>
+      <SectionIntro eyebrow="FAQ" title="Usual questions." />
       <div class="grid-2 audit-outcomes">
         {faqs.map((faq) => (
           <article class="feature-card">

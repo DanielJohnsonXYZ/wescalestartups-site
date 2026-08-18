@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { first30Days, siteConfig, strategicPageRelatedInsights } from "../site";
 
@@ -114,8 +115,7 @@ const first30Schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Month one in practice.</h2>
+      <SectionIntro eyebrow="FAQ" title="Month one in practice." />
       <div class="grid-3">
         {first30Faqs.map((item) => (
           <article class="feature-card">
@@ -131,8 +131,7 @@ const first30Schema = [
     first30Related.length > 0 && (
       <section class="section section-alt">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>How this fits the wider engagement map.</h2>
+          <SectionIntro eyebrow="Related reading" title="How this fits the wider engagement map." />
           <ul class="related-insights-list">
             {first30Related.map((item) => (
               <li>

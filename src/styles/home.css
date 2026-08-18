@@ -68,16 +68,11 @@ main .shell {
   margin-inline: auto;
 }
 
-.v9-scroll-progress {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 100;
-  height: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: linear-gradient(90deg, var(--v9-violet), var(--v9-mint));
-  box-shadow: 0 0 14px rgba(200, 255, 101, 0.4);
-}
+/* .v9-scroll-progress, .v9-hover-glow and .v9-reveal used to be defined here.
+   They now live in site-v9.css so all ~125 routes get them, and the shared
+   script at the bottom of BaseLayout drives all three — see the TIER 3 block
+   in that file. The copies here were deleted rather than left in place, so
+   there is exactly one definition and one listener per effect. */
 
 .v9-section-intro {
   display: grid;
@@ -154,29 +149,6 @@ main .button:hover {
 
 .v9-text-link-light {
   color: var(--v9-white);
-}
-
-.v9-hover-glow {
-  --pointer-x: 50%;
-  --pointer-y: 50%;
-  position: relative;
-  isolation: isolate;
-}
-
-.v9-hover-glow::after {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  pointer-events: none;
-  content: "";
-  opacity: 0;
-  background: radial-gradient(360px circle at var(--pointer-x) var(--pointer-y), rgba(128, 108, 255, 0.13), transparent 60%);
-  transition: opacity 220ms ease;
-}
-
-.v9-hover-glow:hover::after {
-  opacity: 1;
 }
 
 /* Header ---------------------------------------------------- */
@@ -2630,18 +2602,6 @@ main .v9-scorecard-card .button-brand:hover {
   background-size: auto;
 }
 
-/* Scroll reveal */
-.v9-reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 550ms ease, transform 550ms ease;
-}
-
-.v9-reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
 /* Quotes: collapse to 6 with a show-more */
 .v9-quote.is-collapsed {
   display: none !important;
@@ -2660,10 +2620,3 @@ main .v9-scorecard-card .button-brand:hover {
   padding: clamp(5rem, 8vw, 8rem) 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .v9-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}

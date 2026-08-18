@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
 
@@ -41,8 +42,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Proof base</p>
-      <h2>Operator context.</h2>
+      <SectionIntro eyebrow="Proof base" title="Operator context." />
       <ul class="daniel-credentials">
         {founderStory.credentials.map((c) => <li>{c}</li>)}
       </ul>
@@ -59,11 +59,11 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Podcast</p>
-      <h2>Host of {siteConfig.podcastName}</h2>
-      <p class="lede">
-        {siteConfig.podcastTagline} Subscribe on YouTube at {siteConfig.podcastYoutubeHandle}, or visit the show page for guest applications and updates.
-      </p>
+      <SectionIntro
+        eyebrow="Podcast"
+        title={`Host of ${siteConfig.podcastName}`}
+        body={`${siteConfig.podcastTagline} Subscribe on YouTube at ${siteConfig.podcastYoutubeHandle}, or visit the show page for guest applications and updates.`}
+      />
       <div class="hero-actions">
         <a class="button button-brand" href="/podcast" data-cta="daniel-podcast">Show page →</a>
         <a class="button button-light" href={siteConfig.podcastYoutubeUrl} target="_blank" rel="noopener" data-cta="daniel-podcast-youtube">

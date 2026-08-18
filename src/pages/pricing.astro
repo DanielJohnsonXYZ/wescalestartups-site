@@ -1,6 +1,7 @@
 ---
 import OfferRoutingCards from "../components/OfferRoutingCards.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { pricingRelatedReading, pricingTrustBullets, pricingTiers, siteConfig } from "../site";
 
@@ -61,8 +62,7 @@ const pricingFaqs = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Engagement tiers</p>
-      <h2>Pick the smallest engagement that answers your question.</h2>
+      <SectionIntro eyebrow="Engagement tiers" title="Pick the smallest engagement that answers your question." />
       <div class="pricing-grid">
         {pricingTiers.map((tier, idx) => (
           <article
@@ -108,7 +108,7 @@ const pricingFaqs = [
     <div class="shell two-column">
       <div>
         <p class="eyebrow">What's not in the price</p>
-        <h2 style="font-size:clamp(2.2rem,3.8vw,3rem);line-height:1.05;font-weight:700;margin:0.4rem 0 1.4rem;">Media spend. Tools. Vendors.</h2>
+        <h2>Media spend. Tools. Vendors.</h2>
         <p class="lead-copy">Our fee covers strategy, system design, execution, and reporting. Paid media spend, tooling subscriptions, and any third-party vendor fees are separate and pass through at cost.</p>
       </div>
       <div class="grid grid-2">
@@ -122,8 +122,7 @@ const pricingFaqs = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Context for the numbers.</h2>
+      <SectionIntro eyebrow="Related reading" title="Context for the numbers." />
       <ul class="related-insights-list">
         {pricingRelatedReading.map((item) => (
           <li>
@@ -138,8 +137,7 @@ const pricingFaqs = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Pricing FAQ</p>
-      <h2>Common questions before you book.</h2>
+      <SectionIntro eyebrow="Pricing FAQ" title="Common questions before you book." />
       <div class="grid-3">
         {pricingFaqs.map((faq) => (
           <article class="feature-card">

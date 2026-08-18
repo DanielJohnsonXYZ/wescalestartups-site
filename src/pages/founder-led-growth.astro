@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
@@ -84,8 +85,7 @@ const transitionSteps = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The symptoms</p>
-      <h2>How to know you're stuck in founder-led growth.</h2>
+      <SectionIntro eyebrow="The symptoms" title="How to know you're stuck in founder-led growth." />
       <div class="grid-2" style="margin-top: 2rem;">
         {signals.map((item) => (
           <article class="feature-card">
@@ -99,8 +99,7 @@ const transitionSteps = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Why it happens</p>
-      <h2>The founder built traction. Now it's the bottleneck.</h2>
+      <SectionIntro eyebrow="Why it happens" title="The founder built traction. Now it's the bottleneck." />
       <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
         In the early days, founder-led sales and marketing are a superpower. But past PMF, the same pattern becomes the constraint: there's no acquisition system, no shared narrative, and no weekly rhythm the team can own.
       </p>
@@ -126,8 +125,7 @@ const transitionSteps = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The transition</p>
-      <h2>From founder-led to system-led growth.</h2>
+      <SectionIntro eyebrow="The transition" title="From founder-led to system-led growth." />
       <div class="decision-grid" style="margin-top: 2rem;">
         {transitionSteps.map((item, i) => (
           <article class="decision-card">
@@ -142,8 +140,7 @@ const transitionSteps = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Proof</p>
-      <h2>Founders who stepped out of growth.</h2>
+      <SectionIntro eyebrow="Proof" title="Founders who stepped out of growth." />
       <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
         These case studies show what happens when the constraint is named and a system is built around it.
       </p>
@@ -156,8 +153,7 @@ const transitionSteps = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Deeper context on founder-led growth.</h2>
+      <SectionIntro eyebrow="Related reading" title="Deeper context on founder-led growth." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         <li><a class="card-link" href="/post-raise">Just raised? Build the pipeline before the CMO hire →</a></li>
         <li><a class="card-link" href="/insights/when-to-hire-fractional-cmo">When to hire a fractional CMO →</a></li>

@@ -247,8 +247,6 @@ const subAudiences = [
  
   showAnnouncement={false}
 >
-  <div class="v9-scroll-progress" aria-hidden="true"></div>
-
   <section class="v9-hero" id="top" aria-labelledby="v9-hero-title">
     <div class="v9-aurora v9-aurora-one" aria-hidden="true"></div>
     <div class="v9-aurora v9-aurora-two" aria-hidden="true"></div>
@@ -735,25 +733,12 @@ const subAudiences = [
     </div>
   </section>
 
+  <!-- Homepage-only behaviour. The scroll progress bar, the scroll reveal and
+       the pointer-tracking hover glow used to live here too; they are now in
+       the shared script at the bottom of BaseLayout so every route gets them,
+       and the copies here were deleted rather than left to double-bind. -->
   <script is:inline>
     (function () {
-      var progress = document.querySelector(".v9-scroll-progress");
-      var frame = 0;
-
-      function updateProgress() {
-        frame = 0;
-        if (!progress) return;
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        var value = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-        progress.style.transform = "scaleX(" + value + ")";
-      }
-
-      window.addEventListener("scroll", function () {
-        if (!frame) frame = requestAnimationFrame(updateProgress);
-      }, { passive: true });
-      window.addEventListener("resize", updateProgress, { passive: true });
-      updateProgress();
-
       var tabs = Array.from(document.querySelectorAll(".v9-constraint-tab"));
       var outputMeta = document.getElementById("v9-output-meta");
       var outputTitle = document.getElementById("v9-output-title");
@@ -839,31 +824,6 @@ const subAudiences = [
         quotesMore.remove();
       }
 
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
-        var revealTargets = document.querySelectorAll(
-          ".v9-principle, .v9-service-card, .v9-case-card, .v9-quote, .v9-fit-card, .v9-timeline li, .v9-diagnostic-output, .v9-constraint-tabs, .v9-fit-video, .v9-scorecard-card, .v9-other-grid article, .v9-metric"
-        );
-        var revealObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          });
-        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-        revealTargets.forEach(function (el, index) {
-          el.classList.add("v9-reveal");
-          el.style.transitionDelay = (index % 3) * 70 + "ms";
-          revealObserver.observe(el);
-        });
-      }
-
-      document.querySelectorAll(".v9-hover-glow").forEach(function (card) {
-        card.addEventListener("pointermove", function (event) {
-          var rect = card.getBoundingClientRect();
-          card.style.setProperty("--pointer-x", ((event.clientX - rect.left) / rect.width * 100) + "%");
-          card.style.setProperty("--pointer-y", ((event.clientY - rect.top) / rect.height * 100) + "%");
-        });
-      });
     })();
   </script>
 

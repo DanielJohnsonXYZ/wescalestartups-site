@@ -109,8 +109,7 @@ const moreIndustries = publishedIndustries.filter((industry) => !coreIndustryIds
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Proof and services across markets.</h2>
+      <SectionIntro eyebrow="Related reading" title="Proof and services across markets." />
       <ul class="related-insights-list">
         {industriesHubRelatedReading.map((item) => (
           <li>
@@ -125,8 +124,7 @@ const moreIndustries = publishedIndustries.filter((industry) => !coreIndustryIds
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How industry pages work.</h2>
+      <SectionIntro eyebrow="FAQ" title="How industry pages work." />
       <div class="grid-2">
         {industriesHubFaqs.map((item) => (
           <article class="feature-card">

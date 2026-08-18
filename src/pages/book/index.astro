@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig, testimonials } from "../../site";
 
@@ -82,8 +83,7 @@ const bookSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Free or paid?</p>
-      <h2>This call is free. Here is when to pay for more.</h2>
+      <SectionIntro eyebrow="Free or paid?" title="This call is free. Here is when to pay for more." />
       <div class="free-paid-grid">
         <div class="free-paid-card is-free">
           <p class="fp-price">Free · {siteConfig.bookingCallDurationPhrase}</p>
@@ -112,8 +112,7 @@ const bookSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">What you leave with</p>
-      <h2>Four things, in writing, by the end of the call.</h2>
+      <SectionIntro eyebrow="What you leave with" title="Four things, in writing, by the end of the call." />
       <ul class="bring-checklist">
         <li><strong>Your named bottleneck</strong>, the one constraint holding pipeline back, in plain English.</li>
         <li><strong>The likely cause</strong>, positioning, acquisition, conversion, reporting, or team ownership.</li>
@@ -134,8 +133,7 @@ const bookSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Before you book</p>
-      <h2>This call isn't for everyone.</h2>
+      <SectionIntro eyebrow="Before you book" title="This call isn't for everyone." />
       <p class="lede" style="max-width:60ch;">It's a fast, honest diagnosis, not junior execution or a free strategy deck. Hold off for now if:</p>
       <ul class="bring-checklist">
         <li>You're <strong>pre-idea or pre-revenue</strong>, there's no growth system to diagnose yet.</li>
@@ -160,8 +158,7 @@ const bookSchema = [
 
   <section class="section" id="book-cal" aria-labelledby="book-cal-heading">
     <div class="shell">
-      <p class="eyebrow">Pick a time</p>
-      <h2 id="book-cal-heading">Book inline, no extra tabs required.</h2>
+      <SectionIntro eyebrow="Pick a time" title="Book inline, no extra tabs required." titleId="book-cal-heading" />
       <div
         id="book-cal-inline"
         class="cal-inline-widget"
@@ -180,8 +177,7 @@ const bookSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Booking the audit.</h2>
+      <SectionIntro eyebrow="FAQ" title="Booking the audit." />
       <div class="grid-2">
         {bookFaqs.map((item) => (
           <article class="feature-card">

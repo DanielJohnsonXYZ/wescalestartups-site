@@ -33,3 +33,74 @@
 #growth-tool-app .growth-tool-app{padding-bottom:1rem;}
 
 @media(prefers-reduced-motion:reduce){#growth-tool-app *,#growth-tool-app *::before,#growth-tool-app *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}#growth-tool-app .ticker-track{animation:none!important}}
+
+
+/* ============================================================
+   Tier 3 — shape, weight and type alignment
+
+   The palette was retrofitted to tokens in an earlier pass but
+   the SHAPE and WEIGHT language was not, so scrolling out of the
+   Astro hero and into #growth-tool-app read as a product change:
+   px type on a 15px base, font-weight 850/900 where the site
+   tops out at 700, a 12px-radius solid rectangle where the site
+   uses a 999px gradient pill, and a second `.eyebrow` object
+   with its own violet dot.
+
+   The selectors are written out rather than grouped with :where():
+   :where() contributes zero specificity, so `#growth-tool-app
+   :where(.step-kicker)` is (1-0-0) and loses to the sheet above's
+   `#growth-tool-app .step-kicker` at (1-1-0).
+
+   These are overrides rather than edits to the rules above
+   because the block above is the tool's own minified sheet and
+   is easier to diff when left intact. No selector here changes
+   layout structure, and public/growth-tools/app.js — which
+   renders every element the tool shows — is untouched.
+   ============================================================ */
+
+/* Base type in rem so the tool honours the reader's font size. */
+#growth-tool-app{font-size:0.95rem;line-height:1.6}
+
+/* Buttons: the site's pill. `.btn` is used for every action in every
+   tool, so geometry (min-height, radius, padding) is set once here and
+   the variants only restate colour. */
+#growth-tool-app .btn{min-height:44px;padding:0.75rem 1.15rem;border-radius:999px;font-size:0.86rem;font-weight:650}
+#growth-tool-app .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--v9-violet-deep),var(--v9-violet-cta));box-shadow:0 14px 32px rgba(77,63,196,.2);color:#fff}
+#growth-tool-app .btn.primary:hover{background:linear-gradient(135deg,var(--v9-violet-deep),var(--v9-violet-cta));transform:translateY(-2px);box-shadow:0 18px 40px rgba(77,63,196,.28)}
+#growth-tool-app .btn.secondary{border-color:var(--v9-line-strong);background:var(--v9-white);color:var(--v9-ink)}
+#growth-tool-app .btn.ghost{border-color:var(--v9-line-strong)}
+/* The next-step card is the dark band; its button inverts, as the site's
+   dark CTA buttons do, and must not pick up the gradient above. */
+#growth-tool-app .next-card .btn{background:#fff;box-shadow:none;color:var(--v9-ink)}
+#growth-tool-app .next-card .btn:hover{background:#fff}
+#growth-tool-app .back{border-radius:999px;font-weight:650}
+#growth-tool-app .copy-small{border-radius:999px;font-weight:650}
+
+/* Weight: nothing in the site's type system sits above 700. 850/900 read
+   as a different typeface at these sizes. */
+#growth-tool-app .chip,#growth-tool-app .status,#growth-tool-app .level,#growth-tool-app .confidence,#growth-tool-app .rating,#growth-tool-app .quality,#growth-tool-app .progress-meta,#growth-tool-app .option-mark,#growth-tool-app .summary-card span,#growth-tool-app .summary-card strong,#growth-tool-app .defer-list span{font-weight:600}
+#growth-tool-app .field label{font-weight:650}
+
+/* Eyebrows: one treatment, matching the sitewide decision — mono label,
+   uppercase, no pill and no dot. The dot is a hero-only signature. */
+#growth-tool-app .eyebrow,#growth-tool-app .section-label,#growth-tool-app .step-kicker,#growth-tool-app .tool-number{font-family:var(--v9-mono);font-size:0.66rem;font-weight:600;letter-spacing:0.12em;color:var(--v9-violet-deep)}
+#growth-tool-app .eyebrow:before{display:none}
+
+/* Headings: the site's tracking, not the tighter display tracking the tool
+   invented for each level. */
+#growth-tool-app .hero h1,#growth-tool-app .tool-intro h1,#growth-tool-app .result-head h1,#growth-tool-app .section-head h2,#growth-tool-app .panel h2,#growth-tool-app .result-card h2,#growth-tool-app .tool-card h3,#growth-tool-app .hero-card h3,#growth-tool-app .result-card h3{letter-spacing:-0.04em}
+
+/* Small type in rem, at the site's label sizes. */
+#growth-tool-app .chip,#growth-tool-app .status,#growth-tool-app .level,#growth-tool-app .confidence,#growth-tool-app .micro,#growth-tool-app .hint,#growth-tool-app .defer-list span,#growth-tool-app .summary-card span,#growth-tool-app .progress-meta,#growth-tool-app .rating,#growth-tool-app .quality{font-size:0.72rem}
+#growth-tool-app .option .desc,#growth-tool-app .flow-item span,#growth-tool-app .benefit span,#growth-tool-app .review-row span,#growth-tool-app .stage-row span,#growth-tool-app .review-row strong{font-size:0.84rem}
+#growth-tool-app .ticker-track{font-family:var(--v9-mono);font-size:0.62rem;font-weight:500;letter-spacing:0.08em}
+
+/* Selection states used a 2px border plus a compensating padding change,
+   which is a layout shift on every click. One hairline plus an inset ring
+   gives the same emphasis with no reflow. */
+#growth-tool-app .option.selected{padding:15px;border:1px solid var(--v9-violet);box-shadow:0 0 0 1px var(--v9-violet) inset}
+#growth-tool-app .rank-card.top{border:1px solid var(--v9-violet);box-shadow:0 0 0 1px var(--v9-violet) inset}
+
+/* Pull-quote style headline output takes the site's display serif rather
+   than an 900-weight sans slab. */
+#growth-tool-app .copy-box.headline{font-family:var(--v9-display);font-weight:500;letter-spacing:-0.03em}

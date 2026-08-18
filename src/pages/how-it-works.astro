@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { first30Days, siteConfig, strategicPageRelatedInsights } from "../site";
@@ -145,9 +146,7 @@ const howItWorksSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">First 30 days</p>
-      <h2>What happens in month one.</h2>
-      <p class="lede">Same sequence on most engagements, emphasis shifts with your bottleneck.</p>
+      <SectionIntro eyebrow="First 30 days" title="What happens in month one." body="Same sequence on most engagements, emphasis shifts with your bottleneck." />
       <div class="timeline">
         {first30Days.map((item) => (
           <article class="timeline-row">
@@ -169,8 +168,7 @@ const howItWorksSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The engagement rhythm</p>
-      <h2 style="margin:0.4rem 0 2.2rem;">Diagnose. Build. Test. Transfer.</h2>
+      <SectionIntro eyebrow="The engagement rhythm" title="Diagnose. Build. Test. Transfer." />
       <div class="timeline">
         {phases.map((p) => (
           <article class="timeline-row">
@@ -187,12 +185,7 @@ const howItWorksSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Deliverables</p>
-      <h2
-        style="margin:0.4rem 0 1rem;"
-      >
-        The work is in the artefacts, not the deck.
-      </h2>
+      <SectionIntro eyebrow="Deliverables" title="The work is in the artefacts, not the deck." />
       <p class="lede how-artefacts-lede">
         Representative, anonymized snapshots of what ships inside an engagement, not client-specific screenshots.
         Exported at 2× for sharp displays; WebP for load time.
@@ -220,7 +213,7 @@ const howItWorksSchema = [
     <div class="shell two-column">
       <div>
         <p class="eyebrow">Weekly cadence</p>
-        <h2 style="margin:0.4rem 0 1.4rem;">One rhythm, every week.</h2>
+        <h2>One rhythm, every week.</h2>
         <p class="lead-copy">No mystery, no Friday-afternoon "what's been happening?" calls. The week is the same shape, every week.</p>
       </div>
       <div class="grid">
@@ -238,7 +231,7 @@ const howItWorksSchema = [
     <div class="shell two-column">
       <div>
         <p class="eyebrow">What you get</p>
-        <h2 style="margin:0.4rem 0 1.4rem;">Practical working assets your team can use.</h2>
+        <h2>Practical working assets your team can use.</h2>
         <p class="lead-copy">Everything below is something the team can edit, run, or hand to a vendor on day 91 without us in the room.</p>
       </div>
       <ul class="daniel-credentials">
@@ -249,8 +242,7 @@ const howItWorksSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How engagements run in practice.</h2>
+      <SectionIntro eyebrow="FAQ" title="How engagements run in practice." />
       <div class="grid-3">
         {howItWorksFaqs.map((item) => (
           <article class="feature-card">
@@ -266,8 +258,7 @@ const howItWorksSchema = [
     howItWorksRelated.length > 0 && (
       <section class="section">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes that pair with this page.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes that pair with this page." />
           <ul class="related-insights-list">
             {howItWorksRelated.map((item) => (
               <li>

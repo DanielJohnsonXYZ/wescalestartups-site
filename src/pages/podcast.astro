@@ -112,8 +112,7 @@ const showThemes = [
   <!-- SUBSCRIBE -->
   <section class="section section-alt podcast-subscribe">
     <div class="shell">
-      <p class="eyebrow">Watch &amp; follow</p>
-      <h2>Subscribe on YouTube now. Audio directories follow with episode one.</h2>
+      <SectionIntro eyebrow="Watch &amp; follow" title="Subscribe on YouTube now. Audio directories follow with episode one." />
       <p class="lede">
         The channel is live at <strong>{siteConfig.podcastYoutubeHandle}</strong>. Spotify and Apple Podcasts will go live with episode one, we are not publishing placeholder directory URLs. Prefer email? Join <strong>{siteConfig.newsletterName}</strong> for one note when the feed is ready.
       </p>
@@ -142,11 +141,7 @@ const showThemes = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Episodes</p>
-      <h2>On-site episode pages when the first episode ships.</h2>
-      <p class="lede">
-        Each release will get a dedicated URL with a useful summary, key takeaways, and links to the systems discussed.
-      </p>
+      <SectionIntro eyebrow="Episodes" title="On-site episode pages when the first episode ships." body="Each release will get a dedicated URL with a useful summary, key takeaways, and links to the systems discussed." />
     </div>
   </section>
 
@@ -276,8 +271,7 @@ const showThemes = [
   <!-- FAQ -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Common questions about the show.</h2>
+      <SectionIntro eyebrow="FAQ" title="Common questions about the show." />
       <div class="grid-3">
         {podcastFaqs.map((faq) => (
           <article class="feature-card">

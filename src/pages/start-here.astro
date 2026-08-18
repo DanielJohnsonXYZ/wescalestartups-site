@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
@@ -120,8 +121,7 @@ const startHereSchema = [
   <!-- FIT CHECK -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Before you invest the 35 minutes</p>
-      <h2>WSS isn't right for everyone.</h2>
+      <SectionIntro eyebrow="Before you invest the 35 minutes" title="WSS isn't right for everyone." />
 
       <div class="stage-grid">
         <article class="stage-card">
@@ -157,8 +157,7 @@ const startHereSchema = [
   <!-- FAQ -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Before you commit time.</h2>
+      <SectionIntro eyebrow="FAQ" title="Before you commit time." />
       <div class="grid-3">
         {startHereFaqs.map((item) => (
           <article class="feature-card">

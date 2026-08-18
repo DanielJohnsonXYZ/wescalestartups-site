@@ -5505,3 +5505,150 @@ html { scroll-padding-top: 6.5rem; }
   color: var(--muted);
   line-height: 1.7;
 }
+
+/* ============================================================
+   Facts pages (/facts/daniel-johnson, /facts/we-scale-startups)
+
+   AEO/LLM-facing reference pages: the dl/dt/dd and the plain
+   lists are the machine-readable payload and stay exactly that,
+   so everything here is presentation only.
+
+   These rules were previously copy-pasted, byte-identical, into
+   a <style> block in each of the two pages. One definition now.
+   ============================================================ */
+
+/* Quick facts: a definition list drawn as a ledger. Two columns on
+   wide viewports because eight short rows in one column leaves a
+   long empty gutter beside them. */
+.facts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr));
+  margin: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.facts-row {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 1rem;
+  padding: 0.95rem 1.1rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.facts-row dt {
+  color: var(--muted);
+  font-family: var(--v9-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.facts-row dd {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* `.facts-ledger` (the ledger variant these pages use) is defined in
+   site-v9.css next to `.wss-ledger` — it has to outrank that base recipe's
+   0-3-0 selectors, which nothing at this layer's weight can do. */
+
+.facts-statement {
+  max-width: 64ch;
+  margin: 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.62;
+}
+
+@media (max-width: 40rem) {
+  .facts-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
+
+/* A sub-heading inside a facts section (the client roster sits under the
+   track-record ledger). Sized between the section h2 and a ledger cell so
+   the second ledger reads as part of the same section, not a new one. */
+.facts-subhead {
+  margin: 2.25rem 0 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Section lede + checklist — two small shared objects
+
+   `.lede` is the HERO lede scale (site-v9.css sizes it at
+   clamp(1.05rem, 1.45vw, 1.22rem) inside .page-hero). Several
+   interior pages reached for it as ordinary body copy under a
+   section heading, which set hero-sized text mid-page and then
+   needed an inline `style="max-width:62ch"` on every instance
+   to stop the line running long. `.section-lede` is the body
+   version, with the measure baked in.
+   ============================================================ */
+.section-lede {
+  max-width: 62ch;
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+/* Checklist: a list that reads as verified items rather than bullets.
+   The tick is a pseudo-element so the markup stays a plain <ul>. */
+.check-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The tick is positioned rather than laid out as a grid/flex sibling: with a
+   two-track grid, the source whitespace between `<li>` and its content becomes
+   an anonymous item, the real content lands in the 1.45rem column and every
+   line wraps to one character wide. Absolute positioning is immune to how the
+   markup is indented. */
+.check-list li {
+  position: relative;
+  padding: 0.85rem 1rem 0.85rem 2.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  top: 0.85rem;
+  left: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: var(--acid);
+  color: var(--v9-night);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.check-list li strong,
+.check-list li a {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+@media (min-width: 48rem) {
+  .check-list-2up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

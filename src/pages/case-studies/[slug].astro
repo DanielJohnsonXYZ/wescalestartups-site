@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildCaseStudyArticleSchema, buildFaqSchema } from "../../lib/schema";
 import { caseStudyRelatedReading, siteConfig } from "../../site";
 
@@ -276,8 +277,7 @@ const caseFaqs = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>More proof and how to engage.</h2>
+      <SectionIntro eyebrow="Related reading" title="More proof and how to engage." />
       <ul class="related-insights-list">
         {caseStudyRelatedReading.map((item) => (
           <li>
@@ -293,8 +293,7 @@ const caseFaqs = [
   <!-- FAQs -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Case FAQ</p>
-      <h2>What founders ask about this engagement.</h2>
+      <SectionIntro eyebrow="Case FAQ" title="What founders ask about this engagement." />
       <div class="grid-3">
         {caseFaqs.map((faq) => (
           <article class="feature-card">

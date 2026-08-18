@@ -808,3 +808,497 @@
     transition: none;
   }
 }
+
+/* ============================================================
+   TIER 3 — the homepage's interaction layer, promoted sitewide
+
+   Everything below used to live in home.css (homepage only) or
+   in the inline script at the bottom of index.astro. It now
+   lives here, is loaded by BaseLayout on all ~125 routes, and
+   is driven by the shared script in BaseLayout.astro. The
+   homepage copies were DELETED rather than left in place, so
+   there is exactly one definition and one listener per effect.
+
+   NO-JS CONTRACT (load-bearing): `.v9-reveal` is added by the
+   shared script, never by markup. If the script never runs the
+   class is never applied and every element stays at its normal
+   opacity — a reveal that hides content behind JS would be a
+   content bug, not a design flourish.
+   ============================================================ */
+
+/* Scroll progress. Rendered once by BaseLayout, so it is a single
+   fixed element on every route including the homepage. */
+.theme-wss-v9 .v9-scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--v9-violet), var(--v9-mint));
+  box-shadow: 0 0 14px rgba(200, 255, 101, 0.4);
+}
+
+/* Scroll reveal.
+
+   The offset uses the independent `translate` property, NOT `transform`.
+   The homepage's version set `transform: translateY(16px)` / `none` at
+   0-2-0, which outranks both `:where(.feature-card, …):hover`
+   (0-2-0, earlier in this file) and `.v9-service-card:hover` (0-1-1,
+   home.css) — so `is-visible` pinned every revealed card's transform to
+   `none` and the card hover lift never fired. On the homepage that has
+   been true for as long as the reveal has existed; promoting the rule
+   sitewide would have spread it to ~120 pages of interior cards.
+   `translate` composes with `transform` instead of replacing it, so the
+   reveal and the hover lift can both do their job. */
+.theme-wss-v9 .v9-reveal {
+  opacity: 0;
+  translate: 0 16px;
+  transition: opacity 550ms ease, translate 550ms ease;
+}
+
+.theme-wss-v9 .v9-reveal.is-visible {
+  opacity: 1;
+  translate: none;
+}
+
+/* Pointer-tracking hover glow. The custom properties are set by the
+   shared delegated pointermove listener; the 50% fallbacks mean an
+   element that has never been hovered still paints a centred glow
+   rather than an off-canvas one on a keyboard-only visit. */
+.theme-wss-v9 .v9-hover-glow {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+.theme-wss-v9 .v9-hover-glow::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  content: "";
+  opacity: 0;
+  background: radial-gradient(360px circle at var(--pointer-x) var(--pointer-y), rgba(128, 108, 255, 0.13), transparent 60%);
+  transition: opacity 220ms ease;
+}
+
+.theme-wss-v9 .v9-hover-glow:hover::after {
+  opacity: 1;
+}
+
+/* FAQ accordion: the homepage's `+ / −` marker on interior <details>.
+   The homepage renders an explicit <i> for the marker; interior FAQs are
+   plain <summary> elements across several templates, so the ring and the
+   two bars are built from ::after plus a background gradient rather than
+   asking 30 pages to add an element. */
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary::-webkit-details-marker {
+  display: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--v9-line);
+  border-radius: 50%;
+  /* Horizontal bar painted on the box; the vertical bar is the same
+     8×1px gradient rotated, which is what the transition animates. */
+  background:
+    linear-gradient(var(--v9-ink), var(--v9-ink)) center / 8px 1px no-repeat,
+    linear-gradient(var(--v9-ink), var(--v9-ink)) center / 1px 8px no-repeat;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item)[open] > summary::after {
+  transform: rotate(45deg);
+  border-color: var(--v9-violet);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary:hover::after {
+  border-color: var(--v9-violet);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-wss-v9 .v9-reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .theme-wss-v9 .v9-hover-glow::after,
+  .theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary::after {
+    transition: none;
+  }
+}
+
+/* Print escape. The reveal starts at opacity 0 and is cleared by an
+   IntersectionObserver that never fires for content the visitor has not
+   scrolled to, so printing or saving to PDF emitted blank space where that
+   content should be — 25 of 25 elements on /pricing, 46 of 47 on /facts.
+   Print is a no-motion medium anyway, so the reveal simply does not apply. */
+@media print {
+  .theme-wss-v9 .v9-reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .theme-wss-v9 .v9-scroll-progress {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Section eyebrows — ONE treatment
+
+   There were two competing objects: components.css:~5203 gave
+   every `.eyebrow` a violet pill, while site-v9.css's
+   `.page-hero .eyebrow` stripped it back to a plain mono label
+   with a mint dot. The homepage never used a pill anywhere —
+   its `.v9-section-number` is a bare mono label — so the pill
+   is the outlier and it goes. Section eyebrows are now the
+   hero eyebrow's geometry (mono, uppercase, 0.12em) in
+   --v9-violet-deep, which is the text-safe violet (7.3:1).
+   The mint dot stays a hero-only signature so the hero label
+   still outranks a section label.
+
+   Written at 0-2-0 (`.theme-wss-v9` + `:not(.no-shared-chrome)`;
+   the `:where()` adds nothing) so it beats components.css's
+   0-1-0 pill on specificity, not just source order. It also
+   restates `display`/`background`/`border`/`padding` rather than
+   only `color`, because the pill sets all of those and a colour
+   change alone would leave a violet-tinted capsule behind.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) :where(.eyebrow, .card-kicker) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Dark surfaces: the deep violet drops to ~2.4:1 on night, so those
+   eyebrows take mint. components.css already listed three of these
+   selectors for the pill's dark variant; they are restated here
+   because the rule above resets `color` at a higher weight. */
+.theme-wss-v9:not(.no-shared-chrome) :where(
+  .cta-inner,
+  .dark-rhythm-section,
+  .service-selector-aside,
+  .strategic-panel-dark,
+  .proof-inner
+) :where(.eyebrow, .card-kicker) {
+  color: var(--v9-mint);
+}
+
+/* The hero keeps its mint dot. Restated at this weight because the
+   reset above sets `background`/`border` on the same element. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .eyebrow {
+  color: var(--v9-copy);
+  margin: 0 0 1.5rem;
+}
+
+/* ============================================================
+   "Related reading" — a compact card row, not a full band
+
+   30 templates render this section: an eyebrow, an h2 and 3–5
+   links. At the standard `.section` rhythm (clamp(4.75rem, 8vw,
+   7.5rem) block padding) that reads as an unfinished band on
+   every page it appears. `:has()` lets one rule compact every
+   instance without editing 30 files; the cards themselves take
+   the shared card vocabulary so they lift and glow like every
+   other card on the page.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > .related-insights-list),
+.theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > * > .related-insights-list) {
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+/* The heading drops a tier too. A section whose whole body is a row of
+   links is navigation, not content, and sizing it like the argued sections
+   above it is what made these bands read as unfinished in the first place. */
+.theme-wss-v9:not(.no-shared-chrome) .section:has(.related-insights-list) :where(.section-intro, .content-header) h2,
+.theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > .related-insights-list) > .shell > h2 {
+  max-width: 24ch;
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+  line-height: 1.05;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15.5rem, 100%), 1fr));
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li {
+  display: flex;
+  border: 1px solid var(--v9-line);
+  border-radius: var(--v9-radius-small);
+  background: var(--v9-white);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li:hover {
+  transform: translateY(-4px);
+  border-color: rgba(128, 108, 255, 0.38);
+  box-shadow: var(--v9-shadow);
+}
+
+/* Plain-text items (the facts pages list metrics here, not links) need the
+   same padding the card-link supplies, so pad the item and unset it on the
+   link so a linked card still has a full-bleed hit area. */
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li {
+  padding: 1.05rem 1.15rem;
+  color: var(--v9-copy);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li:has(> .card-link) {
+  padding: 0;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li > .card-link {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  padding: 1.05rem 1.15rem;
+  color: var(--v9-ink);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li > .card-link:hover {
+  color: var(--v9-violet-deep);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li strong {
+  color: var(--v9-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Ledger grid — the homepage's collapsed-border device
+
+   The homepage builds two of these (principles ~648, logos ~549):
+   a grid whose cells share hairlines by taking their border from
+   the top/left of the container and the right/bottom of the cell.
+   Promoted here so interior templates can reach for the same
+   object instead of stacking more rounded cards.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  border-top: 1px solid var(--v9-line);
+  border-left: 1px solid var(--v9-line);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  min-height: 12.5rem;
+  padding: 1.5rem 1.4rem;
+  border-right: 1px solid var(--v9-line);
+  border-bottom: 1px solid var(--v9-line);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > .wss-ledger-index {
+  margin-bottom: 2.25rem;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > :where(p, span:not(.wss-ledger-index)) {
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > :where(h3, strong) {
+  margin: 0;
+  color: var(--v9-ink);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+/* Dark variant: same object on a night band. */
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark {
+  border-top-color: var(--v9-line-dark);
+  border-left-color: var(--v9-line-dark);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * {
+  border-right-color: var(--v9-line-dark);
+  border-bottom-color: var(--v9-line-dark);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * > .wss-ledger-index {
+  color: var(--v9-violet-bright);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * > :where(h3, strong) {
+  color: var(--v9-white);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * > :where(p, span:not(.wss-ledger-index)) {
+  color: var(--v9-copy-dark);
+}
+
+@media (max-width: 720px) {
+  .theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * {
+    min-height: auto;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > .wss-ledger-index {
+    margin-bottom: 0.35rem;
+  }
+}
+
+/* ============================================================
+   Section headings that are not direct children of .shell
+
+   The rule at ~379 only matches `.section > .shell > h2`, so any
+   page that nests the heading one level deeper (inside a
+   `.two-column` half, a conditional wrapper, a component) fell
+   back to the base h2 size — the same page could show a 63px and
+   a 37px section heading. Most of those have now been converted
+   to <SectionIntro>; the ones that cannot be (because the
+   heading shares a row with content) are caught here by the
+   eyebrow+heading pairing that IS the hand-rolled section intro.
+
+   `:not([class])` is the opt-out: an h2 a page deliberately
+   classed keeps whatever treatment that class gives it.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .section .eyebrow + h2:not([class]) {
+  max-width: 18ch;
+  font-size: clamp(2.35rem, 4.4vw, 4.35rem);
+  line-height: 0.98;
+}
+
+/* Two-column bands sit the heading BESIDE the content rather than
+   above it, so the full section scale overwhelms the row. One
+   documented compact scale, replacing the ad-hoc inline
+   font-sizes these three pages each invented separately. */
+.theme-wss-v9:not(.no-shared-chrome) .two-column .eyebrow + h2 {
+  max-width: 22ch;
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  line-height: 1.06;
+}
+
+/* ============================================================
+   Industry detail intro band (/industries/[slug])
+
+   The market's buyer problem is that page's thesis, so it takes
+   the homepage's device: a mono label beside a display-scale
+   statement on the night surface.
+
+   It lives here rather than in the template's scoped <style>
+   because `.theme-wss-v9:not(.no-shared-chrome) .section` sets
+   the paper background at 0-3-0, and an Astro scoped style tops
+   out at 0-2-0 — the band rendered as white text on white.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .section.industry-problem {
+  border-bottom-color: var(--v9-line-dark);
+  background: var(--v9-night);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem-grid {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.28fr) 1fr;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* The shared eyebrow rule resolves to --v9-violet-deep, ~2.4:1 on night. */
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem .eyebrow {
+  margin: 0;
+  padding-top: 0.6rem;
+  color: var(--v9-mint);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem h2 {
+  max-width: 22ch;
+  margin: 0;
+  color: var(--v9-white);
+  font-size: clamp(1.9rem, 3.4vw, 3.1rem);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem-meta {
+  margin: 1.5rem 0 0;
+  color: var(--v9-copy-dark);
+  font-family: var(--v9-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 780px) {
+  .theme-wss-v9:not(.no-shared-chrome) .industry-problem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .industry-problem .eyebrow {
+    padding-top: 0;
+  }
+}
+
+/* Facts-page variant of the ledger. A reference list wants a denser cell than
+   the marketing ledgers on the industry pages, and the track-record cells lead
+   with a display-scale number. Named at this weight (not in components.css)
+   because the base `.wss-ledger > *` recipe above is 0-3-0 and a page-layer
+   selector cannot reach it. */
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger.facts-ledger > * {
+  min-height: 0;
+  gap: 0.35rem;
+  padding: 1.05rem 1.15rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger.facts-ledger > .facts-metric > strong {
+  display: block;
+  color: var(--v9-ink);
+  font-family: var(--v9-display);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}

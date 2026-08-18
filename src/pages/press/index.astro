@@ -1,6 +1,7 @@
 ---
 import ProofLogos from "../../components/ProofLogos.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import {
   boilerplateLong,
   boilerplateMedium,
@@ -88,8 +89,7 @@ const pressSchema = [
 
   <section class="section" aria-labelledby="press-boilerplate-heading">
     <div class="shell">
-      <p class="eyebrow">For publication</p>
-      <h2 id="press-boilerplate-heading">Company boilerplates</h2>
+      <SectionIntro eyebrow="For publication" title="Company boilerplates" titleId="press-boilerplate-heading" />
       <div class="detail-grid" style="margin-top: 1rem;">
         <article class="content-block">
           <h3 class="press-subhead">Short</h3>
@@ -135,8 +135,7 @@ const pressSchema = [
 
   <section class="section" aria-labelledby="press-proof-heading">
     <div class="shell">
-      <p class="eyebrow">Credibility</p>
-      <h2 id="press-proof-heading">Proof points</h2>
+      <SectionIntro eyebrow="Credibility" title="Proof points" titleId="press-proof-heading" />
       <article class="content-block" style="margin-top: 1rem; max-width: 62ch;">
         <ul>
           {headlineMetrics.map((metric) => <li><strong>{metric.value}</strong> {metric.label}</li>)}
@@ -155,8 +154,7 @@ const pressSchema = [
 
   <section class="section" aria-labelledby="press-clients-heading">
     <div class="shell">
-      <p class="eyebrow">Selected client work</p>
-      <h2 id="press-clients-heading">Examples journalists can scan quickly.</h2>
+      <SectionIntro eyebrow="Selected client work" title="Examples journalists can scan quickly." titleId="press-clients-heading" />
       <p class="lede" style="max-width: 62ch; margin-top: 0.75rem;">
         Some names are anonymised where confidentiality applies. Verify numbers against{" "}
         <a href="/proof">the proof hub</a> and linked case studies before publication.
@@ -188,8 +186,7 @@ const pressSchema = [
 
   <section class="section section-alt" aria-labelledby="press-founder-heading">
     <div class="shell">
-      <p class="eyebrow">Leadership</p>
-      <h2 id="press-founder-heading">Founder bio</h2>
+      <SectionIntro eyebrow="Leadership" title="Founder bio" titleId="press-founder-heading" />
       <article class="content-block" style="margin-top: 1rem; max-width: 62ch;">
         <p>{founderBio}</p>
         <p>
@@ -204,8 +201,7 @@ const pressSchema = [
 
   <section class="section" aria-labelledby="press-brand-heading">
     <div class="shell">
-      <p class="eyebrow">Brand assets</p>
-      <h2 id="press-brand-heading">Logos, imagery, and usage.</h2>
+      <SectionIntro eyebrow="Brand assets" title="Logos, imagery, and usage." titleId="press-brand-heading" />
       <p class="lede" style="max-width: 62ch; margin-top: 1rem;">
         Download URLs for marks and defaults. For additional speaker photography and topics, use Daniel&apos;s{" "}
         <a href={`${siteConfig.danielSite}/media-kit/`} rel="noreferrer" target="_blank">personal media kit</a>.
@@ -223,8 +219,7 @@ const pressSchema = [
 
   <section class="section section-alt" aria-labelledby="press-angles-heading">
     <div class="shell">
-      <p class="eyebrow">Press angles</p>
-      <h2 id="press-angles-heading">Press angles We Scale Startups can comment on.</h2>
+      <SectionIntro eyebrow="Press angles" title="Press angles We Scale Startups can comment on." titleId="press-angles-heading" />
       <ul class="press-angles-list">
         {pressAngles.map((angle) => (
           <li>{angle}</li>
@@ -235,8 +230,7 @@ const pressSchema = [
 
   <section class="section" aria-labelledby="press-contact-heading">
     <div class="shell">
-      <p class="eyebrow">Media contact</p>
-      <h2 id="press-contact-heading">Company press and fact-checking</h2>
+      <SectionIntro eyebrow="Media contact" title="Company press and fact-checking" titleId="press-contact-heading" />
       <div class="press-contact-routing" style="max-width: 62ch; margin-top: 0.75rem; line-height: 1.55;">
         <p>
           <strong>Company / WSS:</strong> boilerplate, metrics, logos, partner background, and fact-checking on published case formats, use the email below.
@@ -272,8 +266,7 @@ const pressSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Verify claims on the main site.</h2>
+      <SectionIntro eyebrow="Related reading" title="Verify claims on the main site." />
       <ul class="related-insights-list">
         {pressRelatedReading.map((item) => (
           <li>
@@ -288,8 +281,7 @@ const pressSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Press and fact-checking.</h2>
+      <SectionIntro eyebrow="FAQ" title="Press and fact-checking." />
       <div class="grid-3">
         {pressFaqs.map((item) => (
           <article class="feature-card">
@@ -303,8 +295,7 @@ const pressSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Fact-checking</p>
-      <h2>Verify outcomes before you cite them.</h2>
+      <SectionIntro eyebrow="Fact-checking" title="Verify outcomes before you cite them." />
       <p class="lede" style="max-width: 62ch;">
         Published cases and the proof hub use the same Problem / Action / Result structure. For commentary on a live growth decision, book a short call, we can usually clarify what is on the record vs client-confidential.
       </p>

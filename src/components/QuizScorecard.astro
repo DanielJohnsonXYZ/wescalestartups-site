@@ -1,4 +1,5 @@
 ---
+import SectionIntro from "./SectionIntro.astro";
 import { siteConfig } from "../site";
 import "../styles/quiz.css";
 
@@ -110,10 +111,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- PROBLEM BAND -->
 <section class="section section-alt">
   <div class="shell">
-    <p class="eyebrow">{problem.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 2rem;">
-      {problem.heading}
-    </h2>
+    <SectionIntro eyebrow={problem.eyebrow} title={problem.heading} />
     {problem.layout === "grid-2" ? (
       <div class="grid-2" style="gap:1.25rem;">
         {problem.cards.map((r) => (
@@ -142,13 +140,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- INTERACTIVE SCORECARD -->
 <section class={scorecard.sectionClass || "section"} id={scrollTargetId}>
   <div class="shell">
-    <p class="eyebrow">{scorecard.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 0.5rem;">
-      {scorecard.heading}
-    </h2>
-    <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
-      {scorecard.subcopy}
-    </p>
+    <SectionIntro eyebrow={scorecard.eyebrow} title={scorecard.heading} body={scorecard.subcopy} />
 
     <div id="quiz-container">
       <div class="quiz-progress-wrap">
@@ -168,10 +160,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- WHAT THE SCORE MEANS -->
 <section class={scoreMeaning.sectionClass || "section section-alt"}>
   <div class="shell">
-    <p class="eyebrow">{scoreMeaning.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 2rem;">
-      {scoreMeaning.heading}
-    </h2>
+    <SectionIntro eyebrow={scoreMeaning.eyebrow} title={scoreMeaning.heading} />
     <div class="grid-3">
       {scoreMeaning.levels.map((lvl) => (
         <article class="feature-card" style={`border-top:3px solid ${lvl.borderColor};`}>
@@ -187,10 +176,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- FAQ -->
 <section class={faqSection.sectionClass || "section"}>
   <div class="shell">
-    <p class="eyebrow">{faqSection.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 2rem;">
-      {faqSection.heading}
-    </h2>
+    <SectionIntro eyebrow={faqSection.eyebrow} title={faqSection.heading} />
     <div class="grid-3">
       {faqs.map((f) => (
         <article class="feature-card">

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { buildPageRelatedReading, siteConfig } from "../../site";
 
@@ -53,8 +54,7 @@ const buildSchema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Handoff, sprints, and acquisition builds.</h2>
+      <SectionIntro eyebrow="Related reading" title="Handoff, sprints, and acquisition builds." />
       <ul class="related-insights-list">
         {buildPageRelatedReading.map((item) => (
           <li>

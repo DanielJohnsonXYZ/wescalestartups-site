@@ -140,8 +140,7 @@ const insightsSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Frameworks and proof that pair with these notes.</h2>
+      <SectionIntro eyebrow="Related reading" title="Frameworks and proof that pair with these notes." />
       <ul class="related-insights-list">
         {insightsHubRelatedReading.map((item) => (
           <li>
@@ -156,8 +155,7 @@ const insightsSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How to use these notes.</h2>
+      <SectionIntro eyebrow="FAQ" title="How to use these notes." />
       <div class="grid-3">
         {insightsHubFaqs.map((item) => (
           <article class="feature-card">

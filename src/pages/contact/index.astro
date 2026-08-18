@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { contactRelatedReading, siteConfig, customerIoNewsletter } from "../../site";
 
@@ -148,8 +149,7 @@ const turnstileSiteKey =
   <!-- Same Cal.com embed stack as /book. -->
   <section class="section section-alt" id="book-a-time">
     <div class="shell">
-      <p class="eyebrow">Book a time</p>
-      <h2>Pick a slot that works for you.</h2>
+      <SectionIntro eyebrow="Book a time" title="Pick a slot that works for you." />
       <p>
         Same calendar as the Growth Audit. If the embed does not load,{" "}
         <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">open the booking page in a new tab</a>
@@ -170,8 +170,7 @@ const turnstileSiteKey =
   <!-- Source: Notion 354f99a79fdb81eebd81df3dfa282659                      -->
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Routing by enquiry type</p>
-      <h2>Not a growth engagement? Here's the right page.</h2>
+      <SectionIntro eyebrow="Routing by enquiry type" title="Not a growth engagement? Here's the right page." />
       <p>The enquiry form above is for growth engagement enquiries. For everything else, use one of these direct routes, they reach the right inbox faster.</p>
       <div class="grid-3 contact-routing-grid">
         <article class="feature-card">
@@ -225,8 +224,7 @@ const turnstileSiteKey =
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Self-serve before you email.</h2>
+      <SectionIntro eyebrow="Related reading" title="Self-serve before you email." />
       <ul class="related-insights-list">
         {contactRelatedReading.map((item) => (
           <li>
@@ -241,8 +239,7 @@ const turnstileSiteKey =
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Contact and response expectations.</h2>
+      <SectionIntro eyebrow="FAQ" title="Contact and response expectations." />
       <div class="grid-3">
         {contactFaqs.map((item) => (
           <article class="feature-card">

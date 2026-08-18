@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { canonicalProofMetrics, serviceSnapshots, siteConfig, testimonials } from "../site";
 
@@ -122,8 +123,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">The moment you're in</p>
-      <h2>The round closed. The pressure didn't.</h2>
+      <SectionIntro eyebrow="The moment you're in" title="The round closed. The pressure didn't." />
       <ol class="moment-list">
         {moments.map((item, i) => (
           <li>
@@ -137,8 +137,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Self-qualify</p>
-      <h2>Built for this moment. Not for every moment.</h2>
+      <SectionIntro eyebrow="Self-qualify" title="Built for this moment. Not for every moment." />
       <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
         Better you know in 30 seconds than 15 minutes into a call.
       </p>
@@ -165,8 +164,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Where to start</p>
-      <h2>The smallest commitment that answers your biggest question.</h2>
+      <SectionIntro eyebrow="Where to start" title="The smallest commitment that answers your biggest question." />
       <p class="lede" style="max-width: 56ch; margin-top: 0.5rem;">
         Most post-raise founders start in one of two places, depending on how sure you are of the constraint.
       </p>
@@ -222,8 +220,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Before you book</p>
-      <h2>What founders usually ask here.</h2>
+      <SectionIntro eyebrow="Before you book" title="What founders usually ask here." />
       <div class="grid-3" style="margin-top: 1.75rem;">
         {faqs.map((faq) => (
           <article class="feature-card">
@@ -237,8 +234,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Context that pairs with this moment.</h2>
+      <SectionIntro eyebrow="Related reading" title="Context that pairs with this moment." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         {relatedReading.map((item) => (
           <li>

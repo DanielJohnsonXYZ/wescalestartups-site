@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, testimonials, testimonialsRelatedReading } from "../site";
 
@@ -135,8 +136,7 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Verify outcomes and next steps.</h2>
+      <SectionIntro eyebrow="Related reading" title="Verify outcomes and next steps." />
       <ul class="related-insights-list">
         {testimonialsRelatedReading.map((item) => (
           <li>
@@ -151,8 +151,7 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How to read these testimonials.</h2>
+      <SectionIntro eyebrow="FAQ" title="How to read these testimonials." />
       <div class="grid-3">
         {testimonialsFaqs.map((item) => (
           <article class="feature-card">

@@ -89,8 +89,7 @@ const caseStudiesSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Proof, voices, and how to work together.</h2>
+      <SectionIntro eyebrow="Related reading" title="Proof, voices, and how to work together." />
       <ul class="related-insights-list">
         {caseStudiesIndexRelatedReading.map((item) => (
           <li>
@@ -105,8 +104,7 @@ const caseStudiesSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How to read these cases.</h2>
+      <SectionIntro eyebrow="FAQ" title="How to read these cases." />
       <div class="grid-3">
         {caseStudiesHubFaqs.map((item) => (
           <article class="feature-card">

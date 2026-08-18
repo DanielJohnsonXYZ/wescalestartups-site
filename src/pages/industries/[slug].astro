@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { indexableIndustrySlugs, industryDetailRelatedReading, siteConfig } from "../../site";
 
@@ -88,66 +89,100 @@ const industrySchema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="shell detail-grid">
-      <aside class="detail-aside">
-        <p class="eyebrow">Buyer problem</p>
-        <p>{industry.data.buyerProblem}</p>
-      </aside>
-      <div class="detail-body">
-        <article class="content-block">
-          <h2>Useful when</h2>
-          <ul>
-            {industry.data.usefulWhen.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-        <article class="content-block">
-          <h2>Growth system</h2>
-          <ul>
-            {industry.data.growthSystem.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-        <article class="content-block">
-          <h2>Market-specific proof</h2>
-          <ul>
-            {industry.data.proof.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-        {industry.data.readingBlocks?.map((block) => (
-          <article class="content-block">
-            <h2>{block.heading}</h2>
-            {block.paragraphs?.map((p) => (
-              <p>{p}</p>
-            ))}
-            {block.bullets && block.bullets.length > 0 ? (
-              <ul>
-                {block.bullets.map((b) => (
-                  <li>{b}</li>
-                ))}
-              </ul>
-            ) : null}
-          </article>
-        ))}
-        <article class="content-block">
-          <h2>Lead magnet</h2>
-          <p>
-            {siteConfig.scorecardLabelLong} and use it to decide whether the issue is positioning, acquisition, conversion,
-            reporting, or leadership capacity in this market.
-          </p>
-          <p>
-            <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industry-scorecard">
-              {siteConfig.scorecardLabel} →
-            </a>
-          </p>
-        </article>
+  <!-- Intro band. The buyer problem is the page's thesis, so it takes the
+       homepage's device: a mono label over a display-scale statement on the
+       night surface. Copy is the `buyerProblem` string verbatim. -->
+  <section class="section industry-problem" aria-labelledby={`industry-problem-${industry.id}`}>
+    <div class="shell industry-problem-grid">
+      <p class="eyebrow">Buyer problem</p>
+      <div>
+        <h2 id={`industry-problem-${industry.id}`}>{industry.data.buyerProblem}</h2>
+        <p class="industry-problem-meta">{industry.data.title}</p>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Hubs that pair with this market.</h2>
+      <SectionIntro eyebrow="01" title="Useful when" />
+      <div class="wss-ledger">
+        {industry.data.usefulWhen.map((item, index) => (
+          <article>
+            <span class="wss-ledger-index">{String(index + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro eyebrow="02" title="Growth system" />
+      <div class="wss-ledger">
+        {industry.data.growthSystem.map((item, index) => (
+          <article>
+            <span class="wss-ledger-index">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{item}</h3>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof band. Every industry record carries exactly two proof strings
+       today, but the rail is a flow row so it reads correctly at one or five. -->
+  <section class="section industry-proof">
+    <div class="shell">
+      <SectionIntro eyebrow="03" title="Market-specific proof" />
+      <div class="industry-proof-rail">
+        {industry.data.proof.map((item, index) => (
+          <article class="feature-card">
+            <span class="card-kicker">{String(index + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+          </article>
+        ))}
+        <article class="feature-card industry-magnet">
+          <span class="card-kicker">Lead magnet</span>
+          <p>
+            {siteConfig.scorecardLabelLong} and use it to decide whether the issue is positioning, acquisition, conversion,
+            reporting, or leadership capacity in this market.
+          </p>
+          <a class="card-link" href={siteConfig.scorecardUrl} data-cta="industry-scorecard">
+            {siteConfig.scorecardLabel} →
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {industry.data.readingBlocks && industry.data.readingBlocks.length > 0 && (
+    <section class="section section-alt">
+      <div class="shell">
+        <div class="industry-reading">
+          {industry.data.readingBlocks.map((block) => (
+            <article class="content-block">
+              <h2>{block.heading}</h2>
+              {block.paragraphs?.map((p) => (
+                <p>{p}</p>
+              ))}
+              {block.bullets && block.bullets.length > 0 ? (
+                <ul>
+                  {block.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="Related reading" title="Hubs that pair with this market." />
       <ul class="related-insights-list">
         {industryDetailRelatedReading.map((item) => (
           <li>
@@ -162,8 +197,7 @@ const industrySchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Questions founders ask on industry fit.</h2>
+      <SectionIntro eyebrow="FAQ" title="Questions founders ask on industry fit." />
       <div class="grid-3">
         {industryFaqs.map((item) => (
           <article class="feature-card">
@@ -199,3 +233,33 @@ const industrySchema = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Only the rules that have no competing shared selector live here. The
+     dark intro band is in site-v9.css instead: `.section` is set to the paper
+     background at 0-3-0 by the shared layer, which outranks anything an Astro
+     scoped style can reach (0-2-0), so a page-local `background` was silently
+     dropped and the band rendered white text on white. */
+  .industry-proof-rail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+    gap: 1rem;
+  }
+  .industry-proof-rail .feature-card {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding: 1.5rem 1.4rem;
+  }
+  .industry-magnet {
+    background: linear-gradient(150deg, rgba(128, 108, 255, 0.08), var(--v9-white) 62%);
+    border-color: rgba(128, 108, 255, 0.3);
+  }
+  .industry-reading {
+    display: grid;
+    gap: 1rem;
+  }
+  .industry-reading .content-block {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+</style>

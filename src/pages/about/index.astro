@@ -3,6 +3,7 @@ import BrandLogoSlot from "../../components/BrandLogoSlot.astro";
 import ProofLogos from "../../components/ProofLogos.astro";
 import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { aboutRelatedReading, canonicalProofMetrics, revenueInfluencedNote, siteConfig } from "../../site";
 
@@ -189,8 +190,7 @@ const aboutSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>How we work and who it is for.</h2>
+      <SectionIntro eyebrow="Related reading" title="How we work and who it is for." />
       <ul class="related-insights-list">
         {aboutRelatedReading.map((item) => (
           <li>
@@ -210,8 +210,7 @@ const aboutSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>About WSS in three questions.</h2>
+      <SectionIntro eyebrow="FAQ" title="About WSS in three questions." />
       <div class="grid-3">
         {aboutFaqs.map((item) => (
           <article class="feature-card">

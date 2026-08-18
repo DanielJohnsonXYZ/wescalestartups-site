@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import QuizScorecard from "../components/QuizScorecard.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 
@@ -274,10 +275,7 @@ const results = {
   >
     <section slot="after-problem" class="section">
       <div class="shell">
-        <p class="eyebrow">Who are you actually selling to?</p>
-        <h2 style="margin:0.4rem 0 2rem;">
-          HealthTech has up to eight buyer types, each with different proof requirements.
-        </h2>
+        <SectionIntro eyebrow="Who are you actually selling to?" title="HealthTech has up to eight buyer types, each with different proof requirements." />
         <div class="grid-2" style="gap:1rem;">
           {buyerTypes.map(b => (
             <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:var(--v9-radius-small);background:var(--surface);">

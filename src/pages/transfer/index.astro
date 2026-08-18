@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig, transferPageRelatedReading } from "../../site";
 
@@ -53,8 +54,7 @@ const transferSchema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Build, leadership, and first 30 days.</h2>
+      <SectionIntro eyebrow="Related reading" title="Build, leadership, and first 30 days." />
       <ul class="related-insights-list">
         {transferPageRelatedReading.map((item) => (
           <li>

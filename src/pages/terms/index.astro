@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig, termsPageRelatedLinks } from "../../site";
 
@@ -74,8 +75,7 @@ const termsSchema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Site links</p>
-      <h2>Related pages.</h2>
+      <SectionIntro eyebrow="Site links" title="Related pages." />
       <ul class="related-insights-list">
         {termsPageRelatedLinks.map((item) => (
           <li>

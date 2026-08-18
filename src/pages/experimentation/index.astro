@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig } from "../../site";
 
@@ -84,8 +85,7 @@ const experimentationSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Experiment discipline.</h2>
+      <SectionIntro eyebrow="FAQ" title="Experiment discipline." />
       <div class="grid-3">
         {experimentationFaqs.map((item) => (
           <article class="feature-card">

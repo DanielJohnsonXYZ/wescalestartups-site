@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import { sortByOrder } from "../lib/utils";
@@ -115,10 +116,7 @@ const deliverableGallery = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Results by type</p>
-      <h2 style="margin:0.35rem 0 0.75rem;">
-        Proof grouped by the kind of change founders look for.
-      </h2>
+      <SectionIntro eyebrow="Results by type" title="Proof grouped by the kind of change founders look for." />
       <p class="lede" style="max-width: 60ch; margin-bottom: 1.75rem;">
         Same case studies as below, organised so you can jump to the outcome that matches your constraint.
       </p>
@@ -177,8 +175,7 @@ const deliverableGallery = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Third-party validation</p>
-      <h2 style="margin:0.4rem 0 1.4rem;">Reviews that live off-site.</h2>
+      <SectionIntro eyebrow="Third-party validation" title="Reviews that live off-site." />
       <div class="validation-primary">
         <a class="feature-card validation-card" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
           <p class="card-kicker">GrowthMentor</p>
@@ -193,8 +190,7 @@ const deliverableGallery = [
   <!-- Case grid in P/A/R format -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Case studies</p>
-      <h2 style="margin:0.4rem 0 2.2rem;">Same format, every time.</h2>
+      <SectionIntro eyebrow="Case studies" title="Same format, every time." />
       <div class="grid-3">
         {cases.map((c) => (
           <article class="case-mini">
@@ -230,8 +226,7 @@ const deliverableGallery = [
 
   <section class="section section-alt" id="deliverables">
     <div class="shell">
-      <p class="eyebrow">Deliverable patterns</p>
-      <h2>What the work looks like on the table, before it is tailored to you.</h2>
+      <SectionIntro eyebrow="Deliverable patterns" title="What the work looks like on the table, before it is tailored to you." />
       <p class="lede" style="max-width: 62ch;">
         These are illustrative wireframes, not client screenshots. They show the shape of outputs: maps, memos, backlogs, and cadence, then we match your stack and bottleneck.
       </p>
@@ -252,8 +247,7 @@ const deliverableGallery = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">How we measure the work</p>
-      <h2 style="margin:0.4rem 0 2rem;">How we show proof.</h2>
+      <SectionIntro eyebrow="How we measure the work" title="How we show proof." />
       <div class="grid-3">
         {proofStandards.map((item) => (
           <article class="feature-card compact-card">
@@ -266,8 +260,7 @@ const deliverableGallery = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>More ways to verify and engage.</h2>
+      <SectionIntro eyebrow="Related reading" title="More ways to verify and engage." />
       <ul class="related-insights-list">
         {proofHubRelatedReading.map((item) => (
           <li>
@@ -282,8 +275,7 @@ const deliverableGallery = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How to read this proof page.</h2>
+      <SectionIntro eyebrow="FAQ" title="How to read this proof page." />
       <div class="grid-3">
         {proofFaqs.map((item) => (
           <article class="feature-card">

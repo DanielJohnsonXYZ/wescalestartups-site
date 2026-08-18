@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "./SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, strategicPageRelatedInsights } from "../site";
 
@@ -123,8 +124,7 @@ const schema = [
     relatedInsights.length > 0 && (
       <section class="section">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes that pair with this page.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes that pair with this page." />
           <ul class="related-insights-list">
             {relatedInsights.map((item) => (
               <li>

@@ -7,6 +7,12 @@ import { siteConfig } from "../../../site";
   title="Your 90-Day Growth Experiment Planner | We Scale Startups"
   description="Download the editable 90-Day Growth Experiment Planner and companion field guide."
   path="/resources/90-day-growth-sprint-planner/thanks"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: "90-Day Growth Sprint Planner", path: "/resources/90-day-growth-sprint-planner" },
+    { name: "Thanks", path: "/resources/90-day-growth-sprint-planner/thanks" }
+  ]}
   metaRobots="noindex,follow"
   lastUpdated={false}
   showAnnouncement={false}
@@ -72,7 +78,7 @@ import { siteConfig } from "../../../site";
   .next-step {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1.25rem;
+    border-radius: var(--v9-radius);
     padding: clamp(1.5rem, 3vw, 2.25rem);
   }
   .download-card h2,

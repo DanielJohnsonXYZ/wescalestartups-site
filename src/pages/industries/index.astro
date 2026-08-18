@@ -41,6 +41,10 @@ const moreIndustries = publishedIndustries.filter((industry) => !coreIndustryIds
   description="Industry growth pages for SaaS, AI, FinTech, HealthTech, EdTech, and VC portfolios, post-PMF context and service fit per vertical."
   keywords="SaaS growth consultancy, fintech GTM, healthtech marketing, EdTech acquisition, B2B startup industries"
   path="/industries"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Industries", path: "/industries" }
+  ]}
   schema={industriesSchema}
 >
   <section class="page-hero">

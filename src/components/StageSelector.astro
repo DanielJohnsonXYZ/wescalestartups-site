@@ -280,7 +280,7 @@ const selectedStage = stages[1];
   .stage-selector-shell {
     overflow: hidden;
     border: 1px solid var(--v9-line, rgba(17, 17, 23, 0.12));
-    border-radius: 18px;
+    border-radius: var(--v9-radius);
     background: var(--v9-white);
     box-shadow: 0 28px 80px rgba(17, 17, 23, 0.08);
   }
@@ -462,7 +462,7 @@ const selectedStage = stages[1];
 
   .stage-selector-primary:hover {
     transform: translateY(-2px);
-    background: #d7ff8d;
+    background: color-mix(in srgb, var(--v9-mint) 80%, white);
   }
 
   .stage-selector-secondary {
@@ -499,7 +499,7 @@ const selectedStage = stages[1];
     .stage-selector-intro { text-align: left; }
     .stage-selector-intro h2 { margin-left: 0; }
     .stage-selector-intro p { margin-left: 0; }
-    .stage-selector-shell { border-radius: 12px; }
+    .stage-selector-shell { border-radius: var(--v9-radius-small); }
     .stage-selector-tab { grid-template-columns: 52px minmax(0, 1fr) auto; }
     .stage-selector-output-copy,
     .stage-selector-next { padding: 1.5rem; }

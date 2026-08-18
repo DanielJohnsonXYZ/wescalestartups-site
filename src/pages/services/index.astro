@@ -105,7 +105,7 @@ const servicesSchema = [
 
   <section class="section">
     <div class="shell">
-      <ul class="services-trust-list" aria-label="How engagements work">
+      <ul class="trust-list services-trust-list" aria-label="How engagements work">
         {pricingTrustBullets.map((line) => (
           <li>{line}</li>
         ))}
@@ -229,20 +229,10 @@ const servicesSchema = [
   .offer-detail-card .button {
     margin-top: 1rem;
   }
+  /* Shared surface lives in .trust-list (components.css); only the margin
+     is page-specific here, this list opens its own section with nothing
+     above it to separate from. */
   .services-trust-list {
     margin: 0 auto;
-    padding: 1.15rem 1.25rem 1.2rem 1.5rem;
-    max-width: 52rem;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    background: var(--surface);
-    list-style: disc;
-  }
-  .services-trust-list li {
-    margin: 0.35rem 0;
-    padding-left: 0.15rem;
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
   }
 </style>

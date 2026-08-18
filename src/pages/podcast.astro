@@ -71,6 +71,10 @@ const showThemes = [
 
 <BaseLayout
   path="/podcast"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Podcast", path: "/podcast" }
+  ]}
   title={`${siteConfig.podcastName} | We Scale Startups`}
   description={siteConfig.podcastDescription}
   keywords="Luck Doesn't Scale, startup podcast, AI growth, startup AI adoption, founder interviews, B2B SaaS podcast, growth playbook"
@@ -147,7 +151,7 @@ const showThemes = [
   </section>
 
   <!-- WHAT THE SHOW IS -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <SectionIntro
         eyebrow="What we examine"
@@ -166,7 +170,7 @@ const showThemes = [
   </section>
 
   <!-- WHO IT'S FOR -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell">
       <SectionIntro
         eyebrow="Audience"
@@ -191,7 +195,7 @@ const showThemes = [
   </section>
 
   <!-- GUEST CTA -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <SectionIntro
         eyebrow="Guest applications"
@@ -210,7 +214,7 @@ const showThemes = [
   </section>
 
   <!-- ABOUT THE HOST -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell host-grid">
       <div class="host-photos" aria-label="Host photos">
         <figure class="host-photo">
@@ -269,6 +273,22 @@ const showThemes = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="section section-alt">
+    <div class="shell">
+      <p class="eyebrow">FAQ</p>
+      <h2>Common questions about the show.</h2>
+      <div class="grid-3">
+        {podcastFaqs.map((faq) => (
+          <article class="feature-card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- WSS COMMERCIAL CTA -->
   <section class="cta-band">
     <div class="shell cta-inner">
@@ -295,28 +315,9 @@ const showThemes = [
       </div>
     </div>
   </section>
-
-  <!-- FAQ -->
-  <section class="section section-alt">
-    <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Common questions about the show.</h2>
-      <div class="grid-3">
-        {podcastFaqs.map((faq) => (
-          <article class="feature-card">
-            <h3>{faq.question}</h3>
-            <p>{faq.answer}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
-  .podcast-hero {
-    padding-bottom: 3rem;
-  }
   .podcast-tagline {
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 600;
@@ -335,9 +336,6 @@ const showThemes = [
     align-items: center;
   }
 
-  .podcast-subscribe {
-    padding-block: 3rem;
-  }
   .subscribe-buttons {
     display: grid;
     gap: 1rem;
@@ -347,21 +345,15 @@ const showThemes = [
   @media (min-width: 600px) {
     .subscribe-buttons { grid-template-columns: repeat(3, 1fr); }
   }
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .subscribe-btn {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     padding: 1.25rem 1.5rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
     text-decoration: none;
     color: var(--ink);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-  .subscribe-btn:hover {
-    border-color: var(--accent);
-    box-shadow: 0 6px 22px rgba(16, 13, 24, 0.07);
   }
   .subscribe-btn strong {
     font-size: 1rem;
@@ -384,10 +376,9 @@ const showThemes = [
   @media (min-width: 1080px) {
     .podcast-pillars { grid-template-columns: repeat(4, 1fr); }
   }
+  /* Border/radius/background come from the shared card contract in
+     site-v9.css. */
   .pillar-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.85rem;
     padding: 1.25rem 1.25rem 1.4rem;
   }
   .pillar-card h3 {
@@ -415,7 +406,7 @@ const showThemes = [
   .audience-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.25rem 1.25rem 1.4rem;
   }
   .audience-card h3 {
@@ -463,7 +454,7 @@ const showThemes = [
     height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     border: 1px solid var(--line);
     display: block;
   }

@@ -72,6 +72,10 @@ const startHereSchema = [
 
 <BaseLayout
   path="/start-here"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Start here", path: "/start-here" }
+  ]}
   title="Start here | We Scale Startups"
   description="The four-step path for founders: score your growth bottleneck, read one case study, book the audit call, then pick the smallest engagement that fits."
   keywords="We Scale Startups onboarding, post-PMF founder guide, growth consultancy fit, which engagement first, startup growth decision tree"
@@ -192,6 +196,8 @@ const startHereSchema = [
 </BaseLayout>
 
 <style>
+  /* Border/radius/background come from the shared card contract in
+     site-v9.css. */
   .start-step {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -199,15 +205,12 @@ const startHereSchema = [
     gap: 1.5rem;
     padding: 1.75rem 1.6rem;
     margin-top: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
   }
   @media (max-width: 720px) {
     .start-step { grid-template-columns: 1fr; gap: 0.85rem; }
   }
   .start-step-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--accent);
@@ -246,10 +249,9 @@ const startHereSchema = [
   @media (min-width: 720px) { .stage-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1080px) { .stage-grid { grid-template-columns: repeat(3, 1fr); } }
 
+  /* Border/radius/background come from the shared card contract in
+     site-v9.css. */
   .stage-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
     padding: 1.4rem 1.4rem;
   }
   .stage-card-fit { border-color: var(--accent); }
@@ -268,7 +270,7 @@ const startHereSchema = [
   }
   .stage-action {
     background: var(--surface-dim);
-    border-radius: 0.6rem;
+    border-radius: var(--v9-radius-small);
     padding: 0.7rem 0.85rem;
     margin-top: 0.85rem !important;
     color: var(--ink) !important;

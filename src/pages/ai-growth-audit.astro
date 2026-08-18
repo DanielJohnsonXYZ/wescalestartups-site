@@ -124,6 +124,10 @@ const schema = [
 
 <BaseLayout
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "AI SaaS Growth Audit", path }
+  ]}
   title="AI SaaS Growth Audit | We Scale Startups"
   description="A 20-minute Growth Audit for post-PMF AI SaaS founders. Name the pipeline constraint before you hire, increase spend, or add another agency."
   keywords="AI SaaS growth audit, post-PMF AI startup marketing, founder-led growth, fractional CMO AI startup"
@@ -313,7 +317,7 @@ const schema = [
         id="book-cal-inline"
         class="cal-inline-widget"
         data-cal-link={siteConfig.calLink}
-        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
+        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.25rem; border: 1px solid var(--line); border-radius: var(--v9-radius-small); background: #fff;"
       >
       </div>
       <p class="calendly-lede">
@@ -407,7 +411,7 @@ const schema = [
   .daniel-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1.25rem;
+    border-radius: var(--v9-radius);
     overflow: hidden;
     box-shadow: 0 12px 40px rgba(16, 17, 20, 0.06);
   }
@@ -425,7 +429,7 @@ const schema = [
 
   .daniel-card-kicker {
     margin: 0;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -505,7 +509,7 @@ const schema = [
   .fit-table {
     margin-top: 1.25rem;
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     overflow: hidden;
     background: var(--surface);
   }
@@ -518,7 +522,7 @@ const schema = [
 
   .fit-table-head {
     background: color-mix(in srgb, var(--violet) 8%, white);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -551,7 +555,7 @@ const schema = [
   }
 
   .fit-mark {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.8rem;
     line-height: 1.4;
   }

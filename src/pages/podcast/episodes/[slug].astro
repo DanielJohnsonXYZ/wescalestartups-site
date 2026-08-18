@@ -63,14 +63,18 @@ const breadcrumb = buildBreadcrumbSchema([
   ]}
   lastUpdated={siteConfig.lastUpdated}
 >
-  <article class="shell section">
-    <p class="eyebrow">Podcast · Episode {e.episodeNumber > 0 ? e.episodeNumber : "template"}</p>
-    <h1>{e.title}</h1>
-    <p class="lede">
-      With <strong>{e.guestName}</strong>, {e.guestRole}
-      {e.durationNote && ` · ${e.durationNote}`}
-    </p>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Podcast · Episode {e.episodeNumber > 0 ? e.episodeNumber : "template"}</p>
+      <h1>{e.title}</h1>
+      <p class="lede">
+        With <strong>{e.guestName}</strong>, {e.guestRole}
+        {e.durationNote && ` · ${e.durationNote}`}
+      </p>
+    </div>
+  </section>
 
+  <article class="shell section episode-content">
     {
       embedUrl ? (
         <div class="episode-video">
@@ -141,21 +145,18 @@ const breadcrumb = buildBreadcrumbSchema([
 </BaseLayout>
 
 <style>
-  .section {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+  .episode-content {
     max-width: 720px;
   }
-  .lede {
+  .page-hero .lede {
     font-size: 1.1rem;
-    margin-bottom: 1.5rem;
   }
   .episode-video {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: var(--v9-radius-small);
     margin-bottom: 2rem;
   }
   .episode-video iframe {
@@ -168,7 +169,7 @@ const breadcrumb = buildBreadcrumbSchema([
   }
   .episode-placeholder {
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: var(--v9-radius-small);
     border: 1px dashed var(--v9-line);
     margin-bottom: 2rem;
   }

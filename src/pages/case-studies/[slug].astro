@@ -91,7 +91,7 @@ const caseFaqs = [
   ]}
 >
   <!-- Hero -->
-  <section class="page-hero">
+  <section class="page-hero page-hero-longtitle">
     <div class="shell">
       <p class="eyebrow">{caseStudy.data.sector}</p>
       <h1>{caseStudy.data.title}</h1>
@@ -274,7 +274,7 @@ const caseFaqs = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">Related reading</p>
       <h2>More proof and how to engage.</h2>
@@ -291,7 +291,7 @@ const caseFaqs = [
   </section>
 
   <!-- FAQs -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell">
       <p class="eyebrow">Case FAQ</p>
       <h2>What founders ask about this engagement.</h2>
@@ -335,13 +335,6 @@ const caseFaqs = [
 </BaseLayout>
 
 <style>
-  .case-summary {
-    font-size: 1.05rem;
-    line-height: 1.55;
-    max-width: 65ch;
-    margin: 1rem 0 1.5rem;
-    color: var(--muted);
-  }
   .case-grid {
     display: grid;
     gap: 2.5rem;
@@ -357,7 +350,7 @@ const caseFaqs = [
   .case-aside {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     padding: 1.4rem 1.4rem;
     align-self: start;
     position: sticky;
@@ -397,15 +390,14 @@ const caseFaqs = [
 
   .case-body { display: flex; flex-direction: column; gap: 1.5rem; }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .case-section {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
     padding: 1.75rem 1.75rem 1.85rem;
     position: relative;
   }
   .case-section-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.75rem;
     font-weight: 700;
     color: var(--accent);
@@ -459,7 +451,7 @@ const caseFaqs = [
     background: color-mix(in srgb, var(--accent) 8%, transparent);
     border-left: 3px solid var(--accent);
     padding: 0.85rem 1.1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--v9-radius-small);
     margin-top: 1rem !important;
     font-size: 0.92rem;
   }

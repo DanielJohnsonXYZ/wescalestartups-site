@@ -106,6 +106,10 @@ const howItWorksSchema = [
 
 <BaseLayout
   path="/how-it-works"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "How it works", path: "/how-it-works" }
+  ]}
   title="How it works | We Scale Startups"
   description="How a WSS engagement runs week by week: diagnosis, acquisition system build, experiment cadence, and transfer to your team."
   keywords="fractional CMO process, growth engagement phases, weekly growth cadence, startup acquisition system, handover playbook"
@@ -326,7 +330,7 @@ const howItWorksSchema = [
     .how-artefact-img {
       width: 100%;
       height: auto;
-      border-radius: 0.75rem;
+      border-radius: var(--v9-radius-small);
       border: 1px solid var(--line);
       background: var(--surface);
       box-shadow: var(--shadow);

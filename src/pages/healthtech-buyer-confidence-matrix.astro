@@ -210,6 +210,10 @@ const results = {
   description="You may be convincing users, but not building enough confidence with the real buyer. 12 questions to diagnose where trust is breaking in your HealthTech GTM."
   keywords="HealthTech GTM, digital health marketing, healthcare buyer confidence, HealthTech sales, clinical proof, healthcare ROI case"
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "HealthTech Buyer Confidence Matrix", path }
+  ]}
   schema={schema}
 >
   <QuizScorecard
@@ -276,7 +280,7 @@ const results = {
         </h2>
         <div class="grid-2" style="gap:1rem;">
           {buyerTypes.map(b => (
-            <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:0.75rem;background:var(--surface);">
+            <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:var(--v9-radius-small);background:var(--surface);">
               <p style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 0.35rem;">{b.role}</p>
               <p style="font-size:0.85rem;color:var(--muted);line-height:1.5;margin:0;">{b.needs}</p>
             </div>

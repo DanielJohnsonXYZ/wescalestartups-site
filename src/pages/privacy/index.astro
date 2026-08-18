@@ -14,6 +14,10 @@ const privacySchema = buildBreadcrumbSchema([
   description="How We Scale Startups handles enquiry, analytics, scheduling, and communication data. A plain-English privacy notice."
   keywords="We Scale Startups privacy policy, data protection, Cal.com analytics"
   path="/privacy"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Privacy", path: "/privacy" }
+  ]}
   schema={privacySchema}
 >
   <section class="page-hero">
@@ -21,6 +25,14 @@ const privacySchema = buildBreadcrumbSchema([
       <p class="eyebrow">Privacy</p>
       <h1>Plain-English privacy for growth conversations.</h1>
       <p>We collect the minimum information needed to understand an enquiry, schedule calls, improve the site, and follow up professionally.</p>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="privacy-hero-book">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button button-light" href="/contact" data-cta="privacy-hero-contact">
+          Contact us →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -83,6 +95,24 @@ const privacySchema = buildBreadcrumbSchema([
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Questions about this policy?</p>
+        <h2>Get in touch.</h2>
+        <p>Email {siteConfig.email}, or book a {siteConfig.bookingCallShort} if you'd rather talk it through.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="privacy-final-book">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button button-light" href="/contact" data-cta="privacy-final-contact">
+          Contact us →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

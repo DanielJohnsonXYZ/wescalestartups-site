@@ -86,6 +86,10 @@ const gtmDeliverables = [
 
 <BaseLayout
   path="/gtm-strategy"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "GTM Strategy", path: "/gtm-strategy" }
+  ]}
   title="GTM Strategy for Post-PMF B2B SaaS | We Scale Startups"
   description="GTM strategy for post-PMF B2B SaaS and AI startups: diagnose the bottleneck, build the acquisition system, install the weekly rhythm."
   keywords="B2B SaaS GTM strategy, go-to-market system, post-PMF positioning, ICP and channels, acquisition operating rhythm"
@@ -289,7 +293,7 @@ const gtmDeliverables = [
   .gtm-problem-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
@@ -343,11 +347,11 @@ const gtmDeliverables = [
   .gtm-deliverable {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.1rem;
   }
   .gtm-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.68rem;
     font-weight: 700;
     color: var(--accent);
@@ -381,7 +385,7 @@ const gtmDeliverables = [
   .gtm-engagement-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.25rem;
     text-decoration: none;
     color: inherit;

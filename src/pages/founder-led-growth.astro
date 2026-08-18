@@ -51,6 +51,10 @@ const transitionSteps = [
 
 <BaseLayout
   path="/founder-led-growth"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Founder-led growth", path: "/founder-led-growth" }
+  ]}
   title="Founder-led Growth | We Scale Startups"
   description="Founder-led growth: when the founder is the best salesperson, but the company can't scale. Diagnose the bottleneck and build a repeatable system."
   keywords="founder-led growth, post-PMF startup, founder dependency, acquisition system, fractional CMO, startup growth bottleneck"
@@ -200,17 +204,16 @@ const transitionSteps = [
   @media (min-width: 880px) {
     .decision-grid { grid-template-columns: repeat(3, 1fr); }
   }
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .decision-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
     padding: 1.5rem 1.4rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
   .decision-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.7rem;
     font-weight: 700;
     color: var(--accent);
@@ -238,10 +241,9 @@ const transitionSteps = [
   @media (min-width: 720px) { .stage-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1080px) { .stage-grid { grid-template-columns: repeat(3, 1fr); } }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .stage-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
     padding: 1.4rem 1.4rem;
   }
   .stage-card-fit { border-color: var(--accent); }

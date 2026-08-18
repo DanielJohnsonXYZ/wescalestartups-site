@@ -151,13 +151,21 @@ const schemas = [
           </ul>
         </article>
       </div>
-      <div class="growth-tool-next-static">
-        <div>
-          <p class="card-kicker">Connected next step</p>
-          <h3>Your result stays in this browser and can feed the next tool.</h3>
-        </div>
-        <a class="button button-light" href={nextHref} data-cta={`growth-tool-static-next-${id}`}>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Connected next step</p>
+        <h2>Your result stays in this browser and can feed the next tool.</h2>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={nextHref} data-cta={`growth-tool-static-next-${id}`}>
           {nextLabel} →
+        </a>
+        <a class="button button-light" href={siteConfig.bookingUrl} data-cta={`growth-tool-static-book-${id}`}>
+          {siteConfig.bookingLabel} →
         </a>
       </div>
     </div>
@@ -181,7 +189,7 @@ const schemas = [
   .growth-tool-lede { max-width:62ch;font-size:clamp(1.05rem,1.8vw,1.25rem); }
   .growth-tool-meta { display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.5rem; }
   .growth-tool-meta span { border:1px solid var(--border);border-radius:999px;padding:.45rem .72rem;background:rgba(255,255,255,.58);font-size:.78rem;font-weight:700; }
-  .growth-tool-preview { border:1px solid var(--border);border-radius:1.25rem;background:var(--surface);padding:clamp(1.4rem,3vw,2.1rem);box-shadow:var(--shadow-soft); }
+  .growth-tool-preview { border:1px solid var(--border);border-radius:var(--v9-radius);background:var(--surface);padding:clamp(1.4rem,3vw,2.1rem);box-shadow:var(--shadow-soft); }
   .growth-tool-preview h2 { margin:.5rem 0 .75rem;font-size:clamp(1.7rem,3vw,2.55rem); }
   .growth-tool-preview p:not(.card-kicker) { color:var(--muted); }
   .growth-tool-preview-flow { display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem; }
@@ -196,12 +204,9 @@ const schemas = [
   .growth-tool-explainer-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2rem; }
   .growth-tool-explainer-grid ul { margin:1rem 0 0;padding-left:1.2rem; }
   .growth-tool-explainer-grid li + li { margin-top:.55rem; }
-  .growth-tool-next-static { display:flex;align-items:center;justify-content:space-between;gap:1.5rem;margin-top:1rem;padding:1.5rem;border:1px solid var(--border);border-radius:1rem;background:var(--surface-muted); }
-  .growth-tool-next-static h3 { max-width:34ch;margin:.35rem 0 0; }
   @media(max-width:820px){
     .growth-tool-hero-grid,.growth-tool-explainer-grid{grid-template-columns:1fr}
     .growth-tool-page-hero h1{max-width:none}
     .growth-tool-preview{max-width:42rem}
-    .growth-tool-next-static{align-items:flex-start;flex-direction:column}
   }
 </style>

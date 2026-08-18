@@ -347,6 +347,11 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   path={`/resources/${slug}`}
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: magnet.title, path: `/resources/${slug}` }
+  ]}
 >
   <section class="page-hero">
     <div class="shell">

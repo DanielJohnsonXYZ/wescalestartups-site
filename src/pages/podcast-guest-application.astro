@@ -39,6 +39,10 @@ const turnstileSiteKey =
   title={`Podcast Guest Application | ${siteConfig.podcastName}`}
   description={`Apply to be a guest on ${siteConfig.podcastName}. Founders, marketers, investors, and operators examining how AI is rewriting the startup growth playbook.`}
   path="/podcast-guest-application"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Podcast Guest Application", path: "/podcast-guest-application" }
+  ]}
   schema={schemas}
   metaRobots={siteConfig.podcastLive ? "index,follow,max-image-preview:large" : "noindex,follow"}
 >
@@ -350,7 +354,7 @@ const turnstileSiteKey =
         .guest-status {
           margin: 0;
           padding: 1rem 1.1rem;
-          border-radius: 8px;
+          border-radius: var(--v9-radius-small);
           font-size: 0.95rem;
           line-height: 1.5;
         }
@@ -360,9 +364,9 @@ const turnstileSiteKey =
           color: var(--ink);
         }
         .guest-status--err {
-          border: 1px solid #c44;
-          background: #fff5f5;
-          color: #5a1515;
+          border: 1px solid color-mix(in srgb, var(--bad) 45%, var(--line));
+          background: color-mix(in srgb, var(--bad) 8%, var(--surface));
+          color: var(--ink);
         }
         .guest-status a {
           text-decoration: underline;

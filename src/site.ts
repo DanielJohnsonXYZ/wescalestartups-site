@@ -238,15 +238,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/resources/ai-search-visibility-checklist": "2026-05-11"
 };
 
-/** Primary nav, same on every page (including homepage). */
-export const navigation = [
-  { href: "/services", label: "Services" },
-  { href: "/proof", label: "Results" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/insights", label: "Insights" },
-  { href: "/about", label: "About" }
-] as const;
-
 /** Strategic pillar pages → related insights (internal links + related reading section). */
 export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {
   "/how-it-works": [

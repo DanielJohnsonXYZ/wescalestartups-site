@@ -60,6 +60,10 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
 
 <BaseLayout
   path="/testimonials"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Testimonials", path: "/testimonials" }
+  ]}
   title="Testimonials & founder feedback | We Scale Startups"
   description="Founder, client, and mentoring feedback for We Scale Startups. Filter by engagement type. Read what founders say about working with WSS and Daniel Johnson."
   keywords="We Scale Startups reviews, founder testimonials, GrowthMentor reviews, fractional CMO feedback"
@@ -238,7 +242,7 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
   .tm-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1.25rem;
+    border-radius: var(--v9-radius);
     padding: 1.5rem 1.5rem;
     margin: 0;
     transition: opacity 200ms ease, transform 200ms ease;

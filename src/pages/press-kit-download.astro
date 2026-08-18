@@ -34,6 +34,11 @@ const schemas = [
   keywords="We Scale Startups press kit PDF, company boilerplate, startup media assets"
   {path}
   schema={schemas}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Press kit", path: "/press" },
+    { name: "Download", path }
+  ]}
 >
   <section class="page-hero print-hide" aria-labelledby="press-download-heading">
     <div class="shell">
@@ -179,7 +184,7 @@ const schemas = [
     padding: 2rem 1.5rem 2.5rem;
     background: var(--bg);
     border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
-    border-radius: 12px;
+    border-radius: var(--v9-radius-small);
   }
   .card-print {
     line-height: 1.55;

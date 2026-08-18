@@ -65,6 +65,10 @@ const diagnoseSchema = [
   title="Diagnose your growth bottleneck | We Scale Startups"
   description="A 5-step diagnostic to find the real growth constraint: positioning, acquisition, conversion, reporting, or team ownership."
   path="/diagnose"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Diagnose", path: "/diagnose" }
+  ]}
   schema={diagnoseSchema}
 >
   <section class="page-hero">
@@ -200,11 +204,11 @@ const diagnoseSchema = [
     gap: 1.25rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     padding: 1.25rem 1.5rem;
   }
   .diag-layer-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--accent);
@@ -228,7 +232,7 @@ const diagnoseSchema = [
     display: block;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     padding: 1.25rem 1.4rem;
     text-decoration: none;
     color: var(--ink);

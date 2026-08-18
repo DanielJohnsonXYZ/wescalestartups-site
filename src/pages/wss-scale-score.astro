@@ -67,6 +67,10 @@ const schema = [
   description="Score your startup across 8 growth dimensions: positioning, acquisition, conversion, reporting, team ownership, offer, experimentation, and founder time."
   keywords="growth scorecard, startup growth assessment, fractional CMO audit, post-PMF growth checklist, acquisition system score"
   path="/wss-scale-score"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "WSS Scale Score", path: "/wss-scale-score" }
+  ]}
   schema={schema}
 >
   <section class="page-hero">
@@ -105,7 +109,7 @@ const schema = [
             <p style="font-size:0.92rem;color:var(--muted);line-height:1.6;margin:0 0 0.75rem;">{dim.description}</p>
             <div style="display:flex;gap:0.5rem;font-size:0.78rem;">
               {dim.scoreLabels.map((label, j) => (
-                <span style={`padding:0.25rem 0.6rem;border-radius:0.4rem;border:1px solid var(--line);color:var(--muted);background:${j === 0 ? "var(--surface)" : j === 1 ? "var(--surface)" : "color-mix(in srgb, var(--accent) 10%, transparent)"}`}>
+                <span style={`padding:0.25rem 0.6rem;border-radius:var(--v9-radius-small);border:1px solid var(--line);color:var(--muted);background:${j === 0 ? "var(--surface)" : j === 1 ? "var(--surface)" : "color-mix(in srgb, var(--accent) 10%, transparent)"}`}>
                   {label}
                 </span>
               ))}
@@ -146,22 +150,22 @@ const schema = [
         Low scores here are why pipeline plateaus.
       </h2>
       <div class="grid-2" style="gap:1.25rem;">
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Positioning + Offer below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Acquisition spend leaks. Channels attract the wrong ICP. CAC climbs while conversion falls.</p>
-        </div>
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Acquisition system below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Channels work in isolation but pipeline arrives in waves. No compound effect week over week.</p>
-        </div>
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Reporting & Decisions below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Activity gets reported but no one decides what to scale, stop, or fix. Weeks pass without a sharp call.</p>
-        </div>
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Team Ownership below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Growth still depends on founder heroics. The system isn't transferable. Fractional work can't finish.</p>
-        </div>
+        <article class="feature-card compact-card">
+          <h3 style="color:var(--accent);">Positioning + Offer below 2/3</h3>
+          <p>Acquisition spend leaks. Channels attract the wrong ICP. CAC climbs while conversion falls.</p>
+        </article>
+        <article class="feature-card compact-card">
+          <h3 style="color:var(--accent);">Acquisition system below 2/3</h3>
+          <p>Channels work in isolation but pipeline arrives in waves. No compound effect week over week.</p>
+        </article>
+        <article class="feature-card compact-card">
+          <h3 style="color:var(--accent);">Reporting & Decisions below 2/3</h3>
+          <p>Activity gets reported but no one decides what to scale, stop, or fix. Weeks pass without a sharp call.</p>
+        </article>
+        <article class="feature-card compact-card">
+          <h3 style="color:var(--accent);">Team Ownership below 2/3</h3>
+          <p>Growth still depends on founder heroics. The system isn't transferable. Fractional work can't finish.</p>
+        </article>
       </div>
     </div>
   </section>

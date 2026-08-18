@@ -23,6 +23,10 @@ const turnstileSiteKey =
   title="Refer a founder, earn £500 | We Scale Startups"
   description="Know a post-PMF B2B SaaS founder with a pipeline problem? Refer them to We Scale Startups and earn £500 when they sign."
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Refer a founder", path }
+  ]}
   schema={schema}
   lastUpdated={siteConfig.lastUpdated}
 >
@@ -298,7 +302,7 @@ const turnstileSiteKey =
 
     if (fallback) {
       fallback.removeAttribute("hidden");
-      fallback.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
+      fallback.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:var(--v9-radius-small);font-size:0.9rem;";
       fallback.innerHTML = "Your email draft should have opened. If it didn't, email <a href=\"mailto:" + email + "\">" + email + "</a> directly.";
     }
 

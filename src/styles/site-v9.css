@@ -46,6 +46,19 @@
   letter-spacing: -0.045em;
 }
 
+/* Long-form body headings keep the serif editorial voice components.css
+   gives .content-block h2 (Fraunces). The blanket heading rule above wins
+   on both specificity (0-2-0 vs. components.css's 0-1-1) and source order,
+   so it silently downgraded article/case headings to sans Geist — smaller
+   and quieter than the serif FAQ-card headings sitting right below them on
+   the same page. Named at (0-3-1) so it wins outright, not just on order. */
+.theme-wss-v9:not(.no-shared-chrome) .article-body h2 {
+  font-family: var(--v9-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.75rem, 2.6vw, 2.2rem);
+}
+
 .theme-wss-v9 ::selection {
   background: var(--v9-mint);
   color: var(--v9-night);
@@ -244,6 +257,15 @@
   -webkit-text-fill-color: currentColor;
 }
 
+/* Long-title variant: article and case-study titles run 60+ characters and
+   wrap to 4-5 lines at the marketing-headline clamp above. Opt in with
+   `.page-hero-longtitle` on the templates that need it (insights/[slug],
+   case-studies/[slug]) rather than shrinking every short hero headline. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero.page-hero-longtitle h1 {
+  max-width: 34ch;
+  font-size: clamp(2.1rem, 3.6vw, 3.4rem);
+}
+
 .theme-wss-v9:not(.no-shared-chrome) .page-hero h1 em {
   background: linear-gradient(115deg, var(--v9-violet-deep), var(--v9-violet) 72%);
   background-clip: text;
@@ -403,7 +425,16 @@
   .contact-option,
   .faq-item,
   .glossary-item,
-  .free-paid-card
+  .free-paid-card,
+  .handson-card,
+  .mistake-card,
+  .service-faq-item,
+  .case-proof-quote,
+  .symptoms-list li,
+  .case-section,
+  .start-step,
+  .quiz-question-card,
+  .result-card
 ) {
   border: 1px solid var(--v9-line);
   border-radius: var(--v9-radius);
@@ -430,9 +461,16 @@
   .fit-card,
   .strategic-panel:not(.strategic-panel-dark),
   .content-block,
-  .faq-item,
   .glossary-item,
-  .free-paid-card
+  .free-paid-card,
+  .handson-card,
+  .mistake-card,
+  .service-faq-item,
+  .case-proof-quote,
+  .case-section,
+  .start-step,
+  .quiz-question-card,
+  .result-card
 ):hover {
   transform: translateY(-4px);
   border-color: rgba(128, 108, 255, 0.38);

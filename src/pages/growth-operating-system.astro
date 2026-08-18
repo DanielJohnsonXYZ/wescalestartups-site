@@ -36,6 +36,10 @@ const systemComponents = [
 
 <BaseLayout
   path="/growth-operating-system"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Growth operating system", path: "/growth-operating-system" }
+  ]}
   title="Growth Operating System | We Scale Startups"
   description={`The ${methodologyBrand.shortName}: diagnosis, acquisition design, execution, and transfer, so post-PMF startups stop depending on founder heroics.`}
   keywords="growth operating system, startup growth system, fractional CMO, acquisition system, post-PMF growth, B2B SaaS growth"
@@ -184,10 +188,9 @@ const systemComponents = [
   @media (min-width: 880px) {
     .decision-grid { grid-template-columns: repeat(4, 1fr); }
   }
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .decision-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
     padding: 1.5rem 1.4rem;
     display: flex;
     flex-direction: column;

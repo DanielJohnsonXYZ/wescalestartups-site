@@ -9,6 +9,11 @@ const community = siteConfig.growingPains;
   title={`You're booked | ${siteConfig.bookingLabel}`}
   description="Your Growth Audit is confirmed. Check your email for the Google Meet link, then bring the bottleneck you want named."
   path="/book/thanks"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Book", path: "/book" },
+    { name: "Thanks", path: "/book/thanks" }
+  ]}
   metaRobots="noindex,follow"
   lastUpdated={false}
   showAnnouncement={false}

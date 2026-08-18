@@ -22,6 +22,10 @@ const pricingFaqs = [
 
 <BaseLayout
   path="/pricing"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Pricing", path: "/pricing" }
+  ]}
   title="Startup Growth Pricing | We Scale Startups"
   description="Engagement ranges for Growth Diagnosis, 90-Day Sprint, Acquisition System Build, and Fractional CMO. Honest ranges so you can self-qualify."
   keywords="fractional CMO pricing, growth diagnosis cost, 90-day growth sprint price, acquisition system build, post-PMF startup consulting UK"
@@ -38,12 +42,27 @@ const pricingFaqs = [
         All prices in GBP, set for the UK market. Every tier is a range: where you land depends on team complexity, scope, and timeline.
         If the ranges aren't workable for you, an agency or in-house hire will probably be a better fit.
       </p>
+      <div class="hero-actions">
+        <a
+          class="button button-brand button-with-subcopy"
+          href={siteConfig.bookingUrl}
+          data-cta="pricing-hero-book"
+          title={siteConfig.bookingCallReassurance}
+        >
+          <span class="button-label">{siteConfig.bookingLabel}</span>
+          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+        </a>
+        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="pricing-hero-scorecard">
+          Or, {siteConfig.scorecardLabel} →
+        </a>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <h2 class="visually-hidden">Engagement tiers</h2>
     <div class="shell">
+      <p class="eyebrow">Engagement tiers</p>
+      <h2>Pick the smallest engagement that answers your question.</h2>
       <div class="pricing-grid">
         {pricingTiers.map((tier, idx) => (
           <article
@@ -75,7 +94,7 @@ const pricingFaqs = [
         Limited number of clients each quarter.
       </div>
 
-      <ul class="pricing-trust-list" aria-label="How engagements work">
+      <ul class="trust-list pricing-trust-list" aria-label="How engagements work">
         {pricingTrustBullets.map((line) => (
           <li>{line}</li>
         ))}
@@ -85,7 +104,7 @@ const pricingFaqs = [
 
   <OfferRoutingCards />
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell two-column">
       <div>
         <p class="eyebrow">What's not in the price</p>
@@ -101,7 +120,7 @@ const pricingFaqs = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">Related reading</p>
       <h2>Context for the numbers.</h2>
@@ -120,10 +139,11 @@ const pricingFaqs = [
   <section class="section">
     <div class="shell">
       <p class="eyebrow">Pricing FAQ</p>
+      <h2>Common questions before you book.</h2>
       <div class="grid-3">
         {pricingFaqs.map((faq) => (
           <article class="feature-card">
-            <h2>{faq.question}</h2>
+            <h3>{faq.question}</h3>
             <p>{faq.answer}</p>
           </article>
         ))}
@@ -159,20 +179,9 @@ const pricingFaqs = [
 </BaseLayout>
 
 <style>
+  /* Shared surface lives in .trust-list (components.css); only the top
+     margin is page-specific here, this list follows the disclaimer above. */
   .pricing-trust-list {
     margin: 1.75rem 0 0;
-    padding: 1.15rem 1.25rem 1.2rem 1.5rem;
-    max-width: 52rem;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    background: var(--surface);
-    list-style: disc;
-  }
-  .pricing-trust-list li {
-    margin: 0.35rem 0;
-    padding-left: 0.15rem;
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
   }
 </style>

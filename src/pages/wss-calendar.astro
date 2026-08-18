@@ -17,6 +17,10 @@ const schema = buildBreadcrumbSchema([
   description="WSS Calendar is the scheduling app We Scale Startups uses for Growth Audit bookings. It connects Google Calendar and Google Meet so invitees get a real meeting link."
   keywords="WSS Calendar, We Scale Startups scheduling, Growth Audit booking, Google Calendar, Google Meet"
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: appName, path }
+  ]}
   schema={schema}
   showAnnouncement={false}
   stickyBookCta={false}

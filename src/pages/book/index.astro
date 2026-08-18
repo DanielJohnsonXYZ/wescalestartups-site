@@ -48,6 +48,10 @@ const bookSchema = [
   description={`${siteConfig.bookingLabel} with We Scale Startups. Bring your current bottleneck, we name the constraint in plain English, then pick a time.`}
   keywords="book growth call, startup growth diagnostic, Cal.com booking, 20 minute growth audit"
   path="/book"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Book", path: "/book" }
+  ]}
   schema={bookSchema}
 >
   <script is:inline>
@@ -143,7 +147,7 @@ const bookSchema = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">How the {siteConfig.bookingCallDurationPhrase} run</p>
       <ol class="call-phase-list">
@@ -154,7 +158,7 @@ const bookSchema = [
     </div>
   </section>
 
-  <section class="section section-alt" id="book-cal" aria-labelledby="book-cal-heading">
+  <section class="section" id="book-cal" aria-labelledby="book-cal-heading">
     <div class="shell">
       <p class="eyebrow">Pick a time</p>
       <h2 id="book-cal-heading">Book inline, no extra tabs required.</h2>
@@ -162,7 +166,7 @@ const bookSchema = [
         id="book-cal-inline"
         class="cal-inline-widget"
         data-cal-link={siteConfig.calLink}
-        style="min-width: 320px; height: 700px; overflow: auto; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
+        style="min-width: 320px; height: 700px; overflow: auto; border: 1px solid var(--line); border-radius: var(--v9-radius-small); background: #fff;"
       ></div>
       <p class="calendly-lede" style="margin-top:1rem;">
         <strong>Calendar not loading?</strong> Some privacy or cookie blockers stop the embed.{" "}
@@ -174,7 +178,7 @@ const bookSchema = [
 
   <script is:inline src="/scripts/cal-embed-lazy.js" defer></script>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
       <p class="eyebrow">FAQ</p>
       <h2>Booking the audit.</h2>

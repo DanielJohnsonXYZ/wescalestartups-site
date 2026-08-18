@@ -84,6 +84,10 @@ const turnstileSiteKey =
   title="What the Heck is Growth? | We Scale Startups"
   description="A 12-module cohort course on startup growth systems. For founders and operators who want to build repeatable acquisition without founder dependency."
   path="/growth-course"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Growth Course", path: "/growth-course" }
+  ]}
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
 >
@@ -189,7 +193,9 @@ const turnstileSiteKey =
         <h2>Book a 20-minute growth diagnostic instead.</h2>
         <p>Sometimes the fastest way to learn is a focused conversation about your actual bottleneck.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

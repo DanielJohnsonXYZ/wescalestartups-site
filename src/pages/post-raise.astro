@@ -302,7 +302,7 @@ const schema = [
   }
 
   .moment-num {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -331,21 +331,20 @@ const schema = [
     }
   }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .fit-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
     padding: 1.5rem 1.4rem;
   }
 
   .fit-label {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.68rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     display: inline-block;
-    border-radius: 100px;
+    border-radius: 999px;
     padding: 0.3rem 0.75rem;
     margin-bottom: 1rem;
   }
@@ -383,7 +382,7 @@ const schema = [
   .fit-card li::before {
     position: absolute;
     left: 0.1rem;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.75rem;
   }
 
@@ -411,7 +410,7 @@ const schema = [
     gap: 1.25rem;
     padding: 1.25rem 1.35rem;
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     background: var(--surface);
     text-decoration: none;
     color: inherit;
@@ -441,7 +440,7 @@ const schema = [
   }
 
   .ladder-tag {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -449,7 +448,7 @@ const schema = [
     color: #fff;
     background: var(--violet);
     padding: 0.2rem 0.55rem;
-    border-radius: 100px;
+    border-radius: 999px;
   }
 
   .ladder-desc {
@@ -469,7 +468,7 @@ const schema = [
   }
 
   .ladder-price {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--ink-2);

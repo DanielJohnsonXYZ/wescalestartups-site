@@ -59,6 +59,11 @@ const industrySchema = [
   path={path}
   schema={industrySchema}
   metaRobots={industryRobots}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Industries", path: "/industries" },
+    { name: industry.data.title, path }
+  ]}
 >
   <section class="page-hero">
     <div class="shell">

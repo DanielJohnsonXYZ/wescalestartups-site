@@ -338,7 +338,151 @@ curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/healthcheck
 Then add a Notification policy for Health Check status in
 **Notifications → Add → Health Checks status notification**.
 
-## 6. Other standing recommendations
+## 6. Postiz (self-hosted social scheduling)
+
+`https://postiz.wescalestartups.com` — Next.js frontend + NestJS backend on the
+same origin, on the Hetzner box. Running **v2.21.7**; latest upstream is
+**v2.23.0** (2026-08-04). Reviewed 2026-08-13 from the public internet plus
+Daniel's logged-in session; items in 6e still need an on-box check.
+
+> **Setup is incomplete, and that matters more than anything below.** As of
+> 2026-08-13 the Channels list is empty and the calendar has no scheduled
+> posts — no social accounts have been connected, so Postiz cannot publish
+> anything yet. The server side is healthy; the app is simply unused. Connect
+> one channel and schedule a throwaway post before trusting any of it.
+
+### What is healthy
+
+- Frontend and backend both up. `GET /api/` returns `App is running!`;
+  HTTP `:80` 301s to HTTPS.
+- Single-origin config is coherent — `backendUrl` and `frontEndUrl` both point
+  at `postiz.wescalestartups.com`, so the session cookie is first-party.
+- `isSecured: true` (i.e. `NOT_SECURED` is **not** set) → cookies carry
+  `Secure`. Correct for production.
+- Auth is enforced: `/settings` 307s to `/auth`, `/api/user/self` → 401, and
+  `/api/public/v1/posts` → `{"msg":"No API Key found"}`.
+- Uploads are served from `/uploads/` with autoindex off (directory → 403,
+  missing file → 404).
+- `billingEnabled: false` — right for a self-host.
+- Only `80` and `443` answer on `65.109.232.75`; `5432`, `6379`, `3306`,
+  `3000`, `8080`, `9000` are all closed from outside, consistent with the
+  section 1 firewall. Re-verify from an unrestricted host — an egress-filtered
+  probe can't distinguish "closed" from "blocked on my side".
+
+### 6a. Registration is open to the internet — fix first
+
+```bash
+curl -s https://postiz.wescalestartups.com/api/auth/can-register
+# {"register":true}
+```
+
+`/auth` also serves a complete **Sign Up** form with a live *Create Account*
+button. Anyone who reaches the host can create an account and their own org on
+our instance. Set in the Postiz service env (Dokploy → Postiz → Environment):
+
+```
+DISABLE_REGISTRATION=true
+```
+
+Redeploy, then confirm the endpoint returns `{"register":false}` and `/auth`
+no longer renders the signup form.
+
+**Lock-out risk is cleared.** `DISABLE_REGISTRATION` restricts signup to a
+single user, so this is only dangerous if no account exists yet. Daniel's
+account was confirmed working on 2026-08-13 (logged in at `/launches`), so the
+flag can be applied safely. Note it also turns off OAuth/OIDC sign-in, which
+costs nothing here (see 6c).
+
+`register: true` means the signup form is open to the public — it is not a
+statement about whether an account exists. Both can be true at once, and were.
+
+### 6b. Indexable by search engines, and missed by the noindex Worker
+
+`/robots.txt` returns the Next.js 404 page, there is no `X-Robots-Tag`, and
+neither `/auth` nor `/auth/login` carries a `<meta name="robots">`. The page
+title is literally `Postiz Register`. The host is also absent from
+`docs/deindex-internal-subdomains.md` (now added).
+
+`postiz` is **DNS-only** (A → `65.109.232.75`), unlike `cal` and the apex which
+resolve to Cloudflare. The `wss-noindex-subdomains` Worker only binds routes on
+orange-clouded hosts, so it cannot cover Postiz as-is. Either:
+
+1. Orange-cloud `postiz` in Cloudflare DNS, then uncomment/add its route in
+   `infra/wss-noindex-subdomains/wrangler.toml` and redeploy — **but read 5d
+   first**; or
+2. Serve the headers at the origin: add `X-Robots-Tag: noindex, nofollow` and a
+   `robots.txt` of `Disallow: /` in the nginx/Traefik layer in front of Postiz.
+
+> **Do not orange-cloud Postiz before fixing the section 5d Page Rule.** Postiz
+> is Next.js with RSC payloads and cookie auth — exactly the shape that the
+> `*wescalestartups.com/*` Cache Everything rule broke on Cal.com. Proxying
+> Postiz while that rule is live will reproduce the same login loop. Option 2
+> avoids the question entirely.
+
+### 6c. Google / GitHub OAuth buttons are shown but not configured
+
+```bash
+curl -s https://postiz.wescalestartups.com/api/auth/oauth/GOOGLE   # …&client_id=      (empty)
+curl -s https://postiz.wescalestartups.com/api/auth/oauth/GITHUB   # …client_id=undefined
+```
+
+The *Continue With Google* button renders on both the sign-in and sign-up
+screens, so clicking it sends the user to a Google `invalid_client` error. The
+Google flow's `redirect_uri` is `/integrations/social/youtube`, which would
+have to be registered as an authorised redirect URI in Google Cloud for it to
+work at all.
+
+Either configure the client id/secret properly, or accept 6a's
+`DISABLE_REGISTRATION=true`, which removes the OAuth path along with the dead
+button. Email + password login is unaffected either way.
+
+### 6d. No security response headers
+
+`/auth` returns no `Strict-Transport-Security`, `X-Frame-Options` (or CSP
+`frame-ancestors`), `X-Content-Type-Options`, or `Referrer-Policy`. For a
+session-cookie admin panel, HSTS is the one worth adding. Add it at the same
+proxy layer as 6b:
+
+```nginx
+add_header Strict-Transport-Security "max-age=31536000" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-Frame-Options "DENY" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header X-Robots-Tag "noindex, nofollow" always;
+```
+
+If you instead set HSTS with `includeSubDomains` on the apex, it applies to
+every `*.wescalestartups.com` host — check them all first.
+
+### 6e. Needs an on-box / logged-in check
+
+- **Workers and cron containers running.** Scheduled posts failing silently is
+  the standard self-hosted Postiz failure and is invisible from outside. Check
+  the worker/cron processes and Temporal are up, then schedule one throwaway
+  post and confirm it publishes. Currently **untestable end-to-end** — with no
+  channels connected there is nothing for the publisher to do, so a healthy
+  worker and a dead one look identical. This only becomes answerable after the
+  first channel is connected.
+- **Upgrade 2.21.7 → 2.23.0** at some point. Not urgent, and worth doing only
+  after a verified backup, since it is a Dokploy image bump plus a Prisma
+  migration on the Postiz database.
+- **Connected channels and token freshness** — expired provider tokens fail at
+  publish time, not at login.
+- **`JWT_SECRET`** is long and random, and has never been the compose default.
+- **Uploads volume.** `storageProvider: local` with `cloudflareUrl` empty, so
+  media sits on the box disk — inside the same disk-fill blast radius that
+  Mautic caused before (section 7). Section 2 already lists Postiz uploads in
+  the backup set; confirm the backed-up volume is the one actually mounted at
+  `UPLOAD_DIRECTORY`. Moving to R2 via `STORAGE_PROVIDER=cloudflare` would take
+  it off the box entirely.
+- **No uptime monitor exists for Postiz** — Cal has one (5b), Postiz does not.
+  Add a Kuma/cron check on `https://postiz.wescalestartups.com/api/` expecting
+  the body `App is running!`; a keyword check catches a dead backend behind a
+  frontend that still returns 200.
+
+---
+
+## 7. Other standing recommendations
 
 - **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
   disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should

@@ -14,6 +14,10 @@ Paste-ready copy for the self-hosted Cal at `https://cal.wescalestartups.com`.
 
 Site source of truth: `siteConfig.growingPains` in `src/site.ts`. Post-booking page: `/book/thanks`.
 
+Requires Confirmation is off on the Growth Audit event type. New bookings write
+the calendar invite (and Meet link) immediately. Older Unconfirmed rows still
+need a host accept/decline.
+
 ## 1. Event type description (append)
 
 Event types: `Growth Audit` (`/daniel/20min`) and `Growth Audit (1 hour)` (`/daniel/60min`) if present.

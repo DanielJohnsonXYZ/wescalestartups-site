@@ -30,6 +30,12 @@ const bookFaqs = [
   {
     question: "Is there a pitch at the end?",
     answer: "Only if there is a genuine fit. The default outcome is a clear next step, including telling you not to hire us yet when that is the honest answer."
+  },
+  {
+    question: "When does the call appear on my calendar?",
+    answer: siteConfig.bookingRequiresHostConfirmation
+      ? `${siteConfig.founderName} still needs to confirm or decline each request. Google Calendar and the Google Meet link are created only after he accepts — you will get an email then. Until then the booking will not show on your calendar.`
+      : "As soon as you book, WSS Calendar writes the appointment to Google Calendar and emails you a Meet link."
   }
 ];
 
@@ -54,7 +60,13 @@ const bookSchema = [
     (function () {
       try {
         if (new URLSearchParams(window.location.search).get("booked") === "1") {
-          window.location.replace("/book/thanks");
+          var dest = "/book/thanks";
+          try {
+            var status = sessionStorage.getItem("wss_booking_status") || "";
+            if (status === "pending") dest = "/book/thanks?status=pending";
+            else if (status === "confirmed") dest = "/book/thanks?status=confirmed";
+          } catch (_) {}
+          window.location.replace(dest);
         }
       } catch (_) {}
     })();

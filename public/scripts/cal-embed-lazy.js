@@ -11,9 +11,48 @@
   var ORIGIN = "https://cal.wescalestartups.com";
   var SRC = ORIGIN + "/embed/embed.js";
   var EMAIL_KEY = "wss_lead_email";
+  var STATUS_KEY = "wss_booking_status";
   var loaded = false;
   var bookedSent = false;
   var inited = false;
+
+  var PENDING_STATUSES = {
+    PENDING: true,
+    AWAITING_HOST: true,
+    UNCONFIRMED: true,
+    BOOKING_REQUESTED: true
+  };
+  var CONFIRMED_STATUSES = { ACCEPTED: true, CONFIRMED: true };
+
+  function asObject(value) {
+    return value && typeof value === "object" ? value : null;
+  }
+
+  // Keep in sync with scripts/cal-booking-status.mjs
+  function bookingStatusFromCalPayload(detail) {
+    var root = asObject(detail);
+    if (!root) return "";
+    var data = asObject(root.data) || asObject(root.booking) || root;
+    var nested = asObject(data.booking) || data;
+    var raw = String(nested.status || nested.bookingStatus || data.status || root.status || "").toUpperCase();
+    if (PENDING_STATUSES[raw]) return "pending";
+    if (CONFIRMED_STATUSES[raw]) return "confirmed";
+    if (nested.requiresConfirmation === true || data.requiresConfirmation === true || root.requiresConfirmation === true) {
+      return "pending";
+    }
+    if (nested.confirmed === false || data.confirmed === false) return "pending";
+    if (nested.isPending === true || data.isPending === true) return "pending";
+    if (nested.confirmed === true || data.confirmed === true) return "confirmed";
+    return "";
+  }
+
+  function rememberBookingStatus(detail) {
+    var status = bookingStatusFromCalPayload(detail);
+    if (!status) return;
+    try {
+      sessionStorage.setItem(STATUS_KEY, status);
+    } catch (_) {}
+  }
 
   function rememberEmail(email) {
     if (!email || typeof email !== "string") return;
@@ -83,6 +122,7 @@
     var detail = data.arg || data.data || data.payload || data;
 
     if (action === "bookingSuccessfulV2" || action === "bookingSuccessful" || action === "booked") {
+      rememberBookingStatus(detail);
       var email = (emailFromCalPayload(detail) || rememberedEmail() || "").trim();
       markBookedDiagnostic(email, "calcom-booking");
       pushDataLayer("booking_completed", "calcom_inline");
@@ -159,6 +199,7 @@
       window.Cal.ns[ns]("on", {
         action: "bookingSuccessfulV2",
         callback: function (e) {
+          rememberBookingStatus(e && e.detail);
           var email = (emailFromCalPayload(e && e.detail) || rememberedEmail() || "").trim();
           markBookedDiagnostic(email, "calcom-booking");
           pushDataLayer("booking_completed", "calcom_inline");

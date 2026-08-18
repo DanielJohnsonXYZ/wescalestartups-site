@@ -171,6 +171,9 @@ Cap until the owner chooses one of these paths:
 - Google Calendar + Google Meet are required for invites; OAuth consent screen
   must stay published (or keep test users) or Meet/calendar sync breaks for
   new bookers outside the test list.
+- **Requires Confirmation** on `daniel/20min` is **off** (verified 2026-08-17).
+  New bookings write Google Calendar immediately. Older Unconfirmed rows
+  (for example Rafael) stay pending until the host accepts or declines. See §5e.
 - Pause Calendly (`calendly.com/wescalestartups` and `/20min`) once Cal.com is
   the only public booking surface so Slack/old links cannot create orphan bookings.
 - Signup spam accounts on the Cal.com instance were removed (empty locked users
@@ -178,6 +181,40 @@ Cap until the owner chooses one of these paths:
 - Growing Pains founder community (WhatsApp) belongs on the Growth Audit event
   description plus attendee reminder/follow-up workflows. Paste-ready copy:
   `docs/cal-growing-pains-community.md`. Site mirror after booking: `/book/thanks`.
+
+### 5e. Requires Confirmation and Google Calendar writes
+
+**Requires Confirmation is off** on Growth Audit (`daniel/20min`) as of
+2026-08-17. New bookings should write Google Calendar + Meet immediately.
+`siteConfig.bookingRequiresHostConfirmation` is `false`, so `/book/thanks`
+defaults to **Booking confirmed**. Keep the Cal success redirect at
+`https://wescalestartups.com/book/thanks`.
+
+Existing **Unconfirmed** rows (booked while confirmation was on) stay pending
+until the host accepts or declines. They do not auto-flip when the setting
+changes.
+
+**Still do these in Cal from a trusted browser**
+
+1. **Reconnect Google Calendar** if Event Types → Growth Audit → Advanced →
+   Check for conflicts shows “Something went wrong / Try reconnecting your
+   calendar with all necessary permissions.” Without a healthy Google
+   connection, new bookings still miss the calendar even with confirmation off.
+   Apps → Google Calendar → reconnect, grant Calendar + Meet, then confirm
+   **Add to calendar** is `daniel@wescalestartups.com`.
+2. **Unconfirmed bookings** (for example Rafael): Bookings → Unconfirmed →
+   Confirm or decline each row.
+3. **Admin password / 2FA:** Cal warns the admin password is under 15 characters
+   or 2FA is off. Settings → Security: set a 15+ character password and enable
+   2FA so admin access is not blocked.
+
+If a confirmed booking is still missing from Google Calendar, check §5a (OAuth
+Audience must be **Published**; Testing mode breaks invites for non-test Gmail)
+and the destination calendar on the Cal host.
+
+To turn confirmation back on later: Event Types → Advanced → Requires
+Confirmation, then set `bookingRequiresHostConfirmation: true` and optionally
+redirect to `/book/thanks?status=pending`.
 
 ### 5d. Cloudflare must not cache or bot-challenge Cal
 

@@ -169,7 +169,7 @@ const turnstileSiteKey =
       <p class="eyebrow">Routing by enquiry type</p>
       <h2>Not a growth engagement? Here's the right page.</h2>
       <p>The enquiry form above is for growth engagement enquiries. For everything else, use one of these direct routes, they reach the right inbox faster.</p>
-      <div class="grid-3 mt-6">
+      <div class="grid-3 contact-routing-grid">
         <article class="feature-card">
           <p class="card-kicker">Speaking enquiries</p>
           <h3>Book Daniel for a talk or workshop</h3>
@@ -213,7 +213,7 @@ const turnstileSiteKey =
           <a class="card-link" href={`mailto:${siteConfig.email}?subject=Portfolio%20workshop%20or%20mentor%20enquiry`}>Email, Programme enquiry →</a>
         </article>
       </div>
-      <p class="mt-6 text-sm" style="color:var(--muted, #666);">
+      <p class="contact-response-note" style="color:var(--muted, #666);">
         <strong>Response time:</strong> Enquiries are read by the operator, not a gatekeeper. Most enquiries get a reply within one working day. If it's a fit, you'll get a clear next step. If it isn't, you'll get an honest "no" or a referral to the right person.
       </p>
     </div>
@@ -276,6 +276,17 @@ const turnstileSiteKey =
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .contact-routing-grid {
+    margin-top: 1.5rem;
+  }
+
+  .contact-response-note {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+  }
+</style>
 
 <script is:inline define:vars={{ email: siteConfig.email, cioUrl: customerIoNewsletter.submitUrl, cioFormId: customerIoNewsletter.formId }}>
   const form = document.getElementById("growth-enquiry");

@@ -20,9 +20,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <a class="button button-light" href="/book" data-cta="404-book">Book</a>
         <a class="button button-light" href="/contact" data-cta="404-contact">Contact</a>
       </div>
-      <nav class="mt-10 max-w-2xl border-t border-[color:var(--line)] pt-8" aria-label="More ways to continue">
-        <p class="text-sm font-semibold tracking-[-0.02em] text-[color:var(--ink)]">Also try</p>
-        <ul class="mt-4 grid gap-2 text-sm text-[color:var(--muted)] sm:grid-cols-2">
+      <nav class="also-try" aria-label="More ways to continue">
+        <p class="also-try-heading">Also try</p>
+        <ul class="also-try-list">
           <li>
             <a class="link-arrow" href="/newsletter" data-cta="404-newsletter">Newsletter →</a>
           </li>
@@ -35,7 +35,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <li>
             <a class="link-arrow" href="/services" data-cta="404-services">Services →</a>
           </li>
-          <li class="sm:col-span-2">
+          <li class="also-try-full">
             <a class="link-arrow" href="https://danieljohnson.xyz/start-here/" data-cta="404-daniel-start-here" rel="noopener">
               Personal site: Start here (Daniel Johnson) →
             </a>
@@ -45,3 +45,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .also-try {
+    margin-top: 2.5rem;
+    max-width: 42rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+
+  .also-try-heading {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .also-try-list {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    list-style: none;
+    padding: 0;
+  }
+
+  @media (min-width: 640px) {
+    .also-try-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .also-try-full {
+      grid-column: span 2 / span 2;
+    }
+  }
+</style>

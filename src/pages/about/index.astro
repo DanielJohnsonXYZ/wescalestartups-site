@@ -148,9 +148,9 @@ const aboutSchema = [
           <li>20+ post-PMF startups advised across Seed–Series B</li>
           <li>Top-rated mentor on GrowthMentor (4.93/5)</li>
         </ul>
-        <div class="mt-6 flex flex-wrap items-center gap-4">
-          <img src="/images/logos/google.webp" alt="Google for Startups, Mentor" width="544" height="184" loading="lazy" decoding="async" class="h-8 w-auto" />
-          <img src="/images/logos/cambridge.webp" alt="University of Cambridge, Visiting Lecturer" width="544" height="184" loading="lazy" decoding="async" class="h-8 w-auto" />
+        <div class="founder-credibility-logos">
+          <img src="/images/logos/google.webp" alt="Google for Startups, Mentor" width="544" height="184" loading="lazy" decoding="async" class="founder-credibility-logo" />
+          <img src="/images/logos/cambridge.webp" alt="University of Cambridge, Visiting Lecturer" width="544" height="184" loading="lazy" decoding="async" class="founder-credibility-logo" />
           <BrandLogoSlot label="Imperial College" href="https://www.imperial.ac.uk/" />
           <BrandLogoSlot label="Techstars" href="https://www.techstars.com/" />
         </div>
@@ -269,5 +269,16 @@ const aboutSchema = [
     letter-spacing: 0.12em;
     color: var(--accent);
     margin: 1.75rem 0 0.65rem;
+  }
+  .founder-credibility-logos {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  .founder-credibility-logo {
+    height: 2rem;
+    width: auto;
   }
 </style>

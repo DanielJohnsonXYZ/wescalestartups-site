@@ -18,8 +18,6 @@
 @import "@fontsource/geist/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
-@import "tailwindcss";
-
 
 /* Screen-reader-only text: keeps the document outline intact where a
    section has no visible heading. position:absolute keeps it out of
@@ -704,6 +702,91 @@
   box-sizing: border-box;
 }
 
+/* Element-default reset. Previously supplied by Tailwind's preflight layer
+   (removed along with the rest of Tailwind, see base.css history) — nearly
+   every component here sets its own margin/spacing on p/h2/h3/etc. and was
+   relying on the browser default margins being zeroed out first. Without
+   this, standard UA-stylesheet margins would double up with the site's own
+   spacing on every page. Deliberately excludes ul/ol: unlike Tailwind's
+   preflight, this reset leaves list markers alone — components that want a
+   marker-free list (nav grids, footer links, card lists, etc.) set
+   `list-style: none` themselves. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+dl,
+dd,
+figure,
+hr,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+hr {
+  height: 0;
+  color: inherit;
+  border-top: 1px solid currentColor;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  color: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  background-color: transparent;
+  background-image: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+summary {
+  display: list-item;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
 /* Long URLs and other unbreakable tokens must not force a container wider
    than the viewport: `main` is overflow:clip, so anything that overflows is
    cut off rather than scrollable. break-word only acts when a word genuinely
@@ -755,11 +838,6 @@ input,
 textarea,
 select {
   font: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
 }
 
 a {

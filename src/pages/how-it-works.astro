@@ -283,7 +283,7 @@ const howItWorksSchema = [
       <div>
         <p class="eyebrow">Next step</p>
         <h2>See if this rhythm fits your team.</h2>
-        <p class="max-w-2xl mx-auto">Bring the current growth picture. {siteConfig.bookingCallDurationPhrase}. Plain English.</p>
+        <p class="how-cta-lede">Bring the current growth picture. {siteConfig.bookingCallDurationPhrase}. Plain English.</p>
       </div>
       <div class="hero-actions">
         <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="how-it-works-cta">
@@ -298,6 +298,11 @@ const howItWorksSchema = [
   </section>
 
   <style>
+    .how-cta-lede {
+      max-width: 42rem;
+      margin-inline: auto;
+    }
+
     .how-artefacts-lede {
       max-width: 62ch;
       margin-bottom: 1.5rem;

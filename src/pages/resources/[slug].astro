@@ -3,6 +3,7 @@ import EmailSignup from "../../components/EmailSignup.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { growthTools } from "../../data/growthTools";
 import { leadMagnets, siteConfig } from "../../site";
 
 /**
@@ -286,6 +287,19 @@ const magnetDetails: Record<string, {
 };
 
 export function getStaticPaths() {
+  // This file (leadMagnets) and [tool].astro (growthTools) both build under
+  // /resources/*. Astro only lets one route win a given path, silently, so a
+  // colliding id/slug would quietly swallow one page instead of failing the
+  // build. Guard it explicitly.
+  const growthToolSlugs = new Set(growthTools.map((tool) => tool.slug));
+  const collisions = leadMagnets.filter((magnet) => growthToolSlugs.has(magnet.id)).map((magnet) => magnet.id);
+  if (collisions.length > 0) {
+    throw new Error(
+      `/resources route collision: ${collisions.join(", ")} exist in both leadMagnets (src/site.ts) ` +
+        `and growthTools (src/data/growthTools.ts). Rename one so /resources/[slug].astro and /resources/[tool].astro don't both claim the same path.`
+    );
+  }
+
   return leadMagnets.map((magnet) => ({
     params: { slug: magnet.id }
   }));

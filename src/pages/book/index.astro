@@ -117,9 +117,12 @@ const bookSchema = [
         <li><strong>An honest fit call</strong>, whether WSS is the right help right now, or who to point you to instead.</li>
       </ul>
       {featuredBookingQuote && (
-        <figure class="booking-quote" style="margin-top:1.5rem">
+        <figure class="quote-card" style="margin-top:1.5rem">
           <blockquote><p>“{featuredBookingQuote.quote}”</p></blockquote>
-          <figcaption>— {featuredBookingQuote.name}, {featuredBookingQuote.company}</figcaption>
+          <figcaption>
+            <strong>{featuredBookingQuote.name}</strong>
+            <span>{featuredBookingQuote.company}</span>
+          </figcaption>
         </figure>
       )}
     </div>

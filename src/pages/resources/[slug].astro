@@ -397,7 +397,7 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   </section>
 
   <section class="section">
-    <div class="shell two-col">
+    <div class="shell two-column">
       <article>
         <p class="eyebrow">How to use it</p>
         <h2>Designed for one sitting, not a workshop series.</h2>
@@ -415,7 +415,7 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   <section class="section section-alt">
     <div class="shell">
       <SectionIntro eyebrow="FAQ" title="Questions to check before using it." />
-      <div class="faq-stack">
+      <div class="faq-list">
         {details.faq.map((item, index) => (
           <details class="faq-item" open={index === 0}>
             <summary>{item.question}</summary>
@@ -429,9 +429,9 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   <section class="section">
     <div class="shell">
       <SectionIntro eyebrow="Other resources" title="Three more, all free." />
-      <div class="card-grid">
+      <div class="grid grid-3">
         {otherMagnets.map((other) => (
-          <a class="card" href={other.href}>
+          <a class="feature-card" href={other.href}>
             <p class="eyebrow">{other.audience}</p>
             <h3>{other.title}</h3>
             <p>{other.description}</p>
@@ -442,10 +442,12 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
     </div>
   </section>
 
-  <section class="section cta-section">
-    <div class="shell">
-      <h2>Need more than a template?</h2>
-      <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call. Bring your result, we'll pressure-test the constraint it names and sketch the next move in 20 minutes.</p>
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <h2>Need more than a template?</h2>
+        <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call. Bring your result, we'll pressure-test the constraint it names and sketch the next move in 20 minutes.</p>
+      </div>
       <div class="hero-actions">
         <a
           class="button button-brand"

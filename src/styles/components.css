@@ -761,9 +761,113 @@
   line-height: 1.75;
 }
 
+/* Generic muted-text utility — pairs with the --muted token used inline
+   throughout this file. */
+.muted {
+  color: var(--muted);
+}
+
+/* Bulleted list of included items, e.g. lead-magnet "what you get" copy and
+   the booking pages' "bring this" lists. */
+.check-list,
+.bring-checklist {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-list li,
+.bring-checklist li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.check-list li::before,
+.bring-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--violet);
+  font-weight: 600;
+}
+
+.bring-checklist li strong {
+  color: var(--ink);
+}
+
+/* Numbered call-phase breakdown (book/index) — mono numerals match the
+   site's data-driven type language. */
+.call-phase-list {
+  counter-reset: call-phase;
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.call-phase-list li {
+  counter-increment: call-phase;
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.call-phase-list li::before {
+  content: counter(call-phase, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--violet);
+  font-family: var(--v9-mono);
+  font-size: 0.85rem;
+}
+
+.call-phase-list li strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--ink);
+}
+
+.call-phase-list li span {
+  display: block;
+  color: var(--muted);
+}
+
+/* Secondary CTA line under a "who this isn't for" block, e.g. book/index.
+   Mirrors .not-for-footnote's treatment. */
+.footer-secondary-cta {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.footer-secondary-cta a {
+  color: var(--violet);
+  font-weight: 700;
+}
+
+/* Fallback note under the inline Cal.com embed. Matches the scoped recipe
+   already used on /ai-growth-audit, promoted here since book/index and
+   contact also render this widget. */
+.calendly-lede {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.cal-inline-widget {
+  width: 100%;
+}
+
 .operator-grid,
 .contact-grid,
 .grid,
+.grid-2,
 .grid-3,
 .grid-4 {
   display: grid;
@@ -1414,6 +1518,7 @@
     justify-content: flex-start;
   }
 
+  .grid-2,
   .grid-3,
   .grid-4,
   .grid-5,
@@ -1503,6 +1608,7 @@
   .showcase-stats,
   .case-metrics,
   .hero-proof,
+  .grid-2,
   .grid-3,
   .grid-4,
   .grid-5,
@@ -1926,6 +2032,10 @@
   font-weight: 400;
 }
 
+.case-scan-narrative .case-scan-bit {
+  color: var(--ink-2);
+}
+
 .case-mini :is(h3, h4) {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
@@ -2157,6 +2267,12 @@
   margin-top: 2rem;
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.proof-metrics-footnote {
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 .not-for-footnote a {
@@ -5175,15 +5291,6 @@ body {
   border-color: var(--line-soft);
 }
 
-/* ── 13. Header: warm backdrop ─────────────────────────────────
-   The sticky nav uses a backdrop blur; align it to the warm
-   palette so it doesn't look out of place on scroll.
-   ─────────────────────────────────────────────────────────── */
-.site-header {
-  background: rgba(251, 251, 254, 0.85);
-}
-
-
 /* ───────── LAYER: polish-2026-06.css ───────── */
 /* === 2026-06 coherence pass: shared interaction polish with the homepage === */
 ::selection { background: var(--violet); color: #fff; }
@@ -5205,13 +5312,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 /* 2. Sticky-nav overlap (High). */
 html { scroll-padding-top: 6.5rem; }
 :where(section, article, h2, h3, [id]):target { scroll-margin-top: 6.5rem; }
-.header-inner {
-  /* Brand-aligned violet-tinted glass header (was cream) — nudges the header
-     into the purple/violet system while keeping dark nav text for AA contrast. */
-  background: rgba(238, 235, 255, 0.97) !important;
-  border-color: rgba(100, 51, 255, 0.18) !important;
-  box-shadow: 0 10px 34px rgba(100, 51, 255, 0.12) !important;
-}
 
 /* 6. Trusted-by strip — real logos, grouped, better contrast (High). */
 .logo-wall .logo-group-label {

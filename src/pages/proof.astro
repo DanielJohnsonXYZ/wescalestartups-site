@@ -101,7 +101,7 @@ const deliverableGallery = [
           </div>
         ))}
       </div>
-      <p class="proof-metrics-footnote" style="margin-top: 1rem; max-width: 52ch; color: var(--muted); font-size: 0.88rem;">
+      <p class="proof-metrics-footnote" style="margin-top: 1rem;">
         <strong>£18M+ revenue influenced:</strong> {revenueInfluencedNote}
       </p>
     </div>
@@ -118,13 +118,13 @@ const deliverableGallery = [
       <p class="lede" style="max-width: 60ch; margin-bottom: 1.75rem;">
         Same case studies as below, organised so you can jump to the outcome that matches your constraint.
       </p>
-      <div class="grid-2 proof-by-type-grid">
+      <div class="grid-2">
         {
           proofResultsByType.map((row) => {
             const c = caseById[row.caseId];
             if (!c) return null;
             return (
-              <article class="feature-card proof-by-type-card">
+              <article class="feature-card">
                 <p class="card-kicker">{row.label}</p>
                 <p style="margin:0.5rem 0 0;color:var(--ink-2);line-height:1.55;font-size:0.95rem;">{row.summary}</p>
                 <a class="card-link" href={`/case-studies/${row.caseId}`} data-cta={`proof-by-type-${row.caseId}`}>

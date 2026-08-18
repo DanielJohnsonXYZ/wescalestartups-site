@@ -181,19 +181,27 @@ main .button:hover {
 
 /* Header ---------------------------------------------------- */
 
-.site-header {
+/* Promoted to .theme-wss-v9 .site-header (and the two rules below it) to
+   match site-v9.css's specificity — plain .site-header/.header-inner lost
+   that fight and left an unwanted white band + wrong glass tint over the
+   hero. backdrop-filter is explicitly neutralised since it's a property
+   site-v9's version sets and this selector must win outright, not just on
+   the properties re-declared here. */
+.theme-wss-v9 .site-header {
   position: absolute;
   inset: 0 0 auto;
   z-index: 60;
   padding: 1rem 0;
   background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-.site-header .shell {
+.theme-wss-v9 .site-header .shell {
   width: min(calc(100% - 3rem), 1320px);
 }
 
-.header-inner {
+.theme-wss-v9 .header-inner {
   min-height: 64px;
   gap: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2068,7 +2076,7 @@ main .button:hover {
 }
 
 @media (prefers-contrast: more) {
-  { --v9-copy: #3e3d43; --v9-copy-dark: #cac9d2; --v9-line: rgba(17, 17, 23, 0.28); --v9-line-dark: rgba(255, 255, 255, 0.24); }
+  :root { --v9-copy: #3e3d43; --v9-copy-dark: #cac9d2; --v9-line: rgba(17, 17, 23, 0.28); --v9-line-dark: rgba(255, 255, 255, 0.24); }
 }
 
 /* ============================================================

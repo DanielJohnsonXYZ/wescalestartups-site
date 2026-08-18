@@ -361,7 +361,7 @@ const caseFaqs = [
     padding: 1.4rem 1.4rem;
     align-self: start;
     position: sticky;
-    top: 1.5rem;
+    top: 7rem;
   }
   .case-aside-client {
     font-size: 1.05rem;
@@ -443,9 +443,17 @@ const caseFaqs = [
     font-weight: 700;
   }
 
-  /* Subtle accent on the result block */
+  /* Subtle per-section accent, same recipe throughout: coral marks the
+     problem, mint marks the system built, violet (the default UI accent)
+     carries the rest. */
+  .case-section-problem { border-color: color-mix(in srgb, var(--coral) 35%, var(--line)); }
+  .case-section-action { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  .case-section-action li::before { color: var(--accent); }
   .case-section-result { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
   .case-section-result li::before { color: var(--accent); }
+  .case-section-system { border-color: color-mix(in srgb, var(--acid) 35%, var(--line)); }
+  .case-section-system li::before { color: var(--acid); }
+  .case-section-why { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
 
   .case-section-takeaway {
     background: color-mix(in srgb, var(--accent) 8%, transparent);

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BookingEmbed from "../../components/BookingEmbed.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { contactRelatedReading, siteConfig, customerIoNewsletter } from "../../site";
 
@@ -141,7 +142,7 @@ const turnstileSiteKey =
     </div>
   </section>
 
-  <!-- Same Cal.com embed stack as /book. -->
+  <!-- Same Calendly embed as /book. -->
   <section class="section section-alt" id="book-a-time">
     <div class="shell">
       <p class="eyebrow">Book a time</p>
@@ -151,15 +152,9 @@ const turnstileSiteKey =
         <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">open the booking page in a new tab</a>
         {" "}or use the enquiry form above.
       </p>
-      <div
-        id="contact-cal-inline"
-        class="cal-inline-widget"
-        data-cal-link={siteConfig.calLink}
-        style="min-width:320px;height:700px;overflow:auto;border:1px solid var(--line);border-radius:0.85rem;background:#fff;"
-      ></div>
+      <BookingEmbed id="contact-cal-inline" />
     </div>
   </section>
-  <script is:inline src="/scripts/cal-embed-lazy.js" defer></script>
 
   <!-- Route by enquiry type, speaking, podcast, partnership, press all -->
   <!-- have specific better destinations than the generic enquiry form.    -->

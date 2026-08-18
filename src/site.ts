@@ -8,9 +8,12 @@ export const siteConfig = {
   siteUrl: "https://wescalestartups.com",
   canonicalHost: "wescalestartups.com",
   bookingUrl: "/book",
-  /** Public Cal.com booking page (self-hosted). */
-  calUrl: "https://cal.wescalestartups.com/daniel/20min",
-  /** Cal.com username/event path used by the inline embed (no leading slash). */
+  /**
+   * Public booking page. Self-hosted Cal.com (`cal.wescalestartups.com/daniel/20min`)
+   * is 404 until that instance is restored; Calendly is the live calendar.
+   */
+  calUrl: "https://calendly.com/wescalestartups/20min",
+  /** Unused while the inline embed is Calendly; kept for a Cal.com switch-back. */
   calLink: "daniel/20min",
   calOrigin: "https://cal.wescalestartups.com",
   /**

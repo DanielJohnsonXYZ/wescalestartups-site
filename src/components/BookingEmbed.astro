@@ -1,0 +1,18 @@
+---
+import { siteConfig } from "../site";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const embedUrl = `${siteConfig.calUrl}${siteConfig.calUrl.includes("?") ? "&" : "?"}hide_gdpr_banner=1`;
+---
+
+<div
+  id={id}
+  class="calendly-inline-widget"
+  data-url={embedUrl}
+  style="min-width: 320px; height: 700px; overflow: auto; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
+></div>
+<script is:inline src="/scripts/calendly-lazy.js" defer></script>

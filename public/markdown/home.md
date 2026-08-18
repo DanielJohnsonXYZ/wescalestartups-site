@@ -4,7 +4,7 @@
 
 - **Founder:** Daniel Johnson ([personal site](https://danieljohnson.xyz))
 - **Primary site:** https://wescalestartups.com
-- **Booking:** [20-minute Growth Audit](https://wescalestartups.com/book) · [direct calendar](https://cal.wescalestartups.com/daniel/20min)
+- **Booking:** [20-minute Growth Audit](https://wescalestartups.com/book) · [direct calendar](https://calendly.com/wescalestartups/20min)
 - **Start here:** [First-time visitor path](https://wescalestartups.com/start-here)
 - **Services:** [What we offer](https://wescalestartups.com/services)
 - **Pricing:** [Engagement & fees](https://wescalestartups.com/pricing)

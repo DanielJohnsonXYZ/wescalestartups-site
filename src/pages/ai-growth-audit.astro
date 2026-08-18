@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BookingEmbed from "../components/BookingEmbed.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { proofClients, proofEcosystemLogos, siteConfig, testimonials } from "../site";
 
@@ -309,12 +310,8 @@ const schema = [
           <a href={siteConfig.scorecardUrl} data-cta="ai-audit-book-scorecard">{scorecardSoftLink}</a>
         </p>
       </div>
-      <div
-        id="book-cal-inline"
-        class="cal-inline-widget"
-        data-cal-link={siteConfig.calLink}
-        style="min-width: 320px; height: 700px; overflow: auto; margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
-      >
+      <div style="margin-top:1.25rem">
+        <BookingEmbed id="book-cal-inline" />
       </div>
       <p class="calendly-lede">
         <strong>Calendar not loading?</strong>
@@ -326,8 +323,6 @@ const schema = [
       </p>
     </div>
   </section>
-
-  <script is:inline src="/scripts/cal-embed-lazy.js" defer></script>
 
   <section class="section audit-tight">
     <div class="shell">

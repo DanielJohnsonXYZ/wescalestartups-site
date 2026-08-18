@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BookingEmbed from "../../components/BookingEmbed.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { siteConfig, testimonials } from "../../site";
 
@@ -155,12 +156,7 @@ const bookSchema = [
     <div class="shell">
       <p class="eyebrow">Pick a time</p>
       <h2 id="book-cal-heading">Book inline, no extra tabs required.</h2>
-      <div
-        id="book-cal-inline"
-        class="cal-inline-widget"
-        data-cal-link={siteConfig.calLink}
-        style="min-width: 320px; height: 700px; overflow: auto; border: 1px solid var(--line); border-radius: 0.85rem; background: #fff;"
-      ></div>
+      <BookingEmbed id="book-cal-inline" />
       <p class="calendly-lede" style="margin-top:1rem;">
         <strong>Calendar not loading?</strong> Some privacy or cookie blockers stop the embed.{" "}
         <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">Open the booking page in a new tab</a>, or{" "}
@@ -168,8 +164,6 @@ const bookSchema = [
       </p>
     </div>
   </section>
-
-  <script is:inline src="/scripts/cal-embed-lazy.js" defer></script>
 
   <section class="section">
     <div class="shell">

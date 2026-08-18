@@ -291,7 +291,7 @@ export function getStaticPaths() {
   // /resources/*. Astro only lets one route win a given path, silently, so a
   // colliding id/slug would quietly swallow one page instead of failing the
   // build. Guard it explicitly.
-  const growthToolSlugs = new Set(growthTools.map((tool) => tool.slug));
+  const growthToolSlugs = new Set<string>(growthTools.map((tool) => tool.slug));
   const collisions = leadMagnets.filter((magnet) => growthToolSlugs.has(magnet.id)).map((magnet) => magnet.id);
   if (collisions.length > 0) {
     throw new Error(

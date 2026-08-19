@@ -240,6 +240,24 @@
   box-shadow: 0 0 0 0.26rem rgba(200, 255, 101, 0.13), 0 0 18px rgba(200, 255, 101, 0.75);
 }
 
+/* Reading measure -----------------------------------------------
+   Long-form body copy was set the full width of its column: article
+   paragraphs ran about 119 characters per line and service detail
+   pages about 129. Comfortable reading is 45-85, and past roughly 90
+   the eye loses the line return, which is a large part of why these
+   pages read as unformatted templates rather than designed articles.
+
+   The cap goes on the flow content rather than the column so that
+   anything deliberately full-bleed — figures, tables, callouts —
+   still uses the whole column. */
+.theme-wss-v9:not(.no-shared-chrome) :is(.article-body, .detail-body) :is(p, ul, ol, blockquote) {
+  max-width: 58ch;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :is(.article-body, .detail-body) :is(h2, h3, h4) {
+  max-width: 32ch;
+}
+
 /* Section intro proportions ------------------------------------
    components.css sets .section-intro to three columns
    (0.6fr 1fr 0.45fr), but SectionIntro only renders a third child

@@ -311,6 +311,25 @@
 
   /* The headline owns a column now, so it no longer needs the 15ch
      clamp that kept it off the full-width measure. */
+  /* Grid items stretch to their column by default, which turned inline
+     objects like the service "Premium offer" pill into a 700px bar. They
+     size to their content instead. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > *:not(.hero-support) {
+    justify-self: start;
+  }
+
+  /* A hero rail closes the masthead along its bottom edge, the way the
+     homepage's metric rail does, and gives the headline column something
+     to sit above when the support column is the taller of the two. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell > .hero-rail {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+    margin-top: clamp(2.25rem, 4vw, 3.25rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--v9-line);
+  }
+
   /* Wrapped, not stretched: at 18ch most headlines set on a single
      line, which left the headline column a third the height of the
      support column beside it and reopened the empty band this layout

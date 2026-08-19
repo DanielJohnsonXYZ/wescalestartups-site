@@ -67,10 +67,12 @@ const breadcrumb = buildBreadcrumbSchema([
     <div class="shell">
       <p class="eyebrow">Podcast · Episode {e.episodeNumber > 0 ? e.episodeNumber : "template"}</p>
       <h1>{e.title}</h1>
-      <p class="lede">
-        With <strong>{e.guestName}</strong>, {e.guestRole}
-        {e.durationNote && ` · ${e.durationNote}`}
-      </p>
+      <div class="hero-support">
+        <p class="lede">
+          With <strong>{e.guestName}</strong>, {e.guestRole}
+          {e.durationNote && ` · ${e.durationNote}`}
+        </p>
+      </div>
     </div>
   </section>
 

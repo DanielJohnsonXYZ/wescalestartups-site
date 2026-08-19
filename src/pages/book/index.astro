@@ -67,16 +67,18 @@ const bookSchema = [
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Book call</p>
-      <h1>{siteConfig.bookingLabel}</h1>
-      <p class="lede">{siteConfig.bookingSubcopy}</p>
-      <div class="hero-actions">
-        <a class="button button-brand button-with-subcopy" href="#book-cal" data-cta="book-hero-cal" title={siteConfig.bookingCallReassurance}>
-          <span class="button-label">Pick a time</span>
-          <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-hero-scorecard">
-          Not ready? {siteConfig.scorecardLabel} →
-        </a>
+        <h1>{siteConfig.bookingLabel}</h1>
+      <div class="hero-support">
+        <p class="lede">{siteConfig.bookingSubcopy}</p>
+        <div class="hero-actions">
+          <a class="button button-brand button-with-subcopy" href="#book-cal" data-cta="book-hero-cal" title={siteConfig.bookingCallReassurance}>
+            <span class="button-label">Pick a time</span>
+            <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="book-hero-scorecard">
+            Not ready? {siteConfig.scorecardLabel} →
+          </a>
+        </div>
       </div>
     </div>
   </section>

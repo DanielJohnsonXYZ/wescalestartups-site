@@ -177,7 +177,7 @@
 .theme-wss-v9:not(.no-shared-chrome) .page-hero {
   position: relative;
   overflow: hidden;
-  padding: var(--v9-space-section) 0 clamp(4rem, 7vw, 6.5rem);
+  padding: clamp(3.5rem, 5.5vw, 5.5rem) 0 clamp(3rem, 4.5vw, 4.5rem);
   border-bottom: 1px solid var(--v9-line);
   /* Matches the homepage hero: no grid lines, a quiet violet/mint wash. */
   background:
@@ -238,6 +238,87 @@
   border-radius: 50%;
   background: var(--v9-mint);
   box-shadow: 0 0 0 0.26rem rgba(200, 255, 101, 0.13), 0 0 18px rgba(200, 255, 101, 0.75);
+}
+
+/* Section intro proportions ------------------------------------
+   components.css sets .section-intro to three columns
+   (0.6fr 1fr 0.45fr), but SectionIntro only renders a third child
+   when a page passes optional body copy — and most do not. A
+   two-child intro therefore rendered a ~380px label gutter next to a
+   ~285px column that was permanently empty, which is the gap that
+   made interior sections read as mostly white space.
+
+   The label column comes in to match the homepage's own intro
+   (minmax(190px, 0.34fr)), and the third column only exists when
+   there is body copy to put in it. Held above 980px so the
+   single-column collapse in components.css still wins on mobile. */
+@media (min-width: 981px) {
+  .theme-wss-v9:not(.no-shared-chrome) .section-intro {
+    grid-template-columns: minmax(170px, 0.28fr) minmax(0, 1fr);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .section-intro:has(> p:nth-of-type(2)) {
+    grid-template-columns: minmax(170px, 0.28fr) minmax(0, 1fr) minmax(0, 0.5fr);
+  }
+}
+
+/* Interior hero composition ------------------------------------
+   The hero used to be a single text column inside a 1320px shell:
+   the copy topped out around 840px, leaving ~480px of the shell
+   empty, and the block still stood ~630px tall. Measured across the
+   site that was 89 of 120 heroes under 25% covered — a phone layout
+   stretched to desktop, which is exactly how it read.
+
+   It now runs as a masthead. The eyebrow takes its own full-width
+   row, then the headline and its supporting column sit side by side
+   beneath, both starting at the same top edge. Both columns carry
+   content every hero already has, so this composes existing material
+   rather than asking 113 pages to invent a decorative panel. Below
+   1000px it falls back to the stack, which is right at that width. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.35rem;
+  min-width: 0;
+}
+
+@media (min-width: 1000px) {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
+    column-gap: clamp(2.5rem, 4.5vw, 4.5rem);
+    align-items: start;
+  }
+
+  /* The label reads as a heading for the whole masthead, not for the
+     headline column alone, so it spans the full width above both. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  /* Cap-height alignment: the support column's first line starts a
+     little below the headline's cap line, so it is nudged up to read
+     as level with it rather than sitting on the box edge. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support {
+    padding-top: 0.5rem;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support .lede,
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support .hero-copy {
+    max-width: 44ch;
+  }
+
+  /* The headline owns a column now, so it no longer needs the 15ch
+     clamp that kept it off the full-width measure. */
+  /* Wrapped, not stretched: at 18ch most headlines set on a single
+     line, which left the headline column a third the height of the
+     support column beside it and reopened the empty band this layout
+     exists to close. The homepage holds its hero headline to 12ch for
+     the same reason — the wrap is what gives the column presence. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > h1 {
+    max-width: 13ch;
+  }
 }
 
 /* Serif (Fraunces) headline, matching the homepage hero. Interior pages

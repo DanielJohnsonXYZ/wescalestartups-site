@@ -51,21 +51,23 @@ const moreIndustries = publishedIndustries.filter((industry) => !coreIndustryIds
     <div class="shell">
       <p class="eyebrow">Industries</p>
       <h1>Markets where proof, trust, and timing matter.</h1>
-      <p>The system adapts to the buyer, proof required, channel economics, and internal team capacity.</p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="industries-index-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industries-index-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/services" data-cta="industries-index-services">Compare services</a>
+      <div class="hero-support">
+        <p>The system adapts to the buyer, proof required, channel economics, and internal team capacity.</p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="industries-index-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="industries-index-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/services" data-cta="industries-index-services">Compare services</a>
+        </div>
       </div>
     </div>
   </section>

@@ -68,11 +68,13 @@ const schemas = [
     <div class="shell">
       <p class="eyebrow">Insight</p>
       <h1>{insight.data.title}</h1>
-      <p class="lede">{insight.data.description}</p>
-      <div class="article-meta">
-        <span>By {insight.data.author}</span>
-        <span>Published {formatDate(insight.data.publishedAt)}</span>
-        <span>Last updated {formatDate(updatedAt)}</span>
+      <div class="hero-support">
+        <p class="lede">{insight.data.description}</p>
+        <div class="article-meta">
+          <span>By {insight.data.author}</span>
+          <span>Published {formatDate(insight.data.publishedAt)}</span>
+          <span>Last updated {formatDate(updatedAt)}</span>
+        </div>
       </div>
     </div>
   </section>

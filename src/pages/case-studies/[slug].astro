@@ -96,17 +96,19 @@ const caseFaqs = [
     <div class="shell">
       <p class="eyebrow">{caseStudy.data.sector}</p>
       <h1>{caseStudy.data.title}</h1>
-      <p class="case-summary">{caseStudy.data.summary}</p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand"
-          href={siteConfig.bookingUrl}
-          data-cta="case-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          {siteConfig.bookingLabel} →
-        </a>
-        <a class="button button-light" href="/case-studies">All case studies →</a>
+      <div class="hero-support">
+        <p class="case-summary">{caseStudy.data.summary}</p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand"
+            href={siteConfig.bookingUrl}
+            data-cta="case-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            {siteConfig.bookingLabel} →
+          </a>
+          <a class="button button-light" href="/case-studies">All case studies →</a>
+        </div>
       </div>
     </div>
   </section>

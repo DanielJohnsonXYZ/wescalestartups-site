@@ -24,21 +24,23 @@ const transferSchema = buildBreadcrumbSchema([
     <div class="shell">
       <p class="eyebrow">Transfer</p>
       <h1>Leave the team with a system they can keep running.</h1>
-      <p>We document decisions, workflows, reporting, meeting cadence, and handoff rules so the growth function gets stronger after the engagement ends.</p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="transfer-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="transfer-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/services/fractional-cmo" data-cta="transfer-fcmo">Fractional CMO support</a>
+      <div class="hero-support">
+        <p>We document decisions, workflows, reporting, meeting cadence, and handoff rules so the growth function gets stronger after the engagement ends.</p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="transfer-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="transfer-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/services/fractional-cmo" data-cta="transfer-fcmo">Fractional CMO support</a>
+        </div>
       </div>
     </div>
   </section>

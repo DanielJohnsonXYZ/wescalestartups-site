@@ -87,24 +87,26 @@ const showThemes = [
     <div class="shell">
       <p class="eyebrow">Podcast</p>
       <h1>{siteConfig.podcastName}</h1>
-      <p class="podcast-tagline">{siteConfig.podcastTagline}</p>
-      <p class="podcast-description">
-        It is changing how companies build products, understand customers, create content, make decisions, structure teams and compete.
-        {siteConfig.podcastName} explores what this means in practice, hosted by Daniel Johnson, founder of We Scale Startups.
-      </p>
-      <div class="hero-actions podcast-cta-group">
-        <a
-          class="button button-brand"
-          href={siteConfig.podcastYoutubeUrl}
-          target="_blank"
-          rel="noopener"
-          data-cta="podcast-youtube"
-        >
-          Subscribe on YouTube →
-        </a>
-        <a class="button button-light" href="/podcast-guest-application" data-cta="podcast-guest-page">
-          Apply as a guest →
-        </a>
+      <div class="hero-support">
+        <p class="podcast-tagline">{siteConfig.podcastTagline}</p>
+        <p class="podcast-description">
+          It is changing how companies build products, understand customers, create content, make decisions, structure teams and compete.
+          {siteConfig.podcastName} explores what this means in practice, hosted by Daniel Johnson, founder of We Scale Startups.
+        </p>
+        <div class="hero-actions podcast-cta-group">
+          <a
+            class="button button-brand"
+            href={siteConfig.podcastYoutubeUrl}
+            target="_blank"
+            rel="noopener"
+            data-cta="podcast-youtube"
+          >
+            Subscribe on YouTube →
+          </a>
+          <a class="button button-light" href="/podcast-guest-application" data-cta="podcast-guest-page">
+            Apply as a guest →
+          </a>
+        </div>
       </div>
     </div>
   </section>

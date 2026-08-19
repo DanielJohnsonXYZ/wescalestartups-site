@@ -39,23 +39,25 @@ const pricingFaqs = [
     <div class="shell">
       <p class="eyebrow">Pricing</p>
       <h1>Honest UK pricing. No "request a quote" gating.</h1>
-      <p class="lede">
-        All prices in GBP, set for the UK market. Every tier is a range: where you land depends on team complexity, scope, and timeline.
-        If the ranges aren't workable for you, an agency or in-house hire will probably be a better fit.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="pricing-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="pricing-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          All prices in GBP, set for the UK market. Every tier is a range: where you land depends on team complexity, scope, and timeline.
+          If the ranges aren't workable for you, an agency or in-house hire will probably be a better fit.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="pricing-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="pricing-hero-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+        </div>
       </div>
     </div>
   </section>

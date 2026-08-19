@@ -75,22 +75,24 @@ const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
     <div class="shell">
       <p class="eyebrow">Testimonials &amp; founder feedback</p>
       <h1>What founders, operators, and clients say.</h1>
-      <p class="lede">
-        £18M+ revenue influenced · £6M+ paid acquisition managed · 479+ founder sessions · 4.93/5 GrowthMentor · 20+ startups
-        supported · 2 operator-side exits. Filter by engagement type below.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand"
-          href={siteConfig.bookingUrl}
-          data-cta="testimonials-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          {siteConfig.bookingLabel} →
-        </a>
-        <a class="button button-light" href="/case-studies" data-cta="testimonials-hero-cases">
-          Read case studies →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          £18M+ revenue influenced · £6M+ paid acquisition managed · 479+ founder sessions · 4.93/5 GrowthMentor · 20+ startups
+          supported · 2 operator-side exits. Filter by engagement type below.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand"
+            href={siteConfig.bookingUrl}
+            data-cta="testimonials-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            {siteConfig.bookingLabel} →
+          </a>
+          <a class="button button-light" href="/case-studies" data-cta="testimonials-hero-cases">
+            Read case studies →
+          </a>
+        </div>
       </div>
     </div>
   </section>

@@ -46,22 +46,24 @@ const servicesSchema = [
     <div class="shell">
       <p class="eyebrow">Services</p>
       <h1>Four ways to fix the bottleneck, pick the smallest that solves it.</h1>
-      <p>
-        Each offer includes who it is for, the problem it solves, timeline, starting price, and what ships. Confirm scope on a {siteConfig.bookingCallShort}.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="services-hub-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="services-hub-scorecard">
-          {siteConfig.scorecardLabel} →
-        </a>
+      <div class="hero-support">
+        <p>
+          Each offer includes who it is for, the problem it solves, timeline, starting price, and what ships. Confirm scope on a {siteConfig.bookingCallShort}.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="services-hub-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="services-hub-scorecard">
+            {siteConfig.scorecardLabel} →
+          </a>
+        </div>
       </div>
     </div>
   </section>

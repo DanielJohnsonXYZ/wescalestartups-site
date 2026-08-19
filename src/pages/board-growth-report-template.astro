@@ -36,16 +36,18 @@ function requestMailto() {
     <div class="shell">
       <p class="eyebrow">Template</p>
       <h1>{title}</h1>
-      <p class="lede">
-        Structure for monthly or quarterly board updates, commercial outcomes, experiment learnings, and explicit scale/stop/fix recommendations (not activity totals).
-      </p>
-      <div class="hero-actions">
-        <CfEmailOff>
-          <a class="button button-brand" href={requestMailto()} data-cta="board-report-request">
-            Request the template →
-          </a>
-        </CfEmailOff>
-        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      <div class="hero-support">
+        <p class="lede">
+          Structure for monthly or quarterly board updates, commercial outcomes, experiment learnings, and explicit scale/stop/fix recommendations (not activity totals).
+        </p>
+        <div class="hero-actions">
+          <CfEmailOff>
+            <a class="button button-brand" href={requestMailto()} data-cta="board-report-request">
+              Request the template →
+            </a>
+          </CfEmailOff>
+          <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+        </div>
       </div>
     </div>
   </section>

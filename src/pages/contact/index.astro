@@ -50,23 +50,25 @@ const turnstileSiteKey =
     <div class="shell">
       <p class="eyebrow">Contact</p>
       <h1>Send the growth context.</h1>
-      <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="contact-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="contact-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <!--email_off-->
-        <a class="button button-light" href={`mailto:${siteConfig.email}`} data-cta="contact-email">{siteConfig.email}</a>
-        <!--/email_off-->
+      <div class="hero-support">
+        <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="contact-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="contact-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <!--email_off-->
+          <a class="button button-light" href={`mailto:${siteConfig.email}`} data-cta="contact-email">{siteConfig.email}</a>
+          <!--/email_off-->
+        </div>
       </div>
     </div>
   </section>

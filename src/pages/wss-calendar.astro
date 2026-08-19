@@ -30,18 +30,20 @@ const schema = buildBreadcrumbSchema([
     <div class="shell">
       <p class="eyebrow">We Scale Startups · Scheduling app</p>
       <h1>{appName}</h1>
-      <p class="lede">
-        {appName} is the booking and calendar application operated by {siteConfig.name}. It powers
-        public Growth Audit scheduling on this site and on{" "}
-        <a href={siteConfig.calOrigin}>{siteConfig.calOrigin.replace("https://", "")}</a>.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-calendar-book">
-          Book a Growth Audit →
-        </a>
-        <a class="button button-light" href={siteConfig.calUrl} data-cta="wss-calendar-direct" rel="noreferrer" target="_blank">
-          Open the public calendar →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          {appName} is the booking and calendar application operated by {siteConfig.name}. It powers
+          public Growth Audit scheduling on this site and on{" "}
+          <a href={siteConfig.calOrigin}>{siteConfig.calOrigin.replace("https://", "")}</a>.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-calendar-book">
+            Book a Growth Audit →
+          </a>
+          <a class="button button-light" href={siteConfig.calUrl} data-cta="wss-calendar-direct" rel="noreferrer" target="_blank">
+            Open the public calendar →
+          </a>
+        </div>
       </div>
     </div>
   </section>

@@ -360,30 +360,32 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
       {details.premium && <span class="service-premium-badge">Premium offer</span>}
       <p class="eyebrow">{service.data.shortTitle}</p>
       <h1>{service.data.title}</h1>
-      {
-        service.id === "fractional-cmo" && (
-          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
-        )
-      }
-      <p class="service-headline">{details.headline ?? service.data.promise}</p>
-      <p class="service-description">{service.data.description}</p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand"
-          href={siteConfig.bookingUrl}
-          data-cta={`${service.id}-book`}
-          title={siteConfig.bookingCallReassurance}
-        >
-          {siteConfig.bookingLabel} →
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
-          {siteConfig.scorecardLabel} →
-        </a>
-      </div>
-      <div class="service-meta-strip" aria-label="Engagement summary">
-        <div><span class="svc-meta-label">Best for</span><span class="svc-meta-value">{service.data.audience}</span></div>
-        <div><span class="svc-meta-label">Pricing</span><span class="svc-meta-value">{details.price}</span></div>
-        <div><span class="svc-meta-label">Timeline</span><span class="svc-meta-value">{details.timeline.split('.')[0]}.</span></div>
+      <div class="hero-support">
+        {
+          service.id === "fractional-cmo" && (
+            <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
+          )
+        }
+        <p class="service-headline">{details.headline ?? service.data.promise}</p>
+        <p class="service-description">{service.data.description}</p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand"
+            href={siteConfig.bookingUrl}
+            data-cta={`${service.id}-book`}
+            title={siteConfig.bookingCallReassurance}
+          >
+            {siteConfig.bookingLabel} →
+          </a>
+          <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
+            {siteConfig.scorecardLabel} →
+          </a>
+        </div>
+        <div class="service-meta-strip" aria-label="Engagement summary">
+          <div><span class="svc-meta-label">Best for</span><span class="svc-meta-value">{service.data.audience}</span></div>
+          <div><span class="svc-meta-label">Pricing</span><span class="svc-meta-value">{details.price}</span></div>
+          <div><span class="svc-meta-label">Timeline</span><span class="svc-meta-value">{details.timeline.split('.')[0]}.</span></div>
+        </div>
       </div>
     </div>
   </section>

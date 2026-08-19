@@ -36,16 +36,18 @@ function requestMailto() {
     <div class="shell">
       <p class="eyebrow">Template</p>
       <h1>{title}</h1>
-      <p class="lede">
-        A weekly view that ties pipeline to channel activity and decisions, designed so leadership sees what to scale, stop, or fix without vanity metrics.
-      </p>
-      <div class="hero-actions">
-        <CfEmailOff>
-          <a class="button button-brand" href={requestMailto()} data-cta="growth-dashboard-request">
-            Request the template →
-          </a>
-        </CfEmailOff>
-        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      <div class="hero-support">
+        <p class="lede">
+          A weekly view that ties pipeline to channel activity and decisions, designed so leadership sees what to scale, stop, or fix without vanity metrics.
+        </p>
+        <div class="hero-actions">
+          <CfEmailOff>
+            <a class="button button-brand" href={requestMailto()} data-cta="growth-dashboard-request">
+              Request the template →
+            </a>
+          </CfEmailOff>
+          <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+        </div>
       </div>
     </div>
   </section>

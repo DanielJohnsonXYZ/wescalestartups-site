@@ -357,51 +357,53 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
     <div class="shell">
       <p class="eyebrow"><a href="/resources">Resources</a> · {magnet.audience}</p>
       <h1>{magnet.title}</h1>
-      <p class="hero-copy">{magnet.description}</p>
-      <div class="hero-actions">
-        {isGrowthExperimentPlanner ? (
-          <a
-            class="button button-brand"
-            href="#get-planner"
-            data-cta="magnet-get-90-day-growth-experiment-planner"
-          >
-            Get the planner + field guide →
+      <div class="hero-support">
+        <p class="hero-copy">{magnet.description}</p>
+        <div class="hero-actions">
+          {isGrowthExperimentPlanner ? (
+            <a
+              class="button button-brand"
+              href="#get-planner"
+              data-cta="magnet-get-90-day-growth-experiment-planner"
+            >
+              Get the planner + field guide →
+            </a>
+          ) : downloadPath ? (
+            <a
+              class="button button-brand"
+              href={downloadPath}
+              download
+              data-cta={`magnet-download-${slug}`}
+            >
+              Download the {magnet.title} →
+            </a>
+          ) : null}
+          <a class="button button-light" href="/services" data-cta={`magnet-hero-services-${slug}`}>
+            Or see services →
           </a>
-        ) : downloadPath ? (
-          <a
-            class="button button-brand"
-            href={downloadPath}
-            download
-            data-cta={`magnet-download-${slug}`}
-          >
-            Download the {magnet.title} →
-          </a>
-        ) : null}
-        <a class="button button-light" href="/services" data-cta={`magnet-hero-services-${slug}`}>
-          Or see services →
-        </a>
-      </div>
-      <p class="hero-microcopy">
-        {isGrowthExperimentPlanner
-          ? "Free. The editable workbook and guide are available immediately after signup."
-          : "Instant download. Optional: leave your email below for the Growth Bottleneck note."}
-      </p>
-      <div id={isGrowthExperimentPlanner ? "get-planner" : undefined}>
-        <EmailSignup
-          formId={`magnet-${slug}`}
-          heading={isGrowthExperimentPlanner ? "Send me the 90-Day Growth Experiment Planner" : "Want the biweekly growth note too?"}
-          subtext={isGrowthExperimentPlanner
-            ? "Get the editable workbook, the concise field guide, and five practical emails that help you turn it into a working quarterly rhythm."
-            : "One practical note on pipeline, positioning, and founder-led systems."}
-          buttonLabel={isGrowthExperimentPlanner ? "Get the planner →" : "Get the note →"}
-          sourceType="lead_magnet"
-          leadMagnet={slug}
-          sourcePage={`/resources/${slug}`}
-          finePrint={isGrowthExperimentPlanner
-            ? "Includes the five-email planner implementation series. Unsubscribe any time."
-            : "No spam. Unsubscribe any time."}
-          successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}
-        />
+        </div>
+        <p class="hero-microcopy">
+          {isGrowthExperimentPlanner
+            ? "Free. The editable workbook and guide are available immediately after signup."
+            : "Instant download. Optional: leave your email below for the Growth Bottleneck note."}
+        </p>
+        <div id={isGrowthExperimentPlanner ? "get-planner" : undefined}>
+          <EmailSignup
+            formId={`magnet-${slug}`}
+            heading={isGrowthExperimentPlanner ? "Send me the 90-Day Growth Experiment Planner" : "Want the biweekly growth note too?"}
+            subtext={isGrowthExperimentPlanner
+              ? "Get the editable workbook, the concise field guide, and five practical emails that help you turn it into a working quarterly rhythm."
+              : "One practical note on pipeline, positioning, and founder-led systems."}
+            buttonLabel={isGrowthExperimentPlanner ? "Get the planner →" : "Get the note →"}
+            sourceType="lead_magnet"
+            leadMagnet={slug}
+            sourcePage={`/resources/${slug}`}
+            finePrint={isGrowthExperimentPlanner
+              ? "Includes the five-email planner implementation series. Unsubscribe any time."
+              : "No spam. Unsubscribe any time."}
+            successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}
+          />
+        </div>
       </div>
     </div>
   </section>

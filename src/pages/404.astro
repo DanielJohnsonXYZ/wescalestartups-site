@@ -12,36 +12,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="shell">
       <p class="eyebrow">404</p>
       <h1 id="wss-404-title">This page wandered off.</h1>
-      <p>The useful paths are still here: start here, services, proof, book, or contact.</p>
-      <div class="hero-actions">
-        <a class="button button-dark" href="/" data-cta="404-home">Go home</a>
-        <a class="button button-light" href="/start-here" data-cta="404-start-here">Start here</a>
-        <a class="button button-light" href="/proof" data-cta="404-proof">Proof</a>
-        <a class="button button-light" href="/book" data-cta="404-book">Book</a>
-        <a class="button button-light" href="/contact" data-cta="404-contact">Contact</a>
+      <div class="hero-support">
+        <p>The useful paths are still here: start here, services, proof, book, or contact.</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="/" data-cta="404-home">Go home</a>
+          <a class="button button-light" href="/start-here" data-cta="404-start-here">Start here</a>
+          <a class="button button-light" href="/proof" data-cta="404-proof">Proof</a>
+          <a class="button button-light" href="/book" data-cta="404-book">Book</a>
+          <a class="button button-light" href="/contact" data-cta="404-contact">Contact</a>
+        </div>
+        <nav class="also-try" aria-label="More ways to continue">
+          <p class="also-try-heading">Also try</p>
+          <ul class="also-try-list">
+            <li>
+              <a class="link-arrow" href="/newsletter" data-cta="404-newsletter">Newsletter →</a>
+            </li>
+            <li>
+              <a class="link-arrow" href="/insights" data-cta="404-insights">Insights →</a>
+            </li>
+            <li>
+              <a class="link-arrow" href="/growth-course" data-cta="404-growth-course">Growth course →</a>
+            </li>
+            <li>
+              <a class="link-arrow" href="/services" data-cta="404-services">Services →</a>
+            </li>
+            <li class="also-try-full">
+              <a class="link-arrow" href="https://danieljohnson.xyz/start-here/" data-cta="404-daniel-start-here" rel="noopener">
+                Personal site: Start here (Daniel Johnson) →
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <nav class="also-try" aria-label="More ways to continue">
-        <p class="also-try-heading">Also try</p>
-        <ul class="also-try-list">
-          <li>
-            <a class="link-arrow" href="/newsletter" data-cta="404-newsletter">Newsletter →</a>
-          </li>
-          <li>
-            <a class="link-arrow" href="/insights" data-cta="404-insights">Insights →</a>
-          </li>
-          <li>
-            <a class="link-arrow" href="/growth-course" data-cta="404-growth-course">Growth course →</a>
-          </li>
-          <li>
-            <a class="link-arrow" href="/services" data-cta="404-services">Services →</a>
-          </li>
-          <li class="also-try-full">
-            <a class="link-arrow" href="https://danieljohnson.xyz/start-here/" data-cta="404-daniel-start-here" rel="noopener">
-              Personal site: Start here (Daniel Johnson) →
-            </a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </section>
 

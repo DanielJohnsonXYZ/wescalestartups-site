@@ -414,14 +414,18 @@ const schema = [
   }
 
   .ladder-item:hover {
-    border-color: rgba(102, 87, 255, 0.35);
+    border-color: color-mix(in srgb, var(--v9-violet) 35%, transparent);
     box-shadow: 0 12px 32px rgba(54, 38, 109, 0.1);
     transform: translateY(-2px);
   }
 
   .ladder-item.recommended {
-    border-color: rgba(102, 87, 255, 0.45);
-    background: linear-gradient(135deg, rgba(102, 87, 255, 0.08), rgba(255, 254, 250, 0.95));
+    border-color: color-mix(in srgb, var(--v9-violet) 45%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--v9-violet) 8%, transparent),
+      rgba(255, 254, 250, 0.95)
+    );
   }
 
   .ladder-name {

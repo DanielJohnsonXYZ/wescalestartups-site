@@ -899,7 +899,10 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     margin: 0;
     background: color-mix(in srgb, var(--accent) 6%, var(--surface));
     border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
-    border-radius: var(--v9-radius);
+    /* border-radius: not set here — site-v9.css's card contract lists
+       .case-proof-quote and sets border-radius: var(--v9-radius) at (0-2-0),
+       identical to what this scoped rule would resolve to at the same
+       specificity, so restating it here was a no-op. */
     padding: 1.75rem 1.75rem 1.5rem;
   }
   .case-proof-quote p {

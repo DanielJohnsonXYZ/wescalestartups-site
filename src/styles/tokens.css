@@ -122,6 +122,20 @@
   --logo-2: #8b5cf6;
   --logo-3: #a445ff;
   --logo-grad: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 55%, var(--logo-3) 100%);
+
+  /* Spacing ---------------------------------------------------
+     A small scale, not a full ramp: these five values are the
+     rhythm numbers that already repeat verbatim across site-v9.css
+     and components.css (see each file's header for where they're
+     adopted). Introducing the token does not change the value —
+     it names a number that was already the de facto standard so
+     the next section/card doesn't reinvent it as a slightly
+     different literal. */
+  --v9-space-section: clamp(4.75rem, 8vw, 7.5rem);
+  --v9-space-section-compact: clamp(3rem, 5vw, 4.5rem);
+  --v9-space-section-intro-gap: 1.15rem;
+  --v9-space-card-padding: 1.35rem;
+  --v9-space-grid-gap: 1rem;
 }
 
 /* The body contract enforced by scripts/check-site-theme.mjs.

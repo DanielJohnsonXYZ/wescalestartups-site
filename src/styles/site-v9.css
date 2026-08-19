@@ -82,7 +82,7 @@
 
 .theme-wss-v9 .header-inner {
   min-height: 64px;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   padding: 0.48rem 0.52rem 0.48rem 1.05rem;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 999px;
@@ -177,7 +177,7 @@
 .theme-wss-v9:not(.no-shared-chrome) .page-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(4.75rem, 8vw, 7.5rem) 0 clamp(4rem, 7vw, 6.5rem);
+  padding: var(--v9-space-section) 0 clamp(4rem, 7vw, 6.5rem);
   border-bottom: 1px solid var(--v9-line);
   /* Matches the homepage hero: no grid lines, a quiet violet/mint wash. */
   background:
@@ -352,7 +352,7 @@
 /* Sections and editorial rhythm ------------------------------- */
 
 .theme-wss-v9:not(.no-shared-chrome) .section {
-  padding-block: clamp(4.75rem, 8vw, 7.5rem);
+  padding-block: var(--v9-space-section);
   border-bottom: 1px solid var(--v9-line);
   background: var(--v9-paper);
 }
@@ -366,7 +366,7 @@
 }
 
 .theme-wss-v9:not(.no-shared-chrome) :where(.section-intro, .content-header, .testimonials-header) {
-  padding-bottom: 1.15rem;
+  padding-bottom: var(--v9-space-section-intro-gap);
   border-bottom: 1px solid var(--v9-line);
 }
 
@@ -774,7 +774,7 @@
 
   .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-actions {
     align-items: flex-start;
-    gap: 1rem;
+    gap: var(--v9-space-grid-gap);
   }
 
   .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand,
@@ -896,7 +896,7 @@
    asking 30 pages to add an element. */
 .theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary {
   display: flex;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
@@ -1032,7 +1032,7 @@
    ============================================================ */
 .theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > .related-insights-list),
 .theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > * > .related-insights-list) {
-  padding-block: clamp(3rem, 5vw, 4.5rem);
+  padding-block: var(--v9-space-section-compact);
 }
 
 /* The heading drops a tier too. A section whose whole body is a row of

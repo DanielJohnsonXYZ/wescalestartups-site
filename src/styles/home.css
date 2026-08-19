@@ -91,11 +91,6 @@ main .shell {
   font-size: 0.88rem;
 }
 
-.v9-section-intro-dark {
-  border-color: var(--v9-line-dark);
-  color: var(--v9-copy-dark);
-}
-
 .v9-section-number {
   color: currentColor;
   font-family: var(--v9-mono);
@@ -248,14 +243,6 @@ main .button:hover {
 .v9-hero {
   position: relative;
   overflow: hidden;
-  min-height: 900px;
-  padding: 9.75rem 0 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    var(--v9-night);
-  background-size: 64px 64px, 64px 64px, auto;
-  color: var(--v9-white);
 }
 
 .v9-hero::before {
@@ -263,7 +250,6 @@ main .button:hover {
   inset: 0;
   content: "";
   pointer-events: none;
-  background: linear-gradient(180deg, transparent 45%, var(--v9-night) 91%);
 }
 
 .v9-aurora {
@@ -302,7 +288,6 @@ main .button:hover {
   gap: clamp(3rem, 6vw, 7.5rem);
   align-items: center;
   min-height: 590px;
-  padding: 2.5rem 0 5.5rem;
 }
 
 .v9-hero-copy {
@@ -321,7 +306,6 @@ main .button:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  margin-bottom: 2.2rem;
   padding: 0;
   border: 0;
   background: transparent;
@@ -336,19 +320,12 @@ main .button:hover {
 }
 
 .v9-hero h1 {
-  max-width: 11.5ch;
   margin: 0;
-  color: var(--v9-white);
-  font-size: clamp(4.2rem, 7.05vw, 7.35rem);
-  line-height: 0.88;
   text-wrap: balance;
 }
 
 .v9-hero h1 em {
   display: inline-block;
-  background: linear-gradient(115deg, var(--v9-violet-bright), #d6ceff 58%, var(--v9-mint));
-  background-clip: text;
-  -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
@@ -356,13 +333,11 @@ main .button:hover {
 .v9-hero-lede {
   max-width: 62ch;
   margin: 2.35rem 0 0;
-  color: var(--v9-copy-dark);
   font-size: clamp(1rem, 1.4vw, 1.16rem);
   line-height: 1.7;
 }
 
 .v9-hero-lede strong {
-  color: var(--v9-white);
   font-weight: 520;
 }
 
@@ -374,16 +349,11 @@ main .button:hover {
   margin-top: 2rem;
 }
 
-.v9-hero .v9-text-link {
-  color: rgba(255, 255, 255, 0.86);
-}
-
 .v9-hero-reassurance {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem 1.25rem;
   margin-top: 1.4rem;
-  color: rgba(255, 255, 255, 0.47);
   font-family: var(--v9-mono);
   font-size: 0.64rem;
 }
@@ -469,7 +439,6 @@ main .button:hover {
 .v9-metric-rail {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--v9-line-dark);
 }
 
 .v9-metric {
@@ -486,20 +455,17 @@ main .button:hover {
 .v9-metric-index {
   align-self: start;
   margin-bottom: auto;
-  color: rgba(255, 255, 255, 0.32);
   font-family: var(--v9-mono);
   font-size: 0.58rem;
 }
 
 .v9-metric strong {
-  color: var(--v9-white);
   font-size: clamp(1.6rem, 2.4vw, 2.5rem);
   line-height: 1;
 }
 
 .v9-metric > span:last-child {
   max-width: 18ch;
-  color: var(--v9-copy-dark);
   font-size: 0.72rem;
   line-height: 1.4;
 }
@@ -564,8 +530,6 @@ main .button:hover {
 
 .v9-thesis {
   padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
-  background: var(--v9-night);
-  color: var(--v9-white);
 }
 
 .v9-thesis-grid {
@@ -586,7 +550,6 @@ main .button:hover {
 .v9-thesis-lede {
   max-width: 42ch;
   margin: 2rem 0 0;
-  color: var(--v9-copy-dark);
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -595,7 +558,6 @@ main .button:hover {
   overflow: hidden;
   border: 1px solid var(--v9-line-dark);
   border-radius: var(--v9-radius);
-  background: var(--v9-night-2);
   transform: rotate(1.5deg);
 }
 
@@ -613,14 +575,12 @@ main .button:hover {
 }
 
 .v9-teaching-card span {
-  color: var(--v9-mint);
   font-family: var(--v9-mono);
   font-size: 0.57rem;
   text-transform: uppercase;
 }
 
 .v9-teaching-card strong {
-  color: rgba(255, 255, 255, 0.76);
   font-size: 0.8rem;
   font-weight: 500;
 }
@@ -638,13 +598,11 @@ main .button:hover {
   padding: 1.6rem;
   border-right: 1px solid var(--v9-line-dark);
   border-bottom: 1px solid var(--v9-line-dark);
-  background: rgba(255, 255, 255, 0.015);
 }
 
 .v9-principle > span {
   display: block;
   margin-bottom: 5rem;
-  color: var(--v9-violet-bright);
   font-family: var(--v9-mono);
   font-size: 0.62rem;
 }
@@ -657,7 +615,6 @@ main .button:hover {
 .v9-principle p {
   max-width: 35ch;
   margin: 0;
-  color: var(--v9-copy-dark);
   font-size: 0.88rem;
   line-height: 1.65;
 }
@@ -959,12 +916,6 @@ main .button:hover {
 
 .v9-work {
   padding: clamp(4.5rem, 7.4vw, 7.4rem) 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    var(--v9-night);
-  background-size: 72px 72px, 72px 72px, auto;
-  color: var(--v9-white);
 }
 
 .v9-work-heading,
@@ -996,19 +947,16 @@ main .button:hover {
   flex-direction: column;
   border: 1px solid var(--v9-line-dark);
   border-radius: var(--v9-radius);
-  background: rgba(255, 255, 255, 0.025);
   padding: 1.3rem;
   transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
 .v9-service-card:hover {
   border-color: rgba(128, 108, 255, 0.62);
-  background: rgba(255, 255, 255, 0.045);
   transform: translateY(-6px);
 }
 
 .v9-service-card.is-featured {
-  border-color: rgba(200, 255, 101, 0.34);
   background: linear-gradient(155deg, rgba(200, 255, 101, 0.08), rgba(128, 108, 255, 0.06));
 }
 
@@ -1021,7 +969,6 @@ main .button:hover {
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 3.5rem;
-  color: rgba(255, 255, 255, 0.45);
   font-family: var(--v9-mono);
   font-size: 0.58rem;
   text-transform: uppercase;
@@ -1048,13 +995,12 @@ main .button:hover {
   border-bottom: 1px solid var(--v9-line-dark);
 }
 
-.v9-service-price strong { color: var(--v9-violet-bright); font-size: 1rem; }
-.v9-service-price span { color: var(--v9-copy-dark); font-size: 0.7rem; }
+.v9-service-price strong { font-size: 1rem; }
+.v9-service-price span { font-size: 0.7rem; }
 
 .v9-service-card > p {
   min-height: 4.5em;
   margin: 1.2rem 0;
-  color: var(--v9-copy-dark);
   font-size: 0.82rem;
   line-height: 1.55;
 }
@@ -1068,13 +1014,11 @@ main .button:hover {
 }
 
 .v9-service-card li {
-  color: rgba(255, 255, 255, 0.68);
   font-size: 0.72rem;
 }
 
 .v9-service-card li::before {
   margin-right: 0.5rem;
-  color: var(--v9-mint);
   content: "↳";
 }
 
@@ -1085,12 +1029,9 @@ main .button:hover {
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--v9-line-dark);
-  color: var(--v9-white);
   font-size: 0.78rem;
   font-weight: 600;
 }
-
-.v9-service-card > a span { color: var(--v9-mint); }
 
 .v9-timeline-wrap {
   display: grid;
@@ -1102,7 +1043,6 @@ main .button:hover {
 }
 
 .v9-timeline-heading > span {
-  color: var(--v9-mint);
   font-family: var(--v9-mono);
   font-size: 0.62rem;
   text-transform: uppercase;
@@ -1115,7 +1055,6 @@ main .button:hover {
 }
 
 .v9-timeline-heading p {
-  color: var(--v9-copy-dark);
   font-size: 0.86rem;
   line-height: 1.65;
 }
@@ -1145,7 +1084,6 @@ main .button:hover {
   right: 0;
   left: 1.7rem;
   height: 1px;
-  background: var(--v9-line-dark);
   content: "";
 }
 
@@ -1158,8 +1096,6 @@ main .button:hover {
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  background: var(--v9-night);
-  color: var(--v9-copy-dark);
   font-family: var(--v9-mono);
   font-size: 0.52rem;
 }
@@ -1171,7 +1107,6 @@ main .button:hover {
 }
 
 .v9-timeline li > span {
-  color: var(--v9-violet-bright);
   font-family: var(--v9-mono);
   font-size: 0.56rem;
 }
@@ -1183,7 +1118,6 @@ main .button:hover {
 }
 
 .v9-timeline p {
-  color: var(--v9-copy-dark);
   font-size: 0.7rem;
   line-height: 1.5;
 }
@@ -1345,14 +1279,12 @@ main .button:hover {
 
 .v9-quote-grid {
   display: grid;
-  grid-template-columns: 1.35fr 0.825fr 0.825fr;
   gap: 0.9rem;
   margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .v9-quote {
   display: flex;
-  min-height: 350px;
   flex-direction: column;
   justify-content: space-between;
   margin: 0;
@@ -1374,9 +1306,7 @@ main .button:hover {
 .v9-quote blockquote {
   margin: 0;
   font-family: var(--v9-display);
-  font-size: clamp(1.35rem, 2vw, 2rem);
   font-weight: 420;
-  line-height: 1.25;
   letter-spacing: -0.025em;
 }
 
@@ -1499,7 +1429,6 @@ main .button:hover {
 
 .v9-scorecard {
   padding: clamp(4rem, 7vw, 7rem) 0;
-  background: var(--v9-white);
 }
 
 .v9-scorecard-card {
@@ -1742,8 +1671,6 @@ main .button:hover {
   position: relative;
   overflow: hidden;
   padding: clamp(6rem, 10vw, 10rem) 0;
-  background: var(--v9-night);
-  color: var(--v9-white);
   text-align: center;
 }
 
@@ -1767,7 +1694,6 @@ main .button:hover {
   width: min(690px, 70vw);
   height: min(690px, 70vw);
   transform: translate(-50%, -50%);
-  border: 1px dashed rgba(200, 255, 101, 0.17);
   border-radius: 50%;
   animation: v9-spin 55s linear infinite;
 }
@@ -1793,7 +1719,6 @@ main .button:hover {
 
 .v9-final p:first-of-type {
   margin-bottom: 1.5rem;
-  color: var(--v9-mint);
   font-family: var(--v9-mono);
   font-size: 0.64rem;
   text-transform: uppercase;
@@ -1808,9 +1733,6 @@ main .button:hover {
 }
 
 .v9-final h2 em {
-  background: linear-gradient(110deg, var(--v9-violet-bright), var(--v9-mint));
-  background-clip: text;
-  -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
@@ -1818,7 +1740,6 @@ main .button:hover {
 .v9-final h2 + p {
   max-width: 54ch;
   margin: 2rem auto;
-  color: var(--v9-copy-dark);
   font-size: 0.92rem;
   line-height: 1.7;
 }
@@ -1827,8 +1748,6 @@ main .button:hover {
 
 .site-footer-v2 {
   border-top-color: rgba(255, 255, 255, 0.08);
-  background: var(--v9-night);
-  color: rgba(255, 255, 255, 0.68);
 }
 
 .site-footer-v2::before { background: linear-gradient(90deg, transparent, rgba(200, 255, 101, 0.3), transparent); }
@@ -1843,7 +1762,6 @@ main .button:hover {
 @media (max-width: 1120px) {
   .nav-link { padding-inline: 0.52rem; font-size: 0.73rem; }
   .v9-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(380px, 0.75fr); gap: 3rem; }
-  .v9-hero h1 { font-size: clamp(4rem, 7.5vw, 6.1rem); }
   .v9-service-grid { grid-template-columns: repeat(2, 1fr); }
   .v9-service-card { min-height: 430px; }
   .v9-timeline-wrap { grid-template-columns: 1fr; }
@@ -1861,11 +1779,8 @@ main .button:hover {
   .mobile-menu nav { right: 0 !important; left: auto !important; width: min(356px, calc(100vw - 2rem)); max-height: calc(100vh - 7rem); overflow-y: auto; border-color: rgba(255, 255, 255, 0.12); background: rgba(17, 18, 26, 0.98); }
   .mobile-menu .nav-link { color: rgba(255, 255, 255, 0.8); }
   .mobile-subnav-link { color: rgba(255, 255, 255, 0.55); }
-
-  .v9-hero { min-height: auto; padding-top: 8.5rem; }
   .v9-hero-grid { grid-template-columns: 1fr; gap: 3.5rem; padding-bottom: 4rem; }
   .v9-hero-copy { max-width: 800px; }
-  .v9-hero h1 { max-width: 12ch; font-size: clamp(3.9rem, 11vw, 6.8rem); }
   .v9-os-card { max-width: 680px; transform: none; }
   .v9-metric { min-height: 130px; }
 
@@ -1922,11 +1837,8 @@ main .button:hover {
 
   .v9-section-intro { grid-template-columns: 1fr; gap: 0.55rem; margin-bottom: 2.75rem; }
   .v9-section-intro p { text-align: left; font-size: 0.75rem; }
-
-  .v9-hero { padding-top: 7.25rem; background-size: 44px 44px, 44px 44px, auto; }
   .v9-hero-grid { gap: 2.5rem; padding: 1.75rem 0 3rem; }
   .v9-hero .eyebrow { margin-bottom: 1.5rem; font-size: 0.57rem; }
-  .v9-hero h1 { font-size: clamp(3.4rem, 16vw, 5rem); line-height: 0.9; }
   .v9-hero-lede { margin-top: 1.6rem; font-size: 0.96rem; line-height: 1.62; }
   .v9-hero-actions { align-items: flex-start; flex-direction: column; gap: 1rem; }
   .v9-hero .button { width: 100%; }
@@ -1937,7 +1849,7 @@ main .button:hover {
   .v9-os-head > div > span:last-child { display: none; }
 
   .v9-metric-rail { grid-template-columns: repeat(2, 1fr); }
-  .v9-metric { min-height: 118px; padding: 1rem; border-bottom: 1px solid var(--v9-line-dark); }
+  .v9-metric { min-height: 118px; padding: 1rem; }
   .v9-metric:nth-child(2) { border-right: 0; }
   .v9-metric strong { font-size: 1.65rem; }
 
@@ -2063,11 +1975,6 @@ main .button:hover {
 .v9-hero {
   min-height: 860px;
   padding: 6.75rem 0 0;
-  background:
-    linear-gradient(rgba(17, 17, 23, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 17, 23, 0.045) 1px, transparent 1px),
-    var(--v9-paper);
-  background-size: 64px 64px, 64px 64px, auto;
   color: var(--v9-ink);
 }
 

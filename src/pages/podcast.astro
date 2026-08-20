@@ -49,6 +49,8 @@ const podcastSeriesSchema = siteConfig.podcastLive
 
 const podcastSchemas = [buildFaqSchema(podcastFaqs), ...(podcastSeriesSchema ? [podcastSeriesSchema] : [])];
 
+/* The four themes are the show's spine, so they carry mono indices and read
+   as a numbered ledger rather than four undifferentiated boxes. */
 const showThemes = [
   {
     title: "Breaking assumptions",
@@ -65,6 +67,23 @@ const showThemes = [
   {
     title: "What leaders do differently",
     body: "How founders and operators should adapt the growth playbook, without chasing every new tactic."
+  }
+];
+
+/* Same three audiences and the same words that were hard-coded in the markup,
+   split so the question can be set as the pulled quote it already is. */
+const audiences = [
+  {
+    who: "Startup founders",
+    thought: "AI changed the game, what should we actually do differently?"
+  },
+  {
+    who: "Marketers & growth leaders",
+    thought: "Which advantages are disappearing, and which ones are still ours?"
+  },
+  {
+    who: "Investors & operators",
+    thought: "What remains uniquely human when every team has the same tools?"
   }
 ];
 ---
@@ -86,10 +105,15 @@ const showThemes = [
   <section class="page-hero podcast-hero">
     <div class="shell">
       <p class="eyebrow">Podcast</p>
-      <h1>{siteConfig.podcastName}</h1>
+      {/* Three-word title. Alone in the headline column it left the masthead
+          lopsided, so the tagline runs under it as the deck — the same
+          composition the service pages use. */}
+      <div class="hero-headline">
+        <h1>{siteConfig.podcastName}</h1>
+        <p class="hero-deck">{siteConfig.podcastTagline}</p>
+      </div>
       <div class="hero-support">
-        <p class="podcast-tagline">{siteConfig.podcastTagline}</p>
-        <p class="podcast-description">
+        <p class="lede">
           It is changing how companies build products, understand customers, create content, make decisions, structure teams and compete.
           {siteConfig.podcastName} explores what this means in practice, hosted by Daniel Johnson, founder of We Scale Startups.
         </p>
@@ -106,6 +130,30 @@ const showThemes = [
           <a class="button button-light" href="/podcast-guest-application" data-cta="podcast-guest-page">
             Apply as a guest →
           </a>
+        </div>
+      </div>
+      {/* The show has no published episodes yet. Rather than let the masthead
+          imply a back catalogue, the rail states where it actually lives and
+          what is still to come — the same facts the subscribe band and the FAQ
+          already give, surfaced before the visitor has to scroll for them. */}
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">Where the show lives</p>
+        <div class="hero-ledger">
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Host</span>
+            <span class="hero-ledger-value">{siteConfig.founderName}</span>
+            <span class="hero-ledger-label">Founder of We Scale Startups.</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Watch</span>
+            <span class="hero-ledger-value">{siteConfig.podcastYoutubeHandle}</span>
+            <span class="hero-ledger-label">The YouTube channel is live.</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Audio feeds</span>
+            <span class="hero-ledger-value">With episode one</span>
+            <span class="hero-ledger-label">Spotify and Apple Podcasts go live when the first episode ships.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -138,12 +186,13 @@ const showThemes = [
           <span>Founders, marketers, investors, operators</span>
         </a>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell">
-      <SectionIntro eyebrow="Episodes" title="On-site episode pages when the first episode ships." body="Each release will get a dedicated URL with a useful summary, key takeaways, and links to the systems discussed." />
+      {/* This was a whole section of its own — a SectionIntro and nothing
+          else, announcing that there was nothing to show. It is one line of
+          microcopy under the subscribe tiles now, which is the weight the
+          fact deserves. */}
+      <p class="hero-microcopy podcast-episode-note">
+        Each release will get a dedicated URL here with a summary, key takeaways, and links to the systems discussed.
+      </p>
     </div>
   </section>
 
@@ -156,8 +205,9 @@ const showThemes = [
         body="The show brings together founders, marketers, investors and operators. This is not another channel about AI tools or productivity hacks."
       />
       <div class="podcast-pillars">
-        {showThemes.map((theme) => (
+        {showThemes.map((theme, index) => (
           <article class="pillar-card">
+            <span class="pillar-num">{String(index + 1).padStart(2, "0")}</span>
             <h3>{theme.title}</h3>
             <p>{theme.body}</p>
           </article>
@@ -174,19 +224,18 @@ const showThemes = [
         title="Built for people who run growth in ambitious startups."
         body="If you care about what still works, what is disappearing, and what the new playbook might look like, this show is for you."
       />
+      {/* The three "Thinking: …" lines were already questions in quotation
+          marks set as body copy. They are set as the pulled quotes they are,
+          which gives the band a second typographic voice instead of a third
+          row of identical grey paragraphs. */}
       <div class="audience-grid">
-        <article class="audience-card">
-          <h3>Startup founders</h3>
-          <p>Thinking: "AI changed the game, what should we actually do differently?"</p>
-        </article>
-        <article class="audience-card">
-          <h3>Marketers &amp; growth leaders</h3>
-          <p>Thinking: "Which advantages are disappearing, and which ones are still ours?"</p>
-        </article>
-        <article class="audience-card">
-          <h3>Investors &amp; operators</h3>
-          <p>Thinking: "What remains uniquely human when every team has the same tools?"</p>
-        </article>
+        {audiences.map((audience) => (
+          <article class="audience-card">
+            <h3>{audience.who}</h3>
+            <p class="audience-thought-label">Thinking</p>
+            <blockquote class="audience-thought">{audience.thought}</blockquote>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -314,22 +363,15 @@ const showThemes = [
 </BaseLayout>
 
 <style>
-  .podcast-tagline {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    font-weight: 600;
-    color: var(--accent);
-    margin: 0.75rem 0 1rem;
-    letter-spacing: -0.01em;
-  }
-  .podcast-description {
-    max-width: 58ch;
-    color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin: 0 0 1.5rem;
-  }
+  /* .podcast-tagline and .podcast-description are gone: the tagline is the
+     shared .hero-deck now and the description is a plain .lede, so both
+     inherit the interior-hero type scale instead of setting their own. */
   .podcast-cta-group {
     align-items: center;
+  }
+
+  .podcast-episode-note {
+    margin-top: 1.25rem;
   }
 
   .subscribe-buttons {
@@ -375,19 +417,32 @@ const showThemes = [
   /* Border/radius/background come from the shared card contract in
      site-v9.css. */
   .pillar-card {
-    padding: 1.25rem 1.25rem 1.4rem;
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: 1.35rem 1.25rem 1.5rem;
+  }
+  .pillar-num {
+    font-family: var(--v9-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
   }
   .pillar-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    /* Was violet on white at 1rem/700, which read as four link headings. Ink
+       here; the mono index above carries the accent. */
+    color: var(--ink);
+    margin: 0;
   }
   .pillar-card p {
     font-size: 0.9rem;
     color: var(--muted);
     line-height: 1.55;
-    margin: 0;
+    margin: 0.15rem 0 0;
   }
 
   .audience-grid {
@@ -399,25 +454,56 @@ const showThemes = [
   @media (min-width: 720px) {
     .audience-grid { grid-template-columns: repeat(3, 1fr); }
   }
+  /* Border, radius and background come from the shared card contract in
+     site-v9.css, which already lists .audience-card; the local copies of
+     those three properties only ever fought it (and pinned the radius one
+     step smaller than every neighbouring card). */
   .audience-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--v9-radius-small);
-    padding: 1.25rem 1.25rem 1.4rem;
+    position: relative;
+    padding: 1.35rem 1.25rem 1.5rem 1.6rem;
+  }
+  /* Mint as a fill, never as text: a 3px rule is the one place the palette's
+     display green is legible on paper. */
+  .audience-card::before {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--acid);
   }
   .audience-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: -0.025em;
     color: var(--ink);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
   }
-  .audience-card p {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.55;
+  .audience-thought-label {
+    margin: 0 0 0.35rem;
+    color: var(--accent);
+    font-family: var(--v9-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .audience-thought {
     margin: 0;
-    
+    padding: 0;
+    border: 0;
+    color: var(--ink);
+    font-family: var(--v9-display);
+    font-size: 1.02rem;
+    font-style: italic;
+    font-weight: 440;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
   }
+  .audience-thought::before { content: "\201C"; }
+  .audience-thought::after { content: "\201D"; }
 
   .host-grid {
     display: grid;

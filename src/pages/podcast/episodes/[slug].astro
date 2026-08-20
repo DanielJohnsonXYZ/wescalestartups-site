@@ -77,6 +77,10 @@ const breadcrumb = buildBreadcrumbSchema([
   </section>
 
   <article class="shell section episode-content">
+    <!-- No youtubeId on this episode: the reader gets the watch link. The
+         editor instruction that used to print here ("embed youtubeId in the
+         episode JSON when the video is live") was addressed to us, not to
+         them, and rendered on the public page. -->
     {
       embedUrl ? (
         <div class="episode-video">
@@ -95,8 +99,6 @@ const breadcrumb = buildBreadcrumbSchema([
           <a href={e.youtubeUrl} target="_blank" rel="noopener">
             Watch on YouTube →
           </a>
-          {" "}
-          (embed <code>youtubeId</code> in the episode JSON when the video is live.)
         </p>
       )
     }

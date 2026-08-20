@@ -43,6 +43,33 @@ const sections = {
   whyItMattered: caseStudy.data.whyItMattered ?? caseStudy.data.summary
 };
 
+/* Conditional sections, resolved once so the aside index and the body cannot
+   disagree about which sections this case actually renders. */
+const hasContext = Boolean(
+  caseStudy.data.situation ||
+    caseStudy.data.constraint ||
+    caseStudy.data.beforeState ||
+    caseStudy.data.afterState
+);
+const hasDepth = Boolean(
+  caseStudy.data.timeline ||
+    caseStudy.data.assetsShipped?.length ||
+    caseStudy.data.commercialResult ||
+    caseStudy.data.operationalResult ||
+    caseStudy.data.clientQuote ||
+    caseStudy.data.teamAfterWss
+);
+
+const caseNav = [
+  ...(hasContext ? [{ id: "case-context", num: "00", label: "Context" }] : []),
+  { id: "case-problem", num: "01", label: "Problem" },
+  { id: "case-changed", num: "02", label: "What WSS changed" },
+  { id: "case-result", num: "03", label: "Commercial result" },
+  { id: "case-system", num: "04", label: "System created" },
+  { id: "case-why", num: "05", label: "Why it mattered" },
+  ...(hasDepth ? [{ id: "case-depth", num: "06", label: "Depth" }] : [])
+];
+
 const caseFaqs = [
   {
     question: `What did WSS change for this ${caseStudy.data.sector} client?`,
@@ -97,7 +124,9 @@ const caseFaqs = [
       <p class="eyebrow">{caseStudy.data.sector}</p>
       <h1>{caseStudy.data.title}</h1>
       <div class="hero-support">
-        <p class="case-summary">{caseStudy.data.summary}</p>
+        {/* .case-summary had no styles anywhere, so this rendered as a bare
+            hero paragraph while every sibling template opens on a .lede. */}
+        <p class="lede case-summary">{caseStudy.data.summary}</p>
         <div class="hero-actions">
           <a
             class="button button-brand"
@@ -110,6 +139,29 @@ const caseFaqs = [
           <a class="button button-light" href="/case-studies">All case studies →</a>
         </div>
       </div>
+      {/* The engagement facts used to sit in the sticky aside, below the fold
+          on every screen. They are the first thing a buyer checks, so they
+          close the masthead in the same ledger object the pricing and service
+          heroes use. The aside no longer repeats them. */}
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">Engagement</p>
+        <div class="hero-ledger">
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Client</span>
+            <span class="hero-ledger-value">{caseStudy.data.client}</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Services used</span>
+            <span class="hero-ledger-label">{caseStudy.data.services.join(", ")}</span>
+          </div>
+          {caseStudy.data.engagementPeriod && (
+            <div class="hero-ledger-cell">
+              <span class="hero-ledger-index">Period</span>
+              <span class="hero-ledger-value">{caseStudy.data.engagementPeriod}</span>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -117,20 +169,25 @@ const caseFaqs = [
   <section class="section">
     <div class="shell">
       <div class="case-grid">
+        {/* The aside used to restate the hero (client, sector, period) and then
+            list the five section names immediately to the left of those exact
+            five headings. It is a section index now: the same facts are in the
+            hero ledger, and a sticky index is the one thing a long single
+            column actually wants beside it. */}
         <aside class="case-aside">
-          <p class="card-kicker">Client</p>
-          <p class="case-aside-client">{caseStudy.data.client}</p>
-          <dl class="case-aside-meta">
-            <dt>Sector</dt><dd>{caseStudy.data.sector}</dd>
-            <dt>Services used</dt><dd>{caseStudy.data.services.join(", ")}</dd>
-            {caseStudy.data.engagementPeriod && (
-              <>
-                <dt>Engagement period</dt>
-                <dd>{caseStudy.data.engagementPeriod}</dd>
-              </>
-            )}
-            <dt>Format</dt><dd>Problem · What WSS changed · Commercial result · System created · Why it mattered</dd>
-          </dl>
+          <p class="card-kicker">On this page</p>
+          <nav class="case-aside-nav" aria-label="Sections of this case study">
+            <ol class="case-aside-index">
+              {caseNav.map((item) => (
+                <li>
+                  <a href={`#${item.id}`}>
+                    <span class="case-aside-index-num">{item.num}</span>
+                    <span class="case-aside-index-label">{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
           <a class="case-aside-link" href={siteConfig.danielSite} rel="noreferrer" target="_blank">
             Founder/operator: DanielJohnson.xyz →
           </a>
@@ -148,7 +205,7 @@ const caseFaqs = [
             caseStudy.data.constraint ||
             caseStudy.data.beforeState ||
             caseStudy.data.afterState) && (
-            <article class="case-section">
+            <article class="case-section case-section-context" id="case-context">
               <p class="case-section-num">00</p>
               <h2>Context</h2>
               {caseStudy.data.situation && (
@@ -175,14 +232,14 @@ const caseFaqs = [
           )}
 
           <!-- 1. PROBLEM -->
-          <article class="case-section case-section-problem">
+          <article class="case-section case-section-problem" id="case-problem">
             <p class="case-section-num">01</p>
             <h2>Problem</h2>
             <p>{sections.problem}</p>
           </article>
 
           <!-- 2. WHAT WSS CHANGED -->
-          <article class="case-section case-section-action">
+          <article class="case-section case-section-action" id="case-changed">
             <p class="case-section-num">02</p>
             <h2>What WSS changed</h2>
             <ul>
@@ -191,16 +248,28 @@ const caseFaqs = [
           </article>
 
           <!-- 3. COMMERCIAL RESULT -->
-          <article class="case-section case-section-result">
+          {/* The one section a buyer scrolls for was set in the same 0.95rem
+              arrowed list as the process section above it. It reads as a
+              ledger of outcomes instead — mono index, result at heading
+              weight — which is the homepage metric rail's language. The text
+              is the collection's `results` verbatim; nothing is re-cut into
+              a value/label pair, because that would mean writing numbers the
+              data does not state. */}
+          <article class="case-section case-section-result" id="case-result">
             <p class="case-section-num">03</p>
             <h2>Commercial result</h2>
-            <ul>
-              {sections.commercialResult.map((item) => <li>{item}</li>)}
-            </ul>
+            <div class="case-result-ledger">
+              {sections.commercialResult.map((item, index) => (
+                <div class="case-result-cell">
+                  <span class="case-result-index">{String(index + 1).padStart(2, "0")}</span>
+                  <p class="case-result-text">{item}</p>
+                </div>
+              ))}
+            </div>
           </article>
 
           <!-- 4. SYSTEM CREATED -->
-          <article class="case-section case-section-system">
+          <article class="case-section case-section-system" id="case-system">
             <p class="case-section-num">04</p>
             <h2>System created</h2>
             <p>By the end of the engagement, the team was running these systems without WSS in every loop:</p>
@@ -210,7 +279,7 @@ const caseFaqs = [
           </article>
 
           <!-- 5. WHY IT MATTERED -->
-          <article class="case-section case-section-why">
+          <article class="case-section case-section-why" id="case-why">
             <p class="case-section-num">05</p>
             <h2>Why it mattered</h2>
             <p>{sections.whyItMattered}</p>
@@ -225,7 +294,7 @@ const caseFaqs = [
             caseStudy.data.operationalResult ||
             caseStudy.data.clientQuote ||
             caseStudy.data.teamAfterWss) && (
-            <article class="case-section">
+            <article class="case-section case-section-depth" id="case-depth">
               <p class="case-section-num">06</p>
               <h2>Depth</h2>
               {caseStudy.data.timeline && (
@@ -357,26 +426,42 @@ const caseFaqs = [
     position: sticky;
     top: 7rem;
   }
-  .case-aside-client {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 0.4rem 0 1.2rem;
+  /* Sticky section index. Rows are split by hairlines the way the hero
+     ledger's cells are, so the aside reads as the same family of object. */
+  .case-aside-nav { margin: 0.2rem 0 0; }
+  .case-aside-index {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
-  .case-aside-meta { margin: 0; }
-  .case-aside-meta dt {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--violet-deep);
-    margin-top: 0.85rem;
+  .case-aside-index li + li {
+    border-top: 1px solid var(--line);
   }
-  .case-aside-meta dd {
-    margin: 0.3rem 0 0;
+  .case-aside-index a {
+    display: grid;
+    grid-template-columns: 1.9rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.55rem 0;
+    text-decoration: none;
     color: var(--ink);
+  }
+  .case-aside-index a:hover .case-aside-index-label {
+    color: var(--accent);
+  }
+  .case-aside-index-num {
+    font-family: var(--v9-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .case-aside-index-label {
     font-size: 0.88rem;
-    line-height: 1.5;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    transition: color 160ms ease;
   }
   .case-aside-link {
     display: inline-block;
@@ -394,8 +479,33 @@ const caseFaqs = [
   /* Border/radius/background and the hover lift come from the shared card
      contract in site-v9.css. */
   .case-section {
-    padding: 1.75rem 1.75rem 1.85rem;
+    padding: 1.75rem 1.75rem 1.85rem 2.65rem;
     position: relative;
+    /* Sticky header + the aside index's jump links. */
+    scroll-margin-top: 7rem;
+  }
+
+  /* Accent spine. The previous pass tinted each card's border-color with a 35%
+     mix into a 0.14-alpha hairline, which resolved to a difference of a few
+     percent and was invisible at any real viewing distance. The accent is a
+     solid 3px fill instead — a use mint and coral can carry, unlike text. */
+  .case-section::before {
+    content: "";
+    position: absolute;
+    left: 1.15rem;
+    top: 1.95rem;
+    bottom: 1.95rem;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  @media (max-width: 640px) {
+    .case-section {
+      padding-left: 2.15rem;
+    }
+    .case-section::before {
+      left: 0.9rem;
+    }
   }
   .case-section-num {
     font-family: var(--v9-mono);
@@ -436,17 +546,66 @@ const caseFaqs = [
     font-weight: 700;
   }
 
-  /* Subtle per-section accent, same recipe throughout: coral marks the
-     problem, mint marks the system built, violet (the default UI accent)
-     carries the rest. */
-  .case-section-problem { border-color: color-mix(in srgb, var(--coral) 35%, var(--line)); }
-  .case-section-action { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
-  .case-section-action li::before { color: var(--accent); }
-  .case-section-result { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
-  .case-section-result li::before { color: var(--accent); }
-  .case-section-system { border-color: color-mix(in srgb, var(--acid) 35%, var(--line)); }
-  .case-section-system li::before { color: var(--acid); }
-  .case-section-why { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  /* Commercial-result ledger. Collapsed rules, no gap colour, so an odd
+     result count leaves an empty half-row rather than a grey block. */
+  .case-result-ledger {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .case-result-cell {
+    display: grid;
+    align-content: start;
+    gap: 0.3rem;
+    min-width: 0;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .case-result-cell:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  @media (min-width: 720px) {
+    .case-result-ledger {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    /* Only the first row opens without a rule; :nth-child(-n + 2) is the first
+       row because the grid is exactly two columns wide here. */
+    .case-result-cell:nth-child(-n + 2) {
+      padding-top: 0;
+      border-top: 0;
+    }
+    .case-result-cell:nth-child(odd) {
+      padding-right: 1.6rem;
+    }
+    .case-result-cell:nth-child(even) {
+      padding-left: 1.6rem;
+      border-left: 1px solid var(--line);
+    }
+  }
+  .case-result-index {
+    font-family: var(--v9-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .case-result-text {
+    margin: 0 !important;
+    color: var(--ink);
+    font-family: var(--v9-sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+  }
+
+  /* Per-section accent, one recipe throughout: coral marks the problem, mint
+     marks the system that was left behind, violet (the default UI accent)
+     carries the rest. Colour is carried by the spine fill only — the mint "→"
+     bullets this replaces sat at roughly 1.3:1 on white and were effectively
+     unreadable. */
+  .case-section-problem::before { background: var(--coral); }
+  .case-section-system::before { background: var(--acid); }
 
   .case-section-takeaway {
     background: color-mix(in srgb, var(--accent) 8%, transparent);

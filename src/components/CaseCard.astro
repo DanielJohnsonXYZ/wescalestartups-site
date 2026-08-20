@@ -5,17 +5,79 @@ interface Props {
   sector: string;
   summary: string;
   results: string[];
+  /** Engagement window from the collection, shown as mono metadata. */
+  period?: string;
+  /**
+   * Lead card on the index. Spans two columns of the three-column grid, so the
+   * five published cases fill six slots exactly instead of leaving a hole in
+   * the second row.
+   */
+  featured?: boolean;
 }
 
-const { href, title, sector, summary, results } = Astro.props;
+const { href, title, sector, summary, results, period, featured = false } = Astro.props;
+/* The lead card has the room for the full result set; the rest keep the
+   two-line teaser they always had. */
+const shown = featured ? results.slice(0, 4) : results.slice(0, 2);
 ---
 
-<a class="case-card" href={href}>
-  <p class="card-kicker">{sector}</p>
+<a class:list={["case-card", { "case-card--featured": featured }]} href={href}>
+  <p class="card-kicker">
+    {sector}
+    {period && <span class="case-card-period">{period}</span>}
+  </p>
   <h3>{title}</h3>
   <p>{summary}</p>
   <ul>
-    {results.slice(0, 2).map((result) => <li>{result}</li>)}
+    {shown.map((result) => <li>{result}</li>)}
   </ul>
   <span>Read case study</span>
 </a>
+
+<style>
+  /* The kicker is an inline-flex pill from the shared v9 rule; the period
+     rides inside it as a quieter second token rather than as a second label
+     stacked above the title. */
+  .case-card-period {
+    color: var(--muted);
+    font-weight: 500;
+  }
+  /* .card-kicker is a flex row with an 8px gap, so the separator only needs
+     trailing space of its own. */
+  .case-card-period::before {
+    content: "·";
+    margin: 0 0.4rem 0 0;
+  }
+
+  /* Featured card ------------------------------------------------
+     Scoped styles carry Astro's [data-astro-cid] attribute, so these land at
+     0-2-x and win over both the components.css `.case-card h3` recipe (0-1-1)
+     and site-v9's `:where(...) :where(h2, h3)` card contract (0-2-0) without
+     needing !important. */
+  .case-card--featured {
+    display: grid;
+    align-content: start;
+    padding-bottom: 1.6rem;
+  }
+
+  @media (min-width: 981px) {
+    .case-card--featured h3 {
+      font-size: 2.1rem;
+      max-width: 18ch;
+    }
+
+    .case-card--featured > p {
+      max-width: 58ch;
+      font-size: 1.02rem;
+    }
+
+    /* Results read as a ledger of outcomes on the lead card, two abreast,
+       rather than as a single tall list. */
+    .case-card--featured ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.6rem;
+      row-gap: 0.7rem;
+      margin-top: 1.3rem;
+    }
+  }
+</style>

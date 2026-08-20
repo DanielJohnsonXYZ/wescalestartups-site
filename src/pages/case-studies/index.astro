@@ -9,6 +9,21 @@ import { caseStudiesIndexRelatedReading, siteConfig } from "../../site";
 
 const cases = sortByOrder(await getCollection("cases"));
 
+/* Hero ledger facts, all derived from the collection so the masthead can
+   never drift from what is actually published below it. */
+const sectors = [...new Set(cases.map((item) => item.data.sector))];
+
+/* The five sections every case study runs, in order. Same list the
+   case-studies/[slug] template renders and the FAQ below refers to; kept here
+   so the format spine is a fact about the pages, not a claim about them. */
+const caseFormat = [
+  { num: "01", label: "Problem", note: "The constraint the team started with." },
+  { num: "02", label: "What WSS changed", note: "The work that was actually done." },
+  { num: "03", label: "Commercial result", note: "What moved, stated plainly." },
+  { num: "04", label: "System created", note: "What the team kept running afterwards." },
+  { num: "05", label: "Why it mattered", note: "Why the work was worth doing." }
+];
+
 const caseStudiesHubFaqs = [
   {
     question: "Why is every case written in the same format?",
@@ -52,7 +67,9 @@ const caseStudiesSchema = [
       <p class="eyebrow">Proof</p>
       <h1>Useful results from practical growth work.</h1>
       <div class="hero-support">
-        <p>These are not decorative portfolio tiles. They are examples of constraints identified, systems improved, and clearer growth motion created.</p>
+        {/* Was a bare <p>, so it rendered at hero body scale while every sibling
+            page opened on a .lede. */}
+        <p class="lede">These are not decorative portfolio tiles. They are examples of constraints identified, systems improved, and clearer growth motion created.</p>
         <div class="hero-actions">
           <a
             class="button button-dark button-with-subcopy"
@@ -63,10 +80,34 @@ const caseStudiesSchema = [
             <span class="button-label">{siteConfig.bookingLabel}</span>
             <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
           </a>
-          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="case-studies-index-scorecard">
-            Or, {siteConfig.scorecardLabel} →
-          </a>
-          <a class="button button-light" href="/proof" data-cta="case-studies-index-proof">All proof</a>
+          {/* Three actions of three different weights competed here. The
+              scorecard is deliberately demoted sitewide and still closes the
+              page in the final CTA band, so the hero keeps one primary and one
+              quiet secondary. */}
+          <a class="link-arrow" href="/proof" data-cta="case-studies-index-proof">All proof →</a>
+        </div>
+      </div>
+      {/* Same ledger object as the pricing and service heroes. Counts are read
+          off the collection, so the masthead cannot claim more than is
+          published. */}
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">What is published here</p>
+        <div class="hero-ledger">
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Cases</span>
+            <span class="hero-ledger-value">{cases.length} written up in full</span>
+            <span class="hero-ledger-label">Each one has its own page, not a logo tile.</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Sectors</span>
+            <span class="hero-ledger-value">{sectors.join(" · ")}</span>
+            <span class="hero-ledger-label">The sectors the work below sits in.</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Format</span>
+            <span class="hero-ledger-value">{caseFormat.length} sections, every time</span>
+            <span class="hero-ledger-label">Problem, action, result, system, why it mattered.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -75,14 +116,19 @@ const caseStudiesSchema = [
   <section class="section">
     <div class="shell">
       <SectionIntro eyebrow="Selected work" title="Case studies worth keeping." />
-      <div class="grid-3">
-        {cases.map((item) => (
+      {/* Five cases in a plain three-up grid left a permanent hole in the
+          second row. The lead case spans two columns, so the five fill six
+          slots exactly and the page gets a focal point. */}
+      <div class="case-index-grid">
+        {cases.map((item, index) => (
           <CaseCard
             href={`/case-studies/${item.id}`}
             title={item.data.title}
             sector={item.data.sector}
             summary={item.data.summary}
             results={item.data.results}
+            period={item.data.engagementPeriod}
+            featured={index === 0}
           />
         ))}
       </div>
@@ -107,6 +153,21 @@ const caseStudiesSchema = [
   <section class="section">
     <div class="shell">
       <SectionIntro eyebrow="FAQ" title="How to read these cases." />
+      {/* The first FAQ answers "why the same format every time"; the spine
+          shows it instead of describing it, and breaks a long run of text
+          cards. Text glyphs and mono indices, no icon set. */}
+      <ol class="case-format-spine" aria-label="The five sections of every case study">
+        {caseFormat.map((step, index) => (
+          <li class="case-format-step">
+            <span class="case-format-num">{step.num}</span>
+            <span class="case-format-label">{step.label}</span>
+            <span class="case-format-note">{step.note}</span>
+            {index < caseFormat.length - 1 && (
+              <span class="case-format-arrow" aria-hidden="true">→</span>
+            )}
+          </li>
+        ))}
+      </ol>
       <div class="grid-3">
         {caseStudiesHubFaqs.map((item) => (
           <article class="feature-card">
@@ -144,3 +205,136 @@ const caseStudiesSchema = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Mirrors .grid-3's breakpoints (components.css: 3 up > 980, 2 up ≤ 980,
+     1 up ≤ 640) so the case grid stays in step with every other grid on the
+     site; the only addition is the two-column span on the lead card. */
+  .case-index-grid {
+    display: grid;
+    gap: var(--v9-space-grid-gap);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* :global on the child, not on the grid: the cards are rendered by
+     CaseCard.astro, so they never carry this page's scope attribute and a
+     plain `> :first-child` compiles to a selector that matches nothing. The
+     grid class itself stays scoped. */
+  .case-index-grid > :global(:first-child) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 980px) {
+    .case-index-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .case-index-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* One column: a span of 2 would overflow the track list. */
+    .case-index-grid > :global(:first-child) {
+      grid-column: auto;
+    }
+  }
+
+  /* Format spine ------------------------------------------------
+     A ledger row: collapsed vertical rules, mono index, glyph connectors.
+     Same object as the hero ledger, laid horizontally. */
+  .case-format-spine {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin: 0 0 var(--v9-space-grid-gap);
+    padding: 1.4rem 0 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+  }
+
+  .case-format-step {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+    min-width: 0;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .case-format-step:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .case-format-num {
+    color: var(--v9-violet-deep);
+    font-family: var(--v9-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .case-format-label {
+    color: var(--ink);
+    font-family: var(--v9-sans);
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .case-format-note {
+    max-width: 26ch;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  /* Stacked, the connector would point off the side of the column, so it is
+     only drawn once the steps run left to right. */
+  .case-format-arrow {
+    display: none;
+  }
+
+  @media (min-width: 720px) {
+    .case-format-spine {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      grid-template-columns: none;
+    }
+
+    .case-format-step {
+      padding: 0.1rem 2rem 0.1rem 0;
+      border-top: 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .case-format-step + .case-format-step {
+      padding-left: 1.4rem;
+    }
+
+    .case-format-step:last-child {
+      padding-right: 0;
+      border-right: 0;
+    }
+
+    .case-format-arrow {
+      position: absolute;
+      top: 0.05rem;
+      right: 0;
+      display: block;
+      color: var(--v9-violet-deep);
+      font-family: var(--v9-mono);
+      font-size: 0.72rem;
+      line-height: 1;
+      /* Centred on the rule it sits against, with the paper behind it so the
+         rule does not run through the glyph. */
+      transform: translateX(50%);
+      padding: 0 0.3rem;
+      background: var(--v9-paper);
+    }
+  }
+</style>

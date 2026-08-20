@@ -509,6 +509,15 @@
     border-top: 1px solid var(--v9-line);
   }
 
+  /* A headline column can also be a wrapper, so a template with a very short
+     title can put a deck line under the h1 and give the column mass. It must
+     opt out of the justify-self:start above, or the block would size to its
+     max-content and set the h1 on one very long line. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell > .hero-headline {
+    grid-column: 1;
+    justify-self: stretch;
+  }
+
   /* Wrapped, not stretched: at 18ch most headlines set on a single
      line, which left the headline column a third the height of the
      support column beside it and reopened the empty band this layout
@@ -517,6 +526,137 @@
   .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > h1 {
     max-width: 13ch;
   }
+}
+
+/* Headline column wrapper. Below 1000px the shell is not a grid, so it needs
+   its own bottom margin to sit off the support block; inside the grid the
+   rail supplies that spacing instead. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-headline {
+  margin-bottom: 1.75rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-headline h1 {
+  margin-bottom: 0.95rem;
+}
+
+@media (min-width: 1000px) {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-headline {
+    margin-bottom: 0;
+  }
+}
+
+/* Hero deck: a second line under a short h1, in the heading voice but at
+   body scale, so "Pricing" or "Fractional CMO" is not left alone in a column
+   the support block is three times taller than. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-deck {
+  max-width: 22ch;
+  margin: 0;
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
+}
+
+/* Hero rail ---------------------------------------------------
+   The rail runs along the masthead's bottom edge (grid placement is in the
+   masthead media query above). These are the rules it needs at every width,
+   including below 1000px where the shell is not a grid and the rail is just
+   the last block in the hero. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-rail {
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--v9-line);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-rail-stack {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-rail-label {
+  max-width: none;
+  margin: 0;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Ledger of facts, the interior-page relative of the homepage metric rail:
+   an index, a value, a label, split by vertical rules. Used by the pricing,
+   booking and service heroes so the three read as the same object. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--v9-line);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell:first-child {
+  border-top: 0;
+  padding-top: 0.1rem;
+}
+
+@media (min-width: 720px) {
+  /* auto-flow rather than a fixed track count: the rail carries three cells
+     on service pages and four on pricing, and both should fill the width. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell {
+    padding: 0.1rem 1.4rem 0.1rem 0;
+    border-top: 0;
+    border-right: 1px solid var(--v9-line);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell + .hero-ledger-cell {
+    padding-left: 1.4rem;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-index {
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-value {
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-label {
+  max-width: 26ch;
+  color: var(--v9-copy);
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 /* Serif (Fraunces) headline, matching the homepage hero. Interior pages
@@ -595,6 +735,9 @@
 
 .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand,
 .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-dark {
+  /* The label and its arrow are separate flex children, so the whitespace
+     between them in the markup is discarded and the gap has to be declared. */
+  gap: 0.45rem;
   min-height: 50px;
   padding: 0.9rem 1.3rem;
   border: 1px solid var(--v9-violet);
@@ -626,6 +769,14 @@
   transform: none;
   border-color: var(--v9-violet-deep);
   color: var(--v9-violet-deep);
+}
+
+/* A summary band, not a section: the TL;DR sits tight under the hero it
+   summarises rather than taking a full --v9-space-section of its own. */
+.theme-wss-v9:not(.no-shared-chrome) .section-tldr {
+  padding-block: clamp(1.5rem, 2.5vw, 2.25rem);
+  border-bottom: 1px solid var(--v9-line);
+  background: var(--v9-paper);
 }
 
 /* Sections and editorial rhythm ------------------------------- */
@@ -1081,8 +1232,10 @@
 }
 
 /* Demoted, deliberately: the scorecard is a secondary offer, so it reads as
-   a mono aside under the CTA rather than as a second button. */
-.theme-wss-v9:not(.no-shared-chrome) .footer-secondary-cta {
+   a mono aside under the CTA rather than as a second button. Scoped to the
+   footer: /book also uses .footer-secondary-cta, mid-page, where the mono
+   treatment would be wrong. */
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 .footer-secondary-cta {
   margin: 0;
   color: var(--v9-copy);
   font-family: var(--v9-mono);
@@ -1090,7 +1243,7 @@
   letter-spacing: 0.02em;
 }
 
-.theme-wss-v9:not(.no-shared-chrome) .footer-secondary-cta a {
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 .footer-secondary-cta a {
   color: var(--v9-copy);
   font-weight: 500;
   text-decoration: underline;
@@ -1098,7 +1251,7 @@
   text-underline-offset: 3px;
 }
 
-.theme-wss-v9:not(.no-shared-chrome) .footer-secondary-cta a:hover {
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 .footer-secondary-cta a:hover {
   color: var(--v9-ink);
   text-decoration-color: var(--v9-violet-deep);
 }

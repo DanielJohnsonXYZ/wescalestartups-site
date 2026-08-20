@@ -46,17 +46,32 @@ const pricingFaqs = [
         </p>
         <div class="hero-actions">
           <a
-            class="button button-brand button-with-subcopy"
+            class="button button-brand"
             href={siteConfig.bookingUrl}
             data-cta="pricing-hero-book"
             title={siteConfig.bookingCallReassurance}
           >
-            <span class="button-label">{siteConfig.bookingLabel}</span>
-            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+            {siteConfig.bookingLabel} <span aria-hidden="true">→</span>
           </a>
           <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="pricing-hero-scorecard">
             Or, {siteConfig.scorecardLabel} →
           </a>
+        </div>
+        <p class="hero-microcopy">{siteConfig.bookingSubcopy}</p>
+      </div>
+      {/* The page's whole promise is published ranges, so the rail answers the
+          headline in the hero instead of making the reader scroll for it. Same
+          data as the tier cards below (pricingTiers), no second source. */}
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">Engagement ranges</p>
+        <div class="hero-ledger">
+          {pricingTiers.map((tier, index) => (
+            <div class="hero-ledger-cell">
+              <span class="hero-ledger-index">{String(index + 1).padStart(2, "0")}</span>
+              <span class="hero-ledger-value">{tier.priceFrom}</span>
+              <span class="hero-ledger-label">{tier.name} · {tier.duration}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -113,11 +128,14 @@ const pricingFaqs = [
         <h2>Media spend. Tools. Vendors.</h2>
         <p class="lead-copy">Our fee covers strategy, system design, execution, and reporting. Paid media spend, tooling subscriptions, and any third-party vendor fees are separate and pass through at cost.</p>
       </div>
-      <div class="grid grid-2">
-        <article class="feature-card compact-card"><p>Paid media spend (Google, Meta, LinkedIn, etc.)</p></article>
-        <article class="feature-card compact-card"><p>Tools and subscriptions (analytics, CRM, automation)</p></article>
-        <article class="feature-card compact-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
-        <article class="feature-card compact-card"><p>Travel for events or trade shows (if applicable)</p></article>
+      {/* Four identical cards read as four features until something marks them
+          as exclusions. The × is the site's own glyph for "not included" and
+          costs nothing — no icon set enters the build. */}
+      <div class="grid grid-2 exclusion-grid">
+        <article class="feature-card compact-card exclusion-card"><p>Paid media spend (Google, Meta, LinkedIn, etc.)</p></article>
+        <article class="feature-card compact-card exclusion-card"><p>Tools and subscriptions (analytics, CRM, automation)</p></article>
+        <article class="feature-card compact-card exclusion-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
+        <article class="feature-card compact-card exclusion-card"><p>Travel for events or trade shows (if applicable)</p></article>
       </div>
     </div>
   </section>
@@ -183,5 +201,30 @@ const pricingFaqs = [
      margin is page-specific here, this list follows the disclaimer above. */
   .pricing-trust-list {
     margin: 1.75rem 0 0;
+  }
+
+  /* Exclusions, not features. Border/radius/background still come from the
+     shared card contract in site-v9.css; this only adds the marker. */
+  .exclusion-card {
+    position: relative;
+    padding-left: 3.1rem;
+  }
+
+  .exclusion-card::before {
+    content: "×";
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: translateY(-50%);
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--muted);
+    font-family: var(--v9-mono);
+    font-size: 0.85rem;
+    line-height: 1;
   }
 </style>

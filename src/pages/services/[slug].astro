@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import TldrCallout from "../../components/TldrCallout.astro";
+import WssOperatingSystemDiagram from "../../components/WssOperatingSystemDiagram.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildServiceSchema } from "../../lib/schema";
@@ -329,6 +330,12 @@ const metaTitleById: Record<string, string> = {
 
 const keywords = serviceKeywords[service.id];
 const relatedForService = serviceRelatedInsights[service.id] ?? [];
+
+/* Every audience string in the content collection opens with "Best for", so
+   the old meta strip rendered "BEST FOR / Best for Seed to Series B teams…".
+   The label stays as the field name and the duplicated prefix comes off the
+   sentence. */
+const audienceDetail = service.data.audience.replace(/^Best for /, "");
 const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Scale Startups`;
 ---
 
@@ -357,16 +364,22 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   <!-- Hero -->
   <section class="page-hero service-hero">
     <div class="shell">
-      {details.premium && <span class="service-premium-badge">Premium offer</span>}
-      <p class="eyebrow">{service.data.shortTitle}</p>
-      <h1>{service.data.title}</h1>
-      {
-        service.id === "fractional-cmo" && (
-          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
-        )
-      }
+      {/* The "Premium offer" flag was a solid violet pill stacked above the
+          eyebrow, so the masthead opened with two competing labels. It is a
+          fact about the engagement, so it rides in the metadata line. */}
+      <p class="eyebrow">
+        {service.data.shortTitle}
+        {details.premium && <span class="service-premium-badge">Premium offer</span>}
+      </p>
+      {/* Service titles are two or three words. Alone in the headline column
+          they left a ~250px empty band above the rail; the promise line, which
+          was the first thing in the support column, gives the column its
+          mass and stops the support block restating the headline twice. */}
+      <div class="hero-headline">
+        <h1>{service.data.title}</h1>
+        <p class="hero-deck">{details.headline ?? service.data.promise}</p>
+      </div>
       <div class="hero-support">
-        <p class="service-headline">{details.headline ?? service.data.promise}</p>
         <p class="service-description">{service.data.description}</p>
         <div class="hero-actions">
           <a
@@ -375,20 +388,47 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
             data-cta={`${service.id}-book`}
             title={siteConfig.bookingCallReassurance}
           >
-            {siteConfig.bookingLabel} →
+            {siteConfig.bookingLabel} <span aria-hidden="true">→</span>
           </a>
           <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
             {siteConfig.scorecardLabel} →
           </a>
         </div>
+        <p class="hero-microcopy">{siteConfig.bookingSubcopy}</p>
       </div>
-      <div class="service-meta-strip hero-rail" aria-label="Engagement summary">
-        <div><span class="svc-meta-label">Best for</span><span class="svc-meta-value">{service.data.audience}</span></div>
-        <div><span class="svc-meta-label">Pricing</span><span class="svc-meta-value">{details.price}</span></div>
-        <div><span class="svc-meta-label">Timeline</span><span class="svc-meta-value">{details.timeline.split('.')[0]}.</span></div>
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">Engagement summary</p>
+        <div class="hero-ledger">
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Best for</span>
+            <span class="hero-ledger-label">{audienceDetail}</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Pricing</span>
+            <span class="hero-ledger-value">{details.price}</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Timeline</span>
+            <span class="hero-ledger-label">{details.timeline.split('.')[0]}.</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  {/* The TL;DR summarises the whole page, and inside the masthead it was a
+      third restatement of the headline sitting in its own grid cell — the
+      band that made this hero read as broken. It reads as a page summary
+      directly under the hero instead. */}
+  {
+    service.id === "fractional-cmo" && (
+      <section class="section-tldr">
+        <div class="shell">
+          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
+        </div>
+      </section>
+    )
+  }
 
   <!-- Symptoms, "Is this you?" recognition hook -->
   {details.symptoms && details.symptoms.length > 0 && (
@@ -485,6 +525,12 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
       </div>
     </div>
   </section>
+
+  {/* The detail grid above is six stacked lists — the longest unbroken run of
+      text on the page. The existing operating-system diagram is the same
+      inputs → system → outcomes story those lists spell out, so it breaks the
+      run with a picture rather than another card. Reused, not duplicated. */}
+  <WssOperatingSystemDiagram tone="alt" />
 
   {
     service.id === "fractional-cmo" && (
@@ -672,65 +718,40 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     font-size: 0.92rem;
     line-height: 1.55;
   }
+  /* Six stacked lists of grey discs on grey text. Colouring the marker is the
+     cheapest way to give the run some structure without another card. */
+  .detail-body .content-block li::marker {
+    color: var(--violet-deep);
+  }
   .detail-body .content-block p {
     color: var(--muted);
     font-size: 0.92rem;
     line-height: 1.6;
     margin: 0;
   }
+  /* Rides inside the hero eyebrow, so it inherits the mono/uppercase
+     metadata voice instead of shouting as a solid violet pill above it.
+     Colour is set on the chip itself: the hero's .eyebrow rule only passes
+     --v9-copy down by inheritance, which a direct declaration outranks. */
   .service-premium-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 0.3rem 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.15rem;
+    padding: 0.18rem 0.5rem;
+    border: 1px solid rgba(128, 108, 255, 0.34);
     border-radius: 999px;
-    margin-bottom: 0.85rem;
-  }
-  .service-headline {
-    font-size: clamp(1.4rem, 3vw, 1.75rem);
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1.3;
-    margin-top: 1rem;
-    max-width: 60ch;
+    background: rgba(128, 108, 255, 0.1);
+    color: var(--violet-deep);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
   }
   .service-description {
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.6;
     max-width: 60ch;
-    margin-top: 0.85rem;
-  }
-  .service-meta-strip {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-  }
-  @media (min-width: 720px) {
-    .service-meta-strip { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  }
-  .svc-meta-label {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--violet-deep);
-    margin-bottom: 0.3rem;
-  }
-  .svc-meta-value {
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1.4;
+    margin-top: 0;
   }
 
   .handson-grid {

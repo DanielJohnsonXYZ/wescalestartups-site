@@ -6,6 +6,22 @@ import { siteConfig, testimonials } from "../../site";
 
 const featuredBookingQuote = testimonials[0];
 
+/* The four outcomes of the call. The hero rail shows the short label, the
+   "What you leave with" section below shows the same four with their full
+   sentence — one source so the two can never drift. */
+const callOutcomes = [
+  { label: "Your named bottleneck", detail: "the one constraint holding pipeline back, in plain English." },
+  { label: "The likely cause", detail: "positioning, acquisition, conversion, reporting, or team ownership." },
+  { label: "Your next best move", detail: "the highest-leverage action to take next, whether or not you work with us." },
+  { label: "An honest fit call", detail: "whether WSS is the right help right now, or who to point you to instead." }
+] as const;
+
+/* The reassurance line already opens with the instruction and then explains
+   it, so it splits cleanly into the hero's deck line and its lede. Split
+   rather than rewritten: no new claim enters the page. */
+const [bookingDeck, ...bookingLedeRest] = siteConfig.bookingCallReassurance.split(". ");
+const bookingLede = bookingLedeRest.join(". ");
+
 const bookServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -67,17 +83,34 @@ const bookSchema = [
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Book call</p>
+      {/* "Get in touch" is two words: alone in its column it left the masthead
+          two-thirds empty. The deck line carries the column, and the mono
+          facts move to microcopy where the rest of the site puts them. */}
+      <div class="hero-headline">
         <h1>{siteConfig.bookingLabel}</h1>
+        <p class="hero-deck">{bookingDeck}.</p>
+      </div>
       <div class="hero-support">
-        <p class="lede">{siteConfig.bookingSubcopy}</p>
+        <p class="lede">{bookingLede}</p>
         <div class="hero-actions">
-          <a class="button button-brand button-with-subcopy" href="#book-cal" data-cta="book-hero-cal" title={siteConfig.bookingCallReassurance}>
-            <span class="button-label">Pick a time</span>
-            <span class="button-subcopy">Inline calendar below · {siteConfig.bookingCallDurationPhrase}</span>
+          <a class="button button-brand" href="#book-cal" data-cta="book-hero-cal" title={siteConfig.bookingCallReassurance}>
+            Pick a time <span aria-hidden="true">→</span>
           </a>
           <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="book-hero-scorecard">
             Not ready? {siteConfig.scorecardLabel} →
           </a>
+        </div>
+        <p class="hero-microcopy">{siteConfig.bookingSubcopy} · Inline calendar below</p>
+      </div>
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">What you leave with</p>
+        <div class="hero-ledger">
+          {callOutcomes.map((item, index) => (
+            <div class="hero-ledger-cell">
+              <span class="hero-ledger-index">{String(index + 1).padStart(2, "0")}</span>
+              <span class="hero-ledger-value">{item.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -116,10 +149,9 @@ const bookSchema = [
     <div class="shell">
       <SectionIntro eyebrow="What you leave with" title="Four things, in writing, by the end of the call." />
       <ul class="bring-checklist">
-        <li><strong>Your named bottleneck</strong>, the one constraint holding pipeline back, in plain English.</li>
-        <li><strong>The likely cause</strong>, positioning, acquisition, conversion, reporting, or team ownership.</li>
-        <li><strong>Your next best move</strong>, the highest-leverage action to take next, whether or not you work with us.</li>
-        <li><strong>An honest fit call</strong>, whether WSS is the right help right now, or who to point you to instead.</li>
+        {callOutcomes.map((item) => (
+          <li><strong>{item.label}</strong>, {item.detail}</li>
+        ))}
       </ul>
       {featuredBookingQuote && (
         <figure class="quote-card" style="margin-top:1.5rem">

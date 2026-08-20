@@ -953,32 +953,404 @@
   color: var(--v9-mint);
 }
 
-/* Footer ------------------------------------------------------- */
+/* Footer -------------------------------------------------------
+   Rebuilt as the page's closing object rather than a link dump. Four bands,
+   each closed by a rule: identity + next step / directory / keep in touch /
+   legal. The directory splits its columns with vertical rules the way the
+   homepage's metric rail does, which is what makes 29 links scan as four
+   groups instead of one ragged block.
 
-.theme-wss-v9 .site-footer-v2 {
+   Written at `:not(.no-shared-chrome)` (0-3-x) on purpose: components.css
+   styles `.site-footer`, `.site-footer-v2`, `.footer-links` and `.footer-col`
+   at 0-1-x to 0-2-x from two older layers, and the footer is shared chrome on
+   all 121 routes, so these have to win outright rather than on source order.
+   ------------------------------------------------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
   border-top: 1px solid var(--v9-line);
-  background: var(--v9-paper-2);
+  background:
+    radial-gradient(62% 46% at 88% 0%, rgba(128, 108, 255, 0.07), transparent 68%),
+    var(--v9-paper-2);
   color: var(--v9-ink);
 }
 
-.theme-wss-v9 .site-footer-v2::before {
-  background: linear-gradient(90deg, transparent, rgba(128, 108, 255, 0.32), transparent);
+/* The violet hairline that marked the top edge. Kept, brightened, because it
+   is the seam between the dark closing CTA card above and the footer. */
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2::before {
+  content: "";
+  position: absolute;
+  /* top:0, not -1px: the footer clips its own overflow to contain the violet
+     wash, which would clip a rule drawn outside its box. */
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(128, 108, 255, 0.34), transparent);
+  pointer-events: none;
 }
 
-.theme-wss-v9 .site-footer-v2 :is(h2, h3) {
-  color: var(--v9-violet-deep);
+/* Band 1 — identity and the one next step --------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-top {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(2.75rem, 5vw, 4rem) 0 clamp(2.25rem, 3.5vw, 3rem);
+  border-bottom: 1px solid var(--v9-line);
 }
 
-.theme-wss-v9 .site-footer-v2 :where(p, a) {
+@media (min-width: 900px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-top {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-logo {
+  width: 104px;
+  height: auto;
+  margin-bottom: 1.15rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-summary {
+  max-width: 46ch;
+  margin: 0 0 0.9rem;
+  color: var(--v9-ink);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-brand-arch {
+  max-width: 52ch;
+  margin: 0;
   color: var(--v9-copy);
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
-.theme-wss-v9 .site-footer-v2 a:hover {
+.theme-wss-v9:not(.no-shared-chrome) .footer-brand-arch strong {
   color: var(--v9-ink);
 }
 
-.theme-wss-v9 .site-footer-v2 .footer-bottom {
-  border-color: var(--v9-line);
+.theme-wss-v9:not(.no-shared-chrome) .footer-brand-arch a {
+  color: var(--v9-violet-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-label {
+  margin: 0;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-line {
+  max-width: 40ch;
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-cta {
+  gap: 0.45rem;
+  margin-top: 0.15rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-cta span[aria-hidden] {
+  transition: transform 160ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-cta:hover span[aria-hidden] {
+  transform: translateX(2px);
+}
+
+/* Demoted, deliberately: the scorecard is a secondary offer, so it reads as
+   a mono aside under the CTA rather than as a second button. */
+.theme-wss-v9:not(.no-shared-chrome) .footer-secondary-cta {
+  margin: 0;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-secondary-cta a {
+  color: var(--v9-copy);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--v9-line-strong);
+  text-underline-offset: 3px;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-secondary-cta a:hover {
+  color: var(--v9-ink);
+  text-decoration-color: var(--v9-violet-deep);
+}
+
+/* Band 2 — the directory -------------------------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-directory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0;
+  border-bottom: 1px solid var(--v9-line);
+}
+
+@media (min-width: 900px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-directory {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-col {
+  min-width: 0;
+  padding: clamp(1.75rem, 3vw, 2.4rem) clamp(0.9rem, 1.8vw, 1.6rem);
+  border-right: 1px solid var(--v9-line);
+}
+
+/* Ledger edges. The two breakpoints are written as separate exclusive ranges
+   rather than a base plus overrides: the 2-column rules key off nth-child(2n),
+   which is a higher-specificity selector than the 4-column rules and so kept
+   winning at desktop and swallowing the rule between columns 2 and 3. */
+@media (max-width: 899px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--v9-line);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:nth-child(2n - 1) {
+    padding-left: 0;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:first-child {
+    padding-left: 0;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-col h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-col-index {
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links li {
+  margin: 0;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  color: var(--v9-copy);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links a:hover {
+  color: var(--v9-ink);
+  transform: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-link-ext {
+  color: var(--v9-violet-deep);
+  font-size: 0.7rem;
+}
+
+/* Band 3 — keep in touch -------------------------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep {
+  display: grid;
+  gap: 0;
+  border-bottom: 1px solid var(--v9-line);
+}
+
+@media (min-width: 860px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-cell {
+  min-width: 0;
+  padding: clamp(1.75rem, 3vw, 2.4rem) 0;
+}
+
+@media (min-width: 860px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep-newsletter {
+    border-right: 1px solid var(--v9-line);
+    padding-right: clamp(1.75rem, 3.5vw, 3rem);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep-community {
+    padding-left: clamp(1.75rem, 3.5vw, 3rem);
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-community {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  border-top: 1px solid var(--v9-line);
+}
+
+@media (min-width: 860px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep-community {
+    border-top: 0;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-label {
+  margin: 0 0 0.85rem;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-community .footer-keep-label {
+  margin-bottom: 0.3rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-heading {
+  margin: 0;
+  color: var(--v9-ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-copy {
+  max-width: 42ch;
+  margin: 0 0 0.35rem;
+  color: var(--v9-copy);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* The signup strip is a card everywhere else; inside the ledger it is one
+   cell of the grid, so its own frame comes off. */
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep .email-signup-strip {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep .email-signup-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep .email-signup-sub {
+  max-width: 46ch;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* Band 4 — legal strip ----------------------------------------
+   Full-bleed and dark, so the page closes on the same object it opened
+   with (the dark header pill) instead of fading out on a hairline. */
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  background: var(--v9-night);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  align-items: baseline;
+  padding: 1.35rem 0;
+  font-family: var(--v9-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-inner p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-links {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-founder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal a {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal a:hover {
+  color: #fff;
+  border-bottom-color: var(--v9-mint);
 }
 
 /* Responsive --------------------------------------------------- */

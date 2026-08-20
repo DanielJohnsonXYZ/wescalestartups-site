@@ -33,24 +33,26 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
     <div class="shell">
       <p class="eyebrow">Comparison</p>
       <h1>Marketing agency vs a growth partner: choose the level where the problem lives.</h1>
-      <TldrCallout text="Hire an agency when the channel plan is clear and you need production. Hire WSS when the founder is still the growth bottleneck — diagnosis, priorities, system design, and weekly scale/stop/fix decisions before more execution." />
-      <p class="lede">
-        Agencies are useful when the strategy is clear and the team needs execution capacity. WSS is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="vs-agency-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="vs-agency-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/services/fractional-cmo">See Fractional CMO</a>
+      <div class="hero-support">
+        <TldrCallout text="Hire an agency when the channel plan is clear and you need production. Hire WSS when the founder is still the growth bottleneck — diagnosis, priorities, system design, and weekly scale/stop/fix decisions before more execution." />
+        <p class="lede">
+          Agencies are useful when the strategy is clear and the team needs execution capacity. WSS is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="vs-agency-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="vs-agency-hero-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/services/fractional-cmo">See Fractional CMO</a>
+        </div>
       </div>
     </div>
   </section>
@@ -124,8 +126,7 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
     vsAgencyRelated.length > 0 && (
       <section class="section section-alt">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Founder notes on the same decision.</h2>
+          <SectionIntro eyebrow="Related reading" title="Founder notes on the same decision." />
           <ul class="related-insights-list">
             {vsAgencyRelated.map((item) => (
               <li>
@@ -157,7 +158,7 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="vs-agency-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="vs-agency-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>

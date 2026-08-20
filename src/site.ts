@@ -23,10 +23,10 @@ export const siteConfig = {
     whatsappUrl: "https://chat.whatsapp.com/EcodIBMP93TCl82pTHjEbn",
     whatsappLabel: "Join the WhatsApp group"
   },
-  bookingLabel: "Book a Growth Audit",
+  bookingLabel: "Get in touch",
   /** Inline copy: "In 20 minutes you'll…", "20 minutes. No deck." */
   bookingCallDurationPhrase: BOOKING_CALL_DURATION_PHRASE,
-  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · You'll leave with your biggest growth bottleneck named in plain English`,
+  bookingSubcopy: `Free · ${BOOKING_CALL_DURATION_PHRASE} · No pitch`,
   /** Hero, pricing, quiz, noun phrase (not the imperative CTA). Duration lives in microcopy, not the button. */
   bookingCallShort: "Growth Audit call",
   /** What happens on the 20-minute diagnostic (booking reassurance). */
@@ -237,15 +237,6 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/resources/first-marketing-hire-scorecard": "2026-05-11",
   "/resources/ai-search-visibility-checklist": "2026-05-11"
 };
-
-/** Primary nav, same on every page (including homepage). */
-export const navigation = [
-  { href: "/services", label: "Services" },
-  { href: "/proof", label: "Results" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/insights", label: "Insights" },
-  { href: "/about", label: "About" }
-] as const;
 
 /** Strategic pillar pages → related insights (internal links + related reading section). */
 export const strategicPageRelatedInsights: Partial<Record<string, readonly { href: string; label: string }[]>> = {

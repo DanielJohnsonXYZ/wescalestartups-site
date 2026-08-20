@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { methodologyBrand, strategicPageRelatedInsights, siteConfig } from "../site";
 
@@ -36,6 +37,10 @@ const systemComponents = [
 
 <BaseLayout
   path="/growth-operating-system"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Growth operating system", path: "/growth-operating-system" }
+  ]}
   title="Growth Operating System | We Scale Startups"
   description={`The ${methodologyBrand.shortName}: diagnosis, acquisition design, execution, and transfer, so post-PMF startups stop depending on founder heroics.`}
   keywords="growth operating system, startup growth system, fractional CMO, acquisition system, post-PMF growth, B2B SaaS growth"
@@ -46,28 +51,29 @@ const systemComponents = [
     <div class="shell">
       <p class="eyebrow">Cornerstone</p>
       <h1>Growth operating system.</h1>
-      <p class="lede">
-        The <strong>{methodologyBrand.shortName}</strong> is the named WSS model for post-PMF teams: diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm, so growth stops depending on founder heroics.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="gos-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href="/services" data-cta="gos-services">See services →</a>
+      <div class="hero-support">
+        <p class="lede">
+          The <strong>{methodologyBrand.shortName}</strong> is the named WSS model for post-PMF teams: diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm, so growth stops depending on founder heroics.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="gos-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="button button-light" href="/services" data-cta="gos-services">See services →</a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Why it matters</p>
-      <h2>Post-PMF startups usually die in the middle.</h2>
+      <SectionIntro eyebrow="Why it matters" title="Post-PMF startups usually die in the middle." />
       <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
         You have traction. But pipeline arrives in bursts. The founder is still the best salesperson. Channels are running in isolation. Nobody can confidently say what's working.
       </p>
@@ -86,8 +92,7 @@ const systemComponents = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Four phases</p>
-      <h2>How the system is built.</h2>
+      <SectionIntro eyebrow="Four phases" title="How the system is built." />
       <div class="decision-grid" style="margin-top: 2rem;">
         {systemComponents.map((item) => (
           <article class="decision-card">
@@ -102,8 +107,7 @@ const systemComponents = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">What you get</p>
-      <h2>Working artefacts, not slide decks.</h2>
+      <SectionIntro eyebrow="What you get" title="Working artefacts, not slide decks." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         <li><a class="card-link" href="/diagnose">5-layer diagnostic framework</a>, names the constraint in plain English</li>
         <li><a class="card-link" href="/ai-growth-systems">AI growth systems</a>, narrow, repeatable workflows tied to revenue activity</li>
@@ -116,8 +120,7 @@ const systemComponents = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Who this is for</p>
-      <h2>Post-PMF B2B SaaS and AI startups.</h2>
+      <SectionIntro eyebrow="Who this is for" title="Post-PMF B2B SaaS and AI startups." />
       <div class="grid-3" style="margin-top: 2rem;">
         <article class="feature-card">
           <h3>Seed to Series A</h3>
@@ -137,8 +140,7 @@ const systemComponents = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Deeper context on the system.</h2>
+      <SectionIntro eyebrow="Related reading" title="Deeper context on the system." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         {strategicPageRelatedInsights["/growth-operating-system"]?.map((item) => (
           <li><a class="card-link" href={item.href}>{item.label} →</a></li>
@@ -167,7 +169,7 @@ const systemComponents = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gos-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="gos-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -184,10 +186,9 @@ const systemComponents = [
   @media (min-width: 880px) {
     .decision-grid { grid-template-columns: repeat(4, 1fr); }
   }
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .decision-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
     padding: 1.5rem 1.4rem;
     display: flex;
     flex-direction: column;

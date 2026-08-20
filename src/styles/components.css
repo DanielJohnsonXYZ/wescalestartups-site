@@ -6,6 +6,48 @@
 
    Split from global.css on source order; loads after base.css
    and before site-v9.css. Do not reorder.
+
+   SHARED LAYER vs. SCOPED <style>: a pattern used by more than one
+   page or component belongs here (or in site-v9.css), not copied
+   into each template's scoped block. A scoped <style> is for
+   genuinely page-unique styling only, plus the tokens every page
+   already has from tokens.css.
+
+   A NOTE OF CAUTION on "is this scoped rule dead": Astro bundles a
+   page's scoped styles either into the shared BaseLayout.css (before
+   this file's own site-v9.css override in source order, so scoped
+   rules LOSE ties there) or inlines them into that page's own <style>
+   tag, placed AFTER the BaseLayout.css <link> (so scoped rules WIN
+   ties there instead) — and which one happens is an Astro build
+   heuristic, not something readable from the .astro source. Two pages
+   built from the same template can differ. Treat a scoped declaration
+   as dead only when its value is identical to what the shared layer
+   would set anyway (cascade order can't matter then); otherwise verify
+   the actual computed style on the built page before touching it.
+
+   MAP — this file is a stack of dated passes in source order, each one
+   overriding the pass(es) before it at equal specificity. That's why
+   nothing below is reshuffled by topic: moving a rule past another of
+   equal specificity changes which one wins. Passes, oldest first:
+     1. Core component library — buttons, header/nav, hero, cards,
+        proof, pricing, footer.
+     2. "SITE OVERHAUL" — pain-led hero, testimonials, vs-agency,
+        not-for, daniel-story, decision layer, P/A/R format, and the
+        responsive + "Final cascade" overrides that close it out.
+     3. "WSS hero redesign" — the interactive constraint-diagnosis hero.
+     4. "Visual system upgrade" — numbered sub-passes 1-14 (typography
+        rhythm, body-copy measure, eyebrow spacing, testimonial serif,
+        card-link hover, section rhythm, card padding, buttons, image
+        treatment, footer, last-updated band, breadcrumb, mobile
+        rhythm, reduced motion).
+     5. "LAYER: site-v3.css" — the white-theme repaint (body gradient,
+        page-hero, section-alt, cards, CTA, proof, strategic panels).
+     6. "2026-06 coherence pass" — shared interaction polish.
+     7. Facts pages, then the shared lede/checklist objects, closing
+        the file.
+   Within any one pass, rules are still source-order-dependent on each
+   other and on later passes; when in doubt, read forward from a rule
+   to see what (if anything) restates its properties.
    ============================================================ */
 
 /* The one button system. Previously this skin was assembled from four places:
@@ -29,23 +71,8 @@
 /* Stacked CTA (label + subcopy): soft rectangle, not a full pill.
    The primary stacked CTA is the "book a call" action, so it carries
    the brand gradient; `.button-dark` alone stays neutral. */
-.button-with-subcopy {
-  border-radius: 1.1rem;
-  padding: 0.85rem 1.35rem;
-}
-
-.button-dark.button-with-subcopy {
-  background: linear-gradient(135deg, var(--violet-deep), var(--v9-violet-cta, var(--violet-deep)));
-  box-shadow: 0 16px 42px rgba(102, 87, 255, 0.26);
-}
-
-.button-dark.button-with-subcopy:hover {
-  background: var(--violet-deep);
-  box-shadow: 0 22px 52px rgba(102, 87, 255, 0.32);
-}
 
 .header-cta {
-  min-width: 104px;
   padding-inline: 0.9rem;
 }
 
@@ -97,7 +124,6 @@
    white-theme.css. */
 .button-with-subcopy {
   border-radius: 1.1rem;
-  padding: 0.85rem 1.35rem;
 }
 
 /* The stacked primary CTA is always a "book a call" action, so it takes the
@@ -145,11 +171,9 @@
   position: absolute;
   right: 0;
   top: calc(100% + 0.6rem);
-  width: 240px;
   display: grid;
   gap: 0.25rem;
   border: 1px solid var(--line);
-  border-radius: 8px;
   background: var(--surface);
   padding: 0.45rem;
   box-shadow: var(--shadow);
@@ -162,7 +186,7 @@
 
 .contact-form {
   display: grid;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .contact-form h2 {
@@ -224,21 +248,11 @@
 .hero-meta {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   margin-bottom: 1.5rem;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.75rem;
-  text-transform: uppercase;
-}
-
-.eyebrow,
-.card-kicker {
-  margin: 0 0 1rem;
-  color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.76rem;
-  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -288,8 +302,6 @@
 
 .hero-proof {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
   margin-top: 2rem;
   border-top: 1px solid var(--line);
   padding-top: 1.2rem;
@@ -316,7 +328,6 @@
   display: block;
   color: var(--violet);
   font-family: "Fraunces Variable", Georgia, serif;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-style: italic;
   line-height: 1;
 }
@@ -325,7 +336,7 @@
   display: block;
   margin-top: 0.35rem;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   line-height: 1.35;
   text-transform: uppercase;
@@ -337,20 +348,16 @@
 
 .proof-inner {
   display: grid;
-  grid-template-columns: minmax(160px, 0.34fr) minmax(0, 1fr);
   gap: 1.5rem;
-  align-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 254, 250, 0.76);
-  padding: 1rem 1.2rem;
-  box-shadow: 0 14px 42px rgba(16, 13, 24, 0.05);
 }
 
 .proof-inner > p {
   margin: 0;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   line-height: 1.5;
   text-transform: uppercase;
@@ -384,8 +391,6 @@
   height: auto;
   max-height: 34px;
   object-fit: contain;
-  filter: saturate(0.2);
-  opacity: 0.9;
 }
 
 .logo-row figcaption {
@@ -395,7 +400,7 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.62rem;
   line-height: 1.25;
   text-transform: uppercase;
@@ -418,14 +423,11 @@
 }
 
 .hero-offer {
-  padding: 1.35rem;
+  padding: var(--v9-space-card-padding);
 }
 
 .lead-copy {
-  max-width: 640px;
   color: var(--muted);
-  font-size: 1.08rem;
-  line-height: 1.75;
 }
 
 .hero-facts {
@@ -439,7 +441,7 @@
 
 .hero-facts dt {
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   text-transform: uppercase;
 }
@@ -496,7 +498,7 @@
 .showcase-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   margin-top: 1.7rem;
 }
 
@@ -513,7 +515,7 @@
   display: block;
   margin-top: 0.35rem;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   text-transform: uppercase;
 }
@@ -534,7 +536,7 @@
 
 .mock-label {
   color: rgba(255, 255, 255, 0.55);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   text-transform: uppercase;
 }
@@ -555,7 +557,7 @@
   background: rgba(216, 255, 79, 0.18);
   color: var(--acid);
   padding: 0.45rem 0.7rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
 }
 
@@ -633,11 +635,10 @@
 /* One section rhythm. site-v9.css sets the live value for interior routes;
    this is the base for anything outside that scope. */
 .section {
-  padding-block: clamp(4.75rem, 8vw, 7.5rem);
+  padding-block: var(--v9-space-section);
 }
 
 .section-alt {
-  background: rgba(255, 254, 250, 0.62);
   border-block: 1px solid var(--line);
 }
 
@@ -646,7 +647,6 @@
   grid-template-columns: 0.6fr 1fr 0.45fr;
   gap: 2rem;
   align-items: start;
-  margin-bottom: 3rem;
   border-top: 1px solid var(--line-strong);
   padding-top: 1.4rem;
 }
@@ -655,15 +655,12 @@
   margin: 0;
   max-width: 920px;
   font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 4.7rem;
-  line-height: 1;
   font-weight: 370;
 }
 
 .section-intro > p:last-child {
   margin: 0;
   color: var(--muted);
-  line-height: 1.7;
 }
 
 .engine-list {
@@ -686,7 +683,7 @@
 .engine-num,
 .engine-tag {
   color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.76rem;
   text-transform: uppercase;
 }
@@ -738,7 +735,7 @@
 .statement p {
   margin: 1.6rem 0 0;
   color: rgba(255, 255, 255, 0.62);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.75rem;
   text-transform: uppercase;
 }
@@ -761,13 +758,117 @@
   line-height: 1.75;
 }
 
+/* Generic muted-text utility — pairs with the --muted token used inline
+   throughout this file. */
+.muted {
+  color: var(--muted);
+}
+
+/* Bulleted list of included items, e.g. lead-magnet "what you get" copy and
+   the booking pages' "bring this" lists. */
+.check-list,
+.bring-checklist {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-list li,
+.bring-checklist li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.check-list li::before,
+.bring-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--violet);
+  font-weight: 600;
+}
+
+.bring-checklist li strong {
+  color: var(--ink);
+}
+
+/* Numbered call-phase breakdown (book/index) — mono numerals match the
+   site's data-driven type language. */
+.call-phase-list {
+  counter-reset: call-phase;
+  display: grid;
+  gap: var(--v9-space-grid-gap);
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.call-phase-list li {
+  counter-increment: call-phase;
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.call-phase-list li::before {
+  content: counter(call-phase, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--violet);
+  font-family: var(--v9-mono);
+  font-size: 0.85rem;
+}
+
+.call-phase-list li strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--ink);
+}
+
+.call-phase-list li span {
+  display: block;
+  color: var(--muted);
+}
+
+/* Secondary CTA line under a "who this isn't for" block, e.g. book/index.
+   Mirrors .not-for-footnote's treatment. */
+.footer-secondary-cta {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.footer-secondary-cta a {
+  color: var(--violet);
+  font-weight: 700;
+}
+
+/* Fallback note under the inline Cal.com embed. Matches the scoped recipe
+   already used on /ai-growth-audit, promoted here since book/index and
+   contact also render this widget. */
+.calendly-lede {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.cal-inline-widget {
+  width: 100%;
+}
+
 .operator-grid,
 .contact-grid,
 .grid,
+.grid-2,
 .grid-3,
 .grid-4 {
   display: grid;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .grid-3 {
@@ -781,7 +882,7 @@
 .grid-5 {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .grid-2 {
@@ -845,14 +946,13 @@
 
 .founder-gallery {
   display: grid;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .founder-secondary-photo {
   width: 100%;
   aspect-ratio: 16 / 10;
   border: 1px solid var(--line);
-  border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 16px 50px rgba(16, 13, 24, 0.1);
 }
@@ -922,7 +1022,7 @@
 .fit-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   margin-top: 1.75rem;
 }
 
@@ -972,9 +1072,11 @@
   display: block;
   min-height: 100%;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  /* border-radius removed: site-v9.css's card contract (0-3-0) sets
+     border-radius: var(--v9-radius) on every one of these classes that
+     actually appears in markup (.service-card itself is unused), so the
+     8px here never painted. */
   background: rgba(255, 254, 250, 0.78);
-  padding: 1.35rem;
 }
 
 .compact-card {
@@ -1014,7 +1116,7 @@
 .proof-steps span {
   display: block;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   text-transform: uppercase;
 }
@@ -1028,7 +1130,6 @@
 .case-card:hover {
   border-color: var(--line-strong);
   transform: translateY(-2px);
-  box-shadow: 0 18px 45px rgba(16, 13, 24, 0.08);
 }
 
 .service-card h3,
@@ -1078,7 +1179,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.62);
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.72rem;
   padding: 0.35rem 0.65rem;
   text-transform: uppercase;
@@ -1086,7 +1187,10 @@
 
 .article-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  /* Aside gets just enough width for the TL;DR callout; the body carries the
+     long-form reading measure. Was 0.72fr/1.28fr, giving the aside 36% of a
+     1320px shell against 64% for the article itself. */
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 1.62fr);
   gap: 2rem;
   align-items: start;
 }
@@ -1181,10 +1285,8 @@
 .last-updated-band p {
   border-top: 1px solid var(--line);
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-family: var(--v9-mono);
   margin: 0;
-  padding-top: 1rem;
   text-transform: uppercase;
 }
 
@@ -1204,7 +1306,6 @@
 }
 
 .page-hero {
-  padding: 6rem 0 4rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1241,7 +1342,7 @@
 .detail-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .legal-body .content-block {
@@ -1258,21 +1359,12 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.cta-band {
-  padding: 6rem 0;
-}
-
 .cta-inner {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 2rem;
   align-items: center;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(102, 87, 255, 0.12), rgba(216, 255, 79, 0.12)),
-    var(--surface);
-  padding: 3rem;
   box-shadow: var(--shadow);
 }
 
@@ -1288,8 +1380,6 @@
 .cta-inner h2 {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 4rem;
-  line-height: 1.08;
   font-weight: 370;
 }
 
@@ -1325,7 +1415,7 @@
 .site-footer :is(h2, h3) {
   margin: 0 0 1rem;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.76rem;
   font-weight: 400;
   text-transform: uppercase;
@@ -1348,7 +1438,7 @@
   border-top: 1px solid var(--line);
   padding-top: 1.5rem;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.72rem;
 }
 
@@ -1414,6 +1504,7 @@
     justify-content: flex-start;
   }
 
+  .grid-2,
   .grid-3,
   .grid-4,
   .grid-5,
@@ -1437,10 +1528,6 @@
 }
 
 @media (max-width: 640px) {
-  .brand img {
-    width: 74px;
-  }
-
   .header-cta,
   .mobile-menu summary {
     min-height: 40px;
@@ -1503,6 +1590,7 @@
   .showcase-stats,
   .case-metrics,
   .hero-proof,
+  .grid-2,
   .grid-3,
   .grid-4,
   .grid-5,
@@ -1586,9 +1674,8 @@
 
 .hero-secondary {
   display: inline-block;
-  margin-top: 1rem;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.78rem;
   text-decoration: underline;
   text-decoration-color: rgba(102, 87, 255, 0.4);
@@ -1623,7 +1710,7 @@
 
 .button-with-subcopy .button-subcopy {
   color: rgba(255, 255, 255, 0.78);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   font-weight: 400;
   text-transform: none;
@@ -1671,21 +1758,15 @@
 
 .testimonials-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.2rem;
 }
 
 .testimonial-card {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
   margin: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--surface);
-  padding: 1.6rem;
-  box-shadow: 0 14px 42px rgba(16, 13, 24, 0.05);
 }
 
 .testimonial-card blockquote {
@@ -1696,34 +1777,26 @@
   margin: 0;
   color: var(--ink);
   font-family: "Fraunces Variable", Georgia, serif;
-  font-size: 1.18rem;
-  font-style: italic;
-  line-height: 1.45;
 }
 
 .testimonial-card figcaption {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
   margin-top: auto;
   border-top: 1px solid var(--line);
-  padding-top: 0.9rem;
 }
 
 .testimonial-card figcaption strong {
   color: var(--ink);
-  font-size: 0.95rem;
 }
 
 .testimonial-card figcaption span {
   color: var(--muted);
-  font-size: 0.82rem;
 }
 
 .testimonial-result {
-  margin-top: 0.35rem;
   color: var(--violet) !important;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem !important;
   font-weight: 600;
   text-transform: uppercase;
@@ -1778,7 +1851,7 @@
 .decision-duration {
   margin: 0.2rem 0 0;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   text-transform: uppercase;
 }
@@ -1802,7 +1875,7 @@
   background: var(--violet);
   color: #fff;
   padding: 0.32rem 0.7rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1822,12 +1895,11 @@
 .popular-badge {
   position: absolute;
   top: -10px;
-  left: 1.1rem;
   border-radius: 4px;
   background: var(--teal);
   color: #fff;
   padding: 0.32rem 0.7rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1847,7 +1919,7 @@
 /* --- P/A/R case study format --- */
 .par-grid {
   display: grid;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   margin: 1.4rem 0;
 }
 
@@ -1866,7 +1938,7 @@
 .par-label {
   display: block;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1896,7 +1968,7 @@
 
 .case-scan-meta {
   margin: 0 0 0.4rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -1926,6 +1998,10 @@
   font-weight: 400;
 }
 
+.case-scan-narrative .case-scan-bit {
+  color: var(--ink-2);
+}
+
 .case-mini :is(h3, h4) {
   margin: 0;
   font-family: "Fraunces Variable", Georgia, serif;
@@ -1944,7 +2020,7 @@
 
 .par-mini dt {
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.66rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1978,7 +2054,7 @@
   border-bottom: 1px solid var(--line-strong);
   padding: 0.8rem 1rem;
   color: var(--ink);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -2065,7 +2141,7 @@
   border-right: 1px solid var(--line);
   padding: 1rem 1.2rem;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.72rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -2114,7 +2190,7 @@
 .not-for-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .not-for-card {
@@ -2157,6 +2233,12 @@
   margin-top: 2rem;
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.proof-metrics-footnote {
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 .not-for-footnote a {
@@ -2206,7 +2288,7 @@
 .daniel-visuals {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   width: 100%;
 }
 
@@ -2352,7 +2434,7 @@
 
 .pricing-duration {
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -2394,7 +2476,7 @@
 
 .timeline-week {
   color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -2489,11 +2571,11 @@
 .system-board-top {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   padding-bottom: 1rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -2524,7 +2606,7 @@
 .dashboard-label,
 .proof-map span {
   color: rgba(255, 255, 255, 0.62);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   text-transform: uppercase;
 }
@@ -2581,7 +2663,7 @@
 .proof-map {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
 }
 
 .proof-map article {
@@ -2670,7 +2752,7 @@
     display: block;
     margin-bottom: 0.2rem;
     color: var(--violet);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -2681,7 +2763,7 @@
     display: block;
     margin-bottom: 0.2rem;
     color: var(--dim);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -2695,19 +2777,13 @@
 }
 
 /* --- Final cascade overrides for WSS homepage polish --- */
-.site-header {
-  padding: 0.65rem 0;
-}
 
 .header-inner {
-  min-height: 58px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: clamp(0.75rem, 2vw, 1.5rem);
   padding: 0.55rem 0.72rem 0.55rem 0.95rem;
-  border-color: rgba(16, 13, 24, 0.09);
   background: rgba(255, 254, 250, 0.94);
-  box-shadow: 0 14px 44px rgba(16, 13, 24, 0.08);
 }
 
 .brand img {
@@ -2730,7 +2806,6 @@
 
 .nav-link:hover,
 .nav-link.is-active {
-  background: rgba(102, 87, 255, 0.08);
   color: var(--ink);
 }
 
@@ -2816,17 +2891,10 @@
 }
 
 .header-cta {
-  min-height: 42px;
-  min-width: 9.75rem;
-  max-width: 10.5rem;
-  padding: 0.52rem 0.78rem;
   border: 1px solid rgba(102, 87, 255, 0.22);
   border-radius: 8px;
   background: linear-gradient(135deg, #6657ff, #4f3ee8);
   box-shadow: 0 12px 28px rgba(102, 87, 255, 0.2);
-  line-height: 1.15;
-  text-align: left;
-  white-space: normal;
 }
 
 .header-cta.header-cta--stacked.button-with-subcopy {
@@ -2887,7 +2955,7 @@
 .hero-with-portrait { padding-top: 4rem; }
 .hero-with-portrait h1 { max-width: 900px; font-size: clamp(3.2rem, 5.35vw, 5.75rem); }
 .hero-cta-group { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; margin-top: 1.75rem; }
-.hero-cta-group p { max-width: 330px; margin: 0; color: var(--muted); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.76rem; line-height: 1.45; }
+.hero-cta-group p { max-width: 330px; margin: 0; color: var(--muted); font-family: var(--v9-mono); font-size: 0.76rem; line-height: 1.45; }
 .hero-primary-cta { min-width: 142px; min-height: 48px; padding-inline: 1.25rem; }
 .hero-secondary { margin-top: 0.85rem; }
 .hero-proof { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; }
@@ -2898,16 +2966,15 @@
 .proof-inner > div:first-child { display: flex; flex-direction: column; justify-content: center; }
 .proof-inner h2 { max-width: 320px; margin: 0; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(1.6rem, 2vw, 2.2rem); line-height: 1.05; font-weight: 420; }
 .proof-client-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.72rem; }
-.proof-client-tile { min-height: 132px; border: 1px solid var(--line); border-radius: 8px; background: linear-gradient(150deg, rgba(102, 87, 255, 0.06), rgba(216, 255, 79, 0.04)), #fffefa; padding: 1rem; }
+.proof-client-tile { min-height: 132px; border: 1px solid var(--line); border-radius: 8px; padding: 1rem; }
 .proof-client-tile strong { display: block; color: var(--ink); font-family: "Fraunces Variable", Georgia, serif; font-size: 1.18rem; line-height: 1; font-weight: 520; }
 .proof-client-tile strong a { color: inherit; text-decoration: none; }
 .proof-client-tile strong a:hover { color: var(--violet); text-decoration: underline; text-underline-offset: 3px; }
-.proof-client-context { display: block; margin-top: 0.6rem; color: var(--violet); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.66rem; line-height: 1.35; text-transform: uppercase; }
+.proof-client-context { display: block; margin-top: 0.6rem; color: var(--violet); font-family: var(--v9-mono); font-size: 0.66rem; line-height: 1.35; text-transform: uppercase; }
 .proof-client-tile p { margin: 0.8rem 0 0; color: var(--muted); font-size: 0.86rem; line-height: 1.45; }
 .testimonials-section { background: linear-gradient(180deg, rgba(255, 254, 250, 0), rgba(237, 240, 232, 0.82)); }
 .testimonials-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; scroll-snap-type: none; }
 .testimonial-card { min-height: 270px; scroll-snap-align: none; }
-.testimonial-card blockquote p { font-size: 1.06rem; }
 .services-system-section { border-block: 1px solid var(--line); }
 .service-selector { display: grid; grid-template-columns: minmax(260px, 0.34fr) minmax(0, 1fr); gap: 1.1rem; align-items: stretch; }
 .service-selector-aside { border: 1px solid var(--line); border-radius: 8px; background-color: var(--ink); background: linear-gradient(160deg, rgba(16, 13, 24, 0.96), rgba(54, 38, 109, 0.92)), var(--ink); color: #fff; padding: 1.5rem; }
@@ -2922,18 +2989,18 @@
 .service-selector-row h3 { margin: 0 0 0.45rem; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(1.45rem, 2.2vw, 2rem); line-height: 1.05; font-weight: 460; }
 .service-selector-row p { margin: 0.25rem 0 0; color: var(--muted); line-height: 1.5; }
 .service-selector-meta { display: grid; gap: 0.35rem; align-content: center; justify-items: end; text-align: right; }
-.service-selector-meta span, .service-selector-meta em { color: var(--dim); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.68rem; line-height: 1.35; text-transform: uppercase; }
+.service-selector-meta span, .service-selector-meta em { color: var(--dim); font-family: var(--v9-mono); font-size: 0.68rem; line-height: 1.35; text-transform: uppercase; }
 .service-selector-meta strong { color: var(--violet); font-size: 1rem; }
 .dark-rhythm-section .eyebrow { color: var(--acid); }
 .rhythm-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
 .rhythm-flow article { position: relative; min-height: 260px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; background: rgba(255, 255, 255, 0.08); padding: 1.15rem; }
-.rhythm-flow span { color: var(--acid); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.68rem; text-transform: uppercase; }
+.rhythm-flow span { color: var(--acid); font-family: var(--v9-mono); font-size: 0.68rem; text-transform: uppercase; }
 .rhythm-flow strong { display: block; margin-top: 4.4rem; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(1.55rem, 2.2vw, 2.25rem); line-height: 1; font-weight: 420; }
 .rhythm-flow b { position: absolute; top: 1rem; right: 1rem; color: var(--acid); font-size: 1.4rem; font-weight: 400; }
 .strategic-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.strategic-panel { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 1.35rem; }
+.strategic-panel { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: var(--v9-space-card-padding); }
 .strategic-panel-dark { background-color: var(--ink); background: linear-gradient(135deg, #100d18, #302455), var(--ink); color: #fff; }
-.strategic-panel span { color: var(--violet); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.72rem; }
+.strategic-panel span { color: var(--violet); font-family: var(--v9-mono); font-size: 0.72rem; }
 .strategic-panel-dark span { color: var(--acid); }
 .strategic-panel h2 { margin: 3rem 0 0.8rem; font-family: "Fraunces Variable", Georgia, serif; font-size: clamp(1.65rem, 2.6vw, 2.45rem); line-height: 1; font-weight: 420; }
 .strategic-panel p, .strategic-panel li { color: var(--muted); line-height: 1.6; }
@@ -3036,7 +3103,7 @@
 
 .hero-rail .label {
   color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.76rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -3126,7 +3193,7 @@
   max-width: 62ch;
   margin: 0.85rem 0 0;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.76rem;
   line-height: 1.55;
 }
@@ -3209,7 +3276,7 @@
   border-radius: 5px;
   background: var(--ink);
   color: #fff;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.64rem;
   letter-spacing: 0.06em;
 }
@@ -3248,7 +3315,7 @@
 .hero-strikes .lead {
   margin-right: 0.4rem;
   color: var(--coral);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -3350,7 +3417,7 @@
 .hero-microcopy {
   margin: 0.7rem 0 0;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -3434,7 +3501,7 @@
 .founder-card .bottom {
   margin-top: 1px;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.66rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -3557,7 +3624,7 @@
 
 .diag-spark .fix-note text {
   fill: #7a3a06;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -3583,7 +3650,7 @@
 
 .spark .label {
   fill: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.6rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3595,7 +3662,7 @@
 
 .diag-head {
   display: flex;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   align-items: flex-end;
   justify-content: space-between;
   padding: 0.82rem 0.95rem 0.78rem;
@@ -3609,7 +3676,7 @@
   align-items: center;
   margin: 0;
   color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.62rem;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -3664,7 +3731,7 @@
 .diag-kpis span {
   display: block;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.54rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -3694,7 +3761,7 @@
   display: block;
   margin-top: 0.28rem;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.56rem;
   font-style: normal;
   line-height: 1.3;
@@ -3770,7 +3837,7 @@
   gap: 0.45rem;
   align-items: center;
   color: var(--violet);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.58rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -3790,7 +3857,7 @@
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.58rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -3839,7 +3906,7 @@
   border-radius: 7px;
   background: var(--paper);
   color: var(--ink-2);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.62rem;
   font-weight: 700;
 }
@@ -3862,7 +3929,7 @@
   display: block;
   margin-top: 2px;
   color: var(--dim);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.55rem;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -3977,7 +4044,7 @@
   background: var(--logo-grad);
   background-clip: text;
   color: transparent;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.64rem;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -4008,7 +4075,7 @@
   display: block;
   margin-top: 0.34rem;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.58rem;
   letter-spacing: 0.06em;
   line-height: 1.45;
@@ -4195,7 +4262,7 @@
 
 .hero-client-strip-label {
   flex-shrink: 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -4304,7 +4371,7 @@
   border-radius: 6px;
   background: var(--violet-soft);
   color: var(--violet-deep);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -4334,7 +4401,7 @@
   margin-top: auto;
   padding-top: 1rem;
   color: var(--muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--v9-mono);
   font-size: 0.68rem;
   font-style: normal;
   letter-spacing: 0.04em;
@@ -4386,7 +4453,7 @@
   font-weight: 600;
 }
 .wss-hero-redesign .proof-rail-verify a:hover {
-  color: var(--accent, #6657ff);
+  color: var(--accent);
   text-decoration-thickness: 2px;
 }
 
@@ -4397,7 +4464,7 @@
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   margin-top: 0.4rem;
 }
 .wss-hero-redesign .credential-logo {
@@ -4452,7 +4519,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent, #6657ff);
+    color: var(--accent);
     background: rgba(124, 58, 237, 0.05);
   }
 }
@@ -4470,7 +4537,7 @@
   gap: 0.35rem;
   text-decoration: none;
   font-weight: 600;
-  color: var(--accent, #6657ff);
+  color: var(--accent);
   transition: color 160ms ease;
   position: relative;
   border-bottom: 1px solid transparent;
@@ -4484,8 +4551,8 @@
 }
 .link-arrow:hover,
 .link-arrow:focus-visible {
-  color: var(--ink, #0b0b0c);
-  border-bottom-color: var(--accent, #6657ff);
+  color: var(--ink);
+  border-bottom-color: var(--accent);
 }
 .link-arrow:hover {
   /* Subtle pull-right on hover so the arrow direction reads as motion. */
@@ -4497,13 +4564,6 @@
    Notion: https://www.notion.so/354f99a79fdb81428590e795bdd48904
    Radii, elevation, backdrop, section rhythm, cards, CTAs, image treatment.
    ============================================================================= */
-
-body {
-  background:
-    radial-gradient(125% 85% at 100% -15%, rgba(102, 87, 255, 0.1), transparent 52%),
-    radial-gradient(90% 55% at 0% 0%, rgba(139, 92, 246, 0.06), transparent 48%),
-    linear-gradient(180deg, var(--paper) 0%, #f2f4ec 55%, var(--paper-deep) 100%);
-}
 
 body::after {
   opacity: 0.024;
@@ -4573,7 +4633,6 @@ body::after {
 }
 
 .proof-client-tile {
-  border-color: var(--line-soft);
   box-shadow: 0 8px 28px rgba(16, 13, 24, 0.04);
 }
 
@@ -4581,11 +4640,6 @@ body::after {
 .showcase,
 .case-feature {
   box-shadow: var(--shadow-elevated-md);
-}
-
-.lead-copy {
-  font-size: 1.09rem;
-  line-height: 1.72;
 }
 
 .logo-row img {
@@ -4620,10 +4674,6 @@ body::after {
 
 .mobile-menu nav {
   border-radius: var(--radius-md);
-}
-
-.page-hero {
-  padding: clamp(4.5rem, 8vw, 6rem) 0 clamp(3rem, 5vw, 4rem);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -4705,13 +4755,12 @@ body::after {
   line-height: 1.6;
 }
 
-/* ---- 3. Eyebrow refinement: a touch more letter-spacing, slightly smaller
-       size, optical-tuned weight. Reads as senior, not shouty. ---- */
+/* ---- 3. Eyebrow spacing. Only `margin` still does anything here: site-v9.css's
+       :where(.eyebrow, .card-kicker) reset (0-2-0, loads after this file) now
+       owns color/font/size/weight/letter-spacing/text-transform outright, and
+       never sets margin, so this is the one property with no later claimant. ---- */
 .eyebrow,
 .card-kicker {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
   margin: 0 0 0.85rem;
 }
 
@@ -5076,38 +5125,18 @@ body {
   z-index: 1;
 }
 
-/* ── 5. Global eyebrow pill ────────────────────────────────────
-   Every .eyebrow on the site gets the violet pill, matching the
-   homepage engagement-strip eyebrow. Dark-section overrides
-   restore contrast where the pill would look wrong.
+/* ── 5. Global eyebrow pill — DEAD, kept only as a documented marker.
+   Every property both rules below used to set (display, gap, color,
+   background, border, padding, border-radius, font, letter-spacing,
+   text-transform) is now set again by site-v9.css's
+   `:where(.eyebrow, .card-kicker)` reset and its dark-surface variant
+   (site-v9.css ~985 and ~1005), both written at (0-2-0) — equal to
+   these (0-2-0) selectors — and site-v9.css loads after this file, so
+   it wins every tie. See site-v9.css's own "Section eyebrows — ONE
+   treatment" comment, which documents this pill as the rule that
+   lost. Nothing here paints any more; removed rather than left as
+   inert bytes.
    ─────────────────────────────────────────────────────────── */
-.eyebrow,
-.card-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--violet-deep);
-  background: var(--violet-tint);
-  border: 1px solid rgba(102, 87, 255, 0.18);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Dark sections: transparent pill, light text */
-.dark-rhythm-section .eyebrow,
-.service-selector-aside .eyebrow,
-.strategic-panel-dark .eyebrow,
-.strategic-panel-dark .card-kicker {
-  background: transparent;
-  border-color: transparent;
-  color: var(--acid, #cfc4ff);
-  padding-inline: 0;
-}
 
 /* ── 6. Section-alt: warm surface ──────────────────────────────
    Replace the cool off-white with our warm paper tone.
@@ -5175,15 +5204,6 @@ body {
   border-color: var(--line-soft);
 }
 
-/* ── 13. Header: warm backdrop ─────────────────────────────────
-   The sticky nav uses a backdrop blur; align it to the warm
-   palette so it doesn't look out of place on scroll.
-   ─────────────────────────────────────────────────────────── */
-.site-header {
-  background: rgba(251, 251, 254, 0.85);
-}
-
-
 /* ───────── LAYER: polish-2026-06.css ───────── */
 /* === 2026-06 coherence pass: shared interaction polish with the homepage === */
 ::selection { background: var(--violet); color: #fff; }
@@ -5205,19 +5225,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 /* 2. Sticky-nav overlap (High). */
 html { scroll-padding-top: 6.5rem; }
 :where(section, article, h2, h3, [id]):target { scroll-margin-top: 6.5rem; }
-.header-inner {
-  /* Brand-aligned violet-tinted glass header (was cream) — nudges the header
-     into the purple/violet system while keeping dark nav text for AA contrast. */
-  background: rgba(238, 235, 255, 0.97) !important;
-  border-color: rgba(100, 51, 255, 0.18) !important;
-  box-shadow: 0 10px 34px rgba(100, 51, 255, 0.12) !important;
-}
 
 /* 6. Trusted-by strip — real logos, grouped, better contrast (High). */
 .logo-wall .logo-group-label {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--v9-mono);
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--muted, #55535b); text-align: center; margin: 0 0 16px;
+  color: var(--muted); text-align: center; margin: 0 0 16px;
 }
 .logo-wall .logo-group + .logo-group { margin-top: 30px; }
 .logo-wall .logo-img {
@@ -5230,27 +5243,27 @@ html { scroll-padding-top: 6.5rem; }
 
 /* 9. Elevate the Sprint as the bridge offer (High). */
 .pricing-card.is-most-popular {
-  border-color: var(--accent, #6657ff) !important;
+  border-color: var(--accent) !important;
   box-shadow: 0 14px 40px rgba(100, 51, 255, 0.12);
   transform: translateY(-4px);
 }
 @media (max-width: 720px) { .pricing-card.is-most-popular { transform: none; } }
-.pricing-card.is-most-popular .popular-badge { background: var(--accent, #6657ff); color: #fff; }
+.pricing-card.is-most-popular .popular-badge { background: var(--accent); color: #fff; }
 
 /* 8. Proof-to-offer routing (High). */
 .offer-routing-proof {
-  margin: 0 0 0.65rem; font-size: 0.82rem; color: var(--muted, #4a4658);
-  border-left: 2px solid var(--accent, #6657ff); padding-left: 0.6rem;
+  margin: 0 0 0.65rem; font-size: 0.82rem; color: var(--muted);
+  border-left: 2px solid var(--accent); padding-left: 0.6rem;
 }
-.offer-routing-proof strong { color: var(--ink, #100d18); }
+.offer-routing-proof strong { color: var(--ink); }
 
 /* 10. Free-audit vs paid clarifier (High). */
 .free-paid-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 1rem; }
 @media (min-width: 680px) { .free-paid-grid { grid-template-columns: 1fr 1fr; } }
-.free-paid-card { border: 1px solid var(--line, #e7e3da); border-radius: 12px; padding: 1.1rem 1.2rem; background: #fff; }
-.free-paid-card.is-free { border-color: var(--accent, #6657ff); }
+.free-paid-card { border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.2rem; background: #fff; }
+.free-paid-card.is-free { border-color: var(--accent); }
 .free-paid-card h3 { margin: .2rem 0 .5rem; font-size: 1.05rem; }
-.free-paid-card .fp-price { font-size: .82rem; color: var(--muted, #4a4658); font-weight: 600; }
+.free-paid-card .fp-price { font-size: .82rem; color: var(--muted); font-weight: 600; }
 .free-paid-card ul { margin: .6rem 0 0; padding-left: 1.1rem; }
 .free-paid-card li { margin: .25rem 0; font-size: .92rem; }
 
@@ -5351,6 +5364,24 @@ html { scroll-padding-top: 6.5rem; }
   line-height: 1.4;
 }
 
+/* Shared "how engagements work" bullet list (services hub + pricing page were
+   carrying byte-identical rules under two page-scoped class names). */
+.trust-list {
+  padding: 1.15rem 1.25rem 1.2rem 1.5rem;
+  max-width: 52rem;
+  border: 1px solid var(--line);
+  border-radius: var(--v9-radius-small);
+  background: var(--surface);
+  list-style: disc;
+}
+.trust-list li {
+  margin: 0.35rem 0;
+  padding-left: 0.15rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 /* Insight article FAQ section (visible FAQ content, mirrors the FAQPage schema) */
 .faq-section .content-block {
   padding: 1.75rem;
@@ -5362,14 +5393,12 @@ html { scroll-padding-top: 6.5rem; }
   margin-top: 1.2rem;
 }
 
+/* site-v9.css folds .faq-item into the shared card contract (border, radius,
+   background) at 0-2-0, so this only needs to add the padding that contract
+   doesn't set. The old border-top divider style is gone now that each item
+   is its own bordered card. */
 .faq-item {
-  border-top: 1px solid var(--line);
-  padding-top: 1.2rem;
-}
-
-.faq-item:first-child {
-  border-top: none;
-  padding-top: 0;
+  padding: 1.5rem 1.75rem;
 }
 
 .faq-item h3 {
@@ -5385,4 +5414,151 @@ html { scroll-padding-top: 6.5rem; }
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+
+/* ============================================================
+   Facts pages (/facts/daniel-johnson, /facts/we-scale-startups)
+
+   AEO/LLM-facing reference pages: the dl/dt/dd and the plain
+   lists are the machine-readable payload and stay exactly that,
+   so everything here is presentation only.
+
+   These rules were previously copy-pasted, byte-identical, into
+   a <style> block in each of the two pages. One definition now.
+   ============================================================ */
+
+/* Quick facts: a definition list drawn as a ledger. Two columns on
+   wide viewports because eight short rows in one column leaves a
+   long empty gutter beside them. */
+.facts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr));
+  margin: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.facts-row {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: var(--v9-space-grid-gap);
+  padding: 0.95rem 1.1rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.facts-row dt {
+  color: var(--muted);
+  font-family: var(--v9-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.facts-row dd {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* `.facts-ledger` (the ledger variant these pages use) is defined in
+   site-v9.css next to `.wss-ledger` — it has to outrank that base recipe's
+   0-3-0 selectors, which nothing at this layer's weight can do. */
+
+.facts-statement {
+  max-width: 64ch;
+  margin: 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.62;
+}
+
+@media (max-width: 40rem) {
+  .facts-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
+
+/* A sub-heading inside a facts section (the client roster sits under the
+   track-record ledger). Sized between the section h2 and a ledger cell so
+   the second ledger reads as part of the same section, not a new one. */
+.facts-subhead {
+  margin: 2.25rem 0 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Section lede + checklist — two small shared objects
+
+   `.lede` is the HERO lede scale (site-v9.css sizes it at
+   clamp(1.05rem, 1.45vw, 1.22rem) inside .page-hero). Several
+   interior pages reached for it as ordinary body copy under a
+   section heading, which set hero-sized text mid-page and then
+   needed an inline `style="max-width:62ch"` on every instance
+   to stop the line running long. `.section-lede` is the body
+   version, with the measure baked in.
+   ============================================================ */
+.section-lede {
+  max-width: 62ch;
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+/* Checklist: a list that reads as verified items rather than bullets.
+   The tick is a pseudo-element so the markup stays a plain <ul>. */
+.check-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The tick is positioned rather than laid out as a grid/flex sibling: with a
+   two-track grid, the source whitespace between `<li>` and its content becomes
+   an anonymous item, the real content lands in the 1.45rem column and every
+   line wraps to one character wide. Absolute positioning is immune to how the
+   markup is indented. */
+.check-list li {
+  position: relative;
+  padding: 0.85rem 1rem 0.85rem 2.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  top: 0.85rem;
+  left: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: var(--acid);
+  color: var(--v9-night);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.check-list li strong,
+.check-list li a {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+@media (min-width: 48rem) {
+  .check-list-2up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

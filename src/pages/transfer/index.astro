@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig, transferPageRelatedReading } from "../../site";
 
@@ -13,27 +14,33 @@ const transferSchema = buildBreadcrumbSchema([
   title="Transfer Your Growth System | We Scale Startups"
   description="Transfer the growth system to the founder, team, agencies, and future hires so the company keeps improving."
   path="/transfer"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Transfer", path: "/transfer" }
+  ]}
   schema={transferSchema}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Transfer</p>
       <h1>Leave the team with a system they can keep running.</h1>
-      <p>We document decisions, workflows, reporting, meeting cadence, and handoff rules so the growth function gets stronger after the engagement ends.</p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="transfer-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="transfer-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/services/fractional-cmo" data-cta="transfer-fcmo">Fractional CMO support</a>
+      <div class="hero-support">
+        <p>We document decisions, workflows, reporting, meeting cadence, and handoff rules so the growth function gets stronger after the engagement ends.</p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="transfer-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="transfer-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/services/fractional-cmo" data-cta="transfer-fcmo">Fractional CMO support</a>
+        </div>
       </div>
     </div>
   </section>
@@ -49,8 +56,7 @@ const transferSchema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Build, leadership, and first 30 days.</h2>
+      <SectionIntro eyebrow="Related reading" title="Build, leadership, and first 30 days." />
       <ul class="related-insights-list">
         {transferPageRelatedReading.map((item) => (
           <li>
@@ -82,7 +88,7 @@ const transferSchema = buildBreadcrumbSchema([
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="transfer-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="transfer-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>

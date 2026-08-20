@@ -1,4 +1,5 @@
 ---
+import SectionIntro from "./SectionIntro.astro";
 import { siteConfig } from "../site";
 import "../styles/quiz.css";
 
@@ -99,10 +100,12 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
   <div class="shell">
     <p class="eyebrow">{hero.eyebrow}</p>
     <h1 set:html={hero.h1} />
-    <p class="lede" set:html={hero.lede} />
-    <div class="hero-actions">
-      <a class="button button-brand" href={`#${scrollTargetId}`}>{hero.primaryLabel}</a>
-      <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+    <div class="hero-support">
+      <p class="lede" set:html={hero.lede} />
+      <div class="hero-actions">
+        <a class="button button-brand" href={`#${scrollTargetId}`}>{hero.primaryLabel}</a>
+        <a class="button button-light" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel} →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -110,17 +113,14 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- PROBLEM BAND -->
 <section class="section section-alt">
   <div class="shell">
-    <p class="eyebrow">{problem.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 2rem;">
-      {problem.heading}
-    </h2>
+    <SectionIntro eyebrow={problem.eyebrow} title={problem.heading} />
     {problem.layout === "grid-2" ? (
       <div class="grid-2" style="gap:1.25rem;">
         {problem.cards.map((r) => (
-          <div style="padding:1.5rem;border:1px solid var(--line);border-radius:0.85rem;background:var(--surface);">
-            <h3 style="font-size:1rem;font-weight:700;letter-spacing:-0.015em;margin:0 0 0.6rem;">{r.title}</h3>
-            <p style="font-size:0.9rem;color:var(--muted);line-height:1.6;margin:0;">{r.body}</p>
-          </div>
+          <article class="feature-card compact-card">
+            <h3 style="font-size:1rem;">{r.title}</h3>
+            <p>{r.body}</p>
+          </article>
         ))}
       </div>
     ) : (
@@ -142,13 +142,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- INTERACTIVE SCORECARD -->
 <section class={scorecard.sectionClass || "section"} id={scrollTargetId}>
   <div class="shell">
-    <p class="eyebrow">{scorecard.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 0.5rem;">
-      {scorecard.heading}
-    </h2>
-    <p style="color:var(--muted);font-size:0.95rem;margin:0 0 2.5rem;">
-      {scorecard.subcopy}
-    </p>
+    <SectionIntro eyebrow={scorecard.eyebrow} title={scorecard.heading} body={scorecard.subcopy} />
 
     <div id="quiz-container">
       <div class="quiz-progress-wrap">
@@ -168,10 +162,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- WHAT THE SCORE MEANS -->
 <section class={scoreMeaning.sectionClass || "section section-alt"}>
   <div class="shell">
-    <p class="eyebrow">{scoreMeaning.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 2rem;">
-      {scoreMeaning.heading}
-    </h2>
+    <SectionIntro eyebrow={scoreMeaning.eyebrow} title={scoreMeaning.heading} />
     <div class="grid-3">
       {scoreMeaning.levels.map((lvl) => (
         <article class="feature-card" style={`border-top:3px solid ${lvl.borderColor};`}>
@@ -187,10 +178,7 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 <!-- FAQ -->
 <section class={faqSection.sectionClass || "section"}>
   <div class="shell">
-    <p class="eyebrow">{faqSection.eyebrow}</p>
-    <h2 style="margin:0.4rem 0 2rem;">
-      {faqSection.heading}
-    </h2>
+    <SectionIntro eyebrow={faqSection.eyebrow} title={faqSection.heading} />
     <div class="grid-3">
       {faqs.map((f) => (
         <article class="feature-card">
@@ -277,9 +265,9 @@ const resolvedMaxScore = maxScore ?? questions.length * 2;
 
       const weakDims = questions.map((q, i) => ({ dim: q.dimension, score: answers[i] })).filter(d => d.score !== null && d.score <= weakThreshold).map(d => d.dim);
       const weakHtml = weakDims.length > 0
-        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,#f97316 6%,transparent);border:1px solid color-mix(in srgb,#f97316 22%,transparent);border-radius:0.75rem;">
+        ? `<div style="margin-bottom:1.75rem;padding:1rem 1.25rem;background:color-mix(in srgb,var(--v9-coral) 6%,transparent);border:1px solid color-mix(in srgb,var(--v9-coral) 22%,transparent);border-radius:var(--v9-radius-small);">
             <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--warn-color);margin:0 0 0.6rem;">${weakHeading}</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:0.4rem;font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${weakDims.map(d => `<span style="padding:0.3rem 0.65rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--v9-radius-small);font-size:0.82rem;color:var(--ink);font-weight:600;">${d}</span>`).join('')}</div>
             <p style="font-size:0.82rem;color:var(--muted);margin:0.6rem 0 0;line-height:1.5;">${weakSubcopy}</p>
           </div>`
         : '';

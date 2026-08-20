@@ -3,6 +3,7 @@ import EmailSignup from "../../components/EmailSignup.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { growthTools } from "../../data/growthTools";
 import { leadMagnets, siteConfig } from "../../site";
 
 /**
@@ -286,6 +287,19 @@ const magnetDetails: Record<string, {
 };
 
 export function getStaticPaths() {
+  // This file (leadMagnets) and [tool].astro (growthTools) both build under
+  // /resources/*. Astro only lets one route win a given path, silently, so a
+  // colliding id/slug would quietly swallow one page instead of failing the
+  // build. Guard it explicitly.
+  const growthToolSlugs = new Set<string>(growthTools.map((tool) => tool.slug));
+  const collisions = leadMagnets.filter((magnet) => growthToolSlugs.has(magnet.id)).map((magnet) => magnet.id);
+  if (collisions.length > 0) {
+    throw new Error(
+      `/resources route collision: ${collisions.join(", ")} exist in both leadMagnets (src/site.ts) ` +
+        `and growthTools (src/data/growthTools.ts). Rename one so /resources/[slug].astro and /resources/[tool].astro don't both claim the same path.`
+    );
+  }
+
   return leadMagnets.map((magnet) => ({
     params: { slug: magnet.id }
   }));
@@ -333,40 +347,56 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   path={`/resources/${slug}`}
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: magnet.title, path: `/resources/${slug}` }
+  ]}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow"><a href="/resources">Resources</a> · {magnet.audience}</p>
       <h1>{magnet.title}</h1>
-      <p class="hero-copy">{magnet.description}</p>
-      <div class="hero-actions">
-        {isGrowthExperimentPlanner ? (
-          <a
-            class="button button-brand"
-            href="#get-planner"
-            data-cta="magnet-get-90-day-growth-experiment-planner"
-          >
-            Get the planner + field guide →
+      <div class="hero-support">
+        <p class="hero-copy">{magnet.description}</p>
+        <div class="hero-actions">
+          {isGrowthExperimentPlanner ? (
+            <a
+              class="button button-brand"
+              href="#get-planner"
+              data-cta="magnet-get-90-day-growth-experiment-planner"
+            >
+              Get the planner + field guide →
+            </a>
+          ) : downloadPath ? (
+            <a
+              class="button button-brand"
+              href={downloadPath}
+              download
+              data-cta={`magnet-download-${slug}`}
+            >
+              Download the {magnet.title} →
+            </a>
+          ) : null}
+          <a class="button button-light" href="/services" data-cta={`magnet-hero-services-${slug}`}>
+            Or see services →
           </a>
-        ) : downloadPath ? (
-          <a
-            class="button button-brand"
-            href={downloadPath}
-            download
-            data-cta={`magnet-download-${slug}`}
-          >
-            Download the {magnet.title} →
-          </a>
-        ) : null}
-        <a class="button button-light" href="/services" data-cta={`magnet-hero-services-${slug}`}>
-          Or see services →
-        </a>
+        </div>
+        <p class="hero-microcopy">
+          {isGrowthExperimentPlanner
+            ? "Free. The editable workbook and guide are available immediately after signup."
+            : "Instant download. Optional: leave your email below for the Growth Bottleneck note."}
+        </p>
       </div>
-      <p class="hero-microcopy">
-        {isGrowthExperimentPlanner
-          ? "Free. The editable workbook and guide are available immediately after signup."
-          : "Instant download. Optional: leave your email below for the Growth Bottleneck note."}
-      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro eyebrow="What you get" title={`Inside the ${magnet.title}`} body={details.format} />
+      <ul class="check-list">
+        {details.whatYouGet.map((item) => <li>{item}</li>)}
+      </ul>
       <div id={isGrowthExperimentPlanner ? "get-planner" : undefined}>
         <EmailSignup
           formId={`magnet-${slug}`}
@@ -387,17 +417,8 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="shell">
-      <SectionIntro eyebrow="What you get" title={`Inside the ${magnet.title}`} body={details.format} />
-      <ul class="check-list">
-        {details.whatYouGet.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
   <section class="section">
-    <div class="shell two-col">
+    <div class="shell two-column">
       <article>
         <p class="eyebrow">How to use it</p>
         <h2>Designed for one sitting, not a workshop series.</h2>
@@ -415,7 +436,7 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   <section class="section section-alt">
     <div class="shell">
       <SectionIntro eyebrow="FAQ" title="Questions to check before using it." />
-      <div class="faq-stack">
+      <div class="faq-list">
         {details.faq.map((item, index) => (
           <details class="faq-item" open={index === 0}>
             <summary>{item.question}</summary>
@@ -429,9 +450,9 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
   <section class="section">
     <div class="shell">
       <SectionIntro eyebrow="Other resources" title="Three more, all free." />
-      <div class="card-grid">
+      <div class="grid grid-3">
         {otherMagnets.map((other) => (
-          <a class="card" href={other.href}>
+          <a class="feature-card" href={other.href}>
             <p class="eyebrow">{other.audience}</p>
             <h3>{other.title}</h3>
             <p>{other.description}</p>
@@ -442,10 +463,12 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
     </div>
   </section>
 
-  <section class="section cta-section">
-    <div class="shell">
-      <h2>Need more than a template?</h2>
-      <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call. Bring your result, we'll pressure-test the constraint it names and sketch the next move in 20 minutes.</p>
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <h2>Need more than a template?</h2>
+        <p>If the {magnet.title.toLowerCase()} surfaces a constraint you'd rather solve with senior help, the next step is a Growth Diagnosis call. Bring your result, we'll pressure-test the constraint it names and sketch the next move in 20 minutes.</p>
+      </div>
       <div class="hero-actions">
         <a
           class="button button-brand"

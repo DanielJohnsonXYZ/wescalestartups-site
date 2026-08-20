@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import TldrCallout from "../../components/TldrCallout.astro";
+import WssOperatingSystemDiagram from "../../components/WssOperatingSystemDiagram.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildServiceSchema } from "../../lib/schema";
 import { first30Days, serviceRelatedInsights, siteConfig } from "../../site";
 
@@ -328,6 +330,12 @@ const metaTitleById: Record<string, string> = {
 
 const keywords = serviceKeywords[service.id];
 const relatedForService = serviceRelatedInsights[service.id] ?? [];
+
+/* Every audience string in the content collection opens with "Best for", so
+   the old meta strip rendered "BEST FOR / Best for Seed to Series B teams…".
+   The label stays as the field name and the duplicated prefix comes off the
+   sentence. */
+const audienceDetail = service.data.audience.replace(/^Best for /, "");
 const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Scale Startups`;
 ---
 
@@ -356,43 +364,77 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   <!-- Hero -->
   <section class="page-hero service-hero">
     <div class="shell">
-      {details.premium && <span class="service-premium-badge">Premium offer</span>}
-      <p class="eyebrow">{service.data.shortTitle}</p>
-      <h1>{service.data.title}</h1>
-      {
-        service.id === "fractional-cmo" && (
-          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
-        )
-      }
-      <p class="service-headline">{details.headline ?? service.data.promise}</p>
-      <p class="service-description">{service.data.description}</p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand"
-          href={siteConfig.bookingUrl}
-          data-cta={`${service.id}-book`}
-          title={siteConfig.bookingCallReassurance}
-        >
-          {siteConfig.bookingLabel} →
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
-          {siteConfig.scorecardLabel} →
-        </a>
+      {/* The "Premium offer" flag was a solid violet pill stacked above the
+          eyebrow, so the masthead opened with two competing labels. It is a
+          fact about the engagement, so it rides in the metadata line. */}
+      <p class="eyebrow">
+        {service.data.shortTitle}
+        {details.premium && <span class="service-premium-badge">Premium offer</span>}
+      </p>
+      {/* Service titles are two or three words. Alone in the headline column
+          they left a ~250px empty band above the rail; the promise line, which
+          was the first thing in the support column, gives the column its
+          mass and stops the support block restating the headline twice. */}
+      <div class="hero-headline">
+        <h1>{service.data.title}</h1>
+        <p class="hero-deck">{details.headline ?? service.data.promise}</p>
       </div>
-      <div class="service-meta-strip" aria-label="Engagement summary">
-        <div><span class="svc-meta-label">Best for</span><span class="svc-meta-value">{service.data.audience}</span></div>
-        <div><span class="svc-meta-label">Pricing</span><span class="svc-meta-value">{details.price}</span></div>
-        <div><span class="svc-meta-label">Timeline</span><span class="svc-meta-value">{details.timeline.split('.')[0]}.</span></div>
+      <div class="hero-support">
+        <p class="service-description">{service.data.description}</p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand"
+            href={siteConfig.bookingUrl}
+            data-cta={`${service.id}-book`}
+            title={siteConfig.bookingCallReassurance}
+          >
+            {siteConfig.bookingLabel} <span aria-hidden="true">→</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta={`${service.id}-scorecard`}>
+            {siteConfig.scorecardLabel} →
+          </a>
+        </div>
+        <p class="hero-microcopy">{siteConfig.bookingSubcopy}</p>
+      </div>
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">Engagement summary</p>
+        <div class="hero-ledger">
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Best for</span>
+            <span class="hero-ledger-label">{audienceDetail}</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Pricing</span>
+            <span class="hero-ledger-value">{details.price}</span>
+          </div>
+          <div class="hero-ledger-cell">
+            <span class="hero-ledger-index">Timeline</span>
+            <span class="hero-ledger-label">{details.timeline.split('.')[0]}.</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  {/* The TL;DR summarises the whole page, and inside the masthead it was a
+      third restatement of the headline sitting in its own grid cell — the
+      band that made this hero read as broken. It reads as a page summary
+      directly under the hero instead. */}
+  {
+    service.id === "fractional-cmo" && (
+      <section class="section-tldr">
+        <div class="shell">
+          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
+        </div>
+      </section>
+    )
+  }
 
   <!-- Symptoms, "Is this you?" recognition hook -->
   {details.symptoms && details.symptoms.length > 0 && (
     <section class="section symptoms-section">
       <div class="shell">
-        <p class="eyebrow">Is this you?</p>
-        <h2>The signals that usually bring founders here.</h2>
+        <SectionIntro eyebrow="Is this you?" title="The signals that usually bring founders here." />
         <ul class="symptoms-list">
           {details.symptoms.map((s: string) => <li>{s}</li>)}
         </ul>
@@ -403,8 +445,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   <!-- HANDS-ON FRAMING, clarifies WSS is operator, not just advisor -->
   <section class="section section-alt service-handson">
     <div class="shell">
-      <p class="eyebrow">How we work</p>
-      <h2 class="service-handson-title">{details.handsOn.label}</h2>
+      <SectionIntro eyebrow="How we work" title={details.handsOn.label} />
       <div class="handson-grid">
         <article class="handson-card handson-wss">
           <p class="handson-card-label">What WSS brings</p>
@@ -485,12 +526,17 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     </div>
   </section>
 
+  {/* The detail grid above is six stacked lists — the longest unbroken run of
+      text on the page. The existing operating-system diagram is the same
+      inputs → system → outcomes story those lists spell out, so it breaks the
+      run with a picture rather than another card. Reused, not duplicated. */}
+  <WssOperatingSystemDiagram tone="alt" />
+
   {
     service.id === "fractional-cmo" && (
       <section class="section section-alt" aria-labelledby="fcmo-first30">
         <div class="shell">
-          <p class="eyebrow">First 30 days</p>
-          <h2 id="fcmo-first30">What happens in month one</h2>
+          <SectionIntro eyebrow="First 30 days" title="What happens in month one" titleId="fcmo-first30" />
           <div class="timeline">
             {first30Days.map((item) => (
               <article class="timeline-row">
@@ -516,8 +562,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   {details.commonMistakes && details.commonMistakes.length > 0 && (
     <section class="section section-alt mistakes-section">
       <div class="shell">
-        <p class="eyebrow">Common mistakes</p>
-        <h2>What founders usually try first, and why it doesn't move the needle.</h2>
+        <SectionIntro eyebrow="Common mistakes" title="What founders usually try first, and why it doesn't move the needle." />
         <div class="mistakes-grid">
           {details.commonMistakes.map((m: { mistake: string; why: string }) => (
             <article class="mistake-card">
@@ -534,8 +579,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   {details.caseProof && details.caseProof.length > 0 && (
     <section class="section case-proof-section">
       <div class="shell">
-        <p class="eyebrow">In their words</p>
-        <h2>What founders say after the engagement.</h2>
+        <SectionIntro eyebrow="In their words" title="What founders say after the engagement." />
         <div class="case-proof-grid">
           {details.caseProof.map((c: { quote: string; who: string }) => (
             <blockquote class="case-proof-quote">
@@ -552,8 +596,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     relatedForService.length > 0 && (
       <section class="section">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes and hubs that pair with this engagement.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes and hubs that pair with this engagement." />
           <ul class="related-insights-list">
             {relatedForService.map((item) => (
               <li>
@@ -569,10 +612,9 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   }
 
   <!-- Service-specific FAQs (6 standardised questions) -->
-  <section class="section section-alt service-faqs">
+  <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>What founders ask before they book.</h2>
+      <SectionIntro eyebrow="FAQ" title="What founders ask before they book." />
       <div class="service-faqs-grid">
         {details.faqs.map(([question, answer]: [string, string]) => (
           <details class="feature-card service-faq-item">
@@ -614,7 +656,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
         >
           {siteConfig.bookingLabel} →
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta={`${service.id}-final-scorecard`}>
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta={`${service.id}-final-scorecard`}>
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -640,7 +682,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     top: 5.5rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--v9-radius, 1rem);
+    border-radius: var(--v9-radius);
     padding: 1.4rem 1.4rem 1.5rem;
   }
   .detail-aside p {
@@ -654,7 +696,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   .detail-body .content-block {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--v9-radius, 1rem);
+    border-radius: var(--v9-radius);
     padding: 1.4rem 1.5rem 1.5rem;
   }
   .detail-body .content-block h2 {
@@ -676,76 +718,42 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     font-size: 0.92rem;
     line-height: 1.55;
   }
+  /* Six stacked lists of grey discs on grey text. Colouring the marker is the
+     cheapest way to give the run some structure without another card. */
+  .detail-body .content-block li::marker {
+    color: var(--violet-deep);
+  }
   .detail-body .content-block p {
     color: var(--muted);
     font-size: 0.92rem;
     line-height: 1.6;
     margin: 0;
   }
+  /* Rides inside the hero eyebrow, so it inherits the mono/uppercase
+     metadata voice instead of shouting as a solid violet pill above it.
+     Colour is set on the chip itself: the hero's .eyebrow rule only passes
+     --v9-copy down by inheritance, which a direct declaration outranks. */
   .service-premium-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 0.3rem 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.15rem;
+    padding: 0.18rem 0.5rem;
+    border: 1px solid rgba(128, 108, 255, 0.34);
     border-radius: 999px;
-    margin-bottom: 0.85rem;
-  }
-  .service-headline {
-    font-size: clamp(1.4rem, 3vw, 1.75rem);
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1.3;
-    margin-top: 1rem;
-    max-width: 60ch;
+    background: rgba(128, 108, 255, 0.1);
+    color: var(--violet-deep);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
   }
   .service-description {
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.6;
     max-width: 60ch;
-    margin-top: 0.85rem;
-  }
-  .service-meta-strip {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-  }
-  @media (min-width: 720px) {
-    .service-meta-strip { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  }
-  .svc-meta-label {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--violet-deep);
-    margin-bottom: 0.3rem;
-  }
-  .svc-meta-value {
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1.4;
+    margin-top: 0;
   }
 
-  .service-handson { padding-block: 4rem; }
-  .service-handson-title {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-    max-width: 60ch;
-  }
   .handson-grid {
     display: grid;
     gap: 1.25rem;
@@ -753,10 +761,9 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   }
   @media (min-width: 720px) { .handson-grid { grid-template-columns: 1fr 1fr; } }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .handson-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--v9-radius, 1.25rem);
     padding: 1.5rem 1.5rem 1.75rem;
   }
   .handson-wss { border-color: var(--accent); }
@@ -801,10 +808,9 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   }
   @media (min-width: 720px) { .service-faqs-grid { grid-template-columns: 1fr 1fr; } }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .service-faq-item {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.85rem;
     padding: 1rem 1.25rem;
   }
   .service-faq-item summary {
@@ -834,7 +840,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     margin-top: 2rem;
     background: color-mix(in srgb, var(--accent) 8%, transparent);
     border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
-    border-radius: var(--v9-radius, 1rem);
+    border-radius: var(--v9-radius);
     padding: 1.5rem 1.75rem;
   }
   .service-faq-followup h3 {
@@ -849,7 +855,6 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   }
 
   /* ── Symptoms ── */
-  .symptoms-section { padding-block: 4rem; }
   .symptoms-list {
     margin: 1.75rem 0 0;
     padding: 0;
@@ -857,12 +862,11 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     display: grid;
     gap: 0.75rem;
   }
+  /* Border/radius/background come from the shared card contract in
+     site-v9.css. */
   .symptoms-list li {
     position: relative;
     padding: 1rem 1.25rem 1rem 3rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 0.85rem;
     color: var(--ink);
     font-size: 0.95rem;
     line-height: 1.55;
@@ -877,7 +881,6 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   }
 
   /* ── Common mistakes ── */
-  .mistakes-section { padding-block: 4rem; }
   .mistakes-grid {
     display: grid;
     gap: 1rem;
@@ -885,10 +888,9 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     margin-top: 1.75rem;
   }
   @media (min-width: 720px) { .mistakes-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .mistake-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--v9-radius, 1rem);
     padding: 1.25rem 1.4rem 1.5rem;
   }
   .mistake-label {
@@ -906,7 +908,6 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
   }
 
   /* ── Case proof ── */
-  .case-proof-section { padding-block: 4rem; }
   .case-proof-grid {
     display: grid;
     gap: 1.25rem;
@@ -914,18 +915,23 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     margin-top: 1.75rem;
   }
   @media (min-width: 720px) { .case-proof-grid { grid-template-columns: 1fr 1fr; } }
+  /* The accent-tinted background/border are a deliberate departure from the
+     plain white card surface (this is a pulled quote, not a content card);
+     radius still comes from the shared token so it stays in the same family. */
   .case-proof-quote {
     margin: 0;
     background: color-mix(in srgb, var(--accent) 6%, var(--surface));
     border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
-    border-radius: var(--v9-radius, 1.25rem);
+    /* border-radius: not set here — site-v9.css's card contract lists
+       .case-proof-quote and sets border-radius: var(--v9-radius) at (0-2-0),
+       identical to what this scoped rule would resolve to at the same
+       specificity, so restating it here was a no-op. */
     padding: 1.75rem 1.75rem 1.5rem;
   }
   .case-proof-quote p {
     font-size: 1.05rem;
     line-height: 1.6;
     color: var(--ink);
-    
     margin: 0 0 1rem;
   }
   .case-proof-quote footer {
@@ -945,7 +951,7 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
     width: 100%;
     max-width: 42rem;
     height: auto;
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     border: 1px solid var(--line);
     background: var(--paper);
   }

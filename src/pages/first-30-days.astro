@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { first30Days, siteConfig, strategicPageRelatedInsights } from "../site";
 
@@ -44,6 +45,10 @@ const first30Schema = [
 
 <BaseLayout
   path="/first-30-days"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "First 30 days", path: "/first-30-days" }
+  ]}
   title="First 30 days | We Scale Startups"
   description="Exactly what happens in the first month of an engagement. Week-by-week, with concrete deliverables you'll have by day 30."
   schema={first30Schema}
@@ -52,26 +57,28 @@ const first30Schema = [
     <div class="shell">
       <p class="eyebrow">First 30 days</p>
       <h1>Exactly what happens in month one.</h1>
-      <p class="lede">
-        Week-by-week. Real deliverables, not theatre. By day 30 you have a documented plan,
-        a working dashboard, and 3–5 experiments shipped against the constraint we found in week one.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="first-30-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="first-30-hero-scorecard">
-          {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/diagnose" data-cta="first-30-hero-diagnose">
-          5-layer framework (deep dive) →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          Week-by-week. Real deliverables, not theatre. By day 30 you have a documented plan,
+          a working dashboard, and 3–5 experiments shipped against the constraint we found in week one.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="first-30-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="first-30-hero-scorecard">
+            {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/diagnose" data-cta="first-30-hero-diagnose">
+            5-layer framework (deep dive) →
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -110,8 +117,7 @@ const first30Schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Month one in practice.</h2>
+      <SectionIntro eyebrow="FAQ" title="Month one in practice." />
       <div class="grid-3">
         {first30Faqs.map((item) => (
           <article class="feature-card">
@@ -127,8 +133,7 @@ const first30Schema = [
     first30Related.length > 0 && (
       <section class="section section-alt">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>How this fits the wider engagement map.</h2>
+          <SectionIntro eyebrow="Related reading" title="How this fits the wider engagement map." />
           <ul class="related-insights-list">
             {first30Related.map((item) => (
               <li>
@@ -155,7 +160,7 @@ const first30Schema = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="first-30-days-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="first-30-days-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>

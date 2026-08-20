@@ -183,7 +183,7 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
 
 <style>
   .email-signup-strip {
-    border-radius: 0.75rem;
+    border-radius: var(--v9-radius-small);
     padding: 2rem 1.5rem;
     margin: 2.5rem 0;
   }
@@ -215,7 +215,7 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
     margin: 0;
     color: var(--muted);
   }
-  .email-signup-strip--dark .email-signup-sub { color: #aaa; }
+  .email-signup-strip--dark .email-signup-sub { color: var(--v9-copy-dark); }
 
   .email-signup-form {
     display: flex;
@@ -231,7 +231,7 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
     flex: 1 1 220px;
     padding: 0.65rem 0.9rem;
     border: 1px solid var(--line);
-    border-radius: 0.4rem;
+    border-radius: var(--v9-radius-small);
     font-size: 0.95rem;
     background: #fff;
     color: var(--ink);
@@ -239,9 +239,9 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
     min-width: 0;
   }
   .email-signup-strip--dark .email-signup-form input[type="email"] {
-    background: #2a2a28;
-    border-color: #444;
-    color: #fff;
+    background: var(--v9-night-3);
+    border-color: var(--v9-line-dark);
+    color: var(--v9-white);
   }
   .email-signup-form input[type="email"]:focus {
     border-color: var(--accent);

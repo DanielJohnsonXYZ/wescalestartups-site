@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import TestimonialsBlock from "../components/TestimonialsBlock.astro";
 import ProofLogos from "../components/ProofLogos.astro";
 import { sortByOrder } from "../lib/utils";
@@ -74,6 +75,10 @@ const deliverableGallery = [
 
 <BaseLayout
   path="/proof"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Proof", path: "/proof" }
+  ]}
   title="B2B SaaS Growth Results & Case Studies | We Scale Startups"
   description="Case studies, founder testimonials, and £18M+ revenue influenced across post-PMF B2B SaaS and AI startups, using one consistent result format."
   keywords="We Scale Startups proof, B2B SaaS case studies, growth consultancy testimonials, fractional CMO results, startup acquisition outcomes"
@@ -83,10 +88,12 @@ const deliverableGallery = [
     <div class="shell">
       <p class="eyebrow">Proof</p>
       <h1>Real outcomes from post-PMF startups, not just strategy decks.</h1>
-      <p class="lede">
-        Cases, testimonials, logos, and metrics, all on one page.
-        Same Problem / Action / Result format for every case. Same standard of evidence for every claim.
-      </p>
+      <div class="hero-support">
+        <p class="lede">
+          Cases, testimonials, logos, and metrics, all on one page.
+          Same Problem / Action / Result format for every case. Same standard of evidence for every claim.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -101,7 +108,7 @@ const deliverableGallery = [
           </div>
         ))}
       </div>
-      <p class="proof-metrics-footnote" style="margin-top: 1rem; max-width: 52ch; color: var(--muted); font-size: 0.88rem;">
+      <p class="proof-metrics-footnote" style="margin-top: 1rem;">
         <strong>£18M+ revenue influenced:</strong> {revenueInfluencedNote}
       </p>
     </div>
@@ -111,20 +118,17 @@ const deliverableGallery = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Results by type</p>
-      <h2 style="margin:0.35rem 0 0.75rem;">
-        Proof grouped by the kind of change founders look for.
-      </h2>
+      <SectionIntro eyebrow="Results by type" title="Proof grouped by the kind of change founders look for." />
       <p class="lede" style="max-width: 60ch; margin-bottom: 1.75rem;">
         Same case studies as below, organised so you can jump to the outcome that matches your constraint.
       </p>
-      <div class="grid-2 proof-by-type-grid">
+      <div class="grid-2">
         {
           proofResultsByType.map((row) => {
             const c = caseById[row.caseId];
             if (!c) return null;
             return (
-              <article class="feature-card proof-by-type-card">
+              <article class="feature-card">
                 <p class="card-kicker">{row.label}</p>
                 <p style="margin:0.5rem 0 0;color:var(--ink-2);line-height:1.55;font-size:0.95rem;">{row.summary}</p>
                 <a class="card-link" href={`/case-studies/${row.caseId}`} data-cta={`proof-by-type-${row.caseId}`}>
@@ -173,8 +177,7 @@ const deliverableGallery = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Third-party validation</p>
-      <h2 style="margin:0.4rem 0 1.4rem;">Reviews that live off-site.</h2>
+      <SectionIntro eyebrow="Third-party validation" title="Reviews that live off-site." />
       <div class="validation-primary">
         <a class="feature-card validation-card" href={siteConfig.growthMentorReviews} rel="noreferrer" target="_blank">
           <p class="card-kicker">GrowthMentor</p>
@@ -189,8 +192,7 @@ const deliverableGallery = [
   <!-- Case grid in P/A/R format -->
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Case studies</p>
-      <h2 style="margin:0.4rem 0 2.2rem;">Same format, every time.</h2>
+      <SectionIntro eyebrow="Case studies" title="Same format, every time." />
       <div class="grid-3">
         {cases.map((c) => (
           <article class="case-mini">
@@ -226,8 +228,7 @@ const deliverableGallery = [
 
   <section class="section section-alt" id="deliverables">
     <div class="shell">
-      <p class="eyebrow">Deliverable patterns</p>
-      <h2>What the work looks like on the table, before it is tailored to you.</h2>
+      <SectionIntro eyebrow="Deliverable patterns" title="What the work looks like on the table, before it is tailored to you." />
       <p class="lede" style="max-width: 62ch;">
         These are illustrative wireframes, not client screenshots. They show the shape of outputs: maps, memos, backlogs, and cadence, then we match your stack and bottleneck.
       </p>
@@ -248,8 +249,7 @@ const deliverableGallery = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">How we measure the work</p>
-      <h2 style="margin:0.4rem 0 2rem;">How we show proof.</h2>
+      <SectionIntro eyebrow="How we measure the work" title="How we show proof." />
       <div class="grid-3">
         {proofStandards.map((item) => (
           <article class="feature-card compact-card">
@@ -262,8 +262,7 @@ const deliverableGallery = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>More ways to verify and engage.</h2>
+      <SectionIntro eyebrow="Related reading" title="More ways to verify and engage." />
       <ul class="related-insights-list">
         {proofHubRelatedReading.map((item) => (
           <li>
@@ -278,8 +277,7 @@ const deliverableGallery = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How to read this proof page.</h2>
+      <SectionIntro eyebrow="FAQ" title="How to read this proof page." />
       <div class="grid-3">
         {proofFaqs.map((item) => (
           <article class="feature-card">
@@ -305,7 +303,7 @@ const deliverableGallery = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="proof-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="proof-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -333,7 +331,7 @@ const deliverableGallery = [
     padding: 1rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     text-decoration: none;
     color: inherit;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -345,7 +343,7 @@ const deliverableGallery = [
   .proof-deliverable-card img {
     width: 100%;
     height: auto;
-    border-radius: 0.65rem;
+    border-radius: var(--v9-radius-small);
     border: 1px solid var(--line);
     background: var(--paper);
   }

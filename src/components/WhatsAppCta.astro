@@ -89,4 +89,80 @@ const compact = iconOnly && !card;
   .whatsapp-cta-icon {
     flex-shrink: 0;
   }
+  .whatsapp-cta-label {
+    font-weight: 600;
+  }
+
+  /* Default look for the `card` variant, the site's card/CTA vocabulary
+     (surface, radius, hover lift) so this component is self-styled wherever
+     it's dropped. StickyBookCta.astro layers a dark-context override on top
+     via a more specific descendant selector when it renders this inside its
+     own bar. */
+  .cta-card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid var(--v9-line);
+    border-radius: var(--v9-radius-small);
+    background: var(--v9-white);
+    color: var(--v9-ink);
+    text-align: left;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  }
+  .cta-card:hover,
+  .cta-card:focus-visible {
+    border-color: color-mix(in srgb, var(--v9-violet) 38%, transparent);
+    box-shadow: var(--v9-shadow);
+    transform: translateY(-2px);
+    outline: none;
+  }
+  .cta-card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--v9-violet) 12%, transparent);
+    color: var(--v9-violet-deep);
+  }
+  .cta-card-badge svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+  .cta-card-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+  .cta-card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--v9-ink);
+  }
+  .cta-card-sub {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: var(--v9-copy);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .cta-card-arrow {
+    margin-left: auto;
+    padding-left: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--v9-copy);
+    transition: transform 160ms ease, color 160ms ease;
+  }
+  .cta-card:hover .cta-card-arrow,
+  .cta-card:focus-visible .cta-card-arrow {
+    transform: translateX(2px);
+    color: var(--v9-violet-deep);
+  }
 </style>

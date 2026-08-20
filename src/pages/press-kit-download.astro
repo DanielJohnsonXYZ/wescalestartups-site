@@ -34,20 +34,27 @@ const schemas = [
   keywords="We Scale Startups press kit PDF, company boilerplate, startup media assets"
   {path}
   schema={schemas}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Press kit", path: "/press" },
+    { name: "Download", path }
+  ]}
 >
   <section class="page-hero print-hide" aria-labelledby="press-download-heading">
     <div class="shell">
       <p class="eyebrow">Company press kit</p>
       <h1 id="press-download-heading">Download / print the WSS press kit</h1>
-      <p class="press-download-deck">
-        One page you can print or save as PDF (use your browser&apos;s print dialog → Save as PDF). For founder headshots and speaking topics, use{" "}
-        <a href={`${siteConfig.danielSite}/media-kit-download/`} rel="noreferrer" target="_blank"
-          >Daniel Johnson&apos;s media kit download</a
-        >.
-      </p>
-      <div class="hero-actions">
-        <button class="button button-brand" type="button" data-print-kit> Print / Save as PDF → </button>
-        <a class="button button-light" href="/press">View online press kit →</a>
+      <div class="hero-support">
+        <p class="press-download-deck">
+          One page you can print or save as PDF (use your browser&apos;s print dialog → Save as PDF). For founder headshots and speaking topics, use{" "}
+          <a href={`${siteConfig.danielSite}/media-kit-download/`} rel="noreferrer" target="_blank"
+            >Daniel Johnson&apos;s media kit download</a
+          >.
+        </p>
+        <div class="hero-actions">
+          <button class="button button-brand" type="button" data-print-kit> Print / Save as PDF → </button>
+          <a class="button button-light" href="/press">View online press kit →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -179,7 +186,7 @@ const schemas = [
     padding: 2rem 1.5rem 2.5rem;
     background: var(--bg);
     border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
-    border-radius: 12px;
+    border-radius: var(--v9-radius-small);
   }
   .card-print {
     line-height: 1.55;

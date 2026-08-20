@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
@@ -17,6 +18,10 @@ const schema = buildBreadcrumbSchema([
   description="WSS Calendar is the scheduling app We Scale Startups uses for Growth Audit bookings. It connects Google Calendar and Google Meet so invitees get a real meeting link."
   keywords="WSS Calendar, We Scale Startups scheduling, Growth Audit booking, Google Calendar, Google Meet"
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: appName, path }
+  ]}
   schema={schema}
   showAnnouncement={false}
   stickyBookCta={false}
@@ -25,35 +30,44 @@ const schema = buildBreadcrumbSchema([
     <div class="shell">
       <p class="eyebrow">We Scale Startups · Scheduling app</p>
       <h1>{appName}</h1>
-      <p class="lede">
-        {appName} is the booking and calendar application operated by {siteConfig.name}. It powers
-        public Growth Audit scheduling on this site and on{" "}
-        <a href={siteConfig.calOrigin}>{siteConfig.calOrigin.replace("https://", "")}</a>.
-      </p>
+      <div class="hero-support">
+        <p class="lede">
+          {appName} is the booking and calendar application operated by {siteConfig.name}. It powers
+          public Growth Audit scheduling on this site and on{" "}
+          <a href={siteConfig.calOrigin}>{siteConfig.calOrigin.replace("https://", "")}</a>.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-calendar-book">
+            {siteConfig.bookingLabel} →
+          </a>
+          <a class="button button-light" href={siteConfig.calUrl} data-cta="wss-calendar-direct" rel="noreferrer" target="_blank">
+            Open the public calendar →
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Purpose</p>
-      <h2>What {appName} does</h2>
-      <p class="lede" style="max-width:62ch;">
+      <SectionIntro eyebrow="Purpose" title={`What ${appName} does`} />
+      <p class="section-lede">
         Founders book a free {siteConfig.bookingCallDurationPhrase} Growth Audit. {appName} checks
         Daniel Johnson’s availability, writes the appointment to Google Calendar, and attaches a Google
         Meet link so both sides get a calendar invite with a working video URL.
       </p>
-      <ul class="bring-checklist" style="margin-top:1.25rem;">
+      <ul class="check-list check-list-2up">
         <li>
-          <strong>Public booking</strong> — visitors pick a time for the Growth Audit without creating an account.
+          <span><strong>Public booking</strong> — visitors pick a time for the Growth Audit without creating an account.</span>
         </li>
         <li>
-          <strong>Google Calendar access</strong> — used only so the host calendar stays accurate and double-bookings are avoided.
+          <span><strong>Google Calendar access</strong> — used only so the host calendar stays accurate and double-bookings are avoided.</span>
         </li>
         <li>
-          <strong>Google Meet</strong> — creates the meeting location on each confirmed booking and includes it in the invite.
+          <span><strong>Google Meet</strong> — creates the meeting location on each confirmed booking and includes it in the invite.</span>
         </li>
         <li>
-          <strong>Email confirmations and reminders</strong> — booking, reschedule, and reminder messages for host and guest.
+          <span><strong>Email confirmations and reminders</strong> — booking, reschedule, and reminder messages for host and guest.</span>
         </li>
       </ul>
     </div>
@@ -61,39 +75,62 @@ const schema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Who operates it</p>
-      <h2>{siteConfig.name}</h2>
-      <p class="lede" style="max-width:62ch;">
-        {appName} is not a consumer product for third-party teams. It is the internal scheduling stack for
-        {siteConfig.name}, used to run Growth Audit calls with founders. Support contact:{" "}
-        <!--email_off-->
-        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-        <!--/email_off-->.
-      </p>
-      <div class="hero-actions" style="margin-top:1.25rem;">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-calendar-book">
-          Book a Growth Audit →
-        </a>
-        <a class="button button-light" href={siteConfig.calUrl} data-cta="wss-calendar-direct" rel="noreferrer" target="_blank">
-          Open the public calendar →
-        </a>
-      </div>
+      <SectionIntro eyebrow="Who operates it" title={siteConfig.name} />
+      <article class="feature-card wss-calendar-operator">
+        <p>
+          {appName} is not a consumer product for third-party teams. It is the internal scheduling stack for
+          {siteConfig.name}, used to run Growth Audit calls with founders. Support contact:{" "}
+          <!--email_off-->
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <!--/email_off-->.
+        </p>
+      </article>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Policies</p>
-      <h2>Privacy and terms</h2>
-      <p class="lede" style="max-width:62ch;">
+      <SectionIntro eyebrow="Policies" title="Privacy and terms" />
+      <p class="section-lede">
         Scheduling data (name, email, company, intake answers, and meeting times) is handled under the same
         company policies as the rest of {siteConfig.name}.
       </p>
-      <ul class="bring-checklist" style="margin-top:1.25rem;">
-        <li><a href="/privacy">Privacy policy</a></li>
-        <li><a href="/terms">Terms of use</a></li>
-        <li><a href="/contact">Contact</a></li>
+      <ul class="related-insights-list">
+        <li><a class="card-link" href="/privacy">Privacy policy →</a></li>
+        <li><a class="card-link" href="/terms">Terms of use →</a></li>
+        <li><a class="card-link" href="/contact">Contact →</a></li>
       </ul>
     </div>
   </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2>Book a call.</h2>
+        <p>{siteConfig.bookingSubcopy}</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="wss-calendar-final-book">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button button-light" href={siteConfig.calUrl} data-cta="wss-calendar-final-direct" rel="noreferrer" target="_blank">
+          Open the public calendar →
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  /* One card, so it must not stretch to the full 1320px shell — the operator
+     note is a single paragraph and reads badly at that measure. */
+  .wss-calendar-operator {
+    max-width: 46rem;
+    padding: clamp(1.4rem, 3vw, 2rem);
+  }
+  .wss-calendar-operator p {
+    margin: 0;
+    line-height: 1.65;
+  }
+</style>

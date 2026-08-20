@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import WssOperatingSystemDiagram from "../components/WssOperatingSystemDiagram.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { first30Days, siteConfig, strategicPageRelatedInsights } from "../site";
@@ -106,6 +107,10 @@ const howItWorksSchema = [
 
 <BaseLayout
   path="/how-it-works"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "How it works", path: "/how-it-works" }
+  ]}
   title="How it works | We Scale Startups"
   description="How a WSS engagement runs week by week: diagnosis, acquisition system build, experiment cadence, and transfer to your team."
   keywords="fractional CMO process, growth engagement phases, weekly growth cadence, startup acquisition system, handover playbook"
@@ -115,35 +120,35 @@ const howItWorksSchema = [
     <div class="shell">
       <p class="eyebrow">How it works</p>
       <h1>Diagnose. Build. Test. Transfer.</h1>
-      <p class="lede">
-        Most consultancy engagements are a black box. This one isn't. Here's exactly what happens week by week,
-        what the cadence looks like, and what you walk away with.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="how-it-works-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="how-it-works-hero-scorecard">
-          {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/diagnose" data-cta="how-it-works-hero-diagnose">
-          5-layer framework (deep dive) →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          Most consultancy engagements are a black box. This one isn't. Here's exactly what happens week by week,
+          what the cadence looks like, and what you walk away with.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="how-it-works-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="how-it-works-hero-scorecard">
+            {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/diagnose" data-cta="how-it-works-hero-diagnose">
+            5-layer framework (deep dive) →
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">First 30 days</p>
-      <h2>What happens in month one.</h2>
-      <p class="lede">Same sequence on most engagements, emphasis shifts with your bottleneck.</p>
+      <SectionIntro eyebrow="First 30 days" title="What happens in month one." body="Same sequence on most engagements, emphasis shifts with your bottleneck." />
       <div class="timeline">
         {first30Days.map((item) => (
           <article class="timeline-row">
@@ -165,8 +170,7 @@ const howItWorksSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The engagement rhythm</p>
-      <h2 style="margin:0.4rem 0 2.2rem;">Diagnose. Build. Test. Transfer.</h2>
+      <SectionIntro eyebrow="The engagement rhythm" title="Diagnose. Build. Test. Transfer." />
       <div class="timeline">
         {phases.map((p) => (
           <article class="timeline-row">
@@ -181,14 +185,9 @@ const howItWorksSchema = [
     </div>
   </section>
 
-  <section class="section how-artefacts-section">
+  <section class="section">
     <div class="shell">
-      <p class="eyebrow">Deliverables</p>
-      <h2
-        style="margin:0.4rem 0 1rem;"
-      >
-        The work is in the artefacts, not the deck.
-      </h2>
+      <SectionIntro eyebrow="Deliverables" title="The work is in the artefacts, not the deck." />
       <p class="lede how-artefacts-lede">
         Representative, anonymized snapshots of what ships inside an engagement, not client-specific screenshots.
         Exported at 2× for sharp displays; WebP for load time.
@@ -216,7 +215,7 @@ const howItWorksSchema = [
     <div class="shell two-column">
       <div>
         <p class="eyebrow">Weekly cadence</p>
-        <h2 style="margin:0.4rem 0 1.4rem;">One rhythm, every week.</h2>
+        <h2>One rhythm, every week.</h2>
         <p class="lead-copy">No mystery, no Friday-afternoon "what's been happening?" calls. The week is the same shape, every week.</p>
       </div>
       <div class="grid">
@@ -234,7 +233,7 @@ const howItWorksSchema = [
     <div class="shell two-column">
       <div>
         <p class="eyebrow">What you get</p>
-        <h2 style="margin:0.4rem 0 1.4rem;">Practical working assets your team can use.</h2>
+        <h2>Practical working assets your team can use.</h2>
         <p class="lead-copy">Everything below is something the team can edit, run, or hand to a vendor on day 91 without us in the room.</p>
       </div>
       <ul class="daniel-credentials">
@@ -245,8 +244,7 @@ const howItWorksSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>How engagements run in practice.</h2>
+      <SectionIntro eyebrow="FAQ" title="How engagements run in practice." />
       <div class="grid-3">
         {howItWorksFaqs.map((item) => (
           <article class="feature-card">
@@ -262,8 +260,7 @@ const howItWorksSchema = [
     howItWorksRelated.length > 0 && (
       <section class="section">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes that pair with this page.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes that pair with this page." />
           <ul class="related-insights-list">
             {howItWorksRelated.map((item) => (
               <li>
@@ -283,14 +280,14 @@ const howItWorksSchema = [
       <div>
         <p class="eyebrow">Next step</p>
         <h2>See if this rhythm fits your team.</h2>
-        <p class="max-w-2xl mx-auto">Bring the current growth picture. {siteConfig.bookingCallDurationPhrase}. Plain English.</p>
+        <p class="how-cta-lede">Bring the current growth picture. {siteConfig.bookingCallDurationPhrase}. Plain English.</p>
       </div>
       <div class="hero-actions">
         <a class="button button-brand button-with-subcopy" href={siteConfig.bookingUrl} data-cta="how-it-works-cta">
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="how-it-works-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="how-it-works-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -298,6 +295,11 @@ const howItWorksSchema = [
   </section>
 
   <style>
+    .how-cta-lede {
+      max-width: 42rem;
+      margin-inline: auto;
+    }
+
     .how-artefacts-lede {
       max-width: 62ch;
       margin-bottom: 1.5rem;
@@ -321,7 +323,7 @@ const howItWorksSchema = [
     .how-artefact-img {
       width: 100%;
       height: auto;
-      border-radius: 0.75rem;
+      border-radius: var(--v9-radius-small);
       border: 1px solid var(--line);
       background: var(--surface);
       box-shadow: var(--shadow);

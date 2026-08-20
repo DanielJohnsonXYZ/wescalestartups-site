@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { siteConfig, termsPageRelatedLinks } from "../../site";
 
@@ -14,13 +15,27 @@ const termsSchema = buildBreadcrumbSchema([
   description="Terms of use for wescalestartups.com: website access, intellectual property, enquiries, liability limits, and contact details."
   keywords="We Scale Startups terms of use, website terms"
   path="/terms"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Terms", path: "/terms" }
+  ]}
   schema={termsSchema}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Terms</p>
       <h1>Useful boundaries for using this site.</h1>
-      <p>The site exists to explain our growth strategy, research, acquisition, and operating-system work. It is not a substitute for tailored professional advice.</p>
+      <div class="hero-support">
+        <p>The site exists to explain our growth strategy, research, acquisition, and operating-system work. It is not a substitute for tailored professional advice.</p>
+        <div class="hero-actions">
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="terms-hero-book">
+            {siteConfig.bookingLabel} →
+          </a>
+          <a class="button button-light" href="/contact" data-cta="terms-hero-contact">
+            Contact us →
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -62,8 +77,7 @@ const termsSchema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Site links</p>
-      <h2>Related pages.</h2>
+      <SectionIntro eyebrow="Site links" title="Related pages." />
       <ul class="related-insights-list">
         {termsPageRelatedLinks.map((item) => (
           <li>
@@ -73,6 +87,24 @@ const termsSchema = buildBreadcrumbSchema([
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Questions about these terms?</p>
+        <h2>Get in touch.</h2>
+        <p>Email {siteConfig.email}, or book a {siteConfig.bookingCallShort} if you'd rather talk it through.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="terms-final-book">
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button button-light" href="/contact" data-cta="terms-final-contact">
+          Contact us →
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

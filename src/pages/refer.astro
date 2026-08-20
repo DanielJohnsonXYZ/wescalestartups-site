@@ -23,6 +23,10 @@ const turnstileSiteKey =
   title="Refer a founder, earn £500 | We Scale Startups"
   description="Know a post-PMF B2B SaaS founder with a pipeline problem? Refer them to We Scale Startups and earn £500 when they sign."
   path={path}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Refer a founder", path }
+  ]}
   schema={schema}
   lastUpdated={siteConfig.lastUpdated}
 >
@@ -32,14 +36,16 @@ const turnstileSiteKey =
     <div class="shell">
       <p class="eyebrow">Referral programme</p>
       <h1 id="refer-title">Know a founder who needs a <em>growth system?</em></h1>
-      <p class="hero-copy">
-        If you know a post-PMF B2B SaaS or AI founder with a pipeline problem,
-        introduce them to We Scale Startups.
-        <strong>We'll pay you £500 when they sign.</strong>
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href="#refer-form" data-cta="refer-hero-cta">Make a referral →</a>
-        <a class="button button-light" href="#how-it-works" data-cta="refer-hero-how">How it works</a>
+      <div class="hero-support">
+        <p class="hero-copy">
+          If you know a post-PMF B2B SaaS or AI founder with a pipeline problem,
+          introduce them to We Scale Startups.
+          <strong>We'll pay you £500 when they sign.</strong>
+        </p>
+        <div class="hero-actions">
+          <a class="button button-brand" href="#refer-form" data-cta="refer-hero-cta">Make a referral →</a>
+          <a class="button button-light" href="#how-it-works" data-cta="refer-hero-how">How it works</a>
+        </div>
       </div>
     </div>
   </section>
@@ -298,7 +304,7 @@ const turnstileSiteKey =
 
     if (fallback) {
       fallback.removeAttribute("hidden");
-      fallback.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
+      fallback.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:var(--v9-radius-small);font-size:0.9rem;";
       fallback.innerHTML = "Your email draft should have opened. If it didn't, email <a href=\"mailto:" + email + "\">" + email + "</a> directly.";
     }
 

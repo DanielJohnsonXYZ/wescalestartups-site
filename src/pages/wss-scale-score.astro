@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
@@ -67,49 +68,53 @@ const schema = [
   description="Score your startup across 8 growth dimensions: positioning, acquisition, conversion, reporting, team ownership, offer, experimentation, and founder time."
   keywords="growth scorecard, startup growth assessment, fractional CMO audit, post-PMF growth checklist, acquisition system score"
   path="/wss-scale-score"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "WSS Scale Score", path: "/wss-scale-score" }
+  ]}
   schema={schema}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">WSS Scale Score</p>
       <h1>How ready is your growth system?</h1>
-      <p class="lede">
-        Score your startup across 8 dimensions in 5 minutes.
-        At the end you'll see which constraint will block scale first, and what to fix.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="scale-score-book">
-          {siteConfig.bookingLabel}
-          <span class="arr" aria-hidden="true">→</span>
-        </a>
-        <a class="button button-light" href="/resources#growth-bottleneck-scorecard" data-cta="scale-score-resource">
-          Or use the simpler scorecard →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          Score your startup across 8 dimensions in 5 minutes.
+          At the end you'll see which constraint will block scale first, and what to fix.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="scale-score-book">
+            {siteConfig.bookingLabel}
+            <span class="arr" aria-hidden="true">→</span>
+          </a>
+          <a class="button button-light" href="/resources#growth-bottleneck-scorecard" data-cta="scale-score-resource">
+            Or use the simpler scorecard →
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The 8 dimensions</p>
-      <h2 style="margin:0.4rem 0 2rem;">
-        What we measure, and why it predicts scale.
-      </h2>
-      <div class="grid-2" style="gap:1.5rem;">
+      <SectionIntro eyebrow="The 8 dimensions" title="What we measure, and why it predicts scale." />
+      <div class="scale-dimension-grid">
         {dimensions.map((dim, i) => (
-          <article class="feature-card" style="padding:1.5rem 1.5rem 1.8rem;">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.75rem;">
-              <h3 style="font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;margin:0;">0{i + 1}. {dim.dimension}</h3>
-              <span style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);">{dim.weight}</span>
+          <article class="feature-card scale-dimension">
+            <div class="scale-dimension-head">
+              <h3>{String(i + 1).padStart(2, "0")}. {dim.dimension}</h3>
+              <span class="scale-dimension-weight">{dim.weight}</span>
             </div>
-            <p style="font-size:0.92rem;color:var(--muted);line-height:1.6;margin:0 0 0.75rem;">{dim.description}</p>
-            <div style="display:flex;gap:0.5rem;font-size:0.78rem;">
+            <p>{dim.description}</p>
+            <ol class="scale-band-row">
               {dim.scoreLabels.map((label, j) => (
-                <span style={`padding:0.25rem 0.6rem;border-radius:0.4rem;border:1px solid var(--line);color:var(--muted);background:${j === 0 ? "var(--surface)" : j === 1 ? "var(--surface)" : "var(--accent)/10"}`}>
+                <li class:list={["scale-band", { "is-target": j === dim.scoreLabels.length - 1 }]}>
+                  <span class="scale-band-index">{j + 1}</span>
                   {label}
-                </span>
+                </li>
               ))}
-            </div>
+            </ol>
           </article>
         ))}
       </div>
@@ -118,21 +123,18 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">How to use this</p>
-      <h2 style="margin:0.4rem 0 2rem;">
-        A diagnostic tool, not a vanity quiz.
-      </h2>
-      <div class="grid-3">
-        <article class="feature-card compact-card">
-          <h3>1. Score honestly</h3>
+      <SectionIntro eyebrow="How to use this" title="A diagnostic tool, not a vanity quiz." />
+      <div class="scale-howto-grid">
+        <article class="feature-card scale-howto">
+          <h3>01. Score honestly</h3>
           <p>Get a founder, a growth lead, and one IC in the room. Score each dimension separately, then compare.</p>
         </article>
-        <article class="feature-card compact-card">
-          <h3>2. Find the low score</h3>
+        <article class="feature-card scale-howto">
+          <h3>02. Find the low score</h3>
           <p>The dimension with the lowest score is usually the constraint that's blocking repeatable pipeline.</p>
         </article>
-        <article class="feature-card compact-card">
-          <h3>3. Book a diagnostic</h3>
+        <article class="feature-card scale-howto">
+          <h3>03. Book a diagnostic</h3>
           <p>Bring the scores to a 20-minute diagnostic. We'll confirm the constraint and recommend the engagement shape.</p>
         </article>
       </div>
@@ -141,27 +143,24 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">What the score predicts</p>
-      <h2 style="margin:0.4rem 0 2rem;">
-        Low scores here are why pipeline plateaus.
-      </h2>
-      <div class="grid-2" style="gap:1.25rem;">
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Positioning + Offer below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Acquisition spend leaks. Channels attract the wrong ICP. CAC climbs while conversion falls.</p>
-        </div>
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Acquisition system below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Channels work in isolation but pipeline arrives in waves. No compound effect week over week.</p>
-        </div>
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Reporting & Decisions below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Activity gets reported but no one decides what to scale, stop, or fix. Weeks pass without a sharp call.</p>
-        </div>
-        <div style="padding:1.25rem;border:1px solid var(--line);border-radius:0.85rem;">
-          <h3 style="font-size:1rem;font-weight:700;margin:0 0 0.5rem;color:var(--accent);">Team Ownership below 2/3</h3>
-          <p style="font-size:0.9rem;color:var(--muted);line-height:1.55;margin:0;">Growth still depends on founder heroics. The system isn't transferable. Fractional work can't finish.</p>
-        </div>
+      <SectionIntro eyebrow="What the score predicts" title="Low scores here are why pipeline plateaus." />
+      <div class="scale-predict-grid">
+        <article class="feature-card scale-predict">
+          <h3>Positioning + Offer below 2/3</h3>
+          <p>Acquisition spend leaks. Channels attract the wrong ICP. CAC climbs while conversion falls.</p>
+        </article>
+        <article class="feature-card scale-predict">
+          <h3>Acquisition system below 2/3</h3>
+          <p>Channels work in isolation but pipeline arrives in waves. No compound effect week over week.</p>
+        </article>
+        <article class="feature-card scale-predict">
+          <h3>Reporting &amp; Decisions below 2/3</h3>
+          <p>Activity gets reported but no one decides what to scale, stop, or fix. Weeks pass without a sharp call.</p>
+        </article>
+        <article class="feature-card scale-predict">
+          <h3>Team Ownership below 2/3</h3>
+          <p>Growth still depends on founder heroics. The system isn't transferable. Fractional work can't finish.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -187,3 +186,115 @@ const schema = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* The page was almost entirely inline `style=` attributes. Every rule here
+     replaces one of those, keeping the same intent but making it reusable and
+     legible. Nothing on this page is interactive — it is a reference list —
+     so the design work is rhythm and scannability, not affordance. */
+  .scale-dimension-grid,
+  .scale-predict-grid,
+  .scale-howto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  .scale-dimension {
+    display: grid;
+    align-content: start;
+    gap: 0.85rem;
+    padding: 1.6rem 1.5rem 1.75rem;
+  }
+
+  .scale-dimension-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+  }
+
+  .scale-dimension-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .scale-dimension-weight {
+    color: var(--muted);
+    font-family: var(--v9-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .scale-dimension p {
+    margin: 0;
+  }
+
+  /* The three score labels are an ordered scale, so they are an <ol> with the
+     top band marked. The old version painted the third chip violet with no
+     way to tell a reader why — the numeral says it. */
+  .scale-band-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .scale-band {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.76rem;
+  }
+
+  .scale-band-index {
+    color: var(--muted);
+    font-family: var(--v9-mono);
+    font-size: 0.62rem;
+  }
+
+  .scale-band.is-target {
+    border-color: rgba(128, 108, 255, 0.4);
+    background: rgba(128, 108, 255, 0.1);
+    color: var(--v9-violet-deep);
+  }
+
+  .scale-band.is-target .scale-band-index {
+    color: var(--v9-violet-deep);
+  }
+
+  .scale-howto,
+  .scale-predict {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding: 1.5rem 1.4rem;
+  }
+
+  /* A violet left rule instead of the old violet heading colour: it keeps the
+     "this is the failure mode" signal without setting a heading in a colour
+     that has to be re-checked for contrast at every size. */
+  .scale-predict {
+    border-left: 3px solid var(--v9-violet);
+  }
+
+  .scale-howto h3,
+  .scale-predict h3 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  .scale-howto p,
+  .scale-predict p {
+    margin: 0;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
@@ -60,16 +61,18 @@ const stages = [
     <div class="shell">
       <p class="eyebrow">Strategy</p>
       <h1>SEO content strategy (cold search + LLM retrieval)</h1>
-      <p class="lede">
-        This page is the live reference for how we structure editorial work: clusters on <a href="/insights">/insights</a>, definitional coverage in the{" "}
-        <a href="/insights/glossary">glossary</a>, and service CTAs on commercial pages.
-      </p>
+      <div class="hero-support">
+        <p class="lede">
+          This page is the live reference for how we structure editorial work: clusters on <a href="/insights">/insights</a>, definitional coverage in the{" "}
+          <a href="/insights/glossary">glossary</a>, and service CTAs on commercial pages.
+        </p>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="shell prose-block">
-      <h2>Topic clusters</h2>
+    <div class="shell">
+      <SectionIntro eyebrow="Structure" title="Topic clusters" />
       <ol>
         <li>
           <strong>Fractional CMO &amp; leadership</strong>, pillar <a href="/insights/what-is-a-fractional-cmo">What is a fractional CMO?</a> plus hiring and comparison spokes.
@@ -86,7 +89,12 @@ const stages = [
         </li>
       </ol>
 
-      <h2>Buyer stages → content types</h2>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro eyebrow="Mapping" title="Buyer stages → content types" />
       <ul>
         {
           stages.map((s) => (
@@ -104,21 +112,25 @@ const stages = [
         }
       </ul>
 
-      <h2>Conversion paths</h2>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="Where it leads" title="Conversion paths" />
       <p>
         Every long-form piece should link to one primary service (Diagnosis, Sprint, System Build, or Fractional CMO) and to{" "}
         <a href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a> or the <a href={siteConfig.scorecardUrl}>{siteConfig.scorecardName}</a> as a soft step.
       </p>
 
-      <p>
+      <div class="hero-actions">
         <a class="button button-brand" href="/insights">
           Browse insights →
         </a>
-        {" "}
         <a class="button button-light" href={siteConfig.bookingUrl}>
           {siteConfig.bookingLabel} →
         </a>
-      </p>
+      </div>
     </div>
   </section>
 
@@ -138,15 +150,12 @@ const stages = [
 </BaseLayout>
 
 <style>
-  .prose-block {
-    max-width: 44rem;
-  }
-  .prose-block h2 {
-    margin-top: 2rem;
-    font-size: 1.25rem;
-  }
-  .prose-block ul,
-  .prose-block ol {
+  /* Lists here carry link-heavy reference copy, so they get a little more
+     leading than the default. Everything else now comes from the shared
+     section rhythm rather than a one-off centred prose column. */
+  .section ul,
+  .section ol {
+    max-width: 62ch;
     line-height: 1.6;
   }
 </style>

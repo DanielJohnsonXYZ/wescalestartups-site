@@ -4,14 +4,14 @@
 .quiz-progress-wrap {
   height: 4px;
   background: var(--line);
-  border-radius: 99px;
+  border-radius: 999px;
   overflow: hidden;
   margin-bottom: 0.75rem;
 }
 .quiz-progress-bar {
   height: 100%;
   background: var(--accent);
-  border-radius: 99px;
+  border-radius: 999px;
   transition: width 300ms ease;
 }
 .quiz-progress-label {
@@ -22,10 +22,8 @@
   color: var(--muted);
   margin: 0 0 2rem;
 }
+/* Border/radius/background come from the shared card contract in site-v9.css. */
 .quiz-question-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 1rem;
   padding: 2rem;
   margin-bottom: 1.5rem;
 }
@@ -36,7 +34,7 @@
   letter-spacing: 0.1em;
   color: var(--accent);
   margin: 0 0 0.75rem;
-  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: var(--v9-mono);
 }
 .quiz-question-text {
   font-size: clamp(1.05rem, 1.8vw, 1.2rem);
@@ -54,7 +52,7 @@
   padding: 1rem 1.1rem;
   background: var(--bg);
   border: 1.5px solid var(--line);
-  border-radius: 0.75rem;
+  border-radius: var(--v9-radius-small);
   cursor: pointer;
   text-align: left;
   transition: border-color 140ms ease, background 140ms ease;
@@ -100,14 +98,12 @@
 }
 
 /* Result */
+/* Border/radius/background come from the shared card contract in site-v9.css. */
 .result-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 1rem;
   padding: 2rem 2rem 2.5rem;
 }
 .result-score-display {
-  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: var(--v9-mono);
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1;
@@ -122,7 +118,7 @@
   margin-bottom: 1.25rem;
 }
 .result-headline {
-  font-family:'Geist','Inter',ui-sans-serif,system-ui,sans-serif;
+  font-family: var(--v9-sans);
   font-size: clamp(1.6rem, 2.5vw, 2.2rem);
   font-weight:700;
   line-height: 1.1;
@@ -146,7 +142,7 @@
 .result-action-card {
   padding: 1rem 1.25rem;
   border: 1px solid var(--line);
-  border-radius: 0.75rem;
+  border-radius: var(--v9-radius-small);
   background: var(--bg);
 }
 .result-action-card h4 {
@@ -163,9 +159,9 @@
 }
 .result-warning {
   padding: 1rem 1.25rem;
-  border-left: 3px solid #f97316;
-  border-radius: 0 0.5rem 0.5rem 0;
-  background: color-mix(in srgb, #f97316 6%, transparent);
+  border-left: 3px solid var(--v9-coral);
+  border-radius: 0 var(--v9-radius-small) var(--v9-radius-small) 0;
+  background: color-mix(in srgb, var(--v9-coral) 6%, transparent);
   font-size: 0.88rem;
   line-height: 1.55;
   color: var(--ink);

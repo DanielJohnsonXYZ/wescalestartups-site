@@ -100,8 +100,11 @@ const {
 const currentPath = normalizePath(path);
 const stickyBookCta =
   stickyBookCtaProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
-const showAnnouncement =
-  showAnnouncementProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
+/* The scorecard promo used to run as a banner above the header on every
+   route, which made a secondary offer the first thing on the page and
+   pushed the hero down. It is off by default now; a page that genuinely
+   wants a banner still opts in with showAnnouncement. */
+const showAnnouncement = showAnnouncementProp ?? false;
 // Don't interrupt readers who are already on the signup page or in the
 // booking flow — everywhere else the popup is on by default.
 const newsletterPopup =
@@ -312,6 +315,9 @@ const turnstileSiteKey =
       />
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <!-- Reading progress. Rendered here rather than per page so the homepage
+         and the other ~124 routes share one element and one listener. -->
+    <div class="v9-scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     {showAnnouncement && (
       <AnnouncementBanner
@@ -373,5 +379,130 @@ const turnstileSiteKey =
     />
     <NewsletterPopup enabled={newsletterPopup} />
     <EasterEgg />
+    <!-- Shared interaction layer: scroll progress, scroll reveal and the
+         pointer-tracking card glow. This is the homepage's motion language
+         (previously inline in index.astro) promoted to every route.
+
+         Performance: inline so it costs no request, ~1.5KB, and the only
+         persistent listeners are one rAF-throttled scroll handler plus two
+         delegated document listeners. Deliberately NOT deferred to first
+         interaction the way gtm.js is — the reveal has to settle before the
+         visitor scrolls, and unlike an analytics tag it renders content.
+
+         NO-JS: the `v9-reveal` class is only ever added here. If this script
+         does not run, nothing is hidden and every page reads normally. -->
+    <script is:inline>
+      (function () {
+        var progress = document.querySelector(".v9-scroll-progress");
+        var frame = 0;
+        var pending = [];
+
+        function onFrame() {
+          frame = 0;
+          if (progress) {
+            var max = document.documentElement.scrollHeight - window.innerHeight;
+            var value = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+            progress.style.transform = "scaleX(" + value + ")";
+          }
+          sweep();
+        }
+
+        /* IntersectionObserver only fires on a threshold CROSSING, so an
+           instant jump (anchor link, Cmd+End, restored scroll position) skips
+           every element in between and they stay at opacity 0 forever. This
+           sweep reveals anything the viewport has already reached. It only
+           measures the not-yet-revealed set, so it costs nothing once the
+           page is fully revealed. */
+        function sweep() {
+          if (!pending.length) return;
+          var limit = window.innerHeight;
+          pending = pending.filter(function (el) {
+            if (el.classList.contains("is-visible")) return false;
+            if (el.getBoundingClientRect().top >= limit) return true;
+            el.classList.add("is-visible");
+            return false;
+          });
+        }
+
+        window.addEventListener("scroll", function () {
+          if (!frame) frame = requestAnimationFrame(onFrame);
+        }, { passive: true });
+        window.addEventListener("resize", onFrame, { passive: true });
+        onFrame();
+
+        /* Interior card families — the same KINDS of element the homepage
+           glows. The homepage's own glow surfaces already carry the class in
+           markup and are listed here too so the two sets stay one decision;
+           classList.add is idempotent, so nothing is bound twice. */
+        var INTERIOR_CARDS =
+          ".feature-card, .case-card, .insight-card, .pricing-card, .industry-card," +
+          ".offer-card, .offer-detail-card, .offer-routing-card, .pillar-card," +
+          ".audience-card, .team-card, .stage-card, .decision-card, .fit-card," +
+          ".free-paid-card, .handson-card, .mistake-card, .start-step, .content-block," +
+          ".strategic-panel, .contact-option, .cta-inner";
+
+        var GLOW =
+          INTERIOR_CARDS +
+          ", .v9-principle, .v9-service-card, .v9-case-card, .v9-os-card," +
+          ".v9-teaching-card, .v9-diagnostic-output, .v9-fit-video," +
+          ".v9-path-card";
+
+        /* Reveal is narrower than glow on purpose. The homepage's list is
+           reproduced verbatim (it deliberately leaves the hero card, the
+           teaching photo and the community strip static) and interior pages
+           add their cards, section intros and the closing CTA. FAQ
+           accordions, quiz panels and long-form prose stay still. */
+        var REVEAL =
+          INTERIOR_CARDS +
+          ", .section-intro, .content-header, .testimonials-header," +
+          ".related-insights-list > li, .wss-ledger > *," +
+          ".v9-principle, .v9-service-card, .v9-case-card, .v9-quote, .v9-fit-card," +
+          ".v9-timeline li, .v9-diagnostic-output, .v9-constraint-tabs, .v9-fit-video," +
+          ".v9-path-card, .v9-paths-foot li, .v9-metric";
+
+        /* The glow is a CSS object that needs two custom properties kept up to
+           date; adding the class here rather than in 60 templates keeps it a
+           single decision. Purely decorative, so no-JS losing it is fine. */
+        document.querySelectorAll(GLOW).forEach(function (card) {
+          card.classList.add("v9-hover-glow");
+        });
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+          var revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            });
+          }, { rootMargin: "0px 0px 8% 0px", threshold: 0 });
+          document.querySelectorAll(REVEAL).forEach(function (el, index) {
+            el.classList.add("v9-reveal");
+            el.style.transitionDelay = (index % 3) * 70 + "ms";
+            pending.push(el);
+            revealObserver.observe(el);
+          });
+          /* Sweep now, and again whenever layout can shift content into view
+             without a scroll — late fonts, the announcement banner, images
+             settling. IntersectionObserver only fires on a crossing, so
+             without these an element nudged into the first screenful stays
+             at opacity 0 until the visitor happens to scroll, which reads as
+             a page that failed to load rather than one that animates. */
+          sweep();
+          requestAnimationFrame(sweep);
+          window.addEventListener("load", sweep);
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(sweep);
+        }
+
+        /* One delegated listener instead of one per card: pages carry 20+
+           glow surfaces and the homepage carried 12 individual bindings. */
+        document.addEventListener("pointermove", function (event) {
+          var card = event.target instanceof Element ? event.target.closest(".v9-hover-glow") : null;
+          if (!card) return;
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty("--pointer-x", ((event.clientX - rect.left) / rect.width * 100) + "%");
+          card.style.setProperty("--pointer-y", ((event.clientY - rect.top) / rect.height * 100) + "%");
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>

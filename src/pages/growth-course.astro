@@ -84,6 +84,10 @@ const turnstileSiteKey =
   title="What the Heck is Growth? | We Scale Startups"
   description="A 12-module cohort course on startup growth systems. For founders and operators who want to build repeatable acquisition without founder dependency."
   path="/growth-course"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Growth Course", path: "/growth-course" }
+  ]}
   schema={schemas}
   lastUpdated={siteConfig.lastUpdated}
 >
@@ -91,13 +95,15 @@ const turnstileSiteKey =
     <div class="shell">
       <p class="eyebrow">Course</p>
       <h1>What the Heck is Growth?</h1>
-      <p class="hero-copy">
-        A 12-module cohort course for post-PMF founders and operators who are done guessing at acquisition. 
-        Learn to diagnose the bottleneck, build the system, and transfer the rhythm, the same method WSS uses with clients.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-brand" href="#waitlist">Join the Waitlist, £30/mo</a>
-        <a class="button button-light" href="/services">Work with us instead →</a>
+      <div class="hero-support">
+        <p class="hero-copy">
+          A 12-module cohort course for post-PMF founders and operators who are done guessing at acquisition. 
+          Learn to diagnose the bottleneck, build the system, and transfer the rhythm, the same method WSS uses with clients.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-brand" href="#waitlist">Join the Waitlist, £30/mo</a>
+          <a class="button button-light" href="/services">Work with us instead →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -189,7 +195,9 @@ const turnstileSiteKey =
         <h2>Book a 20-minute growth diagnostic instead.</h2>
         <p>Sometimes the fastest way to learn is a focused conversation about your actual bottleneck.</p>
       </div>
-      <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.bookingUrl}>{siteConfig.bookingLabel}</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

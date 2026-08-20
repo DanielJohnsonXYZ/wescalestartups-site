@@ -7,6 +7,12 @@ import { siteConfig } from "../../../site";
   title="Your 90-Day Growth Experiment Planner | We Scale Startups"
   description="Download the editable 90-Day Growth Experiment Planner and companion field guide."
   path="/resources/90-day-growth-sprint-planner/thanks"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: "90-Day Growth Sprint Planner", path: "/resources/90-day-growth-sprint-planner" },
+    { name: "Thanks", path: "/resources/90-day-growth-sprint-planner/thanks" }
+  ]}
   metaRobots="noindex,follow"
   lastUpdated={false}
   showAnnouncement={false}
@@ -15,10 +21,17 @@ import { siteConfig } from "../../../site";
     <div class="shell">
       <p class="eyebrow">Planner unlocked</p>
       <h1>Your 90-day experiment system is ready.</h1>
-      <p class="hero-copy">
-        Start with the workbook, then keep the short field guide beside you when you run the first planning session.
-        The first email contains the same links so you can return to them later.
-      </p>
+      <div class="hero-support">
+        <p class="lede">
+          Start with the workbook, then keep the short field guide beside you when you run the first planning session.
+          The first email contains the same links so you can return to them later.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
       <div class="download-grid">
         <article class="download-card">
           <p class="eyebrow">Editable workbook</p>
@@ -47,10 +60,17 @@ import { siteConfig } from "../../../site";
           </a>
         </article>
       </div>
-      <div class="next-step">
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
         <p class="eyebrow">If the plan is still fuzzy</p>
         <h2>Bring the priority and backlog to a 20-minute Growth Audit.</h2>
         <p>We will pressure-test the constraint and the first experiment sequence. No pitch unless there is a genuine fit.</p>
+      </div>
+      <div class="hero-actions">
         <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="planner-thanks-book-growth-audit">
           Book the Growth Audit →
         </a>
@@ -60,29 +80,27 @@ import { siteConfig } from "../../../site";
 </BaseLayout>
 
 <style>
+  /* Two download cards in the page's own shell, not inside the hero rail —
+     the rail is for a deck, and stuffing the whole page into it left the
+     masthead's left column empty for ~700px. */
   .download-grid {
     display: grid;
     gap: 1rem;
-    margin: 2.5rem 0;
   }
   @media (min-width: 760px) {
     .download-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-  .download-card,
-  .next-step {
+  .download-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 1.25rem;
+    border-radius: var(--v9-radius);
     padding: clamp(1.5rem, 3vw, 2.25rem);
   }
-  .download-card h2,
-  .next-step h2 { margin-bottom: 0.75rem; }
-  .download-card p:not(.eyebrow),
-  .next-step p:not(.eyebrow) { color: var(--muted); }
-  .download-card .button { margin-top: 1rem; }
-  .next-step {
-    background: color-mix(in srgb, var(--violet) 8%, var(--surface));
-    border-color: color-mix(in srgb, var(--violet) 30%, var(--line));
-  }
-  .next-step .btn { margin-top: 1rem; }
+  .download-card h2 { margin-bottom: 0.75rem; }
+  .download-card p:not(.eyebrow) { color: var(--muted); }
+  /* Pins both download buttons to the same baseline across the row. */
+  .download-card .button { margin-top: auto; }
 </style>

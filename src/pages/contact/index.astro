@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { contactRelatedReading, siteConfig, customerIoNewsletter } from "../../site";
 
@@ -39,29 +40,35 @@ const turnstileSiteKey =
   description="Contact We Scale Startups: growth enquiry, email, and booking links for a 20-minute diagnostic with Daniel Johnson."
   keywords="contact We Scale Startups, growth enquiry, book growth diagnostic, Daniel Johnson WSS"
   path="/contact"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" }
+  ]}
   schema={contactSchema}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Contact</p>
       <h1>Send the growth context.</h1>
-      <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="contact-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="contact-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <!--email_off-->
-        <a class="button button-light" href={`mailto:${siteConfig.email}`} data-cta="contact-email">{siteConfig.email}</a>
-        <!--/email_off-->
+      <div class="hero-support">
+        <p>The best enquiry is specific: stage, ARR, channels, bottleneck, budget, timeline, and what needs to change in the next 90 days.</p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="contact-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="contact-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <!--email_off-->
+          <a class="button button-light" href={`mailto:${siteConfig.email}`} data-cta="contact-email">{siteConfig.email}</a>
+          <!--/email_off-->
+        </div>
       </div>
     </div>
   </section>
@@ -144,8 +151,7 @@ const turnstileSiteKey =
   <!-- Same Cal.com embed stack as /book. -->
   <section class="section section-alt" id="book-a-time">
     <div class="shell">
-      <p class="eyebrow">Book a time</p>
-      <h2>Pick a slot that works for you.</h2>
+      <SectionIntro eyebrow="Book a time" title="Pick a slot that works for you." />
       <p>
         Same calendar as the Growth Audit. If the embed does not load,{" "}
         <a href={siteConfig.calUrl} rel="noreferrer" target="_blank">open the booking page in a new tab</a>
@@ -155,7 +161,7 @@ const turnstileSiteKey =
         id="contact-cal-inline"
         class="cal-inline-widget"
         data-cal-link={siteConfig.calLink}
-        style="min-width:320px;height:700px;overflow:auto;border:1px solid var(--line);border-radius:0.85rem;background:#fff;"
+        style="min-width:320px;height:700px;overflow:auto;border:1px solid var(--line);border-radius:var(--v9-radius-small);background:#fff;"
       ></div>
     </div>
   </section>
@@ -164,12 +170,11 @@ const turnstileSiteKey =
   <!-- Route by enquiry type, speaking, podcast, partnership, press all -->
   <!-- have specific better destinations than the generic enquiry form.    -->
   <!-- Source: Notion 354f99a79fdb81eebd81df3dfa282659                      -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell">
-      <p class="eyebrow">Routing by enquiry type</p>
-      <h2>Not a growth engagement? Here's the right page.</h2>
+      <SectionIntro eyebrow="Routing by enquiry type" title="Not a growth engagement? Here's the right page." />
       <p>The enquiry form above is for growth engagement enquiries. For everything else, use one of these direct routes, they reach the right inbox faster.</p>
-      <div class="grid-3 mt-6">
+      <div class="grid-3 contact-routing-grid">
         <article class="feature-card">
           <p class="card-kicker">Speaking enquiries</p>
           <h3>Book Daniel for a talk or workshop</h3>
@@ -213,16 +218,15 @@ const turnstileSiteKey =
           <a class="card-link" href={`mailto:${siteConfig.email}?subject=Portfolio%20workshop%20or%20mentor%20enquiry`}>Email, Programme enquiry →</a>
         </article>
       </div>
-      <p class="mt-6 text-sm" style="color:var(--muted, #666);">
+      <p class="contact-response-note" style="color:var(--muted);">
         <strong>Response time:</strong> Enquiries are read by the operator, not a gatekeeper. Most enquiries get a reply within one working day. If it's a fit, you'll get a clear next step. If it isn't, you'll get an honest "no" or a referral to the right person.
       </p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Self-serve before you email.</h2>
+      <SectionIntro eyebrow="Related reading" title="Self-serve before you email." />
       <ul class="related-insights-list">
         {contactRelatedReading.map((item) => (
           <li>
@@ -235,10 +239,9 @@ const turnstileSiteKey =
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>Contact and response expectations.</h2>
+      <SectionIntro eyebrow="FAQ" title="Contact and response expectations." />
       <div class="grid-3">
         {contactFaqs.map((item) => (
           <article class="feature-card">
@@ -269,13 +272,24 @@ const turnstileSiteKey =
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="contact-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="contact-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .contact-routing-grid {
+    margin-top: 1.5rem;
+  }
+
+  .contact-response-note {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+  }
+</style>
 
 <script is:inline define:vars={{ email: siteConfig.email, cioUrl: customerIoNewsletter.submitUrl, cioFormId: customerIoNewsletter.formId }}>
   const form = document.getElementById("growth-enquiry");
@@ -337,7 +351,7 @@ const turnstileSiteKey =
       note = document.createElement("div");
       note.id = "enquiry-fallback";
       note.setAttribute("role", "status");
-      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:8px;font-size:0.9rem;";
+      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:var(--v9-radius-small);font-size:0.9rem;";
       form.appendChild(note);
     }
     note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your message has been copied to the clipboard.`;

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { buildPageRelatedReading, siteConfig } from "../../site";
 
@@ -13,27 +14,33 @@ const buildSchema = buildBreadcrumbSchema([
   title="Build a Growth System | We Scale Startups"
   description="Build the growth assets, acquisition workflows, reporting cadence, and team rituals that turn strategy into execution."
   path="/build"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Build", path: "/build" }
+  ]}
   schema={buildSchema}
 >
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Build</p>
       <h1>Turn growth strategy into assets, workflows, and operating rhythm.</h1>
-      <p>We build the practical pieces: positioning, landing pages, campaign briefs, reporting, AI workflows, and the meeting cadence that keeps learning moving.</p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="build-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="build-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/services/90-day-growth-sprint" data-cta="build-sprint">See the sprint</a>
+      <div class="hero-support">
+        <p>We build the practical pieces: positioning, landing pages, campaign briefs, reporting, AI workflows, and the meeting cadence that keeps learning moving.</p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="build-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="build-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/services/90-day-growth-sprint" data-cta="build-sprint">See the sprint</a>
+        </div>
       </div>
     </div>
   </section>
@@ -49,8 +56,7 @@ const buildSchema = buildBreadcrumbSchema([
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Handoff, sprints, and acquisition builds.</h2>
+      <SectionIntro eyebrow="Related reading" title="Handoff, sprints, and acquisition builds." />
       <ul class="related-insights-list">
         {buildPageRelatedReading.map((item) => (
           <li>
@@ -82,7 +88,7 @@ const buildSchema = buildBreadcrumbSchema([
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="build-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="build-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>

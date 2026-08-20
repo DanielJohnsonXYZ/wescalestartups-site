@@ -86,6 +86,10 @@ const gtmDeliverables = [
 
 <BaseLayout
   path="/gtm-strategy"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "GTM Strategy", path: "/gtm-strategy" }
+  ]}
   title="GTM Strategy for Post-PMF B2B SaaS | We Scale Startups"
   description="GTM strategy for post-PMF B2B SaaS and AI startups: diagnose the bottleneck, build the acquisition system, install the weekly rhythm."
   keywords="B2B SaaS GTM strategy, go-to-market system, post-PMF positioning, ICP and channels, acquisition operating rhythm"
@@ -95,23 +99,25 @@ const gtmDeliverables = [
     <div class="shell">
       <p class="eyebrow">GTM Strategy</p>
       <h1>Your GTM problem is probably not what you think it is.</h1>
-      <p class="lede">
-        Most post-PMF founders have tried channels. The bottleneck is rarely the channel itself —
-        it's the absence of a connected system, a clear decision view, and a team rhythm that runs without the founder in every loop.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="gtm-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gtm-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          Most post-PMF founders have tried channels. The bottleneck is rarely the channel itself —
+          it's the absence of a connected system, a clear decision view, and a team rhythm that runs without the founder in every loop.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="gtm-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="gtm-hero-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -222,8 +228,7 @@ const gtmDeliverables = [
     gtmRelatedInsights.length > 0 && (
       <section class="section section-alt">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes that pair with GTM strategy work.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes that pair with GTM strategy work." />
           <ul class="related-insights-list">
             {gtmRelatedInsights.map((item) => (
               <li>
@@ -258,13 +263,13 @@ const gtmDeliverables = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="gtm-cta-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="gtm-cta-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
     </div>
   </section>
-  <section class="section section--tight">
+  <section class="section">
     <div class="shell">
       <EmailSignup
         heading="Get the GTM Diagnostic Checklist."
@@ -289,7 +294,7 @@ const gtmDeliverables = [
   .gtm-problem-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
@@ -343,11 +348,11 @@ const gtmDeliverables = [
   .gtm-deliverable {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.1rem;
   }
   .gtm-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.68rem;
     font-weight: 700;
     color: var(--accent);
@@ -381,7 +386,7 @@ const gtmDeliverables = [
   .gtm-engagement-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: var(--v9-radius-small);
     padding: 1.25rem;
     text-decoration: none;
     color: inherit;

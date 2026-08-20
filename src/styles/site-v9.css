@@ -46,6 +46,19 @@
   letter-spacing: -0.045em;
 }
 
+/* Long-form body headings keep the serif editorial voice components.css
+   gives .content-block h2 (Fraunces). The blanket heading rule above wins
+   on both specificity (0-2-0 vs. components.css's 0-1-1) and source order,
+   so it silently downgraded article/case headings to sans Geist — smaller
+   and quieter than the serif FAQ-card headings sitting right below them on
+   the same page. Named at (0-3-1) so it wins outright, not just on order. */
+.theme-wss-v9:not(.no-shared-chrome) .article-body h2 {
+  font-family: var(--v9-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.75rem, 2.6vw, 2.2rem);
+}
+
 .theme-wss-v9 ::selection {
   background: var(--v9-mint);
   color: var(--v9-night);
@@ -63,13 +76,32 @@
   -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
 
+/* The blurred band under the pill used to stop on a hard horizontal edge,
+   so scrolled content was sliced rather than passing under the bar. A short
+   fade below the header softens the join. It cannot be a mask on the header
+   itself — that would fade the pill's own bottom edge with it. z-index:-1 is
+   required: .header-inner carries a backdrop-filter, which makes it a stacking
+   context, so the open dropdown's z-index:70 is trapped inside it and this
+   pseudo-element (later in tree order, same level) otherwise hazed the top of
+   every panel. Negative z-index keeps it inside .site-header's own context, so
+   it still sits above the page. */
+.theme-wss-v9 .site-header::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 auto;
+  z-index: -1;
+  height: 1.1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
 .theme-wss-v9 .site-header .shell {
   width: min(calc(100% - 3rem), 1320px);
 }
 
 .theme-wss-v9 .header-inner {
   min-height: 64px;
-  gap: 1rem;
+  gap: var(--v9-space-grid-gap);
   padding: 0.48rem 0.52rem 0.48rem 1.05rem;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 999px;
@@ -79,6 +111,26 @@
   -webkit-backdrop-filter: blur(24px) saturate(140%);
 }
 
+/* Optical centring. components.css lays the bar out as `auto 1fr auto`, which
+   centres the nav in the gap between the logo and the CTA — and because the
+   mint CTA is ~70px wider than the logo, that put the nav ~22px left of the
+   pill's true centre. Equal side columns centre it against the bar itself.
+   Desktop only: below 1060px the nav and CTA are hidden and the drawer
+   trigger relies on the flexible middle column to stay flush right. */
+@media (min-width: 1061px) {
+  .theme-wss-v9 .header-inner {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .theme-wss-v9 .header-inner > .brand {
+    justify-self: start;
+  }
+
+  .theme-wss-v9 .header-inner > .header-cta {
+    justify-self: end;
+  }
+}
+
 .theme-wss-v9 .brand img {
   width: 82px;
   max-height: 42px;
@@ -86,57 +138,181 @@
   filter: brightness(0) invert(1);
 }
 
+/* Nav type. Light-on-dark optically bolds and fills counters, so the labels
+   were set at 500/66% white — legible enough to pass, quiet enough to read as
+   unfinished. A little more light and a little tracking is what small caps-
+   height sans text on a near-black bar needs. */
 .theme-wss-v9 .nav-link {
+  position: relative;
   border-radius: 999px;
-  padding: 0.58rem 0.7rem;
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 0.8rem;
+  padding: 0.56rem 0.76rem;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.82rem;
   font-weight: 500;
+  letter-spacing: 0.008em;
+  transition: color 160ms ease, background-color 160ms ease;
 }
 
 .theme-wss-v9 .nav-link:hover,
-.theme-wss-v9 .nav-link.is-active,
-.theme-wss-v9 .nav-dropdown.is-active > .nav-link {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-.theme-wss-v9 .nav-menu {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(17, 18, 26, 0.98);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
-}
-
-.theme-wss-v9 .nav-menu-link {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.theme-wss-v9 .nav-menu-link:hover,
-.theme-wss-v9 .nav-menu-link.is-active {
+.theme-wss-v9 .nav-dropdown:hover > .nav-link,
+.theme-wss-v9 .nav-dropdown:focus-within > .nav-link {
   background: rgba(255, 255, 255, 0.07);
   color: #fff;
 }
 
+.theme-wss-v9 .nav-link.is-active,
+.theme-wss-v9 .nav-dropdown.is-active > .nav-link {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* "Where am I" uses the same mint dot the page's own eyebrow uses, rather
+   than asking a 4%-lighter pill to carry the whole signal. */
+.theme-wss-v9 .nav-link.is-active::after,
+.theme-wss-v9 .nav-dropdown.is-active > .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0.3rem;
+  left: 50%;
+  width: 0.24rem;
+  height: 0.24rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--v9-mint);
+}
+
+/* The dropdown marker was a "⌄" text glyph: oversized, sitting low on the
+   baseline, and inheriting --dim (a light-mode grey) on a near-black bar. It
+   is drawn instead, so it can be sized and aligned optically and can answer
+   the open state.
+
+   The inline-flex here is load-bearing: .nav-link is display:block in
+   components.css, so the label and the marker were plain inline content —
+   `gap` did nothing, and the marker, as an inline box, ignored its own
+   width/height and painted its borders down the whole line box. That was the
+   vertical stroke that appeared beside every dropdown label. */
+.theme-wss-v9 .nav-link-parent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+}
+
+.theme-wss-v9 .nav-caret {
+  display: block;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 0.34rem;
+  height: 0.34rem;
+  margin-top: -0.16rem;
+  border-right: 1.2px solid currentColor;
+  border-bottom: 1.2px solid currentColor;
+  color: inherit;
+  opacity: 0.6;
+  transform: rotate(45deg);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.theme-wss-v9 .nav-dropdown:hover .nav-caret,
+.theme-wss-v9 .nav-dropdown:focus-within .nav-caret {
+  opacity: 1;
+  transform: rotate(225deg);
+}
+
+.theme-wss-v9 .nav-menu {
+  /* Measured from the link, not the bar: the pill's own padding sits below
+     the link box, so a 0.7rem offset left the panel almost touching it. */
+  top: calc(100% + 1.05rem);
+  width: min(21rem, calc(100vw - 2rem));
+  gap: 0.1rem;
+  padding: 0.45rem;
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--v9-radius-small);
+  background: linear-gradient(180deg, var(--v9-night-3), var(--v9-night-2));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* Hover bridge between bar and panel, widened to match the larger gap. */
+.theme-wss-v9 .nav-menu::before {
+  inset: -1.2rem 0 auto;
+  height: 1.25rem;
+}
+
+/* Mono label at the head of the panel. Every other grouped surface on the
+   site names itself with metadata type; without it the panel opened cold on
+   its first link and read as a floating rectangle. Ordered first because the
+   panel is a grid and ::after is otherwise its last item. */
+.theme-wss-v9 .nav-menu::after {
+  content: attr(data-menu-label);
+  order: -1;
+  margin: 0.15rem 0 0.35rem;
+  padding: 0 0.7rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.theme-wss-v9 .nav-menu-link {
+  gap: 0.15rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.55rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.theme-wss-v9 .nav-menu-link:hover,
+.theme-wss-v9 .nav-menu-link.is-active {
+  background: rgba(128, 108, 255, 0.24);
+  color: #fff;
+}
+
+.theme-wss-v9 .nav-menu-link strong {
+  font-size: 0.855rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 .theme-wss-v9 .nav-menu-link span {
-  color: rgba(255, 255, 255, 0.64);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.theme-wss-v9 .nav-menu-link:hover span,
+.theme-wss-v9 .nav-menu-link.is-active span {
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .theme-wss-v9 .header-cta,
 .theme-wss-v9 .site-header .button-brand {
   min-height: 44px;
-  padding-inline: 1.1rem;
+  padding-inline: 1.15rem;
   border: 0;
   border-radius: 999px;
   background: var(--v9-mint) !important;
-  box-shadow: none;
+  box-shadow: 0 8px 24px rgba(200, 255, 101, 0.16);
   color: var(--v9-night) !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   -webkit-text-fill-color: var(--v9-night) !important;
+}
+
+.theme-wss-v9 .header-cta span[aria-hidden] {
+  transition: transform 160ms ease;
 }
 
 .theme-wss-v9 .header-cta:hover,
 .theme-wss-v9 .site-header .button-brand:hover {
   transform: translateY(-1px);
   background: #dcff9e !important;
+}
+
+.theme-wss-v9 .header-cta:hover span[aria-hidden] {
+  transform: translateX(2px);
 }
 
 /* Breadcrumbs ------------------------------------------------- */
@@ -164,7 +340,7 @@
 .theme-wss-v9:not(.no-shared-chrome) .page-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(4.75rem, 8vw, 7.5rem) 0 clamp(4rem, 7vw, 6.5rem);
+  padding: clamp(3.5rem, 5.5vw, 5.5rem) 0 clamp(3rem, 4.5vw, 4.5rem);
   border-bottom: 1px solid var(--v9-line);
   /* Matches the homepage hero: no grid lines, a quiet violet/mint wash. */
   background:
@@ -227,6 +403,264 @@
   box-shadow: 0 0 0 0.26rem rgba(200, 255, 101, 0.13), 0 0 18px rgba(200, 255, 101, 0.75);
 }
 
+/* Reading measure -----------------------------------------------
+   Long-form body copy was set the full width of its column: article
+   paragraphs ran about 119 characters per line and service detail
+   pages about 129. Comfortable reading is 45-85, and past roughly 90
+   the eye loses the line return, which is a large part of why these
+   pages read as unformatted templates rather than designed articles.
+
+   The cap goes on the flow content rather than the column so that
+   anything deliberately full-bleed — figures, tables, callouts —
+   still uses the whole column. */
+.theme-wss-v9:not(.no-shared-chrome) :is(.article-body, .detail-body) :is(p, ul, ol, blockquote) {
+  max-width: 58ch;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :is(.article-body, .detail-body) :is(h2, h3, h4) {
+  max-width: 32ch;
+}
+
+/* Section intro proportions ------------------------------------
+   components.css sets .section-intro to three columns
+   (0.6fr 1fr 0.45fr), but SectionIntro only renders a third child
+   when a page passes optional body copy — and most do not. A
+   two-child intro therefore rendered a ~380px label gutter next to a
+   ~285px column that was permanently empty, which is the gap that
+   made interior sections read as mostly white space.
+
+   The label column comes in to match the homepage's own intro
+   (minmax(190px, 0.34fr)), and the third column only exists when
+   there is body copy to put in it. Held above 980px so the
+   single-column collapse in components.css still wins on mobile. */
+@media (min-width: 981px) {
+  .theme-wss-v9:not(.no-shared-chrome) .section-intro {
+    grid-template-columns: minmax(170px, 0.28fr) minmax(0, 1fr);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .section-intro:has(> p:nth-of-type(2)) {
+    grid-template-columns: minmax(170px, 0.28fr) minmax(0, 1fr) minmax(0, 0.5fr);
+  }
+}
+
+/* Interior hero composition ------------------------------------
+   The hero used to be a single text column inside a 1320px shell:
+   the copy topped out around 840px, leaving ~480px of the shell
+   empty, and the block still stood ~630px tall. Measured across the
+   site that was 89 of 120 heroes under 25% covered — a phone layout
+   stretched to desktop, which is exactly how it read.
+
+   It now runs as a masthead. The eyebrow takes its own full-width
+   row, then the headline and its supporting column sit side by side
+   beneath, both starting at the same top edge. Both columns carry
+   content every hero already has, so this composes existing material
+   rather than asking 113 pages to invent a decorative panel. Below
+   1000px it falls back to the stack, which is right at that width. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.35rem;
+  min-width: 0;
+}
+
+@media (min-width: 1000px) {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
+    column-gap: clamp(2.5rem, 4.5vw, 4.5rem);
+    align-items: start;
+  }
+
+  /* The label reads as a heading for the whole masthead, not for the
+     headline column alone, so it spans the full width above both. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  /* Cap-height alignment: the support column's first line starts a
+     little below the headline's cap line, so it is nudged up to read
+     as level with it rather than sitting on the box edge. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support {
+    padding-top: 0.5rem;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support .lede,
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-support .hero-copy {
+    max-width: 44ch;
+  }
+
+  /* The headline owns a column now, so it no longer needs the 15ch
+     clamp that kept it off the full-width measure. */
+  /* Grid items stretch to their column by default, which turned inline
+     objects like the service "Premium offer" pill into a 700px bar. They
+     size to their content instead. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > *:not(.hero-support) {
+    justify-self: start;
+  }
+
+  /* A hero rail closes the masthead along its bottom edge, the way the
+     homepage's metric rail does, and gives the headline column something
+     to sit above when the support column is the taller of the two. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell > .hero-rail {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+    margin-top: clamp(2.25rem, 4vw, 3.25rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--v9-line);
+  }
+
+  /* A headline column can also be a wrapper, so a template with a very short
+     title can put a deck line under the h1 and give the column mass. It must
+     opt out of the justify-self:start above, or the block would size to its
+     max-content and set the h1 on one very long line. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell > .hero-headline {
+    grid-column: 1;
+    justify-self: stretch;
+  }
+
+  /* Wrapped, not stretched: at 18ch most headlines set on a single
+     line, which left the headline column a third the height of the
+     support column beside it and reopened the empty band this layout
+     exists to close. The homepage holds its hero headline to 12ch for
+     the same reason — the wrap is what gives the column presence. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .shell:has(> .hero-support) > h1 {
+    max-width: 13ch;
+  }
+}
+
+/* Headline column wrapper. Below 1000px the shell is not a grid, so it needs
+   its own bottom margin to sit off the support block; inside the grid the
+   rail supplies that spacing instead. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-headline {
+  margin-bottom: 1.75rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-headline h1 {
+  margin-bottom: 0.95rem;
+}
+
+@media (min-width: 1000px) {
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-headline {
+    margin-bottom: 0;
+  }
+}
+
+/* Hero deck: a second line under a short h1, in the heading voice but at
+   body scale, so "Pricing" or "Fractional CMO" is not left alone in a column
+   the support block is three times taller than. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-deck {
+  max-width: 22ch;
+  margin: 0;
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
+}
+
+/* Hero rail ---------------------------------------------------
+   The rail runs along the masthead's bottom edge (grid placement is in the
+   masthead media query above). These are the rules it needs at every width,
+   including below 1000px where the shell is not a grid and the rail is just
+   the last block in the hero. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-rail {
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--v9-line);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-rail-stack {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-rail-label {
+  max-width: none;
+  margin: 0;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Ledger of facts, the interior-page relative of the homepage metric rail:
+   an index, a value, a label, split by vertical rules. Used by the pricing,
+   booking and service heroes so the three read as the same object. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--v9-line);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell:first-child {
+  border-top: 0;
+  padding-top: 0.1rem;
+}
+
+@media (min-width: 720px) {
+  /* auto-flow rather than a fixed track count: the rail carries three cells
+     on service pages and four on pricing, and both should fill the width. */
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell {
+    padding: 0.1rem 1.4rem 0.1rem 0;
+    border-top: 0;
+    border-right: 1px solid var(--v9-line);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell + .hero-ledger-cell {
+    padding-left: 1.4rem;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-cell:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-index {
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-value {
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-ledger-label {
+  max-width: 26ch;
+  color: var(--v9-copy);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
 /* Serif (Fraunces) headline, matching the homepage hero. Interior pages
    run a touch smaller so the homepage stays the fullest expression. */
 .theme-wss-v9:not(.no-shared-chrome) .page-hero h1 {
@@ -242,6 +676,15 @@
   letter-spacing: -0.035em;
   text-wrap: balance;
   -webkit-text-fill-color: currentColor;
+}
+
+/* Long-title variant: article and case-study titles run 60+ characters and
+   wrap to 4-5 lines at the marketing-headline clamp above. Opt in with
+   `.page-hero-longtitle` on the templates that need it (insights/[slug],
+   case-studies/[slug]) rather than shrinking every short hero headline. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero.page-hero-longtitle h1 {
+  max-width: 34ch;
+  font-size: clamp(2.1rem, 3.6vw, 3.4rem);
 }
 
 .theme-wss-v9:not(.no-shared-chrome) .page-hero h1 em {
@@ -294,6 +737,9 @@
 
 .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand,
 .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-dark {
+  /* The label and its arrow are separate flex children, so the whitespace
+     between them in the markup is discarded and the gap has to be declared. */
+  gap: 0.45rem;
   min-height: 50px;
   padding: 0.9rem 1.3rem;
   border: 1px solid var(--v9-violet);
@@ -327,10 +773,18 @@
   color: var(--v9-violet-deep);
 }
 
+/* A summary band, not a section: the TL;DR sits tight under the hero it
+   summarises rather than taking a full --v9-space-section of its own. */
+.theme-wss-v9:not(.no-shared-chrome) .section-tldr {
+  padding-block: clamp(1.5rem, 2.5vw, 2.25rem);
+  border-bottom: 1px solid var(--v9-line);
+  background: var(--v9-paper);
+}
+
 /* Sections and editorial rhythm ------------------------------- */
 
 .theme-wss-v9:not(.no-shared-chrome) .section {
-  padding-block: clamp(4.75rem, 8vw, 7.5rem);
+  padding-block: var(--v9-space-section);
   border-bottom: 1px solid var(--v9-line);
   background: var(--v9-paper);
 }
@@ -344,7 +798,7 @@
 }
 
 .theme-wss-v9:not(.no-shared-chrome) :where(.section-intro, .content-header, .testimonials-header) {
-  padding-bottom: 1.15rem;
+  padding-bottom: var(--v9-space-section-intro-gap);
   border-bottom: 1px solid var(--v9-line);
 }
 
@@ -403,7 +857,16 @@
   .contact-option,
   .faq-item,
   .glossary-item,
-  .free-paid-card
+  .free-paid-card,
+  .handson-card,
+  .mistake-card,
+  .service-faq-item,
+  .case-proof-quote,
+  .symptoms-list li,
+  .case-section,
+  .start-step,
+  .quiz-question-card,
+  .result-card
 ) {
   border: 1px solid var(--v9-line);
   border-radius: var(--v9-radius);
@@ -430,9 +893,16 @@
   .fit-card,
   .strategic-panel:not(.strategic-panel-dark),
   .content-block,
-  .faq-item,
   .glossary-item,
-  .free-paid-card
+  .free-paid-card,
+  .handson-card,
+  .mistake-card,
+  .service-faq-item,
+  .case-proof-quote,
+  .case-section,
+  .start-step,
+  .quiz-question-card,
+  .result-card
 ):hover {
   transform: translateY(-4px);
   border-color: rgba(128, 108, 255, 0.38);
@@ -636,32 +1106,406 @@
   color: var(--v9-mint);
 }
 
-/* Footer ------------------------------------------------------- */
+/* Footer -------------------------------------------------------
+   Rebuilt as the page's closing object rather than a link dump. Four bands,
+   each closed by a rule: identity + next step / directory / keep in touch /
+   legal. The directory splits its columns with vertical rules the way the
+   homepage's metric rail does, which is what makes 29 links scan as four
+   groups instead of one ragged block.
 
-.theme-wss-v9 .site-footer-v2 {
+   Written at `:not(.no-shared-chrome)` (0-3-x) on purpose: components.css
+   styles `.site-footer`, `.site-footer-v2`, `.footer-links` and `.footer-col`
+   at 0-1-x to 0-2-x from two older layers, and the footer is shared chrome on
+   all 121 routes, so these have to win outright rather than on source order.
+   ------------------------------------------------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
   border-top: 1px solid var(--v9-line);
-  background: var(--v9-paper-2);
+  background:
+    radial-gradient(62% 46% at 88% 0%, rgba(128, 108, 255, 0.07), transparent 68%),
+    var(--v9-paper-2);
   color: var(--v9-ink);
 }
 
-.theme-wss-v9 .site-footer-v2::before {
-  background: linear-gradient(90deg, transparent, rgba(128, 108, 255, 0.32), transparent);
+/* The violet hairline that marked the top edge. Kept, brightened, because it
+   is the seam between the dark closing CTA card above and the footer. */
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2::before {
+  content: "";
+  position: absolute;
+  /* top:0, not -1px: the footer clips its own overflow to contain the violet
+     wash, which would clip a rule drawn outside its box. */
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(128, 108, 255, 0.34), transparent);
+  pointer-events: none;
 }
 
-.theme-wss-v9 .site-footer-v2 :is(h2, h3) {
-  color: var(--v9-violet-deep);
+/* Band 1 — identity and the one next step --------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-top {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(2.75rem, 5vw, 4rem) 0 clamp(2.25rem, 3.5vw, 3rem);
+  border-bottom: 1px solid var(--v9-line);
 }
 
-.theme-wss-v9 .site-footer-v2 :where(p, a) {
+@media (min-width: 900px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-top {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-logo {
+  width: 104px;
+  height: auto;
+  margin-bottom: 1.15rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-summary {
+  max-width: 46ch;
+  margin: 0 0 0.9rem;
+  color: var(--v9-ink);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-brand-arch {
+  max-width: 52ch;
+  margin: 0;
   color: var(--v9-copy);
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
-.theme-wss-v9 .site-footer-v2 a:hover {
+.theme-wss-v9:not(.no-shared-chrome) .footer-brand-arch strong {
   color: var(--v9-ink);
 }
 
-.theme-wss-v9 .site-footer-v2 .footer-bottom {
-  border-color: var(--v9-line);
+.theme-wss-v9:not(.no-shared-chrome) .footer-brand-arch a {
+  color: var(--v9-violet-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-label {
+  margin: 0;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-line {
+  max-width: 40ch;
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-cta {
+  gap: 0.45rem;
+  margin-top: 0.15rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-cta span[aria-hidden] {
+  transition: transform 160ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-next-cta:hover span[aria-hidden] {
+  transform: translateX(2px);
+}
+
+/* Demoted, deliberately: the scorecard is a secondary offer, so it reads as
+   a mono aside under the CTA rather than as a second button. Scoped to the
+   footer: /book also uses .footer-secondary-cta, mid-page, where the mono
+   treatment would be wrong. */
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 .footer-secondary-cta {
+  margin: 0;
+  color: var(--v9-copy);
+  font-family: var(--v9-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 .footer-secondary-cta a {
+  color: var(--v9-copy);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--v9-line-strong);
+  text-underline-offset: 3px;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .site-footer-v2 .footer-secondary-cta a:hover {
+  color: var(--v9-ink);
+  text-decoration-color: var(--v9-violet-deep);
+}
+
+/* Band 2 — the directory -------------------------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-directory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0;
+  border-bottom: 1px solid var(--v9-line);
+}
+
+@media (min-width: 900px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-directory {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-col {
+  min-width: 0;
+  padding: clamp(1.75rem, 3vw, 2.4rem) clamp(0.9rem, 1.8vw, 1.6rem);
+  border-right: 1px solid var(--v9-line);
+}
+
+/* Ledger edges. The two breakpoints are written as separate exclusive ranges
+   rather than a base plus overrides: the 2-column rules key off nth-child(2n),
+   which is a higher-specificity selector than the 4-column rules and so kept
+   winning at desktop and swallowing the rule between columns 2 and 3. */
+@media (max-width: 899px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--v9-line);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:nth-child(2n - 1) {
+    padding-left: 0;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:first-child {
+    padding-left: 0;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-col:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-col h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  color: var(--v9-ink);
+  font-family: var(--v9-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-col-index {
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links li {
+  margin: 0;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  color: var(--v9-copy);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-links a:hover {
+  color: var(--v9-ink);
+  transform: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-link-ext {
+  color: var(--v9-violet-deep);
+  font-size: 0.7rem;
+}
+
+/* Band 3 — keep in touch -------------------------------------- */
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep {
+  display: grid;
+  gap: 0;
+  border-bottom: 1px solid var(--v9-line);
+}
+
+@media (min-width: 860px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-cell {
+  min-width: 0;
+  padding: clamp(1.75rem, 3vw, 2.4rem) 0;
+}
+
+@media (min-width: 860px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep-newsletter {
+    border-right: 1px solid var(--v9-line);
+    padding-right: clamp(1.75rem, 3.5vw, 3rem);
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep-community {
+    padding-left: clamp(1.75rem, 3.5vw, 3rem);
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-community {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  border-top: 1px solid var(--v9-line);
+}
+
+@media (min-width: 860px) {
+  .theme-wss-v9:not(.no-shared-chrome) .footer-keep-community {
+    border-top: 0;
+  }
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-label {
+  margin: 0 0 0.85rem;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-community .footer-keep-label {
+  margin-bottom: 0.3rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-heading {
+  margin: 0;
+  color: var(--v9-ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep-copy {
+  max-width: 42ch;
+  margin: 0 0 0.35rem;
+  color: var(--v9-copy);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* The signup strip is a card everywhere else; inside the ledger it is one
+   cell of the grid, so its own frame comes off. */
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep .email-signup-strip {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep .email-signup-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-keep .email-signup-sub {
+  max-width: 46ch;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* Band 4 — legal strip ----------------------------------------
+   Full-bleed and dark, so the page closes on the same object it opened
+   with (the dark header pill) instead of fading out on a hairline. */
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  background: var(--v9-night);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  align-items: baseline;
+  padding: 1.35rem 0;
+  font-family: var(--v9-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-inner p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-links {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal-founder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal a {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .footer-legal a:hover {
+  color: #fff;
+  border-bottom-color: var(--v9-mint);
 }
 
 /* Responsive --------------------------------------------------- */
@@ -703,6 +1547,53 @@
   .theme-wss-v9 .mobile-menu :where(.nav-link, .mobile-subnav-link) {
     color: rgba(255, 255, 255, 0.76);
   }
+
+  /* Drawer hierarchy was inverted: a group's parent link and its children were
+     the same size and weight, and the children were the brighter of the two.
+     The parent becomes a mono section label — the same device the footer and
+     section intros use — so the children read as the list under it. */
+  .theme-wss-v9 .mobile-menu .mobile-nav-group-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
+    padding: 0.5rem 0.55rem 0.35rem;
+    color: rgba(255, 255, 255, 0.46);
+    font-family: var(--v9-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .theme-wss-v9 .mobile-menu .mobile-nav-group-label:hover,
+  .theme-wss-v9 .mobile-menu .mobile-nav-group-label.is-active {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .theme-wss-v9 .mobile-menu .mobile-subnav-link {
+    color: rgba(255, 255, 255, 0.86);
+    font-weight: 500;
+  }
+
+  .theme-wss-v9 .mobile-menu .mobile-subnav-link.is-active {
+    background: rgba(128, 108, 255, 0.26);
+    color: #fff;
+  }
+
+  /* The desktop active marker is a dot centred under a hug-width pill. In the
+     drawer the pill is full width, so the same dot lands a long way from the
+     label. Swap it for a left edge marker on that row. */
+  .theme-wss-v9 .mobile-menu .nav-link.is-active::after {
+    top: 0.55rem;
+    bottom: 0.55rem;
+    left: 0;
+    width: 2px;
+    height: auto;
+    border-radius: 999px;
+    transform: none;
+  }
 }
 
 @media (max-width: 720px) {
@@ -736,7 +1627,7 @@
 
   .theme-wss-v9:not(.no-shared-chrome) .page-hero .hero-actions {
     align-items: flex-start;
-    gap: 1rem;
+    gap: var(--v9-space-grid-gap);
   }
 
   .theme-wss-v9:not(.no-shared-chrome) .page-hero .button-brand,
@@ -769,4 +1660,498 @@
   ) {
     transition: none;
   }
+}
+
+/* ============================================================
+   TIER 3 — the homepage's interaction layer, promoted sitewide
+
+   Everything below used to live in home.css (homepage only) or
+   in the inline script at the bottom of index.astro. It now
+   lives here, is loaded by BaseLayout on all ~125 routes, and
+   is driven by the shared script in BaseLayout.astro. The
+   homepage copies were DELETED rather than left in place, so
+   there is exactly one definition and one listener per effect.
+
+   NO-JS CONTRACT (load-bearing): `.v9-reveal` is added by the
+   shared script, never by markup. If the script never runs the
+   class is never applied and every element stays at its normal
+   opacity — a reveal that hides content behind JS would be a
+   content bug, not a design flourish.
+   ============================================================ */
+
+/* Scroll progress. Rendered once by BaseLayout, so it is a single
+   fixed element on every route including the homepage. */
+.theme-wss-v9 .v9-scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--v9-violet), var(--v9-mint));
+  box-shadow: 0 0 14px rgba(200, 255, 101, 0.4);
+}
+
+/* Scroll reveal.
+
+   The offset uses the independent `translate` property, NOT `transform`.
+   The homepage's version set `transform: translateY(16px)` / `none` at
+   0-2-0, which outranks both `:where(.feature-card, …):hover`
+   (0-2-0, earlier in this file) and `.v9-service-card:hover` (0-1-1,
+   home.css) — so `is-visible` pinned every revealed card's transform to
+   `none` and the card hover lift never fired. On the homepage that has
+   been true for as long as the reveal has existed; promoting the rule
+   sitewide would have spread it to ~120 pages of interior cards.
+   `translate` composes with `transform` instead of replacing it, so the
+   reveal and the hover lift can both do their job. */
+.theme-wss-v9 .v9-reveal {
+  opacity: 0;
+  translate: 0 16px;
+  transition: opacity 550ms ease, translate 550ms ease;
+}
+
+.theme-wss-v9 .v9-reveal.is-visible {
+  opacity: 1;
+  translate: none;
+}
+
+/* Pointer-tracking hover glow. The custom properties are set by the
+   shared delegated pointermove listener; the 50% fallbacks mean an
+   element that has never been hovered still paints a centred glow
+   rather than an off-canvas one on a keyboard-only visit. */
+.theme-wss-v9 .v9-hover-glow {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+.theme-wss-v9 .v9-hover-glow::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  content: "";
+  opacity: 0;
+  background: radial-gradient(360px circle at var(--pointer-x) var(--pointer-y), rgba(128, 108, 255, 0.13), transparent 60%);
+  transition: opacity 220ms ease;
+}
+
+.theme-wss-v9 .v9-hover-glow:hover::after {
+  opacity: 1;
+}
+
+/* FAQ accordion: the homepage's `+ / −` marker on interior <details>.
+   The homepage renders an explicit <i> for the marker; interior FAQs are
+   plain <summary> elements across several templates, so the ring and the
+   two bars are built from ::after plus a background gradient rather than
+   asking 30 pages to add an element. */
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary {
+  display: flex;
+  gap: var(--v9-space-grid-gap);
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary::-webkit-details-marker {
+  display: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--v9-line);
+  border-radius: 50%;
+  /* Horizontal bar painted on the box; the vertical bar is the same
+     8×1px gradient rotated, which is what the transition animates. */
+  background:
+    linear-gradient(var(--v9-ink), var(--v9-ink)) center / 8px 1px no-repeat,
+    linear-gradient(var(--v9-ink), var(--v9-ink)) center / 1px 8px no-repeat;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item)[open] > summary::after {
+  transform: rotate(45deg);
+  border-color: var(--v9-violet);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary:hover::after {
+  border-color: var(--v9-violet);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-wss-v9 .v9-reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .theme-wss-v9 .v9-hover-glow::after,
+  .theme-wss-v9:not(.no-shared-chrome) :where(details.faq-item, details.service-faq-item) > summary::after {
+    transition: none;
+  }
+}
+
+/* Print escape. The reveal starts at opacity 0 and is cleared by an
+   IntersectionObserver that never fires for content the visitor has not
+   scrolled to, so printing or saving to PDF emitted blank space where that
+   content should be — 25 of 25 elements on /pricing, 46 of 47 on /facts.
+   Print is a no-motion medium anyway, so the reveal simply does not apply. */
+@media print {
+  .theme-wss-v9 .v9-reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .theme-wss-v9 .v9-scroll-progress {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Section eyebrows — ONE treatment
+
+   There were two competing objects: components.css:~5203 gave
+   every `.eyebrow` a violet pill, while site-v9.css's
+   `.page-hero .eyebrow` stripped it back to a plain mono label
+   with a mint dot. The homepage never used a pill anywhere —
+   its `.v9-section-number` is a bare mono label — so the pill
+   is the outlier and it goes. Section eyebrows are now the
+   hero eyebrow's geometry (mono, uppercase, 0.12em) in
+   --v9-violet-deep, which is the text-safe violet (7.3:1).
+   The mint dot stays a hero-only signature so the hero label
+   still outranks a section label.
+
+   Written at 0-2-0 (`.theme-wss-v9` + `:not(.no-shared-chrome)`;
+   the `:where()` adds nothing) so it beats components.css's
+   0-1-0 pill on specificity, not just source order. It also
+   restates `display`/`background`/`border`/`padding` rather than
+   only `color`, because the pill sets all of those and a colour
+   change alone would leave a violet-tinted capsule behind.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) :where(.eyebrow, .card-kicker) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Dark surfaces: the deep violet drops to ~2.4:1 on night, so those
+   eyebrows take mint. components.css already listed three of these
+   selectors for the pill's dark variant; they are restated here
+   because the rule above resets `color` at a higher weight. */
+.theme-wss-v9:not(.no-shared-chrome) :where(
+  .cta-inner,
+  .dark-rhythm-section,
+  .service-selector-aside,
+  .strategic-panel-dark,
+  .proof-inner
+) :where(.eyebrow, .card-kicker) {
+  color: var(--v9-mint);
+}
+
+/* The hero keeps its mint dot. Restated at this weight because the
+   reset above sets `background`/`border` on the same element. */
+.theme-wss-v9:not(.no-shared-chrome) .page-hero .eyebrow {
+  color: var(--v9-copy);
+  margin: 0 0 1.5rem;
+}
+
+/* ============================================================
+   "Related reading" — a compact card row, not a full band
+
+   30 templates render this section: an eyebrow, an h2 and 3–5
+   links. At the standard `.section` rhythm (clamp(4.75rem, 8vw,
+   7.5rem) block padding) that reads as an unfinished band on
+   every page it appears. `:has()` lets one rule compact every
+   instance without editing 30 files; the cards themselves take
+   the shared card vocabulary so they lift and glow like every
+   other card on the page.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > .related-insights-list),
+.theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > * > .related-insights-list) {
+  padding-block: var(--v9-space-section-compact);
+}
+
+/* The heading drops a tier too. A section whose whole body is a row of
+   links is navigation, not content, and sizing it like the argued sections
+   above it is what made these bands read as unfinished in the first place. */
+.theme-wss-v9:not(.no-shared-chrome) .section:has(.related-insights-list) :where(.section-intro, .content-header) h2,
+.theme-wss-v9:not(.no-shared-chrome) .section:has(> .shell > .related-insights-list) > .shell > h2 {
+  max-width: 24ch;
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+  line-height: 1.05;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15.5rem, 100%), 1fr));
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li {
+  display: flex;
+  border: 1px solid var(--v9-line);
+  border-radius: var(--v9-radius-small);
+  background: var(--v9-white);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li:hover {
+  transform: translateY(-4px);
+  border-color: rgba(128, 108, 255, 0.38);
+  box-shadow: var(--v9-shadow);
+}
+
+/* Plain-text items (the facts pages list metrics here, not links) need the
+   same padding the card-link supplies, so pad the item and unset it on the
+   link so a linked card still has a full-bleed hit area. */
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li {
+  padding: 1.05rem 1.15rem;
+  color: var(--v9-copy);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li:has(> .card-link) {
+  padding: 0;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li > .card-link {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  padding: 1.05rem 1.15rem;
+  color: var(--v9-ink);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li > .card-link:hover {
+  color: var(--v9-violet-deep);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li strong {
+  color: var(--v9-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-wss-v9:not(.no-shared-chrome) .related-insights-list > li {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Ledger grid — the homepage's collapsed-border device
+
+   The homepage builds two of these (principles ~648, logos ~549):
+   a grid whose cells share hairlines by taking their border from
+   the top/left of the container and the right/bottom of the cell.
+   Promoted here so interior templates can reach for the same
+   object instead of stacking more rounded cards.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  border-top: 1px solid var(--v9-line);
+  border-left: 1px solid var(--v9-line);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  min-height: 12.5rem;
+  padding: 1.5rem 1.4rem;
+  border-right: 1px solid var(--v9-line);
+  border-bottom: 1px solid var(--v9-line);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > .wss-ledger-index {
+  margin-bottom: 2.25rem;
+  color: var(--v9-violet-deep);
+  font-family: var(--v9-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > :where(p, span:not(.wss-ledger-index)) {
+  margin: 0;
+  color: var(--v9-copy);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > :where(h3, strong) {
+  margin: 0;
+  color: var(--v9-ink);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+/* Dark variant: same object on a night band. */
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark {
+  border-top-color: var(--v9-line-dark);
+  border-left-color: var(--v9-line-dark);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * {
+  border-right-color: var(--v9-line-dark);
+  border-bottom-color: var(--v9-line-dark);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * > .wss-ledger-index {
+  color: var(--v9-violet-bright);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * > :where(h3, strong) {
+  color: var(--v9-white);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger-dark > * > :where(p, span:not(.wss-ledger-index)) {
+  color: var(--v9-copy-dark);
+}
+
+@media (max-width: 720px) {
+  .theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * {
+    min-height: auto;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .wss-ledger > * > .wss-ledger-index {
+    margin-bottom: 0.35rem;
+  }
+}
+
+/* ============================================================
+   Section headings that are not direct children of .shell
+
+   The rule at ~379 only matches `.section > .shell > h2`, so any
+   page that nests the heading one level deeper (inside a
+   `.two-column` half, a conditional wrapper, a component) fell
+   back to the base h2 size — the same page could show a 63px and
+   a 37px section heading. Most of those have now been converted
+   to <SectionIntro>; the ones that cannot be (because the
+   heading shares a row with content) are caught here by the
+   eyebrow+heading pairing that IS the hand-rolled section intro.
+
+   `:not([class])` is the opt-out: an h2 a page deliberately
+   classed keeps whatever treatment that class gives it.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .section .eyebrow + h2:not([class]) {
+  max-width: 18ch;
+  font-size: clamp(2.35rem, 4.4vw, 4.35rem);
+  line-height: 0.98;
+}
+
+/* Two-column bands sit the heading BESIDE the content rather than
+   above it, so the full section scale overwhelms the row. One
+   documented compact scale, replacing the ad-hoc inline
+   font-sizes these three pages each invented separately. */
+.theme-wss-v9:not(.no-shared-chrome) .two-column .eyebrow + h2 {
+  max-width: 22ch;
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  line-height: 1.06;
+}
+
+/* ============================================================
+   Industry detail intro band (/industries/[slug])
+
+   The market's buyer problem is that page's thesis, so it takes
+   the homepage's device: a mono label beside a display-scale
+   statement on the night surface.
+
+   It lives here rather than in the template's scoped <style>
+   because `.theme-wss-v9:not(.no-shared-chrome) .section` sets
+   the paper background at 0-3-0, and an Astro scoped style tops
+   out at 0-2-0 — the band rendered as white text on white.
+   ============================================================ */
+.theme-wss-v9:not(.no-shared-chrome) .section.industry-problem {
+  border-bottom-color: var(--v9-line-dark);
+  background: var(--v9-night);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem-grid {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.28fr) 1fr;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* The shared eyebrow rule resolves to --v9-violet-deep, ~2.4:1 on night. */
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem .eyebrow {
+  margin: 0;
+  padding-top: 0.6rem;
+  color: var(--v9-mint);
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem h2 {
+  max-width: 22ch;
+  margin: 0;
+  color: var(--v9-white);
+  font-size: clamp(1.9rem, 3.4vw, 3.1rem);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .industry-problem-meta {
+  margin: 1.5rem 0 0;
+  color: var(--v9-copy-dark);
+  font-family: var(--v9-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 780px) {
+  .theme-wss-v9:not(.no-shared-chrome) .industry-problem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-wss-v9:not(.no-shared-chrome) .industry-problem .eyebrow {
+    padding-top: 0;
+  }
+}
+
+/* Facts-page variant of the ledger. A reference list wants a denser cell than
+   the marketing ledgers on the industry pages, and the track-record cells lead
+   with a display-scale number. Named at this weight (not in components.css)
+   because the base `.wss-ledger > *` recipe above is 0-3-0 and a page-layer
+   selector cannot reach it. */
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger.facts-ledger > * {
+  min-height: 0;
+  gap: 0.35rem;
+  padding: 1.05rem 1.15rem;
+}
+
+.theme-wss-v9:not(.no-shared-chrome) .wss-ledger.facts-ledger > .facts-metric > strong {
+  display: block;
+  color: var(--v9-ink);
+  font-family: var(--v9-display);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }

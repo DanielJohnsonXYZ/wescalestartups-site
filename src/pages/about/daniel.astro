@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
 import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
 
@@ -28,21 +29,32 @@ const schema = [
     <div class="shell">
       <p class="eyebrow">Founder</p>
       <h1>Daniel Johnson</h1>
-      <p class="lede">{founderStory.intro}</p>
-      <p>{founderStory.why}</p>
-      <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="daniel-book">{siteConfig.bookingLabel} →</a>
-        <a class="button button-light" href={siteConfig.danielSite} rel="noopener noreferrer" target="_blank">
-          Personal site →
-        </a>
+      <figure class="daniel-portrait">
+        <img
+          src="/images/daniel-headshot-960.webp"
+          alt="Daniel Johnson, founder of We Scale Startups"
+          width="960"
+          height="960"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+      <div class="hero-support">
+        <p class="lede">{founderStory.intro}</p>
+        <p>{founderStory.why}</p>
+        <div class="hero-actions">
+          <a class="button button-brand" href={siteConfig.bookingUrl} data-cta="daniel-book">{siteConfig.bookingLabel} →</a>
+          <a class="button button-light" href={siteConfig.danielSite} rel="noopener noreferrer" target="_blank">
+            Personal site →
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Proof base</p>
-      <h2>Operator context.</h2>
+      <SectionIntro eyebrow="Proof base" title="Operator context." />
       <ul class="daniel-credentials">
         {founderStory.credentials.map((c) => <li>{c}</li>)}
       </ul>
@@ -59,11 +71,11 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Podcast</p>
-      <h2>Host of {siteConfig.podcastName}</h2>
-      <p class="lede">
-        {siteConfig.podcastTagline} Subscribe on YouTube at {siteConfig.podcastYoutubeHandle}, or visit the show page for guest applications and updates.
-      </p>
+      <SectionIntro
+        eyebrow="Podcast"
+        title={`Host of ${siteConfig.podcastName}`}
+        body={`${siteConfig.podcastTagline} Subscribe on YouTube at ${siteConfig.podcastYoutubeHandle}, or visit the show page for guest applications and updates.`}
+      />
       <div class="hero-actions">
         <a class="button button-brand" href="/podcast" data-cta="daniel-podcast">Show page →</a>
         <a class="button button-light" href={siteConfig.podcastYoutubeUrl} target="_blank" rel="noopener" data-cta="daniel-podcast-youtube">
@@ -87,3 +99,40 @@ const schema = [
   </section>
 
 </BaseLayout>
+
+<style>
+  /* A two-word name leaves the masthead's left column empty for ~360px.
+     The portrait fills it and is the one image this page should lead with. */
+  .daniel-portrait {
+    margin: 1.75rem 0 0;
+    max-width: 340px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--v9-radius);
+  }
+  .daniel-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 999px) {
+    .daniel-portrait { max-width: 240px; }
+  }
+  /* The masthead grid auto-flows children, so a third child would land in
+     the support column. Placed explicitly: headline then portrait down the
+     left, support rail on the right. Matches site-v9's own breakpoint. */
+  @media (min-width: 1000px) {
+    .page-hero .shell > .daniel-portrait {
+      grid-column: 1;
+      grid-row: 3;
+      margin-top: 2.25rem;
+    }
+    /* The rail spans both left-column rows so row 2 sizes to the headline
+       alone — otherwise it stretches to the rail's height and drops the
+       portrait 400px down the page. */
+    .page-hero .shell > .hero-support {
+      grid-column: 2;
+      grid-row: 2 / span 2;
+    }
+  }
+</style>

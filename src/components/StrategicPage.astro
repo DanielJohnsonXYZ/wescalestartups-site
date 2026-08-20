@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "./SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, strategicPageRelatedInsights } from "../site";
 
@@ -65,21 +66,23 @@ const schema = [
     <div class="shell">
       <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
-      <p class="lede">{lede}</p>
-      <div class="hero-actions">
-        <a
-          class="button button-dark button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="strategic-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={scorecardUrl} data-cta="strategic-hero-scorecard">
-          Or, {scorecardLabel} →
-        </a>
-        <a class="button button-light" href="/services" data-cta="strategic-hero-services">Compare services</a>
+      <div class="hero-support">
+        <p class="lede">{lede}</p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="strategic-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={scorecardUrl} data-cta="strategic-hero-scorecard">
+            Or, {scorecardLabel} →
+          </a>
+          <a class="button button-light" href="/services" data-cta="strategic-hero-services">Compare services</a>
+        </div>
       </div>
     </div>
   </section>
@@ -123,8 +126,7 @@ const schema = [
     relatedInsights.length > 0 && (
       <section class="section">
         <div class="shell">
-          <p class="eyebrow">Related reading</p>
-          <h2>Notes that pair with this page.</h2>
+          <SectionIntro eyebrow="Related reading" title="Notes that pair with this page." />
           <ul class="related-insights-list">
             {relatedInsights.map((item) => (
               <li>
@@ -158,7 +160,7 @@ const schema = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={scorecardUrl} data-cta="strategic-final-scorecard">
+        <a class="link-arrow" href={scorecardUrl} data-cta="strategic-final-scorecard">
           Or, {scorecardLabel} →
         </a>
       </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { canonicalProofMetrics, serviceSnapshots, siteConfig, testimonials } from "../site";
 
@@ -86,23 +87,25 @@ const schema = [
         You've got the capital.<br />
         Now you need the <em>pipeline to match</em> — without a £150k CMO hire yet.
       </h1>
-      <p class="lede">
-        We install the acquisition system in 90 days and hand the weekly rhythm to your team, so growth
-        stops waiting on a hire you haven't made and a founder who's in every decision.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="post-raise-hero-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="post-raise-hero-scorecard">
-          Or, {siteConfig.scorecardLabel} →
-        </a>
+      <div class="hero-support">
+        <p class="lede">
+          We install the acquisition system in 90 days and hand the weekly rhythm to your team, so growth
+          stops waiting on a hire you haven't made and a founder who's in every decision.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="post-raise-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="post-raise-hero-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -122,8 +125,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">The moment you're in</p>
-      <h2>The round closed. The pressure didn't.</h2>
+      <SectionIntro eyebrow="The moment you're in" title="The round closed. The pressure didn't." />
       <ol class="moment-list">
         {moments.map((item, i) => (
           <li>
@@ -137,8 +139,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Self-qualify</p>
-      <h2>Built for this moment. Not for every moment.</h2>
+      <SectionIntro eyebrow="Self-qualify" title="Built for this moment. Not for every moment." />
       <p class="lede" style="max-width: 52ch; margin-top: 0.5rem;">
         Better you know in 30 seconds than 15 minutes into a call.
       </p>
@@ -165,8 +166,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Where to start</p>
-      <h2>The smallest commitment that answers your biggest question.</h2>
+      <SectionIntro eyebrow="Where to start" title="The smallest commitment that answers your biggest question." />
       <p class="lede" style="max-width: 56ch; margin-top: 0.5rem;">
         Most post-raise founders start in one of two places, depending on how sure you are of the constraint.
       </p>
@@ -222,8 +222,7 @@ const schema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Before you book</p>
-      <h2>What founders usually ask here.</h2>
+      <SectionIntro eyebrow="Before you book" title="What founders usually ask here." />
       <div class="grid-3" style="margin-top: 1.75rem;">
         {faqs.map((faq) => (
           <article class="feature-card">
@@ -237,8 +236,7 @@ const schema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Context that pairs with this moment.</h2>
+      <SectionIntro eyebrow="Related reading" title="Context that pairs with this moment." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         {relatedReading.map((item) => (
           <li>
@@ -271,7 +269,7 @@ const schema = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="post-raise-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="post-raise-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -302,7 +300,7 @@ const schema = [
   }
 
   .moment-num {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -331,21 +329,20 @@ const schema = [
     }
   }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .fit-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
     padding: 1.5rem 1.4rem;
   }
 
   .fit-label {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.68rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     display: inline-block;
-    border-radius: 100px;
+    border-radius: 999px;
     padding: 0.3rem 0.75rem;
     margin-bottom: 1rem;
   }
@@ -383,7 +380,7 @@ const schema = [
   .fit-card li::before {
     position: absolute;
     left: 0.1rem;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.75rem;
   }
 
@@ -411,7 +408,7 @@ const schema = [
     gap: 1.25rem;
     padding: 1.25rem 1.35rem;
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--v9-radius);
     background: var(--surface);
     text-decoration: none;
     color: inherit;
@@ -419,14 +416,18 @@ const schema = [
   }
 
   .ladder-item:hover {
-    border-color: rgba(102, 87, 255, 0.35);
+    border-color: color-mix(in srgb, var(--v9-violet) 35%, transparent);
     box-shadow: 0 12px 32px rgba(54, 38, 109, 0.1);
     transform: translateY(-2px);
   }
 
   .ladder-item.recommended {
-    border-color: rgba(102, 87, 255, 0.45);
-    background: linear-gradient(135deg, rgba(102, 87, 255, 0.08), rgba(255, 254, 250, 0.95));
+    border-color: color-mix(in srgb, var(--v9-violet) 45%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--v9-violet) 8%, transparent),
+      rgba(255, 254, 250, 0.95)
+    );
   }
 
   .ladder-name {
@@ -441,7 +442,7 @@ const schema = [
   }
 
   .ladder-tag {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -449,7 +450,7 @@ const schema = [
     color: #fff;
     background: var(--violet);
     padding: 0.2rem 0.55rem;
-    border-radius: 100px;
+    border-radius: 999px;
   }
 
   .ladder-desc {
@@ -469,7 +470,7 @@ const schema = [
   }
 
   .ladder-price {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--ink-2);

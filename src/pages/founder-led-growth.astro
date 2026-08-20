@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
@@ -51,6 +52,10 @@ const transitionSteps = [
 
 <BaseLayout
   path="/founder-led-growth"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Founder-led growth", path: "/founder-led-growth" }
+  ]}
   title="Founder-led Growth | We Scale Startups"
   description="Founder-led growth: when the founder is the best salesperson, but the company can't scale. Diagnose the bottleneck and build a repeatable system."
   keywords="founder-led growth, post-PMF startup, founder dependency, acquisition system, fractional CMO, startup growth bottleneck"
@@ -60,28 +65,29 @@ const transitionSteps = [
     <div class="shell">
       <p class="eyebrow">Founder-led growth</p>
       <h1>When the founder is the best salesperson, but the company can't scale.</h1>
-      <p class="lede">
-        Post-PMF startups often hit the same wall: the founder built traction, but growth depends on them personally. The job is to turn that into a system the team can run.
-      </p>
-      <div class="hero-actions">
-        <a
-          class="button button-brand button-with-subcopy"
-          href={siteConfig.bookingUrl}
-          data-cta="flg-book"
-          title={siteConfig.bookingCallReassurance}
-        >
-          <span class="button-label">{siteConfig.bookingLabel}</span>
-          <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
-        </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="flg-scorecard">{siteConfig.scorecardLabel} →</a>
+      <div class="hero-support">
+        <p class="lede">
+          Post-PMF startups often hit the same wall: the founder built traction, but growth depends on them personally. The job is to turn that into a system the team can run.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand button-with-subcopy"
+            href={siteConfig.bookingUrl}
+            data-cta="flg-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            <span class="button-label">{siteConfig.bookingLabel}</span>
+            <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="flg-scorecard">{siteConfig.scorecardLabel} →</a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The symptoms</p>
-      <h2>How to know you're stuck in founder-led growth.</h2>
+      <SectionIntro eyebrow="The symptoms" title="How to know you're stuck in founder-led growth." />
       <div class="grid-2" style="margin-top: 2rem;">
         {signals.map((item) => (
           <article class="feature-card">
@@ -95,8 +101,7 @@ const transitionSteps = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Why it happens</p>
-      <h2>The founder built traction. Now it's the bottleneck.</h2>
+      <SectionIntro eyebrow="Why it happens" title="The founder built traction. Now it's the bottleneck." />
       <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
         In the early days, founder-led sales and marketing are a superpower. But past PMF, the same pattern becomes the constraint: there's no acquisition system, no shared narrative, and no weekly rhythm the team can own.
       </p>
@@ -122,8 +127,7 @@ const transitionSteps = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">The transition</p>
-      <h2>From founder-led to system-led growth.</h2>
+      <SectionIntro eyebrow="The transition" title="From founder-led to system-led growth." />
       <div class="decision-grid" style="margin-top: 2rem;">
         {transitionSteps.map((item, i) => (
           <article class="decision-card">
@@ -138,8 +142,7 @@ const transitionSteps = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Proof</p>
-      <h2>Founders who stepped out of growth.</h2>
+      <SectionIntro eyebrow="Proof" title="Founders who stepped out of growth." />
       <p class="lede" style="max-width: 60ch; margin-top: 0.5rem;">
         These case studies show what happens when the constraint is named and a system is built around it.
       </p>
@@ -152,8 +155,7 @@ const transitionSteps = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Deeper context on founder-led growth.</h2>
+      <SectionIntro eyebrow="Related reading" title="Deeper context on founder-led growth." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
         <li><a class="card-link" href="/post-raise">Just raised? Build the pipeline before the CMO hire →</a></li>
         <li><a class="card-link" href="/insights/when-to-hire-fractional-cmo">When to hire a fractional CMO →</a></li>
@@ -183,7 +185,7 @@ const transitionSteps = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="flg-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="flg-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -200,17 +202,16 @@ const transitionSteps = [
   @media (min-width: 880px) {
     .decision-grid { grid-template-columns: repeat(3, 1fr); }
   }
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .decision-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
     padding: 1.5rem 1.4rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
   .decision-num {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--v9-mono);
     font-size: 0.7rem;
     font-weight: 700;
     color: var(--accent);
@@ -238,10 +239,9 @@ const transitionSteps = [
   @media (min-width: 720px) { .stage-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1080px) { .stage-grid { grid-template-columns: repeat(3, 1fr); } }
 
+  /* Border/radius/background and the hover lift come from the shared card
+     contract in site-v9.css. */
   .stage-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
     padding: 1.4rem 1.4rem;
   }
   .stage-card-fit { border-color: var(--accent); }

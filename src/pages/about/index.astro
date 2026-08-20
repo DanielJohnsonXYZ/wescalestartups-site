@@ -3,6 +3,7 @@ import BrandLogoSlot from "../../components/BrandLogoSlot.astro";
 import ProofLogos from "../../components/ProofLogos.astro";
 import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { aboutRelatedReading, canonicalProofMetrics, revenueInfluencedNote, siteConfig } from "../../site";
 
@@ -37,6 +38,10 @@ const aboutSchema = [
   description="Founder-led growth consultancy: diagnosis, acquisition systems, and fractional CMO support for post-PMF startups. Founded by Daniel Johnson."
   keywords="We Scale Startups about, Daniel Johnson founder, growth consultancy London, post-PMF startup support, acquisition system builder"
   path="/about"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" }
+  ]}
   schema={aboutSchema}
 >
   <!-- Hero -->
@@ -44,13 +49,15 @@ const aboutSchema = [
     <div class="shell">
       <p class="eyebrow">About</p>
       <h1>Founder-led growth consultancy for teams between traction and scale.</h1>
-      <TldrCallout
-        text="WSS is the operator bench for post-PMF B2B SaaS and AI startups: we diagnose the real constraint, wire acquisition and reporting into one system, and leave the team with a weekly rhythm they can run without founder heroics, not slides, not undifferentiated agency hours."
-      />
-      <p>
-        We Scale Startups works with post-PMF teams that already have signal but need clearer positioning, sharper acquisition,
-        and a repeatable operating rhythm, without committing to a £150k full-time CMO hire.
-      </p>
+      <div class="hero-support">
+        <TldrCallout
+          text="WSS is the operator bench for post-PMF B2B SaaS and AI startups: we diagnose the real constraint, wire acquisition and reporting into one system, and leave the team with a weekly rhythm they can run without founder heroics, not slides, not undifferentiated agency hours."
+        />
+        <p>
+          We Scale Startups works with post-PMF teams that already have signal but need clearer positioning, sharper acquisition,
+          and a repeatable operating rhythm, without committing to a £150k full-time CMO hire.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -148,9 +155,9 @@ const aboutSchema = [
           <li>20+ post-PMF startups advised across Seed–Series B</li>
           <li>Top-rated mentor on GrowthMentor (4.93/5)</li>
         </ul>
-        <div class="mt-6 flex flex-wrap items-center gap-4">
-          <img src="/images/logos/google.webp" alt="Google for Startups, Mentor" width="544" height="184" loading="lazy" decoding="async" class="h-8 w-auto" />
-          <img src="/images/logos/cambridge.webp" alt="University of Cambridge, Visiting Lecturer" width="544" height="184" loading="lazy" decoding="async" class="h-8 w-auto" />
+        <div class="founder-credibility-logos">
+          <img src="/images/logos/google.webp" alt="Google for Startups, Mentor" width="544" height="184" loading="lazy" decoding="async" class="founder-credibility-logo" />
+          <img src="/images/logos/cambridge.webp" alt="University of Cambridge, Visiting Lecturer" width="544" height="184" loading="lazy" decoding="async" class="founder-credibility-logo" />
           <BrandLogoSlot label="Imperial College" href="https://www.imperial.ac.uk/" />
           <BrandLogoSlot label="Techstars" href="https://www.techstars.com/" />
         </div>
@@ -185,8 +192,7 @@ const aboutSchema = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>How we work and who it is for.</h2>
+      <SectionIntro eyebrow="Related reading" title="How we work and who it is for." />
       <ul class="related-insights-list">
         {aboutRelatedReading.map((item) => (
           <li>
@@ -206,8 +212,7 @@ const aboutSchema = [
 
   <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">FAQ</p>
-      <h2>About WSS in three questions.</h2>
+      <SectionIntro eyebrow="FAQ" title="About WSS in three questions." />
       <div class="grid-3">
         {aboutFaqs.map((item) => (
           <article class="feature-card">
@@ -239,7 +244,7 @@ const aboutSchema = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="about-final-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="about-final-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
         <a class="button button-light" href="/contact" data-cta="about-final-contact">
@@ -269,5 +274,16 @@ const aboutSchema = [
     letter-spacing: 0.12em;
     color: var(--accent);
     margin: 1.75rem 0 0.65rem;
+  }
+  .founder-credibility-logos {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  .founder-credibility-logo {
+    height: 2rem;
+    width: auto;
   }
 </style>

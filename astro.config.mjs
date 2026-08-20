@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sentry from "@sentry/astro";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://wescalestartups.com",
@@ -27,9 +26,6 @@ export default defineConfig({
       }
     })
   ],
-  vite: {
-    plugins: [tailwindcss()]
-  },
   markdown: {
     shikiConfig: {
       theme: "github-light"

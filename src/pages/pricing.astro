@@ -1,6 +1,7 @@
 ---
 import OfferRoutingCards from "../components/OfferRoutingCards.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { pricingRelatedReading, pricingTrustBullets, pricingTiers, siteConfig } from "../site";
 
@@ -22,6 +23,10 @@ const pricingFaqs = [
 
 <BaseLayout
   path="/pricing"
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Pricing", path: "/pricing" }
+  ]}
   title="Startup Growth Pricing | We Scale Startups"
   description="Engagement ranges for Growth Diagnosis, 90-Day Sprint, Acquisition System Build, and Fractional CMO. Honest ranges so you can self-qualify."
   keywords="fractional CMO pricing, growth diagnosis cost, 90-day growth sprint price, acquisition system build, post-PMF startup consulting UK"
@@ -34,16 +39,47 @@ const pricingFaqs = [
     <div class="shell">
       <p class="eyebrow">Pricing</p>
       <h1>Honest UK pricing. No "request a quote" gating.</h1>
-      <p class="lede">
-        All prices in GBP, set for the UK market. Every tier is a range: where you land depends on team complexity, scope, and timeline.
-        If the ranges aren't workable for you, an agency or in-house hire will probably be a better fit.
-      </p>
+      <div class="hero-support">
+        <p class="lede">
+          All prices in GBP, set for the UK market. Every tier is a range: where you land depends on team complexity, scope, and timeline.
+          If the ranges aren't workable for you, an agency or in-house hire will probably be a better fit.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-brand"
+            href={siteConfig.bookingUrl}
+            data-cta="pricing-hero-book"
+            title={siteConfig.bookingCallReassurance}
+          >
+            {siteConfig.bookingLabel} <span aria-hidden="true">→</span>
+          </a>
+          <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="pricing-hero-scorecard">
+            Or, {siteConfig.scorecardLabel} →
+          </a>
+        </div>
+        <p class="hero-microcopy">{siteConfig.bookingSubcopy}</p>
+      </div>
+      {/* The page's whole promise is published ranges, so the rail answers the
+          headline in the hero instead of making the reader scroll for it. Same
+          data as the tier cards below (pricingTiers), no second source. */}
+      <div class="hero-rail hero-rail-stack">
+        <p class="hero-rail-label">Engagement ranges</p>
+        <div class="hero-ledger">
+          {pricingTiers.map((tier, index) => (
+            <div class="hero-ledger-cell">
+              <span class="hero-ledger-index">{String(index + 1).padStart(2, "0")}</span>
+              <span class="hero-ledger-value">{tier.priceFrom}</span>
+              <span class="hero-ledger-label">{tier.name} · {tier.duration}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <h2 class="visually-hidden">Engagement tiers</h2>
     <div class="shell">
+      <SectionIntro eyebrow="Engagement tiers" title="Pick the smallest engagement that answers your question." />
       <div class="pricing-grid">
         {pricingTiers.map((tier, idx) => (
           <article
@@ -75,7 +111,7 @@ const pricingFaqs = [
         Limited number of clients each quarter.
       </div>
 
-      <ul class="pricing-trust-list" aria-label="How engagements work">
+      <ul class="trust-list pricing-trust-list" aria-label="How engagements work">
         {pricingTrustBullets.map((line) => (
           <li>{line}</li>
         ))}
@@ -85,26 +121,28 @@ const pricingFaqs = [
 
   <OfferRoutingCards />
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="shell two-column">
       <div>
         <p class="eyebrow">What's not in the price</p>
-        <h2 style="font-size:clamp(2.2rem,3.8vw,3rem);line-height:1.05;font-weight:700;margin:0.4rem 0 1.4rem;">Media spend. Tools. Vendors.</h2>
+        <h2>Media spend. Tools. Vendors.</h2>
         <p class="lead-copy">Our fee covers strategy, system design, execution, and reporting. Paid media spend, tooling subscriptions, and any third-party vendor fees are separate and pass through at cost.</p>
       </div>
-      <div class="grid grid-2">
-        <article class="feature-card compact-card"><p>Paid media spend (Google, Meta, LinkedIn, etc.)</p></article>
-        <article class="feature-card compact-card"><p>Tools and subscriptions (analytics, CRM, automation)</p></article>
-        <article class="feature-card compact-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
-        <article class="feature-card compact-card"><p>Travel for events or trade shows (if applicable)</p></article>
+      {/* Four identical cards read as four features until something marks them
+          as exclusions. The × is the site's own glyph for "not included" and
+          costs nothing — no icon set enters the build. */}
+      <div class="grid grid-2 exclusion-grid">
+        <article class="feature-card compact-card exclusion-card"><p>Paid media spend (Google, Meta, LinkedIn, etc.)</p></article>
+        <article class="feature-card compact-card exclusion-card"><p>Tools and subscriptions (analytics, CRM, automation)</p></article>
+        <article class="feature-card compact-card exclusion-card"><p>Third-party vendors (linkbuilding, video, design)</p></article>
+        <article class="feature-card compact-card exclusion-card"><p>Travel for events or trade shows (if applicable)</p></article>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="shell">
-      <p class="eyebrow">Related reading</p>
-      <h2>Context for the numbers.</h2>
+      <SectionIntro eyebrow="Related reading" title="Context for the numbers." />
       <ul class="related-insights-list">
         {pricingRelatedReading.map((item) => (
           <li>
@@ -119,11 +157,11 @@ const pricingFaqs = [
 
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">Pricing FAQ</p>
+      <SectionIntro eyebrow="Pricing FAQ" title="Common questions before you book." />
       <div class="grid-3">
         {pricingFaqs.map((faq) => (
           <article class="feature-card">
-            <h2>{faq.question}</h2>
+            <h3>{faq.question}</h3>
             <p>{faq.answer}</p>
           </article>
         ))}
@@ -150,7 +188,7 @@ const pricingFaqs = [
           <span class="button-label">{siteConfig.bookingLabel}</span>
           <span class="button-subcopy">{siteConfig.bookingSubcopy}</span>
         </a>
-        <a class="button button-light" href={siteConfig.scorecardUrl} data-cta="pricing-scorecard">
+        <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="pricing-scorecard">
           Or, {siteConfig.scorecardLabel} →
         </a>
       </div>
@@ -159,20 +197,34 @@ const pricingFaqs = [
 </BaseLayout>
 
 <style>
+  /* Shared surface lives in .trust-list (components.css); only the top
+     margin is page-specific here, this list follows the disclaimer above. */
   .pricing-trust-list {
     margin: 1.75rem 0 0;
-    padding: 1.15rem 1.25rem 1.2rem 1.5rem;
-    max-width: 52rem;
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    background: var(--surface);
-    list-style: disc;
   }
-  .pricing-trust-list li {
-    margin: 0.35rem 0;
-    padding-left: 0.15rem;
+
+  /* Exclusions, not features. Border/radius/background still come from the
+     shared card contract in site-v9.css; this only adds the marker. */
+  .exclusion-card {
+    position: relative;
+    padding-left: 3.1rem;
+  }
+
+  .exclusion-card::before {
+    content: "×";
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: translateY(-50%);
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
     color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-family: var(--v9-mono);
+    font-size: 0.85rem;
+    line-height: 1;
   }
 </style>

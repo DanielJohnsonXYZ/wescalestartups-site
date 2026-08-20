@@ -590,6 +590,9 @@ const caseFaqs = [
     color: var(--accent);
   }
   .case-result-text {
+    /* `.case-section p` above resolves to 0-3-1 once Astro adds its scope
+       attribute to both compounds, so a 0-2-0 class rule cannot clear its
+       bottom margin without this. */
     margin: 0 !important;
     color: var(--ink);
     font-family: var(--v9-sans);

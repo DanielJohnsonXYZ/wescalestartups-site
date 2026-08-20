@@ -190,7 +190,7 @@ const audiences = [
           else, announcing that there was nothing to show. It is one line of
           microcopy under the subscribe tiles now, which is the weight the
           fact deserves. */}
-      <p class="hero-microcopy podcast-episode-note">
+      <p class="podcast-episode-note">
         Each release will get a dedicated URL here with a summary, key takeaways, and links to the systems discussed.
       </p>
     </div>
@@ -233,7 +233,9 @@ const audiences = [
           <article class="audience-card">
             <h3>{audience.who}</h3>
             <p class="audience-thought-label">Thinking</p>
-            <blockquote class="audience-thought">{audience.thought}</blockquote>
+            {/* A <p>, not a <blockquote>: these are the questions the audience
+                is assumed to be asking, not attributed quotations. */}
+            <p class="audience-thought">{audience.thought}</p>
           </article>
         ))}
       </div>
@@ -370,8 +372,15 @@ const audiences = [
     align-items: center;
   }
 
+  /* Not .hero-microcopy: that recipe is uppercase mono at 0.72rem, built for
+     three-word labels like "Free · 20 minutes · No pitch". A full sentence in
+     it is close to unreadable. */
   .podcast-episode-note {
-    margin-top: 1.25rem;
+    max-width: 62ch;
+    margin: 1.4rem 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
   }
 
   .subscribe-buttons {
@@ -383,15 +392,36 @@ const audiences = [
   @media (min-width: 600px) {
     .subscribe-buttons { grid-template-columns: repeat(3, 1fr); }
   }
-  /* Border/radius/background and the hover lift come from the shared card
-     contract in site-v9.css. */
+  /* The comment that used to sit here claimed the shared card contract in
+     site-v9.css supplied border, radius, background and the hover lift. It
+     does not: .subscribe-btn is not in that selector list, so these three
+     tiles rendered as bare text on the paper-2 band — the page's primary
+     subscribe affordances with no surface at all. The contract's own recipe
+     is restated here rather than adding a class to a global list, because
+     these are links, not cards, and only this page uses them. */
   .subscribe-btn {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     padding: 1.25rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--v9-radius);
+    background: var(--surface);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
     text-decoration: none;
     color: var(--ink);
+    transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  }
+  .subscribe-btn:hover {
+    transform: translateY(-4px);
+    border-color: rgba(128, 108, 255, 0.38);
+    box-shadow: var(--v9-shadow);
+  }
+  /* The tile is the click target, so the arrow marks it as one without
+     needing an icon set. */
+  .subscribe-btn strong::after {
+    content: " →";
+    color: var(--accent);
   }
   .subscribe-btn strong {
     font-size: 1rem;
@@ -492,8 +522,6 @@ const audiences = [
   }
   .audience-thought {
     margin: 0;
-    padding: 0;
-    border: 0;
     color: var(--ink);
     font-family: var(--v9-display);
     font-size: 1.02rem;

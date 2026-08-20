@@ -387,23 +387,6 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
             ? "Free. The editable workbook and guide are available immediately after signup."
             : "Instant download. Optional: leave your email below for the Growth Bottleneck note."}
         </p>
-        <div id={isGrowthExperimentPlanner ? "get-planner" : undefined}>
-          <EmailSignup
-            formId={`magnet-${slug}`}
-            heading={isGrowthExperimentPlanner ? "Send me the 90-Day Growth Experiment Planner" : "Want the biweekly growth note too?"}
-            subtext={isGrowthExperimentPlanner
-              ? "Get the editable workbook, the concise field guide, and five practical emails that help you turn it into a working quarterly rhythm."
-              : "One practical note on pipeline, positioning, and founder-led systems."}
-            buttonLabel={isGrowthExperimentPlanner ? "Get the planner →" : "Get the note →"}
-            sourceType="lead_magnet"
-            leadMagnet={slug}
-            sourcePage={`/resources/${slug}`}
-            finePrint={isGrowthExperimentPlanner
-              ? "Includes the five-email planner implementation series. Unsubscribe any time."
-              : "No spam. Unsubscribe any time."}
-            successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}
-          />
-        </div>
       </div>
     </div>
   </section>
@@ -414,6 +397,23 @@ const layoutTitle = `${magnet.title} | We Scale Startups`;
       <ul class="check-list">
         {details.whatYouGet.map((item) => <li>{item}</li>)}
       </ul>
+      <div id={isGrowthExperimentPlanner ? "get-planner" : undefined}>
+        <EmailSignup
+          formId={`magnet-${slug}`}
+          heading={isGrowthExperimentPlanner ? "Send me the 90-Day Growth Experiment Planner" : "Want the biweekly growth note too?"}
+          subtext={isGrowthExperimentPlanner
+            ? "Get the editable workbook, the concise field guide, and five practical emails that help you turn it into a working quarterly rhythm."
+            : "One practical note on pipeline, positioning, and founder-led systems."}
+          buttonLabel={isGrowthExperimentPlanner ? "Get the planner →" : "Get the note →"}
+          sourceType="lead_magnet"
+          leadMagnet={slug}
+          sourcePage={`/resources/${slug}`}
+          finePrint={isGrowthExperimentPlanner
+            ? "Includes the five-email planner implementation series. Unsubscribe any time."
+            : "No spam. Unsubscribe any time."}
+          successRedirect={isGrowthExperimentPlanner ? "/resources/90-day-growth-sprint-planner/thanks" : undefined}
+        />
+      </div>
     </div>
   </section>
 

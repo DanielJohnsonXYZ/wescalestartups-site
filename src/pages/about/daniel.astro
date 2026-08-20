@@ -29,6 +29,16 @@ const schema = [
     <div class="shell">
       <p class="eyebrow">Founder</p>
       <h1>Daniel Johnson</h1>
+      <figure class="daniel-portrait">
+        <img
+          src="/images/daniel-headshot-960.webp"
+          alt="Daniel Johnson, founder of We Scale Startups"
+          width="960"
+          height="960"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
       <div class="hero-support">
         <p class="lede">{founderStory.intro}</p>
         <p>{founderStory.why}</p>
@@ -89,3 +99,40 @@ const schema = [
   </section>
 
 </BaseLayout>
+
+<style>
+  /* A two-word name leaves the masthead's left column empty for ~360px.
+     The portrait fills it and is the one image this page should lead with. */
+  .daniel-portrait {
+    margin: 1.75rem 0 0;
+    max-width: 340px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--v9-radius);
+  }
+  .daniel-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 999px) {
+    .daniel-portrait { max-width: 240px; }
+  }
+  /* The masthead grid auto-flows children, so a third child would land in
+     the support column. Placed explicitly: headline then portrait down the
+     left, support rail on the right. Matches site-v9's own breakpoint. */
+  @media (min-width: 1000px) {
+    .page-hero .shell > .daniel-portrait {
+      grid-column: 1;
+      grid-row: 3;
+      margin-top: 2.25rem;
+    }
+    /* The rail spans both left-column rows so row 2 sizes to the headline
+       alone — otherwise it stretches to the rail's height and drops the
+       portrait 400px down the page. */
+    .page-hero .shell > .hero-support {
+      grid-column: 2;
+      grid-row: 2 / span 2;
+    }
+  }
+</style>

@@ -183,13 +183,15 @@
 }
 
 /* The dropdown marker was a "⌄" text glyph: oversized, sitting low on the
-   baseline, and inheriting --dim (a light-mode grey) on a near-black bar.
-   Drawn instead so it can be sized and aligned optically, and so it can
-   answer the open state. */
-/* The link itself is display:block in components.css, so the label and the
-   marker were plain inline content: `gap` did nothing and the marker, being
-   an inline box, ignored its own width/height and painted its borders down
-   the whole line box — the vertical stroke beside each dropdown label. */
+   baseline, and inheriting --dim (a light-mode grey) on a near-black bar. It
+   is drawn instead, so it can be sized and aligned optically and can answer
+   the open state.
+
+   The inline-flex here is load-bearing: .nav-link is display:block in
+   components.css, so the label and the marker were plain inline content —
+   `gap` did nothing, and the marker, as an inline box, ignored its own
+   width/height and painted its borders down the whole line box. That was the
+   vertical stroke that appeared beside every dropdown label. */
 .theme-wss-v9 .nav-link-parent {
   display: inline-flex;
   align-items: center;

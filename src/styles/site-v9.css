@@ -79,11 +79,17 @@
 /* The blurred band under the pill used to stop on a hard horizontal edge,
    so scrolled content was sliced rather than passing under the bar. A short
    fade below the header softens the join. It cannot be a mask on the header
-   itself — that would fade the pill's own bottom edge with it. */
+   itself — that would fade the pill's own bottom edge with it. z-index:-1 is
+   required: .header-inner carries a backdrop-filter, which makes it a stacking
+   context, so the open dropdown's z-index:70 is trapped inside it and this
+   pseudo-element (later in tree order, same level) otherwise hazed the top of
+   every panel. Negative z-index keeps it inside .site-header's own context, so
+   it still sits above the page. */
 .theme-wss-v9 .site-header::after {
   content: "";
   position: absolute;
   inset: 100% 0 auto;
+  z-index: -1;
   height: 1.1rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
   pointer-events: none;
@@ -180,15 +186,18 @@
    baseline, and inheriting --dim (a light-mode grey) on a near-black bar.
    Drawn instead so it can be sized and aligned optically, and so it can
    answer the open state. */
+/* The link itself is display:block in components.css, so the label and the
+   marker were plain inline content: `gap` did nothing and the marker, being
+   an inline box, ignored its own width/height and painted its borders down
+   the whole line box — the vertical stroke beside each dropdown label. */
 .theme-wss-v9 .nav-link-parent {
+  display: inline-flex;
+  align-items: center;
   gap: 0.36rem;
 }
 
 .theme-wss-v9 .nav-caret {
-  /* align-self is load-bearing: as a flex child of the link the span was
-     stretching to the line box, so the rotated square rendered as a full-
-     height vertical stroke beside every dropdown label. */
-  align-self: center;
+  display: block;
   flex: 0 0 auto;
   box-sizing: border-box;
   width: 0.34rem;

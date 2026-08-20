@@ -76,6 +76,19 @@
   -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
 
+/* The blurred band under the pill used to stop on a hard horizontal edge,
+   so scrolled content was sliced rather than passing under the bar. A short
+   fade below the header softens the join. It cannot be a mask on the header
+   itself — that would fade the pill's own bottom edge with it. */
+.theme-wss-v9 .site-header::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 auto;
+  height: 1.1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
 .theme-wss-v9 .site-header .shell {
   width: min(calc(100% - 3rem), 1320px);
 }
@@ -92,6 +105,26 @@
   -webkit-backdrop-filter: blur(24px) saturate(140%);
 }
 
+/* Optical centring. components.css lays the bar out as `auto 1fr auto`, which
+   centres the nav in the gap between the logo and the CTA — and because the
+   mint CTA is ~70px wider than the logo, that put the nav ~22px left of the
+   pill's true centre. Equal side columns centre it against the bar itself.
+   Desktop only: below 1060px the nav and CTA are hidden and the drawer
+   trigger relies on the flexible middle column to stay flush right. */
+@media (min-width: 1061px) {
+  .theme-wss-v9 .header-inner {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .theme-wss-v9 .header-inner > .brand {
+    justify-self: start;
+  }
+
+  .theme-wss-v9 .header-inner > .header-cta {
+    justify-self: end;
+  }
+}
+
 .theme-wss-v9 .brand img {
   width: 82px;
   max-height: 42px;
@@ -99,57 +132,176 @@
   filter: brightness(0) invert(1);
 }
 
+/* Nav type. Light-on-dark optically bolds and fills counters, so the labels
+   were set at 500/66% white — legible enough to pass, quiet enough to read as
+   unfinished. A little more light and a little tracking is what small caps-
+   height sans text on a near-black bar needs. */
 .theme-wss-v9 .nav-link {
+  position: relative;
   border-radius: 999px;
-  padding: 0.58rem 0.7rem;
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 0.8rem;
+  padding: 0.56rem 0.76rem;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.82rem;
   font-weight: 500;
+  letter-spacing: 0.008em;
+  transition: color 160ms ease, background-color 160ms ease;
 }
 
 .theme-wss-v9 .nav-link:hover,
-.theme-wss-v9 .nav-link.is-active,
-.theme-wss-v9 .nav-dropdown.is-active > .nav-link {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-.theme-wss-v9 .nav-menu {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(17, 18, 26, 0.98);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
-}
-
-.theme-wss-v9 .nav-menu-link {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.theme-wss-v9 .nav-menu-link:hover,
-.theme-wss-v9 .nav-menu-link.is-active {
+.theme-wss-v9 .nav-dropdown:hover > .nav-link,
+.theme-wss-v9 .nav-dropdown:focus-within > .nav-link {
   background: rgba(255, 255, 255, 0.07);
   color: #fff;
 }
 
+.theme-wss-v9 .nav-link.is-active,
+.theme-wss-v9 .nav-dropdown.is-active > .nav-link {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* "Where am I" uses the same mint dot the page's own eyebrow uses, rather
+   than asking a 4%-lighter pill to carry the whole signal. */
+.theme-wss-v9 .nav-link.is-active::after,
+.theme-wss-v9 .nav-dropdown.is-active > .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0.3rem;
+  left: 50%;
+  width: 0.24rem;
+  height: 0.24rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--v9-mint);
+}
+
+/* The dropdown marker was a "⌄" text glyph: oversized, sitting low on the
+   baseline, and inheriting --dim (a light-mode grey) on a near-black bar.
+   Drawn instead so it can be sized and aligned optically, and so it can
+   answer the open state. */
+.theme-wss-v9 .nav-link-parent {
+  gap: 0.36rem;
+}
+
+.theme-wss-v9 .nav-caret {
+  /* align-self is load-bearing: as a flex child of the link the span was
+     stretching to the line box, so the rotated square rendered as a full-
+     height vertical stroke beside every dropdown label. */
+  align-self: center;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 0.34rem;
+  height: 0.34rem;
+  margin-top: -0.16rem;
+  border-right: 1.2px solid currentColor;
+  border-bottom: 1.2px solid currentColor;
+  color: inherit;
+  opacity: 0.6;
+  transform: rotate(45deg);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.theme-wss-v9 .nav-dropdown:hover .nav-caret,
+.theme-wss-v9 .nav-dropdown:focus-within .nav-caret {
+  opacity: 1;
+  transform: rotate(225deg);
+}
+
+.theme-wss-v9 .nav-menu {
+  /* Measured from the link, not the bar: the pill's own padding sits below
+     the link box, so a 0.7rem offset left the panel almost touching it. */
+  top: calc(100% + 1.05rem);
+  width: min(21rem, calc(100vw - 2rem));
+  gap: 0.1rem;
+  padding: 0.45rem;
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--v9-radius-small);
+  background: linear-gradient(180deg, var(--v9-night-3), var(--v9-night-2));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* Hover bridge between bar and panel, widened to match the larger gap. */
+.theme-wss-v9 .nav-menu::before {
+  inset: -1.2rem 0 auto;
+  height: 1.25rem;
+}
+
+/* Mono label at the head of the panel. Every other grouped surface on the
+   site names itself with metadata type; without it the panel opened cold on
+   its first link and read as a floating rectangle. Ordered first because the
+   panel is a grid and ::after is otherwise its last item. */
+.theme-wss-v9 .nav-menu::after {
+  content: attr(data-menu-label);
+  order: -1;
+  margin: 0.15rem 0 0.35rem;
+  padding: 0 0.7rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--v9-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.theme-wss-v9 .nav-menu-link {
+  gap: 0.15rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.55rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.theme-wss-v9 .nav-menu-link:hover,
+.theme-wss-v9 .nav-menu-link.is-active {
+  background: rgba(128, 108, 255, 0.24);
+  color: #fff;
+}
+
+.theme-wss-v9 .nav-menu-link strong {
+  font-size: 0.855rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 .theme-wss-v9 .nav-menu-link span {
-  color: rgba(255, 255, 255, 0.64);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.theme-wss-v9 .nav-menu-link:hover span,
+.theme-wss-v9 .nav-menu-link.is-active span {
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .theme-wss-v9 .header-cta,
 .theme-wss-v9 .site-header .button-brand {
   min-height: 44px;
-  padding-inline: 1.1rem;
+  padding-inline: 1.15rem;
   border: 0;
   border-radius: 999px;
   background: var(--v9-mint) !important;
-  box-shadow: none;
+  box-shadow: 0 8px 24px rgba(200, 255, 101, 0.16);
   color: var(--v9-night) !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   -webkit-text-fill-color: var(--v9-night) !important;
+}
+
+.theme-wss-v9 .header-cta span[aria-hidden] {
+  transition: transform 160ms ease;
 }
 
 .theme-wss-v9 .header-cta:hover,
 .theme-wss-v9 .site-header .button-brand:hover {
   transform: translateY(-1px);
   background: #dcff9e !important;
+}
+
+.theme-wss-v9 .header-cta:hover span[aria-hidden] {
+  transform: translateX(2px);
 }
 
 /* Breadcrumbs ------------------------------------------------- */
@@ -858,6 +1010,53 @@
 
   .theme-wss-v9 .mobile-menu :where(.nav-link, .mobile-subnav-link) {
     color: rgba(255, 255, 255, 0.76);
+  }
+
+  /* Drawer hierarchy was inverted: a group's parent link and its children were
+     the same size and weight, and the children were the brighter of the two.
+     The parent becomes a mono section label — the same device the footer and
+     section intros use — so the children read as the list under it. */
+  .theme-wss-v9 .mobile-menu .mobile-nav-group-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
+    padding: 0.5rem 0.55rem 0.35rem;
+    color: rgba(255, 255, 255, 0.46);
+    font-family: var(--v9-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .theme-wss-v9 .mobile-menu .mobile-nav-group-label:hover,
+  .theme-wss-v9 .mobile-menu .mobile-nav-group-label.is-active {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .theme-wss-v9 .mobile-menu .mobile-subnav-link {
+    color: rgba(255, 255, 255, 0.86);
+    font-weight: 500;
+  }
+
+  .theme-wss-v9 .mobile-menu .mobile-subnav-link.is-active {
+    background: rgba(128, 108, 255, 0.26);
+    color: #fff;
+  }
+
+  /* The desktop active marker is a dot centred under a hug-width pill. In the
+     drawer the pill is full width, so the same dot lands a long way from the
+     label. Swap it for a left edge marker on that row. */
+  .theme-wss-v9 .mobile-menu .nav-link.is-active::after {
+    top: 0.55rem;
+    bottom: 0.55rem;
+    left: 0;
+    width: 2px;
+    height: auto;
+    border-radius: 999px;
+    transform: none;
   }
 }
 

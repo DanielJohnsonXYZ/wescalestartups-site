@@ -100,8 +100,11 @@ const {
 const currentPath = normalizePath(path);
 const stickyBookCta =
   stickyBookCtaProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
-const showAnnouncement =
-  showAnnouncementProp ?? !(currentPath === "/book" || currentPath.startsWith("/book/"));
+/* The scorecard promo used to run as a banner above the header on every
+   route, which made a secondary offer the first thing on the page and
+   pushed the hero down. It is off by default now; a page that genuinely
+   wants a banner still opts in with showAnnouncement. */
+const showAnnouncement = showAnnouncementProp ?? false;
 // Don't interrupt readers who are already on the signup page or in the
 // booking flow — everywhere else the popup is on by default.
 const newsletterPopup =

@@ -199,8 +199,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
   ],
   "acquisition-system-build": [
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
-    { href: "/build", label: "Build · execution framing" },
-    { href: "/transfer", label: "Transfer · handoff framing" }
+    { href: "/how-it-works", label: "Build and transfer, phase by phase" }
   ],
   "fractional-cmo": [
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
@@ -231,7 +230,7 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" },
   { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
   { href: "/ai-growth-audit", label: "AI Growth Audit" },
-  { href: "/before-you-hire-another-agency", label: "Before you hire another agency" },
+  { href: "/resources/agency-brief-template", label: "Agency brief template" },
   { href: "/industries/saas-growth", label: "SaaS growth industry notes" },
   { href: "/industries/fintech", label: "FinTech industry notes" },
   { href: "/industries/healthtech", label: "HealthTech industry notes" },
@@ -375,21 +374,8 @@ export const industryDetailRelatedReading: readonly { href: string; label: strin
   { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" }
 ];
 
-/** /build. */
-export const buildPageRelatedReading: readonly { href: string; label: string }[] = [
-  { href: "/transfer", label: "Transfer · handoff" },
-  { href: "/services/90-day-growth-sprint", label: "90-Day Growth Sprint" },
-  { href: "/services/acquisition-system-build", label: "Acquisition System Build" },
-  { href: "/how-it-works", label: "How it works" }
-];
-
-/** /transfer. */
-export const transferPageRelatedReading: readonly { href: string; label: string }[] = [
-  { href: "/build", label: "Build · execution" },
-  { href: "/services/fractional-cmo", label: "Fractional CMO" },
-  { href: "/first-30-days", label: "First 30 days" },
-  { href: "/how-it-works", label: "How it works" }
-];
+// buildPageRelatedReading and transferPageRelatedReading removed 2026-08-21 with
+// /build and /transfer, which are now sections of /how-it-works.
 
 /** /press, internal verification paths. */
 export const pressRelatedReading: readonly { href: string; label: string }[] = [

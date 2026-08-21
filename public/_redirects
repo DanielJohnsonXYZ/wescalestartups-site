@@ -133,6 +133,25 @@
 /services-mobile-marketing /services 301
 /services-mobile-marketing/ /services 301
 
+# Consolidation 2026-08-21. Seven pages were competing for the fractional-CMO head
+# term: 3,311 impressions and zero clicks over 90 days, with the two biggest sitting
+# at positions 45-49. These three were 171-208 words each and restated the target
+# page's argument; they are now sections of it.
+/fractional-cmo-vs-full-time-cmo /fractional-cmo-vs-agency 301
+/fractional-cmo-vs-full-time-cmo/ /fractional-cmo-vs-agency 301
+/before-you-hire-a-head-of-marketing /fractional-cmo-vs-agency 301
+/before-you-hire-a-head-of-marketing/ /fractional-cmo-vs-agency 301
+/before-you-hire-another-agency /fractional-cmo-vs-agency 301
+/before-you-hire-another-agency/ /fractional-cmo-vs-agency 301
+
+# Same pass: /build (172w) and /transfer (175w) were two halves of one methodology
+# split across two pages. /how-it-works already carries "Diagnose. Build. Test.
+# Transfer." as its H1 and now carries the detail too.
+/build /how-it-works 301
+/build/ /how-it-works 301
+/transfer /how-it-works 301
+/transfer/ /how-it-works 301
+
 # Catch-all legacy namespaces last so exact rules above take priority.
 /portfolio/* /case-studies 301
 /blog/* /insights 301

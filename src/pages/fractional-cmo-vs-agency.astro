@@ -27,7 +27,62 @@ const queryVariantFaqs = [
   }
 ];
 
+// Merged in from /fractional-cmo-vs-full-time-cmo (301'd here 2026-08-21). That page
+// carried 2 impressions and 208 words while comparing the same role against a third
+// option — it belongs as a section of this comparison, not as a competing URL.
+const vsFullTimeLede =
+  "Fractional fits when you need the system and cadence without locking in a permanent exec search. Full-time fits when the role is stable and you want a single owner for the next multi-year chapter.";
+
+const vsFullTimeFaqs = [
+  {
+    question: "When is fractional the right bridge?",
+    answer:
+      "When you need senior GTM judgement and a running system now, but the full-time CMO brief is still evolving — stage, channel mix, or team shape is not stable enough for a £150k hire."
+  },
+  {
+    question: "When should you hire a full-time CMO instead?",
+    answer:
+      "When the constraint map is clear, the weekly cadence runs without the founder, and you want a permanent executive owning vendor strategy, hiring, and board narrative long term."
+  },
+  {
+    question: "Can WSS help hire the full-time CMO?",
+    answer:
+      "Often yes. We help define the bar, interview for system-building ability, and hand over dashboards and decision rules so the hire starts with context rather than a blank page."
+  }
+];
+
+// Merged in from /before-you-hire-another-agency and /before-you-hire-a-head-of-marketing
+// (both 301'd here 2026-08-21). Both restated this page's thesis at a fifth of the depth.
+const beforeYouHireCards = [
+  {
+    title: "Signs it's the system, not the agency",
+    body: "Each channel reports in its own dashboard, briefs change weekly, and nobody can say what gets scaled or stopped on Monday. A new agency inherits that chaos; it doesn't fix it."
+  },
+  {
+    title: "Signs you genuinely need an agency",
+    body: "The channel plan is clear, the offer converts, and you need production capacity — more creative, more pages, more campaigns. That's what agencies are built for, and the brief writes itself."
+  },
+  {
+    title: "Signs it's too early for a head of marketing",
+    body: "Hiring into an undefined GTM motion produces expensive, frustrated marketers. You want a named bottleneck, a weekly decision cadence, and one internal owner who can receive a system before you recruit into it."
+  }
+];
+
+const beforeYouHireFaqs = [
+  {
+    question: "When is another agency the wrong move?",
+    answer:
+      "When nobody inside the company can brief a single decision view across channels. Adding execution capacity then amplifies confusion, not pipeline. Name the constraint, install the reporting and decision cadence, then brief the agency inside it — teams that do this get more from the same retainer, often with a smaller scope."
+  },
+  {
+    question: "What should be true before the first senior marketing hire?",
+    answer:
+      "A named bottleneck, a weekly decision cadence, and one internal owner who can receive a system. Without those, the hire inherits chaos. Note the first hire is often a senior generalist or growth lead rather than a full executive peer — titles should match the decision rights you can actually give them."
+  }
+];
+
 const pageFaqs = [...wssVsAgencyPage.faqs, ...queryVariantFaqs];
+const schemaFaqs = [...pageFaqs, ...vsFullTimeFaqs, ...beforeYouHireFaqs];
 
 const schemas = [
   buildBreadcrumbSchema([
@@ -35,12 +90,14 @@ const schemas = [
     { name: "Services", path: "/services" },
     { name: "Fractional CMO vs Agency", path: "/fractional-cmo-vs-agency" }
   ]),
-  buildFaqSchema(pageFaqs)
+  buildFaqSchema(schemaFaqs)
 ];
 
 const vsAgencyRelated = [
   ...(strategicPageRelatedInsights["/fractional-cmo-vs-agency"] ?? []),
-  { href: "/fractional-cmo-vs-full-time-cmo", label: "Fractional CMO vs full-time CMO" }
+  { href: "/insights/fractional-cmo-cost-uk", label: "What a fractional CMO costs in the UK" },
+  { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
+  { href: "/insights/what-is-a-fractional-cmo", label: "What a fractional CMO actually does" }
 ];
 ---
 
@@ -78,7 +135,7 @@ const vsAgencyRelated = [
           <a class="link-arrow" href={siteConfig.scorecardUrl} data-cta="vs-agency-hero-scorecard">
             Or, {siteConfig.scorecardLabel} →
           </a>
-          <a class="button button-light" href="/services/fractional-cmo">See Fractional CMO</a>
+          <a class="button button-light" href="/services/fractional-cmo">Fractional CMO for B2B SaaS</a>
         </div>
       </div>
     </div>
@@ -127,6 +184,50 @@ const vsAgencyRelated = [
             ))}
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="The third option"
+        title="Fractional CMO vs a full-time CMO hire."
+        body={vsFullTimeLede}
+      />
+      <div class="grid-3">
+        {vsFullTimeFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+      <p class="comparison-crosslink">
+        For the full side-by-side of those two models — cost, ramp, risk, and when each fits —
+        <a href={`${siteConfig.danielSite}/resources/fractional-cmo-vs-full-time-cmo/`} rel="noreferrer" target="_blank">Fractional CMO vs full-time CMO on danieljohnson.xyz</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Before you hire anyone"
+        title="When the honest answer is 'none of them, yet'."
+        body="Agencies execute; they rarely fix cross-channel prioritisation. A first marketing lead inherits whatever system already exists. If the founder still owns every scale/stop/fix call, neither hire solves it."
+      />
+      <div class="grid-3">
+        {beforeYouHireCards.map((item) => (
+          <article class="feature-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="hero-actions">
+        <a class="link-arrow" href="/resources/agency-brief-template">Agency brief template →</a>
+        <a class="link-arrow" href="/resources/first-marketing-hire-scorecard">First marketing hire scorecard →</a>
       </div>
     </div>
   </section>

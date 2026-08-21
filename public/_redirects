@@ -127,6 +127,12 @@
 /web3-marketing-tips-for-startups-unlocking-the-power-of-blockchain-for-next-level-growth /insights 301
 /web3-marketing-tips-for-startups-unlocking-the-power-of-blockchain-for-next-level-growth/ /insights 301
 
+# Legacy pre-Astro WordPress service page. Confirmed 404 at the apex 2026-08-21
+# (www 301s to apex, then 404s). Surfaced by Bing crawl data.
+# Note /partner-view/* was checked at the same time and correctly returns 410 — leave it.
+/services-mobile-marketing /services 301
+/services-mobile-marketing/ /services 301
+
 # Catch-all legacy namespaces last so exact rules above take priority.
 /portfolio/* /case-studies 301
 /blog/* /insights 301

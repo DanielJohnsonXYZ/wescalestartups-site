@@ -5,23 +5,50 @@ import TldrCallout from "../components/TldrCallout.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { siteConfig, strategicPageRelatedInsights, vsAgency, wssVsAgencyPage } from "../site";
 
+// FAQ entries for the query variants this page actually surfaces for in
+// Search Console (cost comparison, branding/creative agencies, "embedded
+// growth team"). Pricing figures must stay in sync with pricingTiers in
+// src/site.ts — do not change them here without changing them there.
+const queryVariantFaqs = [
+  {
+    question: "How much does a fractional CMO cost compared to an agency?",
+    answer:
+      "WSS's Fractional CMO engagement runs £5k–£8k/mo, or £7.5k–£10k/mo for the Plus tier (~2 days/week) — the public ranges are on our pricing page. Many post-PMF startups spend a similar monthly amount on an agency retainer. The difference is what the money buys: an agency retainer buys channel production; a fractional CMO buys senior decision-making, prioritisation, and a growth system your team keeps when the engagement ends."
+  },
+  {
+    question: "Fractional CMO vs a branding or creative agency — is it the same decision?",
+    answer:
+      "No. A branding or creative agency delivers identity and production work against a defined creative scope. A fractional CMO owns growth priorities across channels, reporting, and team direction. Many teams need both, in sequence: settle positioning and strategy first, then brief the creative work. If you are choosing where the next pound goes, fund the decision layer before more production."
+  },
+  {
+    question: "Is an 'embedded growth team' different from hiring an agency?",
+    answer:
+      "Usually it is an agency model with more integration: external people working inside your standups and tools. That solves communication, not ownership. The question stays the same — who makes the weekly scale, stop, and fix calls? If that judgement still sits outside the company, or still with the founder, you need a senior owner (fractional or in-house) before more embedded execution."
+  }
+];
+
+const pageFaqs = [...wssVsAgencyPage.faqs, ...queryVariantFaqs];
+
 const schemas = [
   buildBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "Fractional CMO vs Agency", path: "/fractional-cmo-vs-agency" }
   ]),
-  buildFaqSchema([...wssVsAgencyPage.faqs])
+  buildFaqSchema(pageFaqs)
 ];
 
-const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"] ?? [];
+const vsAgencyRelated = [
+  ...(strategicPageRelatedInsights["/fractional-cmo-vs-agency"] ?? []),
+  { href: "/fractional-cmo-vs-full-time-cmo", label: "Fractional CMO vs full-time CMO" }
+];
 ---
 
 <BaseLayout
   path="/fractional-cmo-vs-agency"
-  title="Marketing Agency vs Growth Partner | We Scale Startups"
-  description="When a marketing agency is the right call and when a senior growth partner is — how channel execution and operating-system ownership differ for post-PMF startups."
-  keywords="marketing agency vs growth partner, agency alternative for startups, when to hire a growth agency, channel execution vs operating system"
+  title="Fractional CMO vs Marketing Agency: Which to Hire? | We Scale Startups"
+  description="Fractional CMO vs marketing agency for post-PMF startups: what each delivers, what each costs, and how to choose — including when an embedded growth partner beats both."
+  keywords="fractional cmo vs agency, fractional cmo vs marketing agency, fractional cmo vs branding agency, embedded growth team vs agency, agency alternative for startups"
   schema={schemas}
   breadcrumbItems={[
     { name: "Home", path: "/" },
@@ -32,11 +59,11 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
   <section class="page-hero">
     <div class="shell">
       <p class="eyebrow">Comparison</p>
-      <h1>Marketing agency vs a growth partner: choose the level where the problem lives.</h1>
+      <h1>Fractional CMO vs marketing agency: choose the level where the problem lives.</h1>
       <div class="hero-support">
-        <TldrCallout text="Hire an agency when the channel plan is clear and you need production. Hire WSS when the founder is still the growth bottleneck — diagnosis, priorities, system design, and weekly scale/stop/fix decisions before more execution." />
+        <TldrCallout text="Hire an agency when the channel plan is clear and you need production. Hire a fractional CMO — the model WSS runs — when the founder is still the growth bottleneck: diagnosis, priorities, system design, and weekly scale/stop/fix decisions before more execution." />
         <p class="lede">
-          Agencies are useful when the strategy is clear and the team needs execution capacity. WSS is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions.
+          Agencies are useful when the strategy is clear and the team needs execution capacity. A fractional CMO is useful when the constraint is diagnosis, priority, system design, and weekly growth decisions — that senior layer is what WSS provides.
         </p>
         <div class="hero-actions">
           <a
@@ -66,7 +93,7 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
         </ul>
       </article>
       <article class="feature-card card-accent">
-        <p class="card-kicker">Choose WSS when</p>
+        <p class="card-kicker">Choose a fractional CMO (WSS) when</p>
         <ul>
           {wssVsAgencyPage.whenWss.map((item) => <li>{item}</li>)}
         </ul>
@@ -78,7 +105,7 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
     <div class="shell">
       <SectionIntro
         eyebrow="Side by side"
-        title="Agencies run channels. WSS builds the operating system they plug into."
+        title="Agencies run channels. A fractional CMO builds the operating system they plug into."
         body="The right choice depends on whether strategy and priorities are already clear, or whether the company still needs senior judgement to decide what matters before more execution."
       />
       <div class="vs-table-wrap">
@@ -108,7 +135,7 @@ const vsAgencyRelated = strategicPageRelatedInsights["/fractional-cmo-vs-agency"
     <div class="shell">
       <SectionIntro eyebrow="FAQ" title="The practical buying questions." />
       <div class="grid-3">
-        {wssVsAgencyPage.faqs.map((item) => (
+        {pageFaqs.map((item) => (
           <article class="feature-card">
             <h2>{item.question}</h2>
             <p>{item.answer}</p>

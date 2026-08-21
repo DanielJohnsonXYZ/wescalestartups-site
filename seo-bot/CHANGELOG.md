@@ -2,6 +2,26 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-22 (run 3) — consolidation shipped
+
+**Shipped** (`730416c`, `e66b9b9`): the §2 consolidation Daniel approved. Five pages merged into two, 121 → 116 pages, sitemap 111 → 106 URLs.
+
+- Into `/fractional-cmo-vs-agency`: `/fractional-cmo-vs-full-time-cmo` (208w, 2 imp), `/before-you-hire-another-agency` (171w, 7 imp), `/before-you-hire-a-head-of-marketing` (171w, 0 imp). Page went 600 → 1,186 words with two new H2 sections.
+- Into `/how-it-works`: `/build` (172w, 3 imp) and `/transfer` (175w, 0 imp). 738 → 894 words. That page's H1 was already "Diagnose. Build. Test. Transfer."; it now carries the detail too.
+- Internal linking now points **down** rather than sideways. The cluster treated all seven pages as peers, which told Google nothing about which to rank.
+
+**Deviated from the written proposal in two places, both deliberate:**
+- **Kept `/first-30-days`.** The proposal listed it on zero impressions, but it's 413 words and linked from the service pages — zero impressions on a mid-funnel page means nobody searches for it by name, which is not cannibalisation. Merging it would have been consolidation for its own sake.
+- **Did not touch title, description or H1 on `/fractional-cmo-vs-agency`.** Run 1 re-anchored them on 21 Aug and that experiment has not been measured. Changing them now would destroy the read.
+
+**Verified:** 116 pages build clean, zero dangling internal links in `dist`, all five 301s confirmed live, both new sections rendering, `check:lastmod` green after regenerating (5 dead routes dropped automatically).
+
+**Also checked and closed:** `cal.wescalestartups.com/auth/login`. It is **already** correctly noindexed — a Traefik `noindex-headers` middleware has served `X-Robots-Tag: noindex, nofollow` since 12 July, confirmed 10/10 requests including as Googlebot. Nothing to fix. Two residual notes: cal.com's own HTML emits a contradicting `<meta name="robots" content="index, follow">`, and there is a **duplicate Traefik router** (`calcom`) matching the same host on the same entrypoint *without* the middleware — currently losing the tie-break, but a latent risk if that ever flips. Do **not** add a robots.txt `Disallow` for `/auth`: that would stop Google seeing the noindex and lock the URL into the index.
+
+**Expected movement:** the five merged URLs should leave the GSC page report within ~6 weeks and `/fractional-cmo-vs-agency` impressions should rise to roughly the cluster total. **Position movement is not expected from this alone** — the constraint is authority (§3), and merging pages does not create any. If positions have not moved by ~3 months, that is evidence *for* the authority thesis, not evidence the merge failed.
+
+**Review date:** 2026-10-03 (allow the full 3-month window; check at 2026-09-19 only that the 301s resolved cleanly).
+
 ## 2026-08-21 (run 2) — full SEO/GEO/AEO audit + fixes
 
 **Scope:** full audit across GSC (90d), Bing Webmaster, Microsoft Clarity, live site, repo build, and independent research into mid-2026 practice. Delivered `wss-seo-geo-audit-2026-08-21.md` and `wss-consolidation-proposal.md` to Daniel. Six commits shipped.

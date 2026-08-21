@@ -1,5 +1,5 @@
 import { absoluteUrl } from "./utils";
-import { entityGraph, siteConfig } from "../site";
+import { entityGraph, servicePriceRanges, siteConfig } from "../site";
 
 const personKnowsAbout = [
   "Fractional CMO",
@@ -54,6 +54,10 @@ export function buildOrganizationSchema() {
     "@type": ["Organization", "ProfessionalService"],
     "@id": entityGraph.wssOrganization,
     areaServed: ["GB", "Europe", "US"],
+    // ProfessionalService inherits LocalBusiness, where priceRange is first-class.
+    // Spans the published engagement ranges (Diagnosis low → System Build high).
+    priceRange: "£2,000–£25,000",
+    currenciesAccepted: "GBP",
     name: siteConfig.name,
     url: siteConfig.siteUrl,
     email: siteConfig.email,
@@ -96,14 +100,99 @@ export function buildWebSiteSchema() {
   };
 }
 
+/**
+ * Builds an AggregateOffer for a service slug from the canonical numeric ranges
+ * in src/site.ts. Returns undefined for slugs with no published price, so
+ * scoped-on-request engagements never carry an invented number.
+ */
+function buildServiceOffer(path: string) {
+  const slug = path.split("/").filter(Boolean).at(-1);
+  const range = slug ? servicePriceRanges[slug] : undefined;
+  if (!range) return undefined;
+
+  const offer: Record<string, unknown> = {
+    "@type": "AggregateOffer",
+    priceCurrency: "GBP",
+    lowPrice: range.lowPrice,
+    highPrice: range.highPrice,
+    offerCount: 1,
+    availability: "https://schema.org/InStock",
+    url: absoluteUrl(path),
+    seller: { "@id": entityGraph.wssOrganization }
+  };
+
+  if (range.perMonth) {
+    // Recurring engagement: state the unit so the figure is not read as a one-off fee.
+    offer.priceSpecification = {
+      "@type": "UnitPriceSpecification",
+      priceCurrency: "GBP",
+      minPrice: range.lowPrice,
+      maxPrice: range.highPrice,
+      referenceQuantity: {
+        "@type": "QuantitativeValue",
+        value: 1,
+        unitCode: "MON"
+      }
+    };
+  }
+
+  return offer;
+}
+
 export function buildServiceSchema(name: string, description: string, path: string) {
+  const offers = buildServiceOffer(path);
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name,
     description,
+    serviceType: name,
+    areaServed: ["GB", "Europe", "US"],
     provider: { "@id": entityGraph.wssOrganization },
-    url: absoluteUrl(path)
+    url: absoluteUrl(path),
+    ...(offers ? { offers } : {})
+  };
+}
+
+/**
+ * OfferCatalog for /pricing — the four engagements with their published ranges.
+ * Callers pass the display name and description from `pricingTiers` so the
+ * markup cannot drift from the copy rendered on the page.
+ */
+export function buildOfferCatalogSchema(items: Array<{ slug: string; name: string; description: string; path: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: `${siteConfig.name} engagements`,
+    url: absoluteUrl("/pricing"),
+    provider: { "@id": entityGraph.wssOrganization },
+    itemListElement: items.map((item, index) => {
+      const range = servicePriceRanges[item.slug];
+      return {
+        "@type": "Offer",
+        position: index + 1,
+        name: item.name,
+        description: item.description,
+        url: absoluteUrl(item.path),
+        ...(range
+          ? {
+              priceCurrency: "GBP",
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "GBP",
+                minPrice: range.lowPrice,
+                maxPrice: range.highPrice,
+                ...(range.perMonth ? { unitText: "MONTH" } : {})
+              }
+            }
+          : {}),
+        itemOffered: {
+          "@type": "Service",
+          name: item.name,
+          provider: { "@id": entityGraph.wssOrganization }
+        }
+      };
+    })
   };
 }
 
@@ -135,6 +224,20 @@ export function buildFaqSchema(items: Array<{ question: string; answer: string }
   };
 }
 
+/**
+ * Article image, derived from the route so it cannot drift from the OG card
+ * that scripts/generate-og-png.mjs writes for the same id:
+ *   /insights/{id}      -> /og/insights/{id}.png
+ *   /case-studies/{id}  -> /og/cases/{id}.png
+ * Falls back to the default card for any other route.
+ */
+function articleImage(path: string) {
+  const [, section, id] = path.split("/");
+  if (section === "insights" && id) return absoluteUrl(`/og/insights/${id}.png`);
+  if (section === "case-studies" && id) return absoluteUrl(`/og/cases/${id}.png`);
+  return absoluteUrl(siteConfig.ogImage);
+}
+
 export function buildCaseStudyArticleSchema(opts: {
   name: string;
   description: string;
@@ -154,6 +257,7 @@ export function buildCaseStudyArticleSchema(opts: {
     author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
     publisher: { "@id": entityGraph.wssOrganization },
     mainEntityOfPage: absoluteUrl(opts.path),
+    image: articleImage(opts.path),
     keywords: opts.keywords?.join(", ")
   };
 }
@@ -176,6 +280,7 @@ export function buildInsightArticleSchema(opts: {
     author: { "@id": entityGraph.danielPerson, name: siteConfig.founderName },
     publisher: { "@id": entityGraph.wssOrganization },
     mainEntityOfPage: absoluteUrl(opts.path),
+    image: articleImage(opts.path),
     keywords: opts.tags.join(", ")
   };
 }

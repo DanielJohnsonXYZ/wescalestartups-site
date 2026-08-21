@@ -66,6 +66,7 @@ for (const [route, current] of routes) {
 if (check) {
   if (stale.length || dropped.length) {
     console.error(`stale: ${stale.length}, dead: ${dropped.length}`);
+    console.error("fix: commit your content change first, then run `npm run refresh:lastmod` and commit the result.");
     for (const s of stale) console.error("  " + s);
     for (const d of dropped) console.error("  dead route: " + d);
     process.exit(1);

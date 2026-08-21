@@ -11,6 +11,8 @@
     "prebuild": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
     "build": "node --check public/growth-tools/app.js && node scripts/generate-og-png.mjs && astro build && node scripts/check-site-theme.mjs && node scripts/capture-integrity-report.mjs",
     "check:theme": "node scripts/check-site-theme.mjs",
+    "check:lastmod": "node scripts/refresh-lastmod.mjs --check",
+    "refresh:lastmod": "node scripts/refresh-lastmod.mjs",
     "verify:build": "node scripts/verify-build-integrity.mjs",
     "verify:resources": "node scripts/verify-resources.mjs",
     "preview": "astro preview",

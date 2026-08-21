@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # refresh-lastmod --check reads per-file commit dates, which a
+          # shallow clone cannot provide.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -29,6 +33,9 @@ jobs:
           # production stack traces are readable. Absent (e.g. forks) -> skipped.
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: npm run build
+
+      - name: Sitemap lastmod freshness
+        run: npm run check:lastmod
 
       - name: Sitewide theme contract
         run: npm run check:theme

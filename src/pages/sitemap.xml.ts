@@ -3,7 +3,8 @@ import { getCollection } from "astro:content";
 import { growthToolRoutes } from "../data/growthTools";
 import { isFinalSitemapPath } from "../lib/sitemapCanonical";
 import { absoluteUrl } from "../lib/utils";
-import { indexableIndustrySlugs, leadMagnets, siteConfig, staticPathLastModified } from "../site";
+import { staticPathLastModified } from "../lastmod";
+import { indexableIndustrySlugs, leadMagnets, siteConfig } from "../site";
 
 export const prerender = true;
 

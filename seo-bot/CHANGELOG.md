@@ -2,6 +2,29 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-21 (run 2) — full SEO/GEO/AEO audit + fixes
+
+**Scope:** full audit across GSC (90d), Bing Webmaster, Microsoft Clarity, live site, repo build, and independent research into mid-2026 practice. Delivered `wss-seo-geo-audit-2026-08-21.md` and `wss-consolidation-proposal.md` to Daniel. Six commits shipped.
+
+**Shipped** (`d4f40e7`, `31baca6`, `c429d2b`, `f07965f`, `4373428`, `423d8ea`):
+
+- **Four bugs visible in shipped output.** `llms.txt` served raw source identifiers (`{siteConfig.podcastName}` — JSX braces in a JS template literal). `/industries/saas-growth` titled "SaaS Growth Growth Systems". `/ai-growth-systems` carried the brand twice in `<title>` with the pipe leaking into the `<h1>` and breadcrumb. `robots.txt` `Content-Signal` sat after a blank line, so it belonged to no user-agent group.
+- **Sitemap lastmod, generated.** All 55 resolvable entries in the hand-maintained map were stale; 48% of sitemap URLs claimed a lastmod 3+ months older than the content, and PR #83's design rewrite on 20 Aug moved none of them. `/pricing` said 2026-05-03, last edited 2026-08-20. New `scripts/refresh-lastmod.mjs` resolves each route to its backing files and takes the latest commit date; dropped 15 dead routes. Wired into CI as `npm run check:lastmod` (needs `fetch-depth: 0`).
+- **Prices reached structured data.** Four published ranges existed in copy and nowhere in schema. Added `AggregateOffer` on Service pages (with `UnitPriceSpecification` on the recurring Fractional CMO engagement), `OfferCatalog` on `/pricing`, `priceRange` + `currenciesAccepted` on the Organization node, and `image` on both Article builders derived from the route.
+- **robots.txt made coherent.** It said `ai-train=no` while explicitly Allowing GPTBot and ClaudeBot, which are training crawlers. Resolved to `ai-train=yes` — for a firm selling growth advice, presence in model weights is the goal. Reversing needs Disallow rules too; the file comment says so.
+
+**Verified:** all six items fetched live post-deploy. `astro check` 0 errors, 121 pages, `check:lastmod` green, negative-tested by corrupting a date and confirming exit 1.
+
+**Incident:** `main` did not build for ~20 minutes. Commits `9d40663` and `7300343` were pushed file-by-file, leaving `schema.ts` importing `servicePriceRanges` from `../site` while it had landed in `../lastmod`. The deploy from `9d40663` would have failed outright. Fixed in `d4f40e7`. Cause was pushing a partial file set; see the standing decisions in PLAYBOOK.md.
+
+**Corrections to run 1:** branded-query CTR was ranked #1 in the backlog and has been demoted — on 90d data it's 902 impressions / 36 clicks and the brand is a generic English phrase, so much of that volume was never looking for WSS. The FAQ schema rationale for `97531e3` was out of date; FAQPage rich results were deprecated May–Aug 2026.
+
+**Not shipped, deliberately:** `Review`/`AggregateRating` — checked Google's policy, self-serving review markup on Organization/LocalBusiness is ineligible for stars and all WSS ratings live on third-party sites. Consolidation (§2) is proposed, not executed, because merging pages is Daniel's call.
+
+**Expected movement:** none from this run on its own. These fixes remove suppression (stale lastmod blocking recrawl) and add rich-result eligibility; they don't add authority. Position movement depends on consolidation and off-site work.
+
+**Review date:** 2026-09-04 — check recrawl activity in GSC (did the corrected lastmod trigger it?) and whether `/pricing` picks up any Offer rich result.
+
 ## 2026-08-21 (run 1)
 
 **Shipped:** Re-anchored `/fractional-cmo-vs-agency` to its query family.

@@ -15,10 +15,15 @@ export async function getStaticPaths() {
 
 const { industry } = Astro.props;
 const path = `/industries/${industry.id}`;
+// Titles that already end in "Growth" (e.g. "SaaS Growth") would otherwise
+// render as "SaaS Growth Growth Systems". Append only the missing words.
+const industrySystemsLabel = /\bGrowth$/.test(industry.data.title)
+  ? `${industry.data.title} Systems`
+  : `${industry.data.title} Growth Systems`;
 const industryMetaTitle =
   industry.id === "vc-support"
     ? "VC Portfolio Growth Systems | We Scale Startups"
-    : `${industry.data.title} Growth Systems | We Scale Startups`;
+    : `${industrySystemsLabel} | We Scale Startups`;
 
 const industryFaqs = [
   {

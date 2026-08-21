@@ -168,8 +168,8 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 - Contact: ${siteConfig.siteUrl}/contact
 - Company press kit: ${siteConfig.siteUrl}/press
 - Company press kit (print / PDF): ${siteConfig.siteUrl}/press-kit-download
-- Podcast hub ({siteConfig.podcastName}): ${siteConfig.podcastUrl}
-- Podcast on YouTube ({siteConfig.podcastYoutubeHandle}): ${siteConfig.podcastYoutubeUrl}
+- Podcast hub (${siteConfig.podcastName}): ${siteConfig.podcastUrl}
+- Podcast on YouTube (${siteConfig.podcastYoutubeHandle}): ${siteConfig.podcastYoutubeUrl}
 - Podcast guest application: ${siteConfig.siteUrl}/podcast-guest-application
 - Daniel Johnson media kit for podcasts, speaking, and expert commentary: ${siteConfig.danielSite}/media-kit/
 - Book / schedule diagnostic: ${siteConfig.siteUrl}${siteConfig.bookingUrl}

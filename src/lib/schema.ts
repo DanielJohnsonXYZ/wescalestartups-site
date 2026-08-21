@@ -1,5 +1,6 @@
 import { absoluteUrl } from "./utils";
-import { entityGraph, servicePriceRanges, siteConfig } from "../site";
+import { servicePriceRanges } from "../lastmod";
+import { entityGraph, siteConfig } from "../site";
 
 const personKnowsAbout = [
   "Fractional CMO",

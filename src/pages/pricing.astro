@@ -2,7 +2,7 @@
 import OfferRoutingCards from "../components/OfferRoutingCards.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
-import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
+import { buildBreadcrumbSchema, buildFaqSchema, buildOfferCatalogSchema } from "../lib/schema";
 import { pricingRelatedReading, pricingTrustBullets, pricingTiers, siteConfig } from "../site";
 
 const pricingFaqs = [
@@ -19,6 +19,18 @@ const pricingFaqs = [
     answer: "No. WSS fees cover strategy, system design, execution support, and reporting. Media spend, tools, and third-party vendor costs are separate."
   }
 ];
+
+// Offer markup for the four engagements. Slugs key into servicePriceRanges;
+// names and descriptions come from pricingTiers so the markup cannot drift
+// from the copy rendered below.
+const offerCatalog = buildOfferCatalogSchema(
+  pricingTiers.map((tier) => ({
+    slug: tier.href.replace("/services/", ""),
+    name: tier.name,
+    description: tier.description,
+    path: tier.href
+  }))
+);
 ---
 
 <BaseLayout
@@ -33,7 +45,7 @@ const pricingFaqs = [
   schema={[buildBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Pricing", path: "/pricing" }
-  ]), buildFaqSchema(pricingFaqs)]}
+  ]), buildFaqSchema(pricingFaqs), offerCatalog]}
 >
   <section class="page-hero">
     <div class="shell">

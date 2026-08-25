@@ -21,10 +21,13 @@ const path = `/services/${service.id}`;
 // Per-service rich detail. Keyed by service id (slug).
 // Standardised structure:
 //   price, timeline, deliverables[], sampleWeek[], handsOn{ wssBrings, youBring }
-//   faqs[6 standardised questions], afterEngagement, primaryDeliverableImage (optional)
+//   faqs[6 standardised questions, plus any query-observed additions],
+//   afterEngagement, primaryDeliverableImage (optional), tldr (optional)
 const details: Record<string, any> = {
   "fractional-cmo": {
     price: "£5k–£8k/mo · 3-month minimum",
+    tldr:
+      "Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire.",
     timeline: "First 30 days diagnose and reset priorities. Days 31–90 build, test, and transfer the operating rhythm. Most teams continue for 6–9 months.",
     premium: true,
     headline: "Senior growth leadership without a £150k full-time hire.",
@@ -219,6 +222,8 @@ const details: Record<string, any> = {
 
   "90-day-growth-sprint": {
     price: "£8k–£12k · 90 days",
+    tldr:
+      "We Scale Startups runs 90-Day Growth Sprints for post-PMF B2B SaaS and AI startups: a 12-week engagement, £8k–£12k, in which we ship 6–8 ICE-scored experiments, run a weekly decision meeting, set up pipeline and conversion reporting, and hand over a transfer checklist the team keeps. Week 1 is planning, weeks 2–11 are execution and iteration, week 12 is readout and transfer. Test budgets for paid media, tooling and creative are separate and you control them.",
     timeline: "12 weeks of focused experiments, weekly readouts, and clear decisions on what to scale, stop, or fix. Designed for teams that need signal fast, pre-fundraise, post-launch, or before a CMO hire.",
     headline: "Ship 6–8 targeted experiments and a working operating rhythm in one quarter.",
     handsOn: {
@@ -257,7 +262,10 @@ const details: Record<string, any> = {
       ["How long does it take?", "12 weeks. Week 1 is planning, weeks 2–11 are execution and iteration, week 12 is readout and transfer."],
       ["What does it cost?", "£8k–£12k for the standard 90-day sprint. Test budgets (paid media, tooling, creative) are separate and you control them."],
       ["What do you need from us?", "An execution owner, existing creative / dev / content capacity (in-house or agency), 30 minutes of founder time per week, and tracking access. We design and direct; your team ships."],
-      ["What happens after the engagement?", "Most teams either move into Fractional CMO support to keep the rhythm going, or take the transfer pack and run the next quarter internally. A clean readout document is yours either way."]
+      ["What happens after the engagement?", "Most teams either move into Fractional CMO support to keep the rhythm going, or take the transfer pack and run the next quarter internally. A clean readout document is yours either way."],
+      ["Who offers 90-day growth sprints for SaaS teams?", "We Scale Startups runs them as a fixed 12-week engagement at £8k–£12k, led by Daniel Johnson. The alternatives are worth naming honestly: a growth agency if you already know the channel plan and need production capacity, an in-house growth lead if you have the budget and the time to hire, or running it yourself from the transfer pack if you have senior structure internally already. WSS is the right call when you need the experiment rhythm and the decision discipline installed, not more execution volume."],
+      ["How do I get a quote for a 90-day growth sprint?", "The published range is £8k–£12k for the standard 12-week sprint, and that is the number for most teams. Where you land depends on channel mix, how much creative and dev capacity you already have, and whether the sprint runs across more than one product or market. Test budgets are separate. Book the free 20-minute call and you will get a scoped figure, or an honest answer that a Growth Diagnosis at £2k–£4k is the better first step."],
+      ["Can you run a sprint against a fixed board deadline?", "Yes, 12 weeks is the standard shape and it maps cleanly onto a quarter or a board commitment, which is why teams often start one before a raise or after a launch. One scope boundary worth stating plainly: a sprint is a growth-experiment engagement, not a production contract. If what the board has actually asked for is a brand refresh or a site relaunch, that is design and build work and you want an agency or a studio for it. We will say so on the call rather than take the work."]
     ],
     afterEngagement: "Most teams continue with Fractional CMO support to keep the rhythm. About 1 in 3 take the transfer pack and run the next quarter internally.",
     deliverablePreviewNote:
@@ -314,7 +322,7 @@ const serviceKeywords: Record<string, string> = {
   "growth-diagnosis":
     "growth diagnosis, startup bottleneck analysis, constraint mapping, post-PMF diagnostic, one-week growth audit",
   "90-day-growth-sprint":
-    "90-day growth sprint, experiment roadmap, ICE scoring, quarterly growth plan, startup testing cadence",
+    "90-day growth sprint, sprint marketing engagement, experiment roadmap, ICE scoring, quarterly growth plan, startup testing cadence",
   "acquisition-system-build":
     "acquisition system build, multi-channel GTM, campaign and landing briefs, growth reporting system",
   "fractional-cmo":
@@ -328,6 +336,14 @@ const metaTitleById: Record<string, string> = {
   "fractional-cmo": "Fractional CMO for B2B SaaS Startups | We Scale Startups"
 };
 
+/* Meta description override. Only set where the collection description is a
+   poor answer to the queries the page actually surfaces for; otherwise the
+   collection description stands. See seo-bot/CHANGELOG.md 2026-08-25. */
+const metaDescriptionById: Record<string, string> = {
+  "90-day-growth-sprint":
+    "90-Day Growth Sprint for post-PMF B2B SaaS and AI startups: 6–8 ICE-scored experiments, a weekly decision meeting, pipeline reporting and a transfer checklist. £8k–£12k, 12 weeks, UK."
+};
+
 const keywords = serviceKeywords[service.id];
 const relatedForService = serviceRelatedInsights[service.id] ?? [];
 
@@ -337,11 +353,12 @@ const relatedForService = serviceRelatedInsights[service.id] ?? [];
    sentence. */
 const audienceDetail = service.data.audience.replace(/^Best for /, "");
 const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Scale Startups`;
+const layoutDescription = metaDescriptionById[service.id] ?? service.data.description;
 ---
 
 <BaseLayout
   title={layoutTitle}
-  description={service.data.description}
+  description={layoutDescription}
   ogImage={`/og/services/${service.id}.png`}
   ogImageAlt={`${service.data.title}, We Scale Startups`}
   keywords={keywords}
@@ -421,10 +438,10 @@ const layoutTitle = metaTitleById[service.id] ?? `${service.data.title} | We Sca
       band that made this hero read as broken. It reads as a page summary
       directly under the hero instead. */}
   {
-    service.id === "fractional-cmo" && (
+    details.tldr && (
       <section class="section-tldr">
         <div class="shell">
-          <TldrCallout text="Fractional CMO support from WSS means senior growth leadership embedded in your team: weekly decisions, constraint mapping, channel and experiment priorities, and reporting that drives scale / stop / fix calls, until the system runs without a £150k full-time hire." />
+          <TldrCallout text={details.tldr} />
         </div>
       </section>
     )

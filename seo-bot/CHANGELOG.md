@@ -2,6 +2,48 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-25 (run 5) — answered the three-way decision, one layer up from run 4
+
+**Shipped** (`f641844`). One file, content-only: `src/content/insights/when-to-hire-fractional-cmo.mdx`.
+
+**The find.** Run 4 established that this site ranks for provider-selection prompts. Run 5 found the same shape one layer up the funnel — **hiring-decision prompts** — and the page that already wins them was answering a different question.
+
+`/insights/when-to-hire-fractional-cmo`, GSC 90d (2026-05-25 → 2026-08-22), all zero clicks:
+
+| pos | imp | query |
+|---|---|---|
+| 8.3 | 29 | `should a series a startup hire a fractional cmo a growth agency or wait to hire a full-time vp of growth` |
+| 8.0 | 9 | same query, question-mark variant |
+| 14.5 | 10 | `when to hire a fractional cmo for a startup` |
+| 10.5 | 4 | `when should a startup hire a fractional cmo?` |
+| 25.6 | 18 | `when to hire a fractional cmo` |
+
+Outside `/services/90-day-growth-sprint`, this is the highest-position non-brand commercial family on the site. And the three-way shape recurs right across the fractional-CMO cluster at every position: `is it better to hire a full-time growth team or use a fractional growth agency at our stage` (24 imp @ 46.5), `growth pod vs hiring a fractional cmo vs full-service agency` (12 @ 83.4 + 7 @ 94.3), `growth marketing agencies vs hiring a fractional leader, which makes more sense at series a` (2 @ 8.5), `growth agency vs fractional growth lead seed stage startup` (2 @ 10.0), `business growth agency vs fractional cmo comparison` (1 @ 8.0).
+
+The page answered a **two-way** question — fractional CMO versus more execution capacity. It never named the third option the query names, never compared the three in one place, and had no `updatedAt` at all, so it advertised an April date on a 2026 decision question. Google has already picked this page for the three-way prompt (`/fractional-cmo-vs-agency` ranks **94.0** for the same query), so the change reinforces Google's choice rather than creating a second competing answer — which matters, because run 3 spent a whole run undoing exactly that kind of split.
+
+**Change:** new H2 "Fractional CMO, growth agency, or full-time VP of Growth?" with a bolded direct answer, a six-row comparison table (when to buy / what you get / time to useful / typical UK cost / what's left afterwards / minimum commitment) and stage guidance for pre-PMF, Seed, Series A and Series B. `tldr` rewritten to answer all three options — it renders in `detail-aside`, which is the first content block in the DOM, so the direct answer sits above the article body without touching the shared template. `updatedAt: 2026-08-25`. Four FAQs matching the observed prompts.
+
+Every figure reuses what the site already publishes: retainers from `pricingTiers` via `/pricing`, the £6k–£20k agency band and £120k–£180k full-time band from `/insights/fractional-cmo-cost-uk`. **No new market statistics.** The "point them somewhere better" voice is kept — the growth-pod FAQ says plainly that if what you need is sustained channel production, an agency is the better buy.
+
+**Deliberately did not** add the slug to `insightPillarIds` in `[slug].astro`. It would have rendered a second copy of the TL;DR in the article body for marginal gain, on a shared template that run 4 had edited three hours earlier.
+
+**Verified before the commit existed.** Run 5 cloned, `npm ci`'d and built the repo *in the sandbox* — which the playbook previously said was impossible. 116 pages build clean, `BUILD_EXIT=0`, `astro check` 0 errors 0 warnings, all 596 JSON-LD blocks parse, FAQPage carries 4 questions, `dateModified` 2026-08-25, the table renders, and all six internal link targets exist in `dist`. Post-deploy (live in **under 2 minutes**): page fetched with cache-busting, all of the above confirmed on the live HTML. Bing: 1 URL submitted (quota 97/day, 697/month remaining). Google: URL inspected — indexed, canonical clean, last crawl 24 Aug, `PASS`.
+
+**`check:lastmod` was green with zero routes updated, and that is correct, not a missed step.** `/insights/*` routes are not in `staticPathLastModified`; they fall back to `siteConfig.siteLastModified`. The two-step does not apply to insights content. Written into the playbook so a future run doesn't "fix" it.
+
+**No quick wins found, and that is a finding.** Sitewide `dist` audit: zero images missing `alt`, every internal link target resolves, all 596 JSON-LD blocks parse, and run 4's legacy 404 families all redirect correctly — including `www…/portfolio/equoo/`, which still shows in GSC as a landing page at position 1.4 but chains cleanly www → apex → `/case-studies/equoo`. The hygiene layer is genuinely clean. Stop re-auditing it every run.
+
+**Weighed and rejected, both recorded in the playbook so they aren't rediscovered:**
+- **The homepage non-brand category cluster** — ~630 impressions at positions 7–13 with one click (`scale startup` 309 @ 12.6, `marketing startups` 126 @ 13.2, `growth marketing agency` 31 @ 9.1). Largest non-brand pool on page 1–2, and tempting. Rejected because the fix means re-anchoring the homepage on "agency", which contradicts WSS's positioning — the site sells *against* the agency model and has a page saying so — and because the homepage title sits on top of Daniel's design work.
+- **`/insights` hub** (1,032 imp, pos 28.9). Real demand in WSS's own post-PMF language, but at position 29 a content fix is authority-bound. Stays at backlog 4.
+
+**Expected movement:** clicks from `/insights/when-to-hire-fractional-cmo` on the position-8 three-way queries, and possibly the `when to hire a fractional cmo` head variant improving from 25.6. As with run 4, if these impressions are AI-answer citations rather than blue links, clicks will stay near zero and the win will be citation quality — which does not appear in GSC. Do not read flat clicks alone as failure; check whether position 8.0–8.3 is held and whether new decision-shaped prompts appear on the page.
+
+**Review date:** 2026-09-08 (allow crawl + ~3 days lag).
+
+**Verdicts due today: none.** Run 1's is due 2026-08-28, and its early read is now a **second negative**: `/fractional-cmo-vs-agency` shows 740 named-query impressions at an impression-weighted position 46.2 with zero clicks, against the 44.1 that motivated the re-anchor. Runs 2, 3 and 4 are all still inside their windows (2026-09-04, 2026-10-03, 2026-09-01). Nothing was marked as working or failing on the basis of data that isn't in yet.
+
 ## 2026-08-25 (run 4) — answered the prompts the site already wins
 
 **Shipped** (`99ca705`, `dc91ce1`, `993d823`).

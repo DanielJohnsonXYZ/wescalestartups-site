@@ -162,6 +162,38 @@
 /seo-services/ /services 301
 /testimonial /testimonials 301
 
+# Legacy WordPress long-form posts and pages that carried this site's page-1
+# rankings before the May 2026 rebuild, and have 404'd ever since.
+# GSC impressions / position from 1 Mar - 30 Apr 2026, the last full pre-rebuild window.
+# Kept in sync with functions/_middleware.js.
+#   7,520 imp @ pos 7.4
+/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025 /industries/vc-support 301
+/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025/ /industries/vc-support 301
+#   535 imp @ pos 20.0
+/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust /industries/vc-support 301
+/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust/ /industries/vc-support 301
+#   1,968 imp @ pos 60.8
+/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups /services/fractional-cmo 301
+/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups/ /services/fractional-cmo 301
+#   240 imp @ pos 9.8
+/mastering-the-art-of-the-pivot-adapting-your-go-to-market-strategy-for-success /insights/b2b-saas-gtm-strategy 301
+/mastering-the-art-of-the-pivot-adapting-your-go-to-market-strategy-for-success/ /insights/b2b-saas-gtm-strategy 301
+#   91 imp @ pos 29.5
+/go-to-market-for-startup /insights/b2b-saas-gtm-strategy 301
+/go-to-market-for-startup/ /insights/b2b-saas-gtm-strategy 301
+#   125 imp @ pos 44.5
+/fractional-cmo /services/fractional-cmo 301
+/fractional-cmo/ /services/fractional-cmo 301
+#   58 imp @ pos 4.8
+/strategy-direction /how-it-works 301
+/strategy-direction/ /how-it-works 301
+#   36 imp @ pos 10.7
+/copywriting /services 301
+/copywriting/ /services 301
+#   304 imp @ pos 3.9 - WordPress theme demo page, no topical equivalent
+/home-agency-2 / 301
+/home-agency-2/ / 301
+
 # Catch-all legacy namespaces last so exact rules above take priority.
 # /portfolio-tag/ and /testimonial/ are WordPress taxonomy archives; the
 # /portfolio/* and /team/* catch-alls below never matched them.

@@ -148,6 +148,28 @@ export async function onRequest(context) {
     "/choosing-the-perfect-fractional-cmo-for-your-startup/": "/services/fractional-cmo",
     "/choosing-the-perfect-cmo": "/services/fractional-cmo",
     "/choosing-the-perfect-cmo/": "/services/fractional-cmo",
+    // Legacy WordPress long-form posts and pages that carried this site's page-1
+    // rankings before the May 2026 rebuild, and have returned 404 ever since.
+    // Impressions/position are GSC, 1 Mar - 30 Apr 2026 (the last full pre-rebuild window).
+    // Verified 404 live on 2026-08-25 before these rules were added.
+    "/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025": "/industries/vc-support",
+    "/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025/": "/industries/vc-support",
+    "/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust": "/industries/vc-support",
+    "/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust/": "/industries/vc-support",
+    "/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups": "/services/fractional-cmo",
+    "/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups/": "/services/fractional-cmo",
+    "/mastering-the-art-of-the-pivot-adapting-your-go-to-market-strategy-for-success": "/insights/b2b-saas-gtm-strategy",
+    "/mastering-the-art-of-the-pivot-adapting-your-go-to-market-strategy-for-success/": "/insights/b2b-saas-gtm-strategy",
+    "/go-to-market-for-startup": "/insights/b2b-saas-gtm-strategy",
+    "/go-to-market-for-startup/": "/insights/b2b-saas-gtm-strategy",
+    "/fractional-cmo": "/services/fractional-cmo",
+    "/fractional-cmo/": "/services/fractional-cmo",
+    "/strategy-direction": "/how-it-works",
+    "/strategy-direction/": "/how-it-works",
+    "/copywriting": "/services",
+    "/copywriting/": "/services",
+    "/home-agency-2": "/",
+    "/home-agency-2/": "/",
     // IA consolidation
     "/growth-engine": "/growth-operating-system",
     "/growth-engine/": "/growth-operating-system",

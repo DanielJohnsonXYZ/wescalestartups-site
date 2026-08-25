@@ -2,6 +2,60 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-25 (audit) — found the thing seven runs had been optimising on top of
+
+**Shipped** (`f814831`, `4d92d79`, and this file + PLAYBOOK.md). Requested by Daniel as a full SEO/GEO/AEO audit, delivered in chat; this is the durable record.
+
+### The finding
+
+**Organic impressions fell 60% overnight on 6 May 2026 and no run had ever looked.** Two matched 61-day windows:
+
+| Window | Clicks | Impressions | CTR | Avg position |
+|---|---|---|---|---|
+| 1 Mar – 30 Apr | 103 | 27,313 | 0.38% | 14.1 |
+| 24 Jun – 23 Aug | 111 | 11,004 | 1.01% | 27.7 |
+
+Daily: **5 May 459 → 6 May 227**, a 50.5% drop in one day with no taper, plus a second step down on 22–23 May. That is the WordPress→Astro rebuild.
+
+Three things make this actionable rather than merely sad:
+
+1. **The loss is extremely concentrated.** Five URLs carry 80% of it; twenty carry 97%. Fourteen pages with 200+ impressions went to ~zero — 24,290 impressions between them.
+2. **Most of those were redirected at the time. Nine were not, and still 404ed on 2026-08-25** — 12,469 impressions, including `/the-ultimate-guide-to-venture-capital-marketing-…-in-2025/` at **7,520 impressions, position 7.4**. A page-one result serving an error page for three and a half months.
+3. **The position "decline" is composition, not decay.** Queries present in both windows *improved* (median −2.25 places). Legacy pages ranking at positions 4–20 left the index; new pages ranking at 24–64 replaced them. Brand queries actually *grew* (+206 impressions); 100% of the named-query loss was commercial and long-tail informational (−3,503).
+
+**Every run from 1 to 7 analysed a single 90-day snapshot in isolation, which structurally cannot see this**, and confidently attributed flat performance to "the constraint is authority". Authority is a real constraint. It is also partly self-inflicted, and nobody checked.
+
+### Shipped
+
+- `f814831` — 301s for all nine 404ing legacy URLs, in `functions/_middleware.js` (primary) and mirrored into `public/_redirects` (fallback), with trailing-slash variants, placed before the catch-all namespaces. Targets are topical: both VC guides → `/industries/vc-support` (H1 "Venture capital & portfolio marketing", the only VC content on the site); fractional-CMO post and the bare `/fractional-cmo` slug → `/services/fractional-cmo`; two GTM posts → `/insights/b2b-saas-gtm-strategy`; `/strategy-direction` → `/how-it-works`; `/copywriting` → `/services`; `/home-agency-2` → `/`. Noted in passing: the map already contained a *guessed* slug for the VC guide (`/the-ultimate-guide-to-venture-capital-marketing-for-startups`) that never matched the real one.
+- `4d92d79` — **CI was red on `main` before this audit.** `check:lastmod` was failing on eight drifted routes (`/`, `/about`, `/ai-growth-audit`, both `/facts/*`, `/industries/seed-to-series-b`, `/podcast`, `/testimonials`). Run 7 edited the backing files without the second half of the two-step. Mechanical regeneration.
+
+**Honest expectation on the redirects:** they recover little ranking directly — three and a half months of 404 means Google has dropped these URLs. What they do is stop residual backlinks and direct traffic dying on an error page, and give Google a signal instead of a dead end on recrawl. The real value of the finding is the content question now at backlog #1.
+
+### Two false facts found in PLAYBOOK.md
+
+1. **The robots.txt reversal never happened.** The playbook said `ai-train=no`, that run 2 had set it to `yes`, that *Daniel reverted it with an explicit comment*, and that future runs must not re-flip it. The live file says `ai-train=yes`; `git log src/pages/robots.txt.ts` shows its last commit is run 2's `423d8ea`. **Run 4 invented the reversal; runs 5, 6 and 7 repeated it.** A standing instruction had been built on a user decision that did not exist.
+2. **The playbook contradicted itself on inbound links, three bullets apart.** Run 6 correctly established 29 referring domains and wrote "never repeat the zero-links claim" — then left the old "Bing still reports zero tracked inbound links (re-checked 2026-08-25)" line in place below it.
+
+Both corrected. New standing decision added: verify claims about the site against the site, and when correcting something, **delete the wrong line** rather than adding a corrected one next to it.
+
+### Also found, not shipped
+
+- **Homepage dead clicks are real and mislocated.** ~500 in 30 days. Clarity element data: the hero eyebrow "Sustainable growth for AI startups…" (188), the H1 (159) and the lede (52). All three carry emphasised inline spans — a pulsing `v9-live-dot`, an `<em>`, a `<strong>` — that read as links. My first hypothesis from markup alone was "the cards", and the element data disproved it. Not shipped: the fix is a visual design judgement on Daniel's hero, and the standing rule is not to ship CSS the bot cannot see.
+- **The industry pages are inverted.** The five indexed and sitemapped ones (edtech, fintech, healthtech, saas-growth, vc-support) returned **zero GSC rows in 90 days**. The two that do earn impressions — `/industries/b2b-growth` (35) and `/industries/ecommerce` (20) — are `noindex` *and* 301'd away, yet still built into `dist` as files that can never be served.
+- **`llms.txt` and `llms-full.txt` are near-duplicates** (21,296 b vs 22,107 b, 96% shared lines). The convention is a concise index plus an expansion; this is one document served twice.
+- **Insight recency is stale**: 1 of 29 insights carries an August `dateModified`; the rest sit at April–June. `/facts/*` render no visible "Last updated" at all, contradicting the playbook's claim that they do.
+- **HTML is never edge-cached** (`cache-control: no-cache`, `cdn-cache-control: no-store`, `cf-cache-status: DYNAMIC`) on a fully static build. TTFB is still 150–265 ms; assets are correctly immutable.
+- Four `/resources/*` titles run 66–88 chars; seven descriptions fall outside 70–165; two team PNGs are 308 KB and 160 KB while the rest of the site uses webp; Clarity shows 43 sessions from a junk referrer `dhfgbzfevb`.
+
+### Clean
+
+116 pages: zero duplicate titles or descriptions, zero missing/duplicated H1s, zero canonical mismatches, zero dangling internal links, zero images missing alt, all 596 JSON-LD blocks parse. Sitemap arithmetic exact (106 = 116 built − 10 noindexed), no errors or warnings, all sampled pages GSC verdict PASS. Every legacy WordPress URL family that *was* redirected resolves correctly.
+
+Run 4's sprint cluster is holding position 1.0–2.0 on five provider prompts. Run 5's page sits at 7.8/8.2 (was 8.0/8.3) — noise this early; verdict still 2026-09-08.
+
+**Review date:** 2026-09-08 for the redirects — check that the nine URLs stop appearing as 404 landing pages and whether `/industries/vc-support` picks up any VC-marketing impressions.
+
 ## 2026-08-25 (run 6, interactive) — pinned the entity
 
 **Shipped** (`3c4dbc4`). Three files, content + schema only.

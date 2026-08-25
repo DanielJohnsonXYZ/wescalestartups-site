@@ -20,6 +20,10 @@ export function buildPersonSchema() {
     givenName: "Daniel",
     familyName: "Johnson",
     jobTitle: "Founder and Fractional CMO",
+    // Bing surfaces at least seven different Daniel Johnson LinkedIn profiles for
+    // this site's queries, several at position 2. Pin the identifying attributes.
+    disambiguatingDescription:
+      "Daniel Johnson, founder of We Scale Startups, a London growth consultancy for post-PMF B2B SaaS and AI startups. Growth operator with 15+ years in SaaS, fintech, healthtech and EdTech, two operator-side exits, and a personal site at danieljohnson.xyz.",
     url: siteConfig.danielSite,
     email: siteConfig.email,
     telephone: siteConfig.phone,
@@ -54,6 +58,13 @@ export function buildOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": ["Organization", "ProfessionalService"],
     "@id": entityGraph.wssOrganization,
+    alternateName: "WSS",
+    // Bing query data (16 months to 2026-08-21) shows this entity being confused
+    // with at least three unrelated businesses using the WeScale/WeScaleUp name —
+    // most heavily a European B2B e-procurement platform whose login page WSS
+    // ranks 3-10 for. disambiguatingDescription exists for precisely this.
+    disambiguatingDescription:
+      "London-based growth consultancy and fractional CMO practice for post-PMF B2B SaaS and AI startups in the £1M–£10M ARR band, founded by Daniel Johnson and operating at wescalestartups.com. Not connected to similarly named procurement, e-commerce or accelerator businesses trading as WeScale or WeScaleUp.",
     areaServed: ["GB", "Europe", "US"],
     // ProfessionalService inherits LocalBusiness, where priceRange is first-class.
     // Spans the published engagement ranges (Diagnosis low → System Build high).

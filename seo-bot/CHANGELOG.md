@@ -2,6 +2,42 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-25 (run 6, interactive) — pinned the entity
+
+**Shipped** (`3c4dbc4`). Three files, content + schema only.
+
+**Connector fix first, and it unlocked 16 months of data.** The Bing MCP's date-bearing endpoints had been recorded as permanently broken since run 2. Root cause found and fixed: `parse_timestamp_from_api` in the vendored `bing_webmaster_tools` library returned a **naive** datetime, which serialises without a UTC offset. FastMCP validates tool output against a schema declaring those fields `format: date-time`, and RFC 3339 requires an offset — so every response carrying a date failed validation. One line (`tz=timezone.utc`). `get_query_stats`, `get_page_stats`, `get_rank_and_traffic_stats` and `get_url_info` all work now. Backup at `utils.py.bak`. **Caveat: this patches the vendored copy inside the installed extension, so a reinstall wipes it.** The durable fix is upstream at merj/bing-webmaster-tools (stale since April 2025).
+
+**Correction to the playbook's central fact.** Runs 2–5 recorded "Bing reports zero inbound links" and built the authority thesis partly on it. That was a broken endpoint, not a finding — the Bing UI shows **29 referring domains / 41 referring pages / 16 anchor texts**, and `get_url_info` reports `AnchorCount: 50` on the homepage alone. The authority thesis survives (29 domains is low for the head terms in play) but the number was never zero. `get_link_counts`/`get_url_links` still return empty via API — that endpoint appears not to be backed by the same store as the current Backlinks report, and no wrapper fix reaches it.
+
+**Finding 1 — this entity is being confused with at least three others.** Bing query stats, 2025-05-09 → 2026-08-21: the site's **second-largest query is `wescale login`** (106 impressions, avg position 6.69) and it is not a WSS query. It belongs to a European B2B e-procurement platform at wescale.com. Evidence is unambiguous: `punchout catalog`, `wescale supplier login`, `wescale portal de compras`, `https://continental.wescale.com/` (Continental AG), `https://autos.wescale.com/app/#/dashboard`, and two pasted internal IT helpdesk tickets (`could you please check if the below users are added into wescale users security groups ??`). Fifteen login-intent variants total **139 impressions — about a quarter of what previously read as brand traffic**. A second WeScale operates in print/design (`wescale design gpt login`), a third as WeScaleUp Studio. Separately, Bing surfaces **seven distinct Daniel Johnson LinkedIn profile URLs** for this site's queries, several at position 2.
+
+**Finding 2 — agents are running vendor research and this site ranks position 1 for it.** Not conversational queries; machine-issued ones:
+
+| pos | imp | query |
+|---|---|---|
+| 1.0 | 1 | `site:.com "fractional cmo" "b2b saas" "uk" "book" "contact" -mallorymullan` |
+| 1.0 | 1 | `"we scale startups" "fractional cmo" "£1–10m arr" contact` |
+| 1.0 | 4 | `review this and i think the acquisition channel matrix will be hepful` |
+| 2.0 | 3 | `build a channel priority matrix for careermap acquisition vs conversion` |
+| 4.0 | 2 | `draft the 90-day sprint checklist with costs and owners` |
+| 5.0 | 1 | `you are a marketing associate at a venture capital firm in london. you have been asked to create a marl]]]` |
+
+Operator-stacked, competitor-excluding, ARR-band-specific, and in one case a truncated system prompt with `]]]` delimiter garbage. **23% of Bing impressions are conversational or machine-issued.** This extends runs 4 and 5: the audience for extractable facts is not only humans scanning snippets, it is agents assembling shortlists — and what they ask for is *fit criteria and contact details*.
+
+**Change:**
+- `disambiguatingDescription` on both the Organization and Person schema nodes — the property schema.org defines for precisely this problem. States identifying attributes (London, post-PMF B2B SaaS/AI, £1M–£10M ARR, the domain, the founder) rather than relying on a generic-English name. `alternateName: "WSS"` added. No third party named.
+- Four rows added to `/facts/we-scale-startups` quick facts: company type, clients served, typical client size (£1M–£10M ARR), engagement range. Directly answers the observed `"£1–10m arr" contact` shape. Every figure already appears on `/about`, `/start-here` and `/pricing`; nothing new claimed.
+- TL;DRs for Growth Diagnosis and Acquisition System Build, the two service pages runs 4 and 5 left without one. All four now carry one. The ASB summary says "customer-acquisition system" explicitly, which also addresses `scalable land acquisition teams` (60 impressions of real-estate intent on that page).
+
+**Verified:** 116 pages build clean, EXIT=0, astro check 0/0, 596 JSON-LD blocks parse. Post-deploy live fetch with cache-busting confirmed all four TL;DRs, both schema properties, and the new facts rows. Bing: 2 URLs submitted.
+
+**Bing is not a channel and should not be optimised for.** 3,310 impressions / 30 clicks over 16 months, flat. Genuine non-brand commercial clicks in that entire period: **two**. Keep it as a diagnostic mirror — which is exactly what it was useful for today — not a target.
+
+**Expected movement:** entity binding is slow and does not show up as clicks. The read is whether the wrong-entity share of impressions falls, and whether AI answers describing WSS become more accurate. Not measurable in GSC.
+
+**Review date:** 2026-10-06 (entity signals take weeks; check the `wescale login` share of Bing impressions and whether the £1M–£10M ARR band starts appearing in AI answer citations).
+
 ## 2026-08-25 (run 5) — answered the three-way decision, one layer up from run 4
 
 **Shipped** (`f641844`). One file, content-only: `src/content/insights/when-to-hire-fractional-cmo.mdx`.

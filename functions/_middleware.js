@@ -135,8 +135,8 @@ export async function onRequest(context) {
     "/meta-ads": "/services/acquisition-system-build",
     "/meta-ads/": "/services/acquisition-system-build",
     // Legacy VC-marketing guide
-    "/the-ultimate-guide-to-venture-capital-marketing-for-startups": "/insights",
-    "/the-ultimate-guide-to-venture-capital-marketing-for-startups/": "/insights",
+    "/the-ultimate-guide-to-venture-capital-marketing-for-startups": "/insights/venture-capital-marketing",
+    "/the-ultimate-guide-to-venture-capital-marketing-for-startups/": "/insights/venture-capital-marketing",
     // Legacy WordPress / Bing soft-404 paths
     "/growth-package": "/pricing",
     "/growth-package/": "/pricing",
@@ -152,10 +152,12 @@ export async function onRequest(context) {
     // rankings before the May 2026 rebuild, and have returned 404 ever since.
     // Impressions/position are GSC, 1 Mar - 30 Apr 2026 (the last full pre-rebuild window).
     // Verified 404 live on 2026-08-25 before these rules were added.
-    "/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025": "/industries/vc-support",
-    "/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025/": "/industries/vc-support",
-    "/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust": "/industries/vc-support",
-    "/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust/": "/industries/vc-support",
+    // Both VC posts now point at /insights/venture-capital-marketing, which restores
+    // and rewrites their content, rather than at the /industries/vc-support service page.
+    "/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025": "/insights/venture-capital-marketing",
+    "/the-ultimate-guide-to-venture-capital-marketing-advanced-strategies-for-authority-and-trust-in-2025/": "/insights/venture-capital-marketing",
+    "/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust": "/insights/venture-capital-marketing",
+    "/venture-capital-marketing-a-strategic-approach-to-building-authority-and-trust/": "/insights/venture-capital-marketing",
     "/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups": "/services/fractional-cmo",
     "/the-rise-of-the-fractional-cmo-pivotal-marketing-leadership-for-startups/": "/services/fractional-cmo",
     "/mastering-the-art-of-the-pivot-adapting-your-go-to-market-strategy-for-success": "/insights/b2b-saas-gtm-strategy",

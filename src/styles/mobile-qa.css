@@ -89,7 +89,7 @@
   }
 
   /* The proof rail is four columns; at 390px that is 79px per cell, which the
-     stat figures (£18M+, 4.93/5 at ~27px) overflow. Two columns give them
+     stat figures (£18M+, 4.97/5 at ~27px) overflow. Two columns give them
      room. */
   .hero-proof,
   .hero-proof-quad {

@@ -118,9 +118,9 @@ export const revenueInfluencedNote =
 
 export const canonicalProofMetrics = [
   { value: "£18M+", label: "Revenue influenced", note: revenueInfluencedNote },
-  { value: "£6M+", label: "Paid acquisition spend managed" },
+  { value: "£10M+", label: "Paid acquisition spend managed" },
   { value: "479+", label: "Founder sessions" },
-  { value: "4.93/5", label: "GrowthMentor rating" },
+  { value: "4.97/5", label: "Average mentor rating" },
   { value: "20+", label: "Startups supported" },
   { value: "2", label: "Operator-side exits" }
 ] as const;
@@ -996,8 +996,8 @@ export const founderStory = {
   credentials: [
     "Two operator-side startup exits",
     "£18M+ revenue influenced, aggregate across client and operator-side engagements",
-    "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
-    "479+ founder sessions · 4.93/5 on GrowthMentor",
+    "£10M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
+    "479+ founder sessions · 4.97/5 average across Google, Techstars, GrowthMentor and MentorCruise",
     "MentorCruise Top Mentor, 5.0/5 across 30+ reviews",
     "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad"
   ]

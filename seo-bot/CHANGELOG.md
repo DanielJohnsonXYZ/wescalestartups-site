@@ -2,6 +2,39 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-25 (run 4) — answered the prompts the site already wins
+
+**Shipped** (`99ca705`, `dc91ce1`, `993d823`).
+
+**The find.** `/services/90-day-growth-sprint` is the only page on the site ranking at position 1–5 for commercial intent, and it converted none of it. Of the ten non-brand queries the whole site holds at position ≤5 over 90 days, **eight land on this one page**, all zero-click, and all of them are provider-selection intent:
+
+| pos | imp | query |
+|---|---|---|
+| 1.0 | 14 | `top providers of 90-day sprint marketing engagements for saas marketing teams?` |
+| 1.0 | 12 | `which saas marketing agencies provide the best 90-day sprint marketing engagement?` |
+| 1.0 | 6 | `who offers the best 90-day sprint marketing engagement in saas marketing?` |
+| 1.0 | 4 | `who offers quick-start growth sprints for startups and mid-market brands?` |
+| 2.0 | 4 | `what's the best 90-day sprint marketing engagement for saas marketing teams?` |
+| 3.8 | 12 | `get a quote for a 90 day growth sprint for my startup` |
+| 4.5 | 24 | `evaluate acme growth studio on 90-day sprint marketing engagements` |
+| 5.6 | 12 | `our board set a 12-week deadline for a full brand refresh and site relaunch—who has a repeatable sprint process for high-growth saas?` |
+
+The page described the engagement well but never said in one extractable passage *that WSS provides it, for whom, over what period, at what price*. That is what a human scanning a result and an answer engine assembling a shortlist both need — which is why the change is robust to either reading of these impressions (classic blue link vs AI Mode citation). We do not need to resolve that question to act.
+
+**Change:** the `TldrCallout`, previously hardcoded to `fractional-cmo`, is now a `tldr` field any service can set (Fractional CMO's text byte-identical). The sprint gets one naming provider, audience, duration, price, deliverables and week structure. Three FAQs added for the observed prompts — who offers this (naming agency / in-house / DIY alternatives honestly), how to get a quote, and whether a sprint fits a fixed board deadline (which says plainly that a brand refresh is not this engagement). New `metaDescriptionById` map, one entry, mirroring the existing `metaTitleById`; the collection description is untouched so `/services` and the Service schema keep it.
+
+**Framing note for future runs:** the FAQs are for **passage extraction, not rich results**. FAQPage rich results were deprecated May–Aug 2026. Do not cite this commit as evidence that FAQ schema works.
+
+**Quick wins** (`dc91ce1`): three legacy WordPress URL families were still in Google's index while 404ing at the apex — `/seo-services/` (16 imp, **position 1.6**), `/portfolio-tag/marketing/` (14 imp, pos 11.4), `/testimonial/` (1 imp, pos 8.0). The www host 301s to the apex, so every click on those results landed on the error page. `/portfolio-tag/` and `/testimonial/` are WordPress taxonomy archives that the existing `/portfolio/` and `/team/` prefix rules never matched — different literal prefixes. Added those plus their theme siblings `/portfolio-category/` and `/testimonial-view/` to `functions/_middleware.js` (primary) and mirrored into `public/_redirects` (fallback). `/seo-services` → `/services` rather than a topical near-match, because WSS no longer sells SEO standalone.
+
+**Verified:** 116 pages build clean on the tree that was pushed, `astro check` 0 errors 0 warnings, all 595 JSON-LD blocks parse, FAQPage now carries 9 questions, the other three service pages render no TL;DR and Fractional CMO's is unchanged. Post-deploy: live page fetched and confirmed rendering TL;DR, all 9 FAQs and the new description; all seven redirects confirmed 301 to the right targets with no existing rule shadowed (`/portfolio/equoo/` still resolves to its specific case study, `/services` and `/testimonials` still 200). `check:lastmod` green after the two-step regeneration. Bing: 3 URLs submitted (quota 100/day, monthly 700). Google: URL inspected — indexed, canonical clean, last crawl 14 Aug; recrawl comes via the sitemap, whose lastmod for all four service routes now reads 2026-08-25.
+
+**A pleasing coherence win:** the existing `meta-ai:summary` tag is derived from the page description, so it picked up the new provider-shaped summary automatically. The GEO layer and the SEO layer now say the same thing on this page without duplication.
+
+**Expected movement:** first clicks from `/services/90-day-growth-sprint`, and/or a firmer hold on the position-1 prompt cluster. If the impressions are AI Mode citations, expect impressions to hold and clicks to stay near zero — in that case the win is citation quality, not CTR, and the honest read is that this page's value does not show up in GSC at all. Do not treat flat clicks alone as failure; check whether the position-1 cluster is still held and whether new provider prompts appear.
+
+**Review date:** 2026-09-01 (check the eight-query cluster's positions and any clicks; allow crawl + ~3 days lag). Redirect verdict earlier — by 2026-09-08 the three legacy URLs should stop appearing as landing pages in GSC.
+
 ## 2026-08-22 (run 3) — consolidation shipped
 
 **Shipped** (`730416c`, `e66b9b9`): the §2 consolidation Daniel approved. Five pages merged into two, 121 → 116 pages, sitemap 111 → 106 URLs.

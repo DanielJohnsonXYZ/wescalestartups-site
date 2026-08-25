@@ -2,6 +2,30 @@
 
 Maintained by the daily scheduled task. Newest entry first.
 
+## 2026-08-25 (backlog 1) — restored the VC guide, rewritten rather than republished
+
+**Shipped** (`6ddf57f`). New page: **`/insights/venture-capital-marketing`**. Both legacy VC URLs repointed there from `/industries/vc-support`, plus a third guessed slug (`/the-ultimate-guide-to-venture-capital-marketing-for-startups`) that had been sitting in the map pointing at `/insights`.
+
+**Why this page.** The two lost articles held **8,055 impressions at positions 7.4 and 20.0** — the best-performing content this site has ever had. Daniel supplied a reconstruction of both, consolidated from indexed copies.
+
+**Why it was rewritten, not republished.** The reconstruction was 2,911 words of competent but undifferentiated advice: no original evidence, nothing a competitor could not have written, and a 2025 framing. Republishing it would have restored the URL and none of the value. Rewritten to **4,161 words** around three things it lacked:
+
+1. **A stated reason marketing matters now.** [PitchBook Q2 2026 US VC Fundraising and Returns Report](https://pitchbook.com/news/reports/q2-2026-us-vc-fundraising-and-returns-report): funds over $1bn took 68.3% of every dollar raised; a16z, Thrive and Founders Fund took 48.1% of H1 2026 capital between them; first-time managers under 10%. Attributed inline. **An earlier draft used concentration figures from a secondary source that would not resolve when fetched — dropped rather than repeated from a search summary.**
+2. **A vantage point only WSS has.** A connector sweep (Granola, Notion, Gmail, Drive) established something important: **WSS has no VC-firm client work.** Every named fund in the CRM is a cold prospect; there are no recorded fund or LP meetings. The defensible position is accelerator-side — Google for Startups, DeepMind Accelerator, Techstars, GrowthMentor, several hundred founder sessions. The guide says this plainly and builds its differentiated section, "what founders actually notice", from that founder-side view. **Any claim about advising funds would have been unsupportable, and the sweep is what stopped it being written.**
+3. **First-party evidence for the 2026 shift.** Our own GSC data — 118 queries of 8+ words over 90 days, 544 impressions, zero clicks, three vendor-shortlist prompts at position 1.0 — used to show a shortlist being assembled and delivered without a click.
+
+**Flagged for Daniel, not reversed:** the page publishes the fact that WSS's own pages rank first and earn no clicks. It is the strongest original evidence in the piece and it demonstrates the exact problem WSS sells help with, but it is his call.
+
+**Excluded on confidentiality grounds** after review: named mentees and their metrics, a client's investor-disclosure strategy, a third party's criticism of an accelerator programme, and all CRM contact names. Also excluded: the "100 VC research records" in Notion, which the source itself labels reference-only and which would have been trivially misreadable as "100 VCs spoken to".
+
+**Structure** follows the run 4/5 pattern: bolded direct answer in the opening, four comparison tables, six FAQs against real query shapes, extractable passages under every heading. `publishedAt` 2024-04-08 with `updatedAt` 2026-08-25, matching the lineage of the first original; the closing section states the lineage, the sources, and which parts are judgement.
+
+**Verified:** 117 pages build clean, `check:lastmod` green, all 602 JSON-LD blocks parse, FAQPage 6 questions, canonical clean, in sitemap (107 URLs), title 61 chars with brand suffix, description 155. Post-deploy: page 200, all three legacy URLs 301 to it, no existing redirect shadowed, `/industries/vc-support` and `/insights/ai-discoverability` still 200. Bing: 3 URLs submitted.
+
+**Expected movement:** low confidence on direct recovery — these URLs 404ed for three and a half months and Google has largely dropped them. The realistic win is that the topic is covered again by a substantive page, on an evergreen slug, with three legacy URLs consolidating onto it. Watch whether `venture capital marketing` and its variants reappear at all.
+
+**Review date:** 2026-09-22 (allow a full crawl cycle on a new URL).
+
 ## 2026-08-25 (audit) — found the thing seven runs had been optimising on top of
 
 **Shipped** (`f814831`, `4d92d79`, and this file + PLAYBOOK.md). Requested by Daniel as a full SEO/GEO/AEO audit, delivered in chat; this is the durable record.

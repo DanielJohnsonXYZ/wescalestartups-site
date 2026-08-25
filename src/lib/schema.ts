@@ -59,6 +59,10 @@ export function buildOrganizationSchema() {
     "@type": ["Organization", "ProfessionalService"],
     "@id": entityGraph.wssOrganization,
     alternateName: "WSS",
+    // Sourced from Daniel'''s LinkedIn experience entry (Aug 2016 - present),
+    // now mirrored on the LinkedIn company page. A founding date is one of the
+    // strongest disambiguators against the other WeScale entities.
+    foundingDate: "2016",
     // Bing query data (16 months to 2026-08-21) shows this entity being confused
     // with at least three unrelated businesses using the WeScale/WeScaleUp name —
     // most heavily a European B2B e-procurement platform whose login page WSS

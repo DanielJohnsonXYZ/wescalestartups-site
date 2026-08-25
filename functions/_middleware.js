@@ -165,6 +165,21 @@ export async function onRequest(context) {
   }
 
   // Prefix-based legacy redirects (any remaining old portfolio, blog, or team URL).
+  // /portfolio-tag/ and /testimonial/ are WordPress taxonomy archives that the
+  // /portfolio/ and /team/ prefixes below never matched, so they stayed live 404s.
+  // Confirmed 2026-08-25: /seo-services/ held Google position 1.6 while 404ing.
+  if (/^\/portfolio-tag\//.test(path) || /^\/portfolio-category\//.test(path)) {
+    url.pathname = "/case-studies";
+    return Response.redirect(url.toString(), 301);
+  }
+  if (path === "/testimonial" || /^\/testimonial\//.test(path) || /^\/testimonial-view\//.test(path)) {
+    url.pathname = "/testimonials";
+    return Response.redirect(url.toString(), 301);
+  }
+  if (path === "/seo-services" || path === "/seo-services/") {
+    url.pathname = "/services";
+    return Response.redirect(url.toString(), 301);
+  }
   if (/^\/portfolio\//.test(path)) {
     url.pathname = "/case-studies";
     return Response.redirect(url.toString(), 301);

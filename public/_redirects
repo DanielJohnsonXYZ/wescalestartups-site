@@ -152,7 +152,23 @@
 /transfer /how-it-works 301
 /transfer/ /how-it-works 301
 
+# Legacy WordPress pages that were still ranking while returning 404.
+# Confirmed live 2026-08-25: /seo-services/ sat at Google position 1.6 on 16
+# impressions over 90 days and 404'd at the apex, so every click on that result
+# landed on the error page. WSS no longer sells SEO as a standalone service, so
+# the honest target is the services index rather than a topical near-match.
+# Kept in sync with functions/_middleware.js.
+/seo-services /services 301
+/seo-services/ /services 301
+/testimonial /testimonials 301
+
 # Catch-all legacy namespaces last so exact rules above take priority.
+# /portfolio-tag/ and /testimonial/ are WordPress taxonomy archives; the
+# /portfolio/* and /team/* catch-alls below never matched them.
+/portfolio-tag/* /case-studies 301
+/portfolio-category/* /case-studies 301
+/testimonial/* /testimonials 301
+/testimonial-view/* /testimonials 301
 /portfolio/* /case-studies 301
 /blog/* /insights 301
 /team/* /about 301

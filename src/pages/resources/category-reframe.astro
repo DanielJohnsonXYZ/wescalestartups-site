@@ -1,0 +1,183 @@
+---
+import EmailSignup from "../../components/EmailSignup.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
+import { siteConfig } from "../../site";
+
+/**
+ * The Category Reframe, the positioning template behind Growth Letter
+ * Issue 33's first framework. A static route rather than a leadMagnets
+ * entry, so it does not touch the shared /resources/[slug].astro data.
+ */
+
+const slug = "category-reframe";
+const title = "The Category Reframe";
+const description =
+  "Find the category buyers keep filing you under by mistake, then write the one sentence that moves you out of it and prove it.";
+const downloadPath = "/downloads/guides/category-reframe.md";
+
+const whatYouGet = [
+  "A five-buyer script for finding the category you are actually filed under, in their words rather than yours",
+  "A price-by-clarity map so you can see which of the four squares you are trading in today",
+  "The four-line reframe template, with a worked B2B example",
+  "A repeat-back test that shows whether a champion can carry the sentence into a room you are not in",
+  "Placement checklist: homepage, outbound, the verbal answer, and your champion's internal message"
+];
+
+const faq = [
+  {
+    question: "How is this different from a positioning statement?",
+    answer:
+      "A positioning statement describes what you want to be. This starts from what buyers already think you are, which is the thing actually setting your price. The reframe is the bridge between the two."
+  },
+  {
+    question: "What if my buyers all say something different?",
+    answer:
+      "That is a useful result, not a failed exercise. Scattered answers usually mean the category is unclear rather than wrong, which is a different fix: pick one and repeat it everywhere before you worry about which competitor you sit next to."
+  },
+  {
+    question: "Do I need a proof point straight away?",
+    answer:
+      "Yes. A reframe without one is a claim, and buyers screen hardest for the distance between a claim and a demonstration. One checkable client result is enough to start."
+  }
+];
+
+const schemas = [
+  buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: title, path: `/resources/${slug}` }
+  ]),
+  buildFaqSchema(faq),
+  {
+    "@context": "https://schema.org",
+    "@type": "DigitalDocument",
+    name: title,
+    description,
+    url: `${siteConfig.siteUrl}/resources/${slug}`,
+    inLanguage: "en-GB",
+    isAccessibleForFree: true,
+    publisher: { "@id": `${siteConfig.siteUrl}/#organization` }
+  }
+];
+---
+
+<BaseLayout
+  title={`${title} | We Scale Startups`}
+  description={description}
+  path={`/resources/${slug}`}
+  schema={schemas}
+  lastUpdated={siteConfig.lastUpdated}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: title, path: `/resources/${slug}` }
+  ]}
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow"><a href="/resources">Resources</a> · Founders priced against the wrong competitor</p>
+      <h1>{title}</h1>
+      <div class="hero-support">
+        <p class="hero-copy">{description}</p>
+        <div class="hero-actions">
+          <a class="button button-brand" href={downloadPath} download data-cta={`magnet-download-${slug}`}>
+            Download the Category Reframe →
+          </a>
+          <a class="button button-light" href="/services" data-cta={`magnet-hero-services-${slug}`}>
+            Or see services →
+          </a>
+        </div>
+        <p class="hero-microcopy">Instant download. Optional: leave your email below for the Growth Bottleneck note.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="What you get"
+        title="Inside the Category Reframe"
+        body="Positioning worksheet · 4 steps · ~20 minutes"
+      />
+      <ul class="check-list">
+        {whatYouGet.map((item) => <li>{item}</li>)}
+      </ul>
+      <EmailSignup
+        formId={`magnet-${slug}`}
+        heading="Want the biweekly growth note too?"
+        subtext="One practical note on pipeline, positioning, and founder-led systems."
+        buttonLabel="Get the note →"
+        sourceType="lead_magnet"
+        leadMagnet={slug}
+        sourcePage={`/resources/${slug}`}
+        finePrint="No spam. Unsubscribe any time."
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell two-column">
+      <article>
+        <p class="eyebrow">How to use it</p>
+        <h2>Start with what buyers said, not what you wish they said.</h2>
+        <p>
+          Do step one before you write anything. Ask five recent buyers what they thought you were before you spoke, and
+          write the answers down verbatim without correcting them. If three give the same wrong answer, you have a
+          category problem and it is costing you price. Only then write the reframe, and do not ship it until someone
+          outside the company can repeat it back from memory.
+        </p>
+      </article>
+      <article>
+        <p class="eyebrow">Best fit</p>
+        <h2>Who this is for.</h2>
+        <p>Founders whose buyers compare them with the wrong competitor and open every call with a discount question.</p>
+        <p class="muted">
+          <strong>Not for:</strong> teams without recent buyer conversations to draw on. The template runs on what real
+          buyers said, not on internal opinion about what the category should be.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <SectionIntro eyebrow="FAQ" title="Questions to check before using it." />
+      <div class="faq-list">
+        {faq.map((item, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <h2>Need more than a template?</h2>
+        <p>
+          If the category reframe surfaces a constraint you would rather solve with senior help, the next step is a
+          Growth Diagnosis call. Bring your result, we will pressure-test the constraint it names and sketch the next
+          move in 20 minutes.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a
+          class="button button-brand"
+          href={siteConfig.bookingUrl}
+          data-cta={`magnet-final-book-${slug}`}
+          title={siteConfig.bookingCallReassurance}
+        >
+          {siteConfig.bookingLabel} →
+        </a>
+        <a class="button button-light" href="/resources" data-cta={`magnet-final-resources-${slug}`}>
+          Back to all resources →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

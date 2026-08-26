@@ -18,6 +18,32 @@
     "Operator-side support for teams moving from traction to repeatable acquisition"
   ],
   "order": 9,
+  "relatedReading": [
+    {
+      "href": "/insights/venture-capital-marketing",
+      "label": "Venture capital marketing: the full guide"
+    },
+    {
+      "href": "/insights/diagnose-growth-bottleneck-before-spend",
+      "label": "Diagnose before spend"
+    },
+    {
+      "href": "/insights/acquisition-system-beats-channel-sprawl",
+      "label": "Acquisition system vs channel sprawl"
+    },
+    {
+      "href": "/insights/when-to-hire-fractional-cmo",
+      "label": "When to hire a fractional CMO"
+    },
+    {
+      "href": "/services",
+      "label": "Services"
+    },
+    {
+      "href": "/case-studies",
+      "label": "Case studies"
+    }
+  ],
   "readingBlocks": [
     {
       "heading": "What this page is for",

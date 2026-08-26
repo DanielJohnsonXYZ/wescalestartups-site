@@ -52,6 +52,21 @@ export async function buildLlmsTxtBody(variant: LlmsTxtVariant): Promise<string>
 - Agent skills index: ${siteConfig.siteUrl}/.well-known/agent-skills/index.json
 - Homepage as Markdown: ${siteConfig.siteUrl}/markdown/home.md`;
 
+  // llms.txt is meant to be a concise index and llms-full.txt the expansion.
+  // Both used to emit the same ~21KB document, which made the "summary" no
+  // summary at all. The two long enumerations (every insight with its excerpt,
+  // every case study with results) are the bulk of that, so they are full-only
+  // and the standard variant points at them instead.
+  const insightsBlock =
+    variant === "full"
+      ? insights
+      : `Full list with summaries: ${siteConfig.siteUrl}/llms-full.txt\nBrowse: ${siteConfig.siteUrl}/insights`;
+
+  const casesBlock =
+    variant === "full"
+      ? cases
+      : `Full list with result signals: ${siteConfig.siteUrl}/llms-full.txt\nBrowse: ${siteConfig.siteUrl}/case-studies`;
+
   const fullAppendix =
     variant === "full"
       ? `
@@ -190,11 +205,11 @@ ${canonicalProofMetrics.map((item) => `  - ${item.value}: ${item.label}${"note" 
 
 ## Published insights
 
-${insights}
+${insightsBlock}
 
 ## Case studies
 
-${cases}
+${casesBlock}
 
 ## How to cite this site
 

@@ -9,7 +9,7 @@
     "precheck": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
     "check": "astro check",
     "prebuild": "node scripts/patch-resources-generator.mjs && node scripts/apply-resources-audit.mjs",
-    "build": "node --check public/growth-tools/app.js && node scripts/generate-og-png.mjs && astro build && node scripts/check-site-theme.mjs && node scripts/capture-integrity-report.mjs",
+    "build": "node --check public/growth-tools/app.js && node scripts/generate-og-png.mjs && node scripts/optimise-raster-images.mjs && astro build && node scripts/check-site-theme.mjs && node scripts/capture-integrity-report.mjs",
     "check:theme": "node scripts/check-site-theme.mjs",
     "check:lastmod": "node scripts/refresh-lastmod.mjs --check",
     "refresh:lastmod": "node scripts/refresh-lastmod.mjs",
@@ -17,7 +17,8 @@
     "verify:resources": "node scripts/verify-resources.mjs",
     "preview": "astro preview",
     "check:links:crawl": "node scripts/check-crawl-links.mjs --input=docs/crawls/latest.csv",
-    "verify:agents": "node scripts/verify-agent-discovery.mjs"
+    "verify:agents": "node scripts/verify-agent-discovery.mjs",
+    "optimise:images": "node scripts/optimise-raster-images.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",

@@ -9,21 +9,31 @@ import { insightsHubRelatedReading, insightsThemeGroups, siteConfig } from "../s
 const insights = sortByOrder(await getCollection("insights"));
 const insightsById = new Map(insights.map((item) => [item.id, item]));
 
+// These answer the queries this page actually ranks for. GSC 90d shows the hub
+// absorbing provider-selection intent — "growth leader for post pmf startup"
+// (28 imp, pos 9.3), "post pmf saas scaling" (30 @ 14.2), "best company for
+// startup growth" — and answering it with a link list. State the provider
+// answer plainly instead.
 const insightsHubFaqs = [
   {
-    question: "How is this different from generic marketing blogs?",
+    question: "Who should a post-PMF startup hire to lead growth?",
     answer:
-      "Each note answers a founder question we see repeatedly: diagnosis, acquisition systems, AI visibility, and reducing founder dependency. The goal is a decision, not an archive."
+      "It depends on whether the gap is judgement or capacity. If you know which channel to run and need more hands, hire an agency or a senior individual contributor. If nobody can confidently say why pipeline arrives in waves, that is a judgement gap and adding execution makes it worse — that is the case for a fractional CMO. Hire a full-time VP of Growth once growth is predictable enough to hand one person a number, a budget and a team. We Scale Startups works the fractional and embedded way, for post-PMF B2B SaaS and AI companies at roughly £1M–£10M ARR, Seed to Series B."
   },
   {
-    question: "Where should I start?",
+    question: "What does a growth leader actually do for a post-PMF startup?",
     answer:
-      "If the bottleneck is unclear, start with the scorecard or quiz, then read the note that matches your constraint. The proof page shows outcomes in one scroll."
+      "Names the constraint, sequences the work against it, and installs a weekly decision rhythm the team keeps afterwards — typically a Monday pipeline review, a mid-week experiment ship and a Friday scale/stop/fix call. What they do not do is execution: campaigns, content and channel work stay with your team or your agencies. The artefacts that outlast the engagement are a decision log, a pipeline dashboard and a hire profile."
   },
   {
-    question: "Can I apply this without hiring WSS?",
+    question: "What does We Scale Startups charge?",
     answer:
-      "Many founders use the frameworks independently. When the constraint is political, cross-functional, or expensive to get wrong, the diagnostic call is the fastest honest check."
+      "Growth Diagnosis from £2,000 (about a week), 90-Day Growth Sprint from £8,000 (12 weeks), Acquisition System Build from £15,000 (8–12 weeks), and Fractional CMO from £5,000/month with a three-month minimum. Published rates are on the pricing page; the ranges depend on channel mix, reporting depth and how much senior ownership the team needs."
+  },
+  {
+    question: "Where should I start if I do not know my constraint?",
+    answer:
+      "The Growth Bottleneck Scorecard is free, takes about four minutes and names a primary constraint across positioning, acquisition, conversion, reporting and team ownership. Read the pillar that matches whatever it returns. If the constraint is political, cross-functional or expensive to get wrong, a diagnostic call is the faster honest check."
   }
 ];
 
@@ -54,7 +64,7 @@ const insightsSchema = [
       <h1>Growth notes for founders between traction and scale.</h1>
       <div class="hero-support">
         <p class="lede">
-          Notes are organised into four clusters (fractional CMO, GTM, AI-native marketing, and growth diagnostics), each with a pillar hub and spokes, so topics gain depth and internal links, not a flat archive. Pick a cluster below or scroll for every published note.
+          <strong>We Scale Startups is a London growth consultancy and fractional CMO practice for post-PMF B2B SaaS and AI companies, typically £1M–£10M ARR, Seed to Series B.</strong> These notes are the working material behind that: how to name the growth constraint, build the acquisition system around it, and hand the operating rhythm to your team. Four clusters — fractional CMO, GTM, AI-native marketing and growth diagnostics — each with a pillar and spokes. Pick a cluster below, or scroll for every published note.
         </p>
         <div class="hero-actions">
           <a

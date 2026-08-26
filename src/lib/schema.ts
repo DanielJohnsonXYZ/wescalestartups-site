@@ -77,7 +77,7 @@ export function buildOrganizationSchema() {
     // Sourced from Daniel's LinkedIn experience entry (Aug 2016 - present),
     // now mirrored on the LinkedIn company page and the Google Business Profile.
     // A founding date is one of the strongest disambiguators against the other
-    // WeScale entities.
+    // WeScale entities. NOTE: Clutch still lists 2019 and needs correcting there.
     foundingDate: "2016",
     // Bing query data (16 months to 2026-08-21) shows this entity being confused
     // with at least three unrelated businesses using the WeScale/WeScaleUp name —
@@ -106,9 +106,11 @@ export function buildOrganizationSchema() {
       postalCode: "EC2A 3AG",
       addressCountry: "GB"
     },
-    // Every entry verified live (HTTP 200) on 2026-08-26. The three social
-    // accounts were found listed on the Google Business Profile and were
-    // missing here, so the graph knew about fewer WSS profiles than Google did.
+    // Every entry verified live on 2026-08-26. The social accounts were found
+    // listed on the Google Business Profile and were missing here, so the graph
+    // knew about fewer WSS profiles than Google did. Clutch verified by opening
+    // the profile directly. Trustpilot exists and is claimed but is Daniel's
+    // call — see the run 11 changelog.
     sameAs: [
       siteConfig.linkedin,
       siteConfig.danielSite,
@@ -119,7 +121,8 @@ export function buildOrganizationSchema() {
       siteConfig.founderLinkedin,
       "https://x.com/wescalestartups",
       "https://www.instagram.com/wescalestartups/",
-      "https://www.facebook.com/wescalestartups/"
+      "https://www.facebook.com/wescalestartups/",
+      "https://clutch.co/profile/we-scale-startups"
     ]
   };
 }

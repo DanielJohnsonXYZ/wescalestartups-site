@@ -1,119 +1,511 @@
 ---
-title: "Go-to-market strategy for startups"
-description: "GTM strategy for post-PMF B2B SaaS and AI teams: ICP, positioning, channel sequence, cadence, and metrics, a framework you can actually run."
-excerpt: "How post-PMF B2B SaaS teams build a go-to-market strategy that compounds: who you serve, what you promise, which channels reinforce each other, and how you know it is working."
-tldr: "GTM strategy is not a slide deck, it is a sequenced path from ICP → positioning → channel choices → weekly operating rhythm, with metrics that tie spend to pipeline and revenue."
+title: "Go-To-Market Strategy for Startups"
+description: "A go-to-market strategy is how you turn a product people want into repeatable revenue. Who you can win, what makes them act, and why channels come last."
+excerpt: "Most startups don't have a GTM strategy, they have a collection of things they're doing. What to decide first, in what order, and how to know it's working."
+tldr: "A go-to-market strategy is how you turn a product people want into customers and, eventually, repeatable revenue. It answers who you're trying to win, what makes them buy, why they choose you, how you reach them and what you need to learn next. The channels come after that — most startups start there, which is why adding another one rarely helps."
 publishedAt: 2026-05-04
-updatedAt: 2026-05-04
+updatedAt: 2026-08-26
 author: "Daniel Johnson"
 tags: ["gtm", "b2b-saas", "content-cluster", "pillar"]
 order: -3
 faqs:
-  - question: "What is a go-to-market strategy for startups?"
-    answer: "A go-to-market (GTM) strategy is the set of choices that connect your product, your best-fit buyer, and the channels you use to reach them, plus the operating rhythm that turns those choices into repeatable pipeline. For post-PMF B2B SaaS, it usually spans ICP definition, positioning, offer and proof, channel sequencing, and a cadence for experiments and decisions."
-  - question: "How is GTM different before vs after product-market fit?"
-    answer: "Before PMF, GTM is exploratory: you are still proving who buys and why. Messaging and channels change often, and founder-led selling is expected. After PMF, GTM should become more repeatable: the same story should work for more than one rep or campaign, channels should reinforce one another, and you need explicit metrics so you can scale, stop, or fix work without guessing."
-  - question: "What are the most common GTM mistakes for B2B SaaS startups?"
-    answer: "Common failures include: chasing every channel at once without sequencing; confusing activity with progress; letting positioning drift as the product grows; outsourcing execution without a single owner for strategy; and measuring vanity metrics instead of pipeline quality, velocity, and revenue impact."
-  - question: "Which metrics show that a startup GTM strategy is working?"
-    answer: "Healthy GTM shows up in pipeline creation and quality (ideal-fit opportunities, not just MQL volume), conversion between stages, CAC payback within your model, retention or expansion where relevant, and shortening sales cycles for the same ICP. You also want operational signals: a stable weekly experiment cadence and fewer one-off heroics from the founder."
-  - question: "How does fractional CMO or GTM help relate to GTM strategy?"
-    answer: "Senior GTM help is useful when you have traction but the system still runs through the founder, when positioning, channel choices, and reporting are not yet aligned enough to hand to a team. The goal is not more campaigns; it is a coherent system others can run, with clear decision rules and proof."
+  - question: "What is a go-to-market strategy?"
+    answer: "A go-to-market strategy is how you turn a product people want into customers and, eventually, repeatable revenue. In practice it covers who you're selling to, what problem you solve, what makes that problem urgent enough to act on, what they're doing instead today, why they'd choose you, what you're asking them to buy, how they buy it, where you can reach them, what happens between first contact and becoming a customer, and how you know which parts are working. Channels are downstream of all of that."
+  - question: "How is GTM different before and after product-market fit?"
+    answer: "Before product-market fit you're still working out who wants the product and why, so GTM is mostly discovery and messaging churns. After product-market fit the question becomes whether you can win similar customers repeatedly. Later it becomes efficiency, team structure and how far the model scales before the economics break. Trying to solve all three stages at once is where a lot of GTM plans go wrong."
+  - question: "How do I know what's actually wrong with my growth?"
+    answer: "Get to a specific diagnosis. \"We need more pipeline\" isn't specific enough. \"Our outbound is booking meetings, but most are companies below the size where the economics work\" is. So is \"qualified demo volume is fine, but fewer than 10% progress because buyers don't understand how we're different from the incumbent.\" Check ICP, positioning, acquisition, conversion, retention and how the team works before adding a channel — all of those can look like a lead generation problem from a distance."
+  - question: "How should a startup choose its ICP?"
+    answer: "Start with actual customers and deals rather than a persona. Look at who bought quickly, who gets obvious value, who stays, who's profitable to serve, who refers. Then look at the opposite — who takes forever to close, who needs endless support, who pushes on price, who buys and barely uses it. That second group is your anti-ICP and it saves a lot of wasted acquisition spend. Buying situation matters more than company size and job title."
+  - question: "Which acquisition channel should a startup pick first?"
+    answer: "One, not six. Trying LinkedIn, Google Ads, outbound, SEO, partnerships and webinars simultaneously means none of them has enough volume or focus to tell you anything after three months. Choose on three tests: can we find the customer there, can we learn quickly, and do we have some advantage — an existing audience, proprietary data, a community our customers belong to, or ignored high-intent search demand. Once one motion works, add channels that support it."
+  - question: "When should a founder hand over sales?"
+    answer: "Later than most founders want to. Early sales calls are where you hear how customers describe the problem, what they don't understand, what they compare you with, what makes them nervous and why deals are lost. The goal isn't for the founder to sell forever — it's to understand the sale well enough that somebody else can reproduce it. A good handover means a salesperson isn't guessing at the ICP, rewriting the pitch and discovering objections from scratch."
+  - question: "What should a startup GTM strategy actually contain?"
+    answer: "One page: current constraint, ICP, anti-ICP, buying trigger, problem, alternatives, positioning, offer and pricing, sales motion, primary acquisition route, conversion path, main metric, biggest assumptions, and what you're testing now. If that page is clear you have enough to start. It should change — a GTM strategy built at five customers shouldn't be untouched at 100."
 ---
 
-This is the hub for our startup GTM notes. It is written for founders and small GTM teams who already have paying customers and are trying to make growth **repeatable** rather than heroic. If you are looking for a single phrase to anchor on, use this: **go-to-market strategy for startups** is the bridge between “we have a product people want” and “we have a machine that produces pipeline without improvising every week.”
+Most startups I speak to don't really have a go-to-market strategy.
 
-## What “GTM strategy” means on this page
+They have a collection of things they're doing.
 
-In investor decks, “GTM” often means a list of channels and a revenue target. In operating reality, especially for Seed to Series B B2B SaaS, GTM strategy is narrower and harder: it is the **minimum set of choices** that let you answer three questions without a meeting:
+Someone is running paid ads. The founder posts on LinkedIn. There's an outbound campaign. A freelancer is working on SEO. Sales are chasing whatever leads come in.
 
-1. **Who exactly are we built for right now** (ICP), and who are we saying no to?
-2. **What do we promise**, in one plain sentence a busy buyer believes?
-3. **How do we reach and convert that buyer** in a sequence that makes sense for our motion (sales-led, PLG-assisted, hybrid), **without** every channel fighting the others?
+Sometimes that works for a while. Usually because the founder is holding everything together.
 
-Everything else, content, paid, outbound, events, partnerships, hangs off those answers. When they are fuzzy, you get the pattern most post-PMF teams describe: **activity goes up, clarity goes down**, and the founder becomes the implicit integration layer between marketing, sales, and product.
+Then growth slows down and the obvious reaction is to add something else.
 
-## A practical framework: five layers
+More ads. Another salesperson. A new agency. More content.
 
-Think of GTM as five stacked layers. You can picture them as a vertical slice: if any layer is weak, the ones above wobble.
+I've seen companies spend a lot of money this way without ever getting much closer to understanding why customers actually buy.
 
-### 1. ICP and segmentation
+A good go-to-market strategy should make that clearer.
 
-Your ICP is not “B2B SaaS.” It is the **smallest** set of accounts where you can repeatedly win on purpose, same pain, same buying committee shape, same proof, similar sales cycle. For startups, the error is usually **too broad** an ICP because narrowing feels like leaving money on the table. In practice, a broad ICP makes messaging average, campaigns expensive, and win rates patchy.
+**You need to know who you're trying to win, what makes them buy, why they choose you, how you're going to reach them and what you need to learn next.**
 
-A useful test: if you cannot name **three live customers** who match the segment and would recognise themselves in your homepage headline, you are not ready to scale spend.
+The channels come after that.
 
-### 2. Positioning and narrative
+## What is a go-to-market strategy?
 
-Positioning is not a tagline exercise. It is the **constraint** that tells you what to build in public: which outcomes you emphasise, which alternatives you replace, which proof you lead with. For AI startups in particular, the market noise is extreme; “we use AI” is not positioning. Positioning answers: **for whom**, **what broken workflow**, **why us now**, **why not status quo or a bigger vendor**.
+A go-to-market strategy is how you turn a product people want into customers and, eventually, repeatable revenue.
 
-### 3. Offer, packaging, and proof
+In practice, it covers a few connected decisions:
 
-B2B buyers do not buy “strategy.” They buy a **clear next step** with a believable path to value. Your offer should make the first step concrete (diagnostic, pilot scope, implementation boundary) and your proof should match the risk they feel: logos, quantified outcomes where you can, or rigorous anonymised stories where you cannot.
+- Who are we selling to?
+- What problem are we solving for them?
+- What makes that problem important enough to act on?
+- What are they doing instead today?
+- Why would they choose us?
+- What are we asking them to buy?
+- How do they buy it?
+- Where can we reach them?
+- What happens between first contact and becoming a customer?
+- How do we know which parts are working?
 
-### 4. Channel sequence (not channel soup)
+This changes depending on where your startup is.
 
-Channels are not interchangeable levers you pull in parallel forever. **Sequencing** matters: many teams win by being deliberately great at one **demand** engine and one **conversion** surface before adding complexity. For example: sharpen onsite conversion and sales narrative, then layer paid or outbound to **predictable** CAC, not the reverse.
+Before product-market fit, you're still working out who wants the product and why.
 
-The enemy is **channel sprawl**: half-tested LinkedIn, sporadic content, an agency on Meta, a contractor on SEO, with nobody holding the integrated story and the weekly decision on what to scale, stop, or fix.
+After product-market fit, the question becomes whether you can win similar customers repeatedly.
 
-### 5. Operating cadence and decision rights
+Later, you start worrying about efficiency, team structure and how far you can scale the model without the economics falling apart.
 
-This is the least glamorous layer and the most under-invested. A GTM system needs a rhythm: what you review weekly, how experiments are logged, who can kill a campaign, how pipeline quality is defined, and how product and GTM share learnings. Without cadence, you get perpetual **firefighting dressed up as agility**.
+Trying to solve all three stages at once is where a lot of GTM plans go wrong.
 
-If you want a deeper visual mental model, see the [growth operating system](/growth-operating-system) page, it is the same idea expressed as diagnose → design → build → transfer.
+## Start with the problem in your growth system
 
-## Stage-specific GTM: pre-PMF vs post-PMF vs scaling
+One of the first things I do when looking at a company's growth is work out where it's actually breaking.
 
-1. **Pre-PMF.** Prioritise learning velocity over efficiency. Keep ICP hypotheses explicit, talk to users constantly, and accept that messaging will churn. Your GTM “strategy” is mostly **discovery**: who pulls the product in, and what job they hire it for.
-2. **Post-PMF (this page’s focus).** The problem shifts from “will anyone buy?” to **“can we do this twice on purpose?”** Positioning should stabilise enough that marketing and sales are not rewriting the story every month. You need **repeatable pipeline creation** for a defined ICP and a conversion path that does not require the founder in every thread.
-3. **Scaling.** Now efficiency and predictability dominate: channel economics, retention, expansion, maybe geographic or segment expansion. The failure mode is importing “big company” GTM complexity before the **narrow core** is profitable.
+Founders will often tell me they need more leads.
 
-## Common GTM mistakes (and what they look like)
+Maybe they do.
 
-These show up constantly in audits, not because teams are careless, but because growth pressure rewards motion.
+But I've also seen startups with plenty of traffic and terrible conversion. Companies generating lots of demos from businesses that were never going to buy. Teams running paid acquisition into onboarding journeys where almost everyone dropped out. Founders closing deals themselves while nobody else could explain the product properly.
 
-- **Mistake: positioning drift.** Every new feature becomes a new headline; buyers see a different company depending on which page they land on. Fix: one **canonical narrative** owned by a single person, reflected across site, decks, and outbound.
-- **Mistake: activity metrics.** Reporting impressions, clicks, or even raw MQL count without ICP fit. Fix: stage definitions that reflect **quality**, not volume; review disqualifies honestly.
-- **Mistake: founder as permanent glue.** If campaigns only work when the founder writes copy, joins calls, or “fixes” leads, you do not have a system. Fix: document decisions, build a backlog, and train a named owner.
-- **Mistake: agencies without a strategy owner.** Agencies can execute brilliantly and still fail if nobody internal owns **what** to say to **whom** and **why this quarter**.
-- **Mistake: copying a motion that does not match the product.** PLG narratives are seductive; not every product can support them. Match motion to buyer risk, price point, and time-to-value.
+All of those can look like a lead generation problem from a distance.
 
-## How to know your GTM is working: metrics that matter
+They're completely different problems.
 
-Pick a small scorecard and look at it weekly, not a forty-tab dashboard nobody opens.
+Before adding another channel, look at:
 
-- **Pipeline health.** New opportunities per week **in the ICP**, stage conversion rates, and average cycle length for the same motion. Watch for “pipeline” that is really noise: small logos, bad-fit segments, or partner-sourced deals that never close.
-- **Unit economics.** CAC payback within the bounds your investors and cash position require; gross retention and NRR if you are subscription. If you are early in monetisation, proxy with qualified pipeline value and win rates rather than pretending precision you do not have.
-- **Operational signals.** Experiment velocity (tests started and **finished**), percentage of spend behind documented hypotheses, and reduction in one-off escalations to the founder.
+| Layer | The question |
+| --- | --- |
+| **ICP** | Are you attracting companies that actually need the product, can buy it and are likely to succeed with it? |
+| **Positioning** | Do those people understand what you do and why it matters? |
+| **Acquisition** | Can you reach enough of the right people? |
+| **Conversion** | Do qualified prospects move through the funnel? |
+| **Retention** | Do customers get enough value to stay? |
+| **How the team works** | Do you know what is working well enough to make sensible decisions each week? |
 
-If you want a philosophical contrast that informs sequencing, read [An acquisition system beats channel sprawl](/insights/acquisition-system-beats-channel-sprawl) and [Systems vs activity retainers](/insights/systems-vs-activity-retainers).
+The aim is to get to a specific diagnosis.
 
-## Example (anonymised): from plateau to rhythm
+"We need more pipeline" isn't specific enough.
 
-A typical engagement pattern, heavily simplified, looks like this: a Series A B2B team had steady inbound from founder brand and events, but **paid and outbound underperformed** because the story on ads did not match what sales said on calls. Pipeline was “okay” but noisy; win rates swung by quarter.
+"Our outbound is booking meetings, but most are companies below the size where the economics work" is.
 
-The fix was not “more campaigns.” It was **tightening ICP**, rewriting the core narrative around one measurable buyer pain, rebuilding the primary landing experience to match, and only then **re-sequencing** paid and outbound with shared definitions of a qualified opportunity. Within a few months, the leading indicator was not “more leads”, it was **fewer, better** conversations and a stable Monday review that did not depend on the founder rewriting slides every Sunday night.
+So is:
 
-## Spokes (live)
+"Qualified demo volume is fine, but fewer than 10% progress because buyers don't understand how we're different from the incumbent."
 
-- [An acquisition system beats channel sprawl](/insights/acquisition-system-beats-channel-sprawl)
-- [Systems vs activity retainers](/insights/systems-vs-activity-retainers)
+Once you can describe the problem properly, the next decision gets a lot easier.
+
+If you want to work through this with your team, [the five-layer diagnostic](/diagnose) is the structured version, and [startup growth bottlenecks](/insights/startup-growth-bottlenecks) covers how to tell a symptom from a constraint.
+
+## Work out who you can win
+
+A lot of ICP work is far too theoretical.
+
+You end up with a persona called "SaaS Sarah", a company size, a job title and a list of supposed frustrations.
+
+I'd rather start with actual customers and deals.
+
+Take your best customers and look for patterns.
+
+- Who bought relatively quickly?
+- Who gets obvious value from the product?
+- Who stays?
+- Who is profitable to serve?
+- Who refers other customers?
+- Which deals felt surprisingly easy?
+
+Then look at the opposite.
+
+- Which customers take forever to close?
+- Who needs endless support?
+- Who pushes hard on price?
+- Who buys and then barely uses the product?
+- Which segments keep showing interest but never turn into revenue?
+
+That second group is useful. **Your anti-ICP can save you a huge amount of wasted acquisition spend.**
+
+Company size and job title can help, but I care more about the buying situation.
+
+For example:
+
+> Series A B2B SaaS companies where founder-led acquisition has worked, but pipeline becomes inconsistent when they try to build a proper growth function.
+
+That tells me far more than:
+
+> B2B SaaS, 20 to 200 employees.
+
+You can immediately start thinking about the problem, the timing, the person involved and where you might find them.
+
+Your ICP will probably change. That's fine.
+
+It just needs to be specific enough that your current GTM activity is actually aimed at someone.
+
+## Find out what makes them act
+
+Knowing that someone has a problem isn't enough.
+
+Most businesses tolerate problems for a surprisingly long time.
+
+Something normally happens that moves the problem up the priority list.
+
+- A company raises funding and suddenly has a growth target it can't hit.
+- A new VP joins and wants to replace the existing software.
+- A team reaches a size where spreadsheets stop working.
+- A board meeting exposes an ugly number.
+- A customer leaves.
+- A regulation changes.
+- A competitor moves into the market.
+
+Those moments matter because they explain why someone buys **now** rather than six months from now.
+
+This is one of my favourite questions to ask customers:
+
+**What was happening when you first started looking for a solution?**
+
+Follow it with:
+
+**What would you have done if you hadn't solved it?**
+
+You'll often get much better material from those two questions than from asking someone to list their "pain points".
+
+The answers should make their way into your positioning, outbound, advertising and sales conversations.
+
+## Look at what customers would do without you
+
+When founders think about competitors, they usually make a list of companies offering a similar product.
+
+That's useful, but it's only part of the picture.
+
+Ask a customer what they would do if your company disappeared tomorrow.
+
+They might use a competitor. They might hire someone. They might use Excel. They might stitch together three other tools. They might carry on doing the job manually. They might do nothing.
+
+Those are your real alternatives.
+
+Then you can ask a much more useful positioning question:
+
+**Why would someone choose us instead?**
+
+Perhaps you're quicker to implement. Maybe you remove a manual process. Maybe you specialise in a use case that a larger platform handles badly. Maybe you produce better data. Maybe you're considerably cheaper than hiring somebody.
+
+Whatever it is, it needs to matter to the customer.
+
+This is particularly important for AI startups.
+
+I see a lot of positioning built around the fact that a product uses AI. Buyers don't generally care.
+
+They care that something which took four hours now takes ten minutes. They care that they don't need to hire another person. They care that errors fall. They care that they can do something they couldn't realistically do before.
+
+**The technology explains how. The outcome explains why someone should buy it.**
+
+## Make sure the offer makes sense
+
+I've seen startups fixate on messaging when the bigger problem was the thing they were asking customers to do.
+
+Imagine landing on the website of a relatively unknown company and immediately being asked to book a 45-minute demo.
+
+That might be right for a £50,000 piece of enterprise software.
+
+It's probably wrong for a simple £30 tool somebody could understand in five minutes.
+
+The opposite happens too. Complex products are pushed into self-service because "PLG" sounds attractive, even though buying involves security, implementation, several stakeholders and a lot of perceived risk.
+
+Your sales motion should fit the purchase.
+
+A simple product might look like:
+
+> Visit → Try → Get value → Pay
+
+A more complex sale could look like:
+
+> Initial interest → Discovery → Demo → Pilot → Internal approval → Contract
+
+Neither is inherently better.
+
+The question is what the buyer needs in order to make a sensible decision.
+
+The same applies to your offer. Maybe the right first step is a free trial. Maybe it's a demo. Maybe it's a pilot with a clearly defined outcome. Maybe it's an assessment that shows the prospect where their problem is.
+
+The easier you make that next decision to understand, the less work your marketing has to do.
+
+## Don't leave pricing until the end
+
+Pricing is part of your GTM.
+
+It affects who you can sell to, whether paid acquisition works, whether you need salespeople, what customers expect and how easy it is to expand an account later.
+
+If you charge £49 a month, you probably can't afford a sales process involving three calls and a solutions engineer.
+
+If you're selling a £100,000 contract, expecting customers to buy from a pricing page is probably unrealistic.
+
+For SaaS in particular, I'd look at whether the way you charge roughly follows the value the customer gets. That might mean seats. Usage. Transactions. Locations. Data processed. Workflows.
+
+There isn't always a perfect value metric, and startups have a habit of spending too long trying to find one.
+
+You mainly need pricing that customers understand, supports the way you sell and leaves you with workable economics.
+
+Then test it.
+
+## Pick a primary way to acquire customers
+
+This is where I see startups waste a lot of time.
+
+They try LinkedIn, Google Ads, outbound, SEO, partnerships and webinars at the same time.
+
+After three months, none of them has enough volume or focus to tell you very much.
+
+I'd rather get one acquisition motion working properly.
+
+The right choice depends on how your customer buys.
+
+- If people are already searching for a solution, search becomes interesting.
+- If you can identify the exact accounts likely to need the product, outbound might be quicker.
+- If the category is new and buyers need educating, founder-led content can work extremely well.
+- If users can experience value quickly, the product itself can drive acquisition.
+- If trust is everything, referrals, communities and partnerships may matter more.
+
+There are lots of valid channels. There isn't one startup channel that works for everyone.
+
+I normally look at three things:
+
+**Can we find the customer there?** Obvious, but regularly ignored.
+
+**Can we learn quickly?** At an early stage, a channel that gives you ten genuine conversations may be more useful than one that gives you 50,000 impressions.
+
+**Do we have some advantage?** Maybe the founder already has an audience. Maybe you've got great proprietary data. Maybe your customers all belong to one small community. Maybe there is lots of high-intent search demand that competitors have ignored.
+
+Use what you have.
+
+Once one motion starts working, add channels that support it rather than creating five separate marketing strategies. More on why in [an acquisition system beats channel sprawl](/insights/acquisition-system-beats-channel-sprawl).
+
+## Keep the founder close to sales at the start
+
+Founders are often desperate to get themselves out of sales.
+
+I understand why. It's time-consuming and difficult to scale.
+
+Doing it too early is a mistake.
+
+Early sales calls are where you hear:
+
+- how customers describe the problem,
+- what they don't understand,
+- what they compare you with,
+- which features they care about,
+- what makes them nervous,
+- what creates urgency,
+- why deals are lost.
+
+You need enough of that information before handing the job to somebody else.
+
+The goal isn't for the founder to sell forever. **It's to understand the sale well enough that somebody else can reproduce it.**
+
+A good handover means a salesperson isn't guessing at the ICP, rewriting the pitch and discovering the objections from scratch.
+
+## Turn the things you're unsure about into tests
+
+Every GTM strategy contains guesses.
+
+You think one segment cares more than another. You think a particular problem is urgent. You think £500 a month is acceptable. You think outbound is the right channel. You think buyers will start with a free trial.
+
+Write those assumptions down.
+
+Then work out which ones matter most if you're wrong.
+
+Suppose your current belief is:
+
+> Series A AI startups with inconsistent pipeline will respond better to a message about building a repeatable acquisition system than to generic fractional CMO positioning.
+
+That's testable. Run the two messages against the same type of account. Keep the other variables reasonably consistent. Look at qualified response, not just clicks. Then make a decision.
+
+This sounds obvious. In practice, teams are surprisingly bad at finishing experiments.
+
+Campaigns sit there for months because nobody wants to turn them off. A landing page test gets forgotten. Someone changes three things at once, results improve and nobody knows which change mattered.
+
+**Every meaningful test should end with a decision: scale it, change it, or kill it.**
+
+And write down what you learned.
+
+## The Growth Signal Loop
+
+This is the model I've ended up using across a lot of our work at We Scale Startups.
+
+It came from seeing the same problem repeatedly. Companies had plenty of data, calls, campaign results and customer feedback, but very little of it affected the next thing they did.
+
+The loop is:
+
+> Market Signals → Strategic Insight → Growth Experiments → Revenue Assets → Feedback Memory
+
+Here's what that means in practice.
+
+**Market signals.** Capture useful information from customers, sales, search, product usage, competitors and campaigns.
+
+**Strategic insight.** Work out what it changes. Maybe you've found a stronger segment. Maybe the buying trigger is different from what you thought. Maybe one objection keeps appearing. Maybe customers are comparing you with an alternative you barely considered.
+
+**Growth experiments.** Test the implication rather than discussing it for six weeks.
+
+**Revenue assets.** When something works, build it into something useful. A winning message becomes part of your homepage. A common objection becomes a sales asset. A good outbound angle becomes a repeatable sequence. A customer question becomes an article. A high-performing segment gets its own landing page.
+
+**Feedback memory.** Keep a record of the decision and why you made it.
+
+This last part sounds boring. It's also where a lot of growth teams fall apart.
+
+People leave. Agencies change. The founder forgets why the old positioning was changed. A new Head of Marketing joins and runs experiments the business already ran 18 months ago.
+
+**Your company should know more about its market this quarter than it did last quarter.** If it doesn't, you're paying to relearn the same things.
+
+The longer version is in [the Growth Signal Loop](/insights/growth-signal-loop).
+
+## Where AI is actually useful
+
+AI is very good at making marketing teams busier.
+
+You can produce far more content, ad variations, emails and landing pages than you could a few years ago.
+
+That isn't automatically useful.
+
+The more interesting use is reducing the time between receiving a signal and doing something sensible with it.
+
+For example, you can use AI to:
+
+- analyse sales call transcripts,
+- group objections,
+- compare reasons for lost deals,
+- pull patterns from customer research,
+- summarise large amounts of CRM data,
+- monitor how competitors are changing their messaging,
+- turn a validated idea into an asset much faster.
+
+There's still a judgment call in the middle. You need to decide whether a pattern matters, whether it's worth testing and whether the result is strong enough to change what you're doing.
+
+That's why I've become much more interested in **learning latency** than content velocity.
+
+How long does it take your company to notice something important, understand it and make a better decision?
+
+Shorten that and your GTM gets better surprisingly quickly. More on this in [learning latency](/insights/learning-latency) and [AI-native GTM](/insights/ai-native-gtm).
+
+## Measure the bit you're trying to fix
+
+You don't need to track everything.
+
+You do need to know whether your current constraint is improving.
+
+If the problem is acquisition, I want to know whether we're creating enough qualified opportunities. If the problem is conversion, I'd look at movement between the relevant funnel stages. If it's activation, I care much less about increasing traffic until activation improves.
+
+A B2B SaaS scorecard might include:
+
+- qualified opportunities created,
+- pipeline value,
+- opportunity-to-customer conversion,
+- sales cycle,
+- CAC or CAC payback,
+- activation,
+- retention or expansion.
+
+I'd also keep an eye on what the team is learning. How many meaningful tests did you finish? What changed because of them? How long did it take you to act on a useful customer signal?
+
+Those aren't vanity growth metrics. They tell you whether the organisation is getting better at growth.
+
+## Put a weekly decision into the calendar
+
+You can have a sensible strategy and still get nowhere if nobody makes decisions.
+
+Have one weekly growth review. Keep it short. Look at what happened, what changed and what you learned.
+
+Then decide what happens next.
+
+- What are we scaling?
+- What are we stopping?
+- What needs fixing?
+- What's the next assumption we need to test?
+
+Someone needs the authority to make those calls.
+
+Otherwise every campaign survives indefinitely, the backlog keeps growing and "experimentation" becomes another word for having lots of unfinished marketing activity.
+
+Keep a decision log as well. A few lines are enough:
+
+> Tested X because we believed Y. Result was Z. We're doing A next.
+
+Six months later, that becomes extremely useful.
+
+## What I would do in the first 90 days
+
+If I were building GTM from scratch for a startup with some early traction, I wouldn't spend the first month launching a load of new campaigns.
+
+**Weeks 1 and 2.** I'd go through customers, CRM data, sales calls, lost deals, analytics, current channels and the product journey. The goal is to find the biggest constraint and get specific about it.
+
+**Weeks 3 and 4.** I'd tighten the ICP, identify the main buying trigger, map the real alternatives and get the positioning into shape. Then I'd decide on the offer, pricing hypothesis, sales motion and primary acquisition route. By this point, the strategy should fit on one page.
+
+**Month 2.** Start testing the assumptions that matter most. Keep tests focused enough that the result tells you something. Talk to customers while you're doing it.
+
+**Month 3.** Take the things that are working and make them repeatable. Build the pages. Document the messaging. Fix the reporting. Write the sales material. Create the playbook. Stop doing the things that haven't earned more investment.
+
+At the end of 90 days, I'd expect the company to know much more clearly:
+
+- who it can win,
+- what those customers care about,
+- how to reach them,
+- how to convert them,
+- where the current bottleneck is,
+- what needs testing next.
+
+That's a much better outcome than simply being able to say you launched six campaigns.
+
+This is roughly what a [90-Day Growth Sprint](/services/90-day-growth-sprint) is, if you'd rather not run it yourself.
+
+## Put your GTM strategy on one page
+
+A useful GTM strategy doesn't need to be enormous.
+
+I'd want these things written down:
+
+| | |
+| --- | --- |
+| **Current constraint** | What's holding growth back right now? |
+| **ICP** | Who are we actively trying to win? |
+| **Anti-ICP** | Who are we avoiding? |
+| **Buying trigger** | What tends to make the problem urgent? |
+| **Problem** | What are they actually trying to fix? |
+| **Alternatives** | What would they do without us? |
+| **Positioning** | Why should they choose us? |
+| **Offer and pricing** | What are we selling and how are we charging? |
+| **Sales motion** | How does somebody buy? |
+| **Primary acquisition route** | Where will qualified demand come from? |
+| **Conversion path** | What happens between first touch and receiving value? |
+| **Main metric** | How will we know whether the current constraint is improving? |
+| **Biggest assumptions** | What are we still guessing about? |
+| **Experiments** | What are we testing now? |
+
+If that page is clear, you've got enough to start.
+
+It will change. It should change. A GTM strategy built when you had five customers shouldn't remain untouched when you have 100.
+
+The useful part is the process behind it.
+
+Listen to the market, make a decision, test it, keep what works and remember what you learned.
+
+That's how a startup gradually gets from founder-led growth to something the rest of the team can actually run.
+
+## Related
+
+- [Startup growth bottlenecks](/insights/startup-growth-bottlenecks) — telling a symptom from a constraint
+- [The Growth Signal Loop](/insights/growth-signal-loop) — the model in full
+- [An acquisition system beats channel sprawl](/insights/acquisition-system-beats-channel-sprawl) — why one motion first
 - [Pipeline plateau after PMF](/insights/pipeline-plateau-post-pmf)
-
-## Planned spokes
-
-- ICP definition for B2B SaaS
-- Positioning and narrative testing
-- PLG vs sales-led sequencing
-- Founder-led sales and handoff
-
-## Related on the main site
-
-- [GTM strategy](/gtm-strategy)
-- [Growth operating system](/growth-operating-system)
-- [Fractional CMO for B2B SaaS](/services/fractional-cmo), senior GTM leadership to run this system when it still runs through the founder
-
----
-
-_This guide is meant to be living documentation. When your ICP or offer changes, update the narrative first, then channels, then spend._
+- [Systems vs activity retainers](/insights/systems-vs-activity-retainers)
+- [90-Day Growth Sprint](/services/90-day-growth-sprint) — the first 90 days, run for you

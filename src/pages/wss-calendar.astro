@@ -4,6 +4,10 @@ import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
 import { siteConfig } from "../site";
 
+// Support and privacy/terms page for the WSS Calendar scheduling app. Kept
+// reachable because Google OAuth verification needs a live privacy URL, but
+// noindexed: it is not search content and its own headings are "What WSS
+// Calendar does" and "Privacy and terms".
 const path = "/wss-calendar";
 const appName = "WSS Calendar";
 
@@ -14,6 +18,7 @@ const schema = buildBreadcrumbSchema([
 ---
 
 <BaseLayout
+  metaRobots="noindex,follow"
   title={`${appName} | We Scale Startups`}
   description="WSS Calendar is the scheduling app We Scale Startups uses for Growth Audit bookings. It connects Google Calendar and Google Meet so invitees get a real meeting link."
   keywords="WSS Calendar, We Scale Startups scheduling, Growth Audit booking, Google Calendar, Google Meet"

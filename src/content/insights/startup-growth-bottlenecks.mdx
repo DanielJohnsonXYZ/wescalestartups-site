@@ -1,30 +1,113 @@
 ---
-title: "Startup growth bottlenecks"
-description: "Hub note for the growth diagnostics cluster: CAC, retention, pipeline velocity, positioning drift, and reading symptoms vs constraints."
-excerpt: "A single place to land diagnostic content, from quick bottleneck checks to what a serious growth report should answer."
-tldr: "Growth bottlenecks are usually one of a small set of constraints; the job of diagnostics is to name the constraint before you add spend, hires, or channels."
+title: "Startup Growth Bottlenecks: Find Yours"
+description: "A growth bottleneck is the one constraint holding back the whole system. The five places it sits, and how to tell a symptom from a constraint."
+excerpt: "Why more spend rarely fixes growth, the five layers where post-PMF growth actually breaks, and the test that separates the real constraint from its symptoms."
+tldr: "A growth bottleneck is the single constraint limiting the whole system — not the loudest symptom. For post-PMF B2B teams it sits in one of five layers: positioning, acquisition, conversion, reporting or team ownership. Adding spend or channels before naming it usually makes the confusion louder, not the pipeline bigger."
 publishedAt: 2026-05-04
+updatedAt: 2026-08-26
 author: "Daniel Johnson"
 tags: ["diagnosis", "growth", "content-cluster", "pillar"]
 order: -1
+faqs:
+  - question: "What is a growth bottleneck?"
+    answer: "A growth bottleneck is the single constraint that limits how fast the whole growth system can run. It is not the same as the loudest problem. If your offer is unclear, more traffic will not fix it; if reporting does not produce decisions, more experiments will not fix it either. The bottleneck is whichever layer, when fixed, lets the next one start mattering. Everything upstream of it is capacity you are not using."
+  - question: "What are the most common growth bottlenecks for startups?"
+    answer: "For post-PMF B2B SaaS and AI companies the constraint almost always sits in one of five layers: positioning, acquisition, conversion, reporting or team ownership. Pre-PMF the answer is different and usually product or customer understanding — growth work will not rescue a product people do not want, and that is worth ruling out first."
+  - question: "How do I know which growth bottleneck I have?"
+    answer: "Look for the red signal rather than the complaint. Positioning: sales calls feel like education and acquisition keeps getting harder upstream. Acquisition: pipeline lands in waves and CAC is unstable. Conversion: qualified visitors do not become qualified conversations. Reporting: activity gets reported but scale, stop and fix calls do not get made. Team ownership: founder hours quietly fill every gap. The layer with the strongest red signal is your bottleneck."
+  - question: "Why does adding more marketing spend not fix growth?"
+    answer: "Because spend amplifies whatever system it enters. If the constraint is positioning, more traffic means more people bouncing off a message that does not land. If it is conversion, it means more qualified visitors failing to convert. Spend only compounds once the constraint is downstream of it. That is why the sequence matters more than the budget: diagnose, fix the constraint, then scale the thing that now works."
+  - question: "What if two layers look equally bad?"
+    answer: "Pick the one where fixing it unlocks the next decision. In practice positioning and reporting tend to be upstream of the others — a clear message makes acquisition and conversion easier to judge, and reporting that produces decisions is what tells you whether anything you changed worked. If you genuinely cannot separate them, that ambiguity is itself the finding, and it usually means the evidence base is too thin to choose on."
+  - question: "How long does it take to diagnose a growth bottleneck?"
+    answer: "About a week with the right inputs. A Growth Diagnosis at We Scale Startups audits 90 days of CRM pipeline, GA4 acquisition reports and ten recent sales call recordings, then maps every activity into qualified pipeline, learning signal or waste. It is fixed-duration and starts from £2,000. You can also self-assess in about four minutes with the Growth Bottleneck Scorecard, which is free."
 ---
 
-This is the hub for our growth diagnostics notes. Linked notes will cover CAC payback, retention, pipeline velocity, positioning drift, and related metrics in more detail. Link diagnostic content here and to [the 5-layer diagnostic](/diagnose).
+**A growth bottleneck is the single constraint limiting how fast your whole growth system can run — and it is rarely the thing making the most noise.**
 
-## Spokes (live)
+Founders do not usually describe it as a system problem. They say leads are soft, paid is expensive, SEO is too slow, outbound is not converting, or the team needs to ship more. Those symptoms are real. They just do not all point to the same fix, and treating them as separate problems is how a growth function ends up with five channels, none of which reinforce each other.
 
-- [Diagnose the growth bottleneck before you spend more](/insights/diagnose-growth-bottleneck-before-spend)  
-- [What a growth report should answer](/insights/what-a-growth-report-should-answer)  
+The useful question is not *what is going wrong*. It is *which one thing, if we fixed it, would make the others start mattering*.
 
-## Planned spokes
+## Constraint versus symptom
 
-- CAC payback and unit economics  
-- Retention and expansion diagnostics  
-- Pipeline velocity and forecast quality  
-- Positioning drift and message-market fit  
+The distinction is the whole discipline.
 
-## On-site tools
+A **symptom** is what you can see: CAC drifting up, a flat month, a channel that used to work and stopped. A **constraint** is the thing producing it. One constraint typically produces several symptoms, which is why chasing symptoms individually feels like effort without compounding.
 
-- [Diagnose](/diagnose)  
-- [Growth Bottleneck Scorecard](/resources/growth-dependency)  
-- [Growth diagnosis service](/services/growth-diagnosis)  
+Two tests separate them:
+
+1. **Would fixing this let something else start working?** If yes, it is probably the constraint. If it just removes one annoyance, it is a symptom.
+2. **Does more of your current input make it better or louder?** Add budget to a positioning problem and you buy more people bouncing off the wrong message. Constraints get *louder* under pressure. Genuine capacity problems get *better*.
+
+That second test is the reason "we need more leads" is almost never the answer at this stage. More traffic into a weak system produces more confident-sounding confusion.
+
+## The five layers where post-PMF growth breaks
+
+For B2B SaaS and AI companies past product-market fit, the constraint almost always sits in one of five places. For each, the useful thing is not the label — it is the red signal, because that is observable this week.
+
+| Layer | Ask | Red signal |
+| --- | --- | --- |
+| **Positioning** | Do buyers describe the problem the way the website does? | Acquisition keeps getting harder upstream. Sales calls feel like education. |
+| **Acquisition** | Are channels reinforcing each other, or running in isolation? | Pipeline lands in waves. CAC is unstable. |
+| **Conversion** | Is the offer asking for too much, too early? | Qualified visitors don't become qualified conversations. |
+| **Reporting** | Does weekly reporting produce decisions? | Activity is reported. Scale / stop / fix calls aren't made. |
+| **Team ownership** | Is there an internal owner running the rhythm? | Founder hours fill the gap. Growth stays personal. |
+
+The layer with the strongest red signal is your bottleneck. Not the one with the most complaints attached to it.
+
+Work through each layer in depth on [the five-layer diagnostic](/diagnose), or score yourself in about four minutes with the [Growth Bottleneck Scorecard](/resources/growth-dependency).
+
+### Positioning is upstream of almost everything
+
+If buyers do not describe their problem the way your site does, every downstream number degrades quietly. Ads cost more because the click-through audience is wrong. Sales calls run long because the rep is teaching before selling. Content gets read by the wrong people.
+
+This is the constraint most often misdiagnosed as an acquisition problem, because the symptom shows up in the channel metrics.
+
+### Reporting is upstream of knowing anything
+
+A team can run experiments for two quarters and learn nothing if reporting describes activity rather than forcing decisions. The test is not whether you have a dashboard. It is whether Friday produces a *scale, stop or fix* call that someone is accountable for.
+
+If it does not, you cannot trust any conclusion about the other four layers — which is why reporting is worth fixing early even when it is not the headline problem.
+
+### Team ownership is the one founders discount
+
+Growth that only moves when the founder is in the room is not a growth system, it is a founder doing growth. It looks fine on a revenue chart and fails the moment attention moves. The red signal is subtle: nothing is broken, the founder is just quietly in every loop.
+
+## What this looks like in practice
+
+Three patterns worth recognising, because they recur:
+
+- **"Our CAC is rising, we need a better paid agency."** Often positioning. The audience that converts cheaply has been exhausted and the message does not travel to the next segment. A better media buyer optimises a losing auction.
+- **"We need more top-of-funnel."** Often conversion. Qualified visitors are arriving and not converting, so the funnel is being fed rather than fixed. Check the ratio before adding volume.
+- **"We're running lots of experiments but growth is flat."** Almost always reporting. Experiments without a decision rhythm produce activity and anecdotes, not learning.
+
+## Pre-PMF: none of this applies
+
+If you do not yet have product-market fit, the constraint is the product or your understanding of the customer, and growth work will not rescue it. It will just spend money finding out faster.
+
+A diagnosis worth paying for will tell you this on the first call rather than take the engagement. If you are not sure which side of the line you are on, that ambiguity is usually the answer.
+
+## What to do once you have named it
+
+Naming the constraint is most of the value, because it makes the next decision obvious rather than contested:
+
+| If the constraint is… | The honest next step |
+| --- | --- |
+| Positioning | Reframe the offer and message before adding any spend |
+| Acquisition | Connect the channels into one system rather than adding a sixth |
+| Conversion | Fix the offer and the path before feeding more volume into it |
+| Reporting | Build the weekly decision rhythm first — you cannot judge the rest without it |
+| Team ownership | Put an internal owner on it, or bring in senior leadership until you can hire one |
+
+Two ways to get there. The [Growth Bottleneck Scorecard](/resources/growth-dependency) is free, takes about four minutes, and names a primary constraint. A [Growth Diagnosis](/services/growth-diagnosis) takes about a week from £2,000, and audits 90 days of CRM pipeline, GA4 reports and ten recent sales calls to produce a constraint map, an evidence table and a 90-day priority memo.
+
+If you already know your constraint and simply need execution capacity against it, you do not need either — hire for the gap directly.
+
+## Related
+
+- [The five-layer diagnostic](/diagnose) — work through each layer with your team
+- [Diagnose the growth bottleneck first](/insights/diagnose-growth-bottleneck-before-spend) — why sequencing beats spending
+- [What a growth report should answer](/insights/what-a-growth-report-should-answer) — the reporting layer in depth
+- [Growth Diagnosis](/services/growth-diagnosis) — the paid engagement
+- [Growth Bottleneck Scorecard](/resources/growth-dependency) — free, four minutes

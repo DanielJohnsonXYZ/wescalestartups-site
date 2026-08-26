@@ -87,7 +87,8 @@ export const GET: APIRoute = async () => {
       "/newsletter",
       "/refer",
       "/wss-scale-score",
-      "/wss-calendar",
+      // /wss-calendar deliberately omitted: it is noindexed (app support and
+      // privacy/terms page), and a sitemap should not advertise a noindex URL.
       ...(siteConfig.podcastLive
         ? ["/podcast", "/podcast-guest-application"]
         : []),

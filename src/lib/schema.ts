@@ -37,18 +37,27 @@ export function buildPersonSchema() {
       "@id": entityGraph.wssOrganization
     },
     knowsAbout: [...personKnowsAbout],
+    // Mentoring and guest lecturing are affiliations, NOT identity. These three
+    // used to sit in sameAs, which asserts "this URL is another page about this
+    // same entity" — so the graph was claiming Daniel and Techstars were one
+    // thing, directly undermining the disambiguation above.
+    // Not alumniOf: the site says guest lecturer / visiting lecturer at Cambridge
+    // Judge, which is teaching there, not studying there.
+    affiliation: [
+      { "@type": "Organization", name: "Google for Startups", url: "https://startup.google.com/" },
+      { "@type": "Organization", name: "Techstars", url: "https://www.techstars.com/" },
+      { "@type": "CollegeOrUniversity", name: "Cambridge Judge Business School", url: "https://www.jbs.cam.ac.uk/" }
+    ],
+    // sameAs: only pages that unambiguously identify Daniel himself. The WSS
+    // company LinkedIn page and the podcast hub belong on the Organization node.
     sameAs: [
       siteConfig.founderLinkedin,
       siteConfig.founderTwitter,
       siteConfig.growthMentor,
       siteConfig.mentorCruise,
       siteConfig.danielSite,
-      siteConfig.podcastUrl,
-      siteConfig.linkedin,
       "https://www.youtube.com/@danieljohnson6000",
-      "https://www.jbs.cam.ac.uk/",
-      "https://startup.google.com/",
-      "https://www.techstars.com/"
+      "https://www.wikidata.org/wiki/Q137046365"
     ]
   };
 }
@@ -59,7 +68,7 @@ export function buildOrganizationSchema() {
     "@type": ["Organization", "ProfessionalService"],
     "@id": entityGraph.wssOrganization,
     alternateName: "WSS",
-    // Sourced from Daniel'''s LinkedIn experience entry (Aug 2016 - present),
+    // Sourced from Daniel's LinkedIn experience entry (Aug 2016 - present),
     // now mirrored on the LinkedIn company page. A founding date is one of the
     // strongest disambiguators against the other WeScale entities.
     foundingDate: "2016",

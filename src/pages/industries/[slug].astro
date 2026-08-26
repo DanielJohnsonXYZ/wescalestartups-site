@@ -25,6 +25,10 @@ const industryMetaTitle =
     ? "VC Portfolio Growth Systems | We Scale Startups"
     : `${industrySystemsLabel} | We Scale Startups`;
 
+// A market page can carry its own reading list so the long-form guide that
+// belongs to it is reachable from here, not only from the /insights hub.
+const relatedReading = industry.data.relatedReading ?? industryDetailRelatedReading;
+
 const industryFaqs = [
   {
     question: `What usually breaks for ${industry.data.title} teams post-PMF?`,
@@ -191,7 +195,7 @@ const industrySchema = [
     <div class="shell">
       <SectionIntro eyebrow="Related reading" title="Hubs that pair with this market." />
       <ul class="related-insights-list">
-        {industryDetailRelatedReading.map((item) => (
+        {relatedReading.map((item) => (
           <li>
             <a class="card-link" href={item.href}>
               {item.label} →

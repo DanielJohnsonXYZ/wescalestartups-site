@@ -18,6 +18,12 @@ export function buildPersonSchema() {
     "@id": entityGraph.danielPerson,
     name: siteConfig.founderName,
     givenName: "Daniel",
+    // Middle name carried as additionalName, which is the schema.org property
+    // for it. The display name stays "Daniel Johnson" everywhere - that is what
+    // people search and what LinkedIn, X and GrowthMentor say - but the graph
+    // gets the rarer token, which is the point when seven other Daniel Johnsons
+    // compete for the same queries. Matches the Wikidata label.
+    additionalName: "Cameron",
     familyName: "Johnson",
     jobTitle: "Founder and Fractional CMO",
     // Bing surfaces at least seven different Daniel Johnson LinkedIn profiles for

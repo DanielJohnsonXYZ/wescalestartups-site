@@ -27,6 +27,10 @@ const industries = defineCollection({
     growthSystem: z.array(z.string()),
     proof: z.array(z.string()),
     order: z.number().default(999),
+    /** Optional per-industry related reading. Falls back to industryDetailRelatedReading. */
+    relatedReading: z
+      .array(z.object({ href: z.string(), label: z.string() }))
+      .optional(),
     /** Optional readable sections (shorter paragraphs) for dense industry pages. */
     readingBlocks: z
       .array(

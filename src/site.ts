@@ -136,6 +136,7 @@ export const strategicPageRelatedInsights: Partial<Record<string, readonly { hre
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" }
   ],
   "/growth-operating-system": [
+    { href: "/insights/what-is-a-growth-operating-system", label: "What is a growth operating system? Definition and a five-question test" },
     { href: "/insights/acquisition-system-beats-channel-sprawl", label: "Acquisition system vs channel sprawl" },
     { href: "/insights/diagnose-growth-bottleneck-before-spend", label: "Diagnose before spend" }
   ],

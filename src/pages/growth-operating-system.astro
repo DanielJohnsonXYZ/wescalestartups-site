@@ -1,14 +1,43 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
-import { buildBreadcrumbSchema } from "../lib/schema";
+import { buildBreadcrumbSchema, buildFaqSchema } from "../lib/schema";
 import { methodologyBrand, strategicPageRelatedInsights, siteConfig } from "../site";
+
+const gosFaqs = [
+  {
+    question: "What is a growth operating system?",
+    answer:
+      "A growth operating system is a repeatable structure for making acquisition decisions. It has four parts: a named growth constraint, a channel and experiment plan built around that constraint, a fixed weekly rhythm where evidence becomes a scale/stop/fix decision, and transfer artefacts that let the system run without one person holding it in their head. It is a way of working, not a piece of software."
+  },
+  {
+    question: "Is a growth operating system the same as a growth tool or dashboard?",
+    answer:
+      "No. Analytics platforms, attribution software and CRM automation can support a growth operating system, but buying a tool does not create one. The system is the decision structure and the rhythm; the tool is only where you store the evidence. Several products now use “Growth OS” in their name, which is a category label, not the discipline."
+  },
+  {
+    question: "Growth operating system vs a marketing agency retainer: what is the difference?",
+    answer:
+      "An agency retainer buys execution capacity. A growth operating system is the decision layer that tells whoever executes — agency, in-house team or founder — what to test next and why. Agencies can work inside a growth operating system; they rarely arrive with one, because that is not what the retainer is priced for. If you already know the channel and just need hands, an agency is the right buy."
+  },
+  {
+    question: "Do we need a growth operating system yet?",
+    answer:
+      "The trigger is channel count, not revenue or headcount. If you run one channel well, can name your constraint in a sentence and hold a standing weekly decision, you likely already have one. If three or more channels are running, nobody agrees which is working, and every growth conversation restarts from scratch, you are overdue."
+  },
+  {
+    question: "How does We Scale Startups build one?",
+    answer:
+      "In four phases: diagnosis of the constraint across positioning, acquisition, conversion, reporting and team ownership; design of the acquisition system; build and execution against a weekly decision cadence; then transfer of the playbooks, dashboards and rhythm so the system runs without us. Most engagements start with a Growth Diagnosis or a 90-Day Growth Sprint."
+  }
+];
 
 const pageSchema = [
   buildBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Growth operating system", path: "/growth-operating-system" }
-  ])
+  ]),
+  buildFaqSchema(gosFaqs)
 ];
 
 const systemComponents = [
@@ -42,7 +71,7 @@ const systemComponents = [
     { name: "Growth operating system", path: "/growth-operating-system" }
   ]}
   title="Growth Operating System | We Scale Startups"
-  description={`The ${methodologyBrand.shortName}: diagnosis, acquisition design, execution, and transfer, so post-PMF startups stop depending on founder heroics.`}
+  description="A growth operating system is a repeatable structure for acquisition decisions: a named constraint, a channel plan, a weekly rhythm, transfer artefacts."
   keywords="growth operating system, startup growth system, fractional CMO, acquisition system, post-PMF growth, B2B SaaS growth"
   schema={pageSchema}
   lastUpdated={siteConfig.lastUpdated}
@@ -53,7 +82,10 @@ const systemComponents = [
       <h1>Growth operating system.</h1>
       <div class="hero-support">
         <p class="lede">
-          The <strong>{methodologyBrand.shortName}</strong> is the named WSS model for post-PMF teams: diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm, so growth stops depending on founder heroics.
+          <strong>A growth operating system is a repeatable structure for making acquisition decisions.</strong> Four parts: a named growth constraint, a channel and experiment plan built around it, a fixed weekly rhythm where evidence becomes a scale/stop/fix decision, and transfer artefacts so the system survives any one person leaving. It is a way of working, not software.
+        </p>
+        <p class="lede">
+          The <strong>{methodologyBrand.shortName}</strong> is the WSS version of that structure for post-PMF teams: diagnose the bottleneck, build the acquisition engine, and transfer the weekly rhythm, so growth stops depending on founder heroics. For the full definition and a five-question test for whether you need one yet, read <a href="/insights/what-is-a-growth-operating-system">what a growth operating system actually is</a>.
         </p>
         <div class="hero-actions">
           <a
@@ -139,6 +171,20 @@ const systemComponents = [
   </section>
 
   <section class="section">
+    <div class="shell">
+      <SectionIntro eyebrow="FAQ" title="What founders ask about growth operating systems." />
+      <div class="grid-2" style="margin-top: 2rem;">
+        {gosFaqs.map((item) => (
+          <article class="feature-card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
     <div class="shell">
       <SectionIntro eyebrow="Related reading" title="Deeper context on the system." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">

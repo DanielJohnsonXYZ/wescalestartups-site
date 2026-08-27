@@ -87,13 +87,49 @@ Every claim below is already on the site. Nothing invented, no client names, no 
 
 Derived from the panel. These are the *page types* the engines cited when they did not cite WSS. Each needs a draft before it is READY; none may be submitted by the bot.
 
-| # | Target class | Why it is the right class | What is needed | Status |
-| --- | --- | --- | --- | --- |
-| 6 | UK fractional-CMO directories with open submission | Prompts 1, 4 and 7 were answered almost entirely from directory and roundup pages (Limivex, The Marketing Centre, Growtal, Fractional CMO Partners). These are the pages the engines read for this question. | Identify which of these accept submissions vs are closed owned-content; draft one profile that matches the site's positioning and pricing exactly | DRAFTING |
-| 7 | "Best growth agencies / advisors UK" roundups accepting nominations | Prompt 9's near-miss came from precisely this page type, and WSS is already in one of them | Build the list from the cited sources on prompts 1 and 9; check each for a nomination or submission route | DRAFTING |
-| 8 | Crunchbase / G2 completeness pass | Crunchbase was corrected in run 12 (Ltd removed, founding year unified to 2016). Neither profile has been checked for whether it is *complete* enough to be retrieved, which is a different question from whether it is accurate. | Audit both against the site; list missing fields | DRAFTING |
+**Researched and verified 2026-08-27.** Every target below was fetched, not inferred from a search snippet. Ranked within class by how likely an answer engine is to retrieve the resulting page.
 
-**Note the ceiling honestly.** Directory placements are low-value links individually. They are worth doing here for a specific reason — the panel shows the engines answering category questions *out of directories* — not because directory links are generally good. If the next two panel readings show no movement from placements that land, stop.
+### Class A — directories with a free, open application route
+
+| # | Target | Apply at | What it takes | Status |
+| --- | --- | --- | --- | --- |
+| 6 | **Clutch** — do this first | `clutch.co/get-listed` | Free Basic profile, 3 steps, editorial review before publishing. Reviews collected separately at `vendor.clutch.co/vendor/reference/create`. **Verified/Advertiser tiers are paid — do not buy them.** | READY |
+| 7 | **Sortlist** | `sortlist.com/apply` | Free. "Growth Marketing" is an accepted category and single-employee firms are **explicitly permitted**. Onboarding includes a weekly webinar — budget a slot. Skip paid Sortlist+. | READY |
+| 8 | **RankedCMO** | `rankedcmo.com/signup` | Free, SEO-indexed profile. Ranking is 35% verified reviews, 20% review volume, 20% profile completeness. Purpose-built fractional-CMO directory. Caveat: young, and its geography pages are US-only, so WSS would rank on the B2B SaaS and stage pages, not on UK. | READY |
+| 9 | **O-CMO** | `o-cmo.com/for-cmos/apply/` | Free to apply, ~10 min. **Requires 2–3 named client references with email addresses** — they are contacted directly. 30% commission on placed work. Profile goes live as "Unverified" within minutes. European/B2B-tech focus. | READY — needs references |
+| 10 | **GrowTal** | `growtal.com/apply-as-a-marketer/` | Free. Application → interview with a growth marketer. States ~5% overall acceptance. **Already in the engines' retrieval set** — named in the panel. US-heavy client mix. | READY |
+| 11 | **DesignRush** | `designrush.com/submit/agency` | Free submission, reviewed against website, portfolio and reputation. High domain authority, frequently scraped, lower editorial quality than Clutch. Premium visibility ~$200/mo — skip. | READY |
+
+### Class B — neutral roundups. **This class is nearly empty, and that is the finding.**
+
+Every "best growth agency / fractional CMO UK 2026" page found is competitor-owned content marketing — inBeat, Data-Mania, StrategicPete, Digital Hunch, Blazon, Ryesing, VXTX, One Umbrella, and Growth Division, which openly discloses it is "not a neutral party". **None has a submission route. The only way in is asking a competitor for a favour, which is out of scope.**
+
+| # | Target | Route | Note | Status |
+| --- | --- | --- | --- | --- |
+| 12 | **GrowthMentor — "Growth Marketing Agencies in 2026: 5 Tiers, 19 Picks"** | Editorial pitch to founder Foti Panagiotakopoulos — no form | The one genuinely neutral roundup found: the page states "we don't run an agency, and nobody here earns a referral fee." Already contains **Kurve**. Has a "Fractional CMO / Growth-as-a-Service" tier WSS fits and a "bootstrapped boutique / diagnostic-first" slot that matches the Growth Diagnosis. Maintained (March 2026). **Daniel is already a mentor there — this is a warm route, not a cold pitch.** | DRAFTING — pitch needed |
+
+### Class C — expert networks where the profile is a retrievable page
+
+| # | Target | Route | Note | Status |
+| --- | --- | --- | --- | --- |
+| 13 | **MentorCruise** | `mentorcruise.com/mentor/apply/` | Free, mentors keep 80%, public profile with verified testimonials, well indexed. Also runs a `jobs/fractional-cmo/` track. Lower prestige than GrowthMentor, easier to enter. | READY |
+| 14 | Startupbootcamp mentor network | `weempowerinnovators.typeform.com/mentorinterest` | Free, credible accelerator, 1,000+ mentors — **but no public indexed profile page**, so the AEO value is weak. Worth it for deal flow, not for visibility. | LOW PRIORITY |
+
+### Do not bother — checked and rejected
+
+**Semrush Agency Partners** ($90/mo + two certification exams) · **Enterprise Nation** (£20/mo, and the audience is UK micro-SMEs) · **Fractionals United** ($20/mo, directory lives inside Slack/Coda so it is not crawlable) · **MarketerHire** (waitlist-only, North America only) · **Toptal** (multi-week screening for a marketplace where WSS is one of thousands) · **Fractional Jobs** (no public profile created — zero retrieval value) · **all competitor listicles** above. **UpCity** — could not verify the free-profile terms; unverified rather than rejected.
+
+**FindaFractional** (`findafractional.co.uk`) is the only genuinely UK-native fractional directory found, is vetted, and is **paid** — £40/mo or £400/yr plus £1.50 per prospect meeting and a 10% success fee. Excluded under the no-pay-to-list rule, flagged here because it is the strongest UK-geography option if Daniel ever wants to relax that rule.
+
+### What blocks most of Class A
+
+**Client reviews.** Clutch, RankedCMO and DesignRush all rank on verified review volume, and a Clutch profile with zero reviews will not surface for anything. **Getting 3–5 clients through Clutch's reference interview is the prerequisite for the whole class**, which is why item 1 leads this file. O-CMO separately needs three contactable references.
+
+**Good news on company registration:** none of the free routes requires a company number. Clutch's fields are name, tagline, headcount, minimum project size, hourly rate, URL, locations, contact, overview and service focus. Sortlist explicitly permits single-employee firms. **On every form use "We Scale Startups" — never "Ltd".**
+
+**Sequencing.** GrowthMentor profile fix (item 5) → Clutch reviews (item 1) → Clutch and Sortlist listings → the GrowthMentor roundup pitch, which lands better once there is a reviewed profile behind it.
+
+**The ceiling, honestly.** Directory links are low-value individually. They are worth doing *here* for one specific reason — the panel shows engines answering category questions out of directories — not because directory links are generally good. **If the next two panel readings show no movement from placements that land, stop.**
 
 ## Podcast and earned media
 

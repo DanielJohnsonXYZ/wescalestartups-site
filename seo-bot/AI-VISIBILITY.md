@@ -78,6 +78,33 @@ Engines: Perplexity, Google AI Mode. 20/20 prompts returned a full AI answer. No
 
 ---
 
+## Companion instrument: the GSC Generative AI report
+
+**Found and read 2026-08-27 (run 16), after the same run wrongly concluded it was unreachable.** The MCP connector genuinely cannot reach it. The Search Console **UI** can, and the bot can drive the UI with the Chrome connector — that is the lesson, and it generalises.
+
+**How to open it.** Chrome defaults to `admindjohnson@gmail.com`, which does **not** have the property — switch to `daniel@wescalestartups.com` in the account picker first. Then Performance → **Generative AI** (Beta), or straight to:
+`https://search.google.com/u/1/search-console/performance/search-analytics/ai?resource_id=sc-domain:wescalestartups.com`
+
+**What it gives and what it does not.** **Impressions only** — no clicks, no CTR, no position. Tabs are Pages, Countries, Devices, Days. **There is no QUERIES tab**, so it can never say which prompt surfaced a page. This panel and that report are complements: the report says *which pages* Google surfaces in AI features; the panel says *whether WSS is named, for which buyer question, and whether the answer is accurate.* Neither substitutes for the other.
+
+### Baseline — 2026-08-27
+
+| Window | AI impressions | Per day |
+| --- | --- | --- |
+| 3 months (25 May – 23 Aug) | **653** across 50 pages | 7.2 |
+| 28 days (28 Jul – 24 Aug) | **217** across 25 pages | 7.75 |
+
+Growing ~8% on a per-day basis. **Not yet a trend — one comparison.**
+
+**Top pages, 28 days:** `/services/90-day-growth-sprint` **37** · `/fractional-cmo-vs-agency` **18** · `/about` 16 · `/resources` 15 · `/services/fractional-cmo` 11 · `/gtm-strategy` 10 · `/services/growth-diagnosis` 9 · **`/facts/we-scale-startups` 7** · `/about/daniel` 6, plus the homepage above them. Over 3 months the homepage takes **256** and the sprint page **151** — **62% of all AI impressions between two URLs.**
+
+**Two things this establishes.**
+
+1. **The two instruments corroborate each other.** The panel found Google AI Mode citing `/services/90-day-growth-sprint` and `/facts/we-scale-startups`; the report ranks them 2nd and 8th by AI impressions. Completely different measurement paths, same answer. That is the strongest evidence yet that building pages for extraction works.
+2. **`/fractional-cmo-vs-agency` is not dead.** 574 classic impressions at position 44.2, zero clicks, two failed verdicts — and the 2nd-highest non-homepage AI-cited page. Classic position is the wrong lens on it. **This is not a licence to rewrite it again** (run 1 failed twice). It means the page is consumed where rank does not apply, and should be judged on AI impressions from here.
+
+---
+
 ## What to do with the readings
 
 - **Not named anywhere** → authority problem. Workstream C, not more content.

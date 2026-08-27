@@ -35,7 +35,7 @@ Every one of these appears on roundup and comparison pages that WSS could credib
 | # | Target | Why credible | What Daniel does | Status |
 | --- | --- | --- | --- | --- |
 | 1 | Clutch — 5+ verified reviews | Profile claimed. Copy drafted in run-12 outputs (`profile-copy.md`). Review count is a documented driver of both directory rank and AI citation. Clutch pages are exactly the retrievable third-party corroboration the panel shows WSS lacks. | Send review requests to 5 past clients | READY |
-| 5 | GrowthMentor profile → site link | **479+ sessions at 4.97/5 is already real and already public.** This is the single strongest third-party proof WSS has and run 15 flagged that nobody has checked whether the profile even links to `wescalestartups.com`. | Open the profile, confirm the website field points at the site (not a Linktree), confirm the bio matches the site's positioning and the "We Scale Startups" three-word name | READY — 5 minutes |
+| 5 | **GrowthMentor profile — CHECKED run 16. The link is fine; the copy is the problem.** | See the section below. The profile is the site's strongest public third-party proof and its company blurb states the wrong ICP — which an answer engine then repeated back. | Paste the replacement blurb into the We Scale Startups experience entry | **READY — copy drafted below** |
 
 ## Known gaps — drafts needed
 
@@ -57,7 +57,31 @@ Real, verifiable relationships already stated on the site. Each is a potential c
 | Imperial College London | Invited growth teaching | Startup support programme listing |
 | General Assembly | Growth teaching | Instructor profile |
 | UK Space Agency | Startup ecosystem support | Programme or partner listing |
-| GrowthMentor | 479+ sessions, 4.97/5 | Profile is live and reviewed — check it links to the site |
+| GrowthMentor | **406 sessions, 4.94/5, 226 reviews** (verified live 2026-08-27 — the "479+ sessions, 4.97/5" previously recorded here was wrong for this platform) | Profile live at `growthmentor.com/mentors/daniel-johnson`; links to the site correctly. **Copy defect — see below.** |
+
+## GrowthMentor profile — checked live, run 16
+
+**Verified 2026-08-27** at `growthmentor.com/mentors/daniel-johnson`. Correcting three things this file previously got wrong or left open.
+
+**The link is fine.** The *We Scale Startups* experience entry links to `wescalestartups.com/`, dated August 2016 — consistent with the founding year unified in run 12. The profile header's website field points at `danieljohnson.xyz`, which is **correct by design**, not a defect: the entity graph roots Person on `danieljohnson.xyz` and Organization on `wescalestartups.com`. No Linktree anywhere. Socials are Medium, Twitter, LinkedIn, Instagram, all `danieljohnsonxyz`. **Close this as a non-issue.**
+
+**The stats were wrong in this file.** Live figures: **4.94 rating, 226 reviews, 406 sessions**, joined December 2018, London. Not "479+ sessions at 4.97/5". If the site claims 479+ founder sessions that may still be true across all channels — but **do not attribute 479 or 4.97 to GrowthMentor**, because the platform says otherwise and the platform is checkable.
+
+**The real defect — and the AI panel found its downstream effect the same day.** The experience blurb currently reads:
+
+> "We Scale Startups is a growth marketing consultancy I founded in 2016. We work with **early-stage startups** to build predictable, data-driven growth systems — covering paid acquisition, SEO, email, and go-to-market strategy. Clients span SaaS, ecommerce, fintech and consumer apps across the UK, US and Europe."
+
+Four problems against current positioning: **"early-stage"** where the site says post-PMF, Seed to Series B; **"growth marketing"** narrowing a growth consultancy; a **channel-execution list** (paid, SEO, email) that reads as the agency model the site sells against; and a **client base broader than the ICP**.
+
+The first one matters most. Google AI Mode's one imprecision in the run-16 panel was describing WSS's ICP as *"early-to-mid-stage SaaS founders"* — softer than the site's post-PMF positioning. **This profile is the most likely source.** That is the loop closing: the panel found a defect in an answer, and the defect traces to an off-site profile rather than to the site. Worth generalising — when the panel reports something inaccurate, check the off-site profiles before touching a page.
+
+### Drafted replacement — Daniel pastes, the bot does not
+
+Every claim below is already on the site. Nothing invented, no client names, no metrics.
+
+> We Scale Startups is a growth consultancy I founded in 2016. We work with post-PMF B2B SaaS and AI startups, typically Seed to Series B, that have traction but an inconsistent pipeline. The work is diagnosis and system-building rather than channel execution — naming the actual constraint, running 90-day sprints against it, and handing the operating rhythm back to the team. Based in the UK, working with founders globally.
+
+**One judgement call for Daniel.** The draft drops "ecommerce, fintech and consumer apps". That history is real (eQuoo is a consumer app), so this is not a correction of a falsehood — it is a choice to describe who WSS sells to *now* rather than everyone it has ever worked with. If you would rather keep the breadth, add a second sentence naming it as past work; **do not** blur it back into the ICP sentence.
 
 ## Roundup and directory placements — new run 16
 

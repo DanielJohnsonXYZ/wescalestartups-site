@@ -28,15 +28,53 @@ For each prompt record:
 
 ## Log
 
-### YYYY-MM-DD — run N
+### 2026-08-27 — run 16 — FIRST READING, BASELINE
 
-| # | Engine | Named? | Cited URL | Accurate? | Others named |
-| --- | --- | --- | --- | --- | --- |
-| | | | | | |
+Engines: Perplexity, Google AI Mode. 20/20 prompts returned a full AI answer. No blocks, logins, or empty responses.
 
-**Citation share this run:** _n_/10 per engine.
-**Trend:** _vs previous run._
-**Accuracy defects found:** _pages to fix._
+#### Perplexity — 0/10
+
+| # | Named? | Cited URL | Others named |
+| --- | --- | --- | --- |
+| 1 | No | — | YourFractionalCMO.io, Limivex, One Umbrella, Codi Marketing, SCM Consultancy |
+| 2 | No | — | none — generic fCMO-vs-agency framing |
+| 3 | No | — | Growth Sprints (Brendan Hufford), Momentum Nexus, HookLead/Hook90, Mobenal, Epic RevOps |
+| 4 | No | — | One Umbrella, Limivex (as pricing sources) |
+| 5 | No | — | Ladder, Tuff, GrowthHit, Skalski Growth, Metaflow AI |
+| 6 | No | — | Pipeline.tech, LeadActiv, Helpware CX, Athena |
+| 7 | No | — | Growtal, CNV CMO, ThinkCap Advisors (cited sources, not recommendations) |
+| 8 | No | — | none — pure how-to answer |
+| 9 | No | — | Growth Division, The SaaS CMO, Kurve, The Marketing Centre, Genesys Growth |
+| 10 | No | — | none — recommends hiring a Head of Growth in-house |
+
+**Uniform zero, not a marginal one.** Verified twice — answer body and full source-panel link scan. No `wescalestartups.com` reference on any of the ten threads, including the two where Google found the site. WSS is not in Perplexity's retrieval set for this category.
+
+#### Google AI Mode — 2/10
+
+| # | Named? | Cited URL | Accurate? | Others named |
+| --- | --- | --- | --- | --- |
+| 1 | No | — | — | K3C, Kalungi, Team 4, Growth Division, Kurve / VCMO |
+| 2 | No | — | — | none |
+| 3 | **Yes** | /services/90-day-growth-sprint | Yes | Growth Sprints (Brendan Hufford), Mavan, HookLead, SaaSTune, MIMR Growth Lab |
+| 4 | No | — | — | Limivex, McCracken Marketing, The Marketing Centre, Porter Wills |
+| 5 | **Yes** | /facts/we-scale-startups, /about, /press (+ Daniel Johnson LinkedIn in the opening line) | Yes | Growth Division, Market Boost, Zeevron, Robert Moment |
+| 6 | No | — | — | none — role types only (fractional CRO, SalesOps, demand gen) |
+| 7 | No | — | — | McCracken Marketing, The Marketing Centre, Revv Growth, Strategic Pete, Fractional CMO Partners |
+| 8 | No | — | — | Andrew Chen, Jason Cohen / Lenny's, Cognosis Consulting, The Growth Union |
+| 9 | No* | — | — | K3C, Growth Division, Gripped, GrowPad, GrowthCurve, Winning by Design |
+| 10 | No | — | — | VenTech Search, Bain M&A, Namaste Management, PMI Stack, Startup Growth Index |
+
+\* **Prompt 9 is the most useful row in the table.** "WeScaleStartups" appears in a third-party source snippet below the answer — a Growth Division listicle reading "Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups" — but not in the answer body, and no `wescalestartups.com` link is cited. Scored as **not named**. It is the mechanism made visible: the engines read provider listicles, and WSS is already inside one. That is the argument for Workstream C, and it is evidence rather than best practice.
+
+**Citation share this run:** Perplexity **0/10**, Google AI Mode **2/10**.
+**Trend:** none — first reading. Do not read a single reading as a trend.
+**Accuracy defects found:** **none.** Both Google mentions check out against the live site — "£8k–£12k", "6–8 rapid growth experiments", "12 weeks", and the three-service line-up all match. WSS is correctly framed as a consultancy rather than an agency; no "Ltd" error, no location error, no pricing error. One imprecision only: prompt 3 describes the ICP as "early-to-mid-stage SaaS founders" where the site says post-PMF. Softer than the positioning, not false. **Not worth a page change** — logged so a later run does not rediscover it and act on it.
+
+#### What the baseline says
+
+- **Both wins came from pages built to be extracted.** `/services/90-day-growth-sprint` carries the named price, duration and experiment count; `/facts/we-scale-startups` was cited by name. This is the first external evidence that the site's deliberate GEO work does anything. Do not over-read two data points, but do not discount them either.
+- **The eight misses are not content failures.** On those prompts WSS is not in the retrieval set at all — an authority result, per the decision rules below.
+- **Competitive set, counts across all 20 readings:** Growth Division 4 · Kurve 3 · Limivex 2 · The Marketing Centre 2 · HookLead 2 · Growth Sprints (Brendan Hufford) 2 · K3C 2 · McCracken Marketing 2 · One Umbrella 2 · GrowthCurve 2. Everything else once. **Growth Division is the only name on both engines and across both prompt clusters** — the closest thing to a category default, and the publisher of the listicle in the prompt-9 near-miss.
 
 ---
 

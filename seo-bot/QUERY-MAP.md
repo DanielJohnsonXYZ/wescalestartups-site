@@ -78,7 +78,7 @@ Run 15 found this pattern and run 16 swept the whole `page,query` set for it. **
 
 | Query | Impr | Pos | Note |
 | --- | --- | --- | --- |
-| agency collaboration template | 64 | 34.7 | → /resources/agency-brief-template. Template intent, high click propensity, page 3. **Grew 3 → 64 impressions this window** — the largest non-brand gain on the site. Worth a look before the others. |
+| ~~agency collaboration template~~ | 67 | 34.9 | **CLOSED 2026-08-27 — DECOY. Investigated, not winnable, not worth winning.** See the decoy section below. |
 | branding agency for scale-ups | 82 | 61.4 | AUTHORITY |
 | growth readiness | 45 | 58.3 | AUTHORITY. New this window (0 → 45). |
 | scaling beyond founder led gtm | 28 | 37.8 | ABSENT? check. New this window (0 → 28). |
@@ -94,6 +94,20 @@ Run 15 found this pattern and run 16 swept the whole `page,query` set for it. **
 Two head terms disappearing from the named set entirely is consistent with normal churn at positions 43–50, not with a penalty — but if a third goes in the next window, look at `/services/fractional-cmo` properly.
 
 **Clicks:** all three prior-window non-brand clicks (`growth operating system`, `scale startup`, `small startups near me`) went to zero, and all click growth was brand. In the named table the site went backwards on non-brand. In the site total it nearly doubled. See the reconciliation note at the top — that contradiction is the most important thing on this page.
+
+## Closed: `agency collaboration template` is a decoy — investigated 2026-08-27
+
+3 → 67 impressions in one window at position 34.9 looked like the site's largest non-brand gain. It is not an opportunity. Three findings, in order of how much they matter:
+
+**There is no cluster.** Sweeping the entire `page,query` set for `template|brief|checklist|framework|scorecard|example|collaboration` returns **four rows**. `agency collaboration template` is 67 of them; the rest are 3–5 impressions. **One query on one page moved and nothing else did.** Position went 38.7 → 34.9, so the impression jump is Google showing the page deeper for more of the same head term, not a ranking gain.
+
+**The SERP is owned by a different artefact class.** Every result for `agency collaboration template` is a *shared workspace* — Jotform board, Asana template, Notion marketplace, Tracup, Storyflow. The searcher wants a **board to duplicate**, not a document to write. That is why four SaaS products own it and no consultancy does: the query resolves inside a product. Winning it would mean WSS shipping a project-management template to compete with project-management companies on their own surface.
+
+**The audience is post-decision anyway.** Someone looking for a client↔agency task tracker **has already hired the agency.** WSS's entire commercial argument on `/fractional-cmo-vs-agency` is to diagnose the constraint *before* signing the retainer. Even won, this traffic is the wrong side of the decision.
+
+**The one real finding underneath it:** `agency brief template` — the page's own exact title — has **zero impressions in either window.** The page does not rank for its own name, and it only surfaces for a term it was not written for. That SERP is soft (a LinkedIn post, Wikipedia, blog guides, no dominant incumbent) and it hits the genuine pre-hire buyer. The blocker is the deliverable: the download is an **83-word markdown skeleton**, no worked example, no copyable doc. **If this page is ever worth work, that is the work — and it is explicitly not "add collaboration".** Not queued; recorded so the next run does not re-derive it.
+
+The page is in no verdict window — no seo-bot run has ever touched it.
 
 ## Anomalies
 

@@ -1,0 +1,131 @@
+---
+title: "How to Run a 90-Day Growth Sprint"
+description: "A 90-day growth sprint tests a few hypotheses against one named growth constraint, on a weekly decision rhythm. The week-by-week structure, free to copy."
+excerpt: "Most quarterly growth plans are activity lists with a deadline attached. A sprint is different: one constraint, a handful of falsifiable tests, and a standing weekly decision about what to scale, stop, or fix."
+tldr: "A 90-day growth sprint is a single quarter spent testing a small number of hypotheses against one named growth constraint, on a fixed weekly decision rhythm, ending with the rhythm handed to your team. The shape is: week 1 diagnose and set the measure, weeks 2 to 4 design and launch the first tests, month 2 scale what is working and repair what leaked, month 3 transfer ownership, day 90 review what moved. Ninety days is the unit because it is long enough for a channel to produce a readable signal and short enough that a wrong bet costs one quarter rather than a year. You can run one yourself; the structure below is the same one We Scale Startups uses in its paid engagement."
+publishedAt: 2026-08-27
+author: "Daniel Johnson"
+tags: ["growth-systems", "b2b-saas", "experimentation", "gtm"]
+faqs:
+  - question: "What is a 90-day growth sprint?"
+    answer: "A 90-day growth sprint is one quarter spent testing a small number of falsifiable hypotheses against a single named growth constraint, with a fixed weekly meeting where evidence becomes a scale, stop, or fix decision. It is not a quarterly marketing plan and not a channel retainer. The defining features are that the constraint is named before any spend, the number of live experiments is deliberately small, and the sprint ends with the decision rhythm owned by your team rather than by whoever ran it."
+  - question: "How do you run a 90-day growth sprint?"
+    answer: "Week 1: name the constraint from evidence and agree the one measure that proves it moved. Weeks 2 to 4: pick three to five experiments by expected impact, confidence and ease, then build the assets and launch. Month 2: scale what beat its threshold, kill what did not, and fix the conversion leaks the tests exposed. Month 3: document the cadence, hand the dashboard to a named internal owner, and step back deliberately. Day 90: review what moved, what did not, and what the next quarter tests. The weekly decision meeting runs unbroken through all twelve weeks."
+  - question: "Why 90 days? Why not 30 or a full year?"
+    answer: "Ninety days is roughly the shortest window in which a B2B acquisition channel produces a signal you can trust. Thirty days is usually too short: paid campaigns are still in learning, content has not been indexed, and outbound sequences have not completed a cycle, so you end up reading noise and killing things that were about to work. A year is long enough that a wrong bet costs the company real money before anyone admits it. A quarter is also the natural reporting unit for most boards, so the sprint output lands where decisions already get made."
+  - question: "How is a 90-day sprint different from an agency retainer?"
+    answer: "A retainer buys ongoing production capacity in a channel, and it renews on a calendar rather than on evidence. A sprint buys a decision structure with a defined end. The retainer question is what shall we make this month; the sprint question is what do we now believe, and what does that change. The two are not rivals. If your channel plan is already clear and you need hands to execute it, a retainer is the right purchase and a sprint would be an expensive way to reach the same place."
+  - question: "How many experiments should run at once in a growth sprint?"
+    answer: "Three to five in the first cycle, for most post-PMF teams. Fewer than three and one dud wastes the quarter. More than five and two things break: nobody has enough attention to build each test properly, and the results become impossible to attribute because several changes land on the same funnel at once. Score candidates on expected impact, your confidence based on existing data, and ease of execution with the team you actually have, then cut the list."
+  - question: "Who should run the sprint internally?"
+    answer: "One named person with the authority to stop something expensive. That is the real requirement. The common failure is appointing a coordinator who can schedule the meeting but cannot kill a channel the founder championed, at which point the weekly decision quietly becomes a weekly status update. If nobody internally holds that authority yet, the sprint will not survive contact with the first uncomfortable result."
+  - question: "Does a 90-day growth sprint work before product-market fit?"
+    answer: "Usually not, and the reason is worth stating plainly. A sprint optimises an acquisition system against a constraint. Before product-market fit the constraint is normally the product or the customer definition, and no amount of channel testing resolves that. Pre-PMF teams get more out of customer research and willingness-to-pay evidence. The sprint is built for teams with real traction and inconsistent pipeline."
+  - question: "What does a 90-day growth sprint cost?"
+    answer: "Run internally, the cost is the team time plus whatever test budget you allocate, and the structure below is free to copy. We Scale Startups runs it as a paid 12-week engagement at £8k–£12k, which buys the senior judgement, the experiment design, and the handover artefacts rather than the execution hours. If you only need the diagnosis and not the quarter of execution, the Growth Diagnosis at £2k–£4k answers the constraint question on its own."
+---
+
+A 90-day growth sprint is one quarter spent testing a small number of falsifiable hypotheses against a single named growth constraint, on a fixed weekly decision rhythm, ending with that rhythm handed to your team.
+
+That definition is doing a lot of work, so it is worth separating from what it is not. A sprint is not a quarterly marketing plan with a Gantt chart. It is not a channel retainer with a three-month minimum. It is not a strategy deck delivered in week two and quietly ignored by week six. The difference in every case is the same: a sprint names one constraint before any money is spent, keeps the number of live experiments small enough to read, and ends with an internal owner rather than a renewal conversation.
+
+Below is the structure, week by week. It is the same shape We Scale Startups runs as a paid engagement, written out so you can run it yourself. If you would rather not, [the paid version is here](/services/90-day-growth-sprint) — but the method is not the part worth charging for.
+
+## Why 90 days is the unit
+
+Ninety days is roughly the shortest window in which a B2B acquisition channel produces a signal you can trust.
+
+Thirty days is the tempting alternative and it is usually too short. Paid campaigns are still in learning. Content has not been indexed, let alone ranked. Outbound sequences have not completed a full cycle, so reply rates are measuring the first two touches of a five-touch play. Teams that run 30-day tests spend most of their time killing things that were about to work and scaling things that got lucky.
+
+A year fails in the opposite direction. It is long enough for a wrong bet to become an organisational fact — a hire made, a tool bought, a narrative defended in three board meetings — before anyone is willing to say it did not work.
+
+A quarter also happens to be the unit your board already thinks in. That is not a trivial point. The output of the sprint lands in the meeting where decisions actually get made, in the format that meeting already uses.
+
+## Week 1: name the constraint, then agree the measure
+
+Nothing else in the sprint works if this week is skipped, and it is the week most teams skip because it produces no visible activity.
+
+The job is to replace "growth is slow" with one specific, falsifiable sentence. Something closer to: *pipeline is inconsistent because our ICP is too broad and every channel carries a different promise*. That sentence has to come from evidence, not from the loudest opinion in the room.
+
+Three sources are usually enough to get there:
+
+- **Funnel data.** Export your GA4 events and your CRM stage-to-stage conversion rates. You are looking for the step where the drop is disproportionate, not the step with the biggest absolute loss.
+- **Sales calls.** Listen to five recent ones. Not the wins — the ones that stalled. You are listening for the objection that keeps recurring, which is almost never the objection your website answers.
+- **Customer evidence.** What did your last ten closed-won customers have in common that your last ten stalled deals did not?
+
+Then agree the single measure that would prove the constraint moved. One measure. If the team cannot agree on one, the constraint is not named tightly enough yet, and you should stay in week 1 rather than proceed with a compromise.
+
+Write down the baseline for that measure before you touch anything. In three months you will want it and nobody will remember what it was.
+
+## Weeks 2 to 4: design and launch
+
+Pick three to five experiments. Not eight.
+
+The number matters more than it looks. Fewer than three and a single dud wastes the quarter. More than five and two failures compound: nobody has enough attention to build each test properly, and when several changes hit the same funnel simultaneously the results become genuinely unattributable. You will finish the quarter with movement and no idea what caused it.
+
+Score the candidates on three things — expected impact on the constraint, your confidence based on data you already have, and ease of execution with the team you actually have rather than the team you are hiring. Rank them, take the top three to five, and put the rest in a backlog you will genuinely revisit at day 90.
+
+Every experiment needs four things written down before it launches:
+
+1. **The hypothesis**, stated as a belief that could turn out to be wrong.
+2. **The threshold** that would make you scale it, decided *now*, before you are emotionally invested in the result.
+3. **The owner** — one name, not a team.
+4. **The kill condition.** What result would make you stop? If there isn't one, this is not an experiment.
+
+Then build and launch. Landing page variants carrying genuinely different value propositions, not different button colours. Creative sets that test a message rather than a format. Email sequences with behavioural triggers rather than a calendar.
+
+The weekly decision meeting starts this week and keeps its slot for the rest of the quarter. Protect it more carefully than you think you need to.
+
+## Month 2: scale the signal, repair the leaks
+
+By now the tests are producing readable numbers, and this is where sprints most often quietly die.
+
+They die because the weekly meeting drifts into a status update. Someone reports what happened; nobody decides anything; the meeting shortens; within three weeks it is a Slack thread. The discipline that prevents this is simple to state and hard to hold: every experiment gets an explicit scale, stop, or fix call, every week, out loud.
+
+The rule of thumb worth starting from is to scale what is clearly returning above its threshold, kill what is clearly below it, and fix — rather than kill — the cases where the channel is working but a step after the click is leaking. That last category is the one teams get wrong most often. A channel that drives qualified traffic into a broken activation flow looks identical in a CPL report to a channel that drives junk. The distinction only shows up if you are reading the funnel past the first conversion.
+
+Two things to track alongside cost per lead: the conversion rate from lead to qualified opportunity, and pipeline velocity. Cost per lead on its own will reliably talk you into scaling your worst channel.
+
+## Month 3: transfer ownership
+
+The sprint is only worth doing if something survives it. Month 3 exists to make that true, and it needs to be scheduled rather than hoped for.
+
+Three things move to the team:
+
+- **The cadence.** Documented — who attends, what gets reviewed, what decisions are in scope, what happens when the numbers disagree.
+- **The dashboard.** One dashboard that everyone trusts, owned by a named internal person. Not four dashboards that each tell a partial truth.
+- **The hypothesis log.** What was tested, what the threshold was, what happened, and what you now believe. This is the asset that stops the next quarter re-running experiments you already have answers to.
+
+Then the person who has been driving the sprint steps out of the loop deliberately, while there is still time to notice if it collapses. A handover in the final week is not a handover; it is a hope.
+
+## Day 90: the review
+
+Three questions, answered honestly:
+
+What moved, and can you attribute it? What did not move, and do you now know why? What does the next quarter test as a result?
+
+The third question is the point. A sprint that ends with a list of achievements has not really finished. A sprint that ends with a sharper constraint than the one you started with — even if the numbers were mediocre — has done its job, because you are now betting on better information than you had in week 1.
+
+## The failure modes worth naming
+
+Four patterns account for most sprints that produce nothing:
+
+**Too many experiments.** Covered above, and it remains the most common one. Ambition looks like eight tests. Learning looks like four.
+
+**No authority to stop things.** The sprint owner needs to be able to kill a channel the founder personally championed. If they cannot, the weekly decision is decorative.
+
+**Thresholds set after the result.** Deciding what counts as success once you can see the number is not analysis. Write the threshold down first, in the same document, before launch.
+
+**Running one before product-market fit.** A sprint optimises an acquisition system against a constraint. If the constraint is the product or the customer definition, no volume of channel testing will resolve it. Pre-PMF teams get more from [customer research and a sharper ICP](/insights/define-icp-by-mindset-not-demographics) than from a quarter of experiments.
+
+## Doing this without us
+
+The structure above is complete. Nothing has been held back for the paid version, because the structure is not the scarce thing — the willingness to name one constraint, keep the experiment list short, and hold the weekly decision when the answer is uncomfortable is the scarce thing, and no engagement can buy that on your behalf.
+
+If you want to run it yourself, the [90-Day Growth Sprint Planner](/resources/90-day-growth-sprint-planner) is the working template.
+
+If you are not sure the constraint is named correctly — which is the failure that quietly wastes the other eleven weeks — the [Growth Diagnosis](/services/growth-diagnosis) at £2k–£4k answers that question on its own, in about a week, without committing you to a quarter.
+
+And if you would rather have someone senior run the quarter with you, [the 90-Day Growth Sprint](/services/90-day-growth-sprint) is £8k–£12k over twelve weeks. What that buys is the experiment design, the judgement calls in month 2, and the handover artefacts — not execution hours.
+
+Related reading: [random acts of growth](/insights/random-acts-of-growth) on why uncoordinated activity feels productive, [systems vs activity retainers](/insights/systems-vs-activity-retainers) on what you are actually buying, and [the growth signal loop](/insights/growth-signal-loop) on turning evidence into decisions.

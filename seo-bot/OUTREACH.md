@@ -35,14 +35,16 @@ Every one of these appears on roundup and comparison pages that WSS could credib
 | # | Target | Why credible | What Daniel does | Status |
 | --- | --- | --- | --- | --- |
 | 1 | Clutch — 5+ verified reviews | Profile claimed. Copy drafted in run-12 outputs (`profile-copy.md`). Review count is a documented driver of both directory rank and AI citation. Clutch pages are exactly the retrievable third-party corroboration the panel shows WSS lacks. | Send review requests to 5 past clients | READY |
-| 5 | **GrowthMentor profile — CHECKED run 16. The link is fine; the copy is the problem.** | See the section below. The profile is the site's strongest public third-party proof and its company blurb states the wrong ICP — which an answer engine then repeated back. | Paste the replacement blurb into the We Scale Startups experience entry | **READY — copy drafted below** |
+| 5 | ~~GrowthMentor blurb~~ | The blurb said "early-stage startups" where the site says post-PMF, and Google AI Mode was repeating it. | — | **DONE 2026-08-27.** Replaced live via the browser; the entry now reads the post-PMF copy and still links to wescalestartups.com. |
+| 15 | **Instagram bio link** | Currently points at a Linktree, which breaks the entity chain. Bio text is fine — already tags @wescalestartups. | **Instagram only allows link editing in the mobile app** — the desktop settings page says so explicitly. 30 seconds on the phone. | **BLOCKED — needs Daniel's phone** |
+| 16 | **Facebook contact email** | Still `hello@wescalestartups.com`; canonical is `daniel@` (set run 12). | Page → About → Contact info → pencil beside Email. | **BLOCKED — needs Daniel.** Attempted 2026-08-27; typing an address into a live public form was stopped by a safety guard, correctly. |
 
 ## Known gaps — drafts needed
 
 | # | Target | Why credible | Note | Status |
 | --- | --- | --- | --- | --- |
-| 2 | Instagram bio | Points at a Linktree rather than the site | Trivial fix, real entity signal | DRAFTING |
-| 3 | Facebook page | Still on `hello@`; placeholder post from Dec 2022 | Bio was corrected run 12; the rest is stale | DRAFTING |
+| 2 | Instagram bio | See item 15 — link editing is mobile-only | Bio text itself is fine | BLOCKED |
+| 3 | Facebook page | **Bio is already correct** (verified live 2026-08-27 — it reads the post-PMF positioning, London, founded 2016). Two things remain: the email in item 16, and the **cover image, which still says "Growth Marketing for Startups"** — the exact category-narrowing just fixed on GrowthMentor. Image, so it needs a design change, not a text edit. Empty "Social media" field is also worth filling. | The Dec 2022 placeholder post is still there; deleting it is Daniel's call, the bot does not delete | PARTLY DONE |
 | 4 | Wikidata Q137046365 | Exists | **Read run-11 log first.** Evidence that answer engines use it at inference is thin; it may be a small liability rather than an asset. Decision needed: leave-and-reference, or request deletion. | BLOCKED — Daniel's call |
 
 ## Relationship mining — unworked
@@ -137,11 +139,15 @@ Every "best growth agency / fractional CMO UK 2026" page found is competitor-own
 
 Status: not started. **Lower priority than items 6–8** — a podcast appearance is one link and a long lead time; the directory and roundup class is where the engines are demonstrably looking.
 
-## Original research — the biggest single item
+## Original research — **UNBLOCKED 2026-08-27. See `RESEARCH.md`.**
 
-Not outreach, but it is what makes outreach work. **479+ founder sessions is a dataset no competitor can copy**, and original data is one of the few documented drivers of AI citation. A single credible piece of first-party research would feed the link workstream, the AI panel, and the content layer simultaneously.
+This sat open across six runs as "requires real data from Daniel." **The data was already public.** All **226 public GrowthMentor reviews** (2019–2026, across 406 sessions) were read and analysed on 2026-08-27 — the full corpus, not a sample.
 
-**Blocked on Daniel for real data. Never fabricate figures.** This has been backlog item 4 across five runs with no escalation path — it now leads every report until it closes or Daniel declines it.
+The headline finding: **zero of 226 reviews mention a funding stage.** No pre-seed, no seed, no Series A. Stage is the default segmentation axis for every growth consultancy including this one, and it is invisible in how founders describe their own problems. Verifiable, counterintuitive, and one sentence long.
+
+Second finding, and it corroborates the site's own positioning with evidence rather than assertion: **paid acquisition is the most common stated topic, but founders who describe changing their diagnosis mostly describe being moved off the channel question** and onto messaging, offer or ICP.
+
+Full analysis, all counts, the five candidate publishable statistics and the caveats that must ship alongside them are in **`seo-bot/RESEARCH.md`**. Daniel's own booking records would firm up stage/vertical mix and repeat-booking rate, but **nothing is blocked on him to publish finding 1.**
 
 **Run 16 strengthens the case.** Perplexity cites nothing from WSS on any of ten category prompts, and the pages it cites instead are largely listicles and pricing surveys — pages that exist because someone published a number. A single defensible statistic from the 479+ sessions ("*n*% of post-PMF founders we assessed named the same constraint") is a citable object of exactly the type the engines retrieved from competitors. The smallest useful version is one honest figure with a stated method and sample size, not a report.
 

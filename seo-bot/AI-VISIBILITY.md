@@ -78,6 +78,34 @@ Engines: Perplexity, Google AI Mode. 20/20 prompts returned a full AI answer. No
 
 ---
 
+### 2026-08-27 — run 17 — READING #2 (same day as #1)
+
+Perplexity and Google AI Mode, ten prompts each, all twenty successfully run. Fresh navigation per prompt, prompts verbatim, no follow-ups, grounding active on Perplexity 10/10 and Google 7/10.
+
+| Engine | Mention share | Citation share | Accuracy | vs reading #1 |
+| --- | --- | --- | --- | --- |
+| Perplexity | **1/10** | **1/10** | 1/1 | 0/10 → 1/10 |
+| Google AI Mode | 2/10 | 2/10 | 2/2 | unchanged |
+
+**First Perplexity citation ever recorded.** Prompt 3 named WSS second and cited `/services/90-day-growth-sprint`. Reading #1 found Perplexity's zero uniform across answer bodies and source panels, so this is a change in kind, not degree.
+
+Google unchanged: prompts 3 and 5, same URLs (`/services/90-day-growth-sprint`; `/facts/we-scale-startups` + `/about` + `/press`). WSS listed first on prompt 5, ahead of Growth Division — one observation, not a claim.
+
+**Two readings on the same day are noise. Reading #3 must fall on a different day.**
+
+**Accuracy 3/3.** No Ltd, no incorporation claim, no pricing/stage/geography error. One soft framing defect: Google filed WSS under "Paid Ads & Conversion Rate Optimisation (CRO) Sprints", describing sprints as "often spanning paid media and creative". Accurate in substance, wrong in category. Second engine drift of the positioning — check off-site profiles before touching a page.
+
+**Two structural findings:**
+
+- **Prompt 9's listicle reproduced identically** — "Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups" in Google's sources, not its answer. Not-named both readings. A stable retrieval path, and the evidence behind Workstream C.
+- **Google returned zero external citations on prompts 2, 6 and 10.** Ungrounded answers give no brand a surface. Those three are structurally unwinnable in current form — a property of the panel, not a failure of the site.
+
+`/insights/what-226-founder-reviews-reveal` appeared nowhere, as expected hours after publication.
+
+**Competitor tally, both engines:** Growth Division 4 · K3C 3 · Limivex 3 · Kalungi 2 · HookLead 2 · Growth Sprints 2 · Kurve 2 · McCracken Marketing 2 · GrowthCurve 2 · InnoMaker 2 · Codi Marketing 2 · gigCMO 2 · Geisheker 2 · GrowTal 2 · MAVAN 2 · Leadership Services 2. **Growth Division and K3C persist across both engines and both readings.**
+
+---
+
 ## Companion instrument: the GSC Generative AI report
 
 **Found and read 2026-08-27 (run 16), after the same run wrongly concluded it was unreachable.** The MCP connector genuinely cannot reach it. The Search Console **UI** can, and the bot can drive the UI with the Chrome connector — that is the lesson, and it generalises.

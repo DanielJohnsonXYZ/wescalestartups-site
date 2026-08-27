@@ -10,6 +10,9 @@
 
 # Short-lived: first LP slug briefly 404-cached at the edge; keep alias after purge
 /ai-saas-growth-audit /ai-growth-audit 301
+
+# Insight renamed same-day for accuracy (reviews analysed, not sessions)
+/insights/what-226-founder-sessions-show /insights/what-226-founder-reviews-reveal 301
 /ai-saas-growth-audit/ /ai-growth-audit 301
 
 # Legacy /case-studies paths (avoid self-301 rules — they break clients and sitemap audits)

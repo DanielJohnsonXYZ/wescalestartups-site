@@ -106,6 +106,44 @@ Google unchanged: prompts 3 and 5, same URLs (`/services/90-day-growth-sprint`; 
 
 ---
 
+### 2026-08-31 — run 18 — READING #3 (first on a different day)
+
+Google AI Mode ten prompts. Perplexity **nine** — the account hit its free-plan search limit on prompt 10, so prompt 10 is unread, not negative.
+
+| Engine | Mention share | Citation share (own domain) | Accuracy | vs reading #2 |
+| --- | --- | --- | --- | --- |
+| Google AI Mode | 2/10 | 2/10 | 2/2 | unchanged |
+| Perplexity | 2/9 | **0/9 organic** (1/9 personalised) | **0/1** | 1/10 → 0 organic |
+
+**THE PERPLEXITY SERIES IS CONTAMINATED. Read this before recording another Perplexity number.**
+
+On prompt 3, Perplexity named WSS under the heading **"Also relevant to your background"**, with the sentence *"Given your work with We Scale Startups, they also offer a 90-day growth sprint…"*. The panel runs in Daniel's own Chrome, on a Perplexity account signed in as Daniel Johnson, with memory on and all ten panel prompts in its session sidebar from previous runs. Perplexity is answering a question about WSS to a user it knows is WSS.
+
+**Reading #2's "first Perplexity citation ever" was almost certainly the same thing, unlabelled** — same prompt, same second-place slot, same shape. Downgrade it. **Perplexity's organic citation share has been 0 in all three readings.**
+
+A logged-out control was attempted and is unavailable: Perplexity refuses logged-out queries, the built-in browser is blocked from google.com, and creating an account is prohibited. **Any Perplexity mention carrying a personalisation tell must be scored non-scoring, not as a win.**
+
+**Perplexity's one organic mention (prompt 9) is second-hand and inaccurate.** WSS appeared in the answer-body comparison table sourced *entirely* to the Growth Division listicle — `wescalestartups.com` was not in the source panel at all. It reported "Three tiers: Strategy, Marketing Services, Fractional CMO", "Pricing: Not disclosed", "London-based". WSS sells four services and publishes every price. **First accuracy defect recorded on this panel, and it did not come from the site.**
+
+**Google AI Mode — same rate, better URLs.**
+
+| Prompt | Reading #2 | Reading #3 |
+| --- | --- | --- |
+| 3 | /services/90-day-growth-sprint | /services/90-day-growth-sprint **+ /insights/how-to-run-a-90-day-growth-sprint** |
+| 5 | /facts/we-scale-startups, /about, /press | /facts/we-scale-startups, **/insights**, + LinkedIn company page |
+
+**Run 15's insight was cited four days after publication**, and Google attributed the answer's framing sentence — "a single quarter is the shortest window required to pull a reliable channel signal without bleeding cash" — to We Scale Startups. That is run 15's "why 90 days" section extracted as a passage, which is precisely what it was written to be. Run 13's `/insights` hub earned its first recorded citation on prompt 5.
+
+Google accuracy 2/2 and specific: post-PMF B2B SaaS and AI, twelve weeks, £8k–£12k, 6–8 ICE-scored experiments, handover by day 90. All correct against `site.ts`.
+
+**Prompt 9's Growth Division listicle appeared for the third consecutive reading**, and now feeds Perplexity's answer body as well as Google's sources. It is not a stable path; it is *the* path — and it is wrong about WSS in five ways. **Run 17's unexplained Google defect ("Paid Ads & CRO Sprints") traces to it**: the listicle states WSS's primary channels are Meta Ads, Google Ads and SEO. Full defect table in `changelog/2026-08-31-run18.md` §2; correction drafted as C-1 in `OUTREACH.md`.
+
+**Competitors named this reading:** Kalungi, gigCMO, K3C, Fractionus, Growth Division, Revenue Works, MarketerHire, Growth Sprints (Brendan Hufford), Momentum Nexus, HookLead, Mobenal, GTM Lab, MIMR Growth Lab, Ladder, Metaflow AI, Checkpoint GTM. **Growth Division and K3C persist across all three readings and both engines.**
+
+**One source worth noting:** Perplexity cited Clutch's "Top Fractional CMO Services in the United Kingdom" directly on prompt 1, and the Growth Division table has a Clutch column in which WSS reads "Not listed". Two independent reasons in one reading to prioritise the Clutch item.
+
+---
+
 ## Companion instrument: the GSC Generative AI report
 
 **Found and read 2026-08-27 (run 16), after the same run wrongly concluded it was unreachable.** The MCP connector genuinely cannot reach it. The Search Console **UI** can, and the bot can drive the UI with the Chrome connector — that is the lesson, and it generalises.
@@ -139,3 +177,17 @@ Growing ~8% on a per-day basis. **Not yet a trend — one comparison.**
 - **Named but wrong** → a factual defect on a specific page. Highest-priority fix, and cheap. `/facts/we-scale-startups` exists for exactly this.
 - **Named, accurate, wrong URL cited** → the citation is landing on a page that does not convert. Internal linking and passage placement.
 - **Competitors consistently named** → look at what they have that WSS does not. Usually reviews, original data, or third-party coverage.
+
+---
+
+### Reading 2026-08-31 (run 18)
+
+| Window | AI impressions | Per day |
+| --- | --- | --- |
+| 28 days (2–29 Aug) | **228** across 27 pages | 8.1 |
+
+Against 217 across 25 pages at baseline. **Roughly flat — ~4% per day, which is inside noise. Do not call this growth.**
+
+**Top pages, 28 days:** homepage **73** · `/services/90-day-growth-sprint` 38 · `/fractional-cmo-vs-agency` 18 · `/about` 17 · **`/facts/we-scale-startups` 17 (was 7)** · `/resources` 15 · `/services/fractional-cmo` 10 · `/gtm-strategy` 9 · `/services/growth-diagnosis` 9 · `/about/daniel` 7. The remaining 17 pages share 15 impressions.
+
+**`/facts/we-scale-startups` more than doubled, and the panel cites it on prompt 5. Two instruments, one conclusion — keep that page fresh and factual.** `/fractional-cmo-vs-agency` held flat at 18 and still takes zero classic clicks at position 44; the run-16 reading of it stands unchanged.

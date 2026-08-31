@@ -50,9 +50,20 @@ All land on `/fractional-cmo-vs-agency`, which is a good page — comprehensive,
 
 `fractional cmo for b2b saas` 45 @ 45.9, `saas fractional cmo` 43 @ 46.0, `startup fractional cmo` 20 @ 52.1. `/services/fractional-cmo` carries 453 impressions at position 46.7. Authority-bound. Prohibition 11 applies.
 
-## Cluster: generic startup / scaling head terms — 287 impr
+## Cluster: generic startup / scaling head terms — CLOSED as a target, run 18
 
-`scale startup` 108 @ 10.0, `marketing startups` 23 @ 5.7, `startup development agency` 21 @ 9.6. Largest page-1 pool, lowest intent. Deferred deliberately since run 5 — the fix means re-anchoring the homepage on "agency", which contradicts the positioning. Prohibition 14.
+**`scale startup` is a Scale AI brand collision. It is not demand and it is not winnable. Do not reopen it.**
+
+2–29 Aug: **860 impressions, position 10.3, homepage, zero clicks** — up from 108 @ 10.0 when this cluster was written, and 1,040 over three months with 860 of them in the last 28 days. Page one, huge, accelerating, zero clicks: it reads as the best unclaimed opportunity on the site.
+
+The live SERP settles it. `scale startup` returns scale.com, Wikipedia "Scale AI", **wescalestartups.com**, LinkedIn "Scale AI", Y Combinator "Scale AI", Index Ventures "Scale", Stripe "How to Scale a Startup". **Google reads the query as navigational intent for Scale AI, the company.** WSS ranks third in front of an audience looking for something else.
+
+**Two consequences for every future run:**
+
+1. **Discount 860 impressions from the 28-day figures.** Site CTR reads 1.3% → 1.1% and looks like a decline; ex-collision it is 67/5,290 = **1.27%**, i.e. flat. The +690 impression "growth" this window is substantially this one query.
+2. **One SERP fetch turned the run's most attractive lead into a prohibition.** The fixed rule requiring a live SERP check before committing to a cluster earned its place here.
+
+The rest of the cluster is unchanged: `marketing startups` 23 @ 5.7, `startup development agency` 21 @ 9.6 — low intent, and the fix would mean re-anchoring the homepage on "agency". Prohibition 14 stands.
 
 ## Cluster: brand and near-brand — 88 impr across 31 variants
 
@@ -115,3 +126,38 @@ The page is in no verdict window — no seo-bot run has ever touched it.
 - **Third-party vendor questions landing on WSS pages.** "how does minoa compare to valueiq…" (12 impr, pos 88.7) on `/insights`, and a ~50-word Diaceutics precision-medicine question (5 impr, pos 64.4) on `/case-studies/healthtech-precision-medicine`. NOISE — someone else's vendor comparison. Do not build for these.
 - **18 queries at position ≤3 with zero clicks**, including `startup accountants` and `google for startups in shoreditch`. Irrelevant matching, not opportunity.
 - **Duplicate-punctuation splits:** the Series A fractional CMO question appears twice (32 @ 8.0 and 11 @ 7.6), combined 43 impressions. Combine before prioritising.
+
+---
+
+## Window 2026-08-02 → 2026-08-29 (run 18)
+
+Site: 67 clicks / 6.15k impr / 1.1% / **pos 24.6**, against 72 / 5.46k / 1.3% / 26.7 the preceding window. Position improved two places. **Still zero non-brand named clicks — nineteen runs.** 338 query rows, 93 page rows. Named clicks 27 (`we scale startups` 19, `we scale` 4, `wescalestartups` 4); **anonymised 40 of 67 = 60%**, down from 69%.
+
+**Top rows by impressions after discounting `scale startup`:**
+
+| Query | Impr | Pos | Landing page | Intent | Can that page satisfy it? |
+| --- | --- | --- | --- | --- | --- |
+| branding agency for scale-ups | 93 | 60.7 | — | provider | Position 45+. Prohibition 12. |
+| growth operating system | 71 | 23.9 | `/growth-operating-system` | informational | Yes. Run 14's page. |
+| agency collaboration template | 71 | 34.7 | `/resources/agency-brief-template` | template | **Closed decoy** — see below. |
+| growth readiness | 56 | 56.1 | — | informational | Position 45+. Prohibition 12. |
+| embedded growth team vs agency | 47 | 26.1 | comparison cluster | comparison | Authority-bound. |
+| fractional cmo vs marketing agency | 42 | 24.4 | `/fractional-cmo-vs-agency` | comparison | **Yes, and it does.** Run 1 failed twice. Judge it on AI impressions, not rank. |
+| should a series a startup hire a fractional cmo a growth agency or wait to hire a full-time vp of growth | 40 | **7.6** | `/insights/when-to-hire-fractional-cmo` | decision | Yes. **Inside run 5's verdict window to 2026-09-08.** |
+| why 90 day growth sprint | 37 | 10.7 | `/services/90-day-growth-sprint` | informational | **No — but run 15's insight exists now. Verdict 2026-09-17.** |
+| fractional cmo vs agency | 37 | 33.1 | comparison cluster | comparison | Authority-bound. |
+| growth leader for post pmf startup | 36 | **9.2** | provider pages | provider | Yes. No defect. |
+| growth agency vs fractional cmo | 36 | 23.4 | comparison cluster | comparison | Authority-bound. |
+| 90 day growth sprint | 35 | 11.8 | `/services/90-day-growth-sprint` | mixed | Verdict window. |
+| how to run a 90 day growth sprint | 33 | 11.4 | `/services/90-day-growth-sprint` | informational | **Still 100% on the service page four days after the insight shipped.** Verdict 2026-09-17. |
+| scaling beyond founder led gtm | 32 | 37.4 | — | informational | Marginal. |
+| maven fractional cmo | 31 | 44.9 | — | competitor brand | No. |
+| growth agency for scaleups | 31 | 52.1 | — | provider | Position 45+. |
+
+### Standing sweep, run 18 — negative
+
+No `/services/*`, `/pricing`, `/book` or `/contact` URL is the landing page for a `what is` / `how to` / `why` / `how do I` query **outside the sprint cluster**, which run 15 already addressed and which is inside its verdict window. The sweep cost one pull and found nothing new, which is the result worth logging. Keep running it.
+
+### The asymmetry worth watching
+
+`how to run a 90 day growth sprint` still lands **entirely** on the £8k–£12k service page, four days after `/insights/how-to-run-a-90-day-growth-sprint` shipped — while **Google AI Mode already cites the new insight** (panel reading #3, same day). Indexed and cited by the answer engine within four days; not one classic impression reallocated. **The two channels move at different speeds, and that argues for different review horizons.** Do not read the classic non-movement as a run-15 failure before 2026-09-17.

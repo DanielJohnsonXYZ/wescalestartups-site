@@ -34,6 +34,7 @@ Every one of these appears on roundup and comparison pages that WSS could credib
 
 | # | Target | Why credible | What Daniel does | Status |
 | --- | --- | --- | --- | --- |
+| **C-1** | **Growth Division listicle — factual correction.** `growth-division.com/blog/best-startup-growth-agencies-in-the-uk`, author Tristan Gillen | **The single proven answer-engine retrieval path into WSS.** Present in Google AI Mode's sources on prompt 9 in all three panel readings, and now feeding Perplexity's answer body. It is also wrong in five ways, and run 17's unexplained Google mis-categorisation traces to it. Draft below. | Read the draft, decide whether to send, send it himself | **READY — highest leverage item in this file** |
 | 1 | Clutch — 5+ verified reviews | Profile claimed. Copy drafted in run-12 outputs (`profile-copy.md`). Review count is a documented driver of both directory rank and AI citation. Clutch pages are exactly the retrievable third-party corroboration the panel shows WSS lacks. | Send review requests to 5 past clients | READY |
 | 5 | ~~GrowthMentor blurb~~ | The blurb said "early-stage startups" where the site says post-PMF, and Google AI Mode was repeating it. | — | **DONE 2026-08-27.** Replaced live via the browser; the entry now reads the post-PMF copy and still links to wescalestartups.com. |
 | 15 | **Instagram bio link** | Currently points at a Linktree, which breaks the entity chain. Bio text is fine — already tags @wescalestartups. | **Instagram only allows link editing in the mobile app** — the desktop settings page says so explicitly. 30 seconds on the phone. | **BLOCKED — needs Daniel's phone** |
@@ -159,3 +160,64 @@ Full analysis, all counts, the five candidate publishable statistics and the cav
 - Never create accounts or accept terms.
 - Every claim in every draft must be true and already stated on the site. No invented credentials, no implied client logos, no upgrading "mentor" into "partner".
 - Paid work is labelled paid. Teaching is labelled teaching. That labelling discipline is a positioning asset — do not soften it to make a profile read better.
+
+---
+
+## C-1 — Growth Division listicle correction. Drafted 2026-08-31 (run 18). NOT SENT.
+
+**Why this is the top of the queue.** Three consecutive AI-panel readings show Google AI Mode surfacing this page in its sources for buyer prompt 9; on 2026-08-31 Perplexity also lifted WSS into its *answer body* from it, citing `growth-division.com` and not `wescalestartups.com`. When an engine describes WSS second-hand, this is the page it is reading. It is currently the most influential public description of We Scale Startups that WSS did not write.
+
+**The errors**, checked against `src/site.ts` on 2026-08-31:
+
+| The page says | Correct |
+| --- | --- |
+| "Three tiers: Growth Strategy, Marketing Services and Consulting, Fractional CMO" | Four services: Growth Diagnosis, 90-Day Growth Sprint, Acquisition System Build, Fractional CMO |
+| "Pricing: Not publicly disclosed" | Published: £2k–£4k · £8k–£12k · £15k–£25k · £5k–£8k/mo |
+| "Best stage: Pre-seed to Series A" | Post-PMF, Seed to Series B |
+| "Primary channels: Meta Ads, Google Ads, SEO"; "primarily paid and SEO" | Diagnosis-first consultancy. **This line is the likely source of Google filing WSS under "Paid Ads & CRO Sprints" in run 17.** |
+| "London-based agency" | Not an agency |
+| "+768% average client growth rate for 2024", "£20M in revenue generated" | **Neither figure appears anywhere on the site or in the repo.** A third party is publishing performance claims in WSS's name that WSS does not make. |
+| "Clients include … University of Cambridge" | The relationship is Cambridge Judge, accelerator-side, not a client |
+
+**Note on the prohibition.** The standing rule is *do not ask a competitor to add WSS to their own listicle*. This is not that: WSS is already on it, and the ask is to correct published factual errors — including two performance claims attributed to WSS that WSS does not make. That distinction is real, but it is still a competitor's page and still Daniel's call. **The bot has not sent, and will not send, this.**
+
+**Likely cause, worth including if Daniel sends it:** the page is dated **7 May 2026 — the day after the WordPress-to-Astro rebuild**. Whoever researched WSS almost certainly read the old site mid-migration, which explains the stale three-tier structure and the "pricing not disclosed" line.
+
+### Draft — Daniel sends, or does not
+
+> Subject: Correction on the We Scale Startups entry
+>
+> Hi Tristan,
+>
+> Your "Best Startup Growth Agencies in the UK" piece includes We Scale Startups — thanks for that, and the honest-disclosure framing is a fair way to run a list like this.
+>
+> A few details on our entry are out of date, and I think you'd want to know because they're the ones an AI summariser picks up. I've seen a couple of engines repeat them back.
+>
+> - **Services.** We sell four, not three: Growth Diagnosis, 90-Day Growth Sprint, Acquisition System Build, and Fractional CMO.
+> - **Pricing.** It's public, not undisclosed — £2k–£4k, £8k–£12k, £15k–£25k, and £5k–£8k/mo respectively. All on wescalestartups.com/pricing.
+> - **Stage.** We work post-product-market-fit, roughly Seed to Series B, not pre-seed to Series A.
+> - **Channels.** "Meta Ads, Google Ads, SEO" isn't what we do — we're diagnosis-first, and the sprint is 6–8 ICE-scored experiments with handover to the in-house team by day 90.
+> - **Two figures I'd ask you to remove:** the "+768% average client growth rate" and "£20M in revenue generated". We don't publish those and can't substantiate them, so I'd rather they weren't attributed to us. Same for University of Cambridge as a client — the relationship is Cambridge Judge, where I lecture.
+>
+> Everything current is on wescalestartups.com/facts/we-scale-startups if it's easier to work from.
+>
+> No expectation of a better placement — just the accurate version.
+>
+> Daniel
+
+---
+
+## Directory and roundup targets observed in the panel — 2026-08-31, UNVERIFIED
+
+**These are not from a hunt.** Run 16 settled that hunting neutral roundups is waste. These are the pages the engines *actually cited* while answering the panel, which is a different and better-evidenced list. **Route verification is the next run's job — run 16's finding predicts most will be competitor-owned with no submission route, and that prediction should be tested rather than assumed.**
+
+| Source cited | Prompt | Note |
+| --- | --- | --- |
+| `clutch.co` — Top Fractional CMO Services in the United Kingdom | 1 (Perplexity) | **Already item 1 in this file.** Cited directly by an engine, and the Growth Division table records WSS as "Not listed" on Clutch. Two independent reasons to move this up. |
+| `k3c.co` — Best GTM Agencies / Best Fractional GTM Teams | 1, 9 | Competitor-owned. Persists across all three readings. Likely closed. |
+| `fractionus` — Best Fractional CMO Platforms 2026 | 1 | Platform, not a directory. Probably wants to place its own people. |
+| `innomakerpartners` — Best 11 fractional CMO companies in Europe | 1 | Unknown ownership. Worth one check. |
+| `topelevens` — The 11 Best Fractional CMOs (2026) | 1 | Unknown ownership. Worth one check. |
+| `digitalreference` — Best Top Fractional CMO Services in the UK | 1 | Describes itself as a curated list plus procurement guide. **Most likely of these to have a submission route.** Check first. |
+| `hgdrconsulting.co` — Where to find a fractional CMO in the UK | 1 | Compares routes rather than firms; may not list individual providers. |
+| `gtm` — Best GTM Consultant UK | 9 | Unknown ownership. |

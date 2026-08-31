@@ -90,6 +90,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/resources/90-day-growth-sprint-planner": "2026-08-20",
   "/resources/vc-portfolio-growth-diagnosis": "2026-08-20",
   "/resources/acquisition-channel-matrix": "2026-08-20",
+  "/resources/category-reframe": "2026-08-27",
   "/resources/fractional-cmo-hiring-checklist": "2026-08-20",
   "/resources/ai-native-gtm-stack-map": "2026-08-20",
   "/resources/agency-brief-template": "2026-08-20",

@@ -105,6 +105,10 @@ export const GET: APIRoute = async () => {
       "/ai-growth-audit",
       "/privacy",
       "/terms",
+      // Standalone resource page (not a leadMagnets entry), so it is not covered
+      // by the spread below and has to be listed explicitly. It renders
+      // index,follow, so leaving it out was a discovery gap, not a decision.
+      "/resources/category-reframe",
       ...leadMagnets.map((m) => m.href)
     ])
   ].filter(isFinalSitemapPath);

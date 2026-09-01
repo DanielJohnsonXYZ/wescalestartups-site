@@ -163,9 +163,18 @@ Full analysis, all counts, the five candidate publishable statistics and the cav
 
 ---
 
-## C-1 — Growth Division listicle correction. Drafted 2026-08-31 (run 18). NOT SENT.
+## C-1 — Growth Division listicle correction. Drafted run 18, ESCALATED run 20 (2026-09-01). STILL NOT SENT.
 
-**Why this is the top of the queue.** Three consecutive AI-panel readings show Google AI Mode surfacing this page in its sources for buyer prompt 9; on 2026-08-31 Perplexity also lifted WSS into its *answer body* from it, citing `growth-division.com` and not `wescalestartups.com`. When an engine describes WSS second-hand, this is the page it is reading. It is currently the most influential public description of We Scale Startups that WSS did not write.
+**Why this is now the only item on the list that is costing money today.** Five consecutive AI-panel readings show Google AI Mode surfacing this page in its sources for buyer prompt 9. In **reading #5 (2026-09-01) Google stopped merely sourcing it and started reciting it**: WSS is named in the *answer body*, the entry is built entirely from this page, and the three citation cards are **three Growth Division URLs with `wescalestartups.com` absent**. When an engine describes WSS second-hand, this is the page it reads — and it is now the most influential public description of We Scale Startups, full stop.
+
+**The stage error is the one that loses the sale, and it gets worse in transit.** The page says "Pre-seed to Series A". Google rendered it as **"Pre-Seed to Seed"** — degraded a further step. The prompt was *"best growth advisors for **seed to Series B** B2B SaaS in the UK"*. Every other provider in Google's table (Growth Division, Kurve, VCMO) is stamped as covering the asked-for range; WSS is the one entry stamped as not. **A buyer reading that answer has been told WSS is not for them, at the moment of selection, by a page a competitor wrote about itself.**
+
+**Two things found run 20 that are worse than "out of date":**
+
+- **An invented testimonial.** The entry closes with: *"WeScaleStartups gave us the clarity we needed before we spent a single pound on execution." — Client review*. Every testimonial WSS publishes is a named GrowthMentor review with an attributed company (`src/site.ts:848–924`). **This quote is attributed to nobody and matches none of them.**
+- **"Google, Newsflare, GrowthMentor" and "University of Cambridge" presented as clients.** Google for Startups, Techstars and Cambridge Judge are mentoring and programme relationships. The site is scrupulous about that line. A third party has collapsed it.
+
+**Also worth knowing:** the page is written by Growth Division's co-founder and carries the disclosure *"Growth Division is our agency"*, which ranks itself #1. Every WSS "Con" is defined against Growth Division's own products — "No GrowthEX-equivalent AI operating system", "No Bullseye Framework equivalent", "Smaller public social proof".
 
 **The errors**, checked against `src/site.ts` on 2026-08-31:
 
@@ -173,11 +182,12 @@ Full analysis, all counts, the five candidate publishable statistics and the cav
 | --- | --- |
 | "Three tiers: Growth Strategy, Marketing Services and Consulting, Fractional CMO" | Four services: Growth Diagnosis, 90-Day Growth Sprint, Acquisition System Build, Fractional CMO |
 | "Pricing: Not publicly disclosed" | Published: £2k–£4k · £8k–£12k · £15k–£25k · £5k–£8k/mo |
-| "Best stage: Pre-seed to Series A" | Post-PMF, Seed to Series B |
+| "Best stage: Pre-seed to Series A" — **rendered by Google as "Pre-Seed to Seed"** | **Post-PMF, Seed to Series B** (`src/content/services/fractional-cmo.json`, `src/site.ts:986`). **The single most damaging error on the page.** |
 | "Primary channels: Meta Ads, Google Ads, SEO"; "primarily paid and SEO" | Diagnosis-first consultancy. **This line is the likely source of Google filing WSS under "Paid Ads & CRO Sprints" in run 17.** |
 | "London-based agency" | Not an agency |
-| "+768% average client growth rate for 2024", "£20M in revenue generated" | **Neither figure appears anywhere on the site or in the repo.** A third party is publishing performance claims in WSS's name that WSS does not make. |
-| "Clients include … University of Cambridge" | The relationship is Cambridge Judge, accelerator-side, not a client |
+| "+768% average client growth rate for 2024", "£20M in revenue generated for clients" | **Neither appears anywhere in `src/` or `public/` — re-`grep`ped run 20.** The real, carefully-worded figure is **"£18M+ revenue influenced", by Daniel, across client *and operator-side* engagements** (`src/pages/facts/daniel-johnson.astro:43`). Growth Division rounded it up, turned "influenced" into "generated for clients", moved it from the person to the company, and added a +768% figure with no traceable origin — all under the words "*They report*". |
+| "Clients include … University of Cambridge", "Google", "Newsflare" | Cambridge Judge, Google for Startups and Techstars are **mentoring/programme relationships, not client work** |
+| *"WeScaleStartups gave us the clarity we needed…" — Client review* | **An invented testimonial.** Attributed to nobody; matches none of the eight verified GrowthMentor reviews in `src/site.ts:848–924`. |
 
 **Note on the prohibition.** The standing rule is *do not ask a competitor to add WSS to their own listicle*. This is not that: WSS is already on it, and the ask is to correct published factual errors — including two performance claims attributed to WSS that WSS does not make. That distinction is real, but it is still a competitor's page and still Daniel's call. **The bot has not sent, and will not send, this.**
 
@@ -195,15 +205,36 @@ Full analysis, all counts, the five candidate publishable statistics and the cav
 >
 > - **Services.** We sell four, not three: Growth Diagnosis, 90-Day Growth Sprint, Acquisition System Build, and Fractional CMO.
 > - **Pricing.** It's public, not undisclosed — £2k–£4k, £8k–£12k, £15k–£25k, and £5k–£8k/mo respectively. All on wescalestartups.com/pricing.
-> - **Stage.** We work post-product-market-fit, roughly Seed to Series B, not pre-seed to Series A.
+> - **Stage — the one that matters most.** We work post-product-market-fit, roughly Seed to Series B, not pre-seed to Series A. I've now seen Google's AI Mode take that row and render it as "Pre-Seed to Seed" in an answer to someone asking for Seed-to-Series-B advisors, which reads as us being wrong for them.
 > - **Channels.** "Meta Ads, Google Ads, SEO" isn't what we do — we're diagnosis-first, and the sprint is 6–8 ICE-scored experiments with handover to the in-house team by day 90.
-> - **Two figures I'd ask you to remove:** the "+768% average client growth rate" and "£20M in revenue generated". We don't publish those and can't substantiate them, so I'd rather they weren't attributed to us. Same for University of Cambridge as a client — the relationship is Cambridge Judge, where I lecture.
+> - **Three things I'd ask you to remove.** The "+768% average client growth rate" and "£20M in revenue generated for clients" — we don't publish either and can't substantiate them, so I'd rather they weren't attributed to us. And the closing quote ("gave us the clarity we needed before we spent a single pound on execution") isn't one of ours; every testimonial we publish is a named, attributable GrowthMentor review.
+> - **Clients.** Google, Cambridge and Techstars are mentoring and programme relationships — I lecture at Cambridge Judge and mentor at Google for Startups — rather than client engagements. Happy for them to stay if they're framed that way.
 >
 > Everything current is on wescalestartups.com/facts/we-scale-startups if it's easier to work from.
 >
 > No expectation of a better placement — just the accurate version.
 >
 > Daniel
+
+---
+
+## C-4 / C-5 / C-6 — listicle inclusion. The constraint, made countable. Run 20.
+
+**The finding.** Both engines answer provider prompts from a cluster of third-party listicles, **not** from vendors' own sites. Perplexity's prompt-9 answer returned 15 sources and essentially none were a vendor's own domain. The observed cluster: `k3c.co`, `dimartec.co.uk`, `growth-division.com` (×4), `ryesing.com`, `thegrowthsyndicate.com`, `ivanhub.co`, `lafabriquedunet.co.uk`, `webtonic.co.uk`, `syncgtm.com`, `nexagrowth.co`, `intensegroup.co`, `gtm`, HubSpot's agency ecosystem, plus InnoMaker Partners and Fractionus from Google.
+
+**Nine were audited. WSS appears on exactly one — Growth Division's, the one that is wrong about it.** That is what "29 referring domains" means in practice, and it is a more actionable statement of the constraint than the link count.
+
+| | Target | Status | Route |
+| --- | --- | --- | --- |
+| **C-4** | **syncgtm.com** agency directory | WSS profile not found at the obvious slug; directory is 371 pages and filters client-side, so **not confirmed absent** | **Free self-submission**, `support@syncgtm.com`. Easiest win in the file. **Daniel submits — the bot does not create accounts or submit forms (prohibition 17).** |
+| **C-5** | **thegrowthsyndicate.com** | Target article not on the server-rendered blog index; unverified | **`rfp@thegrowthsyndicate.com`** — an RFP route, not a listing route. Lower odds. |
+| **C-6** | **lafabriquedunet.co.uk** — "Top 25 Growth Marketing agencies in London" | **WSS confirmed absent.** Growth Division is #2. | "List my agency" exists **and so does a pricing page**. Methodology page claims "42 audit criteria, no sponsored rankings" — those two facts sit awkwardly together. **Flagged so Daniel can decline; the standing rule is do not pay for placement.** |
+
+**Confirmed absent, no route:** `dimartec.co.uk` (contact form only; runs ~20 self-inclusive programmatic listicles).
+
+**Unverified — `web_fetch` returned empty bodies or the article was not on a paginated index:** `k3c.co`, `ivanhub.co`, `webtonic.co.uk`, `ryesing.com`, `thegrowthsyndicate.com`. **Recorded as unverified, NOT as absent** — Trap 8's rule generalises. Worth one Chrome-connector pass on a future run.
+
+**The uncomfortable read.** Most of this cluster is competitor-owned content marketing that ranks its author first, which is exactly run 16's finding about the neutral-roundup class being nearly empty. Submission routes will not fix that. **The durable route into this layer is being worth citing — original research is the asset that gets a site quoted rather than listed**, which is why the 479+ founder sessions keep appearing at the top of "what only Daniel can do".
 
 ---
 

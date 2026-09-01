@@ -191,3 +191,62 @@ Against 217 across 25 pages at baseline. **Roughly flat — ~4% per day, which i
 **Top pages, 28 days:** homepage **73** · `/services/90-day-growth-sprint` 38 · `/fractional-cmo-vs-agency` 18 · `/about` 17 · **`/facts/we-scale-startups` 17 (was 7)** · `/resources` 15 · `/services/fractional-cmo` 10 · `/gtm-strategy` 9 · `/services/growth-diagnosis` 9 · `/about/daniel` 7. The remaining 17 pages share 15 impressions.
 
 **`/facts/we-scale-startups` more than doubled, and the panel cites it on prompt 5. Two instruments, one conclusion — keep that page fresh and factual.** `/fractional-cmo-vs-agency` held flat at 18 and still takes zero classic clicks at position 44; the run-16 reading of it stands unchanged.
+
+---
+
+### 2026-09-01 — run 19 — READING #4
+
+Google AI Mode ten prompts, Perplexity ten prompts. No blocks, no rate limits, no unread cells.
+
+| Engine | Mention share | Citation share (own domain) | Accuracy | vs reading #3 |
+| --- | --- | --- | --- | --- |
+| Google AI Mode | **1/10** | **1/10** | 1/1 | 2/10 → 1/10 |
+| Perplexity | **0/10** | **0/10** | n/a | 0 organic, unchanged |
+
+#### Google AI Mode — 1/10
+
+| # | Named? | Cited URL | Accurate? | Others named |
+| --- | --- | --- | --- | --- |
+| 1 | No | — | — | K3C, Team 4, Kurve, VCMO, B2B Metrics |
+| 2 | No | — | — | none — no citations rendered |
+| 3 | **Yes** | /services/90-day-growth-sprint **+** /insights/how-to-run-a-90-day-growth-sprint | **Yes** | Growth Sprints (Brendan Hufford), MIMR Growth Lab, HookLead |
+| 4 | No | — | — | Limivex, Leadership Services, Porter Wills, McCracken, The Marketing Centre, Jonny Ross |
+| 5 | **No** | — | — | **none — zero vendors, zero citations** |
+| 6 | No | — | — | none — role archetypes only, zero citations |
+| 7 | No | — | — | The Marketing Centre, PurplePath, Simaia, gigCMO, Bill Rice Strategy, FractionalCMOPartners, StrategicPete |
+| 8 | No | — | — | Andrew Chen, Lenny's Newsletter, Cognosis, Rebekah Rose, Simon Ellson |
+| 9 | No | — (Growth Division listicle in sources) | — | Growth Division, GrowthCurve, Kurve, Kalungi, Haatch |
+| 10 | No | — | — | none — split into customer vs corporate acquisition |
+
+**PROMPT 5 WAS LOST, AND NOT TO A COMPETITOR.** `growth consultancy for post-PMF AI startups` cited `/facts/we-scale-startups` in readings #1, #2 and #3. This reading it returned a pure framework answer with **no vendors named and no citations rendered at all**. Nobody won it. It has joined the ungrounded class.
+
+**THE UNGROUNDED CLASS IS NOW 4 OF 10.** Google returns zero external citations on prompts **2, 5, 6 and 10** — 40% of the panel is structurally unwinnable in its current form. Run 17 identified 2, 6 and 10; prompt 5 joins them.
+
+**Report the winnable surface alongside the share from now on.** It has gone **10 → 7 → 6** across readings, so a raw share is no longer comparable between readings. 1/10 against a winnable 6 is not obviously worse than 2/10 against a winnable 8.
+
+**Prompt 3 is the only win and it is strong.** WSS listed as the **#2 provider**, accurately: 12-week programmes, constraint diagnosis, 6–8 ICE-scored experiments, conversion reporting, decision rhythm, post-PMF B2B SaaS and AI. **Two** citations, and run 15's insight is now cited in two consecutive readings. **Accuracy 1/1. No accuracy defects anywhere in this reading.**
+
+#### Perplexity — 0/10, a clean organic zero
+
+Not named in any answer body; no `wescalestartups.com` URL in any source panel. On the identical prompt 3 where Google names WSS second, Perplexity lists Growth Sprints, Momentum Nexus, Hook90/HookLead, MIMR Growth Lab, GTM Lab and Mavan, and omits WSS entirely. **Run 18's downgrade of the reading-#2 "first citation" is confirmed correct: Perplexity's organic share has been 0 in all four readings.**
+
+**THE PERPLEXITY ACCOUNT IS CONTAMINATED, AND WORSE THAN RUN 18 THOUGHT.** A personalisation tell appeared on prompt 10 — *"Given your background in automation, e-commerce, and multi-platform operations (Shopee, Lazada, n8n, GoHighLevel), prioritize candidates who…"*. It carried no WSS mention, so **nothing needs voiding from the score**. But two things follow:
+
+1. Account memory is live and injecting into answers, so **any** future WSS appearance on this account must be checked for a tell before being counted.
+2. **The stored profile is not Daniel's and not WSS's.** Shopee, Lazada, n8n, GoHighLevel and e-commerce describe somebody else. Perplexity is personalising against a wrong identity.
+
+**Until that memory is cleared or corrected, Perplexity is not a valid instrument on this account.** Escalated to Daniel. Do not drop it from the panel — keep running it and keep logging the zero, but mark the number as unreliable rather than reporting it as a competitive result.
+
+#### The Growth Division listicle
+
+- **Google prompt 9: present for the fourth consecutive reading.** Source card reads "…Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups" — visible on the results page, **not** in the answer body. Scored **not named**, as in all prior readings.
+- **Perplexity prompt 9: absent this reading.** It cited two *different* Growth Division pages (`/blog/the-top-3-growth-agencies-for-scaleups-in-europe-in-2026` and `/directory/agency/growth-division`), neither of which mentions WSS. A regression against reading #3, where the listicle fed WSS into Perplexity's answer body.
+- Growth Division also appeared as a source on Google prompt 1 and Perplexity prompts 1 and 2. **It is the category's default source across both engines. Backlog 13 and OUTREACH C-1 stand.**
+
+#### Structural gaps worth recording, not yet acting on
+
+- **Prompts 5 and 6 are the two most on-ICP queries in the panel and Google now returns no supplier list on either.** There is no list to enter. Not a content gap this bot can fill by ranking; noted so a later run does not mistake it for one.
+- **Prompt 10 is misread by both engines** — Google splits it into customer vs corporate/M&A acquisition, Perplexity treats it as a job requisition and cites job boards. "Acquisition System Build" is not being connected to the query at all.
+- **Prompt 4 is a clean miss on both.** Cited benchmarks (£3k–£10k Google, £3k–£12k Perplexity) bracket WSS's published £5k–£8k/mo, but no WSS source is cited despite `/insights/fractional-cmo-cost-uk` existing.
+
+**Competitors recurring across engines this reading:** Kurve, Kalungi, K3C, The Marketing Centre, gigCMO, VCMO, B2B Metrics, Growth Division, MIMR Growth Lab. **Growth Sprints (Brendan Hufford) outranks WSS on the sprint prompt on both engines** — the only direct head-to-head in the set, and the same name that has appeared in all four readings.

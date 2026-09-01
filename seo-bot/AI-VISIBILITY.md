@@ -250,3 +250,59 @@ Not named in any answer body; no `wescalestartups.com` URL in any source panel. 
 - **Prompt 4 is a clean miss on both.** Cited benchmarks (£3k–£10k Google, £3k–£12k Perplexity) bracket WSS's published £5k–£8k/mo, but no WSS source is cited despite `/insights/fractional-cmo-cost-uk` existing.
 
 **Competitors recurring across engines this reading:** Kurve, Kalungi, K3C, The Marketing Centre, gigCMO, VCMO, B2B Metrics, Growth Division, MIMR Growth Lab. **Growth Sprints (Brendan Hufford) outranks WSS on the sprint prompt on both engines** — the only direct head-to-head in the set, and the same name that has appeared in all four readings.
+
+---
+
+### 2026-09-01 — run 20 — READING #5. **Google AI Mode 10/10, completion-verified. Best reading in the series.**
+
+**METHOD CHANGED THIS READING, AND THE CHANGE INVALIDATES PART OF THE SERIES. Read this before comparing anything below to readings #3 and #4.**
+
+Google AI Mode **streams** its response, and `get_page_text` returns whatever has rendered so far **with no marker that the response is unfinished**. Reproduced directly this run: prompt 5's first read ended at the heading `Consultancies & Specialized Partners` with the three vendors under it not yet rendered — a reading that scores as "no vendors named, no citations". Read again fifteen seconds later after scrolling to the bottom, the same prompt in the same session scored as **WSS named first, `/facts/we-scale-startups` cited as the top source card**. Prompt 1 was truncated on first read too. Prompt 9 **stalled outright** at an ellipsis for 40 seconds and had to be re-issued — a run scoring that page would have logged "not named" for what was never an answer.
+
+**Standing method rule, from this reading on:** *wait, scroll to the bottom, and require a **completion tell** — the follow-up question block ("To recommend…", "could you share…"), the copy/share/thumbs icon row, or the rendered sources card — before scoring any prompt. A prompt with no completion tell is a **null reading**: re-issue it, never score it as an absence.*
+
+**Consequence for the series.** Readings #3 and #4 were taken without completion tells. A truncated read can only ever *undercount*, so their shares are **floors, not measurements**, and the "winnable surface is shrinking, 10 → 7 → 6" finding is **WITHDRAWN** — it has the signature of an artefact (monotonic in the direction of "less rendered") and it reverses the moment the read waits. Measured properly the surface is **9 of 10**.
+
+**Second method note: answer volatility is high.** Prompt 1 was issued twice minutes apart and returned two substantially different vendor sets. **A single reading of one prompt is a sample, not a measurement.** Report the panel as a share across ten; never claim a result on any single prompt.
+
+#### Google AI Mode — 10/10
+
+| # | Prompt | WSS named | WSS cited | Grounded | Accurate | Who else |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | best fractional CMO for B2B SaaS in the UK | No | No | Yes | — | Scaled, Kurve, Kalungi, B2B Metrics, VCMO, Fractionus |
+| 2 | Series A: fractional CMO or growth agency | No | No | Yes — **role categories only, no vendors named** | — | size.vc, Lifted Logic, Novastacks, TechCXO |
+| 3 | who runs 90-day growth sprints for SaaS | **Yes — #2** | **Yes** | Yes | **Accurate** | Growth Sprints (Hufford) #1, MIMR Growth Lab, **Hook90 (new)** |
+| 4 | how much does a fractional CMO cost in the UK | No | No | Yes | — | Fractional Quest, One Umbrella, Porter Wills |
+| 5 | growth consultancy for post-PMF AI startups | **Yes — #1 of 3** | **Yes — `/facts/we-scale-startups` top source card** | Yes | **Accurate** | GTM 8020, Bayleaf Digital |
+| 6 | traction but inconsistent pipeline — who can help | No | No | **NO — zero citations, zero vendors. The only genuinely ungrounded prompt.** | — | — |
+| 7 | fractional CMO vs marketing agency for B2B SaaS | No | No | Yes | — | ThinkCap, Understory, SaaS Hero, TechCXO |
+| 8 | how do I diagnose why growth has stalled | No | No | Yes — **heavily** | — | andrewchen, Lenny's Newsletter, Jason Cohen, HBR, Inc |
+| 9 | best growth advisors seed–Series B B2B SaaS UK | **Yes — "WeScaleStartups"** | **NO — three Growth Division URLs, own domain absent** | Yes | **DEFECT** | Growth Division #1, Kurve, VCMO, Notion Capital, Haatch, Octopus |
+| 10 | who to hire to build a repeatable acquisition system | No | No | Yes | — | Bain, Revenue Leadership Podcast, Force Management |
+
+**Mention 3/10 · own-domain citation 2/10 · winnable surface 9/10 · accuracy 2/3.**
+
+| | #1 | #2 | #3 ⚠ | #4 ⚠ | **#5** |
+| --- | --- | --- | --- | --- | --- |
+| Mention share | 2/10 | 2/10 | 2/10 | 1/10 | **3/10** |
+| Own-domain citation | 2/10 | 2/10 | 2/10 | 1/10 | **2/10** |
+| Winnable surface | 10 | 7 | 6 | 6 | **9** |
+
+⚠ = taken without a completion tell. **Floors, not measurements. Do not draw a trend line through them.** The honest comparison is #1 (2 of 10 winnable) against #5 (3 of 9 winnable).
+
+#### The wins
+
+- **Prompt 3, fifth consecutive reading, and the description is now unusually precise:** "A fixed 12-week framework led by Daniel Johnson. Week 1 maps your primary growth constraint; weeks 2–11 deploy and test 6 to 8 ICE-scored (Impact, Confidence, Ease) marketing experiments; week 12 transfers the data dashboards and weekly operational rhythm directly back to your internal team." That is `/services/90-day-growth-sprint` plus run 15's insight, read correctly. **Growth Sprints (Brendan Hufford) still ranks above WSS — the one direct head-to-head in the panel.**
+- **Prompt 5 — run 19 recorded this as lost; it was not lost.** "Provides specialized Growth Diagnosis sprints and fractional CMO engines specifically for post-PMF B2B SaaS and AI teams. They deploy customer research and weekly experimental rhythms to break distribution bottlenecks." Accurate. **Do not read this as run 19's ship working within two hours** — the page held this citation in readings #1–#3 and the honest reading is that it never stopped.
+
+#### The defect — prompt 9
+
+WSS named for the first time in the series, and named **from a competitor's page with the site absent from the sources**. Google's table row: *Best For* "Highly technical product founders who struggle with growth roadmaps"; *Ideal Stage Focus* **"Pre-Seed to Seed"**; *Cost Structure* "Custom Quote". Body: "A 'clarity-first' advisory service designed for UK SaaS and AI founders. Instead of instantly pitching execution tactics, they audit and build the fundamental growth path architecture."
+
+Source page says "Pre-seed to Series A" — **Google degraded the stage a further step in transit.** The prompt asked for **seed to Series B**. Every other listed provider is stamped as covering that range; WSS is the one that is not. **An inaccurate mention is a defect, not a win**, and this one disqualifies WSS at the moment of selection. Full analysis and the correction draft: `OUTREACH.md` C-1, `changelog/2026-09-01-run20.md` §3.
+
+#### Perplexity — prompt 9 only, as a targeted control
+
+Full sweep skipped deliberately: the account is contaminated (run 19 — stored profile is somebody else's: Shopee, Lazada, n8n, GoHighLevel) and a tenth logged zero adds nothing. **WSS absent. 15 sources, no personalisation tell this reading.**
+
+Its value was the source list, which is the finding in `OUTREACH.md` C-4/5/6: **the retrieval layer for provider prompts is a cluster of ~13 third-party listicles, and WSS is on one of them.**

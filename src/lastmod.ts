@@ -75,7 +75,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/industries/seed-to-series-b": "2026-08-26",
   "/industries/vc-support": "2026-08-26",
   "/about/daniel": "2026-08-20",
-  "/facts/daniel-johnson": "2026-08-25",
+  "/facts/daniel-johnson": "2026-09-02",
   "/facts/we-scale-startups": "2026-09-01",
   "/team": "2026-08-26",
   "/speaking": "2026-08-19",

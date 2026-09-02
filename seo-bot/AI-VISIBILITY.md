@@ -306,3 +306,76 @@ Source page says "Pre-seed to Series A" — **Google degraded the stage a furthe
 Full sweep skipped deliberately: the account is contaminated (run 19 — stored profile is somebody else's: Shopee, Lazada, n8n, GoHighLevel) and a tenth logged zero adds nothing. **WSS absent. 15 sources, no personalisation tell this reading.**
 
 Its value was the source list, which is the finding in `OUTREACH.md` C-4/5/6: **the retrieval layer for provider prompts is a cluster of ~13 third-party listicles, and WSS is on one of them.**
+
+---
+
+## Reading #6 — 2026-09-02, Google AI Mode, all ten completion-verified
+
+Taken during an **attended** run, after Daniel cleared the connector blocks. Every prompt was scrolled to the end and scored only against a completion tell (follow-up question block, icon row, or sources card). **No prompt in this reading was null; no prompt needed re-issuing.** First reading in the series where that is true.
+
+| # | Prompt | WSS named | WSS cited | Grounded | Accurate | Who else |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | best fractional CMO for B2B SaaS in the UK | No | No | Yes | — | K3C, Growth Division, VCMO, Kurve, Team 4, McCracken |
+| 2 | Series A: fractional CMO or growth agency | No | No | **NO — zero citations, zero vendors** | — | — |
+| 3 | who runs 90-day growth sprints for SaaS | **Yes — #2** | **Yes** | Yes | **Accurate** | Growth Sprints (Hufford) #1, HookLead/Hook90, MIMR Growth Lab, **Mavan (new)** |
+| 4 | how much does a fractional CMO cost in the UK | No | No | Yes | — | primewise, Limivex, Leadership Services, McCracken, Porter Wills |
+| 5 | growth consultancy for post-PMF AI startups | **Yes — #1 of 4, AND Daniel Johnson listed separately as #3** | **Yes — `/insights` ("Growth notes for post-PMF founders") + Daniel's LinkedIn** | Yes | **Accurate, both** | Growth Division, Forte |
+| 6 | traction but inconsistent pipeline — who can help | No | No | **NO — zero citations, zero vendors** | — | — |
+| 7 | fractional CMO vs marketing agency for B2B SaaS | No | No | Yes — heavily | — | McCracken, Reddit, Revv Growth, The Marketing Centre, Simaia |
+| 8 | how do I diagnose why growth has stalled | No | No | Yes — heavily | — | Lenny's/Jason Cohen, andrewchen, $100 MBA, Medium |
+| 9 | best growth advisors seed–Series B B2B SaaS UK | **No — reverted from #5** | No | Yes | — | Growth Division, K3C, GrowPad, Winning by Design, Skale |
+| 10 | who to hire to build a repeatable acquisition system | No | No | Yes — but **query is ambiguous, Google split it into GTM vs M&A** | — | PMI Stack, Namaste, keysearch, Bain |
+
+**Mention 2/10 · own-domain citation 2/10 · winnable surface 8/10 · accuracy 2/2 (100%).**
+
+| | #1 | #2 | #3 ⚠ | #4 ⚠ | #5 | **#6** |
+| --- | --- | --- | --- | --- | --- | --- |
+| Mention share | 2/10 | 2/10 | 2/10 | 1/10 | 3/10 | **2/10** |
+| Own-domain citation | 2/10 | 2/10 | 2/10 | 1/10 | 2/10 | **2/10** |
+| Winnable surface | 10 | 7 | 6 | 6 | 9 | **8** |
+| Accuracy of mentions | 1/1 | — | 1/1 | 1/1 | 2/3 | **2/2** |
+
+⚠ = taken without a completion tell. **Floors, not measurements.**
+
+**The series is flat and should be read as flat.** Own-domain citation has been 2/10 in every completion-verified reading (#1, #5, #6). Mention share moved 3 → 2 only because prompt 9 reverted, and prompt 9 was never a win — it was the defect. **Stripping prompt 9 out of both readings, #5 and #6 are identical: prompts 3 and 5, cited, accurate.** Nineteen days of panel history and two prompts is the whole footprint.
+
+### 1. Prompt 9 reverted, and that is the volatility rule, not a regression
+
+Reading #5 had WSS named in the body from Growth Division's page. Reading #6, same prompt, same account, one day later: **not named at all.** Google's answer names Growth Division, K3C, GrowPad, Winning by Design and Skale.
+
+**The listicle is still in the sources**, and its rendered snippet still reads: *"The top 5 startup growth agencies in the UK are Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups."* So the page is still in the retrieval set, still misnames the brand as one word, and whether WSS surfaces in the body is a coin flip between readings.
+
+**Do not record this as "the defect is fixed" or as "WSS lost prompt 9".** It is the same page behaving the same way with a different sampling outcome. C-1 is unchanged in priority.
+
+### 2. Prompt 5 changed which WSS page it cites — and named Daniel as a separate entity
+
+Reading #5 cited `/facts/we-scale-startups`. **Reading #6 cites `/insights` — "Growth notes for post-PMF founders", dated 6 Aug 2026 — and does not cite the facts page at all.** The description is fully accurate: London, post-PMF B2B SaaS and AI, **£1M–£10M ARR, Seed to Series B**, 1-week Growth Diagnosis, 90-day Growth Sprints, acquisition system handed to the internal team.
+
+**Two things follow.**
+
+- **The `/insights` hub earned a provider-prompt citation.** Run 13 rewrote it for provider intent (verdict 2026-09-23) and this is the second time it has been cited by AI Mode. Classic search still shows it at ~28.9 with no clicks. **The two channels are giving opposite answers about the same page, which is the sharpest instance yet of the standing rule that AI visibility and classic visibility are different instruments.**
+- **`Daniel Johnson (AI-Native GTM)` appears as its OWN entry, third of four, cited to his LinkedIn.** The Person and the Organization both surfaced in one answer for the first time in the series. The entity graph is doing what runs 11–13 built it to do — but note the citation is **LinkedIn, not `/facts/daniel-johnson`**. The Person entity is real to Google and the site is not yet the source for it.
+
+### 3. Prompt 4 is the best unclaimed opportunity on this panel
+
+`how much does a fractional CMO cost in the UK` is grounded, commercially shaped, and answered entirely from **primewise.co.uk, Limivex, Leadership Services, mccrackenmarketing.co.uk and a Mike Minett LinkedIn post** — all cost-guide pages of exactly the kind WSS already publishes at `/insights/fractional-cmo-cost-uk`, which the playbook calls the canonical home for the agency (£6k–£20k/mo) and full-time (£120k–£180k) bands.
+
+**A page that exists, on the exact question, absent from a grounded answer.** That is not the "absence" case from run 9 and it is not obviously the authority case either — the cited pages are small vendors, not authorities. **Worth one deliberate look on a future run, against the live SERP and the page's own query set before touching anything.** Do not rewrite on the strength of one panel reading (the volatility rule).
+
+### 4. Prompt 7 absent for the second consecutive reading
+
+`/fractional-cmo-vs-agency` was not cited on `fractional CMO vs marketing agency for B2B SaaS` in #5 or #6, while McCracken, Reddit, Revv Growth and The Marketing Centre were. **Three instruments now agree this page attracts the right questions and converts none of them, and a fourth says it is not even retrieved on its exact query.** The playbook's "no third rewrite, judge it on AI impressions" verdict stands and hardens.
+
+### 5. Prompt 8 — the concept surface exists and WSS is not on it
+
+The answer's own structure is a founder-dependency diagnostic: a *"Founder Bottleneck Test"* ("if you stepped away for three weeks, would revenue stall?"), *"Experiment Velocity"*, and a **seven-area scored health check**. That is what `/resources/growth-dependency` — the Growth Bottleneck Scorecard, 12 questions, ~4 minutes, scoring founder dependency — actually does. Sources are andrewchen, Lenny's, Jason Cohen, a YouTube show and a Medium post. **The demand and the format are both confirmed; the constraint here is authority, not absence.**
+
+### 6. Panel design — prompt 10 should be replaced, and it is NOT being changed mid-series
+
+`who should we hire to build a repeatable acquisition system` is ambiguous. Google opened by splitting it: *"the term applies to two entirely different business functions: Customer Acquisition (GTM) or Corporate Acquisition (M&A)"*, then answered both, citing PMI Stack, Namaste Management and Bain M&A. **Half the answer is about mergers and acquisitions.** No buyer looking for WSS phrases it this way and means M&A, so as a buyer prompt it is half wasted.
+
+**Proposed for a future series, not applied now** (the panel stays fixed so readings stay comparable): replace with `who should we hire to build a repeatable customer acquisition system for B2B SaaS`. **Do not change it without Daniel's sign-off and a note marking the series break.**
+
+### 7. Perplexity — not run this reading
+
+Still contaminated (stored profile is somebody else's) and Daniel has not yet cleared it. **Marked unreliable, not zero.** Google AI Mode remains the only valid engine on this panel.

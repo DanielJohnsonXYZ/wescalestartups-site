@@ -559,4 +559,17 @@ Answers "did I win" and "how many seats". Does not answer why, what I achieved b
 
 Seat sensitivity at the end of a mid-strength term (approval 55, party 60): +20 economy = +7 seats; +20 health = +3; +20 on housing, services, crime, energy, transport, migration or defence = 0; +30 on any region = 0.
 
-Real-UI spender run (one term): 158 clicks, 35 decisions, 2 votes, approval 58% → 70% while headroom sat between −£6bn and −£24bn for 17 quarters; final services 100, legacy "The Builder", 385 seats, 3/3 promises.
+### Six complete terms played in the real UI
+
+Same deployed files, headless Chromium at phone width, one term per strategy, bots reading only what a player sees on screen (the option previews). Clicks count every tap from the title screen to the end screen.
+
+| Strategy | Clicks | Decisions | Result | Seats | Promises | Final money | Party | Legacy | What it shows |
+|---|---|---|---|---|---|---|---|---|---|
+| Spend on everything | 158 | 35 | Won | 385 | 3/3 | −£2bn | 53% | The Builder | 17 quarters in deficit, approval rose from 58% to 70% regardless |
+| Balanced / technocrat | 161 | 36 | Won | 372 | 3/3 | −£5bn | 56% | The Builder | Indistinguishable from the spender: same legacy, same promises, services 100 |
+| Popularity first | 155 | 34 | Won | 347 | 3/3 | −£51bn | 47% | The Deliverer | Deepest deficit of any run and still a comfortable win |
+| Protect the Treasury | 158 | 35 | Lost | 255 | 0/3 | +£51bn | 34% | The Survivor | Finished with £51bn it was never allowed to spend; NHS at 19 |
+| Deliberately bad | 152 | 35 | Lost | 262 | 0/3 | −£40bn | 30% | The Survivor | Only 7 seats worse than careful restraint |
+| Ignore everything | 87 | 0 | Lost | 168 | 0/3 | −£60bn | 26% | The Survivor | Health hits 0, economy 1; no confidence vote, no early end, 20 quarters of "End the quarter without acting" |
+
+Three things stand out. Every strategy that spends wins with the same legacy and the same 3/3 promises, so the game does not distinguish a Builder from a Populist from a Technocrat. The two losing strategies that actually made decisions finished within seven seats of each other, so the game barely distinguishes restraint from sabotage. And a player who does nothing for five years is never sacked, never faces a market or a party, and gets exactly the same ending screen as everyone else.

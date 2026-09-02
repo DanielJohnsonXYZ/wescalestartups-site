@@ -3,8 +3,21 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
 import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
+import { staticPathLastModified } from "../../lastmod";
 
 const path = "/facts/daniel-johnson";
+
+// Freshness is read from the GENERATED sitemap lastmod map, never hand-typed,
+// so the visible date and the sitemap lastmod cannot drift apart.
+const lastmodIso = staticPathLastModified[path];
+const lastUpdatedLabel = lastmodIso
+  ? new Date(`${lastmodIso}T00:00:00Z`).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC"
+    })
+  : false;
 
 const quickFacts: Array<[string, string]> = [
   ["Full name", "Daniel Johnson"],
@@ -72,6 +85,7 @@ const schema = [
   title="Daniel Johnson — Facts | We Scale Startups"
   description="Verified facts about Daniel Johnson: founder of We Scale Startups, fractional CMO, growth operator track record, credentials, and identity links."
   metaRobots="index,follow,max-image-preview:large"
+  lastUpdated={lastUpdatedLabel}
   schema={schema}
   breadcrumbItems={[
     { name: "Home", path: "/" },

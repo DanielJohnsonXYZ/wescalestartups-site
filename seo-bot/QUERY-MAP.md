@@ -161,3 +161,48 @@ No `/services/*`, `/pricing`, `/book` or `/contact` URL is the landing page for 
 ### The asymmetry worth watching
 
 `how to run a 90 day growth sprint` still lands **entirely** on the £8k–£12k service page, four days after `/insights/how-to-run-a-90-day-growth-sprint` shipped — while **Google AI Mode already cites the new insight** (panel reading #3, same day). Indexed and cited by the answer engine within four days; not one classic impression reallocated. **The two channels move at different speeds, and that argues for different review horizons.** Do not read the classic non-movement as a run-15 failure before 2026-09-17.
+
+---
+
+## Run 22 update — 2026-09-03 (28d to 2026-09-01, read from the Search Console UI, 337 queries)
+
+**Source note: this is the first query-level pull in four runs.** The API's `["query"]` dimension answers about the stale `www.` property and returns an 8-row alphabetical tail; these rows come from the UI via the DOM. Method in `changelog/2026-09-03-run22.md` §2.
+
+### CLOSED — the cost/pricing cluster. Do not reopen.
+
+| Query | Intent | Page Google chose | Can it satisfy? | Status |
+| --- | --- | --- | --- | --- |
+| `fractional cmo cost uk` | pricing | `/insights/fractional-cmo-cost-uk` | Yes | **CLOSED — 3 impr @ 17.3 in 90 days, absent from a 28-day window** |
+| `fractional cmo pricing for demand gen b2b` | pricing | — | — | 1 impr @ 92.0 |
+| `agency vs fractional cmo pricing` | pricing/comparison | — | — | 1 impr @ 29.0 |
+| `fractional cmo pricing b2b saas` | pricing | — | — | 1 impr @ 43.0 |
+| `scale to win pricing` | brand collision | — | n/a | discount |
+
+**Whole cluster: 7 queries, 8 impressions, positions 31–92, zero clicks (28d).** The page exists, is canonical, and is correctly targeted. **The constraint is neither absence nor authority — it is that the demand does not reach this site.** Panel prompt 4 absent three readings running. **Settled: no.**
+
+### OPEN — the backlog-10 defect class, one live instance, blocked
+
+| Query | Intent | Page Google chose | Can it satisfy? | Status |
+| --- | --- | --- | --- | --- |
+| `how to scale b2b saas acquisition` | how-to | `/services/acquisition-system-build` (£15k–£25k) | **No** | **Backlog 15. 16 impr @ 30.9. BLOCKED until 2026-09-17** — the fix duplicates run 15's intervention and would confound its verdict |
+| `how does a post-pmf plg saas company scale acquisition without breaking unit economics` | how-to | `/insights` (bare index) | No | Backlog 10 lead. 19 impr @ 36.7. Blocked until 2026-09-23 |
+| `how to scale a startup business` | how-to | — | — | 15 impr @ 78.1 — authority-bound, do not chase |
+| `how to scale b2b saas` | how-to | — | — | 3 impr @ 94.0 — same |
+
+**Sweep result this run: no NEW instances of the defect class.** The two known ones are both blocked by verdict windows. Recorded as a negative finding.
+
+### The provider-fanout set is still large, still position 1–10, still zero clicks
+
+`top providers of 90-day sprint marketing engagements for saas marketing teams?` 14 @ **1.0** · `which saas marketing agencies provide the best 90-day sprint marketing engagement?` 12 @ **1.0** · `who offers the best 90-day sprint marketing engagement in saas marketing?` 6 @ **1.0** · `best 90-day sprint marketing engagements for saas companies` 1 @ **1.0** · `what's the best 90-day sprint marketing engagement for saas marketing teams?` 4 @ **2.0** · `evaluate acme growth studio on 90-day sprint marketing engagements` 24 @ 4.5 · `get a quote for a 90 day growth sprint for my startup` 22 @ 4.4.
+
+**This is run 4's closed verdict continuing to be true: position 1.0 on machine-issued fanout produces nothing.** It is not a regression and it is not an opportunity. **Do not re-optimise the sprint page for it.**
+
+### Human-shaped decision queries — run 5's verdict set, due 2026-09-08
+
+`should a series a startup hire a fractional cmo a growth agency or wait to hire a full-time vp of growth` **46 @ 8.3** · same with punctuation **19 @ 7.8** · `growth leader for post pmf startup` 41 @ 8.4 · `is it better to hire a growth team or use an agency` 17 @ 49.8 · `when to hire a fractional cmo for a startup` 4 @ 26.0 · `when should a startup hire a fractional cmo?` 1 @ 30.0.
+
+**65 impressions across the two punctuation variants at ~8, zero clicks.** `/insights/when-to-hire-fractional-cmo`: 89 impressions, position 9.3, **zero clicks**. **This is the number run 5's verdict turns on. Position ~8 on a question that looks human, and nobody clicks.** Do not pre-judge it here — but note the shape now, because it is the same shape run 4 failed in.
+
+### Unexamined — `/resources`, backlog 17
+
+**12 clicks / 451 impr / 2.7% CTR at 22.1 over 90 days; second-highest-clicking page on the site; query set NOT YET PULLED.** Its clicks do not appear in the named table, so they are anonymised — i.e. rare, long, conversational. **Next run: pull `page = /resources` and fill this row in properly rather than guessing from the page.**

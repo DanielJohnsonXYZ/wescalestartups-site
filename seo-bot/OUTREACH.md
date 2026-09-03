@@ -252,3 +252,39 @@ Full analysis, all counts, the five candidate publishable statistics and the cav
 | `digitalreference` — Best Top Fractional CMO Services in the UK | 1 | Describes itself as a curated list plus procurement guide. **Most likely of these to have a submission route.** Check first. |
 | `hgdrconsulting.co` — Where to find a fractional CMO in the UK | 1 | Compares routes rather than firms; may not list individual providers. |
 | `gtm` — Best GTM Consultant UK | 9 | Unknown ownership. |
+
+---
+
+## Run 22 additions — 2026-09-03. Two targets promoted from "unverified" to CONFIRMED.
+
+**How they were qualified, which is the part worth reusing:** not by auditing candidate listicles, but by **reading which sources Google actually cited on the AI panel**. Run 20 audited nine candidates to confirm one. Run 22 confirmed two as a by-product of a reading it was doing anyway. **Cheaper, and it qualifies on the only criterion that matters — being in the retrieval set.**
+
+### C-7 — `k3c.co.uk` — "Best GTM Agencies for B2B SaaS in 2026 (Europe's Top 10)"
+
+**Why credible:** cited by Google AI Mode in the source card on **two separate panel prompts this reading** — prompt 1 (`best fractional CMO for B2B SaaS in the UK`) and prompt 9 (`best growth advisors for seed to Series B B2B SaaS in the UK`). It has also appeared in reading #1 and reading #6. **This is a page Google reaches for repeatedly on exactly the buyer prompts WSS wants.**
+
+**Why it is reachable and Growth Division's is not:** K3C's roundup is a third-party comparison table of agencies including several K3C does not own. It is content marketing, but it is not "our agency is number one" — unlike Growth Division's, which carries the disclosure "*Growth Division is our agency*". **A neutral roundup can accept a submission. A competitor's self-ranking cannot, and C-1 is a factual-accuracy correction rather than a listing request for exactly that reason.**
+
+**What Daniel does with it:** find the author/editor contact on k3c.co.uk and send an inclusion enquiry — not a link request. The pitch is the gap in their table, which is stage-specific: their table covers agencies by "Best For", and post-PMF Seed-to-Series-B B2B SaaS and AI-native GTM is a slot WSS occupies precisely and most of the listed agencies do not.
+
+**Draft — subject: "Addition for your B2B SaaS GTM agencies table — post-PMF / Seed to Series B"**
+
+> Hi — your "Best GTM Agencies for B2B SaaS in 2026" table is one of the few UK roundups that segments by fit rather than by size, which is why I'm writing rather than pitching.
+>
+> We Scale Startups is a UK growth consultancy working with post-PMF B2B SaaS and AI startups, Seed to Series B. The engagements are a 90-day growth sprint (£8k–£12k), acquisition system builds (£15k–£25k) and fractional CMO work (£5k–£8k/mo). Founder Daniel Johnson; ~20 paid client engagements, 50+ startups supported in total including mentoring through Google for Startups, Techstars and GrowthMentor.
+>
+> If the table has room for a post-PMF / Seed-to-Series-B entry, happy to send whatever format you need. If not, no follow-up from me.
+>
+> Facts and figures, all sourced: https://wescalestartups.com/facts/we-scale-startups
+>
+> Daniel Johnson — daniel@wescalestartups.com
+
+**Status: DRAFTED, UNSENT. Prohibition 17.**
+
+### C-8 — `dimartec.co.uk` — "10 Top SaaS Growth Agencies for B2B SaaS Companies"
+
+**Why credible:** cited in Google's source card on panel prompt 9 alongside Growth Division and K3C. **It was not in run 20's list of ~13 candidate listicles at all** — it was found by watching the engine rather than by searching for roundups, which is the point of the method note above.
+
+**Not yet audited.** Before sending, one browser pass is owed: who wrote it, whether dimartec is itself an agency competing for the same buyer (in which case it is a C-1-shaped problem, not a C-7-shaped opportunity), and whether WSS is already on it under a mangled name. **Do not send C-8 until that check is done.** Queued for the next attended run.
+
+**Still unverified from run 20's list:** ivanhub.co, webtonic.co.uk, ryesing.com, thegrowthsyndicate.com.

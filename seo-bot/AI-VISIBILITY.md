@@ -379,3 +379,80 @@ The answer's own structure is a founder-dependency diagnostic: a *"Founder Bottl
 ### 7. Perplexity — not run this reading
 
 Still contaminated (stored profile is somebody else's) and Daniel has not yet cleared it. **Marked unreliable, not zero.** Google AI Mode remains the only valid engine on this panel.
+
+---
+
+### 2026-09-03 — run 22 — READING #7
+
+**Google AI Mode. All ten completion-verified, none re-issued. Perplexity not run — still contaminated (§7 above), marked unreliable, never logged as zero.**
+
+| Engine | Mention share | Citation share (own domain) | Winnable surface | Accuracy |
+| --- | --- | --- | --- | --- |
+| Google AI Mode | **2/10** | **2/10** | **9/10** | 2/2 |
+
+| # | Named? | Cited URLs | Accurate? | Others named / sources |
+| --- | --- | --- | --- | --- |
+| 1 | No | — | — | mccrackenmarketing.co.uk, **k3c.co.uk**, growth-division.com, kurve.co.uk, leadership-services.co.uk |
+| 2 | No | — | — | **none — UNGROUNDED, no sources card at all** |
+| 3 | **Yes** | /services/90-day-growth-sprint **+ /insights/how-to-run-a-90-day-growth-sprint** | **Yes** — renders £8k–£12k and "Post-PMF B2B SaaS & AI startups" correctly | Growth Sprints (Brendan Hufford), Hook90/HookLead |
+| 4 | No | — | — | leadership-services, primewise, limivex, fractionalcmo.uk, shanjay, porterwills, mccracken, mateerz, flairrepublic, fractionauts, LinkedIn (11 domains) |
+| 5 | **Yes** | **/about, /insights, /facts/we-scale-startups, /services/growth-diagnosis** — leads the comparison table | **Yes** | growth-division.com, **Malt.uk (as "Daniel Johnson, Fractional CMO & GTM Growth Operator")**, productmarketfitisexpiring.com |
+| 6 | No | — | — | hannahbarltropmarketing, air-marketing, nograftnoglory, billionairesinboxers, demanddrive, octavius.ai, hivegrowthpartners, nab-marketing, LinkedIn — **grounded this reading** |
+| 7 | No | — | — | themarketingcentre, marketri, marketinggraham, strategicpete, elevateitnow, z10consulting, Reddit, LinkedIn/Revv Growth |
+| 8 | No | — | — | lennysnewsletter, andrewchen, cognosis, ch4b, simonellson, liveplan, startups.com |
+| 9 | No* | — | — | **growth-division.com, k3c.co.uk, dimartec.co.uk**, grafit.agency, openvc, seedlegals |
+| 10 | No | — | — | bain.com, pmistack, keysearch, movemeon, consultingsuccess, namaste, selectadvisorsinstitute — **M&A split reproduced for the third time** |
+
+`*` Prompt 9: WSS appears **only inside the Growth Division source-card snippet** ("the top 5 startup growth agencies in the UK are Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups"), still misnamed, and **not in the answer body**, whose table names GrowthSpree and Kalungi instead. **A source-snippet appearance is not a mention. Scored No, same as reading #6.**
+
+#### 1. THE INSTRUMENT GOT BETTER — a deterministic completion tell exists
+
+**AI Mode writes the literal string `AI Mode response is ready` into `document.body.innerText` when the stream finishes.** Test that. It replaces the three heuristics (follow-up block / icon row / sources card) runs 20–21 relied on, and it is the fix for the failure mode that produced a false headline metric for two readings.
+
+**One thing it does NOT cover, found the hard way this reading:** the sources card renders into the DOM **only after you scroll to the bottom**. Prompt 2 returned `ready: true` with an empty domain list before scrolling, and would have been logged as ungrounded on a first pass. It **is** genuinely ungrounded — confirmed after scrolling — but the check was invalid until then. **Scroll, then read.**
+
+#### 2. The share is flat for the fourth consecutive verified reading — and that flatness hides real movement
+
+Own-domain citation: **2/10 in #1, #5, #6 and #7.** Read as flat. But counting *prompts* throws away what changed:
+
+- **Prompt 5 went from one cited URL to four** (`/about`, `/insights`, `/facts/we-scale-startups`, `/services/growth-diagnosis`), WSS **leads** the comparison table, and **`/facts/we-scale-startups` returned** after being displaced by `/insights` in reading #6.
+- **Prompt 3 now co-cites `/insights/how-to-run-a-90-day-growth-sprint`** with the service page — run 15's page earning a provider-prompt citation.
+
+**Count cited URLs as well as prompts.** Reading #6 = 2 prompts / 2 URLs; reading #7 = 2 prompts / **6 URLs**. That is the only movement in the series and the prompt-count metric is blind to it.
+
+#### 3. Groundedness is volatile per reading, not a property of the prompt
+
+The file recorded "the winnable surface is 9 of 10, only prompt 6 ungrounded." **Reading #7 has prompt 2 ungrounded and prompt 6 grounded — the exact reverse, with the surface still 9/10.** Never infer a prompt's winnability from a single reading, and never treat groundedness as a stable page-level fact.
+
+#### 4. Two off-site targets converted from unverified to confirmed, by observation rather than audit
+
+**`k3c.co.uk` is in Google's source card on prompts 1 AND 9. `dimartec.co.uk` on prompt 9 — and it was not in run 20's list of ~13 at all.** Both are neutral third-party roundups, so unlike Growth Division's page they are *reachable*. **This is a cheaper way to qualify a Workstream C target than auditing candidate listicles: watch which ones the engine actually cites.** Backlog 16, drafts owed in `OUTREACH.md`.
+
+#### 5. Prompt 4 is settled and the answer is no
+
+Absent for the third consecutive reading, and run 22's Search Console pull removes the remaining case for it: **the entire cost/pricing cluster is 7 queries and 8 impressions in 28 days, all at position 31–92, zero clicks.** `fractional cmo cost uk` does not appear in a 28-day window at all; over 90 days it is 3 impressions at 17.3. **A soft SERP with no demand behind it is not an opportunity. Do not reopen.**
+
+#### 6. Prompt 7 absent for the third consecutive reading
+
+`/fractional-cmo-vs-agency` still uncited on its exact query while The Marketing Centre, Marketri and Reddit are. **Fourth instrument agreeing. No third rewrite.**
+
+---
+
+## Companion instrument — GSC Generative AI report, run 22 reading (2026-09-03, 28d to 2026-09-01)
+
+**258 impressions.** Series: **217 → 228 → 258.** The file recorded this as "flat at ~8/day — not growth"; it is now ~9.2/day and, more importantly, **the concentration broke**.
+
+| | Reading (run 19 era) | Run 22 |
+| --- | --- | --- |
+| Total impressions (28d) | 228 | **258** |
+| Homepage + `/services/90-day-growth-sprint` | **62%** | **46.5%** (73 + 47 of 258) |
+
+Top pages: `/` 73 · `/services/90-day-growth-sprint` 47 · **`/insights/how-to-run-a-90-day-growth-sprint` 20** · **`/facts/we-scale-startups` 19** · `/resources` 16 · `/about` 15 · `/fractional-cmo-vs-agency` 14 · `/growth-operating-system` 13 · `/insights` 11 · `/gtm-strategy` 9.
+
+**Three things to carry:**
+
+1. **Run 15's page (verdict 2026-09-17) is the third most AI-surfaced page on the site** — 20 impressions, and co-cited on panel prompt 3. Its classic numbers are 53 impressions and zero clicks. **The two channels are telling opposite stories about the same page, and the change was made for the citation channel.**
+2. **`/facts/we-scale-startups` continues to climb: 7 → 17 → 19** (verdict 2026-09-22), and returned to the panel's prompt-5 citation set this reading. Three instruments now agree it is in the retrieval set.
+3. **`/facts/daniel-johnson` is on the board for the first time, at 1 impression.** Run 21 shipped its freshness date and noted it "has never been a named mover here." It is now a named mover, barely. **One impression is not evidence of anything — record it, do not act on it.**
+
+**Access note:** the report lives at `/performance/search-analytics/ai?resource_id=…`. The `search_appearance=GENERATIVE_AI` URL parameter does **not** apply the filter, and the in-page "Open report" link did not navigate when clicked. Go to the path directly.

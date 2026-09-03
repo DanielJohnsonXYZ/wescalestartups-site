@@ -1,0 +1,1079 @@
+diff --git a/js/content.js b/js/content.js
+index 7255131..6f24cae 100644
+--- a/js/content.js
++++ b/js/content.js
+@@ -157,8 +157,8 @@ addEvents(
+  adviser:"Leader of the House", avatar:"👑", adviserText:"The Lords can delay and amend. Ultimately the elected Commons has the stronger democratic mandate, but this can still eat parliamentary time.",
+  vote:true,bill:"Public Safety Bill",
+  choices:[
+-  {t:"Reject the amendments",s:"Fight the Lords",e:{power:2,approval:1},h:"COMMONS-LORDS SHOWDOWN",d:"Government sends the bill back unchanged.",voteBoost:-2},
+-  {t:"Accept most changes",s:"Compromise",e:{power:1,britain:2},h:"PM CUTS DEAL WITH LORDS",d:"Ministers accept safeguards to secure the legislation.",voteBoost:7},
++  {t:"Reject the amendments",s:"Fight the Lords",e:{power:2,approval:1},h:"COMMONS-LORDS SHOWDOWN",d:"Government sends the bill back unchanged.",voteBoost:7},
++  {t:"Accept most changes",s:"Compromise",e:{power:1,britain:2},h:"PM CUTS DEAL WITH LORDS",d:"Ministers accept safeguards to secure the legislation.",voteBoost:-2},
+   {t:"Abandon the bill",s:"Save parliamentary time",e:{power:-5,approval:-2},h:"FLAGSHIP BILL DROPPED",d:"Government gives up after months of parliamentary fighting."}
+  ]
+ }
+@@ -253,6 +253,19 @@ const BRIEFINGS = {
+   election:{explainer:"A UK general election is won constituency by constituency under first-past-the-post. National vote share matters, but where those votes are located determines the Commons majority.",control:"You can choose campaign strategy and defend your record. You cannot convert approval directly into seats; geography and opposition performance matter.",stakeholders:[["Voters","Choose their local MP","🗳️"],["Candidates","Win individual constituencies","📍"],["Party HQ","Target marginal seats","🎗️"],["Media","Shape the campaign agenda","📰"]]},
+   eastern_europe_crisis:{explainer:"A major war in Europe is not something a British Prime Minister controls. Britain can shape sanctions, military support, diplomacy and alliances, but every choice has security, fiscal and escalation risks.",control:"You control the UK's diplomatic position and can propose military and financial support. Parliament, allies, military capacity, international law and the actions of the countries at war constrain what happens next.",stakeholders:[["Allies","A united and credible response","🤝"],["Armed forces","Clear objectives and sustainable commitments","🛡️"],["Treasury","Know the cost and duration","💷"],["Public","Security without uncontrolled escalation","👥"]]},
+   shipping_shock:{explainer:"Britain is deeply connected to global trade. A conflict or blockage thousands of miles away can raise shipping, fuel and food costs at home before ministers have done anything.",control:"You cannot reopen an international trade route by decree. You can coordinate with allies, support affected firms and households, and change domestic policy to absorb some of the shock.",stakeholders:[["Consumers","Keep prices down","🛒"],["Businesses","Reliable imports and lower freight costs","🚢"],["Treasury","Avoid an open-ended bailout","💷"],["Allies","Coordinate a security response","🌍"]]},
++  leadership_rumours:{explainer:"A Prime Minister's authority rests on the perception that their own MPs will follow them. Rumours of a challenge can matter more than an actual challenge, because they change how loyally ministers and backbenchers behave in the meantime.",control:"You can change personnel, tone or policy. You cannot stop backbenchers talking to journalists, and denying a rumour often keeps it alive longer than ignoring it.",stakeholders:[["Backbench MPs","A leader who can win them the next election","🏛️"],["Cabinet","Clarity about who is really in charge","🧑‍💼"],["Media","A leadership story to report","📰"],["Party members","Unity rather than another contest","🎗️"]]},
++  winter_crisis:{explainer:"Health demand is seasonal: cold weather, flu and staff absence combine every winter, and a system with no spare capacity has nowhere to put the surge. Emergency funding buys capacity; cancelling other care simply moves the queue.",control:"You can fund extra beds and staff, or free up capacity by delaying other treatment. You cannot shorten winter, and money announced this week does not become trained staff overnight.",stakeholders:[["Patients in A&E","To be seen quickly","🧑‍🤝‍🧑"],["Patients waiting for routine care","Their operation is not cancelled again","🏥"],["NHS staff","Enough people on shift to cope","👩‍⚕️"],["Treasury","A bill that does not repeat every winter","💷"]]},
++  rent_protests:{explainer:"Rents are set by the balance of housing supply and demand, shaped over years, not weeks. A cap changes prices immediately but can change landlords' decisions to let property at all; building more houses works on the supply side but takes years to show up.",control:"You can regulate rent rises or fund and streamline building. You cannot conjure homes into existence, and landlords can respond to regulation by leaving the market.",stakeholders:[["Renters","Rents they can afford now","🔑"],["Landlords","A viable return on their property","🏘️"],["Builders","Demand and permission to build","🏗️"],["Councils","Fewer people presenting as homeless","🏛️"]]},
++  strike_wave:{explainer:"Public-sector pay disputes sit inside departmental budgets, inflation and comparability with other workers. Legislating a minimum service level changes the law rather than the dispute itself, and needs Parliament's consent like any other bill.",control:"You can fund a better offer or change the legal framework around strikes. You cannot force individual workers back into a job, and a service-level law still has to survive a Commons vote.",stakeholders:[["Striking staff","A pay offer that keeps pace with prices","✊"],["The public","Services that keep running","👥"],["Treasury","A settlement that does not spread to everyone else","💷"],["Your MPs","A law they are comfortable voting for","🏛️"]]},
++  opposition_lead:{explainer:"Opinion polls are a snapshot, not a forecast, but MPs read them as a leading indicator of their own seat. A government's response to bad polling shapes party morale well before it shapes any actual vote.",control:"You can change policy, message or tone. You cannot make the opposition less effective, and voters can simply decide they have stopped listening.",stakeholders:[["Your MPs","Reassurance about their own seat","🏛️"],["Party strategists","A message that moves the numbers","📊"],["Opposition","Keep the momentum going","🔴"],["Voters","Something worth changing their mind for","🗳️"]]},
++  inflation_spike:{explainer:"Inflation reflects global prices, domestic demand and the money supply together, and the Bank of England's independent rate-setting is only one lever among several. Government spending decisions can add to or offset the squeeze on households.",control:"You can subsidise households or intervene in specific prices. You cannot set interest rates, and price caps can suppress a symptom while leaving the underlying shortage in place.",stakeholders:[["Households","Prices that stop rising faster than wages","🛒"],["Bank of England","Room to bring inflation to target without political interference","🏦"],["Businesses","Predictable costs and demand","🏢"],["Treasury","A support package that does not itself add to inflation","💷"]]},
++  crime_wave:{explainer:"Recorded crime, policing capacity and court backlogs move on different timescales: officers can be funded quickly, but recruits take months to train and courts take longer still to clear a backlog once sentencing gets tougher.",control:"You can fund policing and change sentencing guidance. You cannot instantly reverse a rise in an underlying behaviour, and tougher sentencing adds demand to a prison system that is already stretched.",stakeholders:[["Retailers and residents","Visible policing and consequences","🏪"],["Police","Enough officers and prosecutions that stick","👮"],["Courts","A caseload they can actually clear","⚖️"],["Treasury","Value for money on prevention versus enforcement","💷"]]},
++  blackout_warning:{explainer:"Electricity supply has to match demand second by second; a system with little spare capacity is exposed whenever demand peaks and low-wind days cut generation at the same time. Building new capacity takes years; standby payments and imports are the short-term levers.",control:"You can pay generators to hold capacity in reserve, ask for voluntary demand reduction, or lean on interconnectors to import power. You cannot control the weather or guarantee another country's spare capacity is there when you need it.",stakeholders:[["Households and businesses","The lights staying on","💡"],["Grid operator","Enough margin to manage the peak safely","🔌"],["Treasury","Standby payments that do not become permanent","💷"],["Other countries","Reliable trade in electricity, not just in a crisis","🌍"]]},
++  pre_election_giveaway:{explainer:"A pre-election Budget sits at the exact point where economic policy and campaign strategy overlap. Anything unveiled now becomes part of both the fiscal inheritance the next government has to manage and the record voters judge before polling day.",control:"You can choose the fiscal package, subject to Parliament. You cannot stop the opposition or the markets reading it as electioneering, whatever you call it.",stakeholders:[["Voters","Feel better off before they decide","🗳️"],["Markets","A package that looks sustainable, not just timed","📈"],["Treasury","Room to manage whatever comes after the election","💷"],["Opposition","Frame the package as a bribe","🔴"]]},
++  manifesto_reckoning:{explainer:"A manifesto is a public promise assessed retrospectively, not a private target. How a government explains what it did and did not deliver becomes part of the electorate's judgement, independent of the numbers themselves.",control:"You can choose how to characterise the record. You cannot change what actually happened, and journalists compare the account you give against the manifesto text itself.",stakeholders:[["Voters","An honest account they can judge","🗳️"],["Party members","A record they can defend on the doorstep","🎗️"],["Media","A gap between the promise and the record to report","📰"],["Opposition","Evidence the manifesto was never serious","🔴"]]},
++  honours_row:{explainer:"Honours are formally granted by the Crown but effectively decided through a process the Prime Minister controls, including a list of the government's own nominations. Independent vetting exists but does not stop every controversial name.",control:"You decide who is nominated, and you can change the process itself. You cannot stop journalists comparing the list against the register of donations.",stakeholders:[["Nominees","Recognition they feel they earned","🎖️"],["Donors and aides","See loyalty rewarded","🤝"],["Public","A system that looks like it rewards merit","👥"],["Media","A story about cronyism","📰"]]},
++  trade_talks:{explainer:"Trade agreements trade market access for regulatory alignment: the other side's standards usually come with the deal. Negotiators can get close to an agreement long before political leaders decide whether to accept the final terms.",control:"You can accept, hold out for changes, or walk away. You cannot make the other side's negotiators offer better terms than they are willing to give.",stakeholders:[["Exporters","Better market access","🚢"],["Affected domestic industries","Protection from new competition","🏭"],["Consumers","Lower prices, more choice","🛒"],["Your MPs","A deal they can defend to constituents","🏛️"]]},
++  nurses_dispute:{explainer:"Safe staffing levels and pay are legally and industrially distinct issues, even though both show up in the same ballot. Funding one does not automatically resolve the other, which is why disputes like this can run alongside a separate pay dispute rather than replacing it.",control:"You can fund staffing changes, offer payments, or route the issue through the independent pay review process. You cannot instantly train and recruit enough nurses to fill every gap.",stakeholders:[["Nurses","Safe staffing levels on every shift","🩺"],["Patients","Consistent, safe care","🧑‍🧑‍🧒"],["NHS trusts","Deliverable staffing rules","🏥"],["Treasury","A cost that does not recur indefinitely","💷"]]},
+   default:{explainer:"Government decisions sit inside a system of institutions, budgets, laws and people with competing incentives. The visible choice is usually only the start of the process.",control:"As Prime Minister you set direction and coordinate government, but Parliament, ministers, courts, public bodies, markets and voters can all constrain what happens next.",stakeholders:[["Public","Results without excessive cost","👥"],["Treasury","Affordable policy","💷"],["Your party","Stay electable and united","🏛️"],["Delivery system","A policy that can actually be implemented","⚙️"]]}
+ };
+ 
+@@ -264,6 +277,153 @@ const WORLD_NEWS=["WORLD • Fighting in Europe puts new pressure on defence bud
+ 
+ addEvents(...EXTERNAL_EVENTS);
+ 
++/* Late-term content. Turns 11-19 used to run dry — the original event
++   library was front-loaded, so the second half of a term was mostly the
++   funding card and whatever the neglect drift dredged up. These ten fill
++   that stretch, several timed to compound trouble already on the board
++   rather than announcing themselves out of nowhere. */
++addEvents(
++{
++ id:"leadership_rumours", icon:"🗞️", category:"Politics", title:"LEADERSHIP RUMOURS",
++ text:"Backbenchers are muttering about a reshuffle — or worse. Nobody will say on the record whether letters are going in, which is itself the story.",
++ adviser:"Chief Whip", avatar:"🏛", adviserText:"This is not a leadership challenge yet, Prime Minister. It becomes one if you act like you're worried about it.",
++ choices:[
++  {t:"Reshuffle the Cabinet",s:"Show you've heard them",e:{power:2,approval:-1},h:"PM RESHUFFLES TO CALM THE PARTY",d:"New faces around the Cabinet table are meant to prove the message landed."},
++  {t:"Face them down",s:"Refuse to blink",e:{power:-1,approval:2},h:"PM DARES CRITICS TO MAKE THEIR MOVE",d:"Downing Street refuses to blink, betting the rumours have no teeth.",delay:{after:3,text:"No challenge ever came — but the rumours cost you some authority anyway.",e:{power:-2}}},
++  {t:"Make a concession to the rebels",s:"Buy peace with policy",e:{power:3,treasury:-3,approval:-1},h:"PM BUYS OFF THE PARTY'S REBELS",d:"A policy concession quiets the loudest critics, for now."}
++ ]
++},
++{
++ id:"winter_crisis", icon:"🥶", category:"Crisis", title:"WINTER CRISIS IN THE NHS",
++ text:"Flu, cold homes and a wave of admissions push A&E waits to record levels. Hospitals across the country declare critical incidents.",
++ adviser:"Health Secretary", avatar:"🏥", adviserText:"We can buy capacity for this winter, free up beds by cancelling other care, or spend the next month explaining why it isn't our fault.",
++ choices:[
++  {t:"Emergency funding",s:"Buy capacity now",e:{treasury:-6,britain:5,approval:2},h:"EMERGENCY WINTER FUNDING FOR THE NHS",d:"Extra beds and agency staff are funded at short notice.",delay:{after:4,text:"The extra winter capacity eases the worst of the pressure.",e:{britain:3}}},
++  {t:"Cancel elective care",s:"Free up beds, lengthen other queues",e:{britain:2,approval:-3},h:"ROUTINE OPERATIONS CANCELLED TO EASE WINTER CRISIS",d:"Non-urgent surgery is paused to free up emergency capacity.",delay:{after:5,text:"The cancelled operations become next year's waiting list.",e:{britain:-3,approval:-2}}},
++  {t:"Blame the previous government",s:"Free, unconvincing",e:{approval:-2,power:1},h:"PM BLAMES PREDECESSORS FOR WINTER CRISIS",d:"Ministers point to years of underinvestment. Voters seem unmoved."}
++ ]
++},
++{
++ id:"rent_protests", icon:"🏘️", category:"Housing", title:"RENT PROTESTS",
++ text:"Renters march in a dozen cities as rents outpace wages for a third straight year. Landlord groups warn that any cap will only shrink supply further.",
++ adviser:"Housing Secretary", avatar:"🏠", adviserText:"Cap rents and landlords start selling up. Do nothing and the marches get bigger.",
++ choices:[
++  {t:"Introduce rent controls",s:"Popular now, costs supply later",e:{housing:-4,approval:4},h:"GOVERNMENT CAPS RENT RISES",d:"Ministers impose a limit on annual rent increases.",delay:{after:5,text:"Landlords begin leaving the rental market, tightening supply further.",e:{housing:-3}}},
++  {t:"Build faster instead",s:"Slower relief, costs money",e:{treasury:-4,housing:3},h:"PM BACKS BUILDING OVER RENT CONTROLS",d:"Government bets on supply rather than price limits.",delay:{after:6,text:"New homes begin easing the rental market.",e:{housing:3}}},
++  {t:"Leave it to the market",s:"Free, and it shows",e:{approval:-3,housing:-1},h:"MINISTERS RULE OUT INTERVENTION ON RENTS",d:"Government declines to act as protests continue."}
++ ]
++},
++{
++ id:"strike_wave", icon:"✊", category:"Crisis", title:"STRIKE WAVE HITS PUBLIC SERVICES",
++ text:"Council staff, driving examiners and immigration caseworkers join a coordinated strike wave. Waiting rooms and picket lines fill up together.",
++ adviser:"Cabinet Secretary", avatar:"⚖", adviserText:"You can pay to settle, legislate to limit the disruption, or wait them out. None of it is free.",
++ vote:true, bill:"Minimum Service Levels Bill",
++ choices:[
++  {t:"Settle",s:"Pay to end it",e:{treasury:-5,britain:4,approval:1},h:"GOVERNMENT SETTLES WITH STRIKING STAFF",d:"A pay deal ends the walkouts.",delay:{after:3,text:"Backlogs from the strike wave finally clear.",e:{britain:2}}},
++  {t:"Legislate minimum service levels",s:"Force a floor, risk your own MPs",e:{approval:-2},h:"MINIMUM SERVICE LEVELS BILL INTRODUCED",d:"Ministers move to guarantee a floor of service during future strikes.",voteBoost:-4},
++  {t:"Sit it out",s:"Free, and it shows",e:{britain:-4,approval:-2},h:"MINISTERS WAIT OUT THE STRIKE WAVE",d:"No new offer, no new law. The disruption continues.",delay:{after:3,text:"Public patience with the standoff wears thin.",e:{approval:-2}}}
++ ]
++},
++{
++ id:"opposition_lead", icon:"📉", category:"Politics", title:"OPPOSITION OPENS UP A LEAD",
++ text:"A fresh poll puts the opposition ten points ahead for the first time this Parliament. Your backbenchers are reading the crosstabs, not the topline.",
++ adviser:"Party Pollster", avatar:"📊", adviserText:"A ten-point gap this far out is not fatal. It is, however, extremely motivating for anyone thinking about their own seat.",
++ choices:[
++  {t:"Pivot to popular policies",s:"Chase the polling",e:{approval:3,power:-2},h:"DOWNING STREET CHASES THE POLLS",d:"Ministers are told to find announcements the public actually wants."},
++  {t:"Hold course",s:"Steady as she goes",e:{power:2,approval:-1},h:"PM: NO CHANGE OF DIRECTION",d:"Downing Street insists the strategy is right and needs time."},
++  {t:"Attack the opposition",s:"Go on the offensive",e:{power:2,approval:-2},h:"PM LAUNCHES ATTACK ON OPPOSITION RECORD",d:"Government shifts to a more combative message."}
++ ]
++},
++{
++ id:"inflation_spike", icon:"💹", category:"Economy", title:"INFLATION SPIKES AGAIN",
++ text:"A surprise jump in the inflation figures wrongfoots the markets and reopens arguments about who should pay for it.",
++ adviser:"The Chancellor", avatar:"£", adviserText:"The Bank sets rates. We set everything else, and voters will not care about the difference.",
++ choices:[
++  {t:"Let the Bank act",s:"Respect independence",e:{power:1,approval:-1},h:"PM LEAVES INFLATION TO THE BANK",d:"Downing Street declines to intervene, citing monetary independence."},
++  {t:"Household support",s:"Cushion the blow",e:{treasury:-4,approval:3},h:"TREASURY UNVEILS COST-OF-LIVING SUPPORT",d:"New payments are announced for the households hit hardest."},
++  {t:"Impose price caps",s:"Popular, distorting",e:{economy:-3,approval:2},h:"PM IMPOSES EMERGENCY PRICE CAPS",d:"Ministers cap prices on a range of essential goods.",delay:{after:4,text:"Price caps begin distorting supply as some goods grow harder to find.",e:{economy:-2}}}
++ ]
++},
++{
++ id:"crime_wave", icon:"🚨", category:"Crisis", title:"CRIME WAVE",
++ text:"Shoplifting, phone theft and antisocial behaviour surge in town centres. Retailers say officers simply do not turn up any more.",
++ adviser:"Home Secretary", avatar:"🛂", adviserText:"More officers, tougher courts or prevention on the ground — pick one and the other two get louder.",
++ choices:[
++  {t:"Fund more police",s:"Expensive, visible",e:{treasury:-5,britain:4},h:"THOUSANDS OF NEW OFFICERS FUNDED",d:"A recruitment drive is fast-tracked for town-centre policing.",delay:{after:5,text:"New officers begin reaching the street.",e:{britain:3}}},
++  {t:"Toughen sentencing",s:"Popular, slower to bite",e:{approval:2,britain:1},h:"PM TOUGHENS SENTENCING FOR REPEAT OFFENDERS",d:"New guidance targets persistent offenders."},
++  {t:"Fund community programmes",s:"Cheaper, long-term",e:{treasury:-2,britain:2},h:"MINISTERS BACK COMMUNITY CRIME PREVENTION",d:"Local prevention schemes get fresh funding."}
++ ]
++},
++{
++ id:"blackout_warning", icon:"🔌", category:"Energy", title:"BLACKOUT WARNING",
++ text:"The grid operator warns of possible rolling blackouts this winter if demand peaks during a cold, still week with little wind generation.",
++ adviser:"Energy Secretary", avatar:"⚡", adviserText:"We can pay generators to be on standby, ask people to use less, or buy more from abroad and hope the interconnectors hold.",
++ choices:[
++  {t:"Pay for standby capacity",s:"Expensive insurance",e:{treasury:-5,britain:4},h:"GOVERNMENT PAYS FOR EMERGENCY GRID CAPACITY",d:"Standby power plants are paid to stay ready.",delay:{after:3,text:"The paid-for capacity comes online just in time for the cold snap.",e:{britain:2}}},
++  {t:"Ask for demand reduction",s:"Cheap, relies on the public",e:{britain:1,approval:-1},h:"HOUSEHOLDS ASKED TO CUT ENERGY USE",d:"A national appeal asks households to shift usage away from peak hours."},
++  {t:"Import more power",s:"Quick, exposes Britain to prices abroad",e:{treasury:-2,britain:2,economy:-1},h:"BRITAIN LEANS ON INTERCONNECTORS TO KEEP THE LIGHTS ON",d:"Extra imports are secured at a premium price."}
++ ]
++},
++{
++ id:"pre_election_giveaway", icon:"🎁", category:"Budget", title:"THE PRE-ELECTION GIVEAWAY QUESTION",
++ text:"With the election closing in, the Chancellor is under pressure to find something voters will actually notice before polling day.",
++ adviser:"The Chancellor", avatar:"£", adviserText:"Whatever we announce now, the electorate has seen this film before. It rarely changes the ending.",
++ choices:[
++  {t:"Cut taxes",s:"Popular, expensive",e:{treasury:-6,approval:4},h:"PM ANNOUNCES PRE-ELECTION TAX CUT",d:"Opposition accuses the government of buying votes with its own money."},
++  {t:"Spending splurge",s:"Popular, visible, expensive",e:{treasury:-7,approval:4,britain:2},h:"GOVERNMENT UNVEILS PRE-ELECTION SPENDING PACKAGE",d:"New money is announced across public services."},
++  {t:"Resist",s:"Responsible, thankless",e:{treasury:3,approval:-2},h:"CHANCELLOR RESISTS PRE-ELECTION GIVEAWAY",d:"The Budget banks the headroom instead of spending it."}
++ ]
++},
++{
++ id:"manifesto_reckoning", icon:"📜", category:"Politics", title:"THE MANIFESTO RECKONING",
++ text:"With the manifesto's promises about to be marked by the voters, the Party Chair wants a line prepared for every one you did not keep.",
++ adviser:"Party Chair", avatar:"🗳", adviserText:"Voters forgive a promise you tried and missed. They do not forgive being told it was never really a promise at all.",
++ choices:[
++  {t:"Be honest about what you missed",s:"Costs approval, buys trust",e:{power:3,approval:-3},h:"PM OWNS UP TO BROKEN PROMISES",d:"A frank account of the manifesto's record is published ahead of the campaign."},
++  {t:"Spin it",s:"35% chance it blows up",e:{approval:3},h:"DOWNING STREET RECASTS THE RECORD",d:"Ministers reframe missed pledges as changed circumstances.",
++   risk:{chance:0.35,e:{approval:-5},h:"SPIN OVER BROKEN PROMISES BLOWS UP",d:"A journalist picks the reframing apart line by line, and it becomes the story instead."}},
++  {t:"Change the subject",s:"Announce something else instead",e:{power:-1},h:"PM CHANGES THE SUBJECT",d:"A new announcement is timed to bury the question."}
++ ]
++}
++);
++
++/* Three more, deliberately generic and broadly windowed. An active player
++   can clear the specific late-term crises above faster than their windows
++   refill; these exist purely so the desk still has something real on it
++   when that happens, not to carry a plot of their own. */
++addEvents(
++{
++ id:"honours_row", icon:"🎖️", category:"Politics", title:"THE HONOURS LIST ROW",
++ text:"A leaked draft of the next honours list rewards donors and aides alongside genuine public service. The commentariat calls it grubby; your MPs mostly call it Tuesday.",
++ adviser:"Chief of Staff", avatar:"📱", adviserText:"Every list looks bad the week before it's published. Most of them are forgotten within a fortnight.",
++ choices:[
++  {t:"Defend the list",s:"Own the decisions",e:{power:1,approval:-2},h:"PM DEFENDS HONOURS LIST",d:"Downing Street stands by every name on the list."},
++  {t:"Trim it quietly",s:"Remove the worst names",e:{approval:1,power:-1},h:"NAMES QUIETLY DROPPED FROM HONOURS LIST",d:"Officials confirm a handful of names have been removed after press inquiries."},
++  {t:"Scrap political honours",s:"Bigger reform, bigger fight",e:{approval:2,power:-3},h:"PM MOVES TO REFORM THE HONOURS SYSTEM",d:"Government proposes ending the practice altogether, angering some of its own benches."}
++ ]
++},
++{
++ id:"trade_talks", icon:"🤝", category:"Economy", title:"TRADE TALKS REACH THE WIRE",
++ text:"Negotiators say a trade agreement is close, but only if Britain accepts standards it has resisted for months. Business wants a deal; some of your MPs want a fight.",
++ adviser:"Business Secretary", avatar:"🤖", adviserText:"No deal is free. The question is only which costs you are willing to accept, and which ones you are willing to be blamed for.",
++ choices:[
++  {t:"Accept the terms",s:"Deal now, complaints later",e:{economy:3,power:-2},h:"BRITAIN SIGNS TRADE DEAL",d:"Ministers accept the terms on offer to secure the agreement.",delay:{after:5,text:"The agreement begins showing up in trade figures.",e:{economy:2}}},
++  {t:"Hold out for more",s:"Risk the whole deal",e:{power:2,economy:-1},h:"PM HOLDS OUT ON TRADE TERMS",d:"Britain declines to sign without further changes."},
++  {t:"Walk away",s:"No deal, no compromise",e:{power:1,economy:-3},h:"TRADE TALKS COLLAPSE",d:"Negotiations end without an agreement."}
++ ]
++},
++{
++ id:"nurses_dispute", icon:"🩺", category:"Crisis", title:"NURSING STAFF DISPUTE",
++ text:"Nursing unions ballot for industrial action over staffing ratios, separately from the wider pay dispute already running. Wards warn they cannot safely absorb another walkout.",
++ adviser:"Health Secretary", avatar:"🏥", adviserText:"This is about staffing levels, not just pay. Money alone will not entirely fix it.",
++ choices:[
++  {t:"Fund safer staffing levels",s:"Address the real complaint",e:{treasury:-4,britain:4},h:"GOVERNMENT FUNDS NURSE STAFFING LEVELS",d:"Ministers commit money specifically to ward staffing ratios.",delay:{after:4,text:"Staffing ratios begin to improve on the wards worst affected.",e:{britain:2}}},
++  {t:"Offer a one-off payment",s:"Cheaper, addresses pay not staffing",e:{treasury:-2,approval:1},h:"NURSES OFFERED ONE-OFF PAYMENT",d:"A lump-sum payment is offered in lieu of a staffing commitment."},
++  {t:"Refer it to the pay review body",s:"Free, slow, safe",e:{approval:-2},h:"NURSING DISPUTE REFERRED TO PAY BODY",d:"Ministers decline to intervene directly, citing the independent process."}
++ ]
++}
++);
++
+ function getBriefing(event){ return BRIEFINGS[event.id] || BRIEFINGS.default; }
+ function getEvent(id){ return EVENTS.find(e => e.id === id); }
+ 
+@@ -278,22 +438,38 @@ const EVENT_META = {
+   rates:                {topic:'economy',   promise:'growth',  from:1,  to:16, cost:1},
+   prisons:              {topic:'crime',     promise:'crime',   from:3,  to:17, cost:1},
+   energy:               {topic:'energy',    promise:'climate', from:2,  to:16, cost:2},
+-  minister_scandal:     {topic:'party',     promise:null,      from:3,  to:18, cost:1},
+-  rail:                 {topic:'transport', promise:null,      from:4,  to:17, cost:1},
++  minister_scandal:     {topic:'party',     promise:null,      from:3,  to:19, cost:1},
++  rail:                 {topic:'transport', promise:null,      from:4,  to:19, cost:1},
+   migration:            {topic:'migration', promise:null,      from:4,  to:17, cost:2},
+   schools:              {topic:'services',  promise:null,      from:3,  to:17, cost:1},
+-  defence:              {topic:'defence',   promise:null,      from:4,  to:18, cost:1},
++  defence:              {topic:'defence',   promise:null,      from:15, to:19, cost:1},
+   local_elections:      {topic:'party',     promise:null,      from:6,  to:14, cost:1},
+-  flood:                {topic:'services',  promise:null,      from:4,  to:18, cost:1},
+-  ai_jobs:              {topic:'economy',   promise:'growth',  from:6,  to:18, cost:1},
+-  lords:                {topic:'party',     promise:null,      from:7,  to:18, cost:2},
+-  by_election:          {topic:'party',     promise:null,      from:8,  to:17, cost:1},
++  flood:                {topic:'services',  promise:null,      from:14, to:19, cost:1},
++  ai_jobs:              {topic:'economy',   promise:'growth',  from:14, to:19, cost:1},
++  lords:                {topic:'party',     promise:null,      from:9,  to:19, cost:2},
++  by_election:          {topic:'party',     promise:null,      from:15, to:19, cost:1},
+   growth_budget:        {topic:'economy',   promise:'growth',  from:5,  to:17, cost:2},
+-  pmqs:                 {topic:'party',     promise:null,      from:1,  to:18, cost:1},
+-  data_breach:          {topic:'services',  promise:null,      from:5,  to:18, cost:1},
++  pmqs:                 {topic:'party',     promise:null,      from:1,  to:19, cost:1},
++  /* Held back deliberately: with most of the library already open by the
++     mid-term, these four are reserved for turn 18 onward so a desk that
++     has otherwise been cleared out is never actually empty. */
++  data_breach:          {topic:'services',  promise:null,      from:18, to:19, cost:1},
+   final_budget:         {topic:'treasury',  promise:'tax',     from:16, to:19, cost:2},
+-  eastern_europe_crisis:{topic:'defence',   promise:null,      from:5,  to:18, cost:2},
+-  shipping_shock:       {topic:'economy',   promise:null,      from:6,  to:18, cost:1},
++  eastern_europe_crisis:{topic:'defence',   promise:null,      from:18, to:19, cost:2},
++  shipping_shock:       {topic:'economy',   promise:null,      from:18, to:19, cost:1},
++  leadership_rumours:   {topic:'party',     promise:null,      from:12, to:19, cost:1},
++  winter_crisis:        {topic:'health',    promise:'nhs',     from:11, to:17, cost:2},
++  rent_protests:        {topic:'housing',   promise:'housing', from:12, to:19, cost:1},
++  strike_wave:          {topic:'services',  promise:null,      from:11, to:17, cost:2},
++  opposition_lead:      {topic:'party',     promise:null,      from:13, to:19, cost:1},
++  inflation_spike:      {topic:'economy',   promise:'growth',  from:11, to:16, cost:1},
++  crime_wave:           {topic:'crime',     promise:'crime',   from:12, to:19, cost:1},
++  blackout_warning:     {topic:'energy',    promise:'climate', from:12, to:19, cost:1},
++  pre_election_giveaway:{topic:'treasury',  promise:'tax',     from:17, to:19, cost:2},
++  manifesto_reckoning:  {topic:'party',     promise:null,      from:16, to:19, cost:1},
++  honours_row:          {topic:'party',     promise:null,      from:9,  to:19, cost:1},
++  trade_talks:          {topic:'economy',   promise:'growth',  from:9,  to:19, cost:1},
++  nurses_dispute:       {topic:'health',    promise:'nhs',     from:9,  to:19, cost:1},
+   election:             {topic:'final',     promise:null,      from:20, to:20, cost:0}
+ };
+ 
+diff --git a/js/engine.js b/js/engine.js
+index e137d95..3121c2e 100644
+--- a/js/engine.js
++++ b/js/engine.js
+@@ -26,6 +26,7 @@ window.Engine = (function () {
+ 
+   const clamp = (n, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, n));
+   const round = Math.round;
++  const round1 = n => Math.round(n * 10) / 10;
+ 
+   /* ---------------------------------------------------------------- state */
+ 
+@@ -40,6 +41,9 @@ window.Engine = (function () {
+       phase: 'briefing',          // briefing | decision | vote | consequences | end
+       approval: 52,
+       headroom: 24,               // £bn of fiscal room, not a 0-100 score
++      borrowingCost: 0,           // £bn/quarter of debt interest, last quarter
++      confidence: 70,             // market confidence, 0-100
++      lastMarketsTurn: -99,       // last turn the markets event was offered
+       party: 73,
+       majority: 24,
+       indicators: {
+@@ -75,7 +79,10 @@ window.Engine = (function () {
+   /* Scheduling metadata for either kind of decision. */
+   function meta(id) {
+     const g = state.generated[id];
+-    if (g) return { topic: g.investTopic, promise: null, cost: 1, invest: true };
++    if (g) {
++      if (g.invest) return { topic: g.investTopic, promise: null, cost: 1, invest: true };
++      return { topic: g.topic || null, promise: null, cost: g.cost || 1 };
++    }
+     return EVENT_META[id] || {};
+   }
+ 
+@@ -301,7 +308,7 @@ window.Engine = (function () {
+       if (key === 'approval') {
+         const b = state.approval; state.approval = clamp(state.approval + v); push('Approval', b, state.approval);
+       } else if (key === 'treasury') {
+-        const b = state.headroom; state.headroom = clamp(state.headroom + v, -60, 120); push('Fiscal headroom', b, state.headroom);
++        const b = state.headroom; state.headroom = clamp(state.headroom + v, -150, 120); push('Fiscal headroom', b, state.headroom);
+       } else if (key === 'power') {
+         const b = state.party; state.party = clamp(state.party + v); push('Your party', b, state.party);
+       } else if (key === 'economy') {
+@@ -309,8 +316,15 @@ window.Engine = (function () {
+       } else if (key === 'housing') {
+         const b = state.indicators.housing; state.indicators.housing = clamp(b + v); push('Housing', b, state.indicators.housing);
+       } else if (key === 'britain') {
+-        const b = state.indicators.services; state.indicators.services = clamp(b + v); push('Public services', b, state.indicators.services);
+-        if (topic && state.indicators[topic] !== undefined && topic !== 'services') {
++        /* "britain" used to always move Public services and, on top of that,
++           the event's own topic — so an NHS package inflated schools and
++           councils for free. It now moves one or the other: Public services
++           when the event is actually about public services (or has no
++           topic indicator of its own), otherwise just the topic itself. */
++        const hasOwnIndicator = topic && state.indicators[topic] !== undefined;
++        if (!hasOwnIndicator || topic === 'services') {
++          const b = state.indicators.services; state.indicators.services = clamp(b + v); push('Public services', b, state.indicators.services);
++        } else {
+           const t = state.indicators[topic];
+           state.indicators[topic] = clamp(t + v);
+           push(INDICATOR_NAMES[topic] || topic, t, state.indicators[topic]);
+@@ -359,19 +373,24 @@ window.Engine = (function () {
+       return finale ? [{ eventId: 'election', urgent: true, cost: 0 }] : [];
+     }
+ 
+-    const candidates = EVENTS.filter(e => {
++    const unresolved = e => {
+       const m = EVENT_META[e.id];
+-      if (!m || m.topic === 'final') return false;
+-      if (state.resolved.includes(e.id)) return false;
+-      return turn >= m.from && turn <= m.to;
+-    });
++      return m && m.topic !== 'final' && !state.resolved.includes(e.id);
++    };
++    let candidates = EVENTS.filter(e => unresolved(e) && turn >= EVENT_META[e.id].from && turn <= EVENT_META[e.id].to);
++    /* A quiet turn should never mean nothing to do. If an active player has
++       cleared the library faster than new windows are opening, fall back to
++       any event that has not fired yet rather than leaving the desk empty. */
++    if (!candidates.length) candidates = EVENTS.filter(unresolved);
+ 
+     const scored = candidates.map(e => {
+       const m = EVENT_META[e.id];
+       let score = rand() * 12;
+-      /* Things going badly ask for attention first. */
++      /* Things going badly ask for attention first — capped, so one
++         catastrophic indicator cannot make the opening turns entirely
++         predictable regardless of the random term and promise pressure. */
+       const ind = state.indicators[m.topic];
+-      if (ind !== undefined) score += (60 - ind) * 0.55;
++      if (ind !== undefined) score += Math.min(12, (60 - ind) * 0.55);
+       /* An event that can deliver or break a promise matters more. */
+       if (m.promise && state.promises.includes(m.promise)) score += 18;
+       /* Something ignored keeps coming back, louder. */
+@@ -381,7 +400,10 @@ window.Engine = (function () {
+       return { event: e, meta: m, score: score };
+     }).sort((a, b) => b.score - a.score);
+ 
+-    const agenda = scored.slice(0, 2).map((c, i) => ({
++    /* The back half of the term has more content competing for the desk —
++       a third slot from turn 13 keeps it from running dry. */
++    const slots = turn >= 13 ? 3 : 2;
++    const agenda = scored.slice(0, slots).map((c, i) => ({
+       eventId: c.event.id, urgent: i === 0, cost: c.meta.cost
+     }));
+ 
+@@ -390,9 +412,45 @@ window.Engine = (function () {
+        promise reachable — the event library alone offers each topic only once. */
+     const invest = makeInvestment();
+     if (invest) agenda.push({ eventId: invest.id, urgent: false, cost: 1 });
++
++    /* When confidence collapses, the markets force their way onto the desk —
++       ahead of everything else, and not more than once every three turns. */
++    if (state.confidence < 45 && turn - state.lastMarketsTurn > 2) {
++      const markets = makeMarketsEvent();
++      agenda.unshift({ eventId: markets.id, urgent: true, cost: meta(markets.id).cost });
++      state.lastMarketsTurn = turn;
++    }
+     return agenda;
+   }
+ 
++  const MARKETS_ADVISER = 'Confidence is ebbing. If borrowing costs spiral, everything else gets harder to fund.';
++
++  function makeMarketsEvent() {
++    const id = 'markets:' + state.turn;
++    const ev = {
++      id: id, icon: '📉', category: 'Crisis', title: 'THE MARKETS HAVE NOTICED',
++      text: 'Gilt yields are creeping up and the papers have noticed. The Treasury wants a response before it becomes a crisis of its own.',
++      adviser: 'The Chancellor', avatar: '£', adviserText: MARKETS_ADVISER,
++      topic: 'services', cost: 2,
++      choices: [
++        { t: 'Emergency spending cuts', s: 'Reassure the markets, fast',
++          e: { treasury: 8, britain: -5, approval: -3, power: -2 },
++          h: 'EMERGENCY CUTS TO CALM THE MARKETS', d: 'Whitehall is ordered to find billions in savings overnight.' },
++        { t: 'Raise taxes', s: 'Reassure the markets, at a political cost',
++          e: { treasury: 8, approval: -5 },
++          h: 'PM RAISES TAXES TO STEADY THE MARKETS', d: 'A tax rise is announced to reassure investors.' },
++        { t: 'Hold the line', s: '40% chance of a crisis',
++          e: { approval: 1 }, h: 'MARKETS HOLD THEIR NERVE', d: 'No emergency action is taken. Gilt yields ease back overnight.',
++          risk: { chance: 0.4,
++                  e: { economy: -8, approval: -6, power: -8, treasury: -6 },
++                  h: 'GILT MARKET CRISIS FORCES EMERGENCY BUDGET',
++                  d: 'Borrowing costs spike overnight, forcing an emergency budget within days.' } }
++      ]
++    };
++    state.generated[id] = ev;
++    return ev;
++  }
++
+   /* Pick the topic that most needs money: a promise the player is failing
+      first, otherwise whatever is worst. */
+   function investmentTopic() {
+@@ -511,12 +569,13 @@ window.Engine = (function () {
+ 
+   function affordable(choice) {
+     const cost = -(choice.e && choice.e.treasury ? choice.e.treasury : 0);
+-    return cost <= 0 || state.headroom - cost > -40;
++    return cost <= 0 || state.headroom - cost >= -90;
+   }
+ 
+   /* Resolve a decision. Returns what happened so the UI can show it immediately
+      rather than silently mutating numbers behind a toast. */
+   function decide(eventId, choiceIndex) {
++    if (state.bill) return { blocked: 'vote' };
+     const ev = lookup(eventId);
+     if (!ev) return null;
+     const entry = state.agenda.find(a => a.eventId === eventId);
+@@ -526,6 +585,7 @@ window.Engine = (function () {
+     const m = meta(ev.id);
+ 
+     if (state.actionsLeft < (entry.cost || 0)) return { blocked: 'actions' };
++    if (!affordable(choice)) return { blocked: 'money' };
+ 
+     /* A whipped bill goes to the Commons instead of resolving immediately. */
+     if (ev.vote && !ev.final && choice.voteBoost !== undefined) {
+@@ -542,10 +602,18 @@ window.Engine = (function () {
+   }
+ 
+   function commitChoice(ev, choice, meta, entry, scale) {
++    /* Generic support for a choice with an uncertain downside: if the roll
++       falls inside `risk.chance`, the risk's effects and headline replace
++       the choice's own rather than the safe outcome landing. */
++    let eff = choice.e, headline = choice.h, deck = choice.d;
++    if (choice.risk && rand() < choice.risk.chance) {
++      eff = choice.risk.e; headline = choice.risk.h; deck = choice.risk.d;
++    }
++
+     const scaled = uncertainty() * (scale === undefined ? 1 : scale);
+-    const changes = applyEffects(choice.e, meta.topic, scaled);
++    const changes = applyEffects(eff, meta.topic, scaled);
+ 
+-    if (/raise .*tax|tax rise/i.test(choice.t) && (choice.e.treasury || 0) > 0) {
++    if (/raise .*tax|tax rise/i.test(choice.t) && (eff.treasury || 0) > 0) {
+       state.flags.taxRaised = true;
+     }
+ 
+@@ -561,17 +629,19 @@ window.Engine = (function () {
+       state.invested[ev.investTopic] = (state.invested[ev.investTopic] || 0) + 1;
+     }
+ 
+-    entry.done = true;
+-    entry.choiceText = choice.t;
+-    state.actionsLeft = Math.max(0, state.actionsLeft - (entry.cost || 0));
++    if (entry) {
++      entry.done = true;
++      entry.choiceText = choice.t;
++      state.actionsLeft = Math.max(0, state.actionsLeft - (entry.cost || 0));
++    }
+     state.resolved.push(ev.id);
+     delete state.ignored[ev.id];
+-    state.record.push({ turn: state.turn, title: ev.title, choice: choice.t, headline: choice.h });
+-    state.news.unshift({ turn: state.turn, headline: choice.h, deck: choice.d });
++    state.record.push({ turn: state.turn, title: ev.title, choice: choice.t, headline: headline });
++    state.news.unshift({ turn: state.turn, headline: headline, deck: deck });
+     state.news = state.news.slice(0, 24);
+ 
+     return {
+-      resolved: true, headline: choice.h, deck: choice.d, changes: changes,
++      resolved: true, headline: headline, deck: deck, changes: changes,
+       delayed: choice.delay ? choice.delay.text : null, eventId: ev.id
+     };
+   }
+@@ -600,7 +670,7 @@ window.Engine = (function () {
+       needed: MAJORITY_THRESHOLD, shortfall: MAJORITY_THRESHOLD - support,
+       likely: support >= MAJORITY_THRESHOLD + 6 ? 'Likely to pass'
+             : support >= MAJORITY_THRESHOLD ? 'Too close to call' : 'Likely to fail',
+-      canConcede: b.concessions < 3, canTalk: !b.talked, canThreaten: !b.threatened,
++      canConcede: (b.concessionCount || 0) < 3, canTalk: !b.talked, canThreaten: !b.threatened,
+       delayed: b.turnsDelayed
+     };
+   }
+@@ -610,17 +680,17 @@ window.Engine = (function () {
+   function negotiate(action) {
+     const b = state.bill;
+     if (!b) return null;
++    if (action === 'talk' && !b.talked && state.actionsLeft <= 0) return { blocked: 'actions' };
+     let note = '';
+-    if (action === 'concede' && b.concessions < 3) {
++    if (action === 'concede' && (b.concessionCount || 0) < 3) {
+       b.concessions += round(4 + rand() * 5);
+       state.party = clamp(state.party - 1);
+       b.concessionCount = (b.concessionCount || 0) + 1;
+-      if (b.concessionCount >= 3) b.concessions = b.concessions;
+       note = 'You water down the bill. Rebels peel away, but so does some of the point of it.';
+       b.weakened = (b.weakened || 0) + 1;
+     } else if (action === 'talk' && !b.talked) {
+       b.talked = true;
+-      if (state.actionsLeft > 0) state.actionsLeft -= 1;
++      state.actionsLeft -= 1;
+       const won = round(rand() * 10);
+       b.concessions += won;
+       note = won > 5 ? 'An evening of persuasion in your office. Most of them come round.'
+@@ -689,7 +759,11 @@ window.Engine = (function () {
+     const b = state.bill;
+     if (!b) return null;
+     const entry = state.agenda.find(a => a.eventId === b.eventId);
+-    if (entry) { entry.done = true; entry.choiceText = 'Bill abandoned'; }
++    if (entry) {
++      entry.done = true;
++      entry.choiceText = 'Bill abandoned';
++      state.actionsLeft = Math.max(0, state.actionsLeft - (entry.cost || 0));
++    }
+     state.approval = clamp(state.approval - 1);
+     state.resolved.push(b.eventId);
+     state.record.push({ turn: state.turn, title: (lookup(b.eventId) || {}).title || b.name,
+@@ -706,9 +780,19 @@ window.Engine = (function () {
+      silently — drift, matured consequences, the cost of ignoring things — is
+      returned here so the player can be shown what their decisions did. */
+   function endTurn() {
+-    const before = snapshot();
+     const report = { turn: state.turn, immediate: [], matured: [], neglected: [], headline: null, chains: [] };
+ 
++    /* Parliament rises at the end of the quarter, so any bill still awaiting
++       a vote lapses rather than surviving into a turn that no longer has an
++       agenda entry for it. */
++    if (state.bill) {
++      const billName = state.bill.name;
++      abandonBill();
++      report.abandonedBill = billName;
++    }
++
++    const before = snapshot();
++
+     /* 1. Delayed consequences that have come due. */
+     const due = state.pending.filter(p => p.dueTurn <= state.turn);
+     state.pending = state.pending.filter(p => p.dueTurn > state.turn);
+@@ -732,6 +816,12 @@ window.Engine = (function () {
+       if (m.invest) return;
+       state.ignored[a.eventId] = (state.ignored[a.eventId] || 0) + 1;
+       const drift = -(2 + rand() * 2.5) * (a.urgent ? 1.5 : 1);
++      /* A government that leaves something on the desk unanswered looks
++         indecisive whether or not it happens to move an indicator — this
++         is what actually separates governing badly from not governing at
++         all, which no indicator-driven approval weight can capture on its
++         own. */
++      state.approval = clamp(state.approval + drift * 0.35);
+       if (state.indicators[m.topic] !== undefined) {
+         const b = state.indicators[m.topic];
+         state.indicators[m.topic] = clamp(b + drift);
+@@ -740,6 +830,26 @@ window.Engine = (function () {
+           text: 'Left unattended. ' + (INDICATOR_NAMES[m.topic] || m.topic) + ' has worsened.',
+           change: { name: INDICATOR_NAMES[m.topic] || m.topic, from: round(b), to: round(state.indicators[m.topic]), delta: round(state.indicators[m.topic]) - round(b) }
+         });
++      } else if (m.topic === 'party') {
++        /* A political problem left alone does not damage a public service —
++           it damages your own side. */
++        const b = state.party;
++        state.party = clamp(state.party + drift);
++        report.neglected.push({
++          title: ev ? ev.title : a.eventId,
++          text: 'Left unattended. Your party has worsened.',
++          change: { name: 'Your party', from: round(b), to: round(state.party), delta: round(state.party) - round(b) }
++        });
++      } else if (m.topic === 'treasury') {
++        /* A fiscal problem left alone does not damage a public service either
++           — it costs money, at a bigger multiple since the sums are bigger. */
++        const b = state.headroom;
++        state.headroom = clamp(state.headroom + drift * 1.5, -150, 120);
++        report.neglected.push({
++          title: ev ? ev.title : a.eventId,
++          text: 'Left unattended. Fiscal headroom has worsened.',
++          change: { name: 'Fiscal headroom', from: round(b), to: round(state.headroom), delta: round(state.headroom) - round(b) }
++        });
+       }
+     });
+ 
+@@ -748,9 +858,9 @@ window.Engine = (function () {
+           a healthy economy fund headroom which fed the economy again, so a good
+           start ran away to the top of every scale. */
+     const ind = state.indicators;
+-    ind.health = clamp(ind.health - 0.5);
++    ind.health = clamp(ind.health - 0.35);
+     ind.housing = clamp(ind.housing - 0.45);
+-    ind.services = clamp(ind.services - 0.3);
++    ind.services = clamp(ind.services - 0.15);
+     ind.crime = clamp(ind.crime - 0.25);
+     ind.energy = clamp(ind.energy - 0.2);
+     ind.transport = clamp(ind.transport - 0.3);
+@@ -761,30 +871,48 @@ window.Engine = (function () {
+           actually improved, and no run of luck can peg it at 100. The pull is
+           comfortably larger than the noise beneath it, which is what the old
+           model got backwards. */
+-    const fundamentals = 22 + ind.economy * 0.18 + ind.health * 0.12 +
+-                         ind.housing * 0.10 + ind.services * 0.10;
+-    const noise = (rand() - 0.5) * 1.2;
++    const fundamentals = 28 + ind.economy * 0.14 + ind.health * 0.1 + ind.housing * 0.08 + ind.services * 0.08;
++    const noise = (rand() - 0.5) * 4;
+     state.approval = clamp(state.approval + (fundamentals - state.approval) * 0.28 + noise);
+ 
+     /* 5. Fiscal position and the party. Growth is what pays for public services:
+           a stronger economy widens the tax base, a weak one leaves a structural
+           deficit no amount of good intentions closes. This is the trade-off the
+           original never had — there, spending was free and debt cost nothing. */
+-    state.headroom = clamp(state.headroom + (ind.economy - 55) * 0.45 - 2.0, -60, 60);
++    state.headroom = clamp(state.headroom + (ind.economy - 55) * 0.45 - 1.0, -150, 60);
+     const partyTarget = 45 + (state.approval - 45) * 0.6 + (state.headroom > 0 ? 4 : -6);
+     state.party = clamp(state.party + (partyTarget - state.party) * 0.25);
+     state.majority = Math.max(0, round(24 + (state.party - 73) * 0.35 + (state.approval - 52) * 0.2));
+ 
+-    /* 5b. Debt has to cost something, or spending freely is simply the right
+-           answer every time — which is what the original model taught, since a
+-           negative balance cost 0.15 party unity a month and nothing else.
+-           Sustained deficits raise borrowing costs, and debt interest crowds out
+-           the growth that everything else depends on. */
++    /* 5b. Debt interest: borrowing is not free. A quarter spent below zero
++           costs real money the next quarter, deducted before anything else
++           happens, and reported so the player sees exactly what it cost. */
++    if (state.headroom < 0) {
++      state.borrowingCost = round1(Math.max(0, -state.headroom) * 0.04);
++      state.headroom = clamp(state.headroom - state.borrowingCost, -150, 60);
++      report.interest = { cost: state.borrowingCost, headroom: round(state.headroom) };
++    } else {
++      state.borrowingCost = 0;
++      /* A surplus is not dead money: cheap borrowing and a credible Treasury pull in investment. */
++      ind.economy = clamp(ind.economy + Math.min(state.headroom, 60) / 60 * 0.25);
++    }
++
++    /* 5c. Confidence tracks the fiscal and economic picture and decides
++           whether the markets force their way onto the desk. */
++    const confidenceTarget = clamp(70 + state.headroom * 1 + (ind.economy - 55) * 0.4);
++    state.confidence = clamp(state.confidence + (confidenceTarget - state.confidence) * 0.3);
++    if (state.confidence > 70) state.approval = clamp(state.approval + (state.confidence - 70) * 0.02);
++
++    /* 5d. Debt has to cost more than interest, or spending freely is simply
++           the right answer every time — which is what the original model
++           taught, since a negative balance cost 0.15 party unity a month and
++           nothing else. Sustained deficits raise borrowing costs, and debt
++           interest crowds out the growth that everything else depends on. */
+     if (state.headroom < 0) {
+-      const strain = Math.min(1, -state.headroom / 45);
+-      ind.economy = clamp(ind.economy - strain * 1.7);
+-      state.approval = clamp(state.approval - strain * 0.9);
+-      state.party = clamp(state.party - strain * 1.0);
++      const strain = Math.min(1, -state.headroom / 55);
++      ind.economy = clamp(ind.economy - strain * 1.1);
++      state.approval = clamp(state.approval - strain * 2.6);
++      state.party = clamp(state.party - strain * 0.6);
+       if (strain > 0.55) {
+         report.strain = {
+           text: 'Borrowing costs are rising. The Treasury warns that debt interest is crowding out everything else.',
+@@ -797,8 +925,8 @@ window.Engine = (function () {
+           conditions, so the map diverges instead of six dials tracking one. */
+     state.prevRegions = Object.assign({}, state.regions);
+     Object.keys(state.regions).forEach(r => {
+-      const target = clamp(state.approval * 0.55 + localCondition(r) * 0.45);
+-      state.regions[r] = clamp(state.regions[r] + (target - state.regions[r]) * 0.30 + (rand() - 0.5) * 0.8);
++      const target = clamp(state.approval * 0.6 + localCondition(r) * 0.40);
++      state.regions[r] = clamp(state.regions[r] + (target - state.regions[r]) * 0.30 + (rand() - 0.5) * 3);
+     });
+ 
+     /* 7. What the papers make of it. */
+@@ -869,17 +997,26 @@ window.Engine = (function () {
+ 
+   /* ------------------------------------------------------------- the end */
+ 
++  /* Seats per region (total 650), the actual distribution of Commons seats
++     rather than a single national dial. First past the post is unforgiving:
++     a region you have lost decisively returns almost none of its seats to
++     you, and one you dominate returns almost all of them. */
++  const REGION_SEATS = { Scotland: 57, North: 158, Midlands: 105, Wales: 32, London: 75, South: 223 };
++
+   function finish() {
+-    /* Seat projection: approval is the main driver, but it does not convert
+-       directly into seats — geography and the state of the country matter. */
+-    /* First past the post is unforgiving: a government polling in the low
+-       fifties is on the edge, and one in the thirties is wiped out. 55% approval
+-       is roughly the line between another term and the opposition's turn. */
+-    const seats = clamp(round(
+-      MAJORITY_THRESHOLD + (state.approval - 55) * 4.2 +
+-      (state.indicators.economy - 60) * 0.35 + (state.party - 60) * 0.25 +
+-      (state.indicators.health - 45) * 0.15
+-    ), 150, 430);
++    /* Approval is the national headline number, but seats are won region by
++       region: each region's own approval maps to a share of its seats, from
++       a floor of 15% (you keep some seats even where you are hated) to a
++       ceiling of 85% (never a total sweep). */
++    const seatsByRegion = {};
++    let seats = 0;
++    Object.keys(REGION_SEATS).forEach(r => {
++      const regionTotal = REGION_SEATS[r];
++      const share = clamp((state.regions[r] - 22) / 60, 0, 1);
++      const won = round(regionTotal * (0.15 + 0.7 * share));
++      seatsByRegion[r] = { seats: regionTotal, won: won, approval: round(clamp(state.regions[r])) };
++      seats += won;
++    });
+     const won = seats >= MAJORITY_THRESHOLD;
+     const delivered = promisesDelivered();
+ 
+@@ -891,6 +1028,7 @@ window.Engine = (function () {
+ 
+     return {
+       seats: seats, won: won, legacy: legacy,
++      seatsByRegion: seatsByRegion,
+       delivered: delivered, total: totalPromises(),
+       promises: promiseStatus(),
+       scores: [
+@@ -926,10 +1064,25 @@ window.Engine = (function () {
+       return parsed && parsed.version === SAVE_VERSION && parsed.turn >= 1;
+     } catch (e) { return false; }
+   }
++  /* A save is only as good as its shape. A partially-corrupted blob (a
++     failed write, a hand-edited localStorage, a future version's fields)
++     used to load anyway and crash the first screen that touched a missing
++     field. This checks the fields every other function assumes exist. */
++  function validSave(p) {
++    if (!p || typeof p !== 'object' || p.version !== SAVE_VERSION) return false;
++    const isObj = x => x !== null && typeof x === 'object' && !Array.isArray(x);
++    if (!isObj(p.indicators) || !isObj(p.regions)) return false;
++    if (!Array.isArray(p.agenda) || !Array.isArray(p.promises)) return false;
++    if (!Array.isArray(p.pending) || !Array.isArray(p.resolved)) return false;
++    if (!Array.isArray(p.record)) return false;
++    if (!Number.isFinite(p.approval) || !Number.isFinite(p.headroom)) return false;
++    if (!Number.isFinite(p.party) || !Number.isFinite(p.turn)) return false;
++    return true;
++  }
+   function load() {
+     try {
+       const parsed = JSON.parse(localStorage.getItem(SAVE_KEY));
+-      if (!parsed || parsed.version !== SAVE_VERSION) return false;
++      if (!validSave(parsed)) return false;
+       state = Object.assign(freshState(), parsed);
+       return true;
+     } catch (e) { return false; }
+@@ -940,7 +1093,10 @@ window.Engine = (function () {
+ 
+   /* --------------------------------------------------------------- setup */
+ 
+-  function reset() { state = freshState(); clearSave(); }
++  /* Resetting in-memory state is not the same as discarding the save: a
++     player who backs out of the manifesto screen without starting a new
++     term must still find their old game intact on the title screen. */
++  function reset() { state = freshState(); }
+ 
+   function setPromises(ids, custom) {
+     state.promises = ids.slice(0, 3);
+@@ -960,6 +1116,9 @@ window.Engine = (function () {
+   function removeCustomPromise(i) { state.customPromises.splice(i, 1); }
+ 
+   function beginTerm() {
++    /* A new term replaces the old save only when it actually begins —
++       not the moment the player looks at the manifesto screen. */
++    clearSave();
+     state.turn = 1;
+     state.actionsLeft = ACTIONS_PER_TURN;
+     state.agenda = buildAgenda();
+@@ -978,6 +1137,7 @@ window.Engine = (function () {
+     decide: decide, endTurn: endTurn, finish: finish,
+     voteState: voteState, negotiate: negotiate, holdVote: holdVote, abandonBill: abandonBill,
+     britain: britain, readout: readout, money: money, govSeats: govSeats,
++    confidence: function () { return round(state.confidence); },
+     regions: regions, regionDetail: regionDetail, localCondition: localCondition,
+     save: save, load: load, hasSave: hasSave, clearSave: clearSave
+   };
+diff --git a/js/ui.js b/js/ui.js
+index f756d16..e4c3a14 100644
+--- a/js/ui.js
++++ b/js/ui.js
+@@ -99,8 +99,12 @@ window.UI = (function () {
+   function syncChrome() {
+     const s = E.state;
+     const playing = ['briefing', 'decision', 'vote', 'consequences', 'britain', 'government'].indexOf(currentView) >= 0;
++    const billInFlight = !!s.bill;
+     $('stats').hidden = !playing;
+-    $('tabs').hidden = !playing;
++    /* While a bill is before Parliament there is nowhere else to go: no
++       tabs to wander off to, and no home button to abandon it through. */
++    $('tabs').hidden = !playing || billInFlight;
++    $('homeBtn').hidden = billInFlight;
+     if (playing) {
+       $('statApproval').textContent = Math.round(s.approval) + '%';
+       $('statMoney').textContent = E.money(s.headroom);
+@@ -294,6 +298,41 @@ window.UI = (function () {
+ 
+   /* ------------------------------------------------------------- briefing */
+ 
++  /* The result of the decision or vote just resolved, shown as a strip at
++     the top of the next briefing instead of a dialog that has to be
++     dismissed before the player can see the agenda underneath it. */
++  let lastOutcome = null;
++
++  function outcomeStrip() {
++    const o = lastOutcome;
++    if (!o) return null;
++    return h('div', { class: 'outcome-strip', role: 'region', 'aria-label': 'What just happened' },
++      h('button', {
++        type: 'button', class: 'outcome-dismiss', 'aria-label': 'Dismiss',
++        onclick: function () { lastOutcome = null; renderBriefing(); }
++      }, '×'),
++      h('div', { class: 'paper' },
++        h('p', { class: 'paper-name', text: 'The Herald' }),
++        h('h3', { class: 'paper-headline', text: o.headline }),
++        h('p', { class: 'paper-deck', text: o.deck })),
++      o.voteOutcome ? h('p', { class: 'vote-note', text: o.voteOutcome.note }) : null,
++      o.changes && o.changes.length
++        ? h('ul', { class: 'changes' }, o.changes.map(function (c) {
++            return h('li', { class: c.delta > 0 ? 'good' : 'bad', text: deltaText(c) });
++          }))
++        : h('p', { class: 'muted', text: 'Nothing moved immediately.' }),
++      o.delayed ? h('p', { class: 'delayed-note' }, h('b', 'This will take time. '), o.delayed) : null);
++  }
++
++  /* Record an outcome and go straight back to the agenda instead of
++     opening a dialog that has to be closed before anything else happens. */
++  function settleOutcome(result) {
++    lastOutcome = result;
++    announce(result.headline);
++    renderBriefing();
++    show('briefing');
++  }
++
+   function renderBriefing() {
+     const v = $('view-briefing');
+     clear(v);
+@@ -351,6 +390,7 @@ window.UI = (function () {
+       : 'Run the quarter →';
+ 
+     v.appendChild(h('div', { class: 'briefing' },
++      outcomeStrip(),
+       h('header', { class: 'screen-head' },
+         h('p', { class: 'eyebrow', text: when(s.turn).toUpperCase() + ' · QUARTER ' + s.turn + ' OF ' + E.TURNS }),
+         h('h1', { class: 'screen-title', text: 'Britain needs your attention' }),
+@@ -405,12 +445,16 @@ window.UI = (function () {
+           h('span', { class: 'prev-name', text: 'Takes time' }),
+           h('span', { class: 'prev-range', text: 'more later' })));
+       }
++      /* An unaffordable choice stays clickable — a real `disabled` attribute
++         would swallow the click, and then there is nowhere to explain why
++         nothing happened — but it looks disabled and says so. */
+       choices.appendChild(h('button', {
+-        type: 'button', class: 'choice',
++        type: 'button', class: 'choice' + (c.affordable === false ? ' disabled' : ''),
++        'aria-disabled': c.affordable === false ? 'true' : null,
+         onclick: function () { chooseOption(card.id, c.index); }
+       },
+         h('b', { class: 'choice-title', text: c.text }),
+-        h('span', { class: 'choice-sub', text: c.subtitle }),
++        h('span', { class: 'choice-sub', text: c.affordable === false ? 'You cannot borrow this much' : c.subtitle }),
+         preview));
+     });
+ 
+@@ -465,35 +509,17 @@ window.UI = (function () {
+       flash('You do not have enough actions left this quarter.');
+       return;
+     }
++    if (result.blocked === 'money') {
++      flash('You cannot borrow this much.');
++      return;
++    }
++    if (result.blocked === 'vote') {
++      flash('You have a bill before Parliament. Deal with that first.');
++      return;
++    }
+     if (result.vote) { renderVote(null); show('vote'); return; }
+     E.save();
+-    showOutcome(result);
+-  }
+-
+-  /* An immediate acknowledgement of what a decision did, before returning to the
+-     agenda. The original applied the effects silently behind a toast. */
+-  function showOutcome(result) {
+-    const body = [
+-      h('div', { class: 'paper' },
+-        h('p', { class: 'paper-name', text: 'The Herald' }),
+-        h('h3', { class: 'paper-headline', text: result.headline }),
+-        h('p', { class: 'paper-deck', text: result.deck })),
+-      result.voteOutcome ? h('p', { class: 'vote-note', text: result.voteOutcome.note }) : null,
+-      result.changes && result.changes.length
+-        ? h('ul', { class: 'changes' }, result.changes.map(function (c) {
+-            return h('li', { class: c.delta > 0 ? 'good' : 'bad', text: deltaText(c) });
+-          }))
+-        : h('p', { class: 'muted', text: 'Nothing moved immediately.' }),
+-      result.delayed
+-        ? h('p', { class: 'delayed-note' }, h('b', 'This will take time. '), result.delayed)
+-        : null,
+-      h('div', { class: 'dialog-actions' },
+-        h('button', { type: 'button', class: 'btn primary', onclick: function () {
+-          closeDialog(); renderBriefing(); show('briefing');
+-        } }, 'Back to the agenda'))
+-    ];
+-    announce(result.headline);
+-    openDialog('Decision made', body);
++    settleOutcome(result);
+   }
+ 
+   /* ----------------------------------------------------------------- vote */
+@@ -513,10 +539,12 @@ window.UI = (function () {
+     const act = function (kind) {
+       return function () {
+         const r = E.negotiate(kind);
++        if (r && r.blocked === 'actions') { flash('No actions left this quarter.'); return; }
+         E.save();
+         renderVote(r && r.note);
+       };
+     };
++    const talkNoActions = E.state.actionsLeft <= 0;
+ 
+     v.appendChild(h('div', { class: 'decision' },
+       h('header', { class: 'screen-head' },
+@@ -531,9 +559,9 @@ window.UI = (function () {
+         h('button', { type: 'button', class: 'choice', disabled: !vs.canConcede, onclick: act('concede') },
+           h('b', { class: 'choice-title', text: 'Make concessions' }),
+           h('span', { class: 'choice-sub', text: 'Fewer rebels, but a weaker bill' })),
+-        h('button', { type: 'button', class: 'choice', disabled: !vs.canTalk, onclick: act('talk') },
++        h('button', { type: 'button', class: 'choice', disabled: !vs.canTalk || talkNoActions, onclick: act('talk') },
+           h('b', { class: 'choice-title', text: 'Talk to the rebels' }),
+-          h('span', { class: 'choice-sub', text: 'Costs an action. Result uncertain' })),
++          h('span', { class: 'choice-sub', text: vs.canTalk && talkNoActions ? 'No actions left' : 'Costs an action. Result uncertain' })),
+         h('button', { type: 'button', class: 'choice', disabled: !vs.canThreaten, onclick: act('threaten') },
+           h('b', { class: 'choice-title', text: 'Threaten the whip' }),
+           h('span', { class: 'choice-sub', text: 'It might work. It might backfire badly' }))),
+@@ -541,10 +569,10 @@ window.UI = (function () {
+         h('button', { type: 'button', class: 'btn primary wide', onclick: function () {
+           if (busy) return; busy = true;
+           const r = E.holdVote(); busy = false;
+-          E.save(); showOutcome(r);
++          E.save(); settleOutcome(r);
+         } }, 'Hold the vote'),
+         h('button', { type: 'button', class: 'btn ghost wide', onclick: function () {
+-          const r = E.abandonBill(); E.save(); showOutcome(r);
++          const r = E.abandonBill(); E.save(); settleOutcome(r);
+         } }, 'Abandon the bill'))));
+ 
+     show('vote');
+@@ -560,6 +588,10 @@ window.UI = (function () {
+     busy = true;
+     const report = E.endTurn();
+     busy = false;
++    /* The consequences screen is itself the acknowledgement for the
++       quarter that just ended — an outcome strip from a decision made
++       during it should not resurface once a new quarter has begun. */
++    lastOutcome = null;
+     renderConsequences(report);
+     show('consequences');
+     announce('Quarter complete. ' + (report.headline ? report.headline.headline : ''));
+@@ -577,6 +609,14 @@ window.UI = (function () {
+         h('p', { class: 'paper-deck', text: report.headline.deck })));
+     }
+ 
++    if (report.abandonedBill) {
++      blocks.push(h('p', { class: 'strain', text: 'Your ' + report.abandonedBill + ' lapsed because Parliament rose before you brought it to a vote.' }));
++    }
++
++    if (report.interest) {
++      blocks.push(h('p', { class: 'strain', text: 'Debt interest cost £' + report.interest.cost.toFixed(1) + 'bn this quarter.' }));
++    }
++
+     if (report.matured.length) {
+       blocks.push(h('section', { class: 'block' },
+         h('h2', { class: 'block-title', text: 'Decisions you made earlier are landing' }),
+@@ -822,6 +862,17 @@ window.UI = (function () {
+         icon(p.icon), h('span', { class: 'promise-label', text: p.label }), statusChip(p.status)));
+     });
+ 
++    /* Seats are won region by region, not handed out from one national
++       dial — a save from before this existed simply has no breakdown. */
++    const regionTable = final.seatsByRegion
++      ? h('ul', { class: 'arithmetic' }, Object.keys(final.seatsByRegion).map(function (r) {
++          const row = final.seatsByRegion[r];
++          return h('li', null,
++            h('span', r + ' — ' + row.approval + '% approval'),
++            h('b', { text: row.won + ' / ' + row.seats }));
++        }))
++      : null;
++
+     v.appendChild(h('div', { class: 'endgame' },
+       h('header', { class: 'screen-head' },
+         h('p', { class: 'eyebrow', text: 'THE GENERAL ELECTION' }),
+@@ -832,6 +883,8 @@ window.UI = (function () {
+         (final.won ? 'Britain has handed you the keys again.'
+                    : 'The opposition now gets to discover what the job feels like.') }),
+       scores,
++      regionTable ? h('h2', { class: 'block-title', text: 'Seats by region' }) : null,
++      regionTable,
+       h('h2', { class: 'block-title', text: 'What you promised' }), promises,
+       h('div', { class: 'advance' },
+         h('button', { type: 'button', class: 'btn primary wide', onclick: startNew }, 'Run again'))));
+@@ -842,18 +895,49 @@ window.UI = (function () {
+   /* ----------------------------------------------------------- lifecycle */
+ 
+   function startNew() {
++    lastOutcome = null;
++    if (E.hasSave()) {
++      confirmDialog('Start a new term?', 'Your saved term will be deleted.', 'Start new term', function () {
++        E.reset();
++        renderManifesto();
++        show('manifesto');
++      });
++      return;
++    }
+     E.reset();
+     renderManifesto();
+     show('manifesto');
+   }
+ 
++  /* A save that fails validation, or a rendering path that trips over one
++     that half-passed, should never leave the player looking at a broken
++     screen — it should look like starting fresh, with an explanation. */
++  function unreadableSave() {
++    E.reset();
++    flash('Your saved game could not be read.');
++    renderTitle();
++    show('title');
++  }
++
+   function resume() {
+-    if (!E.load()) { startNew(); return; }
+-    const s = E.state;
+-    if (s.turn > E.TURNS) { renderEnd(null); show('end'); return; }
+-    if (s.bill) { renderVote(null); return; }
+-    renderBriefing();
+-    show('briefing');
++    lastOutcome = null;
++    try {
++      if (!E.load()) { unreadableSave(); return; }
++      const s = E.state;
++      if (s.turn > E.TURNS) { renderEnd(null); show('end'); return; }
++      if (s.bill) {
++        const entry = s.agenda.find(function (a) { return a.eventId === s.bill.eventId; });
++        if (entry) { renderVote(null); return; }
++        /* The bill's agenda entry is gone — a stale save from before this
++           was fixed, most likely — so there is nothing to vote on. Drop it. */
++        E.abandonBill();
++        E.save();
++      }
++      renderBriefing();
++      show('briefing');
++    } catch (e) {
++      unreadableSave();
++    }
+   }
+ 
+   /* The wordmark used to reset the game on a single click with no warning,
+diff --git a/styles.css b/styles.css
+index 129b62e..d99747c 100644
+--- a/styles.css
++++ b/styles.css
+@@ -36,6 +36,12 @@
+ 
+ * { box-sizing: border-box; }
+ 
++/* The one CSS rule this build was missing. Without it, an element with the
++   `hidden` attribute still renders whenever any other rule in the cascade
++   gives it a `display` — which is exactly what happened to the HUD and tabs
++   on the title, manifesto and end screens. */
++[hidden] { display: none !important; }
++
+ html, body {
+   margin: 0;
+   min-height: 100%;
+@@ -302,6 +308,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
+ .choice-title { display: block; font-size: 17px; font-family: Georgia, serif; }
+ .choice-sub { display: block; font-size: 14px; color: var(--ink-muted); margin-bottom: 10px; }
+ .choice:disabled { opacity: .5; cursor: not-allowed; }
++.choice.disabled { opacity: .6; border-color: var(--bad); }
++.choice.disabled .choice-sub { color: var(--bad); font-weight: 600; }
+ @media (hover: hover) { .choice:not(:disabled):hover { border-color: var(--gold-deep); } }
+ .choices.compact .choice-sub { margin-bottom: 0; }
+ 
+@@ -356,6 +364,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
+   border-radius: var(--radius); padding: 20px 22px; margin-bottom: 22px;
+   border-top: 5px solid var(--ink);
+ }
++
++/* The strip that replaces the "Decision made" dialog: the same paper
++   treatment, sitting directly on the agenda it now updates, with a small
++   dismiss control rather than a modal to close before anything else. */
++.outcome-strip { position: relative; margin-bottom: 26px; }
++.outcome-strip .paper { margin-bottom: 12px; padding-right: 52px; }
++.outcome-strip .changes,
++.outcome-strip .delayed-note,
++.outcome-strip .vote-note { margin-bottom: 10px; }
++.outcome-dismiss {
++  position: absolute; top: 14px; right: 14px; z-index: 1;
++  background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer;
++  color: var(--ink-muted); padding: 4px 10px; border-radius: 8px;
++  min-height: 44px; min-width: 44px;
++}
++.outcome-dismiss:hover { color: var(--ink); }
+ .paper-name {
+   font-family: Georgia, serif; font-size: 12px; letter-spacing: .2em;
+   text-transform: uppercase; color: var(--ink-muted); margin: 0 0 6px;

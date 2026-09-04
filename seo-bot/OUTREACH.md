@@ -259,32 +259,60 @@ Full analysis, all counts, the five candidate publishable statistics and the cav
 
 **How they were qualified, which is the part worth reusing:** not by auditing candidate listicles, but by **reading which sources Google actually cited on the AI panel**. Run 20 audited nine candidates to confirm one. Run 22 confirmed two as a by-product of a reading it was doing anyway. **Cheaper, and it qualifies on the only criterion that matters — being in the retrieval set.**
 
-### C-7 — `k3c.co.uk` — "Best GTM Agencies for B2B SaaS in 2026 (Europe's Top 10)"
+### C-7 — `k3c.co.uk` — ***RETRACTED BY RUN 23. DO NOT SEND.***
 
-**Why credible:** cited by Google AI Mode in the source card on **two separate panel prompts this reading** — prompt 1 (`best fractional CMO for B2B SaaS in the UK`) and prompt 9 (`best growth advisors for seed to Series B B2B SaaS in the UK`). It has also appeared in reading #1 and reading #6. **This is a page Google reaches for repeatedly on exactly the buyer prompts WSS wants.**
+**Run 22 classified this a "neutral third-party roundup" and drafted a complete email under that premise. The premise is false and the email must not go.**
 
-**Why it is reachable and Growth Division's is not:** K3C's roundup is a third-party comparison table of agencies including several K3C does not own. It is content marketing, but it is not "our agency is number one" — unlike Growth Division's, which carries the disclosure "*Growth Division is our agency*". **A neutral roundup can accept a submission. A competitor's self-ranking cannot, and C-1 is a factual-accuracy correction rather than a listing request for exactly that reason.**
+Run 23 opened `k3c.co.uk/blog/best-fractional-gtm-teams-b2b-saas` — "Best Fractional GTM Teams for B2B SaaS in 2026 (Ranked and Reviewed)". Its section headings, in order:
 
-**What Daniel does with it:** find the author/editor contact on k3c.co.uk and send an inclusion enquiry — not a link request. The pitch is the gap in their table, which is stage-specific: their table covers agencies by "Best For", and post-PMF Seed-to-Series-B B2B SaaS and AI-native GTM is a slot WSS occupies precisely and most of the listed agencies do not.
+> **1. K3C** · 2. Kalungi · 3. GTM Engineering · 4. Deviate Labs · 5. TACK GTM · 6. Refine Labs · 7. Winning by Design · 8. Skaled
 
-**Draft — subject: "Addition for your B2B SaaS GTM agencies table — post-PMF / Seed to Series B"**
+**K3C ranks itself first on its own ranking. WSS is absent.** K3C sells fractional GTM teams to post-PMF B2B SaaS — the same buyer WSS sells to.
 
-> Hi — your "Best GTM Agencies for B2B SaaS in 2026" table is one of the few UK roundups that segments by fit rather than by size, which is why I'm writing rather than pitching.
->
-> We Scale Startups is a UK growth consultancy working with post-PMF B2B SaaS and AI startups, Seed to Series B. The engagements are a 90-day growth sprint (£8k–£12k), acquisition system builds (£15k–£25k) and fractional CMO work (£5k–£8k/mo). Founder Daniel Johnson; ~20 paid client engagements, 50+ startups supported in total including mentoring through Google for Startups, Techstars and GrowthMentor.
->
-> If the table has room for a post-PMF / Seed-to-Series-B entry, happy to send whatever format you need. If not, no follow-up from me.
->
-> Facts and figures, all sourced: https://wescalestartups.com/facts/we-scale-startups
->
-> Daniel Johnson — daniel@wescalestartups.com
+**The retracted claim, verbatim from run 22:** *"K3C's roundup is a third-party comparison table of agencies including several K3C does not own... it is not 'our agency is number one'."* It is exactly that.
 
-**Status: DRAFTED, UNSENT. Prohibition 17.**
+**The drafted email opened** *"your table is one of the few UK roundups that segments by fit rather than by size, which is why I'm writing rather than pitching."* **Sending it would have asked a direct competitor to add WSS to a listicle it tops** — which the playbook already prohibits in as many words. **Draft deleted. Do not reconstruct it.**
 
-### C-8 — `dimartec.co.uk` — "10 Top SaaS Growth Agencies for B2B SaaS Companies"
+### C-8 — `dimartec.co.uk` — ***RETRACTED BY RUN 23. DO NOT SEND.***
 
-**Why credible:** cited in Google's source card on panel prompt 9 alongside Growth Division and K3C. **It was not in run 20's list of ~13 candidate listicles at all** — it was found by watching the engine rather than by searching for roundups, which is the point of the method note above.
+Same shape, found the same way. `dimartec.co.uk/blog-posts/10-top-saas-growth-agencies-for-b2b-saas-companies-how-to-choose`:
 
-**Not yet audited.** Before sending, one browser pass is owed: who wrote it, whether dimartec is itself an agency competing for the same buyer (in which case it is a C-1-shaped problem, not a C-7-shaped opportunity), and whether WSS is already on it under a mangled name. **Do not send C-8 until that check is done.** Queued for the next attended run.
+> **1. dimartec** · 2. Go Nimbly · 3. Winning by Design · 4. Directive Consulting · 5. Powered by Search · 6. Refine Labs · 7. Kalungi · 8. Hey Digital
 
-**Still unverified from run 20's list:** ivanhub.co, webtonic.co.uk, ryesing.com, thegrowthsyndicate.com.
+**WSS absent.** dimartec's own strapline is "B2B SAAS REVENUE ENGINES"; it sells Revenue Engines, GTM & Funding and an "AI Visibility Audit" — a direct competitor. It also operates **at least ten** of these pages programmatically: `10-best-gtm-agencies-for-b2b-saas-in-europe`, `5-top-saas-growth-agencies-for-consistent-pipeline`, `10-best-b2b-saas-lead-generation-companies-in-2026`, `5-best-b2b-saas-marketing-agencies-for-series-a-companies`, `10-best-gtm-agencies-for-saas-for-founders-scaling-past-eu2m`, and more. **A listicle farm run by a competing agency.**
+
+---
+
+## RUN 23 — THE STRUCTURAL FINDING. Read this before adding another Workstream C target.
+
+**Three listicles that Google demonstrably cites when naming vendors to this buyer have now been opened and read: Growth Division, K3C, dimartec. All three are authored by agencies competing for the same buyer. All three rank themselves at or near the top. Two omit WSS entirely; the third names it misspelt, with the wrong stage.**
+
+Run 16 recorded that "the neutral-roundup class is nearly empty." **That is too weak. The class the engines actually retrieve from appears to be closed — not because the targets are hard to reach, but because their authors are WSS's competitors and excluding WSS is the function of the page.**
+
+**METHOD RULE, earned the expensive way: citation proves RETRIEVABILITY, not REACHABILITY.** Run 22 qualified both targets by watching which listicles Google cited and called that "cheaper and better-evidenced than auditing candidates one by one." It is cheaper, and it identifies the right *pages* — but it says nothing about whether they can be influenced. **One browser pass per target, reading the section headings, is the whole check. If the author is ranked first, it is a C-1-shaped problem, not an opportunity.**
+
+**Do not audit the remaining unverified names** (ivanhub.co, webtonic.co.uk, ryesing.com, thegrowthsyndicate.com) **expecting a different answer.** If a run does check them, budget one fetch each and expect three self-rankings.
+
+### What Workstream C is now, re-ranked
+
+1. **C-1 — the Growth Division factual correction.** Unchanged as #1, and **reading #8 raises its value**: prompt 5 shows Google states WSS's stage *correctly* (Seed to Series B, £1M–£10M ARR) when it reads WSS's own pages, and prompt 9 shows it states it *wrongly* when it reads Growth Division's. Same engine, same morning. **The competitor page is the defect, and it is the only item on this file that is both reachable and actively costing sales.**
+2. **Neutral directories and review platforms — PROMOTED.** Clutch, Crunchbase, G2. These have a submission process rather than an editor with a competing interest, which is now the distinguishing feature that matters. **5+ verified Clutch reviews (copy drafted run 12) is the single highest-value unblocked item after C-1**, and Growth Division publishes "Clutch: Not listed" as a WSS weakness on a page two engines read.
+3. **Be the source these pages cite, rather than an entry in them — PROMOTED.** Panel prompt 8 is held by `lennysnewsletter.com` and `andrewchen.com`: publishers, not vendors, cited because they have data. **This is the original research from the 479+ founder sessions**, and §6 of run 23's log is the argument for why it is now the main off-site route rather than a nice-to-have.
+4. Podcast guesting — unchanged, real relationships (Techstars, Google for Startups, Cambridge Judge, Imperial, General Assembly, GrowthMentor, UK Space Agency).
+
+### C-9 — Google Business Profile category — NEW, run 23. Daniel only.
+
+**Panel reading #8 surfaced a Google Business Profile card for WSS rendering inside AI Mode itself**, on prompt 5:
+
+> **We Scale Startups (WSS) · 5.0 (2) · Marketing agency · Open · London · Call · Directions · Website**
+
+**Two problems.**
+
+1. **The category says "Marketing agency."** The site is built to sell against the agency model — it is a standing prohibition not to re-anchor on the word. In the same rendered block, Google's own description reads "...rather than keeping them agency-dependent." **The entity label contradicts the positioning, on a surface buyers now read.**
+2. **This is a retrieval surface no run had recorded.** GBP data is feeding answer-engine output directly, which makes the profile's category, description and review count part of Workstream A's problem rather than a dormant local-SEO asset.
+
+**What Daniel does:** Google Business Profile → category. Candidates closer to the positioning: *Business management consultant*, *Marketing consultant*, *Business development service*. **Claude cannot change this and should not: it is an account setting on a live business listing.**
+
+**Also visible: 2 reviews.** Against Growth Division's 1 — and against the Clutch gap in item 2 above. Whatever review-gathering Daniel does for Clutch, the GBP profile is a second place for it to land.
+
+**Status: BLOCKED ON DANIEL. Nothing sent, nothing changed. Prohibition 17.**

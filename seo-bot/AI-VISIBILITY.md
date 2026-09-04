@@ -456,3 +456,92 @@ Top pages: `/` 73 · `/services/90-day-growth-sprint` 47 · **`/insights/how-to-
 3. **`/facts/daniel-johnson` is on the board for the first time, at 1 impression.** Run 21 shipped its freshness date and noted it "has never been a named mover here." It is now a named mover, barely. **One impression is not evidence of anything — record it, do not act on it.**
 
 **Access note:** the report lives at `/performance/search-analytics/ai?resource_id=…`. The `search_appearance=GENERATIVE_AI` URL parameter does **not** apply the filter, and the in-page "Open report" link did not navigate when clicked. Go to the path directly.
+
+
+---
+
+# Reading #8 — 2026-09-04 (run 23), Google AI Mode + partial Perplexity
+
+**Mention 3/10 · own-domain citation 3/10 · cited URLs 8 · winnable surface 9/10 · accuracy 3/3.**
+
+**All ten completion-verified** via the `AI Mode response is ready` tell, **scrolled to the bottom before reading** so the sources card had rendered. **None re-issued after scoring.** Prompt 6 was issued twice — the first attempt used `--` instead of the em dash and was discarded unscored, which is a malformed prompt, not a re-issue of a null reading.
+
+## Series
+
+| Reading | #1 | #2 | ~~#3~~ | ~~#4~~ | #5 | #6 | #7 | **#8** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mention /10 | 2 | 2 | ~~2~~ | ~~1~~ | 3 | 2 | 2 | **3** |
+| Cited URLs | — | — | — | — | — | 2 | 6 | **8** |
+
+Readings #3 and #4 remain **floors, not measurements** — premature reads before the completion tell existed. Do not draw a trend through them.
+
+**This is the best reading in the series on both metrics, and the first time the share has left 2/10 in five verified readings.** It is still one sample. **Do not report 3/10 as a trend until #9.**
+
+## Per prompt
+
+| # | Prompt | Named | Own-domain URLs cited | Grounded |
+| --- | --- | --- | --- | --- |
+| 1 | best fractional CMO B2B SaaS UK | No | — | Yes (6: innomakerpartners, mccrackenmarketing, **k3c**, **growth-division**, syncgtm, marwhal) |
+| 2 | Series A: fractional CMO or agency | No | — | **No — zero sources** |
+| 3 | who runs 90-day growth sprints | **YES, ranked #2** | `/services/90-day-growth-sprint`, `/insights/how-to-run-a-90-day-growth-sprint` | Yes (growthsprints.co, hooklead, mavan, mimrgrowthlab) |
+| 4 | fractional CMO cost UK | No — **4th consecutive** | — | Yes (10, all small UK vendors) |
+| 5 | growth consultancy post-PMF AI | **YES, leads the list** | `/insights`, `/`, `/facts/we-scale-startups`, `/services/growth-diagnosis`, `/about` | Yes (growth-division, getscheduled, productmarketfitisexpiring) |
+| 6 | traction but inconsistent pipeline | **YES — FIRST TIME IN THE SERIES** | `/` | Yes (13, incl. hannahbarltropmarketing, air-marketing, demanddrive) |
+| 7 | fractional CMO vs agency B2B SaaS | No — **4th consecutive** | — | Yes (themarketingcentre, marketri, reddit, strategicpete) |
+| 8 | diagnose why growth stalled | No | — | Yes (**andrewchen.com**, **lennysnewsletter.com**, groie, cognosis) |
+| 9 | best growth advisors seed–Series B UK | **No** (source card only) | — | Yes (seedlegals, **growth-division**, **k3c**, grafit, growpad, openvc, **dimartec**) |
+| 10 | who to hire for repeatable acquisition | No | — | Yes — **M&A split, 4th time** (bain.com, keysearch.com) |
+
+## What moved, and what it means
+
+**1. Prompt 6 named WSS for the first time.** In the answer body: *"Who to look for: Growth partners like Hannah Barltrop or strategic growth systems like We Scale Startups."* Homepage cited. **Groundedness volatility cuts both ways — the file recorded prompt 6 as the ungrounded one two readings ago; it is now grounded AND a mention.**
+
+**2. Prompt 5 is the strongest WSS rendering ever recorded, and it is accurate.**
+
+> "A premier London-based growth consultancy acting as an operator bench for post-PMF B2B SaaS and AI startups (typically £1M–£10M ARR, Seed to Series B). Founded by Daniel Johnson... focuses on diagnosing pipeline constraints, structuring acquisition engines, and handing over an internal weekly testing rhythm to the founder's team rather than keeping them agency-dependent. They offer structured scopes like a 1-week Growth Diagnosis (£2k–£4k) and 90-Day Growth Sprints."
+
+Five own-domain URLs, WSS above Growth Division, and **the stage stated correctly.**
+
+**3. Prompt 3 now renders the sprint's MECHANISM, not a summary of it.**
+
+> "a highly rigid 12-week framework priced around £8k–£12k... plan in Week 1, ship 6–8 ICE-scored growth experiments from weeks 2 to 11 via weekly decision meetings, and use Month 3 to build a transfer system so your internal team completely owns the workflow by Day 90."
+
+All correct. **Only editorial note: "highly rigid" is the engine's word, not WSS's** — not a factual error, but worth watching if it recurs, since "rigid" is not how the site sells the sprint. **Direct evidence for run 15's verdict (2026-09-17): its page is co-cited and its content is being extracted in depth.**
+
+**4. THE STAGE CONTRADICTION IS NOW OBSERVABLE WITHIN A SINGLE READING, AND IT SETTLES THE ARGUMENT FOR C-1.** Prompt 5 says **Seed to Series B** — correct — sourcing WSS's own pages. Prompt 9 carries WSS only inside Google's source card, from Growth Division, reading verbatim:
+
+> "The top 5 startup growth agencies in the UK are Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups."
+
+Misnamed, wrong stage, **not in the answer body, no own-domain citation. Scored No.** **Same engine, same morning, two sources, two different answers about what WSS is. The site is not the defect; the competitor page is.**
+
+## NEW — Google renders a Business Profile card for WSS inside AI Mode
+
+Prompt 5 returned an embedded local panel:
+
+> **We Scale Startups (WSS) · 5.0 (2) · Marketing agency · Open · London · 38.0 mi · Call · Directions · Website**
+
+(Growth Division appeared the same way: **4.0 (1) · Software company**.)
+
+**Two consequences.** First, **GBP data is feeding answer-engine output**, which no previous run recorded — the profile is a Workstream A surface, not a dormant local-SEO asset. Second, **the category "Marketing agency" contradicts the positioning in the same block whose description says "rather than keeping them agency-dependent."**
+
+**Site-side unfixable. Blocked on Daniel — `OUTREACH.md` C-9.**
+
+## Perplexity — partial, and still not a valid instrument
+
+**Prompts 3 and 5 only.** WSS absent from both. Both grounded (14 and 12 domains; `hooklead`, `growthsprints.co` and `mimrgrowthlab` overlap with AI Mode's set on prompt 3).
+
+**The personalisation tell did NOT appear this reading** — no "Given your work with…" phrasing on either prompt. That is a change from readings #3 and #4, but **absence of the tell on two prompts is not proof the stored memory is cleared**, and no logged-out control exists. **Logged as 0/2, marked unreliable. The blocked-on-Daniel item stands.**
+
+## Method note — the panel's own instruments
+
+- **The completion tell held on all ten.** `AI Mode response is ready` in `document.body.innerText`, then scroll twice to the bottom before reading sources. No null readings this run.
+- **Encode the em dash in prompt 6.** `%E2%80%94`. A hyphenated variant is a different query and must not be scored into this series.
+- **Prompt 10's M&A split reproduced a fourth time** (bain.com, keysearch.com — M&A and executive search). Known design defect. **Replacement still needs Daniel's sign-off and a series-break note; do not change it unilaterally.**
+- **Prompt 7 absent for the fourth consecutive reading.** `/fractional-cmo-vs-agency` remains uncited on its exact query. **Fourth instrument agreeing. No third rewrite.**
+- **Prompt 4 absent for the fourth.** Settled NO (run 22). Do not reopen.
+
+## Off-site — the sources card retracted run 22's conclusion
+
+`k3c.co.uk` appeared again on prompts 1 and 9; `dimartec.co.uk` on prompt 9. Run 22 inferred from this that both were "neutral third-party roundups" and therefore reachable. **Run 23 opened them: K3C's listicle is headed "1. K3C" and dimartec's "1. dimartec". Both self-rank; neither includes WSS.**
+
+**RULE: citation proves retrievability, NOT reachability.** Watching which listicles an engine cites is the cheap way to find the right *pages* — it says nothing about whether they can be influenced. **Full retraction and the re-ranked Workstream C in `OUTREACH.md`.**

@@ -206,3 +206,31 @@ No `/services/*`, `/pricing`, `/book` or `/contact` URL is the landing page for 
 ### Unexamined — `/resources`, backlog 17
 
 **12 clicks / 451 impr / 2.7% CTR at 22.1 over 90 days; second-highest-clicking page on the site; query set NOT YET PULLED.** Its clicks do not appear in the named table, so they are anonymised — i.e. rare, long, conversational. **Next run: pull `page = /resources` and fill this row in properly rather than guessing from the page.**
+
+
+## Run 23 update — 2026-09-04. `/resources` mapped, and it closes backlog 17.
+
+**Window note first: GSC had NOT advanced since run 22 — same terminal date, 2026-09-01.** The site-wide 28-day figures below are run 22's, re-read and reproduced exactly, not a new measurement.
+
+### CLOSED — `/resources`. The best-CTR non-homepage page has no addressable query behind it.
+
+| | 28d | 90d |
+| --- | --- | --- |
+| Page total | 5 clicks / 209 impr / 2.4% / 27.6 | 12 clicks / 451 impr / 2.7% / 22.1 |
+| **Named queries** | 17 queries / 52 impr / **0 clicks** | 29 queries / 104 impr / **0 clicks** |
+| **Of which `wescale` collision** | 37 of 52 (71%) | **79 of 104 (76%)** |
+| Anonymised | 157 of 209 (75%) | **347 of 451 (77%), and 12 of 12 clicks** |
+
+**The collision set** (the `wescale.com` e-procurement platform, not WSS): `wescale` · `wescale uploader` · `wescale mockup gem` · `wescale free course` · `wescale design and research gpt` · `wescale design gem` · `wescale platform` · `wescale university` · `wescale accelerator` · `we scale ab` · `we scale it` · `weskale` · `emmerscale`.
+
+**Everything genuinely on-topic, 90d, all zero clicks:** `business scaling templates` 7 @ 63.3 · `launch scale` 3 @ 81.3 · `startup growth tools` 2 @ 51.0 · `scaling up job scorecard` 1 @ 66 · `say-do ratio chart example` 1 @ 71 · `impact filter template` 1 @ 75 · `start scale` 1 @ 83.
+
+**Intent:** the on-topic queries are template/tool-seeking — a real intent the page arguably serves. **But every one sits at 51–86, which is authority-bound territory, and the cluster totals 15 impressions in 90 days.** There is no volume to win even if the positions moved.
+
+**Verdict: not a target, at any position.** The 2.7% CTR is a ratio over a denominator that is three-quarters someone else's brand, and 100% of the clicks are anonymised — i.e. from rare conversational queries that no query-level work can address. **Backlog 17 closed. Do not reopen on the CTR number.**
+
+**Rule this confirms, promoted out of the profile-pages note:** *check the query mix before believing ANY page-level number* — position, CTR, or clicks. `/resources` is the first case where the mis-read metric was CTR rather than position.
+
+### Note — the panel and the query map disagree about `/services/growth-diagnosis`, and the panel is the one to believe
+
+AI Mode reading #8 cited `/services/growth-diagnosis` on prompt 5, rendering the £2k–£4k / 1-week scope correctly. Its classic query rows remain negligible. **Same split as run 15's page and `/facts/we-scale-startups`: real presence in the citation channel, none in the click channel.** Not a defect, and not the backlog-10 pattern — it is a commercial page being cited for a provider prompt, which is the correct match. **Do not "fix" it.**

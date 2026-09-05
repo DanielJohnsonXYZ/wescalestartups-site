@@ -296,7 +296,7 @@ Run 16 recorded that "the neutral-roundup class is nearly empty." **That is too 
 ### What Workstream C is now, re-ranked
 
 1. **C-1 — the Growth Division factual correction.** Unchanged as #1, and **reading #8 raises its value**: prompt 5 shows Google states WSS's stage *correctly* (Seed to Series B, £1M–£10M ARR) when it reads WSS's own pages, and prompt 9 shows it states it *wrongly* when it reads Growth Division's. Same engine, same morning. **The competitor page is the defect, and it is the only item on this file that is both reachable and actively costing sales.**
-2. **Neutral directories and review platforms — PROMOTED.** Clutch, Crunchbase, G2. These have a submission process rather than an editor with a competing interest, which is now the distinguishing feature that matters. **5+ verified Clutch reviews (copy drafted run 12) is the single highest-value unblocked item after C-1**, and Growth Division publishes "Clutch: Not listed" as a WSS weakness on a page two engines read.
+2. **~~Clutch reviews~~ — DROPPED 2026-09-04 on Daniel's instruction.** He will not ask past clients to sit a 15-minute Clutch reference interview, and **without reviews the listing surfaces for nothing, so the listing alone is not worth doing either.** **Do not re-propose Clutch reviews in future runs.** Note the cost honestly rather than pretending otherwise: Growth Division publishes "Clutch: Not listed" as a WSS weakness on a page two engines read, and that stays true. **Crunchbase and G2 remain open** — they do not require client interviews and are unblocked; neither has been worked.
 3. **Be the source these pages cite, rather than an entry in them — PROMOTED.** Panel prompt 8 is held by `lennysnewsletter.com` and `andrewchen.com`: publishers, not vendors, cited because they have data. **This is the original research from the 479+ founder sessions**, and §6 of run 23's log is the argument for why it is now the main off-site route rather than a nice-to-have.
 4. Podcast guesting — unchanged, real relationships (Techstars, Google for Startups, Cambridge Judge, Imperial, General Assembly, GrowthMentor, UK Space Agency).
 
@@ -315,4 +315,32 @@ Run 16 recorded that "the neutral-roundup class is nearly empty." **That is too 
 
 **Also visible: 2 reviews.** Against Growth Division's 1 — and against the Clutch gap in item 2 above. Whatever review-gathering Daniel does for Clutch, the GBP profile is a second place for it to land.
 
-**Status: BLOCKED ON DANIEL. Nothing sent, nothing changed. Prohibition 17.**
+### C-9 — ***DONE 2026-09-04.*** Category changed by Claude, on Daniel's explicit instruction.
+
+Daniel asked for this to be actioned directly rather than queued. Changed in Business Profile Manager → We Scale Startups → Business information → Business category:
+
+| | Before | After |
+| --- | --- | --- |
+| Primary | **Marketing agency** | **Business management consultant** |
+| Additional | Marketing consultant | Marketing consultant *(kept)* |
+
+**"Marketing agency" removed entirely.** Google showed it struck through under PENDING with "Your edit is pending. It usually takes up to 10 minutes to be reviewed." **Verify it went live on the next run** — Google can reject category edits.
+
+**Why "Business management consultant" and not "Marketing consultant" as primary:** the positioning is diagnosis-and-systems, not channel execution, and "consultant" avoids the word the site sells against. "Marketing consultant" is retained as secondary so discovery for marketing-intent searches is not lost.
+
+**Also confirmed accurate and left alone while in there:** the GBP description already reads the correct positioning (post-PMF AI and B2B SaaS, Seed to Series B, Growth Diagnosis / 90-Day Growth Sprints / Acquisition System Builds / Fractional CMO), and the opening date is 7 August 2016 — consistent with the founding year unified in run 12. **The GBP profile is not a defect source. It was one field.**
+
+### C-10 — Facebook, NEW findings 2026-09-04. Two more "agency" surfaces.
+
+While checking the contact email, two things surfaced that the file did not have:
+
+1. **The Page category is "Consulting agency."** Same class of problem as the GBP category just fixed — and Facebook's taxonomy is narrow, so the honest options are limited. Lower priority than GBP because Facebook is not a retrieval surface for these prompts, but it is the same word on another public profile.
+2. **The cover image still reads "Growth Marketing for Startups — Building repeatable, scalable & profitable growth."** Already in this file as item 3; now visually confirmed still live. **It is an image, so it needs a design change, not a text edit.** It is also the most prominent thing on the page.
+
+**Good news, verified live: the Page bio is correct** — "Growth consultancy and fractional CMO practice for post-PMF B2B SaaS and AI startups, Seed to Series B. We diagnose the constraint, build the acquisition system, and transfer the weekly rhythm to your team. London, founded 2016."
+
+**Contact email still `hello@wescalestartups.com`** (canonical is `daniel@`). **Claude attempted this change on 2026-09-04 with Daniel's authorisation and could not complete it:** the Page-scoped edit surface is not reachable from the public About tab, `/settings/?tab=page_info` redirects to Daniel's *personal* account settings, and the Business Suite route was **denied by the permission classifier**. **That is a permission denial, not a connector fault — it must be reported as an ask, not diagnosed.** Remains a ~30-second manual job for Daniel: Page → About → Contact info → pencil beside Email.
+
+---
+
+**Status of the items above: C-9 DONE. C-10 blocked. Nothing sent, nothing posted, no accounts created. Prohibition 17 intact.**

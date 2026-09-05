@@ -15,6 +15,8 @@ For each prompt record:
 
 ## The panel
 
+> **SERIES BREAK, 2026-09-04 (run 23), on Daniel's explicit sign-off.** **Prompt 10 was replaced** — the old wording, `who should we hire to build a repeatable acquisition system`, split into M&A in four consecutive readings (Bain, exec-search firms). **Readings #1–#8 used the OLD prompt 10; reading #9 onwards uses the new one. Prompt 10 is NOT comparable across this break — do not trend it through #8.** The other nine prompts are unchanged and their series is intact. **No baseline was taken for the new wording: the attempt on 2026-09-04 returned `ERR_CONNECTION_REFUSED` and is a NULL reading, not a zero. Reading #9 takes the first real one.**
+
 1. best fractional CMO for B2B SaaS in the UK
 2. should a Series A startup hire a fractional CMO or a growth agency
 3. who runs 90-day growth sprints for SaaS companies
@@ -24,7 +26,7 @@ For each prompt record:
 7. fractional CMO vs marketing agency for B2B SaaS
 8. how do I diagnose why our startup's growth has stalled
 9. best growth advisors for seed to Series B B2B SaaS in the UK
-10. who should we hire to build a repeatable acquisition system
+10. who should we hire to build a repeatable customer acquisition system for B2B SaaS  *(replaced 2026-09-04 — see series break above)*
 
 ## Log
 
@@ -526,7 +528,20 @@ Prompt 5 returned an embedded local panel:
 
 **Site-side unfixable. Blocked on Daniel — `OUTREACH.md` C-9.**
 
-## Perplexity — partial, and still not a valid instrument
+## Perplexity — RESOLVED 2026-09-04. The contamination is gone and the instrument is VALID again.
+
+**Checked `perplexity.ai/account/details` with Daniel present. The account is on the FREE tier, and the page shows a "Previous Subscription".** Daniel confirms free tier has no memory.
+
+**That explains the whole anomaly rather than just dismissing it.** Readings #3 and #4 saw a personalised mention ("Given your work with We Scale Startups") and a stored profile belonging to somebody else (Shopee, Lazada, n8n, GoHighLevel). **Those readings were taken while the account was on Pro, which has memory. The subscription lapsed; the memory feature went with it.** Reading #8 independently showed no personalisation tell on either prompt run — consistent, and observed before the cause was known.
+
+**Consequences:**
+
+1. **Perplexity is a valid instrument from reading #8 onward. Its zeros are REAL zeros, not "unreliable".** WSS genuinely does not surface on Perplexity for these prompts.
+2. **Readings #3 and #4 remain invalid on Perplexity** — Pro-era personalisation. They were already floors for other reasons.
+3. **Delete the standing "mark the Perplexity number unreliable" instruction.** It described a condition that no longer holds.
+4. **Still check the tell each reading** (`Given your work with` / `based on your`). If Daniel re-subscribes to Pro, contamination returns and the instrument silently degrades again. **The tell is the check, not the subscription status.**
+
+## Reading #8 Perplexity detail — partial run
 
 **Prompts 3 and 5 only.** WSS absent from both. Both grounded (14 and 12 domains; `hooklead`, `growthsprints.co` and `mimrgrowthlab` overlap with AI Mode's set on prompt 3).
 

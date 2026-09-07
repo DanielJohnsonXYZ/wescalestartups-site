@@ -72,3 +72,87 @@ Actual stage and vertical mix across all 406 sessions · realised outcomes · tr
 Finding 1 is the strongest and the cheapest to publish. It is one honest sentence with a stated sample, it contradicts the industry's default framing, and it is verifiable by anyone in ten minutes. **That is the shape of a citable object.**
 
 **Do not fabricate, round generously, or extrapolate to "founders" in general.** The value of this corpus is entirely that it is real and checkable — the moment a number is softened, it becomes the same undifferentiated content the panel showed the engines already ignoring.
+
+---
+
+# SECOND CORPUS — 28 private advisory-session transcripts. Analysed 2026-09-07 (run 24), at Daniel's instruction.
+
+**This corpus is PRIVATE and must never be quoted, excerpted or attributed publicly. Its value is that it CORROBORATES the public corpus above by an entirely independent route.** Read the publication rule at the end before using any of it.
+
+## Provenance and the honest denominator
+
+Granola holds **381 meeting notes, 25 Sep 2025 → 7 Sep 2026.** Classified from titles: **32 founder/advisory sessions**, 169 client delivery, 11 sales, 21 partner/ecosystem, 48 internal, 100 undecidable from the title alone.
+
+**31 unique sessions fetched** (one duplicate note for a single session). **Of those: 2 had no usable transcript, 1 was a vendor partnership call rather than a founder session. 28 analysed.**
+
+**THIS IS NOT THE 479+ SESSIONS AND MUST NEVER BE DESCRIBED AS SUCH.** Granola only covers Sep 2025 onward. The GrowthMentor history that produces the 479 figure predates it. **Any statement drawn from this corpus is a statement about 28 sessions in a twelve-month window.** ~100 further meetings sit in the "undecidable from title" bucket and likely contain more founder sessions; they were not opened.
+
+All extraction was done by subagents under a hard anonymisation instruction — no names, companies, domains or identifying detail entered the analysis or this file.
+
+## The headline finding
+
+**In 27 of 28 sessions, the problem the founder brought was not the problem they had.**
+
+| Gap between presenting problem and actual constraint | n |
+| --- | --- |
+| **UPSTREAM** — real constraint sits earlier in the funnel than they thought | **15** |
+| **CATEGORY-ERROR** — a non-marketing problem framed as a marketing one, or vice versa | **9** |
+| DOWNSTREAM | 1 |
+| **SAME — the founder correctly named their own constraint** | **1** |
+| Unresolved in session | 2 |
+
+**UPSTREAM + CATEGORY-ERROR = 24 of 28 (86%).** The single SAME case was partial — that team had already self-diagnosed before the call, and the half they had not diagnosed went unresolved.
+
+## The mechanism, stated precisely
+
+**Founders ask a channel question because the channel layer is where the pain is visible. The constraint is almost always one or two layers upstream, where nothing is visible until someone asks.**
+
+The recurring shape, in the founders' own framing: *which channel next · in-house or agency · which launch vendor · how much more outbound volume · what should I price this at · which platform should I host it on.* Every one of those is a spending decision. In this corpus they were, overwhelmingly, asked at a point where the founder had nothing tested to say and no defined person to say it to.
+
+**Three sub-patterns, each observed independently by all three analysis passes:**
+
+1. **"Which channel?" is the most common disguise for "I don't know who my customer is."** Founders repeatedly sought to spend — ads, agencies, videographers, outreach tooling — before any message had been tested.
+2. **The positioning failure is breadth, not narrowness.** Products and offers aimed at "anyone with this problem". In every case the advice was to pick a beachhead; in most cases the founder pushed back that their category was too crowded or too horizontal to narrow. **Nobody had done the exclusion work — no anti-persona.**
+3. **A payer/user split kept appearing and kept being missed.** The learner who cannot pay while the institution can; the only "user" being a related party on a manual white-glove service; a buyer who wants speed being sold rigour.
+
+**"I don't know what I don't know" appears near-verbatim in five sessions** and functionally in more. It is almost always attached to a request for a channel recommendation.
+
+## The negative finding, and it is the most useful thing here
+
+**Broken tracking, missing analytics and attribution did NOT appear as the binding constraint in a single one of the 28 sessions.** All three analysis passes reported this independently, and all three reported having expected it.
+
+The one measurement-adjacent case was a sample-size problem — real tests run at volumes too low to distinguish between options — not an instrumentation problem. Retention and churn barely arose at all; almost everything was top-of-funnel and positioning.
+
+**This cuts against WSS's own five-layer framing, in which reporting is a named layer, and it should be held honestly rather than explained away.** Two readings are available and the corpus cannot separate them: either measurement is genuinely not where the pain is, **or** this corpus skews earlier than WSS's paying ICP and pre-PMF companies have no data to instrument because they have no traffic. **The second is more likely and is testable against the 169 client-delivery notes, which were not opened.** Until that test is run, do not publish anything implying measurement is or is not a common constraint.
+
+## Why this matters: TWO INDEPENDENT CORPORA NOW AGREE
+
+**Finding 2 of the public corpus above — "founders book about a channel and leave having changed the diagnosis" — is independently reproduced here by a completely different method.**
+
+| | Public corpus | Private corpus |
+| --- | --- | --- |
+| n | 226 reviews / 406 sessions | 28 sessions |
+| Window | 2019–2026 | Sep 2025 – Sep 2026 |
+| Written by | **the founders** | transcribed conversation, coded by an analyst |
+| Method | free-text review, post-session | presenting-vs-actual extraction |
+| Finding | of those describing a changed diagnosis, most were moved off the channel question onto messaging/offer/ICP | 24 of 28 constraints sat upstream of, or in a different category from, the presenting question |
+
+**That convergence is the strongest evidential position WSS has, and it is worth more than either corpus alone** — because the obvious objection to the private corpus (the advisor diagnosed it, so of course the advisor's framing wins) is answered by the public one, which the founders wrote themselves, unprompted, on someone else's platform.
+
+## Caveats — these are not optional and the first one is fatal if omitted
+
+- **SELECTION BIAS, AND IT IS SEVERE. People book a diagnostic call precisely because they cannot diagnose themselves.** A founder who has correctly identified their constraint does not book. **"27 of 28" is a statement about founders who sought advice, and about nothing else.** It must never be written as a claim about founders generally, or about a base rate.
+- **The diagnosing party is also the source.** "ACTUAL" means *what the advisor concluded during the call*, not what was independently verified to be true. No outcome data exists for any of these sessions. **This corpus cannot support a causal claim, and cannot show the re-diagnosis was correct** — only that it happened. The public corpus partly answers this, because the founders reached the same conclusion in their own words.
+- **Stage mix skews earlier than WSS's ICP.** A large share are pre-PMF or solo services operators; WSS sells to post-PMF, Seed to Series B. The constraints found here are consistently "who is this for", not "how do we operationalise what works".
+- **n=28, from a title-based classification** that deliberately excluded ~100 ambiguous meetings. Not a random sample of anything.
+- **The advisor's method is fixed across every session** (persona/anti-persona → JTBD → messaging map → journey map → ranked assumptions → small experiments). Some of the consistency in the findings is the consistency of the instrument, not of the world.
+
+## PUBLICATION RULE — read before using any of this
+
+**The public corpus is publishable. This one is not.**
+
+The 226 reviews were **published by their authors on a public platform**. These transcripts are private advisory conversations, several via GrowthMentor, carrying a reasonable expectation of confidentiality. Anonymisation reduces the risk; it does not create consent.
+
+**So the architecture is: publish from the public corpus, and let this one tell us which claims are safe to make.** A finding that appears in both is a finding WSS can state publicly *citing the public data only* — with far more confidence that it is real and not an artefact of how people write reviews.
+
+**Never publish, in any form:** a session count from this corpus, a quote or paraphrase from a transcript, a sector or stage breakdown, or any figure traceable to it — including "27 of 28". **Do not treat "we anonymised it" as clearance.** If a claim cannot stand on the public corpus, it does not get published.

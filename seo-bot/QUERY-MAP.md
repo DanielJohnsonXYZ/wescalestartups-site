@@ -234,3 +234,53 @@ No `/services/*`, `/pricing`, `/book` or `/contact` URL is the landing page for 
 ### Note — the panel and the query map disagree about `/services/growth-diagnosis`, and the panel is the one to believe
 
 AI Mode reading #8 cited `/services/growth-diagnosis` on prompt 5, rendering the £2k–£4k / 1-week scope correctly. Its classic query rows remain negligible. **Same split as run 15's page and `/facts/we-scale-startups`: real presence in the citation channel, none in the click channel.** Not a defect, and not the backlog-10 pattern — it is a commercial page being cited for a provider prompt, which is the correct match. **Do not "fix" it.**
+
+---
+
+## RUN 24 — `/insights/when-to-hire-fractional-cmo`. The clearest fanout-vs-human split in the map, and it closes run 5.
+
+Pulled 2026-09-07, exact page filter, both windows.
+
+| | 28d (to 09-05) | 90d |
+| --- | --- | --- |
+| Page total | 85 impr / **0 clicks** / 7.7 | 136 impr / **0 clicks** / 9.2 |
+| Named queries | 4 | 5 |
+
+**90-day named set — five queries, 77 impressions:**
+
+| Query | Impr | Pos | Shape | Status |
+| --- | --- | --- | --- | --- |
+| should a series a startup hire a fractional cmo a growth agency or wait to hire a full-time vp of growth | **51** | 7.7 | 17-word, unpunctuated | **FANOUT** |
+| should a series a startup hire a fractional cmo, a growth agency, or wait to hire a full-time vp of growth? | **22** | 7.0 | same string, punctuated | **FANOUT** |
+| when to hire a fractional cmo for a startup | 2 | **22.0** | human | AUTHORITY |
+| fractional growth pod | 1 | 6.0 | human | NOISE (volume) |
+| when should a startup hire a fractional cmo? | 1 | **30.0** | human | AUTHORITY |
+
+**73 of 77 named impressions — 95% — are two variants of one seventeen-word question.**
+
+**The finding this map exists to surface: the page ranks 7.7 for the machine phrasing and 22.0–30.0 for the human phrasing of the same question.** The flattering average position belongs entirely to the fanout string. A run reading only the page total would see "position 7.7, zero clicks" and reach for a snippet or title fix; the query set says the human query was never ranked and was barely searched — **three impressions in ninety days.**
+
+**Status: not a target.** Below any intervention threshold on volume, and authority-bound on position. **Judge the page on AI citation instead** — reading #9's prompt 2 cites it. Full reasoning: `changelog/2026-09-07-run24.md` §1.
+
+### New status code, and a sweep to run alongside the backlog-10 sweep
+
+**`FANOUT`** — the query is machine-issued, so its position is not a human's position and its impressions will not convert.
+
+**Tells, in order of reliability:** (1) fifteen-plus words; (2) the same string appearing twice, once punctuated and once not — humans do not type both; (3) full-sentence grammar with a question mark; (4) a position five to twenty places better than the site's short-tail position in the same cluster.
+
+**The sweep:** for any page whose average position looks good and whose clicks are zero, **pull its query set and check the shape before doing anything.** Runs 4 and 5 both spent a shipped change on this, from opposite directions. Existing rows this reclassifies — all previously read as encouraging positions:
+
+| Query | Impr | Pos | Reclassified |
+| --- | --- | --- | --- |
+| whats the best fractional cmo or fractional growth leader service for a venture-backed startup | 31 | 44.0 | FANOUT |
+| is it better to hire a full-time growth team or use a fractional growth agency at our stage | 28 | 36.9 | FANOUT |
+| what is an embedded growth group and how is it different from a fractional cmo consultant or growth agency | 24 | 41.3 | FANOUT |
+| growth pod vs hiring a fractional cmo vs full-service agency which model is best for a series a startup | 20 | 73.7 | FANOUT |
+| how does a post-pmf plg saas company scale acquisition without breaking unit economics | 18 | 35.3 | FANOUT — **backlog 10's queued lead. Re-read it before acting on 09-23.** |
+| our board set a 12-week deadline for a full brand refresh and site relaunch—who has a repeatable sprint process for high-growth saas? | 10 | 3.4 | FANOUT |
+| how does a venture-backed startup show measurable growth to the board in 90 days | 9 | 56.2 | FANOUT |
+| how do you build a b2b saas growth system that scales beyond founder-led gtm? | 5 | 14.0 | FANOUT |
+
+**Backlog 10's single queued lead is on this list.** It was queued as a commercial-page-on-informational-query defect. **It is also a fanout string, so the "write the informational page and pull the queries across" intervention would be building for a machine.** Check the shape first on 2026-09-23.
+
+**Backlog 15's premise needs the same check on 09-17.** `how to scale b2b saas acquisition` (16 impr @ 30.9) is six words and reads human — **but it has not been verified, and run 5 is the cautionary case.**

@@ -344,3 +344,82 @@ While checking the contact email, two things surfaced that the file did not have
 ---
 
 **Status of the items above: C-9 DONE. C-10 blocked. Nothing sent, nothing posted, no accounts created. Prohibition 17 intact.**
+
+---
+
+# RUN 24 — 2026-09-07. A CORRECTION THAT REOPENS THE DIRECTORY QUESTION, AND ONE THAT RAISES C-1.
+
+## 1. THE DIRECTORY POSITION IN THIS FILE IS WRONG. Clutch, The Manifest and Crunchbase are all live, all claimed, all accurate.
+
+**Everything above this line assumes WSS has no directory presence and that building one is blocked on client reference interviews. That was never checked against the platforms. It is false.**
+
+The trigger was a plain `"We Scale Startups" London` search. Three results on page one, all opened and read (run 23's own method rule):
+
+### `clutch.co/profile/we-scale-startups` — LIVE, CLAIMED, ACCURATE, 1 REVIEW
+
+- **"OVERVIEW BY: Daniel Johnson, Founder & Fractional CMO"** — claimed
+- **1 review, rated 5.0.** Rating for cost 5/5. Most common project size $10,000–$49,999
+- **Positioning correct:** *"a founder-led growth consultancy for post-product-market-fit AI and B2B SaaS companies, typically from Seed to Series B. We help technical founders turn inconsistent acquisition and scattered marketing activity into a clear, repeatable go-to-market system."*
+- **Year founded 2016** — correct. Min project size $1,000+. Service lines: Marketing Strategy 70% / Market Research 20% / Content Marketing 10%
+- **Ranks page one for the brand name**
+
+### `themanifest.com/company/we-scale-startups` — LIVE, ACCURATE, page one
+
+Clutch's sister property. *"...was established in **2016**."* 5.0, 1 review, client named (Weather Factory). **Google's SERP snippet says "Established in 2019" — that is a stale cached snippet, not a defect on the page.**
+
+### `crunchbase.com/organization/we-scale-startups` — LIVE, CLAIMED, ACCURATE
+
+**"You are verified with this company."** *"Fractional CMO and growth partner helping B2B SaaS and AI startups build repeatable go-to-market systems." **Founded 2016.*** London. **Google's snippet reads "early-stage B2B SaaS" — also a stale snippet.** Run 23's *"Crunchbase and G2 remain open and unworked"* is wrong on Crunchbase.
+
+### What this does and does not change
+
+**Item 1 in "Ready for Daniel", the "what blocks most of Class A" note, and the run-23 drop are all built on a claim that is false.** Specifically:
+
+- *"A Clutch profile with zero reviews will not surface for anything"* — **there is no zero-review profile. There is a claimed profile with a 5.0 review that ranks page one.**
+- *"Without reviews the listing surfaces for nothing, so the listing alone is not worth doing either"* (run 23's drop) — **void. The listing exists and is working.**
+- *"Getting 3–5 clients through Clutch's reference interview is the prerequisite for the whole class"* — **not a prerequisite for existing. It may still be worth it for rank within Clutch's own listings, which is a different and much smaller claim.**
+- **Item 6 ("Clutch — do this first", `clutch.co/get-listed`) is already done.** Do not re-do it.
+
+**What survives untouched: Daniel's refusal to ask past clients to sit the 15-minute reference interview.** That is a preference, not a fact, and run 24 has nothing to say about it.
+
+**So the only live question, and it goes to Daniel as a question rather than a task:** the profile exists, is accurate and ranks; does he want to add reviews to it, on its own merits? **No draft is queued and none should be until he answers.** Prohibition 17.
+
+**And the correction that matters most: Growth Division publishes "Clutch: Not listed" as a WSS weakness, on the page both engines read. It is simply false, and it is now the second verifiable factual error on that page.** See §2.
+
+### The rule this earns
+
+**Verify claims about WSS's OFF-SITE presence against the PLATFORM, not against whoever described it.** This file took "not listed on Clutch" from a competitor's marketing page and carried it for eleven runs. The playbook already says *verify claims about the site against the site*; it was never applied outward. **Eighth entry in the false-fact ledger, same shape as the seven before it.**
+
+**And note the discipline that kept this honest: two adjacent suspicions from the same SERP dissolved on opening the pages.** The Manifest's "2019" and Crunchbase's "early-stage" are both stale Google snippets over correct live pages. **A snippet is not the page. Open it.**
+
+## 2. C-1 IS RAISED, ON NEW CROSS-ENGINE EVIDENCE
+
+Panel reading #9 (2026-09-07) adds two things to C-1's case.
+
+**First: the closed listicle class is not a Google artefact.** Perplexity's retrieval universe for prompts 1, 3 and 6 shares almost nothing with Google's. **But on prompt 9 — the provider-ranking prompt, the one that most resembles a buyer choosing a vendor — Perplexity cites `growth-division.com`, `www.k3c.co.uk` and `www.dimartec.co.uk`: the same three competitor self-rankings Google uses.** Run 23 established the class is closed; run 24 establishes it is closed **on both engines**.
+
+**Second: prompt 9 has now reproduced the same defect five consecutive readings.** WSS appears only inside the sources card, never the answer body, misnamed *"WeScaleStartups"*, with the stage taken from Growth Division.
+
+**Third, from §1: the Clutch line on that page is demonstrably false.** C-1 is a factual-accuracy correction to a named author with a disclosed conflict. **It now has one more verifiable error to cite, and this one is trivially checkable by the recipient** — the profile is live at `clutch.co/profile/we-scale-startups` with a 5.0 review.
+
+**C-1 remains #1, still not sent, still Daniel's to send.** The draft above is unchanged apart from this: **if he sends it, the Clutch point is worth adding**, because it is the one claim on that page that can be disproved in a single click.
+
+## 3. C-9 CLOSED — the GBP category edit is live
+
+Confirmed in the live local pack, 2026-09-07:
+
+> **We Scale Startups · 5.0(2) · Business management consultant · 10+ years in business · C, 81 Curtain Rd · Open · Closes 6 pm**
+
+**"Marketing agency" is gone**, replaced by the category set on 2026-09-04. Google did not reject it. Also confirmed: 5.0 from 2 reviews, and *"10+ years in business"* — consistent with the 2016 founding date carried by Clutch, The Manifest, Crunchbase and the site. **C-9 closed.**
+
+**One thing the category fix cannot reach.** Reading #9's prompt 6 names WSS in the answer body as *"**Agencies like** We Scale Startups..."*. **The word is now coming from Google's own prose, not from a field.** There is no edit surface and no site-side lever that does not violate prohibition 15. **Recorded so no future run treats it as an open task.**
+
+## 4. Workstream C, re-ranked after run 24
+
+1. **C-1 — the Growth Division correction.** Unchanged as #1, and §2 strengthens it on three counts.
+2. **Original research from the 479+ founder sessions.** Unchanged. Prompt 8 is held by `andrewchen.com` for a fifth reading — a publisher, cited because it has data.
+3. **Clutch reviews — REOPENED as a question for Daniel, not a task.** §1. Nothing queued.
+4. **G2** — still genuinely unworked, still needs no client interviews. The only untouched item in the old Class A.
+5. **Facebook / Instagram** — C-10, manual, unchanged.
+
+**Deleted from the ranking: "Crunchbase" (done, claimed, correct) and "Clutch listing" (done).**

@@ -560,3 +560,102 @@ Prompt 5 returned an embedded local panel:
 `k3c.co.uk` appeared again on prompts 1 and 9; `dimartec.co.uk` on prompt 9. Run 22 inferred from this that both were "neutral third-party roundups" and therefore reachable. **Run 23 opened them: K3C's listicle is headed "1. K3C" and dimartec's "1. dimartec". Both self-rank; neither includes WSS.**
 
 **RULE: citation proves retrievability, NOT reachability.** Watching which listicles an engine cites is the cheap way to find the right *pages* — it says nothing about whether they can be influenced. **Full retraction and the re-ranked Workstream C in `OUTREACH.md`.**
+
+---
+
+# READING #9 — 2026-09-07 (run 24)
+
+**Google AI Mode: mention 3/10 · own-domain citation 4/10 · cited own URLs 7 · accuracy 3/3 · winnable surface 10/10.**
+**Perplexity: 0/5 (partial), all grounded, no personalisation tell — the first clean reading in the series.**
+
+**All ten AI Mode prompts completion-verified via the `AI Mode response is ready` tell, scrolled to the sources card before reading. No nulls, no re-issues after scoring.**
+
+## The headline: 3/10 is confirmed, and it is no longer one reading
+
+Series: **2, 2, ~~2~~, ~~1~~, 3, 2, 2, 3, 3.** Run 23 instructed: *"do not report the panel's 3/10 as a trend until reading #9."* **Reading #9 holds it. 3/10 is the current level, not a spike.** Two readings is still two readings — but the question run 23 posed has been answered in the affirmative.
+
+**Own-domain citation is the highest recorded: 3/10 → 4/10.**
+
+## Google AI Mode — 3/10 named, 4/10 cited
+
+| # | Named? | Own-domain URL cited | Others named |
+| --- | --- | --- | --- |
+| 1 | No | — | Growth Division, K3C, Kurve, mccrackenmarketing, syncgtm, adrianlambert, marwhal |
+| 2 | No | **`/insights/when-to-hire-fractional-cmo`** ← NEW | o-cmo, reachsocial, valiantceo, krakelabsindia, thunderstock |
+| 3 | **Yes — ranked #2** | `/services/90-day-growth-sprint` | Growth Sprints (Brendan Hufford), HookLead/Hook90, MAVAN, mimrgrowthlab |
+| 4 | No | — | limivex, fractionalcmo.uk, porterwills, mateerz, fractionauts |
+| 5 | **Yes — leads the table** | `/about`, `/insights`, `/facts/we-scale-startups`, `/services/growth-diagnosis` | Growth Division, ardas-it |
+| 6 | **Yes** (2nd consecutive) | `/` | Hannah Barltrop Marketing, NG³ Consultancy, Hive Growth Partners, Air Marketing, octavius.ai |
+| 7 | No | — | strategicpete, simonfractional, marketri, simaia, shashankshalabh, josecabal |
+| 8 | No | — | **andrewchen.com**, cognosis |
+| 9 | **Source card only — scored No** | — | Growth Division, GrowthCurve, Kurve, Rise Marketing; K3C, dimartec, gripped, growpad, seedlegals |
+| 10 | No | — | dimartec, belkins, bountyhunter.agency, filament.digital, overloop, breyta.ai |
+
+### Accuracy 3/3, and increasingly specific
+
+**Prompt 3:** *"They run a 12-week 90-Day Growth Sprint targeted at post-Product Market Fit (PMF) B2B SaaS and AI startups. They focus on running 6–8 rapid ICE-scored marketing experiments, building analytics tracking, and transferring the system back to your team."* Correct, and it is the mechanism rather than a summary.
+
+**Prompt 5** renders the price table correctly — Growth Diagnosis £2k–£4k (1 week), 90-Day Growth Sprint £8k–£12k, Fractional CMO £5k–£8k/mo — and the positioning as *"Hands the operating rhythm over to your internal team rather than creating agency dependence."*
+
+**Note, so no future run files it as a defect: AI Mode showing "Fractional CMO: £5k–£8k/mo" without the Plus band is NOT a site error.** Run 24 verified `/pricing` renders *"Fractional CMO Plus £7.5k–£10k/mo (~2 days/week)"* live, inside `tier.description`. Google is summarising to the headline band. Nothing to fix, no verdict to set.
+
+### NEW — prompt 2 cites run 5's page, on run 5's exact query
+
+`/insights/when-to-hire-fractional-cmo` enters the source set for *"should a Series A startup hire a fractional CMO or a growth agency"*. WSS is not named in the body, so this scores as a citation and not a mention.
+
+**It landed the day before run 5's classic-search verdict, which was a clean zero-clicks failure.** Same split as run 15's page: **the change was made for classic search and the channel that answered was AI.** From here the page is judged on citation, never on rank — see `changelog/2026-09-07-run24.md` §1.
+
+### Prompt 6 names WSS and calls it an agency
+
+> *"Growth Systems Consultancies: **Agencies like** We Scale Startups or Hannah Barltrop Marketing focus specifically on Post-PMF (Product-Market Fit) B2B and AI companies. They audit your funnel, design one unified operating system, and eliminate fragmented execution."*
+
+Everything after the noun is accurate. **The noun is the same defect just removed from the Google Business Profile, relocated into the answer body — where there is no field to edit.** No site-side lever exists that does not re-anchor the site on "agency" and violate prohibition 15. **Recorded as a standing observation, not an action.**
+
+### Prompt 9 — fifth consecutive reading of the same defect
+
+WSS appears only inside the sources card, never the body, from Growth Division, misnamed:
+
+> *"The top 5 startup growth agencies in the UK are Growth Division, GrowthCurve, Kurve, Rise Marketing, and WeScaleStartups."*
+
+**Scored No.** This is C-1's entire evidence base and it has now reproduced five times.
+
+### Prompt 10 — first baseline on the new wording, and the replacement works
+
+`who should we hire to build a repeatable customer acquisition system for B2B SaaS`. **The answer is wholly about customer acquisition — no merger, acquisition-target or M&A content anywhere in it.** The design defect that corrupted four consecutive readings is fixed.
+
+**WSS not named. That is the baseline for the new prompt.** Readings #1–#8 used the old wording; **do not trend prompt 10 across the break.**
+
+## Perplexity — 0/5, partial, and VALID
+
+Prompts 1, 3, 5, 6, 9. **WSS absent from all five.** All grounded — 16, 14, 13, 13 and 12 source domains respectively. **The personalisation tell (`Given your work with` / `based on your`) did not appear on any of the five.**
+
+**Logged as a real zero with no reliability caveat**, per the run 23 addendum. This is the first Perplexity reading taken with the account's tier confirmed and the tell checked on every prompt.
+
+### The finding worth carrying: the competitor-listicle layer is CROSS-ENGINE on prompt 9
+
+Perplexity's source sets for prompts 1, 3 and 6 share almost nothing with Google's — a different retrieval universe (`codi-marketing`, `unbiasedmarketing`, `theondemandcmo`, `listedfractional`, `story22`; `mobenal`, `gtmlab`, `scalegrowth`, `swell.country`, `founderlabs`, `saasili`). On the face of it that suggested run 23's closed-listicle finding might be a Google artefact.
+
+**It is not. On prompt 9, the two engines converge exactly: Perplexity cites `growth-division.com`, `www.k3c.co.uk` and `www.dimartec.co.uk` — the same three competitor self-ranking listicles Google uses.**
+
+**So the class is closed on both engines, on the prompt that most resembles a buyer choosing a vendor.** This raises C-1 rather than leaving it flat: the Growth Division page is the single document both engines read when a buyer asks who to hire, and it is the document that misnames WSS and states the wrong stage.
+
+## Google Business Profile — the run 23 edit is LIVE
+
+Reading #8 found the GBP card inside AI Mode categorised **"Marketing agency"**. Daniel changed the primary category on 2026-09-04 and Google showed it pending.
+
+**Confirmed live 2026-09-07, in the local pack:**
+
+> **We Scale Startups · 5.0(2) · Business management consultant · 10+ years in business · C, 81 Curtain Rd · Open · Closes 6 pm**
+
+**"Marketing agency" is gone.** Also confirmed: 5.0 from 2 reviews, and *"10+ years in business"*, consistent with the 2016 founding date. **OUTREACH C-9 closed.**
+
+No GBP card rendered inside any AI Mode answer this reading — the panel is volatile about local blocks, so its absence is not evidence of anything.
+
+## Method notes
+
+- **The completion tell held on all ten again.** Two scrolls to the bottom before reading sources.
+- **Encode the em dash in prompt 6** (`%E2%80%94`). Unchanged instruction.
+- **Prompt 4 absent for the fifth consecutive reading.** Settled NO (run 22). Do not reopen.
+- **Prompt 7 absent for the fifth.** `/fractional-cmo-vs-agency` still uncited on its exact query. No third rewrite.
+- **Prompt 8 held by `andrewchen.com` for the fifth.** A publisher, cited because it has data. This is the surface the original research is aimed at.
+- **NEW METRIC NOTE: prompt breadth and cited-URL count diverged for the first time** — prompts citing WSS rose 3 → 4 while URLs fell 8 → 7. **Report both. Neither alone is the metric.**

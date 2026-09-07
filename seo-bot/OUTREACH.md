@@ -423,3 +423,45 @@ Confirmed in the live local pack, 2026-09-07:
 5. **Facebook / Instagram** — C-10, manual, unchanged.
 
 **Deleted from the ranking: "Crunchbase" (done, claimed, correct) and "Clutch listing" (done).**
+
+---
+
+# 2026-09-07, ATTENDED — DANIEL CLOSES C-1 AND CLUTCH REVIEWS. Read this before proposing any Workstream C item.
+
+Daniel, on reading the run 24 report, on both of the top two asks:
+
+> *"I don't necessarily have the relationship with the Growth Division that enables me to send that message."*
+> *"I don't necessarily have an opportunity to ask my clients this or have the relationship with them to leave a review at this stage, which is why I'm not."*
+
+**Both are now standing decisions. Do not re-propose either. Do not re-draft, re-rank or "escalate" them.**
+
+## C-1 — CLOSED. Not declined on the merits; declined on standing.
+
+The factual case against the Growth Division page is unchanged and correct — wrong stage, misspelt brand, two unpublished performance figures, an invented testimonial, mentoring relationships described as client work, and (run 24) a false "Clutch: Not listed". **None of that is in dispute. What is missing is a person who can send it.** It was drafted as a cold email to a competitor's co-founder; Daniel does not have that relationship and will not manufacture one.
+
+**The honest consequence, and it is smaller than eleven runs of this file implied.** C-1 was never the mechanism by which WSS gets found — it was damage limitation on one competitor's page. **The site already runs the only durable version of this fix, and it is working:** panel prompt 5 states the stage *correctly*, every reading, because Google builds that answer from WSS's own pages. Prompt 9 states it wrongly because Google builds that answer from Growth Division's. **Same engine, same morning. The counter-move is to be the better source, not to correct the worse one** — which is what `/facts/we-scale-startups` and the entity work are for.
+
+**So: C-1 is closed and Workstream C loses nothing that the site cannot do for itself.** Log prompt 9 each reading as a defect *observation*. Take no action on it.
+
+## Clutch reviews — CLOSED, permanently, second time. The listing question is also settled.
+
+Run 23 dropped this and run 24 reopened it on the discovery that the profile is live and accurate. **Daniel has now closed it on the ground that survived that correction — he will not approach past clients.** That reason is untouched by anything run 24 found.
+
+**And the listing half needs no decision, because it is already done:** `clutch.co/profile/we-scale-startups` is live, claimed, accurate, carries a 5.0 review and ranks page one for the brand name, as do The Manifest and Crunchbase. **There is no open task here of any kind.**
+
+**Do not propose G2 as a substitute.** It is a review platform with the same dependency, and it is built for software products rather than service businesses. Proposing it would be the same ask wearing a different name.
+
+## WHAT WORKSTREAM C ACTUALLY IS NOW — one route, and it needs nobody's permission
+
+**Every remaining off-site route that depended on a third party is closed:** the listicle class is competitor-owned and cross-engine (runs 23–24), C-1 needs a relationship that does not exist, review platforms need clients Daniel will not approach, and the directories are already done and correct.
+
+**What is left is the one route that was always the strongest and is the only one Daniel can execute alone: BE THE SOURCE THESE PAGES CITE.**
+
+**The precedent is already in this repo and it did not need a single other person.** `/insights/what-226-founder-reviews-reveal` was built from **226 PUBLIC GrowthMentor reviews** — no permission, no interviews, no relationship. Verdict due 2026-09-24.
+
+**So the 479+ founder sessions are not a client-permission ask and must never be framed as one again.** What is wanted is the aggregate pattern — what founders most often get wrong, in what order, at what stage — anonymised, unattributed, no client named, no engagement described. **That is Daniel's own observation of his own work.** Panel prompt 8 has been held by `andrewchen.com` and `lennysnewsletter.com` for five consecutive readings: publishers, cited because they have data, on a question WSS has more first-hand data about than either of them.
+
+**Ranking, after this session — and it is a list of one:**
+
+1. **Original research from the founder sessions.** The only remaining route, and the only one with no external dependency. **Frame it as "what patterns do you see", never as "can we ask your clients".**
+2. *(Everything else in this file is either done, closed, or an observation to log.)*

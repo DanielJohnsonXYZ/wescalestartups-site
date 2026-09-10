@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site";
+import { buildBreadcrumbSchema } from "../lib/schema";
+
+const path = "/mentoring";
+const schema = buildBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Founder mentoring", path }
+]);
+---
+
+<BaseLayout
+  title="Founder Mentoring | Daniel Johnson | We Scale Startups"
+  description="1:1 growth and GTM mentoring with Daniel Johnson for founders who need an experienced second opinion, practical guidance, or accountability without a full consulting engagement."
+  path={path}
+  schema={schema}
+  breadcrumbItems={[
+    { name: "Home", path: "/" },
+    { name: "Founder mentoring", path }
+  ]}
+  headerCtaLabel="Book mentoring"
+  headerCtaHref={siteConfig.growthMentor}
+  stickyBookHref={siteConfig.growthMentor}
+  stickyBookCtaLabel="Book mentoring"
+>
+  <section class="page-hero">
+    <div class="shell">
+      <p class="eyebrow">Founder mentoring</p>
+      <h1>A senior growth second opinion, without a consulting engagement.</h1>
+      <div class="hero-support">
+        <p class="lede">
+          For founders and operators who need help thinking through positioning, acquisition, GTM, app marketing, experimentation, or the next commercial decision.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href={siteConfig.growthMentor} data-cta="mentoring-growthmentor">Book on GrowthMentor →</a>
+          <a class="button button-light" href={siteConfig.mentorCruise} data-cta="mentoring-mentorcruise">MentorCruise →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell strategic-grid">
+      <article class="strategic-panel">
+        <span>01</span>
+        <h2>Bring one real problem.</h2>
+        <p>Sessions work best when there is a live decision to make, not a generic request for marketing ideas.</p>
+        <ul>
+          <li>Who should we target first?</li>
+          <li>Why is acquisition not converting?</li>
+          <li>What should we test next?</li>
+          <li>How should we position or launch this?</li>
+        </ul>
+      </article>
+      <article class="strategic-panel strategic-panel-dark">
+        <span>02</span>
+        <h2>Leave with a decision.</h2>
+        <p>The goal is not to fill an hour. It is to identify the constraint, challenge assumptions, and turn the discussion into a clear next step.</p>
+        <ul>
+          <li>Direct feedback</li>
+          <li>Prioritised actions</li>
+          <li>Useful frameworks and examples</li>
+          <li>Introductions where genuinely relevant</li>
+        </ul>
+      </article>
+      <article class="strategic-panel">
+        <span>03</span>
+        <h2>Use consulting only when you need execution.</h2>
+        <p>Mentoring is for advice and decision support. If you need a growth system built or senior execution inside the business, that is a WSS engagement instead.</p>
+        <ul>
+          <li>Mentoring: guidance and accountability</li>
+          <li>Consulting: diagnosis and delivery</li>
+          <li>Fractional CMO: embedded leadership</li>
+          <li>No forced upsell</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="shell">
+      <div class="section-intro">
+        <div>
+          <p class="eyebrow">Track record</p>
+          <h2>Hundreds of founder conversations, grounded in operating work.</h2>
+        </div>
+        <p>Daniel has supported founders through GrowthMentor, MentorCruise, Google for Startups, Techstars and other startup programmes alongside client work at We Scale Startups.</p>
+      </div>
+      <div class="grid-3">
+        <article class="feature-card">
+          <h3>479+ founder sessions</h3>
+          <p>Across mentoring, accelerator and advisory conversations.</p>
+        </article>
+        <article class="feature-card">
+          <h3>4.97/5 average mentor rating</h3>
+          <p>Independent mentoring feedback, with public reviews available on GrowthMentor.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Growth operator perspective</h3>
+          <p>Advice shaped by real acquisition, positioning, paid media and GTM work, not theory alone.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-inner">
+      <div>
+        <p class="eyebrow">Book a session</p>
+        <h2>Bring the problem you are stuck on.</h2>
+        <p>If a mentoring session is enough, we will keep it there. If the problem actually needs execution, I will tell you that too.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-brand" href={siteConfig.growthMentor} data-cta="mentoring-final-growthmentor">GrowthMentor →</a>
+        <a class="link-arrow" href={siteConfig.mentorCruise} data-cta="mentoring-final-mentorcruise">Or, MentorCruise →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

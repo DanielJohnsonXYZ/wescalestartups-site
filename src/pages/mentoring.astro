@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig } from "../site";
 import { buildBreadcrumbSchema } from "../lib/schema";
 
 const path = "/mentoring";
@@ -19,10 +18,10 @@ const schema = buildBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Founder mentoring", path }
   ]}
-  headerCtaLabel="Book mentoring"
-  headerCtaHref={siteConfig.growthMentor}
-  stickyBookHref={siteConfig.growthMentor}
-  stickyBookCtaLabel="Book mentoring"
+  headerCtaLabel="Contact me"
+  headerCtaHref="/contact"
+  stickyBookHref="/contact"
+  stickyBookCtaLabel="Contact me"
 >
   <section class="page-hero">
     <div class="shell">
@@ -33,8 +32,7 @@ const schema = buildBreadcrumbSchema([
           For founders and operators who need help thinking through positioning, acquisition, GTM, app marketing, experimentation, or the next commercial decision.
         </p>
         <div class="hero-actions">
-          <a class="button button-dark" href={siteConfig.growthMentor} data-cta="mentoring-growthmentor">Book on GrowthMentor →</a>
-          <a class="button button-light" href={siteConfig.mentorCruise} data-cta="mentoring-mentorcruise">MentorCruise →</a>
+          <a class="button button-dark" href="/contact" data-cta="mentoring-contact">Contact me →</a>
         </div>
       </div>
     </div>
@@ -107,13 +105,12 @@ const schema = buildBreadcrumbSchema([
   <section class="cta-band">
     <div class="shell cta-inner">
       <div>
-        <p class="eyebrow">Book a session</p>
+        <p class="eyebrow">Get in touch</p>
         <h2>Bring the problem you are stuck on.</h2>
         <p>If a mentoring session is enough, we will keep it there. If the problem actually needs execution, I will tell you that too.</p>
       </div>
       <div class="hero-actions">
-        <a class="button button-brand" href={siteConfig.growthMentor} data-cta="mentoring-final-growthmentor">GrowthMentor →</a>
-        <a class="link-arrow" href={siteConfig.mentorCruise} data-cta="mentoring-final-mentorcruise">Or, MentorCruise →</a>
+        <a class="button button-brand" href="/contact" data-cta="mentoring-final-contact">Contact me →</a>
       </div>
     </div>
   </section>

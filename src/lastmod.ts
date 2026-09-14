@@ -57,7 +57,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/terms": "2026-08-19",
   "/testimonials": "2026-09-02",
   "/when-growth-plateaus": "2026-07-10",
-  "/services/90-day-growth-sprint": "2026-08-27",
+  "/services/90-day-growth-sprint": "2026-09-14",
   "/services/acquisition-system-build": "2026-08-27",
   "/services/fractional-cmo": "2026-08-27",
   "/insights/what-is-a-fractional-cmo": "2026-08-26",

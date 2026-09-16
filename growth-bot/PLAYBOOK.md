@@ -1,16 +1,16 @@
 # Growth-bot playbook
 
-State for the scheduled Growth/CRO operator (Tue/Thu). The SEO/GEO operator's state is in `seo-bot/`; locks are shared both ways. Prompt of record is the scheduled task "WSS Growth Operator".
+State for the scheduled Growth/CRO operator (daily, 07:00 London). The SEO/GEO operator's state is in `seo-bot/`; locks are shared both ways. Prompt of record is the scheduled task "WSS Growth Operator (CRO, daily)".
 
 ## Access notes
 
 - GA4 property ID: not yet recorded. Record on first successful read, with conversion event names.
-- Calendly source of truth: Gmail, `from:notifications@calendly.com`. Count by invitee + event time.
+- Booking source of truth: Gmail, `from:noreply@wescalestartups.com` (self-hosted Cal.com at cal.wescalestartups.com, subjects `Growth Audit | <name> × We Scale Startups`). Legacy Calendly notifications from `notifications@calendly.com` still arrive for old event types. Count by invitee + final event time.
 - Clarity: connector read-only, or clarity.microsoft.com in Chrome.
 
 ## Funnel model
 
-Organic / AI / referral / direct → landing page → money page (`/pricing`, `/services/*`, `/contact`) → `/book` → Calendly booking → qualified?
+Organic / AI / referral / direct → landing page → money page (`/pricing`, `/services/*`, `/contact`) → `/book` (Cal.com embed) → booking → qualified?
 
 ## Ranked backlog
 

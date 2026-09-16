@@ -163,3 +163,15 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 - **Sweep the connectors before writing anything implying WSS expertise or client work.** The real position is accelerator-side (Google for Startups, DeepMind, Techstars, GrowthMentor, several hundred founder sessions) — **a mentoring relationship, not client work.** Run 20 found a third party collapsing that distinction off-site; run 21 found the site doing it on `/facts/daniel-johnson`. **Check every time.**
 - **A hub page must not restate its spokes.** Run 3 spent a run undoing a self-competing cluster — **and run 15 recreated one (backlog 15).**
 - **When a change is defensible under two competing readings of the data, prefer it** over one needing the ambiguity resolved first.
+
+## From growth-bot
+
+Evidence from the daily Growth/CRO operator. Its state is in `growth-bot/`; locks are shared both ways.
+
+- **2026-09-16 (run 1) — GA4 exists and nobody was reading it. Property `259840282`, account `161039443`.** URL shape:
+  `https://analytics.google.com/analytics/web/?authuser=1#/a161039443p259840282/reports/explorer?params=_u..nav%3Dmaui%26_u.date00%3D20260819%26_u.date01%3D20260915&r=lifecycle-traffic-acquisition-v2`
+  **`?authuser=1` alone lands on the WRONG property** (*Baboodle Universal - GA4*, `a232346320p339200980`) — Trap 11's fault on a different instrument. Assert the property name in the header.
+- **GA4 CARRIES A SESSION-LEVEL AI INSTRUMENT, INDEPENDENT OF THE GEN-AI IMPRESSIONS REPORT.** 28d to 2026-09-15: channel **"AI Assistant" = 22 sessions, 54.55% engagement, 29s**, plus event **`ai_referral` (18 events / 17 users)**. The Gen-AI report counts *surfacing*; this counts *arrivals* — and the 09-22 and 09-24 verdicts are both judged on citation with no instrument that says whether citation moves anyone. **Also a cheap test of run 29's open panel-contamination hypothesis: check whether panel days spike the AI Assistant series.**
+- **GSC AND GA4 DISAGREE ABOUT ORGANIC BY ~2x** — GA4 **116 Organic Search sessions** over 28d to 09-15 (56.03% engagement, 47s) against GSC's ~55–60 clicks. Sessions are not clicks, so neither is wrong. **Name the instrument whenever you quote an organic figure.**
+- **NEVER READ GA4 SESSION TOTALS AS TRAFFIC HEALTH.** 996 sessions, of which **Direct is 792 (79.5%) at 8s and 16.67% engaged**. Clarity excluded **305 bot sessions from 914 raw** over the same days; GA4 excludes far fewer. Organic Search, AI Assistant and Organic Social are the only channels behaving like humans.
+- **Commercial reality for backlog ranking: seven booked calls in 28 days, ZERO in ICP** — qualified from invitees' own Cal.com form answers (two `pre-pmf`, a consultancy, a consumer drinks brand, a VR franchisor who wrote *"We aren't SaaS"*, a partner intro). **A click target is not currently a commercial target.** Growth-bot owns this; it is here so the SEO backlog is ranked against it.

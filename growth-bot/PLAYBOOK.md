@@ -4,9 +4,11 @@ State for the scheduled Growth/CRO operator (daily, 07:00 London). The SEO/GEO o
 
 ## Access notes
 
-- **The run is blind without Chrome.** GA4, Clarity and the GSC Generative AI report all require the signed-in Chrome profile. At run 2 the `claude-in-chrome` extension was **not connected** and all three were unreachable for the whole run.
+- **GA4 no longer needs Chrome.** The **WSS Search Analytics (Rankrat)** connector came online at the end of run 2 and reaches GA4 directly. Verified against property `259840282` for 2026-08-20 → 2026-09-16: `wss-search-analytics_google_analytics_landing_page_performance` returned `/` 408 sessions, `/book` 27, `/pricing` 25, `/services/growth-diagnosis` 20, `/contact` 10 — consistent with run 1's hand-read table, so it is answering about the right property. `accounts_list` → `account_id: "google"`, and the GA4 tools take `property_id` explicitly. **Try this before the browser; it is faster and has no account-chooser trap.** Still assert the numbers look like this site.
+  - **Clarity is still Chrome-only.** The connector exposes `clarity_insights` but **no `clarity` account is configured** — the call is rejected. It is also capped at 1–3 days, so even once configured it will not replace the 28-day dashboard read.
+  - **Cloudflare is still unavailable.** No `cloudflare` account configured in the connector either.
   - **The built-in browser is not a substitute for Google-authenticated sources.** It keeps its own profile with **no Google session**: both `clarity.microsoft.com` and `analytics.google.com` bounce to `accounts.google.com/v3/signin/identifier`. Signing in needs a password, which is prohibited. **Do not spend a run trying to route around this** — record the gap and move on.
-  - **There is no Clarity connector and no GA4 connector in this session.** Confirmed by search at run 2. The `wss-search-analytics` (Rankrat) server Daniel tested on 2026-09-16 is not among the run's tools.
+  - **Chrome is still required for Clarity and the GSC Generative AI report.** At run 2 the `claude-in-chrome` extension was not connected for the whole run and both were unreachable; it reconnected afterwards.
 - **Mobile viewport: use the built-in browser, not Chrome.** `resize_window` with `preset: "mobile"` gives a real 375x812 viewport and a mobile user agent (verified via `window.innerWidth`). Chrome's `resize_window` did **not** change the screenshot frame at run 1. The built-in browser needs the desktop app online; it can drop mid-run.
 - **GA4 property `259840282`, account `161039443`** — "We Scale Startups / wescalestartups.com". URL shape that works:
   `https://analytics.google.com/analytics/web/?authuser=1#/a161039443p259840282/reports/explorer?params=_u..nav%3Dmaui%26_u.date00%3D20260819%26_u.date01%3D20260915&r=<report>`
@@ -17,7 +19,7 @@ State for the scheduled Growth/CRO operator (daily, 07:00 London). The SEO/GEO o
 - Booking source of truth: Gmail, `from:noreply@wescalestartups.com` (self-hosted Cal.com at cal.wescalestartups.com, subjects `Growth Audit | <name> × We Scale Startups`). Legacy Calendly from `notifications@calendly.com` for old event types. Count by invitee + final event time. **Gmail has been reliable on every run; it is the one instrument that has never gone dark.**
   - **The Cal.com booking form captures `Company`, `Stage`, constraint and free-text challenge.** This is primary-source qualification evidence and beats a CRM lookup. Legacy Calendly notifications carry none of it — qualification from those is low confidence.
 - Clarity: project `wkannkoxst` at `clarity.microsoft.com/projects/view/wkannkoxst/dashboard`. Sign in via **Sign in to Google → daniel@wescalestartups.com** (already authorised in Chrome, no consent screen). Date control is a numeric "Last _N_ days" field, not a preset list.
-- **PageSpeed keyless quota is exhausted** (429, shared Google project). Needs an API key from Daniel or skip.
+- **PageSpeed is exhausted by both routes.** Keyless curl returns 429 (shared Google project `583797351490`); the connector's `pagespeed_core_web_vitals` returns `RATE_LIMITED` on the same quota. Re-tested at run 2. **Needs an API key from Daniel, or skip — do not re-test both routes each run.**
 - **Cloudflare connector is unauthenticated and unavailable.** Bot share comes from Clarity's own exclusion count only.
 
 ## Funnel model
@@ -56,7 +58,7 @@ Run 2 note: the 09-17 row judges whether the new insight URL takes queries **off
 ## Ranked backlog
 
 1. **Blocked on Daniel — are non-ICP booked calls a problem or part of the model?** Nothing about booking-page filtering can ship until this is answered. Daniel runs mentoring, a podcast and a referral network; five of eight bookings in the run 2 window came from channels he built deliberately.
-2. Close the baseline: device split, and the Clarity money-page view (`/pricing`, `/services/*`, `/book`) — scroll depth to CTA, dead clicks on money pages only. **Attempted at run 2 and impossible: needs Chrome connected.** If Chrome is down, establish that early and do not spend the run retrying.
+2. Close the baseline: device split, and the Clarity money-page view (`/pricing`, `/services/*`, `/book`) — scroll depth to CTA, dead clicks on money pages only. **The GA4 half is now connector-reachable without Chrome. The Clarity half still needs Chrome.** If Chrome is down, pull the GA4 half anyway and record only Clarity as the gap.
 3. ~~Find a working mobile viewport route.~~ **Solved at run 2** — built-in browser, `resize_window` `preset: "mobile"`. `/pricing` and `/book` captured and clean. Remaining money pages not yet captured on mobile: `/contact`, `/services/growth-diagnosis`, `/services/acquisition-system-build`, `/`.
 4. Money-page mobile CWV — blocked on a PageSpeed API key.
 5. Only if 1 returns "yes, filter": state the positive ICP where the decision is made — `/book` above the calendar, and the top of `/pricing`. Metric: qualified share of website-sourced bookings. **Baseline 0 of 3 per 28 days — set a review window of at least 28 days, not 14, or it cannot be read.**
@@ -64,7 +66,8 @@ Run 2 note: the 09-17 row judges whether the new insight URL takes queries **off
 ## Proposed to Daniel
 
 - Answer backlog 1.
-- **Keep Chrome running with the Claude extension when the daily run fires.** Without it the run sees bookings only. This is the biggest instrument risk.
+- **Keep Chrome running with the Claude extension when the daily run fires** — now needed for Clarity and the GSC Generative AI report, no longer for GA4.
+- **Configure `clarity` and `cloudflare` accounts on the WSS Search Analytics connector** if that is possible. GA4 went from Chrome-dependent to one call once it was configured; the same would take Clarity off the critical path.
 - A PageSpeed API key (unblocks mobile CWV).
 - Authorise the Cloudflare connector (bot share is currently inferred from Clarity alone).
 - Confirm the 09-29 money-page interpretation above.

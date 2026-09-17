@@ -43,7 +43,7 @@ Organic / AI / referral / direct → landing page → money page (`/pricing`, `/
 ## Open, not established
 
 - **One booking produced no Cal.com notification email** (Tom McColllum, 09-15 — two reschedule emails, no original). The source of truth may under-count. No second instance at run 2. Watch for one before acting.
-- **The Cal.com iframe reported 956px inside a `#book-cal-inline` container with a computed height of 700px** (run 2, mobile). Whether the container clips is **unresolved** — the bridge dropped before `overflow` could be read. Against it being a defect: website bookings do come through this embed, and Cal.com embeds normally resize their container by postMessage after load, so 700px may have been read mid-settle. **Read `overflow` on `#book-cal-inline` next run. The container is no-touch either way — a clip is a report to Daniel, not a fix.**
+- **`/book` on mobile puts the calendar in a nested scroll box** (run 2, measured at 375px). `#book-cal-inline` is `overflow-y: auto` with `clientHeight` 698px and `scrollHeight` 956px; the Cal.com iframe is 956px. **Not clipped — nested-scrolled.** A mobile visitor must scroll inside a 698px window to reach the bottom 258px of the calendar, where `month_view` puts the time slots and the confirm step. **This is a friction candidate found by inspection, not a demonstrated constraint** — Clarity was dark, so no behavioural evidence and no device split. **It is no-touch (FIXED RULE 1 covers the container). Report it; never route around it.** Promote or retire it with the Clarity mobile `/book` read.
 
 ## Locks inherited from seo-bot (read `seo-bot/VERDICTS.md` every run)
 
@@ -76,3 +76,4 @@ Run 2 note: the 09-17 row judges whether the new insight URL takes queries **off
 - **A booking is not a website conversion until you know how the invitee got the link.** Check Gmail for outbound from Daniel, and for MentorCruise and referral threads, before counting one. Josefina looked like a website booking until the MentorCruise thread turned up.
 - **A window that moves forward by a day is not a new measurement.** Run 2's 7 → 8 is one addition, not growth. Say so, or the next run reads a trend into it.
 - **An empty container is not a broken embed.** The Cal.com widget renders nothing until scrolled near. Inspect the DOM before calling a blank screen a defect.
+- **Programmatic scroll does not move this site.** `window.scrollTo` and `Element.scrollIntoView` leave `window.scrollY` at 0 — a smooth-scroll library intercepts them. Only real wheel events via the `computer` scroll action move the page, so only they fire a lazy-load. **Scroll with `computer`, never with injected JS, when testing lazy-loaded elements.** Two false "the embed failed to load" readings at run 2 came from this.

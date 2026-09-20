@@ -12,3 +12,13 @@ public/og/services/
 .env.*
 !.env.example
 
+
+# Build-time image derivatives. scripts/optimise-raster-images.mjs writes a sibling
+# .webp next to any public/images/**/*.{png,jpg,jpeg} over its size threshold; that
+# script's own header explains they are generated rather than committed, and
+# Cloudflare Pages regenerates them on every deploy. Without these lines every local
+# `npm run build` leaves an untracked file and git-hygiene checks ask for it.
+# Add a line per new large raster source. Hand-authored .webp images are SOURCES —
+# they stay tracked and must never be listed here.
+public/images/team/madiha-shahid.webp
+public/images/team/rahul-van-manen.webp

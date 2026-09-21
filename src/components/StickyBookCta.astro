@@ -164,14 +164,19 @@ const {
     gap: 0.4rem;
   }
 
-  /* The newsletter and the group get identical space and identical weight —
-     neither is the junior partner. The WhatsApp link is rendered by a child
-     component, so its element never carries this file's scope attribute:
-     match it through :global too. */
+  /* Measured 2026-09-21: the bar drew 357 impressions and ~5.6% clicks on the
+     booking button, down from 9.8% the window before, while the two secondary
+     offers sat beside it at equal weight. On a 375x812 phone the bar stood
+     264px tall — a third of the viewport — and covered the price tiers on
+     /pricing. Booking is the primary action, so the newsletter and the group
+     are now one compact line of links under it rather than two cards. Both
+     stay present and tappable; only their weight changes. The WhatsApp link is
+     rendered by a child component, so its element never carries this file's
+     scope attribute: match it through :global too. */
   .sticky-book-cta-duo {
     display: flex;
-    align-items: stretch;
-    gap: 0.4rem;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .sticky-book-cta-duo > *,
@@ -180,26 +185,25 @@ const {
     min-width: 0;
   }
 
-  /* Each half is a small card: icon badge, title, one line of detail, and an
-     arrow that leans in on hover. */
+  /* Each half is a quiet link: small badge, one line of label, arrow on hover.
+     No border and no fill, so neither competes with the booking button. */
   .sticky-book-cta-duo :global(.cta-card) {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.6rem 0.7rem;
-    border: 1px solid color-mix(in srgb, #fff 14%, transparent);
+    gap: 0.4rem;
+    padding: 0.3rem 0.4rem;
+    border: 1px solid transparent;
     border-radius: var(--v9-radius-small);
-    background: color-mix(in srgb, #fff 7%, transparent);
-    color: #fff;
+    background: transparent;
+    color: color-mix(in srgb, #fff 72%, transparent);
     text-align: left;
-    transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    transition: background 160ms ease, color 160ms ease;
   }
 
   .sticky-book-cta-duo :global(.cta-card):hover,
   .sticky-book-cta-duo :global(.cta-card):focus-visible {
-    background: color-mix(in srgb, #fff 13%, transparent);
-    border-color: color-mix(in srgb, #fff 30%, transparent);
-    transform: translateY(-1px);
+    background: color-mix(in srgb, #fff 10%, transparent);
+    color: #fff;
     outline: none;
   }
 
@@ -208,16 +212,16 @@ const {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 1.85rem;
-    height: 1.85rem;
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 999px;
-    background: #fff;
-    color: var(--ink);
+    background: transparent;
+    color: inherit;
   }
 
   .sticky-book-cta-duo :global(.cta-card-badge svg) {
-    width: 0.95rem;
-    height: 0.95rem;
+    width: 0.8rem;
+    height: 0.8rem;
   }
 
   .sticky-book-cta-duo :global(.cta-card-copy) {
@@ -228,20 +232,19 @@ const {
   }
 
   .sticky-book-cta-duo :global(.cta-card-title) {
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
     line-height: 1.25;
     letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
+  /* The descriptive line is what made each half two rows tall. The link labels
+     say what they are, so it goes rather than shrinking. */
   .sticky-book-cta-duo :global(.cta-card-sub) {
-    font-size: 0.72rem;
-    line-height: 1.35;
-    color: color-mix(in srgb, #fff 62%, transparent);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    display: none;
   }
 
   .sticky-book-cta-duo :global(.cta-card-arrow) {
@@ -264,13 +267,13 @@ const {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 2.4rem;
-    padding: 0.5rem 0.9rem;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.9rem;
     border: 1px solid var(--violet);
     border-radius: var(--v9-radius-small);
     background: var(--violet);
     color: #fff;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 600;
     line-height: 1.25;
     text-align: center;
@@ -306,14 +309,15 @@ const {
   }
 
   @media (max-width: 640px) {
-    /* Stacked — still equal-sized, just full-width targets rather than two
-       cramped columns, and all three stay reachable instead of the secondary
-       links being dropped. */
+    /* Still stacked, because side by side truncates both labels at 375px —
+       but each is now one line rather than a two-line card, which is where
+       the bar's height went. */
     .sticky-book-cta-duo {
       flex-direction: column;
+      align-items: stretch;
     }
     .sticky-book-cta-duo :global(.cta-card) {
-      padding: 0.65rem 0.7rem;
+      padding: 0.3rem 0.4rem;
     }
   }
 

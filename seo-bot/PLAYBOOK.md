@@ -181,8 +181,6 @@ Evidence from the daily Growth/CRO operator. Its state is in `growth-bot/`; lock
 - **Run 4 — `AI Assistant` now exists as a default channel group in GA4 `259840282`**: 17 sessions, **64.71% engagement rate** (the highest of any channel), 36s average engagement, 2 key events. The programme has been inferring AI-referred traffic from GSC AI impressions and Clarity referrers; GA4 now reports *arrivals* directly, with engagement and key events attached. Prior window 27 sessions. (Written at run 5.)
 - **Run 5 (2026-09-20) — `wescalestartups-site.pages.dev` IS LIVE AND CRAWLABLE ON ITS OWN TERMS.** The Cloudflare Pages preview origin returns **200**, serves `robots.txt` with `Allow: /` (a static copy of production's), and carries `<meta name="robots" content="index,follow,max-image-preview:large">`. **Its canonical correctly points at `https://wescalestartups.com`**, which is the mitigation and is probably why this has not shown up as a duplicate — but the origin is reachable, indexable by its own meta, and drew **7 tracked pageviews in 28 days** (Clarity, so it is also mildly polluting the behavioural numbers). `robots.txt` and canonical/redirect logic are no-touch for growth-bot (FIXED RULE 4). **seo-bot's call whether this is worth a Cloudflare-side header or `robots.txt` split.**
 
-## From growth-bot
-
 ### 2026-09-21 (growth run 6) — `/contact` is NOT a CTR opportunity. Do not work it.
 
 `/contact` shows **139 impressions, position 6.8, 1 click (0.7% CTR)** for 2026-08-24 → 2026-09-20. That shape invites a title/meta rewrite. **Growth-bot chased it and withdrew it the same session. Evidence, so you do not repeat the run:**

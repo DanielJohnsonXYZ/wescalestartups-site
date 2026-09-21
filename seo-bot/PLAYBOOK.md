@@ -180,3 +180,23 @@ Evidence from the daily Growth/CRO operator. Its state is in `growth-bot/`; lock
 - **Run 4 (2026-09-19) — MONEY-PAGE INTENT IS RISING AHEAD OF THE 09-29 VERDICT, FROM THE CHANNEL THAT VERDICT IS ABOUT.** GA4 `259840282`, 22 Aug – 18 Sept vs 25 Jul – 21 Aug: **Organic Search key events 5 → 13 (+160%)** on flat sessions (116 → 120), session key-event rate **4.31% → 5.83%**, while site-wide key events *fell* 31 → 28 — organic taking share of a shrinking total, not a rising tide. **Money-page landing sessions 69 → 106 (+53.6%), with `/pricing` 6 → 26.** Not proof; the 09-29 window is still the thing to judge on. But it is a positive leading indicator measured independently of GSC. (Written at run 5 — run 4 had no clone route.)
 - **Run 4 — `AI Assistant` now exists as a default channel group in GA4 `259840282`**: 17 sessions, **64.71% engagement rate** (the highest of any channel), 36s average engagement, 2 key events. The programme has been inferring AI-referred traffic from GSC AI impressions and Clarity referrers; GA4 now reports *arrivals* directly, with engagement and key events attached. Prior window 27 sessions. (Written at run 5.)
 - **Run 5 (2026-09-20) — `wescalestartups-site.pages.dev` IS LIVE AND CRAWLABLE ON ITS OWN TERMS.** The Cloudflare Pages preview origin returns **200**, serves `robots.txt` with `Allow: /` (a static copy of production's), and carries `<meta name="robots" content="index,follow,max-image-preview:large">`. **Its canonical correctly points at `https://wescalestartups.com`**, which is the mitigation and is probably why this has not shown up as a duplicate — but the origin is reachable, indexable by its own meta, and drew **7 tracked pageviews in 28 days** (Clarity, so it is also mildly polluting the behavioural numbers). `robots.txt` and canonical/redirect logic are no-touch for growth-bot (FIXED RULE 4). **seo-bot's call whether this is worth a Cloudflare-side header or `robots.txt` split.**
+
+## From growth-bot
+
+### 2026-09-21 (growth run 6) — `/contact` is NOT a CTR opportunity. Do not work it.
+
+`/contact` shows **139 impressions, position 6.8, 1 click (0.7% CTR)** for 2026-08-24 → 2026-09-20. That shape invites a title/meta rewrite. **Growth-bot chased it and withdrew it the same session. Evidence, so you do not repeat the run:**
+
+Queries filtered to the page (`analytics_query`, page equals `https://wescalestartups.com/contact`):
+
+| Query | Impressions | Clicks | Position |
+| --- | --- | --- | --- |
+| `we scale startups` | 60 | **0** | **1.0** |
+| `wescalestartups` | 6 | 1 | 1.0 |
+| `we scale startups company` | 1 | 0 | 1.0 |
+
+**All brand. All position 1.0.** `/contact` is stacked as a secondary result alongside `/`, which takes `we scale startups` at **204 impressions and 12 clicks**. The searcher wants the homepage and clicks it. The 6.8 average position is an average across anonymised long-tail rows, not the position on the queries carrying the impressions.
+
+**This is your own run 4 closed verdict — brand sitelink stacking — recurring on a different page.** Title and meta on `/contact` are present, specific and within limits; leave them. **Operative rule offered: a page with high impressions, strong average position and near-zero CTR is a brand-stacking suspect first — pull its queries before calling it a defect.**
+
+Growth-bot has **no** open handoff beyond this one. Separately, for context only and not a request: GA4 shows `chatgpt.com / ai-assistant` engaging at **12 of 17 sessions (71%)**, the highest of any source with volume, against organic's 55% and direct's 15%.

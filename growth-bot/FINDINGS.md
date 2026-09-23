@@ -6,6 +6,26 @@ Everything below is settled unless a line says otherwise. **Do not re-derive it.
 
 ## Settled findings
 
+- **THE PRIMARY METRIC MOVED FOR THE FIRST TIME IN A WEEK, AND BOTH NEW BOOKINGS ARE STRUCTURALLY NON-WEBSITE (run 8).** Window 2026-08-26 → 2026-09-22: **14 bookings, ZERO qualified, website-sourced still 3.** Nothing dropped at the 08-25 edge; two landed on 09-22, the first since Josefina on 09-16.
+  - **Mahmod Mahamed — `Growth Audit | Mahmod Mahamed × We Scale Startups`, Tue 22 Sept 17:15. UNQUALIFIED, MentorCruise-sourced, proven on the thread rather than inferred.** MentorCruise inquiry 09-21 13:03 ("I'm doing digital marketing focused…"), then 09-22 08:14 "how to continue from here?", 09-22 09:03 "Unfortunately I didn't get any link", 09-22 11:04 **"Yeah, thanks. I scheduled a meeting"**. His own booking-form answers: Company **M71**, Stage **pre-pmf**, constraint positioning, challenge "New clients"; personal Gmail, Asia/Jerusalem. **The site had no part in this booking, and no site change reaches it.** Fifth MentorCruise booking on the record.
+  - **Joshua Herzig-Marx — `Podcast Interview`, Tue 13 Oct. Non-website, not a buyer.** The Cal.com notice carries **"Additional notes: Via Lenny's"**. A podcast-guest slot, counted as a Cal.com booking and never as a qualified call.
+  - **EIGHTEEN CONSECUTIVE UNQUALIFIED BOOKINGS.** Per backlog 1 this is the model Daniel chose, not a defect. Keep counting the two metrics apart.
+  - **Mahmod left NO `A new event has been scheduled` notice — only his own Google Calendar acceptance.** Updated: **6 of 14 (43%)** missing from the new-event notice. Joshua's notice did arrive.
+- **TRAFFIC IS FALLING WHILE MONEY-PAGE REACH AND CTA CLICKS HOLD — a third independent confirmation, now on landing-page sessions rather than events (run 8, GA4 `259840282`, property name asserted in the header).** Two single-range reads, 2026-08-26 → 2026-09-22 against 2026-07-29 → 2026-08-25:
+
+| | Prior 28d | This 28d | Change |
+| --- | --- | --- | --- |
+| Sessions (all landing pages) | 1,326 | 1,003 | **−24.4%** |
+| Key events (all) | 30.00 | 30.00 | **flat** |
+| `/book` landing sessions | 18 | **25** | +39% |
+| `/pricing` landing sessions | not in top 12 (<13) | **24** | up |
+| `/services/growth-diagnosis` | 15 | 14 | flat |
+| `/` landing sessions | 610 | 422 | −31% |
+
+  **The traffic that left is traffic that never reached a money page** — the same shape run 6 read on `session_start` vs `sticky_book_cta_shown` and run 7 confirmed on an independent window. **This is NOT a read on the run 6 sticky-CTA change**, which shipped 2026-09-21 19:08 and sits inside roughly one day of this window; the 2026-10-19 verdict stands unshortened. Raw GA4 sessions remain ~80% direct/bot — do not build a conversion rate on 1,003.
+- **NO NEW BROWSER-SIDE DEFECT (run 8, headless Chromium, live production, `/`, `/pricing`, `/book`, `/contact`).** The only console errors on any of the four are the **two already-recorded CSP refusals** — `challenges.cloudflare.com/turnstile/v0/api.js` and `widget.intercom.io/widget/rkz1so24`. Zero JavaScript exceptions, no other failed request. All eight money pages returned **200 in 0.39–1.27s**. Re-read because run 7's rule stands: a no-touch area still has to be looked at.
+- **THE `/metrics/ag/g/c` ERR_ABORTED IS NOT A DEFECT, AND IT IS SETTLED ON DATA (run 8).** Headless Chromium logs `net::ERR_ABORTED` on the GA4 first-party collect beacon on every page, which reads exactly like broken page_view collection. **Direct probe: `GET` and `POST` to `/metrics/ag/g/c` both return `204`, the correct GA4 response**, and the property recorded 1,003 sessions over the window. It is a beacon/context-close artefact of headless. **Do not chase this.**
+
 - **SEVENTEENTH FALSE FACT, AND THE THIRD THIS BOT HAS WRITTEN ABOUT ITS OWN INSTRUMENTS (run 7, corrected same day).** Run 7 recorded the Rankrat connector **absent**, called it "the fourth absence in seven runs", reported GA4 and `book_call` as unreadable, and led Daniel's blocker list with it. **All of that was false.** The server was **still connecting** when the first-minute check ran; a bare `ToolSearch` for its tool names missed because the schemas had not loaded. It was healthy the whole time: 90+ tools, `accounts_list` answering first call, `diagnostics` `ready: true`, `provider_readiness` for `google` `available: true`. **The shape is identical to the previous sixteen: a claim taken from one instrument reading and never re-checked against the thing it is about.** `RefreshMcpTools` names a server as still connecting, and `ToolSearch` waits for connecting servers — **either one would have caught it, and one of them is now mandatory before recording any connector as unavailable (Trap 13).** Runs 3, 4 and 5 recorded the same absence and cannot be verified retroactively; treat them as suspect.
 - **`book_call` AND `sticky_book_cta_shown`, THE PRE-CHANGE BASELINE, CONFIRMED ON AN INDEPENDENT WINDOW (run 7, GA4 `259840282`).** 2026-08-25 → 2026-09-21 against 2026-07-28 → 2026-08-24:
 

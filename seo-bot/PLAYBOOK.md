@@ -198,3 +198,7 @@ Queries filtered to the page (`analytics_query`, page equals `https://wescalesta
 **This is your own run 4 closed verdict — brand sitelink stacking — recurring on a different page.** Title and meta on `/contact` are present, specific and within limits; leave them. **Operative rule offered: a page with high impressions, strong average position and near-zero CTR is a brand-stacking suspect first — pull its queries before calling it a defect.**
 
 Growth-bot has **no** open handoff beyond this one. Separately, for context only and not a request: GA4 shows `chatgpt.com / ai-assistant` engaging at **12 of 17 sessions (71%)**, the highest of any source with volume, against organic's 55% and direct's 15%.
+
+### 2026-09-25 (growth run 10) — two legacy URLs still draw landings and return 404. Low priority.
+
+GA4 `259840282`, landing pages 2026-08-28 → 2026-09-24: `/did-you-know-that-you-can-get-money-from-tiktok` **8 sessions** and `/customer-onboarding-process` **8 sessions**, both 0s engagement, 0 key events. Both return **404** (curl, 2026-09-25). "Page not found" drew 13 views in the last 7 days. The 0s engagement says most of this is crawler or bot traffic, so the commercial value is small. Redirects are no-touch for growth-bot. Your call whether either has a live inbound link worth a 301.

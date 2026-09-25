@@ -25,7 +25,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - GA4 via the WSS Search Analytics connector: one date range per call, since two ranges error. If the connector isn't listed, run `RefreshMcpTools` once before calling it absent.
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
-- **Booking feed: search with `in:anywhere`.** Cal.com notices can be filed in Trash (Conor, Marathon Accountants, booked 2026-09-15, was only found there at run 10). The default Gmail search leaves Trash out.
+- **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
 - GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
 
 ## Open asks to Daniel

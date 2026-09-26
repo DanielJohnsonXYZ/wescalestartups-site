@@ -25,6 +25,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - GA4 via the WSS Search Analytics connector: one date range per call, since two ranges error. If the connector isn't listed, run `RefreshMcpTools` once before calling it absent.
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
+- **Google Calendar connector is on the work account (2026-09-26).** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with its form answers (company, stage, constraint, challenge) and the invitee's RSVP. Use it to cross-check the Gmail count and to qualify invitees.
 - **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
 - **GA4 event inventory (checked 2026-09-26):** before GTM version 37, GA4 received only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click` and `form_start`. Per-CTA clicks were not measured, and GA4 "key events" counted `book_call` clicks, not bookings.
 - **GTM version 37 (Daniel, 2026-09-26 11:07):** `cta_click`, `scorecard_start`, `pricing_click`, `resource_click` and `outbound_link_click` now go to GA4 under their own names with `cta_label` and `cta_href`. `cta_label` is registered as the event-scoped custom dimension "CTA label". `booking_complete` (no "d") now fires on page views of `/book/thanks`. The old Calendly trigger listens for `calendly.event_scheduled`, which the site never sends, so bookings aren't double-counted. Per-CTA and completed-booking comparisons start from 2026-09-26: never compare them with windows before that date. The old `booking_completed` key event is dead.
@@ -33,8 +34,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Open asks to Daniel
 
-- Mark `booking_complete` as a GA4 key event once it first appears (after the next booking), and delete the dead `booking_completed` key event.
-- Reconnect the Google Calendar connector as daniel@wescalestartups.com (it is signed in as admindjohnson@gmail.com).
+- Mark `booking_complete` as a GA4 key event once it first appears (after the next booking). The old `booking_completed` key event was removed on 2026-09-26.
 - Confirm a real contact-form submission still lands now that Turnstile runs.
 - Decide on Intercom: remove it from GTM, or add `widget.intercom.io` and related hosts to the CSP.
 - Consider a separate Cal.com event type for MentorCruise/mentoring calls, so "Growth Audit" bookings stay a clean prospect signal.

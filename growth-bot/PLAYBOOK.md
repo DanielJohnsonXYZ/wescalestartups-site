@@ -26,11 +26,14 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
 - **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
+- **GA4 event inventory (checked 2026-09-26):** only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click`, `form_start`. `cta_click`, `scorecard_start`, `pricing_click` and `booking_completed` don't reach GA4, so per-CTA clicks come from Clarity only. GA4 "key events" count `book_call` clicks, not completed bookings.
+- No GA4 connector is listed, even after refresh. Use Chrome at `authuser=2`: the Events report for property `259840282` works.
 - GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
 
 ## Open asks to Daniel
 
 - Authorise the `daniel@wescalestartups.com` work calendar on the Google Calendar connector. The booking emails miss about 40% of bookings.
+- GTM: forward `cta_click` (with the `data-cta` label) and `booking_completed` to GA4, and register `cta` as a custom dimension (run 11).
 - Confirm a real contact-form submission still lands now that Turnstile runs.
 - Decide on Intercom: remove it from GTM, or add `widget.intercom.io` and related hosts to the CSP.
 - Consider a separate Cal.com event type for MentorCruise/mentoring calls, so "Growth Audit" bookings stay a clean prospect signal.

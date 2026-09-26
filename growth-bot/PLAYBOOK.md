@@ -26,14 +26,15 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
 - **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
-- **GA4 event inventory (checked 2026-09-26):** only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click`, `form_start`. `cta_click`, `scorecard_start`, `pricing_click` and `booking_completed` don't reach GA4, so per-CTA clicks come from Clarity only. GA4 "key events" count `book_call` clicks, not completed bookings.
+- **GA4 event inventory (checked 2026-09-26):** before GTM version 37, GA4 received only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click` and `form_start`. Per-CTA clicks were not measured, and GA4 "key events" counted `book_call` clicks, not bookings.
+- **GTM version 37 (Daniel, 2026-09-26 11:07):** `cta_click`, `scorecard_start`, `pricing_click`, `resource_click` and `outbound_link_click` now go to GA4 under their own names with `cta_label` and `cta_href`. `cta_label` is registered as the event-scoped custom dimension "CTA label". `booking_complete` (no "d") now fires on page views of `/book/thanks`. The old Calendly trigger listens for `calendly.event_scheduled`, which the site never sends, so bookings aren't double-counted. Per-CTA and completed-booking comparisons start from 2026-09-26: never compare them with windows before that date. The old `booking_completed` key event is dead.
 - No GA4 connector is listed, even after refresh. Use Chrome at `authuser=2`: the Events report for property `259840282` works.
 - GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
 
 ## Open asks to Daniel
 
-- Authorise the `daniel@wescalestartups.com` work calendar on the Google Calendar connector. The booking emails miss about 40% of bookings.
-- GTM: forward `cta_click` (with the `data-cta` label) and `booking_completed` to GA4, and register `cta` as a custom dimension (run 11).
+- Mark `booking_complete` as a GA4 key event once it first appears (after the next booking), and delete the dead `booking_completed` key event.
+- Reconnect the Google Calendar connector as daniel@wescalestartups.com (it is signed in as admindjohnson@gmail.com).
 - Confirm a real contact-form submission still lands now that Turnstile runs.
 - Decide on Intercom: remove it from GTM, or add `widget.intercom.io` and related hosts to the CSP.
 - Consider a separate Cal.com event type for MentorCruise/mentoring calls, so "Growth Audit" bookings stay a clean prospect signal.

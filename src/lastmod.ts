@@ -44,7 +44,7 @@ export const staticPathLastModified: Partial<Record<string, string>> = {
   "/llms-full.txt": "2026-05-03",
   "/markdown/home.md": "2026-08-09",
   "/press": "2026-08-19",
-  "/pricing": "2026-08-21",
+  "/pricing": "2026-09-27",
   "/podcast": "2026-08-25",
   "/insights/glossary": "2026-08-20",
   "/seo-content-strategy": "2026-08-19",

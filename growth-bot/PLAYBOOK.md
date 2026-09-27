@@ -11,6 +11,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - **Booking CTA:** about 65 `book_call` clicks in 90d. Sticky bar redesigned 2026-09-21 (`f9a0ef7`); compare `book_call` ÷ `sticky_book_cta_shown` around 2026-10-19 (baseline 30/357 = 8.4%).
 - **Turnstile:** CSP fixed 2026-09-23 (`ebf5643`). The script now loads on all five forms, but tokens stayed empty in headless Chrome. `TURNSTILE_ENFORCE` is unset. Leave it unset until Daniel confirms a real-browser submission.
 - **Intercom:** a GTM-injected widget, blocked by CSP. Daniel hasn't said whether it should be live. Leave it alone.
+- **Newsletter popup on money pages (run 12, 2026-09-27):** the popup close button was the most-clicked control on desktop `/pricing` (4 of 30 clicks in 30d), matching every "Get in touch" click combined. Popup now off `/pricing` only (`5f0d26d`), reviewed 2026-10-25. It still runs on `/` and `/services/*`.
 - **Mobile:** about 87% of Clarity sessions are desktop. `/book*` scores 94/100 on Clarity CWV. No known friction on `/book`.
 
 ## Starting candidates (re-rank each Monday on fresh data)
@@ -30,6 +31,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - **GA4 event inventory (checked 2026-09-26):** before GTM version 37, GA4 received only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click` and `form_start`. Per-CTA clicks were not measured, and GA4 "key events" counted `book_call` clicks, not bookings.
 - **GTM version 37 (Daniel, 2026-09-26 11:07):** `cta_click`, `scorecard_start`, `pricing_click`, `resource_click` and `outbound_link_click` now go to GA4 under their own names with `cta_label` and `cta_href`. `cta_label` is registered as the event-scoped custom dimension "CTA label". `booking_complete` (no "d") now fires on page views of `/book/thanks`. The old Calendly trigger listens for `calendly.event_scheduled`, which the site never sends, so bookings aren't double-counted. Per-CTA and completed-booking comparisons start from 2026-09-26: never compare them with windows before that date. The old `booking_completed` key event is dead.
 - No GA4 connector is listed, even after refresh. Use Chrome at `authuser=2`: the Events report for property `259840282` works.
+- **Clarity via the browser pane works (run 12):** project `wkannkoxst`. Heatmap URL: `/projects/view/wkannkoxst/heatmaps?date=Last%2030%20days&heatmapDeviceType=2&heatmapType=0&url=<page>&URL=2%3B6%3B<escaped regex>` (device 2 = desktop). Read the click list with JS: split `document.body.innerText` on `N clicks (x%)` lines. Screenshots fail while the pane is hidden, so use `read_page` or JS.
 - GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
 
 ## Open asks to Daniel

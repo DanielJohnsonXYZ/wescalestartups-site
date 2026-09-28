@@ -36,7 +36,10 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Open asks to Daniel
 
-- Mark `booking_complete` as a GA4 key event once it first appears (after the next booking). The old `booking_completed` key event was removed on 2026-09-26.
-- Confirm a real contact-form submission still lands now that Turnstile runs.
-- Decide on Intercom: remove it from GTM, or add `widget.intercom.io` and related hosts to the CSP.
-- Consider a separate Cal.com event type for MentorCruise/mentoring calls, so "Growth Audit" bookings stay a clean prospect signal.
+- Mark `booking_complete` as a GA4 key event once it first appears (after the next booking). Daniel agreed on 2026-09-28; it has not fired yet.
+
+## Closed with Daniel (2026-09-28)
+
+- **Turnstile:** Daniel said "do it yourself". Cloudflare analytics for sitekey `0x4AAAAAAEIhzoHuWLsynQnO`, 7 days to 2026-09-28: 4,761 challenges issued, 1,390 solved without interaction, 1 solved interactively. Real visitors pass. Automated browsers (headless, the browser pane and Claude in Chrome) never get a token, so a form test from here can't prove anything. `TURNSTILE_SECRET_KEY` is set on the `wescalestartups-com` Pages project. `TURNSTILE_ENFORCE` stays unset: switching it on also needs `FORM_MONITOR_SECRET` on Pages and on Steve for the lead-capture probe, and a wrong secret would silently drop leads. Revisit only if bot signups show up in Customer.io.
+- **Intercom:** Daniel wants free tools only. The Intercom tag in GTM-TV6C7GS was paused and published as **version 38** (2026-09-28). Live `gtm.js` serves v38 with no Intercom reference. It had never loaded (CSP-blocked). No chat replacement.
+- **Mentoring bookings:** new Cal.com event type **"Mentoring Session"**, `cal.wescalestartups.com/daniel/mentoring` (id 6), 30 min, Google Meet, same availability, hidden from the public profile. Calendar title is **`Mentoring | {Scheduler} × Daniel Johnson`**, so the Calendar search "Growth Audit We Scale Startups" no longer returns mentoring calls booked through it. Daniel sends this link to mentees (MentorCruise, GrowthMentor, Google mentor programme). Count `Mentoring |` events separately from Growth Audits.

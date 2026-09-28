@@ -13,7 +13,7 @@
  * Wrong lastmod values suppress recrawl, so keep this generated.
  */
 export const staticPathLastModified: Partial<Record<string, string>> = {
-  "/": "2026-08-25",
+  "/": "2026-09-28",
   "/about": "2026-08-25",
   "/ai-growth-systems": "2026-08-21",
   "/ai-sameness-scorecard": "2026-08-18",

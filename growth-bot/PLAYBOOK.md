@@ -12,6 +12,8 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - **Turnstile:** CSP fixed 2026-09-23 (`ebf5643`). The script now loads on all five forms, but tokens stayed empty in headless Chrome. `TURNSTILE_ENFORCE` is unset. Leave it unset until Daniel confirms a real-browser submission.
 - **Intercom:** a GTM-injected widget, blocked by CSP. Daniel hasn't said whether it should be live. Leave it alone.
 - **Newsletter popup on money pages (run 12, 2026-09-27):** the popup close button was the most-clicked control on desktop `/pricing` (4 of 30 clicks in 30d), matching every "Get in touch" click combined. Popup now off `/pricing` (`5f0d26d`, review 2026-10-25) and `/` (run 13, `3a86006`, review 2026-10-28: desktop `/` popup close 26 of 181 clicks, the top control; sticky-bar dismiss 18; booking links ~12). It still runs on `/services/*` and elsewhere. Sticky-bar dismisses outnumber its booking clicks on `/`: weigh that at the 10-19 verdict.
+- **Turnstile JS errors (run 15):** Clarity shows Turnstile client errors 300010, 600010, 300030 and 110200 in 17.7% of sessions over the last 7 days (30 errors), against 3% over 30 days. They rose after the 09-23 CSP fix made the widget load. With `TURNSTILE_ENFORCE` unset they block nothing: `/api/forms` skips verification and the contact form hands off to `mailto:` anyway. The codes match automation and privacy browsers, and Cloudflare shows real visitors solving. Not a conversion defect. Recheck only if `TURNSTILE_ENFORCE` is ever switched on.
+- **Mentees still book on the Growth Audit link (run 15):** Bea Brampton (PAWD Drinks, Up Club mentee) rebooked on 2026-09-29 through Growth Audit, a day after the Mentoring event type went live, with "Mentoring!" as her challenge. Existing mentees reuse the link they already have. Count by form answers, not event title alone.
 - **Mobile:** about 87% of Clarity sessions are desktop. `/book*` scores 94/100 on Clarity CWV. No known friction on `/book`.
 
 ## Starting candidates (re-rank each Monday on fresh data)
@@ -30,12 +32,15 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
 - **GA4 event inventory (checked 2026-09-26):** before GTM version 37, GA4 received only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click` and `form_start`. Per-CTA clicks were not measured, and GA4 "key events" counted `book_call` clicks, not bookings.
 - **GTM version 37 (Daniel, 2026-09-26 11:07):** `cta_click`, `scorecard_start`, `pricing_click`, `resource_click` and `outbound_link_click` now go to GA4 under their own names with `cta_label` and `cta_href`. `cta_label` is registered as the event-scoped custom dimension "CTA label". `booking_complete` (no "d") now fires on page views of `/book/thanks`. The old Calendly trigger listens for `calendly.event_scheduled`, which the site never sends, so bookings aren't double-counted. Per-CTA and completed-booking comparisons start from 2026-09-26: never compare them with windows before that date. The old `booking_completed` key event is dead.
+- **Browser pane Google session (2026-09-30):** every Google account in the pane showed "Signed out", so GA4 could not be read at run 15. Clarity in the pane still works. Claude in Chrome was not connected. Signing in needs Daniel.
 - No GA4 connector is listed, even after refresh. Use Chrome at `authuser=2`: the Events report for property `259840282` works.
 - **Clarity via the browser pane works (run 12):** project `wkannkoxst`. Heatmap URL: `/projects/view/wkannkoxst/heatmaps?date=Last%2030%20days&heatmapDeviceType=2&heatmapType=0&url=<page>&URL=2%3B6%3B<escaped regex>` (device 2 = desktop). Read the click list with JS: split `document.body.innerText` on `N clicks (x%)` lines. Screenshots fail while the pane is hidden, so use `read_page` or JS.
 - GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
 
 ## Open asks to Daniel
 
+- Sign the browser pane back in to `daniel@wescalestartups.com` / the GA4 account (found signed out 2026-09-30). Unlocks per-CTA `cta_click` reads and the `booking_complete` check.
+- The SEO/GEO bot's last run log is `seo-bot/changelog/2026-09-15-run29.md` and there is no cloud scheduled task for it. Its 09-22, 09-24 and 09-29 verdicts are unjudged. Confirm whether it is meant to still run.
 - Mark `booking_complete` as a GA4 key event once it first appears (after the next booking). Daniel agreed on 2026-09-28; it has not fired yet.
 
 ## Closed with Daniel (2026-09-28)

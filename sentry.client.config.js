@@ -1,6 +1,12 @@
 import * as Sentry from "@sentry/astro";
 
+const safariCrossOriginFrameError =
+  /^Blocked a frame with origin "https:\/\/wescalestartups\.com" from accessing a cross-origin frame\./;
+
 Sentry.init({
   dsn: "https://fe2e76837b766e394a8f102c9256cd65@o4511244994215936.ingest.de.sentry.io/4511245053984848",
-  tracesSampleRate: 0.1
+  tracesSampleRate: 0.1,
+  // Safari can surface this when analytics observes third-party iframes (for example Turnstile).
+  // It does not represent an application crash, so keep it out of the error inbox.
+  ignoreErrors: [safariCrossOriginFrameError]
 });

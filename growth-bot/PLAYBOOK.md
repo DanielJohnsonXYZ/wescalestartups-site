@@ -5,17 +5,14 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 ## What we know (checked 2026-09-23, 90 days to 2026-09-22 unless stated)
 
 - **Where traffic comes from (GA4, 90d):** Direct 3,448 sessions but only 18% engaged, mostly bots. Google organic 313 (18 `book_call`). LinkedIn (three source spellings) 72 (8 `book_call`, 140–260s average). ChatGPT 48 (4 `book_call`). Customer.io/SendFox email 73, about 6s average, likely link scanners. Clutch/GoodFirms/GrowthMentor referrals total about 40.
-- **Search is brand.** GSC 90d: "we scale startups" gets 41 clicks at position 1.1. Non-brand queries have about zero clicks. The homepage takes 108 of about 170 search clicks.
+- **Search is brand, and content isn't changing that (run 17, GSC 28d to 09-29).** Site: 58 clicks, 3.66k impressions; `/` takes 35 clicks, `/resources` 9. All 27 `/insights/*` pages together: 318 impressions, **2 clicks**. The runs 10–13 pillars are still near zero (`/insights/b2b-saas-gtm-strategy` 20 impr at 8.4; the fractional-CMO pillar under 5), so the SEO bot's 09-23 test reads as "authority-bound". Don't build more articles to fix pipeline; demand comes from Daniel's channels. **Brand watch:** GSC position of `/` for "we scale startups" was 1.0 every day to 09-24, then 5.8–7.6 from 09-25 (09-29: 3.4), while `/about`, `/proof`, `/press`, `/facts` stay at 1.0. No site change that day; the live UK SERP (Chrome, 10-02) still shows WSS first with sitelinks, then LinkedIn, Instagram, Trustpilot, Crunchbase and `we-scale.co`. Likely a SERP-layout or reporting effect. Recheck daily position on 10-09; act only if brand clicks fall.
 - **Bookings are mostly off-site in origin.** Last 28d: 14 bookings, about 3 with any website involvement. Sources: MentorCruise, GrowthMentor, podcast guests, Daniel's outreach. Daniel (2026-09-21): "More calls, don't filter."
 - **Outreach prospects use the site as a credibility check.** Koa Browne (Onfound, after Daniel's approach) went `/` → `/pricing` → booked, with full scroll. Site behaviour doesn't show how someone got the link, so read the email thread.
 - **Booking CTA:** about 65 `book_call` clicks in 90d. Sticky bar redesigned 2026-09-21 (`f9a0ef7`); compare `book_call` ÷ `sticky_book_cta_shown` around 2026-10-19 (baseline 30/357 = 8.4%).
-- **Turnstile:** CSP fixed 2026-09-23 (`ebf5643`). The script now loads on all five forms, but tokens stayed empty in headless Chrome. `TURNSTILE_ENFORCE` is unset. Leave it unset until Daniel confirms a real-browser submission.
-- **Intercom:** a GTM-injected widget, blocked by CSP. Daniel hasn't said whether it should be live. Leave it alone.
 - **Newsletter popup on money pages (run 12, 2026-09-27):** the popup close button was the most-clicked control on desktop `/pricing` (4 of 30 clicks in 30d), matching every "Get in touch" click combined. Popup now off `/pricing` (`5f0d26d`, review 2026-10-25) and `/` (run 13, `3a86006`, review 2026-10-28: desktop `/` popup close 26 of 181 clicks, the top control; sticky-bar dismiss 18; booking links ~12). It still runs on `/services/*` and elsewhere. Sticky-bar dismisses outnumber its booking clicks on `/`: weigh that at the 10-19 verdict.
-- **Turnstile JS errors (run 15):** Clarity shows Turnstile client errors in 17.7% of 7-day sessions since the 09-23 CSP fix. With `TURNSTILE_ENFORCE` unset they block nothing, and the codes fit automation and privacy browsers. Not a conversion defect; recheck only if enforcement is switched on.
+- **Turnstile JS errors (run 15):** in 17.7% of Clarity sessions; with `TURNSTILE_ENFORCE` unset they block nothing. Not a conversion defect.
 - **Mentees still book on the Growth Audit link (run 15):** Bea Brampton (Up Club mentee) rebooked via Growth Audit on 09-29 with "Mentoring!" as her challenge. Count by form answers, not event title alone.
-- **Legacy 404s are crawlers, not buyers (run 16):** "Page not found" was the second most-viewed title in GA4's last 7 days (21 views). The paths are old WordPress URLs (`/strategic-customer-research-programme/` 10, `/digital-marketing-for-technical-engineering-firms/` 9, `/crypto-marketing/` 8 and smaller), all live 404s, with one view per user and 0s engagement over 28 days. Off-ICP topics: redirecting them would send the wrong people to money pages. Leave as 404. SEO-bot can judge link equity if it restarts.
-- **`cta_click` first read (GA4, 2026-09-26 → 09-30):** 4 events in total, 3 on `/`, 1 on `/book`. Too few to compare CTAs; re-read at the 10-19 verdict.
+- **Legacy 404s are crawlers, not buyers (run 16):** old WordPress URLs (`/strategic-customer-research-programme/`, `/crypto-marketing/` etc.) draw about 20 views a week at one view per user and 0s engagement. Off-ICP topics, so leave them as 404s.
 - **Mobile:** about 87% of Clarity sessions are desktop. `/book*` scores 94/100 on Clarity CWV. No known friction on `/book`.
 
 ## Starting candidates (re-rank each Monday on fresh data)
@@ -27,7 +24,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Access notes (short)
 
-- GA4 via the WSS Search Analytics connector: one date range per call, since two ranges error. If the connector isn't listed, run `RefreshMcpTools` once before calling it absent.
+- **No analytics connector is listed** (run 17, after `RefreshMcpTools`). GSC works in Claude in Chrome at `authuser=2`, `sc-domain:wescalestartups.com`. JS is often denied, so use URL filters (`query=!<exact>`, `page=*<fragment>`, `breakdown=date|page|query`) and `get_page_text`, which returns the first 10 rows.
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
 - **Google Calendar connector is on the work account (2026-09-26).** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with its form answers (company, stage, constraint, challenge) and the invitee's RSVP. Use it to cross-check the Gmail count and to qualify invitees.
@@ -40,7 +37,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Open asks to Daniel
 
-- The SEO/GEO bot's last run log is `seo-bot/changelog/2026-09-15-run29.md` and there is no cloud scheduled task for it. Its 09-22, 09-24 and 09-29 verdicts are unjudged. Confirm whether it is meant to still run.
+- The SEO/GEO bot's last run log is `seo-bot/changelog/2026-09-15-run29.md` and there is no cloud scheduled task for it. Its 09-23 pillar verdict was read at run 17 (still zero); 09-22, 09-24, 09-29 and 10-03 are unjudged. Confirm whether it is meant to still run.
 - Mark `booking_complete` as a GA4 key event. It now appears in the GA4 event list (seen run 16), so it can be marked. Daniel agreed on 2026-09-28.
 
 ## Closed with Daniel (2026-09-28)

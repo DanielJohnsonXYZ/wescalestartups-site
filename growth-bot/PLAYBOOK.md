@@ -24,7 +24,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Access notes (short)
 
-- **No analytics connector is listed** (run 17, after `RefreshMcpTools`). GSC works in Claude in Chrome at `authuser=2`, `sc-domain:wescalestartups.com`. JS is often denied, so use URL filters (`query=!<exact>`, `page=*<fragment>`, `breakdown=date|page|query`) and `get_page_text`, which returns the first 10 rows.
+- **Use the WSS Search Analytics connector first** (from 2026-10-06; see below). Chrome fallback: GSC works in Claude in Chrome at `authuser=2`, `sc-domain:wescalestartups.com`. JS is often denied, so use URL filters (`query=!<exact>`, `page=*<fragment>`, `breakdown=date|page|query`) and `get_page_text`, which returns the first 10 rows.
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
 - **Google Calendar connector is on the work account (2026-09-26).** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with its form answers (company, stage, constraint, challenge) and the invitee's RSVP. Use it to cross-check the Gmail count and to qualify invitees.
@@ -37,11 +37,21 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Open asks to Daniel
 
-- The SEO/GEO bot's last run log is `seo-bot/changelog/2026-09-15-run29.md` and there is no cloud scheduled task for it. Its 09-23 pillar verdict was read at run 17 (still zero); 09-22, 09-24, 09-29 and 10-03 are unjudged. Confirm whether it is meant to still run.
-- Mark `booking_complete` as a GA4 key event. It now appears in the GA4 event list (seen run 16), so it can be marked. Daniel agreed on 2026-09-28.
+- None.
+
+## Closed 2026-10-06
+
+- **`booking_complete` is a GA4 key event** (marked in Chrome at Daniel's instruction, run 19). Completed-booking counts in GA4 are valid from 2026-10-06. `book_call` is still a key event too; it counts clicks, not bookings, so never report it as conversions.
+- **SEO/GEO bot is running.** Daniel didn't know about it; its run 30 committed at 07:37 on 2026-10-06 and closed seven verdicts: every classic-search content change failed, retrieval holds on `/facts/*` and the sprint service page, ~5 AI-referred human sessions a month, no bookings. Don't re-ask Daniel. Read `seo-bot/VERDICTS.md` before any search-driven page change; its operative rule (check humans ask the query, in that phrasing, in volume) applies here too.
+- **`/book/thanks` query string stripped before GTM loads** (`6a3411a`). Cal.com was putting invitee names and free-text notes into GA4 `page_location`. Only `?type=<eventTypeSlug>` survives. Not a conversion test, so no lock.
+- **WSS Search Analytics connector** now gives GA4 (property `259840282`), GSC (`sc-domain:wescalestartups.com`) and Clarity reads without Chrome. Use account_id `google`.
+
+## LinkedIn UTM convention (from 2026-10-06)
+
+Every link Daniel posts: `?utm_source=linkedin&utm_medium=social&utm_campaign=<yyyy-mm>-<post-slug>`. Point posts at a proof page, not `/`. Drafts waiting for his return are in run 19's log.
 
 ## Closed with Daniel (2026-09-28)
 
-- **Turnstile:** Daniel said "do it yourself". Cloudflare analytics for sitekey `0x4AAAAAAEIhzoHuWLsynQnO`, 7 days to 2026-09-28: 4,761 challenges issued, 1,390 solved without interaction, 1 solved interactively. Real visitors pass. Automated browsers (headless, the browser pane and Claude in Chrome) never get a token, so a form test from here can't prove anything. `TURNSTILE_SECRET_KEY` is set on the `wescalestartups-com` Pages project. `TURNSTILE_ENFORCE` stays unset: switching it on also needs `FORM_MONITOR_SECRET` on Pages and on Steve for the lead-capture probe, and a wrong secret would silently drop leads. Revisit only if bot signups show up in Customer.io.
-- **Intercom:** Daniel wants free tools only. The Intercom tag in GTM-TV6C7GS was paused and published as **version 38** (2026-09-28). Live `gtm.js` serves v38 with no Intercom reference. It had never loaded (CSP-blocked). No chat replacement.
-- **Mentoring bookings:** Cal.com event type **"Mentoring Session"**, `cal.wescalestartups.com/daniel/mentoring` (id 6), **20 min** and **public on the profile** (Daniel, 2026-09-28), Google Meet, same availability. Calendar title is **`Mentoring | {Scheduler} × Daniel Johnson`**, so the Calendar search "Growth Audit We Scale Startups" no longer returns calls booked through it. Count `Mentoring |` events separately from Growth Audits. `/mentoring` now has "Book a 20-minute mentoring session" (hero, `data-cta="mentoring-book"`) and "Book a mentoring session" (closing band, `mentoring-final-book`) pointing there, with "Contact me" kept beside each (`2f1759e`, lastmod `9528813`). MentorCruise and GrowthMentor book natively through their own schedulers and have no external booking-link field; neither profile carries a Cal.com or Calendly link, so there was nothing to swap there.
+- **Turnstile:** real visitors pass (Cloudflare, 7d to 09-28: 4,761 issued, 1,391 solved). Automated browsers never get a token, so form tests from here prove nothing. `TURNSTILE_ENFORCE` stays unset (needs `FORM_MONITOR_SECRET` on Pages and Steve; a wrong secret drops leads). Revisit only if bot signups appear in Customer.io.
+- **Intercom:** paused in GTM v38 (free tools only). No chat replacement.
+- **Mentoring bookings:** Cal.com "Mentoring Session" (`cal.wescalestartups.com/daniel/mentoring`, 20 min, public). Calendar title `Mentoring | {Scheduler} × Daniel Johnson`, so count it separately from Growth Audits. `/mentoring` links it (`mentoring-book`, `mentoring-final-book`; `2f1759e`). MentorCruise and GrowthMentor book natively; nothing to swap there.

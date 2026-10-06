@@ -20,6 +20,18 @@ const community = siteConfig.growingPains;
   showAnnouncement={false}
   stickyBookCta={false}
 >
+  <script is:inline>
+    // Cal.com appends the invitee's name, email, notes and booking title to this URL.
+    // Strip them before GTM loads (deferred in BaseLayout) so GA4/Clarity never record them; keep only the event type.
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search);
+        if (!location.search) return;
+        var type = p.get("eventTypeSlug") || p.get("type");
+        history.replaceState(null, "", location.pathname + (type ? "?type=" + encodeURIComponent(type) : "") + location.hash);
+      } catch (e) {}
+    })();
+  </script>
   <section class="page-hero" aria-labelledby="booked-heading">
     <div class="shell">
       <p class="eyebrow">You are booked</p>

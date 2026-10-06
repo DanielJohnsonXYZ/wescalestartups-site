@@ -4,17 +4,19 @@
 
 ## Verdicts due, in order
 
-| Date | What | Judge it on |
-| --- | --- | --- |
-| **2026-09-16** | run 9 — `/insights/what-is-a-fractional-cmo` to pillar depth | clicks; baseline to beat is **zero impressions** |
-| **2026-09-17** | run 15 — `/insights/how-to-run-a-90-day-growth-sprint` | clicks, and whether the new URL takes the queries off the £8k–£12k service page. **Unblocks backlog 15** |
-| **2026-09-22** | run 19 — `/facts/we-scale-startups` | **AI impressions and panel prompt 5 — not rank** |
-| **2026-09-23** | runs 10–13 (migration recovery, three pillars, `/insights` hub, orphans); backlog 10's queued lead | clicks. **If the pillars are still at zero, the pillar thesis is authority-bound too, and that changes the backlog** |
-| **2026-09-24** | original research — `/insights/what-226-founder-reviews-reveal` | **CITATION, not ranking** — panel prompts 6 and 8, the Generative AI report; classic clicks last and possibly never. **A null result is a real finding** |
-| **2026-09-29** | the first genuinely **independent** money-page window | money-page clicks. Nothing before this date confirms anything |
-| **2026-10-03** | run 3 — fractional-CMO consolidation (301 check was 09-19) | clicks |
+**None.** All seven dated verdicts were closed at run 30 (2026-10-06) on the first fully independent GSC windows (09 Aug – 05 Sep vs 06 Sep – 03 Oct, zero shared days). Detail: `changelog/2026-10-06-run30.md`.
 
-**The next several runs are mostly judging, not shipping. Plan for that rather than hunting for something to change.**
+| Due | Change | Result |
+| --- | --- | --- |
+| 09-16 | run 9 — `/insights/what-is-a-fractional-cmo` | **FAIL** — 0 impressions |
+| 09-17 | run 15 — `/insights/how-to-run-a-90-day-growth-sprint` | **FAIL** — classic 94 → 22, 0 clicks; **AI impressions 34 → 0** |
+| 09-22 | run 19 — `/facts/we-scale-startups` | **PASS on retrieval, no commercial effect** — Gen-AI 27 flat through 18 panel-free days; prompt 5 cites it, facts correct; 1 classic click |
+| 09-23 | runs 10–13 pillars, hub, orphans | **FAIL — authority-bound** |
+| 09-24 | original research (226 reviews) | **FAIL — null result**; not cited, not surfaced |
+| 09-29 | first independent money-page window | **FAIL (small n)** — 5 → 1 |
+| 10-03 | run 3 — fractional-CMO consolidation | **FAIL — authority-bound** |
+
+**What the set says: every content intervention judged on classic search has failed. Retrieval holds on fact and service pages and produces ~5 AI-referred human sessions a month and no measurable booking.**
 
 ---
 
@@ -36,16 +38,17 @@
 
 **RULE, PROHIBITION-STRENGTH: VALID ≠ ELIGIBLE.** Check Google's rich-results gallery for the type in that context before shipping schema to obtain a SERP feature — otherwise ship it for entity understanding and passage extraction only, and say so. Not reverted: the price bands ARE being extracted. Detail: `changelog/2026-09-04-run23.md` §3.
 
-### Open-but-trending
+### Closed at run 30 — context
 
-- **run 19** — `/facts/we-scale-startups` completed as a fact source. Four instruments agree it is in the retrieval set: **AI impressions 7 → 17 → 19 → 23**, panel prompt 5 in readings #1–3, #5, #7–#10, and 559 classic impressions at 6.4 **with zero clicks**. Verdict 09-22, on AI impressions — not rank.
-- **run 15** — `/insights/how-to-run-a-90-day-growth-sprint`. **AI impressions 20 → 34.** Baseline: four queries, 110 impressions at 11.3–15.0, zero clicks, all on the £8k–£12k service page. **Cited by AI Mode four days after publication while classic search reallocated nothing — the two channels need different review horizons.**
+- **run 19** — closed PASS on retrieval (see table above).
+- **run 15** — closed FAIL. **An AI citation won in four days can be lost within six weeks; citation is not a durable asset on its own.**
 - **runs 10–13** — one interactive session with Daniel, ~4x unattended scope, **only because Daniel supplied the GTM guide body**. It worked because 4,000 words of unsourced advice produces filler. **Do not reproduce unattended.**
 
 ---
 
 ## Run log — one line each
 
+- **run 30 (2026-10-06) — VERDICT.** Closed all seven overdue verdicts (six FAIL, one retrieval PASS). Panel #13 Google 2/10. Panel-contamination hypothesis upgraded to LIKELY by a 21-day panel-free natural experiment. PLAYBOOK compacted.
 - **run 26 (2026-09-11) — SHIP.** `/mentoring` was absent from the hand-maintained sitemap path list; arithmetic restored 109 → 110. **And the run's larger output: `analytics_query` is REPAIRED** — page, query, date and filters all answer about the correct property, verified four-for-four against run 25's hand-read UI table. Fourteenth false fact. **Panel NULL — Claude in Chrome not connected.** Backlog 15's page found to be **71% a land-acquisition collision**.
 - **run 25 (2026-09-09) — MEASURE.** Whole yield is instruments. Panel **#10 broke the 3/10 story: 2/10**. Found Perplexity's search-history memory ON and self-poisoning; found the Perplexity `Finished` completion tell; proved the old personalisation regex both false-positives and misses. **Generative AI impressions 258 → 337.** State files frozen and split.
 - **run 24 (2026-09-07) — VERDICT.** Closed run 5. Money pages 5. Panel #9. GBP category confirmed live. **Eighth and ninth false facts** (Clutch is live and claimed; `pricingTiers` already fixed). Both SHIP candidates evaporated on inspection — the correct outcome.

@@ -29,7 +29,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
 - **Google Calendar connector is on the work account (2026-09-26).** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with its form answers (company, stage, constraint, challenge) and the invitee's RSVP. Use it to cross-check the Gmail count and to qualify invitees.
 - **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
-- **GA4 event inventory (checked 2026-09-26):** before GTM version 37, GA4 received only `page_view`, `ga4event`, `session_start`, `first_visit`, `user_engagement`, `sticky_book_cta_shown`, `scroll`, `book_call`, `ai_referral`, `click` and `form_start`. Per-CTA clicks were not measured, and GA4 "key events" counted `book_call` clicks, not bookings.
+- **GA4 events before GTM v37 (pre-2026-09-26):** no per-CTA clicks; `book_call` counted clicks, not bookings.
 - **GTM version 37 (Daniel, 2026-09-26 11:07):** `cta_click`, `scorecard_start`, `pricing_click`, `resource_click` and `outbound_link_click` now go to GA4 under their own names with `cta_label` and `cta_href`. `cta_label` is registered as the event-scoped custom dimension "CTA label". `booking_complete` (no "d") now fires on page views of `/book/thanks`. The old Calendly trigger listens for `calendly.event_scheduled`, which the site never sends, so bookings aren't double-counted. Per-CTA and completed-booking comparisons start from 2026-09-26: never compare them with windows before that date. The old `booking_completed` key event is dead.
 - **GA4 route (run 16, 2026-10-01):** the browser pane is still signed out of every Google account; **Claude in Chrome is signed in** and reads GA4 at `authuser=2`, account `a161039443p259840282`. URLs carrying `_u.date00`/`date01`, and the `all-events` report, bounce to Home: use the Pages report (`r=all-pages-and-screens&collectionId=life-cycle`, default last 28 days), set rows to 250 via the `mat-select`, and switch the Event count column's "All events" button to one event to get that event by page. Chrome dropped its connection mid-run, so read what you need early.
 - **Clarity via the browser pane works (run 12):** project `wkannkoxst`. Heatmap URL: `/projects/view/wkannkoxst/heatmaps?date=Last%2030%20days&heatmapDeviceType=2&heatmapType=0&url=<page>&URL=2%3B6%3B<escaped regex>` (device 2 = desktop). Read the click list with JS: split `document.body.innerText` on `N clicks (x%)` lines. Screenshots fail while the pane is hidden, so use `read_page` or JS.
@@ -37,7 +37,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Open asks to Daniel
 
-- None.
+- **(run 20) Add UTMs to the Gmail signature link:** `https://wescalestartups.com/?utm_source=email&utm_medium=signature&utm_campaign=daniel-signature`. ~65 sent emails a week carry a bare link today, so outreach visits vanish into bot-heavy Direct. Once done, GA4 `email / signature` is the outreach-landing measure for candidate 2.
 
 ## Closed 2026-10-06
 

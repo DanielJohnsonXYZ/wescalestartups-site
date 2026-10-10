@@ -39,6 +39,7 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 - **THE PERSON ENTITY IS REAL TO GOOGLE AND THE SITE IS NOT YET ITS SOURCE (run 21).** Reading #6 named Daniel Johnson beside WSS on prompt 5 but cited **LinkedIn, not `/facts/daniel-johnson`**.
 - **THE RUN CADENCE EXCEEDS THE EVIDENCE CADENCE EVEN AT MON/WED/FRI.** **A run that ships nothing and records why is a successful run** — but **build-verifiable work survives an evidence blackout (runs 21, 26, 28), so a blacked-out run is not automatically a REPORT run.** Ask what you can *verify*, not only what you can *measure*.
 - **ALL DATED VERDICTS CLOSED AT RUN 30 (see `VERDICTS.md`): six FAIL, one retrieval PASS. Content is not the lever on classic search. Do not write new pages unless a verdict or Daniel reopens content.**
+- **Run 31 (OFF-SITE): no verdict due until the 10-31 window and the 10-20 panel; nothing shipped.** Brand-SERP hygiene is the open off-site item (DesignRush, Puddding).
 - Daniel works in the repo directly, and so does this bot. **Check `list_commits` before choosing a file**; never touch a page committed in the last 24 hours.
 
 ### Source-of-truth files
@@ -92,7 +93,7 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 
 12. **`agency brief template` — the page does not rank for its own name** (90 impr @ 34.2); its download is an 83-word skeleton. Soft SERP, real pre-hire buyer. If worked, thicken the deliverable; do **not** chase `agency collaboration template`, a closed decoy.
 
-3. **Off-site authority — WORKSTREAM C** lives in `seo-bot/OUTREACH.md` (frozen) plus `seo-bot/outreach/`. Entity hygiene settled runs 11–13. **Daniel's standing decisions: no Companies House registration; display name stays "Daniel Johnson"; NO client review requests on any platform; NO cold outreach to competitors (closes C-1).** **WORKSTREAM C IS A LIST OF ONE: be the source these pages cite — original research.** Every third-party-dependent route is closed. Run 24 got the data (backlog 4); Wikidata Q137046365 closed.
+3. **Off-site authority — WORKSTREAM C** lives in `seo-bot/OUTREACH.md` (frozen) plus `seo-bot/outreach/`. Entity hygiene settled runs 11–13. **Daniel's standing decisions: no Companies House registration; display name stays "Daniel Johnson"; NO client review requests on any platform; NO cold outreach to competitors (closes C-1).** **WORKSTREAM C IS A LIST OF ONE: be the source these pages cite — original research.** Every third-party-dependent route is closed. Run 24 got the data (backlog 4); Wikidata Q137046365 closed. **Run 31: `OUTREACH.md` item 11 (DesignRush "READY" to submit) is WRONG — a profile already exists, carrying the pre-overhaul "growth machines" copy, founded 2019, $99/hr. Action is claim-and-correct by Daniel; queue entry `outreach/2026-10-10-run31.md`. Directories scraped the OLD site: check any profile for `growth machines` before trusting it.**
 
 6. **Homepage non-brand category cluster — deferred since run 5.** ~630 impr at 7–13, one click. The fix means re-anchoring on "agency" (prohibition 15). Revisit only if another page picks these up.
 

@@ -24,7 +24,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Access notes (short)
 
-- **Use the WSS Search Analytics connector first** (from 2026-10-06; see below). Chrome fallback: GSC works in Claude in Chrome at `authuser=2`, `sc-domain:wescalestartups.com`. JS is often denied, so use URL filters (`query=!<exact>`, `page=*<fragment>`, `breakdown=date|page|query`) and `get_page_text`, which returns the first 10 rows.
+- **Use the WSS Search Analytics connector first** (from 2026-10-06; see below). **It connects late:** it was absent for runs 20–24 at run start and loaded mid-session on 2026-10-12 (GA4 property `259840282`, `account_id: google`, verified with `google_analytics_traffic_source_performance`). If ToolSearch misses it, search `+WSS_Search_Analytics` again after a minute before falling back to Chrome. It has no Clarity data despite a `clarity_insights` tool name; check before relying on it. Chrome fallback: GSC works in Claude in Chrome at `authuser=2`, `sc-domain:wescalestartups.com`. JS is often denied, so use URL filters (`query=!<exact>`, `page=*<fragment>`, `breakdown=date|page|query`) and `get_page_text`, which returns the first 10 rows.
 - Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
 - Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
 - **Google Calendar connector is on the work account (2026-09-26).** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with its form answers (company, stage, constraint, challenge) and the invitee's RSVP. Use it to cross-check the Gmail count and to qualify invitees.
@@ -37,6 +37,9 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 
 ## Open asks to Daniel
 
+- **(2026-10-12) DesignRush:** profile claimed July 2026 under `daniel@`, still shows founded 2019, $99/hr, $1k–$10k, PPC/SEO and "growth machines". No password in 1Password; log in (or reset) and paste the copy in `seo-bot/outreach/2026-10-10-run31.md`.
+- **(2026-10-12) Facebook page:** contact email still `hello@`; cover still "Growth Marketing for Startups". The session got to the edit form but the save was blocked by a permission check, so this is Daniel's to click (About → Contact info → Email; Edit cover photo).
+- **(2026-10-12) Instagram bio link:** no WSS Instagram login in 1Password (only a personal account); still Daniel's phone.
 - **(run 20) Add UTMs to the Gmail signature link:** `https://wescalestartups.com/?utm_source=email&utm_medium=signature&utm_campaign=daniel-signature`. ~65 sent emails a week carry a bare link today, so outreach visits vanish into bot-heavy Direct. Once done, GA4 `email / signature` is the outreach-landing measure for candidate 2.
 
 ## Closed 2026-10-06

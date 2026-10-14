@@ -55,7 +55,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - **(2026-10-12) DesignRush:** profile claimed July 2026 under `daniel@`, still shows founded 2019, $99/hr, $1k–$10k, PPC/SEO and "growth machines". No password in 1Password; log in (or reset) and paste the copy in `seo-bot/outreach/2026-10-10-run31.md`.
 - **(2026-10-12) Facebook page:** contact email still `hello@`; cover still "Growth Marketing for Startups". The session got to the edit form but the save was blocked by a permission check, so this is Daniel's to click (About → Contact info → Email; Edit cover photo).
 - **(2026-10-12) Instagram bio link:** no WSS Instagram login in 1Password (only a personal account); still Daniel's phone.
-- **(run 20) Add UTMs to the Gmail signature link:** `https://wescalestartups.com/?utm_source=email&utm_medium=signature&utm_campaign=daniel-signature`. ~65 sent emails a week carry a bare link today, so outreach visits vanish into bot-heavy Direct. Once done, GA4 `email / signature` is the outreach-landing measure for candidate 2.
+- **(run 20, updated 2026-10-14) Signature UTMs:** Gmail web has NO signature (Settings → "No signatures", checked in Chrome 10-14). The HTML signature (logo, wescalestartups.com link, "BOOK A GROWTH AUDIT" → /book) is added by Daniel's desktop mail client, so only he can edit it there. Paste-ready links: `https://wescalestartups.com/?utm_source=email&utm_medium=signature&utm_campaign=daniel-signature` and `https://wescalestartups.com/book?utm_source=email&utm_medium=signature&utm_campaign=daniel-signature&utm_content=book-cta`. Once done, GA4 `email / signature` measures outreach landings.
 
 ## Closed 2026-10-06
 

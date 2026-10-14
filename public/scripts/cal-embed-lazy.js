@@ -73,6 +73,17 @@
     });
   }
 
+  // Cal.com reports one booking through both the postMessage listener and the
+  // namespace "on" callback. Guard so a booking is counted (and subscribed) once.
+  var bookingHandled = false;
+  function handleBooked(detail) {
+    if (bookingHandled) return;
+    bookingHandled = true;
+    var email = (emailFromCalPayload(detail) || rememberedEmail() || "").trim();
+    markBookedDiagnostic(email, "calcom-booking");
+    pushDataLayer("booking_completed", "calcom_inline");
+  }
+
   function onCalMessage(e) {
     if (e.origin !== ORIGIN) return;
     var data = e.data;
@@ -83,9 +94,7 @@
     var detail = data.arg || data.data || data.payload || data;
 
     if (action === "bookingSuccessfulV2" || action === "bookingSuccessful" || action === "booked") {
-      var email = (emailFromCalPayload(detail) || rememberedEmail() || "").trim();
-      markBookedDiagnostic(email, "calcom-booking");
-      pushDataLayer("booking_completed", "calcom_inline");
+      handleBooked(detail);
       return;
     }
 
@@ -159,9 +168,7 @@
       window.Cal.ns[ns]("on", {
         action: "bookingSuccessfulV2",
         callback: function (e) {
-          var email = (emailFromCalPayload(e && e.detail) || rememberedEmail() || "").trim();
-          markBookedDiagnostic(email, "calcom-booking");
-          pushDataLayer("booking_completed", "calcom_inline");
+          handleBooked(e && e.detail);
         }
       });
     });

@@ -2,6 +2,21 @@
 
 The programme was reset on 2026-09-23 at Daniel's request. The old playbook and findings are in `growth-bot/archive/`. Read them only if a question needs history. Keep this file under 10KB and rewrite it instead of appending.
 
+## STANDING DECISION — Daniel, 2026-10-14 (overrides the 10-12 "weekly on Mondays" rule for this bot)
+
+1. **Act every run.** "REPORT, nothing to do" is no longer an acceptable outcome. If a verdict is due, do it first; then finish one concrete pipeline action. A locked page never ends a run: work another part of the funnel.
+2. **Remit is qualified calls from any channel**, not only the website. Don't duplicate the acquisition run (outreach and follow-ups, Notion ledger), the social engagement pass, the Friday post or the SEO bot.
+3. **Daily action menu**, chosen by impact:
+   - pre-call briefs (Notion "Growth Audit briefs") for calls in the next 3 days; never edit the calendar event
+   - post-call follow-ups as Gmail drafts, after checking the ledger and Gmail for duplicates
+   - fix a leak on an unlocked page (Search Analytics connector plus the repo)
+   - segment proof for this week's outreach landings
+   - flag ICP-fit inbound to the acquisition ledger
+   - trace bookings back to their source
+4. **Tests:** at most two open site experiments, each reviewed after no more than 14 days and judged on bookings. Lock only the pages changed. (The four existing locks keep their dates; open no new one until two have closed.)
+5. **Blocked asks: do them yourself** in Claude in Chrome (signed in as Daniel) or with 1Password: directory and profile fixes, Gmail signature UTM, listings. Escalate only on login, 2FA or payment walls. Still never: send prospect or client email or DMs (drafts only), publish new posts as Daniel, commit to price or terms, invent facts, pay, or delete accounts or data. Never touch the Cal.com flow, analytics or GTM tags, or form handling.
+6. **Report:** Done today (with links) → Your 10 minutes (at most 3 items with paste-ready copy) → numbers that changed. Chat only.
+
 ## What we know (checked 2026-09-23, 90 days to 2026-09-22 unless stated)
 
 - **Where traffic comes from (GA4, 90d):** Direct 3,448 sessions but only 18% engaged, mostly bots. Google organic 313 (18 `book_call`). LinkedIn (three source spellings) 72 (8 `book_call`, 140–260s average). ChatGPT 48 (4 `book_call`). Customer.io/SendFox email 73, about 6s average, likely link scanners. Clutch/GoodFirms/GrowthMentor referrals total about 40.

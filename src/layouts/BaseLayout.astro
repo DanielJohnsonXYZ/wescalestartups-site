@@ -133,7 +133,7 @@ const turnstileSiteKey =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); ai_referral (AI referrer/utm); cta_click, book_call (/book or Cal.com), calendly_click (legacy alias for Cal.com clicks), scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download; sticky_book_cta_shown. Booking (inline Cal.com on /book): booking_time_selected, booking_completed (mark booking_completed + book_call as GA4 key events). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
+    <!-- Analytics: GTM loads gtm.js here; dataLayer events — page_context (page load); ai_referral (AI referrer/utm); cta_click, book_call (/book or Cal.com; fires once per click — the old calendly_click alias was removed because GTM mapped it to book_call too, double counting), scorecard_start, pricing_click, resource_click, outbound_link_click (link clicks with label); form_submit; resource_download; sticky_book_cta_shown. Booking (inline Cal.com on /book): booking_time_selected, booking_completed (deduped to one per page load; the ONLY GA4 key event — book_call is a click, not a conversion). Home: home_scorecard_hook_select. Configure GTM Custom Events + Data Layer variables. CMP: use GTM if opt-in regions. -->
     <!-- Google Tag Manager — high in <head> per install instructions (GTM loads before other head assets). -->
     <script is:inline set:html={gtmScript} />
     <!-- End Google Tag Manager -->
@@ -280,15 +280,6 @@ const turnstileSiteKey =
           page_path: window.location.pathname
         });
 
-        // Keep calendly_click for existing GTM mappings while book_call is the key event.
-        if (isCalendly) {
-          window.dataLayer.push({
-            event: "calendly_click",
-            cta_label: label,
-            cta_href: href,
-            page_path: window.location.pathname
-          });
-        }
       });
 
       document.addEventListener("submit", (event) => {

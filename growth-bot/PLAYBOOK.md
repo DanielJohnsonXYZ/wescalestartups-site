@@ -2,15 +2,35 @@
 
 The programme was reset on 2026-09-23 at Daniel's request. The old playbook and findings are in `growth-bot/archive/`. Read them only if a question needs history. Keep this file under 10KB and rewrite it instead of appending.
 
-## STANDING DECISION — Daniel, 2026-10-16: "not proactive enough; aggressively look at the data and scale"
+## STANDING DECISION — Daniel, 2026-10-16 (second instruction of the day; replaces the partner-outreach note written earlier that day)
 
-Overrides the habit of one brief per run. Every run:
+**Role: web growth operator. Objective: more qualified traffic to wescalestartups.com.** Not partner or prospect outreach. That belongs to the acquisition run, and Daniel said this bot lacked the context for it. Each run:
 
-1. **Pull the numbers first, every run, before choosing work.** In one block, pull GA4 sessions and key events by source (connector `google_analytics_report`, property `259840282`, account `google`), GSC brand and top queries, Cal.com bookings (Gmail `in:anywhere` plus Calendar), and the **partner funnel** (Notion Service Partner Network `collection://ea6a96cc-2b77-415a-b0d9-9363c3f365e8`: counts by Outreach Status and Meeting Booked). Log the deltas in the run file.
-2. **Scale what's working; don't polish what isn't.** As of 10-16 the best channel by far is fractional-CFO partner outreach: 58 sent, 13 replies (22%), 7 meetings, and it led to Compass & Ledger, the Anna Stafford webinar and the Anthony Pollock podcast. The website brings in about 5 GA4 key events in 20 days from Google and 4 from LinkedIn. So most runs should push the partner channel: draft the next first-touch batch, revive positive replies that haven't booked, and chase partners after meetings for a first intro.
-3. **Volume target:** at least 5 pipeline-moving drafts or changes per run (Gmail drafts, Notion updates, page fixes), not one.
-4. **Never use a bare booking link with a warm contact.** Offer two fixed times from Daniel's calendar (check that they're free), using different slots for each person. In Sept, "here's my link" lost Sophie Wright and Warren Bingham after they'd both said yes.
-5. Drafts only. Daniel sends them. Still never send, post or commit to price.
+1. **Look across every connector first:** GA4 by source, landing page and week; GSC brand vs non-brand; Bing; Cloudflare (bot and WAF events); referral domains; AI referrals.
+2. **Research before acting:** live SERPs, the third-party pages that already name WSS, and competitors.
+3. **Pick the single action most likely to add qualified visits, then do it** (site change, link or profile fix, or a drafted email for Daniel to send). Record the baseline and when to review it.
+
+**Baseline, 2026-10-16 (GA4, 90 days to 10-15):**
+- Google organic: 345 sessions, 25 key events, almost all brand ("we scale startups"; non-brand GSC is about 0 clicks in 90 days).
+- LinkedIn: about 76 sessions (three source spellings), 12 key events. Best rate.
+- ChatGPT: 54 sessions, 5 key events. About 5 a week in weeks 31–39, then 0–1 a week from week 40.
+- Directories: about 35 sessions (Clutch 16, at 428s average; GoodFirms 9 with 2 key events; DesignRush, TechBehemoths, The Manifest).
+- Direct: 2,781 sessions at about 18% engaged, mostly bots.
+- Google organic weeks 40–42: 20, 14 and 18 sessions, against 31–33 in weeks 37–39. The brand dip lines up with Daniel's holiday.
+
+**Diagnosis:** qualified traffic is people who already know Daniel or WSS. Non-brand search is authority-bound: 29 referring domains, and the SEO bot's content verdicts all failed. **The cheapest authority available is pages that already name WSS without linking.**
+
+**Action 2026-10-16: unlinked-mention reclamation** (Gmail drafts for Daniel to send; review 2026-11-06 by re-checking each page for a `wescalestartups.com` href):
+- startups.com "10 Best Growth Agencies for Startups": WSS listed, the only entry with no link, and the copy is stale ("growth agency", "since 2016"). Draft to support@startups.com (no editorial address; author Ryan Rutan is on LinkedIn only).
+- MediaPost, Laurie Sullivan, 28 Aug: quotes Daniel as "We Scale Startups founder", no link. Draft to her published address.
+- marcdos.com "Best Growth Agencies for Startups": no link. Draft to partnerships@.
+- Worst Advice Podcast, ep 93 (21 Aug): no link. Draft to hello@worstadvicepodcast.com.
+- parisvega.com, First Customers podcast ep 7: no link, contact form only. Paste-ready copy is in the run 28 log.
+- Already linked (leave alone): growthmethod.com, skalskigrowth.com, thedelegatewranglers, superbcompanies (nofollow), danieljohnson.xyz.
+
+**Cloudflare finding, not acted on:** Bot Fight Mode is ON and managed-challenged PerplexityBot 63 times in 7 days. Perplexity is no longer a Cloudflare-verified bot, so robots.txt `Allow` doesn't help. On the Free plan Bot Fight Mode can't be bypassed per bot; the only fix is turning it off. GA4 shows 0 Perplexity referrals in 90 days. OAI-SearchBot, Googlebot and Bingbot get through. Blocks on "ChatGPT-User", "ClaudeBot" or "Googlebot" user agents are exploit scanners from GCP IPs (React RCE rule), so leave them. AI Labyrinth (crawler_protection) is on.
+
+**Next candidates:** more mention reclamation (Instagram, Vendry, Sortlist, The Manifest, Puddding listing copy); Clutch reviews (1 review; Clutch is the top-engagement referrer and an AI source); LinkedIn-to-site links (UTM convention below); why ChatGPT referrals fell after week 39.
 
 ## Earlier decision — Daniel, 2026-10-14 (overrides the 10-12 "weekly on Mondays" rule for this bot)
 

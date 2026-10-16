@@ -2,7 +2,17 @@
 
 The programme was reset on 2026-09-23 at Daniel's request. The old playbook and findings are in `growth-bot/archive/`. Read them only if a question needs history. Keep this file under 10KB and rewrite it instead of appending.
 
-## STANDING DECISION — Daniel, 2026-10-14 (overrides the 10-12 "weekly on Mondays" rule for this bot)
+## STANDING DECISION — Daniel, 2026-10-16: "not proactive enough; aggressively look at the data and scale"
+
+Overrides the habit of one brief per run. Every run:
+
+1. **Pull the numbers first, every run, before choosing work.** In one block, pull GA4 sessions and key events by source (connector `google_analytics_report`, property `259840282`, account `google`), GSC brand and top queries, Cal.com bookings (Gmail `in:anywhere` plus Calendar), and the **partner funnel** (Notion Service Partner Network `collection://ea6a96cc-2b77-415a-b0d9-9363c3f365e8`: counts by Outreach Status and Meeting Booked). Log the deltas in the run file.
+2. **Scale what's working; don't polish what isn't.** As of 10-16 the best channel by far is fractional-CFO partner outreach: 58 sent, 13 replies (22%), 7 meetings, and it led to Compass & Ledger, the Anna Stafford webinar and the Anthony Pollock podcast. The website brings in about 5 GA4 key events in 20 days from Google and 4 from LinkedIn. So most runs should push the partner channel: draft the next first-touch batch, revive positive replies that haven't booked, and chase partners after meetings for a first intro.
+3. **Volume target:** at least 5 pipeline-moving drafts or changes per run (Gmail drafts, Notion updates, page fixes), not one.
+4. **Never use a bare booking link with a warm contact.** Offer two fixed times from Daniel's calendar (check that they're free), using different slots for each person. In Sept, "here's my link" lost Sophie Wright and Warren Bingham after they'd both said yes.
+5. Drafts only. Daniel sends them. Still never send, post or commit to price.
+
+## Earlier decision — Daniel, 2026-10-14 (overrides the 10-12 "weekly on Mondays" rule for this bot)
 
 1. **Act every run.** "REPORT, nothing to do" is no longer an acceptable outcome. If a verdict is due, do it first; then finish one concrete pipeline action. A locked page never ends a run: work another part of the funnel.
 2. **Remit is qualified calls from any channel**, not only the website. Don't duplicate the acquisition run (outreach and follow-ups, Notion ledger), the social engagement pass, the Friday post or the SEO bot.
@@ -49,6 +59,7 @@ The programme was reset on 2026-09-23 at Daniel's request. The old playbook and 
 - **GA4 route (run 16, 2026-10-01):** the browser pane is still signed out of every Google account; **Claude in Chrome is signed in** and reads GA4 at `authuser=2`, account `a161039443p259840282`. URLs carrying `_u.date00`/`date01`, and the `all-events` report, bounce to Home: use the Pages report (`r=all-pages-and-screens&collectionId=life-cycle`, default last 28 days), set rows to 250 via the `mat-select`, and switch the Event count column's "All events" button to one event to get that event by page. Chrome dropped its connection mid-run, so read what you need early.
 - **Clarity via the browser pane works (run 12):** project `wkannkoxst`. Heatmap URL: `/projects/view/wkannkoxst/heatmaps?date=Last%2030%20days&heatmapDeviceType=2&heatmapType=0&url=<page>&URL=2%3B6%3B<escaped regex>` (device 2 = desktop). Read the click list with JS: split `document.body.innerText` on `N clicks (x%)` lines. Screenshots fail while the pane is hidden, so use `read_page` or JS.
 - GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
+- **Gmail `create_draft` works (verified 2026-10-16)**, including in-thread replies via `replyToMessageId`. Use it for every partner or prospect email; Daniel sends.
 
 ## Open asks to Daniel
 

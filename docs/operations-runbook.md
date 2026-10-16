@@ -10,47 +10,28 @@ Dokploy Operational Reference" page. Keep this file as the source of truth for
 
 ---
 
-## 1. Firewall lockdown (do this first)
+## 1. Firewall lockdown
 
-The box was observed listening on Docker Swarm ports `2377/tcp`, `7946/tcp+udp`
-(and overlay `4789/udp`). These are **cluster-internal** and must never be
-reachable from the public internet — `4789` (VXLAN) has no authentication and
-`2377` is the swarm control plane. On a single-node swarm they need no public
-exposure at all.
+**Done 2026-08-10** on server `Steve` (`65.109.232.75`):
 
-Preferred: a **Hetzner Cloud Firewall** (applied at the network edge, outside
-the VM) allowing inbound only:
+- Hetzner Cloud Firewall renamed `coolify-public-web` → **`wss-edge`** (id
+  `10854490`). Inbound allow-list only: `22/tcp`, `80/tcp`, `443/tcp`, `icmp`,
+  `41641/udp` (Tailscale). Removed legacy Coolify `8000` and Dokploy `3000`
+  public allows.
+- Host `ufw` installed and enabled (deny inbound by default; allow 22/80/443 +
+  `tailscale0`). Extra `iptables` drops on `eth0` for Swarm `2377/7946/4789`
+  and Dokploy admin `3000` (localhost still reaches `127.0.0.1:3000`).
+- Persist: `/etc/iptables/rules.v4` + `/etc/ufw/after.rules` (`WSS-HARDENING`
+  block).
 
-| Port | Proto | Source | Purpose |
-|------|-------|--------|---------|
-| 22   | TCP   | your IPs / Tailscale only | SSH |
-| 80   | TCP   | anywhere | HTTP (redirects to 443) |
-| 443  | TCP   | anywhere | HTTPS |
-
-Everything else (2377, 7946, 4789, 3000, DB ports, etc.) = denied inbound.
-
-Host-level backstop with `ufw` (verify it is installed/enabled — section 9 of
-the Notion page lists this as unknown):
-
-```bash
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow 22/tcp        # tighten to your IP / Tailscale CIDR if possible
-ufw allow 80/tcp
-ufw allow 443/tcp
-ufw allow in on tailscale0   # keep Tailscale admin path
-ufw enable
-ufw status verbose
-```
-
-> Note: Docker can bypass `ufw` via iptables for *published* container ports.
-> The Hetzner Cloud Firewall is the reliable control; `ufw` is defense-in-depth.
+Do **not** re-open `3000` or `8000` on the Hetzner firewall. Manage Dokploy at
+`https://dokploy.wescalestartups.com` (Traefik/HTTPS) or via Tailscale/SSH.
 
 ---
 
 ## 2. Backups → Cloudflare R2
 
-Current state as of 2026-06-18:
+Current state as of 2026-08-10:
 
 - R2 bucket: `wss-backups`
 - Dokploy destination: `Cloudflare R2 - wss-backups`
@@ -59,61 +40,35 @@ Current state as of 2026-06-18:
 - Schedule: root crontab runs `/opt/backup.sh` daily at `02:00 UTC`
 - Retention: delete R2 objects older than 14 days
 - Log: `/var/log/wss-backup.log`
-- Previous script backup: `/opt/backup.sh.bak-codex-20260618-001245`
 
-The native Dokploy `backup` and `volume_backup` schedule tables are currently
-empty. All live services are Dokploy compose stacks, so the working backup
-mechanism is the host cron script plus a Dokploy S3 destination row for
-operator visibility.
+The native Dokploy `backup` / `volume_backup` schedules are empty. Live coverage
+is the host cron script.
 
-The script creates database dumps and volume archives before uploading to R2.
-The first full run on 2026-06-18 wrote `r2:wss-backups/2026-06-18/` with 32
-objects totaling about 3.19 GiB.
-
-Covered database dumps:
+Covered database dumps (live stacks):
 
 - Dokploy Postgres
 - Cal.com Postgres
-- PingCRM Postgres
 - Postiz Postgres
 - Postiz Temporal Postgres
-- CAP Media MySQL
-- Mautic MySQL
 
-Covered volumes:
+Covered volumes (live stacks):
 
-- Dokploy Postgres/Redis
-- n8n
-- Uptime Kuma
-- PingCRM Postgres, avatars, WhatsApp sessions
+- Dokploy Postgres/Redis + Dokploy data volumes
 - Postiz config, Postgres, Redis, uploads, Temporal Postgres
-- Cal.com Postgres
-- CAP Media MinIO and MySQL
-- Mautic MySQL, config, media files/images
+- Cal.com Postgres **and Cal.com Redis** (`calcom_calcom-redis`, added 2026-08-10)
 - Hermes data
-- OpenOutreach data
-- ApplyPilot workspace, home, browser data
 
 ### Restore test
 
-An untested backup is not a backup. Monthly, restore the newest backup into a
-throwaway location/container and sanity-check at least one database table or
-application data directory. Do not restore over production during the test.
-
-Read-only verification:
-
-```bash
-rclone lsf r2:wss-backups/2026-06-18 --recursive
-rclone size r2:wss-backups/2026-06-18
-```
-
-Dry restore pattern:
+Monthly, restore the newest backup into a throwaway location (never over
+production). Read-only check done 2026-08-10 for
+`r2:wss-backups/2026-08-09` Dokploy + Cal.com SQL dumps (`gzip -t` OK).
 
 ```bash
 mkdir -p /tmp/wss-restore-check
-rclone copy r2:wss-backups/2026-06-18/databases/dokploy-postgres-2026-06-18.sql.gz /tmp/wss-restore-check/
-gzip -t /tmp/wss-restore-check/dokploy-postgres-2026-06-18.sql.gz
-gzip -cd /tmp/wss-restore-check/dokploy-postgres-2026-06-18.sql.gz | sed -n '1,20p'
+rclone copy r2:wss-backups/YYYY-MM-DD/databases/dokploy-postgres-YYYY-MM-DD.sql.gz /tmp/wss-restore-check/
+gzip -t /tmp/wss-restore-check/dokploy-postgres-YYYY-MM-DD.sql.gz
+gzip -cd /tmp/wss-restore-check/dokploy-postgres-YYYY-MM-DD.sql.gz | sed -n '1,20p'
 ```
 
 Also enable **provider-level daily snapshots** in the Hetzner console for a
@@ -123,20 +78,48 @@ cheap whole-box rollback, independent of app backups.
 
 ## 3. Decommission / removal checklist
 
-Verify before each deletion; these are destructive.
+### Done 2026-08-10 (infra harden)
 
-- [ ] **`wescalestartups-static` Dokploy stack** — remove after the Pages DNS
-      cutover has stayed stable long enough to no longer need a Hetzner fallback.
-- [ ] **`Cap` stack** (cap.wescalestartups.com, 500 since creation) — see §4.
-- [ ] **`calcom-calcom-migrate-1`** — exited one-shot migration container.
-- [ ] **Dokploy API keys** — live enabled keys were `claudecowork`,
-      `Claude Cowork`, and `Claude` on 2026-06-17. Keep only keys with a
-      current owner/use case and add expiry where practical.
+- [x] **Coolify** — removed `/data/coolify` and leftover compose/env copies.
+      No Coolify containers remained. Hetzner firewall no longer named/configured
+      for Coolify dashboard port `8000`.
+- [x] **Root SSH keys** — pruned to 2 keys only (active ops key +
+      `dan@Daniels-MacBook-Air.local`). Removed Coolify, Codex, Cowork, Claude
+      sandbox, Caspian, and other agent keys.
+- [x] **Dokploy API keys** — deleted all 7 never-expiring agent keys
+      (`codex`, `CC`, `ClaudeCode`, `claudecode`, `Claude`, `Claude Cowork`,
+      `claudecowork`). Create a new key in the UI only when needed, with expiry.
+- [x] **Compose `.env` permissions** — set to `600` under
+      `/etc/dokploy/compose/*/code/.env`.
+- [x] **Cal.com image pins** — app + Postgres 16 + Redis 7 digest-pinned in
+      compose (and Dokploy DB `composeFile`).
+- [x] **Dokploy password rotated** — set via host DB using Dokploy’s bcrypt
+      hasher. Enable **2FA** in Dokploy → Settings (still off as of harden).
+
+### Done 2026-08-10 (decommission unused stacks)
+
+- [x] **`wescalestartups-static`** — stopped/removed from Dokploy + Traefik.
+      Marketing site is Cloudflare Pages only (`www` / apex).
+- [x] **`rolo`** — stopped/removed (app, DB volume, Dokploy domain, backup
+      dump entry). Compose dirs archived under `/root/wss-decommission-*`.
+- [x] **`Mautic` / `comms.wescalestartups.com`** — fully removed (app, worker,
+      cron, MySQL, all volumes, Traefik routers, Dokploy compose/domain,
+      backup dumps, healthcheck). Also removed `noindex-static`. Archive:
+      `/root/wss-decommission-mautic-*`. Delete Cloudflare DNS for `comms`.
+
+### Still optional
+
+- [ ] **Ghost DNS** (Cloudflare) — delete unused names that still point at the
+      box or CF: `comms`, `n8n`, `uptime`, `hai`, `applypilot`, `monitor`,
+      `outreach-vnc`, `outreach-admin`, `rolo`, and leftover
+      `video`/`minio`/`cap` records.
 - [ ] **Unused Docker volumes / non-dangling images** — prune with care
       (`docker volume ls`, confirm no stack references each one).
-- [ ] **Floating `:latest` image tags** — pin to a version/digest on cap-web,
-      cap-media-server, minio, uptime-kuma, openoutreach, code-server.
-      Cal.com is already digest-pinned in Dokploy compose `solaRKyqDbTFdedKF69nj`.
+- [ ] **ACME junk** — Traefik `acme.json` still holds certs for retired
+      hostnames; safe to leave until those DNS names are gone.
+- [ ] **Hetzner Backups** — not free (20% of server ≈ €3–4/mo for `cx43`).
+      R2 app backups remain the free path; enable Hetzner Backups only if you
+      want whole-VM rollback.
 
 ---
 
@@ -248,7 +231,10 @@ Until then, a host cron monitor runs on the Hetzner box:
 - Script: `/opt/wss-monitors/cal-booking-check.sh`
 - Cron: `/etc/cron.d/wss-cal-booking-monitor` (every 2 minutes)
 - Alert: Dokploy Slack webhook (`WSS Alerts`) on down / recovery
-- Target: `https://cal.wescalestartups.com/daniel/20min` (expects HTTP 200)
+- Target: Cal booking page via **Traefik origin** (`--resolve` to `127.0.0.1`),
+  path `/daniel/20min`, expects HTTP **200** + booking content. Public HTTPS from
+  the server IP often gets Cloudflare bot challenge (`403`), so edge-only checks
+  are unreliable from this host.
 
 ### 5c. Lead-capture health probe
 
@@ -504,12 +490,21 @@ used to need SSH is answerable from it, and it is where changes must be made
 
 ## 7. Other standing recommendations
 
-- **Mautic** caused a prior disk-fill outage (MySQL binlogs) and is heavy. The
-  disk guard runs every 30 minutes from `/etc/cron.d/wss-disk-guard` and should
-  target live container `mautic-stack-db-1`; keep an eye on disk usage and
-  binlog growth.
-- **Dokploy update** is complete as of 2026-06-17: live image
-  `dokploy/dokploy:v0.29.8`.
+- **Disk guard** runs every 30 minutes from `/etc/cron.d/wss-disk-guard`
+  (dead Mautic prune paths removed 2026-08-10).
+- **Dokploy** live image: `dokploy/dokploy:v0.29.14` (upgraded 2026-08-10).
+  Container must stay on both `dokploy` and `dokploy-network` bridges so it can
+  reach Postgres/Redis and Traefik.
+- **Healthchecks** hit Traefik on localhost (`--resolve …:127.0.0.1`) for Cal
+  `/daniel/20min` + `/daniel/60min`, Postiz, Hermes, Dokploy. Cloudflare bot
+  `403` is no longer treated as success for apps on this box. Marketing Pages
+  edge may log `WARN edge_cf_challenge` from the server IP.
+- **fail2ban** enabled (`sshd` jail). Traefik logs rotate via
+  `/etc/logrotate.d/wss-traefik`.
+- **Removed** Uptime Kuma + Netdata (unused, no Traefik routes) and leftover
+  `rolo-tycuaq_*` Docker networks.
 - **Document owners + acceptable downtime per app**, SSH key ownership, and
   DNS/Cloudflare proxy state — the gaps in Notion §9 are where 3am incidents go
   wrong.
+- Live Dokploy compose stacks: **Cal.com**, **Hermes Gateway**, **Postiz**,
+  **Cal OAuth Home**.

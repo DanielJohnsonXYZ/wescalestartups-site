@@ -172,6 +172,14 @@ export async function onRequest(context) {
     "/copywriting/": "/services",
     "/home-agency-2": "/",
     "/home-agency-2/": "/",
+    // Legacy WordPress posts still linked from Daniel's GrowthMentor profile and
+    // danieljohnson.xyz (checked 2026-10-17: all three 404'd for those visitors).
+    "/creating-a-digital-marketing-strategy-for-your-startup-using-growth-marketing": "/insights/b2b-saas-gtm-strategy",
+    "/creating-a-digital-marketing-strategy-for-your-startup-using-growth-marketing/": "/insights/b2b-saas-gtm-strategy",
+    "/how-to-become-a-growth-marketer-in-2021-for-free": "/growth-course",
+    "/how-to-become-a-growth-marketer-in-2021-for-free/": "/growth-course",
+    "/kassy-cho-interview": "/podcast",
+    "/kassy-cho-interview/": "/podcast",
     // IA consolidation
     "/growth-engine": "/growth-operating-system",
     "/growth-engine/": "/growth-operating-system",

@@ -1,106 +1,55 @@
-# Growth-bot playbook (reset 2026-09-23)
+# Growth-bot playbook (rewritten 2026-10-19, run 30)
 
-The programme was reset on 2026-09-23 at Daniel's request. The old playbook and findings are in `growth-bot/archive/`. Read them only if a question needs history. Keep this file under 10KB and rewrite it instead of appending.
+Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-bot/changelog/`. The 2026-09-23 reset and the long-form notes from runs 1–29 are in git history (`d0c5b37`).
 
-## STANDING DECISION — Daniel, 2026-10-16 (second instruction of the day; replaces the partner-outreach note written earlier that day)
+## Remit (Daniel, 2026-10-14 and 2026-10-16; operator prompt of record from 2026-10-19)
 
-**Role: web growth operator. Objective: more qualified traffic to wescalestartups.com.** Not partner or prospect outreach. That belongs to the acquisition run, and Daniel said this bot lacked the context for it. Each run:
+- **Objective: qualified booked calls from the website.** Rankings, traffic and clicks are inputs. Trace the whole chain: demand → visibility → click → landing → trust → intent → booking → qualified.
+- **Web growth operator, not outreach.** Partner/prospect outreach belongs to the acquisition run. Drafts only for any email (Daniel sends).
+- **Each run:** look across every source, research, pick the highest-value action, do it, verify, record baseline and review date. Don't change things just to show activity; a verdict plus a clear finding is a valid run.
+- **Tests:** at most two open site experiments, judged on bookings, reviewed within 14 days where the volume allows. Lock only the pages changed. Read every test against Daniel's activity (see "What we know").
+- **Never:** send prospect/client email or DMs, publish as Daniel, commit to price or terms, invent facts, pay, delete accounts or data, touch Cal.com flow, analytics/GTM tags or form handling. **No client review requests on any platform** (Daniel, 2026-09-04/07, permanent). Reporting goes in chat only (no Slack, email or push).
 
-1. **Look across every connector first:** GA4 by source, landing page and week; GSC brand vs non-brand; Bing; Cloudflare (bot and WAF events); referral domains; AI referrals.
-2. **Research before acting:** live SERPs, the third-party pages that already name WSS, and competitors.
-3. **Pick the single action most likely to add qualified visits, then do it** (site change, link or profile fix, or a drafted email for Daniel to send). Record the baseline and when to review it.
+## What we know (updated 2026-10-19)
 
-**Baseline, 2026-10-16 (GA4, 90 days to 10-15):**
-- Google organic: 345 sessions, 25 key events, almost all brand ("we scale startups"; non-brand GSC is about 0 clicks in 90 days).
-- LinkedIn: about 76 sessions (three source spellings), 12 key events. Best rate.
-- ChatGPT: 54 sessions, 5 key events. About 5 a week in weeks 31–39, then 0–1 a week from week 40.
-- Directories: about 35 sessions (Clutch 16, at 428s average; GoodFirms 9 with 2 key events; DesignRush, TechBehemoths, The Manifest).
-- Direct: 2,781 sessions at about 18% engaged, mostly bots.
-- Google organic weeks 40–42: 20, 14 and 18 sessions, against 31–33 in weeks 37–39. The brand dip lines up with Daniel's holiday.
+- **Bookings follow Daniel, not the site.** 21 Sep–18 Oct: `/book` views 18 (prior 52), Growth Audit bookings ~6 (prior ~13), page views flat (1,220 vs 1,252). Every booking came from someone who already knew him (mentees, peers, partners, repeats). When he's away, warm traffic and bookings drop together.
+- **Real channels, GA4 28d to 10-18:** Google organic 93 sessions (almost all brand, 7 of 15 key events); LinkedIn 9 (best key-event rate); ChatGPT 7 (was ~5/week before week 40); directories ~10 (Clutch, GoodFirms, DesignRush, The Manifest, TechBehemoths). Direct 733 at 18% engaged is mostly bots. aocr.org (radiology college) 20 sessions: ignore.
+- **Non-brand search is authority-bound.** Content verdicts all failed (seo-bot `VERDICTS.md`); ~29 referring domains. Read seo-bot `VERDICTS.md` before any search-driven page change.
+- **Brand SERP (UK):** WSS first with sitelinks and a Business Profile panel, then LinkedIn, Instagram, **Trustpilot**, Facebook, Crunchbase, Puddding. GSC brand position averages ~4–5 because it pools pages; the live SERP is fine. Brand watch closed 2026-10-19. The `/pricing` sitelink shows the WhatsApp line: fix its meta description after 10-25.
+- **Trust leak on the brand SERP (run 30):** Trustpilot's top review is the July 2022 one-star "fraud" review, and the company reply attacks the reviewer. Fix is Daniel editing the reply (Open asks).
+- **AI visibility:** Bing WMT "AI Performance" (Chrome, signed in) shows ~615 Copilot citations in 3 months, mostly off-ICP queries; no visits follow. ChatGPT is the only AI source that sends visits. SEO bot owns this.
+- **Off-site mentions:** reclamation drafts sent 2026-10-16 (startups.com, MediaPost, marcdos.com, Worst Advice Podcast, parisvega.com); review 2026-11-06 by checking each page for a `wescalestartups.com` href. A fresh sweep on 10-19 found only owned profiles; no new targets. pitchpodcasts.com (10 mentions) and the MentorCruise profile (7) have no link.
+- **Referral 404s fixed (run 29):** three legacy posts linked from GrowthMentor and danieljohnson.xyz now 301. Other legacy 404s are crawlers, off-ICP: leave them.
+- **Cloudflare:** Bot Fight Mode managed-challenges PerplexityBot (Free plan, no per-bot bypass). Perplexity sends 0 referrals. Not acted on.
+- **Sticky booking bar:** closed 2026-10-19, no measurable lift, design kept. Don't retest the bar.
+- **Newsletter popup:** off `/pricing` (verdict 10-25) and `/` (verdict 10-28). Still on `/services/*` and elsewhere.
+- **Outreach prospects use the site as a credibility check** (`/` → `/pricing` → `/book`). Read the email thread to know how they got the link.
+- **Mobile:** ~87% of Clarity sessions are desktop. `/book` is fast. Turnstile JS errors block nothing.
+- **Mentees book on the Growth Audit link.** Count by form answers, not title. Mentoring has its own Cal.com event (`Mentoring | …`).
 
-**Diagnosis:** qualified traffic is people who already know Daniel or WSS. Non-brand search is authority-bound: 29 referring domains, and the SEO bot's content verdicts all failed. **The cheapest authority available is pages that already name WSS without linking.**
+## Next candidates (re-rank Mondays)
 
-**Action 2026-10-16: unlinked-mention reclamation** (Gmail drafts for Daniel to send; review 2026-11-06 by re-checking each page for a `wescalestartups.com` href):
-- startups.com "10 Best Growth Agencies for Startups": WSS listed, the only entry with no link, and the copy is stale ("growth agency", "since 2016"). Draft to support@startups.com (no editorial address; author Ryan Rutan is on LinkedIn only).
-- MediaPost, Laurie Sullivan, 28 Aug: quotes Daniel as "We Scale Startups founder", no link. Draft to her published address.
-- marcdos.com "Best Growth Agencies for Startups": no link. Draft to partnerships@.
-- Worst Advice Podcast, ep 93 (21 Aug): no link. Draft to hello@worstadvicepodcast.com.
-- parisvega.com, First Customers podcast ep 7: no link, contact form only. Paste-ready copy is in the run 28 log.
-- Already linked (leave alone): growthmethod.com, skalskigrowth.com, thedelegatewranglers, superbcompanies (nofollow), danieljohnson.xyz.
-
-**Cloudflare finding, not acted on:** Bot Fight Mode is ON and managed-challenged PerplexityBot 63 times in 7 days. Perplexity is no longer a Cloudflare-verified bot, so robots.txt `Allow` doesn't help. On the Free plan Bot Fight Mode can't be bypassed per bot; the only fix is turning it off. GA4 shows 0 Perplexity referrals in 90 days. OAI-SearchBot, Googlebot and Bingbot get through. Blocks on "ChatGPT-User", "ClaudeBot" or "Googlebot" user agents are exploit scanners from GCP IPs (React RCE rule), so leave them. AI Labyrinth (crawler_protection) is on.
-
-**Next candidates:** more mention reclamation (Instagram, Vendry, Sortlist, The Manifest, Puddding listing copy); Clutch reviews (1 review; Clutch is the top-engagement referrer and an AI source); LinkedIn-to-site links (UTM convention below); why ChatGPT referrals fell after week 39.
-
-## Earlier decision — Daniel, 2026-10-14 (overrides the 10-12 "weekly on Mondays" rule for this bot)
-
-1. **Act every run.** "REPORT, nothing to do" is no longer an acceptable outcome. If a verdict is due, do it first; then finish one concrete pipeline action. A locked page never ends a run: work another part of the funnel.
-2. **Remit is qualified calls from any channel**, not only the website. Don't duplicate the acquisition run (outreach and follow-ups, Notion ledger), the social engagement pass, the Friday post or the SEO bot.
-3. **Daily action menu**, chosen by impact:
-   - pre-call briefs (Notion "Growth Audit briefs") for calls in the next 3 days; never edit the calendar event
-   - post-call follow-ups as Gmail drafts, after checking the ledger and Gmail for duplicates
-   - fix a leak on an unlocked page (Search Analytics connector plus the repo)
-   - segment proof for this week's outreach landings
-   - flag ICP-fit inbound to the acquisition ledger
-   - trace bookings back to their source
-4. **Tests:** at most two open site experiments, each reviewed after no more than 14 days and judged on bookings. Lock only the pages changed. (The four existing locks keep their dates; open no new one until two have closed.)
-5. **Blocked asks: do them yourself** in Claude in Chrome (signed in as Daniel) or with 1Password: directory and profile fixes, Gmail signature UTM, listings. Escalate only on login, 2FA or payment walls. Still never: send prospect or client email or DMs (drafts only), publish new posts as Daniel, commit to price or terms, invent facts, pay, or delete accounts or data. Never touch the Cal.com flow, analytics or GTM tags, or form handling.
-6. **Report:** Done today (with links) → Your 10 minutes (at most 3 items with paste-ready copy) → numbers that changed. Chat only.
-
-## What we know (checked 2026-09-23, 90 days to 2026-09-22 unless stated)
-
-- **Where traffic comes from (GA4, 90d):** Direct 3,448 sessions but only 18% engaged, mostly bots. Google organic 313 (18 `book_call`). LinkedIn (three source spellings) 72 (8 `book_call`, 140–260s average). ChatGPT 48 (4 `book_call`). Customer.io/SendFox email 73, about 6s average, likely link scanners. Clutch/GoodFirms/GrowthMentor referrals total about 40.
-- **Search is brand, and content isn't changing that (run 17, GSC 28d to 09-29).** Site: 58 clicks, 3.66k impressions; `/` takes 35 clicks, `/resources` 9. All 27 `/insights/*` pages together: 318 impressions, **2 clicks**. The runs 10–13 pillars are still near zero (`/insights/b2b-saas-gtm-strategy` 20 impr at 8.4; the fractional-CMO pillar under 5), so the SEO bot's 09-23 test reads as "authority-bound". Don't build more articles to fix pipeline; demand comes from Daniel's channels. **Brand watch:** GSC position of `/` for "we scale startups" was 1.0 every day to 09-24, then 5.8–7.6 from 09-25 (09-29: 3.4), while `/about`, `/proof`, `/press`, `/facts` stay at 1.0. No site change that day; the live UK SERP (Chrome, 10-02) still shows WSS first with sitelinks, then LinkedIn, Instagram, Trustpilot, Crunchbase and `we-scale.co`. Likely a SERP-layout or reporting effect. **Run 22 (10-09):** `/` 28d 12 clicks / pos 3.1 vs prior 18 / ~1.1; sitelinks still 1.0, live SERP still first. Noise; recheck 10-19. puddding.com brand listing (old "agency" copy) handed to SEO bot.
-- **Bookings are mostly off-site in origin.** Last 28d: 14 bookings, about 3 with any website involvement. Sources: MentorCruise, GrowthMentor, podcast guests, Daniel's outreach. Daniel (2026-09-21): "More calls, don't filter."
-- **Outreach prospects use the site as a credibility check.** Koa Browne (Onfound, after Daniel's approach) went `/` → `/pricing` → booked, with full scroll. Site behaviour doesn't show how someone got the link, so read the email thread.
-- **Booking CTA:** about 65 `book_call` clicks in 90d. Sticky bar redesigned 2026-09-21 (`f9a0ef7`); compare `book_call` ÷ `sticky_book_cta_shown` around 2026-10-19 (baseline 30/357 = 8.4%).
-- **Newsletter popup on money pages (run 12, 2026-09-27):** the popup close button was the most-clicked control on desktop `/pricing` (4 of 30 clicks in 30d), matching every "Get in touch" click combined. Popup now off `/pricing` (`5f0d26d`, review 2026-10-25) and `/` (run 13, `3a86006`, review 2026-10-28: desktop `/` popup close 26 of 181 clicks, the top control; sticky-bar dismiss 18; booking links ~12). It still runs on `/services/*` and elsewhere. Sticky-bar dismisses outnumber its booking clicks on `/`: weigh that at the 10-19 verdict.
-- **Turnstile JS errors (run 15):** in 17.7% of Clarity sessions; with `TURNSTILE_ENFORCE` unset they block nothing. Not a conversion defect.
-- **Mentees still book on the Growth Audit link (run 15):** Bea Brampton (Up Club mentee) rebooked via Growth Audit on 09-29 with "Mentoring!" as her challenge. Count by form answers, not event title alone.
-- **Legacy 404s are crawlers, not buyers (run 16):** old WordPress URLs (`/strategic-customer-research-programme/`, `/crypto-marketing/` etc.) draw about 20 views a week at one view per user and 0s engagement. Off-ICP topics, so leave them as 404s.
-- **Mobile:** about 87% of Clarity sessions are desktop. `/book*` scores 94/100 on Clarity CWV. No known friction on `/book`.
-
-## Starting candidates (re-rank each Monday on fresh data)
-
-1. **Grow LinkedIn-sourced visits.** It's the best-engaged, best-converting real channel, but tiny. Levers: consistent UTMs on every link Daniel posts (currently split across `linkedin.com`, `lnkd.in` and `LinkedIn`), linking posts to a specific proof page and not just the homepage, and drafting posts in the report that point somewhere useful.
-2. **Make outreach landings convincing.** Read the acquisition run's Notion pipeline. Check that the pages those prospects are likely to open (home, pricing, the closest case study) answer their obvious questions with proof from their segment. If a segment has no matching proof page, build one from existing repo proof.
-3. **Brand searchers land on `/`.** They already know the name. Check the homepage gets them to proof and to booking fast on desktop, since most traffic is desktop.
-4. **AI referrals (ChatGPT)** convert about as well as LinkedIn. That's SEO-bot territory. Hand off findings; don't duplicate its work.
-
-## Access notes (short)
-
-- **Use the WSS Search Analytics connector first** (from 2026-10-06; see below). **It connects late:** it was absent for runs 20–24 at run start and loaded mid-session on 2026-10-12 (GA4 property `259840282`, `account_id: google`, verified with `google_analytics_traffic_source_performance`). If ToolSearch misses it, search `+WSS_Search_Analytics` again after a minute before falling back to Chrome. It has no Clarity data despite a `clarity_insights` tool name; check before relying on it. Chrome fallback: GSC works in Claude in Chrome at `authuser=2`, `sc-domain:wescalestartups.com`. JS is often denied, so use URL filters (`query=!<exact>`, `page=*<fragment>`, `breakdown=date|page|query`) and `get_page_text`, which returns the first 10 rows.
-- Chrome GA4 fallback: `authuser=2`. Clarity: sign in as `daniel@wescalestartups.com` if prompted.
-- Headless Playwright: use `waitUntil: 'load'` because `networkidle` never settles with analytics running.
-- **Google Calendar connector is on the work account (2026-09-26).** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with its form answers (company, stage, constraint, challenge) and the invitee's RSVP. Use it to cross-check the Gmail count and to qualify invitees.
-- **Booking feed: search with `in:anywhere`.** Cal.com notices are routinely in Trash: 8 September bookings, two of them (Conor McCutcheon, Isabelle Kent) found only there at run 10. The default Gmail search leaves Trash out.
-- **GA4 events before GTM v37 (pre-2026-09-26):** no per-CTA clicks; `book_call` counted clicks, not bookings.
-- **GTM version 37 (Daniel, 2026-09-26 11:07):** `cta_click`, `scorecard_start`, `pricing_click`, `resource_click` and `outbound_link_click` now go to GA4 under their own names with `cta_label` and `cta_href`. `cta_label` is registered as the event-scoped custom dimension "CTA label". `booking_complete` (no "d") now fires on page views of `/book/thanks`. The old Calendly trigger listens for `calendly.event_scheduled`, which the site never sends, so bookings aren't double-counted. Per-CTA and completed-booking comparisons start from 2026-09-26: never compare them with windows before that date. The old `booking_completed` key event is dead.
-- **GA4 route (run 16, 2026-10-01):** the browser pane is still signed out of every Google account; **Claude in Chrome is signed in** and reads GA4 at `authuser=2`, account `a161039443p259840282`. URLs carrying `_u.date00`/`date01`, and the `all-events` report, bounce to Home: use the Pages report (`r=all-pages-and-screens&collectionId=life-cycle`, default last 28 days), set rows to 250 via the `mat-select`, and switch the Event count column's "All events" button to one event to get that event by page. Chrome dropped its connection mid-run, so read what you need early.
-- **Clarity via the browser pane works (run 12):** project `wkannkoxst`. Heatmap URL: `/projects/view/wkannkoxst/heatmaps?date=Last%2030%20days&heatmapDeviceType=2&heatmapType=0&url=<page>&URL=2%3B6%3B<escaped regex>` (device 2 = desktop). Read the click list with JS: split `document.body.innerText` on `N clicks (x%)` lines. Screenshots fail while the pane is hidden, so use `read_page` or JS.
-- GitHub pushes go through the connector with a blob-SHA check. `git clone` over HTTPS works for reading.
-- **Gmail `create_draft` works (verified 2026-10-16)**, including in-thread replies via `replyToMessageId`. Use it for every partner or prospect email; Daniel sends.
+1. Trustpilot reply (Daniel's 10 minutes; copy below).
+2. `/pricing` meta description once its lock closes (10-25).
+3. LinkedIn-to-site links: best-converting channel, tiny volume. Every link Daniel posts: `?utm_source=linkedin&utm_medium=social&utm_campaign=<yyyy-mm>-<post-slug>`, pointing at a proof page, not `/`.
+4. Why ChatGPT referrals fell after week 39 (hand findings to the SEO bot).
+5. `email / signature` UTM: 0 sessions 10-15 to 10-18; recheck 10-26.
 
 ## Open asks to Daniel
 
-- **(2026-10-12) DesignRush:** profile claimed July 2026 under `daniel@`, still shows founded 2019, $99/hr, $1k–$10k, PPC/SEO and "growth machines". No password in 1Password; log in (or reset) and paste the copy in `seo-bot/outreach/2026-10-10-run31.md`.
-- **(2026-10-12) Facebook page:** contact email still `hello@`; cover still "Growth Marketing for Startups". The session got to the edit form but the save was blocked by a permission check, so this is Daniel's to click (About → Contact info → Email; Edit cover photo).
-- **(2026-10-12) Instagram bio link:** no WSS Instagram login in 1Password (only a personal account); still Daniel's phone.
-- **DONE 2026-10-14 — signature UTM.** The signature lives in Microsoft Outlook (Mac) as "WSS". Its `wescalestartups.com` link now points to `https://wescalestartups.com/?utm_source=email&utm_medium=signature&utm_campaign=daniel-signature`, done via computer use at Daniel's request. The "Contact" button is `mailto:` and there is no /book link in the current version. From 2026-10-15, GA4 `email / signature` measures outreach landings. Check it at the Monday re-rank.
+- **(2026-10-19) Trustpilot reply.** Edit the business reply on the July 2022 review (Trustpilot Business → Reviews → the review → edit reply). Suggested text: "I'm sorry this engagement didn't work for you. We see what happened differently, and I'd rather settle it directly than here. If you want to pick it up, email me at daniel@wescalestartups.com. Daniel"
+- **(2026-10-12) DesignRush:** profile still shows 2019, $99/hr, PPC/SEO. Copy in `seo-bot/outreach/2026-10-10-run31.md`.
+- **(2026-10-12) Facebook page:** contact email `hello@` and the "Growth Marketing for Startups" cover. Save was blocked by a permission check.
+- **(2026-10-12) Instagram bio link:** needs Daniel's phone.
 
-## Closed 2026-10-06
+## Access notes
 
-- **`booking_complete` is a GA4 key event** (marked in Chrome at Daniel's instruction, run 19). Completed-booking counts in GA4 are valid from 2026-10-06. `book_call` is still a key event too; it counts clicks, not bookings, so never report it as conversions.
-- **SEO/GEO bot is running.** Daniel didn't know about it; its run 30 committed at 07:37 on 2026-10-06 and closed seven verdicts: every classic-search content change failed, retrieval holds on `/facts/*` and the sprint service page, ~5 AI-referred human sessions a month, no bookings. Don't re-ask Daniel. Read `seo-bot/VERDICTS.md` before any search-driven page change; its operative rule (check humans ask the query, in that phrasing, in volume) applies here too.
-- **`/book/thanks` query string stripped before GTM loads** (`6a3411a`). Cal.com was putting invitee names and free-text notes into GA4 `page_location`. Only `?type=<eventTypeSlug>` survives. Not a conversion test, so no lock.
-- **WSS Search Analytics connector** now gives GA4 (property `259840282`), GSC (`sc-domain:wescalestartups.com`) and Clarity reads without Chrome. Use account_id `google`.
-
-## LinkedIn UTM convention (from 2026-10-06)
-
-Every link Daniel posts: `?utm_source=linkedin&utm_medium=social&utm_campaign=<yyyy-mm>-<post-slug>`. Point posts at a proof page, not `/`. Drafts waiting for his return are in run 19's log.
-
-## Closed with Daniel (2026-09-28)
-
-- **Turnstile:** real visitors pass (Cloudflare, 7d to 09-28: 4,761 issued, 1,391 solved). Automated browsers never get a token, so form tests from here prove nothing. `TURNSTILE_ENFORCE` stays unset (needs `FORM_MONITOR_SECRET` on Pages and Steve; a wrong secret drops leads). Revisit only if bot signups appear in Customer.io.
-- **Intercom:** paused in GTM v38 (free tools only). No chat replacement.
-- **Mentoring bookings:** Cal.com "Mentoring Session" (`cal.wescalestartups.com/daniel/mentoring`, 20 min, public). Calendar title `Mentoring | {Scheduler} × Daniel Johnson`, so count it separately from Growth Audits. `/mentoring` links it (`mentoring-book`, `mentoring-final-book`; `2f1759e`). MentorCruise and GrowthMentor book natively; nothing to swap there.
+- **WSS Search Analytics connector** (GA4 property `259840282`, GSC `sc-domain:wescalestartups.com`, `account_id: google`) is absent at run start most days. Try `+WSS_Search_Analytics` in ToolSearch; if missing, use Chrome.
+- **GA4 in Claude in Chrome:** `authuser=2`, account `a161039443p259840282`. Events: `r=top-events`; Pages: `r=all-pages-and-screens` (switch the Event count "All events" button to one event); Traffic: `r=lifecycle-traffic-acquisition-v2`. Rows: add `params=_r.explorerCard..rowsPerPage%3D100`. Date URL params bounce; use the date picker's Compare toggle ("Previous period (match day of week)").
+- **GSC in Chrome:** `/u/2/`, URL filters work (`query=!<exact>`, `query=*<contains>`, `page=*<fragment>`, `breakdown=`). `get_page_text` is denied there since 10-19: take screenshots.
+- **Bing WMT in Chrome** is signed in; AI Performance at `bing.com/webmasters/aiperformance?siteUrl=https://wescalestartups.com/`.
+- **Clarity** via the browser pane, project `wkannkoxst` (heatmap URL pattern in git history, run 12). Read click lists with JS.
+- **Calendar:** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with form answers; results are large, so save and filter with `jq` on `.created`.
+- **Gmail booking notices:** search `in:anywhere` (they land in Trash). `create_draft` works, including replies.
+- **GA4 events:** `booking_complete` (page view of `/book/thanks`) is the completed-booking key event from 2026-10-06. `book_call` counts clicks on `/book` or Cal.com links, not bookings. Per-CTA `cta_click` with `cta_label` is clean from 2026-09-26 only.
+- **Repo:** `DanielJohnsonXYZ/wescalestartups-site`, deployed to Cloudflare Pages from `main`. Clone over HTTPS to read; push through the GitHub connector (git push is refused by the proxy), all related files in one commit. Headless Playwright: `waitUntil: 'load'`.

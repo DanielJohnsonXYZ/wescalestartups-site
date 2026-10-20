@@ -121,7 +121,7 @@ export const canonicalProofMetrics = [
   { value: "£10M+", label: "Paid acquisition spend managed" },
   { value: "479+", label: "Founder sessions" },
   { value: "4.97/5", label: "Average mentor rating" },
-  { value: "20+", label: "Startups supported" },
+  { value: "20+", label: "Paid client engagements" },
   { value: "2", label: "Operator-side exits" }
 ] as const;
 
@@ -500,7 +500,7 @@ export const proofEcosystemLogos = [
     height: 225,
     alt: "GrowthMentor",
     name: "GrowthMentor",
-    relationship: "External reviews · 479+ mentor sessions"
+    relationship: "External founder mentoring reviews"
   }
 ] as const;
 

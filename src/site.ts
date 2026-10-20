@@ -500,7 +500,7 @@ export const proofEcosystemLogos = [
     height: 225,
     alt: "GrowthMentor",
     name: "GrowthMentor",
-    relationship: "External reviews · 479+ mentor sessions"
+    relationship: "External founder mentoring reviews"
   }
 ] as const;
 

@@ -15,6 +15,7 @@ This is a focused follow-up to Ahrefs' AI-search advice, not a new SEO strategy 
 2. AI Growth Audit proof: make revenue influenced explicitly aggregate across client and operator-side engagements; describe **479+ founder sessions**, not 479 distinct founders; display GrowthMentor's current **4.94/5** platform-specific figure rather than WSS's 4.97 cross-programme average, with a dated source label and the existing external review link.
 3. Shared logo proof label: remove the misleading implication that GrowthMentor itself accounts for all 479+ sessions.
 4. Positioning tool example: bring its historical £6M acquisition-spend example into line with the canonical £10M+ paid-acquisition-spend claim.
+5. Shared metric label: distinguish **20+ paid client engagements** from **50+ startups advised in total**, including mentoring, rather than calling 20+ the total supported.
 
 ## Open items that require external access or evidence
 

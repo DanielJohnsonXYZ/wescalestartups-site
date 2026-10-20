@@ -121,7 +121,7 @@ export const canonicalProofMetrics = [
   { value: "£10M+", label: "Paid acquisition spend managed" },
   { value: "479+", label: "Founder sessions" },
   { value: "4.97/5", label: "Average mentor rating" },
-  { value: "20+", label: "Startups supported" },
+  { value: "20+", label: "Paid client engagements" },
   { value: "2", label: "Operator-side exits" }
 ] as const;
 

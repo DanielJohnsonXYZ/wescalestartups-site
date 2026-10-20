@@ -10,10 +10,11 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 - **Tests:** at most two open site experiments, judged on bookings, reviewed within 14 days where the volume allows. Lock only the pages changed. Read every test against Daniel's activity (see "What we know").
 - **Never:** send prospect/client email or DMs, publish as Daniel, commit to price or terms, invent facts, pay, delete accounts or data, touch Cal.com flow, analytics/GTM tags or form handling. **No client review requests on any platform** (Daniel, 2026-09-04/07, permanent). Reporting goes in chat only (no Slack, email or push).
 
-## What we know (updated 2026-10-19)
+## What we know (updated 2026-10-20)
 
 - **Bookings follow Daniel, not the site.** 21 Sep–18 Oct: `/book` views 18 (prior 52), Growth Audit bookings ~6 (prior ~13), page views flat (1,220 vs 1,252). Every booking came from someone who already knew him (mentees, peers, partners, repeats). When he's away, warm traffic and bookings drop together.
-- **Real channels, GA4 28d to 10-18:** Google organic 93 sessions (almost all brand, 7 of 15 key events); LinkedIn 9 (best key-event rate); ChatGPT 7 (was ~5/week before week 40); directories ~10 (Clutch, GoodFirms, DesignRush, The Manifest, TechBehemoths). Direct 733 at 18% engaged is mostly bots. aocr.org (radiology college) 20 sessions: ignore.
+- **Qualified rate is 0% in every FUNNEL window since July (run 31).** All bookings come from Daniel's network, mentoring or GrowthMentor project intros (Nana/Prodigio, 10-19: pre-PMF, <$5K). No cold ICP buyer has booked from the site in the tracked period.
+- **Real channels, GA4 28d to 10-18:** Google organic 93 sessions (almost all brand, 7 of 15 key events); LinkedIn 9 (best key-event rate); ChatGPT 7 (was ~5/week before week 40; GA4 now files it under the **AI Assistant** default channel, `chatgpt.com / ai-assistant`); directories ~10 (Clutch, GoodFirms, DesignRush, The Manifest, TechBehemoths). Direct 733 at 18% engaged is mostly bots. aocr.org (radiology college) 20 sessions: ignore.
 - **Non-brand search is authority-bound.** Content verdicts all failed (seo-bot `VERDICTS.md`); ~29 referring domains. Read seo-bot `VERDICTS.md` before any search-driven page change.
 - **Brand SERP (UK):** WSS first with sitelinks and a Business Profile panel, then LinkedIn, Instagram, **Trustpilot**, Facebook, Crunchbase, Puddding. GSC brand position averages ~4–5 because it pools pages; the live SERP is fine. Brand watch closed 2026-10-19. The `/pricing` sitelink shows the WhatsApp line: fix its meta description after 10-25.
 - **Trust leak on the brand SERP (run 30):** Trustpilot's top review is the July 2022 one-star "fraud" review, and the company reply attacks the reviewer. Fix is Daniel editing the reply (Open asks).
@@ -37,6 +38,7 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 
 ## Open asks to Daniel
 
+- **(2026-10-20) Has any paying client in the last 12 months first found WSS through the website** (search, AI answer, directory)? If yes, which page or query; that is the only qualified path worth tracing back.
 - **(2026-10-19) Trustpilot reply.** Edit the business reply on the July 2022 review (Trustpilot Business → Reviews → the review → edit reply). Suggested text: "I'm sorry this engagement didn't work for you. We see what happened differently, and I'd rather settle it directly than here. If you want to pick it up, email me at daniel@wescalestartups.com. Daniel"
 - **(2026-10-12) DesignRush:** profile still shows 2019, $99/hr, PPC/SEO. Copy in `seo-bot/outreach/2026-10-10-run31.md`.
 - **(2026-10-12) Facebook page:** contact email `hello@` and the "Growth Marketing for Startups" cover. Save was blocked by a permission check.
@@ -45,11 +47,11 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 ## Access notes
 
 - **WSS Search Analytics connector** (GA4 property `259840282`, GSC `sc-domain:wescalestartups.com`, `account_id: google`) is absent at run start most days. Try `+WSS_Search_Analytics` in ToolSearch; if missing, use Chrome.
-- **GA4 in Claude in Chrome:** `authuser=2`, account `a161039443p259840282`. Events: `r=top-events`; Pages: `r=all-pages-and-screens` (switch the Event count "All events" button to one event); Traffic: `r=lifecycle-traffic-acquisition-v2`. Rows: add `params=_r.explorerCard..rowsPerPage%3D100`. Date URL params bounce; use the date picker's Compare toggle ("Previous period (match day of week)").
+- **GA4 in Claude in Chrome:** `authuser=2`, account `a161039443p259840282`. Events: `r=top-events`; Pages: `r=all-pages-and-screens` (switch the Event count "All events" button to one event); Traffic: `r=lifecycle-traffic-acquisition-v2`. Rows: add `params=_r.explorerCard..rowsPerPage%3D100`. Date URL params bounce; use the date picker's Compare toggle ("Previous period (match day of week)"). Source × landing page: switch the table's primary dimension to Session source/medium, add secondary "Landing page + query string", read rows with JS (`document.querySelectorAll('tr')`).
 - **GSC in Chrome:** `/u/2/`, URL filters work (`query=!<exact>`, `query=*<contains>`, `page=*<fragment>`, `breakdown=`). `get_page_text` is denied there since 10-19: take screenshots.
 - **Bing WMT in Chrome** is signed in; AI Performance at `bing.com/webmasters/aiperformance?siteUrl=https://wescalestartups.com/`.
 - **Clarity** via the browser pane, project `wkannkoxst` (heatmap URL pattern in git history, run 12). Read click lists with JS.
 - **Calendar:** `search_events` "Growth Audit We Scale Startups" returns every Cal.com booking with form answers; results are large, so save and filter with `jq` on `.created`.
 - **Gmail booking notices:** search `in:anywhere` (they land in Trash). `create_draft` works, including replies.
 - **GA4 events:** `booking_complete` (page view of `/book/thanks`) is the completed-booking key event from 2026-10-06. `book_call` counts clicks on `/book` or Cal.com links, not bookings. Per-CTA `cta_click` with `cta_label` is clean from 2026-09-26 only.
-- **Repo:** `DanielJohnsonXYZ/wescalestartups-site`, deployed to Cloudflare Pages from `main`. Clone over HTTPS to read; push through the GitHub connector (git push is refused by the proxy), all related files in one commit. Headless Playwright: `waitUntil: 'load'`.
+- **Repo:** `DanielJohnsonXYZ/wescalestartups-site`, deployed to Cloudflare Pages from `main`. Clone over HTTPS to read; push through the GitHub connector (git push is refused by the proxy), all related files in one commit. Headless Playwright: `waitUntil: 'load'` and `executablePath: '/opt/pw-browsers/chromium'`.

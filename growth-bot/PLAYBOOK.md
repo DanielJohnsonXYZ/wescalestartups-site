@@ -14,6 +14,8 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 
 - **Bookings follow Daniel, not the site.** 21 Sep–18 Oct: `/book` views 18 (prior 52), Growth Audit bookings ~6 (prior ~13), page views flat (1,220 vs 1,252). Every booking came from someone who already knew him (mentees, peers, partners, repeats). When he's away, warm traffic and bookings drop together.
 - **Qualified rate is 0% in every FUNNEL window since July (run 31).** All bookings come from Daniel's network, mentoring or GrowthMentor project intros (Nana/Prodigio, 10-19: pre-PMF, <$5K). No cold ICP buyer has booked from the site in the tracked period. Daniel (10-20) doesn't recall any paying client who first found WSS through the website: treat the site as a credibility check, not a cold-lead source, until one shows up.
+- **ChatGPT is the only cold source landing on a money page (run 32).** GA4 90d to 10-20: 54 sessions, 5 key events (9.3%). Top landings `/` 10, `/services/growth-diagnosis` 9 (22% engaged), `/about` 4, `/insights/when-to-hire-fractional-cmo` 4 (0 engaged). Protect and improve the paths ChatGPT already uses before chasing new ones.
+- **Service pages carry no testimonials (run 32).** Eight anonymous "after the engagement" quotes with unsourced stats (CAC −38%, 60% trial loss) were removed 2026-10-21 (`bda0f51`). Only put a quote back with a named, checkable source; verified reviews live in `src/site.ts` and are mentoring/advisory, so don't relabel them as service outcomes.
 - **Real channels, GA4 28d to 10-18:** Google organic 93 sessions (almost all brand, 7 of 15 key events); LinkedIn 9 (best key-event rate); ChatGPT 7 (was ~5/week before week 40; GA4 now files it under the **AI Assistant** default channel, `chatgpt.com / ai-assistant`); directories ~10 (Clutch, GoodFirms, DesignRush, The Manifest, TechBehemoths). Direct 733 at 18% engaged is mostly bots. aocr.org (radiology college) 20 sessions: ignore.
 - **Non-brand search is authority-bound.** Content verdicts all failed (seo-bot `VERDICTS.md`); ~29 referring domains. Read seo-bot `VERDICTS.md` before any search-driven page change.
 - **Brand SERP (UK):** WSS first with sitelinks and a Business Profile panel, then LinkedIn, Instagram, **Trustpilot**, Facebook, Crunchbase, Puddding. GSC brand position averages ~4–5 because it pools pages; the live SERP is fine. Brand watch closed 2026-10-19. The `/pricing` sitelink shows the WhatsApp line: fix its meta description after 10-25.
@@ -37,6 +39,8 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 5. `email / signature` UTM: 0 sessions 10-15 to 10-18; recheck 10-26.
 
 ## Open asks to Daniel
+
+- **(2026-10-21) Service-page quotes.** If any of the eight removed `/services/*` quotes (see `changelog/2026-10-21-run32.md`) came from a real client, say who and it goes back with a source. Also: GoodFirms lists WSS as founded 2019; the site, Clutch and Crunchbase say 2016.
 
 - **(2026-10-19) Trustpilot reply.** Edit the business reply on the July 2022 review (Trustpilot Business → Reviews → the review → edit reply). Suggested text: "I'm sorry this engagement didn't work for you. We see what happened differently, and I'd rather settle it directly than here. If you want to pick it up, email me at daniel@wescalestartups.com. Daniel"
 - **(2026-10-12) DesignRush:** profile still shows 2019, $99/hr, PPC/SEO. Copy in `seo-bot/outreach/2026-10-10-run31.md`.

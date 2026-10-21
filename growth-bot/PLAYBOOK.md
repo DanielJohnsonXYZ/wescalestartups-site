@@ -19,7 +19,7 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 - **Real channels, GA4 28d to 10-18:** Google organic 93 sessions (almost all brand, 7 of 15 key events); LinkedIn 9 (best key-event rate); ChatGPT 7 (was ~5/week before week 40; GA4 now files it under the **AI Assistant** default channel, `chatgpt.com / ai-assistant`); directories ~10 (Clutch, GoodFirms, DesignRush, The Manifest, TechBehemoths). Direct 733 at 18% engaged is mostly bots. aocr.org (radiology college) 20 sessions: ignore.
 - **Non-brand search is authority-bound.** Content verdicts all failed (seo-bot `VERDICTS.md`); ~29 referring domains. Read seo-bot `VERDICTS.md` before any search-driven page change.
 - **Brand SERP (UK):** WSS first with sitelinks and a Business Profile panel, then LinkedIn, Instagram, **Trustpilot**, Facebook, Crunchbase, Puddding. GSC brand position averages ~4–5 because it pools pages; the live SERP is fine. Brand watch closed 2026-10-19. The `/pricing` sitelink shows the WhatsApp line: fix its meta description after 10-25.
-- **Trust leak on the brand SERP (run 30):** Trustpilot's top review is the July 2022 one-star "fraud" review, and the company reply attacks the reviewer. Fix is Daniel editing the reply (Open asks).
+- **Trustpilot (run 30, fixed 2026-10-21):** the July 2022 one-star review now carries Daniel's rewritten, calmer reply.
 - **AI visibility:** Bing WMT "AI Performance" (Chrome, signed in) shows ~615 Copilot citations in 3 months, mostly off-ICP queries; no visits follow. ChatGPT is the only AI source that sends visits. SEO bot owns this.
 - **Off-site mentions:** reclamation drafts sent 2026-10-16 (startups.com, MediaPost, marcdos.com, Worst Advice Podcast, parisvega.com); review 2026-11-06 by checking each page for a `wescalestartups.com` href. A fresh sweep on 10-19 found only owned profiles; no new targets. pitchpodcasts.com (10 mentions) and the MentorCruise profile (7) have no link.
 - **Referral 404s fixed (run 29):** three legacy posts linked from GrowthMentor and danieljohnson.xyz now 301. Other legacy 404s are crawlers, off-ICP: leave them.
@@ -32,7 +32,7 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 
 ## Next candidates (re-rank Mondays)
 
-1. Trustpilot reply (Daniel's 10 minutes; copy below).
+1. Trustpilot reply: DONE 2026-10-21 (Daniel rewrote it; live, verified on uk.trustpilot.com).
 2. `/pricing` meta description once its lock closes (10-25).
 3. LinkedIn-to-site links: best-converting channel, tiny volume. Every link Daniel posts: `?utm_source=linkedin&utm_medium=social&utm_campaign=<yyyy-mm>-<post-slug>`, pointing at a proof page, not `/`.
 4. Why ChatGPT referrals fell after week 39 (hand findings to the SEO bot).
@@ -42,8 +42,8 @@ Keep under 10KB; rewrite, don't append. History: `growth-bot/archive/`, `growth-
 
 - **(2026-10-21) Service-page quotes.** If any of the eight removed `/services/*` quotes (see `changelog/2026-10-21-run32.md`) came from a real client, say who and it goes back with a source. Also: GoodFirms lists WSS as founded 2019; the site, Clutch and Crunchbase say 2016.
 
-- **(2026-10-19) Trustpilot reply.** Edit the business reply on the July 2022 review (Trustpilot Business → Reviews → the review → edit reply). Suggested text: "I'm sorry this engagement didn't work for you. We see what happened differently, and I'd rather settle it directly than here. If you want to pick it up, email me at daniel@wescalestartups.com. Daniel"
-- **(2026-10-12) DesignRush:** profile still shows 2019, $99/hr, PPC/SEO. Copy in `seo-bot/outreach/2026-10-10-run31.md`.
+- **(2026-10-21) Repo is public.** Growth-bot notes name bookers and their form answers. Daniel is making the repo private (2026-10-21). After that, unauthenticated `git clone` fails: the bots need an authenticated route (GitHub connector reads, or `gh` with access), and Cloudflare Pages' GitHub app must have access to the repo. Until it's private, don't add booker names or form answers to repo files.
+- **(2026-10-12) DesignRush:** profile still shows 2019, $99/hr, PPC/SEO. The account exists and needs a password (checked 2026-10-21), so Daniel logs in. Copy in `seo-bot/outreach/2026-10-10-run31.md`. GoodFirms (founded 2019) is not signed in either.
 - **(2026-10-12) Facebook page:** contact email `hello@` and the "Growth Marketing for Startups" cover. Save was blocked by a permission check.
 - **(2026-10-12) Instagram bio link:** needs Daniel's phone.
 

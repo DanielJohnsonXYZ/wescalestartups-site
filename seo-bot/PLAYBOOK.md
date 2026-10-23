@@ -40,6 +40,7 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 - **THE RUN CADENCE EXCEEDS THE EVIDENCE CADENCE EVEN AT MON/WED/FRI.** **A run that ships nothing and records why is a successful run** — but **build-verifiable work survives an evidence blackout (runs 21, 26, 28), so a blacked-out run is not automatically a REPORT run.** Ask what you can *verify*, not only what you can *measure*.
 - **ALL DATED VERDICTS CLOSED AT RUN 30 (see `VERDICTS.md`): six FAIL, one retrieval PASS. Content is not the lever on classic search. Do not write new pages unless a verdict or Daniel reopens content.**
 - **Run 31 (OFF-SITE): no verdict due until the 10-31 window and the 10-20 panel; nothing shipped.** Brand-SERP hygiene is the open off-site item (DesignRush, Puddding).
+- **Run 33 (MEASURE, 10-23): panel #14 + ChatGPT #1, no accuracy defect on either engine, nothing shipped.** Next panel ~11-06; next decision-grade read is the 10-31 GSC window.
 - Daniel works in the repo directly, and so does this bot. **Check `list_commits` before choosing a file**; never touch a page committed in the last 24 hours.
 
 ### Source-of-truth files
@@ -51,7 +52,8 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 
 ## AI panel — Workstream A
 
-- **THIRTEEN readings. Google AI Mode 2, 2, ~~2~~, ~~1~~, 3, 2, 2, 3, 3, 2, 2, 2, 2/10.** A range (2–3), not a level.
+- **FOURTEEN readings. Google AI Mode 2, 2, ~~2~~, ~~1~~, 3, 2, 2, 3, 3, 2, 2, 2, 2, 2/10.** A range (2–3), not a level. #14 (run 33, 10-23): mention 2, citation 2, URLs 4, accuracy 2/2; `AI Mode response is ready` tell is back.
+- **CHATGPT SERIES (from 10-23): #1 mention 3/10, WSS-owned citation 3/10, accuracy 3/3, grounded 8/10** — named on prompts 1, 3, 9 (Google misses 1 and 9). **Run it in TEMPORARY CHAT** (`chatgpt.com/?temporary-chat=true&q=<prompt>`, then click Send): the Chrome profile's account (`bobdylan94`) has memory that knows WSS and a normal chat answered in the second person (contaminated). Custom instructions not inspected — residual risk. One prompt per call, ≤60s of waits.
 - **Reading #13 (run 30): mention 2/10, own-domain citation 2/10, cited URLs 5, accuracy 2/2, surface 9/10.** `/services/growth-diagnosis` (gained at #12) dropped; `/press` appeared. **Report all three numbers, always.** Completion tell changed: `AI Mode response is ready` is gone — use `Skip to previous prompt` + `Show all` after scrolling; wait with `computer wait`, not `setTimeout` (froze the renderer twice).
 - **Prompts 3 and 5 carry the whole panel.** Prompt 3: named, `/services/90-day-growth-sprint` cited, correct 12-week / 6–8 ICE-scored detail (source-verified run 28, including the week breakdown). Prompt 5: leads the list, **three own-domain URLs** (`/facts/we-scale-startups`, `/insights`, `/about`), stage and price band correct in every reading that named WSS.
 - **Seventh consecutive absences: prompts 4 (settled NO), 7, 8, 9.** Prompt 8 held by `lennysnewsletter.com` — the original-research surface. Prompt 9 reaches WSS only via Growth Division's source card, misnamed. **Prompt 2 ungrounded three readings running.**

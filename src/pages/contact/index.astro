@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { contactRelatedReading, siteConfig, customerIoNewsletter } from "../../site";
+import { contactRelatedReading, siteConfig } from "../../site";
 
 const contactFaqs = [
   {
@@ -75,7 +75,7 @@ const turnstileSiteKey =
 
   <section class="section">
     <div class="shell contact-grid contact-grid-form">
-      <form class="contact-option contact-form" id="growth-enquiry" name="growth-enquiry">
+      <form class="contact-option contact-form" id="growth-enquiry" name="growth-enquiry" action="/api/contact" method="post">
         <p class="card-kicker">Structured enquiry</p>
         <h2>Tell us what is happening now.</h2>
         <label>Name<input name="name" autocomplete="name" required /></label>
@@ -121,7 +121,9 @@ const turnstileSiteKey =
             data-size="flexible"
           />
         )}
-        <button class="button button-brand" type="submit">Send enquiry</button>
+        <button class="button button-brand" type="submit" id="growth-enquiry-submit">Send enquiry</button>
+        <p id="enquiry-status" role="status" aria-live="polite"></p>
+        <a id="enquiry-email-fallback" hidden href={`mailto:${siteConfig.email}`}>Open an email draft instead →</a>
       </form>
       <aside class="contact-option">
         <p class="card-kicker">Prefer a call?</p>
@@ -291,70 +293,81 @@ const turnstileSiteKey =
   }
 </style>
 
-<script is:inline define:vars={{ email: siteConfig.email, cioUrl: customerIoNewsletter.submitUrl, cioFormId: customerIoNewsletter.formId }}>
+<script is:inline define:vars={{ email: siteConfig.email }}>
   const form = document.getElementById("growth-enquiry");
+  const status = document.getElementById("enquiry-status");
+  const button = document.getElementById("growth-enquiry-submit");
+  const fallback = document.getElementById("enquiry-email-fallback");
 
-  form?.addEventListener("submit", (event) => {
+  let submitting = false;
+  form?.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (submitting) return;
+
     const data = new FormData(form);
-    const subject = `WSS enquiry from ${data.get("company") || data.get("name") || "website"}`;
+    const subject = "WSS enquiry from " + (data.get("company") || data.get("name") || "website");
     const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Company: ${data.get("company") || ""}`,
-      `Stage: ${data.get("stage") || ""}`,
-      `ARR: ${data.get("arr") || ""}`,
-      `Channels: ${data.get("channels") || ""}`,
-      `Budget: ${data.get("budget") || ""}`,
-      `Timeline: ${data.get("timeline") || ""}`,
+      "Name: " + (data.get("name") || ""),
+      "Email: " + (data.get("email") || ""),
+      "Company: " + (data.get("company") || ""),
+      "Stage: " + (data.get("stage") || ""),
+      "ARR: " + (data.get("arr") || ""),
+      "Channels: " + (data.get("channels") || ""),
+      "Budget: " + (data.get("budget") || ""),
+      "Timeline: " + (data.get("timeline") || ""),
       "",
       "Current bottleneck:",
-      `${data.get("bottleneck") || ""}`,
+      data.get("bottleneck") || "",
       "",
       "Help needed:",
-      `${data.get("help") || ""}`
+      data.get("help") || ""
     ].join("\n");
 
-    // Capture the lead in Customer.io (fire-and-forget) so submissions are never lost,
-    // even if no mail client is configured.
-    try {
-      const leadEmail = (data.get("email") || "").toString().trim();
-      if (leadEmail) {
-        try {
-          if (typeof window.wssRememberLeadEmail === "function") {
-            window.wssRememberLeadEmail(leadEmail);
-          } else {
-            sessionStorage.setItem("wss_lead_email", leadEmail);
-          }
-        } catch (_) {}
-        fetch(cioUrl, {
-          method: "POST",
-          keepalive: true,
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            form_id: cioFormId,
-            email: leadEmail,
-            source_type: "contact-form",
-            source_page: window.location.href,
-            lead_magnet: "growth-enquiry",
-            "cf-turnstile-response": (data.get("cf-turnstile-response") || "").toString()
-          })
-        }).catch(() => {});
-      }
-    } catch (_) {}
-
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Fallback so the enquiry never dead-ends if no mail client is configured.
-    let note = document.getElementById("enquiry-fallback");
-    if (!note) {
-      note = document.createElement("div");
-      note.id = "enquiry-fallback";
-      note.setAttribute("role", "status");
-      note.style.cssText = "margin-top:1rem;padding:1rem;border:1px solid currentColor;border-radius:var(--v9-radius-small);font-size:0.9rem;";
-      form.appendChild(note);
+    // Fallback is only offered after a failed API delivery, never a false "sent" message.
+    if (fallback instanceof HTMLAnchorElement) {
+      fallback.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      fallback.hidden = true;
     }
-    note.innerHTML = `Your email draft should have opened. If it didn't, email <a href="mailto:${email}">${email}</a> directly, your message has been copied to the clipboard.`;
-    if (navigator.clipboard) navigator.clipboard.writeText(`${subject}\n\n${body}`).catch(() => {});
+
+    const payload = Object.fromEntries(data.entries());
+    payload.source_page = window.location.href;
+
+    submitting = true;
+    if (button instanceof HTMLButtonElement) {
+      button.disabled = true;
+      button.textContent = "Sending…";
+    }
+    if (status) status.textContent = "Sending your enquiry…";
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok || !result.ok || !result.delivered) {
+        throw new Error(result.error || "We couldn't send your enquiry automatically.");
+      }
+
+      form.reset();
+      if (status) status.textContent = "Thanks, your enquiry has been sent. We'll be in touch.";
+      try {
+        const widget = form.querySelector(".cf-turnstile");
+        if (widget && window.turnstile) window.turnstile.reset(widget);
+      } catch (_) {}
+    } catch (error) {
+      if (status) {
+        status.textContent = "Your enquiry hasn't been sent yet. Please use the email link below, or try again. " +
+          (error instanceof Error ? error.message : "");
+      }
+      if (fallback instanceof HTMLAnchorElement) fallback.hidden = false;
+    } finally {
+      submitting = false;
+      if (button instanceof HTMLButtonElement) {
+        button.disabled = false;
+        button.textContent = "Send enquiry";
+      }
+    }
   });
 </script>

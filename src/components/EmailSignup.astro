@@ -139,7 +139,7 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
           })
         });
         const payload = await res.json().catch(() => ({}));
-        if (res.ok && payload.ok) {
+        if (res.ok && payload.ok && payload.form_id) {
           try {
             if (typeof window.wssRememberLeadEmail === "function") {
               window.wssRememberLeadEmail(email);
@@ -167,7 +167,7 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
             if (destination.origin === window.location.origin) window.location.assign(destination.href);
           }
         } else {
-          if (status) status.textContent = "Something went wrong — try again in a moment.";
+          if (status) status.textContent = "Couldn\u0027t confirm your signup. Please try again, or contact us by email.";
         }
       } catch (_) {
         if (status) status.textContent = "Something went wrong — try again in a moment.";

@@ -50,7 +50,7 @@ export async function onRequestPost(context) {
   const guard = await checkFormRequest(context, payload);
   if (!guard.ok) {
     console.warn("Rejected /api/forms submission", guard.reason);
-    return json(200, { ok: true });
+    return json(403, { ok: false, error: "Verification failed. Please refresh and try again." });
   }
 
   const email = clip(payload.email || payload.Email, 320);

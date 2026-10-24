@@ -27,6 +27,9 @@ jobs:
       - name: Astro check
         run: npm run check
 
+      - name: Contact intake tests
+        run: node --test tests/contact-intake.test.mjs
+
       - name: Build
         env:
           # Optional: when set, the build uploads source maps to Sentry so

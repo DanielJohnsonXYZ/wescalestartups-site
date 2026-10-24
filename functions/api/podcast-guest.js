@@ -70,7 +70,7 @@ export async function onRequestPost(context) {
   });
   if (!guard.ok) {
     console.warn("Rejected /api/podcast-guest submission", guard.reason);
-    return json(200, { ok: true });
+    return json(403, { ok: false, error: "Verification failed. Please refresh and try again." });
   }
 
   const data = {

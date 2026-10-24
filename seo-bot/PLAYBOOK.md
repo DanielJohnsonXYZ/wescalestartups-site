@@ -41,6 +41,7 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 - **ALL DATED VERDICTS CLOSED AT RUN 30 (see `VERDICTS.md`): six FAIL, one retrieval PASS. Content is not the lever on classic search. Do not write new pages unless a verdict or Daniel reopens content.**
 - **Run 31 (OFF-SITE): no verdict due until the 10-31 window and the 10-20 panel; nothing shipped.** Brand-SERP hygiene is the open off-site item (DesignRush, Puddding).
 - **Run 33 (MEASURE, 10-23): panel #14 + ChatGPT #1, no accuracy defect on either engine, nothing shipped.** Next panel ~11-06; next decision-grade read is the 10-31 GSC window.
+- **Run 34 (REPORT, 10-24 Sat): nothing due, nothing shipped; connector absent (seventh run).** 10-31 window readable on/after 11-03.
 - Daniel works in the repo directly, and so does this bot. **Check `list_commits` before choosing a file**; never touch a page committed in the last 24 hours.
 
 ### Source-of-truth files

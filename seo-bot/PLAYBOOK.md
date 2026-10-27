@@ -49,6 +49,7 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 - **Run 36 (REPORT, 10-26 Mon): nothing due, no growth-bot handoff, nothing shipped.** GSC connector still absent from the scheduled session (the 10-25 config fix not yet applied); standing checks clean, sitemap 110.
 - **DANIEL, 2026-10-26 (in chat, after run 36): RUN DAILY, AND EVERY RUN DOES REAL WORK.** This **supersedes the 10-12 cadence clause** ("weekly, Mondays; Wed/Fri runs REPORT-unless-a-verdict-is-due"). Three empty REPORT runs in a row read as the bot doing nothing. Unchanged: the SHIP gate, page locks, FIXED RULES, "no new pages unless a verdict or Daniel reopens content", and the fortnightly panel series. **Daily work menu, in order, when no verdict is due:** (a) Workstream D internal-link graph: orphans, click depth, pillar → supporting → money-page paths; build-verifiable, so it survives a GSC blackout; ship only links a real reader would follow. (b) Workstream B query→page sweep, whenever GSC is reachable. (c) Read-only trace of organic and AI-referred sessions to `/book` in Clarity/GA4 (growth-bot owns any conversion change). (d) Improve `OUTREACH.md` queue entries within Daniel's standing decisions. **REPORT is valid only when (a)–(d) are each blocked or done, and the log says which.**
 - **Run 37 (SHIP, 10-27): Workstream D graph built from dist.** Only true orphan: `/resources/category-reframe` (backlog 20). The 226-review research had one inbound link (hub); `9fa45b5` linked it from `/insights/diagnose-growth-bottleneck-before-spend`. Review 11-24. GSC still absent from the scheduled session.
+- **Run 38 (SHIP, 10-27 evening, second run today): connector present in this scheduled session.** 27 Sep – 24 Oct: 62 clicks / named 20 / anonymised 42 / non-homepage 18 / money 1 (overlaps run 30's window by 7 days; diagnostic only). First named non-brand click: `venture capital marketing` (1). Position-1 question rows are fanout. `2ffb9d0` linked `/resources/category-reframe` from the value-proposition insight's category-trap section; orphan closed. Review 11-24.
 - Daniel works in the repo directly, and so does this bot. **Check `list_commits` before choosing a file**; never touch a page committed in the last 24 hours.
 
 ### Source-of-truth files
@@ -107,7 +108,7 @@ Each of these cost at least a run. They are closed; the reasoning is in the chan
 
 6. **Homepage non-brand category cluster — deferred since run 5.** ~630 impr at 7–13, one click. The fix means re-anchoring on "agency" (prohibition 15). Revisit only if another page picks these up.
 
-20. **`/resources/category-reframe` is a true orphan** (sitemap, zero inbound links; static route for Growth Letter 33 so the `leadMagnets`-driven hub never lists it). Link it where a positioning reader would follow, or noindex (two-file change). Also: `/insights/glossary` sits at depth 4.
+20. **(Orphan fixed run 38, `2ffb9d0`; glossary depth remains.)** **`/resources/category-reframe` was a true orphan** (sitemap, zero inbound links; static route for Growth Letter 33 so the `leadMagnets`-driven hub never lists it). Link it where a positioning reader would follow, or noindex (two-file change). Also: `/insights/glossary` sits at depth 4.
 
 ### Closed — one line each, kept only for the reasoning
 

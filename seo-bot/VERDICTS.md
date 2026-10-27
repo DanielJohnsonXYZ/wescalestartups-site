@@ -4,7 +4,9 @@
 
 ## Verdicts due, in order
 
-**None.** All seven dated verdicts were closed at run 30 (2026-10-06) on the first fully independent GSC windows (09 Aug – 05 Sep vs 06 Sep – 03 Oct, zero shared days). Detail: `changelog/2026-10-06-run30.md`.
+**2026-11-24 — run 37 (`9fa45b5`): contextual link to `/insights/what-226-founder-reviews-reveal` from `/insights/diagnose-growth-bottleneck-before-spend`.** Metric: research page in the Gen-AI page list / classic impressions (baseline run 30: absent; 5 @ 4.2). Subtract panel days.
+
+Before run 37: none. All seven dated verdicts were closed at run 30 (2026-10-06) on the first fully independent GSC windows (09 Aug – 05 Sep vs 06 Sep – 03 Oct, zero shared days). Detail: `changelog/2026-10-06-run30.md`.
 
 | Due | Change | Result |
 | --- | --- | --- |

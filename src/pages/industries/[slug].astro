@@ -23,7 +23,9 @@ const industrySystemsLabel = /\bGrowth$/.test(industry.data.title)
 const industryMetaTitle =
   industry.id === "vc-support"
     ? "VC Portfolio Growth Systems | We Scale Startups"
-    : `${industrySystemsLabel} | We Scale Startups`;
+    : industry.id === "ai-genai"
+      ? "Fractional CMO and Growth for AI Startups | We Scale Startups"
+      : `${industrySystemsLabel} | We Scale Startups`;
 
 // A market page can carry its own reading list so the long-form guide that
 // belongs to it is reachable from here, not only from the /insights hub.

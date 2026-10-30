@@ -105,8 +105,6 @@
 # Withdrawn internal planning page and overlapping noindex industry pages
 /podcast-guest-strategy /podcast 301
 /podcast-guest-strategy/ /podcast 301
-/industries/ai-genai /ai-growth-systems 301
-/industries/ai-genai/ /ai-growth-systems 301
 /industries/b2b-growth /industries/saas-growth 301
 /industries/b2b-growth/ /industries/saas-growth 301
 /industries/b2b-saas /industries/saas-growth 301

@@ -362,7 +362,7 @@ export const industriesHubRelatedReading: readonly { href: string; label: string
  * The rest are noindexed in `industries/[slug].astro` and must be EXCLUDED from the
  * sitemap to avoid "noindex URL submitted in sitemap" warnings, keep both in sync here.
  */
-export const indexableIndustrySlugs = ["saas-growth", "fintech", "healthtech", "edtech", "vc-support"] as const;
+export const indexableIndustrySlugs = ["saas-growth", "fintech", "healthtech", "edtech", "vc-support", "ai-genai"] as const;
 
 export const industryDetailRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/industries", label: "All industries" },

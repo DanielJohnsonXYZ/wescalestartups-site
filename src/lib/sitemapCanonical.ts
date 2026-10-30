@@ -31,7 +31,6 @@ const REDIRECT_TO: Record<string, string> = {
   "/execution-model": "/how-it-works",
   "/engagement-models": "/how-it-works",
   "/podcast-guest-strategy": "/podcast",
-  "/industries/ai-genai": "/ai-growth-systems",
   "/industries/b2b-growth": "/industries/saas-growth",
   "/industries/b2b-saas": "/industries/saas-growth",
   "/industries/ecommerce": "/industries",

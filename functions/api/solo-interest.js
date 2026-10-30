@@ -89,70 +89,33 @@ export async function onRequestPost(context) {
   const subject = "WSS Solo feedback: " + data.name;
   const content = emailBody(data);
 
-  if (env.RESEND_API_KEY) {
-    try {
-      const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + env.RESEND_API_KEY,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          from: env.GUEST_APPLICATION_FROM || "We Scale Startups <onboarding@resend.dev>",
-          to: [INBOX],
-          reply_to: data.email,
-          subject,
-          text: content
-        })
-      });
-      if (response.ok) return json(200, { ok: true });
-      console.error("WSS Solo Resend delivery failed:", response.status);
-    } catch (error) {
-      console.error("WSS Solo Resend unavailable:", String(error));
-    }
+  // Use the same provider and sender configuration as /api/contact.
+  // Never report success without a confirmed provider acceptance.
+  if (!env.RESEND_API_KEY) {
+    console.error("WSS Solo email backend is not configured");
+    return json(503, { ok: false, error: "Email delivery temporarily unavailable" });
   }
-
-  if (env.SOLO_INTEREST_WEBHOOK_URL) {
-    try {
-      const response = await fetch(env.SOLO_INTEREST_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, source: "wss-solo", text: content })
-      });
-      if (response.ok) return json(200, { ok: true });
-    } catch (error) {
-      console.error("WSS Solo webhook unavailable:", String(error));
-    }
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + env.RESEND_API_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: env.CONTACT_FORM_FROM || env.GUEST_APPLICATION_FROM || "We Scale Startups <onboarding@resend.dev>",
+        to: [INBOX],
+        reply_to: data.email,
+        subject: subject.replace(/[\r\n]/g, " "),
+        text: content
+      })
+    });
+    if (response.ok) return json(200, { ok: true, delivered: true });
+    console.error("WSS Solo delivery declined:", response.status);
+  } catch (error) {
+    console.error("WSS Solo delivery unavailable:", String(error));
   }
-
-  // Established website fallback. FormSubmit may require inbox activation
-  // before its first successful delivery, so prefer Resend or a webhook.
-  if (env.SOLO_INTEREST_DISABLE_FORMSUBMIT !== "1") {
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(INBOX), {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: subject,
-          _template: "table",
-          _captcha: "false",
-          name: data.name,
-          email: data.email,
-          stage: data.stage,
-          blocker: data.blocker,
-          price_fit: data.priceFit,
-          consent_updates: data.updates,
-          feedback: data.feedback,
-          message: content
-        })
-      });
-      if (response.ok) return json(200, { ok: true });
-    } catch (error) {
-      console.error("WSS Solo form fallback unavailable:", String(error));
-    }
-  }
-
-  return json(503, { ok: false, error: "Delivery temporarily unavailable" });
+  return json(503, { ok: false, error: "Email delivery temporarily unavailable" });
 }
 
 export async function onRequestOptions() {

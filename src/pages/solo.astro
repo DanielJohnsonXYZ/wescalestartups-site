@@ -1,0 +1,414 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildBreadcrumbSchema } from "../lib/schema";
+
+const weeks = [
+  { n: "01", title: "Know exactly who buys", detail: "Sharpen your ideal customer, positioning and offer using actual buyer conversations, not another AI-generated persona." },
+  { n: "02", title: "Find a way to reach them", detail: "Choose one channel and put a real customer acquisition experiment in market, with messaging and a simple pipeline to track it." },
+  { n: "03", title: "Make AI do useful work", detail: "Set up practical workflows for research, prospecting support, follow-ups and measurement, while keeping you in control." },
+  { n: "04", title: "Know what to do next", detail: "Review the evidence, fix what is not working, and leave with a focused plan you can actually keep running." }
+];
+
+const faqs = [
+  { q: "Is WSS Solo open for applications?", a: "Not yet. We're shaping the first pilot with founders. The form below is for feedback and early interest, not a commitment or a paid application." },
+  { q: "Who is this for?", a: "Primarily solo founders who have launched an AI or B2B software product and now need to find paying customers. You don't need a team or previous marketing experience." },
+  { q: "Will there be a fee or equity?", a: "We're testing a founding-cohort price of around £750 for four weeks, with no equity. The final format and price depend on founder feedback. Nothing is on sale yet." },
+  { q: "Do I need to be a technical founder?", a: "No, but you should already have something people can try or buy. The proposed pilot focuses on customer acquisition, not helping people develop an idea from scratch." },
+  { q: "Will you run marketing for me?", a: "No. The aim is to help you build a practical acquisition system you own, with hands-on guidance and AI-assisted workflows, not create another agency retainer." }
+];
+
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
+---
+
+<BaseLayout
+  title="WSS Solo | From Built Product to Paying Customers | We Scale Startups"
+  description="You built the product. Now build the business. Help shape WSS Solo, a proposed hands-on growth accelerator for one-person AI and B2B SaaS founders."
+  keywords="WSS Solo, solo founder accelerator, one-person startup, AI SaaS founder, customer acquisition accelerator"
+  path="/solo"
+  schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "WSS Solo", path: "/solo" }])}
+  showSiteHeader={false}
+  showAnnouncement={false}
+  stickyBookCta={false}
+  newsletterPopup={false}
+  showFooterNewsletter={false}
+  showFooterScorecard={false}
+>
+  <div class="solo-page">
+    <header class="solo-nav">
+      <div class="solo-wrap solo-nav-inner">
+        <a href="/" class="solo-brand" aria-label="We Scale Startups home" data-cta="solo-brand-home">
+          <span class="solo-brand-mark">W<span>SS</span></span>
+          <span class="solo-brand-text">WE SCALE STARTUPS <em>/ SOLO</em></span>
+        </a>
+        <nav aria-label="WSS Solo navigation" class="solo-nav-links">
+          <a href="#how-it-works">The idea</a>
+          <a href="#who-its-for">Who it's for</a>
+          <a href="#feedback" class="solo-nav-cta" data-cta="solo-nav-feedback">Have your say <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="solo-hero" aria-labelledby="solo-h1">
+      <div class="solo-glow" aria-hidden="true"></div>
+      <div class="solo-wrap solo-hero-grid">
+        <div class="solo-hero-main">
+          <p class="solo-overline"><span class="solo-status-dot"></span> AN IDEA IN THE MAKING · HELP SHAPE IT</p>
+          <h1 id="solo-h1">You built the product.<br /><span>Now build the business.</span></h1>
+          <p class="solo-hero-lede">You can build software on your own. Finding people who'll actually pay for it is the harder bit.</p>
+          <p class="solo-hero-support">We're exploring <strong>WSS Solo</strong>, a hands-on, AI-native growth accelerator for solo founders with a product to sell and no sales or marketing team behind them.</p>
+          <div class="solo-actions">
+            <a href="#feedback" class="solo-button solo-button-primary" data-cta="solo-hero-feedback">Help shape WSS Solo <span aria-hidden="true">↗</span></a>
+            <a href="#how-it-works" class="solo-button solo-button-ghost" data-cta="solo-hero-explore">See the idea <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="solo-micro">No pitch, no payment, no product to buy yet. We're looking for honest feedback.</p>
+        </div>
+        <aside class="solo-hero-panel" aria-label="The proposal in brief">
+          <div class="solo-panel-label"><span class="solo-panel-dot"></span> THE PILOT, IF FOUNDERS WANT IT</div>
+          <div class="solo-panel-big">ONE<span class="solo-panel-spark">✳</span></div>
+          <p class="solo-panel-strap">Founder. Small team of AI tools.<br />A real business.</p>
+          <div class="solo-panel-divider"></div>
+          <div class="solo-panel-row"><span>Focus</span><strong>Customers, not just code</strong></div>
+          <div class="solo-panel-row"><span>Format</span><strong>4 weeks, hands-on</strong></div>
+          <div class="solo-panel-row"><span>Equity</span><strong>None proposed</strong></div>
+          <div class="solo-panel-row"><span>Status</span><strong>Seeking feedback</strong></div>
+          <div class="solo-panel-footer">NOT ANOTHER AI COURSE. A WAY TO GET MOVING.</div>
+        </aside>
+      </div>
+      <div class="solo-ticker" aria-hidden="true"><span>BUILD THE PRODUCT</span><b>✳</b><span>FIND THE CUSTOMER</span><b>✳</b><span>MAKE IT REPEATABLE</span><b>✳</b><span>STAY LEAN</span></div>
+    </section>
+
+    <section class="solo-section solo-section-light" id="problem">
+      <div class="solo-wrap">
+        <div class="solo-section-heading">
+          <p class="solo-kicker">01 / THE PROBLEM</p>
+          <h2>Shipping is easier than ever.<br /><span>Selling still isn't.</span></h2>
+          <p>AI has made it possible to do the work of a small product team on your own. But a working product isn't the same as a working business.</p>
+        </div>
+        <div class="solo-problem-grid">
+          <article class="solo-problem-card"><span class="solo-card-number">01</span><div class="solo-card-symbol">◎</div><h3>You've launched. Now what?</h3><p>The product exists, but you're not sure who's most likely to pay, what to say, or where to find them.</p></article>
+          <article class="solo-problem-card"><span class="solo-card-number">02</span><div class="solo-card-symbol">↗</div><h3>Growth feels like guesswork.</h3><p>A bit of LinkedIn, some cold emails, maybe ads. Lots of activity without a clear signal.</p></article>
+          <article class="solo-problem-card"><span class="solo-card-number">03</span><div class="solo-card-symbol">✳</div><h3>You're doing every job.</h3><p>Builder, marketer, salesperson and customer support. You need systems that help without hiring a whole team.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="solo-section solo-section-cream" id="how-it-works">
+      <div class="solo-wrap">
+        <div class="solo-section-heading solo-heading-split">
+          <div><p class="solo-kicker">02 / THE IDEA</p><h2>Less learning.<br /><span>More doing.</span></h2></div>
+          <p>What if a small group of solo founders spent four focused weeks putting a customer acquisition system in place, with expert guidance, useful AI workflows and real accountability?</p>
+        </div>
+        <div class="solo-weeks">
+          {weeks.map((week) => (
+            <article class="solo-week" key={week.n}>
+              <div class="solo-week-index"><span>WEEK</span><strong>{week.n}</strong></div>
+              <div class="solo-week-content"><h3>{week.title}</h3><p>{week.detail}</p></div>
+              <span class="solo-week-arrow" aria-hidden="true">↗</span>
+            </article>
+          ))}
+        </div>
+        <p class="solo-proposal-note"><span aria-hidden="true">✳</span> This is a proposed pilot, not a fixed curriculum. Your feedback will help determine what actually gets built.</p>
+      </div>
+    </section>
+
+    <section class="solo-section solo-section-light" id="who-its-for">
+      <div class="solo-wrap solo-fit-grid">
+        <div class="solo-fit-intro">
+          <p class="solo-kicker">03 / WHO IT'S FOR</p>
+          <h2>Built something?<br /><span>Let's find the buyers.</span></h2>
+          <p>We're starting narrow on purpose. WSS Solo is being designed around people who can ship software but want better commercial instincts and a repeatable way to find customers.</p>
+          <a href="#feedback" class="solo-text-link" data-cta="solo-fit-feedback">Does this sound like you? Tell us <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="solo-fit-cards">
+          <div class="solo-fit-card solo-fit-yes">
+            <h3><span aria-hidden="true">✓</span> Probably a fit</h3>
+            <ul><li>You're building AI or B2B software</li><li>You've got an MVP people can try</li><li>You need customers, not another feature</li><li>You're willing to talk to buyers and test</li></ul>
+          </div>
+          <div class="solo-fit-card solo-fit-not">
+            <h3><span aria-hidden="true">×</span> Probably not yet</h3>
+            <ul><li>You're still looking for your first idea</li><li>You want someone to sell for you</li><li>You only want prompts or recorded lessons</li><li>You don't want to speak to customers</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="solo-section solo-proof">
+      <div class="solo-wrap solo-proof-grid">
+        <div><p class="solo-kicker">THE TEAM BEHIND THE IDEA</p><h2>Same growth thinking.<br /><span>A different starting line.</span></h2><p>WSS Solo is a new idea from <a href="/">We Scale Startups</a>. We've worked with founders on customer research, positioning and acquisition systems. Now we're exploring a version for much earlier, one-person businesses.</p><p class="solo-proof-note">Our existing WSS experience is not evidence of results from WSS Solo. This pilot hasn't run yet.</p></div>
+        <div class="solo-proof-stats"><div><strong>£18M+</strong><span>Revenue influenced through WSS work</span></div><div><strong>479+</strong><span>Founder mentoring sessions cited by WSS</span></div></div>
+      </div>
+    </section>
+
+    <section class="solo-section solo-section-cream" id="feedback">
+      <div class="solo-wrap solo-feedback-grid">
+        <div class="solo-feedback-copy">
+          <p class="solo-kicker">04 / HELP SHAPE IT</p>
+          <h2>Would this actually<br /><span>help you?</span></h2>
+          <p>I'm pretty good at helping other founders test ideas. Testing my own is harder. So rather than build something nobody needs, I'd love your honest take.</p>
+          <div class="solo-feedback-points"><span>✳ Five quick questions</span><span>✳ No sales call required</span><span>✳ Honest criticism welcome</span></div>
+          <p class="solo-signature">Thanks,<br /><strong>Daniel</strong><br /><span>Founder, We Scale Startups</span></p>
+        </div>
+        <div class="solo-form-card">
+          <div class="solo-form-top"><span class="solo-form-pill">EARLY FEEDBACK</span><span>~2 MINUTES</span></div>
+          <h3>Tell me where you're at.</h3>
+          <form id="solo-interest" action="/api/solo-interest" method="post">
+            <div class="solo-form-duo">
+              <label>Your name <input type="text" name="name" autocomplete="name" placeholder="Your first name" required maxlength="120" /></label>
+              <label>Email <input type="email" name="email" autocomplete="email" placeholder="you@startup.com" required maxlength="320" /></label>
+            </div>
+            <label>Where are you with your product?
+              <select name="stage" required><option value="">Choose one</option><option value="idea">Idea or still building</option><option value="launched">Launched MVP, no customers yet</option><option value="first-customers">First paying customers</option><option value="growing">Growing, but still solo</option></select>
+            </label>
+            <label>What's the biggest thing holding you back?
+              <select name="blocker" required><option value="">Choose one</option><option value="finding-buyers">Finding the right buyers</option><option value="messaging">Explaining why anyone should care</option><option value="outreach">Getting conversations and demos</option><option value="conversion">Turning interest into paying customers</option><option value="time-and-systems">Finding time and building systems</option><option value="other">Something else</option></select>
+            </label>
+            <label>Would a hands-on 4-week pilot at around £750 be worth exploring?
+              <select name="price_fit" required><option value="">Choose one</option><option value="yes">Potentially yes</option><option value="maybe">Maybe, depends what's included</option><option value="no">Probably not</option><option value="not-sure">Not sure yet</option></select>
+            </label>
+            <label>What would make this genuinely useful? <span class="solo-optional">(optional)</span>
+              <textarea name="feedback" rows="3" maxlength="1800" placeholder="What you've tried, what's not working, or what you'd love help with..."></textarea>
+            </label>
+            <label class="solo-consent"><input type="checkbox" name="updates" value="yes" /><span>It's okay to email me about WSS Solo updates and a possible pilot. I can opt out at any time.</span></label>
+            <div class="solo-honeypot" aria-hidden="true"><label>Leave this blank<input type="text" name="company_website" autocomplete="off" tabindex="-1" /></label></div>
+            <input type="hidden" name="source_page" value="" />
+            <input type="hidden" name="utm_source" value="" /><input type="hidden" name="utm_medium" value="" /><input type="hidden" name="utm_campaign" value="" />
+            {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-size="flexible"></div>}
+            <button class="solo-button solo-button-primary solo-submit" type="submit">Send my feedback <span aria-hidden="true">↗</span></button>
+            <p id="solo-form-status" class="solo-form-status" role="status" aria-live="polite">Your answers come directly to WSS. This isn't an application.</p>
+            <a href="mailto:daniel@wescalestartups.com?subject=WSS%20Solo%20feedback" id="solo-email-fallback" class="solo-email-fallback" hidden>Or email Daniel instead ↗</a>
+            <p class="solo-privacy">We'll use your answers to evaluate the idea and reply if appropriate. Updates only with your opt-in. <a href="/privacy">Privacy policy</a>.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="solo-section solo-faq">
+      <div class="solo-wrap solo-faq-grid">
+        <div><p class="solo-kicker">05 / GOOD QUESTIONS</p><h2>Before you ask...</h2><p>It's early. Here's what we know, and what we don't.</p></div>
+        <div class="solo-faq-items">{faqs.map((item) => (<details><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>))}</div>
+      </div>
+    </section>
+
+    <div class="solo-endcap"><div class="solo-wrap"><p>BUILT IT? NOW LET'S GET IT SELLING.</p><a href="#feedback" data-cta="solo-end-feedback">Have your say ↗</a></div></div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const form = document.getElementById("solo-interest");
+    const status = document.getElementById("solo-form-status");
+    const fallback = document.getElementById("solo-email-fallback");
+    if (!(form instanceof HTMLFormElement)) return;
+    const source = form.querySelector('[name="source_page"]');
+    if (source) source.value = window.location.href;
+    const params = new URLSearchParams(window.location.search);
+    ["utm_source","utm_medium","utm_campaign"].forEach((key) => {
+      const input = form.querySelector('[name="' + key + '"]');
+      if (input) input.value = (params.get(key) || "").slice(0, 200);
+    });
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const button = form.querySelector('button[type="submit"]');
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.updates = data.updates === "yes" ? "yes" : "no";
+      data.source_page = window.location.href;
+      if (button) button.disabled = true;
+      if (status) status.textContent = "Sending your feedback...";
+      if (fallback) fallback.hidden = true;
+      try {
+        const response = await fetch(form.action, { method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(data) });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.ok !== true) throw new Error("Submission unavailable");
+        form.reset();
+        if (source) source.value = window.location.href;
+        if (window.turnstile) {
+          const widget = form.querySelector(".cf-turnstile");
+          if (widget) { try { window.turnstile.reset(widget); } catch (_) {} }
+        }
+        if (status) status.textContent = "Thanks, this is genuinely useful. Your feedback has been sent!";
+        if (window.dataLayer) window.dataLayer.push({event:"solo_feedback_success",page_path:"/solo"});
+      } catch (_) {
+        if (status) status.textContent = "That didn't go through. Please try again, or email me directly.";
+        if (fallback) fallback.hidden = false;
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  })();
+</script>
+
+<style>
+  .solo-page { --solo-night:#0b0b13; --solo-purple:#8878ff; --solo-acid:#c8ff65; color:#16151d; font-family:var(--v9-sans); overflow:hidden; }
+  .solo-wrap { width:min(1180px,calc(100% - 3rem)); margin-inline:auto; }
+  .solo-page a { text-underline-offset:4px; }
+  .solo-nav { background:#0b0b13; border-bottom:1px solid rgba(255,255,255,.13); }
+  .solo-nav-inner { min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+  .solo-brand { display:flex; align-items:center; gap:.85rem; color:white; text-decoration:none; }
+  .solo-brand-mark { width:44px;height:44px;border-radius:12px;background:var(--solo-acid);color:#111;font-family:var(--v9-sans);display:grid;place-items:center;font-weight:900;font-size:.85rem;letter-spacing:-.075em;transform:rotate(-6deg); }
+  .solo-brand-mark span { letter-spacing:-.08em; }
+  .solo-brand-text { font-size:.82rem;font-weight:850;letter-spacing:.09em; }
+  .solo-brand-text em { font-style:normal;color:var(--solo-acid); }
+  .solo-nav-links { display:flex;align-items:center;gap:2rem; }
+  .solo-nav-links a { color:#dddbe9;text-decoration:none;font-size:.9rem;font-weight:650; }
+  .solo-nav-links a:hover { color:white; }
+  .solo-nav-links .solo-nav-cta { border:1px solid rgba(255,255,255,.25);padding:.8rem 1.1rem;border-radius:100px;color:white; }
+  .solo-nav-cta span { margin-left:.4rem;color:var(--solo-acid); }
+  .solo-hero { position:relative; background:var(--solo-night); color:white;padding:clamp(4rem,7vw,7rem) 0 0;isolation:isolate; }
+  .solo-glow { position:absolute;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 78% 35%,rgba(122,106,255,.23),transparent 37%),radial-gradient(ellipse at 15% 95%,rgba(94,70,198,.14),transparent 44%); }
+  .solo-hero-grid { display:grid;grid-template-columns:1.38fr .72fr;gap:clamp(2rem,5vw,6rem);align-items:center;padding-bottom:clamp(4rem,7vw,7rem); }
+  .solo-overline,.solo-kicker,.solo-panel-label,.solo-panel-footer,.solo-form-pill,.solo-week-index span { font-family:var(--v9-mono);font-size:.73rem;letter-spacing:.11em;font-weight:600; }
+  .solo-overline { color:var(--solo-acid);display:flex;gap:.7rem;align-items:center;margin:0 0:1.6rem; }
+  .solo-status-dot,.solo-panel-dot { flex:0 0 9px;width:9px;height:9px;background:var(--solo-acid);border-radius:50%;box-shadow:0 0 0 5px rgba(200,255,101,.1); }
+  .solo-hero h1 { font-family:var(--v9-display);font-weight:600;letter-spacing:-.052em;font-size:clamp(3.5rem,6vw,6.65rem);line-height:1.04;margin:0 0 2rem;max-width:13ch; }
+  .solo-hero h1 span { color:var(--solo-acid); }
+  .solo-hero-lede { font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.45;max-width:29ch;color:white;margin:0 0:1rem;font-weight:680;letter-spacing:-.025em; }
+  .solo-hero-support { font-size:1.03rem;line-height:1.75;color:#bdbbc9;max-width:54ch;margin:0 0 2rem; }
+  .solo-hero-support strong { color:white; }
+  .solo-actions { display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.15rem; }
+  .solo-button { display:inline-flex;align-items:center;justify-content:center;gap:1.35rem;padding:1rem 1.45rem;min-height:54px;font-size:.94rem;font-weight:760;border-radius:12px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .18s ease,background .18s ease; }
+  .solo-button:hover { transform:translateY(-2px); }
+  .solo-button-primary { background:var(--solo-acid);color:#10120c; }
+  .solo-button-primary:hover { background:#d8ff9b;color:#10120c; }
+  .solo-button-ghost { background:transparent;color:#fff;border-color:rgba(255,255,255,.22); }
+  .solo-micro { color:#9997aa;font-size:.8rem;margin:0; }
+  .solo-hero-panel { background:linear-gradient(145deg,#242237,#12121c);border:1px solid rgba(255,255,255,.16);box-shadow:0 35px 100px rgba(0,0,0,.2);border-radius:20px;padding:clamp(1.5rem,3.2vw,2.4rem);transform:rotate(2deg); }
+  .solo-panel-label { color:#bbb9d1;display:flex;gap:.65rem;align-items:center; }
+  .solo-panel-big { font-family:var(--v9-display);font-size:clamp(6rem,10vw,10rem);font-weight:700;line-height:1;letter-spacing:-.09em;margin:1.6rem 0 .45rem;color:#fff; }
+  .solo-panel-spark { color:var(--solo-acid);font-size:.4em;vertical-align:top;margin-left:.15em; }
+  .solo-panel-strap { font-size:1.1rem;line-height:1.45;color:#e4e2f2;margin:0 0 1.5rem; }
+  .solo-panel-divider { border-top:1px solid rgba(255,255,255,.2);margin-bottom:1rem; }
+  .solo-panel-row { display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.85rem; }
+  .solo-panel-row span { color:#a8a6bb; }
+  .solo-panel-row strong { color:white;text-align:right;font-size:.82rem; }
+  .solo-panel-footer { margin-top:1.75rem;color:var(--solo-acid);font-size:.64rem; }
+  .solo-ticker { display:flex;align-items:center;justify-content:center;gap:clamp(1rem,4vw,4rem);background:var(--solo-acid);color:#12170a;padding:1.05rem;overflow:hidden;white-space:nowrap;font-family:var(--v9-mono);font-size:.79rem;font-weight:750;letter-spacing:.07em; }
+  .solo-ticker b { font-size:1.4rem;line-height:0; }
+  .solo-section { padding:clamp(4rem,8vw,8rem) 0; }
+  .solo-section-light { background:#fff; }
+  .solo-section-cream { background:#f5f5ef; }
+  .solo-kicker { color:#5d4ecc;margin:0 0 1.25rem; }
+  .solo-section-heading { max-width:850px;margin-bottom:2.5rem; }
+  .solo-section h2 { font-family:var(--v9-display);font-size:clamp(2.65rem,4.6vw,4.8rem);font-weight:620;letter-spacing:-.045em;line-height:1.13;margin:0 0 1.2rem;color:#15151d; }
+  .solo-section h2 span { color:#5a4bc9; }
+  .solo-section-heading > p:last-child,.solo-heading-split > p,.solo-fit-intro > p:not(.solo-kicker) { color:#5b5964;font-size:1.06rem;line-height:1.75;max-width:62ch; }
+  .solo-problem-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem; }
+  .solo-problem-card { position:relative;border:1px solid #dddde4;border-radius:18px;padding:2rem;min-height:285px;background:#fff; }
+  .solo-card-number { color:#85818f;font:600 .74rem var(--v9-mono); }
+  .solo-card-symbol { margin:1.6rem 0 1.8rem;font-size:2.2rem;color:#5e4dd9;line-height:1; }
+  .solo-problem-card h3 { font-size:1.37rem;line-height:1.2;letter-spacing:-.03em;margin:0 0 .8rem; }
+  .solo-problem-card p { color:#5f5d68;line-height:1.65;font-size:.95rem;margin:0; }
+  .solo-heading-split { display:grid;grid-template-columns:1fr .75fr;gap:4rem;max-width:none;align-items:end; }
+  .solo-heading-split > p { margin-bottom:1.4rem; }
+  .solo-weeks { border-top:1px solid #cfced7; }
+  .solo-week { display:grid;grid-template-columns:130px 1fr 40px;gap:1rem;align-items:center;padding:1.8rem .5rem;border-bottom:1px solid #cfced7; }
+  .solo-week-index { display:flex;gap:.6rem;align-items:baseline; }
+  .solo-week-index span { color:#777381; }
+  .solo-week-index strong { font-family:var(--v9-display);font-size:2.6rem;line-height:1;color:#6555d5;font-weight:650; }
+  .solo-week-content h3 { font-size:1.28rem;margin:0 0:.35rem;letter-spacing:-.025em; }
+  .solo-week-content p { color:#66636f;line-height:1.6;margin:0;max-width:65ch; }
+  .solo-week-arrow { color:#8576de;font-size:1.7rem; }
+  .solo-proposal-note { display:flex;align-items:flex-start;gap:.75rem;color:#66616e;font-size:.87rem;margin:1.6rem 0 0; }
+  .solo-proposal-note span { color:#5b4ac9;font-size:1.2rem; }
+  .solo-fit-grid { display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(3rem,6vw,7rem); }
+  .solo-text-link { display:inline-block;margin-top:1rem;font-weight:750;color:#5544ba; }
+  .solo-fit-cards { display:grid;gap:1rem; }
+  .solo-fit-card { padding:1.75rem 2rem;border-radius:18px; }
+  .solo-fit-card h3 { margin:0 0:1.2rem;font-size:1.15rem; }
+  .solo-fit-card h3 span { display:inline-grid;place-items:center;width:27px;height:27px;margin-right:.4rem;border-radius:50%; }
+  .solo-fit-yes { background:#eff8df;border:1px solid #d3e6b5; }
+  .solo-fit-yes h3 span { background:#d5efaa;color:#2d5817; }
+  .solo-fit-not { background:#f5f4f6;border:1px solid #e3e1e8; }
+  .solo-fit-not h3 span { background:#e6e4ea;color:#66616a; }
+  .solo-fit-card ul { list-style:none;padding:0;margin:0;display:grid;gap:.75rem; }
+  .solo-fit-card li { position:relative;padding-left:1.4rem;color:#49464f;line-height:1.45;font-size:.95rem; }
+  .solo-fit-card li::before { content:"→";position:absolute;left:0;color:#6150bd; }
+  .solo-proof { color:white;background:#15131f; }
+  .solo-proof h2,.solo-proof h2 span { color:white; }
+  .solo-proof h2 span { color:var(--solo-acid); }
+  .solo-proof .solo-kicker { color:var(--solo-acid); }
+  .solo-proof-grid { display:grid;grid-template-columns:1.25fr .75fr;gap:4rem;align-items:center; }
+  .solo-proof-grid p:not(.solo-kicker) { color:#c6c3d3;line-height:1.75;max-width:56ch; }
+  .solo-proof-grid a { color:var(--solo-acid); }
+  .solo-proof-grid .solo-proof-note { color:#9792aa;font-size:.78rem; }
+  .solo-proof-stats { border-left:1px solid rgba(255,255,255,.17);padding-left:3rem;display:grid;gap:2rem; }
+  .solo-proof-stats div { display:grid;gap:.35rem; }
+  .solo-proof-stats strong { font:650 clamp(3.5rem,6vw,5rem)/1 var(--v9-display);letter-spacing:-.06em;color:var(--solo-acid); }
+  .solo-proof-stats span { color:#c1bdcf;font-size:.89rem; }
+  .solo-feedback-grid { display:grid;grid-template-columns:.83fr 1.17fr;gap:clamp(3rem,7vw,7rem);align-items:start; }
+  .solo-feedback-copy > p:not(.solo-kicker):not(.solo-signature) { color:#66616e;font-size:1.08rem;line-height:1.8; }
+  .solo-feedback-points { display:grid;gap:.8rem;color:#5c4bc5;font-size:.91rem;font-weight:700;margin-top:2rem; }
+  .solo-signature { margin-top:3rem;font-size:.95rem;line-height:1.5;color:#292731; }
+  .solo-signature strong { font-family:var(--v9-display);font-size:1.6rem; }
+  .solo-signature span { color:#7c7884;font-size:.86rem; }
+  .solo-form-card { background:white;border:1px solid #e2e0e7;border-radius:22px;padding:clamp(1.5rem,4vw,2.7rem);box-shadow:0 28px 70px rgba(36,26,70,.07); }
+  .solo-form-top { display:flex;align-items:center;justify-content:space-between;gap:1rem;font:600 .7rem var(--v9-mono);color:#8a8592;letter-spacing:.055em; }
+  .solo-form-pill { background:#edeafd;color:#5642b4;border-radius:100px;padding:.5rem .75rem;font-size:.63rem; }
+  .solo-form-card h3 { font-size:1.9rem;letter-spacing:-.04em;margin:1.5rem 0:1.8rem; }
+  .solo-form-card form { display:grid;gap:1.15rem; }
+  .solo-form-card label { display:grid;gap:.45rem;font-weight:670;font-size:.88rem;color:#292630; }
+  .solo-form-duo { display:grid;grid-template-columns:1fr 1fr;gap:.9rem; }
+  .solo-form-card input:not([type="checkbox"]),.solo-form-card select,.solo-form-card textarea { width:100%;padding:.85rem .9rem;border-radius:9px;border:1px solid #d8d6e0;background:#fff;color:#17151d;min-height:46px;font:400 .94rem var(--v9-sans);box-sizing:border-box; }
+  .solo-form-card input:focus,.solo-form-card textarea:focus,.solo-form-card select:focus { outline:2px solid #8878ff;outline-offset:1px; }
+  .solo-form-card textarea { resize:vertical; }
+  .solo-optional { font-weight:400;color:#78747d; }
+  .solo-form-card .solo-consent { display:flex;align-items:start;gap:.65rem;font-weight:450;line-height:1.55;color:#5f5c65;font-size:.82rem; }
+  .solo-consent input { margin-top:.18rem;accent-color:#5b4bc9; }
+  .solo-honeypot { position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden; }
+  .solo-form-card .cf-turnstile { max-width:100%;overflow:hidden; }
+  .solo-submit { width:100%;border:0;background:#1d182e;color:white; }
+  .solo-submit:hover { background:#3e3263;color:white; }
+  .solo-submit:disabled { opacity:.65;cursor:wait;transform:none; }
+  .solo-form-status { margin:0;color:#585466;font-size:.84rem;line-height:1.5; }
+  .solo-email-fallback { color:#5543b7;font-size:.88rem;font-weight:750; }
+  .solo-privacy { border-top:1px solid #efedf2;padding-top:1rem;color:#85808e;font-size:.75rem;line-height:1.6;margin:0; }
+  .solo-privacy a { color:#5345ad; }
+  .solo-faq-grid { display:grid;grid-template-columns:.8fr 1.2fr;gap:5rem; }
+  .solo-faq-grid > div > p:not(.solo-kicker) { color:#66616e; }
+  .solo-faq-items { border-top:1px solid #dfdde4; }
+  .solo-faq-items details { border-bottom:1px solid #dfdde4;padding:1.2rem 0; }
+  .solo-faq-items summary { list-style:none;cursor:pointer;font-weight:760;font-size:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem; }
+  .solo-faq-items summary::-webkit-details-marker { display:none; }
+  .solo-faq-items summary span { color:#5b4bc9;font-size:1.5rem;font-weight:450; }
+  .solo-faq-items details[open] summary span { transform:rotate(45deg); }
+  .solo-faq-items details p { color:#625e69;line-height:1.7;margin:.8rem 1.5rem .2rem 0;font-size:.94rem; }
+  .solo-endcap { background:var(--solo-acid);color:#10140e;padding:1.6rem 0; }
+  .solo-endcap .solo-wrap { display:flex;justify-content:space-between;align-items:center;gap:1rem; }
+  .solo-endcap p { margin:0;font:700 .85rem var(--v9-mono);letter-spacing:.04em; }
+  .solo-endcap a { font-weight:800;color:#10140e; }
+  @media(max-width:900px) {
+    .solo-hero-grid,.solo-fit-grid,.solo-proof-grid,.solo-feedback-grid,.solo-faq-grid { grid-template-columns:1fr;gap:3rem; }
+    .solo-hero-panel { max-width:490px;transform:none; }
+    .solo-heading-split { grid-template-columns:1fr;gap:.5rem; }
+    .solo-proof-stats { border-left:0;border-top:1px solid rgba(255,255,255,.2);padding:2rem 0 0;grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:640px) {
+    .solo-wrap { width:min(100% - 2rem,1180px); }
+    .solo-nav-inner { min-height:69px; }
+    .solo-nav-links a:not(.solo-nav-cta) { display:none; }
+    .solo-nav-links { gap:0; }
+    .solo-nav-cta { padding:.7rem .8rem !important;font-size:.76rem !important; }
+    .solo-brand-text { font-size:.69rem; }
+    .solo-brand-mark { width:38px;height:38px;flex:0 0 38px; }
+    .solo-hero { padding-top:3.5rem; }
+    .solo-hero h1 { font-size:clamp(3.1rem,11vw,4.4rem); }
+    .solo-hero-panel { padding:1.5rem; }
+    .solo-ticker { justify-content:flex-start;gap:1.1rem;font-size:.62rem; }
+    .solo-section { padding:4rem 0; }
+    .solo-problem-grid,.solo-form-duo,.solo-proof-stats { grid-template-columns:1fr; }
+    .solo-problem-card { min-height:auto; }
+    .solo-week { grid-template-columns:68px 1fr;gap:.8rem;padding:1.3rem 0; }
+    .solo-week-index { display:grid;gap:.25rem; }
+    .solo-week-index strong { font-size:2.1rem; }
+    .solo-week-arrow { display:none; }
+    .solo-week-content h3 { font-size:1.13rem; }
+    .solo-week-content p { font-size:.87rem; }
+    .solo-fit-card { padding:1.4rem; }
+    .solo-form-card { padding:1.3rem; }
+    .solo-feedback-grid { gap:2rem; }
+    .solo-endcap .solo-wrap { flex-direction:column;align-items:flex-start; }
+  }
+  @media(prefers-reduced-motion:reduce) {.solo-button{transition:none}.solo-button:hover{transform:none}}
+</style>

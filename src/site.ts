@@ -205,6 +205,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
   "fractional-cmo": [
     { href: "/insights/when-to-hire-fractional-cmo", label: "When to hire a fractional CMO" },
     { href: "/fractional-cmo-vs-agency", label: "Fractional CMO vs agency" },
+    { href: "/industries/ai-genai", label: "Fractional CMO for AI startups" },
     { href: "/first-30-days", label: "First 30 days with WSS" },
     { href: "/how-it-works", label: "How engagements work" }
   ]
@@ -232,6 +233,7 @@ export const servicesHubRelatedReading: readonly { href: string; label: string }
   { href: "/insights/make-ai-search-visibility-citable", label: "AI search visibility" },
   { href: "/ai-growth-audit", label: "AI Growth Audit" },
   { href: "/resources/agency-brief-template", label: "Agency brief template" },
+  { href: "/industries/ai-genai", label: "AI and GenAI startups" },
   { href: "/industries/saas-growth", label: "SaaS growth industry notes" },
   { href: "/industries/fintech", label: "FinTech industry notes" },
   { href: "/industries/healthtech", label: "HealthTech industry notes" },
@@ -245,6 +247,7 @@ export const insightsHubRelatedReading: readonly { href: string; label: string }
   { href: "/diagnose", label: "5-layer framework" },
   { href: "/proof", label: "Proof hub" },
   { href: "/resources", label: "Resources" },
+  { href: "/industries/ai-genai", label: "AI and GenAI startup notes" },
   { href: "/industries/saas-growth", label: "SaaS growth market notes" },
   { href: "/industries/fintech", label: "FinTech market notes" },
   { href: "/industries/healthtech", label: "HealthTech market notes" },

@@ -118,7 +118,7 @@ export const revenueInfluencedNote =
 
 export const canonicalProofMetrics = [
   { value: "£18M+", label: "Revenue influenced", note: revenueInfluencedNote },
-  { value: "£10M+", label: "Paid acquisition spend managed" },
+  { value: "£6M+", label: "Paid acquisition spend managed" },
   { value: "479+", label: "Founder sessions" },
   { value: "4.97/5", label: "Average mentor rating" },
   { value: "20+", label: "Startups supported" },
@@ -995,12 +995,12 @@ export const pricingTiers = [
 
 // Daniel's "why I built this", operator credibility, founder layer
 export const founderStory = {
-  intro: "I'm Daniel. After 15 years operating inside SaaS, fintech, healthtech and EdTech startups, including two exits, I kept seeing the same pattern: founders with great products who were stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.",
+  intro: "I'm Daniel. After more than a decade working inside SaaS, fintech, healthtech and EdTech startups, including two exits, I kept seeing the same pattern: founders with great products who were stuck running marketing themselves because nobody else on the team could read the numbers and decide what to scale.",
   why: "I built WSS to be the operator I wished was there: senior judgement that diagnoses the real constraint, builds the system, and then transfers it so you don't need me forever.",
   credentials: [
     "Two operator-side startup exits",
     "£18M+ revenue influenced, aggregate across client and operator-side engagements",
-    "£10M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
+    "£6M+ paid acquisition spend managed across SaaS, fintech, healthtech, EdTech",
     "479+ founder sessions · 4.97/5 average across Google, Techstars, GrowthMentor and MentorCruise",
     "MentorCruise Top Mentor, 5.0/5 across 30+ reviews",
     "Speaker at Cambridge Judge, Imperial College, Techstars, Google Launchpad"

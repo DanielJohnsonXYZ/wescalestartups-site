@@ -659,8 +659,3 @@ No GBP card rendered inside any AI Mode answer this reading — the panel is vol
 - **Prompt 7 absent for the fifth.** `/fractional-cmo-vs-agency` still uncited on its exact query. No third rewrite.
 - **Prompt 8 held by `andrewchen.com` for the fifth.** A publisher, cited because it has data. This is the surface the original research is aimed at.
 - **NEW METRIC NOTE: prompt breadth and cited-URL count diverged for the first time** — prompts citing WSS rose 3 → 4 while URLs fell 8 → 7. **Report both. Neither alone is the metric.**
-
-## 2026-11-02 (run 46) — Perplexity spot checks, Chrome, signed-in (soft)
-- Off-panel "how do you build a B2B SaaS growth system that scales beyond founder-led GTM": WSS absent. Cited: growth (domain truncated in UI), trueadvertize, linkedin, saasfoundersclub, upliftgtm. Baseline for the run-46 founder-led page change (citation review 11-30).
-- Panel #8 "how do I diagnose why our startup's growth has stalled": WSS absent. Cited: revenuecat, winstonfrancois, foundedpartners, andrewchen. andrewchen still holds #8 (sixth reading).
-- Mention 0/2, citation 0/2. Not a full panel; next full panel ~11-12.

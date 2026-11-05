@@ -3,9 +3,9 @@ import StrategicPage from "../components/StrategicPage.astro";
 
 const sections = [
   {
-    title: "The plateau is rarely one channel",
-    body: "Post-PMF plateaus usually show up as noisy activity: more content, another hire, another agency, without a single bottleneck everyone agrees on.",
-    points: ["Pipeline arrives in waves", "CAC unstable or unexplained", "Founder still owns every growth decision", "Reporting shows activity, not decisions"]
+    title: "Diagnose the stall in five checks, in this order",
+    body: "Each check rules something out, so the order matters. Confirm the stall is real, find which part of the number moved first, hear how buyers describe the problem, then test whether more effort helps or hurts. Only then decide what to change.",
+    points: ["1. Same-length windows, one-off deals and seasonality removed", "2. New pipeline, win rate or retention: which moved first", "3. Ten recent sales calls: do buyers describe the problem your way", "4. Would more spend make the weak part better, or louder", "5. Retention falling? Check the product before the marketing"]
   },
   {
     title: "Force a constraint before you fund another quarter",
@@ -21,14 +21,14 @@ const sections = [
 
 const faqs = [
   {
+    question: "How do I diagnose why our startup's growth has stalled?",
+    answer:
+      "Start with data you already hold. Compare the last four to eight weeks with an equal earlier period and strip out one-off deals, seasonality and reporting changes, so you know the stall is real. Then split growth into new qualified pipeline, win rate and retention, and find the one that moved first: that is where the cause sits. Listen to ten recent sales calls and check whether buyers describe the problem the way your website does. Ask whether more spend would make the weak part better or louder; a capacity gap improves with more input, a positioning or conversion problem gets louder. If retention is what fell, growth work will not fix it and the honest next step is product and customer research. If you want an outside read, the Growth Diagnosis at We Scale Startups does this in one week from 90 days of CRM, GA4 and call data, for £2k–£4k."
+  },
+  {
     question: "Is a plateau always a marketing problem?",
     answer:
       "Often it is a system problem: positioning, offer, channel fit, conversion, reporting, or who owns scale/stop/fix. Product and PMF can still be the real block, diagnosis should say so honestly."
-  },
-  {
-    question: "What is the fastest honest check?",
-    answer:
-      "Run the scorecard or quiz, read one case study in your sector, then book the diagnostic when the bottleneck is sharp enough that a conversation saves you a quarter of guessing."
   },
   {
     question: "Do we need more experiments?",
@@ -42,9 +42,9 @@ const faqs = [
   path="/when-growth-plateaus"
   eyebrow="Cornerstone"
   title="When growth plateaus after PMF, fix the system, not the symptom."
-  metaTitle="When growth plateaus after PMF | We Scale Startups"
-  description="A practical read on post-PMF plateaus: naming the real constraint, sequencing work, and choosing the right engagement shape."
-  lede="Plateaus look like channel problems. They are usually decision, evidence, or ownership problems wearing channel clothes."
+  metaTitle="Why growth stalls after PMF, and how to diagnose it | We Scale Startups"
+  description="How to diagnose a post-PMF growth stall in five checks: confirm it, find what moved first, hear buyers, test spend, rule out product."
+  lede="To diagnose a stall, confirm it against an equal earlier period, split growth into new pipeline, win rate and retention, and find which moved first. Plateaus look like channel problems; more often they are decision, evidence or ownership problems wearing channel clothes."
   sections={sections}
   faqs={faqs}
 />

@@ -52,6 +52,7 @@ export const GET: APIRoute = async () => {
     ...new Set([
       "/",
       "/start-here",
+      "/studio",
       "/solo",
       "/services",
       "/proof",

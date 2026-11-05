@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 840" role="img" aria-labelledby="t d">
+<title id="t">Focus workspace concept illustration</title><desc id="d">A sample task list and projects shown in a clean, violet-accented workspace. Illustrative preview, not a screenshot.</desc>
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b1833"/><stop offset="1" stop-color="#4031a0"/></linearGradient><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a18cff"/><stop offset="1" stop-color="#e4ddff"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#080712" flood-opacity=".3"/></filter></defs>
+<rect width="1280" height="840" fill="url(#b)"/><circle cx="1120" cy="50" r="310" fill="#917aff" opacity=".2"/><circle cx="40" cy="830" r="340" fill="#a58fff" opacity=".15"/>
+<g filter="url(#shadow)"><rect x="115" y="104" width="1050" height="660" rx="28" fill="#f8f8fd"/><path d="M143 104h229v660H143q-28 0-28-28V132q0-28 28-28" fill="#eeedfa"/>
+<rect x="146" y="145" width="51" height="51" rx="15" fill="#6652e5"/><text x="169" y="180" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="white" text-anchor="middle">f.</text>
+<text x="213" y="178" font-family="Arial, sans-serif" font-weight="700" font-size="28" fill="#1b1930">Focus</text>
+<rect x="137" y="246" width="210" height="55" rx="13" fill="#ded8fc"/><circle cx="169" cy="274" r="10" fill="#6652e5"/><text x="195" y="283" font-family="Arial, sans-serif" font-weight="700" font-size="22" fill="#4634b0">Today</text>
+<text x="165" y="350" font-family="Arial, sans-serif" font-size="22" fill="#656179">Projects</text><text x="165" y="410" font-family="Arial, sans-serif" font-size="22" fill="#656179">All tasks</text><text x="165" y="470" font-family="Arial, sans-serif" font-size="22" fill="#656179">Notes</text>
+<text x="426" y="182" font-family="Arial, sans-serif" font-size="20" letter-spacing="2" font-weight="700" fill="#6555d8">MY WORKSPACE</text>
+<text x="426" y="251" font-family="Arial, sans-serif" font-size="45" font-weight="700" fill="#191725">Your work, clearly.</text>
+<text x="426" y="296" font-family="Arial, sans-serif" font-size="22" fill="#777388">A simple view of what matters next.</text>
+<rect x="422" y="344" width="665" height="84" rx="16" fill="white" stroke="#e3e2ed" stroke-width="2"/><rect x="451" y="373" width="28" height="28" rx="8" fill="#6c53ef"/><path d="m457 386 6 6 10-12" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="504" y="397" font-family="Arial, sans-serif" font-size="23" fill="#4a4858">Set priorities for the week</text>
+<rect x="422" y="448" width="665" height="84" rx="16" fill="white" stroke="#e3e2ed" stroke-width="2"/><rect x="451" y="477" width="28" height="28" rx="8" fill="white" stroke="#b8b1d9" stroke-width="2"/><text x="504" y="501" font-family="Arial, sans-serif" font-size="23" fill="#272633">Review project roadmap</text>
+<rect x="422" y="552" width="665" height="84" rx="16" fill="white" stroke="#e3e2ed" stroke-width="2"/><rect x="451" y="581" width="28" height="28" rx="8" fill="white" stroke="#b8b1d9" stroke-width="2"/><text x="504" y="606" font-family="Arial, sans-serif" font-size="23" fill="#272633">Plan the next experiment</text>
+<rect x="422" y="669" width="178" height="40" rx="20" fill="#e3dfff"/><text x="511" y="696" font-family="Arial, sans-serif" font-size="17" fill="#5846bc" text-anchor="middle" font-weight="bold">STAY FOCUSED</text></g>
+</svg>

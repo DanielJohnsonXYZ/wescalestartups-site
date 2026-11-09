@@ -34,109 +34,180 @@ const faqs = [
   <main class="ws-solo">
     <header class="ws-nav">
       <div class="ws-wrap ws-nav-inner">
-        <a class="ws-logo" href="/" aria-label="We Scale Startups home"><span class="ws-logo-mark">WSS<span>✳</span></span><span>WE SCALE STARTUPS <em>/ SOLO</em></span></a>
-        <nav aria-label="WSS Solo" class="ws-nav-links"><a href="#approach">The approach</a><a href="#fit">Who it's for</a><a class="ws-nav-cta" href="#apply">Apply <span aria-hidden="true">↗</span></a></nav>
+        <a href="/" class="ws-brand" aria-label="We Scale Startups home"><strong>WSS</strong><span aria-hidden="true">/</span><span>SOLO</span></a>
+        <nav class="ws-nav-links" aria-label="WSS Solo navigation">
+          <a href="#challenge">The challenge</a><a href="#how">How it works</a><a href="#fit">Who it's for</a>
+          <a href="#apply" class="ws-nav-cta">Help shape the cohort <span aria-hidden="true">↗</span></a>
+        </nav>
       </div>
     </header>
 
     <section class="ws-hero" aria-labelledby="ws-title">
+      <div class="ws-hero-planet" aria-hidden="true"></div>
       <div class="ws-wrap ws-hero-grid">
-        <div>
-          <p class="ws-eyebrow"><span class="ws-live-dot"></span> WSS SOLO / FOUNDING COHORT</p>
-          <h1 id="ws-title">Built something <em>with AI.</em><br />Now what<span class="ws-question">?</span></h1>
-          <p class="ws-lead">WSS Solo helps founders turn AI-powered products into businesses people actually pay for.</p>
-          <p class="ws-hero-text">Find the right customers, test demand and work out how to grow.</p>
-          <div class="ws-hero-actions"><a class="ws-btn ws-btn-lime" href="#apply">Apply for the founding cohort <span aria-hidden="true">↗</span></a><a class="ws-btn ws-btn-outline" href="#approach">Explore the approach ↓</a></div>
-          <p class="ws-caption ws-hero-caption">Founding cohort. Dates and pricing to be confirmed.</p>
+        <div class="ws-hero-copy">
+          <p class="ws-eyebrow">THE AI-NATIVE ACCELERATOR FOR SOLO FOUNDERS</p>
+          <h1 id="ws-title">You built it.<br />Now <em>find buyers.</em></h1>
+          <p class="ws-hero-lead">A focused accelerator for solo founders building with AI, turning products into customers.</p>
+          <div class="ws-hero-actions">
+            <a class="ws-btn ws-btn-lime" href="#apply">Help shape the first cohort <span aria-hidden="true">↗</span></a>
+            <a class="ws-btn ws-btn-outline" href="#how">See how it works <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="ws-hero-note">Proposed 4-week pilot <span aria-hidden="true">·</span> No equity <span aria-hidden="true">·</span> No commitment</p>
         </div>
-        <aside class="ws-hero-art" aria-label="From product to a business">
-          <span class="ws-art-top">WSS / SOLO</span>
-          <div class="ws-art-orbit"><span class="ws-art-spark">✳</span><span class="ws-art-ring ws-art-ring-one"></span><span class="ws-art-ring ws-art-ring-two"></span></div>
-          <div class="ws-art-bottom"><strong>Build it.</strong><strong>Find buyers.</strong><strong>Keep going.</strong></div>
-          <span class="ws-art-corner">01 / 05</span>
-        </aside>
+        <div class="ws-visual" role="img" aria-label="A founder's AI product connects through customer conversations to paying customers">
+          <div class="ws-visual-labels"><span>PRODUCT</span><span>CONVERSATIONS</span><span>CUSTOMERS</span></div>
+          <svg class="ws-flow-art" viewBox="0 0 720 375" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="wsBeam" x1="0" x2="1"><stop offset="0%" stop-color="#A96AFF"/><stop offset="50%" stop-color="#EAC4FF"/><stop offset="100%" stop-color="#D7FF59"/></linearGradient>
+              <linearGradient id="wsCard" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8151ED" stop-opacity=".92"/><stop offset="100%" stop-color="#211338" stop-opacity=".94"/></linearGradient>
+              <linearGradient id="wsLimeCard" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#E8FF85"/><stop offset="100%" stop-color="#83A632"/></linearGradient>
+              <radialGradient id="wsHalo"><stop offset="0" stop-color="#9B52FF" stop-opacity=".55"/><stop offset="1" stop-color="#9B52FF" stop-opacity="0"/></radialGradient>
+              <filter id="wsGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="wsSoft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="17"/></filter>
+            </defs>
+            <ellipse cx="348" cy="226" rx="315" ry="143" fill="url(#wsHalo)"/>
+            <g opacity=".34" stroke="#664393" stroke-width="1"><path d="M18 356H707M66 328H658M118 306H614M150 284H582M182 262H551M210 244H523"/><path d="M361 220L10 375M361 220L133 375M361 220L252 375M361 220L470 375M361 220L594 375M361 220L714 375"/></g>
+            <g opacity=".65" fill="none" stroke="#CC76FF" stroke-width="1.4"><ellipse cx="365" cy="178" rx="122" ry="122" stroke-dasharray="3 8"/><ellipse cx="365" cy="178" rx="152" ry="91" transform="rotate(-17 365 178)"/></g>
+            <g class="ws-beams" fill="none" stroke-linecap="round"><path d="M190 171C262 122 290 126 355 167S485 237 558 173" stroke="#995DFF" stroke-width="22" opacity=".27" filter="url(#wsSoft)"/><path d="M188 171C265 138 286 164 360 168S479 199 555 176" stroke="url(#wsBeam)" stroke-width="5" filter="url(#wsGlow)"/><path d="M196 179C263 231 309 226 359 196S490 136 555 170" stroke="#AA73FF" stroke-width="2.4" opacity=".84"/><path d="M196 160C267 105 298 110 366 146S474 218 555 182" stroke="#D9B8FF" stroke-width="1.8" opacity=".65"/></g>
+            <g transform="translate(22 73)">
+              <rect x="7" y="32" width="176" height="170" rx="16" fill="#6337C3" opacity=".35" stroke="#A87EFF" transform="rotate(-8 90 116)"/>
+              <rect x="20" y="17" width="172" height="166" rx="15" fill="url(#wsCard)" stroke="#C69CFF" stroke-width="2" transform="rotate(7 100 100)"/>
+              <rect x="0" y="0" width="176" height="162" rx="16" fill="url(#wsCard)" stroke="#D3A7FF" stroke-width="2.3"/>
+              <rect x="0" y="0" width="176" height="32" rx="16" fill="#A675F1" opacity=".4"/>
+              <circle cx="20" cy="17" r="4" fill="#E9D8FF"/><circle cx="34" cy="17" r="4" fill="#E9D8FF"/><circle cx="48" cy="17" r="4" fill="#E9D8FF"/>
+              <rect x="23" y="49" width="131" height="76" rx="10" fill="#421D7C" stroke="#D3AEFF" opacity=".92"/>
+              <path d="M33 107L67 75L89 91L116 63L147 110Z" fill="#B9A3FF" opacity=".75"/>
+              <rect x="50" y="134" width="78" height="25" rx="7" fill="#2B1E4E" stroke="#CFAAFF"/>
+              <text x="89" y="151" font-family="monospace" font-weight="700" font-size="19" fill="#EADEFF" text-anchor="middle">&lt;/&gt;</text>
+            </g>
+            <g class="ws-dots" fill="#DFFF6C" filter="url(#wsGlow)"><circle cx="246" cy="164" r="5"/><circle cx="308" cy="104" r="6"/><circle cx="365" cy="199" r="4"/><circle cx="454" cy="179" r="6"/><circle cx="530" cy="177" r="5"/></g>
+            <g>
+              <circle cx="331" cy="121" r="25" fill="#2A194B" stroke="#B99BFF" stroke-width="2"/><circle cx="331" cy="114" r="7" fill="#DBCAFF"/><path d="M316 136Q331 119 346 136Z" fill="#DBCAFF"/>
+              <rect x="372" y="112" width="93" height="46" rx="16" fill="#7E50E3" stroke="#C4A4FF" stroke-width="2"/><path d="M388 155L383 167L406 156" fill="#7E50E3" stroke="#C4A4FF"/><circle cx="397" cy="135" r="4" fill="white"/><circle cx="418" cy="135" r="4" fill="white"/><circle cx="439" cy="135" r="4" fill="white"/>
+              <circle cx="333" cy="243" r="24" fill="#2A194B" stroke="#B99BFF" stroke-width="2"/><circle cx="333" cy="237" r="7" fill="#DBCAFF"/><path d="M319 258Q333 241 347 258Z" fill="#DBCAFF"/>
+              <rect x="373" y="224" width="82" height="43" rx="14" fill="#8350DF" stroke="#C4A4FF" stroke-width="2"/><circle cx="395" cy="245" r="4" fill="white"/><circle cx="415" cy="245" r="4" fill="white"/><circle cx="435" cy="245" r="4" fill="white"/>
+            </g>
+            <g transform="translate(559 72)" fill="url(#wsLimeCard)" stroke="#DBFF6E" stroke-width="1.6" filter="url(#wsGlow)">
+              <rect x="0" y="0" width="58" height="62" rx="8"/><rect x="72" y="0" width="58" height="62" rx="8"/>
+              <rect x="0" y="76" width="58" height="62" rx="8"/><rect x="72" y="76" width="58" height="62" rx="8"/>
+              <rect x="0" y="152" width="58" height="62" rx="8"/><rect x="72" y="152" width="58" height="62" rx="8"/>
+            </g>
+            <g transform="translate(559 72)" fill="#597324">
+              <circle cx="29" cy="24" r="10"/><path d="M10 49Q29 25 48 49Z"/><circle cx="101" cy="24" r="10"/><path d="M82 49Q101 25 120 49Z"/>
+              <circle cx="29" cy="100" r="10"/><path d="M10 125Q29 101 48 125Z"/><circle cx="101" cy="100" r="10"/><path d="M82 125Q101 101 120 125Z"/>
+              <circle cx="29" cy="176" r="10"/><path d="M10 201Q29 177 48 201Z"/><circle cx="101" cy="176" r="10"/><path d="M82 201Q101 177 120 201Z"/>
+            </g>
+          </svg>
+        </div>
       </div>
-      <div class="ws-marquee" aria-hidden="true">MAKE SOMETHING <b>✳</b> FIND THE CUSTOMER <b>✳</b> TEST REAL DEMAND <b>✳</b> KEEP BUILDING <b>✳</b></div>
     </section>
 
-    <section class="ws-section ws-intro">
-      <div class="ws-wrap ws-intro-grid">
-        <p class="ws-section-label">01 / THE QUESTION</p>
-        <div><h2>You built the product.<br /><em>Who is buying it?</em></h2><p>We help you find out who needs your product, what they would pay for and how to reach them.</p></div>
+    <section class="ws-proof" id="proof" aria-label="Experience behind WSS Solo">
+      <div class="ws-wrap ws-proof-inner">
+        <span class="ws-proof-kicker">FROM THE TEAM AT WE SCALE STARTUPS</span>
+        <p><strong>£18M+</strong> revenue influenced through previous WSS work</p>
+        <small>WSS Solo is new.<br />No cohort results yet.</small>
       </div>
     </section>
 
-    <section class="ws-section ws-approach" id="approach">
+    <section class="ws-section ws-challenge" id="challenge">
       <div class="ws-wrap">
-        <div class="ws-heading"><p class="ws-section-label">02 / THE APPROACH</p><h2>From product to<br /><em>paying customers.</em></h2><p>Five steps to test demand, build what buyers want and start selling.</p></div>
-        <div class="ws-step-area">
-          <div class="ws-step-list" role="tablist" aria-label="Five steps of the approach">
-            {steps.map((step,i)=>(
-              <button class="ws-step" type="button" role="tab" id={`ws-tab-${i}`} aria-controls="ws-step-panel" aria-selected={i===0 ? "true":"false"} data-step={i}>
-                <span class="ws-step-num">{String(i+1).padStart(2,"0")}</span><span>{step.title}</span><span class="ws-step-arrow" aria-hidden="true">↗</span>
-              </button>
-            ))}
-          </div>
-          <div class="ws-step-detail" id="ws-step-panel" role="tabpanel" aria-labelledby="ws-tab-0" tabindex="0">
-            <span class="ws-detail-icon" id="ws-detail-icon">◎</span><p class="ws-detail-small">FOCUS / <span id="ws-detail-number">01</span></p>
-            <h3 id="ws-detail-title">Find the problem</h3>
-            <p id="ws-detail-copy">Get specific about who you want to serve, what is frustrating them and how they solve it today. Talk to real people instead of guessing from a prompt.</p>
-            <div class="ws-detail-outcome"><span>WHAT YOU ARE WORKING TOWARDS</span><strong id="ws-detail-outcome">A customer problem worth testing</strong></div>
-          </div>
+        <h2>Shipping is easy.<br />Selling is the <em>hard part.</em></h2>
+        <div class="ws-problem-grid">
+          <article class="ws-problem-card">
+            <div class="ws-problem-icon" aria-hidden="true">
+              <svg viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="31" stroke="#D7C1FA" stroke-width="6"/><circle cx="45" cy="45" r="20" stroke="#BA8BFF" stroke-width="6"/><circle cx="45" cy="45" r="8" fill="#6D30D0"/><path d="M45 45L75 15" stroke="#11121B" stroke-width="5" stroke-linecap="round"/><path d="M68 8L82 5L81 20Z" fill="#CFFF4B"/></svg>
+            </div>
+            <div><h3>No clear buyer</h3><p>Useful product. Unclear customer.</p></div>
+          </article>
+          <article class="ws-problem-card">
+            <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90"><path d="M15 36L45 18L75 36L45 54Z" fill="#A568F1"/><path d="M15 47L45 65L75 47" fill="none" stroke="#DBFF64" stroke-width="10" stroke-linejoin="round"/><path d="M15 59L45 77L75 59" fill="none" stroke="#5D35AB" stroke-width="10" stroke-linejoin="round"/></svg></div>
+            <div><h3>No reliable channel</h3><p>No repeatable way to find customers.</p></div>
+          </article>
+          <article class="ws-problem-card">
+            <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90"><path d="M50 8L22 49H44L36 82L70 36H48Z" fill="#CFFF4B"/><circle cx="45" cy="45" r="40" stroke="#BE92FD" stroke-width="2" stroke-dasharray="3 11"/></svg></div>
+            <div><h3>No time to waste</h3><p>You need focus, not fluff.</p></div>
+          </article>
         </div>
-        <script type="application/json" id="ws-step-data" set:html={JSON.stringify(steps)} />
+      </div>
+    </section>
+
+    <section class="ws-section ws-method" id="how">
+      <div class="ws-wrap">
+        <div class="ws-method-heading">
+          <h2>A working growth system,<br /><em>not another course.</em></h2>
+          <p>A proposed four-week sprint, designed to turn guesses into customer conversations and evidence.</p>
+        </div>
+        <div class="ws-method-grid">
+          <article class="ws-method-card"><span class="ws-method-step">01</span><span class="ws-method-icon" aria-hidden="true">♣</span><h3>Understand<br />buyers</h3><p>Clarify customer, problem and offer.</p></article>
+          <article class="ws-method-card"><span class="ws-method-step">02</span><span class="ws-method-icon" aria-hidden="true">⚑</span><h3>Find your<br />channel</h3><p>Run one acquisition experiment.</p></article>
+          <article class="ws-method-card"><span class="ws-method-step">03</span><span class="ws-method-icon" aria-hidden="true">▱</span><h3>Build your<br />workflow</h3><p>Use AI to save time and execute.</p></article>
+          <article class="ws-method-card"><span class="ws-method-step">04</span><span class="ws-method-icon" aria-hidden="true">▥</span><h3>Follow the<br />evidence</h3><p>Keep what works. Drop what doesn't.</p></article>
+        </div>
+        <div class="ws-method-footnote">A proposed pilot, the format will be shaped by founder feedback.</div>
       </div>
     </section>
 
     <section class="ws-section ws-fit" id="fit">
       <div class="ws-wrap ws-fit-grid">
-        <div><p class="ws-section-label">03 / WHO IT'S FOR</p><h2>For founders<br /><em>building with AI.</em></h2><p>You've used AI to get something off the ground. Now you want to find out whether people need it and how to reach them.</p><a class="ws-link" href="#apply">Tell us about your product ↗</a></div>
-        <div class="ws-deliverables"><p>WHAT YOU WILL WORK ON</p><div><span>✳</span>A specific customer problem</div><div><span>♧</span>Proof people will pay</div><div><span>↗</span>A way to reach buyers</div><div><span>▱</span>A sales process you can repeat</div></div>
+        <div class="ws-fit-art" aria-hidden="true"><div class="ws-fit-window ws-fit-window-back"></div><div class="ws-fit-window ws-fit-window-front"><div class="ws-window-dots"><i></i><i></i><i></i></div><div class="ws-window-bars"><span></span><span></span><span></span><span></span></div><div class="ws-window-pointer">➤</div></div></div>
+        <h2>Built something?<br /><em>This is for you.</em></h2>
+        <ul class="ws-fit-list">
+          <li>Solo founder or very small team</li>
+          <li>AI-built or AI-enabled product</li>
+          <li>Early in your customer journey</li>
+          <li>Ready to test and take action</li>
+        </ul>
       </div>
     </section>
 
-    <section class="ws-section ws-proof">
-      <div class="ws-wrap">
-        <p class="ws-section-label">04 / THE EXPERIENCE BEHIND IT</p><h2>We've helped founders <em>find customers.</em></h2>
-        <div class="ws-proof-grid"><div><strong>£18M+</strong><span>Revenue influenced</span></div><div><strong>479+</strong><span>Founder sessions</span></div><div><strong>4.97/5</strong><span>Mentor rating</span></div></div>
-        <p class="ws-proof-note">These figures come from previous We Scale Startups work. The first Solo cohort has not run yet.</p>
+    <section class="ws-callout">
+      <div class="ws-wrap ws-callout-inner">
+        <h2>Help shape the<br />first cohort.</h2>
+        <div class="ws-callout-action"><a href="#apply" class="ws-btn ws-btn-dark">Share what you're building <span aria-hidden="true">↗</span></a><p>No commitment. Just honest feedback.</p></div>
       </div>
     </section>
 
     <section class="ws-section ws-application" id="apply">
       <div class="ws-wrap ws-application-grid">
-        <div><p class="ws-section-label">05 / JOIN THE FOUNDING COHORT</p><h2>Tell us what<br /><em>you're building.</em></h2><p>We're collecting applications for the first cohort. We'll share dates, format and pricing before you commit.</p><div class="ws-apply-aside"><span>✳</span><div><strong>Early applications are open</strong><small>No payment or commitment required.</small></div></div></div>
+        <div class="ws-form-intro">
+          <p class="ws-eyebrow-dark">THE FOUNDING COHORT</p>
+          <h2>Tell us what<br /><em>you’re building.</em></h2>
+          <p>We're collecting early interest and feedback. Dates and pricing aren't confirmed, nothing to pay or commit to.</p>
+          <div class="ws-form-tag"><span aria-hidden="true">✳</span> First cohort, currently taking expressions of interest</div>
+        </div>
         <div class="ws-form-wrap">
           <form id="ws-solo-application" novalidate>
-            <label>Your name <input name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name" /></label>
-            <label>Email address <input name="email" type="email" autocomplete="email" required maxlength="320" placeholder="you@company.com" /></label>
-            <label>What are you building? <textarea name="product" required maxlength="1500" rows="3" placeholder="A few lines about your product or idea"></textarea></label>
+            <div class="ws-form-duo">
+              <label>Your name <input name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name" /></label>
+              <label>Email <input name="email" type="email" autocomplete="email" required maxlength="320" placeholder="you@startup.com" /></label>
+            </div>
+            <label>What have you built? <textarea name="product" required maxlength="1500" rows="2" placeholder="A sentence or two is fine"></textarea></label>
             <label>Where are you now?
-              <select name="stage" required><option value="">Select your stage</option><option>Exploring an idea</option><option>Building a prototype or MVP</option><option>Launched, looking for first customers</option><option>Already have some customers</option></select>
+              <select name="stage" required><option value="">Choose your stage</option><option>Exploring an idea</option><option>Building a prototype or MVP</option><option>Launched, looking for first customers</option><option>Already have some customers</option></select>
             </label>
-            <label>What's your biggest challenge? <textarea name="challenge" required maxlength="1500" rows="3" placeholder="What are you trying to figure out?"></textarea></label>
-            <label>Anything else we should know? <span class="ws-optional">Optional</span><textarea name="notes" maxlength="1500" rows="2" placeholder="What would make this useful for you?"></textarea></label>
-            <button class="ws-btn ws-btn-purple ws-submit" type="submit">Review my application <span aria-hidden="true">↗</span></button>
-            <p class="ws-form-info">Nothing is submitted automatically. You'll review and send the email yourself.</p>
-            <p class="ws-form-info">Please don't include sensitive information. <a href="/privacy">Privacy policy</a>.</p>
+            <label>What's your biggest challenge? <textarea name="challenge" required maxlength="1500" rows="2" placeholder="What's getting in the way?"></textarea></label>
+            <label>Anything else? <span class="ws-optional">Optional</span><textarea name="notes" maxlength="1500" rows="2" placeholder="What would make this useful?"></textarea></label>
+            <button class="ws-btn ws-btn-purple ws-submit" type="submit">Review your message <span aria-hidden="true">↗</span></button>
+            <p class="ws-form-info">You'll review and send an email, nothing is submitted automatically.</p>
+            <p class="ws-form-info">Please avoid sensitive details. <a href="/privacy">Privacy policy</a>.</p>
             <p class="ws-form-message" id="ws-form-message" role="status" aria-live="polite"></p>
           </form>
           <div id="ws-review" class="ws-review" hidden>
-            <p class="ws-section-label">REVIEW YOUR EMAIL</p><h3>Ready to send?</h3><p>Check the details below. When you're happy, open the draft in your email app and send it.</p>
+            <p class="ws-eyebrow-dark">REVIEW YOUR MESSAGE</p>
+            <h3>Ready to send?</h3>
+            <p>Check your details, then open the email draft in your email app.</p>
             <div class="ws-review-details"><p><strong>To:</strong> daniel@wescalestartups.com</p><p><strong>Subject:</strong> WSS Solo founding cohort application</p><pre id="ws-review-text"></pre></div>
             <a id="ws-review-send" class="ws-btn ws-btn-purple ws-submit" href="mailto:daniel@wescalestartups.com">Open email draft ↗</a>
-            <div class="ws-review-actions"><button id="ws-copy-email" class="ws-small-btn" type="button">Copy email details</button><button id="ws-edit-application" class="ws-small-btn" type="button">Edit my answers</button></div>
+            <div class="ws-review-actions"><button id="ws-copy-email" class="ws-small-btn" type="button">Copy email details</button><button id="ws-edit-application" class="ws-small-btn" type="button">Edit answers</button></div>
             <p id="ws-copy-status" role="status" aria-live="polite"></p>
-            <p class="ws-form-info">If your email app doesn't open, copy the details and email them to <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>.</p>
+            <p class="ws-form-info">If your email app doesn't open, copy and send the message to <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="ws-section ws-faq">
-      <div class="ws-wrap ws-faq-grid"><div><p class="ws-section-label">06 / GOOD QUESTIONS</p><h2>Before you <em>apply.</em></h2></div><div class="ws-faq-list">{faqs.map((item)=>(<details><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>))}</div></div>
-    </section>
-    <div class="ws-end"><div class="ws-wrap"><p>BUILT SOMETHING? MAKE IT A BUSINESS.</p><a href="#apply">Apply for the founding cohort ↗</a></div></div>
+    <footer class="ws-bottom"><div class="ws-wrap"><a href="/" aria-label="We Scale Startups homepage">WSS <span>/</span> SOLO</a><span>A new programme from We Scale Startups.</span></div></footer>
   </main>
   <script is:inline>
     (() => {
@@ -209,20 +280,89 @@ const faqs = [
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap');
-  .ws-solo{--night:#11121b;--night2:#191824;--ink:#13121d;--paper:#f9f7f2;--paper2:#f5f2ec;--purple:#603cff;--purple2:#a489ff;--lime:#d5ff58;--rule:#dcd8d3;--muted:#625f68;color:var(--ink);font-family:'DM Sans',Arial,sans-serif;overflow:hidden}
-  .ws-solo *{box-sizing:border-box}.ws-solo a{text-underline-offset:4px}.ws-wrap{width:min(1170px,calc(100% - 3rem));margin-inline:auto}
-  .ws-nav{background:var(--night);border-bottom:1px solid #ffffff24;color:white}.ws-nav-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;min-height:77px}
-  .ws-logo{display:flex;align-items:center;gap:1rem;color:#f8f7fa;text-decoration:none;font-size:.72rem;letter-spacing:.12em;font-weight:800}
-  .ws-logo-mark{font-size:1.1rem;letter-spacing:-.09em;color:var(--lime);font-weight:800}.ws-logo-mark span{font-size:1rem;margin-left:.2rem}.ws-logo em{font-style:normal;color:#bbaaff}.ws-nav-links{display:flex;align-items:center;gap:2rem}.ws-nav-links a{color:#e0dce8;text-decoration:none;font-size:.88rem;font-weight:600}.ws-nav-links a:hover{color:white}
-  .ws-nav-links .ws-nav-cta{padding:.7rem 1.05rem;border-radius:40px;background:var(--lime);color:var(--ink);font-weight:800}.ws-nav-cta span{margin-left:.4rem}
-  .ws-hero{background:radial-gradient(ellipse at 76% 30%,#35276088,transparent 42%),var(--night);color:white;padding-top:clamp(5rem,9vw,9rem)}.ws-hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(2rem,6vw,6rem);align-items:center;padding-bottom:clamp(5rem,8vw,8rem)}.ws-eyebrow,.ws-section-label{font-size:.78rem;letter-spacing:.14em;font-weight:800;text-transform:uppercase}.ws-eyebrow{display:flex;align-items:center;gap:.7rem;color:var(--lime);margin:0 0 2rem}.ws-live-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px #d5ff581e}
-  .ws-solo h1,.ws-solo h2,.ws-solo h3{letter-spacing:-.045em}.ws-hero h1{font-size:clamp(3.8rem,6.5vw,7.3rem);line-height:1.03;margin:0 0 1.9rem;font-weight:700;max-width:12ch}.ws-hero h1 em,.ws-solo h2 em{font-family:'Fraunces',Georgia,serif;font-weight:400}.ws-hero h1 em{color:#bbaaff}.ws-question{color:var(--lime)}.ws-lead{font-size:clamp(1.2rem,2.2vw,1.48rem);font-weight:700;line-height:1.45;max-width:33ch;margin:0 0 1rem}.ws-hero-text{font-size:1.02rem;color:#cecad5;line-height:1.8;max-width:50ch}.ws-hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}.ws-btn{display:inline-flex;align-items:center;justify-content:center;gap:1.25rem;border:1px solid transparent;padding:1rem 1.3rem;min-height:52px;border-radius:10px;font-family:inherit;font-size:.91rem;font-weight:800;text-decoration:none;cursor:pointer;transition:transform .18s ease}.ws-btn:hover{transform:translateY(-2px)}.ws-btn-lime{background:var(--lime);color:var(--ink)}.ws-btn-outline{background:transparent;border-color:#ffffff55;color:white}.ws-btn-purple{background:var(--purple);color:white}.ws-caption{font-size:.8rem;color:#a9a5b3}.ws-hero-caption{margin:1.2rem 0 0}
-  .ws-hero-art{position:relative;min-height:490px;border:1px solid #6c567a66;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 53% 48%,#643cff5c,transparent 34%),linear-gradient(135deg,#2d2546,#151522 78%);box-shadow:0 35px 100px #0005}.ws-art-top{position:absolute;top:2rem;left:2rem;color:#d3c4fc;font-size:.72rem;letter-spacing:.2em;font-weight:800}.ws-art-orbit{position:absolute;inset:22% 5% 23%;display:grid;place-items:center}.ws-art-spark{font-size:clamp(8rem,19vw,16rem);color:var(--lime);line-height:1;text-shadow:0 0 60px #c7ff4c55;z-index:1}.ws-art-ring{position:absolute;width:80%;aspect-ratio:1;border:1px solid #b397ff77;border-radius:50%;transform:rotate(-25deg) scaleY(.58)}.ws-art-ring-two{width:95%;transform:rotate(35deg) scaleY(.5)}.ws-art-bottom{position:absolute;bottom:2.3rem;left:2rem;display:grid;gap:.15rem;font-size:1.05rem}.ws-art-bottom strong:nth-child(2){color:var(--lime)}.ws-art-corner{position:absolute;bottom:2rem;right:2rem;color:#c6c0d2;font-size:.72rem;letter-spacing:.18em}.ws-marquee{display:flex;align-items:center;justify-content:center;gap:clamp(1rem,3vw,4rem);background:var(--lime);color:var(--ink);padding:1rem;font-size:.77rem;letter-spacing:.09em;font-weight:800;white-space:nowrap;overflow:hidden}.ws-marquee b{font-size:1.2rem}
-  .ws-section{padding:clamp(4rem,7vw,7rem) 0}.ws-section-label{color:var(--purple);margin:0 0 1.5rem}.ws-solo h2{font-size:clamp(2.9rem,5vw,5.2rem);line-height:1.1;margin:0 0 1.5rem;font-weight:700}.ws-solo h2 em{color:var(--purple)}.ws-section p:not(.ws-section-label):not(.ws-proof-note){font-size:1.03rem;line-height:1.8}.ws-intro{background:var(--paper)}.ws-intro-grid{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start}.ws-intro-grid p:last-child{max-width:43ch;color:var(--muted)}
-  .ws-approach{background:var(--paper2)}.ws-heading{max-width:760px;margin-bottom:3rem}.ws-heading>p:last-child{color:var(--muted)}.ws-step-area{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:19px;overflow:hidden;background:#fff}.ws-step-list{display:grid}.ws-step{border:0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:1rem;background:#fff;text-align:left;padding:1.7rem 1.7rem;font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;font-family:inherit;color:var(--ink);cursor:pointer}.ws-step:last-child{border-bottom:0}.ws-step:hover,.ws-step[aria-selected=true]{background:var(--night);color:white}.ws-step[aria-selected=true] .ws-step-num{color:var(--lime)}.ws-step-num{color:var(--purple);font-size:.85rem}.ws-step-arrow{text-align:right}.ws-step-detail{background:var(--night);color:white;padding:clamp(2rem,4vw,4rem);display:flex;flex-direction:column;justify-content:center;min-height:460px}.ws-detail-icon{font-size:5.5rem;line-height:1;color:var(--lime)}.ws-detail-small{font-size:.73rem!important;letter-spacing:.18em;color:#b3a9c7;margin-top:2rem}.ws-step-detail h3{font-family:'Fraunces',Georgia,serif;font-size:clamp(2rem,3.3vw,3.3rem);margin:.5rem 0 1.2rem;font-weight:400}.ws-step-detail>p:not(.ws-detail-small){color:#d1cbd9;line-height:1.8;max-width:45ch}.ws-detail-outcome{margin-top:2.2rem;border-top:1px solid #ffffff35;padding-top:1.3rem;display:grid;gap:.5rem}.ws-detail-outcome span{font-size:.65rem;letter-spacing:.15em;color:#b9aed2}.ws-detail-outcome strong{font-size:1rem;color:var(--lime)}
-  .ws-fit{background:#fff}.ws-fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,7vw,8rem);align-items:center}.ws-fit-grid>div>p:not(.ws-section-label){color:var(--muted)}.ws-link{display:inline-block;font-weight:800;color:var(--purple);margin-top:1rem}.ws-deliverables{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:clamp(1.5rem,4vw,3rem)}.ws-deliverables>p{font-size:.77rem!important;letter-spacing:.11em;font-weight:800;color:var(--purple);margin:0 0 1rem}.ws-deliverables>div{display:flex;gap:1.1rem;align-items:center;padding:1.3rem 0;border-bottom:1px solid var(--rule);font-weight:750;font-size:1.15rem}.ws-deliverables>div:last-child{border:0}.ws-deliverables span{width:40px;height:40px;display:grid;place-items:center;border-radius:9px;background:#e8dfff;color:var(--purple)}
-  .ws-proof{background:var(--night);color:white}.ws-proof .ws-section-label{color:var(--lime)}.ws-proof h2 em{color:#bbaaff}.ws-proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:1px solid #ffffff35;border-bottom:1px solid #ffffff35;padding:2.6rem 0;margin:2.2rem 0 1.3rem}.ws-proof-grid div{display:grid;gap:.4rem}.ws-proof-grid strong{color:var(--lime);font-size:clamp(2.2rem,4vw,4.5rem);letter-spacing:-.055em}.ws-proof-grid span{color:#d2ced9;font-size:.9rem}.ws-proof-note{font-size:.8rem;line-height:1.65;color:#aaa6b1}
-  .ws-application{background:var(--paper)}.ws-application-grid{display:grid;grid-template-columns:.85fr 1.15fr;align-items:start;gap:clamp(2rem,7vw,8rem)}.ws-application-grid>div>p:not(.ws-section-label){max-width:42ch;color:var(--muted)}.ws-apply-aside{display:flex;align-items:center;gap:1.2rem;background:#e5e0d8;border:1px solid var(--rule);border-radius:12px;padding:1.2rem;margin-top:2.2rem;max-width:460px}.ws-apply-aside>span{font-size:2rem;color:var(--purple)}.ws-apply-aside strong,.ws-apply-aside small{display:block}.ws-apply-aside small{margin-top:.2rem;color:var(--muted)}.ws-form-wrap{background:white;border:1px solid var(--rule);border-radius:18px;padding:clamp(1.4rem,3vw,2.5rem);box-shadow:0 25px 70px #13121d10}.ws-form-wrap form{display:grid;gap:1.15rem}.ws-form-wrap label{display:grid;gap:.45rem;font-size:.88rem;font-weight:750}.ws-form-wrap input,.ws-form-wrap textarea,.ws-form-wrap select{width:100%;font:inherit;font-weight:450;line-height:1.5;min-height:48px;background:#fbfaf8;border:1px solid #d2cdd1;border-radius:8px;padding:.8rem 1rem;color:var(--ink)}.ws-form-wrap input:focus,.ws-form-wrap textarea:focus,.ws-form-wrap select:focus{outline:2px solid var(--purple);outline-offset:1px}.ws-optional{font-weight:400;color:var(--muted);font-size:.8rem}.ws-submit{width:100%;margin-top:.3rem}.ws-form-info{font-size:.78rem!important;line-height:1.5!important;color:var(--muted);margin:.1rem 0!important}.ws-form-info a{color:var(--purple)}.ws-form-message{font-size:.8rem!important;color:#b22338}.ws-review{scroll-margin-top:3rem}.ws-review h3{font-size:2rem;margin:0 0 1rem}.ws-review>p:not(.ws-section-label){color:var(--muted)}.ws-review-details{border:1px solid var(--rule);border-radius:10px;background:#f9f7f2;padding:1.3rem;margin:1.5rem 0}.ws-review-details p{font-size:.83rem!important;margin:0 0 .4rem!important}.ws-review-details pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:.85rem;line-height:1.6;margin:1.2rem 0 0}.ws-review-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}.ws-small-btn{border:1px solid #cac1d4;background:white;border-radius:8px;padding:.7rem 1rem;font-family:inherit;font-weight:700;cursor:pointer}.ws-review[hidden],.ws-form-wrap form[hidden]{display:none}
-  .ws-faq{background:var(--paper2)}.ws-faq-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:4rem}.ws-faq-list details{border-top:1px solid var(--rule)}.ws-faq-list details:last-child{border-bottom:1px solid var(--rule)}.ws-faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.3rem 0;font-size:1.05rem;font-weight:800;cursor:pointer;list-style:none}.ws-faq-list summary::-webkit-details-marker{display:none}.ws-faq-list details[open] summary span{transform:rotate(45deg)}.ws-faq-list summary span{color:var(--purple);font-size:1.5rem;transition:transform .2s}.ws-faq-list details p{font-size:.95rem!important;color:var(--muted);max-width:60ch;margin:0 0 1.3rem}.ws-end{background:var(--lime);padding:1.25rem 0}.ws-end .ws-wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}.ws-end p{margin:0;font-size:.83rem;letter-spacing:.08em;font-weight:800}.ws-end a{color:var(--ink);font-weight:800;text-decoration:none}
-  @media(max-width:950px){.ws-hero-grid{grid-template-columns:1fr}.ws-hero-art{min-height:320px;max-width:630px}.ws-hero h1{max-width:14ch}.ws-intro-grid{grid-template-columns:1fr}.ws-application-grid{grid-template-columns:1fr}.ws-application-grid>div>p:not(.ws-section-label){max-width:65ch}}@media(max-width:760px){.ws-wrap{width:min(100% - 2rem,1170px)}.ws-nav-inner{min-height:68px}.ws-logo{font-size:.64rem}.ws-nav-links{gap:.7rem}.ws-nav-links a:not(.ws-nav-cta){display:none}.ws-hero{padding-top:4.4rem}.ws-hero h1{font-size:clamp(3.4rem,11vw,5rem)}.ws-hero-grid{padding-bottom:4rem}.ws-hero-art{min-height:280px}.ws-art-spark{font-size:9rem}.ws-marquee{justify-content:flex-start}.ws-section{padding:4rem 0}.ws-solo h2{font-size:clamp(2.5rem,8vw,3.7rem)}.ws-step-area{grid-template-columns:1fr}.ws-step{grid-template-columns:36px 1fr 22px;padding:1.25rem}.ws-step-detail{min-height:350px}.ws-fit-grid,.ws-faq-grid{grid-template-columns:1fr;gap:2rem}.ws-proof-grid{grid-template-columns:1fr;gap:1rem}.ws-proof-grid strong{font-size:3.1rem}.ws-end .ws-wrap{flex-direction:column;align-items:flex-start}}@media(prefers-reduced-motion:reduce){.ws-btn,.ws-faq-list summary span{transition:none}}
+  .ws-solo{--night:#100F1F;--night2:#171126;--ink:#121124;--paper:#F9F7F4;--purple:#7339D6;--lime:#D7FF58;--muted:#5C596B;color:var(--ink);font-family:'DM Sans',Arial,sans-serif;overflow:hidden;background:#fff}
+  .ws-solo *, .ws-solo *::before,.ws-solo *::after{box-sizing:border-box}
+  .ws-wrap{width:min(1200px,calc(100% - 3.5rem));margin-inline:auto}
+  .ws-solo a{text-underline-offset:4px}.ws-solo :focus-visible{outline:3px solid #9D63F5;outline-offset:4px}
+  .ws-nav{position:relative;z-index:4;background:#100F1F;color:white}
+  .ws-nav-inner{min-height:79px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+  .ws-brand{display:inline-flex;align-items:center;gap:.38rem;color:#fff;font-size:1.65rem;letter-spacing:-.065em;text-decoration:none;white-space:nowrap}
+  .ws-brand strong{font-weight:800}.ws-brand>span:first-of-type{color:var(--lime);margin:0 .15rem;font-weight:300}.ws-brand>span:last-of-type{font-weight:450}
+  .ws-nav-links{display:flex;align-items:center;gap:clamp(.7rem,2.2vw,2rem)}.ws-nav-links a{font-size:.81rem;font-weight:650;color:#E9E5F5;text-decoration:none;white-space:nowrap}
+  .ws-nav-links a:hover{color:var(--lime)}.ws-nav-links .ws-nav-cta{color:#11121b;background:var(--lime);padding:.82rem 1.05rem;border-radius:13px;font-weight:800}.ws-nav-links .ws-nav-cta:hover{background:#EAFFA9;color:#11121b}
+  .ws-hero{position:relative;isolation:isolate;color:#fff;background:radial-gradient(ellipse at 78% 38%,#442068 0,transparent 44%),radial-gradient(ellipse at 20% 0,#281351 0,transparent 36%),var(--night);padding:clamp(3.5rem,6vw,6rem) 0 4.2rem}
+  .ws-hero-planet{position:absolute;right:-10%;bottom:-28%;width:43%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 25% 18%,#D5B7FF 0,#7132D9 13%,#2E165A 32%,transparent 68%);opacity:.45;filter:blur(8px);z-index:-1}
+  .ws-hero-grid{display:grid;grid-template-columns:.93fr 1.07fr;align-items:center;gap:clamp(1rem,2.8vw,3rem);min-height:430px}
+  .ws-hero-copy{position:relative;z-index:1}.ws-eyebrow{font-size:.78rem;letter-spacing:.16em;color:#D7B7FF;font-weight:800;margin:0 0 1.45rem}
+  .ws-hero h1{font-size:clamp(3.4rem,5.7vw,6.5rem);line-height:1.015;letter-spacing:-.065em;font-weight:800;margin:0 0 1.5rem;max-width:11ch;white-space:nowrap}
+  .ws-hero h1 em,.ws-solo h2 em{font-family:'Fraunces',Georgia,serif;letter-spacing:-.045em;font-weight:480}
+  .ws-hero h1 em{color:var(--lime)}
+  .ws-hero-lead{color:#ECE7F4;max-width:32ch;font-size:clamp(1.13rem,1.75vw,1.4rem);line-height:1.48;margin:0}
+  .ws-hero-actions{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
+  .ws-btn{display:inline-flex;align-items:center;justify-content:center;gap:1rem;min-height:54px;border:1px solid transparent;border-radius:12px;padding:.95rem 1.2rem;text-decoration:none;font:800 .88rem/1.3 'DM Sans',Arial,sans-serif;cursor:pointer;transition:transform .2s ease,background .2s ease}
+  .ws-btn:hover{transform:translateY(-2px)}.ws-btn-lime{background:var(--lime);color:#101020}.ws-btn-lime:hover{background:#E9FFA1;color:#101020}
+  .ws-btn-outline{border-color:#A99ABB;color:white;background:#ffffff0A}.ws-btn-outline:hover{background:#ffffff1A;color:white}
+  .ws-hero-note{color:#C9C2D5;font-size:.78rem;line-height:1.6;margin:1.15rem 0 0}.ws-hero-note span{margin:0 .45rem;color:#9F7AE0}
+  .ws-visual{min-width:0;align-self:center}.ws-visual-labels{display:grid;grid-template-columns:26% 43% 31%;color:#F5F1FF;font-weight:800;font-size:clamp(.56rem,.85vw,.76rem);letter-spacing:.09em;text-align:center;padding:0 0 .25rem;white-space:nowrap}
+  .ws-flow-art{width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 18px 35px #0004)}
+  .ws-proof{background:#151024;color:#fff;border-top:1px solid #B08BF72B;border-bottom:1px solid #ffffff18}
+  .ws-proof-inner{display:grid;grid-template-columns:1.05fr 2.55fr .95fr;gap:2rem;align-items:center;padding:1.3rem 0}
+  .ws-proof-kicker{font-size:.73rem;letter-spacing:.13em;font-weight:800;max-width:20ch;line-height:1.5}.ws-proof p{margin:0;border-left:1px solid #847797;padding-left:2rem;font-size:1.2rem;font-weight:650}
+  .ws-proof p strong{color:var(--lime);font-size:2.35rem;font-weight:800;letter-spacing:-.055em;margin-right:.45rem;white-space:nowrap}.ws-proof small{font-size:.75rem;color:#C8BFD4;line-height:1.55;border-left:1px solid #847797;padding-left:2rem}
+  .ws-section{padding:clamp(4rem,7vw,6.7rem) 0}.ws-solo h2{font-size:clamp(2.7rem,4.6vw,5rem);line-height:1.09;letter-spacing:-.06em;font-weight:800;margin:0}.ws-solo h2 em{color:var(--purple)}
+  .ws-challenge{background:var(--paper)}.ws-challenge h2{margin-bottom:2.6rem}
+  .ws-problem-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
+  .ws-problem-card{background:#FFFFFF80;border:1px solid #E4DFDF;border-radius:18px;padding:1.7rem 1.15rem;display:flex;align-items:center;gap:1rem;min-height:171px}
+  .ws-problem-icon{width:97px;flex:0 0 97px;display:grid;place-items:center}.ws-problem-icon svg{width:89px;height:89px}
+  .ws-problem-card h3{font-size:clamp(1.05rem,1.55vw,1.43rem);letter-spacing:-.04em;line-height:1.13;font-weight:800;margin:0 0 .55rem}
+  .ws-problem-card p{font-size:.93rem;color:#454057;line-height:1.45;margin:0}
+  .ws-method{background:radial-gradient(ellipse at 50% 20%,#3D255C 0,transparent 44%),#120F22;color:white}
+  .ws-method-heading{display:grid;grid-template-columns:1.35fr .65fr;gap:4rem;align-items:center;margin-bottom:3.8rem}.ws-method h2{font-size:clamp(2.7rem,4.5vw,4.9rem)}
+  .ws-method h2 em{color:var(--lime)}.ws-method-heading p{font-size:1.13rem;line-height:1.62;color:#D8D1E5;margin:0;padding-left:2rem;border-left:2px solid var(--lime)}
+  .ws-method-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;position:relative}
+  .ws-method-grid::before{content:"";position:absolute;top:-23px;left:4%;right:4%;height:3px;background:linear-gradient(90deg,#B47AFF 2%,#F0B7FF 45%,#DCFF5E 100%);box-shadow:0 0 15px #C382FF;pointer-events:none}
+  .ws-method-card{position:relative;background:linear-gradient(165deg,#26203A 0%,#1B172D 68%,#2E1B48 100%);border:1px solid #8B55CA;border-radius:21px;padding:3rem 1.4rem 1.75rem;min-height:294px;box-shadow:inset 0 0 32px #A14BE010}
+  .ws-method-step{position:absolute;top:-43px;left:1.15rem;width:55px;height:55px;display:grid;place-items:center;border-radius:50%;background:#D6A2FF;border:3px solid #E5C5FF;color:#20102E;font-size:1.15rem;font-weight:800;box-shadow:0 0 17px #CA8CFF}
+  .ws-method-card:last-child .ws-method-step{background:var(--lime);border-color:#EDFFB2;box-shadow:0 0 18px #CCFF45}
+  .ws-method-icon{display:block;font-size:3rem;line-height:1;color:#B98BFF;height:3.5rem;margin-bottom:.8rem;font-weight:700}
+  .ws-method-card h3{font-size:clamp(1.35rem,2vw,1.8rem);font-weight:800;line-height:1.13;letter-spacing:-.045em;margin:0 0 1.1rem}
+  .ws-method-card p{font-size:.94rem;line-height:1.5;color:#E7DEEE;margin:0}
+  .ws-method-footnote{text-align:right;margin-top:1.8rem;font-size:.79rem;color:#BEB1D2}
+  .ws-fit{background:#FBFAF8}.ws-fit-grid{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:clamp(1.5rem,4vw,4.5rem);align-items:center}
+  .ws-fit h2{font-size:clamp(2.8rem,4.1vw,4.4rem);white-space:nowrap}.ws-fit-list{list-style:none;margin:0;padding:0;display:grid;gap:1.15rem}
+  .ws-fit-list li{font-size:1.02rem;font-weight:650;display:flex;align-items:center;gap:.9rem}.ws-fit-list li::before{content:"✓";font-size:1.06rem;font-weight:900;width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;border-radius:50%;background:var(--lime)}
+  .ws-fit-art{position:relative;min-height:230px}.ws-fit-window{position:absolute;border-radius:17px;background:linear-gradient(135deg,#BB82FF,#5E25BA 75%);border:2px solid #C39BFA;box-shadow:0 24px 42px #7D4AD654}
+  .ws-fit-window-back{width:76%;height:144px;top:17px;left:5%;transform:rotate(-16deg);opacity:.56}
+  .ws-fit-window-front{width:75%;height:170px;top:35px;left:20%;transform:rotate(8deg);padding:14px 18px}
+  .ws-window-dots{display:flex;gap:5px}.ws-window-dots i{width:6px;height:6px;background:#EBD9FF;border-radius:50%}
+  .ws-window-bars{position:absolute;left:20%;right:20%;bottom:29px;height:95px;display:flex;align-items:end;justify-content:space-between;gap:10px}
+  .ws-window-bars span{width:25%;background:var(--lime);box-shadow:0 0 12px #D5FF72}.ws-window-bars span:nth-child(1){height:27%}.ws-window-bars span:nth-child(2){height:46%}.ws-window-bars span:nth-child(3){height:67%}.ws-window-bars span:nth-child(4){height:91%}
+  .ws-window-pointer{position:absolute;right:-16px;bottom:-20px;font-size:3.5rem;color:white;transform:rotate(90deg);text-shadow:0 4px 9px #3C217B}
+  .ws-callout{background:#FBFAF8;padding:1rem 1rem 2rem}.ws-callout-inner{position:relative;background:var(--lime);border-radius:35px;padding:clamp(2rem,5vw,4.5rem);display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center;overflow:hidden;isolation:isolate}
+  .ws-callout-inner::before,.ws-callout-inner::after{content:"";position:absolute;width:310px;height:310px;border-radius:50%;border:2px dotted #243209;opacity:.4;left:-170px;top:-92px;z-index:-1}
+  .ws-callout-inner::after{width:450px;height:450px;left:auto;right:-335px;top:70px}
+  .ws-callout h2{font-size:clamp(3rem,5vw,5.4rem);line-height:1.04;color:#101020;letter-spacing:-.065em}
+  .ws-callout-action{border-left:1px solid #777D52;padding-left:3rem}.ws-btn-dark{background:#141024;color:white;width:max-content;max-width:100%}.ws-btn-dark:hover{background:#30203D;color:white}.ws-callout-action p{font-size:.84rem;margin:1rem 0 0;color:#292C18}
+  .ws-application{background:#F7F4EF;scroll-margin-top:1rem}.ws-application-grid{display:grid;grid-template-columns:.8fr 1.1fr;gap:clamp(2rem,7vw,7rem);align-items:start}
+  .ws-form-intro{padding-top:1rem}.ws-eyebrow-dark{color:#7142BE;font-size:.78rem;letter-spacing:.14em;font-weight:800;margin:0 0 1.2rem}.ws-form-intro h2{margin-bottom:1.4rem}
+  .ws-form-intro>p:not(.ws-eyebrow-dark){font-size:1.08rem;line-height:1.7;color:#5C5866;max-width:40ch}.ws-form-tag{display:flex;align-items:center;gap:1rem;font-size:.86rem;font-weight:750;background:#E7DFFA;padding:1rem 1.2rem;border-radius:13px;margin-top:2rem}
+  .ws-form-tag span{color:#7443C5;font-size:1.8rem}
+  .ws-form-wrap{background:#FFF;border:1px solid #E2DDDF;border-radius:22px;padding:clamp(1.3rem,3vw,2.4rem);box-shadow:0 18px 50px #21153310}
+  .ws-form-wrap form{display:grid;gap:1.05rem}.ws-form-duo{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  .ws-form-wrap label{font-size:.87rem;font-weight:750;display:grid;gap:.45rem}
+  .ws-form-wrap input,.ws-form-wrap select,.ws-form-wrap textarea{width:100%;font:450 .95rem/1.45 'DM Sans',Arial,sans-serif;min-height:49px;padding:.78rem .9rem;border:1px solid #D4CDD9;border-radius:10px;background:#FCFAFD;color:#1B1423}
+  .ws-form-wrap textarea{resize:vertical}.ws-form-wrap input:focus,.ws-form-wrap textarea:focus,.ws-form-wrap select:focus{outline:2px solid #8E54E3;outline-offset:1px}
+  .ws-optional{font-weight:500;color:#7D7687}.ws-btn-purple{background:#6637BB;color:white}.ws-btn-purple:hover{background:#7949D0;color:white}.ws-submit{width:100%;margin-top:.25rem}
+  .ws-form-info{font-size:.76rem;line-height:1.55;color:#716C79;margin:.05rem 0}.ws-form-info a{color:#6637BB}.ws-form-message{font-size:.8rem;color:#B41E32;margin:0}
+  .ws-review h3{font-size:2rem;margin:.5rem 0 1rem}.ws-review>p:not(.ws-eyebrow-dark){color:#5C596B}
+  .ws-review-details{border:1px solid #E2DDE2;padding:1.3rem;background:#F8F5FB;border-radius:13px;margin:1.4rem 0}
+  .ws-review-details pre{white-space:pre-wrap;overflow-wrap:anywhere;font:400 .9rem/1.5 'DM Sans',Arial,sans-serif;margin:1rem 0 0}
+  .ws-review-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin:1rem 0}.ws-small-btn{font:750 .83rem 'DM Sans';background:#FFF;border:1px solid #B9AFCB;padding:.7rem .9rem;border-radius:9px;cursor:pointer}
+  .ws-form-wrap form[hidden],.ws-review[hidden]{display:none}
+  .ws-bottom{background:#120E21;color:#C3B8D5;padding:1.4rem 0}.ws-bottom .ws-wrap{display:flex;justify-content:space-between;gap:2rem;align-items:center;font-size:.82rem}
+  .ws-bottom a{font-weight:850;color:#fff;text-decoration:none;font-size:1.2rem}.ws-bottom a span{color:var(--lime);margin:0 .25rem}.ws-bottom span{color:#CFC5D6}
+  @media(max-width:1100px){.ws-hero-grid{grid-template-columns:1fr 1.05fr;gap:1rem}.ws-hero h1{font-size:clamp(3.1rem,5.7vw,5.6rem)}.ws-method-card{padding:2.8rem 1.1rem 1.5rem}.ws-problem-card{padding:1.3rem .85rem}.ws-problem-icon{width:66px;flex-basis:66px}.ws-problem-icon svg{width:64px;height:64px}.ws-fit h2{font-size:clamp(2.3rem,3.65vw,4rem)}}
+  @media(max-width:850px){.ws-hero-grid{grid-template-columns:1fr}.ws-hero{padding:3.6rem 0 3rem}.ws-hero h1{white-space:normal;max-width:14ch;font-size:clamp(3.5rem,8vw,5.9rem)}.ws-hero-lead{max-width:44ch}.ws-visual{max-width:720px;margin:1.7rem auto 0;width:100%}.ws-proof-inner{grid-template-columns:1fr 2fr;gap:1rem}.ws-proof small{grid-column:1/-1;border-left:none;padding-left:0}.ws-problem-grid{grid-template-columns:1fr}.ws-problem-icon{width:90px;flex-basis:90px}.ws-problem-icon svg{width:80px;height:80px}.ws-problem-card{min-height:125px}.ws-method-heading{grid-template-columns:1fr;gap:1.3rem}.ws-method-heading p{max-width:60ch}.ws-method-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3.7rem}.ws-method-grid::before{display:none}.ws-fit-grid{grid-template-columns:.8fr 1.2fr}.ws-fit-list{grid-column:1/-1;grid-template-columns:1fr 1fr}.ws-callout-inner{grid-template-columns:1fr;gap:1rem}.ws-callout-action{border:0;padding-left:0}.ws-application-grid{grid-template-columns:1fr;gap:2rem}}
+  @media(max-width:620px){.ws-wrap{width:calc(100% - 2rem)}.ws-nav-inner{min-height:66px}.ws-brand{font-size:1.3rem}.ws-nav-links{gap:.8rem}.ws-nav-links a:not(.ws-nav-cta){display:none}.ws-nav-links .ws-nav-cta{font-size:.72rem;padding:.7rem .82rem}.ws-eyebrow{font-size:.67rem;letter-spacing:.12em}.ws-hero{padding:3rem 0 2.3rem}.ws-hero h1{font-size:clamp(3.1rem,11vw,5rem)}.ws-hero-lead{font-size:1.04rem}.ws-hero-actions{align-items:stretch}.ws-btn{min-height:49px;font-size:.82rem}.ws-hero-note span{margin:0 .22rem}.ws-visual{margin-top:1rem}.ws-visual-labels{font-size:.55rem}.ws-proof-inner{grid-template-columns:1fr;gap:.7rem}.ws-proof-kicker{max-width:none}.ws-proof p{border-left:none;padding-left:0;font-size:.94rem}.ws-proof p strong{font-size:1.7rem}.ws-proof small{font-size:.72rem}.ws-section{padding:3.9rem 0}.ws-solo h2{font-size:clamp(2.55rem,9.5vw,4rem)}.ws-challenge h2{margin-bottom:2rem}.ws-problem-card{gap:1.1rem}.ws-method-heading{margin-bottom:3.1rem}.ws-method-grid{gap:3.2rem .65rem}.ws-method-card{min-height:250px;border-radius:16px;padding:2rem .82rem 1.15rem}.ws-method-step{top:-35px;width:47px;height:47px;font-size:.96rem}.ws-method-icon{font-size:2.5rem;height:2.5rem}.ws-method-card h3{font-size:clamp(1.16rem,4.8vw,1.5rem)}.ws-method-card p{font-size:.82rem}.ws-method-footnote{text-align:left}.ws-fit-grid{grid-template-columns:1fr;gap:.5rem}.ws-fit-art{width:220px;max-width:100%;min-height:210px}.ws-fit-list{grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}.ws-callout{padding:0 .65rem 1.3rem}.ws-callout-inner{padding:2rem 1.25rem;border-radius:23px}.ws-callout h2{font-size:clamp(2.65rem,9.5vw,4rem)}.ws-callout-action .ws-btn{width:100%}.ws-form-duo{grid-template-columns:1fr}.ws-bottom .ws-wrap{align-items:flex-start;flex-direction:column;gap:.5rem}}
+  @media(prefers-reduced-motion:reduce){.ws-btn{transition:none}}
 </style>

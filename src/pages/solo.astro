@@ -16,11 +16,15 @@ const faqs = [
   {q:"What stage should I be at?",a:"You can apply with an idea, a prototype or a launched product. Tell us where you are stuck so we can see if the cohort is right for you."},
   {q:"How much does it cost and when does it start?",a:"Dates, format and pricing have not been confirmed. We are collecting interest now and will share the details before anyone commits."}
 ];
+const turnstileSiteKey =
+  (typeof import.meta.env.PUBLIC_TURNSTILE_SITE_KEY === "string" &&
+    import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
+  "0x4AAAAAAEIhzoHuWLsynQnO";
 ---
 
 <BaseLayout
   title="WSS Solo | Built something with AI. Now what?"
-  description="WSS Solo helps founders building with AI test demand, find paying customers and work out how to grow. Register interest in the founding cohort."
+  description="WSS Solo helps founders turn AI-built products into paying customers. Join the first-cohort waitlist for updates."
   keywords="WSS Solo, AI startup accelerator, solo founder, first customers, validate demand, AI-built businesses"
   path="/solo"
   schema={buildBreadcrumbSchema([{name:"Home",path:"/"},{name:"WSS Solo",path:"/solo"}])}
@@ -38,7 +42,7 @@ const faqs = [
         <a href="/" class="ws-brand" aria-label="We Scale Startups home"><strong>WSS</strong><span aria-hidden="true">/</span><span>SOLO</span></a>
         <nav class="ws-nav-links" aria-label="WSS Solo navigation">
           <a href="#challenge">The challenge</a><a href="#how">How it works</a><a href="#fit">Who it's for</a>
-          <a href="#apply" class="ws-nav-cta">Help shape the cohort <span aria-hidden="true">↗</span></a>
+          <a href="#waitlist" class="ws-nav-cta">Join the waitlist <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
@@ -51,7 +55,7 @@ const faqs = [
           <h1 id="ws-title">You built it.<br />Now <em>find buyers.</em></h1>
           <p class="ws-hero-lead">A focused accelerator for solo founders building with AI, turning products into customers.</p>
           <div class="ws-hero-actions">
-            <a class="ws-btn ws-btn-lime" href="#apply">Help shape the first cohort <span aria-hidden="true">↗</span></a>
+            <a class="ws-btn ws-btn-lime" href="#waitlist">Join the waitlist <span aria-hidden="true">↗</span></a>
             <a class="ws-btn ws-btn-outline" href="#how">See how it works <span aria-hidden="true">↗</span></a>
           </div>
           <p class="ws-hero-note">Proposed 4-week pilot <span aria-hidden="true">·</span> No equity <span aria-hidden="true">·</span> No commitment</p>
@@ -165,45 +169,49 @@ const faqs = [
 
     <section class="ws-callout">
       <div class="ws-wrap ws-callout-inner">
-        <h2>Help shape the<br />first cohort.</h2>
-        <div class="ws-callout-action"><a href="#apply" class="ws-btn ws-btn-dark">Share what you're building <span aria-hidden="true">↗</span></a><p>No commitment. Just honest feedback.</p></div>
+        <h2>Get on the<br />waitlist.</h2>
+        <div class="ws-callout-action"><a href="#waitlist" class="ws-btn ws-btn-dark">Join the waitlist <span aria-hidden="true">↗</span></a><p>No payment. Get first-cohort updates.</p></div>
       </div>
     </section>
 
-    <section class="ws-section ws-application" id="apply">
+    <section class="ws-section ws-application" id="waitlist">
       <div class="ws-wrap ws-application-grid">
         <div class="ws-form-intro">
-          <p class="ws-eyebrow-dark">THE FOUNDING COHORT</p>
-          <h2>Tell us what<br /><em>you’re building.</em></h2>
-          <p>We're collecting early interest and feedback. Dates and pricing aren't confirmed, nothing to pay or commit to.</p>
-          <div class="ws-form-tag"><span aria-hidden="true">✳</span> First cohort, currently taking expressions of interest</div>
+          <p class="ws-eyebrow-dark">WSS SOLO / FIRST COHORT</p>
+          <h2>Get on<br />the <em>waitlist.</em></h2>
+          <p>Be first to hear when WSS Solo opens. No payment, no commitment.</p>
+          <div class="ws-form-tag"><span aria-hidden="true">✳</span> First cohort, currently gathering interest</div>
         </div>
         <div class="ws-form-wrap">
-          <form id="ws-solo-application" novalidate>
+          <form id="ws-solo-waitlist" action="/api/solo-waitlist" method="post">
+            <p class="ws-form-heading">Join the WSS Solo waitlist</p>
             <div class="ws-form-duo">
               <label>Your name <input name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name" /></label>
-              <label>Email <input name="email" type="email" autocomplete="email" required maxlength="320" placeholder="you@startup.com" /></label>
+              <label>Email <input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@startup.com" /></label>
             </div>
-            <label>What have you built? <textarea name="product" required maxlength="1500" rows="2" placeholder="A sentence or two is fine"></textarea></label>
-            <label>Where are you now?
-              <select name="stage" required><option value="">Choose your stage</option><option>Exploring an idea</option><option>Building a prototype or MVP</option><option>Launched, looking for first customers</option><option>Already have some customers</option></select>
+            <label>Where are you now? <span class="ws-optional">(optional)</span>
+              <select name="stage"><option value="">Choose your stage</option><option value="idea">Exploring an idea</option><option value="building">Building an MVP</option><option value="launched">Launched, looking for customers</option><option value="customers">Already have some customers</option></select>
             </label>
-            <label>What's your biggest challenge? <textarea name="challenge" required maxlength="1500" rows="2" placeholder="What's getting in the way?"></textarea></label>
-            <label>Anything else? <span class="ws-optional">Optional</span><textarea name="notes" maxlength="1500" rows="2" placeholder="What would make this useful?"></textarea></label>
-            <button class="ws-btn ws-btn-purple ws-submit" type="submit">Review your message <span aria-hidden="true">↗</span></button>
-            <p class="ws-form-info">You'll review and send an email, nothing is submitted automatically.</p>
-            <p class="ws-form-info">Please avoid sensitive details. <a href="/privacy">Privacy policy</a>.</p>
-            <p class="ws-form-message" id="ws-form-message" role="status" aria-live="polite"></p>
+            <label class="ws-consent">
+              <input type="checkbox" name="waitlist_consent" value="yes" required />
+              <span>Email me about WSS Solo and its first cohort. I can unsubscribe at any time.</span>
+            </label>
+            <div class="ws-honeypot" aria-hidden="true"><label>Leave this blank<input type="text" name="company_website" autocomplete="off" tabindex="-1"/></label></div>
+            <input type="hidden" name="source_page" value="" />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-size="flexible"></div>
+            <button class="ws-btn ws-btn-purple ws-submit" type="submit">Join the waitlist <span aria-hidden="true">↗</span></button>
+            <p id="ws-waitlist-status" class="ws-form-message" role="status" aria-live="polite"></p>
+            <p class="ws-form-info">Only WSS Solo updates. See our <a href="/privacy">privacy policy</a>.</p>
           </form>
-          <div id="ws-review" class="ws-review" hidden>
-            <p class="ws-eyebrow-dark">REVIEW YOUR MESSAGE</p>
-            <h3>Ready to send?</h3>
-            <p>Check your details, then open the email draft in your email app.</p>
-            <div class="ws-review-details"><p><strong>To:</strong> daniel@wescalestartups.com</p><p><strong>Subject:</strong> WSS Solo founding cohort application</p><pre id="ws-review-text"></pre></div>
-            <a id="ws-review-send" class="ws-btn ws-btn-purple ws-submit" href="mailto:daniel@wescalestartups.com">Open email draft ↗</a>
-            <div class="ws-review-actions"><button id="ws-copy-email" class="ws-small-btn" type="button">Copy email details</button><button id="ws-edit-application" class="ws-small-btn" type="button">Edit answers</button></div>
-            <p id="ws-copy-status" role="status" aria-live="polite"></p>
-            <p class="ws-form-info">If your email app doesn't open, copy and send the message to <a href="mailto:daniel@wescalestartups.com">daniel@wescalestartups.com</a>.</p>
+          <div id="ws-waitlist-success" class="ws-waitlist-success" role="status" aria-live="polite" hidden>
+            <div class="ws-success-icon" aria-hidden="true">✓</div>
+            <p class="ws-eyebrow-dark">YOU'RE ON THE LIST</p>
+            <h3>You're on the waitlist.</h3>
+            <p>Thanks for your interest. We'll be in touch when there are updates about the first WSS Solo cohort.</p>
+            <a href="/" class="ws-success-link">Explore We Scale Startups ↗</a>
           </div>
         </div>
       </div>
@@ -212,71 +220,55 @@ const faqs = [
   </main>
   <script is:inline>
     (() => {
-      const stepData = document.getElementById("ws-step-data");
-      if (stepData) {
-        const steps = JSON.parse(stepData.textContent || "[]");
-        const tabs = Array.from(document.querySelectorAll(".ws-step"));
-        const panel = document.getElementById("ws-step-panel");
-        const selectStep = (index) => {
-          const item = steps[index];
-          if (!item || !panel) return;
-          for (const [i, tab] of tabs.entries()) {
-            tab.setAttribute("aria-selected", i === index ? "true" : "false");
-            tab.tabIndex = i === index ? 0 : -1;
-          }
-          document.getElementById("ws-detail-number").textContent = String(index+1).padStart(2,"0");
-          document.getElementById("ws-detail-title").textContent = item.title;
-          document.getElementById("ws-detail-copy").textContent = item.detail;
-          document.getElementById("ws-detail-outcome").textContent = item.outcome;
-          document.getElementById("ws-detail-icon").textContent = item.icon;
-          panel.setAttribute("aria-labelledby", "ws-tab-" + index);
-        };
-        tabs.forEach((tab, index) => {
-          tab.addEventListener("click", () => selectStep(index));
-          tab.addEventListener("keydown", (event) => {
-            if (!["ArrowDown","ArrowUp","ArrowRight","ArrowLeft","Home","End"].includes(event.key)) return;
-            event.preventDefault();
-            const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length-1 : (index + (["ArrowDown","ArrowRight"].includes(event.key) ? 1 : -1) + tabs.length) % tabs.length;
-            selectStep(next);
-            tabs[next].focus();
-          });
-        });
+      const form = document.getElementById("ws-solo-waitlist");
+      const success = document.getElementById("ws-waitlist-success");
+      const notice = document.getElementById("ws-waitlist-status");
+      if (!(form instanceof HTMLFormElement) || !success) return;
+
+      const source = form.querySelector('[name="source_page"]');
+      if (source) source.value = window.location.href;
+      const query = new URLSearchParams(window.location.search);
+      for (const field of ["utm_source", "utm_medium", "utm_campaign"]) {
+        const input = form.querySelector('[name="' + field + '"]');
+        if (input) input.value = (query.get(field) || "").slice(0, 150);
       }
-      const form = document.getElementById("ws-solo-application");
-      const review = document.getElementById("ws-review");
-      const notice = document.getElementById("ws-form-message");
-      if (!(form instanceof HTMLFormElement) || !review) return;
-      const subject = "WSS Solo founding cohort application";
-      let draftText = "";
-      form.addEventListener("submit", (event) => {
+
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          if (notice) notice.textContent = "Please complete the required fields.";
-          return;
-        }
-        const data = new FormData(form);
-        const value = (key) => String(data.get(key) || "").trim();
-        draftText = ["WSS Solo founding cohort application","", "Name: " + value("name"), "Email: " + value("email"), "", "What I'm building:", value("product"), "", "Current stage: " + value("stage"), "", "Biggest challenge:", value("challenge"), "", "Anything else:", value("notes") || "(not provided)", "", "Submitted from: https://wescalestartups.com/solo"].join("\n");
-        const email = document.getElementById("ws-review-text");
-        const link = document.getElementById("ws-review-send");
-        if (email) email.textContent = draftText;
-        if (link) link.href = "mailto:daniel@wescalestartups.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(draftText);
-        form.hidden = true;
-        review.hidden = false;
-        review.scrollIntoView({behavior: "smooth", block: "start"});
+        if (!form.reportValidity()) return;
+        const button = form.querySelector('button[type="submit"]');
+        const payload = Object.fromEntries(new FormData(form).entries());
+        payload.waitlist_consent = payload.waitlist_consent === "yes" ? "yes" : "no";
+        payload.source_page = window.location.href;
+        if (button) { button.disabled = true; button.textContent = "Joining..."; }
         if (notice) notice.textContent = "";
-      });
-      document.getElementById("ws-edit-application")?.addEventListener("click", () => {
-        review.hidden = true; form.hidden = false; form.scrollIntoView({behavior: "smooth", block: "start"});
-      });
-      document.getElementById("ws-copy-email")?.addEventListener("click", async () => {
-        const message = document.getElementById("ws-copy-status");
-        try { await navigator.clipboard.writeText("To: daniel@wescalestartups.com\nSubject: " + subject + "\n\n" + draftText); if (message) message.textContent = "Copied. Paste into an email to Daniel."; }
-        catch (_) { if (message) message.textContent = "Please select and copy the email details above."; }
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || result.ok !== true || result.joined !== true) {
+            throw new Error(result.error || "Could not save your place. Please try again.");
+          }
+          form.hidden = true;
+          success.hidden = false;
+          success.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (window.dataLayer) window.dataLayer.push({ event: "solo_waitlist_joined", page_path: "/solo" });
+        } catch (error) {
+          if (notice) notice.textContent = error instanceof Error ? error.message : "Something went wrong. Please try again.";
+          if (window.turnstile) {
+            const widget = form.querySelector(".cf-turnstile");
+            if (widget) { try { window.turnstile.reset(widget); } catch (_) {} }
+          }
+        } finally {
+          if (button) { button.disabled = false; button.innerHTML = 'Join the waitlist <span aria-hidden="true">↗</span>'; }
+        }
       });
     })();
   </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
 </BaseLayout>
 
 <style>
@@ -369,4 +361,18 @@ const faqs = [
   .ws-solo .ws-hero h1, .ws-solo .ws-method h2, .ws-solo .ws-method-card h3{color:#FFFFFF!important}
   .ws-solo .ws-hero h1{font-size:clamp(3.3rem,4.65vw,5.3rem)}
   :global(body.solo-landing-body > footer.site-footer){display:none}
+  .ws-form-heading{font-size:1.17rem!important;font-weight:800;letter-spacing:-.035em;margin:0 0 .3rem}
+  .ws-form-wrap .ws-consent{display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;font-weight:500;line-height:1.55}
+  .ws-form-wrap .ws-consent input{width:19px;height:19px;min-height:19px;margin:2px 0 0;flex:0 0 19px;accent-color:#7045C9}
+  .ws-form-wrap .ws-consent span{font-size:.85rem;color:#373040}
+  .ws-honeypot{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  .ws-solo .ws-form-wrap form[hidden],.ws-solo .ws-waitlist-success[hidden]{display:none}
+  .ws-form-wrap .ws-form-message{min-height:0;font-weight:650;line-height:1.45}
+  .ws-submit:disabled{opacity:.65;cursor:wait;transform:none}
+  .ws-waitlist-success{text-align:center;padding:1.6rem .5rem}
+  .ws-success-icon{display:grid;place-items:center;margin:0 auto 1.5rem;width:70px;height:70px;border-radius:50%;background:#D7FF58;color:#171121;font-weight:900;font-size:2.1rem}
+  .ws-waitlist-success h3{font-size:clamp(1.85rem,3vw,2.7rem);line-height:1.13;letter-spacing:-.05em;margin:.3rem 0 1rem}
+  .ws-waitlist-success p:not(.ws-eyebrow-dark){color:#5C5866;font-size:1.03rem;line-height:1.6;max-width:34ch;margin:0 auto 1.5rem}
+  .ws-success-link{color:#6532B4;font-size:.93rem;font-weight:800}
+  .ws-solo .cf-turnstile{max-width:100%;overflow:hidden}
 </style>

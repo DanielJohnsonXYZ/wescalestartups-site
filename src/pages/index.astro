@@ -248,7 +248,7 @@ const subAudiences = [
   bodyClass="homepage-solo-promo"
   showAnnouncement={true}
   announcementVariant="brand"
-  announcementText="WSS Solo is here, the accelerator for founders building with AI."
+  announcementText="New: WSS Solo accelerator"
   announcementHref="/solo"
   announcementLinkText="Join the waitlist ↗"
   announcementDismissible={true}
@@ -812,17 +812,23 @@ const subAudiences = [
   </style>
 
   <style is:global>
-    /* Homepage-only, slim WSS Solo promotion above the main navigation. */
+    /* Slim homepage-only announcement, with a header offset so the pill
+       navigation never obscures the banner. Other routes stay unchanged. */
     body.homepage-solo-promo .announcement-banner--brand {
       background: #d7ff58;
       color: #161a0c;
       border-bottom: 1px solid #bce244;
-      padding: 0.32rem 0;
+      height: 36px;
+      padding: 0;
+      display: flex;
+      align-items: center;
       font-size: 0.8rem;
-      line-height: 1.35;
+      line-height: 1.2;
     }
     body.homepage-solo-promo .announcement-banner--brand .banner-inner {
-      gap: 0.45rem;
+      gap: 0.48rem;
+      flex-wrap: nowrap;
+      white-space: nowrap;
     }
     body.homepage-solo-promo .announcement-banner--brand .banner-link {
       color: #16210a;
@@ -831,14 +837,21 @@ const subAudiences = [
     }
     body.homepage-solo-promo .announcement-banner--brand .banner-dismiss {
       color: #2c3a12;
+      flex: none;
+    }
+    body.homepage-solo-promo .site-header {
+      top: 36px;
     }
     @media (max-width: 540px) {
       body.homepage-solo-promo .announcement-banner--brand {
-        font-size: 0.73rem;
-        padding: 0.35rem 0;
+        height: 40px;
+        font-size: 0.72rem;
       }
       body.homepage-solo-promo .announcement-banner--brand .banner-inner {
-        column-gap: 0.3rem;
+        gap: 0.3rem;
+      }
+      body.homepage-solo-promo .site-header {
+        top: 40px;
       }
     }
   </style>

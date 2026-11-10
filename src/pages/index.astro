@@ -245,7 +245,13 @@ const subAudiences = [
   path="/"
   schema={faqSchema}
   newsletterPopup={false}
-  showAnnouncement={false}
+  bodyClass="homepage-solo-promo"
+  showAnnouncement={true}
+  announcementVariant="brand"
+  announcementText="WSS Solo is here, the accelerator for founders building with AI."
+  announcementHref="/solo"
+  announcementLinkText="Join the waitlist ↗"
+  announcementDismissible={true}
 >
   <section class="v9-hero" id="top" aria-labelledby="v9-hero-title">
     <div class="v9-aurora v9-aurora-one" aria-hidden="true"></div>
@@ -802,6 +808,38 @@ const subAudiences = [
     }
     .v9-path-card :global(.whatsapp-cta) {
       margin-top: auto;
+    }
+  </style>
+
+  <style is:global>
+    /* Homepage-only, slim WSS Solo promotion above the main navigation. */
+    body.homepage-solo-promo .announcement-banner--brand {
+      background: #d7ff58;
+      color: #161a0c;
+      border-bottom: 1px solid #bce244;
+      padding: 0.32rem 0;
+      font-size: 0.8rem;
+      line-height: 1.35;
+    }
+    body.homepage-solo-promo .announcement-banner--brand .banner-inner {
+      gap: 0.45rem;
+    }
+    body.homepage-solo-promo .announcement-banner--brand .banner-link {
+      color: #16210a;
+      font-weight: 800;
+      text-underline-offset: 2px;
+    }
+    body.homepage-solo-promo .announcement-banner--brand .banner-dismiss {
+      color: #2c3a12;
+    }
+    @media (max-width: 540px) {
+      body.homepage-solo-promo .announcement-banner--brand {
+        font-size: 0.73rem;
+        padding: 0.35rem 0;
+      }
+      body.homepage-solo-promo .announcement-banner--brand .banner-inner {
+        column-gap: 0.3rem;
+      }
     }
   </style>
 </BaseLayout>

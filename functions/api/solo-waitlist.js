@@ -104,6 +104,8 @@ export async function onRequestPost(context) {
   }
 
   const joinedAt = new Date().toISOString();
+  // Keep the existing synthetic monitoring address out of real waitlist counts.
+  const isSyntheticTest = email === "monitor+run@wescalestartups.com";
   const base = (env.CUSTOMER_IO_REGION || "eu").toLowerCase() === "eu"
     ? "https://track-eu.customer.io" : "https://track.customer.io";
 
@@ -112,7 +114,8 @@ export async function onRequestPost(context) {
   const traits = {
     email,
     name,
-    wss_solo_waitlist: true,
+    wss_solo_waitlist: !isSyntheticTest,
+    wss_solo_waitlist_test: isSyntheticTest,
     wss_solo_waitlist_consent: true,
     wss_solo_waitlist_joined_at: joinedAt,
     wss_solo_waitlist_stage: stage || "not-provided",
@@ -142,7 +145,7 @@ export async function onRequestPost(context) {
   }
 
   // Notifications are supplementary: a confirmed CRM save is the source of truth.
-  const notification = alertOwner(env, {
+  const notification = isSyntheticTest ? Promise.resolve() : alertOwner(env, {
     name, email, stage, source, joinedAt, utmSource, utmMedium, utmCampaign
   });
   if (typeof context.waitUntil === "function") context.waitUntil(notification);

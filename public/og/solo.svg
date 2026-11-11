@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="WSS Solo: You built it. Now make it grow.">
+  <defs>
+    <radialGradient id="g1" cx="0.8" cy="0.4" r="0.6"><stop offset="0" stop-color="#4A2272"/><stop offset="1" stop-color="#100F1F" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g2" cx="0.15" cy="0" r="0.5"><stop offset="0" stop-color="#2B1456"/><stop offset="1" stop-color="#100F1F" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#100F1F"/>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <rect width="1200" height="630" fill="url(#g2)"/>
+  <text x="80" y="110" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#FFFFFF"><tspan font-weight="800">WSS</tspan><tspan fill="#D7FF58" dx="10">/</tspan><tspan dx="10">SOLO</tspan></text>
+  <text x="80" y="190" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4" fill="#D7B7FF">THE AI-NATIVE ACCELERATOR FOR SOLO FOUNDERS</text>
+  <text x="80" y="320" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="800" letter-spacing="-3" fill="#FFFFFF">You built it.</text>
+  <text x="80" y="430" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-style="italic" letter-spacing="-2" fill="#D7FF58">Now make it grow.</text>
+  <text x="80" y="540" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#ECE7F4">First paying customers, and the system behind them.</text>
+  <text x="80" y="590" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#A99ABB">wescalestartups.com/solo</text>
+  <g transform="translate(930 220)" fill="#D7FF58" opacity="0.9">
+    <rect x="0" y="0" width="70" height="74" rx="10"/><rect x="88" y="0" width="70" height="74" rx="10"/>
+    <rect x="0" y="92" width="70" height="74" rx="10"/><rect x="88" y="92" width="70" height="74" rx="10"/>
+  </g>
+  <g transform="translate(930 220)" fill="#597324">
+    <circle cx="35" cy="28" r="12"/><path d="M12 60Q35 32 58 60Z"/><circle cx="123" cy="28" r="12"/><path d="M100 60Q123 32 146 60Z"/>
+    <circle cx="35" cy="120" r="12"/><path d="M12 152Q35 124 58 152Z"/><circle cx="123" cy="120" r="12"/><path d="M100 152Q123 124 146 152Z"/>
+  </g>
+</svg>

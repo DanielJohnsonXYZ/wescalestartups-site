@@ -1,21 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildBreadcrumbSchema } from "../lib/schema";
+import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
 
-const steps = [
-  { title: "Find the problem", detail: "Get specific about who you want to serve, what is frustrating them and how they solve it today. Talk to real people instead of guessing from a prompt.", outcome: "A customer problem worth testing", icon: "◎" },
-  { title: "Validate demand", detail: "Find out whether the problem is important enough that people would change their behaviour or pay. Use conversations and tangible evidence, not compliments.", outcome: "Evidence of interest and willingness to pay", icon: "✳" },
-  { title: "Build what matters", detail: "Prioritise the smallest changes that make the product more useful to the people most likely to buy. Avoid building features just because AI makes them easy.", outcome: "A sharper offer and product priorities", icon: "▱" },
-  { title: "Get customers", detail: "Choose a practical way to reach the right buyers, start useful conversations and make a clear offer. Focus on doing, learning and improving.", outcome: "An acquisition experiment you can actually run", icon: "↗" },
-  { title: "Repeat what works", detail: "Work out what caused progress and turn the useful parts into a simple repeatable process. Use AI to save time, not to replace customer understanding.", outcome: "A focused next-step growth plan", icon: "↻" }
-];
-
-const faqs = [
-  {q:"Is this an AI course?",a:"The focus is finding customers, testing demand and making sales. You may use AI tools during the work, but you will still need to speak to potential buyers."},
-  {q:"Who is it for?",a:"Solo founders and small teams using AI to build a product or service. You might be testing an idea, building an MVP or looking for your first customers."},
-  {q:"What stage should I be at?",a:"You can apply with an idea, a prototype or a launched product. Tell us where you are stuck so we can see if the cohort is right for you."},
-  {q:"How much does it cost and when does it start?",a:"Dates, format and pricing have not been confirmed. We are collecting interest now and will share the details before anyone commits."}
-];
 ---
 
 <BaseLayout
@@ -23,7 +9,12 @@ const faqs = [
   description="WSS Solo helps founders turn AI-built products into paying customers. Join the first-cohort waitlist for updates."
   keywords="WSS Solo, AI startup accelerator, solo founder, first customers, validate demand, AI-built businesses"
   path="/solo"
-  schema={buildBreadcrumbSchema([{name:"Home",path:"/"},{name:"WSS Solo",path:"/solo"}])}
+  ogImage="/og/solo.png"
+  ogImageAlt="WSS Solo: you built it, now make it grow"
+  schema={[
+    buildBreadcrumbSchema([{name:"Home",path:"/"},{name:"WSS Solo",path:"/solo"}]),
+    buildServiceSchema("WSS Solo", "A small-cohort programme from We Scale Startups that helps solo founders with AI-built products get their first paying customers and build the system behind them.", "/solo")
+  ]}
   showSiteHeader={false}
   bodyClass="solo-landing-body"
   showAnnouncement={false}
@@ -49,12 +40,12 @@ const faqs = [
         <div class="ws-hero-copy">
           <p class="ws-eyebrow">THE AI-NATIVE ACCELERATOR FOR SOLO FOUNDERS</p>
           <h1 id="ws-title">You built it.<br />Now <em>make it grow.</em></h1>
-          <p class="ws-hero-lead">Hands-on help to build the tools, workflows and growth systems your business actually needs.</p>
+          <p class="ws-hero-lead">Hands-on help to get your first paying customers, and to build the system that keeps them coming.</p>
           <div class="ws-hero-actions">
             <a class="ws-btn ws-btn-lime" href="#waitlist">Join the waitlist <span aria-hidden="true">↗</span></a>
             <a class="ws-btn ws-btn-outline" href="#how">See how it works <span aria-hidden="true">↗</span></a>
           </div>
-          <p class="ws-hero-note">Founding cohort in development <span aria-hidden="true">·</span> No equity <span aria-hidden="true">·</span> No commitment</p>
+          <p class="ws-hero-note">No equity <span aria-hidden="true">·</span> No commitment to join the waitlist</p>
         </div>
         <div class="ws-visual" role="img" aria-label="An AI-built product connects to the systems that help a business grow">
           <div class="ws-visual-labels"><span>PRODUCT</span><span>CONVERSATIONS</span><span>CUSTOMERS</span></div>
@@ -108,7 +99,7 @@ const faqs = [
       <div class="ws-wrap ws-proof-inner">
         <span class="ws-proof-kicker">FROM THE TEAM AT WE SCALE STARTUPS</span>
         <p><strong>£18M+</strong> revenue influenced through previous WSS work</p>
-        <small>WSS Solo is new.<br />No cohort results yet.</small>
+        <a class="ws-proof-case" href="/case-studies/ned"><strong>500+ sign-ups</strong> in two months for Ned, a small-business funding platform <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
@@ -120,15 +111,15 @@ const faqs = [
             <div class="ws-problem-icon" aria-hidden="true">
               <svg viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="31" stroke="#D7C1FA" stroke-width="6"/><circle cx="45" cy="45" r="20" stroke="#BA8BFF" stroke-width="6"/><circle cx="45" cy="45" r="8" fill="#6D30D0"/><path d="M45 45L75 15" stroke="#11121B" stroke-width="5" stroke-linecap="round"/><path d="M68 8L82 5L81 20Z" fill="#CFFF4B"/></svg>
             </div>
-            <div><h3>Unclear next step</h3><p>Plenty of ideas. No clear priority.</p></div>
+            <div><h3>You shipped. Nobody signed up.</h3><p>The product works. The people who need it haven't found it yet.</p></div>
           </article>
           <article class="ws-problem-card">
             <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90"><path d="M15 36L45 18L75 36L45 54Z" fill="#A568F1"/><path d="M15 47L45 65L75 47" fill="none" stroke="#DBFF64" stroke-width="10" stroke-linejoin="round"/><path d="M15 59L45 77L75 59" fill="none" stroke="#5D35AB" stroke-width="10" stroke-linejoin="round"/></svg></div>
-            <div><h3>Disconnected tools</h3><p>Too many moving parts, nothing joined up.</p></div>
+            <div><h3>Twelve tools, no system</h3><p>Leads sit in one place and follow-ups live somewhere else, if they happen at all.</p></div>
           </article>
           <article class="ws-problem-card">
             <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90" fill="none"><path d="M50 8L22 49H44L36 82L70 36H48Z" fill="#CFFF4B"/><circle cx="45" cy="45" r="40" stroke="#BE92FD" stroke-width="2" stroke-dasharray="3 11"/></svg></div>
-            <div><h3>No repeatable process</h3><p>Too much manual work to make progress.</p></div>
+            <div><h3>Posting daily, still no users</h3><p>You put content out most days and can't tell if any of it brings people in.</p></div>
           </article>
         </div>
       </div>
@@ -138,41 +129,7 @@ const faqs = [
       <div class="ws-wrap">
         <div class="ws-method-heading">
           <h2>Your goal.<br /><em>The setup to get there.</em></h2>
-          <p>There's no single playbook for every startup. We work backwards from what you're trying to achieve and build the practical systems to help you get there.</p>
-        </div>
-        <div class="ws-method-grid">
-          <article class="ws-method-card">
-            <span class="ws-method-step">01</span>
-            <span class="ws-method-icon" aria-hidden="true">◎</span>
-            <p class="ws-method-kicker">GET CLEAR</p>
-            <h3>Choose what<br />to work towards</h3>
-            <p>Work out your next goal, what's getting in the way and where to focus.</p>
-            <p class="ws-method-output"><span>THE OUTPUT</span><strong>A clear goal and a realistic plan.</strong></p>
-          </article>
-          <article class="ws-method-card">
-            <span class="ws-method-step">02</span>
-            <span class="ws-method-icon" aria-hidden="true">✳</span>
-            <p class="ws-method-kicker">DESIGN THE SETUP</p>
-            <h3>Find the right<br />way forward</h3>
-            <p>Choose the channels, customer journey and processes that fit your business.</p>
-            <p class="ws-method-output"><span>THE OUTPUT</span><strong>A setup designed for your business.</strong></p>
-          </article>
-          <article class="ws-method-card">
-            <span class="ws-method-step">03</span>
-            <span class="ws-method-icon" aria-hidden="true">↗</span>
-            <p class="ws-method-kicker">BUILD IT</p>
-            <h3>Put the tools<br />in place</h3>
-            <p>Build what you actually need, whether that's a CRM, acquisition workflow, onboarding or AI automations.</p>
-            <p class="ws-method-output"><span>THE OUTPUT</span><strong>Working tools and connected workflows.</strong></p>
-          </article>
-          <article class="ws-method-card">
-            <span class="ws-method-step">04</span>
-            <span class="ws-method-icon" aria-hidden="true">▥</span>
-            <p class="ws-method-kicker">MAKE IT WORK</p>
-            <h3>Run it. Learn.<br />Improve it.</h3>
-            <p>Put your setup to use, see what moves the needle and keep refining it.</p>
-            <p class="ws-method-output"><span>THE OUTPUT</span><strong>A system you can keep using and improving.</strong></p>
-          </article>
+          <p>Every product needs a different setup. We start from the goal you pick and build what gets you there, with you, on your actual product.</p>
         </div>
         <div class="ws-goal-examples" aria-label="Examples of goals and the systems that could support them">
           <p class="ws-goal-examples-label">DIFFERENT GOALS. DIFFERENT SETUPS.</p>
@@ -181,13 +138,45 @@ const faqs = [
             <div class="ws-goal-example"><span>Improve conversion</span><strong>Onboarding + activation tracking</strong></div>
             <div class="ws-goal-example"><span>Save time running things</span><strong>Connected tools + automations</strong></div>
           </div>
-          <p class="ws-goal-example-note">Examples, not a fixed package. We choose what to build based on your business.</p>
+        </div>
+        <div class="ws-method-grid">
+          <article class="ws-method-card">
+            <span class="ws-method-step">01</span>
+            <span class="ws-method-icon" aria-hidden="true">◎</span>
+            <p class="ws-method-kicker">GET CLEAR</p>
+            <h3>Pick one goal<br />for the month</h3>
+            <p>Decide what you need next and what's stopping it. Everything else waits.</p>
+            <p class="ws-method-output"><span>THE OUTPUT</span><strong>One goal and a plan you can stick to.</strong></p>
+          </article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">02</span>
+            <span class="ws-method-icon" aria-hidden="true">✳</span>
+            <p class="ws-method-kicker">DESIGN THE SETUP</p>
+            <h3>Map how customers<br />reach you</h3>
+            <p>Choose the channel, then map each step from first visit to paying customer.</p>
+            <p class="ws-method-output"><span>THE OUTPUT</span><strong>A setup designed for your product.</strong></p>
+          </article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">03</span>
+            <span class="ws-method-icon" aria-hidden="true">↗</span>
+            <p class="ws-method-kicker">BUILD IT</p>
+            <h3>Build it<br />together</h3>
+            <p>Build what the plan needs. That might be a CRM, a lead workflow, onboarding emails or an AI automation.</p>
+            <p class="ws-method-output"><span>THE OUTPUT</span><strong>Working tools, connected up.</strong></p>
+          </article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">04</span>
+            <span class="ws-method-icon" aria-hidden="true">▥</span>
+            <p class="ws-method-kicker">MAKE IT WORK</p>
+            <h3>Run it and fix<br />what's weak</h3>
+            <p>Put it live, watch the numbers and change whatever isn't pulling its weight.</p>
+            <p class="ws-method-output"><span>THE OUTPUT</span><strong>A system you keep using after the cohort ends.</strong></p>
+          </article>
         </div>
         <div class="ws-method-how">
-          <div><span class="ws-method-how-symbol" aria-hidden="true">✳</span><strong>What the programme looks like</strong></div>
-          <p>Hands-on working sessions, practical building and feedback. What we work on depends on your product, stage and goal, not a fixed list of homework.</p>
+          <div><span class="ws-method-how-symbol" aria-hidden="true">✳</span><strong>What the first cohort looks like</strong></div>
+          <p>About four weeks. One live working session a week with Daniel, plus help building between sessions. The group is kept small so every founder gets time on their own product.</p>
         </div>
-        <div class="ws-method-footnote">Proposed first-cohort approach. Programme scope, duration and session format will be confirmed before anyone commits.</div>
       </div>
     </section>
 
@@ -204,10 +193,23 @@ const faqs = [
       </div>
     </section>
 
-    <section class="ws-callout">
-      <div class="ws-wrap ws-callout-inner">
-        <h2>Get on the<br />waitlist.</h2>
-        <div class="ws-callout-action"><a href="#waitlist" class="ws-btn ws-btn-dark">Join the waitlist <span aria-hidden="true">↗</span></a><p>No payment. Get first-cohort updates.</p></div>
+    <section class="ws-section ws-founder" id="founder" aria-labelledby="ws-founder-title">
+      <div class="ws-wrap ws-founder-grid">
+        <picture class="ws-founder-photo">
+          <source type="image/webp" srcset="/images/daniel-headshot-640.webp 640w, /images/daniel-headshot-960.webp 960w" sizes="(max-width: 850px) 70vw, 360px" />
+          <img src="/images/daniel-headshot-960.webp" alt="Daniel Johnson, founder of We Scale Startups" width="960" height="1003" loading="lazy" decoding="async" />
+        </picture>
+        <div class="ws-founder-copy">
+          <p class="ws-eyebrow-dark">WHO RUNS IT</p>
+          <h2 id="ws-founder-title">Daniel <em>Johnson.</em></h2>
+          <p class="ws-founder-lead">I've spent 15 years growing startups, including two I helped take to exit. Most of that work has been with funded teams. WSS Solo is the same work, cut down for founders building on their own.</p>
+          <ul class="ws-founder-facts">
+            <li><strong>2 exits</strong><span>eQuoo and Image To Painting</span></li>
+            <li><strong>£18M+</strong><span>revenue influenced for WSS clients</span></li>
+            <li><strong>Mentor</strong><span>Google for Startups</span></li>
+          </ul>
+          <a class="ws-founder-link" href="/about/daniel">More about Daniel <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </section>
 
@@ -217,7 +219,6 @@ const faqs = [
           <p class="ws-eyebrow-dark">WSS SOLO / FIRST COHORT</p>
           <h2>Get on<br />the <em>waitlist.</em></h2>
           <p>Be first to hear when WSS Solo opens. No payment, no commitment.</p>
-          <div class="ws-form-tag"><span aria-hidden="true">✳</span> First cohort, currently gathering interest</div>
         </div>
         <div class="ws-form-wrap">
           <form id="ws-solo-waitlist" action="/api/solo-waitlist" method="post">
@@ -227,7 +228,10 @@ const faqs = [
               <label>Email <input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@startup.com" /></label>
             </div>
             <label>Where are you now? <span class="ws-optional">(optional)</span>
-              <select name="stage"><option value="">Choose your stage</option><option value="idea">Exploring an idea</option><option value="building">Building an MVP</option><option value="launched">Launched, looking for customers</option><option value="customers">Already have some customers</option></select>
+              <select name="stage"><option value="">Choose your stage</option><option value="launched">Launched, looking for customers</option><option value="customers">Already have some customers</option></select>
+            </label>
+            <label>Product URL <span class="ws-optional">(optional)</span>
+              <input name="product_url" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="yourproduct.com" />
             </label>
             <label class="ws-consent">
               <input type="checkbox" name="waitlist_consent" value="yes" required />
@@ -332,7 +336,7 @@ const faqs = [
   .ws-proof{background:#151024;color:#fff;border-top:1px solid #B08BF72B;border-bottom:1px solid #ffffff18}
   .ws-proof-inner{display:grid;grid-template-columns:1.05fr 2.55fr .95fr;gap:2rem;align-items:center;padding:1.3rem 0}
   .ws-proof-kicker{font-size:.73rem;letter-spacing:.13em;font-weight:800;max-width:20ch;line-height:1.5}.ws-proof p{margin:0;border-left:1px solid #847797;padding-left:2rem;font-size:1.2rem;font-weight:650}
-  .ws-proof p strong{color:var(--lime);font-size:2.35rem;font-weight:800;letter-spacing:-.055em;margin-right:.45rem;white-space:nowrap}.ws-proof small{font-size:.75rem;color:#C8BFD4;line-height:1.55;border-left:1px solid #847797;padding-left:2rem}
+  .ws-proof p strong{color:var(--lime);font-size:2.35rem;font-weight:800;letter-spacing:-.055em;margin-right:.45rem;white-space:nowrap}.ws-proof-case{font-size:.82rem;color:#D8CFE4;line-height:1.5;border-left:1px solid #847797;padding-left:2rem;text-decoration:none}.ws-proof-case strong{color:#fff;display:block;font-size:1rem}.ws-proof-case:hover strong{color:var(--lime)}
   .ws-section{padding:clamp(4rem,7vw,6.7rem) 0}.ws-solo h2{font-size:clamp(2.7rem,4.6vw,5rem);line-height:1.09;letter-spacing:-.06em;font-weight:800;margin:0}.ws-solo h2 em{color:var(--purple)}
   .ws-challenge{background:var(--paper)}.ws-challenge h2{margin-bottom:2.6rem}
   .ws-problem-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
@@ -360,19 +364,19 @@ const faqs = [
   .ws-method-output{border-top:1px solid #684a8e;padding-top:1rem;margin:1.2rem 0 0!important;display:grid;gap:.4rem;margin-top:auto!important}
   .ws-method-output span{font-size:.64rem;letter-spacing:.12em;font-weight:800;color:#CAAFE8}
   .ws-method-output strong{font-size:.86rem;line-height:1.45;color:var(--lime)}
-  .ws-goal-examples{margin-top:2.25rem}
+  .ws-goal-examples{margin:0 0 4.2rem}
   .ws-goal-examples-label{color:#CEB7E4;font-size:.72rem!important;font-weight:800;letter-spacing:.13em;margin:0 0 .85rem}
   .ws-goal-example-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
   .ws-goal-example{background:#1B1730;border:1px solid #60437E;border-radius:14px;padding:1.05rem 1.2rem;display:flex;flex-direction:column;gap:.48rem}
-  .ws-goal-example span{color:#D7C9E7;font-size:.81rem}
-  .ws-goal-example strong{color:var(--lime);font-size:.98rem;line-height:1.35}
-  .ws-goal-example-note{font-size:.78rem!important;color:#C4B8D8;margin:.85rem 0 0}
+  .ws-goal-example span{color:#D7C9E7;font-size:.95rem}
+  .ws-goal-example strong{color:var(--lime);font-size:clamp(1.15rem,1.6vw,1.4rem);line-height:1.3;letter-spacing:-.02em}
+  .ws-goal-example{padding:1.4rem 1.5rem!important}
+  .ws-goal-examples-label{font-size:.8rem!important}
   @media(max-width:850px){.ws-goal-example-grid{grid-template-columns:1fr}}
   .ws-method-how{display:flex;align-items:center;gap:1.5rem;background:#211932;border:1px solid #665184;border-radius:16px;padding:1.2rem 1.5rem;margin-top:2rem}
   .ws-method-how>div{display:flex;align-items:center;gap:.75rem;flex:0 0 31%;font-size:1.06rem}
   .ws-method-how-symbol{font-size:1.8rem;color:var(--lime)}
   .ws-method-how p{color:#DCD4E8;line-height:1.6;font-size:.94rem;margin:0}
-  .ws-method-footnote{text-align:left;margin-top:1rem;font-size:.76rem;color:#C7BCD7;line-height:1.5}
   @media(max-width:850px){.ws-method-card{min-height:360px}.ws-method-how{flex-direction:column;align-items:flex-start;gap:.5rem}.ws-method-how>div{flex:none}}
   @media(max-width:620px){.ws-method-card{min-height:360px;padding:2rem .86rem 1.1rem}.ws-method-card h3{font-size:1.16rem}.ws-method-card > p:not(.ws-method-kicker):not(.ws-method-output){font-size:.82rem}.ws-method-output strong{font-size:.8rem}.ws-method-how{padding:1rem}.ws-method-how>div{font-size:.95rem}.ws-method-how p{font-size:.87rem}}
 
@@ -386,15 +390,9 @@ const faqs = [
   .ws-window-bars{position:absolute;left:20%;right:20%;bottom:29px;height:95px;display:flex;align-items:end;justify-content:space-between;gap:10px}
   .ws-window-bars span{width:25%;background:var(--lime);box-shadow:0 0 12px #D5FF72}.ws-window-bars span:nth-child(1){height:27%}.ws-window-bars span:nth-child(2){height:46%}.ws-window-bars span:nth-child(3){height:67%}.ws-window-bars span:nth-child(4){height:91%}
   .ws-window-pointer{position:absolute;right:-16px;bottom:-20px;font-size:3.5rem;color:white;transform:rotate(90deg);text-shadow:0 4px 9px #3C217B}
-  .ws-callout{background:#FBFAF8;padding:1rem 1rem 2rem}.ws-callout-inner{position:relative;background:var(--lime);border-radius:35px;padding:clamp(2rem,5vw,4.5rem);display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center;overflow:hidden;isolation:isolate}
-  .ws-callout-inner::before,.ws-callout-inner::after{content:"";position:absolute;width:310px;height:310px;border-radius:50%;border:2px dotted #243209;opacity:.4;left:-170px;top:-92px;z-index:-1}
-  .ws-callout-inner::after{width:450px;height:450px;left:auto;right:-335px;top:70px}
-  .ws-callout h2{font-size:clamp(3rem,5vw,5.4rem);line-height:1.04;color:#101020;letter-spacing:-.065em}
-  .ws-callout-action{border-left:1px solid #777D52;padding-left:3rem}.ws-btn-dark{background:#141024;color:white;width:max-content;max-width:100%}.ws-btn-dark:hover{background:#30203D;color:white}.ws-callout-action p{font-size:.84rem;margin:1rem 0 0;color:#292C18}
   .ws-application{background:#F7F4EF;scroll-margin-top:1rem}.ws-application-grid{display:grid;grid-template-columns:.8fr 1.1fr;gap:clamp(2rem,7vw,7rem);align-items:start}
   .ws-form-intro{padding-top:1rem}.ws-eyebrow-dark{color:#7142BE;font-size:.78rem;letter-spacing:.14em;font-weight:800;margin:0 0 1.2rem}.ws-form-intro h2{margin-bottom:1.4rem}
-  .ws-form-intro>p:not(.ws-eyebrow-dark){font-size:1.08rem;line-height:1.7;color:#5C5866;max-width:40ch}.ws-form-tag{display:flex;align-items:center;gap:1rem;font-size:.86rem;font-weight:750;background:#E7DFFA;padding:1rem 1.2rem;border-radius:13px;margin-top:2rem}
-  .ws-form-tag span{color:#7443C5;font-size:1.8rem}
+  .ws-form-intro>p:not(.ws-eyebrow-dark){font-size:1.08rem;line-height:1.7;color:#5C5866;max-width:40ch}
   .ws-form-wrap{background:#FFF;border:1px solid #E2DDDF;border-radius:22px;padding:clamp(1.3rem,3vw,2.4rem);box-shadow:0 18px 50px #21153310}
   .ws-form-wrap form{display:grid;gap:1.05rem}.ws-form-duo{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
   .ws-form-wrap label{font-size:.87rem;font-weight:750;display:grid;gap:.45rem}
@@ -410,7 +408,7 @@ const faqs = [
   .ws-bottom{background:#120E21;color:#C3B8D5;padding:1.4rem 0}.ws-bottom .ws-wrap{display:flex;justify-content:space-between;gap:2rem;align-items:center;font-size:.82rem}
   .ws-bottom a{font-weight:850;color:#fff;text-decoration:none;font-size:1.2rem}.ws-bottom a span{color:var(--lime);margin:0 .25rem}.ws-bottom span{color:#CFC5D6}
   @media(max-width:1100px){.ws-hero-grid{grid-template-columns:1fr 1.05fr;gap:1rem}.ws-hero h1{font-size:clamp(3.1rem,5.7vw,5.6rem)}.ws-method-card{padding:2.8rem 1.1rem 1.5rem}.ws-problem-card{padding:1.3rem .85rem}.ws-problem-icon{width:66px;flex-basis:66px}.ws-problem-icon svg{width:64px;height:64px}.ws-fit h2{font-size:clamp(2.3rem,3.65vw,4rem)}}
-  @media(max-width:850px){.ws-hero-grid{grid-template-columns:1fr}.ws-hero{padding:3.6rem 0 3rem}.ws-hero h1{white-space:normal;max-width:14ch;font-size:clamp(3.5rem,8vw,5.9rem)}.ws-hero-lead{max-width:44ch}.ws-visual{max-width:720px;margin:1.7rem auto 0;width:100%}.ws-proof-inner{grid-template-columns:1fr 2fr;gap:1rem}.ws-proof small{grid-column:1/-1;border-left:none;padding-left:0}.ws-problem-grid{grid-template-columns:1fr}.ws-problem-icon{width:90px;flex-basis:90px}.ws-problem-icon svg{width:80px;height:80px}.ws-problem-card{min-height:125px}.ws-method-heading{grid-template-columns:1fr;gap:1.3rem}.ws-method-heading p{max-width:60ch}.ws-method-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3.7rem}.ws-method-grid::before{display:none}.ws-fit-grid{grid-template-columns:.8fr 1.2fr}.ws-fit-list{grid-column:1/-1;grid-template-columns:1fr 1fr}.ws-callout-inner{grid-template-columns:1fr;gap:1rem}.ws-callout-action{border:0;padding-left:0}.ws-application-grid{grid-template-columns:1fr;gap:2rem}}
+  @media(max-width:850px){.ws-hero-grid{grid-template-columns:1fr}.ws-hero{padding:3.6rem 0 3rem}.ws-hero h1{white-space:normal;max-width:14ch;font-size:clamp(3.5rem,8vw,5.9rem)}.ws-hero-lead{max-width:44ch}.ws-visual{max-width:720px;margin:1.7rem auto 0;width:100%}.ws-proof-inner{grid-template-columns:1fr 2fr;gap:1rem}.ws-proof-case{grid-column:1/-1;border-left:none;padding-left:0}.ws-problem-grid{grid-template-columns:1fr}.ws-problem-icon{width:90px;flex-basis:90px}.ws-problem-icon svg{width:80px;height:80px}.ws-problem-card{min-height:125px}.ws-method-heading{grid-template-columns:1fr;gap:1.3rem}.ws-method-heading p{max-width:60ch}.ws-method-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3.7rem}.ws-method-grid::before{display:none}.ws-fit-grid{grid-template-columns:.8fr 1.2fr}.ws-fit-list{grid-column:1/-1;grid-template-columns:1fr 1fr}.ws-callout-inner{grid-template-columns:1fr;gap:1rem}.ws-callout-action{border:0;padding-left:0}.ws-application-grid{grid-template-columns:1fr;gap:2rem}}
   @media(max-width:620px){.ws-wrap{width:calc(100% - 2rem)}.ws-nav-inner{min-height:66px}.ws-brand{font-size:1.3rem}.ws-nav-links{gap:.8rem}.ws-nav-links a:not(.ws-nav-cta){display:none}.ws-nav-links .ws-nav-cta{font-size:.72rem;padding:.7rem .82rem}.ws-eyebrow{font-size:.67rem;letter-spacing:.12em}.ws-hero{padding:3rem 0 2.3rem}.ws-hero h1{font-size:clamp(3.1rem,11vw,5rem)}.ws-hero-lead{font-size:1.04rem}.ws-hero-actions{align-items:stretch}.ws-btn{min-height:49px;font-size:.82rem}.ws-hero-note span{margin:0 .22rem}.ws-visual{margin-top:1rem}.ws-visual-labels{font-size:.55rem}.ws-proof-inner{grid-template-columns:1fr;gap:.7rem}.ws-proof-kicker{max-width:none}.ws-proof p{border-left:none;padding-left:0;font-size:.94rem}.ws-proof p strong{font-size:1.7rem}.ws-proof small{font-size:.72rem}.ws-section{padding:3.9rem 0}.ws-solo h2{font-size:clamp(2.55rem,9.5vw,4rem)}.ws-challenge h2{margin-bottom:2rem}.ws-problem-card{gap:1.1rem}.ws-method-heading{margin-bottom:3.1rem}.ws-method-grid{gap:3.2rem .65rem}.ws-method-card{min-height:250px;border-radius:16px;padding:2rem .82rem 1.15rem}.ws-method-step{top:-35px;width:47px;height:47px;font-size:.96rem}.ws-method-icon{font-size:2.5rem;height:2.5rem}.ws-method-card h3{font-size:clamp(1.16rem,4.8vw,1.5rem)}.ws-method-card p{font-size:.82rem}.ws-method-footnote{text-align:left}.ws-fit-grid{grid-template-columns:1fr;gap:.5rem}.ws-fit-art{width:220px;max-width:100%;min-height:210px}.ws-fit-list{grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}.ws-callout{padding:0 .65rem 1.3rem}.ws-callout-inner{padding:2rem 1.25rem;border-radius:23px}.ws-callout h2{font-size:clamp(2.65rem,9.5vw,4rem)}.ws-callout-action .ws-btn{width:100%}.ws-form-duo{grid-template-columns:1fr}.ws-bottom .ws-wrap{align-items:flex-start;flex-direction:column;gap:.5rem}}
   @media(prefers-reduced-motion:reduce){.ws-btn{transition:none}}
   .ws-solo .ws-hero h1, .ws-solo .ws-method h2, .ws-solo .ws-method-card h3{color:#FFFFFF!important}
@@ -428,5 +426,16 @@ const faqs = [
   .ws-success-icon{display:grid;place-items:center;margin:0 auto 1.5rem;width:70px;height:70px;border-radius:50%;background:#D7FF58;color:#171121;font-weight:900;font-size:2.1rem}
   .ws-waitlist-success h3{font-size:clamp(1.85rem,3vw,2.7rem);line-height:1.13;letter-spacing:-.05em;margin:.3rem 0 1rem}
   .ws-waitlist-success p:not(.ws-eyebrow-dark){color:#5C5866;font-size:1.03rem;line-height:1.6;max-width:34ch;margin:0 auto 1.5rem}
+  .ws-founder{background:#FBFAF8;padding-top:0}
+  .ws-founder-grid{display:grid;grid-template-columns:360px 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;background:#fff;border:1px solid #E6E0EA;border-radius:28px;padding:clamp(1.5rem,4vw,3.5rem)}
+  .ws-founder-photo img{display:block;width:100%;height:auto;border-radius:20px;background:#E7DFFA}
+  .ws-founder h2{font-size:clamp(2.6rem,4.2vw,4.4rem);margin:.4rem 0 1.2rem}
+  .ws-founder-lead{font-size:1.12rem;line-height:1.65;color:#3D3848;max-width:52ch;margin:0 0 1.8rem}
+  .ws-founder-facts{list-style:none;margin:0 0 1.8rem;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+  .ws-founder-facts li{background:#F4EFFB;border-radius:14px;padding:1rem 1.1rem;display:grid;gap:.3rem}
+  .ws-founder-facts strong{font-size:1.35rem;letter-spacing:-.04em;color:#4E22A0}
+  .ws-founder-facts span{font-size:.85rem;color:#5C5866;line-height:1.4}
+  .ws-founder-link{color:#6532B4;font-weight:800;font-size:.95rem}
+  @media(max-width:850px){.ws-founder-grid{grid-template-columns:1fr}.ws-founder-photo{max-width:320px}.ws-founder-facts{grid-template-columns:1fr}}
   .ws-success-link{color:#6532B4;font-size:.93rem;font-weight:800}
 </style>

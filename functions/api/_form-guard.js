@@ -115,7 +115,19 @@ export async function checkFormRequest(context, payload, options = {}) {
     }
   }
 
-  if (!originHost || !isAllowedHost(originHost)) {
+  // A few privacy-focused browsers and embedded webviews omit the Origin header.
+  // For selected public JSON forms, don't reject a legitimate same-site request
+  // solely for that omission. Cross-site Fetch Metadata and any explicitly
+  // supplied unrecognised Origin or Referer must still be rejected.
+  const originHeader = (context.request.headers.get("Origin") || "").trim();
+  const originMissing = !originHeader || originHeader === "null";
+  const fetchSite = context.request.headers.get("Sec-Fetch-Site") || "";
+  const allowNoOrigin = options.allowMissingOriginForPublicJson === true &&
+    originMissing && fetchSite !== "cross-site" &&
+    fetchSite !== "none" &&
+    (!refererHost || isAllowedHost(refererHost));
+
+  if (!isAllowedHost(originHost) && !allowNoOrigin) {
     return { ok: false, reason: "origin" };
   }
 

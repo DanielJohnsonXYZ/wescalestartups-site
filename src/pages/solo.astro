@@ -174,6 +174,15 @@ const faqs = [
             <p class="ws-method-output"><span>THE OUTPUT</span><strong>A system you can keep using and improving.</strong></p>
           </article>
         </div>
+        <div class="ws-goal-examples" aria-label="Examples of goals and the systems that could support them">
+          <p class="ws-goal-examples-label">DIFFERENT GOALS. DIFFERENT SETUPS.</p>
+          <div class="ws-goal-example-grid">
+            <div class="ws-goal-example"><span>Find first customers</span><strong>Lead capture + follow-up system</strong></div>
+            <div class="ws-goal-example"><span>Improve conversion</span><strong>Onboarding + activation tracking</strong></div>
+            <div class="ws-goal-example"><span>Save time running things</span><strong>Connected tools + automations</strong></div>
+          </div>
+          <p class="ws-goal-example-note">Examples, not a fixed package. We choose what to build based on your business.</p>
+        </div>
         <div class="ws-method-how">
           <div><span class="ws-method-how-symbol" aria-hidden="true">✳</span><strong>What the programme looks like</strong></div>
           <p>Hands-on working sessions, practical building and feedback. What we work on depends on your product, stage and goal, not a fixed list of homework.</p>
@@ -351,6 +360,14 @@ const faqs = [
   .ws-method-output{border-top:1px solid #684a8e;padding-top:1rem;margin:1.2rem 0 0!important;display:grid;gap:.4rem;margin-top:auto!important}
   .ws-method-output span{font-size:.64rem;letter-spacing:.12em;font-weight:800;color:#CAAFE8}
   .ws-method-output strong{font-size:.86rem;line-height:1.45;color:var(--lime)}
+  .ws-goal-examples{margin-top:2.25rem}
+  .ws-goal-examples-label{color:#CEB7E4;font-size:.72rem!important;font-weight:800;letter-spacing:.13em;margin:0 0 .85rem}
+  .ws-goal-example-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+  .ws-goal-example{background:#1B1730;border:1px solid #60437E;border-radius:14px;padding:1.05rem 1.2rem;display:flex;flex-direction:column;gap:.48rem}
+  .ws-goal-example span{color:#D7C9E7;font-size:.81rem}
+  .ws-goal-example strong{color:var(--lime);font-size:.98rem;line-height:1.35}
+  .ws-goal-example-note{font-size:.78rem!important;color:#C4B8D8;margin:.85rem 0 0}
+  @media(max-width:850px){.ws-goal-example-grid{grid-template-columns:1fr}}
   .ws-method-how{display:flex;align-items:center;gap:1.5rem;background:#211932;border:1px solid #665184;border-radius:16px;padding:1.2rem 1.5rem;margin-top:2rem}
   .ws-method-how>div{display:flex;align-items:center;gap:.75rem;flex:0 0 31%;font-size:1.06rem}
   .ws-method-how-symbol{font-size:1.8rem;color:var(--lime)}

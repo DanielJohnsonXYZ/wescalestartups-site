@@ -71,11 +71,17 @@ export async function onRequestPost(context) {
 
   const guard = await checkFormRequest(context, payload, {
     sourcePageField: "source_page",
-    honeypotFields: ["company_website"]
+    // The old name "company_website" was sometimes auto-filled by browsers
+    // and password managers, causing legitimate submissions to fail.
+    honeypotFields: ["wss_solo_auxiliary_7d2"],
+    allowMissingOriginForPublicJson: true
   });
   if (!guard.ok) {
     console.warn("WSS Solo waitlist rejected:", guard.reason);
-    return json(403, { ok: false, error: "Verification failed. Refresh the page and try again." });
+    return json(403, {
+      ok: false,
+      error: "We couldn't verify this request. Please open wescalestartups.com/solo directly and retry. If it still fails, email daniel@wescalestartups.com."
+    });
   }
 
   const name = clip(payload.name, 120);

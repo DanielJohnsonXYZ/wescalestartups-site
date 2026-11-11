@@ -137,16 +137,48 @@ const faqs = [
     <section class="ws-section ws-method" id="how">
       <div class="ws-wrap">
         <div class="ws-method-heading">
-          <h2>A working growth system,<br /><em>not another course.</em></h2>
-          <p>A proposed four-week sprint, designed to turn guesses into customer conversations and evidence.</p>
+          <h2>Four weeks.<br /><em>Real work. Real evidence.</em></h2>
+          <p>A proposed hands-on programme. Each week, do something with real potential customers, then use what you learn to take the next step.</p>
         </div>
         <div class="ws-method-grid">
-          <article class="ws-method-card"><span class="ws-method-step">01</span><span class="ws-method-icon" aria-hidden="true">♣</span><h3>Understand<br />buyers</h3><p>Clarify customer, problem and offer.</p></article>
-          <article class="ws-method-card"><span class="ws-method-step">02</span><span class="ws-method-icon" aria-hidden="true">⚑</span><h3>Find your<br />channel</h3><p>Run one acquisition experiment.</p></article>
-          <article class="ws-method-card"><span class="ws-method-step">03</span><span class="ws-method-icon" aria-hidden="true">▱</span><h3>Build your<br />workflow</h3><p>Use AI to save time and execute.</p></article>
-          <article class="ws-method-card"><span class="ws-method-step">04</span><span class="ws-method-icon" aria-hidden="true">▥</span><h3>Follow the<br />evidence</h3><p>Keep what works. Drop what doesn't.</p></article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">01</span>
+            <span class="ws-method-icon" aria-hidden="true">◎</span>
+            <p class="ws-method-kicker">WEEK ONE</p>
+            <h3>Talk to five<br />potential buyers</h3>
+            <p>Pick a specific customer. Ask five people how they solve the problem today.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A clear buyer and a problem worth testing.</strong></p>
+          </article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">02</span>
+            <span class="ws-method-icon" aria-hidden="true">✳</span>
+            <p class="ws-method-kicker">WEEK TWO</p>
+            <h3>Test an offer<br />people understand</h3>
+            <p>Write a simple offer. Show it to potential buyers and test a small paid pilot.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>An offer you can actually pitch.</strong></p>
+          </article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">03</span>
+            <span class="ws-method-icon" aria-hidden="true">↗</span>
+            <p class="ws-method-kicker">WEEK THREE</p>
+            <h3>Reach 20<br />relevant prospects</h3>
+            <p>Choose one channel, contact 20 matched prospects and track replies and calls.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A real customer acquisition experiment.</strong></p>
+          </article>
+          <article class="ws-method-card">
+            <span class="ws-method-step">04</span>
+            <span class="ws-method-icon" aria-hidden="true">▥</span>
+            <p class="ws-method-kicker">WEEK FOUR</p>
+            <h3>Build a simple<br />sales routine</h3>
+            <p>Follow up, use AI to organise leads and decide what to improve based on results.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A lead tracker and your next 30-day plan.</strong></p>
+          </article>
         </div>
-        <div class="ws-method-footnote">A proposed pilot, the format will be shaped by founder feedback.</div>
+        <div class="ws-method-how">
+          <div><span class="ws-method-how-symbol" aria-hidden="true">✳</span><strong>How the pilot could work</strong></div>
+          <p>One guided working session each week, practical customer-facing tasks between sessions, and feedback on what you actually tried.</p>
+        </div>
+        <div class="ws-method-footnote">Illustrative first-cohort plan. Session format and activities will be confirmed before anyone commits. Results depend on what you test and learn.</div>
       </div>
     </section>
 
@@ -310,7 +342,22 @@ const faqs = [
   .ws-method-icon{display:block;font-size:3rem;line-height:1;color:#B98BFF;height:3.5rem;margin-bottom:.8rem;font-weight:700}
   .ws-method-card h3{font-size:clamp(1.35rem,2vw,1.8rem);font-weight:800;line-height:1.13;letter-spacing:-.045em;margin:0 0 1.1rem}
   .ws-method-card p{font-size:.94rem;line-height:1.5;color:#E7DEEE;margin:0}
-  .ws-method-footnote{text-align:right;margin-top:1.8rem;font-size:.79rem;color:#BEB1D2}
+  .ws-method-card{display:flex;flex-direction:column;min-height:400px;padding-top:2.4rem}
+  .ws-method-icon{font-size:2.3rem;height:2.6rem;margin-bottom:.5rem}
+  .ws-method-card .ws-method-kicker{margin:0 0 .65rem;color:#C7A0FF;font-size:.72rem;letter-spacing:.13em;font-weight:800}
+  .ws-method-card h3{font-size:clamp(1.2rem,1.8vw,1.65rem);margin:0 0 .85rem}
+  .ws-method-card > p:not(.ws-method-kicker):not(.ws-method-output){font-size:.91rem;line-height:1.55}
+  .ws-method-output{border-top:1px solid #684a8e;padding-top:1rem;margin:1.2rem 0 0!important;display:grid;gap:.4rem;margin-top:auto!important}
+  .ws-method-output span{font-size:.64rem;letter-spacing:.12em;font-weight:800;color:#CAAFE8}
+  .ws-method-output strong{font-size:.86rem;line-height:1.45;color:var(--lime)}
+  .ws-method-how{display:flex;align-items:center;gap:1.5rem;background:#211932;border:1px solid #665184;border-radius:16px;padding:1.2rem 1.5rem;margin-top:2rem}
+  .ws-method-how>div{display:flex;align-items:center;gap:.75rem;flex:0 0 31%;font-size:1.06rem}
+  .ws-method-how-symbol{font-size:1.8rem;color:var(--lime)}
+  .ws-method-how p{color:#DCD4E8;line-height:1.6;font-size:.94rem;margin:0}
+  .ws-method-footnote{text-align:left;margin-top:1rem;font-size:.76rem;color:#C7BCD7;line-height:1.5}
+  @media(max-width:850px){.ws-method-card{min-height:360px}.ws-method-how{flex-direction:column;align-items:flex-start;gap:.5rem}.ws-method-how>div{flex:none}}
+  @media(max-width:620px){.ws-method-card{min-height:360px;padding:2rem .86rem 1.1rem}.ws-method-card h3{font-size:1.16rem}.ws-method-card > p:not(.ws-method-kicker):not(.ws-method-output){font-size:.82rem}.ws-method-output strong{font-size:.8rem}.ws-method-how{padding:1rem}.ws-method-how>div{font-size:.95rem}.ws-method-how p{font-size:.87rem}}
+
   .ws-fit{background:#FBFAF8}.ws-fit-grid{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:clamp(1.5rem,4vw,4.5rem);align-items:center}
   .ws-fit h2{font-size:clamp(2.8rem,4.1vw,4.4rem);white-space:nowrap}.ws-fit-list{list-style:none;margin:0;padding:0;display:grid;gap:1.15rem}
   .ws-fit-list li{font-size:1.02rem;font-weight:650;display:flex;align-items:center;gap:.9rem}.ws-fit-list li::before{content:"✓";font-size:1.06rem;font-weight:900;width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;border-radius:50%;background:var(--lime)}

@@ -76,43 +76,11 @@ const turnstileSiteKey =
   <section class="section">
     <div class="shell contact-grid contact-grid-form">
       <form class="contact-option contact-form" id="growth-enquiry" name="growth-enquiry" action="/api/contact" method="post">
-        <p class="card-kicker">Structured enquiry</p>
-        <h2>Tell us what is happening now.</h2>
+        <p class="card-kicker">Growth enquiry</p>
+        <h2>Tell us who you are.</h2>
         <label>Name<input name="name" autocomplete="name" required /></label>
         <label>Email<input name="email" type="email" autocomplete="email" required /></label>
-        <label>Company<input name="company" autocomplete="organization" required /></label>
-        <label>Company stage
-          <select name="stage" required>
-            <option value="">Choose one</option>
-            <option>Pre-seed / seed</option>
-            <option>Series A</option>
-            <option>Series B+</option>
-            <option>Bootstrapped / profitable</option>
-          </select>
-        </label>
-        <label>ARR range
-          <select name="arr" required>
-            <option value="">Choose one</option>
-            <option>Under £500k</option>
-            <option>£500k to £1m</option>
-            <option>£1m to £5m</option>
-            <option>£5m to £10m</option>
-            <option>£10m+</option>
-          </select>
-        </label>
-        <label>Current channels<input name="channels" placeholder="Paid, outbound, SEO, partners, content, sales-led..." /></label>
-        <label>Current bottleneck<textarea name="bottleneck" rows="4" required></textarea></label>
-        <label>Budget
-          <select name="budget" required>
-            <option value="">Choose one</option>
-            <option>Exploring</option>
-            <option>£2k to £5k</option>
-            <option>£5k to £10k</option>
-            <option>£10k+</option>
-          </select>
-        </label>
-        <label>Timeline<input name="timeline" placeholder="Now, this quarter, next quarter..." /></label>
-        <label>What do you need help with?<textarea name="help" rows="4"></textarea></label>
+        <label>Company and stage<input name="company" placeholder="Acme, Series A" required /></label>
         {turnstileSiteKey && (
           <div
             class="cf-turnstile"
@@ -123,6 +91,7 @@ const turnstileSiteKey =
         )}
         <button class="button button-brand" type="submit" id="growth-enquiry-submit">Send enquiry</button>
         <p id="enquiry-status" role="status" aria-live="polite"></p>
+        <a id="enquiry-book-next" hidden href="#book-a-time">Book your growth diagnostic →</a>
         <a id="enquiry-email-fallback" hidden href={`mailto:${siteConfig.email}`}>Open an email draft instead →</a>
       </form>
       <aside class="contact-option">
@@ -299,6 +268,7 @@ const turnstileSiteKey =
   const button = document.getElementById("growth-enquiry-submit");
   const fallback = document.getElementById("enquiry-email-fallback");
 
+  const bookNext = document.getElementById("enquiry-book-next");
   let submitting = false;
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -309,18 +279,7 @@ const turnstileSiteKey =
     const body = [
       "Name: " + (data.get("name") || ""),
       "Email: " + (data.get("email") || ""),
-      "Company: " + (data.get("company") || ""),
-      "Stage: " + (data.get("stage") || ""),
-      "ARR: " + (data.get("arr") || ""),
-      "Channels: " + (data.get("channels") || ""),
-      "Budget: " + (data.get("budget") || ""),
-      "Timeline: " + (data.get("timeline") || ""),
-      "",
-      "Current bottleneck:",
-      data.get("bottleneck") || "",
-      "",
-      "Help needed:",
-      data.get("help") || ""
+      "Company and stage: " + (data.get("company") || "")
     ].join("\n");
 
     // Fallback is only offered after a failed API delivery, never a false "sent" message.
@@ -332,6 +291,7 @@ const turnstileSiteKey =
     const payload = Object.fromEntries(data.entries());
     payload.source_page = window.location.href;
 
+    if (bookNext) bookNext.hidden = true;
     submitting = true;
     if (button instanceof HTMLButtonElement) {
       button.disabled = true;
@@ -351,6 +311,7 @@ const turnstileSiteKey =
       }
 
       form.reset();
+      if (bookNext) bookNext.hidden = false;
       if (status) status.textContent = "Thanks, your enquiry has been sent. We'll be in touch.";
       try {
         const widget = form.querySelector(".cf-turnstile");

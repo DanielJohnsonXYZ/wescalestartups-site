@@ -1,4 +1,6 @@
 ---
+import EngagementCommitments from "../components/EngagementCommitments.astro";
+import { canonicalProofMetrics, testimonials } from "../site";
 import OfferRoutingCards from "../components/OfferRoutingCards.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
@@ -72,6 +74,22 @@ const offerCatalog = buildOfferCatalogSchema(
         </div>
         <p class="hero-microcopy">{siteConfig.bookingSubcopy}</p>
       </div>
+      <figure class="hero-support">
+        <blockquote>{testimonials[0].quote}</blockquote>
+        <figcaption>{testimonials[0].name}, {testimonials[0].company}</figcaption>
+      </figure>
+      <div class="pricing-proof-logos">
+        <img src="/images/logos/ned.svg" alt="Ned" width="96" height="32" />
+        <img src="/images/logos/equoo.svg" alt="eQuoo" width="96" height="32" />
+      </div>
+      <dl class="hero-ledger">
+        {[canonicalProofMetrics[0], canonicalProofMetrics[2], canonicalProofMetrics[3]].map((metric) => (
+          <div class="hero-ledger-cell">
+            <dt class="hero-ledger-label">{metric.label}</dt>
+            <dd class="hero-ledger-value" style="margin: 0">{metric.value}</dd>
+          </div>
+        ))}
+      </dl>
       {/* The page's whole promise is published ranges, so the rail answers the
           headline in the hero instead of making the reader scroll for it. Same
           data as the tier cards below (pricingTiers), no second source. */}
@@ -182,6 +200,8 @@ const offerCatalog = buildOfferCatalogSchema(
     </div>
   </section>
 
+  <EngagementCommitments />
+
   <section class="cta-band">
     <div class="shell cta-inner">
       <div>
@@ -210,6 +230,8 @@ const offerCatalog = buildOfferCatalogSchema(
 </BaseLayout>
 
 <style>
+  .pricing-proof-logos { display: flex; gap: 1rem; margin-block: 1rem; }
+  .pricing-proof-logos img { object-fit: contain; }
   /* Shared surface lives in .trust-list (components.css); only the top
      margin is page-specific here, this list follows the disclaimer above. */
   .pricing-trust-list {

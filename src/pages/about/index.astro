@@ -5,7 +5,7 @@ import TldrCallout from "../../components/TldrCallout.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { aboutRelatedReading, canonicalProofMetrics, revenueInfluencedNote, siteConfig } from "../../site";
+import { aboutRelatedReading, canonicalProofMetrics, pricingTiers, revenueInfluencedNote, siteConfig } from "../../site";
 
 const aboutFaqs = [
   {
@@ -81,6 +81,23 @@ const aboutSchema = [
     </div>
   </section>
 
+  <section class="section" id="working-with-wss">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Working with WSS"
+        title="WSS works with Seed to Series B teams, and every engagement has a published price."
+        body="We Scale Startups is a London-based growth consultancy led by Daniel Johnson. It works with post-PMF B2B SaaS and AI founders, usually at Seed to Series B and roughly £1M–£10M ARR, who have paying customers but no repeatable way to win more of them. Daniel leads every engagement himself. The usual starting point is the one-week Growth Diagnosis; the larger engagements below follow once the constraint is clear."
+      />
+      <ul class="related-insights-list">
+        {pricingTiers.map((t) => (
+          <li><a href={t.href}>{t.name}</a>: {t.priceFrom}, {t.duration}.</li>
+        ))}
+        <li><a href="/services/fractional-cmo">Fractional CMO Plus</a>: £7.5k–£10k/mo, about two days a week, when you need deeper operating support.</li>
+      </ul>
+      <p style="margin-top:1rem">Not the right fit: pre-PMF startups, or teams with no one internally to run the work. <a href="/pricing">Compare all engagements on the pricing page</a>, or <a href={siteConfig.bookingUrl}>book a call</a> to check fit.</p>
+    </div>
+  </section>
+
   <!-- WHY WSS EXISTS -->
   <section class="section">
     <div class="shell">
@@ -88,7 +105,7 @@ const aboutSchema = [
         <p class="eyebrow">Why WSS exists</p>
         <h2>Founders kept getting stuck running marketing themselves.</h2>
         <p style="margin-top: 1rem;">
-          After more than a decade working inside SaaS, fintech, healthtech and EdTech startups, including two exits —
+          After 15 years working inside SaaS, fintech, healthtech and EdTech startups, including two exits,
           the same pattern kept showing up: founders with great products who were stuck running marketing themselves
           because nobody else on the team could read the numbers and decide what to scale.
         </p>

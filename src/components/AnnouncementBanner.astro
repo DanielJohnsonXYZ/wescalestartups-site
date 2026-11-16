@@ -7,12 +7,14 @@ interface Props {
   variant?: "default" | "brand" | "muted" | "dark-hero";
   /** Optional label chip (dark-hero variant). */
   pill?: string;
+  /** Loop the announcement copy as a marquee; CTA remains stationary. */
+  marquee?: boolean;
 }
 
-const { text, href, linkText = "Learn more →", dismissible = true, variant = "default", pill } = Astro.props;
+const { text, href, linkText = "Learn more →", dismissible = true, variant = "default", pill, marquee = false } = Astro.props;
 
 // Generate a unique ID for this banner (for localStorage dismiss)
-const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
+const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global") + (marquee ? "-ticker" : "");
 ---
 
 <div
@@ -23,7 +25,16 @@ const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
 >
   <div class="shell banner-inner">
     {pill && variant === "dark-hero" && <span class="banner-pill">{pill}</span>}
-    <p class="banner-text">{text}</p>
+    {marquee ? (
+      <div class="banner-marquee">
+        <div class="banner-marquee-track">
+          <span class="banner-marquee-text">{text}</span>
+          <span class="banner-marquee-text" aria-hidden="true">{text}</span>
+        </div>
+      </div>
+    ) : (
+      <p class="banner-text">{text}</p>
+    )}
     {href && (
       <a class="banner-link" href={href}>{linkText}</a>
     )}
@@ -132,7 +143,36 @@ const bannerId = "banner-" + (href ? href.replace(/\//g, "-") : "global");
   .banner-text {
     margin: 0;
   }
+  .banner-marquee {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    mask-image: linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
+  }
+  .banner-marquee-track {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    animation: announcement-ticker 24s linear infinite;
+  }
+  .banner-marquee-text {
+    flex: 0 0 auto;
+    padding-right: 4.5rem;
+  }
+  @keyframes announcement-ticker {
+    to { transform: translateX(-50%); }
+  }
+  .announcement-banner:hover .banner-marquee-track,
+  .announcement-banner:focus-within .banner-marquee-track {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .banner-marquee-track { animation: none; }
+  }
   .banner-link {
+    flex: 0 0 auto;
     font-weight: 600;
     color: var(--violet-deep);
     text-decoration: underline;

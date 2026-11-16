@@ -248,10 +248,11 @@ const subAudiences = [
   bodyClass="homepage-solo-promo"
   showAnnouncement={true}
   announcementVariant="brand"
-  announcementText="New: WSS Solo accelerator"
+  announcementText="🚀 Built something with AI? WSS Solo helps solo founders find paying customers, test demand and grow. 💡 First-cohort waitlist now open! ✨"
   announcementHref="/solo"
   announcementLinkText="Join the waitlist ↗"
   announcementDismissible={true}
+  announcementMarquee={true}
 >
   <section class="v9-hero" id="top" aria-labelledby="v9-hero-title">
     <div class="v9-aurora v9-aurora-one" aria-hidden="true"></div>
@@ -818,7 +819,7 @@ const subAudiences = [
       background: #d7ff58;
       color: #161a0c;
       border-bottom: 1px solid #bce244;
-      height: 36px;
+      height: 38px;
       padding: 0;
       display: flex;
       align-items: center;
@@ -829,6 +830,7 @@ const subAudiences = [
       gap: 0.48rem;
       flex-wrap: nowrap;
       white-space: nowrap;
+      width: min(100% - 2rem, 1320px);
     }
     body.homepage-solo-promo .announcement-banner--brand .banner-link {
       color: #16210a;
@@ -840,18 +842,18 @@ const subAudiences = [
       flex: none;
     }
     body.homepage-solo-promo .site-header {
-      top: 36px;
+      top: 38px;
     }
     @media (max-width: 540px) {
       body.homepage-solo-promo .announcement-banner--brand {
-        height: 40px;
+        height: 42px;
         font-size: 0.72rem;
       }
       body.homepage-solo-promo .announcement-banner--brand .banner-inner {
         gap: 0.3rem;
       }
       body.homepage-solo-promo .site-header {
-        top: 40px;
+        top: 42px;
       }
     }
   </style>

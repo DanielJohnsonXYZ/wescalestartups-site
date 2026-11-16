@@ -42,6 +42,7 @@ interface Props {
   announcementHref?: string;
   announcementLinkText?: string;
   announcementDismissible?: boolean;
+  announcementMarquee?: boolean;
   announcementVariant?: "default" | "brand" | "muted" | "dark-hero";
   announcementPill?: string;
   /** Sticky book CTA (off on /book and pages with their own booking block). */
@@ -84,6 +85,7 @@ const {
   announcementHref = siteConfig.scorecardUrl,
   announcementLinkText = "Take the scorecard →",
   announcementDismissible = true,
+  announcementMarquee = false,
   announcementVariant = "brand",
   announcementPill,
   stickyBookCta: stickyBookCtaProp,
@@ -325,6 +327,7 @@ const turnstileSiteKey =
         href={announcementHref}
         linkText={announcementLinkText}
         dismissible={announcementDismissible}
+        marquee={announcementMarquee}
         variant={announcementVariant}
         pill={announcementPill}
       />

@@ -15,6 +15,13 @@ await sharp(join(root, "public/og/default.svg"), { density: 96 })
   .toFile(join(root, "public/og/default.png"));
 console.log("[og] generated public/og/default.png (1200x630)");
 
+// --- WSS Solo landing page card ---
+await sharp(join(root, "public/og/solo.svg"), { density: 96 })
+  .resize(1200, 630)
+  .png()
+  .toFile(join(root, "public/og/solo.png"));
+console.log("[og] generated public/og/solo.png (1200x630)");
+
 // --- Per-item cards ---
 function escapeXml(value) {
   return String(value)

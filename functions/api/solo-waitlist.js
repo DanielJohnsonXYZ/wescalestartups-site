@@ -12,6 +12,18 @@ function json(status, body) {
   });
 }
 
+function cleanProductUrl(value) {
+  const raw = clip(value, 300);
+  if (!raw) return "";
+  try {
+    const url = new URL(/^https?:\/\//i.test(raw) ? raw : "https://" + raw);
+    if (!["http:", "https:"].includes(url.protocol) || !url.hostname.includes(".")) return null;
+    return url.toString();
+  } catch {
+    return null;
+  }
+}
+
 function clip(value, max) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
@@ -27,6 +39,7 @@ async function alertOwner(env, data) {
     "Name: " + data.name,
     "Email: " + data.email,
     "Stage: " + (data.stage || "Not provided"),
+    "Product URL: " + (data.productUrl || "Not provided"),
     "Consent: Yes, WSS Solo cohort updates",
     "Joined at: " + data.joinedAt,
     "Source: " + data.source,
@@ -71,16 +84,23 @@ export async function onRequestPost(context) {
 
   const guard = await checkFormRequest(context, payload, {
     sourcePageField: "source_page",
-    honeypotFields: ["company_website"]
+    // The old name "company_website" was sometimes auto-filled by browsers
+    // and password managers, causing legitimate submissions to fail.
+    honeypotFields: ["wss_solo_auxiliary_7d2"],
+    allowMissingOriginForPublicJson: true
   });
   if (!guard.ok) {
     console.warn("WSS Solo waitlist rejected:", guard.reason);
-    return json(403, { ok: false, error: "Verification failed. Refresh the page and try again." });
+    return json(403, {
+      ok: false,
+      error: "We couldn't verify this request. Please open wescalestartups.com/solo directly and retry. If it still fails, email daniel@wescalestartups.com."
+    });
   }
 
   const name = clip(payload.name, 120);
   const email = clip(payload.email, 254).toLowerCase();
   const stage = clip(payload.stage, 25);
+  const productUrl = cleanProductUrl(payload.product_url);
   const source = clip(payload.source_page, 500);
   const consent = payload.waitlist_consent === "yes";
   const utmSource = clip(payload.utm_source, 150);
@@ -91,6 +111,9 @@ export async function onRequestPost(context) {
   try { sourceURL = new URL(source); } catch { return json(400, { ok: false, error: "Invalid page." }); }
   if (!["/solo", "/solo/"].includes(sourceURL.pathname)) {
     return json(400, { ok: false, error: "Invalid page." });
+  }
+  if (productUrl === null) {
+    return json(400, { ok: false, error: "That product URL doesn't look right. Check it or leave it blank." });
   }
   if (!name || !EMAIL_RE.test(email) || !STAGES.has(stage) || !consent) {
     return json(400, { ok: false, error: "Enter your name, a valid email and agree to WSS Solo updates." });
@@ -119,6 +142,7 @@ export async function onRequestPost(context) {
     wss_solo_waitlist_consent: true,
     wss_solo_waitlist_joined_at: joinedAt,
     wss_solo_waitlist_stage: stage || "not-provided",
+    wss_solo_waitlist_product_url: productUrl,
     wss_solo_waitlist_source: "https://wescalestartups.com/solo",
     wss_solo_waitlist_utm_source: utmSource,
     wss_solo_waitlist_utm_medium: utmMedium,
@@ -146,7 +170,7 @@ export async function onRequestPost(context) {
 
   // Notifications are supplementary: a confirmed CRM save is the source of truth.
   const notification = isSyntheticTest ? Promise.resolve() : alertOwner(env, {
-    name, email, stage, source, joinedAt, utmSource, utmMedium, utmCampaign
+    name, email, stage, productUrl, source, joinedAt, utmSource, utmMedium, utmCampaign
   });
   if (typeof context.waitUntil === "function") context.waitUntil(notification);
   else await notification;

@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../../lib/schema";
-import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
+import { canonicalProofMetrics, founderStory, pricingTiers, siteConfig } from "../../site";
 
 const path = "/about/daniel";
 const schema = [
@@ -49,6 +49,31 @@ const schema = [
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="who-daniel-works-with">
+    <div class="shell">
+      <SectionIntro
+        eyebrow="Who he works with"
+        title="Daniel advises post-PMF B2B SaaS and AI teams between Seed and Series B."
+        body="Daniel Johnson is a London-based fractional CMO and growth advisor. He works with founders who have paying customers but no repeatable way to win more of them, usually at Seed to Series B and roughly £1M–£10M ARR, in the UK and internationally. He leads every engagement himself, with no junior account managers, and hands the system to your team at the end."
+      />
+      <ul class="related-insights-list">
+        <li>Best for: founders still running growth themselves, or teams whose pipeline is inconsistent after early traction.</li>
+        <li>Stage: Seed to Series B, roughly £1M–£10M ARR.</li>
+        <li>Sectors: B2B SaaS and AI first, with operator experience in fintech, healthtech and EdTech. 15 years in growth and two operator-side startup exits.</li>
+        <li>Mentoring is separate from client work: he mentors founders through Google for Startups and Techstars, which is teaching, not paid delivery.</li>
+        <li>Not the right fit: pre-PMF startups, or teams with no one internally to run the work. If that is you, he will say so on the call and point you somewhere better.</li>
+      </ul>
+      <h3 style="margin-top:1.5rem">Ways to hire him, with published prices</h3>
+      <ul class="related-insights-list">
+        {pricingTiers.map((t) => (
+          <li><a href={t.href}>{t.name}</a>: {t.priceFrom}, {t.duration}.</li>
+        ))}
+        <li><a href="/services/fractional-cmo">Fractional CMO Plus</a>: £7.5k–£10k/mo, about two days a week, when you need deeper operating support.</li>
+      </ul>
+      <p style="margin-top:1rem"><a href="/pricing">Compare all engagements on the pricing page</a>, or <a href={siteConfig.bookingUrl}>book a call</a> to check fit.</p>
     </div>
   </section>
 

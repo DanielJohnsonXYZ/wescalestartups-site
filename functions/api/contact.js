@@ -114,7 +114,7 @@ export async function onRequestPost(context) {
   }
 
   const data = fields(payload);
-  if (!data.name || !data.email || !data.company || !data.stage || !data.arr || !data.bottleneck || !data.budget || !EMAIL_RE.test(data.email)) {
+  if (!data.name || !data.email || !data.company || !EMAIL_RE.test(data.email)) {
     return json(400, { ok: false, error: "Complete the required fields and check your email address." });
   }
 

@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
 import { buildBreadcrumbSchema, buildFaqSchema } from "../../lib/schema";
-import { canonicalProofMetrics, founderStory, siteConfig } from "../../site";
+import { canonicalProofMetrics, founderStory, pricingTiers, siteConfig } from "../../site";
 import { staticPathLastModified } from "../../lastmod";
 
 const path = "/facts/daniel-johnson";
@@ -19,11 +19,22 @@ const lastUpdatedLabel = lastmodIso
     })
   : false;
 
+// Prices come from pricingTiers so this page cannot drift from /pricing.
+const engagementSummary =
+  pricingTiers.map((t) => `${t.name} ${t.priceFrom}`).join("; ") +
+  "; Fractional CMO Plus £7.5k–£10k/mo";
+
 const quickFacts: Array<[string, string]> = [
   ["Full name", "Daniel Johnson"],
   ["Role", "Founder and Fractional CMO"],
   ["Company", "We Scale Startups"],
   ["Based in", "London, United Kingdom"],
+  ["Years in growth", "15"],
+  ["Exits", "Two operator-side exits: eQuoo and Image To Painting"],
+  ["Works with", "Post-PMF B2B SaaS and AI startups, Seed to Series B, typically £1M–£10M ARR"],
+  ["Engagements", engagementSummary],
+  ["Published prices", `${siteConfig.siteUrl}/pricing`],
+  ["Mentoring (teaching, not client work)", "Google for Startups mentor; senior moderator at Online Geniuses"],
   ["Personal site", siteConfig.danielSite],
   ["LinkedIn", siteConfig.founderLinkedin],
   ["X / Twitter", siteConfig.founderTwitter],
@@ -43,12 +54,16 @@ const faqs = [
   {
     question: "Who is Daniel Johnson?",
     answer:
-      "Daniel Johnson is the founder and Fractional CMO of We Scale Startups, a London-based growth consultancy for post-PMF B2B SaaS and AI startups. He has operated inside SaaS, fintech, healthtech and EdTech startups for more than a decade, including two operator-side exits."
+      "Daniel Johnson is the founder and Fractional CMO of We Scale Startups, a London-based growth consultancy for post-PMF B2B SaaS and AI startups. He has operated inside SaaS, fintech, healthtech and EdTech startups for 15 years, including two operator-side exits."
   },
   {
     question: "What company did Daniel Johnson found?",
     answer:
       "Daniel Johnson founded We Scale Startups, a growth consultancy that builds acquisition systems and provides fractional CMO leadership for post-PMF startups from Seed to Series B."
+  },
+  {
+    question: "Who does Daniel Johnson work with, and what does it cost?",
+    answer: `Daniel Johnson works with post-PMF B2B SaaS and AI founders between Seed and Series B, typically £1M–£10M ARR, who have paying customers but no repeatable way to win more of them. He leads every We Scale Startups engagement himself. Prices are published: ${engagementSummary}. Pre-PMF startups, or teams with no one internally to run the work, are not the right fit. Full details are at ${siteConfig.siteUrl}/pricing.`
   },
   {
     question: "What is Daniel Johnson's track record?",
@@ -58,7 +73,7 @@ const faqs = [
   {
     question: "What credentials and affiliations does Daniel Johnson have?",
     answer:
-      "Daniel Johnson is a mentor for Google for Startups and Techstars, has guest lectured at Cambridge Judge Business School, and has delivered invited growth teaching at Imperial College London. He is also affiliated with the UK Space Agency startup ecosystem and General Assembly."
+      "Daniel Johnson is a mentor for Google for Startups and Techstars and a senior moderator at Online Geniuses, has guest lectured at Cambridge Judge Business School, and has delivered invited growth teaching at Imperial College London. He is also affiliated with the UK Space Agency startup ecosystem and General Assembly."
   },
   {
     question: "Where is Daniel Johnson based?",
@@ -125,7 +140,7 @@ const schema = [
       <SectionIntro eyebrow="02" title="Identity statement" />
       <p class="facts-statement">
         Daniel Johnson is the founder and Fractional CMO of We Scale Startups. He has operated inside SaaS, fintech,
-        healthtech and EdTech startups for more than a decade, including two operator-side exits. He founded We Scale
+        healthtech and EdTech startups for 15 years, including two operator-side exits. He founded We Scale
         Startups to provide the senior growth judgement early-stage founders otherwise lack: diagnosing the real
         growth constraint, building the acquisition system, and transferring the operating rhythm to the founder's
         team.
@@ -191,8 +206,8 @@ const schema = [
     <div class="shell">
       <SectionIntro eyebrow="07" title="Related" />
       <ul class="related-insights-list">
-        <li><a class="card-link" href="/about/daniel">Daniel Johnson — founder profile →</a></li>
-        <li><a class="card-link" href="/facts/we-scale-startups">We Scale Startups — company facts →</a></li>
+        <li><a class="card-link" href="/about/daniel">Daniel Johnson: founder profile →</a></li>
+        <li><a class="card-link" href="/facts/we-scale-startups">We Scale Startups: company facts →</a></li>
         <li><a class="card-link" href="/about">About We Scale Startups →</a></li>
       </ul>
     </div>

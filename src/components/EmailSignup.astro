@@ -40,7 +40,58 @@ const turnstileSiteKey =
     import.meta.env.PUBLIC_TURNSTILE_SITE_KEY.trim()) ||
   "0x4AAAAAAEIhzoHuWLsynQnO";
 const turnstileTheme = variant === "dark" ? "dark" : "light";
+const turnstileCallbackSuffix = formId.replace(/[^a-zA-Z0-9_]/g, "_");
+const turnstileErrorCallback = `wssTurnstileError_${turnstileCallbackSuffix}`;
+const turnstileSuccessCallback = `wssTurnstileSuccess_${turnstileCallbackSuffix}`;
 ---
+
+
+<script
+  is:inline
+  data-form-id={formId}
+  data-error-handler={turnstileErrorCallback}
+  data-success-handler={turnstileSuccessCallback}
+>
+  // Register before the widget appears so async Turnstile can always find its callbacks.
+  (() => {
+    const script = document.currentScript;
+    const formId = script?.dataset.formId;
+    const errorHandler = script?.dataset.errorHandler;
+    const successHandler = script?.dataset.successHandler;
+    if (!formId || !errorHandler || !successHandler) return;
+
+    const controls = () => {
+      const form = document.getElementById(formId);
+      return {
+        status: form?.parentElement?.querySelector("[data-signup-status]"),
+        retryButton: form?.querySelector("[data-turnstile-retry]")
+      };
+    };
+
+    window[errorHandler] = () => {
+      const { status, retryButton } = controls();
+      if (status && status.textContent !== "Subscribing…") {
+        if (status.dataset.turnstileError !== "1") {
+          status.dataset.previousTurnstileStatus = status.textContent || "";
+        }
+        status.dataset.turnstileError = "1";
+        status.textContent = "Security check failed. Cloudflare will retry automatically. If it keeps failing, select Retry verification or refresh this page.";
+      }
+      if (retryButton instanceof HTMLButtonElement) retryButton.hidden = false;
+      return true; // Handled, so Turnstile does not throw an uncaught exception.
+    };
+
+    window[successHandler] = () => {
+      const { status, retryButton } = controls();
+      if (status?.dataset.turnstileError === "1") {
+        status.textContent = status.dataset.previousTurnstileStatus || "Security check complete. You can sign up.";
+        delete status.dataset.previousTurnstileStatus;
+        delete status.dataset.turnstileError;
+      }
+      if (retryButton instanceof HTMLButtonElement) retryButton.hidden = true;
+    };
+  })();
+</script>
 
 <div class={`email-signup-strip email-signup-strip--${variant}`} data-form-id={formId}>
   <div class="email-signup-inner">
@@ -80,11 +131,16 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
           data-sitekey={turnstileSiteKey}
           data-theme={turnstileTheme}
           data-size="flexible"
+          data-error-callback={turnstileErrorCallback}
+          data-callback={turnstileSuccessCallback}
         />
+      )}
+      {turnstileSiteKey && (
+        <button type="button" class="turnstile-retry" data-turnstile-retry hidden>Retry verification</button>
       )}
       <button type="submit" class="button button-brand">{buttonLabel}</button>
     </form>
-    <p class="email-signup-fine" data-signup-status>{finePrint}</p>
+    <p class="email-signup-fine" data-signup-status role="status" aria-live="polite">{finePrint}</p>
   </div>
 </div>
 
@@ -110,12 +166,35 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
     const status = form.parentElement?.querySelector("[data-signup-status]");
     const button = form.querySelector('button[type="submit"]');
     const defaultFine = status?.textContent || "No spam. Unsubscribe any time.";
+    const retryButton = form.querySelector("[data-turnstile-retry]");
+    if (retryButton instanceof HTMLButtonElement) {
+      retryButton.addEventListener("click", () => {
+        const widget = form.querySelector(".cf-turnstile");
+        if (!widget || !window.turnstile) {
+          if (status) status.textContent = "Please refresh this page and try again.";
+          return;
+        }
+        try {
+          if (status) status.textContent = "Retrying the security check…";
+          retryButton.hidden = true;
+          window.turnstile.reset(widget);
+        } catch (_) {
+          retryButton.hidden = false;
+          if (status) status.textContent = "Please refresh this page and try again.";
+        }
+      });
+    }
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
       const email = (data.get("email") || "").toString().trim();
       if (!email) return;
+      if (form.querySelector(".cf-turnstile") && !(data.get("cf-turnstile-response") || "").toString().trim()) {
+        if (status) status.textContent = "Please complete the security check before subscribing.";
+        if (retryButton instanceof HTMLButtonElement) retryButton.hidden = false;
+        return;
+      }
 
       if (button instanceof HTMLButtonElement) {
         button.disabled = true;
@@ -227,6 +306,18 @@ const turnstileTheme = variant === "dark" ? "dark" : "light";
   .email-signup-form .cf-turnstile {
     flex: 1 1 100%;
   }
+  .email-signup-form .turnstile-retry {
+    border: 0;
+    background: transparent;
+    padding: 0.25rem 0;
+    color: var(--accent);
+    font: inherit;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .email-signup-form .turnstile-retry[hidden] { display: none; }
+  .email-signup-strip--dark .turnstile-retry { color: var(--v9-white); }
   .email-signup-form input[type="email"] {
     flex: 1 1 220px;
     padding: 0.65rem 0.9rem;

@@ -144,45 +144,45 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
       <div class="ws-wrap">
         <div class="ws-method-heading">
           <h2>Four weeks.<br /><em>From guessing to knowing.</em></h2>
-          <p>We don't start with tools. We start with your customer, test what you're unsure of, then build only what the results back up.</p>
+          <p>Start with your customer. Test what you're unsure of. Build what works.</p>
         </div>
         <div class="ws-method-grid">
           <article class="ws-method-card">
             <span class="ws-method-step">01</span>
             <span class="ws-method-icon" aria-hidden="true">◎</span>
-            <p class="ws-method-kicker">WEEK 1 / KNOW YOUR CUSTOMER</p>
-            <h3>Who is it for,<br />and why?</h3>
-            <p>Work out who your best customer is, who it isn't, and the problem you solve for them, in their words.</p>
-            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A one-page picture of your customer.</strong></p>
+            <p class="ws-method-kicker">WEEK 1</p>
+            <h3>Know your customer</h3>
+            <p>Who it's for, who it isn't, and the problem you solve.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A one-page customer picture.</strong></p>
           </article>
           <article class="ws-method-card">
             <span class="ws-method-step">02</span>
             <span class="ws-method-icon" aria-hidden="true">✳</span>
-            <p class="ws-method-kicker">WEEK 2 / LIST YOUR GUESSES</p>
-            <h3>What has to<br />be true?</h3>
-            <p>Write down what you're assuming about your customer, your offer and how people find you. Then pick the guess that matters most.</p>
-            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>Your riskiest guesses, ranked.</strong></p>
+            <p class="ws-method-kicker">WEEK 2</p>
+            <h3>Sort fact from belief</h3>
+            <p>List what you're assuming. Pick the riskiest.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>Your assumptions, ranked.</strong></p>
           </article>
           <article class="ws-method-card">
             <span class="ws-method-step">03</span>
             <span class="ws-method-icon" aria-hidden="true">↗</span>
-            <p class="ws-method-kicker">WEEK 3 / TEST IT</p>
-            <h3>Run small<br />tests</h3>
-            <p>Plan a few quick tests, each with a clear result to look for. Run them with real people and see what holds up.</p>
-            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A simple test plan and real results.</strong></p>
+            <p class="ws-method-kicker">WEEK 3</p>
+            <h3>Test it cheaply</h3>
+            <p>Small tests with real people.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A test plan and real results.</strong></p>
           </article>
           <article class="ws-method-card">
             <span class="ws-method-step">04</span>
             <span class="ws-method-icon" aria-hidden="true">▥</span>
-            <p class="ws-method-kicker">WEEK 4 / BUILD WHAT WORKS</p>
-            <h3>Set up what<br />the tests back</h3>
-            <p>Build the tools and workflows around what worked. That might be lead capture and follow-up, onboarding emails or an AI automation.</p>
-            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A working setup you keep using.</strong></p>
+            <p class="ws-method-kicker">WEEK 4</p>
+            <h3>Build what works</h3>
+            <p>Tools and workflows around what the tests back.</p>
+            <p class="ws-method-output"><span>YOU LEAVE WITH</span><strong>A setup you keep using.</strong></p>
           </article>
         </div>
         <div class="ws-method-how">
           <div><span class="ws-method-how-symbol" aria-hidden="true">✳</span><strong>What the first cohort looks like</strong></div>
-          <p>One live working session a week with Daniel, plus help between sessions. The group is kept small so every founder gets time on their own product.</p>
+          <p>One live session a week with Daniel, plus help in between. Small group, so everyone gets time on their own product.</p>
         </div>
       </div>
     </section>
@@ -432,4 +432,7 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
   .ws-founder-link{color:#6532B4;font-weight:800;font-size:.95rem}
   @media(max-width:850px){.ws-founder-grid{grid-template-columns:1fr}.ws-founder-photo{max-width:320px}.ws-founder-facts{grid-template-columns:1fr}}
   .ws-success-link{color:#6532B4;font-size:.93rem;font-weight:800}
+  .ws-solo .ws-method-card{min-height:0}
+  .ws-solo .ws-method-card h3{min-height:0}
+  .ws-solo .ws-method-card > p:not(.ws-method-kicker):not(.ws-method-output){font-size:1rem;margin-bottom:1.4rem}
 </style>

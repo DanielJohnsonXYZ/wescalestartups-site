@@ -19,6 +19,10 @@ interface Props {
   description?: string;
   /** Optional extra discoverability meta for hub pages (insights, resources, etc.). */
   keywords?: string;
+  /** Override the ai:role meta for pages aimed at a different audience (e.g. /solo). */
+  aiRole?: string;
+  /** Override the ai:serves meta for pages aimed at a different audience. */
+  aiServes?: string;
   path?: string;
   ogImage?: string;
   /** Alt text for social preview images (defaults to title). */
@@ -69,6 +73,8 @@ const {
   title = siteConfig.title,
   description = siteConfig.description,
   keywords,
+  aiRole = "Growth consultancy and fractional CMO support for post-PMF startups",
+  aiServes = "Post-PMF SaaS, AI, fintech, healthtech, ecommerce, and education startups",
   path = Astro.url.pathname,
   ogImage = siteConfig.ogImage,
   ogImageAlt: ogImageAltProp,
@@ -191,8 +197,8 @@ const turnstileSiteKey =
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <meta name="ai:summary" content={description} />
-    <meta name="ai:role" content="Growth consultancy and fractional CMO support for post-PMF startups" />
-    <meta name="ai:serves" content="Post-PMF SaaS, AI, fintech, healthtech, ecommerce, and education startups" />
+    <meta name="ai:role" content={aiRole} />
+    <meta name="ai:serves" content={aiServes} />
     <meta name="ai:contact" content={`${siteConfig.siteUrl}${siteConfig.bookingUrl}`} />
     <meta
       name="ai:entity"

@@ -99,7 +99,7 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
 
     <section class="ws-proof" id="proof" aria-label="Experience behind WSS Solo">
       <div class="ws-wrap ws-proof-inner">
-        <span class="ws-proof-kicker">RUN BY A MENTOR FOUNDERS RATE</span>
+        <span class="ws-proof-kicker">WHO YOU WORK WITH</span>
         <p><strong>479+</strong> founder mentoring sessions, rated 4.97/5 on average</p>
         <a class="ws-proof-case" href="/case-studies/ned"><strong>Ned: 500+ sign-ups</strong> Generated through paid search over two months <span aria-hidden="true">↗</span></a>
       </div>
@@ -112,7 +112,7 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
         <ul class="ws-fit-list">
           <li>You have an AI-built product or MVP</li>
           <li>You're a solo founder or very small team</li>
-          <li>You need more customers or a smoother way to run things</li>
+          <li>You want customers and aren't sure where to start</li>
           <li>You want hands-on help, not another course</li>
         </ul>
       </div>
@@ -120,7 +120,7 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
 
     <section class="ws-section ws-challenge" id="challenge">
       <div class="ws-wrap">
-        <h2>You build the product.<br />Now build <em>what's around it.</em></h2>
+        <h2>You built the product.<br />Now you're <em>guessing at the rest.</em></h2>
         <div class="ws-problem-grid">
           <article class="ws-problem-card">
             <div class="ws-problem-icon" aria-hidden="true">
@@ -129,14 +129,15 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
             <div><h3>You shipped. Nobody signed up.</h3><p>The product works. The people who need it haven't found it yet.</p></div>
           </article>
           <article class="ws-problem-card">
-            <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90"><path d="M15 36L45 18L75 36L45 54Z" fill="#A568F1"/><path d="M15 47L45 65L75 47" fill="none" stroke="#DBFF64" stroke-width="10" stroke-linejoin="round"/><path d="M15 59L45 77L75 59" fill="none" stroke="#5D35AB" stroke-width="10" stroke-linejoin="round"/></svg></div>
-            <div><h3>Everything depends on you</h3><p>Every enquiry, follow-up and admin task needs you to remember it.</p></div>
-          </article>
-          <article class="ws-problem-card">
             <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90" fill="none"><path d="M50 8L22 49H44L36 82L70 36H48Z" fill="#CFFF4B"/><circle cx="45" cy="45" r="40" stroke="#BE92FD" stroke-width="2" stroke-dasharray="3 11"/></svg></div>
             <div><h3>Posting daily, still no users</h3><p>You put content out most days and can't tell if any of it brings people in.</p></div>
           </article>
+          <article class="ws-problem-card">
+            <div class="ws-problem-icon" aria-hidden="true"><svg viewBox="0 0 90 90"><path d="M15 36L45 18L75 36L45 54Z" fill="#A568F1"/><path d="M15 47L45 65L75 47" fill="none" stroke="#DBFF64" stroke-width="10" stroke-linejoin="round"/><path d="M15 59L45 77L75 59" fill="none" stroke="#5D35AB" stroke-width="10" stroke-linejoin="round"/></svg></div>
+            <div><h3>Not sure what to do next</h3><p>Every idea sounds plausible, so you try a bit of everything.</p></div>
+          </article>
         </div>
+        <p class="ws-bridge">Most products stall on an assumption nobody tested. <strong>WSS Solo is four weeks of testing yours.</strong></p>
       </div>
     </section>
 
@@ -183,6 +184,7 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
         <div class="ws-method-how">
           <div><span class="ws-method-how-symbol" aria-hidden="true">✳</span><strong>What the first cohort looks like</strong></div>
           <p>One live session a week with Daniel, plus help in between. Small group, so everyone gets time on their own product.</p>
+          <a class="ws-btn ws-btn-lime ws-method-how-cta" href="#waitlist">Join the waitlist <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -212,7 +214,7 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
         <div class="ws-form-intro">
           <p class="ws-eyebrow-dark">WSS SOLO / FIRST COHORT</p>
           <h2>Get on<br />the <em>waitlist.</em></h2>
-          <p>Join the first-cohort waitlist for programme details and launch updates.</p>
+          <p>The first cohort is a small group. Join the waitlist and you'll hear the dates first.</p>
         </div>
         <div class="ws-form-wrap">
           <form id="ws-solo-waitlist" action="/api/solo-waitlist" method="post">
@@ -433,6 +435,10 @@ import { buildBreadcrumbSchema, buildServiceSchema } from "../lib/schema";
   @media(max-width:850px){.ws-founder-grid{grid-template-columns:1fr}.ws-founder-photo{max-width:320px}.ws-founder-facts{grid-template-columns:1fr}}
   .ws-success-link{color:#6532B4;font-size:.93rem;font-weight:800}
   .ws-solo .ws-method-card{min-height:0}
+  .ws-bridge{margin:2.4rem 0 0;font-size:clamp(1.15rem,1.7vw,1.4rem);line-height:1.5;color:#454057;max-width:46ch}
+  .ws-bridge strong{color:var(--ink);font-weight:800}
+  .ws-method-how-cta{flex:0 0 auto;white-space:nowrap;min-height:46px;padding:.7rem 1rem}
+  .ws-method-how p{flex:1 1 auto}
   .ws-solo .ws-method-card h3{min-height:0}
   .ws-solo .ws-method-card > p:not(.ws-method-kicker):not(.ws-method-output){font-size:1rem;margin-bottom:1.4rem}
 </style>

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import { buildBreadcrumbSchema } from "../lib/schema";
-import { siteConfig } from "../site";
+import { pricingTiers, siteConfig } from "../site";
 
 const pageSchema = [
   buildBreadcrumbSchema([
@@ -48,6 +48,9 @@ const transitionSteps = [
     description: "Playbooks, dashboards, and weekly rhythm that runs without founder involvement."
   }
 ];
+
+const diagnosis = pricingTiers.find((tier) => tier.name === "Growth Diagnosis")!;
+const systemBuild = pricingTiers.find((tier) => tier.name === "Acquisition System Build")!;
 ---
 
 <BaseLayout
@@ -137,6 +140,13 @@ const transitionSteps = [
           </article>
         ))}
       </div>
+      <p class="flg-where-to-start">
+        Where to start: if you cannot yet say what only the founder can do today, begin with the
+        <a href={diagnosis.href}>{diagnosis.name}</a> ({diagnosis.duration}, {diagnosis.priceFrom}).
+        If you know it and need channels, offers, landing pages and reporting built and handed to the team, that is the
+        <a href={systemBuild.href}>{systemBuild.name}</a> ({systemBuild.duration}, {systemBuild.priceFrom}).
+        Every engagement and its price is on the <a href="/pricing">pricing page</a>.
+      </p>
     </div>
   </section>
 
@@ -157,6 +167,7 @@ const transitionSteps = [
     <div class="shell">
       <SectionIntro eyebrow="Related reading" title="Deeper context on founder-led growth." />
       <ul class="related-insights-list" style="margin-top: 1.5rem;">
+        <li><a class="card-link" href="/insights/founder-led-sales-and-handoff">How to scale beyond founder-led sales, and hand sales over in stages →</a></li>
         <li><a class="card-link" href="/post-raise">Just raised? Build the pipeline before the CMO hire →</a></li>
         <li><a class="card-link" href="/insights/when-to-hire-fractional-cmo">When to hire a fractional CMO →</a></li>
         <li><a class="card-link" href="/insights/diagnose-growth-bottleneck-before-spend">Diagnose the bottleneck before spend →</a></li>
@@ -194,6 +205,12 @@ const transitionSteps = [
 </BaseLayout>
 
 <style>
+  .flg-where-to-start {
+    max-width: 68ch;
+    margin-top: 1.5rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
   .decision-grid {
     display: grid;
     gap: 1rem;

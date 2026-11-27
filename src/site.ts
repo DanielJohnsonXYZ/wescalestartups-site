@@ -214,6 +214,7 @@ export const serviceRelatedInsights: Partial<Record<string, readonly { href: str
 /** /pricing, decision context and self-serve paths. */
 export const pricingRelatedReading: readonly { href: string; label: string }[] = [
   { href: "/services", label: "Compare the four engagements" },
+  { href: "/insights/fractional-cmo-cost-uk", label: "What a fractional CMO costs in the UK" },
   { href: "/fractional-cmo-vs-agency", label: "Fractional CMO vs agency" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/start-here", label: "Start here" },
